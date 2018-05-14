@@ -1,0 +1,24 @@
+{% load staticfiles %}
+{% block navbar %}
+  <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
+    <div class="container">
+      <a class="navbar-brand" href="#">
+        <img src="{% static 'img/logo.png' %}" width="80" alt="">
+      </a>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+          {% block navlinks %}
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'homepage' %}">Home <span
+                  class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/blog">Blog</a>
+            </li>
+          {% endblock %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+{% endblock %}

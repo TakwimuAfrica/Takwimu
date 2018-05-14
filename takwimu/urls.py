@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^$', HomeView.as_view(), name='homepage'),
     url(r'^cms/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^blog/', include(wagtail_urls)),
+    url(r'^blog/', include(wagtail_urls), name='blog'),
 
 ]
 
