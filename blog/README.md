@@ -9,8 +9,15 @@ Quick start
         ...
         'blog',
     ]
+    
+2. Add `blog` apps and middleware to `settings.py`
+    ```python
+    from blog import BLOG_APPS, BLOG_MIDDLEWARE
+    MIDDLEWARE += BLOG_MIDDLEWARE
+    INSTALLED_APPS += BLOG_APPS
+    ```
 
-2. Include the polls URLconf in your project urls.py like this::
+3. Include the polls URLconf in your project urls.py like this::
 
     ```python
     url(r'^admin/', include(wagtailadmin_urls)),
@@ -18,4 +25,4 @@ Quick start
     url(r'^blog/', include(blogs_urls)),
     ```
 
-3. Run `python manage.py migrate` to create the `blog` models.
+4. Run `python manage.py migrate` to create the `blog` models.
