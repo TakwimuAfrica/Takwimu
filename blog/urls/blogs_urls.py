@@ -1,4 +1,4 @@
-from django.conf.urls import url, include
+from django.conf.urls import include, url
 from wagtail.core import urls as wagtail_urls
 
 urlpatterns = [

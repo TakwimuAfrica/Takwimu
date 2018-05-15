@@ -16,12 +16,9 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 
+from blog.urls import blogs_urls, wagtailadmin_urls, wagtaildocs_urls
 from takwimu import settings
 from takwimu.views import HomeView
-
-from blog.urls import wagtailadmin_urls
-from blog.urls import blogs_urls
-from blog.urls import wagtaildocs_urls
 
 urlpatterns = [
     url(r'^django_admin/', admin.site.urls),

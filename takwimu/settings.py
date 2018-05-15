@@ -11,10 +11,11 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 """
 
 import os
-from blog import BLOG_APPS, BLOG_MIDDLEWARE
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import dj_database_url
+
+from blog import BLOG_APPS, BLOG_MIDDLEWARE
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DJANGO_DEBUG', 'true') == 'true'
@@ -127,7 +128,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = 'static'
-
 
 STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
