@@ -15,19 +15,21 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from wagtail.admin import urls as wagtailadmin_urls
-from wagtail.core import urls as wagtail_urls
-from wagtail.documents import urls as wagtaildocs_urls
 
 from takwimu import settings
 from takwimu.views import HomeView
 
+from blog.urls import wagtailadmin_urls
+from blog.urls import blogs_urls
+from blog.urls import wagtaildocs_urls
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    url(r'^django_admin/', admin.site.urls),
     url(r'^$', HomeView.as_view(), name='homepage'),
-    url(r'^cms/', include(wagtailadmin_urls)),
+    url(r'^admin/', include(wagtailadmin_urls)),
     url(r'^documents/', include(wagtaildocs_urls)),
-    url(r'^blog/', include(wagtail_urls), name='blog'),
+    url(r'^blog/', include(blogs_urls)),
+
 
 ]
 
