@@ -10,7 +10,40 @@ TODO
 
 ## Development
 
-TODO
+## Development
+
+1. Clone the repo
+2. ``cd TAKWIMU``
+3. ``virtualenv --no-site-packages env``
+4. ``source env/bin/activate``
+5. ``pip install -r requirements.txt``
+
+
+***NB:** The set up docs from here assume setting up HURUmap Kenya but is applicable to the rest of the projects.*
+
+You will need a Postgres database:
+
+```
+psql
+create user takwimu with password takwimu;
+create database takwimu;
+grant all privileges on database takwimu to takwimu;
+```
+
+Run migrations to keep Django happy:
+```
+python manage.py migrate
+```
+
+Import the data into the new database (will overwrite some tables created by Django, but that's ok).
+```
+cat takwimu/sql/*.sql | psql -U takwimu -W takwimu
+```
+
+Start the server:
+```
+python manage.py runserver
+```
 
 ### Landing Page
 
