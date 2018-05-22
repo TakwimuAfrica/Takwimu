@@ -1,5 +1,6 @@
 # coding=utf-8
 import os
+
 from hurumap.settings import *  # noqa
 
 # insert our overrides before both census and hurumap
