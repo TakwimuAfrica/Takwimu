@@ -10,7 +10,59 @@ TODO
 
 ## Development
 
+### Server Requirements
+You will need to make sure your server meets the following requirements:
+- [virtualenv](https://virtualenv.pypa.io/en/stable/installation/)
+- [pip](https://pip.pypa.io/en/stable/installing/)
+- python (2.7)
+- npm
+- node
+- [postgres](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb)
+
+> RECOMENDATION
+>
+> For node and npm user [nvm](https://github.com/creationix/nvm)
+
+***NB:** `TODO` package version*
+
+### Installation
+
+1. Clone the repo ``https://github.com/TakwimuAfrica/TAKWIMU.git``
+2. ``cd TAKWIMU``
+3. ``virtualenv --no-site-packages env``
+4. ``source env/bin/activate``
+5. ``pip install -r requirements.txt``
+
+You will need a Postgres database:
+
+```
+psql
+create user takwimu with password twakwimu;
+create database takwimu;
+grant all privileges on database takwimu to takwimu;
+```
+
+Set the environment variables as needed:
+```
 TODO
+```
+
+Run migrations to keep Django happy:
+```
+TODO
+```
+
+Collect static files:
+
+```
+npm install
+python manage.py collectstatic
+```
+
+Start the server:
+```
+python manage.py runserver
+```
 
 ### Landing Page
 

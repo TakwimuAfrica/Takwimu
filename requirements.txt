@@ -7,3 +7,4 @@ psycopg2==2.7.4
 psycopg2-binary==2.7.4
 pytz==2018.4
 whitenoise==3.3.1
+django-npm==1.0.0

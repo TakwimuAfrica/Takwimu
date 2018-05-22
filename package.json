@@ -1,0 +1,34 @@
+{
+  "name": "takwimu",
+  "version": "0.1.0",
+  "description": "African Digital Service",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TakwimuAfrica/TAKWIMU.git"
+  },
+  "keywords": [
+    "Takwimu",
+    "africapractice",
+    "Code for Africa",
+    "iHub"
+  ],
+  "author": "africapractice, Code for Africa, iHub",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TakwimuAfrica/TAKWIMU/issues"
+  },
+  "homepage": "https://github.com/TakwimuAfrica/TAKWIMU#readme",
+  "dependencies": {
+    "bootstrap": "^4.1.1",
+    "font-awesome": "^4.7.0",
+    "jquery": "^3.3.1",
+    "popper": "^1.0.1"
+  }
+}
