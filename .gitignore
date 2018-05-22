@@ -2,6 +2,7 @@ _site/
 .sass-cache/
 .jekyll-metadata
 .DS_STORE
+.env/
 
 # Created by https://www.gitignore.io/api/django,pycharm
 

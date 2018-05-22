@@ -1,3 +1,5 @@
+
+{% load staticfiles %}
 <!doctype html>
 <html class="no-js" lang="">
   <head>
@@ -15,6 +17,13 @@
     <link
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
         rel="stylesheet" type="text/css">
+    <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="./Leaflet-1.0.3/leaflet.css"/>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" ></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
 
 
   </head>
@@ -24,11 +33,17 @@
 
     {% endblock %}
 
-    <footer class="text-center pb-4">
-      <p class="small">All content released under a <a
-          href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
-          rel="noopener">Creative Commons 4 Attribution license</a>.</p>
-    </footer>
+    {% include 'blocks/header.html' %}
+    
+     {% include 'blocks/map.html' %}
+
+     {% include 'blocks/services.html' %}
+
+    {% include 'blocks/stories.html' %}
+
+    {% include 'blocks/partners.html' %}
+
+    {% include 'blocks/footer.html' %}
 
   </body>
 </html>
