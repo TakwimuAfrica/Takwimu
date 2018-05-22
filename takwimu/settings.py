@@ -122,6 +122,7 @@ STATIC_ROOT = 'static'
 
 
 STATICFILES_FINDERS = (
+    'npm.finders.NpmFinder',
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder'
 )
