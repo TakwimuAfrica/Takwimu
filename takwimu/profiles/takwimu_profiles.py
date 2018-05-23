@@ -1,13 +1,10 @@
-from collections import OrderedDict
+import logging
 import re
+from collections import OrderedDict
 
-from wazimap.data.utils import get_session, get_stat_data
+from django.conf import settings
 from wazimap.data.utils import (LocationNotFound, get_session, get_stat_data,
                                 merge_dicts)
-from django.conf import settings
-import logging
-import json
-import pprint
 
 log = logging.getLogger(__name__)
 
@@ -209,9 +206,9 @@ def get_landscape_data(geo, session):
 
         for i in landscape.values()[:-1]:
             data = {
-                    'name': i.get('name'),
-                    'values': {'this': i.get('values')['this']}
-                }
+                'name': i.get('name'),
+                'values': {'this': i.get('values')['this']}
+            }
 
             key = re.sub(r'[^\w\s]', '', i.get('name'))
             dict_key = key.lower().replace(' ', '_')
@@ -224,6 +221,7 @@ def get_landscape_data(geo, session):
 
     except LocationNotFound:
         landscape, _ = LOCATIONNOTFOUND, 0
+
 
 # helpers
 
