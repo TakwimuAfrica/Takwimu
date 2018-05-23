@@ -1,0 +1,58 @@
+{% load humanize madlibs comparatives stats %}
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+{#<script src="{{ STATIC_URL }}js/vendor/chart.min.js"></script>#}
+
+
+<canvas id="{{ uid }}"></canvas>
+
+<script>
+
+    var ctx = document.getElementById('{{ uid }}').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'line',
+
+        // The data for our dataset
+        data: {
+            labels: {{ x_values | safe }},
+
+            datasets: [{
+                label: "{{ chart_title }}",
+                backgroundColor: 'rgb(230, 242, 255)',
+                borderColor: 'rgb(128, 189, 255)',
+                borderWidth: 1,
+                data: {{ y_values }}
+            }]
+        },
+
+        // Configuration options go here
+        options: {
+            title: {
+                display: true,
+                text: "{{ chart_title }}",
+                fontSize: 24
+            },
+            legend: {
+                display: false,
+                position: 'bottom'
+            },
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        reverse: false
+                    },
+                    scaleLabel: {
+                        labelString: "{{ y_label }}",
+                        display: true
+                    }
+                }],
+                xAxes: [{
+                    scaleLabel: {
+                        labelString: "{{ x_label }}",
+                        display: true
+                    }
+                }]
+            }
+        }
+    });
+</script>
