@@ -37,26 +37,19 @@ You will need a Postgres database:
 
 ```
 psql
-create user takwimu with password twakwimu;
+create user takwimu with password takwimu;
 create database takwimu;
 grant all privileges on database takwimu to takwimu;
 ```
 
-Set the environment variables as needed:
+Import the data into the new database (will overwrite some tables created by Django, but that's ok).
 ```
-TODO
+cat takwimu/sql/*.sql | psql -U takwimu -W takwimu
 ```
 
 Run migrations to keep Django happy:
 ```
-TODO
-```
-
-Collect static files:
-
-```
-npm install
-python manage.py collectstatic
+python manage.py migrate
 ```
 
 Start the server:
