@@ -19,8 +19,8 @@ HURUMAP['default_profile'] = takwimu_profile
 
 HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(
     takwimu_profile)
-HURUMAP['default_geo_version'] = os.environ.get('DEFAULT_GEO_VERSION', '2018')
-HURUMAP['legacy_embed_geo_version'] = '2018'
+HURUMAP['default_geo_version'] = os.environ.get('DEFAULT_GEO_VERSION', '2009')
+HURUMAP['legacy_embed_geo_version'] = '2009'
 
 
 HURUMAP['levels'] = {
@@ -34,7 +34,7 @@ HURUMAP['levels'] = {
 }
 HURUMAP['comparative_levels'] = ['country']
 HURUMAP['geometry_data'] = {
-    '2018': {
+    '2009': {
         'continent': 'geo/continent.topojson',
         'country': 'geo/country.topojson'
     }
