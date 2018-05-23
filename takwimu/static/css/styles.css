@@ -1,0 +1,45 @@
+	/* ----------------------
+Project: Takwimu Landing Page
+Author: Code for Africa
+-------------------------*/
+/* Stories */
+
+.card img {
+  margin: 0;
+  color: grey;
+  opacity: 0.5;
+  display: block;
+  max-width:100%;
+}
+.card {
+    height:400px;
+  
+}
+/* Partners */
+.partners img{
+	height:250px;
+	width:600px;
+	max-width:100%;
+}
+
+/* Footer section */
+footer {
+	background-color:#084a49;
+	height:400px;
+	color:#dedede;
+}
+footer-text {
+	text-decoration:none;
+}
+footer-text:hover {
+	color:green;
+	text-decoration:none;
+}
+
+.footer-logo {
+  max-height: 65px;
+  width: 100px; }
+
+ img {
+ 	max-width:100%;
+ } 
