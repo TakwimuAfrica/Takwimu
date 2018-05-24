@@ -1,7 +1,7 @@
 {% extends 'homepage_country.html' %}{% load humanize partition staticfiles %}
 
 {% block header_content %}
-<div class="vcenter col-lg-5 col-md-5 col-sm-8 col-xs-10 bg-ocean-blue">
+<div class="vcenter col-lg-4 col-md-4 col-sm-8 col-xs-10 bg-ocean-blue">
     <div class="content-container clearfix text-center">
         <h1>Discover the Stories Behind the Data</h1>
         <h4>
@@ -18,5 +18,48 @@
     </div>
 </div>
 {% endblock header_content %}
-
-{% include 'blocks/showcase.tml' %}
+{% block how_it_works %}
+    <div class="wrapper clearfix card-deck">
+        <div class="column-third">
+            <div class="card">
+                <div class="card-body">
+                    <i class="fa fa-connectdevelop"></i>
+                    <h5 class="card-title">Find Facts</h5>
+                    <p class="card-text">
+                        Population and financial figures are broken down by category: Elections, Demographics, Service Delivery, Economics, and Education.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column-third">
+            <div class="card">
+                <div class="card-body">
+                    <i class="fa fa-connectdevelop"></i>
+                    <h5 class="card-title">Visualize</h5>
+                    <p class="card-text">
+                        Our library of charts gives you insight into data from places you research. Look for them on profile pages. You can embed
+                        the charts on your own site
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column-third">
+            <div class="card">
+                <div class="card-body">
+                    <i class="fa fa-connectdevelop"></i>
+                    <h5 class="card-title">Get Context</h5>
+                    <p class="card-text">
+                        Pre-computed statistics are presented alongside each data point so you can see how each place fits into a large context
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper">
+        <br/>
+        <br/>
+        <p>
+            <a href="/help" class="btn btn-help bg-bottle-blue btn-takwimu-primary">Learn more</a>
+        </p>
+    </div>
+    {% endblock %}
