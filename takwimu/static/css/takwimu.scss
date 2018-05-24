@@ -1,0 +1,456 @@
+// HURUmap.scss
+
+// VARIABLES
+@import "custom";
+
+// Colours
+$bottle_blue: #336781;
+$ocean_blue: #4fa1ca;
+
+$brand-primary-color: $bottle_blue;
+$brand-secondary-color: $ocean_blue;
+
+// Fonts
+$font-lato: 'Lato', sans-serif;
+$font-poppins: 'Poppins', sans-serif;
+
+// Sizes
+$nav-height: 70px;
+
+
+// DEFAULTS
+
+html, body, h4, h5, h6, p {
+  font-family: $font-lato;
+  word-wrap: break-word;
+}
+h1, h2, h3 {
+  font-family: $font-poppins;
+  font-weight: 400;
+}
+h4, h5, h6 {
+  font-weight: 300;
+}
+h1 { font-size: 1.85em; }
+h4 { font-size: 20px; }
+h5 { font-size: 18px; }
+h6 { font-size: 16px; }
+html, body, p { font-size: 16px; }
+
+
+img {
+  max-width: 100%;
+}
+
+a {
+  &:hover {
+    color: $ocean_blue;
+  }
+}
+
+input {
+  border-radius: 0 !important;
+}
+
+
+// HELPERS
+
+// Container
+
+.container-narrow {
+  max-width: 800px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+.container-narrowest {
+  max-width: 700px;
+  padding: 0 15px;
+  margin: 0 auto;
+}
+
+// Colour helpers
+
+.bg-ocean-blue {
+  background-color: $ocean_blue;
+  color: #fff;
+}
+
+.bg-bottle-blue {
+  background-color: $bottle_blue;
+  color: #fff;
+}
+
+.bg-tan {
+  background-color: #fff;
+}
+
+// Text helpers
+
+.text-lg {
+  font-size: 1.1em;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.text-center {
+  text-align: center;
+}
+
+
+// BODY
+
+body {
+  padding-top: 70px;
+}
+#body-spinner {
+  margin: 90px 20px;
+}
+
+// Navbar
+
+#page-header {
+  position: fixed;
+  width: 100%;
+  z-index: 10000;
+  top: 0px;
+  // padding: 15px 10px;
+  transition: top 0.2s ease-in-out;
+
+  #page-header-title {
+    min-height: $nav-height;
+    padding: 10px 0 !important;
+
+    .title {
+      img {
+        height: 20px;
+        margin: 15px;
+      }
+    }
+
+    .nav-menu {
+      float: right;
+      @media screen and (max-width: 640px) {
+        float: none;
+      }
+      ul#site-menu {
+        padding: 15px 10px 0px 10px;
+        li {
+          a {
+            &:hover {
+              color: $ocean_blue;
+              text-decoration: none;
+            }
+            .fa {
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      #menu {
+        margin: 10px 0 0;
+        .tool-group {
+          margin-left: 10px;
+        }
+        input {
+          padding: 2px 6px;
+          height: 30px;
+          @media only screen and (max-width: 768px) {
+            font-size: 1.1em;
+          }
+        }
+      }
+    }
+    
+    #menu-toggle {
+      color: $ocean_blue;
+      font-size: 20px;
+      margin-top: 10px;
+    }
+
+  }
+}
+
+.nav-up {
+  top: -$nav-height !important;
+}
+
+#page-header, .box-header {
+  background-color: $bottle_blue;
+}
+
+// Footer
+
+#page-footer {
+  background-color: $bottle_blue;
+  color: #fff;
+  padding: 45px 0 35px;
+  small, .small, .smaller {
+    font-weight: 300;
+  }
+  a {
+    color: #fff;
+    &:hover {
+      color: $ocean_blue;
+    }
+  }
+  ul a {
+    text-decoration: underline;
+  }
+
+  img {
+    max-height: 50px;
+    margin: 10px;
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  // Remove attribution without having to change entire body block
+  section:nth-child(2) {
+    display: none;
+  }
+}
+
+// PAGES
+
+// Homepage
+
+#homepage .hero {
+  background-image: url('/static/img/banners/global.jpg');
+  background-size: cover;
+  background-position: center;
+  min-height: 300px;
+  padding: 150px 0;
+
+  select, a {
+    max-width: 100%;
+    width: 320px;
+    height: auto;
+    display: inline-block;
+    padding: 13px 20px 12px;
+    background-color: $ocean_blue;
+    text-transform: uppercase;
+    text-align: left;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+    font-family: $font-poppins;
+    border-radius: 5px;
+    box-shadow: 0 0 20px #000;
+    cursor: pointer;
+    i {
+      float: right;
+      margin-top: 2px;
+    }
+    &:hover {
+      background-color: $bottle_blue;
+    }
+  }
+  #locate-me {
+    padding-right: 13px;
+  }
+}
+
+.showcase {
+  padding: 50px 0;
+  .column-third {
+    .img {
+      height: 200px;
+      width: 100%;
+      max-width: 300px;
+      margin: 10px auto 20px;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+    }
+  }
+
+  &.partners {
+    img {
+      max-width: 250px;
+      max-height: 75px;
+      margin: 10px;
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+  }
+}
+
+.btn {
+  text-decoration: none;
+  &.btn-lg {
+    font-size: 1.2em;
+    padding: 10px 20px 12px;
+  }
+  &.bg-ocean-blue:hover {
+    background-color: $bottle_blue;
+    color: #fff;
+  }
+  &.bg-bottle-blue:hover {
+    background-color: $ocean_blue;
+    color: #fff;
+  }
+}
+
+
+// Select2 Stuff
+
+.select2-container {
+  .select2-choice {
+    div {
+      background-color: $ocean_blue !important;
+      border: none !important;
+      background-image: url('/static/img/arrow-down-white.png') !important;
+      background-size: 24px !important;
+      background-repeat: no-repeat !important;
+      background-position: left center !important;
+      width: 34px !important;
+      b {
+        display: none !important;
+      }
+    }
+    &:hover, &:focus, &:hover div, &:focus div {
+      background-color: $bottle_blue !important;
+    }
+  }
+  .select2-default {
+      color: #fff !important;
+  }
+}
+
+.select2-drop {
+  padding: 10px 5px;
+  .select2-results {
+    font-size: 1.1em !important;
+    .select2-result-label {
+      padding: 5px 8px 6px;
+    }
+    .select2-highlighted {
+      background-color: $bottle_blue;
+    }
+  }
+}
+
+
+// Other pages: about, help
+
+#page {
+  .container-narrow, .container-narrowest {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+}
+
+
+// COUNTRY EDITS
+
+.leaflet-label {
+  color: #fff !important;
+  background-color: $ocean_blue !important;
+  border-color: $ocean_blue !important;
+  border-radius: 0 !important;
+  font-weight: 200 !important;
+  font-family: $font-poppins !important;
+  padding: 3px 6px 1px !important;
+}
+
+.how-it-works {
+  img {
+    max-width: 70px;
+  }
+}
+
+// override wazimap css add padding between compare with and the input box
+
+#profile #compare-place-picker .typeahead-container {
+  padding-left: 18em;
+}
+
+.floating-nav-wrapper {
+  height: 54px;
+}
+
+.floating-nav {
+  z-index: 1500;
+  width: 100%;
+  padding: 0.5em;
+  background-color: #e0e4d4;
+}
+
+.floating-nav.affix {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  right: 0px;
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+}
+
+.floating-nav h3 {
+  margin-bottom: 0.5em;
+  display: none;
+}
+
+.floating-nav h3 img {
+  width: auto;
+  height: 17px;
+  margin-right: 10px;
+  vertical-align: text-bottom;
+}
+
+.floating-nav.affix .geography-ico {
+  display: block;
+}
+
+.floating-nav ul {
+  margin: 0px;
+  padding: 0px;
+}
+
+.floating-nav li {
+  display: inline-block;
+  float: left;
+  margin-right: 20px;
+  text-align: center;
+}
+
+.floating-nav li a {
+  display: block;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.floating-nav li a span {
+  display: block;
+}
+
+.floating-nav li a .fa {
+  font-size: 14px;
+}
+
+@media only screen and (max-width: 768px) {
+  .floating-nav-wrapper {
+    display: none;
+  }
+}
+
+.geography-ico span {
+    height: 16px;
+  img {
+
+  }
+}
+
+.geography-ico span img {
+  margin-right: 10px;
+  height: 16px;
+}
+
+.geography-ico {
+  display: none;
+}
+
+

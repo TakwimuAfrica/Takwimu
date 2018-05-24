@@ -1,0 +1,42 @@
+#page-header-title a,
+.box-header a {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.vcenter {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    padding: 0 2em;
+}
+
+.vcenter .content-container h1{
+    border-bottom: 1px solid #ccc;
+}
+
+.search-form {
+    margin: 0 auto;
+    width: 80%;
+    padding-top: 1em;
+
+}
+.search-form input#search-takwimu {
+    padding: 1.5em;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 2em!important;
+}
+.btn-takwimu-primary {
+    padding: 0.5em 1em;
+    font-weight: bold;
+    border-radius: 2em;
+}
+
+.btn-help {
+    padding: 0.5em 5em;
+}
