@@ -29,17 +29,14 @@ create user takwimu with password takwimu;
 create database takwimu;
 grant all privileges on database takwimu to takwimu;
 ```
-
+Run migrations to keep Django happy:
+```
+python manage.py migrate
+```
 
 Import the data into the new database (will overwrite some tables created by Django, but that's ok).
 ```
 cat takwimu/sql/*.sql | psql -U takwimu -W takwimu
-```
-
-
-Run migrations to keep Django happy:
-```
-python manage.py migrate
 ```
 
 Start the server:
