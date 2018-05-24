@@ -27,6 +27,7 @@ SET default_with_oids = false;
 --
 -- Name: wazimap_geography; Type: TABLE; Schema: public; Owner: humandev
 --
+DROP TABLE wazimap_geography;
 
 CREATE TABLE wazimap_geography (
     id integer NOT NULL,
