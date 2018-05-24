@@ -1,54 +1,57 @@
 {% load staticfiles %}
 
-
 <div class="row">
-    <div class="col"><hr></div>
-    <div class="col-auto"><i class="fa fa-server"></i></div>
-    <div class="col"><hr></div>
-</div>
+	<div class="col"><hr></div>
+	<div class="col-auto">
 
-<div class="container">
-	<div class="row">
-		<div class="col-12 pt-5 pb-5">
-			<div class="card bg-dark text-white border border-white rounded-0" style="height:500px;">
-				<img class="card-img" src="{% static 'img/story/food.jpeg' %}" alt="Card image" height="500px" width="150px;" style="max-width:100%;">
-				<div class="d-flex flex-column justify-content-center card-img-overlay"> 
-        <div class="col-4" style="top:50%;left:30%;"> 
-					<button type="button" class="btn btn btn-success">STORY TITLE STORY TITLE STORY TITLE</button>
-        </div>
-        <div class="col-4" style="top:30%;left:40%;">
-					<button type="button" class="btn btn btn-success">READ MORE</button>
-        </div>
-				</div>
-			</div>
-		</div>
+		<span class="fa-stack fa-lg">
+			<i class="fa fa-circle fa-stack-4x"></i>
+			<i class="fa fa-commenting-o fa-stack-4x fa-inverse">Partners</i>
+		</span></div>
+		<div class="col"><hr></div>
+	</div>
+	<div class="container">
 		<div class="row">
-			<div class="col-6 pl-4">
-				<div class="card bg-dark text-white border border-white rounded-0" style="height:300px;">
-					<img class="card-img" src="{% static 'img/story/food.jpeg' %}" alt="Card image" height="300px" width="150px;" style="max-width:100%;">
-					<div class="d-flex flex-column justify-content-center card-img-overlay pt-5 pl-5 pr-5 ml-5">
-						<div class="col-4 text-center pt-5 pl-5 ml-5">
-							<button type="button" class="btn btn-success">STORY TITLE</button>
-						</div><br>
-						<div class="col-4 text-center pt-1 pl-5 ml-5">
-							<button type="button" class="btn btn-success">READ MORE</button>
+			<div class="col-12 pt-5 pb-5">
+				<div class="card bg-dark text-white border border-white rounded-0" style="height:500px;">
+					<img class="card-img filtered" src="{% static 'img/story/donkeys.jpg' %}" alt="Card image" height="500px" width="150px;">
+					<div class="d-flex flex-column justify-content-center card-img-overlay"> 
+						<div class="col-4" style="top:40%;left:25%;"> 
+							<button type="button" class="btn btn btn-primary" style="background-color:#336781;border-color:#336781;text-transform:Uppercase;">Marakwet locals intercept lorry ferrying 30 donkeys</button>
+						</div>
+						<div class="col-4" style="top:20%;left:40%;">
+							<button type="button" class="btn btn btn-primary" style="background-color:#336781;border-color:#336781;">READ MORE</button>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="col-6 pr-4">
-				<div class="card bg-dark text-white border border-white rounded-0" style="height:300px;">
-					<img class="card-img" src="{% static 'img/story/food.jpeg' %}" alt="Card image" height="300px" width="150px;" style="max-width:100%;">
-					<div class="d-flex flex-column justify-content-center card-img-overlay pt-5 pl-5 pr-5 ml-5">
-						<div class="col-4 text-center pt-5 pl-5 ml-5">
-							<button type="button" class="btn btn-success">STORY TITLE</button>
-						</div><br>
-						<div class="col-4 text-center pt-1 pl-5 ml-5">
-							<button type="button" class="btn btn-success">READ MORE</button>
+			<div class="row">
+				<div class="col-6 pl-4">
+					<div class="card bg-dark text-white border border-white rounded-0" style="height:300px;">
+						<img class="card-img" src="{% static 'img/story/malawi_hdi.jpg' %}" alt="Card image" height="300px" width="150px;" style="max-width:100%;">
+						<div class="d-flex flex-column justify-content-center card-img-overlay pt-5 pl-5 pr-5 ml-5">
+							<div class="col-4 text-center pt-5">
+								<button type="button" class="btn btn-primary" style="background-color:#336781;border-color:#336781;text-transform:Uppercase;">Two suspected thugs shot dead in Nairobi</button>
+							</div><br>
+							<div class="col-4 text-center pt-1 pl-5 ml-5">
+								<button type="button" class="btn btn-primary" style="background-color:#336781;border-color:#336781;">READ MORE</button>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-6 pr-4">
+					<div class="card bg-dark text-white border border-white rounded-0" style="height:300px;">
+						<img class="card-img" src="{% static 'img/story/early-pregnancy.jpg' %}" alt="Card image" height="300px" width="300px;" style="max-width:100%;">
+						<div class="d-flex flex-column justify-content-center card-img-overlay pt-5 pl-5 pr-5 ml-5">
+							<div class="col-4 text-center pt-5">
+								<button type="button" class="btn btn-primary" style="background-color:#336781;border-color:#336781;text-transform:Uppercase;">Narok, Homa Bay and West Pokot top in </button>
+							</div><br>
+							<div class="col-4 text-center pt-1 pl-5 ml-5">
+								<button type="button" class="btn btn-primary" style="background-color:#336781;border-color:#336781;ext-transform:Uppercase;">READ MORE</button>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
