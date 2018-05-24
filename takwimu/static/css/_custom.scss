@@ -12,10 +12,10 @@
     right: 0; 
     margin-left: auto; 
     margin-right: auto;
-    padding: 0 2em;
+    padding: 0 1em;
 }
 
-.vcenter .content-container h1{
+.vcenter .content-container h2{
     border-bottom: 1px solid #ccc;
 }
 
@@ -26,17 +26,14 @@
 
 }
 .search-form input#search-takwimu {
-    padding: 1.5em;
+    padding: 1.25em;
     text-align: center;
-    font-weight: bold;
     border-radius: 2em!important;
 }
-.btn-takwimu-primary {
-    padding: 0.5em 1em;
-    font-weight: bold;
-    border-radius: 2em;
-}
 
-.btn-help {
-    padding: 0.5em 5em;
+.btn-takwimu-primary {
+    color: #fff;
+    background: $bottle_blue;
+    padding: 0.5em 1em;
+    border-radius: 2em;
 }
