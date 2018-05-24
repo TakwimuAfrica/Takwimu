@@ -1,0 +1,23 @@
+
+body{
+	width:100%;
+	height:auto;
+}
+footer {
+	color:white;
+	background-color:#336781;
+}
+.footer-logo {
+	height:60px;
+	width:100px;
+}
+.card-img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.5;
+}
+
+
+
+
+
