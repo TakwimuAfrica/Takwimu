@@ -33,7 +33,47 @@
 
 .btn-takwimu-primary {
     color: #fff;
-    background: $bottle_blue;
+    background: #336781;
     padding: 0.5em 1em;
     border-radius: 2em;
 }
+
+.btn-primary {
+    background-color:#336781;
+    border-color:#336781;
+}
+.btn-primary:hover,
+.btn-primary:focus
+ {
+    background-color:#336781;
+    border-color:#336781;
+}
+
+hr {
+    border-color:#336781;
+    border-color:#336781;
+}
+
+.fa-stack {
+    margin-top:-2rem;
+}
+
+.fa-inverse {
+    background-color:#336781;
+    border-radius:50px;
+}
+
+.card {
+    margin:20px;
+}
+
+.card-img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.9;
+}
+
+.text-color {
+    color:#336781;
+}
+
