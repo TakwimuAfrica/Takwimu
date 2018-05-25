@@ -1,3 +1,11 @@
+
+body{
+    max-width:100%;
+    width:auto;
+    display:block;
+}
+
+
 #page-header-title a,
 .box-header a {
     text-transform: uppercase;
@@ -51,9 +59,7 @@
 
 hr {
     border-color:#336781;
-    border-color:#336781;
-    padding-left:30rem;
-    width:90%;
+    border-color:#336781;    
 }
 
 .fa-stack {
