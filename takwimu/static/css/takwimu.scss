@@ -98,7 +98,7 @@ input {
 // BODY
 
 body {
-  padding-top: 70px;
+  padding-top: 0px;
 }
 #body-spinner {
   margin: 90px 20px;
@@ -107,7 +107,7 @@ body {
 // Navbar
 
 #page-header {
-  position: fixed;
+  position: absolute;
   width: 100%;
   z-index: 10000;
   top: 0px;

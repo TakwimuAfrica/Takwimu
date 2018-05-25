@@ -1,9 +1,6 @@
 
-body{
-    min-width: 100%;
-    box-sizing: border-box;
-    width: fit-content;
-    -webkit-fit-content:fit-content;
+html {
+    display:inline-block;
 }
 
 #page-header-title a,
@@ -14,8 +11,8 @@ body{
 
 .vcenter {
     position: absolute;
-    z-index: 1003;
-    top: 15%;
+    z-index: 1;
+    top: 20%;
     left: 0; 
     right: 0; 
     margin-left: auto; 
