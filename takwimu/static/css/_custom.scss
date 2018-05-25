@@ -1,7 +1,4 @@
-
-html {
-    display:inline-block;
-}
+$primary: #4fa1ca;
 
 #page-header-title a,
 .box-header a {
@@ -36,27 +33,15 @@ html {
     border-radius: 2em!important;
 }
 
-.btn-takwimu-primary {
+.btn-t-primary {
+    background: $primary;
     color: #fff;
-    background: #336781;
     padding: 0.5em 1em;
     border-radius: 2em;
 }
 
-.btn-primary {
-    background-color:#336781;
-    border-color:#336781;
-}
-.btn-primary:hover,
-.btn-primary:focus
- {
-    background-color:#4fa1ca;
-    border-color:#4fa1ca;
-}
-
 hr {
     border-color:#336781;
-    border-color:#336781;    
 }
 
 .fa-stack {
@@ -71,7 +56,7 @@ hr {
 }
 
 .map-menu {
-    margin-top:-7rem;
+    margin-top:-5rem;
 }
 
 .map-item {
@@ -98,19 +83,8 @@ hr {
     background-color:white;
 }
 
-.border-secondary{
-    color:limegreen;
-}
-
 #homepage #slippy-map {
-    display: block;
-    width: 100%;
-    height: 48em;
-    position: relative;
-    border-bottom: 3px solid #336781;
+    top: 45px;
+    height: calc(90vh - 45px);
+    border-bottom: 1px solid #336781;
 }
-
-
-
-
-
