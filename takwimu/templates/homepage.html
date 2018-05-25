@@ -1,25 +1,9 @@
 {% extends 'homepage_country.html' %}{% load humanize partition staticfiles %}
 
 {% block header_content %}
-<div class="column-third">
-<div class="vcenter col-lg-4 col-md-4 col-sm-8 col-xs-10 bg-ocean-blue">
-    <div class="content-container clearfix text-center">
-        <h2>Discover the Stories Behind the Data</h2>
-        <h4>
-            {{ HURUMAP.name }} helps storytellers and
-            campaigners use data to add context and depth to stories.
-        </h4>
-        <form class="search-form">
-            <div class="form-group">
-                <input type="text" class="form-control" id="search-takwimu" 
-                    aria-describedby="searchHelp" placeholder="Enter your search term">
-            </div>
-            <button type="submit" class="btn btn-takwimu-primary">Search Takwimu</button>
-        </form>
-    </div>
-</div>
-</div>
+<!-- This discover stories header suppose to be blank -->
 {% endblock header_content %}
+
 {% block how_it_works %}
 
   <div class="map-menu d-flex flex-row justify-content-center bg-white" >
