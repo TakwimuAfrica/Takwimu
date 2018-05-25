@@ -1,4 +1,5 @@
 # TAKWIMU
+[![Build Status](https://travis-ci.org/TakwimuAfrica/TAKWIMU.svg?branch=develop)](https://travis-ci.org/TakwimuAfrica/TAKWIMU)
 
 The TAKWIMU web platform powering insight from human development indicators. Helping to find the stories behind the data. Accessible at https://takwimu.africa/
 
