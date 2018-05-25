@@ -65,7 +65,19 @@ hr {
 
 .fa-inverse {
     background-color:#336781;
-    border-radius:50px;
+    border-radius:100px;
+    height:100px;
+    font-size:1.8rem;
+}
+
+.map-menu {
+    margin-top:-7rem;
+}
+
+.map-item {
+    display:block;
+    margin-top:-4.5rem;
+    font-size:medium;
 }
 
 .card {
@@ -97,6 +109,7 @@ hr {
     position: relative;
     border-bottom: 3px solid #336781;
 }
+
 
 
 
