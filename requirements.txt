@@ -1,1 +1,2 @@
 -e git+https://github.com/CodeForAfricaLabs/HURUmap.git@develop#egg=hurumap
+gunicorn==19.8.1

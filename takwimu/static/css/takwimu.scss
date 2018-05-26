@@ -1,3 +1,7 @@
+/* ----------------------
+Project: TAKWIMU
+Author: Code for Africa
+-------------------------*/
 
 // Colours
 $bottle_blue: #336781;
@@ -113,18 +117,18 @@ body {
   top: 0px;
   // padding: 15px 10px;
   transition: top 0.2s ease-in-out;
-
+  
   #page-header-title {
     min-height: $nav-height;
     padding: 10px 0 !important;
-
+    
     .title {
       img {
         height: 20px;
         margin: 15px;
       }
     }
-
+    
     .nav-menu {
       float: right;
       @media screen and (max-width: 640px) {
@@ -144,7 +148,7 @@ body {
           }
         }
       }
-
+      
       #menu {
         margin: 10px 0 0;
         .tool-group {
@@ -165,7 +169,7 @@ body {
       font-size: 20px;
       margin-top: 10px;
     }
-
+    
   }
 }
 
@@ -195,7 +199,7 @@ body {
   ul a {
     text-decoration: underline;
   }
-
+  
   img {
     max-height: 50px;
     margin: 10px;
@@ -203,7 +207,7 @@ body {
       opacity: 0.8;
     }
   }
-
+  
   // Remove attribution without having to change entire body block
   section:nth-child(2) {
     display: none;
@@ -220,7 +224,7 @@ body {
   background-position: center;
   min-height: 300px;
   padding: 150px 0;
-
+  
   select, a {
     max-width: 100%;
     width: 320px;
@@ -263,7 +267,7 @@ body {
       background-position: center center;
     }
   }
-
+  
   &.partners {
     img {
       max-width: 250px;
@@ -314,7 +318,7 @@ body {
     }
   }
   .select2-default {
-      color: #fff !important;
+    color: #fff !important;
   }
 }
 
@@ -434,9 +438,9 @@ body {
 }
 
 .geography-ico span {
-    height: 16px;
+  height: 16px;
   img {
-
+    
   }
 }
 
