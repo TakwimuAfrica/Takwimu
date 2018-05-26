@@ -10,7 +10,7 @@ INSTALLED_APPS = ['takwimu'] + INSTALLED_APPS
 HURUMAP = WAZIMAP
 
 HURUMAP['name'] = 'TAKWIMU'
-HURUMAP['url'] = os.environ.get('TAKWIMU_URL','https://takwimu.africa/')
+HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://takwimu.africa/')
 
 takwimu_profile = os.environ.get('TAKWIMU_PROFILE', 'takwimu_profiles')
 
