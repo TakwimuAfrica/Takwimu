@@ -14,16 +14,8 @@ TODO
 You will need to make sure your server meets the following requirements:
 - [virtualenv](https://virtualenv.pypa.io/en/stable/installation/)
 - [pip](https://pip.pypa.io/en/stable/installing/)
-- python (2.7)
-- [yarn](https://yarnpkg.com/en/docs/install#debian-stable)
-- node
+- Python 2.7
 - [postgres](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb)
-
-> RECOMENDATION
->
-> For node installation use [nvm](https://github.com/creationix/nvm)
-
-***NB:** `TODO` package version*
 
 ### Installation
 
