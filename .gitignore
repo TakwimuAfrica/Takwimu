@@ -96,3 +96,4 @@ fabric.properties
 # End of https://www.gitignore.io/api/django,jekyll,visualstudiocode,pycharm
 
 static/*
+*.DS_Store
