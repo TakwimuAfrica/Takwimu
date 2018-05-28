@@ -1,2 +1,62 @@
-// TAKWIMU SCSS
+/*
+ * takwimu.scss
+ * ------------
+ * Overide the HURUmap styling
+ */
 
+$brand-color-primary: #1f6cc6;
+$brand-color-secondary: #0d51a2;
+
+::selection, ::-moz-selection {
+  background-color: $brand-color-primary;
+}
+
+// Navbar
+#page-header {
+  background-color: $brand-color-primary;
+  #page-header-title {
+      .title img {
+        max-height: 30px;
+        margin-top: 10px;
+      }
+      .nav-menu ul#site-menu li a:hover {
+        color: #fff;
+        text-decoration: underline;
+      }
+  }
+}
+
+// Footer
+
+#page-footer {
+  background-color: $brand-color-secondary;
+}
+
+
+// Geography
+
+.leaflet-label {
+  background-color: $brand-color-secondary !important;
+  border-color: $brand-color-secondary !important;
+}
+
+// HELPERS
+
+.bg-color-primary {
+  background-color: $brand-color-primary;
+}
+
+.bg-color-secondary {
+  background-color: $brand-color-secondary;
+}
+
+.btn {
+  &.bg-color-primary:hover {
+    background-color: $brand-color-secondary;
+    color: #fff;
+  }
+  &.bg-color-secondary:hover {
+    background-color: $brand-color-primary;
+    color: #fff;
+  }
+}
