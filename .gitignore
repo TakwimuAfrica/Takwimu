@@ -92,3 +92,4 @@ staticfiles/*
 # End of https://www.gitignore.io/api/django,pycharm
 
 /static
+*.DS_Store
