@@ -16,6 +16,8 @@ ROOT_URLCONF = 'takwimu.urls'
 HURUMAP['name'] = 'TAKWIMU'
 HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://takwimu.africa/')
 
+hurumap_profile = 'takwimu'
+
 HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(hurumap_profile)
 HURUMAP['default_geo_version'] = os.environ.get('DEFAULT_GEO_VERSION', '2009')
 HURUMAP['legacy_embed_geo_version'] = '2009'
