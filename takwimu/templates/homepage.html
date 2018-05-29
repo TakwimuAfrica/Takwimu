@@ -1,2 +1,30 @@
 {% extends 'homepage.html' %}{% load humanize partition staticfiles %}
 
+{% block header_content %}
+<div class="content-container clearfix bg-color-secondary text-center">
+    <div class="wrapper">
+        <h1>The African Human Development Service</h1>
+        <h4>Helping you find the data you need.</h4>
+    </div>
+</div>
+{% endblock header_content %}
+
+
+{% block how_it_works %}
+
+<div style="text-align: center; max-width: 700px; margin: 0 auto; padding: 10px; background-color: red; padding-top: 20px;">
+    <h1>THIS IS NOT THE FINAL SITE. IT SERVES AS A PROOF OF CONCEPT FOR THE ARCHITECTURE.</h1>
+    <p>The site pulls together the different dependencies that will be customized for TAKWIMU.</p>
+    <p>
+      <a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener">Twitter</a> . 
+      <a href="https://facebook.com/TakwimuAfrica" target="_blank" rel="noopener">Facebook</a> . 
+      <a href="https://github.com/TakwimuAfrica" target="_blank" rel="noopener">GitHub</a>
+    </p>
+</div>
+
+<br/></br/>
+
+
+{{ block.super }}
+
+{% endblock %}
