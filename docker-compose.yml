@@ -8,6 +8,8 @@ services:
      - POSTGRES_USER=takwimu
      - POSTGRES_PASSWORD=takwimu
      - POSTGRES_DB=takwimu
+   volumes:
+     - ./takwimu/:/docker-entrypoint-initdb.d/
 
  web:
    build: .
