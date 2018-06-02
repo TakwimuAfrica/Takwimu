@@ -1,0 +1,90 @@
+$primary: #4fa1ca;
+
+#page-header-title a,
+.box-header a {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.vcenter {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    padding: 0 1em;
+}
+
+.vcenter .content-container h2{
+    border-bottom: 1px solid #ccc;
+}
+
+.search-form {
+    margin: 0 auto;
+    width: 80%;
+    padding-top: 1em;
+
+}
+.search-form input#search-takwimu {
+    padding: 1.25em;
+    text-align: center;
+    border-radius: 2em!important;
+}
+
+.btn-t-primary {
+    background: $primary;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 2em;
+}
+
+hr {
+    border-color:#336781;
+}
+
+.fa-stack {
+    margin-top:-2rem;
+}
+
+.fa-inverse {
+    background-color:#336781;
+    border-radius:100px;
+    height:100px;
+    font-size:1.8rem;
+}
+
+.map-menu {
+    margin-top:-5rem;
+}
+
+.map-item {
+    display:block;
+    margin-top:-4.5rem;
+    font-size:medium;
+}
+
+.card {
+    margin:20px;
+}
+
+.card-img {
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  opacity: 0.9;
+}
+
+.text-color {
+    color:#336781;
+}
+
+.card-color {
+    background-color:white;
+}
+
+#homepage #slippy-map {
+    top: 45px;
+    height: calc(90vh - 45px);
+    border-bottom: 1px solid #336781;
+}

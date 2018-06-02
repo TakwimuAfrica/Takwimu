@@ -60,6 +60,10 @@ WAZIMAP = HURUMAP
 # Database Configs
 # -------------------------------------------------------------------------------------
 
+# -------------------------------------------------------------------------------------
+# Database Configs
+# -------------------------------------------------------------------------------------
+
 DATABASE_URL = os.environ.get('DATABASE_URL',
                               'postgresql://takwimu:takwimu@localhost/takwimu')
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL)

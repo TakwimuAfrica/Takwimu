@@ -1,30 +1,97 @@
 {% extends 'homepage.html' %}{% load humanize partition staticfiles %}
 
 {% block header_content %}
-<div class="content-container clearfix bg-color-secondary text-center">
-    <div class="wrapper">
-        <h1>The African Human Development Service</h1>
-        <h4>Helping you find the data you need.</h4>
+<div class="column-third">
+<div class="vcenter col-lg-4 col-md-4 col-sm-8 col-xs-10 bg-ocean-blue ">
+    <div class="content-container clearfix text-center">
+        <h2>Discover the Stories Behind the Data</h2>
+        <h4>
+            {{ HURUMAP.name }} helps storytellers and
+            campaigners use data to add context and depth to stories.
+        </h4>
+        <form class="search-form">
+            <div class="form-group">
+                <input type="text" class="form-control" id="search-takwimu" 
+                    aria-describedby="searchHelp" placeholder="Enter your search term">
+            </div>
+            <button type="submit" class="btn btn-takwimu-primary">Search Takwimu</button>
+        </form>
     </div>
 </div>
+</div>
 {% endblock header_content %}
-
-
 {% block how_it_works %}
 
-<div style="text-align: center; max-width: 700px; margin: 0 auto; padding: 10px; background-color: red; padding-top: 20px;">
-    <h1>THIS IS NOT THE FINAL SITE. IT SERVES AS A PROOF OF CONCEPT FOR THE ARCHITECTURE.</h1>
-    <p>The site pulls together the different dependencies that will be customized for TAKWIMU.</p>
-    <p>
-      <a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener">Twitter</a> . 
-      <a href="https://facebook.com/TakwimuAfrica" target="_blank" rel="noopener">Facebook</a> . 
-      <a href="https://github.com/TakwimuAfrica" target="_blank" rel="noopener">GitHub</a>
-    </p>
-</div>
-
-<br/></br/>
-
-
-{{ block.super }}
-
+  <div class="map-menu d-flex flex-row justify-content-center bg-white" >
+      <div class="m-5 pl-5">
+        <span class="fa-stack fa-3x">
+          <i class="fa fa-circle fa-stack-3x" ></i>
+          <i class="fa fa-newspaper-o fa-stack-1x fa-inverse small"><span class="map-item">About</span></i>
+        </span>
+      </div>
+        <div class="m-5 pl-5">
+          <span class="fa-stack fa-3x">
+          <i class="fa fa-circle fa-stack-3x" ></i>
+          <i class="fa fa-map-o fa-stack-1x fa-inverse"><span class="map-item">Map</span></i>
+        </span>
+      </div>
+        <div class="m-5 pl-5">
+          <span class="fa-stack fa-3x">
+          <i class="fa fa-circle fa-stack-3x" ></i>
+          <i class="fa fa-commenting-o fa-stack-1x fa-inverse"><span class="map-item">Stories</span></i>
+        </span>
+      </div>
+          <div class="m-5 pl-5">
+            <span class="fa-stack fa-3x">
+          <i class="fa fa-circle fa-stack-3x" ></i>
+          <i class="fa fa-group fa-stack-1x fa-inverse"><span class="map-item">Partners</span></i>
+        </span>
+      </div>
+    </div>
+  <div class="pb-5 pt-3 text-color">
+    <h1>How it works</h1>
+    </div>
+    <div class="wrapper clearfix card-deck">
+        <div class="column-third">
+            <div class="card">
+                <div class="card-body card-color border">
+                    <i class="fa fa-connectdevelop"></i>
+                    <h5 class="card-title">Find Facts</h5>
+                    <p class="card-text">
+                        Population and financial figures are broken down by category: Elections, Demographics, Service Delivery, Economics, and Education.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column-third">
+            <div class="card">
+                <div class="card-body card-color border">
+                    <i class="fa fa-connectdevelop"></i>
+                    <h5 class="card-title">Visualize</h5>
+                    <p class="card-text">
+                        Our library of charts gives you insight into data from places you research. Look for them on profile pages. You can embed
+                        the charts on your own site
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="column-third">
+            <div class="card ">
+                <div class="card-body card-color border">
+                    <i class="fa fa-connectdevelop"></i>
+                    <h5 class="card-title">Get Context</h5>
+                    <p class="card-text">
+                        Pre-computed statistics are presented alongside each data point so you can see how each place fits into a large context
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper pt-5">
+        <br/>
+        <br/>
+        <p>
+            <a href="/help" class="btn btn-t-primary">Learn more</a>
+        </p>
+    </div>
 {% endblock %}

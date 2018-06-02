@@ -1,0 +1,102 @@
+{% extends '_base.html' %}{% load staticfiles %}
+
+{% block body_id %}homepage{% endblock %}
+
+{% block head_css_extra %}
+<link rel="stylesheet" href="{% static 'css/vendor/leaflet-0.6.4.css' %}" />
+<!--[if lte IE 8]>
+    <link rel="stylesheet" href="{% static 'css/vendor/leaflet-0.6.4.ie.css' %}" />
+<![endif]-->
+<link href="{% static 'css/vendor/leaflet.label.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block header_content %}
+<!-- Leave this blank -->
+{% endblock header_content %}
+
+
+{% block content_container %}
+
+    <div class="clearfix">
+        <div id="slippy-map"></div>
+        <div class="column-third">
+            <div class="vcenter col-lg-4 col-md-4 col-sm-8 col-xs-10" style="background: #336781; color:#fff;">
+                <div class="content-container clearfix text-center">
+                    <h2>Discover the Stories Behind the Data</h2>
+                    <h4>
+                        {{ HURUMAP.name }} helps storytellers and
+                        campaigners use data to add context and depth to stories.
+                    </h4>
+                    <form class="search-form">
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="search-takwimu" 
+                                aria-describedby="searchHelp" placeholder="Enter your search term">
+                        </div>
+                        <button type="submit" class="btn btn-t-primary">Search Takwimu</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="showcase how-it-works bg-tan text-center">
+        {% block how_it_works %}
+            <div class="wrapper clearfix">
+                <h1>How It Works</h1>
+                <br/>
+                <div class="column-third">
+                    <p><img src="{% static 'img/icons/blurbs/facts.png' %}" alt=""></p>
+                    <h3>Find Facts</h3>
+                    <p>Population and financial figures are broken down by category: Elections, Demographics, Service Delivery, Economics, and Education.</p>
+                </div>
+                <div class="column-third">
+                    <p><img src="{% static 'img/icons/blurbs/visualise.png' %}" alt=""></p>
+                    <h3>Visualize</h3>
+                    <p>Our library of charts gives you insight into data from places you research. Look for them on profile pages. You can embed the charts on your own site.</p>
+                </div>
+                <div class="column-third">
+                    <p><img src="{% static 'img/icons/blurbs/context.png' %}" alt=""></p>
+                    <h3>Get Context</h3>
+                    <p>Pre-computed statistics are presented alongside each data point so you can see how each place fits into a large context.</p>
+                </div>
+            </div>
+            <div class="wrapper">
+                <br/><br/>
+                <p><a href="/help" class="btn btn-t-primary">Learn more</a></p>
+            </div>
+        {% endblock %}
+    </div>
+
+    {% include 'blocks/showcase.html' %}
+
+    {% include 'blocks/partners.html' with extra_css_class='bg-tan' %}
+{% endblock %}
+
+
+{% block body_javascript_extra %}
+    {{ block.super }}
+
+    {% block homepage_javascripb_libs %}
+    <script src="{% static 'js/vendor/leaflet-0.6.4.js' %}"></script>
+    <script src="{% static 'js/vendor/topojson.v1.min.js' %}"></script>
+    <script src="{% static 'js/vendor/leaflet.label.js' %}"></script>
+    <script src="{% static 'js/maps_static.js' %}"></script>
+    <script src="{% static 'js/profile_map.js' %}"></script>
+    {% endblock %}
+
+    <script>
+    // show 'use my current location' button
+    if (Modernizr.geolocation) {
+        $('.geolocate-only').show();
+    }
+    // geoSelect already defined by widget.geo.select.js
+    geoSelect.focus();
+    var maps = new ProfileMaps();
+    var centre = {% if HURUMAP.map_centre %}{{ HURUMAP.map_centre }}{% else %}null{% endif %};
+    var zoom = {% if HURUMAP.map_zoom %}{{ HURUMAP.map_zoom }}{% else %}null{% endif %};
+    maps.drawMapForHomepage('{{ geo_data.first_child_level }}', '{{ HURUMAP.default_geo_version }}', centre, zoom);
+    </script>
+    <script src="{% static 'js/data.query.builder.js' %}"></script>
+{% endblock %}
+    
