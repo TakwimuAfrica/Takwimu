@@ -16,8 +16,8 @@ $brand-color-secondary: #0d51a2;
   background-color: $brand-color-primary;
   #page-header-title {
       .title img {
-        max-height: 30px;
-        margin-top: 10px;
+        max-height: 25px;
+        margin-top: 15px;
       }
       .nav-menu ul#site-menu li a:hover {
         color: #fff;
@@ -60,3 +60,6 @@ $brand-color-secondary: #0d51a2;
     color: #fff;
   }
 }
+
+
+@import "custom";
