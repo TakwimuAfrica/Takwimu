@@ -23,36 +23,3 @@
 
 {# Navbar #}
 
-{% block header %}
-    <header id="page-header">
-        <div id="page-header-title" class="wrapper clearfix">
-            <i id="menu-toggle" class="fa fa-bars"></i>
-            <a class="title" href="{% url 'homepage' %}">
-                {% block header_logo %}
-                <img src="{% static 'img/logo-white.png' %}">
-                {% endblock %}
-            </a>
-
-            <div class="nav-menu">
-                <ul id="site-menu">
-                    {% block header_menu %}
-                        <li><a href="/about">About</a></li>
-                        <li><a href="">Showcase</a></li>
-                        <li><a href="https://facebook.com/HacksHackersAfrica" target="_blank" rel="noopener">Community</a></li>
-                        <li><a href="/login">login/register</a></li>
-                        <li class="social-icons">
-                            <a href="https://twitter.com/{{ HURUMAP.twitter }}">
-                                <i class="fa fa-twitter fa-lg fa-fw"></i>
-                            </a>
-                            <a href="https://facebook.com/{{ HURUMAP.facebook }}">
-                                <i class="fa fa-facebook fa-lg fa-fw"></i>
-                            </a>
-                        </li>
-
-                    {% endblock header_menu %}
-                </ul>
-            </div>
-        </div>
-    </header>
-<!-- {% block header_content %}{% endblock header_content %} -->
-{% endblock %}
