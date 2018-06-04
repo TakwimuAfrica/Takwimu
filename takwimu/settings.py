@@ -6,19 +6,19 @@ from hurumap.settings import *  # noqa
 # insert our overrides before both census and hurumap
 INSTALLED_APPS = ['takwimu'] + INSTALLED_APPS
 
+ROOT_URLCONF = 'takwimu.urls'
 
-HURUMAP = WAZIMAP
+
+# -------------------------------------------------------------------------------------
+# Website Details
+# -------------------------------------------------------------------------------------
 
 HURUMAP['name'] = 'TAKWIMU'
-HURUMAP['url'] = os.environ.get('TAKWIMU_URL','https://takwimu.africa/')
+HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://takwimu.africa/')
 
-takwimu_profile = os.environ.get('TAKWIMU_PROFILE', 'takwimu_profiles')
+hurumap_profile = 'census'
 
-
-HURUMAP['default_profile'] = takwimu_profile
-
-HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(
-    takwimu_profile)
+HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(hurumap_profile)
 HURUMAP['default_geo_version'] = os.environ.get('DEFAULT_GEO_VERSION', '2009')
 HURUMAP['legacy_embed_geo_version'] = '2009'
 
@@ -40,13 +40,33 @@ HURUMAP['geometry_data'] = {
     }
 }
 
-LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
+# Map config
+HURUMAP['map_centre'] = None
+HURUMAP['map_zoom'] = None
 
+# -------------------------------------------------------------------------------------
+# Google Analytics
+
+HURUMAP['ga_tracking_ids'] = [
+    'UA-44795600-8',  # HURUmap
+    'UA-115543098-1'  # TAKWIMU
+]
+
+# Making sure they are the same
+WAZIMAP = HURUMAP
+
+
+# -------------------------------------------------------------------------------------
+# Database Configs
+# -------------------------------------------------------------------------------------
 
 DATABASE_URL = os.environ.get('DATABASE_URL',
                               'postgresql://takwimu:takwimu@localhost/takwimu')
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
-DATABASES['default']['ATOMIC_REQUESTS'] = True
 
-# Making sure they are the same
-WAZIMAP = HURUMAP
+
+# -------------------------------------------------------------------------------------
+# Logging Configs
+# -------------------------------------------------------------------------------------
+
+LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
