@@ -29,9 +29,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css,gh/FortAwesome/Font-Awesome@5.0.13/web-fonts-with-css/css/fontawesome-all.css">
     <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
   {% endblock %}
+
+  {% block head_facebook_tags %}{% endblock %}
+  {% block head_twitter_tags %}{% endblock %}
+  <!-- Page generated: {% now "Y-m-d H:i:s.u" %} -->
 </head>
 
-<body>
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+  {% block body %}
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
@@ -39,11 +44,16 @@
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
 
+  {% endblock body %}
+
+  {% block body_javascript %}
 
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
   <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1,npm/bootstrap@4.1.1/dist/js/bootstrap.min.js"></script>
   <script src="{% static 'js/main.js' %}"></script>
+
+  {% block body_javascript_extra %}{% endblock %}
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
@@ -55,6 +65,8 @@
     {% endfor %}
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+  {% endblock body_javascript %}
 </body>
 
 </html>
