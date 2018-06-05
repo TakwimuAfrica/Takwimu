@@ -21,8 +21,9 @@
           <div role="tabpanel" class="tab-pane fade in active show"
                id="recommended_for_you">
             <div class="row p-3">
-              {% for story in stories %}
-                <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
+              {% for story in recommended %}
+                <div
+                    class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
                   <div class="card"><a href="{{ story.url }}" target="_blank"
                                        class="card-link">
                     <div class="card-img"
@@ -30,7 +31,6 @@
                     <div class="card-body">
                       <h3 class="card-title">{{ story.title }}</h3>
                       <p class="card-text">{{ story.subtitle }}</p>
-                      <a href="#" class="btn btn-outline-light">Outline</a>
                     </div>
                   </a>
                   </div>
@@ -43,8 +43,26 @@
             </div>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="most_recent">
-            <div class="container">
-
+            <div class="row p-3">
+              {% for story in recent_stories %}
+                <div
+                    class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
+                  <div class="card"><a href="{{ story.url }}" target="_blank"
+                                       class="card-link">
+                    <div class="card-img"
+                         style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
+                    <div class="card-body">
+                      <h3 class="card-title">{{ story.title }}</h3>
+                      <p class="card-text">{{ story.subtitle }}</p>
+                    </div>
+                  </a>
+                  </div>
+                </div>
+              {% endfor %}
+              <div class="w-100 text-center">
+                <button class="btn-primary load-more-stories-btn">Load more
+                  stories &nbsp;<i class="fas fa-arrow-down"></i></button>
+              </div>
             </div>
           </div>
         </div>
@@ -62,14 +80,37 @@
         </ul>
 
         <!-- Tab panes -->
-        <div class="tab-content">
+        <div class="tab-content pt-3">
           <div role="tabpanel" class="tab-pane fade in active show"
                id="most_popular">
+            {% for story in popular_stories %}
+              <div class="col-12 d-flex align-items-stretch mb-5">
+                <div class="card"><a href="{{ story.url }}" target="_blank"
+                                     class="card-link">
+                  <div class="card-img"
+                       style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
+                  <div class="card-body">
+                    <h3 class="card-title">{{ story.title }}</h3>
+                  </div>
+                </a>
+                </div>
+              </div>
+            {% endfor %}
           </div>
           <div role="tabpanel" class="tab-pane fade" id="most_shared">
-            <div class="container">
-
-            </div>
+            {% for story in most_shared %}
+              <div class="col-12 d-flex align-items-stretch mb-5">
+                <div class="card"><a href="{{ story.url }}" target="_blank"
+                                     class="card-link">
+                  <div class="card-img"
+                       style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
+                  <div class="card-body">
+                    <h3 class="card-title">{{ story.title }}</h3>
+                  </div>
+                </a>
+                </div>
+              </div>
+            {% endfor %}
           </div>
         </div>
       </div>
