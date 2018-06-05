@@ -6,6 +6,7 @@
 
 $brand-color-primary: #1f6cc6;
 $brand-color-secondary: #0d51a2;
+$brand-extend-black: #000000;
 
 ::selection, ::-moz-selection {
   background-color: $brand-color-primary;
@@ -58,5 +59,57 @@ $brand-color-secondary: #0d51a2;
   &.bg-color-secondary:hover {
     background-color: $brand-color-primary;
     color: #fff;
+  }
+}
+
+/*
+* Tabs css
+* ---------
+* Overide bootstrap 4 tabs css 
+*/ 
+
+#nav-tab {
+  border-bottom: 2px solid transparent;
+ .nav-item {
+    color: $brand-extend-black;
+    border-bottom: 2px solid transparent;  
+    &.active {
+      color: $brand-color-primary;
+      border-bottom: 2px solid $brand-color-primary;
+    }
+    &:hover,&:focus {
+      color: $brand-color-primary;
+    }
+  }
+}
+
+
+/*
+* Country container css
+* ----------------------
+*/ 
+
+.country-container {
+  text-align:center;
+  .col {
+    display: inline-block;
+    padding: 2em;
+    border-right: 1px solid #ddd;
+    &:nth-last-child(1), &:nth-child(6){
+      border-right: 1px solid transparent;
+    }
+    a {
+      text-decoration: none;
+      img {
+        display: block;
+        margin: 0 auto;
+        width: 50px;
+        height: 50px;
+      }
+      span {
+        font-size: 0.75em;
+        font-weight: 500;
+      }
+    }
   }
 }
