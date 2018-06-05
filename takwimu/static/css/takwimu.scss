@@ -125,8 +125,7 @@ nav.navbar.navbar-expand-lg.navbar-light.border {
 
 #stories_section {
   background-color: #ffffff;
-  margin-left: 0;
-  margin-right: 0;
+  margin: 40px 0;
 
   .title {
     font-family: Roboto;
@@ -156,6 +155,30 @@ nav.navbar.navbar-expand-lg.navbar-light.border {
 
   .nav-tabs .nav-link.active {
     background-color: transparent;
+  }
+
+  .card .card-title {
+    font-size: 20px;
+  }
+
+  .card .card-text {
+    font-size: 16px;
+    color: #4a4a4a;
+  }
+
+  .card-img {
+    background-size: cover!important;
+    height: 200px;
+  }
+
+  .card-link {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  .load-more-stories-btn {
+    padding: 15px 15px;
+    border-radius: 30px;
   }
 }
 
