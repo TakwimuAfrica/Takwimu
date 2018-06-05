@@ -11,6 +11,10 @@ $brand-color-secondary: #0d51a2;
   background-color: $brand-color-primary;
 }
 
+img {
+  max-width: 100%;
+}
+
 // Navbar
 #page-header {
   background-color: $brand-color-primary;
