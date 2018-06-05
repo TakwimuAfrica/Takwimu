@@ -1,9 +1,12 @@
-{% extends '_base.html' %}
+{% extends 'takwimu/_base.html' %}
 
 {% block content %}
 
-<h1>{{ page.title }}</h1>
+  <h1>{{ page.title }}</h1>
 
-{{ page.body }}
+  {{ page.body }}
+
+  {% include 'takwimu/_includes/country_report/stories_section.html' with country='Nigeria' %}
+
 
 {% endblock %}
