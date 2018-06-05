@@ -4,8 +4,14 @@
  * Overide the HURUmap styling
  */
 
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+
 $brand-color-primary: #1f6cc6;
 $brand-color-secondary: #0d51a2;
+
+* {
+  font-family: 'Roboto', sans-serif;
+}
 
 ::selection, ::-moz-selection {
   background-color: $brand-color-primary;
