@@ -3,7 +3,6 @@
  * ------------
  * Overide the HURUmap styling
  */
-
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 $brand-color-primary: #1f6cc6;
@@ -78,7 +77,7 @@ nav.navbar.navbar-expand-lg.navbar-dark {
 }
 
 img {
-  //height: 22px;
+  height: 22px;
   max-width: 100%;
 
 }
@@ -167,7 +166,7 @@ nav.navbar.navbar-expand-lg.navbar-light.border {
   }
 
   .card-img {
-    background-size: cover!important;
+    background-size: cover !important;
     height: 200px;
   }
 

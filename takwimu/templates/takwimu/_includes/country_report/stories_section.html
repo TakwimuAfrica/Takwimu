@@ -23,19 +23,23 @@
             <div class="row p-3">
               {% for story in stories %}
                 <div class="col-sm-4 d-flex align-items-stretch mb-5">
-                  <div class="card"><a href="{{ story.url }}" target="_blank" class="card-link">
-                    <div class="card-img" style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
+                  <div class="card"><a href="{{ story.url }}" target="_blank"
+                                       class="card-link">
+                    <div class="card-img"
+                         style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                     <div class="card-body">
                       <h3 class="card-title">{{ story.title }}</h3>
                       <p class="card-text">{{ story.subtitle }}</p>
                       <a href="#" class="btn btn-outline-light">Outline</a>
-                    </div></a>
+                    </div>
+                  </a>
                   </div>
                 </div>
               {% endfor %}
-            <div class="w-100 text-center">
-              <button class="btn-primary load-more-stories-btn">Load more stories &nbsp;<i class="fas fa-arrow-down"></i></button>
-            </div>
+              <div class="w-100 text-center">
+                <button class="btn-primary load-more-stories-btn">Load more
+                  stories &nbsp;<i class="fas fa-arrow-down"></i></button>
+              </div>
             </div>
           </div>
           <div role="tabpanel" class="tab-pane fade" id="most_recent">
