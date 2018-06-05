@@ -1,12 +1,10 @@
 from django.db import models
-
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore import blocks
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel
+from wagtail.wagtailcore import blocks
+from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.models import Page
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
-
 from wazimap.models import Geography
 
 
@@ -37,4 +35,3 @@ class ReportPage(Page):
         FieldPanel('geo'),
         StreamFieldPanel('body'),
     ]
-    

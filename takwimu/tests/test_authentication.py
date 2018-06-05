@@ -10,4 +10,3 @@ class AuthenticationTest(TestCase):
     def test_signup_endpoint_exists(self):
         found = resolve('/accounts/signup/')
         self.assertEqual(found.view_name, 'account_signup')
-
