@@ -68,7 +68,7 @@ nav.navbar.navbar-expand-lg.navbar-dark {
 }
 
 img {
-  height: 22px;
+  //height: 22px;
   max-width: 100%;
 
 }
@@ -127,6 +127,25 @@ nav.navbar.navbar-expand-lg.navbar-light.border {
     line-height: 2.25;
     letter-spacing: 0.4px;
     color: #000000;
+  }
+
+  .tab-content {
+    border: 1px solid #b8b8b8;
+    min-height: 50vh;
+  }
+
+  .nav-tabs {
+    margin-left: 10px;
+    border-bottom: none;
+  }
+
+  .nav-tabs .nav-link {
+    color: #000000;
+    background-color: #ededec;
+  }
+
+  .nav-tabs .nav-link.active {
+    background-color: transparent;
   }
 }
 
