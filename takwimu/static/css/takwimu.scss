@@ -3,7 +3,6 @@
  * ------------
  * Primary TAKWIMU styling
  */
-
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 $brand-color-primary: #1f6cc6;
@@ -25,14 +24,14 @@ img {
 #page-header {
   background-color: $brand-color-primary;
   #page-header-title {
-      .title img {
-        max-height: 30px;
-        margin-top: 10px;
-      }
-      .nav-menu ul#site-menu li a:hover {
-        color: #fff;
-        text-decoration: underline;
-      }
+    .title img {
+      max-height: 30px;
+      margin-top: 10px;
+    }
+    .nav-menu ul#site-menu li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -41,7 +40,6 @@ img {
 #page-footer {
   background-color: $brand-color-secondary;
 }
-
 
 // Geography
 
@@ -71,3 +69,39 @@ img {
   }
 }
 
+#get_updates {
+  background-color: #f7f7f7;
+
+  #rss_email_updates_div {
+    border-right: 1px solid rgba(151, 151, 151, 0.35);
+  }
+
+  h3 {
+    font-size: 32px;
+    font-weight: 500;
+  }
+
+  p {
+    font-size: 16px;
+    font-weight: normal;
+    color: #787878;
+  }
+
+  button {
+    height: 81px;
+    border-radius: 40.5px;
+    bottom: 0;
+    background-color: #1f6cc6;
+  }
+}
+
+@media only screen and (max-width: 767px) {
+  #get_updates {
+
+    #rss_email_updates_div {
+      border-bottom: 1px solid rgba(151, 151, 151, 0.35);
+      border-right: none;
+    }
+
+  }
+}
