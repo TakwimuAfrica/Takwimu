@@ -1,5 +1,4 @@
 {% load staticfiles %}
-
 <!-- Primary Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1f6cc6; height: 71px;">
   <a class="navbar-brand" href="/">
@@ -29,26 +28,18 @@
         <a class="nav-link" href="#">Contact</a>
       </li>
     </ul>
+    <div class="offset-3">
+      <button class="btn bg-white border rounded pt-1 pb-1 pr-4 pl-4 text-uppercase">Login</button>
+    </div>
   </div>
 </nav>
-
 <!-- Secondary Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light border">
-  <ul class="navbar-nav pl-5">
-    <li class="nav-item borders">
-        <a class="nav-link " href="#">DATA BY COUNTRY<span><i class="fas fa-arrow-down"></i></span></a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="#">DATA BY TOPIC</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">DATA BY PRIORITY</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="#">DATA BY SDG INDICATOR</a>
-      </li>
-      <li class="nav-item ">
-        <a class="nav-link" href="#">EXPLORE ALL DATA POINTS</a>
-      </li>
-  </ul>
+<nav class="navbar navbar-expand-lg navbar-light border pt-0 pb-0">
+	<div class="d-flex flex-row justify-content-start pl-4 text-secondary text-uppercase">
+	  <div class="nav-link border-right px-5 py-4">Data by Country &nbsp<i class="fas fa-angle-down"></i></div>
+	  <div class="nav-link border-right px-5 py-4">Data by Topic</div>
+	  <div class="nav-link border-right px-5 py-4">Data by Priority</div>
+	  <div class="nav-link border-right px-5 py-4">Data by SDG Indicators &nbsp<i class="fas fa-angle-down"></i></div>
+	  <div class="nav-link px-5 py-4">Explore all data points</div>
+	</div>
 </nav>
