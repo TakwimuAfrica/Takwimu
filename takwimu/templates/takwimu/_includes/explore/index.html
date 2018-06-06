@@ -3,17 +3,17 @@
         <h2>Explore other data</h2>
     </div>
     <nav class="d-flex justify-content-center">
-        {% include 'blocks/explore/_tabs.html' %}
+        {% include 'takwimu/_includes/explore/_tabs.html' %}
     </nav>
-    <div class="tab-content" id="nav-tabContent">
+    <div class="d-flex flex-wrap tab-content" id="nav-tabContent">
         <div class="tab-pane fade show active" id="nav-country" role="tabpanel" aria-labelledby="nav-country-tab">
-            {% include 'blocks/explore/_country.html' %}            
+            {% include 'takwimu/_includes/explore/_country.html' %}            
         </div>
         <div class="tab-pane fade" id="nav-topic" role="tabpanel" aria-labelledby="nav-topic-tab">
-            {% include 'blocks/explore/_topic.html' %}            
+            {% include 'takwimu/_includes/explore/_topic.html' %}            
         </div>
         <div class="tab-pane fade" id="nav-indicators" role="tabpanel" aria-labelledby="nav-indicators-tab">
-            {% include 'blocks/explore/_indicator.html' %}
+            {% include 'takwimu/_includes/explore/_indicator.html' %}
         </div>
     </div>
 </div>
