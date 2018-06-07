@@ -2,8 +2,9 @@
  * takwimu.scss
  * ------------
  * Primary TAKWIMU styling
+ *
+ * NOTE: Please don't make edits here unless super necessary.
  */
-
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 $brand-color-primary: #1f6cc6;
@@ -27,14 +28,14 @@ img {
 #page-header {
   background-color: $brand-color-primary;
   #page-header-title {
-      .title img {
-        max-height: 30px;
-        margin-top: 10px;
-      }
-      .nav-menu ul#site-menu li a:hover {
-        color: #fff;
-        text-decoration: underline;
-      }
+    .title img {
+      max-height: 30px;
+      margin-top: 10px;
+    }
+    .nav-menu ul#site-menu li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
   }
 }
 
@@ -43,7 +44,6 @@ img {
 #page-footer {
   background-color: $brand-color-secondary;
 }
-
 
 // Geography
 
@@ -72,6 +72,35 @@ img {
     color: #fff;
   }
 }
+
+
+/* ------------------------------------------------------------------------------
+ * TAKWIMU: New CSS
+ * ----------------
+ * This looks to make slight tweaks to Bootstrap and make appropriate edits later.
+ *
+ * NOTE: Please don't make edits here unless super necessary.
+ */
+
+ // Stories Section
+
+section.stories {
+
+  .card .card-text {
+    color: #4a4a4a;
+  }
+
+  .card-img {
+    background-size: cover !important;
+    height: 200px;
+  }
+
+  .card-link {
+    color: inherit;
+    text-decoration: none;
+  }
+}
+
 
 /*
 * Tabs css
@@ -194,3 +223,4 @@ img {
   */ 
   // body { background: grey;}
  }
+
