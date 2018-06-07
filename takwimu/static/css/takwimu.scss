@@ -132,17 +132,16 @@ section.stories {
 */ 
 
 .country-container {
-  text-align:center;
   .col {
     display: inline-block;
     padding: 2em;
     border-right: 1px solid #ddd;
-    &:nth-last-child(1){
+    &:nth-child(5n of .col) {
       border-right: 1px solid transparent;
     }
     a {
       text-decoration: none;
-      color: $brand-extend-black;
+      color: #000;
       &:hover,&:focus {
         color: $brand-color-primary;
       }
