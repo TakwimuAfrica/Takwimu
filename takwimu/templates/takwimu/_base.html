@@ -4,40 +4,31 @@
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!-->
-<html class="no-js"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 
 <head>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>{% block head_title %}{{ HURUMAP.name }}{% endblock %}</title>
-  <meta name="description"
-        content="{% block head_meta_description %}{% endblock %}">
-  <meta name="viewport"
-        content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="{% block head_meta_description %}{% endblock %}">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   {% block favicon %}
-    <link rel="apple-touch-icon" sizes="152x152"
-          href="{% static 'img/favicons/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32"
-          href="{% static 'img/favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16"
-          href="{% static 'img/favicons/favicon-16x16.png' %}">
+    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicons/apple-touch-icon.png' %}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
     <link rel="manifest" href="{% static 'img/favicons/site.webmanifest' %}">
-    <link rel="mask-icon"
-          href="{% static 'img/favicons/safari-pinned-tab.svg' %}"
-          color="#5bbad5">
+    <link rel="mask-icon" href="{% static 'img/favicons/safari-pinned-tab.svg' %}" color="#5bbad5">
     <link rel="shortcut icon" href="{% static 'img/favicons/favicon.ico' %}">
     <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="msapplication-config"
-          content="{% static 'img/favicons/browserconfig.xml' %}">
+    <meta name="msapplication-config" content="{% static 'img/favicons/browserconfig.xml'%}">
     <meta name="theme-color" content="#ffffff">
   {% endblock %}
 
   {% block head_css %}
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
-   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
-   <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css">
+    <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
   {% endblock %}
 
   {% block head_facebook_tags %}{% endblock %}
@@ -45,51 +36,38 @@
   <!-- Page generated: {% now "Y-m-d H:i:s.u" %} -->
 </head>
 
-<body id="{% block body_id %}{% endblock %}"
-      class="{% block body_class %}{% endblock %}">
-{% block body %}
+<body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
+  {% block body %}
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
 
+  <!-- Add your site or application content here -->
+  <p>Hello world! This is HTML5 Boilerplate.</p>
 
-  {% include 'takwimu/_includes/navbar.html' %}
-  <div class="main_content">
-    {% block content %}
-    {% endblock %}
-  </div>
+  {% endblock body %}
 
-  {% include 'takwimu/_includes/footer.html' %}
-{% endblock body %}
-
-{% block body_javascript %}
+  {% block body_javascript %}
 
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
-  <script
-      src="https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1,npm/bootstrap@4.1.1/dist/js/bootstrap.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/combine/npm/jquery@3.3.1,npm/bootstrap@4.1.1/dist/js/bootstrap.min.js"></script>
   <script src="{% static 'js/main.js' %}"></script>
 
   {% block body_javascript_extra %}{% endblock %}
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
-      window.ga = function () {
-          ga.q.push(arguments)
-      };
-      ga.q = [];
-      ga.l = +new Date;
-      ga('create', '{{ HURUmap.ga_tracking_id }}', 'auto');
-      ga('send', 'pageview')
-      {% for ga_tracking_id in HURUMAP.ga_tracking_ids %}
-          ga('create', '{{ ga_tracking_id }}', 'auto', {'name': 't{{ forloop.counter }}'});
-          ga('t{{ forloop.counter }}.send', 'pageview');
-      {% endfor %}
+    window.ga = function () { ga.q.push(arguments) }; ga.q = []; ga.l = +new Date;
+    ga('create', '{{ HURUmap.ga_tracking_id }}', 'auto'); ga('send', 'pageview')
+    {% for ga_tracking_id in HURUMAP.ga_tracking_ids %}
+        ga('create', '{{ ga_tracking_id }}', 'auto', {'name': 't{{ forloop.counter }}'});
+        ga('t{{ forloop.counter }}.send', 'pageview');
+    {% endfor %}
   </script>
-  <script src="https://www.google-analytics.com/analytics.js" async
-          defer></script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
-{% endblock body_javascript %}
+  {% endblock body_javascript %}
 </body>
 
 </html>
