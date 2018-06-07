@@ -18,4 +18,3 @@ class CountryReport(TemplateView):
         context['recommended'] = stories[10:16]
         print context.keys()
         return context
-
