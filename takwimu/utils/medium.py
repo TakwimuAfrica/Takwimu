@@ -44,7 +44,7 @@ class Medium(object):
                 image.original_width = image_dict["originalWidth"]
                 image.original_height = image_dict["originalHeight"]
 
-                image.url = u"https://cdn-images-1.medium.com/fit/{width}/{height}/{id}" \
+                image.url = u"https://cdn-images-1.medium.com/max/800/{id}" \
                     .format(width=image.original_width,
                             height=image.original_height,
                             id=image.image_id)
