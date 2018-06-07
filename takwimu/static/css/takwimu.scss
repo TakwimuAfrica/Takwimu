@@ -69,44 +69,22 @@ img {
   }
 }
 
-#get_updates {
-  background-color: #f7f7f7;
+// Country Report Page
 
-  #rss_email_updates_div {
-    border-right: 1px solid rgba(151, 151, 151, 0.35);
+section.stories {
+
+  .card .card-text {
+    color: #4a4a4a;
   }
 
-  h3 {
-    font-size: 32px;
-    font-weight: 500;
+  .card-img {
+    background-size: cover !important;
+    height: 200px;
   }
 
-  p {
-    font-size: 16px;
-    font-weight: normal;
-    color: #787878;
-  }
-
-  button {
-    height: 81px;
-    border-radius: 40.5px;
-    bottom: 0;
-    background-color: #1f6cc6;
+  .card-link {
+    color: inherit;
+    text-decoration: none;
   }
 }
 
-@media only screen and (max-width: 767px) {
-  #get_updates {
-
-    #rss_email_updates_div {
-      border-bottom: 1px solid rgba(151, 151, 151, 0.35);
-      border-right: none;
-    }
-
-    div.row {
-      padding-left: 40px;
-      padding-right: 40px;
-    }
-
-  }
-}
