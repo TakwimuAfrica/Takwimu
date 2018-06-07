@@ -123,3 +123,18 @@ section.stories {
     top: 1em;
   }
 }
+
+.help-footer {
+  background-color: $brand-color-primary;
+  color: $brand-extend-white;
+  .pulse-icon {
+    padding: 0;
+    img {
+      float: right;
+      background-color: $brand-extend-white;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+    }
+  }
+}
