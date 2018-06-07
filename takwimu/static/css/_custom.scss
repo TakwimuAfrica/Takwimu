@@ -1,0 +1,48 @@
+#page-header-title a,
+.box-header a {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.vcenter {
+    position: absolute;
+    z-index: 1;
+    top: 20%;
+    left: 0; 
+    right: 0; 
+    margin-left: auto; 
+    margin-right: auto;
+    padding: 0 1em;
+}
+
+.vcenter .content-container h2{
+    border-bottom: 1px solid #ccc;
+}
+
+.search-form .input-group{
+    border-radius: 2em!important;
+    background: #fff;
+    padding: 0.1em;
+}
+.search-form .input-group input{
+    border:none;
+}
+
+.btn-t-primary {
+    background: $brand-color-primary;
+    color: #fff;
+    padding: 0.5em 1em;
+    border-radius: 2em;
+}
+
+hr {
+    border-color:$brand-color-secondary;
+}
+
+.text-brand-sec {
+    color: $brand-color-secondary;
+}
+
+#homepage #slippy-map {
+    height: calc(90vh - 45px);
+}

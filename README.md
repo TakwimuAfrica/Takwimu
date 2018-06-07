@@ -11,16 +11,20 @@ TODO
 
 ## Development
 
-## Development
+### Server Requirements
+You will need to make sure your server meets the following requirements:
+- [virtualenv](https://virtualenv.pypa.io/en/stable/installation/)
+- [pip](https://pip.pypa.io/en/stable/installing/)
+- Python 2.7
+- [postgres](https://www.codementor.io/engineerapart/getting-started-with-postgresql-on-mac-osx-are8jcopb)
 
-1. Clone the repo
+### Installation
+
+1. Clone the repo ``https://github.com/TakwimuAfrica/TAKWIMU.git``
 2. ``cd TAKWIMU``
 3. ``virtualenv --no-site-packages env``
 4. ``source env/bin/activate``
 5. ``pip install -r requirements.txt``
-
-
-***NB:** The set up docs from here assume setting up HURUmap Kenya but is applicable to the rest of the projects.*
 
 You will need a Postgres database:
 
@@ -30,6 +34,7 @@ create user takwimu with password takwimu;
 create database takwimu;
 grant all privileges on database takwimu to takwimu;
 ```
+
 Run migrations to keep Django happy:
 ```
 python manage.py migrate

@@ -1,30 +1,96 @@
 {% extends 'homepage.html' %}{% load humanize partition staticfiles %}
 
-{% block header_content %}
-<div class="content-container clearfix bg-color-secondary text-center">
-    <div class="wrapper">
-        <h1>The African Human Development Service</h1>
-        <h4>Helping you find the data you need.</h4>
+{% block content_container %}
+    <div class="clearfix">
+        <div id="slippy-map"></div>
+        <div class="column-third">
+            <div class="vcenter col-lg-4 col-md-4 col-sm-8 col-xs-10 bg-color-secondary">
+                <div class="clearfix text-center">
+                    <h2 class="pt-4 text-white">Discover the Stories Behind the Data</h2>
+                    <h4 class="text-white">
+                        {{ HURUMAP.name }} helps storytellers and
+                        campaigners use data to add context and depth to stories.
+                    </h4>
+                    <form class="search-form pt-3">
+                        <div class="form-row align-items-center">
+                            <div class="col-auto mx-auto" style="width: 80%;">
+                                <div class="input-group pl-3">
+                                    <input type="text" class="form-control" id="search-takwimu" 
+                                    aria-describedby="searchHelp" placeholder="Enter your search term">
+                                    <div class="input-group-prepend">
+                                        <button type="submit" class="btn btn-primary rounded-circle">
+                                            <span class="fa fa-search"></span>
+                                        </button>
+                                    </div>
+                                </div>
+                                <small class="form-text text-white">
+                                    Search by <a href="#" class="text-info">country</a> or <a href="#" class="text-info">indicators</a> ?
+                                </small>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-{% endblock header_content %}
 
+    <div class="showcase how-it-works bg-white text-center">
+        {% block how_it_works %}
+            <div class="clearfix container text-center">
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong>THIS IS NOT THE FINAL SITE. IT SERVES AS A PROOF OF CONCEPT FOR THE ARCHITECTURE.</strong>
+                    <p>The site pulls together the different dependencies that will be customized for TAKWIMU.</p>
+                    <p>
+                        <a href="https://twitter.com/TakwimuAfrica" class="text-brand-sec" target="_blank" rel="noopener">Twitter</a> . 
+                        <a href="https://facebook.com/TakwimuAfrica" class="text-brand-sec" target="_blank" rel="noopener">Facebook</a> . 
+                        <a href="https://github.com/TakwimuAfrica" class="text-brand-sec" target="_blank" rel="noopener">GitHub</a>
+                    </p>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            </div>
+            <div class="pb-5 pt-3 text-brand-sec">
+                <h1>How it works</h1>
+            </div>
+            <div class="wrapper clearfix card-deck">
+                <div class="card shadow bg-white border-0">
+                    <div class="card-body">
+                        <i class="fa fa-connectdevelop"></i>
+                        <h5 class="card-title">Find Facts</h5>
+                        <p class="card-text">
+                            Population and financial figures are broken down by category: Elections, Demographics, Service Delivery, Economics, and Education.
+                        </p>
+                    </div>
+                </div>
+                <div class="card shadow bg-white border-0">
+                    <div class="card-body">
+                        <i class="fa fa-connectdevelop"></i>
+                        <h5 class="card-title">Visualize</h5>
+                        <p class="card-text">
+                            Our library of charts gives you insight into data from places you research. Look for them on profile pages. You can embed
+                            the charts on your own site
+                        </p>
+                    </div>
+                </div>
+                <div class="card shadow bg-white border-0">
+                    <div class="card-body">
+                        <i class="fa fa-connectdevelop"></i>
+                        <h5 class="card-title">Get Context</h5>
+                        <p class="card-text">
+                            Pre-computed statistics are presented alongside each data point so you can see how each place fits into a large context
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="wrapper">
+                <br/><br/>
+                <p><a href="/help" class="btn btn-t-primary">Learn more</a></p>
+            </div>
+        {% endblock %}
+    </div>
 
-{% block how_it_works %}
+    {% include 'blocks/showcase.html' %}
 
-<div style="text-align: center; max-width: 700px; margin: 0 auto; padding: 10px; background-color: red; padding-top: 20px;">
-    <h1>THIS IS NOT THE FINAL SITE. IT SERVES AS A PROOF OF CONCEPT FOR THE ARCHITECTURE.</h1>
-    <p>The site pulls together the different dependencies that will be customized for TAKWIMU.</p>
-    <p>
-      <a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener">Twitter</a> . 
-      <a href="https://facebook.com/TakwimuAfrica" target="_blank" rel="noopener">Facebook</a> . 
-      <a href="https://github.com/TakwimuAfrica" target="_blank" rel="noopener">GitHub</a>
-    </p>
-</div>
-
-<br/></br/>
-
-
-{{ block.super }}
-
+    {% include 'blocks/partners.html' with extra_css_class='bg-white' %}
 {% endblock %}
