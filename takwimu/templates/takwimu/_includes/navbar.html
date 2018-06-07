@@ -4,13 +4,16 @@
   <a class="navbar-brand" href="/">
     <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
   </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+    aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav pl-5">
       <li class="nav-item pl-4">
-        <a class="nav-link" href="#">About Takwimu<span class="sr-only"></span></a>
+        <a class="nav-link" href="#">About Takwimu
+          <span class="sr-only"></span>
+        </a>
       </li>
       <li class="nav-item pl-4">
         <a class="nav-link" href="#">Data Services</a>
@@ -34,12 +37,34 @@
   </div>
 </nav>
 <!-- Secondary Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light border pt-0 pb-0">
-	<div class="d-flex flex-row justify-content-start pl-4 text-secondary text-uppercase">
-	  <div class="nav-link border-right px-5 py-4">Data by Country &nbsp<i class="fas fa-angle-down"></i></div>
-	  <div class="nav-link border-right px-5 py-4">Data by Topic</div>
-	  <div class="nav-link border-right px-5 py-4">Data by Priority</div>
-	  <div class="nav-link border-right px-5 py-4">Data by SDG Indicators &nbsp<i class="fas fa-angle-down"></i></div>
-	  <div class="nav-link px-5 py-4">Explore all data points</div>
-	</div>
+<nav class="navbar navbar-expand-lg navbar-light border p-0">
+  <ul class="w-100 d-flex flex-nowrap flex-row justify-content-between navbar-nav text-uppercase nav-fill">
+    <li class="nav-item dropdown border-right pt-2 pb-2">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Data by Country
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Under construction</a>
+      </div>
+    </li>
+    <li class="nav-item border-right pt-2 pb-2">
+      <a class="nav-link" href="#">Data by Topic</a>
+    </li>
+    <li class="nav-item border-right pt-2 pb-2">
+      <a class="nav-link" href="#">Data by priority</a>
+    </li>
+    <li class="nav-item dropdown border-right pt-2 pb-2">
+      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+        Data by SDG Indicators
+      </a>
+      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <a class="dropdown-item" href="#">Under construction </a>
+      </div>
+    </li>
+    <li class="nav-item pt-2 pb-2">
+      <a class="nav-link" href="#">Explore all data points</a>
+    </li>
+  </ul>
 </nav>
