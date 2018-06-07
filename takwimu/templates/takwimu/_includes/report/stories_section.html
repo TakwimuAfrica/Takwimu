@@ -1,16 +1,16 @@
-<section id="stories_section">
-  <div class="container-fluid">
-    <h3 class="title">Latest stories, updates and resources
-      for {{ country }}.</h3>
+<!-- Stories Section -->
+<section class="stories">
+  <div class="container-fluid py-5">
+    <h3>Latest stories, updates and resources for {{ country }}.</h3>
     <div class="row">
-      <div class="col-lg-9">
+      <div class="col-md-9">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" href="#recommended_for_you" role="tab"
+            <a class="nav-link active" href="#recommended-for-you" role="tab"
                data-toggle="tab">Recommended for you</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#most_recent" role="tab"
+            <a class="nav-link" href="#most-recent" role="tab"
                data-toggle="tab">Most
               Recent</a>
           </li>
@@ -19,7 +19,7 @@
         <!-- Tab panes -->
         <div class="tab-content">
           <div role="tabpanel" class="tab-pane fade in active show"
-               id="recommended_for_you">
+               id="recommended-for-you">
             <div class="row p-3">
               {% for story in recommended %}
                 <div
@@ -29,7 +29,7 @@
                     <div class="card-img"
                          style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                     <div class="card-body">
-                      <h3 class="card-title">{{ story.title }}</h3>
+                      <h5 class="card-title">{{ story.title }}</h5>
                       <p class="card-text">{{ story.subtitle }}</p>
                     </div>
                   </a>
@@ -37,12 +37,11 @@
                 </div>
               {% endfor %}
               <div class="w-100 text-center">
-                <button class="btn-primary load-more-stories-btn">Load more
-                  stories &nbsp;<i class="fas fa-arrow-down"></i></button>
+                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Stories <i class="fas fa-external-link-alt"></i></a>
               </div>
             </div>
           </div>
-          <div role="tabpanel" class="tab-pane fade" id="most_recent">
+          <div role="tabpanel" class="tab-pane fade" id="most-recent">
             <div class="row p-3">
               {% for story in recent_stories %}
                 <div
@@ -52,7 +51,7 @@
                     <div class="card-img"
                          style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                     <div class="card-body">
-                      <h3 class="card-title">{{ story.title }}</h3>
+                      <h5 class="card-title">{{ story.title }}</h5>
                       <p class="card-text">{{ story.subtitle }}</p>
                     </div>
                   </a>
@@ -60,14 +59,13 @@
                 </div>
               {% endfor %}
               <div class="w-100 text-center">
-                <button class="btn-primary load-more-stories-btn">Load more
-                  stories &nbsp;<i class="fas fa-arrow-down"></i></button>
+                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Stories <i class="fas fa-external-link-alt"></i></a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="col-lg-3">
+      <div class="col-md-3">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
             <a class="nav-link active" href="#most_popular" role="tab"
@@ -90,7 +88,7 @@
                   <div class="card-img"
                        style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                   <div class="card-body">
-                    <h3 class="card-title">{{ story.title }}</h3>
+                    <h5 class="card-title">{{ story.title }}</h5>
                   </div>
                 </a>
                 </div>
@@ -105,7 +103,7 @@
                   <div class="card-img"
                        style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                   <div class="card-body">
-                    <h3 class="card-title">{{ story.title }}</h3>
+                    <h5 class="card-title">{{ story.title }}</h5>
                   </div>
                 </a>
                 </div>

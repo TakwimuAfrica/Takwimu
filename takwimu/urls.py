@@ -7,6 +7,5 @@ from takwimu.views import CountryReport
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
-              hurumap_urlpatterns + [
-    url(r'^report', CountryReport.as_view(), name='country_report'),
-]
+              hurumap_urlpatterns + \
+              [ url(r'^report', CountryReport.as_view(), name='country_report')]
