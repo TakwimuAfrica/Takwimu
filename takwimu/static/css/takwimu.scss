@@ -7,6 +7,8 @@
 
 $brand-color-primary: #1f6cc6;
 $brand-color-secondary: #0d51a2;
+$brand-extend-white: #ffffff;
+$brand-extend-jumbotron: #e9ecef;
 
 * {
   font-family: 'Roboto', sans-serif;
@@ -88,3 +90,36 @@ section.stories {
   }
 }
 
+/*
+* Jumbotron 
+* ----------
+* Override bootstrap jumbotron css
+*/ 
+
+.jumbotron {
+  position: relative;
+  background-color: $brand-extend-white;
+  &.active {
+    background-color: $brand-extend-jumbotron;
+  }
+  &.active .btn-pr-country-report {
+    display: block;
+  }
+  .btn-pr-country-report {
+    display: none;
+    position: absolute;
+    background-color: $brand-color-primary;
+    color: $brand-extend-white;
+    top: -0.5em;
+    right: 1em;
+    text-transform: uppercase;
+    strong {
+      font-size: 12px;
+    }
+  }
+  .section-no {
+    position: absolute;
+    margin: 0 auto;
+    top: 1em;
+  }
+}

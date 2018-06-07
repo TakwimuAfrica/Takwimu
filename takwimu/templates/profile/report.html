@@ -1,0 +1,107 @@
+{% block country_report %}
+<section id="country_report" class="container-fluid py-4">
+    <div class="col-8 mx-auto">
+        <div class="row border-bottom">
+            <div class="col-11 mx-auto py-2">
+                    <!-- Header -->
+                    <div class="col-12">
+                        <div class="dropdown">
+                            <button class="btn dropdown-toggle" type="button" id="countryDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ STATIC_URL }}img/flags/nigeria.svg" width="50" height="50" alt="Nigeria">
+                                Nigeria
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="countryDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <img src="{{ STATIC_URL }}img/flags/kenya.svg" alt="">
+                                    Kenya
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img src="{{ STATIC_URL }}img/flags/tanzania.svg" alt="">
+                                    Tanzania
+                                </a>
+                                <a class="dropdown-item" href="#">
+                                    <img src="{{ STATIC_URL }}img/flags/uganda.svg" alt="">
+                                    Uganda
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="col-12">
+                        <h1 class="display-3 font-weight-bold py-2">
+                            Country profile contents
+                        </h1>
+                    </div>            
+                </div>
+        </div>
+        
+        <div class="row text-center">
+            <div class="jumbotron border-bottom jumbotron-fluid w-100">
+                <span class="text-uppercase section-no">section 1</span>           
+                <div class="container">
+                    <h1 class="display-4 text-capitalize">Country overview</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                </div>
+                <button type="button" class="btn btn-pr-country-report">
+                    <span class="fa fa-eye"></span>
+                    <strong class="px-2">Your are here</strong>
+                </button>
+            </div>
+            <div class="jumbotron jumbotron-fluid w-100">
+                <span class="text-uppercase section-no">section 2</span>
+                <div class="container">
+                    <h1 class="display-4 text-capitalize">Contenxt &amp; Key Issiues</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>                    
+                </div>
+                <button type="button" class="btn btn-pr-country-report">
+                    <span class="fa fa-eye"></span>
+                    <strong class="px-2">Your are here</strong>
+                </button>
+            </div>
+            <div class="active jumbotron jumbotron-fluid border-top w-100">
+                <span class="text-uppercase section-no">section 3</span>            
+                <div class="container">
+                    <h1 class="display-4 text-capitalize">Policy framework</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                </div>
+                <button type="button" class="btn btn-pr-country-report">
+                    <span class="fa fa-eye"></span>
+                    <strong class="px-2">Your are here</strong>
+                </button>
+            </div>
+            <div class="jumbotron jumbotron-fluid border-top w-100">
+                <span class="text-uppercase section-no">section 4</span>                
+                <div class="container">
+                    <h1 class="display-4 text-capitalize">Programme areas</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                </div>
+                <button type="button" class="btn btn-pr-country-report">
+                    <span class="fa fa-eye"></span>
+                    <strong class="px-2">Your are here</strong>
+                </button>
+            </div>
+            <div class="jumbotron jumbotron-fluid border-top w-100">
+                <span class="text-uppercase section-no">section 5</span>                
+                <div class="container">
+                    <h1 class="display-4 text-capitalize">Public finance</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                </div>
+                <button type="button" class="btn btn-pr-country-report">
+                    <span class="fa fa-eye"></span>
+                    <strong class="px-2">Your are here</strong>
+                </button>
+            </div>
+            <div class="jumbotron jumbotron-fluid border-top w-100">
+                <div class="container">
+                    <h1 class="display-4 text-capitalize">Official developement assistance</h1>
+                    <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+                </div>
+                <button type="button" class="btn btn-pr-country-report">
+                    <span class="fa fa-eye"></span>
+                    <strong class="px-2">Your are here</strong>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
