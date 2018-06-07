@@ -16,7 +16,7 @@ class CountryReport(TemplateView):
         context = dict()
         try:
             if settings.DEBUG:
-                with open('articles.json') as f:
+                with open('data/articles.json') as f:
                     stories = json.load(f)
             else:
                 client = Medium()
