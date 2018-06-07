@@ -1,7 +1,9 @@
-from django.views.generic import TemplateView
-from utils.medium import Medium
 import json
+
 from django.conf import settings
+from django.views.generic import TemplateView
+
+from utils.medium import Medium
 
 
 class CountryReport(TemplateView):
