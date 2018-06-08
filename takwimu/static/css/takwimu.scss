@@ -62,7 +62,25 @@ img {
  * NOTE: Please don't make edits here unless super necessary.
  */
 
- // Stories Section
+// Navbar Dropdown Goodness
+.nav-dropdowns-btn {
+  // Do default styles here
+}
+.nav-dropdowns {
+  div {
+    display: none;
+    &:hover {
+      display: block;
+    }
+  }
+}
+
+#nav-reports-btn:hover + #nav-reports {
+  display: block !important;
+}
+
+
+// Stories Section
 
 section.stories {
 
