@@ -1,70 +1,43 @@
 {% load staticfiles %}
 <!-- Primary Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #1f6cc6; height: 71px;">
-  <a class="navbar-brand" href="/">
-    <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
-  </a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-    aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav pl-5">
-      <li class="nav-item pl-4">
-        <a class="nav-link" href="#">About Takwimu
-          <span class="sr-only"></span>
-        </a>
-      </li>
-      <li class="nav-item pl-4">
-        <a class="nav-link" href="#">Data Services</a>
-      </li>
-      <li class="nav-item pl-4">
-        <a class="nav-link" href="#">Media Center</a>
-      </li>
-      <li class="nav-item pl-4">
-        <a class="nav-link" href="#">Community</a>
-      </li>
-      <li class="nav-item pl-4">
-        <a class="nav-link" href="#">Help</a>
-      </li>
-      <li class="nav-item pl-4">
-        <a class="nav-link" href="#">Contact</a>
-      </li>
-    </ul>
-    <div class="float-right">
-      <button class="btn bg-white border rounded pt-1 pb-1 pr-4 pl-4 text-uppercase">Login</button>
+        <li class="nav-item pl-4">
+          <a class="nav-link px-3" href="#">Data</a>
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            About Us
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="/about">About Takwimu</a>
+            <a class="dropdown-item" href="/about/data-services">Data Services</a>
+            <a class="dropdown-item" href="/about/media-center">Media Center</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Community</a>
+            <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Help</a>
+            <a class="dropdown-item" href="/about/contact">Contact Us</a>
+            <a class="dropdown-item" href="/login">Login</a>
+          </div>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Newsletter
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">Work In Progress</a>
+          </div>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fab fa-twitter fa-fw"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fab fa-facebook fa-fw"></i></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#"><i class="fas fa-search fa-fw"></i></a>
+        </li>
     </div>
   </div>
-</nav>
-<!-- Secondary Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light border p-0">
-  <ul class="w-100 d-flex flex-nowrap flex-row justify-content-between navbar-nav text-uppercase nav-fill">
-    <li class="nav-item dropdown border-right pt-2 pb-2">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        Data by Country
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Under construction</a>
-      </div>
-    </li>
-    <li class="nav-item border-right pt-2 pb-2">
-      <a class="nav-link" href="#">Data by Topic</a>
-    </li>
-    <li class="nav-item border-right pt-2 pb-2">
-      <a class="nav-link" href="#">Data by priority</a>
-    </li>
-    <li class="nav-item dropdown border-right pt-2 pb-2">
-      <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
-        aria-expanded="false">
-        Data by SDG Indicators
-      </a>
-      <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-        <a class="dropdown-item" href="#">Under construction </a>
-      </div>
-    </li>
-    <li class="nav-item pt-2 pb-2">
-      <a class="nav-link" href="#">Explore all data points</a>
-    </li>
-  </ul>
+ 
 </nav>

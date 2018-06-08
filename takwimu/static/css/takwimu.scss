@@ -12,38 +12,18 @@ $brand-color-secondary: #0d51a2;
 $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 
-* {
-  font-family: 'Roboto', sans-serif;
+body {
+  padding-top: 56px;
 }
 
-::selection, ::-moz-selection {
-  background-color: $brand-color-primary;
+* {
+  font-family: 'Roboto', sans-serif;
 }
 
 img {
   max-width: 100%;
 }
 
-// Navbar
-#page-header {
-  background-color: $brand-color-primary;
-  #page-header-title {
-    .title img {
-      max-height: 30px;
-      margin-top: 10px;
-    }
-    .nav-menu ul#site-menu li a:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
-  }
-}
-
-// Footer
-
-#page-footer {
-  background-color: $brand-color-secondary;
-}
 
 // Geography
 
