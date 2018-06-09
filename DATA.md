@@ -21,7 +21,7 @@ Country Reports -> Data Indicators
 
 
 # Topics can be directly linked with indicators without need of reports (These are the HURUmap Topic Profiles e.g Education profiles)
-Topic -> Data Indicators (one to many)
+Topics -> Data Indicators (many to many)
 
 # Data Indicators can live on their own as searchable entities
 Data Indicators
@@ -43,6 +43,9 @@ Data Indicator -> Data Values (one to many)
 ```
 
 A data indicator can have multiple data values because of different sources of the data.
+
+TODO: Can one data value have many data indicators?
+
 
 
 ### Data Values
