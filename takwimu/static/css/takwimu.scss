@@ -101,60 +101,6 @@ section.stories {
   }
 }
 
-/*
-* Jumbotron 
-* ----------
-* Override bootstrap jumbotron css
-*/ 
-
-.jumbotron {
-  position: relative;
-  background-color: $brand-extend-white;
-  &.active {
-    background-color: $brand-extend-jumbotron;
-  }
-  &.active .btn-pr-country-report {
-    display: block;
-  }
-  .btn-pr-country-report {
-    display: none;
-    position: absolute;
-    background-color: $brand-color-primary;
-    color: $brand-extend-white;
-    top: -0.5em;
-    right: 1em;
-    text-transform: uppercase;
-    strong {
-      font-size: 12px;
-    }
-  }
-  .section-no {
-    position: absolute;
-    margin: 0 auto;
-    top: 1em;
-  }
-}
-
-.help-footer {
-  background-color: $brand-color-primary;
-  color: $brand-extend-white;
-  .help-content {
-    position: relative;
-    .pulse-icon {
-      padding-left: 3em;
-      svg {
-        float: right;
-        background-color: $brand-extend-white;
-        width: 80px;
-        height: 80px;
-        border-radius: 50%;
-        path {
-          fill: $brand-color-primary;
-        }
-      }
-    }
-  }  
-}
 
 /*
 * Tabs css
