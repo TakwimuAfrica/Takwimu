@@ -14,38 +14,18 @@ $brand-extend-jumbotron: #e9ecef;
 $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 
-* {
-  font-family: 'Roboto', sans-serif;
+body {
+  padding-top: 56px;
 }
 
-::selection, ::-moz-selection {
-  background-color: $brand-color-primary;
+* {
+  font-family: 'Roboto', sans-serif;
 }
 
 img {
   max-width: 100%;
 }
 
-// Navbar
-#page-header {
-  background-color: $brand-color-primary;
-  #page-header-title {
-    .title img {
-      max-height: 30px;
-      margin-top: 10px;
-    }
-    .nav-menu ul#site-menu li a:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
-  }
-}
-
-// Footer
-
-#page-footer {
-  background-color: $brand-color-secondary;
-}
 
 // Geography
 
@@ -84,7 +64,25 @@ img {
  * NOTE: Please don't make edits here unless super necessary.
  */
 
- // Stories Section
+// Navbar Dropdown Goodness
+.nav-dropdowns-btn {
+  // Do default styles here
+}
+.nav-dropdowns {
+  div {
+    display: none;
+    &:hover {
+      display: block;
+    }
+  }
+}
+
+#nav-reports-btn:hover + #nav-reports {
+  display: block !important;
+}
+
+
+// Stories Section
 
 section.stories {
 

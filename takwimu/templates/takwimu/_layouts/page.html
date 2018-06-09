@@ -1,17 +1,29 @@
 {% extends 'takwimu/_base.html' %}
 
+{% comment %}
+
+  page.html: Default Page Layout
+  ------------------------------
+  The default page layout for our awesome site. Every page extends this to display content e.g:
+    1. Posts
+    2. Static Pages
+    3. Report Pages
+
+{% endcomment %}
+
+
 {% block body_class %}page{% endblock %}
 
 {% block body %}
 
 {# Navbar #}
-{% include 'takwimu/_includes/navbar.html' %}
+
+{% include 'takwimu/_includes/navbar/_index.html' %}
 
 {# Page Content #}
 {% block content %}
 
-{% include 'profile/report.html' %}
-
+  {# Content goes here. #}
 
 {% endblock %}
 
