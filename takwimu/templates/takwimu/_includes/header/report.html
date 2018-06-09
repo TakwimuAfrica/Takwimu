@@ -1,0 +1,50 @@
+{% load staticfiles %}
+
+<header>
+  <div class="jumbotron jumbotron-fluid pt-3 bg-white">
+
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-white">
+          <li class="breadcrumb-item"><a href="#">Home</a></li> 
+          <li class="breadcrumb-item"><a href="#">Country Profiles</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Nigeria</li>
+        </ol>
+      </nav>
+  
+      <div class="d-flex justify-content-between align-items-center">
+          <div class="btn-group">
+            <button class="btn btn-outline-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <img class="rounded-circle border-light mr-2" src="{% static 'img/flags/nigeria.svg' %}"
+                  border="8" style="border-style:double; width: 50px; height: 50px;"/>
+              Nigeria
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="#">Senegal</a>
+              <a class="dropdown-item" href="#">Tanzania</a>
+            </div>
+          </div>
+        
+        <button class="btn btn-light btn-lg text-uppercase">
+          <i class="fas fa-align-left"></i> Table of Contents
+        </button>
+      </div>
+  
+      <div class="clearfix text-center mx-auto" style="max-width: 780px;">
+        <p class="strong text-uppercase">Section 1</p>
+        <h1 class="display-1">Country Overview</h1>
+        <p class="lead my-4">A top-level overview of Nigeria – how it’s governed, the make-up of it’s population, the economy and SDG indicators</p>
+        <a class="btn btn-primary btn-sm text-uppercase px-2 py-1" href="#" role="button">
+          Download full country report <i class="fas fa-download border-left pl-2 ml-1"></i>
+        </a>
+      </div>
+        
+    </div>
+
+  </div>
+
+  <div class="py-5 bg-light">
+    <h1 class="text-center">Report section buttons go here.</h1>
+  </div>
+
+</header>

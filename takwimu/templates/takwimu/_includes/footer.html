@@ -1,75 +1,104 @@
 {% load staticfiles %}
 
-<footer class="text-light small" style="background-image: linear-gradient(to bottom, #1f6cc6, #57c9b0);">
+<footer class="text-light small font-weight-light bg-dark" style="background-color: #1f6cc6;">
   <!-- Footer widgets -->
   <div class="container py-5">
 
     <div class="row mt-3 mb-2">
-      <div class="col-3">
-        <p><img src="{% static 'img/logo-white-all.png' %}" alt="" style="max-height: 22px;"></p>
-        <p>Takwimu is an open data platform which
-            facilitates African-led development in areas
-            such as Agriculture, Education, Health & 
-            Financial Inclusion.</p>
-          <p><a href="#">Find out more »</a></p>
+      <div class="col-6">
+        <p class="mb-4 mt-3">
+          <img src="{% static 'img/logo-white-all.png' %}" alt="" style="max-height: 40px;">
+        </p>
+        <p>
+          TAKWIMU is an open data platform which facilitates African-led development in areas such as Agriculture,
+          Education,Health & Financial Inclusion.
+        </p>
+        <p>All content is released under a
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons 4 Attribution license</a>. Reuse it to help empower your own community. The code is available
+          on
+          <a href="https://github.com/TakwimuAfrica/" target="_blank" rel="noopener">GitHub</a> and data is available on ​
+          <a href="https://openafrica.net/" target="_blank" rel="noopener">openAFRICA​</a>.</p>
       </div>
-      <div class="col-3">
+      <div class="col-3 pt-5">
         <h5>Quick Links</h5>
+        <nav class="nav flex-column">
+          <a class="nav-link" href="/about">About</a>
+          <a class="nav-link" href="/data-services">Data Services</a>
+          <a class="nav-link" href="https://takwimu.zendesk.com/">Community</a>
+        </nav>
       </div>
-      <div class="col-3">
+      <div class="col-3 pt-5">
         <h5>Find Data</h5>
-      </div>
-      <div class="col-3">
-        <h5>Search TAKWIMU</h5>
+        <nav class="nav flex-column">
+          <a class="nav-link" href="#">Explore All Data</a>
+          <a class="nav-link" href="#">By Country</a>
+          <a class="nav-link" href="#">By Topic</a>
+        </nav>
       </div>
     </div>
-    
+
   </div>
 
   <!-- Footer Nav -->
-  <nav class="navbar navbar-expand-lg navbar-dark small" style="background-color: #144681; height: 75px;">
+  <nav class="navbar navbar-expand-lg navbar-dark small" style="background-color: #144681;">
     <div class="container">
-      <span class="navbar-text">
-        © 2018, TAKWIMU CC by 4.0
+      <span class="navbar-text">        
+        © {% now "Y" %} TAKWIMU CC by 4.0
       </span>
 
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav ml-5">
           <li class="nav-item">
-            <a class="nav-link" href="#">Terms of Use</a>
+            <a class="nav-link" href="/terms-of-use">Terms of Use</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Privacy Policy</a>
+            <a class="nav-link" href="/privacy-policy">Privacy Policy</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Cookie Policy</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="/cookie-policy">Cookie Policy</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <a class="nav-link" href="#">tw</a>
+            <a class="nav-link" href="https://twitter.com/TakwimuAfrica" target="_blank">
+              <i class="fab fa-twitter"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">fb</a>
+            <a class="nav-link" href="https://facebook.com/TakwimuAfrica" target="_blank">
+              <i class="fab fa-facebook"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">yt</a>
+            <a class="nav-link" href="#" target="_blank">
+              <i class="fab fa-youtube"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">ig</a>
+            <a class="nav-link" href="#" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">gh</a>
+            <a class="nav-link" href="https://github.com/TakwimuAfrica" target="_blank">
+              <i class="fab fa-github"></i>
+            </a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">English</a>
+          <li class="nav-item dropup">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa fa-globe"></i>
+              English
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Swahili</a>
+              <a class="dropdown-item" href="#">French</a>
+              <a class="dropdown-item" href="#">Chinese</a>
+            </div>
           </li>
         </ul>
       </div>

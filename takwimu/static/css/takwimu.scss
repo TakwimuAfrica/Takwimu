@@ -2,44 +2,28 @@
  * takwimu.scss
  * ------------
  * Primary TAKWIMU styling
+ *
+ * NOTE: Please don't make edits here unless super necessary.
  */
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
 $brand-color-primary: #1f6cc6;
 $brand-color-secondary: #0d51a2;
+$brand-extend-black: #000000;
+$brand-extend-muted: #6c757d;
+
+body {
+  padding-top: 56px;
+}
 
 * {
   font-family: 'Roboto', sans-serif;
-}
-
-::selection, ::-moz-selection {
-  background-color: $brand-color-primary;
 }
 
 img {
   max-width: 100%;
 }
 
-// Navbar
-#page-header {
-  background-color: $brand-color-primary;
-  #page-header-title {
-    .title img {
-      max-height: 30px;
-      margin-top: 10px;
-    }
-    .nav-menu ul#site-menu li a:hover {
-      color: #fff;
-      text-decoration: underline;
-    }
-  }
-}
-
-// Footer
-
-#page-footer {
-  background-color: $brand-color-secondary;
-}
 
 // Geography
 
@@ -69,7 +53,34 @@ img {
   }
 }
 
-// Country Report Page
+
+/* ------------------------------------------------------------------------------
+ * TAKWIMU: New CSS
+ * ----------------
+ * This looks to make slight tweaks to Bootstrap and make appropriate edits later.
+ *
+ * NOTE: Please don't make edits here unless super necessary.
+ */
+
+// Navbar Dropdown Goodness
+.nav-dropdowns-btn {
+  // Do default styles here
+}
+.nav-dropdowns {
+  div {
+    display: none;
+    &:hover {
+      display: block;
+    }
+  }
+}
+
+#nav-reports-btn:hover + #nav-reports {
+  display: block !important;
+}
+
+
+// Stories Section
 
 section.stories {
 
@@ -87,4 +98,126 @@ section.stories {
     text-decoration: none;
   }
 }
+
+
+/*
+* Tabs css
+* ---------
+* Overide bootstrap 4 tabs css 
+*/ 
+
+#nav-tab {
+  border-bottom: 2px solid transparent;
+ .nav-item {
+    padding: 1em 0;
+    margin: 0 1em;
+    color: $brand-extend-black;
+    border-bottom: 2px solid transparent;  
+    &.active {
+      color: $brand-color-primary;
+      border-bottom: 2px solid $brand-color-primary;
+    }
+    &:hover,&:focus {
+      color: $brand-color-primary;
+    }
+  }
+}
+
+
+/*
+* Country container css
+* ----------------------
+*/ 
+
+.country-container {
+  .col {
+    display: inline-block;
+    padding: 2em;
+    border-right: 1px solid #ddd;
+    &:nth-child(5n of .col) {
+      border-right: 1px solid transparent;
+    }
+    a {
+      text-decoration: none;
+      color: #000;
+      &:hover,&:focus {
+        color: $brand-color-primary;
+      }
+      &.active {
+        color: $brand-extend-muted;
+        svg  {
+          filter: $brand-extend-muted; /* IE6-9 */
+          -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+          filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
+        }
+      }
+      svg {
+        display: block;
+        margin: 0 auto;
+        width: 50px;
+        height: 50px;
+      }
+      span {
+        display: block;
+        padding-top: 1.75em;
+        font-size: 0.75em;
+        font-weight: 500;
+      }
+    }
+  }
+}
+
+/*
+* Extra small devices (portrait phones, less than 576px)
+* Small devices (landscape phones, 576px and down)
+*/
+
+@media (max-width: 576px) {
+  .nav-item {
+    font-size: 0.75em;
+  }
+  .country-container {
+    div.col {
+      &:nth-child(even) {
+        border-right: 1px solid transparent;
+      }
+    }
+  }
+}
+
+/* 
+* Small devices (landscape phones, 576px and up)
+* Medium devices (tablets, 768px and up)
+*/
+
+@media (min-width: 576px) and (max-width: 768px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ 
+  // body {background: red;}
+}
+
+
+/*
+* Large devices (desktops, 992px and up)
+*/ 
+@media (min-width: 768px) and (max-width: 992px) { 
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ 
+  // body { background: yellow;}
+ }
+
+/*
+* Extra large devices (large desktops, 1200px and up)
+*/ 
+@media (min-width: 1200px) { 
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ 
+  // body { background: grey;}
+ }
 
