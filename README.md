@@ -11,8 +11,6 @@ TODO
 
 ## Development
 
-## Development
-
 1. Clone the repo
 2. ``cd TAKWIMU``
 3. ``virtualenv --no-site-packages env``
