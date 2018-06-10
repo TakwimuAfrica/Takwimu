@@ -1,3 +1,7 @@
 {# Loads all the section topics #}
 
-{% include 'takwimu/_includes/report/topics_detail.html' %}
+{% for topic in page.topics.all %}
+
+  {% include 'takwimu/_includes/report/topics_detail.html' with topic=topic.topic %}
+
+{% endfor %}

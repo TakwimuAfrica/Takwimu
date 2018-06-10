@@ -1,42 +1,34 @@
 {% load staticfiles %}
-<div class="container pt-5">
+
+<div class="container py-5">
 	<div class="row ">
-		<div class="col-4">
-			<!--Navbar section -->
-			<nav class="nav flex-column">
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center" href="">Economy Size</a>
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center" href=""><i class="fas fa-eye text-left"></i> &nbsp GDP growth rate</a>
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center" href="">Oil price growth</a>
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center"  href="">Nigerian's in poverty</a>
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center"  href="">Size of middle class</a>
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center"  href="">Access to water</a>
-				<a class="nav-link btn btn-primary border-bottom rounded-0 btn-large py-3 text-center"  href="">Rural/ Urban education</a>
-			</nav>
-			<div class="row pt-5 pb-5 text-dark">
+
+		<!-- Left navigation of all indicators-->
+		<div class="col-3">
+			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				{% for indicator in topic.data_indicators.all %}
+					<a class="nav-link" id="d{{ indicator.indicator.id }}-tab-btn" data-toggle="pill" href="#d{{ indicator.indicator.id }}-tab" role="tab" aria-controls="d{{ indicator.indicator.id }}-tab" aria-selected="true">
+						{{ indicator.indicator.name }}</a>
+				{% endfor %}
+			</div>
+			<!-- <div class="row pt-5 pb-5 text-dark">
 				<p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
 				<a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
-			</div>
-		</div>
+			</div> -->
+		</div>  <!-- /.col-3 -->
 
-		<div class="col-8">
-			<h1>Development Context</h1>
-			<p class="text-dark">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore 
-				et dolore magna aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut
-				ali quip ex eacommodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-				cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt 
-				in culpa qui officia deserunt mollit anim id est laborum.....<a href="#">Read more<i class="fas fa-angle-double-right fa-sm"></i></a></p>
-				<div>
-          <h4 class="pt-5">GDP Growth Rate</h4>
-          <div class="d-flex justify-content-end">
-            <div class="text-muted pt-2">Show data at</div>
-            <div class="col-4">
-            <select class="form-control">
-              <option>GDP</option>
-              <option>National</option>
-            </select>
-            </div>
-          </div>
-          <h3>HURUmap Visuals go here</h3>
+		<div class="col-9">
+			<h1>{{ topic.title }}</h1>
+			<p class="text-dark">{{ topic.description }}</p>
+			<div class="tab-content" id="v-pills-tabContent">
+				{% for indicator in topic.data_indicators.all %}
+				<div class="tab-pane fade" id="d{{ indicator.indicator.id }}-tab" role="tabpanel" aria-labelledby="d{{ indicator.indicator.id }}-tab-btn">
+						<h4 class="pt-5">{{ indicator.indicator.name }}</h4>
+						<p>{{ indicator.indicator.description }}</p>
+						<hr/>
+						<h3>HURUmap Visuals go here</h3>
+				</div>
+				{% endfor %}
 			</div>
 		</div>
 	</div>

@@ -4,15 +4,13 @@
 
   {% include 'takwimu/_includes/header/report.html' %}
 
-  <h1>Sections</h1>
-
-  {{ page.body }}
-
   {% include 'takwimu/_includes/report/topics.html' %}
 
   <hr/>
 
   {% include 'takwimu/_includes/report/sections_list.html' %}
+
+  {% include 'takwimu/_includes/sections/data-services.html' %}
 
   {% include 'takwimu/_includes/sections/stories.html' with country='Nigeria' %}
 
