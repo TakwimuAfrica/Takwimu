@@ -1,83 +1,105 @@
 {% load staticfiles %}
 
-<div class="fixed-top">
+<div class="fixed-top morph-dropdown">
   <!-- Primary Navbar -->
   <nav class="navbar navbar-expand-lg navbar-dark" style="background: #6196a5 url('{% static 'img/bg/header-bg.jpg'%}') no-repeat center; background-size: cover;">
-      <div class="container">
-        <a class="navbar-brand" href="/">
-          <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
-        </a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-          aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ml-5 mr-auto">
-            <li class="nav-item">
-              <a class="nav-link nav-dropdowns-btn px-3" id="nav-reports-btn" href="#">
-                Reports
-              </a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle px-3" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Topics
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">WIP</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle px-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                SDGs
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">WIP</a>
-              </div>
-            </li>
-            <li class="nav-item pl-4">
-              <a class="nav-link px-3" href="#">Data</a>
-            </li>
-          </ul>
-          <ul class="navbar-nav">
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                About Us
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="/about">About Takwimu</a>
-                <a class="dropdown-item" href="/about/data-services">Data Services</a>
-                <a class="dropdown-item" href="/about/media-center">Media Center</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Community</a>
-                <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Help</a>
-                <a class="dropdown-item" href="/about/contact">Contact Us</a>
-                <a class="dropdown-item" href="/login">Login</a>
-              </div>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Newsletter
-              </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Work In Progress</a>
-              </div>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fab fa-twitter fa-fw"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fab fa-facebook fa-fw"></i></a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#"><i class="fas fa-search fa-fw"></i></a>
-            </li>
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" 
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-5 mr-auto">
+          <li class="nav-item has-dropdown" data-content="reports">
+            <a class="nav-link px-3" id="nav-reports-btn" href="#">
+              Reports
+            </a>
+          </li>
+          <li class="nav-item has-dropdown" data-content="topics">
+            <a class="nav-link px-3" href="#">
+              Topics
+            </a>
+          </li>
+          <li class="nav-item has-dropdown" data-content="sdgs">
+            <a class="nav-link dropdown-toggle px-3" href="#" id="navbarDropdown" role="button"
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              SDGs
+            </a>
+          </li>
+          <li class="nav-item pl-4 has-dropdown" data-content="data">
+            <a class="nav-link px-3" href="#">Data</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav">
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" 
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              About Us
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="/about">About Takwimu</a>
+              <a class="dropdown-item" href="/about/data-services">Data Services</a>
+              <a class="dropdown-item" href="/about/media-center">Media Center</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Community</a>
+              <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Help</a>
+              <a class="dropdown-item" href="/about/contact">Contact Us</a>
+              <a class="dropdown-item" href="/login">Login</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" 
+              data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Newsletter
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Work In Progress</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fab fa-twitter fa-fw"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fab fa-facebook fa-fw"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-search fa-fw"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="nav-dropdowns">
+    <div class="dropdown-list">
+      <div class="dropdown" id="reports">
+        <div class="content">
+          {% include 'takwimu/_includes/navbar/reports.html' %}
         </div>
       </div>
-    </nav>
-
-    <div class="nav-dropdowns">
-      {% include 'takwimu/_includes/navbar/reports.html' %}
+      <div class="dropdown" id="topics">
+        <div class="content">
+          Topics dropdown goes here
+        </div>
+      </div>
+      <div class="dropdown" id="sdgs">
+        <div class="content">
+          SDGs dropdown goes here
+        </div>
+      </div>
+      <div class="dropdown" id="data">
+        <div class="content">
+          Data dropdown goes here
+        </div>
+      </div>
     </div>
-
+  </div>
 </div>
-

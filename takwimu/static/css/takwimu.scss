@@ -65,22 +65,7 @@ img {
  */
 
 // Navbar Dropdown Goodness
-.nav-dropdowns-btn {
-  // Do default styles here
-}
-.nav-dropdowns {
-  div {
-    display: none;
-    &:hover {
-      display: block;
-    }
-  }
-}
-
-#nav-reports-btn:hover + #nav-reports {
-  display: block !important;
-}
-
+@import"dropdown";
 
 // Stories Section
 
