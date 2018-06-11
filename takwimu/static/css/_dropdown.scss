@@ -44,6 +44,20 @@
       visibility: hidden;
       box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
       background: red;
+      .dropdown {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        visibility: hidden;
+        width: 100%;
+        -webkit-transition: opacity .3s, visibility .3s;
+        transition: opacity .3s, visibility .3s;
+        &.active {
+          opacity: 1;
+          visibility: visible;
+        }
+      }
     }
     &.is-dropdown-visible .dropdown-list {
       visibility: visible;
@@ -55,20 +69,7 @@
         opacity: 1;
       }
     }
-    .dropdown {
-      position: absolute;
-      left: 0;
-      top: 0;
-      opacity: 0;
-      visibility: hidden;
-      width: 100%;
-      -webkit-transition: opacity .3s, visibility .3s;
-      transition: opacity .3s, visibility .3s;
-      &.active {
-        opacity: 1;
-        visibility: visible;
-      }
-    }
+    
     .content {
       padding: 2.2em 1.8em;
       -webkit-transition: -webkit-transform .3s;
