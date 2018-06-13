@@ -1,4 +1,5 @@
 import json
+import operator
 
 from django.conf import settings
 from django.views.generic import TemplateView
@@ -22,12 +23,10 @@ class CountryReport(TemplateView):
                 client = Medium()
                 stories = client.get_publication_posts('code-for-africa',
                                                        count=20)
-            context['recent_stories'] = stories[0:6]
-            context['popular_stories'] = stories[6:8]
-            context['most_shared'] = stories[8:10]
-            context['recommended'] = stories[10:16]
-            print context.keys()
-
+            latest = stories[0:6]
+            context['recent_stories'] = latest
+            context['trending'] =sorted(latest, key=operator.itemgetter('clap_count'), reverse=True)
             return context
         except Exception as e:
+            print e.message
             return context

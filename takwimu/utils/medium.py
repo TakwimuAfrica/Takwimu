@@ -104,6 +104,7 @@ class Medium(object):
             response_count = virtual_dict["responsesCreatedCount"]
             read_time = virtual_dict["readingTime"]
             word_count = virtual_dict["wordCount"]
+            clap_count = virtual_dict["totalClapCount"]
             image_count = virtual_dict["imageCount"]
             preview_image = virtual_dict["previewImage"]
             subtitle = virtual_dict["subtitle"]
@@ -115,6 +116,7 @@ class Medium(object):
             post.subtitle = subtitle
             post.post_date = post_date
             post.url = url
+            post.clap_count = clap_count
             post.recommend_count = recommend_count
             post.response_count = response_count
             post.read_time = read_time

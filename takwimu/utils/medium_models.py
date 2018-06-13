@@ -61,6 +61,14 @@ class Post:
         self._response_count = count
 
     @property
+    def clap_count(self):
+        return self._clap_count
+
+    @clap_count.setter
+    def clap_count(self, count):
+        self._clap_count = count
+
+    @property
     def read_time(self):
         return self._read_time
 
