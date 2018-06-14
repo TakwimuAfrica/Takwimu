@@ -26,7 +26,6 @@ img {
   max-width: 100%;
 }
 
-
 // Geography
 
 .leaflet-label {
@@ -55,7 +54,6 @@ img {
   }
 }
 
-
 /* ------------------------------------------------------------------------------
  * TAKWIMU: New CSS
  * ----------------
@@ -68,6 +66,7 @@ img {
 .nav-dropdowns-btn {
   // Do default styles here
 }
+
 .nav-dropdowns {
   div {
     display: none;
@@ -80,7 +79,6 @@ img {
 #nav-reports-btn:hover + #nav-reports {
   display: block !important;
 }
-
 
 // Stories Section
 
@@ -101,25 +99,24 @@ section.stories {
   }
 }
 
-
 /*
 * Tabs css
 * ---------
 * Overide bootstrap 4 tabs css 
-*/ 
+*/
 
 #nav-tab {
   border-bottom: 2px solid transparent;
- .nav-item {
+  .nav-item {
     padding: 1em 0;
     margin: 0 1em;
     color: $brand-extend-black;
-    border-bottom: 2px solid transparent;  
+    border-bottom: 2px solid transparent;
     &.active {
       color: $brand-color-primary;
       border-bottom: 2px solid $brand-color-primary;
     }
-    &:hover,&:focus {
+    &:hover, &:focus {
       color: $brand-color-primary;
     }
   }
@@ -133,6 +130,7 @@ section.stories {
 body.modal-open {
   overflow: scroll;
 }
+
 #toc {
   .modal-content {
     height: 100vh;
@@ -145,13 +143,29 @@ body.modal-open {
     right: 0;
     margin-top: 0;
   }
-}
 
+  .modal-header {
+    border-bottom: none;
+  }
+
+  hr {
+    border-top: 2px solid rgba(0, 0, 0, .1);
+  }
+
+  p[aria-expanded=true] .fa-plus {
+    display: none;
+  }
+  p[aria-expanded=false] .fa-minus {
+    display: none;
+  }
+
+
+}
 
 /*
 * Country container css
 * ----------------------
-*/ 
+*/
 
 .country-container {
   .col {
@@ -164,12 +178,12 @@ body.modal-open {
     a {
       text-decoration: none;
       color: #000;
-      &:hover,&:focus {
+      &:hover, &:focus {
         color: $brand-color-primary;
       }
       &.active {
         color: $brand-extend-muted;
-        svg  {
+        svg {
           filter: $brand-extend-muted; /* IE6-9 */
           -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
           filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
@@ -218,30 +232,29 @@ body.modal-open {
   /*
   * Do not delete the code below, it's useful for css debuging 
   * during development
-  */ 
+  */
   // body {background: red;}
 }
 
-
 /*
 * Large devices (desktops, 992px and up)
-*/ 
-@media (min-width: 768px) and (max-width: 992px) { 
+*/
+@media (min-width: 768px) and (max-width: 992px) {
   /*
   * Do not delete the code below, it's useful for css debuging 
   * during development
-  */ 
+  */
   // body { background: yellow;}
- }
+}
 
 /*
 * Extra large devices (large desktops, 1200px and up)
-*/ 
-@media (min-width: 1200px) { 
+*/
+@media (min-width: 1200px) {
   /*
   * Do not delete the code below, it's useful for css debuging 
   * during development
-  */ 
+  */
   // body { background: grey;}
- }
+}
 

@@ -6,30 +6,35 @@
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item"><a href="#">Home</a></li> 
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
           <li class="breadcrumb-item"><a href="#">Country Profiles</a></li>
           <li class="breadcrumb-item active" aria-current="page">Nigeria</li>
         </ol>
       </nav>
-  
+
       <div class="d-flex justify-content-between align-items-center">
-        
+
         {% include 'takwimu/_includes/report/country_selector.html' %}
-        
-        <button class="btn btn-light btn-lg text-uppercase" data-toggle="modal" data-target="#toc">
+
+        <button class="btn btn-light btn-lg text-uppercase" data-toggle="modal"
+                data-target="#toc">
           <i class="fas fa-align-left"></i> Table of Contents
         </button>
       </div>
-  
+
       <div class="clearfix text-center mx-auto" style="max-width: 780px;">
         <p class="strong text-uppercase">Section 1</p>
         <h1 class="display-1">Country Overview</h1>
-        <p class="lead my-4">A top-level overview of Nigeria – how it’s governed, the make-up of it’s population, the economy and SDG indicators</p>
-        <a class="btn btn-primary btn-sm text-uppercase px-2 py-1" href="#" role="button">
-          Download full country report <i class="fas fa-download border-left pl-2 ml-1"></i>
+        <p class="lead my-4">A top-level overview of Nigeria – how it’s
+          governed, the make-up of it’s population, the economy and SDG
+          indicators</p>
+        <a class="btn btn-primary btn-sm text-uppercase px-2 py-1" href="#"
+           role="button">
+          Download full country report <i
+            class="fas fa-download border-left pl-2 ml-1"></i>
         </a>
       </div>
-        
+
     </div>
 
   </div>
@@ -38,24 +43,58 @@
     <h1 class="text-center">Section Topics buttons go here.</h1>
   </div>
 
-  <div class="modal fade" id="toc" tabindex="-1" role="dialog" aria-labelledby="Table of Contents" aria-hidden="true" data-backdrop="false">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ...
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+  <div class="modal fade" id="toc" tabindex="-1" role="dialog"
+       aria-labelledby="Table of Contents" aria-hidden="true"
+       data-backdrop="false">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"
+                  aria-label="Close">
+            <i class="fas fa-times fa-2x"></i>
+          </button>
+          <br>
+        </div>
+        <div class="modal-body container">
+
+          {% include 'takwimu/_includes/report/country_selector.html' %}
+
+          <hr>
+
+          <h2>Table of Contents</h2>
+
+
+            <p class="toc_toggle text-primary" data-toggle="collapse" data-target="#country_profile" aria-expanded="false">
+              <i class="fas fa-plus"></i>
+              <i class="fas fa-minus"></i>
+              &nbsp;Country Profile</p>
+            <div id="country_profile" class="collapse multi-collapse">
+              <ul class="text-primary">
+                <li>Some thing</li>
+                <li>Some thing</li>
+                <li>Some thing</li>
+                <li>Some thing</li>
+              </ul>
+            </div>
+
+          <p class="toc_toggle text-primary" data-toggle="collapse" data-target="#context_key_issues" aria-expanded="false">
+              <i class="fas fa-plus"></i>
+              <i class="fas fa-minus"></i>
+              &nbsp;Context and Key Issues</p>
+            <div id="context_key_issues" class="collapse multi-collapse">
+              <ul class="text-primary">
+                <li>Some thing</li>
+                <li>Some thing</li>
+                <li>Some thing</li>
+                <li>Some thing</li>
+              </ul>
+            </div>
+
+
+
+        </div>
       </div>
     </div>
   </div>
-</div>
 
 </header>
