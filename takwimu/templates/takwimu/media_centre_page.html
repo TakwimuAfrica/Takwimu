@@ -1,0 +1,31 @@
+{% extends 'takwimu/_layouts/page.html' %}
+
+{% block content %}
+
+  <div class="bg-light p-5">
+    <nav class="side-nav position-fixed">
+      <ul>
+        <li>Overview</li>
+        <li>Press Releases</li>
+        <li>Press Downloads</li>
+        <li>Resources and Stories</li>
+        <li>Glossary</li>
+      </ul>
+    </nav>
+
+    {% block media_centre_main %}
+      <div class="main">
+        <h2>{{ page.title }}</h2>
+        <small>{{ page.subtitle }}</small>
+      </div>
+    {% endblock %}
+
+
+  </div>
+
+
+
+  {% include 'takwimu/_includes/sections/updates.html' with country='Nigeria' %}
+
+
+{% endblock %}

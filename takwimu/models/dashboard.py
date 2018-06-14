@@ -1,5 +1,6 @@
 from django.db import models
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, \
+    PageChooserPanel, InlinePanel
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
@@ -22,11 +23,13 @@ class TopicPageDataIndicator(models.Model):
     class Meta:
         abstract = True
 
+
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
 class TopicPageDataIndicators(Orderable, TopicPageDataIndicator):
     page = ParentalKey('takwimu.TopicPage', related_name='data_indicators')
+
 
 class TopicPage(Page):
     '''
@@ -37,7 +40,9 @@ class TopicPage(Page):
     '''
     description = models.TextField(blank=True)
 
-    parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
+    parent_topic = models.ForeignKey('self', null=True, blank=True,
+                                     on_delete=models.SET_NULL,
+                                     related_name='+')
     related_topics = models.ManyToManyField('self')
 
     # Search index configuration
@@ -53,6 +58,7 @@ class TopicPage(Page):
         FieldPanel('description'),
         InlinePanel('data_indicators', label="Data Indicators"),
     ]
+
 
 # The abstract model for topics, complete with panels
 class ReportPageTopic(models.Model):
@@ -71,6 +77,7 @@ class ReportPageTopic(models.Model):
 # to the model we want to add related links to (TopicPage)
 class ReportSectionPageTopics(Orderable, ReportPageTopic):
     page = ParentalKey('takwimu.ReportSectionPage', related_name='topics')
+
 
 class ReportSectionPage(Page):
     '''
@@ -98,6 +105,7 @@ class ReportSectionPage(Page):
     parent_page_types = ['takwimu.ReportPage']
     subpage_types = []
 
+
 # The abstract model for topics, complete with panels
 class ReportPageSection(models.Model):
     section = models.ForeignKey(ReportSectionPage, on_delete=models.CASCADE)
@@ -108,6 +116,7 @@ class ReportPageSection(models.Model):
 
     class Meta:
         abstract = True
+
 
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
@@ -128,7 +137,8 @@ class ReportPage(Page):
     Report Page
     -----------
     '''
-    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True)
+    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL, blank=True,
+                            null=True)
 
     # Search index configuration
 
@@ -148,3 +158,11 @@ class ReportPage(Page):
 
     subpage_types = ['takwimu.ReportSectionPage']
 
+
+class MediaCentrePage(Page):
+    intro = models.CharField(max_length=250)
+    content_panels = Page.content_panels + [
+        FieldPanel('intro')
+    ]
+
+    subpage_types = []
