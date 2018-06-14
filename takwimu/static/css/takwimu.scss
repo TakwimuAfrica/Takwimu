@@ -125,6 +125,28 @@ section.stories {
   }
 }
 
+/*
+* table of contents
+* ----------------------
+*/
+
+body.modal-open {
+  overflow: scroll;
+}
+#toc {
+  .modal-content {
+    height: 100vh;
+    width: 20vw;
+  }
+
+  .modal-dialog {
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-top: 0;
+  }
+}
+
 
 /*
 * Country container css

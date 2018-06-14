@@ -16,7 +16,7 @@
         
         {% include 'takwimu/_includes/report/country_selector.html' %}
         
-        <button class="btn btn-light btn-lg text-uppercase">
+        <button class="btn btn-light btn-lg text-uppercase" data-toggle="modal" data-target="#toc">
           <i class="fas fa-align-left"></i> Table of Contents
         </button>
       </div>
@@ -38,6 +38,24 @@
     <h1 class="text-center">Section Topics buttons go here.</h1>
   </div>
 
-  <div class="toc w-25 d-none"></div>
+  <div class="modal fade" id="toc" tabindex="-1" role="dialog" aria-labelledby="Table of Contents" aria-hidden="true" data-backdrop="false">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 </header>
