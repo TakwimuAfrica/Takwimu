@@ -1,0 +1,207 @@
+{% load staticfiles %}
+
+<div class="clearfix container text-center py-5">
+    <div class="wrapper p-3">
+        <h2>Explore data by Sustainable Development Goals</h2>
+        <span>Filter sustainable development goals by data indicator</span>
+    </div>
+
+    {% include 'takwimu/_includes/sections/sdg/nav.html' %}
+
+    <div class="my-2 col-lg-10 col-md-10 mx-auto accordion" id="sdgAccordion">
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="" data-toggle="collapse" data-target="#collapseSDG01" 
+                    aria-expanded="false" aria-controls="collapseSDG01">
+                    <img class="svg" src="{% static 'img/sdg/sdg-01.png' %}" alt="No Porverty">              
+                </a>
+            </div>            
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-category="agriculture" data-target="#collapseSDG02" 
+                    aria-expanded="false" aria-controls="collapseSDG02">
+                    <img class="svg" src="{% static 'img/sdg/sdg-02.png' %}" alt="Zero Hunger">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG03" 
+                    aria-expanded="false" aria-controls="collapseSDG03">
+                    <img class="svg" src="{% static 'img/sdg/sdg-03.png' %}" alt="Good Health and Well Being">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG04" 
+                    aria-expanded="false" aria-controls="collapseSDG04">
+                    <img class="svg" src="{% static 'img/sdg/sdg-04.png' %}" alt="Quality Education">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG05" 
+                    aria-expanded="false" aria-controls="collapseSDG05">
+                    <img class="svg" src="{% static 'img/sdg/sdg-05.png' %}" alt="Gender Equality">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG06" 
+                    aria-expanded="false" aria-controls="collapseSDG06">
+                    <img class="svg" src="{% static 'img/sdg/sdg-06.png' %}" alt="Clean Water and Sanitaion">                
+                </a>
+            </div>           
+        </div>
+        <div>
+            <div id="collapseSDG01" class="collapse" data-parent="#sdgAccordion">
+                {% include 'takwimu/_includes/sections/sdg/accordion_body.html' %}
+            </div>
+            <div id="collapseSDG02" class="collapse" data-parent="#sdgAccordion">
+                {% include 'takwimu/_includes/sections/sdg/accordion_body.html' %}
+            </div>
+            <div id="collapseSDG03" class="collapse" data-parent="#sdgAccordion">
+                {% include 'takwimu/_includes/sections/sdg/accordion_body.html' %}
+            </div>
+            <div id="collapseSDG04" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    SDG04
+                </div>
+            </div>
+            <div id="collapseSDG05" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    SDG05
+                </div>
+            </div>
+            <div id="collapseSDG06" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    SDG06
+                </div>
+            </div>
+        </div>
+        <!-- Second row -->
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG07" 
+                    aria-expanded="false" aria-controls="collapseSDG07">
+                    <img class="svg" src="{% static 'img/sdg/sdg-07.png' %}" alt="Affordable and clean energy">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG08" 
+                    aria-expanded="false" aria-controls="collapseSDG08">
+                    <img class="svg" src="{% static 'img/sdg/sdg-08.png' %}" alt="Decent work and economic growth">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG09" 
+                    aria-expanded="false" aria-controls="collapseSDG09">
+                    <img class="svg" src="{% static 'img/sdg/sdg-09.png' %}" alt="Industtry, Innovation and Infrastructure">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG10" 
+                    aria-expanded="false" aria-controls="collapseSDG10">
+                    <img class="svg" src="{% static 'img/sdg/sdg-10.png' %}" alt="Reduced Inequality">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG11" 
+                    aria-expanded="false" aria-controls="collapseSDG11">
+                    <img class="svg" src="{% static 'img/sdg/sdg-11.png' %}" alt="Sustainable Cities and Communities">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG12" data-category="agriculture"
+                    aria-expanded="false" aria-controls="collapseSDG12">
+                    <img class="svg" src="{% static 'img/sdg/sdg-12.png' %}" alt="Responsible consumption and production">                
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div id="collapseSDG07" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Affordable and clean energy
+                </div>
+            </div>
+            <div id="collapseSDG08" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Decent work and economic growth
+                </div>
+            </div>
+            <div id="collapseSDG09" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Industry Innovation and Infrastructure
+                </div>
+            </div>
+            <div id="collapseSDG10" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Reduced Inequality
+                </div>
+            </div>
+            <div id="collapseSDG11" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Sustainable Cities and Communities
+                </div>
+            </div>
+            <div id="collapseSDG12" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Responsible consumption and production
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG13" data-category="agriculture"
+                    aria-expanded="false" aria-controls="collapseSDG13">
+                    <img class="svg" src="{% static 'img/sdg/sdg-13.png' %}" alt="Climate action">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG14" data-category="agriculture"
+                    aria-expanded="false" aria-controls="collapseSDG14">
+                    <img class="svg" src="{% static 'img/sdg/sdg-14.png' %}" alt="Life below water">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG15" data-category="agriculture"
+                    aria-expanded="false" aria-controls="collapseSDG15">
+                    <img class="svg" src="{% static 'img/sdg/sdg-15.png' %}" alt="Life on land">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG16"
+                    aria-expanded="false" aria-controls="collapseSDG16">
+                    <img class="svg" src="{% static 'img/sdg/sdg-16.png' %}" alt="Peace Justice and Strong Institutions">                
+                </a>
+            </div>
+            <div class="col-lg-2 col-md-2">
+                <a href="#" class="collapsed" data-toggle="collapse" data-target="#collapseSDG17" 
+                    aria-expanded="false" aria-controls="collapseSDG17">
+                    <img class="svg" src="{% static 'img/sdg/sdg-17.png' %}" alt="Partnerships for the goals">                
+                </a>
+            </div>
+        </div>
+        <div class="row">
+            <div id="collapseSDG13" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Climate action
+                </div>
+            </div>
+            <div id="collapseSDG14" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Life below water
+                </div>
+            </div>
+            <div id="collapseSDG15" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Life on land
+                </div>
+            </div>
+            <div id="collapseSDG16" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Peace, Justice and strong institutions
+                </div>
+            </div>
+            <div id="collapseSDG17" class="collapse" data-parent="#sdgAccordion">
+                <div class="card-body">
+                    Partnership for the goals
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

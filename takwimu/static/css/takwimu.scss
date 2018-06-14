@@ -108,7 +108,7 @@ section.stories {
 * Overide bootstrap 4 tabs css 
 */ 
 
-#nav-tab {
+#country-nav-tab {
   border-bottom: 2px solid transparent;
  .nav-item {
     padding: 1em 0;
@@ -166,6 +166,41 @@ section.stories {
         font-weight: 500;
       }
     }
+  }
+}
+/*
+* SDG container css
+* ----------------------
+*/ 
+#sdg-nav-tab {
+  margin: 1em 0;
+  .nav-item {
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 1em;
+    margin: 1em;
+    font-size: 12px;
+    border-bottom: 3px solid #6196a5;
+    &.active {
+      border-bottom: 3px solid transparent;
+      
+    } 
+    img {
+      padding: 1em 0;
+      display: block;
+      margin: 0 auto;
+    }
+  }
+  
+}
+#sdgAccordion {
+  a[aria-expanded="true"] {
+    filter: gray; /* IE6-9 */
+    -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
+    filter: grayscale(1);
+  }
+  .row div {
+    padding: 0.25em;
   }
 }
 
