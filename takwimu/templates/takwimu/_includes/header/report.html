@@ -56,42 +56,36 @@
           <br>
         </div>
         <div class="modal-body container">
-
           {% include 'takwimu/_includes/report/country_selector.html' %}
-
           <hr>
-
           <h2>Table of Contents</h2>
+          <p class="toc_toggle text-primary" data-toggle="collapse"
+             data-target="#country_profile" aria-expanded="false">
+            <i class="fas fa-plus"></i>
+            <i class="fas fa-minus"></i>
+            &nbsp;Country Profile</p>
+          <div id="country_profile" class="collapse multi-collapse">
+            <ul class="text-primary">
+              <li>Some thing</li>
+              <li>Some thing</li>
+              <li>Some thing</li>
+              <li>Some thing</li>
+            </ul>
+          </div>
 
-
-            <p class="toc_toggle text-primary" data-toggle="collapse" data-target="#country_profile" aria-expanded="false">
-              <i class="fas fa-plus"></i>
-              <i class="fas fa-minus"></i>
-              &nbsp;Country Profile</p>
-            <div id="country_profile" class="collapse multi-collapse">
-              <ul class="text-primary">
-                <li>Some thing</li>
-                <li>Some thing</li>
-                <li>Some thing</li>
-                <li>Some thing</li>
-              </ul>
-            </div>
-
-          <p class="toc_toggle text-primary" data-toggle="collapse" data-target="#context_key_issues" aria-expanded="false">
-              <i class="fas fa-plus"></i>
-              <i class="fas fa-minus"></i>
-              &nbsp;Context and Key Issues</p>
-            <div id="context_key_issues" class="collapse multi-collapse">
-              <ul class="text-primary">
-                <li>Some thing</li>
-                <li>Some thing</li>
-                <li>Some thing</li>
-                <li>Some thing</li>
-              </ul>
-            </div>
-
-
-
+          <p class="toc_toggle text-primary" data-toggle="collapse"
+             data-target="#context_key_issues" aria-expanded="false">
+            <i class="fas fa-plus"></i>
+            <i class="fas fa-minus"></i>
+            &nbsp;Context and Key Issues</p>
+          <div id="context_key_issues" class="collapse multi-collapse">
+            <ul class="text-primary">
+              <li>Some thing</li>
+              <li>Some thing</li>
+              <li>Some thing</li>
+              <li>Some thing</li>
+            </ul>
+          </div>
         </div>
       </div>
     </div>
