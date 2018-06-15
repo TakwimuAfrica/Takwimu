@@ -100,3 +100,4 @@ fabric.properties
 
 /static
 *.DS_Store
+.vscode

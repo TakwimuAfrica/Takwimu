@@ -63,21 +63,22 @@ img {
  */
 
 // Navbar Dropdown Goodness
-.nav-dropdowns-btn {
-  // Do default styles here
+
+// Fix position problem of the "containing block" of lg dropdown
+.nav-item.dropdown {
+  position: initial;
 }
 
-.nav-dropdowns {
-  div {
-    display: none;
-    &:hover {
-      display: block;
-    }
+.dropdown-menu-lg {
+  display: none;
+  left: 0;
+  width: 100vw;
+  &:hover {
+    display: block;
   }
 }
-
-#nav-reports-btn:hover + #nav-reports {
-  display: block !important;
+.nav-link:hover + .dropdown-menu-lg {
+  display: block;
 }
 
 // Stories Section
