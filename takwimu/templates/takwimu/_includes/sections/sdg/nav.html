@@ -1,0 +1,26 @@
+{% load staticfiles %}
+
+<nav class="d-flex justify-content-center">
+    <div class="nav nav-sdg" id="sdg-nav-tab" role="tablist">
+        <a class="nav-item" id="nav-health-tab" data-toggle="tab" href="#health" role="tab"
+            aria-controls="nav-country" aria-selected="true">
+            <img class="svg" src="{% static 'img/icons/sector-health.png' %}" alt="Health">
+            Health
+        </a>
+        <a class="nav-item active" id="nav-agriculture-tab" data-toggle="tab" href="#agriculture" role="tab" aria-controls="nav-topic"
+            aria-selected="false">
+            <img class="svg" src="{% static 'img/icons/sector-health.png' %}" alt="Agriculture">               
+            Agriculture
+        </a>
+        <a class="nav-item" id="nav-education-tab" data-toggle="tab" href="#education" role="tab" aria-controls="nav-indicators"
+            aria-selected="false">
+            <img class="svg" src="{% static 'img/icons/sector-education.png' %}" alt="Education">                    
+            Education
+        </a>
+        <a class="nav-item" id="nav-financial-tab" data-toggle="tab" href="#financial-inclusion" role="tab" aria-controls="nav-indicators"
+            aria-selected="false">
+            <img class="svg" src="{% static 'img/icons/sector-financial-inclusion.png' %}" alt="Financial Inclusion">                
+            Financial Inclusion
+        </a>
+    </div>
+</nav>
