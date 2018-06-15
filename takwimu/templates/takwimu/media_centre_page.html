@@ -1,28 +1,41 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
 {% block content %}
+  <div id="media-centre">
 
-  <div class="bg-light p-5">
-    <nav class="side-nav position-fixed">
-      <ul>
-        <li>Overview</li>
-        <li>Press Releases</li>
-        <li>Press Downloads</li>
-        <li>Resources and Stories</li>
-        <li>Glossary</li>
-      </ul>
-    </nav>
+    <div class="row bg-light p-5">
+      <div class="col-lg-2">
+        <nav class="side-nav p-4">
+          <ul class="list-unstyled list-group">
+            <li class="list-group-item">Overview</li>
 
-    {% block media_centre_main %}
-      <div class="main">
-        <h2>{{ page.title }}</h2>
-        <small>{{ page.subtitle }}</small>
+            <li class="list-group-item">Press Releases</li>
+
+            <li class="list-group-item">Press Downloads</li>
+
+            <li class="list-group-item">Resources and Stories</li>
+
+            <li class="list-group-item">Glossary</li>
+          </ul>
+        </nav>
       </div>
-    {% endblock %}
+      <div class="col-lg-10">
+        {% block media_centre_main %}
+
+          <h2>{{ page.title }}</h2>
+          <p>{{ page.intro }}</p>
+
+          <div class="row">
+            {% for page in self.child_pages %}
+
+            {% endfor %}
+          </div>
+          </div>
+        {% endblock %}
+    </div>
 
 
   </div>
-
 
 
   {% include 'takwimu/_includes/sections/updates.html' with country='Nigeria' %}
