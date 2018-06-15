@@ -65,20 +65,26 @@ img {
  */
 
 // Navbar Dropdown Goodness
-.nav-dropdowns-btn {
-  // Do default styles here
-}
-.nav-dropdowns {
-  div {
-    display: none;
-    &:hover {
-      display: block;
-    }
-  }
+.nav-link {
+
 }
 
-#nav-reports-btn:hover + #nav-reports {
-  display: block !important;
+
+// Fix position problem of the "containing block" of lg dropdown
+.nav-item.dropdown {
+  position: initial;
+}
+
+.dropdown-menu-lg {
+  display: none;
+  left: 0;
+  width: 100vw;
+  &:hover {
+    display: block;
+  }
+}
+.nav-link:hover + .dropdown-menu-lg {
+  display: block;
 }
 
 
