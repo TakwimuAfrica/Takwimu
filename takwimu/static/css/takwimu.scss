@@ -176,6 +176,29 @@ section.stories {
 }
 
 /*
+Media Centre
+*/
+
+#media-centre {
+  .list-group-item {
+    background-color: transparent;
+    border-left: none;
+    border-top: none;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,.125);
+  }
+
+  .list-group-item:last-child {
+    border-bottom: none;
+  }
+
+  .side-nav {
+    background-color: #005973;
+    color: #ffffff;
+  }
+}
+
+/*
 * Extra small devices (portrait phones, less than 576px)
 * Small devices (landscape phones, 576px and down)
 */
