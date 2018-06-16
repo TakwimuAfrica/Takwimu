@@ -12,13 +12,12 @@
              id="d{{ indicator.indicator.id }}-tab-btn"
              data-toggle="pill" href="#d{{ indicator.indicator.id }}-tab"
              role="tab" aria-controls="d{{ indicator.indicator.id }}-tab"
-             {% if forloop.first %} aria-selected="true" {% endif %}
+              {% if forloop.first %} aria-selected="true" {% endif %}
              aria-selected="false"><i class="fas fa-eye mr-3"></i>
             {{ indicator.indicator.name }}</a>
 
-          {% if not forloop.last %}<div class="separator mx-3 my-2"></div>{% endif %}
-
-
+          {% if not forloop.last %}
+            <div class="separator mx-3 my-2"></div>{% endif %}
         {% endfor %}
       </div>
       <!-- <div class="row pt-5 pb-5 text-dark">
@@ -52,6 +51,7 @@
   .nav-link {
     color: #f0f0f0;
   }
+
   .nav-link[aria-selected=false] .fa-eye {
     display: none;
   }
@@ -60,7 +60,7 @@
     display: inline;
   }
 
-  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
     background-color: transparent;
     font-weight: 500;
   }
