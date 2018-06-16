@@ -7,12 +7,17 @@
     <div class="col-3">
       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
            aria-orientation="vertical">
-        {% for indicator in topic.data_indicators.all %}cle
-          <a class="nav-link{% if forloop.first %} active show{% endif %}" id="d{{ indicator.indicator.id }}-tab-btn"
+        {% for indicator in topic.data_indicators.all %}
+          <a class="nav-link {% if forloop.first %}active show{% endif %}"
+             id="d{{ indicator.indicator.id }}-tab-btn"
              data-toggle="pill" href="#d{{ indicator.indicator.id }}-tab"
              role="tab" aria-controls="d{{ indicator.indicator.id }}-tab"
-             aria-selected="true">
+             {% if forloop.first %} aria-selected="true" {% endif %}
+             aria-selected="false"><i class="fas fa-eye mr-3"></i>
             {{ indicator.indicator.name }}</a>
+
+          {% if not forloop.last %}<div class="separator mx-3 my-2"></div>{% endif %}
+
 
         {% endfor %}
       </div>
@@ -27,12 +32,14 @@
       <p class="text-dark">{{ topic.description }}</p>
       <div class="tab-content" id="v-pills-tabContent">
         {% for indicator in topic.data_indicators.all %}
-          <div class="tab-pane fade {% if forloop.first %} active show{% endif %}" id="d{{ indicator.indicator.id }}-tab"
-               role="tabpanel"
-               aria-labelledby="d{{ indicator.indicator.id }}-tab-btn">
+          <div
+              class="tab-pane fade {% if forloop.first %} active show{% endif %}"
+              id="d{{ indicator.indicator.id }}-tab"
+              role="tabpanel"
+              aria-labelledby="d{{ indicator.indicator.id }}-tab-btn">
             <h4 class="pt-5">{{ indicator.indicator.name }}</h4>
             <p>{{ indicator.indicator.description }}</p>
-            <hr/>
+
             <h3>HURUmap Visuals go here</h3>
           </div>
         {% endfor %}
@@ -40,3 +47,34 @@
     </div>
   </div>
 </div>
+
+<style>
+  .nav-link {
+    color: #f0f0f0;
+  }
+  .nav-link[aria-selected=false] .fa-eye {
+    display: none;
+  }
+
+  .nav-link[aria-selected=true] .fa-eye {
+    display: inline;
+  }
+
+  .nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+    background-color: transparent;
+    font-weight: 500;
+  }
+
+  .nav-pills {
+    background-color: #005973;
+  }
+
+  .separator {
+    height: 1px;
+    background-color: #ffffff;
+  }
+
+  a.nav-link:hover {
+    color: #f0f0f0;;
+  }
+</style>
