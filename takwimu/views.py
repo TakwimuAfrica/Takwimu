@@ -33,4 +33,4 @@ class CountryReport(TemplateView):
 
 
 class ContactUsPage(TemplateView):
-    template_name = 'takwimu/contact_us_page.html'
+    template_name = 'takwimu/contact.html'
