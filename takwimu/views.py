@@ -30,3 +30,7 @@ class CountryReport(TemplateView):
         except Exception as e:
             print e.message
             return context
+
+
+class ContactUsPage(TemplateView):
+    template_name = 'takwimu/contact.html'
