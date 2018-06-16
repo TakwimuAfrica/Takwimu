@@ -1,19 +1,21 @@
 <!-- Stories Section -->
 <section class="stories">
   <div class="p-5">
-    <h3 class="mb-4">Latest stories, updates and resources for {{ country }}.</h3>
+    <h3 class="mb-4 text-center">Latest for {{ country }} <i class="fas fa-rss"></i></h3>
     <div class="row">
-      <div class="col-md-12">
-        <ul class="nav nav-tabs" role="tablist">
+      <div class="col-md-12 text-align:center;">
+        <div class="d-flex flex-row justify-content-center">
+        <ul class="nav" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" href="#recommended-for-you" role="tab"
-               data-toggle="tab">Trending</a>
+            <button class="nav-link active btn-light text-white m-1 rounded-0" href="#recommended-for-you" role="tab"
+               data-toggle="tab" style="background-color:;" >Trending</button>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#most-recent" role="tab"
-               data-toggle="tab">Latest</a>
+            <button class="nav-link btn-lg btn-light m-1 rounded-0" href="#most-recent" role="tab"
+               data-toggle="tab">Latest</button>
           </li>
         </ul>
+      </div>
 
         <!-- Tab panes -->
         <div class="tab-content">
