@@ -1,19 +1,22 @@
 version: '3.3'
 
 services:
-  # Postgres
   db:
-    image: postgres
-      environment:
-        - POSTGRES_USER=takwimu
-        - POSTGRES_PASSWORD=takwimu
-        - POSTGRES_DB=takwimu
+    image: postgres:9.5
+    environment:
+      - POSTGRES_USER=takwimu
+      - POSTGRES_PASSWORD=takwimu
+      - POSTGRES_DB=takwimu
 
   web:
     build: .
     ports:
       - "8000:8000"
-    links:
-      - db
     depends_on:
       - db
+    environment:
+      - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
+      - PGHOST=db
+      - PGDATABASE=takwimu
+      - PGUSER=takwimu
+      - PGPASSWORD=takwimu
