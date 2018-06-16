@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 
 import wbdata
-from hurumap.models.data import DataIndicatorAuthor, DataIndicator, \
+from hurumap.models.data import DataIndicatorPublisher, DataIndicator, \
     DataIndicatorValue
 
 
@@ -9,7 +9,7 @@ class Command(BaseCommand):
     help = 'Scrape WorldBank Data Indicators'
 
     def handle(self, *args, **options):
-        author, created = DataIndicatorAuthor.objects.get_or_create(
+        publisher, created = DataIndicatorPublisher.objects.get_or_create(
             slug='world-bank',
             defaults={
                 'name': 'World Bank',
@@ -27,8 +27,7 @@ class Command(BaseCommand):
                 # takwimu_countries =
                 wb_indicator_values = wbdata.get_data(
                     wb_indicator.get('id'),
-                    country=["KE", "NG", "SN", "TZ", "BF", "ZM", "ZA", "UG",
-                             "ET", "CD"]
+                    country=["NG", "SN", "TZ"]
                 )
 
                 if len(filter(self.filter_indicators,
@@ -39,10 +38,10 @@ class Command(BaseCommand):
                     continue
 
                 indicator, created = DataIndicator.objects.get_or_create(
-                    author=author,
-                    author_code=wb_indicator.get('id'),
+                    publisher=publisher,
+                    publisher_code=wb_indicator.get('id'),
                     defaults={
-                        'author_data': wb_indicator,
+                        'publisher_data': wb_indicator,
                         'name': wb_indicator.get('name'),
                         'source': wb_indicator.get('source'),
                         'source_note': wb_indicator.get('sourceNote'),
@@ -56,7 +55,7 @@ class Command(BaseCommand):
                         country=wb_indicator_val.get('country'),
                         date=wb_indicator_val.get('date'),
                         defaults={
-                            'author_data': wb_indicator_val,
+                            'publisher_data': wb_indicator_val,
                             'decimal': wb_indicator_val.get('decimal'),
                             'value': wb_indicator_val.get('value')
                         }
