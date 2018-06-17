@@ -14,6 +14,8 @@ services:
       - "8000:8000"
     depends_on:
       - db
+    volumes:
+      - "./:/srv/takwimu"
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
       - PGHOST=db

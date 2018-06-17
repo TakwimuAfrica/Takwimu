@@ -25,16 +25,17 @@ WORKDIR $TAKWIMU_SRVHOME
 RUN mkdir media static logs
 VOLUME ["$TAKWIMU_SRVHOME/media/", "$TAKWIMU_SRVHOME/logs/"]
 
-# Copy application source code to SRCDIR
-ADD $TAKWIMU_SRC $TAKWIMU_SRVPROJ
-
 # Install Python dependencies
+COPY ./requirements.txt /
 RUN pip install -q -U pip setuptools
-RUN pip install -q -r $TAKWIMU_SRVPROJ/requirements.txt 
+RUN pip install -q -r /requirements.txt 
 
 # GDAL pains
 RUN pip install -q GDAL==2.1.3 --global-option=build_ext --global-option="-I/usr/include/gdal"
 RUN pip install -q "Shapely>=1.5.13"
+
+# Add application source code to SRCDIR
+ADD $TAKWIMU_SRC $TAKWIMU_SRVPROJ
 
 # Expose Django service
 EXPOSE 8000

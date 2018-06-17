@@ -1,7 +1,6 @@
 #!/bin/bash
 python manage.py migrate                  # Apply database migrations
 cat takwimu/sql/*.sql | psql              # Upload tables / data  
-python manage.py compilescss              # Compile CSS
 python manage.py collectstatic --noinput  # Collect static files
 
 # Prepare log files and start outputting logs to stdout
@@ -18,4 +17,5 @@ exec gunicorn takwimu.wsgi:application \
     --log-level=info \
     --log-file=/srv/logs/gunicorn.log \
     --access-logfile=/srv/logs/access.log \
+    --reload \
     "$@"
