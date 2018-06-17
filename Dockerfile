@@ -26,7 +26,7 @@ RUN mkdir media static logs
 VOLUME ["$TAKWIMU_SRVHOME/media/", "$TAKWIMU_SRVHOME/logs/"]
 
 # Copy application source code to SRCDIR
-COPY $TAKWIMU_SRC $TAKWIMU_SRVPROJ
+ADD $TAKWIMU_SRC $TAKWIMU_SRVPROJ
 
 # Install Python dependencies
 RUN pip install -q -U pip setuptools
