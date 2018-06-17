@@ -6,9 +6,12 @@
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item"><a href="#">Home</a></li> 
-          <li class="breadcrumb-item"><a href="#">Country Profiles</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Nigeria</li>
+          <li class="breadcrumb-item"><a href="/">Home</a></li> 
+          <li class="breadcrumb-item"><a href="/reports">Country Reports</a></li>
+          {% if page.content_type.model == "reportsectionpage" %}
+          <li class="breadcrumb-item"><a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></li>
+          {% endif %}
+          <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
         </ol>
       </nav>
   
