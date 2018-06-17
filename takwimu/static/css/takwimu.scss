@@ -64,32 +64,31 @@ img {
  * NOTE: Please don't make edits here unless super necessary.
  */
 
-// Navbar Dropdown Goodness
-.nav-link {
+.navbar.fixed-top {
+  // Fix position problem of the "containing block" of lg dropdown
+  .nav-item.dropdown {
+    position: initial;
+  }
 
-}
-
-
-// Fix position problem of the "containing block" of lg dropdown
-.nav-item.dropdown {
-  position: initial;
-}
-
-.dropdown-menu-lg {
-  display: none;
-  left: 0;
-  width: 100vw;
-  background-color: #005973;
-  &:hover {
-    display: block;
+  .dropdown-menu-lg {
+    display: none;
+    left: 0;
+    width: 100vw;
+    background-color: #005973;
+    &:hover {
+      display: block;
+    }
+  }
+  .nav-link:hover, .nav-link:focus {
+    background-color: #005973;
+    & + .dropdown-menu-lg {
+      display: block;
+    }
   }
 }
-.nav-link:hover, .nav-link:focus {
-  background-color: #005973;
-  & + .dropdown-menu-lg {
-    display: block;
-  }
-}
+
+
+
 
 
 
