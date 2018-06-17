@@ -1,20 +1,26 @@
+{% load staticfiles %}
 <!-- Stories Section -->
 <section class="stories">
   <div class="p-5">
-    <h3 class="mb-4 text-center">Latest for {{ country }} <i class="fas fa-rss"></i></h3>
+    <h3 class="mb-4 text-center">Latest for {{ country }} <i class="fas fa-rss" style="color:#6196a5;"></i></h3>
+    
     <div class="row">
       <div class="col-md-12 text-align:center;">
-        <div class="d-flex flex-row justify-content-center">
+        <div class="d-flex flex-row justify-content-center pb-4">
         <ul class="nav" role="tablist">
           <li class="nav-item">
-            <button class="nav-link active btn-light text-white m-1 rounded-0" href="#recommended-for-you" role="tab"
-               data-toggle="tab" style="background-color:;" >Trending</button>
+            <button class="nav-link active btn-lg btn-light text-white m-1 pt-2 pb-2" href="#recommended-for-you" role="tab"
+               data-toggle="tab" style="background-color:#6196a5;width:150px;"><small>Trending</small></button>
           </li>
           <li class="nav-item">
-            <button class="nav-link btn-lg btn-light m-1 rounded-0" href="#most-recent" role="tab"
-               data-toggle="tab">Latest</button>
+            <button class="nav-link btn-lg btn-light m-1 pt-2 pb-2" href="#most-recent" role="tab"
+               data-toggle="tab" style="width:150px;"><small><b>Latest</b></small></button>
           </li>
         </ul>
+
+      </div>
+      <div>
+        <p class="text-center text-muted pt-3">The following content is recommended for you based on your <a href="#" style="color:#6196a5;">preffered area of interest</a></p>
       </div>
 
         <!-- Tab panes -->
@@ -25,20 +31,23 @@
               {% for story in trending %}
                 <div
                     class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-                  <div class="card"><a href="{{ story.url }}" target="_blank"
+                  <div class="card rounded-0"><a href="{{ story.url }}" target="_blank"
                                        class="card-link">
-                    <div class="card-img"
+                    <div class="card-img rounded-0"
                          style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                     <div class="card-body">
                       <h5 class="card-title">{{ story.title }}</h5>
                       <p class="card-text">{{ story.subtitle }}</p>
                     </div>
                   </a>
+                  <!--<div class="d-flex justify-content-end">
+                  <img src="{% static 'img/logos/medium.png'%}" alt="Medium logo" width="100px" height="30px">
+                </div>-->
                   </div>
                 </div>
               {% endfor %}
               <div class="w-100 text-center">
-                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Stories <i class="fas fa-external-link-alt"></i></a>
+                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank" style="background-color:#6196a5;border-color:#6196a5;"><small>Load more stories &nbsp</small><i class="fas fa-long-arrow-alt-down"></i></a>
               </div>
             </div>
           </div>
@@ -47,9 +56,9 @@
               {% for story in recent_stories %}
                 <div
                     class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-                  <div class="card"><a href="{{ story.url }}" target="_blank"
+                  <div class="card rounded-0"><a href="{{ story.url }}" target="_blank"
                                        class="card-link">
-                    <div class="card-img"
+                    <div class="card-img rounded-0"
                          style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
                     <div class="card-body">
                       <h5 class="card-title">{{ story.title }}</h5>
@@ -60,7 +69,7 @@
                 </div>
               {% endfor %}
               <div class="w-100 text-center">
-                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Stories <i class="fas fa-external-link-alt"></i></a>
+                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank" style="background-color:#6196a5;border-color:#6196a5;"><small>Load more stories &nbsp</small><i class="fas fa-long-arrow-alt-down"></i></a>
               </div>
             </div>
           </div>
@@ -68,6 +77,5 @@
       </div>
     </div>
   </div>
-
 </section>
 
