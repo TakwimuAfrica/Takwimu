@@ -7,8 +7,8 @@
  */
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
 
-$brand-color-primary: #1f6cc6;
-$brand-color-secondary: #0d51a2;
+$brand-color-primary: #005973;
+$brand-color-secondary: #6196a5;
 $brand-extend-white: #ffffff;
 $brand-extend-jumbotron: #e9ecef;
 $brand-extend-black: #000000;
@@ -64,6 +64,17 @@ img {
  * NOTE: Please don't make edits here unless super necessary.
  */
 
+// Replace Colours
+
+.btn-primary {
+  background-color: $brand-color-primary;
+  &:hover {
+    background-color: $brand-color-secondary;
+  }
+}
+
+ // Custom CSS
+
 .navbar.fixed-top {
   // Fix position problem of the "containing block" of lg dropdown
   .nav-item.dropdown {
@@ -79,7 +90,7 @@ img {
       display: block;
     }
   }
-  .nav-link:hover, .nav-link:focus {
+  .nav-link:hover {
     background-color: #005973;
     & + .dropdown-menu-lg {
       display: block;
