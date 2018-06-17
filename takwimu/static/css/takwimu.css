@@ -1,0 +1,191 @@
+/*
+ * takwimu.scss
+ * ------------
+ * Primary TAKWIMU styling
+ *
+ * NOTE: Please don't make edits here unless super necessary.
+ */
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900");
+body {
+  padding-top: 56px; }
+
+* {
+  font-family: 'Roboto', sans-serif; }
+
+img {
+  max-width: 100%; }
+
+.leaflet-label {
+  background-color: #6196a5 !important;
+  border-color: #6196a5 !important; }
+
+/* ------------------------------------------------------------------------------
+ * TAKWIMU: New CSS
+ * ----------------
+ * This looks to make slight tweaks to Bootstrap and make appropriate edits later.
+ *
+ * NOTE: Please don't make edits here unless super necessary.
+ */
+a {
+  color: #005973; }
+  a:hover {
+    color: #6196a5; }
+
+.bg-primary {
+  background-color: #005973 !important; }
+
+.bg-secondary {
+  background-color: #6196a5 !important; }
+
+.text-primary {
+  color: #005973 !important; }
+
+.text-secondary {
+  color: #6196a5 !important; }
+
+.btn-primary {
+  background-color: #005973;
+  border-color: #6196a5; }
+  .btn-primary:hover {
+    background-color: #6196a5;
+    border-color: #005973; }
+
+.btn-outline-primary {
+  border-color: #005973;
+  color: #005973; }
+  .btn-outline-primary:hover {
+    background-color: #005973;
+    border-color: #6196a5; }
+
+.btn-outline-light:hover {
+  color: #005973; }
+
+.nav-pills .nav-link.active, .nav-pills .show > .nav-link {
+  background-color: transparent;
+  color: #005973;
+  border-bottom: 3px #005973 solid;
+  border-radius: 0; }
+
+.navbar.fixed-top .nav-item.dropdown {
+  position: initial; }
+
+.navbar.fixed-top .dropdown-menu-lg {
+  display: none;
+  left: 0;
+  width: 100vw;
+  background-color: #005973; }
+  .navbar.fixed-top .dropdown-menu-lg:hover {
+    display: block; }
+
+.navbar.fixed-top .nav-link:hover {
+  background-color: #005973; }
+  .navbar.fixed-top .nav-link:hover + .dropdown-menu-lg {
+    display: block; }
+
+section.stories .card-img {
+  background-size: cover !important;
+  background-color: #005973;
+  background-position: center center;
+  height: 200px; }
+
+/*
+* Tabs css
+* ---------
+* Overide bootstrap 4 tabs css 
+*/
+#nav-tab {
+  border-bottom: 2px solid transparent; }
+  #nav-tab .nav-item {
+    padding: 1em 0;
+    margin: 0 1em;
+    color: #000000;
+    border-bottom: 2px solid transparent; }
+    #nav-tab .nav-item.active {
+      color: #005973;
+      border-bottom: 2px solid #005973; }
+    #nav-tab .nav-item:hover, #nav-tab .nav-item:focus {
+      color: #005973; }
+
+/*
+* Country container css
+* ----------------------
+*/
+.country-flag-links .col {
+  padding: 1em;
+  border-right: 1px solid #ddd; }
+  .country-flag-links .col a {
+    padding: 1em;
+    text-decoration: none;
+    color: #005973; }
+    .country-flag-links .col a svg {
+      display: block;
+      margin: 0 auto;
+      width: 50px;
+      height: 50px; }
+    .country-flag-links .col a span {
+      display: block;
+      font-weight: 400; }
+    .country-flag-links .col a:hover, .country-flag-links .col a:focus {
+      color: #6196a5; }
+      .country-flag-links .col a:hover svg, .country-flag-links .col a:focus svg {
+        filter: #6196a5;
+        /* IE6-9 */
+        -webkit-filter: grayscale(1);
+        /* Google Chrome, Safari 6+ & Opera 15+ */
+        filter: grayscale(1);
+        /* Microsoft Edge and Firefox 35+ */ }
+    .country-flag-links .col a.active {
+      color: #6c757d; }
+      .country-flag-links .col a.active svg {
+        filter: #6c757d;
+        /* IE6-9 */
+        -webkit-filter: grayscale(1);
+        /* Google Chrome, Safari 6+ & Opera 15+ */
+        filter: grayscale(1);
+        /* Microsoft Edge and Firefox 35+ */ }
+    .country-flag-links .col a[data-toggle="tooltip"] * {
+      opacity: 0.5; }
+
+.navbar.fixed-top .country-flag-links a {
+  color: #f8f9fa; }
+
+.navbar.fixed-top .country-flag-links div {
+  border-color: rgba(248, 249, 250, 0.1) !important; }
+
+/*
+* Extra small devices (portrait phones, less than 576px)
+* Small devices (landscape phones, 576px and down)
+*/
+@media (max-width: 576px) {
+  .nav-item {
+    font-size: 0.75em; }
+  .country-container div.col:nth-child(even) {
+    border-right: 1px solid transparent; } }
+
+/* 
+* Small devices (landscape phones, 576px and up)
+* Medium devices (tablets, 768px and up)
+*/
+@media (min-width: 576px) and (max-width: 768px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ }
+
+/*
+* Large devices (desktops, 992px and up)
+*/
+@media (min-width: 768px) and (max-width: 992px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ }
+
+/*
+* Extra large devices (large desktops, 1200px and up)
+*/
+@media (min-width: 1200px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ }

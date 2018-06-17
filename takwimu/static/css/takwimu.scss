@@ -47,20 +47,14 @@ img {
 
 // Replace Colours
 
-.btn-primary {
-  background-color: $brand-color-primary;
-  border-color: $brand-color-secondary;
+a {
+  color: $brand-color-primary;
   &:hover {
-    background-color: $brand-color-secondary;
-    border-color: $brand-color-primary;
-  }
-}
-.btn-outline-light {
-  &:hover {
-    color: $brand-color-primary;
+    color: $brand-color-secondary;
   }
 }
 
+// Background colours
 .bg-primary {
   background-color: $brand-color-primary !important;
 }
@@ -68,11 +62,42 @@ img {
   background-color: $brand-color-secondary !important;
 }
 
+// Text Colours
 .text-primary {
   color: $brand-color-primary !important;
 }
 .text-secondary {
   color: $brand-color-secondary !important;
+}
+
+// Button collors
+.btn-primary {
+  background-color: $brand-color-primary;
+  border-color: $brand-color-secondary;
+  &:hover, &:focus, &:active {
+    background-color: $brand-color-secondary;
+    border-color: $brand-color-primary;
+  }
+}
+.btn-outline-primary {
+  border-color: $brand-color-primary;
+  color: $brand-color-primary;
+  &:hover, &:focus, &:active {
+    background-color: $brand-color-primary;
+    border-color: $brand-color-secondary;
+  }
+}
+.btn-outline-light {
+  &:hover, &:focus, &:active {
+    color: $brand-color-primary;
+  }
+}
+
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+  background-color: transparent;
+  color: $brand-color-primary;
+  border-bottom: 3px $brand-color-primary solid;
+  border-radius: 0;
 }
 
  // Custom CSS
@@ -102,50 +127,6 @@ img {
     }
   }
   
-}
-
-
-// Stories Section
-
-section.stories {
-
-  .card .card-text {
-    color: #4a4a4a;
-  }
-
-  .card-img {
-    background-size: cover !important;
-    height: 200px;
-  }
-
-  .card-link {
-    color: inherit;
-    text-decoration: none;
-  }
-}
-
-
-/*
-* Tabs css
-* ---------
-* Overide bootstrap 4 tabs css 
-*/ 
-
-#nav-tab {
-  border-bottom: 2px solid transparent;
- .nav-item {
-    padding: 1em 0;
-    margin: 0 1em;
-    color: $brand-extend-black;
-    border-bottom: 2px solid transparent;  
-    &.active {
-      color: $brand-color-primary;
-      border-bottom: 2px solid $brand-color-primary;
-    }
-    &:hover,&:focus {
-      color: $brand-color-primary;
-    }
-  }
 }
 
 

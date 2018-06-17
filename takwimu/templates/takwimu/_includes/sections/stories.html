@@ -1,71 +1,70 @@
 <!-- Stories Section -->
-<section class="stories">
-  <div class="p-5">
-    <h3 class="mb-4">Latest stories, updates and resources for {{ country }}.</h3>
-    <div class="row">
-      <div class="col-md-12">
-        <ul class="nav nav-tabs" role="tablist">
-          <li class="nav-item">
-            <a class="nav-link active" href="#recommended-for-you" role="tab"
-               data-toggle="tab">Trending</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#most-recent" role="tab"
-               data-toggle="tab">Latest</a>
-          </li>
-        </ul>
 
-        <!-- Tab panes -->
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane fade in active show"
-               id="recommended-for-you">
-            <div class="row p-3">
-              {% for story in trending %}
-                <div
-                    class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-                  <div class="card"><a href="{{ story.url }}" target="_blank"
-                                       class="card-link">
-                    <div class="card-img"
-                         style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">{{ story.title }}</h5>
-                      <p class="card-text">{{ story.subtitle }}</p>
-                    </div>
-                  </a>
-                  </div>
+<section class="stories bg-light py-5">
+  <div class="container">
+    <h3 class="mb-4 text-center">Latest Articles from Takwimu</h3>
+    <ul class="nav nav-pills justify-content-center mb-4" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" href="#latest" role="tab" data-toggle="tab">Latest</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#trending" role="tab" data-toggle="tab">Trending</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+      
+      <div role="tabpanel" class="tab-pane fade active show" id="latest">
+        <div class="row">
+          {% for story in stories_latest %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
+              <div class="card">
+                <a href="{{ story.url }}" target="_blank" class="card-link">
+                <div class="card-img" style="background-image: url('{{ story.preview_image.url }}');"></div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ story.title }}</h5>
+                  <p class="card-text">{{ story.subtitle }}</p>
                 </div>
-              {% endfor %}
-              <div class="w-100 text-center">
-                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Stories <i class="fas fa-external-link-alt"></i></a>
+              </a>
               </div>
             </div>
-          </div>
-          <div role="tabpanel" class="tab-pane fade" id="most-recent">
-            <div class="row p-3">
-              {% for story in recent_stories %}
-                <div
-                    class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-                  <div class="card"><a href="{{ story.url }}" target="_blank"
-                                       class="card-link">
-                    <div class="card-img"
-                         style="background-image: url('{{ story.preview_image.url }}'); background-position: 50% 50% !important;"></div>
-                    <div class="card-body">
-                      <h5 class="card-title">{{ story.title }}</h5>
-                      <p class="card-text">{{ story.subtitle }}</p>
-                    </div>
-                  </a>
-                  </div>
-                </div>
-              {% endfor %}
-              <div class="w-100 text-center">
-                <a class="btn btn-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Stories <i class="fas fa-external-link-alt"></i></a>
-              </div>
-            </div>
-          </div>
+          {% endfor %}
         </div>
-      </div>
-    </div>
-  </div>
+      </div> <!-- /#latest-->
+
+      <div role="tabpanel" class="tab-pane fade" id="trending">
+        <div class="row">
+          {% for story in stories_trending %}
+            <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
+              <div class="card"><a href="{{ story.url }}" target="_blank"
+                                    class="card-link">
+                <div class="card-img" style="background-image: url('{{ story.preview_image.url }}');"></div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ story.title }}</h5>
+                  <p class="card-text">{{ story.subtitle }}</p>
+                </div>
+              </a>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>  <!-- /#trending -->
+
+    </div>  <!-- /.tab-content -->
+
+    <p class="text-center">
+      <a class="btn btn-outline-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More Articles . <i class="fab fa-medium fa-fw"></i></a>
+    </p>
+  </div>  <!-- /.container -->
 
 </section>
 
+<style>
+  section.stories .card-img {
+    background-size: cover !important;
+    background-color: #005973;
+    background-position: center center;
+    height: 200px;
+  }
+</style>
