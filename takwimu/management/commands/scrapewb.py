@@ -20,8 +20,6 @@ class Command(BaseCommand):
 
         wb_indicators = wbdata.get_indicator(display=False)
         for wb_indicator in wb_indicators:
-            if wb_indicator.get('id', 'lema') == 'lema':
-                raise CommandError(str(wb_indicator))
 
             try:
                 # takwimu_countries =
@@ -33,7 +31,7 @@ class Command(BaseCommand):
                 if len(filter(self.filter_indicators,
                               wb_indicator_values)) == 0:
                     self.stdout.write(self.style.WARNING(
-                        'Skipped indicator value "%s"' % wb_indicator.get(
+                        'Skipped indicator "%s"' % wb_indicator.get(
                             'id')))
                     continue
 
