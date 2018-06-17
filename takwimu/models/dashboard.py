@@ -187,4 +187,5 @@ class ReportPage(Page):
             return context
         except Exception as e:
             print e.message
-            return context
+
+        return context
