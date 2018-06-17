@@ -49,9 +49,12 @@ class TopicPage(Page):
     """
     description = models.TextField(blank=True)
 
+    # TODO: For topics heirachy
     parent_topic = models.ForeignKey('self', null=True, blank=True,
                                      on_delete=models.SET_NULL,
                                      related_name='+')
+
+    # TODO: To show other related topics to this one e.g by keywords
     related_topics = models.ManyToManyField('self')
 
     # Search index configuration
