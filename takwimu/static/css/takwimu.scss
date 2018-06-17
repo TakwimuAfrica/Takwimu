@@ -97,7 +97,7 @@ a {
   }
 }
 
-.nav-pills .nav-link.active, .nav-pills .show>.nav-link {
+.nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
   background-color: transparent;
   color: $brand-color-primary;
   border-bottom: 3px $brand-color-primary solid;
