@@ -38,9 +38,9 @@ class TopicPage(Page):
     description = models.TextField(blank=True)
 
     # TODO: For topics heirachy
-    parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
+    #parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
     # TODO: To show other related topics to this one e.g by keywords
-    related_topics = models.ManyToManyField('self')
+    #related_topics = models.ManyToManyField('self')
 
     # Search index configuration
 
@@ -72,7 +72,7 @@ class ReportPageTopic(models.Model):
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
 class ReportSectionPageTopics(Orderable, ReportPageTopic):
-    page = ParentalKey('takwimu.ReportSectionPage', related_name='topics')
+    section_page = ParentalKey('takwimu.ReportSectionPage', related_name='topics')
 
 class ReportSectionPage(Page):
     '''
@@ -115,14 +115,14 @@ class ReportPageSection(models.Model):
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
 class ReportPageSections(Orderable, ReportPageSection):
-    page = ParentalKey('takwimu.ReportPage', related_name='sections')
+    report_page = ParentalKey('takwimu.ReportPage', related_name='sections')
 
 
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
 class ReportPageTopics(Orderable, ReportPageTopic):
-    page = ParentalKey('takwimu.ReportPage', related_name='topics')
+    report_page = ParentalKey('takwimu.ReportPage', related_name='topics')
 
 
 class ReportPage(Page):

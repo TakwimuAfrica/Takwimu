@@ -1,0 +1,39 @@
+{% load staticfiles %}
+
+<div class="container py-5">
+	<div class="row ">
+
+		<!-- Left navigation of all indicators-->
+		<div class="col-3">
+			<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+				{% for indicator in topic.data_indicators.all %}
+					<a class="nav-link" id="d{{ indicator.indicator.id }}-tab-btn" data-toggle="pill" href="#d{{ indicator.indicator.id }}-tab" role="tab" aria-controls="d{{ indicator.indicator.id }}-tab" aria-selected="true">
+						{{ indicator.indicator.name }}</a>
+				{% endfor %}
+			</div>
+			<!-- <div class="row pt-5 pb-5 text-dark">
+				<p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
+				<a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
+			</div> -->
+		</div>  <!-- /.col-3 -->
+
+		<div class="col-9">
+			<h1>{{ topic.title }}</h1>
+			<p class="text-dark">{{ topic.description }}</p>
+			<div class="tab-content" id="v-pills-tabContent">
+				{% for indicator in topic.data_indicators.all %}
+				<div class="tab-pane fade" id="d{{ indicator.indicator.id }}-tab" role="tabpanel" aria-labelledby="d{{ indicator.indicator.id }}-tab-btn">
+						<h4 class="pt-5">{{ indicator.indicator.name }}</h4>
+						<p>{{ indicator.indicator.description }}</p>
+						<hr/>
+						<h3>HURUmap Visuals go here</h3>
+						{% for val in indicator.indicator.dataindicatorvalue_set.all %}
+							{{ val.value }}
+						{% endfor %}
+				</div>
+				{% endfor %}
+			</div>
+		</div>
+	</div>
+</div>
+
