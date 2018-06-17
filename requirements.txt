@@ -4,3 +4,5 @@ gunicorn==19.8.1
 
 # workaround: setup keeps installing wazimap from PYPI
 -e git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
+
+django-debug-toolbar
