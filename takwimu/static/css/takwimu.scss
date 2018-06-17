@@ -87,6 +87,10 @@ a {
     border-color: $brand-color-secondary;
   }
 }
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: $brand-color-secondary;
+  border-color: $brand-color-primary;
+}
 .btn-outline-light {
   &:hover, &:focus, &:active {
     color: $brand-color-primary;

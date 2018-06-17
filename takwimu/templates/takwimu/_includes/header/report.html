@@ -24,11 +24,23 @@
         </button>
       </div>
   
-      <div class="clearfix text-center mx-auto" style="max-width: 780px;">
+      <div class="text-center">
+        {% if page.content_type.model == "reportsectionpage" %}
+
+        <p class="strong text-uppercase">Section 1</p>
+        <h1 class="display-1">{{ page.title }}</h1>
+        <p class="lead my-4 mx-auto" style="max-width: 780px;">{{ page.description }}</p>
+
+        {% else %}
+        
         <p class="strong text-uppercase">Section 1</p>
         <h1 class="display-1">Country Overview</h1>
-        <p class="lead my-4">A top-level overview of Nigeria – how it’s governed, the make-up of it’s population, the economy and SDG indicators</p>
-        <a class="btn btn-primary btn-sm text-uppercase px-2 py-1" href="#" role="button">
+        <p class="lead my-4 mx-auto" style="max-width: 780px;">A top-level overview of Nigeria – how it’s governed, the make-up of it’s population, the economy and SDG indicators</p>
+        
+        {% endif %}
+
+        <a class="btn btn-primary btn-sm text-uppercase px-2 py-1 disabled" href="#" role="button"
+            data-toggle="tooltip" data-placement="top" title="Coming Soon">
           Download full country report <i class="fas fa-download border-left pl-2 ml-1"></i>
         </a>
       </div>
