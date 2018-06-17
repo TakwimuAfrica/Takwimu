@@ -1,0 +1,25 @@
+{% extends 'takwimu/_includes/navbar/_dropdown.html' %}
+
+{% load staticfiles %}
+
+{% block dropdown_id %}nav-about{% endblock %}
+
+{% block dropdown_title %}About Takwimu{% endblock %}
+{% block dropdown_desc %}Lorem ipsum{% endblock %}
+
+{% block dropdown_content %}
+<div class="row pl-4">
+    <div class="col-sm-4">
+      <p><a href="/about">About Takwimu</a></p>
+      <p><a href="#">Data Services</a></p>
+      <p><a href="#">Media Center</a></p>
+      <p><a href="/about/contact">Contact Us</a></p>
+    </div>
+    <div class="col-sm-4">
+      <p><a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener">Community</a></p>
+      <p><a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener">Help</a></p>
+      <p><a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener">Twitter</a></p>
+      <p><a href="/dashboard">Dashboard (Admin)</a></p>
+    </div>
+</div>
+{% endblock %}

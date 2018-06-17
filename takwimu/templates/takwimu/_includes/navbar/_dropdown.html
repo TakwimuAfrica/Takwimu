@@ -1,7 +1,19 @@
 {% load staticfiles %}
 
-<div class="dropdown-menu-lg position-absolute bg-dark py-5 container-fluid {% block dropdown_class %}{% endblock %}"
+<div class="dropdown-menu-lg position-absolute text-light py-5 container-fluid {% block dropdown_class %}{% endblock %}"
      id="{% block dropdown_id %}{% endblock %}"
      style="{% block dropdown_style %}{% endblock %}">
-  {% block dropdown_content %}{% endblock %}
+
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-4">
+              <h3>{% block dropdown_title %}Country Reports{% endblock %}</h3>
+              <p>{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
+          </div>
+          <div class="col-8 border-left">
+              {% block dropdown_content %}{% endblock %}
+          </div>
+      </div>
+  </div>
+  
 </div>

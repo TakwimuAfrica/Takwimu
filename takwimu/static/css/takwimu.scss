@@ -79,13 +79,18 @@ img {
   display: none;
   left: 0;
   width: 100vw;
+  background-color: #005973;
   &:hover {
     display: block;
   }
 }
-.nav-link:hover + .dropdown-menu-lg {
-  display: block;
+.nav-link:hover, .nav-link:focus {
+  background-color: #005973;
+  & + .dropdown-menu-lg {
+    display: block;
+  }
 }
+
 
 
 // Stories Section

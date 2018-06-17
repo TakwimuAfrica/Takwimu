@@ -13,7 +13,7 @@
       <div class="collapse navbar-collapse" id="navbarNav">
         <ul class="navbar-nav ml-5 mr-auto">
           <li class="nav-item">
-            <a class="nav-link dropdown-toggle px-3 py-3" data-target="nav-reports" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-white px-3 py-3" data-target="nav-reports" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Reports
             </a>
             <!-- On large devices -->
@@ -26,38 +26,30 @@
             
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-3 py-3" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle text-white px-3 py-3" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Topics
             </a>
             <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/reports.html' %}
+            {% include 'takwimu/_includes/navbar/topics.html' %}
 
             <!-- TODO: On small devices -->
             <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="#">WIP</a>
             </div>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-3 py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              SDGs
-            </a>
-            <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/reports.html' %}
-
-            <!-- TODO: On small devices -->
-            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">WIP</a>
-            </div>
-          </li>
-          <li class="nav-item pl-4">
-            <a class="nav-link px-3 py-3" href="#">Data</a>
+          <li class="nav-item">
+            <a class="nav-link text-white px-3 py-3" href="https://openafrica.net/organization/takwimuafrica" target="_blank" rel="noopener">Data</a>
           </li>
         </ul>
         <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle px-2 py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               About Us
             </a>
+            <!-- On large devices -->
+            {% include 'takwimu/_includes/navbar/about.html' %}
+
+            <!-- TODO: On small devices -->
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <a class="dropdown-item" href="/about">About Takwimu</a>
               <a class="dropdown-item" href="/about/data-services">Data Services</a>
@@ -70,21 +62,22 @@
             </div>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-2" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle px-2 py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Newsletter
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Work In Progress</a>
+            <!-- On large devices -->
+            {% include 'takwimu/_includes/navbar/newsletter.html' %}
+
+            <!-- TODO: On small devices -->
+            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">Subscribe</a>
             </div>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fab fa-twitter fa-fw"></i></a>
+            <a class="nav-link py-3" href="https://twitter.com/TakwimuAfrica"><i class="fab fa-twitter fa-fw"></i></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fab fa-facebook fa-fw"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#"><i class="fas fa-search fa-fw"></i></a>
+            <a class="nav-link py-3" href="https://facebook.com/TakwimuAfrica"><i class="fab fa-facebook fa-fw"></i></a>
           </li>
       </div>
     </div>
