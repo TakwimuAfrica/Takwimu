@@ -34,26 +34,6 @@ img {
   border-color: $brand-color-secondary !important;
 }
 
-// HELPERS
-
-.bg-color-primary {
-  background-color: $brand-color-primary;
-}
-
-.bg-color-secondary {
-  background-color: $brand-color-secondary;
-}
-
-.btn {
-  &.bg-color-primary:hover {
-    background-color: $brand-color-secondary;
-    color: #fff;
-  }
-  &.bg-color-secondary:hover {
-    background-color: $brand-color-primary;
-    color: #fff;
-  }
-}
 
 
 /* ------------------------------------------------------------------------------
@@ -68,12 +48,35 @@ img {
 
 .btn-primary {
   background-color: $brand-color-primary;
+  border-color: $brand-color-secondary;
   &:hover {
     background-color: $brand-color-secondary;
+    border-color: $brand-color-primary;
+  }
+}
+.btn-outline-light {
+  &:hover {
+    color: $brand-color-primary;
   }
 }
 
+.bg-primary {
+  background-color: $brand-color-primary !important;
+}
+.bg-secondary {
+  background-color: $brand-color-secondary !important;
+}
+
+.text-primary {
+  color: $brand-color-primary !important;
+}
+.text-secondary {
+  color: $brand-color-secondary !important;
+}
+
  // Custom CSS
+
+ // Navbar goodness
 
 .navbar.fixed-top {
   // Fix position problem of the "containing block" of lg dropdown
