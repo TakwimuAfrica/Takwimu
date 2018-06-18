@@ -45,12 +45,3 @@ window.onload = function () {
         }
     });
 };
-document.getElementById('randomizeData').addEventListener('click', function () {
-    barChartData.datasets.forEach(function (dataset) {
-        dataset.data = dataset.data.map(function () {
-            console.log(randomScalingFactor());
-            return randomScalingFactor();
-        });
-    });
-    window.myBar.update();
-});
