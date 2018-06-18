@@ -16,7 +16,7 @@ class CountryReportFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return item.intro
+        return ''
 
     def item_link(self, item):
-        return item.get_full_url()
+        return item.get_url()
