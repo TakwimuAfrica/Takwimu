@@ -9,7 +9,7 @@ from takwimu.views import CountryReport, ContactUsPage
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               [url(r'^about/contact', ContactUsPage.as_view(), name='contact'),
-               url(r'^reports/feed/$', CountryReportFeed())] + \
+               url(r'^reports/feed/$', CountryReportFeed(), name='rss_feed')] + \
               hurumap_urlpatterns
 
 if settings.DEBUG:
