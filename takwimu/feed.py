@@ -19,6 +19,7 @@ class CountryReportFeed(Feed):
         return 'Country Report for {}'.format(item.title)
 
     def item_link(self, item):
+        # return item.get_absolute_url()
         return ''
 
 
