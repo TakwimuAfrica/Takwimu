@@ -1,6 +1,6 @@
 <div class="clearfix">
-    <div class="col-lg-9 col-md-10 col-sm-11 row mx-auto my-4">
-        <div class="col-3 sidebar">
+    <div class="col-lg-10 col-md-11 col-sm-12 row mx-auto my-4">
+        <div class="col-3 sidebar" style="font-size: 14px;">
             {% include 'takwimu/_includes/sections/temp/sidebar.html' %}
         </div>
         <div class="d-flex flex-wrap tab-content col mx-auto px-5" id="nav-tabContent">
@@ -38,7 +38,7 @@
                         <div class="col">
                             <form class="form-inline float-right">
                                 <div class="form-group mx-sm-3 mb-2">
-                                    <label for="date" class="sr-only">Show date at</label>
+                                    <label for="date" class="px-1">Show date at:</label>
                                     <select id="date" class="form-control">
                                         <option>National level</option>
                                     </select>
@@ -47,7 +47,7 @@
                         </div>
                     </div>
                     <div class="row my-2 position-relative">
-                        <div class="btn-group position-absolute" role="group">
+                        <div class="btn-group position-absolute" style="top: 1.5em; left: 1.5em" role="group">
                             <button type="button" class="btn">
                                 <i class="fa fa-flag"></i>
                             </button>
@@ -70,12 +70,12 @@
                                 <i class="fa fa-book-open"></i>
                             </button>
                         </div>
-                        <ul class="nav nav-tabs w-100 justify-content-end" id="myTab" role="tablist">
+                        <ul class="nav nav-tabs w-100 justify-content-end pr-4" id="myTab" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" id="graph-tab" data-toggle="tab" href="#graph" role="tab" 
+                                <a class="nav-link active mr-1" id="graph-tab" data-toggle="tab" href="#graph" role="tab" 
                                     aria-controls="graph" aria-selected="true">Graph</a>
                             </li>
-                            <li class="nav-item">
+                            <li class="nav-item mr-1">
                                 <a class="nav-link" id="table-tab" data-toggle="tab" href="#table" role="tab" 
                                     aria-controls="table" aria-selected="false">Table</a>
                             </li>
@@ -93,6 +93,15 @@
                     <div class="row justify-content-center">
                         <div class="alert alert-primary" role="alert">
                             <strong>tax-take</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 tab-pane fade" id="nav-deficit" role="tabpanel" aria-labelledby="nav-deficit-tab">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="alert alert-primary" role="alert">
+                            <strong>Deficit / Surplus</strong>
                         </div>
                     </div>
                 </div>
