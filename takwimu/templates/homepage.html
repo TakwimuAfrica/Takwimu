@@ -4,26 +4,29 @@
 
 {% block content %}
 
-  <div class="py-5 text-light" style="background: #6196a5 url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
 
-    <div class="container">
-      <div style="max-width: 800px;">
-          
-        <h3 class="font-weight-light">Creating actionable data for African decision-makers.</h3>
-        <h5 class="font-weight-light">Takwimu is a free and <strong><u>open data</u></strong> platform that aims to transform the way development decisions are made in Africa.</h5>
-        <p class="mt-4">
-          <a href="/about" class="btn btn-primary mr-3">
-            Find out more
-          </a>
-          <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#videoModal">
-            <i class="fas fa-play"></i> Watch the video
-          </button>
-        </p>
-      </div>
+<div class="py-5 text-light" style="background: #6196a5 url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
+  
+  <div class="container">
+    <div style="max-width: 800px;">
       
+      <h3 class="font-weight-light">Creating actionable data for African decision-makers.</h3>
+      <h5 class="font-weight-light">Takwimu is a free and <strong><u>open data</u></strong> platform that aims to transform the way development decisions are made in Africa.</h5>
+      <p class="mt-4">
+        <a href="/about" class="btn btn-primary mr-3">
+          Find out more
+        </a>
+        <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#videoModal">
+          <i class="fas fa-play"></i> Watch the video
+        </button>
+      </p>
     </div>
-
+    
   </div>
+  
+</div>
+
+{% include 'takwimu/_includes/sections/temp/index.html' %}
 
   <div class="bg-light py-5">
     <div class="text-center container" style="max-width: 800px;">

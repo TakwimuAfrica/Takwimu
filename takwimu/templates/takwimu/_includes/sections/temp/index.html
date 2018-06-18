@@ -1,0 +1,102 @@
+<div class="clearfix">
+    <div class="col-lg-9 col-md-10 col-sm-11 row mx-auto my-4">
+        <div class="col-3 sidebar">
+            {% include 'takwimu/_includes/sections/temp/sidebar.html' %}
+        </div>
+        <div class="d-flex flex-wrap tab-content col mx-auto px-5" id="nav-tabContent">
+            {% include 'takwimu/_includes/sections/temp/intro.html' %}
+            
+            <div class="w-100 tab-pane fade" id="nav-gdp" role="tabpanel" aria-labelledby="nav-gdp-tab">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="alert alert-primary" role="alert">
+                            <strong>gdp</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 tab-pane fade" id="nav-gdp-per-capita" role="tabpanel" aria-labelledby="nav-gdp-per-capita-tab">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="alert alert-primary" role="alert">
+                            <strong>GDP per capita</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 tab-pane fade" id="nav-gini" role="tabpanel" aria-labelledby="nav-gini-tab">
+                <div class="row">
+                    <h2 class="font-weight-bold">Gini</h2>
+                </div>
+            </div>
+            <div class="w-100 tab-pane fade show active" id="nav-foreign" role="tabpanel" aria-labelledby="nav-foreign-tab">
+                <div class="container px-0 py-2">
+                    <div class="row">
+                        <div class="col">
+                            <h3 class="font-weight-bold">Foreign Direct investment</h3>
+                        </div>
+                        <div class="col">
+                            <form class="form-inline float-right">
+                                <div class="form-group mx-sm-3 mb-2">
+                                    <label for="date" class="sr-only">Show date at</label>
+                                    <select id="date" class="form-control">
+                                        <option>National level</option>
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="row my-2 position-relative">
+                        <div class="btn-group position-absolute" role="group">
+                            <button type="button" class="btn">
+                                <i class="fa fa-flag"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fa fa-exchange"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fa fa-code"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fa fa-download"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fa fa-share-alt"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fa fa-heart"></i>
+                            </button>
+                            <button type="button" class="btn">
+                                <i class="fa fa-book-open"></i>
+                            </button>
+                        </div>
+                        <ul class="nav nav-tabs w-100 justify-content-end" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="graph-tab" data-toggle="tab" href="#graph" role="tab" 
+                                    aria-controls="graph" aria-selected="true">Graph</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="table-tab" data-toggle="tab" href="#table" role="tab" 
+                                    aria-controls="table" aria-selected="false">Table</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="related-tab" data-toggle="tab" href="#related" role="tab" 
+                                    aria-controls="related" aria-selected="false">Related</a>
+                            </li>
+                        </ul>
+                        {% include 'takwimu/_includes/sections/temp/fdi_tabs_content.html' %}
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 tab-pane fade" id="nav-tax-take" role="tabpanel" aria-labelledby="nav-tax-take-tab">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="alert alert-primary" role="alert">
+                            <strong>tax-take</strong>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
