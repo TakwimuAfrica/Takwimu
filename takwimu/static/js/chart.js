@@ -2,7 +2,7 @@ var barChartData = {
     labels: ['2015', '2016', '2017'],
     datasets: [{
         label: 'Youth Unemployment',
-        backgroundColor: window.chartColors.blue,
+        backgroundColor: 'rgb(54, 162, 235)', //Blue
         data: [
             11,
             25,
@@ -10,12 +10,12 @@ var barChartData = {
         ]
     }, {
         label: 'Unemployment',
-        backgroundColor: window.chartColors.purple,
+        backgroundColor: 'rgb(153, 102, 255)', //Purple
         data: [
             8,
             11,
             18
-        ]
+        ],
         
     }]
 };
