@@ -10,7 +10,7 @@
     {% include 'takwimu/_includes/report/sections_list_detail.html' %}
 
     {% for section in page.sections.all %}
-      {% include 'takwimu/_includes/report/sections_list_detail.html' with section=section.section %}
+      {% include 'takwimu/_includes/report/sections_list_detail.html' with section=section.section counter=forloop.counter  %}
     {% endfor %}
 
     {# If it's a section #}
