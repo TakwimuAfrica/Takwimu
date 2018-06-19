@@ -15,7 +15,7 @@
 
     {# If it's a section #}
     {% for section in page.get_parent.specific.sections.all %}
-      {% include 'takwimu/_includes/report/sections_list_detail.html' with section=section.section %}
+      {% include 'takwimu/_includes/report/sections_list_detail.html' with section=section.section counter=forloop.counter%}
     {% endfor %}
   </div>
 </section>
