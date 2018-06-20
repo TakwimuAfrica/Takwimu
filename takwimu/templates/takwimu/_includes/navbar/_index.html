@@ -74,6 +74,16 @@
             </div>
           </li>
           <li class="nav-item">
+            <a class="nav-link dropdown-toggle py-3" href="#"><i class="fa fa-search"></i></a>
+            <!-- On large devices -->
+            {% include 'takwimu/_includes/navbar/search.html' %}
+
+            <!-- TODO: On small devices -->
+            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">WIP</a>
+            </div>
+          </li>
+          <li class="nav-item">
             <a class="nav-link py-3" href="https://twitter.com/TakwimuAfrica"><i class="fab fa-twitter fa-fw"></i></a>
           </li>
           <li class="nav-item">
