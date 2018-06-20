@@ -11,3 +11,10 @@
     <a class="dropdown-item" href="#"><img class="rounded-circle border-light mr-2" src="{% static 'img/flags/tanzania.svg' %}" border="8" style="border-style:double; width: 50px; height: 50px;"/>Tanzania</a>
   </div>
 </div>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script>
+	$('.dropdown-menu a').click(function(){
+		$(".btn:first-child").html($(this).text()+' <span class="caret"></span>');
+	});
+</script>
