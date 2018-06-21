@@ -150,3 +150,6 @@ class ReportPage(Page):
 
     subpage_types = ['takwimu.ReportSectionPage']
 
+    def get_absolute_url(self):
+        return self.full_url
+
