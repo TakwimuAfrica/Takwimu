@@ -118,14 +118,14 @@ a {
     display: none;
     left: 0;
     width: 100vw;
-    background-color: #005973;
+    background-color: $brand-color-primary;
     &:hover {
       display: block;
     }
 
   }
   .nav-link:hover {
-    background-color: #005973;
+    background-color: $brand-color-primary;
     & + .dropdown-menu-lg {
       display: block;
     }
@@ -146,6 +146,7 @@ a {
     a {
       padding: 1em;
       text-decoration: none;
+      text-align: center;
       color: $brand-color-primary;
       
       svg {
@@ -153,10 +154,6 @@ a {
         margin: 0 auto;
         width: 50px;
         height: 50px;
-      }
-      span {
-        display: block;
-        font-weight: 400;
       }
 
       &:hover,&:focus {
