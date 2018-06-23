@@ -73,7 +73,7 @@ Visual representations of the data produced from the values. Types are according
     b. Is disaggregated e.g male and female
 
 
-Types of visusals that are available:
+Types of visusls that are available:
 
 1. Text / Number Output (Single): Where no extra processing is needed. Might be styled though as large, bold, small, etc.
 2. Bar chart (Combined): Best to represent ?
