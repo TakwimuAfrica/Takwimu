@@ -22,3 +22,4 @@ services:
       - PGDATABASE=takwimu
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
+      - PYTHONDONTWRITEBYTECODE="True"
