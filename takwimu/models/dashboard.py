@@ -153,3 +153,41 @@ class ReportPage(Page):
     def get_absolute_url(self):
         return self.full_url
 
+# named DataInd to avoid conflict with DataIndicator model from HURUmap as
+# this is an early prototype for uploading media
+
+
+class DataInd(models.Model):
+    title = models.CharField(blank=True, null=False, max_length=255)
+    description = models.TextField(blank=True)
+
+    class Meta:
+        verbose_name = 'Indicator'
+        verbose_name_plural = 'Indicators'
+
+
+class DataPublisher(models.Model):
+    name = models.CharField(blank=True, null=False, max_length=255)
+    description = models.TextField(blank=True)
+    link = models.URLField(null=True)
+
+    class Meta:
+        verbose_name = 'Data Publisher'
+        verbose_name_plural = 'Data Publishers'
+
+
+class DataValue(models.Model):
+    publisher = models.ForeignKey(DataPublisher, on_delete=models.CASCADE)
+
+    # TODO
+    # connects to fieldtable but fieldtables have no models
+    # data = models.ForeignKey(FieldTable, on_delete=models.CASCADE)
+
+    # add signal to hook on the on create
+    publisher_data = models.FileField(null=True)
+
+    class Meta:
+        verbose_name = 'Data Value'
+        verbose_name_plural = 'Data Values'
+
+
