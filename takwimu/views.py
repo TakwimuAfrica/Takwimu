@@ -7,7 +7,7 @@ from django.views.generic import TemplateView
 from utils.medium import Medium
 
 
-class CountryReport(TemplateView):
+class CountryProfile(TemplateView):
     """
     This view is for template debugging purposes
     """
