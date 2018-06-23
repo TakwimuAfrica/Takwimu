@@ -5,7 +5,7 @@ from takwimu.models import ReportPage
 
 
 class CountryReportFeed(Feed):
-    title = "Country Reports Feed"
+    title = "Country Profiles Feed"
     link = "/feed/"
     description = "Updates on changes to country profiles"
 
@@ -16,7 +16,7 @@ class CountryReportFeed(Feed):
         return item.title
 
     def item_description(self, item):
-        return 'Country Report for {}'.format(item.title)
+        return 'Country Profile for {}'.format(item.title)
 
     def item_link(self, item):
         return item.get_absolute_url()

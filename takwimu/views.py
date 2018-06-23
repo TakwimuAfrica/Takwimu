@@ -11,7 +11,7 @@ class CountryReport(TemplateView):
     """
     This view is for template debugging purposes
     """
-    template_name = 'takwimu/report_page.html'
+    template_name = 'takwimu/profile_page.html'
 
     def get_context_data(self, **kwargs):
         context = dict()
