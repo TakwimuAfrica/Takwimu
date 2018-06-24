@@ -9,8 +9,8 @@ from takwimu.views import CountryProfile, AboutUsPage, ContactUsPage
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               [
-                url(r'^about', AboutUsPage.as_view(), name='about'),
                 url(r'^about/contact', ContactUsPage.as_view(), name='contact'),
+                url(r'^about', AboutUsPage.as_view(), name='about'),
                 url(r'^feed/$', CountryProfileFeed(), name='rss_feed')
               ] + \
               hurumap_urlpatterns

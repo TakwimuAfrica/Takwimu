@@ -3,26 +3,26 @@
 {% block content %}
 
 <div class="bg-light py-5">
-  <div class="container py-5">
-      <h1 class="text-center">Contact Us</h1>
+  <div class="container">
+      <h1 class="text-center display-3">Contact Us</h1>
       <p class="text-center">Cras mattis consectetur purus sit amet fermentum.
         Maecenas sed diam eget risus varius blandit sit amet non magna.
         Vestibulum id ligula porta felis euismod semper. Nulla vitae elit
         libero, a pharetra augue.</p>
-      <div class="row text-left">
-        <div class="col-md-4">
+      <div class="row mt-5">
+        <div class="col">
           <h3>Key contacts</h3>
-          <span class="d-block">General</span>
-          <p><a  href="https://zendesk">hello@takwimu.africa</a></p>
-          <span class="d-block">Help and Support</span>
-          <p><a  href="mailto:support@takwimu.africa">support@takwimu.africa</a></p>
-          <span class="d-block">Data Services</span>
-          <p><a  href="mailto:admin@takwimu.africa">admin@takwimu.africa</a></p>
+          <p>General <br/>
+          <a  href="mailto:hello@takwimu.africa">hello@takwimu.africa</a></p>
+          <p>Help and Support<br/>
+          <a  href="https://takwimuafrica.zendesk.com" target="_blank" rel="noopener">Visit Zendesk</a></p>
+          <p>Data Services<br/>
+          <a  href="mailto:data.services@takwimu.africa">data.services@takwimu.africa</a></p>
     
         </div>
-        <div class="col-md-4">
+        <div class="col">
           <h3>Address</h3>
-          <ul class="list-unstyled text-left">
+          <ul class="list-unstyled">
             <li>403 Placeholder Avenue</li>
             <li>Placeholder</li>
             <li>Placeholder</li>
@@ -30,14 +30,26 @@
             <li>+00 3323 32323 2323</li>
           </ul>
         </div>
-        <div class="col-md-4">
+        <div class="col">
           <h3>Social</h3>
-          <ul class="list-unstyled text-left">
-            <li><i class="fab fa-facebook-square fa-2x mr-3"></i>Facebook</li>
-            <li><i class="fab fa-twitter-square fa-2x mr-3"></i>Twitter</li>
-            <li><i class="fab fa-youtube-square fa-2x mr-3"></i>YouTube</li>
-            <li><i class="fab fa-instagram fa-2x mr-3"></i>Instagram</li>
-            <li><i class="fab fa-github-square fa-2x mr-3"></i>GitHub</li>
+          <ul class="list-unstyled">
+            <li>
+              <a href="https://facebook.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-facebook-square fa-fw mr-2"></i> Facebook</a>
+            </li>
+            <li>
+              <a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-twitter-square fa-fw mr-2"></i> Twitter</a>
+            <li>
+              <a href="https://medium.com/takwimu-africa" target="_blank" rel="noopener"><i class="fab fa-medium fa-fw mr-2"></i> Medium</a>
+            </li>
+            <li>
+              <a href="https://youtube.com/takwimu-africa" target="_blank" rel="noopener"><i class="fab fa-youtube-square fa-fw mr-2"></i> YouTube</a>
+            </li>
+            <li>
+              <a href="https://instagram.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-instagram fa-fw mr-2"></i> Instagram</a>
+            </li>
+            <li>
+              <a href="https://github.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-github-square fa-fw mr-2"></i> GitHub</a>
+            </li>
           </ul>
         </div>
       </div>
@@ -45,11 +57,9 @@
 </div>
 
 <div class="container py-5 text-center">
-  <p class="p-0 m-0 lead">
-    <a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener" >
-      <u>Get in touch with our support team.</u>
-    </a>
-  </p>
+  <a class="btn btn-outline-primary btn-lg" href="https://takwimuafrica.zendesk.com/" target="_blank" rel="noopener" >
+    Get in touch with our support team. 👋
+  </a>
 </div>
 
 {% include 'takwimu/_includes/sections/data-services.html' %}
