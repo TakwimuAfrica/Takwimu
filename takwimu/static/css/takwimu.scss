@@ -124,6 +124,16 @@ a {
       display: block;
     }
 
+    a {
+      color: $brand-extend-light;
+    }
+    // Color fix for country flag links in navbar
+    .country-flag-links {
+      div {
+        border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
+      }
+    }
+
   }
   .nav-link:hover {
     background-color: $brand-color-primary;;
@@ -145,7 +155,6 @@ a {
     padding: 1em;
     border-right: 1px solid #ddd;
     a {
-      padding: 1em;
       text-decoration: none;
       color: $brand-color-primary;
       
@@ -156,6 +165,7 @@ a {
         height: 50px;
       }
       span {
+        padding-top: 1em;
         display: block;
         font-weight: 400;
       }
@@ -183,17 +193,6 @@ a {
         opacity: 0.5;
       }
       
-    }
-  }
-}
-// Color fix for country flag links in navbar
-.navbar.fixed-top {
-  .country-flag-links {
-    a {
-      color: $brand-extend-light;
-    }
-    div {
-      border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
     }
   }
 }
