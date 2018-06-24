@@ -33,7 +33,10 @@ class CountryProfile(TemplateView):
 
 
 class AboutUsPage(TemplateView):
-    template_name = 'takwimu/about.html'
+    template_name = 'takwimu/about/index.html'
 
 class ContactUsPage(TemplateView):
-    template_name = 'takwimu/contact.html'
+    template_name = 'takwimu/about/contact.html'
+
+class DataServicesPage(TemplateView):
+    template_name = 'takwimu/about/data-services.html'
