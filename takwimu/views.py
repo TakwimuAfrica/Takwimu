@@ -32,5 +32,8 @@ class CountryProfile(TemplateView):
             return context
 
 
+class AboutUsPage(TemplateView):
+    template_name = 'takwimu/about.html'
+
 class ContactUsPage(TemplateView):
     template_name = 'takwimu/contact.html'
