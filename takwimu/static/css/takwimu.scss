@@ -118,7 +118,7 @@ a {
     display: none;
     left: 0;
     width: 100vw;
-    background-color: #005973;
+    background-color: $brand-color-primary;;
     z-index: 3000;
     &:hover {
       display: block;
@@ -126,7 +126,7 @@ a {
 
   }
   .nav-link:hover {
-    background-color: #005973;
+    background-color: $brand-color-primary;;
     & + .dropdown-menu-lg {
       display: block;
     }
