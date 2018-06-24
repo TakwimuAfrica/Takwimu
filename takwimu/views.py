@@ -7,11 +7,11 @@ from django.views.generic import TemplateView
 from utils.medium import Medium
 
 
-class CountryReport(TemplateView):
+class CountryProfile(TemplateView):
     """
     This view is for template debugging purposes
     """
-    template_name = 'takwimu/report_page.html'
+    template_name = 'takwimu/profile_page.html'
 
     def get_context_data(self, **kwargs):
         context = dict()
@@ -32,5 +32,11 @@ class CountryReport(TemplateView):
             return context
 
 
+class AboutUsPage(TemplateView):
+    template_name = 'takwimu/about/index.html'
+
 class ContactUsPage(TemplateView):
-    template_name = 'takwimu/contact.html'
+    template_name = 'takwimu/about/contact.html'
+
+class DataServicesPage(TemplateView):
+    template_name = 'takwimu/about/data-services.html'

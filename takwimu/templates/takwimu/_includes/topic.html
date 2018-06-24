@@ -22,14 +22,16 @@
             <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>{% endif %}
         {% endfor %}
       </div>
+      <!-- TODO: Integrate with Zendesk -->
       <!-- <div class="row pt-5 pb-5 text-dark">
-                <p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
-                <a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
-            </div> -->
+              <p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
+              <a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
+          </div> -->
     </div>  <!-- /.col-3 -->
 
+    <!-- The Main Stage -->
     <div class="col-9">
-      <h1>{{ topic.title }}</h1>
+      <h1 id="{{ topic.title|slugify }}" style="padding-top: 3em; margin-top: -3em;">{{ topic.title }}</h1>
       <p class="text-dark">{{ topic.description }}</p>
       <div class="tab-content" id="v-pills-tabContent">
         {% for indicator in topic.data_indicators.all %}

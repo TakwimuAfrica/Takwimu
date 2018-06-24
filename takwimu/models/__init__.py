@@ -1,3 +1,4 @@
 from .dashboard import TopicPageDataIndicator, TopicPageDataIndicators, TopicPage, \
-                       ReportPageTopic, ReportSectionPageTopics, ReportSectionPage, \
-                       ReportPageSection, ReportPageSections, ReportPage, DataValue, DataPublisher, DataInd
+                       ProfilePageTopic, ProfileSectionPageTopics, ProfileSectionPage, \
+                       ProfilePageSection, ProfilePageSections, ProfilePage, DataValue, DataPublisher, DataInd
+

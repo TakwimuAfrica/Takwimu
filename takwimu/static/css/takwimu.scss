@@ -75,16 +75,16 @@ a {
   background-color: $brand-color-primary;
   border-color: $brand-color-secondary;
   &:hover, &:focus, &:active {
-    background-color: $brand-color-secondary;
-    border-color: $brand-color-primary;
+    background-color: $brand-color-secondary !important;
+    border-color: $brand-color-primary !important;
   }
 }
 .btn-outline-primary {
   border-color: $brand-color-primary;
   color: $brand-color-primary;
   &:hover, &:focus, &:active {
-    background-color: $brand-color-primary;
-    border-color: $brand-color-secondary;
+    background-color: $brand-color-primary !important;
+    border-color: $brand-color-primary !important;
   }
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -114,21 +114,43 @@ a {
     position: initial;
   }
 
+  // When you hover over a link
+  .nav-link:hover {
+    background-color: $brand-color-primary;
+    & + .dropdown-menu-lg {
+      display: block;
+    }
+  }
+
   .dropdown-menu-lg {
     display: none;
     left: 0;
     width: 100vw;
-    background-color: #005973;
+    background-color: $brand-color-primary;;
+    z-index: 3000;
+
+    a {
+      color: $brand-extend-light;
+    }
+    // Color fix for country flag links in navbar
+    .country-flag-links {
+      div {
+        border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
+      }
+    }
+
+    // When you are hovering over dropdown
     &:hover {
       display: block;
     }
-
-  }
-  .nav-link:hover {
-    background-color: #005973;
-    & + .dropdown-menu-lg {
+    // Hack to show background in link
+    & + .nav-link {
+      display: none;
+    }
+    &:hover + .nav-link {
       display: block;
     }
+
   }
   
 }
@@ -144,7 +166,6 @@ a {
     padding: 1em;
     border-right: 1px solid #ddd;
     a {
-      padding: 1em;
       text-decoration: none;
       color: $brand-color-primary;
       
@@ -155,6 +176,7 @@ a {
         height: 50px;
       }
       span {
+        padding-top: 1em;
         display: block;
         font-weight: 400;
       }
@@ -182,17 +204,6 @@ a {
         opacity: 0.5;
       }
       
-    }
-  }
-}
-// Color fix for country flag links in navbar
-.navbar.fixed-top {
-  .country-flag-links {
-    a {
-      color: $brand-extend-light;
-    }
-    div {
-      border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
     }
   }
 }
