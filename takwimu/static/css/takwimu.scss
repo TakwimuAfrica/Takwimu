@@ -75,16 +75,16 @@ a {
   background-color: $brand-color-primary;
   border-color: $brand-color-secondary;
   &:hover, &:focus, &:active {
-    background-color: $brand-color-secondary;
-    border-color: $brand-color-primary;
+    background-color: $brand-color-secondary !important;
+    border-color: $brand-color-primary !important;
   }
 }
 .btn-outline-primary {
   border-color: $brand-color-primary;
   color: $brand-color-primary;
   &:hover, &:focus, &:active {
-    background-color: $brand-color-primary;
-    border-color: $brand-color-secondary;
+    background-color: $brand-color-primary !important;
+    border-color: $brand-color-primary !important;
   }
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -119,6 +119,7 @@ a {
     left: 0;
     width: 100vw;
     background-color: #005973;
+    z-index: 3000;
     &:hover {
       display: block;
     }

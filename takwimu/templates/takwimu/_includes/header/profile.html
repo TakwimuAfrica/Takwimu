@@ -19,9 +19,14 @@
         
         {% include 'takwimu/_includes/profile/country_selector.html' %}
         
-        <button class="btn btn-light btn-lg text-uppercase">
+        <!-- TOC Button -->
+        <button
+            class="btn btn-light btn-lg text-uppercase pr-4"
+            style=" position: absolute; right: 0; border-radius: 0.3em 0 0 0.3em;"
+            onclick="javascript:$('#toc').removeClass('d-none')">
           <i class="fas fa-align-left"></i> Table of Contents
         </button>
+
       </div>
   
       <div class="text-center">
@@ -54,3 +59,50 @@
   </div>
 
 </header>
+
+<!-- Table of Contents Sidebar -->
+<div id="toc" class="d-none p-4 border-left"
+    style="max-width: 400px; width: 100%; height: 100vh; position: fixed; top: 0; right: 0; overflow-y: scroll; background-color: #fff; z-index: 2000;">
+
+  <p class="text-right mb-3">
+    <button
+        class="btn btn btn-outline-primary text-uppercase d-flex align-items-center ml-auto border-0 py-0"
+        onclick="javascript:$('#toc').addClass('d-none')">
+      Close <span class="ml-2 font-weight-light" style="font-size: 2em;">X</span>
+    </button>
+  </p>
+
+  {% include 'takwimu/_includes/profile/country_selector.html' %}
+
+  <hr class="my-4"/>
+
+  <h2 class="mb-3">Table of Contents</h2>
+  {% if page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
+    {% include 'takwimu/_includes/header/toc.html' with section=page %}
+
+    {% for section in page.sections.all %}
+      {% include 'takwimu/_includes/header/toc.html' with section=section.section %}
+    {% endfor %}
+  {% else %}
+    {% include 'takwimu/_includes/header/toc.html' with section=page.get_parent.specific %}
+
+    {% for section in page.get_parent.specific.sections.all %}
+      {% include 'takwimu/_includes/header/toc.html' with section=section.section %}
+    {% endfor %}
+  {% endif %}
+
+
+</div>
+
+
+<!-- TOC - Toggle opening and closing accordion. -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    $('button[data-toggle="collapse"]').on('click', function () {
+      $(this)
+        .find('[data-fa-i2svg]')
+        .toggleClass('fa-minus')
+        .toggleClass('fa-plus');
+    });
+  });
+</script>
