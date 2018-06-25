@@ -79,7 +79,7 @@
 
   <!--Load the Country dropdown-->
   <script>
-  $(window).on('load', function(){
+  window.addEventListener('load', function() {
     $('.dropdown-menu a').click(function(){
       $(".btn:first-child").html($(this).html()+' <span class="caret"></span>');
     });
