@@ -161,6 +161,9 @@ class DataInd(models.Model):
     title = models.CharField(blank=True, null=False, max_length=255)
     description = models.TextField(blank=True)
 
+    def __str__(self):
+        return self.title
+
     class Meta:
         verbose_name = 'Indicator'
         verbose_name_plural = 'Indicators'
@@ -170,6 +173,9 @@ class DataPublisher(models.Model):
     name = models.CharField(blank=True, null=False, max_length=255)
     description = models.TextField(blank=True)
     link = models.URLField(null=True)
+
+    def __str__(self):
+        return self.name
 
     class Meta:
         verbose_name = 'Data Publisher'
@@ -184,7 +190,9 @@ class DataValue(models.Model):
     # data = models.ForeignKey(FieldTable, on_delete=models.CASCADE)
 
     # add signal to hook on the on create
+    indicator = models.ForeignKey(DataInd, on_delete=models.CASCADE)
     publisher_data = models.FileField(null=True)
+
 
     class Meta:
         verbose_name = 'Data Value'
