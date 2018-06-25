@@ -1,5 +1,7 @@
+
 {% extends 'takwimu/_layouts/page.html' %}
 
+{% load staticfiles %}
 {% block content %}
 
 <div class="py-5 container" style="max-width: 800px;">
@@ -16,8 +18,19 @@
 </div>
 
 <div class="container py-5" style="max-width: 800px;">
-  <h1 class="text-center display-4">The Partners</h1>
-  <!-- TODO: Add description + logos here. -->
+  <h1 class="text-center display-4"><b>The Partnership</b></h1>
+  <!-- TODO: Add description + logos here. --> 
+  <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos rem vitae, quas officiis earum 
+    quam, nihil cupiditate alias unde aspernatur adipisci recusandae debitis exercitationem ab 
+    incidunt sunt, at laudantium tenetur.
+ </p>
+  <div class="d-flex flex-row justify-content-center pt-5">
+    <a href="" class="px-5 py-5 border-right"><img src="{% static 'img/logos/bmgf.png' %}" alt="Bill and Melinda Gates" height="50px" width="100%"></a>
+    <a href="" class="px-5 py-5 border-right"><img src="{% static 'img/logos/ap.png' %}" alt="Africa Practice" height="50px;" width="100%"></a>
+    <a href="" class="px-5 py-5 border-right"><img src="{% static 'img/logos/cfafrica.png' %}" alt ="Code for Africa" width="100%"></a>
+    <a href="" class="px-5 py-5"><img src="{% static 'img/logos/ihub.png' %}" alt="Ihub" width="100%"></a>
+  </div>
+  
 </div>
 
 {% include 'takwimu/_includes/sections/data-services.html' %}
