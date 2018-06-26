@@ -3,6 +3,8 @@ version: '3.3'
 services:
   db:
     image: postgres:9.5
+    ports:
+      - "54321:5432"
     environment:
       - POSTGRES_USER=takwimu
       - POSTGRES_PASSWORD=takwimu
@@ -22,3 +24,4 @@ services:
       - PGDATABASE=takwimu
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
+      - PYTHONDONTWRITEBYTECODE="True"

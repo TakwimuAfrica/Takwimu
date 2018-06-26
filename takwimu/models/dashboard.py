@@ -32,7 +32,7 @@ class TopicPage(Page):
     '''
     Topic Editor
     ------------
-    All data indicators are made available to reports + sections via topics.
+    All data indicators are made available to profiles + sections via topics.
     This therefore serves as an editorial interface to create topics and link indicators to it.
     '''
     description = models.TextField(blank=True)
@@ -57,7 +57,7 @@ class TopicPage(Page):
     ]
 
 # The abstract model for topics, complete with panels
-class ReportPageTopic(models.Model):
+class ProfilePageTopic(models.Model):
     topic = models.ForeignKey(TopicPage, on_delete=models.CASCADE)
 
     panels = [
@@ -71,12 +71,12 @@ class ReportPageTopic(models.Model):
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
-class ReportSectionPageTopics(Orderable, ReportPageTopic):
-    section_page = ParentalKey('takwimu.ReportSectionPage', related_name='topics')
+class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
+    section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
 
-class ReportSectionPage(Page):
+class ProfileSectionPage(Page):
     '''
-    Report Section Page
+    Profile Section Page
     -------------------
     After overview, each of the sections have the following structure
     '''
@@ -97,12 +97,12 @@ class ReportSectionPage(Page):
 
     # Parent page / subpage type rules
 
-    parent_page_types = ['takwimu.ReportPage']
+    parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
 
 # The abstract model for topics, complete with panels
-class ReportPageSection(models.Model):
-    section = models.ForeignKey(ReportSectionPage, on_delete=models.CASCADE)
+class ProfilePageSection(models.Model):
+    section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
 
     panels = [
         PageChooserPanel('section')
@@ -114,20 +114,20 @@ class ReportPageSection(models.Model):
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
-class ReportPageSections(Orderable, ReportPageSection):
-    report_page = ParentalKey('takwimu.ReportPage', related_name='sections')
+class ProfilePageSections(Orderable, ProfilePageSection):
+    profile_page = ParentalKey('takwimu.ProfilePage', related_name='sections')
 
 
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
-class ReportPageTopics(Orderable, ReportPageTopic):
-    report_page = ParentalKey('takwimu.ReportPage', related_name='topics')
+class ProfilePageTopics(Orderable, ProfilePageTopic):
+    profile_page = ParentalKey('takwimu.ProfilePage', related_name='topics')
 
 
-class ReportPage(Page):
+class ProfilePage(Page):
     '''
-    Report Page
+    Profile Page
     -----------
     '''
     geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True)
@@ -148,5 +148,8 @@ class ReportPage(Page):
 
     # Parent page / subpage type rules
 
-    subpage_types = ['takwimu.ReportSectionPage']
+    subpage_types = ['takwimu.ProfileSectionPage']
+
+    def get_absolute_url(self):
+        return self.full_url
 
