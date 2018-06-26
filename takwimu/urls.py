@@ -4,14 +4,13 @@ from hurumap.urls import urlpatterns as hurumap_urlpatterns
 from takwimu.feed import CountryProfileFeed
 
 from takwimu import settings
-from takwimu.views import CountryProfile, AboutUsPage, ContactUsPage, DataServicesPage, DataPriorityPage
+from takwimu.views import CountryProfile, AboutUsPage, ContactUsPage, DataServicesPage
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
               [
                 url(r'^about/contact', ContactUsPage.as_view(), name='about_contact'),
                 url(r'^about/data-services', DataServicesPage.as_view(), name='about_dataservices'),
-                url(r'^about/data-priority', DataPriorityPage.as_view(), name='about_datapriority'),
                 url(r'^about', AboutUsPage.as_view(), name='about'),
                 url(r'^feed/$', CountryProfileFeed(), name='rss_feed')
               ] + \

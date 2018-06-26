@@ -40,6 +40,3 @@ class ContactUsPage(TemplateView):
 
 class DataServicesPage(TemplateView):
     template_name = 'takwimu/about/data-services.html'
-
-class DataPriorityPage(TemplateView):
-    template_name = 'takwimu/about/data-priority.html'
