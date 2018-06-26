@@ -1,18 +1,32 @@
 {% load staticfiles %}
 
-{% block content %}
-<div class="btn-group">
+<div class="country-selector btn-group">
   <button class="btn btn-outline-secondary btn-lg dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
     <img class="rounded-circle border-light mr-2" src="{% static 'img/flags/nigeria.svg' %}"
         border="8" style="border-style:double; width: 50px; height: 50px;"/>
     Nigeria
   </button>
-  <div class="dropdown-menu pt-0 rounded-0" aria-labelledby="dropdownMenuButton" style="width: 180px;">
+  <div class="dropdown-menu pt-0 rounded-0" aria-labelledby="dropdownMenuButton" style="max-width: 180px;">
 
     <a class="dropdown-item" href="#" data-value="senegal"><img class="rounded-circle border-light mr-2" src="{% static 'img/flags/senegal.svg' %}" border="8" style="border-style:double; width: 50px; height: 50px;"/>Senegal</a>
-    <a class="dropdown-item" href="#" data-value="tanzania"><img class="rounded-circle border-light mr-2" src="{% static 'img/flags/tanzania.svg' %}" border="8" style="border-style:double; width: 50px; height: 50px;"/>Tanzania</a>
-    <a class="dropdown-item" href="#" data-value="tanzania"><img class="rounded-circle border-light mr-2" src="{% static 'img/flags/nigeria.svg' %}" border="8" style="border-style:double; width: 50px; height: 50px;"/>Nigeria</a>
+    <a class="dropdown-item" href="/profile/tanzania" data-value="tanzania"><img class="rounded-circle border-light mr-2" src="{% static 'img/flags/tanzania.svg' %}" border="8" style="border-style:double; width: 50px; height: 50px;"/>Tanzania</a>
+    <a class="dropdown-item" href="/profile/nigeria" data-value="tanzania"><img class="rounded-circle border-light mr-2" src="{% static 'img/flags/nigeria.svg' %}" border="8" style="border-style:double; width: 50px; height: 50px;"/>Nigeria</a>
 
   </div>
 </div>
-{% endblock  %}
+
+
+<!-- TODO: Add styling here -->
+<style>
+
+</style>
+
+
+<!-- When you select a country, the selector changes. -->
+<script>
+  window.addEventListener('load', function() {
+    $('.country-selector .dropdown-menu a').click(function(){
+      $(".country-selector button:first-child").html($(this).html());
+    });
+  });
+</script>
