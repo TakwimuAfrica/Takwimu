@@ -4,7 +4,7 @@ import os
 from hurumap.settings import *  # noqa
 
 # insert our overrides before both census and hurumap
-INSTALLED_APPS = ['takwimu'] + INSTALLED_APPS + ['debug_toolbar']
+INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin'] + INSTALLED_APPS + ['debug_toolbar']
 
 ROOT_URLCONF = 'takwimu.urls'
 
