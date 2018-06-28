@@ -8,7 +8,7 @@ class DataIndicatorAdmin(ModelAdmin):
     menu_icon = 'doc-full-inverse'
     list_display = ('title', 'description')
     search_fields = ('title', 'description')
-    form_fields_exclude = ('view', 'process_prefs', 'data_values')
+    form_fields_exclude = ('view', 'process_prefs', 'data_values', 'publisher_data')
 
 
 class DataPublisherAdmin(ModelAdmin):
