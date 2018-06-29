@@ -7,9 +7,10 @@
           aria-expanded="false">
     <img class="rounded-circle border-light mr-2"
          src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
-            {% static image_static %}
-          {% endwith %}
-         border="8" style="border-style:double; width: 50px; height: 50px;"/>
+           {% static image_static %}
+         {% endwith %}
+             border="8"
+         style="border-style:double; width: 50px; height: 50px;"/>
     {{ current_page.title }}
   </button>
   <div class="dropdown-menu pt-0 rounded-0" aria-labelledby="dropdownMenuButton"
