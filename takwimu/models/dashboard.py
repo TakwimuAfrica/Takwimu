@@ -1,3 +1,4 @@
+# encoding=utf-8
 from django.db import models
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
 from wagtail.wagtailcore import blocks
@@ -9,6 +10,7 @@ from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
+from fontawesome.fields import IconField
 
 
 # The abstract model for data indicators, complete with panels
@@ -36,6 +38,7 @@ class TopicPage(Page):
     This therefore serves as an editorial interface to create topics and link indicators to it.
     '''
     description = models.TextField(blank=True)
+    icon = IconField()
 
     # TODO: For topics heirachy
     #parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
@@ -53,6 +56,7 @@ class TopicPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        FieldPanel('icon'),
         InlinePanel('data_indicators', label="Data Indicators"),
     ]
 
@@ -152,4 +156,3 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
-
