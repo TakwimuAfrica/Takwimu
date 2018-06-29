@@ -6,7 +6,7 @@
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item"><a href="/">Home</a></li> 
+          <li class="breadcrumb-item"><a href="/">Home</a></li>
           <li class="breadcrumb-item"><a href="/profiles">Country Profiles</a></li>
           {% if page.content_type.model == "profilesectionpage" %}
           <li class="breadcrumb-item"><a href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a></li>
@@ -14,11 +14,11 @@
           <li class="breadcrumb-item active" aria-current="page">{{ page.title }}</li>
         </ol>
       </nav>
-  
+
       <div class="d-flex justify-content-between align-items-center">
-        
+
         {% include 'takwimu/_includes/profile/country_selector.html' %}
-        
+
         <!-- TOC Button -->
         <button
             class="btn btn-light btn-lg text-uppercase pr-4"
@@ -28,7 +28,7 @@
         </button>
 
       </div>
-  
+
       <div class="text-center">
         {% if page.content_type.model == "profilesectionpage" %}
 
@@ -37,11 +37,11 @@
         <p class="lead my-4 mx-auto" style="max-width: 780px;">{{ page.description }}</p>
 
         {% else %}
-        
+
         <p class="strong text-uppercase">Section 1</p>
         <h1 class="display-1">Country Overview</h1>
         <p class="lead my-4 mx-auto" style="max-width: 780px;">A top-level overview of Nigeria – how it’s governed, the make-up of it’s population, the economy and SDG indicators</p>
-        
+
         {% endif %}
 
         <a class="btn btn-primary btn-sm text-uppercase px-2 py-1 disabled" href="#" role="button"
@@ -49,28 +49,18 @@
           Download full country profile <i class="fas fa-download border-left pl-2 ml-1"></i>
         </a>
       </div>
-        
+
     </div>
 
   </div>
   <div class="py-5 bg-light">
     <div class="d-flex flex-row justify-content-center text-uppercase">
+      {% for topic in page.topics.all %}
         <div class="col-2 border-right text-center">
           <p><i class="fas fa-university fa-2x text-primary"></i></p>
-          <p><a href="#">Governance</a></p>
+          <p><a href={{ topic.topic.url }}>{{ topic.topic }}</a></p>
         </div>
-        <div class="col-2 border-right text-center">
-          <p><i class="fas fa-users fa-2x text-primary"></i></p>
-          <p><a href="#">The People</a></p>
-        </div>
-        <div class="col-2 border-right text-center">
-          <p><i class="fas fa-chart-bar fa-2x text-primary"></i></p>
-          <p><a href="#">The Economy</a></p>
-        </div>
-        <div class="col-2 text-center">
-          <p><i class="fas fa-leaf fa-2x text-primary"></i></p>
-          <p><a href="#" >Sustainable Development Goals</a></p>
-          </div>
+      {% endfor %}
     </div>
   </div>
 
