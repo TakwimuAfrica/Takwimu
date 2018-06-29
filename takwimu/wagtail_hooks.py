@@ -2,28 +2,27 @@ from wagtail.contrib.modeladmin.options import modeladmin_register, ModelAdminGr
 from hurumap.models import DataIndicator, DataIndicatorPublisher
 
 
+class DataPublisherAdmin(ModelAdmin):
+    model = DataIndicatorPublisher
+    menu_label = 'Publishers'
+    menu_icon = 'group'
+    list_display = ('name', 'url')
+    search_fields = ('name')
+
 class DataIndicatorAdmin(ModelAdmin):
     model = DataIndicator
-    menu_label = 'Data Indicator'
-    menu_icon = 'doc-full-inverse'
+    menu_label = 'Indicators'
+    menu_icon = 'table'
     list_display = ('title', 'description')
     search_fields = ('title', 'description')
     form_fields_exclude = ('view', 'process_prefs', 'data_values', 'publisher_data')
-
-
-class DataPublisherAdmin(ModelAdmin):
-    model = DataIndicatorPublisher
-    menu_label = 'Indicator Publisher'
-    menu_icon = 'doc-full-inverse'
-    list_display = ('name', 'url')
-    search_fields = ('name')
 
 
 class DataAdminGroup(ModelAdminGroup):
     menu_label = 'Data'
     menu_icon = 'folder-open-inverse'
     menu_order = 200
-    items = (DataIndicatorAdmin, DataPublisherAdmin)
+    items = (DataPublisherAdmin, DataIndicatorAdmin)
 
 
 modeladmin_register(DataAdminGroup)

@@ -13,14 +13,24 @@ TODO
 
 ## Development
 
+### Setup - Docker
+
+With Docker, development set up is relatively quick:
+
+```sh
+git clone https://github.com/TakwimuAfrica/TAKWIMU.git
+cd TAKWIMU
+docker-compose build
+docker-compose up web
+```
+
+### Setup - Mac OS
+
 1. Clone the repo
 2. ``cd TAKWIMU``
 3. ``virtualenv --no-site-packages env``
 4. ``source env/bin/activate``
 5. ``pip install -r requirements.txt``
-
-
-***NB:** The set up docs from here assume setting up HURUmap Kenya but is applicable to the rest of the projects.*
 
 You will need a Postgres database:
 
