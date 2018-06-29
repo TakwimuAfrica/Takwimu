@@ -28,6 +28,7 @@ class TopicPageDataIndicator(models.Model):
 class TopicPageDataIndicators(Orderable, TopicPageDataIndicator):
     page = ParentalKey('takwimu.TopicPage', related_name='data_indicators')
 
+
 class TopicPage(Page):
     '''
     Topic Editor
@@ -56,6 +57,7 @@ class TopicPage(Page):
         InlinePanel('data_indicators', label="Data Indicators"),
     ]
 
+
 # The abstract model for topics, complete with panels
 class ProfilePageTopic(models.Model):
     topic = models.ForeignKey(TopicPage, on_delete=models.CASCADE)
@@ -67,12 +69,18 @@ class ProfilePageTopic(models.Model):
     class Meta:
         abstract = True
 
+# The real model which combines the abstract model, an
+# Orderable helper class, and what amounts to a ForeignKey link
+# to the model we want to add related links to (TopicPage)
+class ProfilePageTopics(Orderable, ProfilePageTopic):
+    profile_page = ParentalKey('takwimu.ProfilePage', related_name='topics')
 
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
 class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
     section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
+
 
 class ProfileSectionPage(Page):
     '''
@@ -117,12 +125,6 @@ class ProfilePageSection(models.Model):
 class ProfilePageSections(Orderable, ProfilePageSection):
     profile_page = ParentalKey('takwimu.ProfilePage', related_name='sections')
 
-
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfilePageTopics(Orderable, ProfilePageTopic):
-    profile_page = ParentalKey('takwimu.ProfilePage', related_name='topics')
 
 
 class ProfilePage(Page):
