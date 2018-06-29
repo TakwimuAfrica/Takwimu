@@ -1,4 +1,3 @@
-# encoding=utf-8
 from django.db import models
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
 from wagtail.wagtailcore import blocks
