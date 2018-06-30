@@ -105,3 +105,8 @@ LANGUAGES = (
     ('sw', _('Swahili')),
     ('am', _('Amharic')),
 )
+
+MODELTRANSLATION_DEFAULT_LANGUAGE = 'en'
+
+MODELTRANSLATION_FALLBACK_LANGUAGES = {'default': ('en',)}
+
