@@ -6,5 +6,5 @@ image-latest:
 	docker push takwimu/app:latest
 
 image-release:
-	docker build -t takwimu/app:1.0.0.
+	docker build -t takwimu/app:1.0.0
 	docker push takwimu/app:1.0.0
