@@ -13,6 +13,8 @@ from wazimap.models import Geography
 def create_field_tables(sender, instance, created, **kwargs):
     # to prevent post_save recursion, first disconnect the signal, the connect it again
     # https://stackoverflow.com/questions/39481625/how-can-i-prevent-post-save-recursion-in-django
+    if not hasattr(instance.raw_data_file, 'path'):
+        return
     post_save.disconnect(create_field_tables, sender=sender)
     path = instance.raw_data_file.path
     _, extension = splitext(path)
