@@ -91,7 +91,7 @@ section.stories .card-img {
 /*
 * Tabs css
 * ---------
-* Overide bootstrap 4 tabs css 
+* Overide bootstrap 4 tabs css
 */
 #nav-tab {
   border-bottom: 2px solid transparent; }
@@ -152,6 +152,35 @@ section.stories .card-img {
 .navbar.fixed-top .country-flag-links div {
   border-color: rgba(248, 249, 250, 0.1) !important; }
 
+  /* active section */
+.active-section-div {
+    color: #343a40;
+    margin-bottom: 0;
+
+}
+.combined-shape {
+  width: 220px;
+  height: 51px;
+  border-radius: 2px;
+  background-color: #005973;
+  padding-right: 10%;
+  padding-top: 5%;
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.26);
+}
+.combined-shape p {
+  font-size: 18px;
+  font-weight: 500;
+  text-align: center;
+
+}
+.active-span {
+  float: right;
+  margin-top: -7%;
+  position: relative;
+  margin-right: 2.4%;
+}
+
+
 /*
 * Extra small devices (portrait phones, less than 576px)
 * Small devices (landscape phones, 576px and down)
@@ -162,13 +191,13 @@ section.stories .card-img {
   .country-container div.col:nth-child(even) {
     border-right: 1px solid transparent; } }
 
-/* 
+/*
 * Small devices (landscape phones, 576px and up)
 * Medium devices (tablets, 768px and up)
 */
 @media (min-width: 576px) and (max-width: 768px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
   */ }
 
@@ -177,7 +206,7 @@ section.stories .card-img {
 */
 @media (min-width: 768px) and (max-width: 992px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
   */ }
 
@@ -186,6 +215,6 @@ section.stories .card-img {
 */
 @media (min-width: 1200px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
   */ }
