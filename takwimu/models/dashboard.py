@@ -85,6 +85,17 @@ class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
     section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
 
 
+class TopicBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    icon = ImageChooserBlock(required=False)
+    summary = blocks.TextBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+    
+    # TODO: Indicator selection goes here with ListBlock
+
+    class Meta:
+        icon = 'form'
+
 class ProfileSectionPage(Page):
     '''
     Profile Section Page
@@ -92,17 +103,23 @@ class ProfileSectionPage(Page):
     After overview, each of the sections have the following structure
     '''
     description = models.TextField(blank=True)
+    date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    body = StreamField([
+        ('topic', TopicBlock())
+    ], blank=True)
 
     # Search index configuration
 
     search_fields = Page.search_fields + [
-        index.SearchField('description')
+        index.SearchField('description'),
+        index.SearchField('body'),
     ]
 
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        StreamFieldPanel('body'),
         InlinePanel('topics', label="Topics"),
     ]
 
@@ -129,24 +146,29 @@ class ProfilePageSections(Orderable, ProfilePageSection):
     profile_page = ParentalKey('takwimu.ProfilePage', related_name='sections')
 
 
-
 class ProfilePage(Page):
     '''
     Profile Page
     -----------
     '''
     geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True)
+    date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    body = StreamField([
+        ('topic', TopicBlock())
+    ], blank=True)
 
     # Search index configuration
 
     search_fields = Page.search_fields + [
         index.FilterField('geo'),
+        index.SearchField('body'),
     ]
 
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
+        StreamFieldPanel('body'),
         InlinePanel('topics', label="Topics"),
         InlinePanel('sections', label="Sections"),
     ]
