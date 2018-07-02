@@ -5,6 +5,6 @@ gunicorn==19.8.1
 # workaround: setup keeps installing wazimap from PYPI
 -e git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
 
--e git+https://github.com/KhadijaMahanga/django-fontawesome.git@master#egg=django-fontawesome
+-e git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
 
 django-debug-toolbar
