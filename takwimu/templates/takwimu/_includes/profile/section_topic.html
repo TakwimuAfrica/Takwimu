@@ -1,0 +1,86 @@
+{% load wagtailcore_tags %}
+
+{% load staticfiles %}
+
+<div class="container py-5 data-topic">
+  <div class="row ">
+
+    <!-- Left navigation of all indicators-->
+    <div class="col-3 dataindicators-nav">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+           aria-orientation="vertical">
+        {% for indicator in topic.data_indicators.all %}
+          <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
+             id="d{{ indicator.indicator.id }}-tab-btn"
+             data-toggle="pill" href="#d{{ indicator.indicator.id }}-tab"
+             role="tab" aria-controls="d{{ indicator.indicator.id }}-tab"
+              {% if forloop.first %} aria-selected="true" {% endif %}
+             aria-selected="false">
+            <i class="fas fa-eye fa-fw"></i>
+            {{ indicator.indicator.name }}
+          </a>
+
+          {% if not forloop.last %}
+            <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>{% endif %}
+        {% endfor %}
+      </div>
+      <!-- TODO: Integrate with Zendesk -->
+      <!-- <div class="row pt-5 pb-5 text-dark">
+              <p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
+              <a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
+          </div> -->
+    </div>  <!-- /.col-3 -->
+
+    <!-- The Main Stage -->
+    <div class="col-9 topic-{{ topic.value.title|slugify }}">
+      <h1 id="{{ topic.value.title|slugify }}" style="padding-top: 3em; margin-top: -3em;">{{ topic.value.title }}</h1>
+      <div class="text-dark">
+          <p>
+            {{ topic.value.summary }}
+            <button class="btn btn-link" onclick="javascript:$('.topic-{{ topic.value.title|slugify }} .topic-body').toggleClass('d-none');">Read More >></button>
+          </p>
+          <div class="topic-body d-none">{% include_block topic.value.body %}</div>
+      </div>
+      
+      
+      <div class="tab-content" id="v-pills-tabContent">
+        {% for indicator in topic.data_indicators.all %}
+          <div
+              class="tab-pane fade {% if forloop.first %} active show {% endif %}"
+              id="d{{ indicator.indicator.id }}-tab"
+              role="tabpanel"
+              aria-labelledby="d{{ indicator.indicator.id }}-tab-btn">
+
+            {% include 'takwimu/_includes/dataview/_index.html' %}
+            
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .dataindicators-nav .nav-pills {
+    background-color: #005973;
+  }
+  .dataindicators-nav .nav-link {
+    color: #f0f0f0;
+  }
+  .dataindicators-nav .nav-link:hover {
+    color: #f0f0f0;;
+  }
+
+  .dataindicators-nav .nav-link .fa-eye {
+    display: none;
+    margin-left: -2em;
+    position: absolute;
+  }
+  .dataindicators-nav .nav-link[aria-selected=true] .fa-eye {
+    display: inline;
+  }
+  .dataindicators-nav .nav-pills .nav-link.active, .dataindicators-nav .nav-pills .show > .nav-link {
+    background-color: transparent;
+    font-weight: 500;
+  }
+</style>
