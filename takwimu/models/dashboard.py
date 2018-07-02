@@ -1,4 +1,5 @@
 from django.db import models
+from django import forms
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailcore.fields import StreamField
@@ -10,6 +11,9 @@ from modelcluster.fields import ParentalKey
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
 from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 # The abstract model for data indicators, complete with panels
@@ -85,6 +89,21 @@ class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
     section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
 
 
+
+class DataIndicatorChooserBlock(blocks.ChooserBlock):
+    target_model = DataIndicator
+    widget = forms.Select
+
+    class Meta:
+        icon = "icon"
+
+    # Return the key value for the select field
+    def value_for_form(self, value):
+        if isinstance(value, self.target_model):
+            return value.pk
+        else:
+            return value
+
 class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = ImageChooserBlock(required=False)
@@ -92,6 +111,7 @@ class TopicBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(required=False)
     
     # TODO: Indicator selection goes here with ListBlock
+    indicators = blocks.ListBlock(DataIndicatorChooserBlock(),required=False)
 
     class Meta:
         icon = 'form'
@@ -127,6 +147,7 @@ class ProfileSectionPage(Page):
 
     parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
+
 
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
