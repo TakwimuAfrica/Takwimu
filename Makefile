@@ -1,10 +1,10 @@
 build:
-	docker build -t takwimu/app:latest .
+	docker build -t codeforafrica/takwimu:latest .
 
 image-latest:
-	docker build -t takwimu/app:latest .
-	docker push takwimu/app:latest
+	docker build -t codeforafrica/takwimu:latest .
+	docker push codeforafrica/takwimu:latest
 
 image-release:
-	docker build -t takwimu/app:1.0.0.
-	docker push takwimu/app:1.0.0
+	docker build -t codeforafrica/takwimu:0.0.6
+	docker push codeforafrica/takwimu:0.0.6
