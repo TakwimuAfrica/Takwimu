@@ -9,6 +9,7 @@ from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
+from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons
 
 
 # The abstract model for data indicators, complete with panels
@@ -37,6 +38,7 @@ class TopicPage(Page):
     This therefore serves as an editorial interface to create topics and link indicators to it.
     '''
     description = models.TextField(blank=True)
+    icon = IconField()  #adding icon property that uses the djano-fontawesome app structure
 
     # TODO: For topics heirachy
     #parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
@@ -54,6 +56,7 @@ class TopicPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        FieldPanel('icon'),
         InlinePanel('data_indicators', label="Data Indicators"),
     ]
 
@@ -154,4 +157,3 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
-
