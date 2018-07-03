@@ -32,7 +32,7 @@
       <div class="text-center">
         {% if page.content_type.model == "profilesectionpage" %}
 
-        <p class="strong text-uppercase">Section 1</p>
+        <p class="strong text-uppercase">Section {% for section in page.get_parent.specific.sections.all %} {% if page.title == section.section.title %} {{ forloop.counter | add:"1" }} {% endif %}{% endfor %}</p>
         <h1 class="display-1">{{ page.title }}</h1>
         <p class="lead my-4 mx-auto" style="max-width: 780px;">{{ page.description }}</p>
 
