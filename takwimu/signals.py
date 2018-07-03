@@ -82,7 +82,7 @@ def get_stats_per_year(df, aggfunc):
 
 def get_data_values_per_geography(df, disagg_column):
     data = {}
-    for key, df_key in df.groupby(['geography', disagg_column]):
+    for key, df_key in df.groupby([disagg_column, 'geography']):
         data[key] = dict(zip(df_key.year, df_key.value))
     return data
 
