@@ -111,6 +111,7 @@ class ProfileSectionPage(Page):
     parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
 
+
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
     section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
@@ -157,3 +158,4 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
+
