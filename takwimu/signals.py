@@ -61,7 +61,7 @@ def convert_csv_to_json(path):
 def get_geo_data(geo_name):
     try:
         query = Geography.objects.get(name__iexact=geo_name)
-        return '-'.join(query.geo_level, query.geo_code)
+        return '-'.join([query.geo_level, query.geo_code])
     except ObjectDoesNotExist:
         return 'undefined'
 
@@ -77,7 +77,8 @@ def get_stats_per_year(df, aggfunc):
 
     if aggfunc:
         table = pd.pivot_table(df, values='value', columns=['year'],
-                               index=['geography'], aggfunc=aggfunc)
+                               fill_value=0, index=['geography'],
+                               aggfunc=aggfunc)
 
         # recreate geography column from the index
         table['geography'] = table.index
@@ -86,12 +87,15 @@ def get_stats_per_year(df, aggfunc):
         data = pd.melt(table, id_vars=['geography'])
 
         for key, df_total in data.groupby('geography'):
-            data_dict[key] = df_total
+            data_dict[key] = dict(zip(df_total.year, df_total.value))
 
     return data_dict
 
 
-
+def get_data_values_per_geography(df, disagg_column):
+    for key, df_key in df.groupby(['geography', disagg_column]):
+        pass
+    pass
 
 """
 TODO 
