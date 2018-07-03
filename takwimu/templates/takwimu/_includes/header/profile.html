@@ -82,7 +82,11 @@
     </button>
   </p>
 
-  {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+  {% if page.content_type.model == "profilesectionpage" %}
+    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent %}
+  {% else %}
+    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+  {% endif %}
 
   <hr class="my-4"/>
 
