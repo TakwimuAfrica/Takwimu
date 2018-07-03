@@ -27,3 +27,27 @@ def takwimu_stories(request):
         'stories_latest': stories_latest,
         'stories_trending': stories_trending[0:6]
     }
+
+# This function can be refactored or completely removed, it acts as sample dummy data
+# For the topics with sub-topics 
+def takwimu_topics(request):
+    sample_topics = []
+
+    try:
+        # Only do this on development
+        if settings.DEBUG:
+            with open('data/sample_topics.json') as t:
+                topics = json.load(t)
+        
+        # Query the database on production
+        else:
+            return
+
+        sample_topics = topics
+
+    except Exception as e:
+        print e.message
+
+    return {
+        'topics': sample_topics,
+    }
