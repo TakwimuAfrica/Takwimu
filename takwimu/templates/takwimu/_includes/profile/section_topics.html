@@ -1,4 +1,8 @@
 {# Loads all the section topics #}
+
+{% for topic in page.body %}
+    {% include 'takwimu/_includes/profile/section_topic.html' %}
+{% endfor %}
  
 {% for topic in page.topics.all %}
 
