@@ -36,10 +36,12 @@
 </head>
 
 <body id="{% block body_id %}{% endblock %}" class="{% block body_class %}{% endblock %}">
-  {% block body %}
+  
   <!--[if lte IE 9]>
     <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
   <![endif]-->
+  
+  {% block body %}
 
   <!-- Add your site or application content here -->
   <p>Hello world! This is HTML5 Boilerplate.</p>
@@ -53,12 +55,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.min.js"></script>
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/svg.js' %}"></script>
   <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js" integrity="sha384-3LK/3kTpDE/Pkp8gTNp2gR/2gOiwQ6QaO7Td0zV76UFJVhqLl4Vl3KL1We6q6wR9" crossorigin="anonymous"></script>
-
-  {% block body_javascript_extra %}{% endblock %}
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
   <script>
@@ -71,12 +70,14 @@
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
-  <!-- Enable Tooltips -->
+  <!-- Bootstrap: Enable Tooltips -->
   <script>
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
   </script>
+
+  {% block body_javascript_extra %}{% endblock %}
 
   {% endblock body_javascript %}
 </body>
