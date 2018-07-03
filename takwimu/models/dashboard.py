@@ -200,3 +200,4 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
+
