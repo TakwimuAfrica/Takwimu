@@ -28,11 +28,11 @@ def create_field_tables(sender, instance, created, **kwargs):
     }
 
     print '\n\n\n\n\n'
-    print data_values
+    print json.dumps(data_values, sort_keys=True)
     print '\n\n\n\n\n'
 
     instance.publisher_data = publisher_data
-    instance.data_values = json.dumps(data_values)
+    instance.data_values = json.dumps(data_values, sort_keys=True)
     instance.save()
     post_save.connect(create_field_tables, sender=sender)
 
@@ -92,6 +92,7 @@ def return_data_values(path, indicator_title):
     try:
         df = pd.read_csv(path)
         df['geography'] = df['geography'].apply(lambda x: get_geo_data(x))
+        df['year'] = df['year'].apply(lambda x: str(x))
 
         # get disaggregation column
         disaggregation_column = \
@@ -121,20 +122,23 @@ def return_data_values(path, indicator_title):
                 }
 
         # add totals
-        for geo, value in totals:
+        for geo, value in totals.iteritems():
             if not geo in data_values.keys():
                 data_values[geo] = {'_totals': value}
             else:
                 data_values[geo]['_totals'] = value
 
         # add averages
-        for geo, value in average:
+        for geo, value in average.iteritems():
             if not geo in data_values.keys():
-                data_values[geo] = {'_totals': value}
+                data_values[geo] = {'_average': value}
             else:
-                data_values[geo]['_totals'] = value
+                data_values[geo]['_average'] = value
+
+        return data_values
 
     except Exception as e:
+        print e.message
         return data_values
 
 
