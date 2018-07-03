@@ -2,7 +2,7 @@
 
 <section class="py-5">
   <div class="container">
-    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent %}
     <h1 class="text-center display-3 font-weight-bold my-4">Country Profile Contents</h1>
   </div>
 

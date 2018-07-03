@@ -16,9 +16,11 @@
       </nav>
 
       <div class="d-flex justify-content-between align-items-center">
-
-        {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
-
+        {% if page.content_type.model == "profilesectionpage" %}
+          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent %}
+        {% else %}
+          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+        {% endif %}
         <!-- TOC Button -->
         <button
             class="btn btn-light btn-lg text-uppercase pr-4"
