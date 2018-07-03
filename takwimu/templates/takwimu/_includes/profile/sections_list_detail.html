@@ -1,30 +1,26 @@
-{% if current_page.title == section.title and section.content_type.model == "profilesectionpage" %}
-  <div class="jumbotron jumbotron-fluid border-top bg-light active-section-div">
-    <div class="active-span"><p class="combined-shape text-white text-center"><i class="far fa-eye fa-fw"></i> YOU ARE HERE </p></div>
-    <p class="text-uppercase">Section {{ counter | add:"1" }}</p>
-    <h1 class="display-4">{{ section.title|default:"Country Overview" }}</h1>
-    {% with default_desc="A top-level overview of "|add:page.title|add:" – how it’s governed, the make-up of it’s population, the economy and SDG indicators" %}
-    <p>{{ section.description|default:default_desc }}</p>
-    {% endwith %}
-  </div>
+{% if section.title|default:"TKW" == "TKW" and page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
+  <a>
+    <div class="jumbotron jumbotron-fluid border-top bg-light pt-4 pb-5 mb-0">
+      <div class="position-absolute" style="right: 12%; margin-top: -30px;">
+        <span class="bg-primary text-light py-2 px-3"><i class="fa fa-eye mr-1"></i> YOU ARE HERE</span>
+      </div>
+{% elif section.title == page.title %}
+  <a>
+    <div class="jumbotron jumbotron-fluid border-top bg-light pt-4 pb-5 mb-0">
+      <div class="position-absolute" style="right: 12%; margin-top: -30px;">
+        <span class="bg-primary text-light py-2 px-3"><i class="fa fa-eye mr-1"></i> YOU ARE HERE</span>
+      </div>
 {% elif page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
-<a href="{{ section.url|default:'#' }}">
-  <div class="jumbotron jumbotron-fluid border-top bg-white">
-    <p class="text-uppercase">Section {{ counter | add:"1" }}</p>
-    <h1 class="display-4">{{ section.title|default:"Country Overview" }}</h1>
-    {% with default_desc="A top-level overview of "|add:page.title|add:" – how it’s governed, the make-up of it’s population, the economy and SDG indicators" %}
-    <p>{{ section.description|default:default_desc }}</p>
-    {% endwith %}
-  </div>
-</a>
+  <a href="{{ section.url|default:'#' }}">
+    <div class="jumbotron jumbotron-fluid border-top bg-white pt-4 pb-5 mb-0">
 {% else %}
-<a href="{{ section.url|default:'../' }}">
-  <div class="jumbotron jumbotron-fluid border-top bg-white">
+  <a href="{{ section.url|default:'../' }}">
+    <div class="jumbotron jumbotron-fluid border-top bg-white pt-4 pb-5 mb-0">
+{% endif %}
     <p class="text-uppercase">Section {{ counter | add:"1" }}</p>
     <h1 class="display-4">{{ section.title|default:"Country Overview" }}</h1>
     {% with default_desc="A top-level overview of "|add:page.title|add:" – how it’s governed, the make-up of it’s population, the economy and SDG indicators" %}
-    <p>{{ section.description|default:default_desc }}</p>
+    <p class="mb-0">{{ section.description|default:default_desc }}</p>
     {% endwith %}
   </div>
 </a>
-{% endif %}
