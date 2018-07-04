@@ -17,11 +17,12 @@
               {% if forloop.first %} aria-selected="true" {% endif %}
              aria-selected="false">
             <i class="fas fa-eye fa-fw"></i>
-            {{ indicator.title }}
+            {{ indicator.value.title }}
           </a>
 
           {% if not forloop.last %}
-            <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>{% endif %}
+            <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
+          {% endif %}
         {% endfor %}
       </div>
       <!-- TODO: Integrate with Zendesk -->

@@ -58,10 +58,10 @@
   <div class="py-5 bg-light">
     <div class="container">
       <div class="d-flex flex-row justify-content-center text-uppercase">
-        {% for topic in page.topics.all %}
+        {% for topic in page.body %}
           <div class="col-2 border-right text-center">
-            <p><i class="fas fa-{{ topic.topic.icon }} fa-2x text-primary"></i></p>
-            <p><a href={{ topic.topic.url }}>{{ topic.topic }}</a></p>
+            <p><i class="fas fa-{{ topic.value.icon }} fa-2x text-primary"></i></p>
+            <p><a href="#{{ topic.title|slugify }}">{{ topic.value.title }}</a></p>
           </div>
         {% endfor %}
       </div>
