@@ -1,6 +1,4 @@
-{% load wagtailcore_tags %}
-
-{% load staticfiles %}
+{% load staticfiles wagtailcore_tags %}
 
 <div class="container py-5 data-topic">
   <div class="row ">
@@ -11,9 +9,9 @@
            aria-orientation="vertical">
         {% for indicator in topic.value.indicators %}
           <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
-             id="d{{ indicator.id }}-tab-btn"
-             data-toggle="pill" href="#d{{ indicator.id }}-tab"
-             role="tab" aria-controls="d{{ indicator.id }}-tab"
+             id="d{{ indicator.value.title|slugify }}-tab-btn"
+             data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
+             role="tab" aria-controls="d{{ indicator.value.title|slugify }}-tab"
               {% if forloop.first %} aria-selected="true" {% endif %}
              aria-selected="false">
             <i class="fas fa-eye fa-fw"></i>
@@ -48,11 +46,11 @@
         {% for indicator in topic.value.indicators %}
           <div
               class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-              id="d{{ indicator.id }}-tab"
+              id="d{{ indicator.value.title|slugify }}-tab"
               role="tabpanel"
-              aria-labelledby="d{{ indicator.id }}-tab-btn">
+              aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
 
-            {% include 'takwimu/_includes/dataview/_index.html' %}
+            {% include_block indicator %}
             
           </div>
         {% endfor %}

@@ -97,9 +97,10 @@ class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
 class EntityStructBlock(blocks.StructBlock):
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
-    description = blocks.TextBlock(required=False)
+    description = blocks.RichTextBlock(features=['link'],required=False)
     class Meta:
         icon = 'group'
+        template = 'takwimu/_includes/dataview/entity_detail.html'
 
 
 class DataIndicatorChooserBlock(blocks.ChooserBlock):
@@ -118,50 +119,68 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
 
 class IndicatorsBlock(blocks.StreamBlock):
 
-    free_form = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('body', blocks.RichTextBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='snippet')
+    free_form = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('body', blocks.RichTextBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='snippet',
+        template='takwimu/_includes/dataview/freeform.html'
+    )
 
     data_indicator = DataIndicatorChooserBlock()
 
-    embed = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('embed', EmbedBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='media')
+    embed = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('embed', EmbedBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='media',
+        template='takwimu/_includes/dataview/embed.html'
+    )
 
-    document = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('document', DocumentChooserBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='doc-full')
+    document = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('document', DocumentChooserBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='doc-full',
+        template='takwimu/_includes/dataview/document.html'
+    )
 
-    image = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('image', ImageChooserBlock(required=False)),
-        ('caption', blocks.TextBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='image')
+    image = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('image', ImageChooserBlock(required=False)),
+            ('caption', blocks.TextBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='image',
+        template='takwimu/_includes/dataview/image.html'
+    )
 
-    html = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('raw_html', blocks.RawHTMLBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='code')
+    html = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('raw_html', blocks.RawHTMLBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
 
-    entities = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('entities', blocks.ListBlock(EntityStructBlock())),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='group')
+    entities = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('entities', blocks.ListBlock(EntityStructBlock())),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='group',
+        template='takwimu/_includes/dataview/entities.html'
+    )
 
     class Meta:
         icon = 'form'
@@ -186,7 +205,7 @@ class TopicBlock(blocks.StructBlock):
     def media(self):
         # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
         return super(TopicBlock, self).media + forms.Media(
-            js=['fontawesome/js/django_fontawesome.js','fontawesome/select2/select2.min.js', 'js/main.js'],
+            js=['fontawesome/js/django_fontawesome.js','fontawesome/select2/select2.min.js', 'js/dashboard.js'],
             css={'all': ['fontawesome/css/fontawesome-all.min.css',
             'fontawesome/select2/select2.css',
             'fontawesome/select2/select2-bootstrap.css']}
