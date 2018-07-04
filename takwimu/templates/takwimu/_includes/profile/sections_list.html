@@ -2,7 +2,11 @@
 
 <section class="py-5">
   <div class="container">
-    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+    {% if page.content_type.model == "profilesectionpage" %}
+      {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent %}
+    {% else %}
+      {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+    {% endif %}
     <h1 class="text-center display-3 font-weight-bold my-4">Country Profile Contents</h1>
   </div>
 
@@ -15,7 +19,7 @@
 
     {# If it's a section #}
     {% for section in page.get_parent.specific.sections.all %}
-      {% include 'takwimu/_includes/profile/sections_list_detail.html' with section=section.section counter=forloop.counter%}
+      {% include 'takwimu/_includes/profile/sections_list_detail.html' with section=section.section current_page=page counter=forloop.counter%}
     {% endfor %}
   </div>
 </section>
