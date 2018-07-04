@@ -303,9 +303,9 @@ class ProfilePage(Page):
 
 
 class SupportService(models.Model):
-    icon = IconField()
     title = models.TextField()
-    benefit = RichTextField()
+    icon = IconField()
+    description = RichTextField()
 
     def get_slug(self):
         # remove special characters and punctuation
