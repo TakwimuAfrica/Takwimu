@@ -1,3 +1,5 @@
+import re
+
 from django.db import models
 from django import forms
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
@@ -7,7 +9,7 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 from modelcluster.fields import ParentalKey
@@ -298,3 +300,16 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
+
+
+class SupportService(models.Model):
+    icon = IconField()
+    title = models.TextField()
+    benefit = RichTextField()
+
+    def get_slug(self):
+        # remove special characters and punctuation
+        title = re.sub('[^A-Za-z0-9]+', ' ', self.title)
+        return '-'.join(title.lower().split(' '))
+
+

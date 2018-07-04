@@ -4,6 +4,7 @@ import operator
 from django.conf import settings
 from django.views.generic import TemplateView
 
+from takwimu.models.dashboard import SupportService
 from utils.medium import Medium
 
 
@@ -40,3 +41,10 @@ class ContactUsPage(TemplateView):
 
 class DataServicesPage(TemplateView):
     template_name = 'takwimu/about/data-services.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(DataServicesPage, self).get_context_data(**kwargs)
+        services = SupportService.objects.all()
+        context['support_services'] = services
+        return context
+

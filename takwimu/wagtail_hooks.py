@@ -1,5 +1,6 @@
 from wagtail.contrib.modeladmin.options import modeladmin_register, ModelAdminGroup, ModelAdmin
 from hurumap.models import DataIndicator, DataIndicatorPublisher
+from takwimu.models.dashboard import SupportService
 
 
 class DataPublisherAdmin(ModelAdmin):
@@ -24,5 +25,14 @@ class DataAdminGroup(ModelAdminGroup):
     menu_order = 200
     items = (DataPublisherAdmin, DataIndicatorAdmin)
 
+
+class SupportServicesAdmin(ModelAdmin):
+    model = SupportService
+    menu_label = 'Support Services'
+    menu_icon = 'help'
+    list_display = ('title',)
+
+
+modeladmin_register(SupportServicesAdmin)
 
 modeladmin_register(DataAdminGroup)
