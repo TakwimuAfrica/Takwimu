@@ -4,6 +4,10 @@ import operator
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
+from wagtail.wagtailsearch.backends import get_search_backend
+from takwimu.models.dashboard import ProfileSectionPage
+from takwimu.models.dashboard import TopicPage
+
 def takwimu_stories(request):
 
     stories_latest = []
@@ -34,20 +38,39 @@ def takwimu_topics(request):
     sample_topics = []
 
     try:
-        # Only do this on development
-        if settings.DEBUG:
-            with open('data/sample_topics.json') as t:
-                topics = json.load(t)
-        
-        # Query the database on production
-        else:
-            return
+        # with open('data/sample_topics.json') as t:
+            # topics = json.load(t)
+        s = get_search_backend()
+        takwimuTopics = []
+        profileSections = ProfileSectionPage.objects.all()
+        for profileSection in profileSections:
+            takwimuTopic = {
+                'id': str(profileSection.id),
+                'title': profileSection.title,
+            }
+            takwimuTopics.append(takwimuTopic)
 
-        sample_topics = topics
+            takwimuTopic['subtopics'] = []
+            topics = profileSection.topics.select_related('topic').all()
+            for topic in topics:
+                subtopic = {
+                    'id': str(topic.id),
+                    'title': topic.topic.title,
+                }
+                takwimuTopic['subtopics'].append(subtopic)
+
+                subtopic['sub_subtopics'] = []
+                indicators = topic.topic.data_indicators.select_related('indicator').all()
+                for indicator in indicators:
+                    sub_subtopic = {
+                        'id': str(indicator.id),
+                        'title': indicator.indicator.title,
+                    }
+                subtopic['sub_subtopics'].append(sub_subtopic)
 
     except Exception as e:
         print e.message
 
     return {
-        'topics': sample_topics,
+        'topics': takwimuTopics,
     }
