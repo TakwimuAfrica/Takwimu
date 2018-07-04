@@ -14,7 +14,8 @@ from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
-from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons
+from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons on TopicPage
+from fontawesome.forms import IconFormField #importing property from djano-fontawesome app for icon field on TopicBlock
 
 import logging
 logger = logging.getLogger(__name__)
@@ -165,13 +166,31 @@ class IndicatorsBlock(blocks.StreamBlock):
     class Meta:
         icon = 'form'
 
+class IconChoiceBlock(blocks.FieldBlock):
+    field = IconFormField(required=False)
+
+
 class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
-    icon = ImageChooserBlock(required=False)
+    icon = IconChoiceBlock(required=False)
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
-    
+
     indicators = IndicatorsBlock(required=False)
+
+    def js_initializer(self):
+        parent_initializer = super(TopicBlock, self).js_initializer()
+        return "Topic(%s)" % parent_initializer
+
+    @property
+    def media(self):
+        # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
+        return super(TopicBlock, self).media + forms.Media(
+            js=['fontawesome/js/django_fontawesome.js','fontawesome/select2/select2.min.js', 'js/main.js'],
+            css={'all': ['fontawesome/css/fontawesome-all.min.css',
+            'fontawesome/select2/select2.css',
+            'fontawesome/select2/select2-bootstrap.css']}
+        )
 
     class Meta:
         icon = 'form'
@@ -260,4 +279,3 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
-
