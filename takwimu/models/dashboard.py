@@ -1,10 +1,14 @@
 from django.db import models
 from django import forms
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
+
 from wagtail.wagtailcore import blocks
+from wagtail.wagtailembeds.blocks import EmbedBlock
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.wagtailimages.blocks import ImageChooserBlock
+
 from wagtail.wagtailcore.fields import StreamField
 from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailsearch import index
 from modelcluster.fields import ParentalKey
 
@@ -89,13 +93,20 @@ class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
     section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
 
 
+class EntityStructBlock(blocks.StructBlock):
+    name = blocks.CharBlock(required=False)
+    image = ImageChooserBlock(required=False)
+    description = blocks.TextBlock(required=False)
+    class Meta:
+        icon = 'group'
+
 
 class DataIndicatorChooserBlock(blocks.ChooserBlock):
     target_model = DataIndicator
     widget = forms.Select
 
     class Meta:
-        icon = "icon"
+        icon = 'folder'
 
     # Return the key value for the select field
     def value_for_form(self, value):
@@ -104,14 +115,63 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+class IndicatorsBlock(blocks.StreamBlock):
+
+    free_form = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('body', blocks.RichTextBlock(required=False)),
+        ('source', blocks.URLBlock(required=False)),
+        ('source_date', blocks.DateBlock(required=False))
+    ], icon='snippet')
+
+    data_indicator = DataIndicatorChooserBlock()
+
+    embed = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('embed', EmbedBlock(required=False)),
+        ('source', blocks.URLBlock(required=False)),
+        ('source_date', blocks.DateBlock(required=False))
+    ], icon='media')
+
+    document = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('document', DocumentChooserBlock(required=False)),
+        ('source', blocks.URLBlock(required=False)),
+        ('source_date', blocks.DateBlock(required=False))
+    ], icon='doc-full')
+
+    image = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('image', ImageChooserBlock(required=False)),
+        ('caption', blocks.TextBlock(required=False)),
+        ('source', blocks.URLBlock(required=False)),
+        ('source_date', blocks.DateBlock(required=False))
+    ], icon='image')
+
+    html = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('raw_html', blocks.RawHTMLBlock(required=False)),
+        ('source', blocks.URLBlock(required=False)),
+        ('source_date', blocks.DateBlock(required=False))
+    ], icon='code')
+
+    entities = blocks.StructBlock([
+        ('title', blocks.CharBlock(required=False)),
+        ('entities', blocks.ListBlock(EntityStructBlock())),
+        ('source', blocks.URLBlock(required=False)),
+        ('source_date', blocks.DateBlock(required=False))
+    ], icon='group')
+
+    class Meta:
+        icon = 'form'
+
 class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = ImageChooserBlock(required=False)
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
     
-    # TODO: Indicator selection goes here with ListBlock
-    indicators = blocks.ListBlock(DataIndicatorChooserBlock(),required=False)
+    indicators = IndicatorsBlock(required=False)
 
     class Meta:
         icon = 'form'
@@ -200,3 +260,4 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
+
