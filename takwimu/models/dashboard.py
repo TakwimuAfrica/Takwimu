@@ -322,8 +322,35 @@ class AboutPage(Page):
     ]
 
 
+class ContactUsPage(Page):
+    address = RichTextField()
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('address'),
+        InlinePanel('key_contacts', label='Key Contacts'),
+        InlinePanel('social_media', label='Social Media')
+    ]
+
+
 class SocialMedia(Orderable):
-    pass
+    name = models.TextField()
+    url = models.URLField()
+    icon = IconField()
+    page = ParentalKey(ContactUsPage, related_name='social_media')
+
+
+    def __str__(self):
+        return self.name
+
+
+class KeyContacts(Orderable):
+    title = models.TextField()
+    contact_details = models.TextField()
+    link = models.TextField()
+    page = ParentalKey(ContactUsPage, related_name='key_contacts')
+
+
 
 
 
