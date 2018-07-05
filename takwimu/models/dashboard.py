@@ -313,3 +313,18 @@ class SupportService(models.Model):
         return '-'.join(title.lower().split(' '))
 
 
+class AboutPage(Page):
+    content = RichTextField()
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('content'),
+    ]
+
+
+class SocialMedia(Orderable):
+    pass
+
+
+
+
