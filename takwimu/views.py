@@ -39,11 +39,11 @@ class AboutUsPage(TemplateView):
 class ContactUsPage(TemplateView):
     template_name = 'takwimu/about/contact.html'
 
-class DataServicesPage(TemplateView):
-    template_name = 'takwimu/about/data-services.html'
+class SupportServicesPage(TemplateView):
+    template_name = 'takwimu/about/support-services.html'
 
     def get_context_data(self, **kwargs):
-        context = super(DataServicesPage, self).get_context_data(**kwargs)
+        context = super(SupportServicesPage, self).get_context_data(**kwargs)
         services = SupportService.objects.all()
         context['support_services'] = services
         return context
