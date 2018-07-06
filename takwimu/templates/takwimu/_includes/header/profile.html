@@ -74,7 +74,7 @@
           <div
               class="col-2 text-center {% if not forloop.last %}border-right{% endif %}">
             <p><i class="{{ topic.value.icon }} fa-2x text-primary"></i></p>
-            <p><a href="#{{ topic.title|slugify }}">{{ topic.value.title }}</a>
+            <p><a href="#{{ topic.value.title|slugify }}">{{ topic.value.title }}</a>
             </p>
           </div>
         {% endfor %}
