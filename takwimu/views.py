@@ -33,11 +33,6 @@ class CountryProfile(TemplateView):
             return context
 
 
-class AboutUsPage(TemplateView):
-    template_name = 'takwimu/about/index.html'
-
-class ContactUsPage(TemplateView):
-    template_name = 'takwimu/about/contact.html'
 
 class SupportServicesPage(TemplateView):
     template_name = 'takwimu/about/support-services.html'
