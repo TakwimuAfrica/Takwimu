@@ -129,21 +129,31 @@ a {
   .nav-item.dropdown {
     position: initial;
   }
-
-  // When you hover over a link
-  .nav-link:hover {
-    background-color: $brand-color-primary;
-    & + .dropdown-menu-lg {
+  
+  .nav-item:hover{
+    .dropdowm-menu-lg-tag{
+      display: flex!important;
+    }
+    .dropdown-menu-lg {
       display: block;
     }
   }
 
+  .dropdowm-menu-lg-tag {
+    display: none !important;
+    position: relative;
+    top: -10px; margin-bottom: -10px;
+    span {
+      border-bottom: 10px solid $brand-color-primary-alt;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+    }
+  }
   .dropdown-menu-lg {
     display: none;
-    left: 0;
-    width: 100vw;
-    background-color: $brand-color-secondary;
-    z-index: 3000;
+    position: absolute; left: 0;
+    width: 100vw; z-index: 3000;
+    background-color: $brand-color-primary-alt;
 
     a {
       color: $brand-extend-light;
@@ -152,19 +162,16 @@ a {
     .country-flag-links {
       div {
         border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
+        a {
+          svg {
+            border: 3px solid #fff;
+            border-radius: 9999px;
+          }
+          &:hover{
+            color: #fff;
+          }
+        }
       }
-    }
-
-    // When you are hovering over dropdown
-    &:hover {
-      display: block;
-    }
-    // Hack to show background in link
-    & + .nav-link {
-      display: none;
-    }
-    &:hover + .nav-link {
-      display: block;
     }
 
   }
@@ -179,7 +186,7 @@ a {
 
 .country-flag-links {
   .col {
-    padding: 1em;
+    padding: 3em 1em;
     border-right: 1px solid #ddd;
     a {
       text-decoration: none;
