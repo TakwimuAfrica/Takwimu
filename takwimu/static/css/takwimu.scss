@@ -8,7 +8,8 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800');
 
 $brand-color-primary: #1f6cc6;
-$brand-color-secondary: #074c9c;
+$brand-color-primary-alt: #074c9c;
+$brand-color-secondary: #1e4a7e;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
 $brand-extend-jumbotron: #e9ecef;
@@ -59,6 +60,9 @@ a {
 .bg-primary {
   background-color: $brand-color-primary !important;
 }
+.bg-primary-alt {
+  background-color: $brand-color-primary-alt !important;
+}
 .bg-secondary {
   background-color: $brand-color-secondary !important;
 }
@@ -66,6 +70,9 @@ a {
 // Text Colours
 .text-primary {
   color: $brand-color-primary !important;
+}
+.text-primary-alt {
+  color: $brand-color-primary-alt !important;
 }
 .text-secondary {
   color: $brand-color-secondary !important;
