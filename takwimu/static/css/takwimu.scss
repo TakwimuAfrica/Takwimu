@@ -5,10 +5,10 @@
  *
  * NOTE: Please don't make edits here unless super necessary.
  */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800');
 
-$brand-color-primary: #005973;
-$brand-color-secondary: #6196a5;
+$brand-color-primary: #1f6cc6;
+$brand-color-secondary: #074c9c;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
 $brand-extend-jumbotron: #e9ecef;
@@ -20,7 +20,7 @@ body {
 }
 
 * {
-  font-family: 'Roboto', sans-serif;
+  font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
 
@@ -127,7 +127,7 @@ a {
     display: none;
     left: 0;
     width: 100vw;
-    background-color: $brand-color-primary;
+    background-color: $brand-color-secondary;
     z-index: 3000;
 
     a {
