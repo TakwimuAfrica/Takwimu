@@ -111,6 +111,12 @@ a {
   &:hover, &:focus, &:active {
     color: $brand-color-primary;
   }
+  &.btn-alt {
+    background-color: rgba(255, 255, 255, 0.4);
+    &:hover, &:focus, &:active {
+      background-color: #fff;
+    }
+  }
 }
 
 .nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
