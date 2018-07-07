@@ -106,17 +106,22 @@
   <hr class="my-4"/>
 
   <h2 class="mb-3">Table of Contents</h2>
+  
+  {# TOC content is relative to a profile page. #}
+  {# So we check if it's a profile page, else it's a profile section #}
+  {# If it's a section, we reference the parent #}
+
   {% if page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
-    {% include 'takwimu/_includes/header/toc.html' with section=page %}
+    {% include 'takwimu/_includes/profile/toc_detail.html' with section=page %}
 
     {% for section in page.sections.all %}
-      {% include 'takwimu/_includes/header/toc.html' with section=section.section %}
+      {% include 'takwimu/_includes/profile/toc_detail.html' with section=section.section %}
     {% endfor %}
   {% else %}
-    {% include 'takwimu/_includes/header/toc.html' with section=page.get_parent.specific %}
+    {% include 'takwimu/_includes/profile/toc_detail.html' with section=page.get_parent.specific %}
 
     {% for section in page.get_parent.specific.sections.all %}
-      {% include 'takwimu/_includes/header/toc.html' with section=section.section %}
+      {% include 'takwimu/_includes/profile/toc_detail.html' with section=section.section %}
     {% endfor %}
   {% endif %}
 
