@@ -72,30 +72,6 @@ class TopicPage(Page):
     ]
 
 
-# The abstract model for topics, complete with panels
-class ProfilePageTopic(models.Model):
-    topic = models.ForeignKey(TopicPage, on_delete=models.CASCADE)
-
-    panels = [
-        PageChooserPanel('topic')
-    ]
-
-    class Meta:
-        abstract = True
-
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfilePageTopics(Orderable, ProfilePageTopic):
-    profile_page = ParentalKey('takwimu.ProfilePage', related_name='topics')
-
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
-    section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
-
-
 class EntityStructBlock(blocks.StructBlock):
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
@@ -240,7 +216,6 @@ class ProfileSectionPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('description'),
         StreamFieldPanel('body'),
-        InlinePanel('topics', label="Topics"),
     ]
 
     # Parent page / subpage type rules
@@ -290,7 +265,6 @@ class ProfilePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
         StreamFieldPanel('body'),
-        InlinePanel('topics', label="Topics"),
         InlinePanel('sections', label="Sections"),
     ]
 

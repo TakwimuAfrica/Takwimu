@@ -3,10 +3,3 @@
 {% for topic in page.body %}
     {% include 'takwimu/_includes/profile/section_topic.html' %}
 {% endfor %}
- 
-{# TODO: Remove this. #}
-{% for topic in page.topics.all %}
-
-  {% include 'takwimu/_includes/topic.html' with topic=topic.topic %}
-
-{% endfor %}
