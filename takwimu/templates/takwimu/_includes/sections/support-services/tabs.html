@@ -88,7 +88,7 @@
     // Javascript to enable link to tab
     var url = document.location.toString();
     if (url.match('#')) {
-      $('#nav-tabs a[href="#'+url.split('#')[1]+'"]').tab('show') ;
+      $('section.support-services-tabs #nav-tabs a[href="#'+url.split('#')[1]+'"]').tab('show') ;
     }
   }
 
@@ -98,7 +98,7 @@
     linkToTab()
 
     // With HTML5 history API, we can easily prevent scrolling!
-    $('#nav-tabs a').on('shown.bs.tab', function (e) {
+    $('section.support-services-tabs #nav-tabs a').on('shown.bs.tab', function (e) {
         if("pushState" in history) {
           history.pushState("", document.title, e.target.hash); 
         } else {

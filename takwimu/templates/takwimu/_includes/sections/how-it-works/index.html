@@ -1,0 +1,45 @@
+{% load staticfiles %}
+
+<section class="how-it-works py-5 bg-light">
+  <div class="container text-center">
+    <h1 class="display-4 font-weight-bold d-inline-block px-3 bg-light position-relative" style="z-index: 101;">How it works</h1>
+    <div class="position-relative" style="outline: 2px dashed #dee2e6; height: 80px; top: -40px;" style="z-index: 100;"></div>
+
+    {% with hwis='find compile use contribute' %}
+    <ul class="nav nav-justified position-relative" style="top: -75px;" role="tablist">
+      {% for hwi in hwis.split %}
+        {% include 'takwimu/_includes/sections/how-it-works/nav_detail.html' %}
+      {% endfor %}
+    </ul>
+
+    <div class="tab-content position-relative text-left" style="top: -119px; z-index: 100; outline: 1px solid #dee2e6;">
+      {% for hwi in hwis.split %}
+        {% include 'takwimu/_includes/sections/how-it-works/tab_detail.html' %}
+      {% endfor %}
+    </div>
+    {% endwith %}
+  </div>
+</section>
+
+<style>
+  section.how-it-works .nav-link .step-number span {
+    color: #9b9b9b;
+    height: 52px;
+    width: 52px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%; 
+    border: 5px solid #ededec;
+    background-color: #f4f4f4;
+    padding-top: 5px;
+  }
+  section.how-it-works .nav-link.active .step-number span, section.how-it-works .nav-link.active .step-description {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+  }
+  section.how-it-works .nav-link.active .step-active {
+    visibility: visible !important;
+  }
+
+</style>

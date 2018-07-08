@@ -1,0 +1,17 @@
+<li class="nav-item">
+    <a class="nav-link {% if forloop.first %}active{% endif %}"
+        id="hwi-{{ hwi }}-tab" data-toggle="tab" href="#hwi-{{ hwi }}" role="tab"
+        aria-controls="hwi-{{ hwi }}" aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+      <h3 class="step-number font-weight-bold d-flex justify-content-center position-relative" style="z-index: 102;">
+        <span>{{ forloop.counter }}</span>
+      </h3>
+      <div class="step-description position-relative px-5 py-4"
+          style="background-color: #f5f6f7; top: -17px; z-index: 101; color: #4a4a4a;">
+        <h5 class="font-weight-bold">{{ hwi|title }}</h5>
+        <p class="mb-0">Quickly locate the data you’re looking for</p>
+      </div>
+      <div class="step-active position-relative mx-auto invisible"
+          style="border: 20px solid #17a2b8; border-bottom: 0; border-left-color: transparent; border-right-color: transparent; width: 20px; top: -22px; z-index: 101;"></div>
+    </a>
+</li>
+
