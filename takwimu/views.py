@@ -5,36 +5,13 @@ from django.conf import settings
 from django.views.generic import TemplateView
 
 from takwimu.models.dashboard import SupportService
-from utils.medium import Medium
 
-
-class CountryProfile(TemplateView):
-    """
-    This view is for template debugging purposes
-    """
-    template_name = 'takwimu/profile_page.html'
-
-    def get_context_data(self, **kwargs):
-        context = dict()
-        try:
-            if settings.DEBUG:
-                with open('data/articles.json') as f:
-                    stories = json.load(f)
-            else:
-                client = Medium()
-                stories = client.get_publication_posts('code-for-africa',
-                                                       count=20)
-            latest = stories[0:6]
-            context['recent_stories'] = latest
-            context['trending'] =sorted(latest, key=operator.itemgetter('clap_count'), reverse=True)
-            return context
-        except Exception as e:
-            print e.message
-            return context
-
-
-
-class SupportServicesPage(TemplateView):
+class SupportServicesView(TemplateView):
+    '''
+    Support Sevices View
+    --------------------
+    View of support services page.
+    '''
     template_name = 'takwimu/about/support-services.html'
 
     def get_context_data(self, **kwargs):
@@ -43,3 +20,17 @@ class SupportServicesPage(TemplateView):
         context['support_services'] = services
         return context
 
+
+class HomePageView(TemplateView):
+    '''
+    Home Page View:
+    ---------------
+    View of homepage.
+    '''
+    template_name = 'takwimu/home_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(HomePageView, self).get_context_data(**kwargs)
+        support_services = SupportService.objects.all()
+        context['support_services'] = support_services
+        return context
