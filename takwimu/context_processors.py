@@ -17,7 +17,7 @@ def takwimu_stories(request):
             client = Medium()
             stories = client.get_publication_posts('code-for-africa',
                                                     count=20)
-        stories_latest = stories[0:6]
+        stories_latest = stories[0:3]
         stories_trending = sorted(stories, key=operator.itemgetter('clap_count'), reverse=True)
 
     except Exception as e:
@@ -25,5 +25,5 @@ def takwimu_stories(request):
 
     return {
         'stories_latest': stories_latest,
-        'stories_trending': stories_trending[0:6]
+        'stories_trending': stories_trending[0:3]
     }
