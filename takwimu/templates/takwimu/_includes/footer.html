@@ -1,6 +1,6 @@
 {% load staticfiles %}
 
-<footer class="text-light small font-weight-light" style="background: #1f6cc6;">
+<footer class="bg-primary text-light">
   <!-- Footer widgets -->
   <div class="container py-5">
 
@@ -11,36 +11,45 @@
                style="max-height: 40px;">
         <div class="underline"></div>
         </p>
-        <h3 style="font-weight: bold">Explore Africa, by numbers.</h3>
+        <h3 class="font-weight-bold mb-4">Explore Africa, by
+          <span class="position-relative">
+            numbers
+            <div class="position-absolute" 
+                style="background: rgba(255, 255, 255, 0.4); height: 10px; width: 136px; bottom: 1px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg);">
+            </div>
+          </span>.
+        </h3>
 
 
-        <p style="opacity: 0.6; font-size: 16px">Takwimu is an initiative by</p>
+        <p class="mb-0" style="opacity: 0.6; font-size: 16px">Takwimu is an initiative by:</p>
         <div class="row">
-          <div class="col-2 partner-logo-container m-2">
-            <img src="{% static 'img/logos/bmgf-white.png' %}" class="img-responsive" alt="Bill and Melinda Gates Foundation logo">
-          </div>
-          <div class="col-2 partner-logo-container m-2">
-            <img src="{% static 'img/logos/ap-white.png' %}" class="img-responsive" alt="Africa Practice logo">
-          </div>
-          <div class="col-2 partner-logo-container m-2">
-            <img src="{% static 'img/logos/cfafrica-white.png' %}" class="img-responsive" alt="C4A logo">
-          </div>
-          <div class="col-2 partner-logo-container m-2">
-            <img src="{% static 'img/logos/ihub-white.png' %}" class="img-responsive" alt="ihub logo">
-          </div>
+          <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-1 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/bmgf-white.png' %}" class="img-responsive" alt="Bill and Melinda Gates Foundation">
+          </a>
+          <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-1 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/ap-white.png' %}" class="img-responsive" alt="africapractice">
+          </a>
+          <a href="https://codeforafrica.org" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/cfafrica-white.png' %}" class="img-responsive" alt="Code for Africa">
+          </a>
+          <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-4 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/ihub-white.png' %}" class="img-responsive" alt="iHub">
+          </a>
         </div>
 
       </div>
       <div class="col-6 pt-5">
         <div class="mt-5 pl-5" style="border-left: solid 2px #4081ce;">
           <p style="font-size: 20px; font-weight: bold;">Data from 10 african
-            counties showing the impact of money, politics
-            and "the people”.</p>
+            counties showing the impact of money, politics, and the people.</p>
           <div class="underline"></div>
 
-          <p class="pt-4" style="font-size: 16px"><span style="opacity: 0.6;">Explore data through</span> <a href="">countries</a>,
-            <a href="">topics</a>, <a href="">read insights</a><span style="opacity: 0.6;">, and learn more
-              about</span> <a href="">our story</a></p>
+          <p class="pt-4" style="font-size: 16px"><span style="opacity: 0.6;">Explore data through</span> <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">countries</a>, <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">topics</a>, <a href="https://medium.com/takwimu-africa" target="_blank" rel="noopener">read insights</a><span style="opacity: 0.6;">, and learn more about</span> <a href="/about">our story</a>
+          </p>
         </div>
       </div>
 
@@ -49,11 +58,8 @@
   </div>
 
   <!-- Footer Nav -->
-  <nav class="navbar navbar-expand-lg navbar-dark small"
-       style="background-color: #074c9c;">
+  <nav class="navbar navbar-expand-lg navbar-dark small bg-primary-alt font-weight-bold">
     <div class="container">
-
-
       <button class="navbar-toggler" type="button" data-toggle="collapse"
               data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent"
@@ -63,51 +69,51 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-        <ul class="navbar-nav ml-5">
-          <li class="nav-item navbar-text" style="font-weight: bold">Stay in touch with us </li>
+        <ul class="navbar-nav">
+          <li class="nav-item navbar-text">Stay in touch with us</li>
+          <li class="nav-item ml-2">
+            <a class="nav-link" href="mailto:hello@takwimu.africa"
+                target="_blank">
+              <i class="fa fa-at fa-fw"></i>
+            </a>
+          </li>
           <li class="nav-item">
             <a class="nav-link" href="https://twitter.com/TakwimuAfrica"
-               target="_blank">
-              <i class="fab fa-twitter"></i>
+               target="_blank" rel="noopener">
+              <i class="fab fa-twitter fa-fw"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://facebook.com/TakwimuAfrica"
-               target="_blank">
-              <i class="fab fa-facebook"></i>
+               target="_blank" rel="noopener">
+              <i class="fab fa-facebook fa-fw"></i>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#" target="_blank">
-              <i class="fab fa-youtube"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" target="_blank">
-              <i class="fab fa-instagram"></i>
+            <a class="nav-link" href="https://medium.com/takwimu-africa"
+               target="_blank" rel="noopener">
+              <i class="fab fa-medium fa-fw"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="https://github.com/TakwimuAfrica"
-               target="_blank">
-              <i class="fab fa-github"></i>
+               target="_blank" rel="noopener">
+              <i class="fab fa-github fa-fw"></i>
             </a>
           </li>
         </ul>
 
         <span class="navbar-text mx-auto">
-        © {% now "Y" %} TAKWIMU <a
-            href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+          © {% now "Y" %} Takwimu
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
             rel="noopener">CC by 4.0</a>
-      </span>
-        <ul class="navbar-nav ml-auto">
+        </span>
+        <ul class="navbar-nav ml-auto text-uppercase">
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/terms-of-use">Terms of
-              Use</a>
+            <a class="nav-link" href="/terms-of-use">Terms of Use</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link text-uppercase" href="/privacy-policy">Privacy
-              Policy</a>
+            <a class="nav-link" href="/privacy-policy">Privacy Policy</a>
           </li>
         </ul>
 
@@ -126,8 +132,9 @@
   .partner-logo-container {
     background-color: rgba(244,244,244, 0.06);
     height: 81px;
-    display: flex;
-    align-items: center;
+  }
+  .partner-logo-container img {
+    max-height: 50px;
   }
 
   footer .underline {
