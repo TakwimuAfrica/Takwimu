@@ -1,17 +1,26 @@
 {% load staticfiles %}
 
-<section class="bg-primary text-light py-5">
+<section class="support-services-button bg-primary text-light py-5">
   <a href="/about/support-services" class="text-light">
-    <div class="container" style="max-width: 800px;">
-      <div class="d-flex align-items-center">
-        <div class="pulse-icon mr-4">
-          <i class="fas fa-space-shuttle fa-5x" data-fa-transform="rotate--90"></i>
+    <div class="container">
+      <div class="d-flex align-items-center justify-content-center">
+        <div class="pulse-icon mr-5">
+          <img src="{% static 'img/icons/pulse.svg' %}" alt="Support Services">
         </div>
         
-        <div class="text-uppercase">
-          <p style="text-decoration: none !important;">Looking for other data or support sevices?</p>
-          <h1 class="display-5 font-weight-normal"><u>Find out how we can help</u></h1>
+        <div>
+          <p class="text-uppercase" style="text-decoration: none !important;">Looking for other data or support sevices?</p>
+          <h1 class="display-5 font-weight-bold"><u>How Takwimu Can Help You</u></h1>
       </div>
     </div>
   </a>
 </section>
+
+<style>
+  .support-services-button:hover {
+    background-color: #1e4a7e !important;
+  }
+  .support-services-button a:hover {
+    text-decoration: none !important;
+  }
+</style>

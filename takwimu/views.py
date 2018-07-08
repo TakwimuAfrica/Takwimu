@@ -15,7 +15,7 @@ class SupportServicesView(TemplateView):
     template_name = 'takwimu/about/support-services.html'
 
     def get_context_data(self, **kwargs):
-        context = super(SupportServicesPage, self).get_context_data(**kwargs)
+        context = super(SupportServicesView, self).get_context_data(**kwargs)
         services = SupportService.objects.all()
         context['support_services'] = services
         return context

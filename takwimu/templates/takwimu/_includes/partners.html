@@ -1,25 +1,30 @@
 {% load staticfiles %}
-<!-- Partners section starts here -->
-<div class="container py-5 text-center" style="max-width: 800px;">
-  <h1 class="display-4">The Partnership</h1>
-  <!-- TODO: Add description + logos here. -->
+
+<section class="partners container py-5 text-center" style="max-width: 800px;">
+  <h1 class="display-4 font-weight-bold">The Partnership</h1>
   <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos rem vitae, quas officiis earum 
     quam, nihil cupiditate alias unde aspernatur adipisci recusandae debitis exercitationem ab 
     incidunt sunt, at laudantium tenetur.
   </p>
-  <div class="d-flex flex-row justify-content-center py-5">
-    <a href="https://" class="col border-right pt-5 pr-4 pl-4" style="height:100px;">
-      <img src="{% static 'img/logos/bmgf.png' %}" alt="Bill and Melinda Gates Foundation" style="width:auto;">
+  <div class="row align-items-center pt-4">
+    <a href="https://www.gatesfoundation.org" class="col border-right p-4">
+      <img src="{% static 'img/logos/bmgf.png' %}" alt="Bill and Melinda Gates Foundation">
     </a>
-    <a href="#" class="col border-right pt-5 pr-4 pl-4" style="height:100px;">
-      <img src="{% static 'img/logos/ap.png' %}" alt="Africa Practice" style="width:auto;">
+    <a href="http://www.africapractice.com/" target="_blank" rel="noopener" class="col border-right p-4">
+      <img src="{% static 'img/logos/ap.png' %}" alt="africapractice">
     </a>
-    <a href="#" class="col border-right pt-4 pl-5" style="height:100px;">
-      <img src="{% static 'img/logos/cfafrica.png' %}" alt ="Code for Africa" style="height:50px;width:auto;">
+    <a href="https://codeforafrica.org" target="_blank" rel="noopener" class="col border-right p-4">
+      <img src="{% static 'img/logos/cfafrica.png' %}" alt ="Code for Africa">
     </a>
-    <a href="#" class="col pt-4 pr-4 pl-4" style="height:100px;">
-      <img src="{% static 'img/logos/ihub-black.png' %}" alt="Ihub" style="height:50px;width:auto;">
+    <a href="https://ihub.co.ke/" target="_blank" rel="noopener" class="col p-4">
+      <img src="{% static 'img/logos/ihub-black.png' %}" alt="iHub">
     </a>
   </div>
-  
-</div>
+</section>
+
+<style>
+  section.partners img {
+    max-width: 150px;
+    max-height: 60px;
+  }
+</style>

@@ -14,55 +14,23 @@
     </div>
   </div>
 
+  {% include 'takwimu/_includes/sections/how-it-works/index.html' %}
+  
+  {% include 'takwimu/_includes/sections/stories.html' %}
+
+  {% include 'takwimu/_includes/sections/updates.html' %}
+
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+
   <div class="container text-center py-5" style="max-width: 800px;">
     <h1>Country Profiles</h1>
     <p>Read our profiles from the 10 focus countries.</p>
     {% include 'takwimu/_includes/sections/explore/countries.html' %}
   </div>
-  
-  
-  {% include 'takwimu/_includes/sections/stories.html' %}
 
-  <div class="container py-5">
-    <div class="row d-flex align-items-center">
-      <div class="col-sm-6">
-        <h3>About the Project</h3>
-        <p>Takwimu was launched in 2018 in response to the problem posed by poor access to quality data, which limits the effectiveness of development policy and programming in Africa.</p>
-        <p>Conceived by a consortium of partners - africapractice, Code 4 Africa and iHub - and funded by the Bill and Melinda Gates Foundation, Takwimu is designed to provide a free and open data service which empowers African development actors with the insights to achieve greater impact.
-        <p>The website offers concise, objective, data-rich profiles on ten African countries (Burkina Faso, Democratic Republic of Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia) in English and French. Work is underway to expand coverage to more countries and to make the content available in additional languages.</p>
-      </div>
-      <div class="text-center col-sm-6">
-        <p>Consortium Members:</p>
-        <p class="partner-logos mt-3">
-          <a href="http://www.africapractice.com" target="_blank" rel="noopener" class="m-2 p-2">
-            <img src="{% static 'img/logos/ap.png'%}" alt="" class="m-2 p-2"></a>
-          <a href="https://ihub.co.ke" target="_blank" rel="noopener">
-            <img src="{% static 'img/logos/ihub.png'%}" alt="" class="m-2 p-2"></a>
-          <a href="https://codeforafrica.org/" target="_blank" rel="noopener">
-            <img src="{% static 'img/logos/cfafrica.png'%}" alt="" class="m-2 p-2"></a>
-        </p>
-        <p>With support from:</p>
-        <p class="sponsor-logos mb-3">
-          <a href="https://ga" target="_blank" rel="noopener" class="m-2 p-2">
-            <img src="{% static 'img/logos/bmgf.png'%}" alt="" class="m-2 p-2"></a>
-        </p>
-      </div>
-    </div>
-  </div>
+  {% include 'takwimu/_includes/sections/faq/index.html' %}
 
-  {% include 'takwimu/_includes/sections/updates.html' %}
-
-  <!-- Extra Styles -->
-
-  <style>
-    .partner-logos img {
-      max-width: 210px;
-      max-height: 90px;
-    }
-    .sponsor-logos img {
-      max-width: 300px;
-    }
-  </style>
+  {% include 'takwimu/_includes/sections/testimonials.html' %}
 
   <!-- Video Modal -->
   <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
