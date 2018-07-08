@@ -20,17 +20,14 @@
         <div class="row">
           {% for story in stories_latest %}
             <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-              <div class="card">
-                <a href="{{ story.url }}" target="_blank" class="card-link">
-                  <div class="card-img grayscale" style="background-image: url('{{ story.preview_image.url }}'); "></div>
-                  <div class="card-body text-center">
-                    <h5 class="card-title" style="color: #000000; font-weight: 800;">{{ story.title }}</h5>
-                    <p class="card-text" style="color: #4a4a4a; font-weight: 300;">{{ story.subtitle }}</p>
-                    <button class="btn btn-outline-primary mt-3">
-                      <a href="">CONTINUE READING</a>
-                    </button>
-                  </div>
-                </a>
+              <div class="card grayscale">
+                <div class="card-img" style="background-image: url('{{ story.preview_image.url }}'); "></div>
+                <div class="card-body text-center">
+                  <h5 class="card-title" style="color: #000000; font-weight: 800;">{{ story.title }}</h5>
+                  <p class="card-text" style="color: #4a4a4a; font-weight: 300;">{{ story.subtitle }}</p>
+                </div>
+                <a href="{{ story.url }}" target="_blank" class="btn btn-outline-primary mx-5 my-3" style="border-radius: 24px; border: solid 2px #1f6cc6; color:#1f6cc6;">CONTINUE
+                  READING</a>
               </div>
             </div>
           {% endfor %}
@@ -41,14 +38,15 @@
         <div class="row">
           {% for story in stories_trending %}
             <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-              <div class="card"><a href="{{ story.url }}" target="_blank"
-                                   class="card-link">
-                <div class="card-img" style="background-image: url('{{ story.preview_image.url }}');"></div>
-                <div class="card-body">
-                  <h5 class="card-title">{{ story.title }}</h5>
-                  <p class="card-text">{{ story.subtitle }}</p>
+              <div class="card grayscale">
+                <div class="card-img" style="background-image: url('{{ story.preview_image.url }}'); "></div>
+                <div class="card-body text-center">
+                  <h5 class="card-title" style="color: #000000; font-weight: 800;">{{ story.title }}</h5>
+                  <p class="card-text mb-3" style="color: #4a4a4a; font-weight: 300;">{{ story.subtitle }}</p>
                 </div>
-              </a>
+
+                <a href="{{ story.url }}" target="_blank" class="btn btn-outline-primary mx-5 my-3" style="border-radius: 24px; border: solid 2px #1f6cc6; color:#1f6cc6;">CONTINUE
+                  READING</a>
               </div>
             </div>
           {% endfor %}
@@ -58,14 +56,20 @@
     </div>  <!-- /.tab-content -->
 
     <p class="text-center">
-      <a class="btn btn-outline-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank">More
-        Articles . <i class="fab fa-medium fa-fw"></i></a>
+      <a class="btn btn-outline-primary btn-lg" href="https://medium.com/takwimu-africa" target="_blank" style="border-radius: 24px; background-color: #1f6cc6; border: solid 2px #1f6cc6; color: #ffffff; font-size: 14px;">
+        <i class="fab fa-medium-m fa-fw"></i> &nbsp; CONTINUE READING ON MEDIUM</a>
     </p>
   </div>  <!-- /.container -->
 
 </section>
 
 <style>
+  .card .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    background-color: #1f6cc6 !important;
+    border-color: #1f6cc6 !important;
+    color: #ffffff !important;
+    text-decoration: none;
+  }
 
   .nav-link {
     color: #929292;
@@ -92,7 +96,4 @@
     -webkit-filter: grayscale(0%); /* Chrome 19+ & Safari 6+ */
   }
 
-  button a {
-    color: inherit;
-  }
 </style>
