@@ -17,7 +17,7 @@
         <p style="opacity: 0.6; font-size: 16px">Takwimu is an initiative by</p>
         <div class="row">
           <div class="col-2 partner-logo-container m-2">
-            <img src="{% static 'img/logos/bmgf-white.png' %}" class="" alt="Bill and Melinda Gates Foundation logo">
+            <img src="{% static 'img/logos/bmgf-white.png' %}" class="img-responsive" alt="Bill and Melinda Gates Foundation logo">
           </div>
           <div class="col-2 partner-logo-container m-2">
             <img src="{% static 'img/logos/ap-white.png' %}" class="img-responsive" alt="Africa Practice logo">
@@ -124,9 +124,10 @@
   }
 
   .partner-logo-container {
-    opacity: 0.06;
-    background-color: #f4f4f4;
+    background-color: rgba(244,244,244, 0.06);
     height: 81px;
+    display: flex;
+    align-items: center;
   }
 
   footer .underline {
