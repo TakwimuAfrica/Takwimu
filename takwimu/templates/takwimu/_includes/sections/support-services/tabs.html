@@ -5,9 +5,9 @@
         id="nav-tabs" role="tablist">
       {% for service in support_services %}
         <a class="nav-item nav-link text-light p-0 pt-4"
-          id="nav-{{ service.get_slug | add:'-tab' }}"
-          data-toggle="tab" href="#nav-{{ service.get_slug }}" role="tab"
-          aria-controls="nav-{{ service.get_slug }}"
+          id="support-{{ service.get_slug | add:'-btn' }}"
+          data-toggle="tab" href="#support-{{ service.get_slug }}" role="tab"
+          aria-controls="support-{{ service.get_slug }}"
           aria-selected="true">
           <h2 class="mb-1">{{ service.icon.as_html }}</h2>
           <p class="small text-uppercase ">{{ service.title }}</p>
@@ -21,11 +21,11 @@
     {% for service in support_services %}
       <div
           class="tab-pane fade container py-5"
-          id="nav-{{ service.get_slug }}" role="tabpanel"
-          aria-labelledby="nav-{{ service.get_slug | add:'-tab' }}">
+          id="support-{{ service.get_slug }}" role="tabpanel"
+          aria-labelledby="support-{{ service.get_slug | add:'-btn' }}">
 
-        <button class="close-alt float-right btn btn-outline-light btn-sm px-2 py-1" aria-label="Close"
-            onclick="javascript:$('.support-services-tabs .tab-pane').removeClass('show active');$('.support-services-tabs #nav-tabs a').removeClass('active')">
+        <button class="close-alt float-right btn btn-outline-light btn-sm px-2 py-1"
+            aria-label="Close">
           X
         </button>
 
@@ -82,3 +82,42 @@
     content: 'CLOSE';
   }
 </style>
+
+<script>
+  function linkToTab(){
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+      $('#nav-tabs a[href="#'+url.split('#')[1]+'"]').tab('show') ;
+    }
+  }
+
+  function listenToNavTabs(event){
+    // https://stackoverflow.com/a/17552459/1298144
+    // Javascript to enable link to tab
+    linkToTab()
+
+    // With HTML5 history API, we can easily prevent scrolling!
+    $('#nav-tabs a').on('shown.bs.tab', function (e) {
+        if("pushState" in history) {
+          history.pushState("", document.title, e.target.hash); 
+        } else {
+          window.location.hash = e.target.hash; //Polyfill for old browsers
+        }
+    })
+
+    // When you click close on tab
+    $('section.support-services-tabs button.close-alt').click(function(){
+      $('.support-services-tabs .tab-pane').removeClass('show active');
+      $('.support-services-tabs #nav-tabs a').removeClass('active');
+      if("pushState" in history) {
+        history.pushState("", document.title, window.location.pathname + window.location.search); 
+      } else {
+        window.location.href.split('#')[0]; //Polyfill for old browsers
+      }
+    });
+  }
+
+  window.addEventListener("load", listenToNavTabs, false);
+  window.addEventListener("hashchange", linkToTab, false);
+</script>
