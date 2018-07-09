@@ -229,7 +229,7 @@ a {
     border-right: 1px solid #ddd;
     a {
       text-decoration: none;
-      color: $brand-color-primary;
+      color: $brand-extend-black;
       
       svg {
         display: block;
@@ -238,7 +238,7 @@ a {
         height: 50px;
       }
       span {
-        padding-top: 1em;
+        padding-top: 1.5em;
         display: block;
         font-weight: 400;
       }
@@ -326,4 +326,3 @@ a {
   */ 
   // body { background: grey;}
  }
-
