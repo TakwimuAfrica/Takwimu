@@ -135,18 +135,6 @@ a {
   font-weight: 900;
 }
 
-// Quick fix for country-flags
-#nav-tab {
-  .nav-item {
-    color: $brand-extend-black;
-    padding: 0.25em;
-    margin: 0 2em;
-    &.active {
-      font-weight: bold;
-    }
-  }
-}
-
 .grayscale {
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
