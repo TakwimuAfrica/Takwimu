@@ -7,24 +7,29 @@
       <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
            aria-orientation="vertical">
         {% for question in faqs %}
-          <a class="nav-link pl-5 py-3 d-flex align-items-right {% if forloop.first %}active show{% endif %}"
+          <li class="nav-item">
+          <a class="nav-link d-flex {% if forloop.first %}active show{% endif %}"
              id="d{{ question.id }}-tab-btn"
              data-toggle="pill" href="#d{{ question.id }}-tab"
              role="tab" aria-controls="d{{ question.id }}-tab"
              aria-selected="false">
             {{ question.question }}
           </a>
+          </li>
+
 
 
           <hr class="mx-3 my-0 w-30" style="border-color: rgba(255, 255, 255, 0.2); width: 150px; display: inline-block;"/>
 
         {% endfor %}
+      <li class="nav-item">
         <a class="nav-link pl-5 py-3 d-flex align-items-center "
            id="d-more-faqs-tab-btn"
            data-toggle="pill" href="#d-more-faqs-tab"
            role="tab" aria-controls="d-more-faqs-tab">
           More FAQs
         </a>
+      </li>
       </ul>
     </div>
     <div class="col-8" style="background-color: #ffffff">
