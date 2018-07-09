@@ -325,6 +325,16 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
+class FAQ(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question.encode('ascii', 'ignore')
+
+
 
 
 
