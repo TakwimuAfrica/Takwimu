@@ -327,15 +327,10 @@ class KeyContacts(Orderable):
 
 class FAQ(models.Model):
     question = models.TextField()
-    answer = models.TextField()
-    created_date = models.DateTimeField(auto_now_add=True)
-    modified_date = models.DateTimeField(auto_now=True)
+    answer = RichTextField()
+    cta_one_url = models.URLField("'Find Out More' button URL", default="https://takwimu.zendesk.com/")
+    cta_two_name = models.TextField("Second button Name (optional)", blank=True)
+    cta_two_url = models.URLField("Second button URL (optional)", blank=True)
 
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
-
-
-
-
-
-
