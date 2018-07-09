@@ -324,6 +324,7 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
+
 class Testimonial(models.Model):
     name = models.CharField(max_length=255)
     website = models.URLField()
@@ -331,6 +332,16 @@ class Testimonial(models.Model):
     picture = models.FileField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    
+class FAQ(models.Model):
+    question = models.TextField()
+    answer = models.TextField()
+    created_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.question.encode('ascii', 'ignore')
 
     def __str__(self):
         return self.name.encode('ascii', 'ignore')
