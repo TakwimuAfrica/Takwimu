@@ -1,16 +1,6 @@
-{% load staticfiles %}
-{% load wagtailcore_tags %}
+{% load staticfiles wagtailcore_tags %}
 
 <div class="tab-pane fade {% if forloop.first %}show active{% endif %} position-relative"
-    id="hwi-{{ hwi.id }}" role="tabpanel" aria-labelledby="hwi-{{ hwi.id }}-tab">
-  <div class="row mx-0" style="max-width: 100%;">
-    <div class="col-3 py-5 px-4" style="background-color: rgba(155, 155, 155, 0.17)">
-      {{ hwi.description|richtext  }}
-    </div>
-    <div class="col-9 py-5 px-4" style="background-color: #f3f3f3;">
-      {#  use placeholder for dev, can't load images from fixtures    #}
-{#      <img src="{{ hwi.descriptor_image.url }}" />#}
-      <img src="http://via.placeholder.com/800x800" />
-    </div>
-  </div>
+    id="step-{{ forloop.counter }}" role="tabpanel" aria-labelledby="step-{{ forloop.counter }}-tab">
+  {{ step.value.body }}
 </div>

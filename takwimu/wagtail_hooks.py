@@ -1,6 +1,6 @@
 from wagtail.contrib.modeladmin.options import modeladmin_register, ModelAdminGroup, ModelAdmin
 from hurumap.models import DataIndicator, DataIndicatorPublisher
-from takwimu.models.dashboard import SupportService, AboutPage, ContactUsPage, HowItWorks
+from takwimu.models.dashboard import SupportService, AboutPage, ContactUsPage, ExplainerSteps
 
 
 class DataPublisherAdmin(ModelAdmin):
@@ -54,10 +54,10 @@ class AboutUsAdminGroup(ModelAdminGroup):
     items = (AboutPageAdmin, ContactUsPageAdmin)
 
 
-class HowItWorksAdmin(ModelAdmin):
-    model = HowItWorks
-    menu_icon = 'doc-full-inverse'
-    menu_label = 'How it works'
+class ExplainerStepsAdmin(ModelAdmin):
+    model = ExplainerSteps
+    menu_icon = 'list-ul'
+    menu_label = 'Explainer Steps'
     menu_order = 500
 
 
@@ -67,4 +67,4 @@ modeladmin_register(DataAdminGroup)
 
 modeladmin_register(AboutUsAdminGroup)
 
-modeladmin_register(HowItWorksAdmin)
+modeladmin_register(ExplainerStepsAdmin)

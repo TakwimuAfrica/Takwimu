@@ -324,11 +324,18 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
-class HowItWorks(models.Model):
-    title = models.CharField(max_length=30)
-    tagline = models.CharField(max_length=140)
-    description = RichTextField()
-    descriptor_image = models.FileField()
+class ExplainerSteps(Page):
+    sidebar = RichTextField()
+    steps = StreamField([
+        ('step', blocks.StructBlock([
+            ('title', blocks.CharBlock(required=False)),
+            ('brief', blocks.TextBlock(required=False)),
+            ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
+            ('body', blocks.RichTextBlock(required=False)),
+        ], icon='user'))
+    ])
 
-    def __str__(self):
-        return self.title.encode('ascii', 'ignore')
+    content_panels = Page.content_panels + [
+        FieldPanel('sidebar'),
+        StreamFieldPanel('steps'),
+    ]
