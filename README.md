@@ -69,7 +69,6 @@ Once done, you'd want to load some data available to you:
 # Docker
 docker-compose exec web ./manage.py loaddata supportservice
 docker-compose exec web ./manage.py loaddata faq
-docker-compose exec web ./manage.py loaddata explainersteps
 ```
 
 #### Exporting Data
