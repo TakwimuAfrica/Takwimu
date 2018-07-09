@@ -313,7 +313,6 @@ class SocialMedia(Orderable):
     icon = IconField()
     page = ParentalKey(ContactUsPage, related_name='social_media')
 
-
     def __str__(self):
         return self.name
 
@@ -325,7 +324,15 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
+class Testimonial(models.Model):
+    name = models.CharField(max_length=255)
+    website = models.URLField()
+    body = models.CharField(max_length=140)
+    picture = models.FileField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
 
-
+    def __str__(self):
+        return self.name.encode('ascii', 'ignore')
 
 

@@ -1,0 +1,41 @@
+<section id="testimonials">
+  <div class="container text-center">
+    <h3 class="font-weight-bold my-5" style="font-size: 54px;">Real
+      <span class="position-relative">
+            People
+            <div class="position-absolute"
+                 style="background: rgba(98,152,215, 0.32); height: 10px; width: 196px; bottom: 1px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg);">
+            </div></span>, Real <span class="position-relative">
+            Benefits
+            <div class="position-absolute"
+                 style="background: rgba(98,152,215, 0.32); height: 10px; width: 242px; bottom: 1px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg);">
+            </div></span></h3>
+    <div class="row py-3">
+      {% for testimonial in testimonials %}
+        <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
+          <div class="card text-center">
+            <div class="card-body font-weight-light pt-3 px-2 pb-5" style="color: #4a4a4a;">
+              <p class="card-text">{{ testimonial.body }}</p>
+            </div>
+            <div class="card-footer" style="background-color: transparent">
+              <img src="http://i.pravatar.cc/100" alt="" class="img-circle" style="height: 100px; width: 100px; border: 5px solid #ededec; border-radius: 50%;">
+              <p class="font-weight-bold" style="color: #074c9c;">{{ testimonial.name }}</p>
+              <span>{{ testimonial.website }}</span>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<style>
+  .card {
+    border: none;
+  }
+
+  .card-body {
+    padding: 0;
+    border: 1px solid rgba(0, 0, 0, .125);
+  }
+</style>
