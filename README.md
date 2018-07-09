@@ -68,6 +68,7 @@ Once done, you'd want to load some data available to you:
 ```sh
 # Docker
 docker-compose exec web ./manage.py loaddata supportservices
+docker-compose exec web ./manage.py loaddata data/how_it_works.json
 ```
 
 #### Exporting Data
