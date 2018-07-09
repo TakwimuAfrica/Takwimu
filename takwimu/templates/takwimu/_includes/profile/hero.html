@@ -1,21 +1,27 @@
 {% load staticfiles %}
 
-<header>
-  <div class="jumbotron jumbotron-fluid pt-3 bg-white">
+<header class="text-light" style="background: #074c9c url('{% static 'img/bg/profile-hero.jpg'%}') no-repeat center; background-size: cover;">
+  <div class="jumbotron jumbotron-fluid pt-4 mb-0" style="background-color: rgba(7, 76, 156, 0.8)">
 
     <div class="container">
       <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-white">
-          <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/profiles">Country Profiles</a>
+        <ol class="breadcrumb bg-transparent">
+          <li class="breadcrumb-item">
+            <a href="/" class="text-light"><u>Home</u></a>
+          </li>
+          <li class="breadcrumb-item">
+            <a href="/profiles" class="text-light"><u>Country Profiles</u></a>
           </li>
           {% if page.content_type.model == "profilesectionpage" %}
-            <li class="breadcrumb-item"><a
-                href="{{ page.get_parent.url }}">{{ page.get_parent.title }}</a>
+            <li class="breadcrumb-item">
+              <ahref="{{ page.get_parent.url }}" class="text-light">
+                <u>{{ page.get_parent.title }}</u>
+              </a>
             </li>
           {% endif %}
-          <li class="breadcrumb-item active"
-              aria-current="page">{{ page.title }}</li>
+          <li class="breadcrumb-item active text-light" aria-current="page">
+              {{ page.title }}
+          </li>
         </ol>
       </nav>
 
@@ -38,29 +44,31 @@
       <div class="text-center">
         {% if page.content_type.model == "profilesectionpage" %}
 
-          <p class="strong text-uppercase">Section
+          <p class="font-weight-bold text-uppercase">Section
             {% for section in page.get_parent.specific.sections.all %}
               {% if page.title == section.section.title %}
                 {{ forloop.counter | add:"1" }} {% endif %}{% endfor %}</p>
-          <h1 class="display-1">{{ page.title }}</h1>
+          <h1 class="display-3" style="font-weight: 900;">{{ page.title }}</h1>
           <p class="lead my-4 mx-auto"
              style="max-width: 780px;">{{ page.description }}</p>
 
         {% else %}
 
-          <p class="strong text-uppercase">Section 1</p>
-          <h1 class="display-1">Country Overview</h1>
+          <p class="font-weight-bold  text-uppercase">Section 1</p>
+          <h1 class="display-3" style="font-weight: 900;">Country Overview</h1>
           <p class="lead my-4 mx-auto" style="max-width: 780px;">A top-level
             overview of {{ page.title }} – how it’s governed, the make-up of
             it’s population, the economy and SDG indicators</p>
 
         {% endif %}
 
-        <a class="btn btn-primary btn-sm text-uppercase px-2 py-1 disabled"
+        <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled"
            href="#" role="button"
            data-toggle="tooltip" data-placement="top" title="Coming Soon">
-          Download full country profile <i
-            class="fas fa-download border-left pl-2 ml-1"></i>
+          Download full country profile
+          <span class="border-left pl-2 ml-2">
+            <i class="fas fa-download fa-fw"></i>
+          </span>
         </a>
       </div>
 
