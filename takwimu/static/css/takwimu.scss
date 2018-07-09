@@ -119,12 +119,28 @@ a {
   }
 }
 
+.nav-pills.nav-pills-alt .nav-link {
+  color: #929292;
+}
 .nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
   background-color: transparent;
   color: $brand-color-primary;
   border-bottom: 3px $brand-color-primary solid;
   border-radius: 0;
+  color: #4a4a4a;
+  font-weight: 900;
 }
+
+.grayscale {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+  &:hover {
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%); /* Chrome 19+ & Safari 6+ */
+  }
+}
+
+
 
  // Custom CSS
 
