@@ -1,23 +1,41 @@
 <!-- Get Updates section -->
-<section class="updates text-center p-5" style="background-color: #f7f7f7;">
-  <div class="container">
-    <div class="row  d-flex align-items-center">
-      <div class="col-md-6 p-4">
-        <h4 class="mt-4 text-primary">
-          <i class="far fa-newspaper display-4 mb-2"></i><br/>
-          Stay up-to-date
-        </h4>
-        <p class="mt-4 mx-auto" style="max-width: 400px;"><i class="fas fa-rss"></i>&nbsp;<a href="{% url 'rss_feed' %}">Subscribe by RSS</a> or <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">email</a> if you’d like to be updated when new data or content becomes available.</p>
-        <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener" class="btn btn-primary mt-2">Get email updates</a>
-      </div>
-      <div class="col-md-6 p-4 border-left">
-        <h4 class="mt-4 text-primary">
-          <i class="far fa-comments display-4 mb-2"></i><br/>
-          Join the discussion
-        </h4>
-        <p class="mt-4 mx-auto" style="max-width: 400px;">Encouraging open discussion, debate and the sharing of ideas.</p>
-        <a href="https://takwimu.zendesk.com/" class="btn btn-primary mt-2" target="_blank" rel="noopener">Visit the community forum</a>
-      </div>
+<section class="updates text-center bg-light">
+  <div class="container d-flex align-items-center">
+    <div class="col p-5">
+      <h4 class="mt-4" style="font-size: 32px; font-weight: bold;">
+        <i class="far fa-newspaper display-4 mb-2"></i><br/>
+        Stay up-to-date
+      </h4>
+      <p class="mt-4 mx-auto" style="max-width: 400px; color: #4a4a4a;">
+        To be notified when new data or content is added to Takwimu
+        by&nbsp;<a href="{% url 'rss_feed' %}">subscribing to RSS</a> or
+        <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribing
+          to email updates</a></p>
+    </div>
+    <div class="col p-5 border-left">
+      <h4 class="mt-4" style="font-size: 32px; font-weight: bold;">
+        <i class="far fa-comments display-4 mb-2"></i><br/>
+        Join the discussion
+      </h4>
+      <p class="mt-4 mx-auto" style="max-width: 400px; color: #4a4a4a;">
+        Encouraging open
+        discussion, debate and the sharing of ideas by
+        <a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener">visiting
+          the community forum</a></p>
     </div>
   </div>
 </section>
+
+<style>
+
+  .updates a {
+    font-weight: bold;
+    color: #1f6cc6;
+    text-decoration: underline;
+  }
+
+  .updates .col:hover {
+    background-color: #e8e8e8;
+  }
+
+</style>
