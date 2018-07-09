@@ -119,11 +119,24 @@ a {
   }
 }
 
-.nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
+.nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link,
+.nav .nav-link.active {
   background-color: transparent;
   color: $brand-color-primary;
   border-bottom: 3px $brand-color-primary solid;
   border-radius: 0;
+}
+
+// Quick fix for country-flags
+#nav-tab {
+  .nav-item {
+    color: $brand-extend-black;
+    padding: 0.25em;
+    margin: 0 2em;
+    &.active {
+      font-weight: bold;
+    }
+  }
 }
 
  // Custom CSS
@@ -209,7 +222,7 @@ a {
     border-right: 1px solid #ddd;
     a {
       text-decoration: none;
-      color: $brand-color-primary;
+      color: $brand-extend-black;
       
       svg {
         display: block;
@@ -218,7 +231,7 @@ a {
         height: 50px;
       }
       span {
-        padding-top: 1em;
+        padding-top: 1.5em;
         display: block;
         font-weight: 400;
       }
