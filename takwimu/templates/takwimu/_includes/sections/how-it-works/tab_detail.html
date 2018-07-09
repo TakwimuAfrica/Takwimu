@@ -1,20 +1,6 @@
-{% load staticfiles %}
+{% load staticfiles wagtailcore_tags %}
 
 <div class="tab-pane fade {% if forloop.first %}show active{% endif %} position-relative"
-    id="hwi-{{ hwi }}" role="tabpanel" aria-labelledby="hwi-{{ hwi }}-tab">
-  <div class="row mx-0" style="max-width: 100%;">
-    <div class="col-3 py-5 px-4" style="background-color: rgba(155, 155, 155, 0.17)">
-      <h5 class="font-weight-bold">Expert Analysis</h5>
-      <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin urna quam, facilisis at congue ac, malesuada eget ipsum dolor sit amet, consectetur adipiscing elit. </p>
-      <h5 class="font-weight-bold mt-4">Infographics</h5>
-      <p class="font-weight-light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin urna quam, facilisis at congue ac, malesuada eget ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <h5 class="font-weight-bold mt-4">Find Data</h5>
-      <ul class="font-weight-bold">
-        <li><a href="#">By Country</a></li>
-      </ul>
-    </div>
-    <div class="col-9 py-5 px-4" style="background-color: #f3f3f3;">
-      <p>Something {{ hwi }}</p>
-    </div>
-  </div>
+    id="step-{{ forloop.counter }}" role="tabpanel" aria-labelledby="step-{{ forloop.counter }}-tab">
+  {{ step.value.body }}
 </div>

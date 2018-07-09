@@ -3,8 +3,8 @@ import operator
 
 from django.conf import settings
 from django.views.generic import TemplateView
-from takwimu.models.dashboard import SupportService, Testimonial, FAQ
 
+from takwimu.models.dashboard import SupportService, ExplainerSteps, FAQ, Testimonial
 
 class SupportServicesView(TemplateView):
     '''
@@ -16,8 +16,7 @@ class SupportServicesView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SupportServicesView, self).get_context_data(**kwargs)
-        services = SupportService.objects.all()
-        context['support_services'] = services
+        context['support_services'] = SupportService.objects.all()
         return context
 
 
@@ -31,13 +30,10 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-
-        support_services = SupportService.objects.all()
-        faqs = FAQ.objects.all()
         
-        context['support_services'] = support_services
-        testimonials = Testimonial.objects.order_by('updated_at')
-        context['testimonials'] = testimonials if len(testimonials) < 3 else testimonials[:3]
-        context['faqs'] = faqs
+        context['support_services'] = SupportService.objects.all()
+        context['explainer_steps'] = ExplainerSteps.objects.first()
+        context['faqs'] = FAQ.objects.all()
+        context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         
         return context

@@ -324,16 +324,30 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
-
+    
 class Testimonial(models.Model):
     name = models.CharField(max_length=255)
-    website = models.URLField()
-    body = models.CharField(max_length=140)
-    picture = models.FileField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
+    title = models.TextField()
+    body = models.CharField(max_length=255)
+    photo = models.FileField()
 
-    
+
+class ExplainerSteps(Page):
+    sidebar = RichTextField()
+    steps = StreamField([
+        ('step', blocks.StructBlock([
+            ('title', blocks.CharBlock(required=False)),
+            ('brief', blocks.TextBlock(required=False)),
+            ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
+            ('body', blocks.RichTextBlock(required=False)),
+        ], icon='user'))
+    ])
+
+    content_panels = Page.content_panels + [
+        FieldPanel('sidebar'),
+        StreamFieldPanel('steps'),
+    ]
+
 class FAQ(models.Model):
     question = models.TextField()
     answer = RichTextField()
