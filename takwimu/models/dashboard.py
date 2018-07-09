@@ -328,8 +328,11 @@ class KeyContacts(Orderable):
 class Testimonial(models.Model):
     name = models.CharField(max_length=255)
     title = models.TextField()
-    body = models.CharField(max_length=255)
-    photo = models.FileField()
+    quote = models.TextField()
+    photo = models.ImageField(blank=True, upload_to='testimonials/')
+
+    def __str__(self):
+        return self.quote
 
 
 class ExplainerSteps(Page):

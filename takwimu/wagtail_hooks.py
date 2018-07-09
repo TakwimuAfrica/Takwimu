@@ -70,8 +70,9 @@ class FAQAdmin(ModelAdmin):
 class TestimonialAdmin(ModelAdmin):
     model = Testimonial
     menu_label = 'Testimonials'
-    menu_icon = 'group'
+    menu_icon = 'openquote'
     menu_order = 600
+    list_display = ('name', 'title', 'quote')
 
     
 modeladmin_register(DataAdminGroup)
