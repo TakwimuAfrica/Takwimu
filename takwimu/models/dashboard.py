@@ -313,7 +313,6 @@ class SocialMedia(Orderable):
     icon = IconField()
     page = ParentalKey(ContactUsPage, related_name='social_media')
 
-
     def __str__(self):
         return self.name
 
@@ -324,6 +323,22 @@ class KeyContacts(Orderable):
     link = models.TextField()
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
+
+class ExplainerSteps(Page):
+    sidebar = RichTextField()
+    steps = StreamField([
+        ('step', blocks.StructBlock([
+            ('title', blocks.CharBlock(required=False)),
+            ('brief', blocks.TextBlock(required=False)),
+            ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
+            ('body', blocks.RichTextBlock(required=False)),
+        ], icon='user'))
+    ])
+
+    content_panels = Page.content_panels + [
+        FieldPanel('sidebar'),
+        StreamFieldPanel('steps'),
+    ]
 
 class FAQ(models.Model):
     question = models.TextField()

@@ -4,7 +4,7 @@ import operator
 from django.conf import settings
 from django.views.generic import TemplateView
 
-from takwimu.models.dashboard import SupportService, FAQ
+from takwimu.models.dashboard import SupportService, ExplainerSteps, FAQ
 
 class SupportServicesView(TemplateView):
     '''
@@ -36,6 +36,7 @@ class HomePageView(TemplateView):
         faqs = FAQ.objects.all()
         
         context['support_services'] = support_services
+        context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = faqs
         
         return context
