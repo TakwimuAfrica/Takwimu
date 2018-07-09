@@ -332,7 +332,7 @@ class FAQ(models.Model):
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        self.question.encode('ascii', 'ignore')
+        return self.question.encode('ascii', 'ignore')
 
 
 

@@ -1,0 +1,100 @@
+<!-- FAQ section -->
+<section id="faq" class="text-center p-5" style="background-color: #074c9c;">
+  <h3 style="font-weight: 800; color: #ffffff;">Common Questions</h3>
+
+  <div class="row faq-container my-5">
+    <div class="col-4" style="color: #ffffff">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+           aria-orientation="vertical">
+        {% for question in faqs %}
+          <div class="">
+            <a class="nav-link pl-5 py-3 d-flex align-items-right {% if forloop.first %}active show{% endif %}"
+               id="d{{ question.id }}-tab-btn"
+               data-toggle="pill" href="#d{{ question.id }}-tab"
+               role="tab" aria-controls="d{{ question.id }}-tab"
+               aria-selected="false">
+              {{ question.question }}
+            </a>
+            <div class="step-active position-relative mx-auto invisible" style="border: 20px solid #17a2b8; border-bottom: 0; border-left-color: transparent; border-right-color: transparent; width: 20px; top: -22px; z-index: 101;"></div>
+          </div>
+
+          <hr class="mx-3 my-0 w-30" style="border-color: rgba(255, 255, 255, 0.2); width: 150px; display: inline-block;"/>
+
+        {% endfor %}
+        <a class="nav-link pl-5 py-3 d-flex align-items-center "
+           id="d-more-faqs-tab-btn"
+           data-toggle="pill" href="#d-more-faqs-tab"
+           role="tab" aria-controls="d-more-faqs-tab">
+          More FAQs
+        </a>
+      </div>
+    </div>
+    <div class="col-8" style="background-color: #ffffff">
+      <div class="tab-content p-5" id="v-pills-tabContent">
+        {% for faq in faqs %}
+          <div class="tab-pane fade text-left pt-5 {% if forloop.first %}active show{% endif %}"
+               id="d{{ faq.id }}-tab"
+               role="tabpanel"
+               aria-labelledby="d{{ faq.id }}-tab-btn">
+            <h3 style="font-size: 21px; font-weight: bold;">{{ faq.question }}</h3>
+
+            <p class="mt-5">{{ faq.answer }}</p>
+
+            <div class="row mt-5">
+              <div class="col-6 text-center px-5">
+                <button class="btn btn-primary" style="width: 100%; font-weight: bold;">FIND OUT MORE</button>
+              </div>
+              <div class="col-6 text-center px-3">
+                <button class="btn btn-primary" style="width: 100%; font-weight: bold;">OPTINAL SECONDARY CTA</button>
+              </div>
+            </div>
+
+
+          </div>
+        {% endfor %}
+        <div
+            class="tab-pane fade py-5 px-5"
+            id="d-more-faqs-tab"
+            role="tabpanel"
+            aria-labelledby="d-more-faqs-tab-btn">
+          {{ faq.question }}
+
+          {{ faq.answer }}
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<style>
+  #faq .nav-link {
+    color: #ffffff;
+    opacity: 0.5;
+    font-weight: bold;
+  }
+
+  #faq .nav-link.active {
+    color: #ffffff;
+    background-color: transparent;
+    font-weight: bold;
+    opacity: 1;
+
+  }
+
+  #faq .faq-container {
+    border-top: solid 2px rgba(255, 255, 255, 0.1);
+    border-bottom: solid 2px rgba(255, 255, 255, 0.1);
+  }
+
+  #faq .list-underline {
+    width: 20%;
+    height: 2px;
+    opacity: 0.5;
+    background-color: #1f6cc6;
+    display: inline-block;
+  }
+
+
+</style>
