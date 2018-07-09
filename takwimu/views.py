@@ -31,13 +31,13 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
+
         support_services = SupportService.objects.all()
         faqs = FAQ.objects.all()
-        if len(faqs) < 3:
-            context['faqs'] = faqs
-        else:
-            context['faqs'] = faqs[:3]
+        
         context['support_services'] = support_services
         testimonials = Testimonial.objects.order_by('updated_at')
         context['testimonials'] = testimonials if len(testimonials) < 3 else testimonials[:3]
+        context['faqs'] = faqs
+        
         return context
