@@ -1,0 +1,60 @@
+{% load staticfiles %}
+<style>
+  section.testimonials .photo {
+    height: 120px; width: 120px;
+    background-size: cover;
+    border-radius: 50%;
+    border: 5px solid #fff;
+  }
+  section.testimonials .bio {
+    margin-top: -135px;
+    top: 130px;
+  }
+</style>
+
+<section class="testimonials py-5">
+  <div class="container text-center my-5">
+    <h3 class="mb-5 display-4 position-relative" style="font-weight: 900;">
+      Real
+      <span class="position-relative">
+        People,
+        <div class="position-absolute" 
+            style="background: rgba(98,152,215, 0.32); height: 20px; width: 230px; bottom: 1px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg); z-index: -1;">
+        </div>
+      </span>
+      Real
+      <span class="position-relative">
+        Benefits
+        <div class="position-absolute" 
+            style="background: rgba(98,152,215, 0.32); height: 20px; width: 257px; bottom: 1px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg); z-index: -1;">
+        </div>
+      </span>
+    </h3>
+
+    <div class="card-deck" style="margin-bottom: 200px;">
+      {% for testimonial in testimonials %}
+      <div class="card">
+        <div class="card-body">
+          <blockquote class="blockquote">
+            <p class="mb-0" style="color: #4a4a4a;">"{{ testimonial.quote }}"</p>
+          </blockquote>
+        </div>
+        <div class="bio position-relative">
+          <p class="text-center mb-0">
+            <div class="photo mx-auto shadow"
+              {% if testimonial.photo %}
+              style="background-image: url({{ testimonial.photo.url }});"
+              {% else %}
+              style="background-image: url({% static 'img/placeholder.jpg' %});"
+              {% endif %}
+              alt="{{ testimonial.name }}">
+            </div>
+          </p>
+          <p class="lead font-weight-bold text-primary-alt mb-0">{{ testimonial.name }}</p>
+          <p class="mb-0" style="color: #4a4a4a;">{{ testimonial.title }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
