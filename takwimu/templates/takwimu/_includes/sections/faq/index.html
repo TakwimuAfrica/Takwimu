@@ -4,19 +4,17 @@
 
   <div class="row faq-container my-5">
     <div class="col-4" style="color: #ffffff">
-      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+      <ul class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
            aria-orientation="vertical">
         {% for question in faqs %}
-          <div class="">
-            <a class="nav-link pl-5 py-3 d-flex align-items-right {% if forloop.first %}active show{% endif %}"
-               id="d{{ question.id }}-tab-btn"
-               data-toggle="pill" href="#d{{ question.id }}-tab"
-               role="tab" aria-controls="d{{ question.id }}-tab"
-               aria-selected="false">
-              {{ question.question }}
-            </a>
-            <div class="step-active position-relative mx-auto invisible" style="border: 20px solid #17a2b8; border-bottom: 0; border-left-color: transparent; border-right-color: transparent; width: 20px; top: -22px; z-index: 101;"></div>
-          </div>
+          <a class="nav-link pl-5 py-3 d-flex align-items-right {% if forloop.first %}active show{% endif %}"
+             id="d{{ question.id }}-tab-btn"
+             data-toggle="pill" href="#d{{ question.id }}-tab"
+             role="tab" aria-controls="d{{ question.id }}-tab"
+             aria-selected="false">
+            {{ question.question }}
+          </a>
+
 
           <hr class="mx-3 my-0 w-30" style="border-color: rgba(255, 255, 255, 0.2); width: 150px; display: inline-block;"/>
 
@@ -27,7 +25,7 @@
            role="tab" aria-controls="d-more-faqs-tab">
           More FAQs
         </a>
-      </div>
+      </ul>
     </div>
     <div class="col-8" style="background-color: #ffffff">
       <div class="tab-content p-5" id="v-pills-tabContent">
@@ -42,10 +40,14 @@
 
             <div class="row mt-5">
               <div class="col-6 text-center px-5">
-                <button class="btn btn-primary" style="width: 100%; font-weight: bold;">FIND OUT MORE</button>
+                <button class="btn btn-primary" style="width: 100%; font-weight: bold;">
+                  FIND OUT MORE
+                </button>
               </div>
               <div class="col-6 text-center px-3">
-                <button class="btn btn-primary" style="width: 100%; font-weight: bold;">OPTINAL SECONDARY CTA</button>
+                <button class="btn btn-primary" style="width: 100%; font-weight: bold;">
+                  OPTINAL SECONDARY CTA
+                </button>
               </div>
             </div>
 
@@ -82,6 +84,7 @@
     opacity: 1;
 
   }
+
 
   #faq .faq-container {
     border-top: solid 2px rgba(255, 255, 255, 0.1);
