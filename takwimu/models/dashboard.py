@@ -324,6 +324,17 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
+    
+class Testimonial(models.Model):
+    name = models.CharField(max_length=255)
+    title = models.TextField()
+    quote = models.TextField()
+    photo = models.ImageField(blank=True, upload_to='testimonials/')
+
+    def __str__(self):
+        return self.quote
+
+
 class ExplainerSteps(Page):
     sidebar = RichTextField()
     steps = StreamField([
