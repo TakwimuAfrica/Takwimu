@@ -23,11 +23,15 @@
           {% endif %}
         {% endfor %}
       </div>
-      <!-- TODO: Integrate with Zendesk -->
-      <!-- <div class="row pt-5 pb-5 text-dark">
-              <p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
-              <a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
-          </div> -->
+            <!-- TODO: Integrate with Zendesk -->
+      <div class="row pt-5 pb-5 text-dark">
+        {% if page.content_type.model == "profilesectionpage" %}
+              <p class=" pl-3">Add your voice to the discussion of {{ page.get_parent.title }}'s development context </p>
+        {% else %}
+              <p class=" pl-3">Add your voice to the discussion of {{ page.title }}'s development context </p>
+        {% endif %}
+              <a class="pl-3" href="" style="text-decoration: none;"><i class="fas fa-comments fa-2x"></i> &nbsp 89 comments</a>
+          </div>
     </div>  <!-- /.col-3 -->
 
     <!-- The Main Stage -->
