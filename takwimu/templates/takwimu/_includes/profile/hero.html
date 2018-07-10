@@ -76,15 +76,15 @@
     </div>
 
   </div>
-  <div class="py-5 bg-light">
+  <div class="py-2 bg-secondary">
     <div class="container">
-      <div class="d-flex flex-row justify-content-center text-uppercase">
+      <div class="row d-flex flex-row justify-content-center">
         {% for topic in page.body %}
-          <div
-              class="col-2 text-center {% if not forloop.last %}border-right{% endif %}">
-            <p><i class="{{ topic.value.icon }} fa-2x text-primary"></i></p>
-            <p><a href="#{{ topic.value.title|slugify }}">{{ topic.value.title }}</a>
-            </p>
+          <div class="col-2 text-center {% if not forloop.last %}border-right{% endif %}">
+            <a href="#{{ topic.value.title|slugify }}" class="text-light text-uppercase py-3">
+              <p><i class="{{ topic.value.icon }} fa-2x text-primary"></i></p>
+              <p>{{ topic.value.title }}</p>
+            </a>
           </div>
         {% endfor %}
       </div>
