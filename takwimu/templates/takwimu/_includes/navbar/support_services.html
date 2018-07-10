@@ -1,0 +1,54 @@
+{% extends 'takwimu/_includes/navbar/_dropdown.html' %}
+
+{% load staticfiles %}
+
+{% block dropdown_id %}nav-about{% endblock %}
+
+{% block dropdown_title %}Support Services{% endblock %}
+{% block dropdown_desc %}Cum sociis natoque penatibus et magnis dis parturient
+  montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet
+  rutrum faucibus dolor auctor.{% endblock %}
+
+{% block dropdown_content %}
+  <div class="row w-100">
+    <div class="col-4">
+      <h6 class="font-weight-bold">Data Services</h6>
+    </div>
+    <div class="col-4">
+      <h6 class="font-weight-bold">Value Added Services</h6>
+      <ul>
+        {% for service in support_services %}
+          <li>For {{ service.title }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-4">
+      <h6 class="font-weight-bold">Help and support</h6>
+      <div class="mt-2">
+        <ul class="list-unstyled">
+          <li style="float: left" class="px-2">
+            <a href="https://twitter.com/TakwimuAfrica" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+          </li>
+          <li style="float: left" class="px-2">
+            <a href="https://facebook.com/TakwimuAfrica" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+          </li>
+          <li style="float: left" class="px-2">
+            <a href="" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
+          </li>
+          <li style="float: left" class="px-2">
+            <a href="https://github.com/TakwimuAfrica" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+          </li>
+        </ul>
+      </div>
+      <br>
+      <ul>
+        <li><a href="/contact-us">Contact Us</a></li>
+        <li><a href="https://takwimu.zendesk.com/" target="_blank">Support</a></li>
+        <li><a href="/about">About Us</a></li>
+      </ul>
+    </div>
+
+
+  </div>
+{% endblock %}

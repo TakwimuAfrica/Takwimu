@@ -47,6 +47,20 @@
             Data
           </a>
         </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
+              href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+            SUPPORT SERVICES
+          </a>
+          <!-- On large devices -->
+          {% include 'takwimu/_includes/navbar/support_services.html' with button_name="Topics" %}
+
+          <!-- TODO: On small devices -->
+          <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">WIP</a>
+          </div>
+        </li>
       </ul>
       <ul class="navbar-nav">
         <li class="nav-item dropdown">

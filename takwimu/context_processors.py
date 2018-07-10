@@ -4,6 +4,8 @@ import operator
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
+from takwimu.models.dashboard import SupportService
+
 def takwimu_stories(request):
 
     stories_latest = []
@@ -25,5 +27,6 @@ def takwimu_stories(request):
 
     return {
         'stories_latest': stories_latest,
-        'stories_trending': stories_trending[0:3]
+        'stories_trending': stories_trending[0:3],
+        'support_services': SupportService.objects.all()
     }
