@@ -4,11 +4,11 @@
 
 {% block dropdown_id %}nav-profiles{% endblock %}
 
-{% block dropdown_title %}Country Profiles{% endblock %}
-{% block dropdown_desc %}Lorem ipsum{% endblock %}
+{% block dropdown_title %}Explore our country profiles{% endblock %}
+{% block dropdown_desc %}Actionable analysis by geo-political and socioeconomic experts across 10 key African countries.{% endblock %}
 
 {% block dropdown_content %}
 
-  {% include 'takwimu/_includes/sections/explore/countries.html' %}
+  {% include 'takwimu/_includes/sections/explore/countries.html'  with comingsoon_tooltip_data_container='#nav-profiles' %}
 
 {% endblock %}

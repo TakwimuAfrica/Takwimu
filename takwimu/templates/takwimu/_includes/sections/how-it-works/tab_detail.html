@@ -1,0 +1,6 @@
+{% load staticfiles wagtailcore_tags %}
+
+<div class="tab-pane fade {% if forloop.first %}show active{% endif %} position-relative"
+    id="step-{{ forloop.counter }}" role="tabpanel" aria-labelledby="step-{{ forloop.counter }}-tab">
+  {{ step.value.body }}
+</div>

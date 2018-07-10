@@ -1,0 +1,13 @@
+{% load wagtailcore_tags wagtailimages_tags %}
+
+<div class="card">
+  <div class="card-body">
+      <div class="media">
+        {% image value.image fill-50x50 class="mr-2" %}
+        <div class="media-body">
+          <h5 class="mt-0">{{ value.name }}</h5>
+          {{ value.description }}
+        </div>
+      </div>
+  </div>
+</div>
