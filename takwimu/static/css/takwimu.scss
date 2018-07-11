@@ -150,22 +150,19 @@ a {
 * Custom CSS
 * Topics tabs css
 */
-.topic-nav {   
-  border-bottom: 0.25rem solid transparent;
-  &:hover {
-    left: -1px;
+.custom-nav a {
+  border-bottom: 0.4em solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  &:hover, &.active {
     background: $brand-extend-primary;
-    border-bottom: 0.25rem solid $brand-extend-white;
-    a {
-      border-right: 1px solid transparent !important;
+    border-bottom: 0.4em solid $brand-extend-white;
+    + a div {
+      border-left: 1px solid transparent !important;
     }
-  }
-  a {
-    width: 100%;
-    padding:0 1em;
-    flex: 1 0 auto;
-    cursor: pointer;
-    text-decoration: none;
+    div {
+      border-left: 1px solid transparent !important;
+    }
   }
 }
 
