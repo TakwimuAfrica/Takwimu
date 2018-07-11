@@ -1,36 +1,10 @@
 {% load staticfiles %}
-<style>
-  .section-list-country-head {
-    text-align: center;
-    display: block;
-    font-size: 31px;
-    font-weight: bold;
-    line-height: 1.29;
-  }
-</style>
-
 <section class="py-5">
   <div class="container">
     {% if page.content_type.model == "profilesectionpage" %}
-      <div class="section-list-country-head">
-          <img class="rounded-circle border-light mr-2"
-            src={% with 'img/flags/'|add:page.get_parent.title|lower|add:'.svg' as image_static %}
-                  {% static image_static %}
-                {% endwith %}
-            border="8"
-            style="border-style:double; width: 68px; height: 67px;"/>
-          {{ page.get_parent.title }}
-      </div>
+      {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent selector='False' %}
     {% else %}
-      <div class="section-list-country-head">
-          <img class="rounded-circle border-light mr-2"
-            src={% with 'img/flags/'|add:page.title|lower|add:'.svg' as image_static %}
-                  {% static image_static %}
-                {% endwith %}
-            border="8"
-            style="border-style:double; width: 68px; height: 67px;"/>
-          {{ page.title }}
-      </div>
+      {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page selector='False' %}
     {% endif %}
     <h1 class="text-center display-3 font-weight-bold my-4">Country Profile Contents</h1>
   </div>
