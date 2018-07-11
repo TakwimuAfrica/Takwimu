@@ -25,24 +25,24 @@
 
     <div class="col-4">
       <h6 class="font-weight-bold">Help and support</h6>
-      <div class="mt-2">
-        <ul class="list-unstyled">
-          <li style="float: left" class="px-2">
-            <a href="https://twitter.com/TakwimuAfrica" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
+      <div class="mt-2 d-inline-block p-2 social_media">
+        <ul class="list-unstyled" style="">
+          <li class="px-2">
+            <a href="{{ settings.takwimu.SocialMediaSettings.twitter }}" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
           </li>
-          <li style="float: left" class="px-2">
-            <a href="https://facebook.com/TakwimuAfrica" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
+          <li class="px-2">
+            <a href="{{ settings.takwimu.SocialMediaSettings.facebook }}" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
           </li>
-          <li style="float: left" class="px-2">
-            <a href="" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
+          <li class="px-2">
+            <a href="{{ settings.takwimu.SocialMediaSettings.instagram }}" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
           </li>
-          <li style="float: left" class="px-2">
-            <a href="https://github.com/TakwimuAfrica" target="_blank"><i class="fab fa-github fa-fw"></i></a>
+          <li class="px-2">
+            <a href="{{ settings.takwimu.SocialMediaSettings.github }}" target="_blank"><i class="fab fa-github fa-fw"></i></a>
           </li>
         </ul>
       </div>
       <br>
-      <ul>
+      <ul class="mt-2">
         <li><a href="/contact-us">Contact Us</a></li>
         <li><a href="https://takwimu.zendesk.com/" target="_blank">Support</a></li>
         <li><a href="/about">About Us</a></li>
@@ -51,4 +51,26 @@
 
 
   </div>
+  <style>
+  .social_media{
+    background-color: #2c73c5;
+  }
+
+  .social_media ul {
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+
+  .social_media li {
+    display: inline;
+  }
+
+  .social_media li a:hover {
+    color: #ffffff;
+  }
+</style>
+
 {% endblock %}
+
+
+
