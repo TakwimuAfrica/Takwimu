@@ -1,18 +1,19 @@
 <section class="support-services-tabs">
   <div class="bg-secondary">
     <nav
-        class="nav nav-justified container text-center"
+        class="nav nav-justified container text-center custom-nav"
         id="nav-tabs" role="tablist">
       {% for service in support_services %}
-        <a class="nav-item nav-link text-light p-0 pt-4"
-          id="support-{{ service.get_slug | add:'-btn' }}"
-          data-toggle="tab" href="#support-{{ service.get_slug }}" role="tab"
-          aria-controls="support-{{ service.get_slug }}"
-          aria-selected="true">
+      <a class="nav-item nav-link text-light pt-3 px-0"
+        id="support-{{ service.get_slug | add:'-btn' }}"
+        data-toggle="tab" href="#support-{{ service.get_slug }}" role="tab"
+        aria-controls="support-{{ service.get_slug }}"
+        aria-selected="true">
+        <div class="text-center {% if not forloop.first %}border-left{% endif %}">
           <h2 class="mb-1">{{ service.icon.as_html }}</h2>
-          <p class="small text-uppercase ">{{ service.title }}</p>
-          <div class="invisible bg-white" style="height:5px;"></div>
-        </a>
+          <p class="small text-uppercase">{{ service.title }}</p>
+        </div>
+      </a>
       {% endfor %}
     </nav>
   </div>
@@ -26,7 +27,8 @@
 
         <button class="close-alt float-right btn btn-outline-light btn-sm px-2 py-1"
             aria-label="Close">
-          X
+          <!-- X -->
+          <span class="fa fa-times mx-1"></span>
         </button>
 
         <div class="row">
@@ -64,15 +66,7 @@
 </section>
 
 <style>
-  section.support-services-tabs nav a:hover {
-    background-color: rgba(255,255,255,0.2);
-  }
-  section.support-services-tabs nav a.active {
-    background-color: rgba(255,255,255,0.1);
-  }
-  section.support-services-tabs nav a:hover .invisible, section.support-services-tabs nav a.active .invisible {
-    visibility: visible !important;
-  }
+ 
   section.support-services-tabs .tab-content h3.display-4 {
     white-space: nowrap; 
     overflow: hidden;
