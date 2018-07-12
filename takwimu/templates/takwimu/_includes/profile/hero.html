@@ -78,7 +78,7 @@
   </div>
   <div class="bg-secondary">
     <div class="container">
-      <div class="row d-flex flex-row justify-content-center card-deck custom-nav">
+      <div class="row d-flex flex-row justify-content-center custom-nav">
         {% for topic in page.body %}
         <a href="#{{ topic.value.title|slugify }}" class="text-light text-truncate text-uppercase px-0 py-3">
           <div class="py-2 col {% if not forloop.first %}border-left{% endif %} d-flex align-items-center flex-column">
