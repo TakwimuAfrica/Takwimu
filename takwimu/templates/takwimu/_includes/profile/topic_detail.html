@@ -51,8 +51,6 @@
           </div>
           <!-- <div class="bg-white position-relative" style="height:50px; top: -45px; margin-bottom: -45px; z-index: 100;"></div> -->
         </div>
-        
-        
         <div class="tab-content" id="v-pills-tabContent">
           {% for indicator in topic.value.indicators %}
             <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
@@ -60,7 +58,6 @@
                 aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
 
               {% include_block indicator %}
-              
             </div>
           {% endfor %}
         </div>
@@ -96,7 +93,7 @@
   .topic .btn.read-more::after {
     content: "Read More";
   }
-  
+
   .topic .btn.read-more.active::after {
     content: "Read Less"
   }
