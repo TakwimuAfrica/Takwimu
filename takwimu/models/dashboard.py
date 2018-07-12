@@ -1,3 +1,5 @@
+import re
+
 from django.db import models
 from django import forms
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
@@ -7,14 +9,15 @@ from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
-from wagtail.wagtailcore.fields import StreamField
+from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
-from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons
+from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons on TopicPage
+from fontawesome.forms import IconFormField #importing property from djano-fontawesome app for icon field on TopicBlock
 
 import logging
 logger = logging.getLogger(__name__)
@@ -69,36 +72,13 @@ class TopicPage(Page):
     ]
 
 
-# The abstract model for topics, complete with panels
-class ProfilePageTopic(models.Model):
-    topic = models.ForeignKey(TopicPage, on_delete=models.CASCADE)
-
-    panels = [
-        PageChooserPanel('topic')
-    ]
-
-    class Meta:
-        abstract = True
-
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfilePageTopics(Orderable, ProfilePageTopic):
-    profile_page = ParentalKey('takwimu.ProfilePage', related_name='topics')
-
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
-    section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
-
-
 class EntityStructBlock(blocks.StructBlock):
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
-    description = blocks.TextBlock(required=False)
+    description = blocks.RichTextBlock(features=['link'],required=False)
     class Meta:
         icon = 'group'
+        template = 'takwimu/_includes/dataview/entity_detail.html'
 
 
 class DataIndicatorChooserBlock(blocks.ChooserBlock):
@@ -117,61 +97,97 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
 
 class IndicatorsBlock(blocks.StreamBlock):
 
-    free_form = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('body', blocks.RichTextBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='snippet')
+    free_form = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('body', blocks.RichTextBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='snippet',
+        template='takwimu/_includes/dataview/freeform.html'
+    )
 
     data_indicator = DataIndicatorChooserBlock()
 
-    embed = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('embed', EmbedBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='media')
+    embed = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('embed', EmbedBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='media',
+        template='takwimu/_includes/dataview/embed.html'
+    )
 
-    document = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('document', DocumentChooserBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='doc-full')
+    document = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('document', DocumentChooserBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='doc-full',
+        template='takwimu/_includes/dataview/document.html'
+    )
 
-    image = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('image', ImageChooserBlock(required=False)),
-        ('caption', blocks.TextBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='image')
+    image = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('image', ImageChooserBlock(required=False)),
+            ('caption', blocks.TextBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='image',
+        template='takwimu/_includes/dataview/image.html'
+    )
 
-    html = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('raw_html', blocks.RawHTMLBlock(required=False)),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='code')
+    html = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('raw_html', blocks.RawHTMLBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
 
-    entities = blocks.StructBlock([
-        ('title', blocks.CharBlock(required=False)),
-        ('entities', blocks.ListBlock(EntityStructBlock())),
-        ('source', blocks.URLBlock(required=False)),
-        ('source_date', blocks.DateBlock(required=False))
-    ], icon='group')
+    entities = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('entities', blocks.ListBlock(EntityStructBlock())),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='group',
+        template='takwimu/_includes/dataview/entities.html'
+    )
 
     class Meta:
         icon = 'form'
 
+class IconChoiceBlock(blocks.FieldBlock):
+    field = IconFormField(required=False)
+
+
 class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
-    icon = ImageChooserBlock(required=False)
+    icon = IconChoiceBlock(required=False)
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
-    
+
     indicators = IndicatorsBlock(required=False)
+
+    def js_initializer(self):
+        parent_initializer = super(TopicBlock, self).js_initializer()
+        return "Topic(%s)" % parent_initializer
+
+    @property
+    def media(self):
+        # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
+        return super(TopicBlock, self).media + forms.Media(
+            js=['fontawesome/js/django_fontawesome.js','fontawesome/select2/select2.min.js', 'js/dashboard.js'],
+            css={'all': ['fontawesome/css/fontawesome-all.min.css',
+            'fontawesome/select2/select2.css',
+            'fontawesome/select2/select2-bootstrap.css']}
+        )
 
     class Meta:
         icon = 'form'
@@ -200,7 +216,6 @@ class ProfileSectionPage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('description'),
         StreamFieldPanel('body'),
-        InlinePanel('topics', label="Topics"),
     ]
 
     # Parent page / subpage type rules
@@ -250,7 +265,6 @@ class ProfilePage(Page):
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
         StreamFieldPanel('body'),
-        InlinePanel('topics', label="Topics"),
         InlinePanel('sections', label="Sections"),
     ]
 
@@ -261,3 +275,88 @@ class ProfilePage(Page):
     def get_absolute_url(self):
         return self.full_url
 
+
+class SupportService(models.Model):
+    title = models.TextField()
+    icon = IconField()
+    description = RichTextField()
+
+    def get_slug(self):
+        # remove special characters and punctuation
+        title = re.sub('[^A-Za-z0-9]+', ' ', self.title)
+        return '-'.join(title.lower().split(' '))
+
+
+class AboutPage(Page):
+    content = RichTextField()
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('content'),
+    ]
+
+
+class ContactUsPage(Page):
+    address = RichTextField()
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('address'),
+        InlinePanel('key_contacts', label='Key Contacts'),
+        InlinePanel('social_media', label='Social Media')
+    ]
+
+
+class SocialMedia(Orderable):
+    name = models.TextField()
+    url = models.URLField()
+    icon = IconField()
+    page = ParentalKey(ContactUsPage, related_name='social_media')
+
+    def __str__(self):
+        return self.name
+
+
+class KeyContacts(Orderable):
+    title = models.TextField()
+    contact_details = models.TextField()
+    link = models.TextField()
+    page = ParentalKey(ContactUsPage, related_name='key_contacts')
+
+
+    
+class Testimonial(models.Model):
+    name = models.CharField(max_length=255)
+    title = models.TextField()
+    quote = models.TextField()
+    photo = models.ImageField(blank=True, upload_to='testimonials/')
+
+    def __str__(self):
+        return self.quote
+
+
+class ExplainerSteps(Page):
+    sidebar = RichTextField()
+    steps = StreamField([
+        ('step', blocks.StructBlock([
+            ('title', blocks.CharBlock(required=False)),
+            ('brief', blocks.TextBlock(required=False)),
+            ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
+            ('body', blocks.RichTextBlock(required=False)),
+        ], icon='user'))
+    ])
+
+    content_panels = Page.content_panels + [
+        FieldPanel('sidebar'),
+        StreamFieldPanel('steps'),
+    ]
+
+class FAQ(models.Model):
+    question = models.TextField()
+    answer = RichTextField()
+    cta_one_url = models.URLField("'Find Out More' button URL", default="https://takwimu.zendesk.com/")
+    cta_two_name = models.TextField("Second button Name (optional)", blank=True)
+    cta_two_url = models.URLField("Second button URL (optional)", blank=True)
+
+    def __str__(self):
+        return self.question.encode('ascii', 'ignore')

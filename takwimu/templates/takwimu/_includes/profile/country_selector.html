@@ -1,66 +1,63 @@
 {% load staticfiles %}
-
-<div class="country-selector btn-group">
-  {% if current_page.get_verbose_name == 'Profile page' %}
-    <button class="btn btn-outline-secondary btn-lg dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
+<style>
+  .country-selector button::after {
+    content: none;
+  }
+  .section-list-country-head {
+    text-align: center;
+    display: block;
+    font-size: 31px;
+    font-weight: bold;
+    line-height: 1.29;
+  }
+</style>
+{% if selector == 'False' %}
+  <div class="section-list-country-head">
       <img class="rounded-circle border-light mr-2"
-           src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
-             {% static image_static %}
-           {% endwith %}
-               border="8"
-           style="border-style:double; width: 50px; height: 50px;"/>
+        src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
+              {% static image_static %}
+            {% endwith %}
+        border="8"
+        style="border-style:double; width: 68px; height: 67px;"/>
       {{ current_page.title }}
-    </button>
-    <div class="dropdown-menu pt-0 rounded-0"
-         aria-labelledby="dropdownMenuButton"
-         style="max-width: 180px;">
+  </div>
+{% else %}
+<div class="country-selector btn-group">
+  <button class="btn btn-link btn-lg dropdown-toggle font-weight-bold {{ class_extra }}"
+      type="button"
+      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+    <img class="rounded-circle border-light mr-2"
+      src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
+            {% static image_static %}
+          {% endwith %}
+      border="8"
+      style="border-style:double; width: 50px; height: 50px;"/>
+    {{ current_page.title }}
+    <span>
+      <i class="fa fa-angle-down fa-fw"></i>
+    </span>
+  </button>
 
-      {% for profile in current_page.get_siblings %}
-        <a class="dropdown-item" href="{{ profile.get_url }}"
-           data-value="{{ profile.title | lower }}"><img
-            class="rounded-circle border-light mr-2"
-            src={% with 'img/flags/'|add:profile.title|lower|add:'.svg' as image_static %}
-              {% static image_static %}
-            {% endwith %} border="8"
-            style="border-style:double; width: 50px; height: 50px;"/>{{ profile.title }}
-        </a>
-      {% endfor %} </div>
+  <div class="dropdown-menu pt-0 rounded-0"
+      aria-labelledby="dropdownMenuButton"
+      style="max-width: 180px;">
 
-  {% else %}
-
-    <button class="btn btn-outline-secondary btn-lg dropdown-toggle"
-            type="button"
-            id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false">
-      <img class="rounded-circle border-light mr-2"
-           src={% with 'img/flags/'|add:current_page.get_parent.title|lower|add:'.svg' as image_static %}
-             {% static image_static %}
-           {% endwith %}
-               border="8"
-           style="border-style:double; width: 50px; height: 50px;"/>
-      {{ current_page.get_parent.title }}
-    </button>
-    <div class="dropdown-menu pt-0 rounded-0"
-         aria-labelledby="dropdownMenuButton"
-         style="max-width: 180px;">
-
-      {% for profile in current_page.get_parent.get_siblings %}
-        <a class="dropdown-item" href="{{ profile.get_url }}"
-           data-value="{{ profile.title | lower }}"><img
-            class="rounded-circle border-light mr-2"
-            src={% with 'img/flags/'|add:profile.title|lower|add:'.svg' as image_static %}
-              {% static image_static %}
-            {% endwith %} border="8"
-            style="border-style:double; width: 50px; height: 50px;"/>{{ profile.title }}
-        </a>
-      {% endfor %}
-    </div>
-  {% endif %}
-
+    {% for profile in current_page.get_siblings %}
+      <a class="dropdown-item" href="{{ profile.get_url }}"
+          data-value="{{ profile.title | lower }}"><img
+          class="rounded-circle border-light mr-2"
+          src={% with 'img/flags/'|add:profile.title|lower|add:'.svg' as image_static %}
+                {% static image_static %}
+              {% endwith %}
+          border="8"
+          style="border-style:double; width: 50px; height: 50px;"/>
+        {{ profile.title }}
+      </a>
+    {% endfor %}
+  </div>
 </div>
+{% endif %}
 
 
 <!-- TODO: Add styling here -->
@@ -71,10 +68,9 @@
 
 <!-- When you select a country, the selector changes. -->
 <script>
-    window.addEventListener('load', function () {
-        $('.country-selector .dropdown-menu a').click(function () {
-            $(".country-selector button:first-child").html($(this).html());
-        });
+  window.addEventListener('load', function () {
+    $('.country-selector .dropdown-menu a').click(function () {
+      $(".country-selector button:first-child").html($(this).html());
     });
+  });
 </script>
-

@@ -1,24 +1,22 @@
 {% load staticfiles %}
 
-<div class="dropdown-menu-lg position-absolute text-light py-5 container-fluid {% block dropdown_class %}{% endblock %}"
+<div class="dropdowm-menu-lg-tag d-flex justify-content-center">
+  <span></span>
+</div>
+
+<div class="dropdown-menu-lg text-light py-5 container-fluid {% block dropdown_class %}{% endblock %}"
     id="{% block dropdown_id %}{% endblock %}"
     style="{% block dropdown_style %}{% endblock %}">
 
   <div class="container">
     <div class="row">
-      <div class="col-4">
-        <h3>{% block dropdown_title %}Country Profiles{% endblock %}</h3>
-        <p>{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
+      <div class="col-3">
+        <h2 class="font-weight-bold">{% block dropdown_title %}Some title{% endblock %}</h2>
+        <p class="font-weight-light">{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
       </div>
-      <div class="col-8 border-left">
+      <div class="col-9 border-left d-flex align-items-center" style="border-left-style: dashed !important;">
         {% block dropdown_content %}{% endblock %}
       </div>
     </div>
   </div>
 </div>
-
-<!-- Hack to show background colour of link -->
-<a class="nav-link dropdown-toggle text-white px-3 py-3 bg-primary position-absolute" style="top: 0;"
-    href="#">
-   {{ button_name }}
-</a>

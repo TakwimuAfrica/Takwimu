@@ -13,7 +13,9 @@ TODO
 
 ## Development
 
-### Setup - Docker
+### Setup
+
+#### Docker
 
 With Docker, development set up is relatively quick:
 
@@ -24,7 +26,7 @@ docker-compose build
 docker-compose up web
 ```
 
-### Setup - Mac OS
+#### Mac OS
 
 1. Clone the repo
 2. ``cd TAKWIMU``
@@ -55,6 +57,32 @@ Start the server:
 python manage.py runserver
 ```
 
+### Handling Data
+
+#### Loading Data
+
+Once done, you'd want to load some data available to you:
+
+**CAREFUL: Doing this will override whatever data you already have in the DB.**
+
+```sh
+# Docker
+docker-compose exec web ./manage.py loaddata supportservice
+docker-compose exec web ./manage.py loaddata faq
+```
+
+#### Exporting Data
+
+To export data, run the following commands:
+```sh
+# Docker
+docker-compose exec web ./manage.py dumpdata takwimu.SupportService -o takwimu/fixtures/supportservice.json
+docker-compose exec web ./manage.py dumpdata takwimu.FAQ -o takwimu/fixtures/faq.json
+
+# Dokku
+# TODO
+```
+
 ### Landing Page
 
 The landing page for TAKWIMU currently lives in the `/docs` folder hosted on Github Pages, powered by Jekyll. This will be fully replaced with actual platform documentation.
@@ -76,20 +104,21 @@ TODO
 
 ## Contributing
 
-If you'd like to contribute to TAKWIMU, check out the [CONTRIBUTING.md](CONTRIBUTING.md) file on how to get started.
+If you'd like to contribute to TAKWIMU, check out [CONTRIBUTING.md](CONTRIBUTING.md) on how to get started.
 
 ## Attribution
 
 TAKWIMU has been made possible thanks to:
 
 - Consortium Members:
-    - @africapractice
-    - @CodeForAfrica
-    - @iHub
+    - [africapractice](http://www.africapractice.com)
+    - [Code for Africa](https://github.com/CodeForAfrica)
+    - [iHub](https://ihub.co.ke)
 - Contributors:
-    - ?
+    - Sean Peaterson, [Zaang Designs](http://www.zaang.com)
 - Technologies:
-    - ?
+    - [Django Framework](https://djangoproject.com/)
+    - [Wagtail CMS](https://wagtail.io)
 
 ---
 

@@ -1,26 +1,21 @@
 <div class="clearfix container text-center py-5">
-    <div class="wrapper p-3">
-        <h2>Explore other data</h2>
+  <div class="wrapper p-3">
+    <h4 class="display-4 font-weight-bold">Explore the data by...</h4>
+  </div>
+  <ul class="nav nav-pills nav-pills-alt justify-content-center mb-5" role="tablist">
+    <li class="nav-item mx-4">
+      <a class="nav-link active" href="#explore-countries" role="tab" data-toggle="tab" id="explore-countries-tab">Country</a>
+    </li>
+    <li class="nav-item mx-4">
+      <a class="nav-link" href="#explore-topics" role="tab" data-toggle="tab" id="explore-topics-tab">Topic</a>
+    </li>
+  </ul>
+  <div class="tab-content my-5 col-lg-8 col-md-10 mx-auto">
+    <div class="tab-pane fade show active" id="explore-countries" role="tabpanel" aria-labelledby="explore-countries-tab">
+      {% include 'takwimu/_includes/sections/explore/countries.html' %}            
     </div>
-    <nav class="d-flex justify-content-center">
-        <div class="nav" id="nav-tab" role="tablist">
-            <a class="nav-item nav-link active text-uppercase" id="nav-country-tab" data-toggle="tab" href="#nav-country" role="tab"
-                aria-controls="nav-country" aria-selected="true">By Country</a>
-            <a class="nav-item nav-link text-uppercase" id="nav-topic-tab" data-toggle="tab" href="#nav-topic" role="tab" aria-controls="nav-topic"
-                aria-selected="false">By Topic</a>
-            <a class="nav-item nav-link text-uppercase" id="nav-indicators-tab" data-toggle="tab" href="#nav-indicators" role="tab" aria-controls="nav-indicators"
-                aria-selected="false">By SDG Indicator</a>
-        </div>
-    </nav>
-    <div class="d-flex flex-wrap tab-content my-5 col-lg-8 col-md-10 mx-auto" id="nav-tabContent">
-        <div class="tab-pane fade show active" id="nav-country" role="tabpanel" aria-labelledby="nav-countries-tab">
-            {% include 'takwimu/_includes/sections/explore/countries.html' %}            
-        </div>
-        <div class="tab-pane fade" id="nav-topic" role="tabpanel" aria-labelledby="nav-topics-tab">
-            {% include 'takwimu/_includes/sections/explore/topics.html' %}            
-        </div>
-        <div class="tab-pane fade" id="nav-indicators" role="tabpanel" aria-labelledby="nav-indicators-tab">
-            {% include 'takwimu/_includes/sections/explore/indicators.html' %}
-        </div>
+    <div class="tab-pane fade" id="explore-topics" role="tabpanel" aria-labelledby="explore-topics-tab">
+      {% include 'takwimu/_includes/sections/explore/topics.html' %}            
     </div>
+  </div>
 </div>

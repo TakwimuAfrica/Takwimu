@@ -2,23 +2,23 @@
 
 {% block content %}
 
-  {% include 'takwimu/_includes/header/profile.html' %}
+  {% include 'takwimu/_includes/profile/hero.html' %}
 
-  {% include 'takwimu/_includes/profile/section_topics.html' %}
+  {# Loads all the topics #}
+  {% for topic in page.body %}
+      {% include 'takwimu/_includes/profile/topic_detail.html' %}
+  {% endfor %}
 
   <hr/>
 
   {% include 'takwimu/_includes/profile/sections_list.html' %}
 
-  {% include 'takwimu/_includes/sections/data-services.html' %}
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
-  {% include 'takwimu/_includes/sections/stories.html' %}
+  {% include 'takwimu/_includes/sections/stories/index.html' %}
 
-  <div class="container text-center py-5" style="max-width: 800px;">
-    <h1>Country Profiles</h1>
-    <p>Read our profiles from the 10 focus countries.</p>
-    {% include 'takwimu/_includes/sections/explore/countries.html' %}
-  </div>
+  <!-- Country profile country select -->
+  {% include 'takwimu/_includes/sections/explore/_index.html' %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
 
