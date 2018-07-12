@@ -12,7 +12,7 @@ $brand-color-primary-alt: #074c9c;
 $brand-color-secondary: #1e4a7e;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
-$brand-extend-primary: #46648c;
+$brand-dark-alt: #46648c;
 $brand-extend-jumbotron: #e9ecef;
 $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
@@ -155,7 +155,7 @@ a {
   cursor: pointer;
   text-decoration: none;
   &:hover, &.active {
-    background: $brand-extend-primary;
+    background: $brand-dark-alt;
     border-bottom: 0.4em solid $brand-extend-white;
     + a div {
       border-left: 1px solid transparent !important;
