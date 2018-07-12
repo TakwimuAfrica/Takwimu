@@ -3,7 +3,25 @@
   .country-selector button::after {
     content: none;
   }
+  .section-list-country-head {
+    text-align: center;
+    display: block;
+    font-size: 31px;
+    font-weight: bold;
+    line-height: 1.29;
+  }
 </style>
+{% if selector == 'False' %}
+  <div class="section-list-country-head">
+      <img class="rounded-circle border-light mr-2"
+        src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
+              {% static image_static %}
+            {% endwith %}
+        border="8"
+        style="border-style:double; width: 68px; height: 67px;"/>
+      {{ current_page.title }}
+  </div>
+{% else %}
 <div class="country-selector btn-group">
   <button class="btn btn-link btn-lg dropdown-toggle font-weight-bold {{ class_extra }}"
       type="button"
@@ -39,11 +57,12 @@
     {% endfor %}
   </div>
 </div>
+{% endif %}
 
 
 <!-- TODO: Add styling here -->
 <style>
-  
+
 </style>
 
 
@@ -55,4 +74,3 @@
     });
   });
 </script>
-
