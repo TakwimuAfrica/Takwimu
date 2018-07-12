@@ -6,7 +6,7 @@ from hurumap.urls import urlpatterns as hurumap_urlpatterns
 from takwimu import settings
 
 from takwimu.feed import CountryProfileFeed
-from takwimu.views import HomePageView, SupportServicesView
+from takwimu.views import HomePageView, SupportServicesView, TermsOfUse
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \

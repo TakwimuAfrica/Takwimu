@@ -37,3 +37,13 @@ class HomePageView(TemplateView):
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         
         return context
+
+class TermsOfUse(TemplateView):
+    '''
+   Terms of Use View:
+    ---------------
+    View of terms.
+    '''
+    template_name = 'takwimu/about/terms_page.html'
+
+    
