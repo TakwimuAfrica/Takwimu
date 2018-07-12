@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% load datastructuretags %}
+
 <div class="bg-light py-5">
   <div class="container">
       <h1 class="text-center display-3">Contact Us</h1>
@@ -21,28 +23,21 @@
         </div>
         <div class="col">
           <h3>Address</h3>
-          {{ page.address | safe }}
+          {{ settings.takwimu.SupportSetting.address | safe }}
         </div>
         <div class="col">
           <h3>Social</h3>
           <ul class="list-unstyled">
-            <li>
-              <a href="https://facebook.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-facebook-square fa-fw mr-2"></i> Facebook</a>
-            </li>
-            <li>
-              <a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-twitter-square fa-fw mr-2"></i> Twitter</a>
-            <li>
-              <a href="https://medium.com/takwimu-africa" target="_blank" rel="noopener"><i class="fab fa-medium fa-fw mr-2"></i> Medium</a>
-            </li>
-            <li>
-              <a href="https://youtube.com/takwimu-africa" target="_blank" rel="noopener"><i class="fab fa-youtube-square fa-fw mr-2"></i> YouTube</a>
-            </li>
-            <li>
-              <a href="https://instagram.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-instagram fa-fw mr-2"></i> Instagram</a>
-            </li>
-            <li>
-              <a href="https://github.com/TakwimuAfrica" target="_blank" rel="noopener"><i class="fab fa-github-square fa-fw mr-2"></i> GitHub</a>
-            </li>
+          {% to_list 'facebook' 'twitter' 'medium' 'youtube' 'instagram' 'github' as social_medias %}
+          {% for social_media in social_medias %}
+            {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+              <li>
+                <a href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+                  <i class="fab fa-{{ social_media }} fa-fw mr-2"></i> <span class="text-capitalize">{{ social_media }}</span> 
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
           </ul>
         </div>
       </div>
@@ -50,7 +45,7 @@
 </div>
 
 <div class="container py-5 text-center">
-  <a class="btn btn-outline-primary btn-lg" href="https://takwimu.zendesk.com/" target="_blank" rel="noopener" >
+  <a class="btn btn-outline-primary btn-lg" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener" >
     Get in touch with our support team. 👋
   </a>
 </div>
