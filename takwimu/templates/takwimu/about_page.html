@@ -1,10 +1,11 @@
 {% extends 'takwimu/_layouts/page.html' %}
+{% load wagtailcore_tags %}
 
 {% block content %}
 
 <div class="py-5 container" style="max-width: 800px;">
-  <h1 class="text-center display-3">{{ page.title }}</h1>
-  {{ page.content | safe }}
+  <h1 class="text-center display-3">About Us</h1>
+  {{ settings.takwimu.AboutUsSettings.about_us | richtext }}
 </div>
 
 <div class="bg-light py-5">

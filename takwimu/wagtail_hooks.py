@@ -76,7 +76,7 @@ class TestimonialAdmin(ModelAdmin):
 
     
 modeladmin_register(DataAdminGroup)
-modeladmin_register(AboutUsAdminGroup)
+# modeladmin_register(AboutUsAdminGroup)
 
 modeladmin_register(SupportServicesAdmin)
 modeladmin_register(ExplainerStepsAdmin)

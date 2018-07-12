@@ -37,3 +37,6 @@ class HomePageView(TemplateView):
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         
         return context
+
+class AboutPageView(TemplateView):
+    template_name = 'takwimu/about_page.html'
