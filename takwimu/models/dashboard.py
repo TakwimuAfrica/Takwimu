@@ -325,7 +325,6 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
-    
 class Testimonial(models.Model):
     name = models.CharField(max_length=255)
     title = models.TextField()
@@ -369,6 +368,9 @@ class SupportSetting(BaseSetting):
         help_text='TAKWIMU main email address')
     zendesk = models.URLField(blank=True, null=True,
         help_text='TAKWIMU Zendesk account URL')
+    address = RichTextField(blank=True, null=True,
+        help_text='TAKWIMU address')
+
     class Meta:
         verbose_name = 'Support'
 
@@ -386,5 +388,6 @@ class SocialMediaSetting(BaseSetting):
         help_text='TAKWIMU Twitter account URL')
     youtube = models.URLField(blank=True, null=True,
         help_text='TAKWIMU YouTube channel or account URL')
+
     class Meta:
         verbose_name = 'Social Media'

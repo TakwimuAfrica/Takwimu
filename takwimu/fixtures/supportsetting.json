@@ -5,7 +5,9 @@
     "fields": {
       "site": 1,
       "hello": "hello@takwimu.africa",
-      "zendesk": "https://takwimu.zendesk.com"
+      "zendesk": "https://takwimu.zendesk.com",
+      "address":
+        "<p>403 Placeholder</p><p>Placeholder<br/></p><p>Placeholder<br/></p><p>+0332 3423342322<br/></p>"
     }
   }
 ]
