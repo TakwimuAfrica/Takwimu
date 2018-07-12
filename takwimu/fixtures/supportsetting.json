@@ -1,0 +1,11 @@
+[
+  {
+    "model": "takwimu.supportsetting",
+    "pk": 1,
+    "fields": {
+      "site": 1,
+      "hello": "hello@takwimu.africa",
+      "zendesk": "https://takwimu.zendesk.com"
+    }
+  }
+]
