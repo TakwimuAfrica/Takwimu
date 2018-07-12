@@ -16,10 +16,10 @@
       <p class="mb-0"><a href="/dashboard">Dashboard (Admin)</a></p>
     </div>
     <div class="col-sm-4">
-      <p><a href="https://medium.com/takwimu-africa" target="_blank" rel="noopener">Blog</a></p>
-      <p><a href="https://twitter.com/TakwimuAfrica" target="_blank" rel="noopener">Twitter</a></p>
-      <p><a href="https://facebook.com/TakwimuAfrica" target="_blank" rel="noopener">Facebook</a></p>
-      <p class="mb-0"><a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener">Help / Support</a></p>
+      <p><a href="{{ settings.takwimu.SocialMediaSetting.medium }}" target="_blank" rel="noopener">Blog</a></p>
+      <p><a href="{{ settings.takwimu.SocialMediaSetting.twitter }}" target="_blank" rel="noopener">Twitter</a></p>
+      <p><a href="{{ settings.takwimu.SocialMediaSetting.facebook }}" target="_blank" rel="noopener">Facebook</a></p>
+      <p class="mb-0"><a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener">Help / Support</a></p>
     </div>
 </div>
 {% endblock %}
