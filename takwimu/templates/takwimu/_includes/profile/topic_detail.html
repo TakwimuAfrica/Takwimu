@@ -1,29 +1,30 @@
 {% load staticfiles wagtailcore_tags %}
 
-<div class="container py-5 data-topic">
-  <div class="row ">
+<div class="container-fluid data-topic-container">
+  <div class="container py-5 data-topic">
+    <div class="row">
 
-    <!-- Left navigation of all indicators-->
-    <div class="col-3 dataindicators-nav">
-      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
-           aria-orientation="vertical">
-        {% for indicator in topic.value.indicators %}
-          <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
-             id="d{{ indicator.value.title|slugify }}-tab-btn"
-             data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
-             role="tab" aria-controls="d{{ indicator.value.title|slugify }}-tab"
-              {% if forloop.first %} aria-selected="true" {% endif %}
-             aria-selected="false">
-            <i class="fas fa-eye fa-fw"></i>
-            {{ indicator.value.title }}
-          </a>
+      <!-- Left navigation of all indicators-->
+      <div class="col-3 dataindicators-nav">
+        <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
+            aria-orientation="vertical">
+          {% for indicator in topic.value.indicators %}
+            <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
+              id="d{{ indicator.value.title|slugify }}-tab-btn"
+              data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
+              role="tab" aria-controls="d{{ indicator.value.title|slugify }}-tab"
+                {% if forloop.first %} aria-selected="true" {% endif %}
+              aria-selected="false">
+              <i class="fas fa-eye fa-fw"></i>
+              {{ indicator.value.title }}
+            </a>
 
           {% if not forloop.last %}
             <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
           {% endif %}
         {% endfor %}
       </div>
-            <!-- TODO: Integrate with Zendesk -->
+     <!-- TODO: Integrate with Zendesk -->
       <div class="row pt-5 pb-5 text-dark">
         {% if page.content_type.model == "profilesectionpage" %}
               <p class=" pl-3">Add your voice to the discussion of {{ page.get_parent.title }}'s development context </p>
@@ -51,29 +52,27 @@
               style="border-radius: 0; bottom: -30px;" onclick="javascript:$(this).toggleClass('active')">
             <!-- "Read More: inserted by CSS for easy toggle -->
           </button>
-        </div>
-        <div class="bg-white position-relative" style="height:50px; top: -45px; margin-bottom: -45px; z-index: 100;"></div>
-      </div>
-      
-      
-      <div class="tab-content" id="v-pills-tabContent">
-        {% for indicator in topic.value.indicators %}
-          <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-              id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
-              aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
-
-            {% include_block indicator %}
-            
           </div>
-        {% endfor %}
+          <!-- <div class="bg-white position-relative" style="height:50px; top: -45px; margin-bottom: -45px; z-index: 100;"></div> -->
+        </div>
+        <div class="tab-content" id="v-pills-tabContent">
+          {% for indicator in topic.value.indicators %}
+            <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
+                id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
+                aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
+
+              {% include_block indicator %}
+            </div>
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
-</div>
+</div><!-- container fluid -->
 
 <style>
   .dataindicators-nav .nav-pills {
-    background-color: #005973;
+    background-color: #1f6cc6;
   }
   .dataindicators-nav .nav-link {
     color: #f0f0f0;
@@ -98,7 +97,36 @@
   .topic .btn.read-more::after {
     content: "Read More";
   }
-    .topic .btn.read-more.active::after {
-      content: "Read Less"
-    }
+
+  .topic .btn.read-more.active::after {
+    content: "Read Less"
+  }
+
+  .data-topic-container:nth-of-type(odd){
+    background: #f9f9f9;
+  }
+
+  .data-topic-container:nth-of-type(even){
+    background: #f4f4f4;
+  }
+
+  .topic .tab-content .tab-content{
+    background: #ffffff;
+  }
+
+  .topic > h1{
+    font-size: 55px;
+  }
+
+  .topic h5{
+    font-size: 25px;
+  }
+
+  .topic .btn-group .btn{
+    border-radius: 2px;
+    color: #1a1a1a;
+    background: #ffffff;
+    border-color: #f4f4f4;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+  }
 </style>
