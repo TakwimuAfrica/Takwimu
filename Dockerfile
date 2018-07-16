@@ -1,4 +1,4 @@
-FROM python:2.7-stretch
+FROM codeforafrica/hurumap-base:0.1.0
 ENV DEBIAN_FRONTEND noninteractive
 
 MAINTAINER Code for Africa
@@ -11,15 +11,6 @@ ENV TAKWIMU_SRVHOME=/srv
 # Directory in container for project source files
 ENV TAKWIMU_SRVPROJ=/srv/takwimu
 
-
-# Installing OS Dependencies
-RUN apt-get update && apt-get upgrade -y
-RUN apt-get install binutils libproj-dev gdal-bin python-gdal libgdal-dev -y
-RUN apt-get install libtiff5-dev libjpeg62-turbo-dev zlib1g-dev \
-    libfreetype6-dev liblcms2-dev libwebp-dev libharfbuzz-dev libfribidi-dev \
-    tcl8.6-dev tk8.6-dev python-tk -y
-RUN apt-get install postgresql-client -y
-
 # Create application subdirectories
 WORKDIR $TAKWIMU_SRVHOME
 RUN mkdir media static logs
@@ -28,7 +19,7 @@ VOLUME ["$TAKWIMU_SRVHOME/media/", "$TAKWIMU_SRVHOME/logs/"]
 # Install Python dependencies
 COPY ./requirements.txt /
 RUN pip install -q -U pip setuptools
-RUN pip install -q -r /requirements.txt 
+RUN pip install -q -r /requirements.txt
 
 # GDAL pains
 RUN pip install -q GDAL==2.1.3 --global-option=build_ext --global-option="-I/usr/include/gdal"

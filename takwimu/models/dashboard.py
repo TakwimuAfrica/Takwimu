@@ -1,14 +1,27 @@
+import re
+
 from django.db import models
+from django import forms
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
+
 from wagtail.wagtailcore import blocks
-from wagtail.wagtailcore.fields import StreamField
-from wagtail.wagtailcore.models import Orderable, Page
+from wagtail.wagtailembeds.blocks import EmbedBlock
+from wagtail.wagtaildocs.blocks import DocumentChooserBlock
 from wagtail.wagtailimages.blocks import ImageChooserBlock
+
+from wagtail.wagtailcore.fields import StreamField, RichTextField
+from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
 from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
+from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons on TopicPage
+from fontawesome.forms import IconFormField #importing property from djano-fontawesome app for icon field on TopicBlock
+
+import logging
+logger = logging.getLogger(__name__)
 
 
 # The abstract model for data indicators, complete with panels
@@ -37,6 +50,7 @@ class TopicPage(Page):
     This therefore serves as an editorial interface to create topics and link indicators to it.
     '''
     description = models.TextField(blank=True)
+    icon = IconField()  #adding icon property that uses the djano-fontawesome app structure
 
     # TODO: For topics heirachy
     #parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
@@ -54,33 +68,130 @@ class TopicPage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        FieldPanel('icon'),
         InlinePanel('data_indicators', label="Data Indicators"),
     ]
 
 
-# The abstract model for topics, complete with panels
-class ProfilePageTopic(models.Model):
-    topic = models.ForeignKey(TopicPage, on_delete=models.CASCADE)
+class EntityStructBlock(blocks.StructBlock):
+    name = blocks.CharBlock(required=False)
+    image = ImageChooserBlock(required=False)
+    description = blocks.RichTextBlock(features=['link'],required=False)
+    class Meta:
+        icon = 'group'
+        template = 'takwimu/_includes/dataview/entity_detail.html'
 
-    panels = [
-        PageChooserPanel('topic')
-    ]
+
+class DataIndicatorChooserBlock(blocks.ChooserBlock):
+    target_model = DataIndicator
+    widget = forms.Select
 
     class Meta:
-        abstract = True
+        icon = 'folder'
 
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfilePageTopics(Orderable, ProfilePageTopic):
-    profile_page = ParentalKey('takwimu.ProfilePage', related_name='topics')
+    # Return the key value for the select field
+    def value_for_form(self, value):
+        if isinstance(value, self.target_model):
+            return value.pk
+        else:
+            return value
 
-# The real model which combines the abstract model, an
-# Orderable helper class, and what amounts to a ForeignKey link
-# to the model we want to add related links to (TopicPage)
-class ProfileSectionPageTopics(Orderable, ProfilePageTopic):
-    section_page = ParentalKey('takwimu.ProfileSectionPage', related_name='topics')
+class IndicatorsBlock(blocks.StreamBlock):
 
+    free_form = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('body', blocks.RichTextBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='snippet',
+        template='takwimu/_includes/dataview/freeform.html'
+    )
+
+    data_indicator = DataIndicatorChooserBlock()
+
+    embed = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('embed', EmbedBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='media',
+        template='takwimu/_includes/dataview/embed.html'
+    )
+
+    document = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('document', DocumentChooserBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='doc-full',
+        template='takwimu/_includes/dataview/document.html'
+    )
+
+    image = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('image', ImageChooserBlock(required=False)),
+            ('caption', blocks.TextBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='image',
+        template='takwimu/_includes/dataview/image.html'
+    )
+
+    html = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('raw_html', blocks.RawHTMLBlock(required=False)),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
+
+    entities = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('entities', blocks.ListBlock(EntityStructBlock())),
+            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+        ],
+        icon='group',
+        template='takwimu/_includes/dataview/entities.html'
+    )
+
+    class Meta:
+        icon = 'form'
+
+class IconChoiceBlock(blocks.FieldBlock):
+    field = IconFormField(required=False)
+
+
+class TopicBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    icon = IconChoiceBlock(required=False)
+    summary = blocks.TextBlock(required=False)
+    body = blocks.RichTextBlock(required=False)
+
+    indicators = IndicatorsBlock(required=False)
+
+    def js_initializer(self):
+        parent_initializer = super(TopicBlock, self).js_initializer()
+        return "Topic(%s)" % parent_initializer
+
+    @property
+    def media(self):
+        # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
+        return super(TopicBlock, self).media + forms.Media(
+            js=['fontawesome/js/django_fontawesome.js','fontawesome/select2/select2.min.js', 'js/dashboard.js'],
+            css={'all': ['fontawesome/css/fontawesome-all.min.css',
+            'fontawesome/select2/select2.css',
+            'fontawesome/select2/select2-bootstrap.css']}
+        )
+
+    class Meta:
+        icon = 'form'
 
 class ProfileSectionPage(Page):
     '''
@@ -89,24 +200,30 @@ class ProfileSectionPage(Page):
     After overview, each of the sections have the following structure
     '''
     description = models.TextField(blank=True)
+    date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    body = StreamField([
+        ('topic', TopicBlock())
+    ], blank=True)
 
     # Search index configuration
 
     search_fields = Page.search_fields + [
-        index.SearchField('description')
+        index.SearchField('description'),
+        index.SearchField('body'),
     ]
 
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
-        InlinePanel('topics', label="Topics"),
+        StreamFieldPanel('body'),
     ]
 
     # Parent page / subpage type rules
 
     parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
+
 
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
@@ -126,25 +243,29 @@ class ProfilePageSections(Orderable, ProfilePageSection):
     profile_page = ParentalKey('takwimu.ProfilePage', related_name='sections')
 
 
-
 class ProfilePage(Page):
     '''
     Profile Page
     -----------
     '''
     geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True)
+    date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    body = StreamField([
+        ('topic', TopicBlock())
+    ], blank=True)
 
     # Search index configuration
 
     search_fields = Page.search_fields + [
         index.FilterField('geo'),
+        index.SearchField('body'),
     ]
 
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
-        InlinePanel('topics', label="Topics"),
+        StreamFieldPanel('body'),
         InlinePanel('sections', label="Sections"),
     ]
 
@@ -155,3 +276,118 @@ class ProfilePage(Page):
     def get_absolute_url(self):
         return self.full_url
 
+
+class SupportService(models.Model):
+    title = models.TextField()
+    icon = IconField()
+    description = RichTextField()
+
+    def get_slug(self):
+        # remove special characters and punctuation
+        title = re.sub('[^A-Za-z0-9]+', ' ', self.title)
+        return '-'.join(title.lower().split(' '))
+
+
+class AboutPage(Page):
+    content = RichTextField()
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('content'),
+    ]
+
+
+class ContactUsPage(Page):
+    address = RichTextField()
+
+    content_panels = [
+        FieldPanel('title'),
+        FieldPanel('address'),
+        InlinePanel('key_contacts', label='Key Contacts'),
+        InlinePanel('social_media', label='Social Media')
+    ]
+
+
+class SocialMedia(Orderable):
+    name = models.TextField()
+    url = models.URLField()
+    icon = IconField()
+    page = ParentalKey(ContactUsPage, related_name='social_media')
+
+    def __str__(self):
+        return self.name
+
+
+class KeyContacts(Orderable):
+    title = models.TextField()
+    contact_details = models.TextField()
+    link = models.TextField()
+    page = ParentalKey(ContactUsPage, related_name='key_contacts')
+
+
+class Testimonial(models.Model):
+    name = models.CharField(max_length=255)
+    title = models.TextField()
+    quote = models.TextField()
+    photo = models.ImageField(blank=True, upload_to='testimonials/')
+
+    def __str__(self):
+        return self.quote
+
+
+class ExplainerSteps(Page):
+    sidebar = RichTextField()
+    steps = StreamField([
+        ('step', blocks.StructBlock([
+            ('title', blocks.CharBlock(required=False)),
+            ('brief', blocks.TextBlock(required=False)),
+            ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
+            ('body', blocks.RichTextBlock(required=False)),
+        ], icon='user'))
+    ])
+
+    content_panels = Page.content_panels + [
+        FieldPanel('sidebar'),
+        StreamFieldPanel('steps'),
+    ]
+
+class FAQ(models.Model):
+    question = models.TextField()
+    answer = RichTextField()
+    cta_one_url = models.URLField("'Find Out More' button URL", default="https://takwimu.zendesk.com/")
+    cta_two_name = models.TextField("Second button Name (optional)", blank=True)
+    cta_two_url = models.URLField("Second button URL (optional)", blank=True)
+
+    def __str__(self):
+        return self.question.encode('ascii', 'ignore')
+
+# Settings
+@register_setting
+class SupportSetting(BaseSetting):
+    hello = models.EmailField(blank=True, null=True,
+        help_text='TAKWIMU main email address')
+    zendesk = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Zendesk account URL')
+    address = RichTextField(blank=True, null=True,
+        help_text='TAKWIMU address')
+
+    class Meta:
+        verbose_name = 'Support'
+
+@register_setting
+class SocialMediaSetting(BaseSetting):
+    facebook = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Facebook page URL')
+    github = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Github page URL')
+    instagram = models.URLField(blank=True, null=True,
+        max_length=255, help_text='TAKWIMU Instagram account URL')
+    medium = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Medium page URL')
+    twitter = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Twitter account URL')
+    youtube = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU YouTube channel or account URL')
+
+    class Meta:
+        verbose_name = 'Social Media'

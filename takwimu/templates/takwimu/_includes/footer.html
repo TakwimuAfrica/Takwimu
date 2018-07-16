@@ -1,105 +1,111 @@
 {% load staticfiles %}
+{% load datastructuretags %}
 
-<footer class="text-light small font-weight-light" style="background: #6196a5 url('{% static 'img/bg/footer-main-bg.jpg'%}') no-repeat center; background-size: cover;">
+<footer class="bg-primary text-light">
   <!-- Footer widgets -->
   <div class="container py-5">
 
     <div class="row mt-3 mb-2">
       <div class="col-6">
         <p class="mb-4 mt-3">
-          <img src="{% static 'img/logo-white-all.png' %}" alt="" style="max-height: 40px;">
+          <img src="{% static 'img/logo-white-all.png' %}" alt=""
+               style="max-height: 40px;">
+        <div class="underline"></div>
         </p>
-        <p>
-          Takwimu seeks to give African <strong>decision-makers</strong> the best granular data available, to help improve the relevance and impact of <strong>development planning</strong> and <strong>advocacy</strong>.
-        </p>
-        <p>All content is released under a
-          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">Creative Commons 4 Attribution license</a>. Reuse it to help empower your own community. The code is available
-          on
-          <a href="https://github.com/TakwimuAfrica/" target="_blank" rel="noopener">GitHub</a> and data is available on ​
-          <a href="https://openafrica.net/" target="_blank" rel="noopener">openAFRICA​</a>.</p>
+        <h3 class="font-weight-bold mb-4">Explore Africa, by
+          <span class="position-relative">
+            numbers
+            <div class="position-absolute" 
+                style="background: rgba(255, 255, 255, 0.4); height: 10px; width: 136px; bottom: 1px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg);">
+            </div>
+          </span>.
+        </h3>
+
+
+        <p class="mb-0" style="opacity: 0.6; font-size: 16px">Takwimu is an initiative by:</p>
+        <div class="row">
+          <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-1 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/bmgf-white.png' %}" class="img-responsive" alt="Bill and Melinda Gates Foundation">
+          </a>
+          <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-1 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/ap-white.png' %}" class="img-responsive" alt="africapractice">
+          </a>
+          <a href="https://codeforafrica.org" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/cfafrica-white.png' %}" class="img-responsive" alt="Code for Africa">
+          </a>
+          <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
+              class="col-2 partner-logo-container m-2 px-4 d-flex align-items-center justify-content-center">
+            <img src="{% static 'img/logos/ihub-white.png' %}" class="img-responsive" alt="iHub">
+          </a>
+        </div>
+
       </div>
-      <div class="col-3 pt-5">
-        <h5>Quick Links</h5>
-        <nav class="nav flex-column">
-          <a class="nav-link" href="/about">About</a>
-          <a class="nav-link" href="/about/data-services">Data Services</a>
-          <a class="nav-link" href="https://takwimu.zendesk.com/">Community</a>
-        </nav>
+      <div class="col-6 pt-5">
+        <div class="mt-5 pl-5" style="border-left: solid 2px #4081ce;">
+          <p style="font-size: 20px; font-weight: bold;">Data from 10 African
+            countries showing the impact of money, politics, and the people.</p>
+          <div class="underline"></div>
+
+          <p class="pt-4" style="font-size: 16px"><span style="opacity: 0.6;">Explore data through</span> <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">countries</a>, <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">topics</a>, <a href="https://medium.com/takwimu-africa" target="_blank" rel="noopener">read insights</a><span style="opacity: 0.6;">, and learn more about</span> <a href="/about">our story</a>
+          </p>
+        </div>
       </div>
-      <div class="col-3 pt-5">
-        <h5>Latest Profiles</h5>
-        <nav class="nav flex-column">
-          <a class="nav-link" href="/profiles/nigeria">Nigeria</a>
-          <a class="nav-link" href="/profiles/tanzania">Tanzania</a>
-          <a class="nav-link" href="/profiles/senegal">Senegal</a>
-        </nav>
-      </div>
+
     </div>
 
   </div>
 
   <!-- Footer Nav -->
-  <nav class="navbar navbar-expand-lg navbar-dark small" style="background-color: #6196a5;">
+  <nav class="navbar navbar-expand-lg navbar-dark small bg-primary-alt font-weight-bold">
     <div class="container">
-      <span class="navbar-text">        
-        © {% now "Y" %} TAKWIMU <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener">CC by 4.0</a>
-      </span>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-        aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-toggle="collapse"
+              data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav ml-5">
+
+        <ul class="navbar-nav">
+          <li class="nav-item navbar-text">Stay in touch with us</li>
+          <li class="nav-item ml-2">
+            <a class="nav-link" href="mailto:{{ settings.takwimu.SupportSetting.hello }}"
+                target="_blank">
+              <i class="fa fa-at fa-fw"></i>
+            </a>
+          </li>
+
+          {% to_list 'twitter' 'facebook' 'medium' 'github' as social_medias %}
+          {% for social_media in social_medias %}
+            {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+              <li class="nav-item">
+                <a class="nav-link" href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}"
+                  target="_blank" rel="noopener">
+                  <i class="fab fa-{{ social_media }} fa-fw"></i>
+                </a>
+              </li>
+            {% endif %}
+          {% endfor %}
+        </ul>
+
+        <span class="navbar-text mx-auto">
+          © {% now "Y" %} Takwimu
+          <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank"
+            rel="noopener">CC by 4.0</a>
+        </span>
+        <ul class="navbar-nav ml-auto text-uppercase">
           <li class="nav-item">
             <a class="nav-link" href="/terms-of-use">Terms of Use</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="/privacy-policy">Privacy Policy</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/cookie-policy">Cookie Policy</a>
-          </li>
         </ul>
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item">
-            <a class="nav-link" href="https://twitter.com/TakwimuAfrica" target="_blank">
-              <i class="fab fa-twitter"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://facebook.com/TakwimuAfrica" target="_blank">
-              <i class="fab fa-facebook"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" target="_blank">
-              <i class="fab fa-youtube"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#" target="_blank">
-              <i class="fab fa-instagram"></i>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://github.com/TakwimuAfrica" target="_blank">
-              <i class="fab fa-github"></i>
-            </a>
-          </li>
-          <li class="nav-item dropup">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa fa-globe"></i>
-              English
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Swahili</a>
-              <a class="dropdown-item" href="#">French</a>
-              <a class="dropdown-item" href="#">Chinese</a>
-            </div>
-          </li>
-        </ul>
+
       </div>
     </div>
   </nav>
@@ -109,5 +115,24 @@
   footer a {
     color: #fff;
     text-decoration: underline;
+    font-weight: bold;
+  }
+
+  .partner-logo-container {
+    background-color: rgba(244,244,244, 0.06);
+    height: 81px;
+  }
+  .partner-logo-container img {
+    max-height: 50px;
+  }
+
+  footer .underline {
+    width: 79px;
+    height: 1px;
+    border: solid 1px #4081ce;
+  }
+
+  footer .navbar-dark .navbar-text {
+    color: #ffffff;
   }
 </style>

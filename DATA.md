@@ -133,3 +133,39 @@ When data is uploaded, we should provide some check so that things aren't broken
 2. When selecting a view/viz type, that the data values allow for it.
 3. Honourary third mention? ie. all good things come in threes.
 
+## CSV Upload Formats
+
+The CSV file must always have a geography column, any number of fields, the value and optionally a total column
+
+| geography     | field         | field | value  | total |
+| ------------- |:-------------:| -----:| ------:| -----:|
+| ?             | ?             | ?     | ?      | ?     |
+
+
+Taking an example of Adult Mortality Rate in Nigeria, Tanzania and Senegal for the years 1990 to 2014
+
+| Country   | 1990  | 1995  | 2000  | 2005  | 2010  | 2011  | 2012  | 2013 | 2014 |sex     |
+|-----------|------:|------:|------:|------:|------:|------:|------:|-----:|-----:|-------:|
+|  Nigeria  | 413   | 416   | 423   | 411   | 390   | 387   | 383   | 381  | 379  | male   |
+|  Senegal  | 282   | 278   | 280   | 266   | 242   | 238   | 233   | 230  | 227  | male   |
+|  Tanzania | 418   | 460   | 460   | 392   | 321   | 309   | 298   | 290  | 281  | male   |
+|  Nigeria  | 413   | 416   | 423   | 411   | 390   | 387   | 383   | 381  | 379  | female |
+|  Senegal  | 282   | 278   | 280   | 266   | 242   | 238   | 233   | 230  | 227  | female |
+|  Tanzania | 418   | 460   | 460   | 392   | 321   | 309   | 298   | 290  | 281  | female |
+
+The goal is 'unpivot' the table from this wide format to the long format optionally leaving indicator
+values set. The table should be massaged into a format where one or more columns are the identifier variables (fields) .i.e
+`geography` and `sex`, while all the other columns considered measured variables and 'unpivoted' to the
+row axis, `year` and `value`
+
+
+
+| geography     | sex           | year  | value  |
+| ------------- |:-------------:| -----:| ------:|
+| Nigeria       | Male          | 2001  | 1200   |
+| Tanzania      | Male          | 2001  | 1300   |
+| Senengal      | Male          | 2001  | 1230   |
+| Nigeria       | Female        | 2001  | 1200   |
+| Tanzania      | Female        | 2001  | 1300   |
+| Senengal      | Female        | 2001  | 1230   |
+

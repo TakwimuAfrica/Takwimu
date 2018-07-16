@@ -3,8 +3,11 @@ import os
 
 from hurumap.settings import *  # noqa
 
+# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
 # insert our overrides before both census and hurumap
-INSTALLED_APPS = ['takwimu'] + INSTALLED_APPS + ['debug_toolbar']
+INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'wagtail.contrib.settings', 'fontawesome'] + INSTALLED_APPS + ['debug_toolbar']
 
 ROOT_URLCONF = 'takwimu.urls'
 
@@ -15,7 +18,9 @@ MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
 TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
+    'wagtail.contrib.settings.context_processors.settings',
     'takwimu.context_processors.takwimu_stories',
+    'takwimu.context_processors.takwimu_topics',
 )
 
 
@@ -80,3 +85,6 @@ DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 # -------------------------------------------------------------------------------------
 
 LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
