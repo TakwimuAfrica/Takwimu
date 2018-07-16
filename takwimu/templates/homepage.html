@@ -1,6 +1,36 @@
-{% extends 'takwimu/home_page.html' %}
+{% extends 'homepage.html' %}
 
-{% comment %}
-This template isn't used but will be deleted
-once we do review of HURUmap integration.
-{% endcomment %}
+{% load staticfiles %}
+{% load staticfiles sass_tags %}
+
+{% block head_css_extra %}
+  {{block.super}}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+{% endblock %}
+{% block body %}
+  {% block header %}
+    {% include 'takwimu/_includes/navbar/_index.html' %}
+    {% block header_content %}
+    <div class="container text-center py-5" style="max-width: 800px;">
+      <h2 class="display-4 text-primary font-weight-bold">Find data by Country</h2>
+      <p class="p-3">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+        praesentium, libero odit voluptatum necessitatibus quisquam
+        nulla expedita saepe quibusdam.
+      </p>
+    </div>
+    {% endblock header_content %}
+  {% endblock %}
+  {% block content_container %}
+  <div class="clearfix">
+      <div id="slippy-map"></div>
+  </div>
+  <section class="py-5">
+    {{ geo_data }}
+  </section>
+  {% endblock content_container %}
+  {% block footer_content %}
+    {% include 'takwimu/_includes/footer.html' %}
+  {% endblock %}
+{% endblock body %}
