@@ -100,12 +100,17 @@ a {
     border-color: $brand-color-primary !important;
   }
 }
+.btn-outline {
+  background: transparent;
+  color: $brand-extend-black;
+}
 .btn-outline-primary {
   border-color: $brand-color-primary;
   color: $brand-color-primary;
   &:hover, &:focus, &:active {
     background-color: $brand-color-primary !important;
     border-color: $brand-color-primary !important;
+    color: $brand-extend-white;
   }
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -145,7 +150,6 @@ a {
   }
 }
 
-
 /*
 * Custom CSS
 * Topics tabs css
@@ -154,6 +158,9 @@ a {
   border-bottom: 0.4em solid transparent;
   cursor: pointer;
   text-decoration: none;
+  .border-left {
+    border-left: 1px solid rgba(255, 255, 255, 0.25)!important;
+  }
   &:hover, &.active {
     background: $brand-color-dark-alt;
     border-bottom: 0.4em solid $brand-extend-white;

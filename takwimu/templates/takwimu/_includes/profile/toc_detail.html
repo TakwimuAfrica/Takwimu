@@ -1,5 +1,5 @@
 <p>
-  <button class="btn btn-outline-primary btn-sm mr-2 border-0 p-1" type="button"
+  <button class="btn btn-outline-primary btn-sm mr-2 border-0 p-1" role="button"
           data-toggle="collapse" data-target="#toc-collapse-s{{ section.id }}"
           aria-expanded="false" aria-controls="toc-collapse-s{{ section.id }}"
           style="font-size: 2em; line-height: 1;">
@@ -17,7 +17,7 @@
 <div class="collapse show pl-4" id="toc-collapse-s{{ section.id }}">
   <ul>
     {% for topic in section.body %}
-      <li class="pl-2">
+      <li class="pl-2" style="color:#1f6cc6; text-decoration: underline;">
         <a href="{{ section.url }}#{{ topic.value.title|slugify }}">
           {{ topic.value.title }}
         </a>
