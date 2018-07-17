@@ -224,11 +224,7 @@ a {
 * Small devices (landscape phones, 576px and up)
 * Medium devices (tablets, 768px and up)
 */
-@media (min-width: 576px) and (max-width: 768px) {
-  /*
-  * Do not delete the code below, it's useful for css debuging 
-  * during development
-  */ }
+@media (min-width: 576px) and (max-width: 768px) {}
 
 /*
 * Large devices (desktops, 992px and up)
