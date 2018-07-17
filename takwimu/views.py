@@ -2,7 +2,7 @@ import json
 import operator
 
 from django.conf import settings
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, View
 
 from takwimu.models.dashboard import SupportService, ExplainerSteps, FAQ, Testimonial
 
@@ -30,13 +30,17 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        
         context['support_services'] = SupportService.objects.all()
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
-        
         return context
 
-class AboutPageView(TemplateView):
-    template_name = 'takwimu/about_page.html'
+
+class AboutUsView(TemplateView):
+    template_name = 'takwimu/about/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AboutUsView, self).get_context_data(**kwargs)
+        context['support_services'] = SupportService.objects.all()
+        return context
