@@ -31,7 +31,7 @@ class SupportServicesAdmin(ModelAdmin):
     model = Service
     menu_label = 'Support Services'
     menu_icon = 'help'
-    list_display = ('title',)
+    list_display = ('title', 'category',)
 
 
 class AboutPageAdmin(ModelAdmin):

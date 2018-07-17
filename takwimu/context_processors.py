@@ -32,7 +32,8 @@ def takwimu_stories(request):
     return {
         'stories_latest': stories_latest,
         'stories_trending': stories_trending[0:3],
-        'support_services': Service.objects.all()
+        'standard_services': Service.objects.filter(category='Standard'),
+        'premium_services': Service.objects.filter(category='Premium')
     }
 
 # This function can be refactored or completely removed, it acts as sample dummy data
