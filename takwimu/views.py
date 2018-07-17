@@ -4,7 +4,7 @@ import operator
 from django.conf import settings
 from django.views.generic import TemplateView, View
 
-from takwimu.models.dashboard import SupportService, ExplainerSteps, FAQ, Testimonial
+from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
 
 class SupportServicesView(TemplateView):
     '''
@@ -16,7 +16,7 @@ class SupportServicesView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(SupportServicesView, self).get_context_data(**kwargs)
-        context['support_services'] = SupportService.objects.all()
+        context['support_services'] = Service.objects.all()
         return context
 
 
@@ -30,7 +30,7 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['support_services'] = SupportService.objects.all()
+        context['support_services'] = Service.objects.all()
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
@@ -42,5 +42,5 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-        context['support_services'] = SupportService.objects.all()
+        context['support_services'] = Service.objects.all()
         return context
