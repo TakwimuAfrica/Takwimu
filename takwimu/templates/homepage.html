@@ -12,8 +12,8 @@
   {% block header %}
     {% include 'takwimu/_includes/navbar/_index.html' %}
     {% block header_content %}
-    <div class="text-light" style="background: #074c9c url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
-      <div class="text-center py-3" style="background-color: rgba(7, 76, 156, 0.8)">
+    <div class="text-light" style="background: #074c9c url('{% static 'img/bg/header-databycountry.jpg'%}') no-repeat center; background-size: cover;">
+      <div class="text-center py-3">
         <div class="container">
           <nav aria-label="breadcrumb">
             <ol class="breadcrumb bg-transparent">
@@ -51,31 +51,45 @@
         </button>
       </div>
   </div>
-  <section class="container py-5">
-    <div class="row jumbotron jumbotron-fluid bg-white pt-4 pb-5 mb-0">
-      <div class="col-4">
-        <img class=" border-light mr-2"
-          src={% with 'img/maps/'|add:'tza'|lower|add:'.svg' as image_static %}
-                {% static image_static %}
-              {% endwith %}/>
+  <section class="py-5">
+    {% with countries='nigeria tanzania senegal' %}
+    {% for country in countries.split %}
+      <div class="jumbotron jumbotron-fluid pt-4 pb-5 mb-0 container-fluid country-container">
+        <div class="container">
+          <div class="row">
+            <div class="col-4">
+              <img class=" border-light mr-2"
+                src={% with 'img/maps/'|add:country|lower|add:'.svg' as image_static %}
+                      {% static image_static %}
+                    {% endwith %}/>
+            </div>
+            <div class="col-8">
+              <h2 class="display-4 font-weight-bold mb-4">{{country|title}}</h2>
+              <p class="mb-0" style="color: #4a4a4a; font-size: 15px">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                praesentium, libero odit voluptatum necessitatibus quisquam
+                nulla expedita saepe quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+                praesentium, libero odit voluptatum necessitatibus quisquam
+                nulla expedita saepe quibusdam.
+              </p>
+              <p class="font-weight-bold" style="margin-top: 3em;">
+                Show data at:
+                <select class="ml-2 py-2"
+                style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto">
+                  <option value="National Level">National Level</option>
+                </select>
+                <a class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" href="/profiles/{{country}}"
+                  role="button" style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px; right: -10%; position: relative">
+                  VIEW DATA FOR {{country|upper}}
+                </a>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="col-8">
-        <h2 class="display-4 font-weight-bold mb-4">Tanzania</h2>
-        <p class="mb-0" style="color: #4a4a4a; font-size: 15px">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-          praesentium, libero odit voluptatum necessitatibus quisquam
-          nulla expedita saepe quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-          praesentium, libero odit voluptatum necessitatibus quisquam
-          nulla expedita saepe quibusdam.
-        </p>
-        <p class="font-weight-bold" style="margin-top: 3em;">Show data at: <select class="ml-2 py-2" style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto"><option value="National Level">National Level</option></select>
-        <a class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" href="/profiles/country-TZA-tanzania"
-          role="button" style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px; right: -10%; position: relative">
-          VIEW DATA FOR TANZANIA
-        </a></p>
-      </div>
-    </div>
-    {{ settings.geometry_data.country.features|length }}
+    {% endfor %}
+    {% endwith %}
+
   </section>
   {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
@@ -89,7 +103,21 @@
   {% block footer_content %}
     {% include 'takwimu/_includes/footer.html' %}
   {% endblock %}
+  <style>
+  .breadcrumb-item+.breadcrumb-item::before {
+      display: inline-block;
+      padding-right: .5rem;
+      style="color: #fff;
+      content: '>>';"
+  }
+  .country-container:nth-of-type(odd) {
+    background-color: #fff;
+  }
+  .country-container:nth-of-type(even) {
+    background-color: #f4f4f4;
+  }
+  </style>
+  <script>
+    console.log({{geometry_data}})
+  </script>
 {% endblock body %}
-<script>
-  L.geoJson([], style : {fillColor: #d5e0ff}).addTo(maps.map)
-</script>
