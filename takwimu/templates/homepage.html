@@ -4,7 +4,7 @@
 {% load staticfiles sass_tags %}
 
 {% block head_css_extra %}
-  {{block.super}}
+  {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
 {% endblock %}
@@ -12,92 +12,96 @@
   {% block header %}
     {% include 'takwimu/_includes/navbar/_index.html' %}
     {% block header_content %}
-    <div class="text-light" style="background: #074c9c url('{% static 'img/bg/header-databycountry.jpg'%}') no-repeat center; background-size: cover;">
-      <div class="text-center py-3">
-        <div class="container">
-          <nav aria-label="breadcrumb">
-            <ol class="breadcrumb bg-transparent">
-              <li class="breadcrumb-item">
-                <a href="/" class="text-light"><u>Home</u></a>
-              </li>
-              <li class="breadcrumb-item active text-light">
+      <div class="text-light" style="background: #074c9c url('{% static 'img/bg/header-databycountry.jpg' %}') no-repeat center; background-size: cover;">
+        <div class="text-center py-3">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb bg-transparent">
+                <li class="breadcrumb-item">
+                  <a href="/" class="text-light"><u>Home</u></a>
+                </li>
+                <li class="breadcrumb-item active text-light">
                   Countries
-              </li>
-            </ol>
-          </nav>
-          <h1 class="display-4 text-light font-weight-bold">Find data by Country</h1>
-          <p class="p-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-            praesentium, libero odit voluptatum necessitatibus quisquam
-            nulla expedita saepe quibusdam. libero odit voluptatum necessitatibus quisquam
-            nulla expedita saepe quibusdam.
-          </p>
+                </li>
+              </ol>
+            </nav>
+            <h1 class="display-4 text-light font-weight-bold">Find data by
+              Country</h1>
+            <p class="p-4">
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
+              praesentium, libero odit voluptatum necessitatibus quisquam
+              nulla expedita saepe quibusdam. libero odit voluptatum
+              necessitatibus quisquam
+              nulla expedita saepe quibusdam.
+            </p>
+          </div>
         </div>
       </div>
-    </div>
     {% endblock header_content %}
   {% endblock %}
   {% block content_container %}
-  <div class="clearfix">
+    <div class="clearfix">
       <div id="slippy-map"></div>
       <div id="map-div" class="py-4 px-4 mt-3 text-center border" style="position: absolute; top: 50%; left: 30%; border-radius: 2px; width: 700px; height: 201px; background-color: #ffffff; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.23)">
         <p class="text-uppercase font-weight-bold">Browse by Map</p>
         <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-        praesentium, libero odit voluptatum necessitatibus quisquam
-        nulla expedita saepe quibusdam.</p>
+          praesentium, libero odit voluptatum necessitatibus quisquam
+          nulla expedita saepe quibusdam.</p>
         <button class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" style="border-color: #1f6cc6;"
-        onclick="javascript:$('#map-div').css('display', 'none')">
+                onclick="javascript:$('#map-div').css('display', 'none')">
           GOT IT
         </button>
       </div>
-  </div>
-  <section class="py-5">
-    {% with countries='nigeria tanzania senegal' %}
-    {% for country in countries.split %}
-      <div class="jumbotron jumbotron-fluid pt-4 pb-5 mb-0 container-fluid country-container">
-        <div class="container">
-          <div class="row">
-            <div class="col-4">
-              <img class=" border-light mr-2"
-                src={% with 'img/maps/'|add:country|lower|add:'.svg' as image_static %}
-                      {% static image_static %}
-                    {% endwith %}/>
-            </div>
-            <div class="col-8">
-              <h2 class="display-4 font-weight-bold mb-4">{{country|title}}</h2>
-              <p class="mb-0" style="color: #4a4a4a; font-size: 15px">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                praesentium, libero odit voluptatum necessitatibus quisquam
-                nulla expedita saepe quibusdam. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-                praesentium, libero odit voluptatum necessitatibus quisquam
-                nulla expedita saepe quibusdam.
-              </p>
-              <p class="font-weight-bold" style="margin-top: 3em;">
-                Show data at:
-                <select class="ml-2 py-2"
-                style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto">
-                  <option value="National Level">National Level</option>
-                </select>
-                <a class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" href="/profiles/{{country}}"
-                  role="button" style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px; right: -10%; position: relative">
-                  VIEW DATA FOR {{country|upper}}
-                </a>
-              </p>
+    </div>
+    <section class="py-5">
+      {% with countries='nigeria tanzania senegal' %}
+        {% for country in countries.split %}
+          <div class="jumbotron jumbotron-fluid pt-4 pb-5 mb-0 container-fluid country-container">
+            <div class="container">
+              <div class="row">
+                <div class="col-4">
+                  <img class=" border-light mr-2"
+                       src={% with 'img/maps/'|add:country|lower|add:'.svg' as image_static %}
+                         {% static image_static %}
+                       {% endwith %}/>
+                </div>
+                <div class="col-8">
+                  <h2 class="display-4 font-weight-bold mb-4">{{ country|title }}</h2>
+                  <p class="mb-0" style="color: #4a4a4a; font-size: 15px">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Ipsum
+                    praesentium, libero odit voluptatum necessitatibus quisquam
+                    nulla expedita saepe quibusdam. Lorem ipsum dolor sit amet
+                    consectetur adipisicing elit. Ipsum
+                    praesentium, libero odit voluptatum necessitatibus quisquam
+                    nulla expedita saepe quibusdam.
+                  </p>
+                  <p class="font-weight-bold" style="margin-top: 3em;">
+                    Show data at:
+                    <select class="ml-2 py-2"
+                            style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto">
+                      <option value="National Level">National Level</option>
+                    </select>
+                    <a class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" href="/profiles/{{ country }}"
+                       role="button" style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px; right: -10%; position: relative">
+                      VIEW DATA FOR {{ country|upper }}
+                    </a>
+                  </p>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    {% endfor %}
-    {% endwith %}
+        {% endfor %}
+      {% endwith %}
 
-  </section>
-  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+    </section>
+    {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
-  {% include 'takwimu/_includes/sections/stories/index.html' %}
+    {% include 'takwimu/_includes/sections/stories/index.html' %}
 
-  {% include 'takwimu/_includes/sections/explore/_index.html' %}
+    {% include 'takwimu/_includes/sections/explore/_index.html' %}
 
-  {% include 'takwimu/_includes/sections/updates.html' %}
+    {% include 'takwimu/_includes/sections/updates.html' %}
 
   {% endblock content_container %}
   {% block footer_content %}
@@ -105,24 +109,28 @@
   {% endblock %}
   <style>
 
-  p {
-    font-family: 'Montserrat', sans-serif;
-  }
-  .updates {
-    margin-bottom: 0;
-  }
-  .breadcrumb-item+.breadcrumb-item::before {
+    p {
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .updates {
+      margin-bottom: 0;
+    }
+
+    .breadcrumb-item + .breadcrumb-item::before {
       display: inline-block;
       padding-right: .5rem;
       color: #fff;
       content: '>>';
-  }
-  .country-container:nth-of-type(odd) {
-    background-color: #fff;
-  }
-  .country-container:nth-of-type(even) {
-    background-color: #f4f4f4;
-  }
+    }
+
+    .country-container:nth-of-type(odd) {
+      background-color: #fff;
+    }
+
+    .country-container:nth-of-type(even) {
+      background-color: #f4f4f4;
+    }
   </style>
 {% endblock body %}
 
