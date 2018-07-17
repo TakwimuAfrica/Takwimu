@@ -1,0 +1,249 @@
+/*
+ * takwimu.scss
+ * ------------
+ * Primary TAKWIMU styling
+ *
+ * NOTE: Please don't make edits here unless super necessary.
+ */
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900");
+body {
+  padding-top: 56px; }
+
+* {
+  font-family: 'Montserrat', sans-serif;
+  word-break: break-word; }
+
+img {
+  max-width: 100%; }
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold; }
+
+.leaflet-label {
+  background-color: #1e4a7e !important;
+  border-color: #1e4a7e !important; }
+
+/* ------------------------------------------------------------------------------
+ * TAKWIMU: New CSS
+ * ----------------
+ * This looks to make slight tweaks to Bootstrap and make appropriate edits later.
+ *
+ * NOTE: Please don't make edits here unless super necessary.
+ */
+a {
+  color: #1f6cc6; }
+  a:hover {
+    color: #1e4a7e; }
+
+.bg-primary {
+  background-color: #1f6cc6 !important; }
+
+.bg-primary-alt {
+  background-color: #074c9c !important; }
+
+.bg-secondary {
+  background-color: #1e4a7e !important; }
+
+.text-primary {
+  color: #1f6cc6 !important; }
+
+.text-primary-alt {
+  color: #074c9c !important; }
+
+.text-secondary {
+  color: #1e4a7e !important; }
+
+.btn {
+  border-radius: 24px;
+  padding: .375rem 1.25rem; }
+
+.btn-lg {
+  padding: .5rem 1.5rem; }
+
+.btn-primary {
+  background-color: #1f6cc6;
+  border-color: #1e4a7e; }
+  .btn-primary:hover, .btn-primary:focus, .btn-primary:active {
+    background-color: #1e4a7e !important;
+    border-color: #1f6cc6 !important; }
+
+.btn-outline-primary {
+  border-color: #1f6cc6;
+  color: #1f6cc6; }
+  .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:active {
+    background-color: #1f6cc6 !important;
+    border-color: #1f6cc6 !important; }
+
+.btn-primary.disabled, .btn-primary:disabled {
+  background-color: #1e4a7e;
+  border-color: #1f6cc6; }
+
+.btn-outline-light:hover, .btn-outline-light:focus, .btn-outline-light:active {
+  color: #1f6cc6; }
+
+.btn-outline-light.btn-alt {
+  background-color: rgba(255, 255, 255, 0.4); }
+  .btn-outline-light.btn-alt:hover, .btn-outline-light.btn-alt:focus, .btn-outline-light.btn-alt:active {
+    background-color: #fff; }
+
+.nav-pills.nav-pills-alt .nav-link {
+  color: #929292; }
+
+.nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show > .nav-link {
+  background-color: transparent;
+  color: #1f6cc6;
+  border-bottom: 3px #1f6cc6 solid;
+  border-radius: 0;
+  color: #4a4a4a;
+  font-weight: 900; }
+
+.grayscale {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  /* Chrome 19+ & Safari 6+ */ }
+  .grayscale:hover {
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%);
+    /* Chrome 19+ & Safari 6+ */ }
+
+/*
+* Custom CSS
+* Topics tabs css
+*/
+.custom-nav a {
+  border-bottom: 0.4em solid transparent;
+  cursor: pointer;
+  text-decoration: none; }
+  .custom-nav a:hover, .custom-nav a.active {
+    background: #46648c;
+    border-bottom: 0.4em solid #ffffff; }
+    .custom-nav a:hover + a div, .custom-nav a.active + a div {
+      border-left: 1px solid transparent !important; }
+    .custom-nav a:hover div, .custom-nav a.active div {
+      border-left: 1px solid transparent !important; }
+
+.navbar.fixed-top .nav-item.dropdown {
+  position: initial; }
+
+.navbar.fixed-top .dropdown-toggle::after {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900;
+  content: '\f107';
+  border: 0;
+  vertical-align: 0;
+  visibility: hidden;
+  margin-left: 0; }
+
+.navbar.fixed-top .nav-link svg {
+  margin-left: .255em; }
+
+.navbar.fixed-top .nav-item:hover .dropdowm-menu-lg-tag {
+  display: flex !important; }
+
+.navbar.fixed-top .nav-item:hover .dropdown-menu-lg {
+  display: block; }
+
+.navbar.fixed-top .dropdowm-menu-lg-tag {
+  display: none !important;
+  position: relative;
+  top: -10px;
+  margin-bottom: -10px; }
+  .navbar.fixed-top .dropdowm-menu-lg-tag span {
+    border-bottom: 10px solid #074c9c;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent; }
+
+.navbar.fixed-top .dropdown-menu-lg {
+  display: none;
+  position: absolute;
+  left: 0;
+  width: 100vw;
+  z-index: 3000;
+  background-color: #074c9c; }
+  .navbar.fixed-top .dropdown-menu-lg a {
+    color: #f8f9fa; }
+  .navbar.fixed-top .dropdown-menu-lg .country-flag-links div {
+    border-color: rgba(248, 249, 250, 0.1) !important; }
+    .navbar.fixed-top .dropdown-menu-lg .country-flag-links div a svg {
+      border: 3px solid #fff;
+      border-radius: 9999px; }
+    .navbar.fixed-top .dropdown-menu-lg .country-flag-links div a:hover {
+      color: #fff; }
+
+/*
+* Country container css
+* ----------------------
+*/
+.country-flag-links .col {
+  padding: 3em 1em;
+  border-right: 1px solid #ddd; }
+  .country-flag-links .col a {
+    text-decoration: none;
+    color: #000000; }
+    .country-flag-links .col a svg {
+      display: block;
+      margin: 0 auto;
+      width: 50px;
+      height: 50px; }
+    .country-flag-links .col a span {
+      padding-top: 1.5em;
+      display: block;
+      font-weight: 400; }
+    .country-flag-links .col a:hover, .country-flag-links .col a:focus {
+      color: #1e4a7e; }
+      .country-flag-links .col a:hover svg, .country-flag-links .col a:focus svg {
+        filter: #1e4a7e;
+        /* IE6-9 */
+        -webkit-filter: grayscale(1);
+        /* Google Chrome, Safari 6+ & Opera 15+ */
+        filter: grayscale(1);
+        /* Microsoft Edge and Firefox 35+ */ }
+    .country-flag-links .col a.active {
+      color: #6c757d; }
+      .country-flag-links .col a.active svg {
+        filter: #6c757d;
+        /* IE6-9 */
+        -webkit-filter: grayscale(1);
+        /* Google Chrome, Safari 6+ & Opera 15+ */
+        filter: grayscale(1);
+        /* Microsoft Edge and Firefox 35+ */ }
+    .country-flag-links .col a[data-toggle="tooltip"] * {
+      opacity: 0.5; }
+
+/*
+* Extra small devices (portrait phones, less than 576px)
+* Small devices (landscape phones, 576px and down)
+*/
+@media (max-width: 576px) {
+  .nav-item {
+    font-size: 0.75em; }
+  .country-container div.col:nth-child(even) {
+    border-right: 1px solid transparent; } }
+
+/* 
+* Small devices (landscape phones, 576px and up)
+* Medium devices (tablets, 768px and up)
+*/
+@media (min-width: 576px) and (max-width: 768px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ }
+
+/*
+* Large devices (desktops, 992px and up)
+*/
+@media (min-width: 768px) and (max-width: 992px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ }
+
+/*
+* Extra large devices (large desktops, 1200px and up)
+*/
+@media (min-width: 1200px) {
+  /*
+  * Do not delete the code below, it's useful for css debuging 
+  * during development
+  */ }

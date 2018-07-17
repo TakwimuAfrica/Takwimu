@@ -391,3 +391,14 @@ class SocialMediaSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Social Media'
+
+
+@register_setting
+class AboutUsSetting(BaseSetting):
+    about_us = RichTextField()
+
+    class Meta:
+        verbose_name = 'About Us'
+
+
+
