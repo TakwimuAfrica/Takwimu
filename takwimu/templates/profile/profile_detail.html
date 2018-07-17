@@ -5,7 +5,6 @@
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
-
 {% endblock %}
 
 {% block header %}
@@ -15,7 +14,6 @@
   {% block header_content %}
     {% block secondary_nav %} {% endblock %}
     {{ block.super }}
-
   {% endblock %}
 {% endblock %}
 
@@ -23,8 +21,8 @@
   <div class="column-full">
     <p class="caption"><strong>Census data:</strong> 2014</p>
   </div>
-
 {% endblock %}
+
 {% block content_container %}
   <div class="content-container wrapper clearfix">
     {% block profile_preamble %} {% endblock %}
@@ -205,15 +203,17 @@
     #profile {
       background-color: #ffffff;
     }
+
     #page-footer {
       display: none;
     }
+
     .updates {
       margin-bottom: 0;
     }
   </style>
-
 {% endblock %}
+
 {% block body_javascript %}
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
