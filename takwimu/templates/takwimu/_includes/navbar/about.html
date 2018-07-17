@@ -1,6 +1,7 @@
 {% extends 'takwimu/_includes/navbar/_dropdown.html' %}
 
 {% load staticfiles %}
+{% load datastructuretags %}
 
 {% block dropdown_id %}nav-about{% endblock %}
 
@@ -10,7 +11,7 @@
 {% block dropdown_content %}
 <div class="row pl-4 pb-5" style="width: 100%;">
     <div class="col-sm-4">
-      <ul style="color:#7ab1f2;">
+      <ul style="color:#7ab1f2; font-weight: bold;">
         <li class="pb-3" type="disc"><a href="/about"><u>About Takwimu</u></a></li>
         <li class="pb-3" type="disc"><a href="/about/support-services"><u>Support Services</u></a></li>
         <li class="pb-3" type="disc"><a href="/contact-us"><u>Contact Us</u></a></li>
@@ -21,36 +22,17 @@
     <h5 class="pb-2">Follow us</h5>
     <div class="d-flex flex-row flex-start col-sm-12 h-27 rounded" style="background-color:#1455a0;">
         <ul class="navbar-nav">
+        {% to_list 'twitter' 'facebook' 'instagram' 'slack' 'github' as social_medias %}
+        {% for social_media in social_medias %}
+          {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
             <li class="nav-item pt-3 pb-3">
-              <a class="nav-link border-right" href="https://twitter.com/TakwimuAfrica"
-                 target="_blank" rel="noopener">
-                <i class="fab fa-twitter fa-fw text-white"></i>
+              <a class="nav-link{% if not forloop.last %} border-right" {% else %}" {% endif %}
+		             href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+                <i class="fab fa-{{ social_media }} fa-fw"></i>
               </a>
             </li>
-            <li class="nav-item pt-3 pb-3">
-              <a class="nav-link border-right" href="https://facebook.com/TakwimuAfrica"
-                 target="_blank" rel="noopener">
-                <i class="fab fa-facebook fa-fw text-white"></i>
-              </a>
-            </li>
-            <li class="nav-item pt-3 pb-3">
-              <a class="nav-link border-right" href="https://medium.com/takwimu-africa"
-                 target="_blank" rel="noopener">
-                <i class="fab fa-instagram fa-fw"></i>
-              </a>
-            </li>
-            <li class="nav-item pt-3 pb-3">
-                <a class="nav-link border-right" href="https://medium.com/takwimu-africa"
-                   target="_blank" rel="noopener">
-                  <i class="fab fa-slack fa-fw "></i>
-                </a>
-              </li> 
-            <li class="nav-item pt-3 pb-3">
-              <a class="nav-link" href="https://github.com/TakwimuAfrica"
-                 target="_blank" rel="noopener">
-                <i class="fab fa-github fa-fw"></i>
-              </a>
-            </li>
+          {% endif %}
+        {% endfor %}
           </ul>
     </div>
     </div>
