@@ -2,30 +2,27 @@ import json
 import operator
 
 from django.conf import settings
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, ListView
 
 from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
 
-class SupportServicesView(TemplateView):
-    '''
+
+class SupportServicesIndexView(ListView):
+    """
     Support Sevices View
     --------------------
     View of support services page.
-    '''
+    """
     template_name = 'takwimu/about/support-services.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(SupportServicesView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all()
-        return context
+    model = Service
 
 
 class HomePageView(TemplateView):
-    '''
+    """
     Home Page View:
     ---------------
     View of homepage.
-    '''
+    """
     template_name = 'takwimu/home_page.html'
 
     def get_context_data(self, **kwargs):
