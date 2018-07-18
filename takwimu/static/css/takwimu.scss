@@ -21,7 +21,9 @@ body {
   padding-top: 56px;
 }
 
-* {
+// hurumap.css provides default font family for these elements: html, body, h4, h5, h6 & p
+// thus we must overide them (CSS Specificity Hierarchy)
+ html, body, h4, h5, h6, p, * {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
