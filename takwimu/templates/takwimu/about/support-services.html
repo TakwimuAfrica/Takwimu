@@ -3,26 +3,46 @@
 
 {% block content %}
 
-  <div class="py-5 container border-bottom">
-    <div class="text-center py-3">
-      <h3 class="text-center font-weight-bold display-3">Takwimu Data
-        Services</h3>
-      <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
-        Donec id elit non mi porta gravida at eget metus.</p>
+  <div class="row" style="background-color: #ffffff;">
+    <div class="container-fluid pt-4 pl-5">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+          <li class="breadcrumb-item">
+            <a href="/" class=""><u>Home</u></a>
+          </li>
+          <li class="breadcrumb-item">
+            <u>Services</u>
+          </li>
+
+        </ol>
+      </nav>
     </div>
 
+  </div>
+  <div class="row p-5" style="background-color: #f9f9f9;">
+    <div class="py-5 container">
+      <div class="text-center py-3">
+        <h3 class="text-center font-weight-bold display-3" style="font-size: 60px; font-weight: 800;">
+          Takwimu Data Services</h3>
+        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
+          Donec id elit non mi porta gravida at eget metus.</p>
+      </div>
 
-    <p>Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget
-      lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis
-      parturient montes, nascetur ridiculus mus. Donec id elit non mi porta
-      gravida at eget metus. Integer posuere erat a ante venenatis dapibus
-      posuere velit aliquet.</p>
 
+      <p style="font-size: 15px; font-weight: 300;">Duis mollis, est non commodo
+        luctus, nisi erat porttitor ligula, eget
+        lacinia odio sem nec elit. Cum sociis natoque penatibus et magnis dis
+        parturient montes, nascetur ridiculus mus. Donec id elit non mi porta
+        gravida at eget metus. Integer posuere erat a ante venenatis dapibus
+        posuere velit aliquet.</p>
+
+    </div>
   </div>
 
-  <div class="row" id="card-area">
+  <div class="row p-4" id="card-area" style="background-color: #f4f4f4">
     <div class="container">
-      <h3>The Services</h3>
+      <h2 class="text-center my-3" style="font-weight: bold; font-size: 55px;">
+        The Services</h2>
       <div class="row">
         {% for service in service_list %}
           <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
@@ -41,20 +61,86 @@
   </div>
 
 
+  <div class="p-5">
+    <h2 class="text-center my-3" style="font-weight: bold; font-size: 55px;">
+      Enquire about these services</h2>
+    <div class="container p-5" style="background-color: #1e4a7e; color: #ffffff;">
+      <form action="">
+        <div class="row">
+          <div class="col">
+            <label for="email">Your Email</label>
+            <input type="text" class="form-control" placeholder="name@email.com" id="email">
+          </div>
+          <div class="col">
+            <label for="">Your Location</label>
+            <input type="text" class="form-control" placeholder="" id="location">
+          </div>
+        </div>
+        <div class="form-group pt-4">
+          <label for="role">What best describes your role?</label>
+          <select class="custom-select mb-3" id="role">
+            <option selected>Please select</option>
+            <option value="1">Investor</option>
+            <option value="2">Journalist</option>
+            <option value="3">NGO</option>
+          </select>
+        </div>
+
+        <div class="">
+          <label for="">What services are you interested in?</label><br>
+          <div class="row">
+            {% for service in service_list %}
+              <div class="col-4">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="checkbox" id="{{ service.get_slug }}" value="option1">
+
+                  <label class="form-check-label" for="{{ service.get_slug }}">
+                    {% if service.category == 'Standard' %}
+                      For
+                    {% endif %}
+                    {{ service.title }}</label>
+                </div>
+              </div>
+            {% endfor %}
+
+
+          </div>
+        </div>
+
+        <div class="form-group py-4">
+          <label for="help">How can we help you?</label>
+          <textarea class="form-control" id="help" rows="5"></textarea>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <button type="submit" class="btn btn-outline-light" style="float: right;">
+              Submit Enquiry
+            </button>
+          </div>
+
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+
   {% include 'takwimu/_includes/sections/updates.html' %}
 
   <style>
 
-  #card-area .card-img {
-    background-size: cover !important;
-    background: #1f6cc6 center center;
-    height: 200px;
-    opacity: 0.6;
-  }
+    #card-area .card-img {
+      background-size: cover !important;
+      background: #1f6cc6 center center;
+      height: 200px;
+      opacity: 0.6;
+    }
+
     #card-area .card:hover .card-img {
       opacity: 1;
     }
 
-</style>
+  </style>
 
 {% endblock %}
