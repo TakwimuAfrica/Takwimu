@@ -1,9 +1,10 @@
 <p>
-  <button class="btn btn-outline-primary btn-sm mr-2 border-0 p-1" role="button"
+  <button class="btn btn-toc btn-sm mr-2 border-0 p-2" role="button"
           data-toggle="collapse" data-target="#toc-collapse-s{{ section.id }}"
           aria-expanded="false" aria-controls="toc-collapse-s{{ section.id }}"
           style="font-size: 2em; line-height: 1;">
-    <i class="fas fa-minus"></i>
+    <!-- <i class="fas fa-minus"></i> -->
+    <span class="icon icon-minus"></span>
   </button>
   <a href="{{ section.url }}">
     {% if section.subpage_types|first == 'takwimu.ProfileSectionPage' %}
@@ -25,3 +26,26 @@
     {% endfor %}
   </ul>
 </div>
+
+<style>
+.btn-toc {
+  background: none;
+}
+.btn-toc .icon {
+  width: 25px;
+  height: 25px;
+  display: block;
+  text-indent: -9999px;
+}
+
+.btn-toc .icon-minus {
+  background: url(/static/img/icons/minus.svg) no-repeat 50% 50%;
+  -webkit-mask-image: url(/static/img/icons/minus.svg) no-repeat 50% 50%;
+  mask-image: url(/static/img/icons/minus.svg) no-repeat 50% 50%;
+}
+.btn-toc .icon-add {
+  background: url(/static/img/icons/add.svg) no-repeat 50% 50%;
+  -webkit-mask-image: url(/static/img/icons/add.svg) no-repeat 50% 50%;
+  mask-image: url(/static/img/icons/add.svg) no-repeat 50% 50%;
+}
+</style>
