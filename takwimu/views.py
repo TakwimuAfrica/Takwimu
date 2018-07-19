@@ -13,11 +13,8 @@ class SupportServicesIndexView(ListView):
     --------------------
     View of support services page.
     """
-    template_name = 'takwimu/about/support-services.html'
+    template_name = 'takwimu/about/support_services.html'
     model = Service
-
-
-
 
 
 class HomePageView(TemplateView):
@@ -35,7 +32,6 @@ class HomePageView(TemplateView):
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         return context
-
 
 class AboutUsView(TemplateView):
     template_name = 'takwimu/about/index.html'

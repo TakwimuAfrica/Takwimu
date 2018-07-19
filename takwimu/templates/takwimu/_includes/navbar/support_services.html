@@ -1,8 +1,9 @@
 {% extends 'takwimu/_includes/navbar/_dropdown.html' %}
 
 {% load staticfiles %}
+{% load datastructuretags %}
 
-{% block dropdown_id %}nav-about{% endblock %}
+{% block dropdown_id %}nav-support-services{% endblock %}
 
 {% block dropdown_title %}Support Services{% endblock %}
 {% block dropdown_desc %}Cum sociis natoque penatibus et magnis dis parturient
@@ -12,72 +13,55 @@
 {% block dropdown_content %}
   <div class="row w-100">
     <div class="col-4">
-      <h6 class="font-weight-bold">Standard Services</h6>
-      <ul>
+      <h5 class="font-weight-bold pb-2">Standard Services</h5>
+      <ul style="color:#7ab1f2; font-weight: bold;">
         {% for service in standard_services %}
-          <li>For {{ service.title }}</li>
+          <li class="pb-2" type="disc"><a href="/about/support-services"><u>For {{ service.title }}</u></a></li>
         {% endfor %}
       </ul>
     </div>
     <div class="col-4">
-      <h6 class="font-weight-bold">Premium Services</h6>
-      <ul>
+      <h5 class="font-weight-bold pb-2">Premium Services</h5>
+      <ul style="color:#7ab1f2; font-weight: bold;">
         {% for service in premium_services %}
-          <li>{{ service.title }}</li>
+          <li class="pb-2" type="disc"><a href="/about/support-services"><u>{{ service.title }}</u></a></li>
         {% endfor %}
       </ul>
     </div>
 
     <div class="col-4">
-      <h6 class="font-weight-bold">Help and support</h6>
-      <div class="mt-2 d-inline-block p-2 social_media">
-        <ul class="list-unstyled" style="">
-          <li class="px-2">
-            <a href="{{ settings.takwimu.SocialMediaSetting.twitter }}" target="_blank"><i class="fab fa-twitter fa-fw"></i></a>
-          </li>
-          <li class="px-2">
-            <a href="{{ settings.takwimu.SocialMediaSetting.facebook }}" target="_blank"><i class="fab fa-facebook fa-fw"></i></a>
-          </li>
-          <li class="px-2">
-            <a href="{{ settings.takwimu.SocialMediaSetting.instagram }}" target="_blank"><i class="fab fa-instagram fa-fw"></i></a>
-          </li>
-          <li class="px-2">
-            <a href="{{ settings.takwimu.SocialMediaSetting.github }}" target="_blank"><i class="fab fa-github fa-fw"></i></a>
-          </li>
+      <h5 class="font-weight-bold pb-2">Help and support</h5>
+      <div class="mt-2 d-inline-block p-2 rounded" style="background-color:#1455a0;">
+        <ul class="navbar-nav">
+        {% to_list 'twitter' 'facebook' 'instagram' 'slack' 'github' as social_medias %}
+        {% for social_media in social_medias %}
+          {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+            <li class="nav-item p-2">
+              <a class="nav-link{% if not forloop.last %} border-right" {% else %}" {% endif %}
+		             href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+                <i class="fab fa-{{ social_media }} fa-fw"></i>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
         </ul>
       </div>
-      <br>
-      <ul class="mt-2">
-        <li><a href="/contact-us">Contact Us</a></li>
-        <li>
-          <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank">Support</a>
-        </li>
-        <li><a href="/about">About Us</a></li>
-      </ul>
+
+      <div class="mt-2 d-inline-block pt-2">
+        <ul class="pl-3" style="color:#7ab1f2; font-weight: bold;">
+          <li class="pb-2" type="disc"><a href="/contact-us"><u>Contact Us</u></a></li>
+          <li class="pb-2" type="disc">
+            <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener"><u>Support</u></a>
+          </li>
+          <li class="pb-2" type="disc"><a href="/about"><u>About Us</u></a></li>
+        </ul>
+      </div>
     </div>
-
-
   </div>
+
   <style>
-    .social_media {
-      background-color: #2c73c5;
-    }
-
-    .social_media ul {
-      margin-top: 0;
-      margin-bottom: 0;
-    }
-
-    .social_media li {
-      display: inline;
-    }
-
-    .social_media li a:hover {
-      color: #ffffff;
+    ul li u {
+      color:#7ab1f2;
     }
   </style>
-
 {% endblock %}
-
-
-
