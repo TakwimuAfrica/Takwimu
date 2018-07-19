@@ -14,8 +14,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
                   url(r'^$', HomePageView.as_view(), name='home'),
                   url(r'^about/support-services', SupportServicesView.as_view(), name='about_support_services'),
                   url(r'^about$', RedirectView.as_view(permanent=False,   url='/about/')),
-                  url(r'^terms$', TermsOfUse.as_view(), name='terms'),
-                  url(r'^martor/', include('martor.urls')),
+                  url(r'^terms-privacy$', TermsOfUse.as_view(), name='terms-privacy'),
                   url(r'^feed/$', CountryProfileFeed(), name='rss_feed')
               ] + \
               hurumap_urlpatterns

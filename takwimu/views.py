@@ -45,5 +45,3 @@ class TermsOfUse(TemplateView):
     View of terms.
     '''
     template_name = 'takwimu/about/terms_page.html'
-
-    
