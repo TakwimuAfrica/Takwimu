@@ -2,43 +2,46 @@
 
 {% block content %}
 
-This is example text. Testing if the content actually works
-<!--<section>
+  This is example text. Testing if the content actually works
+  <section>
     <div class="container py-5 data-topic">
-        <div class="row ">
-          <div class="col-3 dataindicators-nav">
-            <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                <a class="active nav-link pl-5 py-3 d-flex align-items-center rounded-0" 
-                   data-toggle="pill" href="#terms-pill" role="tab">
-                  <i class="fas fa-eye fa-fw"></i>Terms of use</a>
-                  <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
-                  <a class="nav-link pl-5 py-3 d-flex align-items-center rounded-0" data-toggle="pill" href="#privacy-pill" role="tab"> Privacy policy
-                </a>
-              </div>
+      <div class="row ">
+        <div class="col-3 dataindicators-nav">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="active nav-link pl-5 py-3 d-flex align-items-center rounded-0"
+               data-toggle="pill" href="#terms-pill" role="tab">
+              <i class="fas fa-eye fa-fw"></i>Terms of use</a>
+            <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
+            <a class="nav-link pl-5 py-3 d-flex align-items-center rounded-0" data-toggle="pill" href="#privacy-pill" role="tab">
+              Privacy policy
+            </a>
           </div>
-          <div class="col-9 tab-content">
-            <div id="terms-pill" class="tab-pane fade in active">
-              <h1>Terms of use</h1>
-              <p>
-                { % include 'takwimu/about/snippets/terms.md' % }
-                </p>
-            </div>
-            <div id="privacy-pill" class="tab-pane fade">
-                <h1>Privacy Policy</h1>
-                <p>{ % include 'takwimu/about/snippets/privacy.md' % }</p>
-              </div>
+        </div>
+        <div class="col-9 tab-content">
+          <div id="terms-pill" class="tab-pane fade in active">
+            <h1>Terms of use</h1>
+            <p>
+              { % include 'takwimu/about/snippets/terms.md' % }
+            </p>
+          </div>
+          <div id="privacy-pill" class="tab-pane fade">
+            <h1>Privacy Policy</h1>
+            <p>{ % include 'takwimu/about/snippets/privacy.md' % }</p>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-<style>
+  <style>
     .dataindicators-nav .nav-pills {
       background-color: #005973;
     }
+
     .dataindicators-nav .nav-link {
       color: #f0f0f0;
     }
+
     .dataindicators-nav .nav-link:hover {
       color: #f0f0f0;;
     }
@@ -47,14 +50,17 @@ This is example text. Testing if the content actually works
       display: none;
       margin-left: -2em;
       position: absolute;
-    }s
+    }
+
+    s
     .dataindicators-nav .nav-link[aria-selected=true] .fa-eye {
       display: inline;
     }
+
     .dataindicators-nav .nav-pills .nav-link.active, .dataindicators-nav .nav-pills .show > .nav-link {
       background-color: transparent;
       font-weight: 500;
     }
-  </style>-->
+  </style>
 
-  {% endblock %}
+{% endblock %}
