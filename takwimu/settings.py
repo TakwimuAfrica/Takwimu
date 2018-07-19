@@ -61,10 +61,12 @@ HURUMAP['map_zoom'] = None
 
 # -------------------------------------------------------------------------------------
 # Google Analytics
+# Main tracking id: TAKWIMU
+HURUMAP['ga_tracking_id'] = 'UA-115543098-1'
 
+# Additional tracking ids
 HURUMAP['ga_tracking_ids'] = [
     'UA-44795600-8',  # HURUmap
-    'UA-115543098-1'  # TAKWIMU
 ]
 
 # Making sure they are the same
