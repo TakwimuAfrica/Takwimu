@@ -1,9 +1,7 @@
 {% extends 'takwimu/_layouts/page.html' %}
-
+% load staticfiles %}
 {% block content %}
-
-  This is example text. Testing if the content actually works
-  <section>
+  <section class="pt-5">
     <div class="container py-5 data-topic">
       <div class="row ">
         <div class="col-3 dataindicators-nav">
@@ -15,19 +13,25 @@
             <a class="nav-link pl-5 py-3 d-flex align-items-center rounded-0" data-toggle="pill" href="#privacy-pill" role="tab">
               Privacy policy
             </a>
+            <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
+            <a class="nav-link pl-5 py-3 d-flex align-items-center rounded-0" data-toggle="pill" href="#cookie-pill" role="tab">
+                Cookie policy
+              </a>
           </div>
         </div>
         <div class="col-9 tab-content">
-          <div id="terms-pill" class="tab-pane fade in active">
+          <div id="terms-pill" class="tab-pane fade show active">
             <h1>Terms of use</h1>
-            <p>
-              { % include 'takwimu/about/snippets/terms.md' % }
-            </p>
+            <p>{% include 'takwimu/about/snippets/terms.md' %}</p>
           </div>
           <div id="privacy-pill" class="tab-pane fade">
             <h1>Privacy Policy</h1>
-            <p>{ % include 'takwimu/about/snippets/privacy.md' % }</p>
+            <p>{% include 'takwimu/about/snippets/privacy.md' %}</p>
           </div>
+          <div id="cookie-pill" class="tab-pane fade">
+              <h1>Cookie Policy</h1>
+              <p>{% include 'takwimu/about/snippets/cookie.md' %}</p>
+            </div>
         </div>
       </div>
     </div>
