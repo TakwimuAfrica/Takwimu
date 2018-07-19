@@ -67,7 +67,7 @@
                 </div>
                 <div class="col-8">
                   <h2 class="display-4 font-weight-bold mb-4">{{ country|title }}</h2>
-                  <p class="mb-0" style="color: #4a4a4a; font-size: 15px">
+                  <p class="mb-0" style="color: #4a4a4a;">
                     Lorem ipsum dolor sit amet consectetur adipisicing elit.
                     Ipsum
                     praesentium, libero odit voluptatum necessitatibus quisquam
@@ -108,22 +108,6 @@
     {% include 'takwimu/_includes/footer.html' %}
   {% endblock %}
   <style>
-
-    p {
-      font-family: 'Montserrat', sans-serif;
-    }
-
-    .updates {
-      margin-bottom: 0;
-    }
-
-    .breadcrumb-item + .breadcrumb-item::before {
-      display: inline-block;
-      padding-right: .5rem;
-      color: #fff;
-      content: '>>';
-    }
-
     .country-container:nth-of-type(odd) {
       background-color: #fff;
     }
@@ -156,22 +140,6 @@
   })(document, "script", "db3ec064-4699-489e-a829-d337d290b7e7");
   /*]]>*/</script>
   <!-- End of takwimu Zendesk Widget script -->
-
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-      window.ga = function () {
-          ga.q.push(arguments)
-      };
-      ga.q = [];
-      ga.l = +new Date;
-      ga('create', '{{ HURUmap.ga_tracking_id }}', 'auto');
-      ga('send', 'pageview')
-      {% for ga_tracking_id in HURUMAP.ga_tracking_ids %}
-          ga('create', '{{ ga_tracking_id }}', 'auto', {'name': 't{{ forloop.counter }}'});
-          ga('t{{ forloop.counter }}.send', 'pageview');
-      {% endfor %}
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
   <!-- Bootstrap: Enable Tooltips -->
   <script>

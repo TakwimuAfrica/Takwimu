@@ -16,7 +16,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
                   url(r'^about/support-services', SupportServicesView.as_view(), name='about_support_services'),
                   url(r'^about/$', AboutUsView.as_view(), name='about_page'),
                   url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
-                  url(r'^profiles/$', ProfileView.as_view(), name='profiles')
+                  url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
               ] + \
               hurumap_urlpatterns
 
