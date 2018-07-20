@@ -277,10 +277,15 @@ class ProfilePage(Page):
         return self.full_url
 
 
-class SupportService(models.Model):
+class Service(models.Model):
+
+    SERVICE_CATEGORIES = [('Standard', 'Standard'), ('Premium', 'Premium')]
+
     title = models.TextField()
     icon = IconField()
     description = RichTextField()
+    category = models.CharField(max_length=20, choices=SERVICE_CATEGORIES,
+                                default='Standard')
 
     def get_slug(self):
         # remove special characters and punctuation
