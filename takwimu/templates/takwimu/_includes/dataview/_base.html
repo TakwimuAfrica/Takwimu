@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 
 <div class="py-2">
-  {% if indicator.value.hide_title %}
+  {% if not indicator.value.hide_title %}
     <h5>{{ indicator.value.title }}</h5>
   {% endif %}
 
