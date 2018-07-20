@@ -3,10 +3,9 @@
           data-toggle="collapse" data-target="#toc-collapse-s{{ section.id }}"
           aria-expanded="false" aria-controls="toc-collapse-s{{ section.id }}"
           style="font-size: 2em; line-height: 1;">
-    <!-- <i class="fas fa-minus"></i> -->
     <span class="icon icon-minus"></span>
   </button>
-  <a href="{{ section.url }}">
+  <a href="{{ section.url }}" class="font-weight-bold">
     {% if section.subpage_types|first == 'takwimu.ProfileSectionPage' %}
       Country Overview
     {% else %}
@@ -35,7 +34,6 @@
   width: 25px;
   height: 25px;
   display: block;
-  text-indent: -9999px;
 }
 
 .btn-toc .icon-minus {
@@ -43,7 +41,7 @@
   -webkit-mask-image: url(/static/img/icons/minus.svg) no-repeat 50% 50%;
   mask-image: url(/static/img/icons/minus.svg) no-repeat 50% 50%;
 }
-.btn-toc .icon-add {
+.btn-toc .icon-plus {
   background: url(/static/img/icons/add.svg) no-repeat 50% 50%;
   -webkit-mask-image: url(/static/img/icons/add.svg) no-repeat 50% 50%;
   mask-image: url(/static/img/icons/add.svg) no-repeat 50% 50%;
