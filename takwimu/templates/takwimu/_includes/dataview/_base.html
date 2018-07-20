@@ -1,7 +1,9 @@
 {% load wagtailcore_tags %}
 
 <div class="py-2">
-  <h5>{{ indicator.value.title }}</h5>
+  {% if indicator.value.hide_title %}
+    <h5>{{ indicator.value.title }}</h5>
+  {% endif %}
 
   <div class="btn-group ml-4" role="group" style="margin-bottom: -100px;">
     {% block dataview_ctrl %}
