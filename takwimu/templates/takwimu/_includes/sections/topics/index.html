@@ -1,0 +1,102 @@
+{% load staticfiles %}
+
+<div class="bg-primary">
+  <div class="row container mx-auto p-5 card-deck no-gutters text-white" id="data-topics">
+    <!-- Topic navigation -->
+    <div class="col-4">
+      <h3 class="font-weight-bold text-center">Select a topic </h3>
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        {% for topic in topics %}
+          <a class="nav-link text-white pl-5" id={% with "v-pills-topic-tab"|add:topic.id as tab_id %}{{ tab_id }}{% endwith %} 
+            href={% with "#v-pills-topic"|add:topic.id as ref %}{{ ref }}{% endwith %} 
+            aria-controls={% with "v-pills-topic"|add:topic.id as topic_id %}{{ topic_id }}{% endwith %} 
+            data-toggle="pill" role="tab" aria-selected="false">
+            {{ topic.title }}
+            <i class="fa fa-angle-double-right float-right"></i>
+          </a>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Sub topic second column -->
+    <div class="col-4">
+      <h3 class="font-weight-bold text-center">Select a sub topic </h3>
+      <div class="tab-content" id="v-pills-tabContent">
+        {% for topic in topics %}
+        <div class="tab-pane fade" id={% with "v-pills-topic"|add:topic.id as ref %}{{ ref }}{% endwith %} role="tabpanel" 
+          aria-labelledby={% with "v-pills-topic-tab"|add:topic.id as tab_id %}{{ tab_id }}{% endwith %}>
+          <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+            {% for subtopic in topic.subtopics %}
+              <!-- Check if the last item is country -->
+              {% if subtopic.id != 'country' %}
+                <a class="nav-link text-white pl-5"
+                  id={% with "v-sub-pills-topic-tab"|add:subtopic.id as subtab_id %}{{ subtab_id }}{% endwith %}
+                  href={% with "#v-sub-pills-topic"|add:subtopic.id as ref %}{{ ref }}{% endwith %}
+                  aria-controls={% with "v-sub-pills-topic"|add:subtopic.id as subtopic_id %}{{ subtopic_id }}{% endwith %} 
+                  role="tab" data-toggle="pill" aria-selected="false">
+                  {{ subtopic.title }}
+                  <i class="fa fa-angle-double-right float-right"></i>
+                </a>
+              {% else %}
+                <!-- Country dropdown -->
+                <a class="btn btn-link text-white" 
+                  id={% with "v-sub-pills-topic-tab"|add:subtopic.id as subtab_id %}{{ subtab_id }}{% endwith %} 
+                  href={% with "#v-sub-pills-topic"|add:subtopic.id as ref %}{{ ref }}{% endwith %}>
+
+                  <img class="rounded-circle border-light mr-2" 
+                    src={% with 'img/flags/'|add:subtopic.title|lower|add:'.svg' as image_static %}
+                      {% static image_static %}
+                    {% endwith %} 
+                    border="4" style="border-style:double; width: 40px; height: 40px;"/>
+                  <span>
+                    Key issue - {{ subtopic.key_issue }}
+                    <b>( {{ subtopic.title }})</b>
+                  </span>
+                </a>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- Sub-topic last column -->
+    <div class="col-4">
+      <h3 class="font-weight-bold text-center">Select a sub topic </h3>
+      <div class="tab-content" id="v-sub-pills-tabContent" role="tablist" aria-orientation="vertical">
+        {% for topic in topics %} {% for subtopic in topic.subtopics %}
+          <div class="tab-pane fade" id={% with "v-sub-pills-topic"|add:subtopic.id as ref %}{{ ref }}{% endwith %} role="tabpanel"
+            aria-labelledby={% with "v-sub-pills-topic-tab"|add:subtopic.id as tab_id %}{{ tab_id }}{% endwith %}>
+            <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+              {% for topic in subtopic.sub_subtopics %}
+                <a class="nav-link text-white pl-5" 
+                  id={% with "v-sub-pills-topic-tab"|add:subtopic.id as subtab_id %}{{ subtab_id }}{% endwith %} 
+                  href={% with "#v-sub-pills-topic"|add:subtopic.id as ref %}{{ ref }}{% endwith %} 
+                  aria-controls={% with "v-sub-pills-topic"|add:subtopic.id as subtopic_id %}{{ subtopic_id }}{% endwith %} 
+                  role="tab" data-toggle="pill" aria-selected="false">
+                  {{ topic.title }}
+                  <i class="fa fa-angle-double-right float-right"></i>
+                </a>
+              {% endfor %}
+            </div>
+          </div>
+          {% endfor %}
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</div>
+<!-- This css needs to be refactored in .scss -->
+<style>
+  #data-topics .nav-link {
+    background: transparent;
+    border: transparent;
+    cursor: pointer;
+  }
+
+  #data-topics .nav-link.active,
+  #data-topics .nav-link:hover {
+    background: #6196a5;
+  }
+</style>

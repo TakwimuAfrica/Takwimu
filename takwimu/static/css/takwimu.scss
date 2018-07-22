@@ -10,6 +10,7 @@
 $brand-color-primary: #1f6cc6;
 $brand-color-primary-alt: #074c9c;
 $brand-color-secondary: #1e4a7e;
+$brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
 $brand-extend-jumbotron: #e9ecef;
@@ -20,7 +21,9 @@ body {
   padding-top: 56px;
 }
 
-* {
+// hurumap.css provides default font family for these elements: html, body, h4, h5, h6 & p
+// thus we must overide them (CSS Specificity Hierarchy)
+ html, body, h4, h5, h6, p, * {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
@@ -105,6 +108,7 @@ a {
   &:hover, &:focus, &:active {
     background-color: $brand-color-primary !important;
     border-color: $brand-color-primary !important;
+    color: $brand-extend-white;
   }
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -144,11 +148,30 @@ a {
   }
 }
 
+/*
+* Custom CSS
+* Topics tabs css
+*/
+.custom-nav a {
+  border-bottom: 0.4em solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  .border-left {
+    border-left: 1px solid rgba(255, 255, 255, 0.25)!important;
+  }
+  &:hover, &.active {
+    background: $brand-color-dark-alt;
+    border-bottom: 0.4em solid $brand-extend-white;
+    + a div {
+      border-left: 1px solid transparent !important;
+    }
+    div {
+      border-left: 1px solid transparent !important;
+    }
+  }
+}
 
-
- // Custom CSS
-
- // Navbar goodness
+// Navbar goodness
 
 .navbar.fixed-top {
   // Fix position problem of the "containing block" of lg dropdown

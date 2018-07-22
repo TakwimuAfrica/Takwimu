@@ -2,6 +2,7 @@ import re
 
 from django.db import models
 from django import forms
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
 
 from wagtail.wagtailcore import blocks
@@ -276,10 +277,15 @@ class ProfilePage(Page):
         return self.full_url
 
 
-class SupportService(models.Model):
+class Service(models.Model):
+
+    SERVICE_CATEGORIES = [('Standard', 'Standard'), ('Premium', 'Premium')]
+
     title = models.TextField()
     icon = IconField()
     description = RichTextField()
+    category = models.CharField(max_length=20, choices=SERVICE_CATEGORIES,
+                                default='Standard')
 
     def get_slug(self):
         # remove special characters and punctuation
@@ -324,7 +330,6 @@ class KeyContacts(Orderable):
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
-    
 class Testimonial(models.Model):
     name = models.CharField(max_length=255)
     title = models.TextField()
@@ -360,3 +365,45 @@ class FAQ(models.Model):
 
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
+
+# Settings
+@register_setting
+class SupportSetting(BaseSetting):
+    hello = models.EmailField(blank=True, null=True,
+        help_text='TAKWIMU main email address')
+    zendesk = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Zendesk account URL')
+    address = RichTextField(blank=True, null=True,
+        help_text='TAKWIMU address')
+
+    class Meta:
+        verbose_name = 'Support'
+
+@register_setting
+class SocialMediaSetting(BaseSetting):
+    facebook = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Facebook page URL')
+    github = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Github page URL')
+    instagram = models.URLField(blank=True, null=True,
+        max_length=255, help_text='TAKWIMU Instagram account URL')
+    medium = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Medium page URL')
+    twitter = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Twitter account URL')
+    youtube = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU YouTube channel or account URL')
+
+    class Meta:
+        verbose_name = 'Social Media'
+
+
+@register_setting
+class AboutUsSetting(BaseSetting):
+    about_us = RichTextField()
+
+    class Meta:
+        verbose_name = 'About Us'
+
+
+

@@ -57,15 +57,15 @@
 
           <p class="font-weight-bold  text-uppercase">Section 1</p>
           <h1 class="display-3" style="font-weight: 900;">Country Overview</h1>
-          <p class="lead my-4 mx-auto" style="max-width: 780px;">A top-level
-            overview of {{ page.title }} – how it’s governed, the make-up of
-            it’s population, the economy and SDG indicators</p>
+          <p class="lead my-4 mx-auto" style="max-width: 780px;">
+            A top-level overview of {{ page.title }} – how it’s governed, the make-up of
+            its population, the economy and SDG indicators
+          </p>
 
         {% endif %}
 
-        <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled"
-           href="#" role="button"
-           data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled" href="#" 
+          role="button" data-toggle="tooltip" data-placement="top" title="Coming Soon">
           Download full country profile
           <span class="border-left pl-2 ml-2">
             <i class="fas fa-download fa-fw"></i>
@@ -76,16 +76,16 @@
     </div>
 
   </div>
-  <div class="py-2 bg-secondary">
+  <div class="bg-secondary">
     <div class="container">
-      <div class="row d-flex flex-row justify-content-center">
+      <div class="row d-flex flex-row justify-content-center custom-nav">
         {% for topic in page.body %}
-          <div class="col-2 text-center {% if not forloop.last %}border-right{% endif %}">
-            <a href="#{{ topic.value.title|slugify }}" class="text-light text-uppercase py-3">
-              <p><i class="{{ topic.value.icon }} fa-2x text-primary"></i></p>
-              <p>{{ topic.value.title }}</p>
-            </a>
+        <a href="#{{ topic.value.title|slugify }}" class="text-light text-truncate text-uppercase px-0 py-3">
+          <div class="py-2 col {% if not forloop.first %}border-left{% endif %} d-flex align-items-center flex-column">
+            <span class="d-block my-1 {{ topic.value.icon }} text-white py-0" style="font-size: 1.559em;"></span>
+            <small class="d-block">{{ topic.value.title }}</small>
           </div>
+        </a>
         {% endfor %}
       </div>
     </div>
@@ -95,14 +95,15 @@
 
 <!-- Table of Contents Sidebar -->
 <div id="toc" class="d-none p-4 border-left"
-     style="max-width: 400px; width: 100%; height: 100vh; position: fixed; top: 0; right: 0; overflow-y: scroll; background-color: #fff; z-index: 2000;">
+  style="max-width: 400px; width: 100%; height: 100vh; position: fixed; top: 0; right: 0; overflow-y: scroll; background-color: #fff; z-index: 2000;">
 
   <p class="text-right mb-3">
     <button
-        class="btn btn btn-outline-primary text-uppercase d-flex align-items-center ml-auto border-0 py-0"
+        class="btn btn-link text-uppercase font-weight-bold ml-auto border-0 py-2"
+        style="text-decoration: none; color: #000;"
         onclick="javascript:$('#toc').addClass('d-none')">
-      Close <span class="ml-2 font-weight-light"
-                  style="font-size: 2em;">X</span>
+      Close 
+      <img src="{% static 'img/icons/close.svg' %}" class="ml-2 p-1" alt="Close" style="width: 35px;height: 35px;object-fit: contain;">
     </button>
   </p>
 
@@ -117,8 +118,8 @@
   <h2 class="mb-3">Table of Contents</h2>
   
   {# TOC content is relative to a profile page. #}
-  {# So we check if it's a profile page, else it's a profile section #}
-  {# If it's a section, we reference the parent #}
+  {# So we check if its a profile page, else its a profile section #}
+  {# If its a section, we reference the parent #}
 
   {% if page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
     {% include 'takwimu/_includes/profile/toc_detail.html' with section=page %}
@@ -143,9 +144,9 @@
     document.addEventListener('DOMContentLoaded', function () {
         $('button[data-toggle="collapse"]').on('click', function () {
             $(this)
-                .find('[data-fa-i2svg]')
-                .toggleClass('fa-minus')
-                .toggleClass('fa-plus');
+                .find('.icon')
+                .toggleClass('icon-minus')
+                .toggleClass('icon-plus');
         });
     });
 </script>
