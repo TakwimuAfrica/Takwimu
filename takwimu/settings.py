@@ -32,7 +32,7 @@ TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
 # -------------------------------------------------------------------------------------
 
 HURUMAP['name'] = 'Takwimu'
-HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://dev.takwimu.africa/')
+HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://dev.takwimu.africa')
 
 hurumap_profile = 'census'
 
