@@ -24,6 +24,9 @@
   section.how-it-works .nav-link.active .step-active {
     visibility: visible !important;
   }
+  .links a u {
+    color:#1f6cc6;
+  }
 
 </style>
 
@@ -52,7 +55,7 @@
           <ul class="font-weight-bold">
             {% with countries='nigeria tanzania senegal' %}
             {% for country in countries.split %}
-            <li><a href="/profiles/{{ country }}"><u>{{ country|title }} Profile</u></a></li>
+            <li class="links"><a href="/profiles/{{ country }}"><u>{{ country|title }} Profile</u></a></li><br>
             {% endfor %}
             {% endwith %}
           </ul>
