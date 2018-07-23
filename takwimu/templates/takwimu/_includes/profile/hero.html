@@ -64,7 +64,7 @@
 
         {% endif %}
 
-        <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled" href="#" 
+        <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled" href="#"
           role="button" data-toggle="tooltip" data-placement="top" title="Coming Soon">
           Download full country profile
           <span class="border-left pl-2 ml-2">
@@ -78,16 +78,16 @@
   </div>
   <div class="bg-secondary">
     <div class="container">
-      <div class="row d-flex flex-row justify-content-center custom-nav">
+      <nav class="nav nav-justified container text-center custom-nav">
         {% for topic in page.body %}
-        <a href="#{{ topic.value.title|slugify }}" class="text-light text-truncate text-uppercase px-0 py-3">
-          <div class="py-2 col {% if not forloop.first %}border-left{% endif %} d-flex align-items-center flex-column">
+        <a href="#{{ topic.value.title|slugify }}" class=" nav-item nav-link text-light pt-4 pb-2 px-0">
+          <div class="pt-2 col text-center {% if not forloop.first %}border-left{% endif %} d-flex align-items-center flex-column">
             <span class="d-block my-1 {{ topic.value.icon }} text-white py-0" style="font-size: 1.559em;"></span>
-            <small class="d-block">{{ topic.value.title }}</small>
+            <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal;">{{ topic.value.title }}</p>
           </div>
         </a>
         {% endfor %}
-      </div>
+      </nav>
     </div>
   </div>
 
@@ -102,7 +102,7 @@
         class="btn btn-link text-uppercase font-weight-bold ml-auto border-0 py-2"
         style="text-decoration: none; color: #000;"
         onclick="javascript:$('#toc').addClass('d-none')">
-      Close 
+      Close
       <img src="{% static 'img/icons/close.svg' %}" class="ml-2 p-1" alt="Close" style="width: 35px;height: 35px;object-fit: contain;">
     </button>
   </p>
@@ -116,7 +116,7 @@
   <hr class="my-4"/>
 
   <h2 class="mb-3">Table of Contents</h2>
-  
+
   {# TOC content is relative to a profile page. #}
   {# So we check if its a profile page, else its a profile section #}
   {# If its a section, we reference the parent #}

@@ -1,17 +1,18 @@
+{% load staticfiles %}
 <section class="support-services-tabs">
   <div class="bg-secondary">
     <nav
         class="nav nav-justified container text-center custom-nav"
         id="nav-tabs" role="tablist">
       {% for service in support_services %}
-      <a class="nav-item nav-link text-light pt-3 px-0"
-        id="support-{{ service.get_slug | add:'-btn' }}"
+      <a class="nav-item nav-link text-light pt-4 pb-3 px-0"
+        id="support-{{ service.get_slug | add:'-btn'}}"
         data-toggle="tab" href="#support-{{ service.get_slug }}" role="tab"
         aria-controls="support-{{ service.get_slug }}"
         aria-selected="true">
         <div class="text-center {% if not forloop.first %}border-left{% endif %}">
-          <h2 class="mb-1">{{ service.icon.as_html }}</h2>
-          <p class="small text-uppercase">{{ service.title }}</p>
+          <h2 class="py-1">{{ service.icon.as_html }}</h2>
+          <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal";>{{ service.title }}</p>
         </div>
       </a>
       {% endfor %}
@@ -66,9 +67,9 @@
 </section>
 
 <style>
- 
+
   section.support-services-tabs .tab-content h3.display-4 {
-    white-space: nowrap; 
+    white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
@@ -94,7 +95,7 @@
     // With HTML5 history API, we can easily prevent scrolling!
     $('section.support-services-tabs #nav-tabs a').on('shown.bs.tab', function (e) {
         if("pushState" in history) {
-          history.pushState("", document.title, e.target.hash); 
+          history.pushState("", document.title, e.target.hash);
         } else {
           window.location.hash = e.target.hash; //Polyfill for old browsers
         }
@@ -105,7 +106,7 @@
       $('.support-services-tabs .tab-pane').removeClass('show active');
       $('.support-services-tabs #nav-tabs a').removeClass('active');
       if("pushState" in history) {
-        history.pushState("", document.title, window.location.pathname + window.location.search); 
+        history.pushState("", document.title, window.location.pathname + window.location.search);
       } else {
         window.location.href.split('#')[0]; //Polyfill for old browsers
       }
