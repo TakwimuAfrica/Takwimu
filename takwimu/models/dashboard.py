@@ -366,6 +366,7 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
+
 # Settings
 @register_setting
 class SupportSetting(BaseSetting):
@@ -378,6 +379,7 @@ class SupportSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Support'
+
 
 @register_setting
 class SocialMediaSetting(BaseSetting):
@@ -406,4 +408,12 @@ class AboutUsSetting(BaseSetting):
         verbose_name = 'About Us'
 
 
+@register_setting
+class LegalNoticeSetting(BaseSetting):
+    terms_of_use = RichTextField(blank=True, null=True)
+    privacy_policy = RichTextField(blank=True, null=True)
+    cookie_policy = RichTextField(blank=True, null=True)
+
+    class Meta:
+        verbose_name = 'Legal Notice'
 
