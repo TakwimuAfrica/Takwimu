@@ -25,6 +25,7 @@
     visibility: visible !important;
   }
 
+
 </style>
 
 <section>
@@ -52,7 +53,7 @@
           <ul class="font-weight-bold">
             {% with countries='nigeria tanzania senegal' %}
             {% for country in countries.split %}
-            <li><a href="/profiles/{{ country }}"><u>{{ country|title }} Profile</u></a></li>
+            <li class="links"><a href="/profiles/{{ country }}"><u>{{ country|title }} Profile</u></a></li><br>
             {% endfor %}
             {% endwith %}
           </ul>
@@ -67,3 +68,9 @@
     </div>
   </div>
 </section>
+
+<style>
+  .links a u {
+    color:blue;
+  }
+</style>
