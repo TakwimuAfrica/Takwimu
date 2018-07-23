@@ -1,133 +1,137 @@
--- noinspection SqlNoDataSourceInspectionForFile
-
--- noinspection SqlDialectInspectionForFile
-
 --
 -- PostgreSQL database dump
 --
 
 -- Dumped from database version 10.0
--- Dumped by pg_dump version 10.0
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 SET row_security = off;
-
-SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: wazimap_geography; Type: TABLE; Schema: public; Owner: humandev
+-- Name: wazimap_geography; Type: TABLE; Schema: public; Owner: ahereza
 --
-DROP TABLE wazimap_geography;
 
-CREATE TABLE wazimap_geography (
+CREATE TABLE public.wazimap_geography (
     id integer NOT NULL,
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     name character varying(100) NOT NULL,
     version character varying(100) NOT NULL,
     square_kms double precision,
-    parent_level character varying(15),
-    parent_code character varying(10),
+    parent_level character varying(20),
+    parent_code character varying(20),
     long_name character varying(100)
 );
 
 
-ALTER TABLE wazimap_geography OWNER TO takwimu;
+ALTER TABLE public.wazimap_geography OWNER TO ahereza;
 
 --
--- Name: wazimap_geography_id_seq; Type: SEQUENCE; Schema: public; Owner: humandev
+-- Data for Name: wazimap_geography; Type: TABLE DATA; Schema: public; Owner: ahereza
 --
 
-CREATE SEQUENCE wazimap_geography_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE wazimap_geography_id_seq OWNER TO takwimu;
-
---
--- Name: wazimap_geography_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: humandev
---
-
-ALTER SEQUENCE wazimap_geography_id_seq OWNED BY wazimap_geography.id;
-
-
---
--- Name: wazimap_geography id; Type: DEFAULT; Schema: public; Owner: humandev
---
-
-ALTER TABLE ONLY wazimap_geography ALTER COLUMN id SET DEFAULT nextval('wazimap_geography_id_seq'::regclass);
-
-
---
--- Data for Name: wazimap_geography; Type: TABLE DATA; Schema: public; Owner: humandev
---
-
-COPY wazimap_geography (id, geo_level, geo_code, name, version, square_kms, parent_level, parent_code, long_name) FROM stdin;
-1	continent	AFR	Africa	2009	\N	\N	\N	\N
-2	country	NGA	Nigeria	2009	\N	continent	AFR	\N
-3	country	SEN	Senegal	2009	\N	continent	AFR	\N
-4	country	TZA	Tanzania	2009	\N	continent	AFR	\N
+COPY public.wazimap_geography (id, geo_level, geo_code, name, version, square_kms, parent_level, parent_code, long_name) FROM stdin;
+0	level1	NG-1-001	Abia	2009	\N	country	NG	Abia
+1	level1	NG-1-002	Adamawa	2009	\N	country	NG	Adamawa
+2	level1	NG-1-003	Akwa Ibom	2009	\N	country	NG	Akwa Ibom
+3	level1	NG-1-004	Anambra	2009	\N	country	NG	Anambra
+4	level1	NG-1-005	Bauchi	2009	\N	country	NG	Bauchi
+5	level1	NG-1-006	Bayelsa	2009	\N	country	NG	Bayelsa
+6	level1	NG-1-007	Benue	2009	\N	country	NG	Benue
+7	level1	NG-1-008	Borno	2009	\N	country	NG	Borno
+8	level1	NG-1-009	Cross River	2009	\N	country	NG	Cross River
+9	level1	NG-1-010	Delta	2009	\N	country	NG	Delta
+10	level1	NG-1-011	Ebonyi	2009	\N	country	NG	Ebonyi
+11	level1	NG-1-012	Edo	2009	\N	country	NG	Edo
+12	level1	NG-1-013	Ekiti	2009	\N	country	NG	Ekiti
+13	level1	NG-1-014	Enugu	2009	\N	country	NG	Enugu
+14	level1	NG-1-015	Federal Capital Territory	2009	\N	country	NG	Federal Capital Territory
+15	level1	NG-1-016	Gombe	2009	\N	country	NG	Gombe
+16	level1	NG-1-017	Imo	2009	\N	country	NG	Imo
+17	level1	NG-1-018	Jigawa	2009	\N	country	NG	Jigawa
+18	level1	NG-1-019	Kaduna	2009	\N	country	NG	Kaduna
+19	level1	NG-1-020	Kano	2009	\N	country	NG	Kano
+20	level1	NG-1-021	Katsina	2009	\N	country	NG	Katsina
+21	level1	NG-1-022	Kebbi	2009	\N	country	NG	Kebbi
+22	level1	NG-1-023	Kogi	2009	\N	country	NG	Kogi
+23	level1	NG-1-024	Kwara	2009	\N	country	NG	Kwara
+24	level1	NG-1-025	Lagos	2009	\N	country	NG	Lagos
+25	level1	NG-1-026	Nasarawa	2009	\N	country	NG	Nasarawa
+26	level1	NG-1-027	Niger	2009	\N	country	NG	Niger
+27	level1	NG-1-028	Ogun	2009	\N	country	NG	Ogun
+28	level1	NG-1-029	Ondo	2009	\N	country	NG	Ondo
+29	level1	NG-1-030	Osun	2009	\N	country	NG	Osun
+30	level1	NG-1-031	Oyo	2009	\N	country	NG	Oyo
+31	level1	NG-1-032	Plateau	2009	\N	country	NG	Plateau
+32	level1	NG-1-033	Rivers	2009	\N	country	NG	Rivers
+33	level1	NG-1-034	Sokoto	2009	\N	country	NG	Sokoto
+34	level1	NG-1-035	Taraba	2009	\N	country	NG	Taraba
+35	level1	NG-1-036	Yobe	2009	\N	country	NG	Yobe
+36	level1	NG-1-037	Zamfara	2009	\N	country	NG	Zamfara
+37	level1	SN-1-001	Dakar	2009	\N	country	SN	Dakar
+38	level1	SN-1-002	Diourbel	2009	\N	country	SN	Diourbel
+39	level1	SN-1-003	Fatick	2009	\N	country	SN	Fatick
+40	level1	SN-1-004	Kaffrine	2009	\N	country	SN	Kaffrine
+41	level1	SN-1-005	Kaolack	2009	\N	country	SN	Kaolack
+42	level1	SN-1-006	Kedougou	2009	\N	country	SN	Kedougou
+43	level1	SN-1-007	Kolda	2009	\N	country	SN	Kolda
+44	level1	SN-1-008	Louga	2009	\N	country	SN	Louga
+45	level1	SN-1-009	Matam	2009	\N	country	SN	Matam
+46	level1	SN-1-010	Saint Louis	2009	\N	country	SN	Saint Louis
+47	level1	SN-1-011	Sedhiou	2009	\N	country	SN	Sedhiou
+48	level1	SN-1-012	Tambacounda	2009	\N	country	SN	Tambacounda
+49	level1	SN-1-013	Thies	2009	\N	country	SN	Thies
+50	level1	SN-1-014	Ziguinchor	2009	\N	country	SN	Ziguinchor
+51	level1	TZ-1-022	Pwani	2009	\N	country	TZ	Pwani
+52	level1	TZ-1-026	Simiyu	2009	\N	country	TZ	Simiyu
+53	level1	TZ-1-004	Geita	2009	\N	country	TZ	Geita
+54	level1	TZ-1-027	Singida	2009	\N	country	TZ	Singida
+55	level1	TZ-1-005	Iringa	2009	\N	country	TZ	Iringa
+56	level1	TZ-1-023	Rukwa	2009	\N	country	TZ	Rukwa
+57	level1	TZ-1-006	Kagera	2009	\N	country	TZ	Kagera
+58	level1	TZ-1-010	Kigoma	2009	\N	country	TZ	Kigoma
+59	level1	TZ-1-014	Lindi	2009	\N	country	TZ	Lindi
+60	level1	TZ-1-002	Dar es salaam	2009	\N	country	TZ	Dar es salaam
+61	level1	TZ-1-003	Dodoma	2009	\N	country	TZ	Dodoma
+62	level1	TZ-1-028	Tanga	2009	\N	country	TZ	Tanga
+63	level1	TZ-1-019	Mtwara	2009	\N	country	TZ	Mtwara
+64	level1	TZ-1-21	Njombe	2009	\N	country	TZ	Njombe
+65	level1	TZ-1-029	Tabora	2009	\N	country	TZ	Tabora
+66	level1	TZ-1-011	Kilimanjaro	2009	\N	country	TZ	Kilimanjaro
+67	level1	TZ-1-025	Shinyanga	2009	\N	country	TZ	Shinyanga
+68	level1	TZ-1-016	Mara	2009	\N	country	TZ	Mara
+69	level1	TZ-1-024	Ruvuma	2009	\N	country	TZ	Ruvuma
+70	level1	TZ-1-020	Mwanza	2009	\N	country	TZ	Mwanza
+71	level1	TZ-1-017	Mbeya	2009	\N	country	TZ	Mbeya
+72	level1	TZ-1-001	Arusha	2009	\N	country	TZ	Arusha
+73	level1	TZ-1-018	Morogoro	2009	\N	country	TZ	Morogoro
+74	level1	TZ-1-009	Katavi	2009	\N	country	TZ	Katavi
+75	level1	TZ-1-015	Manyara	2009	\N	country	TZ	Manyara
+76	level1	TZ-1-012	Kusini Pemba	2009	\N	country	TZ	Kusini Pemba
+77	level1	TZ-1-008	Kaskazini Unguja	2009	\N	country	TZ	Kaskazini Unguja
+78	level1	TZ-1-013	Kusini Unguja	2009	\N	country	TZ	Kusini Unguja
+79	level1	TZ-1-030	Mjini Magharibi	2009	\N	country	TZ	Mjini Magharibi
+80	level1	TZ-1-007	Kaskazini Pemba	2009	\N	country	TZ	Kaskazini Pemba
+81	country	TZ	Tanzania	2009	\N	continent	AFR	Tanzania
+82	country	NG	Nigeria	2009	\N	continent	AFR	Nigeria
+83	country	SN	Senegal	2009	\N	continent	AFR	Senegal
+84	continent	AFR	Africa	2009	\N	\N	\N	Africa
 \.
-
-
---
--- Name: wazimap_geography_id_seq; Type: SEQUENCE SET; Schema: public; Owner: humandev
---
-
-SELECT pg_catalog.setval('wazimap_geography_id_seq', 48, true);
-
-
---
--- Name: wazimap_geography wazimap_geography_geo_level_9a5128d2_uniq; Type: CONSTRAINT; Schema: public; Owner: humandev
---
-
-ALTER TABLE ONLY wazimap_geography
-    ADD CONSTRAINT wazimap_geography_geo_level_9a5128d2_uniq UNIQUE (geo_level, geo_code);
-
-
---
--- Name: wazimap_geography wazimap_geography_pkey; Type: CONSTRAINT; Schema: public; Owner: humandev
---
-
-ALTER TABLE ONLY wazimap_geography
-    ADD CONSTRAINT wazimap_geography_pkey PRIMARY KEY (id);
-
-
---
--- Name: wazimap_geography_84cdc76c; Type: INDEX; Schema: public; Owner: humandev
---
-
-CREATE INDEX wazimap_geography_84cdc76c ON wazimap_geography USING btree (version);
-
-
---
--- Name: wazimap_geography_b068931c; Type: INDEX; Schema: public; Owner: humandev
---
-
-CREATE INDEX wazimap_geography_b068931c ON wazimap_geography USING btree (name);
-
-
---
--- Name: wazimap_geography_name_36b79089_like; Type: INDEX; Schema: public; Owner: humandev
---
-
-CREATE INDEX wazimap_geography_name_36b79089_like ON wazimap_geography USING btree (name varchar_pattern_ops);
 
 
 --
 -- PostgreSQL database dump complete
 --
+
