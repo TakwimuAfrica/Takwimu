@@ -1,21 +1,21 @@
 {% if section.title|default:"TKW" == "TKW" and page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
-  <a>
+  <a style="text-decoration: none;">
     <div class="jumbotron jumbotron-fluid border-top border-bottom bg-light pt-4 pb-5 mb-0">
       <div class="position-absolute" style="right: 17%; margin-top: -30px;">
         <span class="text-light py-3 px-4" style="background-color: #074c9c; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.26);"><i class="fa fa-eye mr-2"></i> <b>YOU ARE HERE</b></span>
       </div>
 {% elif section.title == page.title %}
-  <a>
+  <a style="text-decoration: none!important;">
     <div class="jumbotron jumbotron-fluid border-top border-bottom bg-light pt-4 pb-5 mb-0">
       <div class="position-absolute" style="right: 17%; margin-top: -30px;">
         <span class="text-light py-3 px-4" style="background-color: #074c9c; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.26);"><i class="fa fa-eye mr-2"></i> <b>YOU ARE HERE</b></span>
       </div>
 {% elif page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
-  <a href="{{ section.url|default:'#' }}">
-    <div class=" container jumbotron jumbotron-fluid bg-white pt-4 pb-5 mb-0">
+  <a href="{{ section.url|default:'#' }}" style="text-decoration: none;">
+    <div class=" container jumbotron jumbotron-fluid border-top bg-white pt-4 pb-5 mb-0">
 {% else %}
-  <a href="{{ section.url|default:'../' }}">
-      <div class="container jumbotron jumbotron-fluid bg-white pt-4 pb-5 mb-0">
+  <a href="{{ section.url|default:'../' }}" style="text-decoration: none;">
+      <div class="container jumbotron jumbotron-fluid border-top bg-white pt-4 pb-5 mb-0">
 {% endif %}
     <div class="container">
       <small class="text-uppercase font-weight-bold" style="color: #4a4a4a;">Section {{ counter | add:"1" }}</small>
