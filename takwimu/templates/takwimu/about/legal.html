@@ -1,7 +1,6 @@
 {% extends 'takwimu/_layouts/page.html' %}
 {% load staticfiles %}
-{% load wagtailcore_tags %}
-{% load datastructuretags %}
+{% load safemarktags %}
 
 {% block content %}
 
@@ -63,15 +62,15 @@
           <div class="col-9 tab-content">
             <div id="terms-of-use-tab" class="tab-pane fade active show">
               <h2 class="display-4" style="font-weight: bold;">Terms of Use</h2>
-              {{ settings.takwimu.LegalNoticeSetting.terms_of_use | richtext }}
+              {{ 'takwimu/about/snippets/terms_of_use.md' | safemarktemplate }}
             </div>
             <div id="privacy-policy-tab" class="tab-pane fade">
               <h2 class="display-4" style="font-weight: bold;">Privacy Policy</h2>
-              {{ settings.takwimu.LegalNoticeSetting.privacy_policy | richtext }}
+              {{ 'takwimu/about/snippets/privacy_policy.md' | safemarktemplate }}
             </div>
             <div id="cookie-policy-tab" class="tab-pane fade">
               <h2 class="display-4" style="font-weight: bold;">Cookie Policy</h2>
-              {{ settings.takwimu.LegalNoticeSetting.cookie_policy | richtext }}
+              {{ 'takwimu/about/snippets/cookie_policy.md' | safemarktemplate }}
             </div>
           </div>  <!-- /.col-9 -->
         </div> <!-- row -->
