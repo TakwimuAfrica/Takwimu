@@ -288,13 +288,18 @@ class ProfilePage(Page):
 
 class Service(models.Model):
 
-    SERVICE_CATEGORIES = [('Standard', 'Standard'), ('Premium', 'Premium')]
+    SERVICE_CATEGORIES = [
+        ('Standard', 'Standard'), ('Premium', 'Premium'), ('Persona', 'Persona')
+    ]
 
     title = models.TextField()
     icon = IconField()
     description = RichTextField()
-    category = models.CharField(max_length=20, choices=SERVICE_CATEGORIES,
-                                default='Standard')
+    category = models.CharField(
+        max_length=20,
+        choices=SERVICE_CATEGORIES,
+        default='Standard'
+    )
 
     def get_slug(self):
         # remove special characters and punctuation
