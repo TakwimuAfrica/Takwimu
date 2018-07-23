@@ -96,11 +96,13 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+
 class IndicatorsBlock(blocks.StreamBlock):
 
     free_form = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('body', blocks.RichTextBlock(required=False)),
             ('source', blocks.RichTextBlock(features=['link'],required=False)),
         ],
@@ -113,6 +115,7 @@ class IndicatorsBlock(blocks.StreamBlock):
     embed = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('embed', EmbedBlock(required=False)),
             ('source', blocks.RichTextBlock(features=['link'],required=False)),
         ],
@@ -123,6 +126,7 @@ class IndicatorsBlock(blocks.StreamBlock):
     document = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('document', DocumentChooserBlock(required=False)),
             ('source', blocks.RichTextBlock(features=['link'],required=False)),
         ],
@@ -133,6 +137,7 @@ class IndicatorsBlock(blocks.StreamBlock):
     image = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('image', ImageChooserBlock(required=False)),
             ('caption', blocks.TextBlock(required=False)),
             ('source', blocks.RichTextBlock(features=['link'],required=False)),
@@ -144,6 +149,7 @@ class IndicatorsBlock(blocks.StreamBlock):
     html = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
             ('source', blocks.RichTextBlock(features=['link'],required=False)),
         ],
@@ -154,6 +160,7 @@ class IndicatorsBlock(blocks.StreamBlock):
     entities = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('entities', blocks.ListBlock(EntityStructBlock())),
             ('source', blocks.RichTextBlock(features=['link'],required=False)),
         ],
@@ -163,6 +170,7 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     class Meta:
         icon = 'form'
+
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
@@ -192,6 +200,7 @@ class TopicBlock(blocks.StructBlock):
 
     class Meta:
         icon = 'form'
+
 
 class ProfileSectionPage(Page):
     '''
@@ -277,10 +286,15 @@ class ProfilePage(Page):
         return self.full_url
 
 
-class SupportService(models.Model):
+class Service(models.Model):
+
+    SERVICE_CATEGORIES = [('Standard', 'Standard'), ('Premium', 'Premium')]
+
     title = models.TextField()
     icon = IconField()
     description = RichTextField()
+    category = models.CharField(max_length=20, choices=SERVICE_CATEGORIES,
+                                default='Standard')
 
     def get_slug(self):
         # remove special characters and punctuation
@@ -391,3 +405,14 @@ class SocialMediaSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Social Media'
+
+
+@register_setting
+class AboutUsSetting(BaseSetting):
+    about_us = RichTextField()
+
+    class Meta:
+        verbose_name = 'About Us'
+
+
+

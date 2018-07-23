@@ -99,11 +99,11 @@
 
   <p class="text-right mb-3">
     <button
-        class="btn btn btn-outline-primary text-uppercase d-flex align-items-center ml-auto border-0 py-2"
+        class="btn btn-link text-uppercase font-weight-bold ml-auto border-0 py-2"
+        style="text-decoration: none; color: #000;"
         onclick="javascript:$('#toc').addClass('d-none')">
       Close 
-      <!-- <span class="ml-2 font-weight-light" style="font-size: 2em;">X</span> -->
-      <span class="fa fa-times-circle ml-2"></span>
+      <img src="{% static 'img/icons/close.svg' %}" class="ml-2 p-1" alt="Close" style="width: 35px;height: 35px;object-fit: contain;">
     </button>
   </p>
 
@@ -144,9 +144,9 @@
     document.addEventListener('DOMContentLoaded', function () {
         $('button[data-toggle="collapse"]').on('click', function () {
             $(this)
-                .find('[data-fa-i2svg]')
-                .toggleClass('fa-minus')
-                .toggleClass('fa-plus');
+                .find('.icon')
+                .toggleClass('icon-minus')
+                .toggleClass('icon-plus');
         });
     });
 </script>

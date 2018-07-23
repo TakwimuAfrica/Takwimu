@@ -21,7 +21,9 @@ body {
   padding-top: 56px;
 }
 
-* {
+// hurumap.css provides default font family for these elements: html, body, h4, h5, h6 & p
+// thus we must overide them (CSS Specificity Hierarchy)
+ html, body, h4, h5, h6, p, * {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
@@ -106,6 +108,7 @@ a {
   &:hover, &:focus, &:active {
     background-color: $brand-color-primary !important;
     border-color: $brand-color-primary !important;
+    color: $brand-extend-white;
   }
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -145,7 +148,6 @@ a {
   }
 }
 
-
 /*
 * Custom CSS
 * Topics tabs css
@@ -154,6 +156,9 @@ a {
   border-bottom: 0.4em solid transparent;
   cursor: pointer;
   text-decoration: none;
+  .border-left {
+    border-left: 1px solid rgba(255, 255, 255, 0.25)!important;
+  }
   &:hover, &.active {
     background: $brand-color-dark-alt;
     border-bottom: 0.4em solid $brand-extend-white;
