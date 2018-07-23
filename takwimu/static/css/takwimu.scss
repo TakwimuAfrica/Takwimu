@@ -169,6 +169,10 @@ a {
       border-left: 1px solid transparent !important;
     }
   }
+  &.active {
+    background: $brand-color-primary;
+    border-bottom: 5px solid transparent;
+  }
 }
 
 // Navbar goodness
