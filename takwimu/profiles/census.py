@@ -28,6 +28,7 @@ def get_profile(geo, profile_name, request):
         data['literacy'] = get_literacy(geo, session)
         data['crops'] = get_crop_production_index(geo, session)
         data['landscape'] = get_landscape_data(geo, session)
+        data['population'] = get_population(geo, session)
         print '\n'
         print data
         return data
@@ -222,6 +223,31 @@ def get_landscape_data(geo, session):
     except LocationNotFound:
         landscape, _ = LOCATIONNOTFOUND, 0
 
+
+def get_population(geo, session):
+    try:
+        sex_dist, total_sex_dist = get_stat_data('Population_Sex', geo,
+                                           session,
+                                           table_fields=[
+                                               'Population_Sex'])
+
+        residence_dist, total_residence_dist = get_stat_data('Population_Residence', 
+                                            geo, session,
+                                            table_fields=[
+                                                'Population_Residence'])
+
+        return {
+            'sex_dist': sex_dist,
+            'total_sex': {
+                'name': '',
+                'numerators': {'this': total_sex_dist},
+                'values': {'this': total_sex_dist}
+            },
+            'residence_dist': residence_dist
+        }
+
+    except LocationNotFound:
+        population_dist, _ = LOCATIONNOTFOUND, 0
 
 # helpers
 
