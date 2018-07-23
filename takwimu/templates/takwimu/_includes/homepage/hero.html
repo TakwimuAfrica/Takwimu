@@ -50,13 +50,25 @@
 <style>
   #carousel-homepage-hero img {
     height: 50px;
-    opacity:0.76;
+    opacity:1;
     border-radius: 999px;
-    filter:  hue-rotate(160deg) saturate(150%) contrast(100%);
-    -webkit-filter: hue-rotate(160deg) saturate(150%) contrast(100%);
+    filter:hue-rotate(190.3deg) saturate(30%) brightness(100%) contrast(100%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
     mix-blend-mode: lighten;
+  }
+  .overlay{
+    position:relative;
+    background-color:#17a2b8;
+    mix-blend-mode: lighten;
+    border-radius: 999px;
+    height: 50px;
+    opacity: 0.8;
+    -moz-opacity: 80%;
+    -webkit-opacity: 80%;
+    z-index: 2;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
   }
+
   #carousel-homepage-hero .carousel-item .btn {
     background-color: rgba(255, 255, 255, 0.28);
   }
