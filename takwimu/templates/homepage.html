@@ -28,11 +28,7 @@
             <h1 class="display-4 text-light font-weight-bold">Find data by
               Country</h1>
             <p class="p-4">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-              praesentium, libero odit voluptatum necessitatibus quisquam
-              nulla expedita saepe quibusdam. libero odit voluptatum
-              necessitatibus quisquam
-              nulla expedita saepe quibusdam.
+              All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
             </p>
           </div>
         </div>
@@ -44,19 +40,17 @@
       <div id="slippy-map"></div>
       <div id="map-div" class="py-4 px-4 mt-3 text-center border" style="position: absolute; top: 50%; left: 30%; border-radius: 2px; width: 700px; height: 201px; background-color: #ffffff; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.23)">
         <p class="text-uppercase font-weight-bold">Browse by Map</p>
-        <p> Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum
-          praesentium, libero odit voluptatum necessitatibus quisquam
-          nulla expedita saepe quibusdam.</p>
+        <p>The data view on pages shown by navigating with this map are still <strong>work in progress</strong>. Please treat them as a sneak peak of what to expect in future releases. We'd though still want your <a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener">feedback</a> on them though.</p>
         <button class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" style="border-color: #1f6cc6;"
                 onclick="javascript:$('#map-div').css('display', 'none')">
           GOT IT
         </button>
       </div>
     </div>
-    <section class="py-5">
+    <section class="m-0">
       {% with countries='nigeria tanzania senegal' %}
         {% for country in countries.split %}
-          <div class="jumbotron jumbotron-fluid pt-4 pb-5 mb-0 container-fluid country-container">
+          <div class="jumbotron jumbotron-fluid py-5 mb-0 container-fluid country-container">
             <div class="container">
               <div class="row">
                 <div class="col-4">
@@ -68,23 +62,17 @@
                 <div class="col-8">
                   <h2 class="display-4 font-weight-bold mb-4">{{ country|title }}</h2>
                   <p class="mb-0" style="color: #4a4a4a;">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Ipsum
-                    praesentium, libero odit voluptatum necessitatibus quisquam
-                    nulla expedita saepe quibusdam. Lorem ipsum dolor sit amet
-                    consectetur adipisicing elit. Ipsum
-                    praesentium, libero odit voluptatum necessitatibus quisquam
-                    nulla expedita saepe quibusdam.
+                    Actionable analysis by geo-political and socioeconomic experts across 10 key African countries.
                   </p>
-                  <p class="font-weight-bold" style="margin-top: 3em;">
-                    Show data at:
+                  <p class="font-weight-bold mt-4">
+                    <!-- Show data at:
                     <select class="ml-2 py-2"
                             style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto">
                       <option value="National Level">National Level</option>
-                    </select>
-                    <a class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" href="/profiles/{{ country }}"
-                       role="button" style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px; right: -10%; position: relative">
-                      VIEW DATA FOR {{ country|upper }}
+                    </select> -->
+                    <a class="btn btn-primary btn-sm text-uppercase font-weight-bold" href="/profiles/{{ country }}"
+                       style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px;">
+                      Read Country Analysis For {{ country|upper }}
                     </a>
                   </p>
                 </div>
