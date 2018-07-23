@@ -406,14 +406,3 @@ class AboutUsSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'About Us'
-
-
-@register_setting
-class LegalNoticeSetting(BaseSetting):
-    terms_of_use = RichTextField(blank=True, null=True)
-    privacy_policy = RichTextField(blank=True, null=True)
-    cookie_policy = RichTextField(blank=True, null=True)
-
-    class Meta:
-        verbose_name = 'Legal Notice'
-
