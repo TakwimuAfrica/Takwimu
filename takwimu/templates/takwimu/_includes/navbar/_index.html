@@ -42,25 +42,26 @@
             <a class="dropdown-item" href="#">WIP</a>
           </div>
         </li>
-        <li class="nav-item">
-          <a class="nav-link text-white text-uppercase font-weight-bold px-3 py-4"
-              href="https://openafrica.net/organization/takwimuafrica" target="_blank" rel="noopener">
-            Data
-          </a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
               href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
-            SUPPORT SERVICES
+            Our Services
           </a>
           <!-- On large devices -->
-          {% include 'takwimu/_includes/navbar/support_services.html' with button_name="Support Services" %}
+          {% include 'takwimu/_includes/navbar/support_services.html' with button_name="Our Services" %}
 
           <!-- TODO: On small devices -->
           <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="#">WIP</a>
           </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white text-uppercase font-weight-bold px-3 py-4"
+                href="/contact-us" role="button"
+                aria-expanded="false">
+              Contact Us
+            </a>
         </li>
       </ul>
       <ul class="navbar-nav">
@@ -76,12 +77,12 @@
           <!-- TODO: On small devices -->
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             <a class="dropdown-item" href="{% url 'about_page' %}">About Takwimu</a>
-            <a class="dropdown-item" href="{% url 'about_support_services' %}">Support Services</a>
+            <a class="dropdown-item" href="{% url 'about_support_services' %}">Our Services</a>
             <a class="dropdown-item" href="/about/media-center">Media Center</a>
             <div class="dropdown-divider"></div>
             <a class="dropdown-item" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank">Community</a>
             <a class="dropdown-item" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank">Help</a>
-            <a class="dropdown-item" href="/about/contact">Contact Us</a>
+            <a class="dropdown-item" href="/contact-us">Contact Us</a>
             <a class="dropdown-item" href="/login">Login</a>
           </div>
         </li>

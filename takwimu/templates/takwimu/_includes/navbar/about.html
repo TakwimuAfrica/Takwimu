@@ -26,8 +26,8 @@
         {% for social_media in social_medias %}
           {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
             <li class="nav-item p-2">
-              <a class="nav-link{% if not forloop.last %} border-right" {% else %}" {% endif %}
-		             href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+              <a class="nav-link{% if not forloop.last %} border-right {% else %} {% endif %}" 
+		            href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
                 <i class="fab fa-{{ social_media }} fa-fw"></i>
               </a>
             </li>
