@@ -20,7 +20,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: wazimap_geography; Type: TABLE; Schema: public; Owner: ahereza
+-- Name: wazimap_geography; Type: TABLE; Schema: public; Owner: takwimu
 --
 
 CREATE TABLE public.wazimap_geography (
@@ -36,10 +36,10 @@ CREATE TABLE public.wazimap_geography (
 );
 
 
-ALTER TABLE public.wazimap_geography OWNER TO ahereza;
+ALTER TABLE public.wazimap_geography OWNER TO takwimu;
 
 --
--- Data for Name: wazimap_geography; Type: TABLE DATA; Schema: public; Owner: ahereza
+-- Data for Name: wazimap_geography; Type: TABLE DATA; Schema: public; Owner: takwimu
 --
 
 COPY public.wazimap_geography (id, geo_level, geo_code, name, version, square_kms, parent_level, parent_code, long_name) FROM stdin;
