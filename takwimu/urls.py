@@ -14,7 +14,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               [
                   url(r'^$', HomePageView.as_view(), name='home'),
                   url(r'^about/support-services', SupportServicesIndexView.as_view(), name='about_support_services'),
-                  url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
+                  url(r'^about/$', AboutUsView.as_view(), name='about_page'),
                   url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
                   url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
               ] + \
@@ -25,3 +25,6 @@ if settings.DEBUG:
     urlpatterns = [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
+
+handler404 = 'takwimu.views.handler404'
+handler500 = 'takwimu.views.handler500'
