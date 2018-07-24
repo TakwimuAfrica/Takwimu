@@ -13,10 +13,11 @@ INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome', 'wagta
 
 ROOT_URLCONF = 'takwimu.urls'
 
-MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-)
+MIDDLEWARE_CLASSES = (
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+    ) + MIDDLEWARE_CLASSES + (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 

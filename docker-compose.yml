@@ -20,9 +20,11 @@ services:
       - "./:/srv/takwimu"
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
+      - DJANGO_SECRET_KEY=somethingsecret
       - HURUMAP_URL='http://localhost:8000'
       - PGHOST=db
       - PGDATABASE=takwimu
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
       - PYTHONDONTWRITEBYTECODE="True"
+      # - DJANGO_DEBUG=False  # For testing deploys
