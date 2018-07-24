@@ -15,6 +15,7 @@ ROOT_URLCONF = 'takwimu.urls'
 
 MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
 )
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
@@ -26,13 +27,16 @@ TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
     'takwimu.context_processors.takwimu_topics',
 )
 
+# Static Files Handler
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # -------------------------------------------------------------------------------------
 # Website Details
 # -------------------------------------------------------------------------------------
 
-HURUMAP['name'] = 'TAKWIMU'
-HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://takwimu.africa/')
+HURUMAP['name'] = 'Takwimu'
+HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://dev.takwimu.africa')
 
 hurumap_profile = 'census'
 
