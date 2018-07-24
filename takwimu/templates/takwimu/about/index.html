@@ -2,22 +2,23 @@
 {% load wagtailcore_tags %}
 
 {% block content %}
+  <section class="container py-3 text-muted">
+    <a href="/"><u>Home</u></a> <span class="mx-2">»</span> About Takwimu
+  </section>
   <div style="background-color: #f9f9f9;">
     <div class="py-5 container" style="max-width: 800px;">
-      <h1 class="text-center display-3">About Takwimu</h1>
+      <h1 class="text-center display-3 font-weight-bold">About Takwimu</h1>
       {{ settings.takwimu.AboutUsSetting.about_us | richtext }}
     </div>
   </div>
 
-  {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
-
-  <div class="bg-light py-5">
-    <div class="container lead text-center" style="max-width:700px; ">
-      Evidence-based planning produces better impacts. Takwimu offers
-      data-driven tools and analysis to help shape better informed decisions.
+  <section class="bg-secondary">
+    <div class="container text-center text-light py-5">
+      <h1 class="font-weight-bold display-3">Services for...</h1>
     </div>
-  </div>
+    {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
 
+  </section>
   {% include 'takwimu/_includes/partners.html' %}
 
   {% include 'takwimu/_includes/sections/support-services/button.html' %}
