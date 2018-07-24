@@ -35,6 +35,7 @@ class HomePageView(TemplateView):
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         return context
 
+
 class AboutUsView(TemplateView):
     template_name = 'takwimu/about/index.html'
 
@@ -42,3 +43,12 @@ class AboutUsView(TemplateView):
         context = super(AboutUsView, self).get_context_data(**kwargs)
         context['support_services'] = Service.objects.all().filter(category="Persona")
         return context
+
+
+class LegalView(TemplateView):
+    """
+    Legal View:
+    ---------------
+    View of legal notices: Terms of Use, Privacy and Cookie policies.
+    """
+    template_name = 'takwimu/about/legal.html'

@@ -398,6 +398,7 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
+
 # Settings
 @register_setting
 class SupportSetting(BaseSetting):
@@ -410,6 +411,7 @@ class SupportSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Support'
+
 
 @register_setting
 class SocialMediaSetting(BaseSetting):
@@ -436,6 +438,3 @@ class AboutUsSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'About Us'
-
-
-
