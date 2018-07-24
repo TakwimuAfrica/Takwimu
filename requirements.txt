@@ -9,4 +9,6 @@ git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 
 git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
 
+Markdown==2.6.11
+
 django-debug-toolbar
