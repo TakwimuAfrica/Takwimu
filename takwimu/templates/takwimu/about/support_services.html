@@ -1,5 +1,5 @@
 {% extends 'takwimu/_layouts/page.html' %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 
 {% block content %}
 
@@ -23,7 +23,7 @@
       <div class="py-5 container">
         <div class="text-center py-3">
           <h1 class="text-center font-weight-bold display-3">
-            Takwimu Data Services
+            Takwimu Services
           </h1>
           <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur et.
             Donec id elit non mi porta gravida at eget metus.</p>
@@ -48,7 +48,8 @@
           {% for service in service_list %}
             <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
               <div class="shadow-sm card grayscale" style="width: 100%">
-                <div class="card-img" style="background-image: url('http://via.placeholder.com/350x150'); "></div>
+                  {% image service.cover width-400 as tmp_photo %}
+                <div class="card-img" style="background-image: url('{{ tmp_photo.url }}'); "></div>
                 <div class="card-body text-left pt-3 font-weight-light" style="color: #4a4a4a;">
                   <h5 class="card-title font-weight-bold" style="color: #000000;">{{ service.title }}</h5>
                   <p class="card-text">{{ service.description | richtext }}</p>

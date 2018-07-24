@@ -14,7 +14,9 @@ class SupportServicesIndexView(ListView):
     View of support services page.
     """
     template_name = 'takwimu/about/support_services.html'
-    model = Service
+
+    def get_queryset(self):
+        return Service.objects.all().exclude(category='Persona')
 
 
 class HomePageView(TemplateView):
@@ -27,7 +29,7 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all()[:4]
+        context['support_services'] = Service.objects.all().filter(category="Persona")
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
@@ -39,7 +41,7 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all()
+        context['support_services'] = Service.objects.all().filter(category="Persona")
         return context
 
 
