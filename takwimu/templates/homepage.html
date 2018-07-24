@@ -20,7 +20,7 @@
                   <a href="/" class="text-light"><u>Home</u></a>
                 </li>
                 <li class="breadcrumb-item active text-light">
-                  Countries
+                  Countries profiles
                 </li>
               </ol>
             </nav>
@@ -101,6 +101,20 @@
 
     .country-container:nth-of-type(even) {
       background-color: #f4f4f4;
+    }
+    .breadcrumb {
+      padding: 1rem;
+    }
+    .breadcrumb-item {
+      padding-left: .1rem;
+      letter-spacing: 0;
+      font-size: 14px;
+    }
+    .breadcrumb-item+.breadcrumb-item::before {
+        display: inline-block;
+        padding-right: .1rem;
+        color: #fff;
+        content: ">>";
     }
   </style>
 {% endblock body %}
