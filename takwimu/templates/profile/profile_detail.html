@@ -188,6 +188,7 @@
       </article>
     {% endblock %}
   </div>
+  {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower %}
 
   {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
@@ -202,6 +203,9 @@
   <style>
     #profile {
       background-color: #ffffff;
+    }
+    .country-container {
+      background-color: #f4f4f4;
     }
 
     #page-footer {
@@ -267,5 +271,3 @@
   {{ block.super }}
 
 {% endblock body_javascript %}
-
-
