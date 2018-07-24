@@ -1,7 +1,8 @@
 #!/bin/bash
 python manage.py migrate                  # Apply database migrations
-cat takwimu/sql/*.sql | psql              # Upload tables / data  
+cat takwimu/sql/*.sql | psql              # Upload tables / data
 python manage.py collectstatic --noinput  # Collect static files
+
 
 # Prepare log files and start outputting logs to stdout
 touch /srv/logs/gunicorn.log
