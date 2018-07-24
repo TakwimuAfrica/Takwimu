@@ -176,7 +176,7 @@
         <header class="section-contents">
           <h1>Agriculture</h1>
         </header>
-        <div class="section-container">
+        <div class="section-container" style="border-bottom: 0">
           <section class="clearfix stat-row">
             <div class="column-full"
                  id="chart-histogram-crops-crop"
@@ -188,7 +188,7 @@
       </article>
     {% endblock %}
   </div>
-  {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower %}
+  {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower title='long' %}
 
   {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
@@ -205,7 +205,8 @@
       background-color: #ffffff;
     }
     .country-container {
-      background-color: #f4f4f4;
+      background-color: #f9f9f9;
+      height: 400px;
     }
 
     #page-footer {

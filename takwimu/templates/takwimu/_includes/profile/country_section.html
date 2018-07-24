@@ -1,6 +1,6 @@
 {% load staticfiles %}
 <div class="jumbotron jumbotron-fluid py-5 mb-0 container-fluid country-container">
-  <div class="container">
+  <div class="container pt-4">
     <div class="row">
       <div class="col-4">
         <img class=" border-light mr-2"
@@ -9,7 +9,7 @@
              {% endwith %}/>
       </div>
       <div class="col-8">
-        <h2 class="display-4 font-weight-bold mb-4">{{ country|title }}</h2>
+        <h2 class="display-4 font-weight-bold mb-4">{{ country|title}}{% if title %}'s Country Profile{% endif %}</h2>
         <p class="mb-0" style="color: #4a4a4a;">
           Actionable analysis by geo-political and socioeconomic experts across 10 key African countries.
         </p>
