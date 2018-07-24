@@ -1,0 +1,30 @@
+{% extends 'takwimu/_layouts/page.html' %}
+
+{% block content %}
+  <section class="p-5" style="background-color: #f9f9f9">
+    <div class="container text-center py-5">
+      <h2 style="font-size: 60px; font-weight: 800;">404 Not found</h2>
+      <p style="font-size: 18px;">The page you’re looking for cannot be found</p>
+    </div>
+  </section>
+  <section class="p-5">
+    <div class="container text-center p-5">
+      <p style="font-weight: 300; font-size: 30px;">Why not try one of the
+        following instead?</p>
+      <div style="width: 70%;" class="d-inline-block p-4">
+        <a href="{% url 'profiles' %}" class="btn btn-primary float-left mr-5 btn-option">Explore country profiles</a>
+        <a href="{% url 'home' %}" target="_blank" rel="noopener" class="btn btn-primary float-right btn-option">Go to Home Page</a>
+      </div>
+
+    </div>
+  </section>
+
+  <style>
+    .btn-option {
+      width: 45%;
+      background-color: #1f6cc6;
+      border-color: #1f6cc6;
+    }
+
+  </style>
+{% endblock %}

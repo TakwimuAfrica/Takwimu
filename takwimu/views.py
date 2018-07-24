@@ -2,6 +2,8 @@ import json
 import operator
 
 from django.conf import settings
+from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.views.generic import TemplateView, ListView
 
 from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
@@ -44,7 +46,6 @@ class AboutUsView(TemplateView):
         context['support_services'] = Service.objects.all().filter(category="Persona")
         return context
 
-
 class LegalView(TemplateView):
     """
     Legal View:
@@ -52,3 +53,17 @@ class LegalView(TemplateView):
     View of legal notices: Terms of Use, Privacy and Cookie policies.
     """
     template_name = 'takwimu/about/legal.html'
+
+    
+def handler404(request):
+    response = render_to_response('404.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 404
+    return response
+
+
+def handler500(request):
+    response = render_to_response('500.html', {},
+                                  context_instance=RequestContext(request))
+    response.status_code = 500
+    return response

@@ -26,3 +26,6 @@ if settings.DEBUG:
     urlpatterns = [
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
+
+handler404 = 'takwimu.views.handler404'
+handler500 = 'takwimu.views.handler500'
