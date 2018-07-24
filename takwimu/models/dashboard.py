@@ -373,13 +373,14 @@ class Testimonial(models.Model):
 
 
 class ExplainerSteps(Page):
-    sidebar = RichTextField()
+    sidebar = RichTextField() # TODO: Remove
     steps = StreamField([
         ('step', blocks.StructBlock([
             ('title', blocks.CharBlock(required=False)),
             ('brief', blocks.TextBlock(required=False)),
             ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
             ('body', blocks.RichTextBlock(required=False)),
+            ('sidebar', blocks.RichTextBlock(required=False)),
         ], icon='user'))
     ])
 
