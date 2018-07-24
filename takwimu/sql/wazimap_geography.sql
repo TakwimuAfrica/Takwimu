@@ -43,11 +43,10 @@ ALTER TABLE public.wazimap_geography OWNER TO ahereza;
 --
 
 COPY public.wazimap_geography (id, geo_level, geo_code, name, version, square_kms, parent_level, parent_code, long_name) FROM stdin;
-0	level1	NG_1_001	Abia	2009	\N	country	NG	Abia
-1	level1	NG_1_002	Adamawa	2009	\N	country	NG	Adamawa
-2	level1	NG_1_003	Akwa Ibom	2009	\N	country	NG	Akwa Ibom
-3	level1	NG_1_004	Anambra	2009	\N	country	NG	Anambra
-4	level1	NG_1_005	Bauchi	2009	\N	country	NG	Bauchi
+1	continent	AFR	Africa	2009	\N	\N	\N	\N
+2	country	NG	Nigeria	2009	\N	continent	AFR	\N
+3	country	SN	Senegal	2009	\N	continent	AFR	\N
+4	country	TZ	Tanzania	2009	\N	continent	AFR	\N
 5	level1	NG_1_006	Bayelsa	2009	\N	country	NG	Bayelsa
 6	level1	NG_1_007	Benue	2009	\N	country	NG	Benue
 7	level1	NG_1_008	Borno	2009	\N	country	NG	Borno
@@ -124,10 +123,11 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, version, square_km
 78	level1	TZ_1_013	Kusini Unguja	2009	\N	country	TZ	Kusini Unguja
 79	level1	TZ_1_030	Mjini Magharibi	2009	\N	country	TZ	Mjini Magharibi
 80	level1	TZ_1_007	Kaskazini Pemba	2009	\N	country	TZ	Kaskazini Pemba
-81	country	TZ	Tanzania	2009	\N	continent	AFR	Tanzania
-82	country	NG	Nigeria	2009	\N	continent	AFR	Nigeria
-83	country	SN	Senegal	2009	\N	continent	AFR	Senegal
-84	continent	AFR	Africa	2009	\N	\N	\N	Africa
+81	level1	NG_1_001	Abia	2009	\N	country	NG	Abia
+82	level1	NG_1_002	Adamawa	2009	\N	country	NG	Adamawa
+83	level1	NG_1_003	Akwa Ibom	2009	\N	country	NG	Akwa Ibom
+84	level1	NG_1_004	Anambra	2009	\N	country	NG	Anambra
+85	level1	NG_1_005	Bauchi	2009	\N	country	NG	Bauchi
 \.
 
 
