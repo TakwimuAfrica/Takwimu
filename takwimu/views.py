@@ -14,7 +14,9 @@ class SupportServicesIndexView(ListView):
     View of support services page.
     """
     template_name = 'takwimu/about/support_services.html'
-    model = Service
+
+    def get_queryset(self):
+        return Service.objects.all().exclude(category='Persona')
 
 
 class HomePageView(TemplateView):
