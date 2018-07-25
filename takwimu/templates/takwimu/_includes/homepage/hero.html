@@ -47,14 +47,28 @@
     </div>
   </div>
 </div>
-
 <style>
   #carousel-homepage-hero img {
     height: 50px;
-    opacity: 0.8;
-    border: 3px solid;
+    opacity:1;
     border-radius: 999px;
+    filter:hue-rotate(190.3deg) saturate(30%) brightness(100%) contrast(100%);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    mix-blend-mode: lighten;
   }
+  .overlay{
+    position:relative;
+    background-color:#17a2b8;
+    mix-blend-mode: lighten;
+    border-radius: 999px;
+    height: 50px;
+    opacity: 0.8;
+    -moz-opacity: 80%;
+    -webkit-opacity: 80%;
+    z-index: 2;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+  }
+
   #carousel-homepage-hero .carousel-item .btn {
     background-color: rgba(255, 255, 255, 0.28);
   }
@@ -62,4 +76,20 @@
     background-color: rgba(255, 255, 255, 0.6);
     border-color: transparent;
   }
+  .carousel-indicators li {
+    position: relative;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    border-radius:10px;
+    background-color:white;
+  }
+  .carousel-indicators .active {
+    background-color: #005e79;
+}
 </style>
