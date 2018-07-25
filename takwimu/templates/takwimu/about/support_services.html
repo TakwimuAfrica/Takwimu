@@ -66,25 +66,25 @@
         Enquire about these services
       </h2>
       <div class="container p-5" style="background-color: #1e4a7e; color: #ffffff;">
-        <form>
-          <div class="form-row">
+        <form class="px-5">
+          <div class="form-row py-4 px-5">
             <div class="col">
               <div class="form-group">
                 <label for="email">Your Email</label>
-                <input type="text" class="form-control" placeholder="name@email.com" id="email">
+                <input type="text" class="form-control form-control-lg rounded-0" placeholder="name@email.com" id="email">
               </div>
             </div>
             <div class="col">
               <div class="form-group">
                 <label for="">Your Location</label>
-                <input type="text" class="form-control" placeholder="" id="location">
+                <input type="text" class="form-control form-control-lg rounded-0" placeholder="" id="location">
               </div>
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group py-4 px-5">
             <label for="role">What best describes your role?</label>
-            <select class="custom-select mb-3" id="role">
+            <select class="custom-select mb-3 form-control form-control-lg rounded-0" id="role">
               <option selected>Please select</option>
               <option value="1">Investor</option>
               <option value="2">Journalist</option>
@@ -92,7 +92,7 @@
             </select>
           </div>
 
-          <div class="form-group">
+          <div class="form-group px-5">
             <label for="">What services are you interested in?</label><br>
             <div class="form-row">
               {% for service in service_list %}
@@ -111,14 +111,15 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div class="form-group px-5">
             <label for="help">How can we help you?</label>
-            <textarea class="form-control" id="help" rows="5"></textarea>
+            <textarea class="form-control form-control-lg rounded-0" id="help" rows="5"></textarea>
           </div>
-
+          <div class="py-5">
           <button type="submit" class="btn btn-outline-light" style="float: right;">
             Submit Enquiry
           </button>
+        </div>
         </form>
       </div>
     </div>
