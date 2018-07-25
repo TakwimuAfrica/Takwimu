@@ -42,22 +42,22 @@ CREATE TABLE literacy_year (
 --
 
 COPY literacy_year (geo_level, geo_code, geo_version, "Literacy_Year", total) FROM stdin;
-country	NGA	2009	1991	55
-country	NGA	2009	2003	55
-country	NGA	2009	2008	51
-country	NGA	2009	2015	60
-country	SEN	2009	1988	27
-country	SEN	2009	2002	39
-country	SEN	2009	2006	42
-country	SEN	2009	2009	50
-country	SEN	2009	2011	52
-country	SEN	2009	2013	43
-country	SEN	2009	2015	56
-country	TZA	2009	1988	59
-country	TZA	2009	2002	69
-country	TZA	2009	2010	68
-country	TZA	2009	2012	78
-country	TZA	2009	2015	80
+country	NG	2009	1991	55
+country	NG	2009	2003	55
+country	NG	2009	2008	51
+country	NG	2009	2015	60
+country	SN	2009	1988	27
+country	SN	2009	2002	39
+country	SN	2009	2006	42
+country	SN	2009	2009	50
+country	SN	2009	2011	52
+country	SN	2009	2013	43
+country	SN	2009	2015	56
+country	TZ	2009	1988	59
+country	TZ	2009	2002	69
+country	TZ	2009	2010	68
+country	TZ	2009	2012	78
+country	TZ	2009	2015	80
 \.
 
 

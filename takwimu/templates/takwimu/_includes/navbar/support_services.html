@@ -5,7 +5,7 @@
 
 {% block dropdown_id %}nav-support-services{% endblock %}
 
-{% block dropdown_title %}Support Services{% endblock %}
+{% block dropdown_title %}Our Services{% endblock %}
 {% block dropdown_desc %}Cum sociis natoque penatibus et magnis dis parturient
   montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet
   rutrum faucibus dolor auctor.{% endblock %}
@@ -37,8 +37,8 @@
         {% for social_media in social_medias %}
           {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
             <li class="nav-item p-2">
-              <a class="nav-link{% if not forloop.last %} border-right" {% else %}" {% endif %}
-		             href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+              <a class="nav-link{% if not forloop.last %} border-right {% else %} {% endif %}"
+		            href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
                 <i class="fab fa-{{ social_media }} fa-fw"></i>
               </a>
             </li>
@@ -49,9 +49,15 @@
 
       <div class="mt-2 d-inline-block pt-2">
         <ul class="pl-3" style="color:#7ab1f2; font-weight: bold;">
-          <li class="pb-2" type="disc"><a href="/contact-us"><u>Contact Us</u></a></li>
+          <li class="pb-2" type="disc"><a href="/contact-us"><u>General Enquiries</u></a></li>
           <li class="pb-2" type="disc">
-            <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener"><u>Support</u></a>
+            <a href="#" target="_blank"><u>FAQ</u></a>
+          </li>
+          <li class="pb-2" type="disc">
+            <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener"><u>Technical Support Desk</u></a>
+          </li>
+          <li class="pb-2" type="disc">
+            <a href="#" target="_blank"><u>Community Forum</u></a>
           </li>
           <li class="pb-2" type="disc"><a href="/about"><u>About Us</u></a></li>
         </ul>

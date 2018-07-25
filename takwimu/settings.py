@@ -13,9 +13,11 @@ INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome', 'wagta
 
 ROOT_URLCONF = 'takwimu.urls'
 
-MIDDLEWARE_CLASSES = MIDDLEWARE_CLASSES + (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
+MIDDLEWARE_CLASSES = (
+        'whitenoise.middleware.WhiteNoiseMiddleware',
+    ) + MIDDLEWARE_CLASSES + (
+        'debug_toolbar.middleware.DebugToolbarMiddleware',
+    )
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
@@ -26,13 +28,16 @@ TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
     'takwimu.context_processors.takwimu_topics',
 )
 
+# Static Files Handler
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
 
 # -------------------------------------------------------------------------------------
 # Website Details
 # -------------------------------------------------------------------------------------
 
-HURUMAP['name'] = 'TAKWIMU'
-HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://takwimu.africa/')
+HURUMAP['name'] = 'Takwimu'
+HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://dev.takwimu.africa')
 
 hurumap_profile = 'census'
 
@@ -44,17 +49,22 @@ HURUMAP['legacy_embed_geo_version'] = '2009'
 HURUMAP['levels'] = {
     'continent': {
         'plural': 'continents',
-        'children': ['country'],
+        'children': ['country', 'level1'],
     },
     'country': {
         'plural': 'countries',
+        'children': ['level1']
+    },
+    'level1': {
+
     }
 }
 HURUMAP['comparative_levels'] = ['country']
 HURUMAP['geometry_data'] = {
     '2009': {
         'continent': 'geo/continent.topojson',
-        'country': 'geo/country.topojson'
+        'country': 'geo/country.topojson',
+        'level1': 'geo/level1.topojson',
     }
 }
 

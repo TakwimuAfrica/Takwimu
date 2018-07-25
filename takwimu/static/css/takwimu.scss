@@ -18,7 +18,7 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 
 body {
-  padding-top: 56px;
+  padding-top: 72px;
 }
 
 // hurumap.css provides default font family for these elements: html, body, h4, h5, h6 & p
@@ -155,7 +155,7 @@ a {
 * Topics tabs css
 */
 .custom-nav a {
-  border-bottom: 0.4em solid transparent;
+  border-bottom: 5px solid transparent;
   cursor: pointer;
   text-decoration: none;
   .border-left {
@@ -163,13 +163,17 @@ a {
   }
   &:hover, &.active {
     background: $brand-color-dark-alt;
-    border-bottom: 0.4em solid $brand-extend-white;
+    border-bottom: 5px solid $brand-extend-white;
     + a div {
       border-left: 1px solid transparent !important;
     }
     div {
       border-left: 1px solid transparent !important;
     }
+  }
+  &.active {
+    background: $brand-color-primary;
+    border-bottom: 5px solid transparent;
   }
 }
 
@@ -180,7 +184,7 @@ a {
   .nav-item.dropdown {
     position: initial;
   }
-  
+
   .dropdown-toggle::after{
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
@@ -239,14 +243,14 @@ a {
     }
 
   }
-  
+
 }
 
 
 /*
 * Country container css
 * ----------------------
-*/ 
+*/
 
 .country-flag-links {
   .col {
@@ -255,7 +259,7 @@ a {
     a {
       text-decoration: none;
       color: $brand-extend-black;
-      
+
       svg {
         display: block;
         margin: 0 auto;
@@ -290,7 +294,7 @@ a {
       &[data-toggle="tooltip"] * {
         opacity: 0.5;
       }
-      
+
     }
   }
 }
@@ -316,38 +320,38 @@ a {
   }
 }
 
-/* 
+/*
 * Small devices (landscape phones, 576px and up)
 * Medium devices (tablets, 768px and up)
 */
 
 @media (min-width: 576px) and (max-width: 768px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
-  */ 
+  */
   // body {background: red;}
 }
 
 
 /*
 * Large devices (desktops, 992px and up)
-*/ 
-@media (min-width: 768px) and (max-width: 992px) { 
+*/
+@media (min-width: 768px) and (max-width: 992px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
-  */ 
+  */
   // body { background: yellow;}
  }
 
 /*
 * Extra large devices (large desktops, 1200px and up)
-*/ 
-@media (min-width: 1200px) { 
+*/
+@media (min-width: 1200px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
-  */ 
+  */
   // body { background: grey;}
  }
