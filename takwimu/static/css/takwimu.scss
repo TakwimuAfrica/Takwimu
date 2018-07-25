@@ -13,7 +13,7 @@ $brand-color-secondary: #1e4a7e;
 $brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
-$brand-extend-jumbotron: #e9ecef;
+$brand-extend-jumbotron: #fafafa;
 $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 
@@ -243,6 +243,30 @@ a {
   }
 
 }
+
+/*
+* Profile content css
+* --------------------
+*/
+.profile-content {
+  .is-active {
+    background-color: $brand-extend-jumbotron;
+    + div.border-top {
+      border-top: 0!important;
+    }
+    /* Quick way to remove underline on mouse hover for the current selected item */
+    h1.section-title:hover {
+      text-decoration: none;
+    }
+  }
+  
+  /* Ideally only the section title would underline on mouse hover */
+  h1.section-title:hover, h1.section-title:focus {
+    text-decoration: underline;
+  }
+}
+
+
 
 
 /*
