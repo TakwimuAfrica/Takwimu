@@ -49,17 +49,22 @@ HURUMAP['legacy_embed_geo_version'] = '2009'
 HURUMAP['levels'] = {
     'continent': {
         'plural': 'continents',
-        'children': ['country'],
+        'children': ['country', 'level1'],
     },
     'country': {
         'plural': 'countries',
+        'children': ['level1']
+    },
+    'level1': {
+
     }
 }
 HURUMAP['comparative_levels'] = ['country']
 HURUMAP['geometry_data'] = {
     '2009': {
         'continent': 'geo/continent.topojson',
-        'country': 'geo/country.topojson'
+        'country': 'geo/country.topojson',
+        'level1': 'geo/level1.topojson',
     }
 }
 
