@@ -1,15 +1,16 @@
 {% load staticfiles %}
 
 <div class="carousel-item p-5 {% if forloop.first %}active{% endif %}">
-  <div class="">
-    <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="float-right"/>
-    <p class="text-uppercase" style="font-weight: 600;">New Country</p>
+  <div>
+    <div class="overlay float-right"><img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="float-right"/></div>
+    <p class="text-uppercase" style="font-weight: 400; font-size:13px;">New Country</p>
     <h2 style="font-weight: 600;">{{ country|title }} country profile now available</h2>
-    <p>Explore human development data and analysis for {{ country|title }}.</p>
+    <p class="pt-2">Explore human development data and analysis for {{ country|title }}.</p>
     <p>
-      <a href="/profiles/{{ country }}" class="btn btn-info px-4 text-uppercase" style="font-size: 80%;">
-        View Country Profile <i class="fa fa-arrow-right ml-2"></i>
+      <a href="/profiles/{{ country }}" class="btn btn-info px-4 text-uppercase" style="font-size: 80%; height: 44px; line-height: 2.4">
+        View Country Profile &nbsp; <img class="border-0" src="{% static 'img/icons/button-arrow.svg' %}" alt="button arrow" style="height:15px; width: 23px; box-shadow: none; object-fit: contain;">
       </a>
     </p>
   </div>
 </div>
+

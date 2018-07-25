@@ -1,11 +1,11 @@
 <p>
-  <button class="btn btn-toc btn-sm mr-2 border-0 p-2" role="button"
+  <button class="btn btn-toc btn-sm mr-2 border-0 p-2 shadow-none" role="button"
           data-toggle="collapse" data-target="#toc-collapse-s{{ section.id }}"
           aria-expanded="false" aria-controls="toc-collapse-s{{ section.id }}"
           style="font-size: 2em; line-height: 1;">
-    <span class="icon icon-minus"></span>
+    <span class="icon icon-plus"></span>
   </button>
-  <a href="{{ section.url }}" class="font-weight-bold">
+  <a href="{{ section.url }}" class="font-weight-bold" style="text-decoration: underline;">
     {% if section.subpage_types|first == 'takwimu.ProfileSectionPage' %}
       Country Overview
     {% else %}
@@ -14,10 +14,10 @@
   </a>
 </p>
 
-<div class="collapse show pl-4" id="toc-collapse-s{{ section.id }}">
+<div class="collapse pl-4" id="toc-collapse-s{{ section.id }}">
   <ul>
     {% for topic in section.body %}
-      <li class="pl-2" style="color:#1f6cc6; text-decoration: underline;">
+      <li class="pl-2 my-4" style="color:#1f6cc6; text-decoration: underline;">
         <a href="{{ section.url }}#{{ topic.value.title|slugify }}">
           {{ topic.value.title }}
         </a>
