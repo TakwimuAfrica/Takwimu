@@ -407,6 +407,8 @@ class SupportSetting(BaseSetting):
         help_text='TAKWIMU main email address')
     zendesk = models.URLField(blank=True, null=True,
         help_text='TAKWIMU Zendesk account URL')
+    community = models.URLField(blank=True, null=True,
+        help_text='TAKWIMU Community forums URL')
     address = RichTextField(blank=True, null=True,
         help_text='TAKWIMU address')
 
