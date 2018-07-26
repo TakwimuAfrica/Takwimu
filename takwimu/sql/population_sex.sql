@@ -108,8 +108,8 @@ level1	TZ_1_029	2009	male	1051197
 level1	TZ_1_029	2009	female	1084414
 level1	TZ_1_030	2009	male	266935
 level1	TZ_1_030	2009	female	293361
-level1	TZ_1_21	2009	male	309733
-level1	TZ_1_21	2009	female	352927
+level1	TZ_1_021	2009	male	309733
+level1	TZ_1_021	2009	female	352927
 level1	NG_1_001	2009	male	1900947
 level1	NG_1_001	2009	female	1826400
 level1	NG_1_002	2009	male	2166702

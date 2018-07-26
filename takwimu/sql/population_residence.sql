@@ -108,8 +108,8 @@ level1	TZ_1_029	2009	urban	271452
 level1	TZ_1_029	2009	rural	1864159
 level1	TZ_1_030	2009	urban	473956
 level1	TZ_1_030	2009	rural	86340
-level1	TZ_1_21	2009	urban	157264
-level1	TZ_1_21	2009	rural	505396
+level1	TZ_1_021	2009	urban	157264
+level1	TZ_1_021	2009	rural	505396
 level1	NG_1_001	2009	urban	0
 level1	NG_1_001	2009	rural	0
 level1	NG_1_002	2009	urban	0
