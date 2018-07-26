@@ -227,14 +227,14 @@ def get_landscape_data(geo, session):
 def get_population(geo, session):
     try:
         sex_dist, total_sex_dist = get_stat_data('Population_Sex', geo,
-                                           session,
-                                           table_fields=[
-                                               'Population_Sex'])
+                                                 session,
+                                                 table_fields=[
+                                                     'Population_Sex'])
 
-        residence_dist, total_residence_dist = get_stat_data('Population_Residence', 
-                                            geo, session,
-                                            table_fields=[
-                                                'Population_Residence'])
+        residence_dist, total_residence_dist = get_stat_data('Population_Residence',
+                                                             geo, session,
+                                                             table_fields=[
+                                                                 'Population_Residence'])
 
         return {
             'sex_dist': sex_dist,
@@ -244,7 +244,7 @@ def get_population(geo, session):
                 'values': {'this': total_sex_dist}
             },
             'residence_dist': residence_dist,
-            'total_residence':{
+            'total_residence': {
                 'name': '',
                 'numerators': {'this': total_residence_dist},
                 'values': {'this': total_residence_dist}
@@ -252,7 +252,8 @@ def get_population(geo, session):
         }
 
     except LocationNotFound:
-        population_dist, _ = LOCATIONNOTFOUND, 0
+        sex_dist, _ = LOCATIONNOTFOUND, 0
+        residence_dist, _ = LOCATIONNOTFOUND, 0
 
 # helpers
 
