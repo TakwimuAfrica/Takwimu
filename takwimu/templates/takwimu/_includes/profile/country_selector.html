@@ -23,8 +23,9 @@
   </div>
 {% else %}
 <div class="country-selector btn-group">
-  <button class="btn btn-link btn-lg dropdown-toggle font-weight-bold {{ class_extra }}"
+  <button class="btn btn-link btn-lg px-0 dropdown-toggle font-weight-bold {{ class_extra }}"
       type="button"
+      style="text-decoration: none; color:#000;"
       id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
       aria-expanded="false">
     <img class="rounded-circle border-light mr-2"
@@ -39,12 +40,12 @@
     </span>
   </button>
 
-  <div class="dropdown-menu pt-0 rounded-0"
+  <div class="dropdown-menu py-0 rounded-0"
       aria-labelledby="dropdownMenuButton"
       style="max-width: 180px;">
 
     {% for profile in current_page.get_siblings %}
-      <a class="dropdown-item" href="{{ profile.get_url }}"
+      <a class="dropdown-item px-1" href="{{ profile.get_url }}"
           data-value="{{ profile.title | lower }}"><img
           class="rounded-circle border-light mr-2"
           src={% with 'img/flags/'|add:profile.title|lower|add:'.svg' as image_static %}

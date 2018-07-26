@@ -1,29 +1,31 @@
 {% load wagtailcore_tags %}
 
 <div class="py-2">
-  <h5>{{ indicator.value.title }}</h5>
+  {% if not indicator.value.hide_title %}
+    <h5>{{ indicator.value.title }}</h5>
+  {% endif %}
 
-  <div class="btn-group ml-4" role="group" style="margin-bottom: -100px;">
+  <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
     {% block dataview_ctrl %}
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-flag"></i>
     </button>
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-exchange-alt"></i>
     </button>
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-code"></i>
     </button>
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-download"></i>
     </button>
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-share-alt"></i>
     </button>
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-heart"></i>
     </button>
-    <button type="button" class="btn">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
       <i class="fa fa-book-open"></i>
     </button>
     {% endblock %}

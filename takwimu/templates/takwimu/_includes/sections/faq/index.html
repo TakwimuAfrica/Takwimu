@@ -1,7 +1,7 @@
 <!-- FAQ section -->
 
-<section class="faq bg-primary-alt text-light p-5">
-  <div class="container-fluid">
+<section class="faq bg-primary-alt text-light py-5">
+  <div class="container">
     <h3 class="text-center display-4 mt-4 mb-5" style="font-weight: 800;">Common Questions</h3>
 
     <div class="row mb-5">
@@ -14,7 +14,7 @@
       </div>
 
       <div class="col-8">
-        <div class="tab-content bg-light text-dark p-5 h-100" id="faqs-tabContent"
+        <div class="tab-content bg-light text-dark h-100 py-4 px-5" id="faqs-tabContent"
             style="border-radius: 2px;">
           {% for faq in faqs %}
             {% include 'takwimu/_includes/sections/faq/tab_detail.html' %}
@@ -22,7 +22,7 @@
         </div>
       </div>
     </div>
-    
+
   </div> <!-- /.container-fluid -->
 
 </section>

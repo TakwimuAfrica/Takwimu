@@ -1,0 +1,73 @@
+{% extends 'takwimu/_includes/navbar/_dropdown.html' %}
+
+{% load staticfiles %}
+{% load datastructuretags %}
+
+{% block dropdown_id %}nav-support-services{% endblock %}
+
+{% block dropdown_title %}Our Services{% endblock %}
+{% block dropdown_desc %}Cum sociis natoque penatibus et magnis dis parturient
+  montes, nascetur ridiculus mus. Vivamus sagittis lacus vel augue laoreet
+  rutrum faucibus dolor auctor.{% endblock %}
+
+{% block dropdown_content %}
+  <div class="row w-100">
+    <div class="col-4">
+      <h5 class="font-weight-bold pb-2">Standard Services</h5>
+      <ul style="color:#7ab1f2; font-weight: bold;">
+        {% for service in standard_services %}
+          <li class="pb-2" type="disc"><a href="/about/support-services"><u>For {{ service.title }}</u></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="col-4">
+      <h5 class="font-weight-bold pb-2">Premium Services</h5>
+      <ul style="color:#7ab1f2; font-weight: bold;">
+        {% for service in premium_services %}
+          <li class="pb-2" type="disc"><a href="/about/support-services"><u>{{ service.title }}</u></a></li>
+        {% endfor %}
+      </ul>
+    </div>
+
+    <div class="col-4">
+      <h5 class="font-weight-bold pb-2">Help and support</h5>
+      <div class="mt-2 d-inline-block p-2 rounded" style="background-color:#1455a0;">
+        <ul class="navbar-nav">
+        {% to_list 'twitter' 'facebook' 'instagram' 'slack' 'github' as social_medias %}
+        {% for social_media in social_medias %}
+          {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+            <li class="nav-item p-2">
+              <a class="nav-link{% if not forloop.last %} border-right {% else %} {% endif %}"
+		            href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+                <i class="fab fa-{{ social_media }} fa-fw"></i>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
+        </ul>
+      </div>
+
+      <div class="mt-2 d-inline-block pt-2">
+        <ul class="pl-3" style="color:#7ab1f2; font-weight: bold;">
+          <li class="pb-2" type="disc"><a href="/contact-us"><u>General Enquiries</u></a></li>
+          <li class="pb-2" type="disc">
+            <a href="#" target="_blank"><u>FAQ</u></a>
+          </li>
+          <li class="pb-2" type="disc">
+            <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener"><u>Technical Support Desk</u></a>
+          </li>
+          <li class="pb-2" type="disc">
+            <a href="#" target="_blank"><u>Community Forum</u></a>
+          </li>
+          <li class="pb-2" type="disc"><a href="/about"><u>About Us</u></a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <style>
+    ul li u {
+      color:#7ab1f2;
+    }
+  </style>
+{% endblock %}
