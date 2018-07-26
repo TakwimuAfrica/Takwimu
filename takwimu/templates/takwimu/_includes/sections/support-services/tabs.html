@@ -1,17 +1,18 @@
+{% load staticfiles %}
 <section class="support-services-tabs">
   <div class="bg-secondary">
     <nav
         class="nav nav-justified container text-center custom-nav"
         id="nav-tabs" role="tablist">
       {% for service in support_services %}
-      <a class="nav-item nav-link text-light pt-3 px-0"
-        id="support-{{ service.get_slug | add:'-btn' }}"
+      <a class="nav-item nav-link text-light pt-4 pb-3 px-0"
+        id="support-{{ service.get_slug | add:'-btn'}}"
         data-toggle="tab" href="#support-{{ service.get_slug }}" role="tab"
         aria-controls="support-{{ service.get_slug }}"
         aria-selected="true">
         <div class="text-center {% if not forloop.first %}border-left{% endif %}">
-          <h2 class="mb-1">{{ service.icon.as_html }}</h2>
-          <p class="small text-uppercase">{{ service.title }}</p>
+          <h2 class="py-1">{{ service.icon.as_html }}</h2>
+          <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal";>{{ service.title }}</p>
         </div>
       </a>
       {% endfor %}
@@ -33,11 +34,11 @@
 
         <div class="row">
           <div class="col-4 pr-5">
-            <h6 class="text-uppercase">Find out how Takwimu benefits:</h6>
-            <h3 class="display-4 font-weight-bold">
+            <!-- <h6 class="text-uppercase">Find out how Takwimu benefits:</h6> -->
+            <h1 class="font-weight-bold" style="font-size: 50px;">
               {{ service.title }}
             </h3>
-            <hr class="border-light">
+            <!-- <hr class="border-light">
             <p class="font-weight-bold text-uppercase">Latest Profiles:</p>
             <ul>
               {% with countries='nigeria tanzania senegal' %}
@@ -51,10 +52,10 @@
               {% for story in stories_trending %}
                 <li><a href="{{ story.url }}" target="_blank" rel="no-opener" class="text-light">{{ story.title }}</a></li>
               {% endfor %}
-            </ul>
+            </ul> -->
           </div>
           <div class="col">
-            <div class="col-10 pl-5 border-left" style="border-left-style: dashed !important;">
+            <div class="col-10 pl-5" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
               <h4 class="font-weight-bold">How Takwimu benefits you</h4>
               {{ service.description | safe }}
             </div>
@@ -66,12 +67,6 @@
 </section>
 
 <style>
- 
-  section.support-services-tabs .tab-content h3.display-4 {
-    white-space: nowrap; 
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
   section.support-services-tabs .close-alt:hover::after {
     content: 'CLOSE';
   }
@@ -94,7 +89,7 @@
     // With HTML5 history API, we can easily prevent scrolling!
     $('section.support-services-tabs #nav-tabs a').on('shown.bs.tab', function (e) {
         if("pushState" in history) {
-          history.pushState("", document.title, e.target.hash); 
+          history.pushState("", document.title, e.target.hash);
         } else {
           window.location.hash = e.target.hash; //Polyfill for old browsers
         }
@@ -105,7 +100,7 @@
       $('.support-services-tabs .tab-pane').removeClass('show active');
       $('.support-services-tabs #nav-tabs a').removeClass('active');
       if("pushState" in history) {
-        history.pushState("", document.title, window.location.pathname + window.location.search); 
+        history.pushState("", document.title, window.location.pathname + window.location.search);
       } else {
         window.location.href.split('#')[0]; //Polyfill for old browsers
       }

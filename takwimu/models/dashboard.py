@@ -8,6 +8,9 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, Pag
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+
+from wagtail.wagtailimages.models import Image
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -17,8 +20,8 @@ from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
-from fontawesome.fields import IconField #importing property from djano-fontawesome app for icons on TopicPage
-from fontawesome.forms import IconFormField #importing property from djano-fontawesome app for icon field on TopicBlock
+from fontawesome.fields import IconField  # importing property from djano-fontawesome app for icons on TopicPage
+from fontawesome.forms import IconFormField  # importing property from djano-fontawesome app for icon field on TopicBlock
 
 import logging
 logger = logging.getLogger(__name__)
@@ -288,13 +291,33 @@ class ProfilePage(Page):
 
 class Service(models.Model):
 
-    SERVICE_CATEGORIES = [('Standard', 'Standard'), ('Premium', 'Premium')]
+    SERVICE_CATEGORIES = [
+        ('Standard', 'Standard'), ('Premium', 'Premium'), ('Persona', 'Persona')
+    ]
 
     title = models.TextField()
     icon = IconField()
+    cover = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     description = RichTextField()
-    category = models.CharField(max_length=20, choices=SERVICE_CATEGORIES,
-                                default='Standard')
+    category = models.CharField(
+        max_length=20,
+        choices=SERVICE_CATEGORIES,
+        default='Standard'
+    )
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('icon'),
+        ImageChooserPanel('cover'),
+        FieldPanel('description'),
+        FieldPanel('category'),
+    ]
 
     def get_slug(self):
         # remove special characters and punctuation
@@ -350,13 +373,14 @@ class Testimonial(models.Model):
 
 
 class ExplainerSteps(Page):
-    sidebar = RichTextField()
+    sidebar = RichTextField() # TODO: Remove
     steps = StreamField([
         ('step', blocks.StructBlock([
             ('title', blocks.CharBlock(required=False)),
             ('brief', blocks.TextBlock(required=False)),
             ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
             ('body', blocks.RichTextBlock(required=False)),
+            ('sidebar', blocks.RichTextBlock(required=False)),
         ], icon='user'))
     ])
 
@@ -375,6 +399,7 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
+
 # Settings
 @register_setting
 class SupportSetting(BaseSetting):
@@ -387,6 +412,7 @@ class SupportSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Support'
+
 
 @register_setting
 class SocialMediaSetting(BaseSetting):
@@ -413,6 +439,3 @@ class AboutUsSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'About Us'
-
-
-
