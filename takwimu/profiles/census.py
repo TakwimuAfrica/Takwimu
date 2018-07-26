@@ -243,7 +243,12 @@ def get_population(geo, session):
                 'numerators': {'this': total_sex_dist},
                 'values': {'this': total_sex_dist}
             },
-            'residence_dist': residence_dist
+            'residence_dist': residence_dist,
+            'total_residence':{
+                'name': '',
+                'numerators': {'this': total_residence_dist},
+                'values': {'this': total_residence_dist}
+            }
         }
 
     except LocationNotFound:

@@ -198,11 +198,13 @@
         <div class="section-container">
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Total Population </h2>
-            <div class="column-quarter">
+            <div class="{% if population.total_residence.numerators.this > 0 %}column-quarter{% else %}column-half{% endif %}">
               {% include 'profile/_blocks/_stat_list.html' with stat=population.total_sex stat_type='number'  %}
             </div>
             <div class="column-half" id="chart-pie-population-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
+            {% if population.total_residence.numerators.this > 0 %}
             <div class="column-quarter" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
+            {% endif %}
           </section>
           </div>
       </article>
