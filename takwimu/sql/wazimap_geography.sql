@@ -106,7 +106,7 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, version, square_km
 61	level1	TZ_1_003	Dodoma	2009	\N	country	TZ	Dodoma
 62	level1	TZ_1_028	Tanga	2009	\N	country	TZ	Tanga
 63	level1	TZ_1_019	Mtwara	2009	\N	country	TZ	Mtwara
-64	level1	TZ_1_21	Njombe	2009	\N	country	TZ	Njombe
+64	level1	TZ_1_021	Njombe	2009	\N	country	TZ	Njombe
 65	level1	TZ_1_029	Tabora	2009	\N	country	TZ	Tabora
 66	level1	TZ_1_011	Kilimanjaro	2009	\N	country	TZ	Kilimanjaro
 67	level1	TZ_1_025	Shinyanga	2009	\N	country	TZ	Shinyanga
