@@ -1,6 +1,7 @@
 import json
 import operator
 
+from collections import OrderedDict
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
@@ -36,45 +37,58 @@ def takwimu_stories(request):
         'premium_services': Service.objects.filter(category='Premium')
     }
 
-# This function can be refactored or completely removed, it acts as sample dummy data
-# For the topics with sub-topics 
 def takwimu_topics(request):
-    sample_topics = []
-
+    sections = []
     try:
-        # with open('data/sample_topics.json') as t:
-            # topics = json.load(t)
-        s = get_search_backend()
-        takwimuTopics = []
-        profileSections = ProfileSectionPage.objects.all()
-        for profileSection in profileSections:
-            takwimuTopic = {
-                'id': str(profileSection.id),
-                'title': profileSection.title,
-            }
-            takwimuTopics.append(takwimuTopic)
+        profile_sections = ProfileSectionPage.objects.all()
+        sections_by_title = OrderedDict()
+        section_topics_by_title = OrderedDict()
+        section_topic_indicators_by_title = OrderedDict()
+        # topic_countries = {}
+        for profile_section in profile_sections:
+            # country = str(profile_section.get_parent())
 
-            takwimuTopic['subtopics'] = []
-            topics = profileSection.topics.select_related('topic').all()
-            for topic in topics:
-                subtopic = {
-                    'id': str(topic.id),
-                    'title': topic.topic.title,
-                }
-                takwimuTopic['subtopics'].append(subtopic)
+            section_title = profile_section.title
+            section = sections_by_title.setdefault(
+                section_title.lower(), { 'title': section_title })
+            topics_by_title = section_topics_by_title.setdefault(
+                section_title.lower(), OrderedDict())
+            topic_indicators_by_title = section_topic_indicators_by_title.setdefault(
+                section_title.lower(), OrderedDict())
+            for section_topic in profile_section.body:
+                topic_title =  section_topic.value['title']
+                topic = topics_by_title.setdefault(
+                    topic_title.lower(), { 'title': topic_title })
 
-                subtopic['sub_subtopics'] = []
-                indicators = topic.topic.data_indicators.select_related('indicator').all()
-                for indicator in indicators:
-                    sub_subtopic = {
-                        'id': str(indicator.id),
-                        'title': indicator.indicator.title,
-                    }
-                subtopic['sub_subtopics'].append(sub_subtopic)
+                indicators_by_title = topic_indicators_by_title.setdefault(
+                    topic_title.lower(), OrderedDict())
+                for topic_indicator in section_topic.value['indicators']:
+                    indicator_title = topic_indicator.value['title']
+                    indicator = indicators_by_title.setdefault(
+                        indicator_title.lower(), { 'title': indicator_title })
+                    print(indicator)
+
+                #     indicator = {
+                #         'title': topic_indicator.value['title'],
+                #     }
+                #     topic['indicators'].append(indicator)
+                    # topics.append(topic)
+                # if not topic['indicators']:
+                #     topic_country_list = topic_countries.setdefault(title, [])
+                #     topic_country_list.append({
+                #         'title': country,
+                #         'topic': topic['title'],
+                #     }
+                #     section['countries'] = topic_country_list
+                # else:
+                #     section['topics'].append(topic)
+                topic['indicators'] = indicators_by_title.viewvalues()
+            section['topics'] = topics_by_title.viewvalues()
+        sections = sections_by_title.viewvalues()
 
     except Exception as e:
         print e.message
 
     return {
-        'topics': takwimuTopics,
+        'sections': sections,
     }

@@ -1,8 +1,104 @@
+{% load staticfiles %}
+
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="alert alert-primary mx-auto" role="alert">
-            <strong>By Topic View</strong>
-            <span>This is work in progress</span>
+    <div class="row">
+        <div class="col-12">
+            <div class="bg-primary">
+                <div class="row mx-auto p-5 card-deck no-gutters text-white" id="data-topics">
+
+                    <!-- Topics: first column, profile sections -->
+                    <div class="col-4">
+                        <h3 class="font-weight-bold text-center">Select a topic </h3>
+                        <div class="nav flex-column nav-pills" id="profile-sections-tab" role="tablist" aria-orientation="vertical">
+                            {% for section in sections %}
+                            <a class="nav-link text-white pl-5"
+                               id="section-tab-{{ forloop.counter }}"
+                               href="#topic-{{ forloop.counter }}"
+                               aria-controls="topic-{{ forloop.counter }}"
+                               data-toggle="pill" role="tab" aria-selected="false">
+                                {{ section.title }}
+                                <i class="fa fa-angle-double-right float-right"></i>
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- .col-4 -->
+
+                    <!-- Topics: second column, topics -->
+                    <div class="col-4">
+                        <h3 class="font-weight-bold text-center">Select a sub topic </h3>
+                        <div class="tab-content" id="profile-sections-topics">
+                            {% for section in sections %}
+                            <div class="tab-pane fade"
+                                 id="topic-{{ forloop.counter }}"
+                                 role="tabpanel"
+                                 aria-labelledby="topic-{{ forloop.counter }}-tab">
+                                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                                    {% for topic in section.topics %}
+                                        <a class="nav-link text-white pl-5"
+                                        id="topic-tab-{{ forloop.counter }}"
+                                        href="#indicator-{{ forloop.counter }}"
+                                        aria-controls="indicator-{{ forloop.counter }}"
+                                        data-toggle="pill" role="tab" aria-selected="false">
+                                            {{ topic.title }}
+                                            <i class="fa fa-angle-double-right float-right"></i>
+                                        </a>
+                                    {% endfor %}
+
+                                    {% for country in section.countries %}
+                                        <a class="btn btn-link text-white"
+                                        id="section-country-tab-{{ country.title }}"
+                                        href="/profiles/{{ country.title|slugify }}">
+                                            <img class="rounded-circle border-light mr-2"
+                                                src="{% with 'img/flags/'|add:country.title|lower|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                                                border="4" style="border-style:double; width: 40px; height: 40px;"
+                                            />
+                                            <span>
+                                                Key issue - {{ country.topic }}
+                                                <b>( {{ country.title }})</b>
+                                            </span>
+                                        </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    <!-- .col-4 -->
+
+                    <!-- Topics: third column, indicators -->
+                    <div class="col-4">
+                        <h3 class="font-weight-bold text-center">Select a sub topic </h3>
+                        <div class="tab-content" id="v-sub-pills-tabContent" role="tablist" aria-orientation="vertical">
+                            {% for section in sections %}
+                            {% for topic in section.topics %}
+                            <div class="tab-pane fade"
+                                 id="indicator-{{ forloop.counter }}"
+                                 role="tabpanel"
+                                 aria-labelledby="indicator-{{ forloop.counter }}-tab">
+                                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                                    {% for indicator in topic.indicators %}
+                                    <a class="nav-link text-white pl-5"
+                                       id="indicator-tab-{{ forloop.counter }}"
+                                       href="#country-{{ forloop.counter }}"
+                                       aria-controls="country-{{ forloop.counter }}"
+                                       data-toggle="pill" role="tab" aria-selected="false">
+                                        {{ indicator.title }}
+                                        <i class="fa fa-angle-double-right float-right"></i>
+                                    </a>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- .row -->
+            </div>
+            <!-- .bg-primary -->
         </div>
+        <!-- .col-12 -->
     </div>
+    <!-- .row -->
 </div>
