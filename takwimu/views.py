@@ -1,6 +1,10 @@
+import json
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import TemplateView, FormView
+
+import requests
+from django.conf import settings
 
 from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
 from forms import SupportServicesContactForm
@@ -75,18 +79,34 @@ class SupportServicesIndexView(FormView):
 
     def form_valid(self, form):
         email = form.cleaned_data['email']
+        name = form.cleaned_data['name']
         location = form.cleaned_data['location']
         role = form.cleaned_data['role']
         help_wanted = form.cleaned_data['help']
         print '\n\n\n\n\n\n\n\n'
         data = {
             'request': {
-                'subject': 'Enquiry: {} a {} from {} asks'.format(email, role, location),
+                'requester': {
+                    "name": name,
+                    "email": email
+                },
+                'subject': 'Enquiry: {} a(n) {} from {} asks'.format(name, role, location),
                 'comment': {
                     'body': help_wanted
                 }
             }
         }
+
+        headers = {'content-type': 'application/json'}
+
+        request = requests.post(
+            settings.ZENDESK_API,
+            data=json.dumps(data),
+            headers=headers
+        )
+
+        if request.status_code != 201:
+            return super(SupportServicesIndexView, self).form_invalid(form)
 
         return super(SupportServicesIndexView, self).form_valid(form)
 

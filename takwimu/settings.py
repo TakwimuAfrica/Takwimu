@@ -103,3 +103,5 @@ LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+ZENDESK_API = 'https://takwimu.zendesk.com/api/v2/requests.json'

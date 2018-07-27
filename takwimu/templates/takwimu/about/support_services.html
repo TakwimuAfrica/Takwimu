@@ -70,6 +70,14 @@
           {% csrf_token %}
 
           {{ form.non_field_errors }}
+          <div class="form-group py-2 px-5">
+            <label for="{{ form.name.name }}">{{ form.name.label }}</label>
+            {{ form.name }}
+            <small class="text-danger">
+              {{ form.name.errors }}
+            </small>
+          </div>
+
           <div class="form-row py-2 px-5">
             <div class="col">
               <div class="form-group">
@@ -146,3 +154,5 @@
   </style>
 
 {% endblock %}
+
+

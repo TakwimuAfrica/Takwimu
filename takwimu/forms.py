@@ -10,6 +10,14 @@ STYLE_CLASSES = "form-control form-control-lg rounded-0"
 
 
 class SupportServicesContactForm(forms.Form):
+    name = forms.CharField(
+        max_length=254,
+        label='Your Name',
+        widget=forms.TextInput(
+            attrs={'class': STYLE_CLASSES,
+                   'placeholder': 'Jane Doe'}),
+    )
+
     email = forms.CharField(
         max_length=254,
         label='Your Email',
