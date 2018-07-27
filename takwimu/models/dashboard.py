@@ -399,6 +399,33 @@ class FAQ(models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
+# Support Service block
+
+class ServiceBlock(blocks.StructBlock):
+
+    SERVICE_CATEGORIES = [
+        ('Standard', 'Standard'), ('Premium', 'Premium'), ('Persona', 'Persona')
+    ]
+
+    title = blocks.CharBlock(required=True)
+    icon = IconChoiceBlock(required=False)
+    cover = ImageChooserBlock(
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+',
+        required=False
+    )
+    description = blocks.RichTextBlock(required=True)
+    category = blocks.ChoiceBlock(
+        max_length=20,
+        choices=SERVICE_CATEGORIES,
+        default='Standard'
+    )
+
+    class Meta:
+        icon = 'form'
+
 
 # Settings
 @register_setting
@@ -441,3 +468,16 @@ class AboutUsSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'About Us'
+
+@register_setting
+class SupportServicesSetting(BaseSetting):
+    services = StreamField([
+        ('service', ServiceBlock())
+    ], blank=True)
+
+    panels = [
+        StreamFieldPanel('services')
+    ]
+
+    class Meta:
+        verbose_name = 'Support Services'
