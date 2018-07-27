@@ -2,24 +2,31 @@ from django import forms
 
 LOCATION = ['Tanzania', 'Nigeria', 'Senegal']
 
+# todo  to be loaded from the user personae in settings
+
+ROLES = ['Investor', 'NGO', 'Journalist']
+
+STYLE_CLASSES = "form-control form-control-lg rounded-0"
+
 
 class SupportServicesContactForm(forms.Form):
     email = forms.CharField(
         max_length=254,
         label='Your Email',
-        help_text='name@email.com',
         widget=forms.EmailInput(
-            attrs={'class': "form-control form-control-lg rounded-0"}),
+            attrs={'class': STYLE_CLASSES,
+                   'placeholder': 'name@email.com'}),
     )
     location  = forms.ChoiceField(
         label='Your Location', choices=LOCATION,
         widget=forms.Select(
-            attrs={"class":"form-control form-control-lg rounded-0"}))
+            attrs={"class": STYLE_CLASSES}))
 
     role = forms.ChoiceField(
         label='What best describes your role?',
-        choices=LOCATION,
+        choices=ROLES,
         widget=forms.Select(
-            attrs={"class":"form-control form-control-lg rounded-0"}))
+            attrs={"class": STYLE_CLASSES}))
 
-    help = ""
+    help = forms.CharField(label='How can we help you?',
+        widget=forms.Textarea(attrs={"class": STYLE_CLASSES, "rows": 5}) )
