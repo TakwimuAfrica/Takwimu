@@ -1,10 +1,10 @@
 from django import forms
 
-LOCATION = ['Tanzania', 'Nigeria', 'Senegal']
+LOCATION = [('Tanzania', 'Tanzania'), ('Senegal', 'Senegal'), ('Nigeria', 'Nigeria')]
 
 # todo  to be loaded from the user personae in settings
 
-ROLES = ['Investor', 'NGO', 'Journalist']
+ROLES = [('investor', 'Investor'), ('NGO', 'NGO'), ('Journalist', 'Journalist')]
 
 STYLE_CLASSES = "form-control form-control-lg rounded-0"
 

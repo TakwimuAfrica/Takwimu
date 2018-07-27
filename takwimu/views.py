@@ -1,27 +1,9 @@
-import json
-import operator
-
-from django.conf import settings
-from django.http import Http404
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django.views.generic import TemplateView, ListView
-from django.views.generic.edit import FormMixin
+from django.views.generic import TemplateView, FormView
 
 from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
 from forms import SupportServicesContactForm
-
-
-# class SupportServicesIndexView(ListView):
-#     """
-#     Support Services View
-#     --------------------
-#     View of support services page.
-#     """
-#     template_name = 'takwimu/about/support_services.html'
-#
-#     def get_queryset(self):
-#         return Service.objects.all().exclude(category='Persona')
 
 
 class HomePageView(TemplateView):
@@ -75,27 +57,7 @@ def handler500(request):
     return response
 
 
-class FormListView(FormMixin, ListView):
-    def get(self, request, *args, **kwargs):
-        form_class = self.get_form_class()
-        self.form = self.get_form(form_class)
-
-        self.object_list = self.get_queryset()
-        allow_empty = self.get_allow_empty()
-        if not allow_empty and len(self.object_list) == 0:
-            raise Http404(
-                u"Empty list and '%(class_name)s.allow_empty' is False."
-                % {'class_name': self.__class__.__name__})
-
-        context = self.get_context_data(object_list=self.object_list,
-                                        form=self.form)
-        return self.render_to_response(context)
-
-    def post(self, request, *args, **kwargs):
-        return self.get(request, *args, **kwargs)
-
-
-class SupportServicesIndexView(FormListView):
+class SupportServicesIndexView(FormView):
     """
     Support Services View
     --------------------
@@ -105,42 +67,30 @@ class SupportServicesIndexView(FormListView):
     template_name = 'takwimu/about/support_services.html'
     form_class = SupportServicesContactForm
     success_url = '/'
-
-    def get_queryset(self):
-        return Service.objects.all().exclude(category='Persona')
+    
+    def get_context_data(self, **kwargs):
+        context = super(SupportServicesIndexView, self).get_context_data(**kwargs)
+        context['service_list'] = Service.objects.all().exclude(category='Persona')
+        return context
 
     def form_valid(self, form):
-        email = self.form.cleaned_data['email']
-        location = self.form.cleaned_data['location']
-        role = self.form.cleaned_data['role']
-        help_wanted = self.form.cleaned_data['help']
-
-        print('\n\n\n\n\n\n')
-
-        print(email)
-        print(location)
-        print(role)
-        print(help_wanted)
+        email = form.cleaned_data['email']
+        location = form.cleaned_data['location']
+        role = form.cleaned_data['role']
+        help_wanted = form.cleaned_data['help']
+        print '\n\n\n\n\n\n\n\n'
+        data = {
+            'request': {
+                'subject': 'Enquiry: {} a {} from {} asks'.format(email, role, location),
+                'comment': {
+                    'body': help_wanted
+                }
+            }
+        }
 
         return super(SupportServicesIndexView, self).form_valid(form)
 
     def form_invalid(self, form):
-        email = self.form.cleaned_data['email']
-        location = self.form.cleaned_data['location']
-        role = self.form.cleaned_data['role']
-        help_wanted = self.form.cleaned_data['help']
-
         print('\n\n\n\n\n\n')
-
-        print(email)
-        print(location)
-        print(role)
-        print(help_wanted)
-
+        print form.data
         return super(SupportServicesIndexView, self).form_invalid(form)
-
-    def post(self, request, *args, **kwargs):
-        print "\n\n\n\n\n\n"
-        print "Shit has been posted"
-        print "\n\n\n\n\n\n"
-        return super(SupportServicesIndexView, self).post(request, *args, **kwargs)

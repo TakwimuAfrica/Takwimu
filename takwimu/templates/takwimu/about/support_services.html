@@ -83,12 +83,7 @@
             <div class="col">
               <div class="form-group">
                 <label for="{{ form.location.name }}">{{ form.location.label }}</label>
-                <select class="custom-select mb-3 form-control form-control-lg rounded-0" id="{{ form.location.name }}">
-                  <option selected="">Please select</option>
-                  {% for choice in form.location.field.choices %}
-                    <option value="{{ choice }}">{{ choice }}</option>
-                  {% endfor %}
-                </select>
+                {{ form.location }}
                 <small class="text-danger">
                   {{ form.location.errors }}
                 </small>
@@ -99,12 +94,7 @@
           <div class="form-group py-2 px-5">
             <label for="{{ form.role.name }}">What best describes your
               role?</label>
-            <select class="custom-select mb-3 form-control form-control-lg rounded-0" id="{{ form.role.name }}">
-              <option selected="">Please select</option>
-              {% for choice in form.role.field.choices %}
-                <option value="{{ choice }}">{{ choice }}</option>
-              {% endfor %}
-            </select>
+            {{ form.role }}
             <small class="text-danger">
               {{ form.role.errors }}
             </small>
@@ -114,7 +104,7 @@
             <label for="{{ form.help.name }}">{{ form.help.label }}</label>
             {{ form.help }}
             <small class="text-danger">
-              {{ form.help.errors }}
+              {{ form.email.errors }}
             </small>
           </div>
           <div class="py-5">
