@@ -71,10 +71,13 @@ class SupportServicesIndexView(FormView):
     template_name = 'takwimu/about/support_services.html'
     form_class = SupportServicesContactForm
     success_url = '/'
-    
+
     def get_context_data(self, **kwargs):
-        context = super(SupportServicesIndexView, self).get_context_data(**kwargs)
-        context['service_list'] = Service.objects.all().exclude(category='Persona')
+        context = super(SupportServicesIndexView, self).get_context_data(
+            **kwargs)
+        context['service_list'] = Service.objects.all().exclude(
+            category='Persona')
+        context['ticket_success'] = False
         return context
 
     def form_valid(self, form):
@@ -90,7 +93,8 @@ class SupportServicesIndexView(FormView):
                     "name": name,
                     "email": email
                 },
-                'subject': 'Enquiry: {} a(n) {} from {} asks'.format(name, role, location),
+                'subject': 'Enquiry: {} a(n) {} from {} asks'.format(name, role,
+                                                                     location),
                 'comment': {
                     'body': help_wanted
                 }
@@ -106,9 +110,15 @@ class SupportServicesIndexView(FormView):
         )
 
         if request.status_code != 201:
+            # add non field error
+            form.add_error(None,
+                           'Could not open a ticket at the moment. Please try again later')
             return super(SupportServicesIndexView, self).form_invalid(form)
 
-        return super(SupportServicesIndexView, self).form_valid(form)
+        context = self.get_context_data(form=form)
+        # hide form and show the success dialog
+        context['ticket_success'] = True
+        return self.render_to_response(context)
 
     def form_invalid(self, form):
         print('\n\n\n\n\n\n')
