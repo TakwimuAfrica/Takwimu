@@ -12,3 +12,6 @@ FieldTable(['HIV_Prevalence_Year'], value_type='Float')
 FieldTable(['Literacy_Year'])
 
 FieldTable(['Indicator'], id='hd_landscape', value_type='Float')
+
+FieldTable(['Population_Sex'])
+FieldTable(['Population_Residence'])
