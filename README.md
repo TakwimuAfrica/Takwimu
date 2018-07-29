@@ -24,9 +24,9 @@ Once we replace https://takwimu.africa/ to point to Django App, this directory's
 
 ---
 
-## Development
+# Development
 
-### Setup
+## Setup
 
 There are a couple of ways one can setup their development environment but we currently support [Docker](https://www.docker.com/). It allows us to move away from the "but it works on my machine" issue when making changes or deploying.
 
@@ -41,9 +41,34 @@ docker-compose build
 docker-compose up web
 ```
 
-### Handling Data
+## Handling Data
 
-#### Loading Data
+### HURUmap Data
+
+To import HURUmap data, we run the following command in `docker-entrypoint.sh`:
+```sh
+cat takwimu/sql/*.sql | psql -U takwimu -W takwimu
+```
+
+To export the HURUmap data you might be working on, run the following command:
+```sh
+docker-compose exec web python manage.py dumppsql --table TABLENAME > sql/TABLENAME.sql
+```
+
+To dump all data tables at once, run
+
+```sh
+for t in `ls takwimu/sql/[a-z]*.sql`
+do
+    echo $t
+    pg_dump "postgres://takwimu:takwimu@localhost/takwimu" \
+        -O -c --if-exists -t $(basename $t .sql) \
+      | egrep -v "(idle_in_transaction_session_timeout|row_security)" \
+      > takwimu/sql/$(basename $t .sql).sql
+done
+```
+
+### Django / CMS Data Import
 
 Once done, you'd want to load some data available to you:
 
@@ -55,27 +80,24 @@ docker-compose exec web ./manage.py loaddata supportservice
 docker-compose exec web ./manage.py loaddata faq
 ```
 
-#### Exporting Data
+#### Django / CMS Data Export
 
 To export data, run the following commands:
 ```sh
 # Docker
 docker-compose exec web ./manage.py dumpdata takwimu.SupportService -o takwimu/fixtures/supportservice.json
 docker-compose exec web ./manage.py dumpdata takwimu.FAQ -o takwimu/fixtures/faq.json
-
-# Dokku
-# TODO
 ```
 
-### Web Platform
+---
+
+# Tests
 
 TODO
 
-## Tests
+---
 
-TODO
-
-## Deployment
+# Deployment
 
 TODO
 
