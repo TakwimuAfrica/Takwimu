@@ -33,29 +33,13 @@
         </button>
 
         <div class="row">
-          <div class="col-4 pr-5">
-            <!-- <h6 class="text-uppercase">Find out how Takwimu benefits:</h6> -->
-            <h1 class="font-weight-bold" style="font-size: 50px;">
+          <div class="col-4">
+            <h3 class="font-weight-bold text-right" style="font-size: 45px;">
               {{ service.title }}
             </h3>
-            <!-- <hr class="border-light">
-            <p class="font-weight-bold text-uppercase">Latest Profiles:</p>
-            <ul>
-              {% with countries='nigeria tanzania senegal' %}
-              {% for country in countries.split %}
-              <li><a href="/profiles/{{ country }}" class="text-light text-uppercase">{{ country|title }}</a></li>
-              {% endfor %}
-              {% endwith %}
-            </ul>
-            <p class="font-weight-bold text-uppercase">Insights &amp; Articles:</p>
-            <ul>
-              {% for story in stories_trending %}
-                <li><a href="{{ story.url }}" target="_blank" rel="no-opener" class="text-light">{{ story.title }}</a></li>
-              {% endfor %}
-            </ul> -->
           </div>
           <div class="col">
-            <div class="col-10 pl-5" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
+            <div class="col-10 pl-5 ml-3" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
               <h4 class="font-weight-bold">How Takwimu benefits you</h4>
               {{ service.description | safe }}
             </div>
