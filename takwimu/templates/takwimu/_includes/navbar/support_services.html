@@ -15,16 +15,20 @@
     <div class="col-4">
       <h5 class="font-weight-bold pb-2">Standard Services</h5>
       <ul style="color:#7ab1f2; font-weight: bold;">
-        {% for service in standard_services %}
-          <li class="pb-2" type="disc"><a href="/about/support-services"><u>For {{ service.title }}</u></a></li>
+        {% for service in settings.takwimu.SupportServicesSetting.services %}
+          {% if service.value.category == "Standard" %}
+            <li class="pb-2" type="disc"><a href="/about/support-services"><u>For {{ service.value.title }}</u></a></li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>
     <div class="col-4">
       <h5 class="font-weight-bold pb-2">Premium Services</h5>
       <ul style="color:#7ab1f2; font-weight: bold;">
-        {% for service in premium_services %}
-          <li class="pb-2" type="disc"><a href="/about/support-services"><u>{{ service.title }}</u></a></li>
+        {% for service in settings.takwimu.SupportServicesSetting.services %}
+          {% if service.value.category == "Premium" %}
+            <li class="pb-2" type="disc"><a href="/about/support-services"><u>{{ service.value.title }}</u></a></li>
+          {% endif %}
         {% endfor %}
       </ul>
     </div>

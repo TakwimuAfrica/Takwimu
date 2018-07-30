@@ -1,12 +1,12 @@
 import json
+import requests
+
+from django.conf import settings
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import TemplateView, FormView
 
-import requests
-from django.conf import settings
-
-from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial
 from forms import SupportServicesContactForm
 
 
@@ -20,8 +20,6 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all().filter(
-            category="Persona")
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
@@ -33,8 +31,6 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all().filter(
-            category="Persona")
         return context
 
 
@@ -67,7 +63,6 @@ class SupportServicesIndexView(FormView):
     --------------------
     View of support services page.
     """
-    model = Service
     template_name = 'takwimu/about/support_services.html'
     form_class = SupportServicesContactForm
     success_url = '/'
@@ -75,8 +70,6 @@ class SupportServicesIndexView(FormView):
     def get_context_data(self, **kwargs):
         context = super(SupportServicesIndexView, self).get_context_data(
             **kwargs)
-        context['service_list'] = Service.objects.all().exclude(
-            category='Persona')
         context['ticket_success'] = False
         return context
 
