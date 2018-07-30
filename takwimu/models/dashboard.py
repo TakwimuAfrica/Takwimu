@@ -260,7 +260,7 @@ class ProfilePage(Page):
     Profile Page
     -----------
     '''
-    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True)
+    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True, db_constraint=False)
     date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
     body = StreamField([
         ('topic', TopicBlock())
