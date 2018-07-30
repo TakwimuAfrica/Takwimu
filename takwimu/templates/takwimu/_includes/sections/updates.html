@@ -1,31 +1,40 @@
 <!-- Get Updates section -->
-<section class="updates container-fluid text-center bg-light m-0">
-  <div class="row d-flex align-items-center">
-    <div class="col p-5">
-      <h4 class="mt-4" style="font-size: 32px; font-weight: bold;">
-        <i class="far fa-newspaper display-4 mb-2"></i><br/>
-        Stay up-to-date
-      </h4>
-      <p class="mt-4 mx-auto" style="max-width: 400px; color: #4a4a4a;">
-        Receive customised alerts when relevant new content is uploaded to the site
-        by&nbsp;<a href="{% url 'rss_feed' %}">subscribing to RSS</a> or
-        <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribing
-          to email updates</a></p>
+{% load staticfiles %}
+<section class="updates container-fluid text-center bg-light m-0 p-0">
+  <div class="d-flex">
+    <div class="col py-2 mx-0 px-0">
+      <div class="py-5 my-2">
+        <h4 class="font-weight-bold" style="font-size: 32px;">
+          <img class="pb-2" src={% static 'img/icons/wave.svg' %}
+            style="width: auto; height: 45px;"/><br/>
+          Stay up-to-date
+        </h4>
+        <p class="mx-auto" style="max-width: 400px; color: #4a4a4a;">
+          To be notified when new data is added to Takwimu
+          by&nbsp;<a href="{% url 'rss_feed' %}">subscribing to RSS</a> or
+          <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribing
+            to email updates</a>
+        </p>
+      </div>
     </div>
-    <div class="col p-5 border-left">
-      <h4 class="mt-4" style="font-size: 32px; font-weight: bold;">
-        <i class="far fa-comments display-4 mb-2"></i><br/>
-        Join the discussion
-      </h4>
-      <p class="mt-4 mx-auto" style="max-width: 400px; color: #4a4a4a;">
-        Contribute to Takwimu by sharing your thoughts and ideas on the
-        <a href="{{ settings.takwimu.SupportSetting.community }}" target="_blank" rel="noopener">community forum</a></p>
+    <div class="col py-2 mx-0 px-0">
+      <div class="py-5 my-2" style="border-left: 2px dashed #e7e7e7;">
+          <h4 class="font-weight-bold" style="font-size: 32px;">
+            <img class="pb-2" src={% static 'img/icons/chat.svg' %}
+            style="width: auto; height: 50px;"/><br/>
+            <img src="" alt="">
+            Join the discussion
+          </h4>
+          <p class="mx-auto" style="max-width: 400px; color: #4a4a4a;">
+            Contribute to Takwimu by sharing your thoughts and ideas on the
+            <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener">community forum</a>
+          </p>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-
   .updates a {
     font-weight: bold;
     color: #1f6cc6;
@@ -33,7 +42,10 @@
   }
 
   .updates .col:hover {
-    background-color: #e8e8e8;
+    background-color: #e8e8e8;;
+  }
+  .updates .col:hover + .col div {
+    border-left: 2px dashed transparent!important;
   }
 
 </style>

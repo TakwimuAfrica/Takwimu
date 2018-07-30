@@ -6,19 +6,16 @@ from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django.views.generic import TemplateView, ListView
 
-from takwimu.models.dashboard import Service, ExplainerSteps, FAQ, Testimonial
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial
 
 
-class SupportServicesIndexView(ListView):
+class SupportServicesIndexView(TemplateView):
     """
     Support Sevices View
     --------------------
     View of support services page.
     """
     template_name = 'takwimu/about/support_services.html'
-
-    def get_queryset(self):
-        return Service.objects.all().exclude(category='Persona')
 
 
 class HomePageView(TemplateView):
@@ -31,7 +28,6 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all().filter(category="Persona")
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
@@ -43,7 +39,6 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-        context['support_services'] = Service.objects.all().filter(category="Persona")
         return context
 
 class LegalView(TemplateView):

@@ -260,7 +260,7 @@ class ProfilePage(Page):
     Profile Page
     -----------
     '''
-    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True)
+    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True, db_constraint=False)
     date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
     body = StreamField([
         ('topic', TopicBlock())
@@ -287,43 +287,6 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
-
-
-class Service(models.Model):
-
-    SERVICE_CATEGORIES = [
-        ('Standard', 'Standard'), ('Premium', 'Premium'), ('Persona', 'Persona')
-    ]
-
-    title = models.TextField()
-    icon = IconField()
-    cover = models.ForeignKey(
-        'wagtailimages.Image',
-        null=True,
-        blank=True,
-        on_delete=models.SET_NULL,
-        related_name='+'
-    )
-    description = RichTextField()
-    category = models.CharField(
-        max_length=20,
-        choices=SERVICE_CATEGORIES,
-        default='Standard'
-    )
-
-    panels = [
-        FieldPanel('title'),
-        FieldPanel('icon'),
-        ImageChooserPanel('cover'),
-        FieldPanel('description'),
-        FieldPanel('category'),
-    ]
-
-    def get_slug(self):
-        # remove special characters and punctuation
-        title = re.sub('[^A-Za-z0-9]+', ' ', self.title)
-        return '-'.join(title.lower().split(' '))
-
 
 class AboutPage(Page):
     content = RichTextField()

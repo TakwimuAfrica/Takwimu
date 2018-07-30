@@ -2,28 +2,25 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
--- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
-
--- Started on 2018-07-26 10:37:03 EAT
+-- Dumped from database version 10.0
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.population_residence DROP CONSTRAINT IF EXISTS pk_population_residence;
+DROP TABLE IF EXISTS public.population_residence;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- TOC entry 358 (class 1259 OID 26723)
--- Name: population_residence; Type: TABLE; Schema: public; Owner: takwimu
+-- Name: population_residence; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.population_residence (
@@ -35,12 +32,8 @@ CREATE TABLE public.population_residence (
 );
 
 
-ALTER TABLE public.population_residence OWNER TO takwimu;
-
 --
--- TOC entry 3373 (class 0 OID 26723)
--- Dependencies: 358
--- Data for Name: population_residence; Type: TABLE DATA; Schema: public; Owner: takwimu
+-- Data for Name: population_residence; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.population_residence (geo_level, geo_code, geo_version, "Population_Residence", total) FROM stdin;
@@ -216,15 +209,12 @@ level1	SN_1_014	2009	rural	427385
 
 
 --
--- TOC entry 3251 (class 2606 OID 26728)
--- Name: population_residence pk_population_residence; Type: CONSTRAINT; Schema: public; Owner: takwimu
+-- Name: population_residence pk_population_residence; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.population_residence
     ADD CONSTRAINT pk_population_residence PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Residence");
 
-
--- Completed on 2018-07-26 10:37:03 EAT
 
 --
 -- PostgreSQL database dump complete
