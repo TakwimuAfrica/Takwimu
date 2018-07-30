@@ -3,23 +3,18 @@
 --
 
 -- Dumped from database version 10.0
--- Dumped by pg_dump version 10.0
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
-
-SET search_path = public, pg_catalog;
 
 ALTER TABLE IF EXISTS ONLY public.crop_production_year DROP CONSTRAINT IF EXISTS pk_crop_production_year;
 DROP TABLE IF EXISTS public.crop_production_year;
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -28,7 +23,7 @@ SET default_with_oids = false;
 -- Name: crop_production_year; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE crop_production_year (
+CREATE TABLE public.crop_production_year (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -41,7 +36,7 @@ CREATE TABLE crop_production_year (
 -- Data for Name: crop_production_year; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY crop_production_year (geo_level, geo_code, geo_version, "Crop_Production_Year", total) FROM stdin;
+COPY public.crop_production_year (geo_level, geo_code, geo_version, "Crop_Production_Year", total) FROM stdin;
 country	TZ	2009	1980	48
 country	TZ	2009	1981	50
 country	TZ	2009	1982	51
@@ -151,7 +146,7 @@ country	NG	2009	2013	109
 -- Name: crop_production_year pk_crop_production_year; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY crop_production_year
+ALTER TABLE ONLY public.crop_production_year
     ADD CONSTRAINT pk_crop_production_year PRIMARY KEY (geo_level, geo_code, geo_version, "Crop_Production_Year");
 
 

@@ -2,28 +2,25 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
--- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
-
--- Started on 2018-07-26 10:35:47 EAT
+-- Dumped from database version 10.0
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
+ALTER TABLE IF EXISTS ONLY public.population_sex DROP CONSTRAINT IF EXISTS pk_population_sex;
+DROP TABLE IF EXISTS public.population_sex;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- TOC entry 357 (class 1259 OID 26717)
--- Name: population_sex; Type: TABLE; Schema: public; Owner: takwimu
+-- Name: population_sex; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.population_sex (
@@ -35,12 +32,8 @@ CREATE TABLE public.population_sex (
 );
 
 
-ALTER TABLE public.population_sex OWNER TO takwimu;
-
 --
--- TOC entry 3373 (class 0 OID 26717)
--- Dependencies: 357
--- Data for Name: population_sex; Type: TABLE DATA; Schema: public; Owner: takwimu
+-- Data for Name: population_sex; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 COPY public.population_sex (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
@@ -216,15 +209,12 @@ level1	SN_1_014	2009	female	405006
 
 
 --
--- TOC entry 3251 (class 2606 OID 26722)
--- Name: population_sex pk_population_sex; Type: CONSTRAINT; Schema: public; Owner: takwimu
+-- Name: population_sex pk_population_sex; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.population_sex
     ADD CONSTRAINT pk_population_sex PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
 
-
--- Completed on 2018-07-26 10:35:48 EAT
 
 --
 -- PostgreSQL database dump complete
