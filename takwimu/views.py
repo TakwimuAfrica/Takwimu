@@ -103,11 +103,19 @@ class SupportServicesIndexView(FormView):
 
         headers = {'content-type': 'application/json'}
 
+        user = email + '/token'
+        api_token = settings.ZENDESK_API_TOKEN
+
         request = requests.post(
             settings.ZENDESK_API,
             data=json.dumps(data),
+            auth=(user, api_token),
             headers=headers
         )
+
+        print '\n\n\n\n\n\n\n\n'
+        print request.status_code
+        print request.json()
 
         if request.status_code != 201:
             # add non field error
