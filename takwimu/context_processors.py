@@ -1,5 +1,6 @@
 import json
 import operator
+import pprint
 
 from collections import OrderedDict
 from takwimu import settings
@@ -23,12 +24,13 @@ def takwimu_stories(request):
         else:
             client = Medium()
             stories = client.get_publication_posts('code-for-africa',
-                                                    count=20)
+                                                   count=20)
         stories_latest = stories[0:3]
-        stories_trending = sorted(stories, key=operator.itemgetter('clap_count'), reverse=True)
+        stories_trending = sorted(
+            stories, key=operator.itemgetter('clap_count'), reverse=True)
 
     except Exception as e:
-        print e.message
+        print(e.message)
 
     return {
         'stories_latest': stories_latest,
@@ -37,57 +39,75 @@ def takwimu_stories(request):
         'premium_services': Service.objects.filter(category='Premium')
     }
 
+
 def takwimu_topics(request):
+    """
+        Sections, topics with indicators and key issues
+    """
+
     sections = []
     try:
         profile_sections = ProfileSectionPage.objects.all()
         sections_by_title = OrderedDict()
         section_topics_by_title = OrderedDict()
         section_topic_indicators_by_title = OrderedDict()
-        # topic_countries = {}
-        for profile_section in profile_sections:
-            # country = str(profile_section.get_parent())
-
-            section_title = profile_section.title
+        for section_num, profile_section in enumerate(profile_sections, start=1):
+            country = str(profile_section.get_parent())
+            default_section = {
+                'id': 'section-{}'.format(section_num),
+                'title': profile_section.title,
+                'href': 'section-{}-topics'.format(section_num),
+                'key_issues': [],
+            }
             section = sections_by_title.setdefault(
-                section_title.lower(), { 'title': section_title })
+                default_section['title'].lower(), default_section)
             topics_by_title = section_topics_by_title.setdefault(
-                section_title.lower(), OrderedDict())
+                default_section['title'].lower(), OrderedDict())
             topic_indicators_by_title = section_topic_indicators_by_title.setdefault(
-                section_title.lower(), OrderedDict())
-            for section_topic in profile_section.body:
-                topic_title =  section_topic.value['title']
-                topic = topics_by_title.setdefault(
-                    topic_title.lower(), { 'title': topic_title })
+                default_section['title'].lower(), OrderedDict())
+            for topic_num, section_topic in enumerate(profile_section.body, start=1):
+                # Topics that have no indicators (key issues) should be
+                # displayed separately.
+                topic_title = section_topic.value['title']
+                if not section_topic.value['indicators']:
+                    section['key_issues'].append({
+                        'id': '{}-key_issue-{}'.format(section['id'], topic_num),
+                        'title': topic_title,
+                        'country': country,
+                        'href': profile_section.get_url(request),
+                    })
+                else:
+                    default_topic = {
+                        'id': 'topic-{}'.format(topic_num),
+                        'title': topic_title,
+                        'href': '{}-topic-{}-indicators'.format(section['id'], topic_num),
+                    }
+                    topic = topics_by_title.setdefault(
+                        default_topic['title'].lower(), default_topic)
+                    indicators_by_title = topic_indicators_by_title.setdefault(
+                        topic_title.lower(), OrderedDict())
+                    for indicator_num, topic_indicator in enumerate(section_topic.value['indicators'], start=1):
+                        indicator_title = topic_indicator.value['title']
+                        default_indicator = {
+                            'id': 'indicator-{}'.format(indicator_num),
+                            'title': indicator_title,
+                            'href': '{}-country-selection'.format(topic['href']),
+                            'countries': [],
+                        }
+                        indicator = indicators_by_title.setdefault(
+                            indicator_title.lower(), default_indicator)
+                        indicator['countries'].append({
+                            'title': country,
+                            'href': profile_section.get_url(request),
+                        })
 
-                indicators_by_title = topic_indicators_by_title.setdefault(
-                    topic_title.lower(), OrderedDict())
-                for topic_indicator in section_topic.value['indicators']:
-                    indicator_title = topic_indicator.value['title']
-                    indicator = indicators_by_title.setdefault(
-                        indicator_title.lower(), { 'title': indicator_title })
-                    print(indicator)
+                    topic['indicators'] = indicators_by_title.values()
 
-                #     indicator = {
-                #         'title': topic_indicator.value['title'],
-                #     }
-                #     topic['indicators'].append(indicator)
-                    # topics.append(topic)
-                # if not topic['indicators']:
-                #     topic_country_list = topic_countries.setdefault(title, [])
-                #     topic_country_list.append({
-                #         'title': country,
-                #         'topic': topic['title'],
-                #     }
-                #     section['countries'] = topic_country_list
-                # else:
-                #     section['topics'].append(topic)
-                topic['indicators'] = indicators_by_title.viewvalues()
-            section['topics'] = topics_by_title.viewvalues()
-        sections = sections_by_title.viewvalues()
+            section['topics'] = topics_by_title.values()
 
+        sections = sections_by_title.values()
     except Exception as e:
-        print e.message
+        print(e.message)
 
     return {
         'sections': sections,
