@@ -1,5 +1,5 @@
 #!/bin/bash
-python manage.py migrate                  # Apply database migrations
+python manage.py migrate --noinput        # Apply database migrations
 cat takwimu/sql/*.sql | psql              # Upload tables / data
 python manage.py compilescss              # Compile SCSS (offline)
 python manage.py collectstatic --noinput  # Collect static files

@@ -4,18 +4,18 @@
 {% block content %}
 
   <div class="py-4" style="background-color: #f9f9f9;">
-  <div class="container">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb bg-transparent">
-        <li class="breadcrumb-item">
-          <a href="/" class=""><u>Home</u></a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-          Services
-        </li>
-      </ol>
-    </nav>
-  </div>
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+          <li class="breadcrumb-item">
+            <a href="/" class=""><u>Home</u></a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">
+            Services
+          </li>
+        </ol>
+      </nav>
+    </div>
   </div>
 
   <div class="container-fluid">
@@ -45,17 +45,19 @@
           The Services
         </h2>
         <div class="row">
-          {% for service in service_list %}
-            <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-              <div class="shadow-sm card grayscale" style="width: 100%">
-                {% image service.cover width-400 as tmp_photo %}
-                <div class="card-img" style="background-image: url('{{ tmp_photo.url }}'); "></div>
-                <div class="card-body text-left pt-3 font-weight-light" style="color: #4a4a4a;">
-                  <h5 class="card-title font-weight-bold" style="color: #000000;">{{ service.title }}</h5>
-                  <p class="card-text">{{ service.description | richtext }}</p>
+          {% for service in settings.takwimu.SupportServicesSetting.services %}
+            {% if service.value.category != "Persona" %}
+              <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
+                <div class="shadow-sm card grayscale" style="width: 100%">
+                  {% image service.value.cover width-400 as tmp_photo %}
+                  <div class="card-img" style="background-image: url('{{ tmp_photo.url }}'); "></div>
+                  <div class="card-body text-left pt-3 font-weight-light" style="color: #4a4a4a;">
+                    <h5 class="card-title font-weight-bold" style="color: #000000;">{{ service.value.title }}</h5>
+                    <p class="card-text">{{ service.value.description | richtext }}</p>
+                  </div>
                 </div>
               </div>
-            </div>
+            {% endif %}
           {% endfor %}
         </div>
       </div>
@@ -66,60 +68,73 @@
         Enquire about these services
       </h2>
       <div class="container p-5" style="background-color: #1e4a7e; color: #ffffff;">
-        <form>
-          <div class="form-row">
-            <div class="col">
-              <div class="form-group">
-                <label for="email">Your Email</label>
-                <input type="text" class="form-control" placeholder="name@email.com" id="email">
-              </div>
-            </div>
-            <div class="col">
-              <div class="form-group">
-                <label for="">Your Location</label>
-                <input type="text" class="form-control" placeholder="" id="location">
-              </div>
+        {% if ticket_success == True %}
+          <div class="success w-100 text-center">
+            <i class="fas fa-check-circle fa-3x"></i>
+            <div class="px-5 py-2">
+              <p>Your enquiry has been successfully sent. You will hear back
+                from our Data Services team within 2 working days.</p>
+              <a class="btn btn-outline-light mt-2" href="{% url 'about_support_services' %}">MAKE ANOTHER ENQUIRY</a>
             </div>
           </div>
+        {% else %}
+          <form class="px-5" method="post">
+            {% csrf_token %}
 
-          <div class="form-group">
-            <label for="role">What best describes your role?</label>
-            <select class="custom-select mb-3" id="role">
-              <option selected>Please select</option>
-              <option value="1">Investor</option>
-              <option value="2">Journalist</option>
-              <option value="3">NGO</option>
-            </select>
-          </div>
+            {{ form.non_field_errors }}
+            <div class="form-group py-2 px-5">
+              <label for="{{ form.name.name }}">{{ form.name.label }}</label>
+              {{ form.name }}
+              <small class="text-danger">
+                {{ form.name.errors }}
+              </small>
+            </div>
 
-          <div class="form-group">
-            <label for="">What services are you interested in?</label><br>
-            <div class="form-row">
-              {% for service in service_list %}
-                <div class="col-4">
-                  <div class="form-check form-check-inline">
-                    <input class="form-check-input" type="checkbox" id="{{ service.get_slug }}" value="option1">
-
-                    <label class="form-check-label" for="{{ service.get_slug }}">
-                      {% if service.category == 'Standard' %}
-                        For
-                      {% endif %}
-                      {{ service.title }}</label>
-                  </div>
+            <div class="form-row py-2 px-5">
+              <div class="col">
+                <div class="form-group">
+                  <label for="email">{{ form.email.label }}</label>
+                  {{ form.email }}
+                  <small class="text-danger">
+                    {{ form.email.errors }}
+                  </small>
                 </div>
-              {% endfor %}
+              </div>
+              <div class="col">
+                <div class="form-group">
+                  <label for="{{ form.location.name }}">{{ form.location.label }}</label>
+                  {{ form.location }}
+                  <small class="text-danger">
+                    {{ form.location.errors }}
+                  </small>
+                </div>
+              </div>
             </div>
-          </div>
 
-          <div class="form-group">
-            <label for="help">How can we help you?</label>
-            <textarea class="form-control" id="help" rows="5"></textarea>
-          </div>
+            <div class="form-group py-2 px-5">
+              <label for="{{ form.role.name }}">What best describes your
+                role?</label>
+              {{ form.role }}
+              <small class="text-danger">
+                {{ form.role.errors }}
+              </small>
+            </div>
 
-          <button type="submit" class="btn btn-outline-light" style="float: right;">
-            Submit Enquiry
-          </button>
-        </form>
+            <div class="form-group px-5 py-2">
+              <label for="{{ form.help.name }}">{{ form.help.label }}</label>
+              {{ form.help }}
+              <small class="text-danger">
+                {{ form.email.errors }}
+              </small>
+            </div>
+            <div class="py-5">
+              <button type="submit" class="btn btn-outline-light" style="float: right; height:48px; width: 260px;">
+                Submit Enquiry
+              </button>
+            </div>
+          </form>
+        {% endif %}
+
       </div>
     </div>
   </div>
@@ -137,6 +152,21 @@
     #card-area .card:hover .card-img {
       opacity: 1;
     }
+
+    /*Checkbox styling */
+    .custom-control-label {
+      font-size: 16px;
+    }
+
+    .custom-control-label::before,
+    .custom-control-label::after {
+      top: .8rem;
+      width: 2.3rem;
+      height: 2.3rem;
+    }
+
   </style>
 
 {% endblock %}
+
+
