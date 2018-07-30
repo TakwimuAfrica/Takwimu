@@ -11,7 +11,7 @@
                         <h3 class="font-weight-bold text-center">Select a topic </h3>
                         <div class="nav flex-column nav-pills" id="profile-sections-tab" role="tablist" aria-orientation="vertical">
                             {% for section in sections %}
-                            <a class="nav-link nav-link-explore-section text-white pl-5"
+                            <a class="nav-link nav-link-explore-section text-white text-left pl-5"
                                id="{{ section.id }}"
                                href="#{{ section.href }}"
                                aria-controls="#{{ section.href }}"
@@ -35,7 +35,7 @@
                                  aria-labelledby="{{ section.id }}-tab">
                                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                                     {% for topic in section.topics %}
-                                        <a class="nav-link text-white pl-5"
+                                        <a class="nav-link text-white text-left pl-5"
                                            id="{{ topic.id }}"
                                            href="#{{ topic.href }}"
                                            aria-controls="{{ topic.href }}"
@@ -46,7 +46,7 @@
                                     {% endfor %}
 
                                     {% for key_issue in section.key_issues %}
-                                        <a class="btn btn-link text-white"
+                                        <a class="btn btn-link text-white text-left"
                                         id="{{ key_issue.id }}"
                                         href="{{ key_issue.href }}#{{ key_issue.title|slugify }}">
                                             <img class="rounded-circle border-light mr-2"
@@ -78,7 +78,7 @@
                                 aria-labelledby="{{ topic.id }}-tab">
                                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                                     {% for indicator in topic.indicators %}
-                                    <a class="nav-link text-white pl-5 nav-link-explore-indicator"
+                                    <a class="nav-link text-white text-left pl-5 nav-link-explore-indicator"
                                        id="{{ indicator.id }}"
                                        href="#{{ indicator.href }}"
                                        aria-controls="{{ indicator.href }}"
@@ -107,7 +107,7 @@
                                 aria-labelledby="{{ indicator.id }}-tab">
                                 <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
                                     {% for country in indicator.countries %}
-                                    <a class="btn btn-link text-white"
+                                    <a class="btn btn-link text-white text-left"
                                        href="{{ country.href }}#{{ topic.title|slugify }}">
                                         <img class="rounded-circle border-light mr-2"
                                             src="{% with 'img/flags/'|add:country.title|lower|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
