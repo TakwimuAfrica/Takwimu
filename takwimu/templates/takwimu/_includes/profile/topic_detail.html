@@ -67,6 +67,12 @@
             </div>
           {% endfor %}
         </div>
+        {% if topic.value.has_full_data != "Yes"%}
+          <div class="alert alert-info" role="alert">
+            <span class="fas fa-info"></span>
+            <span style="margin-left:10px;">We are working to source additional data for this topic. Please subscribe to receive an alert when the data is updated.</span>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>

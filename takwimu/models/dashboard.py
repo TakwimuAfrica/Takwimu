@@ -180,10 +180,19 @@ class IconChoiceBlock(blocks.FieldBlock):
 
 
 class TopicBlock(blocks.StructBlock):
+    FULL_DATA_OPTIONS = [
+        ('Yes', 'Yes'), ('No', 'No')
+    ]
+
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
+    has_full_data = blocks.ChoiceBlock(
+        max_length=20,
+        choices=FULL_DATA_OPTIONS,
+        default='Yes'
+    )
 
     indicators = IndicatorsBlock(required=False)
 
@@ -273,7 +282,7 @@ class ProfilePage(Page):
         index.SearchField('body'),
     ]
 
-    # Editor panels configuration
+    # Editor panels configurationActiona
 
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
