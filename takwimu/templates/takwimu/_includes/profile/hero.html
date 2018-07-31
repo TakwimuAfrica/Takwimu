@@ -7,7 +7,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
           <li class="breadcrumb-item">
-            <a href="/" class="text-light"><u>Home</u></a>
+            <a href="/" class="text-light"><u>Home</u></a><i class="glyphicon glyphicon-thumbs-up"></i>
           </li>
           <li class="breadcrumb-item">
             <a href="/profiles" class="text-light"><u>Country Profiles</u></a>
@@ -34,10 +34,10 @@
 
         <!-- TOC Button -->
         <button
-            class="btn btn-light btn-lg text-uppercase pr-4 pl-3 position-fixed font-weight-bold"
-            style="right: 0; border-radius: 2px 0 0 2px; font-size: 100%; z-index: 1000; "
+            class="btn btn-light btn-lg text-uppercase pr-4 pl-3 py-3 position-fixed font-weight-bold"
+            style="right: 0; border-radius: 2px 0 0 2px; font-size: 13px; z-index: 1000; border: 0px; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.29)"
             onclick="javascript:$('#toc').removeClass('d-none')">
-          <span class="mr-2"><i class="fas fa-align-left fa-fw"></i></span>
+          <span class="mr-2"><img src="{% static "img/icons/toc-menu.svg" %}"></span>
           Table of Contents
         </button>
       </div>
@@ -49,14 +49,14 @@
             {% for section in page.get_parent.specific.sections.all %}
               {% if page.title == section.section.title %}
                 {{ forloop.counter | add:"1" }} {% endif %}{% endfor %}</p>
-          <h1 class="display-3" style="font-weight: 900;">{{ page.title }}</h1>
+          <h1 class="text-white" style="font-weight: 900; font-size: 60px">{{ page.title }}</h1>
           <p class="lead my-4 mx-auto"
              style="max-width: 780px;">{{ page.description }}</p>
 
         {% else %}
 
           <p class="font-weight-bold  text-uppercase">Section 1</p>
-          <h1 class="display-3" style="font-weight: 900;">Country Overview</h1>
+          <h1 class="text-white" style="font-weight: 900; font-size: 60px">Country Overview</h1>
           <p class="lead my-4 mx-auto" style="max-width: 780px;">
             A top-level overview of {{ page.title }} – how it’s governed, the make-up of
             its population, the economy and SDG indicators
@@ -68,7 +68,7 @@
           role="button" data-toggle="tooltip" data-placement="top" title="Coming Soon">
           Download full country profile
           <span class="border-left pl-2 ml-2">
-            <i class="fas fa-download fa-fw"></i>
+            <img src="{% static "img/icons/icon-download.svg" %}">
           </span>
         </a>
       </div>
@@ -137,6 +137,23 @@
 
 
 </div>
+
+<style>
+.breadcrumb {
+  padding: 1rem;
+}
+.breadcrumb-item {
+  padding-left: .1rem;
+  letter-spacing: 0;
+  font-size: 14px;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .1rem;
+    color: #fff;
+    content: "\00BB";
+  }
+</style>
 
 
 <!-- TOC - Toggle opening and closing accordion. -->
