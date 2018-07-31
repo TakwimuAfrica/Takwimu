@@ -180,18 +180,12 @@ class IconChoiceBlock(blocks.FieldBlock):
 
 
 class TopicBlock(blocks.StructBlock):
-    FULL_DATA_OPTIONS = [
-        ('Yes', 'Yes'), ('No', 'No')
-    ]
-
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
 
     indicators = IndicatorsBlock(required=False)
-
-    work_in_progress = blocks.BooleanBlock(default=False, required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()
