@@ -49,35 +49,7 @@
     <section class="m-0">
       {% with countries='nigeria tanzania senegal' %}
         {% for country in countries.split %}
-          <div class="jumbotron jumbotron-fluid py-5 mb-0 container-fluid country-container">
-            <div class="container">
-              <div class="row">
-                <div class="col-4">
-                  <img class=" border-light mr-2"
-                       src={% with 'img/maps/'|add:country|lower|add:'.svg' as image_static %}
-                         {% static image_static %}
-                       {% endwith %}/>
-                </div>
-                <div class="col-8">
-                  <h2 class="display-4 font-weight-bold mb-4">{{ country|title }}</h2>
-                  <p class="mb-0" style="color: #4a4a4a;">
-                    Actionable analysis by geo-political and socioeconomic experts across 10 key African countries.
-                  </p>
-                  <p class="font-weight-bold mt-4">
-                    <!-- Show data at:
-                    <select class="ml-2 py-2"
-                            style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto">
-                      <option value="National Level">National Level</option>
-                    </select> -->
-                    <a class="btn btn-primary btn-sm text-uppercase font-weight-bold" href="/profiles/{{ country }}"
-                       style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px;">
-                      Read Country Analysis For {{ country|upper }}
-                    </a>
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
+          {% include 'takwimu/_includes/profile/country_section.html' with country=country %}
         {% endfor %}
       {% endwith %}
 

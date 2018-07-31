@@ -15,7 +15,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
               [
                   url(r'^$', HomePageView.as_view(), name='home'),
                   url(r'^about/support-services', SupportServicesIndexView.as_view(), name='about_support_services'),
-                  url(r'^about/$', AboutUsView.as_view(), name='about_page'),
+                  url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
                   url(r'^legal$', LegalView.as_view(), name='legal'),
                   url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
                   url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
