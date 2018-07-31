@@ -15,3 +15,6 @@ FieldTable(['Indicator'], id='hd_landscape', value_type='Float')
 
 FieldTable(['Population_Sex'])
 FieldTable(['Population_Residence'])
+FieldTable(['candidate'], id="votes_per_candidate")
+FieldTable(['votes'], id="valid_invalid_votes")
+FieldTable(['voters'], id="registered_accredited_voters")

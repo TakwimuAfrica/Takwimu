@@ -28,167 +28,6 @@
     {% block profile_preamble %} {% endblock %}
 
     {% block profile_detail %}
-      <!--
-      <article
-          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-        <header class="section-contents">
-          <h1>HDI Overview</h1>
-        </header>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=hdi_overview.hdi stat_type='number' %}
-            </div>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=hdi_overview.rank stat_type='number' %}
-            </div>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=hiv_prevalence.current_prevalence stat_type='percentage' %}
-            </div>
-          </section>
-        </div>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.forest_area__of_total_land_area stat_type='percentage' %}
-            </div>
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.population_living_below_income_poverty_line_ppp_190_a_day_ stat_type='percentage' %}
-            </div>
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.pupil_teacher_ratio_primary_school stat_type='number' %}
-            </div>
-          </section>
-        </div>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.homicide_rate_per_100000_people stat_type='number' %}
-            </div>
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.public_health_expenditure_of_gdp stat_type='percentage' %}
-            </div>
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.internet_users__of_population stat_type='percentage' %}
-            </div>
-          </section>
-        </div>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.gender_development_index stat_type='number' %}
-            </div>
-
-
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=landscape.domestic_food_price_level_index stat_type='number' %}
-            </div>
-          </section>
-
-        </div>
-      </article>
-      <article
-          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-        <header class="section-contents">
-          <h1>Economy</h1>
-        </header>
-        <div class="section-container">
-
-          <section class="clearfix stat-row">
-            <div class="column-full"
-                 id="chart-histogram-gdp-gdp"
-                 data-stat-type="number"
-                 data-chart-title="GDP in billions of US$"></div>
-          </section>
-
-        </div>
-      </article>
-
-      <article
-          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-        <header class="section-contents">
-          <h1>Health</h1>
-        </header>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            <div class="column-full"
-                 id="chart-histogram-life_expectancy-life_expectancy"
-                 data-stat-type="number"
-                 data-chart-title="Life Expectancy For the last 10 years"></div>
-          </section>
-
-        </div>
-
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            <div class="column-full"
-                 id="chart-histogram-hiv_prevalence-HIV"
-                 data-stat-type="scaled-percentage"
-                 data-chart-title="HIV Prevalence For the last 10 years as a % of the population aged 15 - 49"></div>
-          </section>
-
-        </div>
-      </article>
-
-      <article
-          class="clearfix">
-        <header class="section-contents">
-          <h1>Census</h1>
-        </header>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            <h4>Population 2016</h4>
-            {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-          </section>
-          <section class="clearfix stat-row">
-            <div class="column-full"
-                 id="chart-histogram-demographics-population_dist"
-                 data-stat-type="number"
-                 data-chart-title="Population For the last 5 years"></div>
-          </section>
-
-        </div>
-      </article>
-
-      <article
-          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-        <header class="section-contents">
-          <h1>Education</h1>
-        </header>
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            <div class="column-full"
-                 id="chart-histogram-literacy-literacy"
-                 data-stat-type="scaled-percentage"
-                 data-chart-title="Literate Percentage of population above 15 years"></div>
-          </section>
-
-        </div>
-      </article>
-      <article
-          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-        <header class="section-contents">
-          <h1>Agriculture</h1>
-        </header>
-        <div class="section-container border-bottom-0">
-          <section class="clearfix stat-row">
-            <div class="column-full"
-                 id="chart-histogram-crops-crop"
-                 data-stat-type="number"
-                 data-chart-title="Crop Production Index For the last 10 years"></div>
-          </section>
-
-        </div>
-      </article>
-
-    -->
 
       <article
           class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
@@ -199,14 +38,35 @@
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Total Population </h2>
             <div class="{% if population.total_residence.numerators.this > 0 %}column-quarter{% else %}column-half{% endif %}">
-              {% include 'profile/_blocks/_stat_list.html' with stat=population.total_sex stat_type='number'  %}
+              {% include 'profile/_blocks/_stat_list.html' with stat=population.total_sex stat_type='number' %}
             </div>
             <div class="column-half" id="chart-pie-population-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
             {% if population.total_residence.numerators.this > 0 %}
-            <div class="column-quarter" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
+              <div class="column-quarter" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
             {% endif %}
           </section>
-          </div>
+        </div>
+      </article>
+
+      <article class="clearfix">
+        <header class="section-contents">
+          <h1>Elections</h1>
+        </header>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Votes Distribution </h2>
+
+            <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
+            <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
+          </section>
+        </div>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Total Votes Per Candidate </h2>
+
+            <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
+          </section>
+        </div>
       </article>
     {% endblock %}
   </div>
@@ -226,6 +86,7 @@
     #profile {
       background-color: #ffffff;
     }
+
     .country-container {
       background-color: #f9f9f9;
       height: 400px;
