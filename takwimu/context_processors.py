@@ -4,7 +4,6 @@ import operator
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import Service
 from wagtail.wagtailsearch.backends import get_search_backend
 from takwimu.models.dashboard import ProfileSectionPage
 from takwimu.models.dashboard import TopicPage
@@ -31,9 +30,7 @@ def takwimu_stories(request):
 
     return {
         'stories_latest': stories_latest,
-        'stories_trending': stories_trending[0:3],
-        'standard_services': Service.objects.filter(category='Standard'),
-        'premium_services': Service.objects.filter(category='Premium')
+        'stories_trending': stories_trending[0:3]
     }
 
 # This function can be refactored or completely removed, it acts as sample dummy data

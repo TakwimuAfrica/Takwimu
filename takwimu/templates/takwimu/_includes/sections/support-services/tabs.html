@@ -4,48 +4,54 @@
     <nav
         class="nav nav-justified container text-center custom-nav"
         id="nav-tabs" role="tablist">
-      {% for service in support_services %}
-      <a class="nav-item nav-link text-light pt-4 pb-3 px-0"
-        id="support-{{ service.get_slug | add:'-btn'}}"
-        data-toggle="tab" href="#support-{{ service.get_slug }}" role="tab"
-        aria-controls="support-{{ service.get_slug }}"
-        aria-selected="true">
-        <div class="text-center {% if not forloop.first %}border-left{% endif %}">
-          <h2 class="py-1">{{ service.icon.as_html }}</h2>
-          <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal";>{{ service.title }}</p>
-        </div>
-      </a>
+      {% for service in settings.takwimu.SupportServicesSetting.services %}
+        {% if service.value.category == "Persona" %}
+        <br />
+        <br />
+        <a class="nav-item nav-link text-light pt-4 pb-3 px-0"
+          id="support-{{ service.value.title|slugify | add:'-btn'}}"
+          data-toggle="tab" href="#support-{{ service.value.title|slugify }}" role="tab"
+          aria-controls="support-{{ service.value.title|slugify }}"
+          aria-selected="true">
+          <div class="text-center {% if not forloop.first %}border-left{% endif %}">
+            <h2 class="py-1"><i class="{{ service.value.icon }}"></i></h2>
+            <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal";>{{ service.value.title }}</p>
+          </div>
+        </a>
+        {% endif %}
       {% endfor %}
     </nav>
   </div>
 
   <div class="tab-content bg-primary text-light" id="datapriority-content">
-    {% for service in support_services %}
-      <div
-          class="tab-pane fade container py-5"
-          id="support-{{ service.get_slug }}" role="tabpanel"
-          aria-labelledby="support-{{ service.get_slug | add:'-btn' }}">
+    {% for service in settings.takwimu.SupportServicesSetting.services %}
+      {% if service.value.category == "Persona" %}
+        <div
+            class="tab-pane fade container py-5"
+            id="support-{{ service.value.title|slugify }}" role="tabpanel"
+            aria-labelledby="support-{{ service.value.title|slugify | add:'-btn' }}">
 
-        <button class="close-alt float-right btn btn-outline-light btn-sm px-2 py-1"
-            aria-label="Close">
-          <!-- X -->
-          <span class="fa fa-times mx-1"></span>
-        </button>
+          <button class="close-alt float-right btn btn-outline-light btn-sm px-2 py-1"
+              aria-label="Close">
+            <!-- X -->
+            <span class="fa fa-times mx-1"></span>
+          </button>
 
-        <div class="row">
-          <div class="col-4">
-            <h3 class="font-weight-bold text-right" style="font-size: 45px;">
-              {{ service.title }}
-            </h3>
-          </div>
-          <div class="col">
-            <div class="col-10 pl-5 ml-3" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
-              <h4 class="font-weight-bold">How Takwimu benefits you</h4>
-              {{ service.description | safe }}
+          <div class="row">
+            <div class="col-4 pr-5">
+              <h1 class="font-weight-bold" style="font-size: 50px;">
+                {{ service.value.title }}
+              </h3>
+            </div>
+            <div class="col">
+              <div class="col-10 pl-5" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
+                <h4 class="font-weight-bold">How Takwimu benefits you</h4>
+                {{ service.value.description | safe }}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      {% endif %}
     {% endfor %}
   </div>
 </section>
