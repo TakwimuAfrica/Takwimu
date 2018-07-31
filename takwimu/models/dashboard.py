@@ -188,13 +188,10 @@ class TopicBlock(blocks.StructBlock):
     icon = IconChoiceBlock(required=False)
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
-    has_full_data = blocks.ChoiceBlock(
-        max_length=20,
-        choices=FULL_DATA_OPTIONS,
-        default='Yes'
-    )
 
     indicators = IndicatorsBlock(required=False)
+
+    work_in_progress = blocks.BooleanBlock(default=False, required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()

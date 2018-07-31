@@ -3,7 +3,6 @@
 <div class="container-fluid data-topic-container">
   <div class="container py-5 data-topic">
     <div class="row">
-
       <!-- Left navigation of all indicators-->
       <div class="col-3 dataindicators-nav">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
@@ -67,7 +66,7 @@
             </div>
           {% endfor %}
         </div>
-        {% if topic.value.has_full_data != "Yes"%}
+        {% if topic.value.work_in_progress %}
           <div class="alert alert-info" role="alert">
             <span class="fas fa-info"></span>
             <span style="margin-left:10px;">We are working to source additional data for this topic. Please subscribe to receive an alert when the data is updated.</span>
