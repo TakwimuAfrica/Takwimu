@@ -1,12 +1,10 @@
 import json
 import operator
-import pprint
 
 from collections import OrderedDict
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
-from wagtail.wagtailsearch.backends import get_search_backend
 from takwimu.models.dashboard import ProfileSectionPage
 from takwimu.models.dashboard import TopicPage
 
