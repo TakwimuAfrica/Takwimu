@@ -1,7 +1,7 @@
 {% load staticfiles wagtailcore_tags %}
 
-<div class="container-fluid data-topic-container">
-  <div class="container py-5 data-topic">
+<div class="container-fluid data-topic-container" id="{{ topic.value.title|slugify }}">
+  <div class="container data-topic">
     <div class="row">
 
       <!-- Left navigation of all indicators-->
@@ -34,11 +34,11 @@
               <a class="pl-3 font-weight-bold" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener"
                   style="text-decoration: none;">
                 <span class="mr-1"><i class="fas fa-comments fa-lg"></i></span> Have your say</a>
-          </div>
+      </div>
     </div>  <!-- /.col-3 -->
 
     <!-- The Main Stage -->
-    <div id="{{ topic.value.title|slugify }}" class="col-9 topic topic-{{ topic.value.title|slugify }}">
+    <div class="col-9 topic topic-{{ topic.value.title|slugify }}">
       <h1>{{ topic.value.title }}</h1>
       <div class="text-dark">
         <p>{{ topic.value.summary }}</p>
@@ -122,6 +122,10 @@
 
   .topic h5{
     font-size: 25px;
+  }
+  .data-topic {
+    padding-top: 72px;
+    padding-bottom: 72px;
   }
 
   .topic .btn-group .btn{
