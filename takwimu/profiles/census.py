@@ -82,6 +82,11 @@ def get_elections(geo, session):
         valid_invalid_dist, _ = LOCATIONNOTFOUND, 0
         registered_accred_dist, _ = LOCATIONNOTFOUND, 0
 
+        return {
+            'candidate_dist': candidate_dist,
+            'valid_invalid_dist': valid_invalid_dist,
+            'registered_accred_dist': registered_accred_dist
+        }
 
 def get_crop_production(geo, session):
     try:

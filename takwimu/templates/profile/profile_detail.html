@@ -55,15 +55,22 @@
         <div class="section-container">
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Votes Distribution </h2>
-
-            <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
-            <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
+            {% if elections.valid_invalid_dist.name != 'No Data Found' %}
+              <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
+              <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
+            {% else %}
+              {% include 'profile/no_data_available.html' %}
+            {% endif %}
           </section>
         </div>
         <div class="section-container">
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Total Votes Per Candidate </h2>
-            <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
+            {% if elections.valid_invalid_dist.name != 'No Data Found' %}
+              <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
+            {% else %}
+              {% include 'profile/no_data_available.html' %}
+            {% endif %}
           </section>
         </div>
       </article>
@@ -91,11 +98,11 @@
     {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower title='long' %}
   {% else %}
     {% if geography.parents %}
-        {% for level, g in geography.parents.items %}
-          {% if g.geo_level == 'country' %}
-            {% include 'takwimu/_includes/profile/country_section.html' with country=g.short_name|lower title='long' %}
-          {%endif%}
-        {% endfor %}
+      {% for level, g in geography.parents.items %}
+        {% if g.geo_level == 'country' %}
+          {% include 'takwimu/_includes/profile/country_section.html' with country=g.short_name|lower title='long' %}
+        {% endif %}
+      {% endfor %}
     {% endif %}
   {% endif %}
 
