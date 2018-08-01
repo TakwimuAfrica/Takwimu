@@ -1,7 +1,71 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
-{% block content %}
+{% load staticfiles %}
 
-{% include 'takwimu/_includes/topic.html' with topic=page %}
+{% block content %}
+<header class="text-light" style="background: #074c9c url('{% static 'img/bg/header-databycountry.jpg' %}') no-repeat center; background-size: cover;">
+  <div class="text-center py-3">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+          <li class="breadcrumb-item">
+            <a href="/" class="text-light"><u>Home</u></a>
+          </li>
+          <li class="breadcrumb-item active text-light">
+            Data by topic
+          </li>
+        </ol>
+      </nav>
+      <h1 class="display-4 text-light font-weight-bold">Find data by
+        Topic</h1>
+      <p class="p-4">
+        All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
+      </p>
+    </div>
+  </div>
+</header>
+<div class="explore-topic container-fluid bg-secondary py-2">
+  <div class="container">
+    {% include 'takwimu/_includes/sections/explore/topics.html' %}
+  </div>
+</div>
+
+{% include 'takwimu/_includes/sections/support-services/button.html' %}
+
+{% include 'takwimu/_includes/sections/stories/index.html' %}
+
+<div class="clearfix container text-center py-5">
+  <div class="wrapper p-3">
+    <h4 class="display-4 font-weight-bold">Explore the data by Country</h4>
+  </div>
+    <div class="col-lg-8 col-md-10 mx-auto tab-pane fade show active"
+      id="explore-countries" role="tabpanel" aria-labelledby="explore-countries-tab">
+      {% include 'takwimu/_includes/sections/explore/countries.html' %}
+    </div>
+</div>
+
+{% include 'takwimu/_includes/sections/updates.html' %}
+<style>
+.breadcrumb {
+  padding: 1rem;
+}
+.breadcrumb-item {
+  padding-left: .1rem;
+  letter-spacing: 0;
+  font-size: 14px;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .1rem;
+    color: #fff;
+    content: "\00BB";
+  }
+  .explore-topic h3 {
+    font-size: 35px;
+  }
+  .explore-topic .nav-pills .nav-link.active {
+    background-color: #3673bb;
+  }
+</style>
 
 {% endblock %}
