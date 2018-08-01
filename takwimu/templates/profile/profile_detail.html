@@ -67,18 +67,21 @@
           </section>
         </div>
       </article>
+
+
       <article class="clearfix">
         <header class="section-contents">
-          <h1>Agriculture</h1>
+          <h1>Crops</h1>
         </header>
         <div class="section-container">
-          {% if crops.crop_distribution.name != 'No Data Found' %}
-            <section class="clearfix stat-row">
-              <h2 class="header-for-columns">Crop Production in Tonnes </h2>
-              <div class="column-half" id="chart-histogram-crops-crop_distribution" data-stat-type="percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
-            </section>
-          {% endif %}
-
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Crop Production in Tonnes </h2>
+            {% if crops.crop_distribution.name == 'No Data Found' %}
+              {% include 'profile/no_data_available.html' %}
+            {% else %}
+              <div class="column-full" id="chart-pie-crops-crop_distribution" data-stat-type="percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
+            {% endif %}
+          </section>
         </div>
       </article>
     {% endblock %}

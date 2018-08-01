@@ -85,7 +85,7 @@ def get_elections(geo, session):
 
 def get_crop_production(geo, session):
     try:
-        crop_distribution = get_stat_data('crops', geo, session, table_fields=['crops'])
+        crop_distribution, _ = get_stat_data('crops', geo, session, table_fields=['crops'])
         return {
             'crop_distribution': crop_distribution
         }

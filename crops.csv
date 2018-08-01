@@ -1,0 +1,372 @@
+geography,crops,total
+Adamawa,Cotton,80920.29255
+Adamawa,Sesame seed,1061.882333
+Adamawa,Garlic,484.576593
+Adamawa,Shea nuts,17705.20179
+Adamawa,Sugarcane,50885.72285
+Adamawa,Cocoa,1650.133421
+Adamawa,Palm Oil,203.539597
+Abia,Ginger,1940.936019
+Abia,Cashew,278.134884
+Abia,Cocoa,3340.760914
+Abia,Coffee,598.612874
+Abia,Palm Oil,49227.36304
+Abia,Rubber,301.379887
+Abia,Kolanut,281.589339
+Akwa Ibom,Cashew,143.862871
+Akwa Ibom,Cocoa,1253.087948
+Akwa Ibom,Palm Oil,135818.9043
+Akwa Ibom,Kolanut,354.711016
+Anambra,Cashew,999.494949
+Anambra,Palm Oil,53463.24156
+Anambra,Kolanut,2302.998519
+Bauchi,Cotton,741.843533
+Bauchi,Sesame seed,3796.68721
+Bauchi,Gum Arabic,966.160338
+Bauchi,Shea nuts,25623.62593
+Bauchi,Sugarcane,993.096855
+Bayelsa,Sugarcane,33599.70892
+Bayelsa,Cocoa,91.111661
+Bayelsa,Palm Oil,15369.85524
+Bayelsa,Rubber,1658.289776
+Benue,Sesame seed,19922.94858
+Benue,Garlic,761.477503
+Benue,Ginger,34434.71564
+Benue,Shea nuts,27136.25026
+Benue,Sugarcane,9020.603847
+Benue,Cashew,580.77033
+Benue,Palm Oil,47588.13511
+Benue,Kolanut,3147.766535
+Borno,Cotton,8850.491099
+Borno,Sesame seed,2092.561963
+Borno,Garlic,9909.096863
+Borno,Ginger,6101.433649
+Borno,Gum Arabic,6789.367089
+Borno,Shea nuts,5900.625056
+Borno,Sugarcane,2841.358941
+Cross River,Cashew,1016.630956
+Cross River,Cocoa,69421.41894
+Cross River,Coffee,4278.603808
+Cross River,Palm Oil,101741.9813
+Cross River,Rubber,11491.32344
+Cross River,Kolanut,91.056762
+Delta,Sugarcane,3179.276297
+Delta,Cashew,2107.533925
+Delta,Cocoa,3927.924954
+Delta,Palm Oil,104728.9242
+Delta,Rubber,15950.93038
+Delta,Kolanut,650.113524
+Ebonyi,Ginger,2916.232228
+Ebonyi,Sugarcane,2806.860339
+Ebonyi,Cashew,2656.667687
+Ebonyi,Palm Oil,89718.9895
+Edo,Sugarcane,10098.5155
+Edo,Cashew,5236.608509
+Edo,Cocoa,23678.90842
+Edo,Coffee,2373.526745
+Edo,Palm Oil,70876.80954
+Edo,Rubber,6951.181267
+Edo,Kolanut,291.07848
+Ekiti,Cotton,49.456236
+Ekiti,Ginger,697.322275
+Ekiti,Sugarcane,6486.145197
+Ekiti,Cashew,2505.897357
+Ekiti,Cocoa,36464.91156
+Ekiti,Coffee,3281.051677
+Ekiti,Palm Oil,60948.05563
+Ekiti,Rubber,492.481706
+Ekiti,Kolanut,11344.02764
+Enugu,Sugarcane,113.792021
+Enugu,Cashew,7663.095602
+Enugu,Palm Oil,56297.47374
+Enugu,Kolanut,1407.922693
+Gombe,Cotton,53682.75015
+Gombe,Sesame seed,3754.618654
+Gombe,Garlic,4104.067064
+Gombe,Ginger,13587.67773
+Gombe,Shea nuts,7664.543078
+Gombe,Sugarcane,11451.6152
+Imo,Shea nuts,4098.776933
+Imo,Cashew,8475.5025
+Imo,Cocoa,10.235179
+Imo,Palm Oil,124435.1405
+Imo,Kolanut,87.397335
+Jigawa,Cotton,18259.24215
+Jigawa,Sesame seed,30583.84046
+Jigawa,Ginger,2125.533175
+Jigawa,Gum Arabic,1858.059072
+Jigawa,Shea nuts,33577.3357
+Jigawa,Sugarcane,114174.776
+Kaduna,Cotton,21325.52875
+Kaduna,Sesame seed,2439.976268
+Kaduna,Garlic,89.003864
+Kaduna,Ginger,43135.13033
+Kaduna,Shea nuts,35494.39553
+Kaduna,Sugarcane,197208.5069
+Kaduna,Cashew,7241.097847
+Kaduna,Palm Oil,4098.779449
+Kano,Cotton,52077.41599
+Kano,Sesame seed,3796.68721
+Kano,Garlic,37350.77608
+Kano,Ginger,7184.36019
+Kano,Gum Arabic,1699.578059
+Kano,Shea nuts,14772.191
+Kano,Sugarcane,401189.1159
+Kano,Cashew,2411.794715
+Katsina,Cotton,116611.8483
+Katsina,Sesame seed,2955.316083
+Katsina,Garlic,29766.84786
+Katsina,Ginger,16580.03555
+Katsina,Gum Arabic,590.379747
+Katsina,Shea nuts,3712.197614
+Katsina,Sugarcane,192853.433
+Katsina,Cashew,805.632078
+Kebbi,Cotton,15707.3004
+Kebbi,Sesame seed,3754.618654
+Kebbi,Garlic,3720.597289
+Kebbi,Gum Arabic,885.56962
+Kebbi,Shea nuts,11641.39796
+Kebbi,Sugarcane,122543.4051
+Kebbi,Cashew,1003.309866
+Kogi,Cotton,197.824942
+Kogi,Sesame seed,1002.904745
+Kogi,Ginger,3408.708531
+Kogi,Shea nuts,28033.23617
+Kogi,Sugarcane,1789.638149
+Kogi,Cashew,986.450362
+Kogi,Cocoa,1062.969382
+Kogi,Coffee,5445.421578
+Kogi,Palm Oil,54395.1178
+Kogi,Rubber,165.828978
+Kogi,Kolanut,3521.845015
+Kwara,Shea nuts,24797.63801
+Kwara,Sugarcane,8782.675076
+Kwara,Cashew,38981.206
+Kwara,Cocoa,1427.416027
+Kwara,Coffee,1385.675431
+Kwara,Palm Oil,3065.569117
+Lagos,Sugarcane,96.068375
+Lagos,Cashew,843.995511
+Lagos,Cocoa,202.470358
+Lagos,Palm Oil,5007.096225
+Lagos,Kolanut,64.340573
+Nasarawa,Sesame seed,40817.01679
+Nasarawa,Ginger,24981.1019
+Nasarawa,Shea nuts,1093.954984
+Nasarawa,Sugarcane,25561.82581
+Nasarawa,Cashew,978.267524
+Nasarawa,Palm Oil,5516.321317
+Niger,Cotton,22828.99831
+Niger,Sesame seed,1077.570863
+Niger,Shea nuts,30130.96132
+Niger,Sugarcane,19965.36442
+Niger,Cashew,1927.762473
+Niger,Palm Oil,8197.558899
+Niger,Kolanut,18.510859
+Ogun,Cotton,148.368707
+Ogun,Cashew,1083.766963
+Ogun,Cocoa,19903.07832
+Ogun,Coffee,1535.811423
+Ogun,Palm Oil,59165.48396
+Ogun,Rubber,3053.242735
+Ogun,Kolanut,51464.83218
+Ondo,Cotton,148.368707
+Ondo,Sugarcane,8182.680783
+Ondo,Cashew,1064.585246
+Ondo,Cocoa,92220.79173
+Ondo,Coffee,4008.821396
+Ondo,Palm Oil,101089.6963
+Ondo,Rubber,5298.452854
+Ondo,Kolanut,50862.9689
+Osun,Cotton,0.0
+Osun,Cashew,999.904091
+Osun,Cocoa,74104.15119
+Osun,Coffee,2363.553944
+Osun,Palm Oil,71435.7082
+Osun,Kolanut,37326.81392
+Oyo,Cotton,178.803718
+Oyo,Ginger,347.630332
+Oyo,Sugarcane,6279.250614
+Oyo,Cashew,987.858382
+Oyo,Cocoa,36059.97084
+Oyo,Coffee,1026.926564
+Oyo,Palm Oil,86470.05393
+Oyo,Kolanut,7616.214215
+Plateau,Sesame seed,1935.676664
+Plateau,Shea nuts,27628.06142
+Plateau,Sugarcane,28003.1819
+Plateau,Tea,1441.201
+Plateau,Cashew,834.404653
+Rivers,Sugarcane,2968.937275
+Rivers,Cashew,8.363432
+Rivers,Cocoa,303.705538
+Rivers,Palm Oil,16417.82572
+Rivers,Rubber,2656.888982
+Rivers,Kolanut,693.973346
+Sokoto,Cotton,3204.764061
+Sokoto,Sesame seed,588.959789
+Sokoto,Garlic,39408.93113
+Sokoto,Gum Arabic,994.51476
+Sokoto,Sugarcane,98912.89025
+Sokoto,Cashew,556.269768
+Taraba,Sesame seed,2797.558997
+Taraba,Ginger,3650.118483
+Taraba,Gum Arabic,751.392405
+Taraba,Shea nuts,20328.54524
+Taraba,Sugarcane,49289.19582
+Taraba,Tea,4170.801
+Taraba,Cocoa,4885.953619
+Taraba,Coffee,6601.99456
+Taraba,Palm Oil,6085.296622
+Taraba,Kolanut,2704.758144
+Yobe,Cotton,2819.005424
+Yobe,Sesame seed,3291.864534
+Yobe,Garlic,3016.242059
+Yobe,Gum Arabic,8504.908903
+Yobe,Shea nuts,6763.434204
+Zamfara,Cotton,135559.5415
+Zamfara,Garlic,21508.38162
+Zamfara,Ginger,5002.014218
+Zamfara,Shea nuts,7316.945638
+Zamfara,Sugarcane,17544.66069
+Dakar,Cassava,5189
+Dakar,Cowpea,397
+Dakar,Maize,799
+Dakar,Peanut Oil Mill,935
+Dakar,Sorghum,180
+Dakar,Total Cereals,979
+Dakar,Watermelon,1488
+Senegal,Cassava,439571
+Senegal,Cotton,20295
+Senegal,Cowpea,82875
+Senegal,Fonio,3228
+Senegal,Maize,304296
+Senegal,Millet,749874
+Senegal,Peanut Oil Mill,1050042
+Senegal,Rice,906348
+Senegal,Sesame,10376
+Senegal,Sorghum,188500
+Senegal,Total Cereals,2152245
+Senegal,Watermelon,270686
+Diourbel,Cassava,5831
+Diourbel,Cowpea,7301
+Diourbel,Maize,836
+Diourbel,Millet,103444
+Diourbel,Peanut Oil Mill,65442
+Diourbel,Sesame,305
+Diourbel,Sorghum,10666
+Diourbel,Total Cereals,114946
+Diourbel,Watermelon,16840
+Fatick,Cassava,12277
+Fatick,Cowpea,15389
+Fatick,Maize,30361
+Fatick,Millet,108840
+Fatick,Peanut Oil Mill,127389
+Fatick,Rice,15982
+Fatick,Sesame,174
+Fatick,Sorghum,11989
+Fatick,Total Cereals,167171
+Fatick,Watermelon,20188
+Kaffrine,Cassava,4712
+Kaffrine,Cowpea,313
+Kaffrine,Maize,65294
+Kaffrine,Millet,113926
+Kaffrine,Peanut Oil Mill,198468
+Kaffrine,Rice,478
+Kaffrine,Sesame,4303
+Kaffrine,Sorghum,51618
+Kaffrine,Total Cereals,231316
+Kaffrine,Watermelon,60126
+Kaolack,Cassava,56782
+Kaolack,Cowpea,1706
+Kaolack,Maize,37932
+Kaolack,Millet,133626
+Kaolack,Peanut Oil Mill,124901
+Kaolack,Rice,5525
+Kaolack,Sesame,211
+Kaolack,Sorghum,10491
+Kaolack,Total Cereals,187573
+Kaolack,Watermelon,68825
+Kedougou,Cowpea,5
+Kedougou,Fonio,839
+Kedougou,Maize,12678
+Kedougou,Peanut Oil Mill,3981
+Kedougou,Rice,18750
+Kedougou,Sorghum,4642
+Kedougou,Total Cereals,36908
+Kolda,Cassava,7416
+Kolda,Cowpea,731
+Kolda,Fonio,72
+Kolda,Maize,34807
+Kolda,Millet,33662
+Kolda,Peanut Oil Mill,86363
+Kolda,Rice,162964
+Kolda,Sesame,654
+Kolda,Sorghum,25935
+Kolda,Total Cereals,257440
+Kolda,Watermelon,12013
+Louga,Cassava,23566
+Louga,Cowpea,43357
+Louga,Maize,3682
+Louga,Millet,44524
+Louga,Peanut Oil Mill,139842
+Louga,Rice,705
+Louga,Sorghum,2227
+Louga,Total Cereals,51138
+Louga,Watermelon,41840
+Matam,Cowpea,244
+Matam,Maize,810
+Matam,Millet,31230
+Matam,Peanut Oil Mill,781
+Matam,Rice,42896
+Matam,Sorghum,3844
+Matam,Total Cereals,78780
+Matam,Watermelon,2179
+Saint Louis,Cassava,3859
+Saint Louis,Cowpea,3177
+Saint Louis,Maize,5018
+Saint Louis,Millet,2129
+Saint Louis,Peanut Oil Mill,5714
+Saint Louis,Rice,399224
+Saint Louis,Sorghum,880
+Saint Louis,Total Cereals,407251
+Saint Louis,Watermelon,18514
+Sedhiou,Cassava,7975
+Sedhiou,Cowpea,660
+Sedhiou,Fonio,2317
+Sedhiou,Maize,71005
+Sedhiou,Millet,33877
+Sedhiou,Peanut Oil Mill,72288
+Sedhiou,Rice,174264
+Sedhiou,Sesame,1448
+Sedhiou,Sorghum,16354
+Sedhiou,Total Cereals,297816
+Sedhiou,Watermelon,6034
+Tambacounda,Cassava,3540
+Tambacounda,Cowpea,660
+Tambacounda,Maize,37094
+Tambacounda,Millet,57960
+Tambacounda,Peanut Oil Mill,91500
+Tambacounda,Rice,6843
+Tambacounda,Sesame,2803
+Tambacounda,Sorghum,34729
+Tambacounda,Total Cereals,136626
+Tambacounda,Watermelon,4609
+Thies,Cassava,305969
+Thies,Cowpea,7680
+Thies,Maize,1375
+Thies,Millet,80672
+Thies,Peanut Oil Mill,100641
+Thies,Sorghum,14514
+Thies,Total Cereals,96561
+Thies,Watermelon,9388
+Ziguinchor,Cassava,2455
+Ziguinchor,Cowpea,1254
+Ziguinchor,Maize,2607
+Ziguinchor,Millet,5983
+Ziguinchor,Peanut Oil Mill,31797
+Ziguinchor,Rice,78718
+Ziguinchor,Sesame,479
+Ziguinchor,Sorghum,430
+Ziguinchor,Total Cereals,87739
+Ziguinchor,Watermelon,8644
