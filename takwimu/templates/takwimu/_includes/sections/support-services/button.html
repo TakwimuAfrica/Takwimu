@@ -2,15 +2,15 @@
 
 <section class="support-services-button bg-primary text-light py-5 mb-0">
   <a href="/about/support-services" class="text-light">
-    <div class="container">
+    <div class="container py-4 mt-3">
       <div class="d-flex align-items-center justify-content-center">
         <div class="pulse-icon mr-5">
           <img src="{% static 'img/icons/pulse.svg' %}" alt="Support Services">
         </div>
-        
+
         <div>
-          <p class="text-uppercase" style="text-decoration: none !important;">Looking for other data or support sevices?</p>
-          <h1 class="display-5 font-weight-bold"><u>How Takwimu Can Help You</u></h1>
+          <p class="text-uppercase" style="color: #c0dcfd;text-decoration: none !important;">Looking for other data or support sevices?</p>
+          <h1 class="display-5 font-weight-bold" style="line-height: 0.9"><u>How Takwimu Can Help You</u></h1>
       </div>
     </div>
   </a>
@@ -22,5 +22,10 @@
   }
   .support-services-button a:hover {
     text-decoration: none !important;
+  }
+  .support-services-button u {
+    text-decoration: none;
+    border-bottom: 2px solid #fff;
+    display: inline-block;
   }
 </style>
