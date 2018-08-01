@@ -1,6 +1,5 @@
 {% load staticfiles %}
-
-<div class="carousel-item p-5 {% if forloop.first %}active{% endif %}">
+<div class="carousel-item p-5 {% if forloop.first and status != 'beta' %}active{% endif %}">
   <div>
     <div class="overlay float-right"><img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="float-right"/></div>
     <p class="text-uppercase" style="font-weight: 400; font-size:13px;">New Country</p>
