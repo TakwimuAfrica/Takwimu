@@ -63,9 +63,22 @@
         <div class="section-container">
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Total Votes Per Candidate </h2>
-
             <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
           </section>
+        </div>
+      </article>
+      <article class="clearfix">
+        <header class="section-contents">
+          <h1>Agriculture</h1>
+        </header>
+        <div class="section-container">
+          {% if crops.crop_distribution.name != 'No Data Found' %}
+            <section class="clearfix stat-row">
+              <h2 class="header-for-columns">Crop Production in Tonnes </h2>
+              <div class="column-half" id="chart-histogram-crops-crop_distribution" data-stat-type="percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
+            </section>
+          {% endif %}
+
         </div>
       </article>
     {% endblock %}

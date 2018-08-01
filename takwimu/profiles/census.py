@@ -21,8 +21,9 @@ def get_profile(geo, profile_name, request):
     try:
         data['population'] = get_population(geo, session)
         data['elections'] = get_elections(geo, session)
+        data['crops'] = get_crop_production(geo, session)
         print '\n\n\n\n\n\n\n'
-        print data['elections']
+        print data
         print '\n\n\n\n\n\n\n'
 
         return data
@@ -62,6 +63,7 @@ def get_population(geo, session):
         residence_dist, _ = LOCATIONNOTFOUND, 0
 
 
+
 def get_elections(geo, session):
     try:
         candidate_dist, total_candidate_dist = get_stat_data('candidate', geo, session, table_fields=['candidate'])
@@ -79,6 +81,20 @@ def get_elections(geo, session):
         candidate_dist, _ = LOCATIONNOTFOUND, 0
         valid_invalid_dist, _ = LOCATIONNOTFOUND, 0
         registered_accred_dist, _ = LOCATIONNOTFOUND, 0
+
+
+def get_crop_production(geo, session):
+    try:
+        crop_distribution = get_stat_data('crops', geo, session, table_fields=['crops'])
+        return {
+            'crop_distribution': crop_distribution
+        }
+
+    except LocationNotFound:
+        crop_distribution, _ = LOCATIONNOTFOUND, 0
+        return {
+            'crop_distribution': crop_distribution
+        }
 
 
 # helpers
