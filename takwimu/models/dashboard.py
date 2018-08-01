@@ -273,7 +273,7 @@ class ProfilePage(Page):
         index.SearchField('body'),
     ]
 
-    # Editor panels configurationActiona
+    # Editor panels configuration
 
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
