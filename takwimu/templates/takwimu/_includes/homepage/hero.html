@@ -37,10 +37,10 @@
             <div class="carousel-inner">
               {% with countries='nigeria tanzania senegal' status='beta' %}
               {% if status == 'beta' %}
-                {% include 'takwimu/_includes/homepage/beta_detail.html' %}
+                {% include 'takwimu/_includes/homepage/carousel/beta_detail.html' %}
               {% endif %}
               {% for country in countries.split %}
-                {% include 'takwimu/_includes/homepage/hero_detail.html' %}
+                {% include 'takwimu/_includes/homepage/carousel/hero_detail.html' %}
               {% endfor %}
               {% endwith %}
             </div>
