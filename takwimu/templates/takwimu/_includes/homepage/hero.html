@@ -35,15 +35,8 @@
               <li data-target="#carousel-homepage-hero" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
-              {% with countries='nigeria tanzania senegal' status='beta' %}
-              {% if status == 'beta' %}
-                {% include 'takwimu/_includes/homepage/carousel/beta_detail.html' %}
-              {% endif %}
-              {% for country in countries.split %}
-                {% include 'takwimu/_includes/homepage/carousel/hero_detail.html' %}
-              {% endfor %}
-              {% endwith %}
-            </div>
+              {% include 'takwimu/_includes/homepage/carousel/hero_detail.html' %}
+          </div>
           </div>
         </div>
       </div>
