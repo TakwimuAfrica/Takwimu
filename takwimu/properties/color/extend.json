@@ -1,0 +1,12 @@
+
+{
+    "brand": {
+      "extend": {
+        "white": { "value": "#ffffff" },
+        "light": { "value": "#f8f9fa" },
+        "jumbotron": { "value": "#fafafa" },
+        "black": { "value": "#000000" },
+        "muted": { "value": "#6c757d" }
+      }
+    }
+  }
