@@ -3,7 +3,6 @@
 <div class="container-fluid data-topic-container" id="{{ topic.value.title|slugify }}">
   <div class="container data-topic">
     <div class="row">
-
       <!-- Left navigation of all indicators-->
       <div class="col-3 dataindicators-nav">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
@@ -67,6 +66,12 @@
             </div>
           {% endfor %}
         </div>
+        {% if not topic.value.indicators %}
+          <div class="alert alert-info" role="alert">
+            <span class="fas fa-info"></span>
+            <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
+          </div>
+        {% endif %}
       </div>
     </div>
   </div>
