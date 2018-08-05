@@ -1,0 +1,13 @@
+{
+  "source": ["properties/**/*.json"],
+  "platforms": {
+    "scss": {
+      "transformGroup": "scss",
+      "buildPath": "static/css/",
+      "files": [{
+        "destination": "colors.scss",
+        "format": "scss/colors"
+      }]
+    }
+  }
+}

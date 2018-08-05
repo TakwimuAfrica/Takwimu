@@ -1,0 +1,11 @@
+
+{
+    "brand": {
+      "color": {
+        "primary": { "value": "#1f6cc6" },
+        "primary-alt": { "value": "#074c9c" },
+        "secondary": { "value": "#1e4a7e" },
+        "dark-alt": { "value": "#46648c;" }
+      }
+    }
+  }
