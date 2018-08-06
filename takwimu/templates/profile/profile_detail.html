@@ -53,15 +53,16 @@
           <h1>Elections</h1>
         </header>
         <div class="section-container">
+          {% if elections.valid_invalid_dist.name != 'No Data Found' %}
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Votes Distribution </h2>
-            {% if elections.valid_invalid_dist.name != 'No Data Found' %}
+
               <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
               <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
-            {% else %}
-              {% include 'profile/no_data_available.html' %}
-            {% endif %}
+
+
           </section>
+          {% endif %}
         </div>
         <div class="section-container">
           <section class="clearfix stat-row">
@@ -81,14 +82,12 @@
           <h1>Crops</h1>
         </header>
         <div class="section-container">
+        {% if crops.crop_distribution.name != 'No Data Found' %}
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Crop Production in Tonnes </h2>
-            {% if crops.crop_distribution.name == 'No Data Found' %}
-              {% include 'profile/no_data_available.html' %}
-            {% else %}
-              <div class="column-full" id="chart-pie-crops-crop_distribution" data-stat-type="percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
-            {% endif %}
+              <div class="column-full" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
           </section>
+          {% endif %}
         </div>
       </article>
     {% endblock %}

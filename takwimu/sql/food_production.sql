@@ -286,6 +286,9 @@ country	SN	2009	Sesame	10376
 country	SN	2009	Sorghum	188500
 country	SN	2009	Total Cereals	2152245
 country	SN	2009	Watermelon	270686
+country TZ  2009  Wheat 5085
+country TZ  2009  Bananas 95226
+country TZ  2009  Maize 143950
 level1	SN_1_002	2009	Cassava	5831
 level1	SN_1_002	2009	Cowpea	7301
 level1	SN_1_002	2009	Maize	836
