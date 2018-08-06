@@ -21,6 +21,7 @@ def get_profile(geo, profile_name, request):
     try:
         data['population'] = get_population(geo, session)
         data['elections'] = get_elections(geo, session)
+        data['health_centers'] = get_health_centers(geo, session)
         print '\n\n\n\n\n\n\n'
         print data['elections']
         print '\n\n\n\n\n\n\n'
@@ -80,6 +81,22 @@ def get_elections(geo, session):
         valid_invalid_dist, _ = LOCATIONNOTFOUND, 0
         registered_accred_dist, _ = LOCATIONNOTFOUND, 0
 
+
+def get_health_centers(geo, session):
+    try:
+        health_centers_dist, total_health_centers_dist = get_stat_data('centers',geo, session, table_name='health_centers', order_by='-total')
+
+        return {
+            'health_centers_dist': health_centers_dist,
+            'total_health_centers': {
+                'name': 'Total health centers in operation (2014)',
+                'numerators': {'this': total_health_centers_dist},
+                'values': {'this': total_health_centers_dist}
+            }
+        }
+
+    except LocationNotFound:
+        health_centers_dist, _ = LOCATIONNOTFOUND, 0
 
 # helpers
 

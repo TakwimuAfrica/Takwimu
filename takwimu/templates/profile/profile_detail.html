@@ -68,6 +68,22 @@
           </section>
         </div>
       </article>
+
+      <article id="health_centers_distribution" class="clearfix">
+        <header class="section-contents">
+            <h1>Health centers distribution</h1>
+        </header>
+        <div class="section-container">
+             <section class="clearfix stat-row">
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
+                  </div>
+                 <div class="column-full">
+                     <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by region (2014)"></div>
+                </div>
+            </section>
+        </div>
+      </article>
     {% endblock %}
   </div>
 
