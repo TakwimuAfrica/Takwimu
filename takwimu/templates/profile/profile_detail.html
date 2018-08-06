@@ -48,48 +48,45 @@
         </div>
       </article>
 
+      {% if not elections.candidate_dist.is_missing or not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
       <article class="clearfix">
         <header class="section-contents">
           <h1>Elections</h1>
         </header>
+        {% if not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
         <div class="section-container">
-          {% if elections.valid_invalid_dist.name != 'No Data Found' %}
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Votes Distribution </h2>
-
-              <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
-              <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
-
-
+            <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
+            <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
           </section>
-          {% endif %}
         </div>
+        {% endif %}
+        {% if not elections.candidate_dist.is_missing %}
         <div class="section-container">
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Total Votes Per Candidate </h2>
-            {% if elections.valid_invalid_dist.name != 'No Data Found' %}
-              <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
-            {% else %}
-              {% include 'profile/no_data_available.html' %}
-            {% endif %}
+            <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
           </section>
         </div>
+        {% endif %}
       </article>
+      {% endif %}
 
 
+      {% if not crops.crop_distribution.is_missing %}
       <article class="clearfix">
         <header class="section-contents">
           <h1>Crops</h1>
         </header>
         <div class="section-container">
-        {% if crops.crop_distribution.name != 'No Data Found' %}
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Crop Production in Tonnes </h2>
-              <div class="column-full" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
+            <div class="column-full" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
           </section>
-          {% endif %}
         </div>
       </article>
+      {% endif %}
     {% endblock %}
   </div>
 
