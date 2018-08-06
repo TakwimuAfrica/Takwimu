@@ -44,9 +44,9 @@ class LegalView(TemplateView):
 
 class TopicView(TemplateView):
     """
-    Legal View:
+    Topic View:
     ---------------
-    View of legal notices: Terms of Use, Privacy and Cookie policies.
+    Finding Data by Topic View.
     """
     template_name = 'takwimu/topic_page.html'
 
