@@ -404,7 +404,7 @@ class AboutUsSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'About Us'
-        
+
 
 # Support Service block
 

@@ -3,8 +3,8 @@
 {% load staticfiles %}
 
 {% block content %}
-<header class="text-light" style="background: #074c9c url('{% static 'img/bg/profile-hero.jpg' %}') no-repeat center; background-size: cover;">
-  <div class="text-center py-5" style="background-color: rgba(7, 76, 156, 0.8)">
+<div class="text-light" style="background: #074c9c url('{% static 'img/bg/profile-hero.jpg' %}') no-repeat center; background-size: cover;">
+  <div class="text-center py-3" style="background-color: rgba(7, 76, 156, 0.8)">
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
@@ -16,14 +16,14 @@
           </li>
         </ol>
       </nav>
-      <h1 class="display-4 text-light font-weight-bold">Find data by
+      <h1 class="display-3 text-light py-2" style="font-weight: 900">Find data by
         Topic</h1>
-      <p class="p-4">
+      <p class="p-4" style="font-size: 18px">
         All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
       </p>
     </div>
   </div>
-</header>
+</div>
 <div class="explore-topic container-fluid bg-secondary py-2">
   <div class="container">
     {% include 'takwimu/_includes/sections/explore/topics.html' %}
