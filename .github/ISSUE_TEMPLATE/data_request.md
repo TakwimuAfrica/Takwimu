@@ -4,13 +4,20 @@ about: Suggest data to add to this platform
 
 ---
 
-**Please describe the data required**
+**Please describe the data requested**
 A clear and concise description of the data needed
 
-**Where does the data fit in the country profiles already uploaded**
-A clear and concise description of the countries this data covers and the [topics](https://takwimu.africa/) under which this data would fall
+**How would this data be visualized?**
 
-**Could you share possible sources for this data if any?**
+
+**Which countries is this data related to?**
+A clear and concise description of the countries this data is related to
+
+**Which topics is this data related to?**
+Which [topics](https://takwimu.africa/) does this data fall under
+
+**Please share links to the sources for the data.**
+*You can attach the files here or add the link to the google sheet*
 - Link 1
 - Link 2
 - Link 3
