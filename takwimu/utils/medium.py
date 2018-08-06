@@ -77,7 +77,7 @@ class Medium(object):
             post = Post(post_id)
             unique_slug = post_dict["uniqueSlug"]
             title = post_dict["title"]
-            post_date = post_dict["createdAt"]
+            post_date = post_dict["latestPublishedAt"]
 
             # print(post_date)
             publication_id = post_dict["approvedHomeCollectionId"]
