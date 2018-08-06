@@ -125,7 +125,7 @@ TAKWIMU has been made possible thanks to:
     - [Census Reporter](https://github.com/censusreporter/censusreporter)
     - [Django Framework](https://djangoproject.com/)
     - [Wagtail CMS](https://wagtail.io)
-- Sponsored by:
+- Supported by:
     - [Bill and Melinda Gates Foundation](https://www.gatesfoundation.org)
 
 ---
