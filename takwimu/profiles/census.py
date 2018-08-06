@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 SECTIONS = settings.HURUMAP.get('topics', {})
 
-LOCATIONNOTFOUND = {'name': 'No Data Found', 'numerators': {'this': 0},
+LOCATIONNOTFOUND = {'is_missing': True, 'name': 'No Data Found', 'numerators': {'this': 0},
                     'values': {'this': 0}}
 
 
@@ -21,8 +21,9 @@ def get_profile(geo, profile_name, request):
     try:
         data['population'] = get_population(geo, session)
         data['elections'] = get_elections(geo, session)
+        data['crops'] = get_crop_production(geo, session)
         print '\n\n\n\n\n\n\n'
-        print data['elections']
+        print data
         print '\n\n\n\n\n\n\n'
 
         return data
@@ -63,22 +64,46 @@ def get_population(geo, session):
 
 
 def get_elections(geo, session):
+    candidate_dist = LOCATIONNOTFOUND
+    valid_invalid_dist = LOCATIONNOTFOUND
+    registered_accred_dist = LOCATIONNOTFOUND
+
+    # Each of these fetches may fail due to data unavailability but failure of one
+    # does not imply failure of another i.e. they are independent.
     try:
-        candidate_dist, total_candidate_dist = get_stat_data('candidate', geo, session, table_fields=['candidate'])
-        valid_invalid_dist, _ = get_stat_data('votes', geo, session, table_fields=['votes'], table_name='valid_invalid_votes')
-        registered_accred_dist, _ = get_stat_data('voters', geo, session, table_fields=['voters'], table_name='registered_accredited_voters')
-
-
-        return {
-            'candidate_dist': candidate_dist,
-            'valid_invalid_dist': valid_invalid_dist,
-            'registered_accred_dist': registered_accred_dist
-        }
-
+        candidate_dist, _ = get_stat_data(
+            'candidate', geo, session, table_fields=['candidate'])
     except LocationNotFound:
-        candidate_dist, _ = LOCATIONNOTFOUND, 0
-        valid_invalid_dist, _ = LOCATIONNOTFOUND, 0
-        registered_accred_dist, _ = LOCATIONNOTFOUND, 0
+        pass
+    try:
+        valid_invalid_dist, _ = get_stat_data('votes', geo, session, table_fields=[
+                                              'votes'], table_name='valid_invalid_votes')
+    except LocationNotFound:
+        pass
+    try:
+        registered_accred_dist, _ = get_stat_data('voters', geo, session, table_fields=[
+                                                  'voters'], table_name='registered_accredited_voters')
+    except LocationNotFound:
+        pass
+
+    return {
+        'candidate_dist': candidate_dist,
+        'valid_invalid_dist': valid_invalid_dist,
+        'registered_accred_dist': registered_accred_dist
+    }
+
+
+def get_crop_production(geo, session):
+    crop_distribution = LOCATIONNOTFOUND
+    try:
+        crop_distribution, _ = get_stat_data(
+            'crops', geo, session, table_fields=['crops'])
+    except LocationNotFound:
+        pass
+
+    return {
+        'crop_distribution': crop_distribution
+    }
 
 
 # helpers
