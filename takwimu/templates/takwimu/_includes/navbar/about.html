@@ -32,7 +32,7 @@
                 target="_blank" rel="noopener">
                 <i class="fab fa-{{ social_media }} fa-fw"></i>
               </a>
-              {% if not forloop.last %}<div class="border-right m-2 float-right" style="height:24px; width:1px; opacity:0.2;"></div> {% endif %}
+              {% if not forloop.last %}<div class="border-right m-2 float-right"></div> {% endif %}
             </li>
           {% endif %}
         {% endfor %}
@@ -66,4 +66,11 @@
       </div>
     </div>
 </div>
+
+<style>
+  .border-right.m-2.float-right{
+    height:24px; width:1px; opacity:0.2;
+  }
+</style>
+
 {% endblock %}
