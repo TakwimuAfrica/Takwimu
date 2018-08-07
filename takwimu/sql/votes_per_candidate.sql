@@ -779,6 +779,254 @@ country	NG	2009	PDP	12853162
 country	NG	2009	PPN	24475
 country	NG	2009	UDP	9208
 country	NG	2009	UPP	18220
+level1	TZ_1_001	2009	Anna E. Mgwihira	1925
+level1	TZ_1_001	2009	Chief L. Yemba	996
+level1	TZ_1_001	2009	Dkt. John P. Magufuli	206548
+level1	TZ_1_001	2009	Edward N. Lowassa	507273
+level1	TZ_1_001	2009	Hashim R. Spunda	1628
+level1	TZ_1_001	2009	Kasambala J. Malik	150
+level1	TZ_1_001	2009	Elifatio M. Lyimo	193
+level1	TZ_1_001	2009	Dovutwa F. Nassoro	122
+level1	TZ_1_002	2009	Anna E. Mgwihira	4394
+level1	TZ_1_002	2009	Chief L. Yemba	3509
+level1	TZ_1_002	2009	Dkt. John P. Magufuli	728711
+level1	TZ_1_002	2009	Edward N. Lowassa	834759
+level1	TZ_1_002	2009	Hashim R. Spunda	4615
+level1	TZ_1_002	2009	Kasambala J. Malik	451
+level1	TZ_1_002	2009	Elifatio M. Lyimo	320
+level1	TZ_1_002	2009	Dovutwa F. Nassoro	283
+level1	TZ_1_003	2009	Anna E. Mgwihira	4780
+level1	TZ_1_003	2009	Chief L. Yemba	3243
+level1	TZ_1_003	2009	Dkt. John P. Magufuli	516317
+level1	TZ_1_003	2009	Edward N. Lowassa	157623
+level1	TZ_1_003	2009	Hashim R. Spunda	1691
+level1	TZ_1_003	2009	Kasambala J. Malik	374
+level1	TZ_1_003	2009	Elifatio M. Lyimo	314
+level1	TZ_1_003	2009	Dovutwa F. Nassoro	332
+level1	TZ_1_004	2009	Anna E. Mgwihira	2984
+level1	TZ_1_004	2009	Chief L. Yemba	1663
+level1	TZ_1_004	2009	Dkt. John P. Magufuli	377051
+level1	TZ_1_004	2009	Edward N. Lowassa	157440
+level1	TZ_1_004	2009	Hashim R. Spunda	1384
+level1	TZ_1_004	2009	Kasambala J. Malik	182
+level1	TZ_1_004	2009	Elifatio M. Lyimo	214
+level1	TZ_1_004	2009	Dovutwa F. Nassoro	198
+level1	TZ_1_005	2009	Anna E. Mgwihira	2047
+level1	TZ_1_005	2009	Chief L. Yemba	1611
+level1	TZ_1_005	2009	Dkt. John P. Magufuli	243249
+level1	TZ_1_005	2009	Edward N. Lowassa	130149
+level1	TZ_1_005	2009	Hashim R. Spunda	1063
+level1	TZ_1_005	2009	Kasambala J. Malik	158
+level1	TZ_1_005	2009	Elifatio M. Lyimo	152
+level1	TZ_1_005	2009	Dovutwa F. Nassoro	160
+level1	TZ_1_006	2009	Anna E. Mgwihira	2819
+level1	TZ_1_006	2009	Chief L. Yemba	2604
+level1	TZ_1_006	2009	Dkt. John P. Magufuli	475910
+level1	TZ_1_006	2009	Edward N. Lowassa	287538
+level1	TZ_1_006	2009	Hashim R. Spunda	1725
+level1	TZ_1_006	2009	Kasambala J. Malik	217
+level1	TZ_1_006	2009	Elifatio M. Lyimo	251
+level1	TZ_1_006	2009	Dovutwa F. Nassoro	168
+level1	TZ_1_007	2009	Anna E. Mgwihira	165
+level1	TZ_1_007	2009	Chief L. Yemba	263
+level1	TZ_1_007	2009	Dkt. John P. Magufuli	7505
+level1	TZ_1_007	2009	Edward N. Lowassa	57038
+level1	TZ_1_007	2009	Hashim R. Spunda	766
+level1	TZ_1_007	2009	Kasambala J. Malik	195
+level1	TZ_1_007	2009	Elifatio M. Lyimo	177
+level1	TZ_1_007	2009	Dovutwa F. Nassoro	284
+level1	TZ_1_008	2009	Anna E. Mgwihira	302
+level1	TZ_1_008	2009	Chief L. Yemba	561
+level1	TZ_1_008	2009	Dkt. John P. Magufuli	38105
+level1	TZ_1_008	2009	Edward N. Lowassa	24664
+level1	TZ_1_008	2009	Hashim R. Spunda	676
+level1	TZ_1_008	2009	Kasambala J. Malik	238
+level1	TZ_1_008	2009	Elifatio M. Lyimo	258
+level1	TZ_1_008	2009	Dovutwa F. Nassoro	239
+level1	TZ_1_009	2009	Anna E. Mgwihira	1396
+level1	TZ_1_009	2009	Chief L. Yemba	439
+level1	TZ_1_009	2009	Dkt. John P. Magufuli	132135
+level1	TZ_1_009	2009	Edward N. Lowassa	47278
+level1	TZ_1_009	2009	Hashim R. Spunda	318
+level1	TZ_1_009	2009	Kasambala J. Malik	59
+level1	TZ_1_009	2009	Elifatio M. Lyimo	47
+level1	TZ_1_009	2009	Dovutwa F. Nassoro	55
+level1	TZ_1_010	2009	Anna E. Mgwihira	18838
+level1	TZ_1_010	2009	Chief L. Yemba	3040
+level1	TZ_1_010	2009	Dkt. John P. Magufuli	314715
+level1	TZ_1_010	2009	Edward N. Lowassa	149031
+level1	TZ_1_010	2009	Hashim R. Spunda	2835
+level1	TZ_1_010	2009	Kasambala J. Malik	671
+level1	TZ_1_010	2009	Elifatio M. Lyimo	453
+level1	TZ_1_010	2009	Dovutwa F. Nassoro	586
+level1	TZ_1_011	2009	Anna E. Mgwihira	2714
+level1	TZ_1_011	2009	Chief L. Yemba	2145
+level1	TZ_1_011	2009	Dkt. John P. Magufuli	214973
+level1	TZ_1_011	2009	Edward N. Lowassa	343562
+level1	TZ_1_011	2009	Hashim R. Spunda	3683
+level1	TZ_1_011	2009	Kasambala J. Malik	212
+level1	TZ_1_011	2009	Elifatio M. Lyimo	434
+level1	TZ_1_011	2009	Dovutwa F. Nassoro	178
+level1	TZ_1_012	2009	Anna E. Mgwihira	152
+level1	TZ_1_012	2009	Chief L. Yemba	470
+level1	TZ_1_012	2009	Dkt. John P. Magufuli	12736
+level1	TZ_1_012	2009	Edward N. Lowassa	48334
+level1	TZ_1_012	2009	Hashim R. Spunda	602
+level1	TZ_1_012	2009	Kasambala J. Malik	204
+level1	TZ_1_012	2009	Elifatio M. Lyimo	181
+level1	TZ_1_012	2009	Dovutwa F. Nassoro	212
+level1	TZ_1_013	2009	Anna E. Mgwihira	134
+level1	TZ_1_013	2009	Chief L. Yemba	244
+level1	TZ_1_013	2009	Dkt. John P. Magufuli	40376
+level1	TZ_1_013	2009	Edward N. Lowassa	10079
+level1	TZ_1_013	2009	Hashim R. Spunda	286
+level1	TZ_1_013	2009	Kasambala J. Malik	103
+level1	TZ_1_013	2009	Elifatio M. Lyimo	86
+level1	TZ_1_013	2009	Dovutwa F. Nassoro	83
+level1	TZ_1_014	2009	Anna E. Mgwihira	3409
+level1	TZ_1_014	2009	Chief L. Yemba	3676
+level1	TZ_1_014	2009	Dkt. John P. Magufuli	342285
+level1	TZ_1_014	2009	Edward N. Lowassa	477995
+level1	TZ_1_014	2009	Hashim R. Spunda	5550
+level1	TZ_1_014	2009	Kasambala J. Malik	837
+level1	TZ_1_014	2009	Elifatio M. Lyimo	974
+level1	TZ_1_014	2009	Dovutwa F. Nassoro	781
+level1	TZ_1_015	2009	Anna E. Mgwihira	1803
+level1	TZ_1_015	2009	Chief L. Yemba	1262
+level1	TZ_1_015	2009	Dkt. John P. Magufuli	273757
+level1	TZ_1_015	2009	Edward N. Lowassa	182543
+level1	TZ_1_015	2009	Hashim R. Spunda	716
+level1	TZ_1_015	2009	Kasambala J. Malik	101
+level1	TZ_1_015	2009	Elifatio M. Lyimo	137
+level1	TZ_1_015	2009	Dovutwa F. Nassoro	89
+level1	TZ_1_016	2009	Anna E. Mgwihira	3830
+level1	TZ_1_016	2009	Chief L. Yemba	3082
+level1	TZ_1_016	2009	Dkt. John P. Magufuli	364908
+level1	TZ_1_016	2009	Edward N. Lowassa	241581
+level1	TZ_1_016	2009	Hashim R. Spunda	1676
+level1	TZ_1_016	2009	Kasambala J. Malik	283
+level1	TZ_1_016	2009	Elifatio M. Lyimo	408
+level1	TZ_1_016	2009	Dovutwa F. Nassoro	241
+level1	TZ_1_017	2009	Anna E. Mgwihira	5738
+level1	TZ_1_017	2009	Chief L. Yemba	4040
+level1	TZ_1_017	2009	Dkt. John P. Magufuli	519985
+level1	TZ_1_017	2009	Edward N. Lowassa	450796
+level1	TZ_1_017	2009	Hashim R. Spunda	2252
+level1	TZ_1_017	2009	Kasambala J. Malik	441
+level1	TZ_1_017	2009	Elifatio M. Lyimo	371
+level1	TZ_1_017	2009	Dovutwa F. Nassoro	329
+level1	TZ_1_018	2009	Anna E. Mgwihira	5200
+level1	TZ_1_018	2009	Chief L. Yemba	3855
+level1	TZ_1_018	2009	Dkt. John P. Magufuli	501814
+level1	TZ_1_018	2009	Edward N. Lowassa	306088
+level1	TZ_1_018	2009	Hashim R. Spunda	1941
+level1	TZ_1_018	2009	Kasambala J. Malik	266
+level1	TZ_1_018	2009	Elifatio M. Lyimo	320
+level1	TZ_1_018	2009	Dovutwa F. Nassoro	317
+level1	TZ_1_019	2009	Anna E. Mgwihira	4330
+level1	TZ_1_019	2009	Chief L. Yemba	3441
+level1	TZ_1_019	2009	Dkt. John P. Magufuli	304126
+level1	TZ_1_019	2009	Edward N. Lowassa	214933
+level1	TZ_1_019	2009	Hashim R. Spunda	2525
+level1	TZ_1_019	2009	Kasambala J. Malik	546
+level1	TZ_1_019	2009	Elifatio M. Lyimo	670
+level1	TZ_1_019	2009	Dovutwa F. Nassoro	548
+level1	TZ_1_020	2009	Anna E. Mgwihira	4325
+level1	TZ_1_020	2009	Chief L. Yemba	2696
+level1	TZ_1_020	2009	Dkt. John P. Magufuli	584184
+level1	TZ_1_020	2009	Edward N. Lowassa	311532
+level1	TZ_1_020	2009	Hashim R. Spunda	2477
+level1	TZ_1_020	2009	Kasambala J. Malik	350
+level1	TZ_1_020	2009	Elifatio M. Lyimo	429
+level1	TZ_1_020	2009	Dovutwa F. Nassoro	522
+level1	TZ_1_022	2009	Anna E. Mgwihira	3085
+level1	TZ_1_022	2009	Chief L. Yemba	2482
+level1	TZ_1_022	2009	Dkt. John P. Magufuli	261395
+level1	TZ_1_022	2009	Edward N. Lowassa	170288
+level1	TZ_1_022	2009	Hashim R. Spunda	2118
+level1	TZ_1_022	2009	Kasambala J. Malik	366
+level1	TZ_1_022	2009	Elifatio M. Lyimo	331
+level1	TZ_1_022	2009	Dovutwa F. Nassoro	335
+level1	TZ_1_023	2009	Anna E. Mgwihira	1936
+level1	TZ_1_023	2009	Chief L. Yemba	1284
+level1	TZ_1_023	2009	Dkt. John P. Magufuli	178312
+level1	TZ_1_023	2009	Edward N. Lowassa	130123
+level1	TZ_1_023	2009	Hashim R. Spunda	727
+level1	TZ_1_023	2009	Kasambala J. Malik	105
+level1	TZ_1_023	2009	Elifatio M. Lyimo	209
+level1	TZ_1_023	2009	Dovutwa F. Nassoro	107
+level1	TZ_1_024	2009	Anna E. Mgwihira	3895
+level1	TZ_1_024	2009	Chief L. Yemba	3006
+level1	TZ_1_024	2009	Dkt. John P. Magufuli	319366
+level1	TZ_1_024	2009	Edward N. Lowassa	151992
+level1	TZ_1_024	2009	Hashim R. Spunda	1502
+level1	TZ_1_024	2009	Kasambala J. Malik	247
+level1	TZ_1_024	2009	Elifatio M. Lyimo	287
+level1	TZ_1_024	2009	Dovutwa F. Nassoro	370
+level1	TZ_1_025	2009	Anna E. Mgwihira	2539
+level1	TZ_1_025	2009	Chief L. Yemba	2138
+level1	TZ_1_025	2009	Dkt. John P. Magufuli	326936
+level1	TZ_1_025	2009	Edward N. Lowassa	132180
+level1	TZ_1_025	2009	Hashim R. Spunda	1167
+level1	TZ_1_025	2009	Kasambala J. Malik	204
+level1	TZ_1_025	2009	Elifatio M. Lyimo	181
+level1	TZ_1_025	2009	Dovutwa F. Nassoro	170
+level1	TZ_1_026	2009	Anna E. Mgwihira	2309
+level1	TZ_1_026	2009	Chief L. Yemba	1548
+level1	TZ_1_026	2009	Dkt. John P. Magufuli	318358
+level1	TZ_1_026	2009	Edward N. Lowassa	183710
+level1	TZ_1_026	2009	Hashim R. Spunda	1704
+level1	TZ_1_026	2009	Kasambala J. Malik	395
+level1	TZ_1_026	2009	Elifatio M. Lyimo	291
+level1	TZ_1_026	2009	Dovutwa F. Nassoro	367
+level1	TZ_1_027	2009	Anna E. Mgwihira	2435
+level1	TZ_1_027	2009	Chief L. Yemba	6056
+level1	TZ_1_027	2009	Dkt. John P. Magufuli	290899
+level1	TZ_1_027	2009	Edward N. Lowassa	112342
+level1	TZ_1_027	2009	Hashim R. Spunda	994
+level1	TZ_1_027	2009	Kasambala J. Malik	127
+level1	TZ_1_027	2009	Elifatio M. Lyimo	169
+level1	TZ_1_027	2009	Dovutwa F. Nassoro	140
+level1	TZ_1_028	2009	Anna E. Mgwihira	4375
+level1	TZ_1_028	2009	Chief L. Yemba	3900
+level1	TZ_1_028	2009	Dkt. John P. Magufuli	439459
+level1	TZ_1_028	2009	Edward N. Lowassa	225051
+level1	TZ_1_028	2009	Hashim R. Spunda	3422
+level1	TZ_1_028	2009	Kasambala J. Malik	280
+level1	TZ_1_028	2009	Elifatio M. Lyimo	325
+level1	TZ_1_028	2009	Dovutwa F. Nassoro	323
+level1	TZ_1_029	2009	Anna E. Mgwihira	5655
+level1	TZ_1_029	2009	Chief L. Yemba	2218
+level1	TZ_1_029	2009	Dkt. John P. Magufuli	413492
+level1	TZ_1_029	2009	Edward N. Lowassa	181213
+level1	TZ_1_029	2009	Hashim R. Spunda	1627
+level1	TZ_1_029	2009	Kasambala J. Malik	335
+level1	TZ_1_029	2009	Elifatio M. Lyimo	293
+level1	TZ_1_029	2009	Dovutwa F. Nassoro	328
+level1	TZ_1_030	2009	Anna E. Mgwihira	378
+level1	TZ_1_030	2009	Chief L. Yemba	717
+level1	TZ_1_030	2009	Dkt. John P. Magufuli	95599
+level1	TZ_1_030	2009	Edward N. Lowassa	70918
+level1	TZ_1_030	2009	Hashim R. Spunda	1033
+level1	TZ_1_030	2009	Kasambala J. Malik	332
+level1	TZ_1_030	2009	Elifatio M. Lyimo	263
+level1	TZ_1_030	2009	Dovutwa F. Nassoro	227
+level1	TZ_1_021	2009	Anna E. Mgwihira	2164
+level1	TZ_1_021	2009	Chief L. Yemba	1197
+level1	TZ_1_021	2009	Dkt. John P. Magufuli	182250
+level1	TZ_1_021	2009	Edward N. Lowassa	82289
+level1	TZ_1_021	2009	Hashim R. Spunda	575
+level1	TZ_1_021	2009	Kasambala J. Malik	86
+level1	TZ_1_021	2009	Elifatio M. Lyimo	140
+level1	TZ_1_021	2009	Dovutwa F. Nassoro	99
+country	TZ	2009	Anna E. Mgwihira	100056
+country	TZ	2009	Chief L. Yemba	67386
+country	TZ	2009	Dkt. John P. Magufuli	9025456
+country	TZ	2009	Dovutwa F. Nassoro	8193
+country	TZ	2009	Edward N. Lowassa	6380342
+country	TZ	2009	Elifatio M. Lyimo	8878
+country	TZ	2009	Hashim R. Spunda	53278
+country	TZ	2009	Kasambala J. Malik	8515
 \.
 
 
