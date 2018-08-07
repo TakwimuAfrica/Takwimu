@@ -114,47 +114,47 @@ def get_health_centers(geo, session):
     hiv_health_centers_dist, total_hiv_health_centers_dist = LOCATIONNOTFOUND, 0
 
     try:
-        health_centers_dist, total_health_centers_dist = get_stat_data('centers',geo, session, 
-                                                table_name='health_centers', order_by='-total')
-    except LocationNotFound:
-        pass
-    
-    try:
-        hiv_health_centers_dist, total_hiv_health_centers_dist = get_stat_data('centers',geo, session, 
-                                                table_name='hiv_health_centers', order_by='-total')
+        health_centers_dist, total_health_centers_dist = get_stat_data(
+            'centers', geo, session, table_name='health_centers', order_by='-total')
     except LocationNotFound:
         pass
 
     try:
-        health_centers_ownership_dist, _ = get_stat_data('centers',geo, session, 
-                                                table_name='health_centers_ownership', order_by='-total')
+        hiv_health_centers_dist, total_hiv_health_centers_dist = get_stat_data(
+            'centers', geo, session, table_name='hiv_health_centers', order_by='-total')
     except LocationNotFound:
         pass
-    
+
+    try:
+        health_centers_ownership_dist, _ = get_stat_data(
+            'centers', geo, session, table_name='health_centers_ownership', order_by='-total')
+    except LocationNotFound:
+        pass
+
     return {
-            'health_centers_dist': health_centers_dist,
-            'total_health_centers': {
-                'name': 'Total health centers in operation (2014)',
-                'numerators': {'this': total_health_centers_dist},
-                'values': {'this': total_health_centers_dist}
-            },
-            'hiv_health_centers_dist': hiv_health_centers_dist,
-            'total_hiv_health_centers': {
-                'name': 'HIV care and treatment centers (2014)',
-                'numerators': {'this': total_hiv_health_centers_dist},
-                'values': {'this': total_hiv_health_centers_dist}
-            },
-            'health_centers_ownership_dist': health_centers_ownership_dist
-        }
+        'health_centers_dist': health_centers_dist,
+        'total_health_centers': {
+            'name': 'Total health centers in operation (2014)',
+            'numerators': {'this': total_health_centers_dist},
+            'values': {'this': total_health_centers_dist}
+        },
+        'hiv_health_centers_dist': hiv_health_centers_dist,
+        'total_hiv_health_centers': {
+            'name': 'HIV care and treatment centers (2014)',
+            'numerators': {'this': total_hiv_health_centers_dist},
+            'values': {'this': total_hiv_health_centers_dist}
+        },
+        'health_centers_ownership_dist': health_centers_ownership_dist
+    }
+
 
 def get_health_workers(geo, session):
     health_workers_dist, total_health_workers_dist = LOCATIONNOTFOUND, 0
     hrh_patient_ratio = 0
 
     try:
-        health_workers_dist, total_health_workers = get_stat_data('workers',geo, session, 
-                    table_name='health_workers', order_by='-total')
-
+        health_workers_dist, total_health_workers_dist = get_stat_data(
+            'workers', geo, session, table_name='health_workers', order_by='-total')
         hrh_patient_ratio = health_workers_dist['HRH patient ratio']['numerators']['this']
         del health_workers_dist['HRH patient ratio']
         del health_workers_dist['MO and AMO per 10000']
