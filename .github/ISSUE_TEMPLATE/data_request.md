@@ -11,10 +11,25 @@ A clear and concise description of the data needed
 
 
 **Which countries is this data related to?**
-A clear and concise description of the countries this data is related to
+- [ ] Burkina Faso
+- [ ] DRC Congo
+- [ ] Ethiopia
+- [ ] Kenya
+- [ ] Nigeria
+- [ ] Senegal
+- [ ] South Africa
+- [ ] Tanzania
+- [ ] Uganda
+- [ ] Zambia
 
 **Which topics is this data related to?**
-Which [topics](https://takwimu.africa/) does this data fall under
+- [ ] Development Context and Key Issues
+- [ ] Policy Framework
+- [ ] Sector Policies and Programming
+- [ ] Public Finance
+- [ ] The Budget
+- [ ] Official Development Assistance
+- [ ] Other
 
 **Please share links to the sources for the data.**
 *You can attach the files here or add the link to the google sheet*
