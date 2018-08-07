@@ -4,9 +4,11 @@
 {% if status == 'beta' %}
 <div class="carousel-item p-5 active">
     <div>
-      <div class="float-right"><img src="{% static 'img/icons/icon-notification.svg' %}" class="float-right bg-light p-2"/></div>
+        <div class="bullhorn-img float-right" >
+          <img src="{% static 'img/icons/icon-notification.svg' %}" class="rounded-0"/>
+        </div>
       <p class="text-uppercase" style="font-weight: 400; font-size:13px;">News</p>
-      <h2 style="font-weight: 600;">We want your feedback !</h2>
+      <h2 style="font-weight: 600;">We'd love to hear your feedback!</h2>
       <p class="pt-2">
         Takwimu is now released in beta: your feedback on all aspects of the site will help us to improve
         before launching.
@@ -22,7 +24,9 @@
   {% for country in countries.split %}
 <div class="carousel-item p-5 {% if forloop.first and status != 'beta' %}active{% endif %}">
   <div>
-    <div class="overlay float-right"><img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="float-right"/></div>
+    <div class="overlay flag-img float-right">
+      <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="float-right"/>
+    </div>
     <p class="text-uppercase" style="font-weight: 400; font-size:13px;">New Country</p>
     <h2 style="font-weight: 600;">{{ country|title }} country profile now available</h2>
     <p class="pt-2">Explore human development data and analysis for {{ country|title }}.</p>
@@ -35,4 +39,5 @@
 </div>
 {% endfor %}
 {% endwith %}
+
 
