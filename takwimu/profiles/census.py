@@ -111,7 +111,7 @@ def get_crop_production(geo, session):
 def get_health_centers(geo, session):
     health_centers_dist, total_health_centers_dist = LOCATIONNOTFOUND, 0
     health_centers_ownership_dist = LOCATIONNOTFOUND
-    hiv_centers_dist, total_hiv_centers_dist = LOCATIONNOTFOUND, 0
+    hiv_health_centers_dist, total_hiv_health_centers_dist = LOCATIONNOTFOUND, 0
 
     try:
         health_centers_dist, total_health_centers_dist = get_stat_data('centers',geo, session, 
@@ -138,7 +138,7 @@ def get_health_centers(geo, session):
                 'numerators': {'this': total_health_centers_dist},
                 'values': {'this': total_health_centers_dist}
             },
-            'hiv_health_centers_dist': hiv_centers_dist,
+            'hiv_health_centers_dist': hiv_health_centers_dist,
             'total_hiv_health_centers': {
                 'name': 'HIV care and treatment centers (2014)',
                 'numerators': {'this': total_hiv_health_centers_dist},
