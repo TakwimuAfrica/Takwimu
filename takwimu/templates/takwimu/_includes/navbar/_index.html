@@ -1,6 +1,7 @@
 {% load staticfiles %}
 {% load datastructuretags %}
 
+
 <!-- Primary Navbar -->
 <nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top bg-primary shadow" style="min-height:72px;">
   <div class="container">
@@ -99,3 +100,21 @@
     </div>
   </div>
 </nav>
+
+<style>
+  .navbar.fixed-top .dropdown-menu-lg li[type="disc"] {
+	  color:#7ab1f2;
+  }
+  .navbar.fixed-top .dropdown-menu-lg ul li[type="disc"] a{
+      color:#7ab1f2;
+      text-decoration: underline;
+      line-height: 2;
+  }
+  .dropdown-menu-lg .nav-item .nav-link .border-right{ 
+    opacity: 0.1;
+  }
+
+  .border-right {
+    opacity: 0.1;
+  }
+</style>
