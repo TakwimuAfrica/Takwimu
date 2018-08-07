@@ -73,7 +73,6 @@
       </article>
       {% endif %}
 
-
       {% if not crops.crop_distribution.is_missing %}
       <article class="clearfix">
         <header class="section-contents">
@@ -85,6 +84,54 @@
             <div class="column-full" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
           </section>
         </div>
+      </article>
+      {% endif %}
+
+      {% if not health_centers.health_centers_dist.is_missing %}
+      <article id="health_centers_distribution" class="clearfix">
+        <header class="section-contents">
+            <h1>Health centers distribution</h1>
+        </header>
+        <div class="section-container">
+             <section class="clearfix stat-row">
+                {% if not health_centers.total_health_centers.is_missing %}
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
+                  </div>
+                {% endif %}
+                {% if not health_centers.total_hiv_health_centers.is_missing %}
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers stat_type='number' %}
+                  </div>
+                {% endif %}
+                {% if not health_centers.health_centers_ownership_dist.is_missing %}
+                  <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
+                {% endif %}
+                {% if not health_centers.health_centers_dist.is_missing %}
+                  <div class="column-full">
+                    <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by region (2014)"></div>
+                  </div>
+                {% endif %}
+            </section>
+        </div>
+      </article>
+      {% endif %}
+
+      {% if not health_workers.health_workers_dist.is_missing %}
+      <article id="health_workers_distribution" class="clearfix">
+          <header class="section-contents">
+              <h1>Health workers distribution</h1>
+          </header>
+          <div class="section-container">
+               <section class="clearfix stat-row">
+                   <div class="column-third">
+                      {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio stat_type='number' %}
+                    </div>
+                   <div class="column-full">
+                       <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
+                  </div>
+              </section>
+          </div>
       </article>
       {% endif %}
     {% endblock %}
