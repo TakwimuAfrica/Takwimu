@@ -8,35 +8,16 @@ about: Suggest data to add to this platform
 A clear and concise description of the data needed
 
 **How would this data be visualized?**
-- [ ] Histogram
-- [ ] Pie Chart
-- [ ] Column Chart
-- [ ] Grouped Column Chart
-- [ ] Bar Chart
-- [ ] Grouped Bar Chart
-- [ ] Line Graph
+*Takwimu supports the following visualizations histogram, pie chart, column chart, grouped column chart, Bar chart, grouped bar chart and line charts*
 
 
 **Which countries is this data related to?**
-- [ ] Burkina Faso
-- [ ] DRC Congo
-- [ ] Ethiopia
-- [ ] Kenya
-- [ ] Nigeria
-- [ ] Senegal
-- [ ] South Africa
-- [ ] Tanzania
-- [ ] Uganda
-- [ ] Zambia
+*Select the countries from Burkina Faso, DRC Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia.*
+
 
 **Which topics is this data related to?**
-- [ ] Development Context and Key Issues
-- [ ] Policy Framework
-- [ ] Sector Policies and Programming
-- [ ] Public Finance
-- [ ] The Budget
-- [ ] Official Development Assistance
-- [ ] Other
+*Select topics from Development Context and Key Issues, Policy Framework, Sector Policies and Programming
+Public Finance, the Budget and Official Development Assistance. If you data does not fit in any other mentioned topics, feel free to suggest a new topic*
 
 **Please share links to the sources for the data.**
 *You can attach the files here or add the link to the google sheet*
