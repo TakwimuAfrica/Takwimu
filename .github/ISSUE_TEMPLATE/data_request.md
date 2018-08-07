@@ -8,6 +8,13 @@ about: Suggest data to add to this platform
 A clear and concise description of the data needed
 
 **How would this data be visualized?**
+- [ ] Histogram
+- [ ] Pie Chart
+- [ ] Column Chart
+- [ ] Grouped Column Chart
+- [ ] Bar Chart
+- [ ] Grouped Bar Chart
+- [ ] Line Graph
 
 
 **Which countries is this data related to?**
