@@ -100,9 +100,9 @@
                     {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
                   </div>
                 {% endif %}
-                {% if not health_centers.total_hiv_centers.is_missing %}
+                {% if not health_centers.total_hiv_health_centers.is_missing %}
                   <div class="column-third">
-                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_centers stat_type='number' %}
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers stat_type='number' %}
                   </div>
                 {% endif %}
                 {% if not health_centers.health_centers_ownership_dist.is_missing %}

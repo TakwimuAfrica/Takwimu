@@ -120,7 +120,7 @@ def get_health_centers(geo, session):
         pass
     
     try:
-        hiv_centers_dist, total_hiv_centers_dist = get_stat_data('centers',geo, session, 
+        hiv_health_centers_dist, total_hiv_health_centers_dist = get_stat_data('centers',geo, session, 
                                                 table_name='hiv_health_centers', order_by='-total')
     except LocationNotFound:
         pass
@@ -138,11 +138,11 @@ def get_health_centers(geo, session):
                 'numerators': {'this': total_health_centers_dist},
                 'values': {'this': total_health_centers_dist}
             },
-            'hiv_centers_dist': hiv_centers_dist,
-            'total_hiv_centers': {
+            'hiv_health_centers_dist': hiv_centers_dist,
+            'total_hiv_health_centers': {
                 'name': 'HIV care and treatment centers (2014)',
-                'numerators': {'this': total_hiv_centers_dist},
-                'values': {'this': total_hiv_centers_dist}
+                'numerators': {'this': total_hiv_health_centers_dist},
+                'values': {'this': total_hiv_health_centers_dist}
             },
             'health_centers_ownership_dist': health_centers_ownership_dist
         }
