@@ -117,6 +117,24 @@
         </div>
       </article>
       {% endif %}
+
+      {% if not health_workers.health_workers_dist.is_missing %}
+      <article id="health_workers_distribution" class="clearfix">
+          <header class="section-contents">
+              <h1>Health workers distribution</h1>
+          </header>
+          <div class="section-container">
+               <section class="clearfix stat-row">
+                   <div class="column-third">
+                      {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio stat_type='number' %}
+                    </div>
+                   <div class="column-full">
+                       <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
+                  </div>
+              </section>
+          </div>
+      </article>
+      {% endif %}
     {% endblock %}
   </div>
 

@@ -21,10 +21,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: hiv_centers; Type: TABLE; Schema: public; Owner: -
+-- Name: hiv_health_centers; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.hiv_centers (
+CREATE TABLE public.hiv_health_centers (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -33,10 +33,10 @@ CREATE TABLE public.hiv_centers (
 );
 
 --
--- Data for Name: hiv_centers; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: hiv_health_centers; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.hiv_centers (geo_level, geo_code, geo_version, centers, total) FROM stdin;
+COPY public.hiv_health_centers (geo_level, geo_code, geo_version, centers, total) FROM stdin;
 level1	TZ_1_001	2009	hiv centers	68
 level1	TZ_1_003	2009	hiv centers	138
 level1	TZ_1_002	2009	hiv centers	55
@@ -72,11 +72,11 @@ country	TZ	2009	hiv centers	2672
 
 
 --
--- Name: hiv_centers pk_hiv_centers; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: hiv_health_centers pk_hiv_health_centers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.hiv_centers
-    ADD CONSTRAINT pk_hiv_centers PRIMARY KEY (geo_level, geo_code, geo_version, centers);
+ALTER TABLE ONLY public.hiv_health_centers
+    ADD CONSTRAINT pk_hiv_health_centers PRIMARY KEY (geo_level, geo_code, geo_version, centers);
 
 --
 -- PostgreSQL database dump complete

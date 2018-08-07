@@ -21,8 +21,9 @@ def get_profile(geo, profile_name, request):
     try:
         data['population'] = get_population(geo, session)
         data['elections'] = get_elections(geo, session)
-        data['health_centers'] = get_health_centers(geo, session)
         data['crops'] = get_crop_production(geo, session)
+        data['health_centers'] = get_health_centers(geo, session)
+        data['health_workers'] = get_health_workers(geo, session)
         print '\n\n\n\n\n\n\n'
         print data
         print '\n\n\n\n\n\n\n'
@@ -120,7 +121,7 @@ def get_health_centers(geo, session):
     
     try:
         hiv_centers_dist, total_hiv_centers_dist = get_stat_data('centers',geo, session, 
-                                                table_name='hiv_centers', order_by='-total')
+                                                table_name='hiv_health_centers', order_by='-total')
     except LocationNotFound:
         pass
 
@@ -145,6 +146,38 @@ def get_health_centers(geo, session):
             },
             'health_centers_ownership_dist': health_centers_ownership_dist
         }
+
+def get_health_workers(geo, session):
+    health_workers_dist, total_health_workers_dist = LOCATIONNOTFOUND, 0
+    hrh_patient_ratio = 0
+
+    try:
+        health_workers_dist, total_health_workers = get_stat_data('workers',geo, session, 
+                    table_name='health_workers', order_by='-total')
+
+        hrh_patient_ratio = health_workers_dist['HRH patient ratio']['numerators']['this']
+        del health_workers_dist['HRH patient ratio']
+        del health_workers_dist['MO and AMO per 10000']
+        del health_workers_dist['Nurses and midwives per 10000']
+        del health_workers_dist['Pharmacists per 10000']
+        del health_workers_dist['Clinicians per 10000']
+
+    except LocationNotFound:
+        pass
+
+    return {
+        'total_health_workers': {
+            'name': 'Total health worker population (2014)',
+            'numerators': {'this': total_health_workers_dist},
+            'values': {'this': total_health_workers_dist}
+        },
+        'hrh_patient_ratio': {
+            'name': 'Skilled health worker to patient ratio (2014)',
+            'numerators': {'this': hrh_patient_ratio},
+            'values': {'this': hrh_patient_ratio}
+        },
+        'health_workers_dist': health_workers_dist
+    }
 
 # helpers
 
