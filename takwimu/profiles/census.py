@@ -108,17 +108,29 @@ def get_crop_production(geo, session):
 
 
 def get_health_centers(geo, session):
+    health_centers_dist, total_health_centers_dist = LOCATIONNOTFOUND, 0
+    health_centers_ownership_dist = LOCATIONNOTFOUND
+    hiv_centers_dist, total_hiv_centers_dist = LOCATIONNOTFOUND, 0
+
     try:
         health_centers_dist, total_health_centers_dist = get_stat_data('centers',geo, session, 
                                                 table_name='health_centers', order_by='-total')
-        
+    except LocationNotFound:
+        pass
+    
+    try:
         hiv_centers_dist, total_hiv_centers_dist = get_stat_data('centers',geo, session, 
                                                 table_name='hiv_centers', order_by='-total')
+    except LocationNotFound:
+        pass
 
+    try:
         health_centers_ownership_dist, _ = get_stat_data('centers',geo, session, 
                                                 table_name='health_centers_ownership', order_by='-total')
-
-        return {
+    except LocationNotFound:
+        pass
+    
+    return {
             'health_centers_dist': health_centers_dist,
             'total_health_centers': {
                 'name': 'Total health centers in operation (2014)',
@@ -133,11 +145,6 @@ def get_health_centers(geo, session):
             },
             'health_centers_ownership_dist': health_centers_ownership_dist
         }
-
-    except LocationNotFound:
-        health_centers_dist, _ = LOCATIONNOTFOUND, 0
-        health_centers_ownership_dist, _ = LOCATIONNOTFOUND, 0
-        hiv_centers_dist, _ = LOCATIONNOTFOUND, 0
 
 # helpers
 

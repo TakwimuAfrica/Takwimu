@@ -88,23 +88,31 @@
       </article>
       {% endif %}
 
-      {% if not health_centers.is_missing %}
+      {% if not health_centers.health_centers_dist.is_missing %}
       <article id="health_centers_distribution" class="clearfix">
         <header class="section-contents">
             <h1>Health centers distribution</h1>
         </header>
         <div class="section-container">
              <section class="clearfix stat-row">
-                <div class="column-third">
-                  {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
-                </div>
-                <div class="column-third">
-                  {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_centers stat_type='number' %}
-                </div>
-                <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
-                <div class="column-full">
-                  <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by region (2014)"></div>
-                </div>
+                {% if not health_centers.total_health_centers.is_missing %}
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
+                  </div>
+                {% endif %}
+                {% if not health_centers.total_hiv_centers.is_missing %}
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_centers stat_type='number' %}
+                  </div>
+                {% endif %}
+                {% if not health_centers.health_centers_ownership_dist.is_missing %}
+                  <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
+                {% endif %}
+                {% if not health_centers.health_centers_dist.is_missing %}
+                  <div class="column-full">
+                    <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by region (2014)"></div>
+                  </div>
+                {% endif %}
             </section>
         </div>
       </article>
