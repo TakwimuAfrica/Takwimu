@@ -27,7 +27,7 @@ CREATE TABLE public.health_centers_ownership (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    centers character varying(128) NOT NULL,
+    organization_type character varying(128) NOT NULL,
     total integer
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE public.health_centers_ownership (
 -- Data for Name: health_centers_ownership; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.health_centers_ownership (geo_level, geo_code, geo_version, centers, total) FROM stdin;
+COPY public.health_centers_ownership (geo_level, geo_code, geo_version, organization_type, total) FROM stdin;
 level1	TZ_1_001	2009	faith based org	62
 level1	TZ_1_001	2009	parastatal	4
 level1	TZ_1_001	2009	private	84
@@ -149,7 +149,7 @@ country	TZ	2009	public	5126
 --
 
 ALTER TABLE ONLY public.health_centers_ownership
-    ADD CONSTRAINT pk_health_centers_ownership PRIMARY KEY (geo_level, geo_code, geo_version, centers);
+    ADD CONSTRAINT pk_health_centers_ownership PRIMARY KEY (geo_level, geo_code, geo_version, organization_type);
 
 --
 -- PostgreSQL database dump complete

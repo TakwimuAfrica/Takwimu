@@ -127,7 +127,7 @@ def get_health_centers(geo, session):
 
     try:
         health_centers_ownership_dist, _ = get_stat_data(
-            'centers', geo, session, table_name='health_centers_ownership', order_by='-total')
+            'organization_type', geo, session, table_name='health_centers_ownership', order_by='-total')
     except LocationNotFound:
         pass
 
