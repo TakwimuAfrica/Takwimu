@@ -42,6 +42,14 @@ class LegalView(TemplateView):
     """
     template_name = 'takwimu/about/legal.html'
 
+class TopicView(TemplateView):
+    """
+    Topic View:
+    ---------------
+    Finding Data by Topic View.
+    """
+    template_name = 'takwimu/topic_page.html'
+
 
 def handler404(request):
     response = render_to_response('404.html', {},
