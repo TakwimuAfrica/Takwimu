@@ -11,62 +11,54 @@
 {% block dropdown_content %}
 <div class="row pl-4 pb-5" style="width: 100%;">
   <div class="col-sm-4">
-    <ul style="color:#7ab1f2; font-weight: bold;">
-      <li class="pb-2" type="disc"><a href="{% url 'about_page' %}"><u>About Takwimu</u></a></li>
-      <li class="pb-2" type="disc"><a href="/about/support-services"><u>Our Services</u></a></li>
-      <li class="pb-2" type="disc"><a href="/contact-us"><u>Contact Us</u></a></li>
-      <li class="mb-0 pb-3" type="disc"><a href="/dashboard"><u>Dashboard (Admin)</u></a></li>
+    <ul class="font-weight-bold" style="color:#7ab1f2">
+      <li class="pb-2" type="disc"><a href="{% url 'about_page' %}">About Takwimu</a></li>
+      <li class="pb-2" type="disc"><a href="/about/support-services">Our Services</a></li>
+      <li class="pb-2" type="disc"><a href="/contact-us">Contact Us</a></li>
+      <li class="mb-0 pb-3" type="disc"><a href="/dashboard">Dashboard (Admin)</a></li>
     </ul>
   </div>
-  <div class="col-sm-4">
-    <h5 class="pb-2">Follow us</h5>
-    <div class="mt-2 d-inline-block p-2 rounded" style="background-color:#1455a0;">
-      <ul class="navbar-nav">
-        {% to_list 'twitter' 'facebook' 'medium' 'slack' 'github' as social_medias %}
-        {% for social_media in social_medias %}
-          {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
-            <li class="nav-item p-2">
-              <a class="nav-link{% if not forloop.last %} border-right {% else %} {% endif %}" 
-                href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
-                <i class="fab fa-{{ social_media }} fa-fw"></i>
-              </a>
-            </li>
-          {% endif %}
-        {% endfor %}
-      </ul>
+  <div class="col-sm-8">
+    <h5 class="font-weight-bold pb-0">Follow us</h5>
+    <div class="mt-2 d-inline-block py-3 px-2 rounded social-icons" style="background-color:#1455a0;">
+        <ul class="navbar-nav">
+            {% to_list 'twitter' 'facebook' 'medium' 'instagram' 'slack' 'github' as social_medias %}
+            {% for social_media in social_medias %}
+              {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+                <li class="nav-item">
+                  <a class="nav-link py-0 px-3 {% if not forloop.last %} border-right {% endif %}" 
+                    href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+                    <i class="fab fa-{{ social_media }} fa-fw"></i>
+                  </a>
+                </li>
+              {% endif %}
+            {% endfor %}
+          </ul>
     </div>
-  </div>
 
-  <div class="row pt-5">
-    <div class="col-8">
-      <p class="mb-0 text-truncate" style="opacity: 0.6; font-size: 16px">Takwimu is an initiative by:</p>
-      <div class="row">
-        <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
-            class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
-          <img src="{% static 'img/logos/ap-white.png' %}" class="img-responsive" alt="africapractice">
-        </a>
-        <a href="https://codeforafrica.org" target="_blank" rel="noopener"
-            class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
-          <img src="{% static 'img/logos/cfafrica-white.png' %}" class="img-responsive" alt="Code for Africa">
-        </a>
-        <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
-            class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
-          <img src="{% static 'img/logos/ihub-white.png' %}" class="img-responsive" alt="iHub">
+  <div class="row mt-5 pl-4">
+    <h5 class="mb-0 text-truncate font-weight-bold">An initiative by </h5>
+    <div class="row">
+      <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
+          class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
+        <img src="{% static 'img/logos/ap-white.png' %}" alt="africapractice">
+      </a>
+      <a href="https://codeforafrica.org" target="_blank" rel="noopener"
+          class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
+        <img src="{% static 'img/logos/cfafrica-white.png' %}" alt="Code for Africa">
+      </a>
+      <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
+          class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
+        <img src="{% static 'img/logos/ihub-white.png' %}" alt="iHub">
+      </a>
+      <div class="col-4 p-0">
+      <p class="mb-0 pt-0 text-truncate text-center" style="opacity: 0.6; font-size: 16px;margin-top:-1.5rem;">Supported by:</p>
+        <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
+          class="col partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
+          <img src="{% static 'img/logos/bmgf-white.png' %}" alt="Bill and Melinda Gates Foundation">
         </a>
       </div>
     </div>
-    <div class="col-4">
-      <p class="mb-0 text-truncate text-center" style="opacity: 0.6; font-size: 16px">Supported by:</p>
-      <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
-          class="col-8  ml-4 partner-logo-container m-2 px-3 d-flex align-items-center justify-content-center">
-        <img src="{% static 'img/logos/bmgf-white.png' %}" class="img-responsive" alt="Bill and Melinda Gates Foundation">
-      </a>
-    </div>
-  </div>
 </div>
-<style>
-ul li u {
-  color:#7ab1f2;
-}
-</style>
+
 {% endblock %}

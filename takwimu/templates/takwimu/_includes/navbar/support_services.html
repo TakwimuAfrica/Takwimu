@@ -12,7 +12,7 @@
   <div class="row w-100">
     <div class="col-4">
       <h5 class="font-weight-bold pb-2">Standard Services</h5>
-      <ul style="color:#7ab1f2; font-weight: bold;">
+      <ul class="font-weight-bold"style="color:#7ab1f2;">
         {% for service in settings.takwimu.SupportServicesSetting.services %}
           {% if service.value.category == "Standard" %}
             <li class="pb-2" type="disc"><a href="/about/support-services"><u>For {{ service.value.title }}</u></a></li>
@@ -22,7 +22,7 @@
     </div>
     <div class="col-4">
       <h5 class="font-weight-bold pb-2">Premium Services</h5>
-      <ul style="color:#7ab1f2; font-weight: bold;">
+      <ul class="font-weight-bold"style="color:#7ab1f2;">
         {% for service in settings.takwimu.SupportServicesSetting.services %}
           {% if service.value.category == "Premium" %}
             <li class="pb-2" type="disc"><a href="/about/support-services"><u>{{ service.value.title }}</u></a></li>
@@ -33,13 +33,13 @@
 
     <div class="col-4">
       <h5 class="font-weight-bold pb-2">Help and support</h5>
-      <div class="mt-2 d-inline-block p-2 rounded" style="background-color:#1455a0;">
+      <div class="mt-2 d-inline-block py-3 px-2 rounded social-icons" style="background-color:#1455a0;">
         <ul class="navbar-nav">
-        {% to_list 'twitter' 'facebook' 'instagram' 'slack' 'github' as social_medias %}
+        {% to_list 'twitter' 'facebook' 'medium' 'slack' 'github' as social_medias %}
         {% for social_media in social_medias %}
           {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
-            <li class="nav-item p-2">
-              <a class="nav-link{% if not forloop.last %} border-right {% else %} {% endif %}"
+            <li class="nav-item">
+              <a class="nav-link py-0 px-3 {% if not forloop.last %} border-right {% endif %}"
 		            href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
                 <i class="fab fa-{{ social_media }} fa-fw"></i>
               </a>
@@ -50,7 +50,7 @@
       </div>
 
       <div class="mt-2 d-inline-block pt-2">
-        <ul class="pl-3" style="color:#7ab1f2; font-weight: bold;">
+        <ul class="font-weight-bold pl-3" style="color:#7ab1f2;">
           <li class="pb-2" type="disc"><a href="/contact-us"><u>General Enquiries</u></a></li>
           <li class="pb-2" type="disc">
             <a href="#" target="_blank"><u>FAQ</u></a>
@@ -66,10 +66,4 @@
       </div>
     </div>
   </div>
-
-  <style>
-    ul li u {
-      color:#7ab1f2;
-    }
-  </style>
 {% endblock %}
