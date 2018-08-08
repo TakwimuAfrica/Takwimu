@@ -12,7 +12,7 @@
   <div class="row w-100">
     <div class="col-4">
       <h5 class="font-weight-bold pb-2">Standard Services</h5>
-      <ul class="font-weight-bold">
+      <ul class="font-weight-bold" style="color:#7ab1f2;">
         {% for service in settings.takwimu.SupportServicesSetting.services %}
           {% if service.value.category == "Standard" %}
             <li class="pb-2" type="disc"><a href="/about/support-services"><u>For {{ service.value.title }}</u></a></li>
@@ -50,7 +50,7 @@
       </div>
 
       <div class="mt-2 d-inline-block pt-2">
-        <ul class="pl-3 font-weight-bold">
+        <ul class="pl-3 font-weight-bold" style="color:#7ab1f2;">
           <li class="pb-2" type="disc"><a href="/contact-us">General Enquiries</a></li>
           <li class="pb-2" type="disc">
             <a href="#" target="_blank"><u>FAQ</u></a>

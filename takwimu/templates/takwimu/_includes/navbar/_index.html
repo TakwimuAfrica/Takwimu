@@ -29,12 +29,20 @@
           </div> -->
 
         </li>
-        <li class="nav-item">
-            <a class="nav-link text-white text-uppercase font-weight-bold px-3 py-4"
-                href="/topics" role="button" aria-expanded="false">
-              Topics
-            </a>
-        </li>
+        <!-- <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
+              href="#" role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+            Topics
+          </a> -->
+          <!-- On large devices -->
+          <!-- {% include 'takwimu/_includes/navbar/topics.html' with button_name="Topics" %} -->
+
+          <!-- TODO: On small devices -->
+          <!-- <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">WIP</a>
+          </div>
+        </li> -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
               href="/about/support-services" role="button">
@@ -58,7 +66,7 @@
       <ul class="navbar-nav">
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-uppercase font-weight-bold px-3 py-4"
-              href="/about" id="navbarDropdown" role="button" aria-haspopup="true"
+              href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true"
               aria-expanded="false">
             About Us
           </a>
@@ -94,13 +102,11 @@
 </nav>
 
 <style>
-  .navbar.fixed-top .dropdown-menu-lg li[type="disc"] {
-	  color:#7ab1f2;
-  }
-  .navbar.fixed-top .dropdown-menu-lg ul li[type="disc"] a{
+
+ .navbar .dropdown-menu-lg ul li[type="disc"] a{
       color:#7ab1f2;
       text-decoration: underline;
-      line-height: 2;
+      line-height: 2.4;
   }
   .dropdown-menu-lg .social-icons .border-right{ 
     border-right-color: rgba(255, 255, 255, 0.1) !important;
