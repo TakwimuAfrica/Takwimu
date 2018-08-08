@@ -35,12 +35,9 @@
               <li data-target="#carousel-homepage-hero" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
-              {% with countries='nigeria tanzania senegal' status='beta' %}
-              {% if status == 'beta' %}
-                {% include 'takwimu/_includes/homepage/beta_detail.html' %}
-              {% endif %}
+              {% with countries='beta nigeria tanzania senegal' %}
               {% for country in countries.split %}
-                {% include 'takwimu/_includes/homepage/hero_detail.html' %}
+                {% include 'takwimu/_includes/homepage/carousel_item_detail.html' %}
               {% endfor %}
               {% endwith %}
             </div>
@@ -52,26 +49,29 @@
   </div>
 </div>
 <style>
-  #carousel-homepage-hero img {
-    height: 50px;
-    opacity:1;
+  
+  #carousel-homepage-hero .icon-wrap {
     border-radius: 999px;
-    filter:hue-rotate(190.3deg) saturate(30%) brightness(100%) contrast(100%);
+    height: 50px; width: 50px;
+    text-align: center;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-    mix-blend-mode: lighten;
+    text-align: center;
+    overflow: hidden;
   }
-  .overlay{
-    position:relative;
-    background-color:#17a2b8;
-    mix-blend-mode: lighten;
-    border-radius: 999px;
-    height: 50px;
-    opacity: 0.8;
-    -moz-opacity: 80%;
-    -webkit-opacity: 80%;
-    z-index: 2;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-  }
+    #carousel-homepage-hero svg {
+      height: 50px;
+      width: 50px;
+      opacity: 0.76;
+      mix-blend-mode: screen;
+      filter: saturate(0%);
+    }
+      #carousel-homepage-hero svg#beta {
+        padding: 10px;
+        opacity: 1.0;
+        filter: none;
+        mix-blend-mode: normal;
+        background: #fff;
+      }
 
   #carousel-homepage-hero .carousel-item .btn {
     background-color: rgba(255, 255, 255, 0.28);
