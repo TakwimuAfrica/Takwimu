@@ -16,8 +16,7 @@ A clear and concise description of the data needed
 
 
 **Which topics is this data related to?**
-*Select topics from Development Context and Key Issues, Policy Framework, Sector Policies and Programming
-Public Finance, the Budget and Official Development Assistance. If you data does not fit in any other mentioned topics, feel free to suggest a new topic*
+*Select topics from Agriculture & Rural Development, Aid Effectiveness, Climate Change, Economy & Growth, Education, Energy & Mining, Environment, External Debt, Financial Sector, Gender, Health, Infrastructure, Poverty, Private Sector, Public Sector, Science & Technology, Social Development, Social Protection & Labor, Trade and Urban Development. If you data does not fit in any of the mentioned topics, feel free to suggest a new topic.*
 
 **Please share links to the sources for the data.**
 *You can attach the files here or add the link to the google sheet*
