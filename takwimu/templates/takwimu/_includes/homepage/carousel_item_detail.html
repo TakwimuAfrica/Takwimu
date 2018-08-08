@@ -1,0 +1,46 @@
+{% load staticfiles %}
+<div class="carousel-item p-5 {% if forloop.first %}active{% endif %}">
+  <div>
+    <div class="icon-wrap float-right bg-info">
+      <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="svg" id="{{ country }}"/>
+    </div>
+    <p class="text-uppercase" style="font-weight: 400; font-size:13px;">
+      {% if country = 'beta' %}
+      News
+      {% else %}
+      New Country
+      {% endif %}
+    </p>
+    <h2 style="font-weight: 600;">
+      {% if country = 'beta' %}
+      We want your feedback!
+      {% else %}
+      {{ country|title }} country profile now available
+      {% endif %}
+    </h2>
+    <p class="pt-2">
+      {% if country = 'beta' %}
+      Takwimu is now released in beta: your feedback on all aspects of the site will help us to improve
+      before launching.
+      {% else %}
+      Explore human development data and analysis for {{ country|title }}.
+      {% endif %}
+      </p>
+    <p>
+      <a class="btn btn-info px-4 text-uppercase" style="font-size: 80%; height: 44px; line-height: 2.4"
+          {% if country = 'beta' %}
+          href="https://takwimu.zendesk.com/hc/en-us/community/topics" target="_blank"
+          {% else %}
+          href="/profiles/{{ country }}"
+          {% endif %} >
+        {% if country = 'beta' %}
+        Send your comments
+        {% else %}
+        View Country Profile
+        {% endif %}
+        <img class="border-0" src="{% static 'img/icons/button-arrow.svg' %}" alt="button arrow"
+            style="height:15px; width: 23px; box-shadow: none; object-fit: contain;">
+      </a>
+    </p>
+  </div>
+</div>
