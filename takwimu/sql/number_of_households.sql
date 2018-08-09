@@ -58,7 +58,9 @@ level1	SN_1_012	2009	Rural	52260
 level1	SN_1_013	2009	Urban	82425
 level1	SN_1_013	2009	Rural	95665
 level1	SN_1_014	2009	Rural	41251
-level1	SN_1_014	2009		46546
+level1	SN_1_014	2009	Urban 46546
+country	SN	2009	Urban	626647
+country	SN	2009	Rural	635731
 \.
 
 

@@ -46,6 +46,13 @@
             {% endif %}
           </section>
         </div>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Households</h2>
+            <div class="column-half" id="chart-pie-households-household_number_dist" data-stat-type="percentage" data-chart-title="Number of Households" data-initial-sort="-value"></div>
+            <div class="column-half" id="chart-pie-households-household_size_dist" data-stat-type="percentage" data-chart-title="Size of Households" data-initial-sort="-value"></div>
+          </section>
+        </div>
       </article>
 
       {% if not elections.candidate_dist.is_missing or not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}

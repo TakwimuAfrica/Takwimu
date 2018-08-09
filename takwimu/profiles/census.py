@@ -10,7 +10,8 @@ log = logging.getLogger(__name__)
 
 SECTIONS = settings.HURUMAP.get('topics', {})
 
-LOCATIONNOTFOUND = {'is_missing': True, 'name': 'No Data Found', 'numerators': {'this': 0},
+LOCATIONNOTFOUND = {'is_missing': True, 'name': 'No Data Found',
+                    'numerators': {'this': 0},
                     'values': {'this': 0}}
 
 
@@ -24,9 +25,11 @@ def get_profile(geo, profile_name, request):
         data['crops'] = get_crop_production(geo, session)
         data['health_centers'] = get_health_centers(geo, session)
         data['health_workers'] = get_health_workers(geo, session)
-        print '\n\n\n\n\n\n\n'
-        print data
-        print '\n\n\n\n\n\n\n'
+        data['households'] = get_household_distribution(geo, session)
+        print '\n\n\n\n\n\n\n\n'
+        print data['households']
+        print '\n\n\n\n\n\n\n\n'
+
 
         return data
     finally:
@@ -40,10 +43,11 @@ def get_population(geo, session):
                                                  table_fields=[
                                                      'Population_Sex'])
 
-        residence_dist, total_residence_dist = get_stat_data('Population_Residence',
-                                                             geo, session,
-                                                             table_fields=[
-                                                                 'Population_Residence'])
+        residence_dist, total_residence_dist = get_stat_data(
+            'Population_Residence',
+            geo, session,
+            table_fields=[
+                'Population_Residence'])
 
         return {
             'sex_dist': sex_dist,
@@ -78,13 +82,17 @@ def get_elections(geo, session):
     except LocationNotFound:
         pass
     try:
-        valid_invalid_dist, _ = get_stat_data('votes', geo, session, table_fields=[
-                                              'votes'], table_name='valid_invalid_votes')
+        valid_invalid_dist, _ = get_stat_data('votes', geo, session,
+                                              table_fields=[
+                                                  'votes'],
+                                              table_name='valid_invalid_votes')
     except LocationNotFound:
         pass
     try:
-        registered_accred_dist, _ = get_stat_data('voters', geo, session, table_fields=[
-                                                  'voters'], table_name='registered_accredited_voters')
+        registered_accred_dist, _ = get_stat_data('voters', geo, session,
+                                                  table_fields=[
+                                                      'voters'],
+                                                  table_name='registered_accredited_voters')
     except LocationNotFound:
         pass
 
@@ -108,6 +116,30 @@ def get_crop_production(geo, session):
     }
 
 
+def get_household_distribution(geo, session):
+    household_size_dist = LOCATIONNOTFOUND
+    household_number_dist = LOCATIONNOTFOUND
+
+    try:
+        household_size_dist, _ = get_stat_data('location', geo, session,
+                                           table_fields=['location'],
+                                           table_name='size_of_households')
+    except LocationNotFound:
+        pass
+
+    try:
+        household_number_dist, _ = get_stat_data('location', geo, session,
+                                           table_fields=['location'],
+                                           table_name='number_of_households')
+    except LocationNotFound:
+        pass
+
+    return {
+        'household_number_dist': household_number_dist,
+        'household_size_dist': household_size_dist
+    }
+
+
 def get_health_centers(geo, session):
     health_centers_dist, total_health_centers_dist = LOCATIONNOTFOUND, 0
     health_centers_ownership_dist = LOCATIONNOTFOUND
@@ -115,19 +147,22 @@ def get_health_centers(geo, session):
 
     try:
         health_centers_dist, total_health_centers_dist = get_stat_data(
-            'centers', geo, session, table_name='health_centers', order_by='-total')
+            'centers', geo, session, table_name='health_centers',
+            order_by='-total')
     except LocationNotFound:
         pass
 
     try:
         hiv_health_centers_dist, total_hiv_health_centers_dist = get_stat_data(
-            'centers', geo, session, table_name='hiv_health_centers', order_by='-total')
+            'centers', geo, session, table_name='hiv_health_centers',
+            order_by='-total')
     except LocationNotFound:
         pass
 
     try:
         health_centers_ownership_dist, _ = get_stat_data(
-            'organization_type', geo, session, table_name='health_centers_ownership', order_by='-total')
+            'organization_type', geo, session,
+            table_name='health_centers_ownership', order_by='-total')
     except LocationNotFound:
         pass
 
@@ -154,8 +189,10 @@ def get_health_workers(geo, session):
 
     try:
         health_workers_dist, total_health_workers_dist = get_stat_data(
-            'workers', geo, session, table_name='health_workers', order_by='-total')
-        hrh_patient_ratio = health_workers_dist['HRH patient ratio']['numerators']['this']
+            'workers', geo, session, table_name='health_workers',
+            order_by='-total')
+        hrh_patient_ratio = \
+        health_workers_dist['HRH patient ratio']['numerators']['this']
         del health_workers_dist['HRH patient ratio']
         del health_workers_dist['MO and AMO per 10000']
         del health_workers_dist['Nurses and midwives per 10000']
@@ -178,6 +215,7 @@ def get_health_workers(geo, session):
         },
         'health_workers_dist': health_workers_dist
     }
+
 
 # helpers
 
