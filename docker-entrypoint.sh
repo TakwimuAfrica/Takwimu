@@ -1,7 +1,6 @@
 #!/bin/bash
 python manage.py migrate --noinput        # Apply database migrations
 cat takwimu/sql/*.sql | psql              # Upload tables / data
-cat takwimu_dev.sql | psql                # Upload test data
 python manage.py compilescss              # Compile SCSS (offline)
 python manage.py collectstatic --noinput  # Collect static files
 
