@@ -1,0 +1,16 @@
+{% if forloop.first %}
+<div style="border-bottom: 3px solid rgba(255, 255, 255, 0.1)"></div>
+{% endif %}
+
+<a class="nav-link py-4 {% if forloop.first %}active{% endif %}"
+    id="faq-{{ faq.id }}-tab" style=""
+    data-toggle="pill" href="#faq-{{ faq.id }}" role="tab" aria-controls="faq-{{ faq.id }}"
+    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
+  {{ faq.question }}
+</a>
+
+{% if forloop.last %}
+<div style="border-bottom: 3px solid rgba(255, 255, 255, 0.1)"></div>
+{% else %}
+<div class="ml-auto w-50" style="border-bottom: 3px solid rgba(255, 255, 255, 0.1)"></div>
+{% endif %}

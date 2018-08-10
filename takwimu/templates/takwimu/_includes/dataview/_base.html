@@ -1,0 +1,65 @@
+{% load wagtailcore_tags %}
+
+<div class="py-2">
+  {% if not indicator.value.hide_title %}
+    <h5>{{ indicator.value.title }}</h5>
+  {% endif %}
+
+  <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
+    {% block dataview_ctrl %}
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-flag"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-exchange-alt"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-code"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-download"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-share-alt"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-heart"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-book-open"></i>
+    </button>
+    {% endblock %}
+  </div>
+
+  {% block dataview_tabs_nav %}
+  <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
+    <li class="nav-item">
+      <a class="nav-link active mr-1" id="d{{ indicator.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ indicator.value.title|slugify }}-dv-chart" role="tab" 
+      aria-controls="d{{ indicator.value.title|slugify }}-dv-chart" aria-selected="true">{% block dataview_tab_title %}Chart{% endblock %}</a>
+    </li>
+  </ul>
+  {% endblock %}
+    
+<div class="tab-content border border-top-0 p-3 pt-4 pb-2 {% block dataview_tab_class %}{% endblock %}">
+    <div class="tab-pane fade show active" id="d{{ indicator.value.title|slugify }}-dv-chart" role="tabpanel" aria-labelledby="d{{ indicator.value.title|slugify }}-dv-chart-tab">
+      {% block dataview_tab_content %}
+
+        {% include 'takwimu/_includes/dataview/chart.html' %}
+
+      {% endblock %}
+      <div class="dataview-source small text-muted">
+          {{ value.source }}
+      </div>
+    </div>
+    <!-- <div class="tab-pane fade" id="d{{ indicator.value.title|slugify }}-dv-table" role="tabpanel" aria-labelledby="d{{ indicator.value.title|slugify }}-dv-table-tab">
+      {% include 'takwimu/_includes/dataview/table.html' %}
+    </div> -->
+  </div>
+</div>
+
+
+<style>
+  .dataview-source p {
+    margin-bottom: 0;
+  }
+</style>

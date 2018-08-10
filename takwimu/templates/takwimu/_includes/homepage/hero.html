@@ -1,0 +1,99 @@
+{% load staticfiles %}
+
+<div class="text-light" style="background: #074c9c url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
+  <div class="py-5" style="background-color: rgba(7, 76, 156, 0.8)">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-8">
+          <h1 class="font-weight-regular display-4">
+            <span style="font-weight: 800;">Actionable</span>
+            <span class="position-relative">
+              insights
+              <div class="position-absolute" 
+                  style="background: rgba(255, 255, 255, 0.4); height: 20px; width: 223px; bottom: 5px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg);">
+              </div>
+            </span> for African 
+            <span style="font-weight: 800;">changemakers</span>
+          </h1>
+          <p class="mt-4">
+            <a href="/about/" class="btn btn-outline-light mr-3 text-uppercase py-3 px-5 font-weight-bold" style="font-size: 80%; border-radius: 30px;">
+              Find out more
+            </a>
+            <button type="button" class="btn btn-outline-light btn-alt text-uppercase py-3 px-5 font-weight-bold"
+                data-toggle="modal" data-target="#videoModal" style="font-size: 80%; border-radius: 30px;">
+              <i class="fas fa-play mr-2"></i> Watch the video 
+            </button>
+          </p>
+        </div>
+
+        <div class="col-4">
+          <div id="carousel-homepage-hero" class="carousel slide bg-info shaddow">
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-homepage-hero" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-homepage-hero" data-slide-to="1"></li>
+              <li data-target="#carousel-homepage-hero" data-slide-to="2"></li>
+              <li data-target="#carousel-homepage-hero" data-slide-to="3"></li>
+            </ol>
+            <div class="carousel-inner">
+              {% with countries='beta nigeria tanzania senegal' %}
+              {% for country in countries.split %}
+                {% include 'takwimu/_includes/homepage/carousel_item_detail.html' %}
+              {% endfor %}
+              {% endwith %}
+            </div>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+<style>
+  
+  #carousel-homepage-hero .icon-wrap {
+    border-radius: 999px;
+    height: 50px; width: 50px;
+    text-align: center;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
+    text-align: center;
+    overflow: hidden;
+  }
+    #carousel-homepage-hero svg {
+      height: 50px;
+      width: 50px;
+      opacity: 0.76;
+      mix-blend-mode: screen;
+      filter: saturate(0%);
+    }
+      #carousel-homepage-hero svg#beta {
+        padding: 10px;
+        opacity: 1.0;
+        filter: none;
+        mix-blend-mode: normal;
+        background: #fff;
+      }
+
+  #carousel-homepage-hero .carousel-item .btn {
+    background-color: rgba(255, 255, 255, 0.28);
+  }
+  #carousel-homepage-hero .carousel-item .btn:hover {
+    background-color: rgba(255, 255, 255, 0.6);
+    border-color: transparent;
+  }
+  .carousel-indicators li {
+    position: relative;
+    -ms-flex: 0 1 auto;
+    flex: 0 1 auto;
+    width: 10px;
+    height: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+    text-indent: -999px;
+    cursor: pointer;
+    border-radius:10px;
+    background-color:white;
+  }
+  .carousel-indicators .active {
+    background-color: #005e79;
+}
+</style>

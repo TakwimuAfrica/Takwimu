@@ -30,6 +30,7 @@ _site/
 .idea/**/workspace.xml
 .idea/**/tasks.xml
 .idea/dictionaries
+atom-amd64.deb
 
 # Sensitive or high-churn files:
 .idea/**/dataSources/
@@ -103,3 +104,4 @@ fabric.properties
 
 .idea/*
 .vscode
+media/*

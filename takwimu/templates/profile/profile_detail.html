@@ -1,169 +1,240 @@
 {% extends 'profile/profile_detail.html' %}
+{% load staticfiles sass_tags %}
+
+{% block head_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+{% endblock %}
+
+{% block header %}
+  {# Navbar #}
+  {% include 'takwimu/_includes/navbar/_index.html' %}
+
+  {% block header_content %}
+    {% block secondary_nav %} {% endblock %}
+    {{ block.super }}
+  {% endblock %}
+{% endblock %}
 
 {% block profile_header_tail %}
   <div class="column-full">
     <p class="caption"><strong>Census data:</strong> 2014</p>
   </div>
-
 {% endblock %}
 
-{% block profile_detail %}
-  <article
-      class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-    <header class="section-contents">
-      <h1>HDI Overview</h1>
-    </header>
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=hdi_overview.hdi stat_type='number' %}
+{% block content_container %}
+  <div class="content-container wrapper clearfix">
+    {% block profile_preamble %} {% endblock %}
+
+    {% block profile_detail %}
+
+      <article
+          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
+        <header class="section-contents">
+          <h1>Demographics</h1>
+        </header>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Total Population </h2>
+            <div class="{% if population.total_residence.numerators.this > 0 %}column-quarter{% else %}column-half{% endif %}">
+              {% include 'profile/_blocks/_stat_list.html' with stat=population.total_sex stat_type='number' %}
+            </div>
+            <div class="column-half" id="chart-pie-population-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
+            {% if population.total_residence.numerators.this > 0 %}
+              <div class="column-quarter" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
+            {% endif %}
+          </section>
         </div>
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=hdi_overview.rank stat_type='number' %}
+      </article>
+
+      {% if not elections.candidate_dist.is_missing or not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
+      <article class="clearfix">
+        <header class="section-contents">
+          <h1>Elections</h1>
+        </header>
+        {% if not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Votes Distribution </h2>
+            <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
+            <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
+          </section>
         </div>
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=hiv_prevalence.current_prevalence stat_type='percentage' %}
+        {% endif %}
+        {% if not elections.candidate_dist.is_missing %}
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Total Votes Per Candidate </h2>
+            <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
+          </section>
         </div>
-      </section>
-    </div>
-    <div class="section-container">
-      <section class="clearfix stat-row">
+        {% endif %}
+      </article>
+      {% endif %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.forest_area__of_total_land_area stat_type='percentage' %}
+      {% if not crops.crop_distribution.is_missing %}
+      <article class="clearfix">
+        <header class="section-contents">
+          <h1>Crops</h1>
+        </header>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Crop Production in Tonnes </h2>
+            <div class="column-full" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
+          </section>
         </div>
+      </article>
+      {% endif %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.population_living_below_income_poverty_line_ppp_190_a_day_ stat_type='percentage' %}
+      {% if not health_centers.health_centers_dist.is_missing %}
+      <article id="health_centers_distribution" class="clearfix">
+        <header class="section-contents">
+            <h1>Health centers distribution</h1>
+        </header>
+        <div class="section-container">
+             <section class="clearfix stat-row">
+                {% if not health_centers.total_health_centers.is_missing %}
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
+                  </div>
+                {% endif %}
+                {% if not health_centers.total_hiv_health_centers.is_missing %}
+                  <div class="column-third">
+                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers stat_type='number' %}
+                  </div>
+                {% endif %}
+                {% if not health_centers.health_centers_ownership_dist.is_missing %}
+                  <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
+                {% endif %}
+                {% if not health_centers.health_centers_dist.is_missing %}
+                  <div class="column-full">
+                    <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by region (2014)"></div>
+                  </div>
+                {% endif %}
+            </section>
         </div>
+      </article>
+      {% endif %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.pupil_teacher_ratio_primary_school stat_type='number' %}
-        </div>
-      </section>
-    </div>
-    <div class="section-container">
-      <section class="clearfix stat-row">
+      {% if not health_workers.health_workers_dist.is_missing %}
+      <article id="health_workers_distribution" class="clearfix">
+          <header class="section-contents">
+              <h1>Health workers distribution</h1>
+          </header>
+          <div class="section-container">
+               <section class="clearfix stat-row">
+                   <div class="column-third">
+                      {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio stat_type='number' %}
+                    </div>
+                   <div class="column-full">
+                       <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
+                  </div>
+              </section>
+          </div>
+      </article>
+      {% endif %}
+    {% endblock %}
+  </div>
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.homicide_rate_per_100000_people stat_type='number' %}
-        </div>
+  {% if geography.this.geo_level == 'country' %}
+    {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower title='long' %}
+  {% else %}
+    {% if geography.parents %}
+      {% for level, g in geography.parents.items %}
+        {% if g.geo_level == 'country' %}
+          {% include 'takwimu/_includes/profile/country_section.html' with country=g.short_name|lower title='long' %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.public_health_expenditure_of_gdp stat_type='percentage' %}
-        </div>
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.internet_users__of_population stat_type='percentage' %}
-        </div>
-      </section>
-    </div>
-    <div class="section-container">
-      <section class="clearfix stat-row">
+  <!-- Country profile country select -->
+  {% include 'takwimu/_includes/sections/explore/_index.html' %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.gender_development_index stat_type='number' %}
-        </div>
+  {% include 'takwimu/_includes/sections/updates.html' %}
 
+  {# Footer #}
+  {% include 'takwimu/_includes/footer.html' %}
 
-        <div class="column-third">
-          {% include 'profile/_blocks/_stat_list.html' with stat=landscape.domestic_food_price_level_index stat_type='number' %}
-        </div>
-      </section>
+  <style>
+    #profile {
+      background-color: #ffffff;
+    }
 
-    </div>
-  </article>
-  <article
-      class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-    <header class="section-contents">
-      <h1>Economy</h1>
-    </header>
-    <div class="section-container">
+    .country-container {
+      background-color: #f9f9f9;
+      height: 400px;
+    }
 
-      <section class="clearfix stat-row">
-        <div class="column-full"
-             id="chart-histogram-gdp-gdp"
-             data-stat-type="number"
-             data-chart-title="GDP in billions of US$"></div>
-      </section>
+    #page-footer {
+      display: none;
+    }
 
-    </div>
-  </article>
+    .updates {
+      margin-bottom: 0;
+    }
 
-  <article
-      class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-    <header class="section-contents">
-      <h1>Health</h1>
-    </header>
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <div class="column-full"
-             id="chart-histogram-life_expectancy-life_expectancy"
-             data-stat-type="number"
-             data-chart-title="Life Expectancy For the last 10 years"></div>
-      </section>
-
-    </div>
-
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <div class="column-full"
-             id="chart-histogram-hiv_prevalence-HIV"
-             data-stat-type="scaled-percentage"
-             data-chart-title="HIV Prevalence For the last 10 years as a % of the population aged 15 - 49"></div>
-      </section>
-
-    </div>
-  </article>
-
-  <article
-      class="clearfix">
-    <header class="section-contents">
-      <h1>Census</h1>
-    </header>
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <h4>Population 2016</h4>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </section>
-      <section class="clearfix stat-row">
-        <div class="column-full"
-             id="chart-histogram-demographics-population_dist"
-             data-stat-type="number"
-             data-chart-title="Population For the last 5 years"></div>
-      </section>
-
-    </div>
-  </article>
-
-  <article
-      class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-    <header class="section-contents">
-      <h1>Education</h1>
-    </header>
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <div class="column-full"
-             id="chart-histogram-literacy-literacy"
-             data-stat-type="scaled-percentage"
-             data-chart-title="Literate Percentage of population above 15 years"></div>
-      </section>
-
-    </div>
-  </article>
-  <article
-      class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
-    <header class="section-contents">
-      <h1>Agriculture</h1>
-    </header>
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <div class="column-full"
-             id="chart-histogram-crops-crop"
-             data-stat-type="number"
-             data-chart-title="Crop Production Index For the last 10 years"></div>
-      </section>
-
-    </div>
-  </article>
+    article {
+      display: block;
+      overflow: auto;
+      padding-bottom: 10px;
+    }
+  </style>
 {% endblock %}
+
+{% block body_javascript %}
+  <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/plugins.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/svg.js' %}"></script>
+  <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
+
+  <!-- Start of takwimu Zendesk Widget script -->
+  <script>/*<![CDATA[*/
+  window.zE || (function (e, t, s) {
+      var n = window.zE = window.zEmbed = function () {
+          n._.push(arguments)
+      }, a = n.s = e.createElement(t), r = e.getElementsByTagName(t)[0];
+      n.set = function (e) {
+          n.set._.push(e)
+      }, n._ = [], n.set._ = [], a.async = true, a.setAttribute("charset", "utf-8"), a.src = "https://static.zdassets.com/ekr/asset_composer.js?key=" + s, n.t = +new Date, a.type = "text/javascript", r.parentNode.insertBefore(a, r)
+  })(document, "script", "db3ec064-4699-489e-a829-d337d290b7e7");
+  /*]]>*/</script>
+  <!-- End of takwimu Zendesk Widget script -->
+
+  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
+  <script>
+      window.ga = function () {
+          ga.q.push(arguments)
+      };
+      ga.q = [];
+      ga.l = +new Date;
+      ga('create', '{{ HURUmap.ga_tracking_id }}', 'auto');
+      ga('send', 'pageview')
+      {% for ga_tracking_id in HURUMAP.ga_tracking_ids %}
+          ga('create', '{{ ga_tracking_id }}', 'auto', {'name': 't{{ forloop.counter }}'});
+          ga('t{{ forloop.counter }}.send', 'pageview');
+      {% endfor %}
+  </script>
+  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+
+  <!-- Bootstrap: Enable Tooltips -->
+  <script>
+      $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+      })
+  </script>
+
+  {% block body_javascript_extra %}
+    {{ block.super }}
+  {% endblock %}
+
+  {{ block.super }}
+
+{% endblock body_javascript %}

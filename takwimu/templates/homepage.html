@@ -1,116 +1,130 @@
-{% extends 'takwimu/_layouts/page.html' %}
+{% extends 'homepage.html' %}
 
-{% load staticfiles %}
+{% load staticfiles sass_tags %}
 
-{% block content %}
-
-  <div class="py-5 text-light" style="background: #6196a5 url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
-
-    <div class="container">
-      <div style="max-width: 800px;">
-          
-        <h3 class="font-weight-light">Creating actionable data for African decision-makers.</h3>
-        <h5 class="font-weight-light">Takwimu is a free and <strong><u>open data</u></strong> platform that aims to transform the way development decisions are made in Africa.</h5>
-        <p class="mt-4">
-          <a href="/about" class="btn btn-primary mr-3">
-            Find out more
-          </a>
-          <button type="button" class="btn btn-outline-light" data-toggle="modal" data-target="#videoModal">
-            <i class="fas fa-play"></i> Watch the video
-          </button>
-        </p>
-      </div>
-      
-    </div>
-
-  </div>
-
-  <div class="bg-light py-5">
-    <div class="text-center container" style="max-width: 800px;">
-      <p class="lead">Evidence-based planning produces better impacts. Takwimu offers data-driven tools and analysis to help shape better informed decisions.</p>
-    </div>
-  </div>
-
-  <div class="container text-center py-5" style="max-width: 800px;">
-    <h1>Country Reports</h1>
-    <p>Read our reports from the 10 focus countries.</p>
-    {% include 'takwimu/_includes/sections/explore/countries.html' %}
-  </div>
-  
-  
-  {% include 'takwimu/_includes/sections/stories.html' %}
-
-  <div class="container py-5">
-    <div class="row d-flex align-items-center">
-      <div class="col-sm-6">
-        <h3>About the Project</h3>
-        <p>Takwimu was launched in 2018 in response to the problem posed by poor access to quality data, which limits the effectiveness of development policy and programming in Africa.</p>
-        <p>Conceived by a consortium of partners - africapractice, Code 4 Africa and iHub - and funded by the Bill and Melinda Gates Foundation, Takwimu is designed to provide a free and open data service which empowers African development actors with the insights to achieve greater impact.
-        <p>The website offers concise, objective, data-rich profiles on ten African countries (Burkina Faso, Democratic Republic of Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia) in English and French. Work is underway to expand coverage to more countries and to make the content available in additional languages.</p>
-      </div>
-      <div class="text-center col-sm-6">
-        <p>Consortium Members:</p>
-        <p class="partner-logos mt-3">
-          <a href="http://www.africapractice.com" target="_blank" rel="noopener" class="m-2 p-2">
-            <img src="{% static 'img/logos/ap.png'%}" alt="" class="m-2 p-2"></a>
-          <a href="https://ihub.co.ke" target="_blank" rel="noopener">
-            <img src="{% static 'img/logos/ihub.png'%}" alt="" class="m-2 p-2"></a>
-          <a href="https://codeforafrica.org/" target="_blank" rel="noopener">
-            <img src="{% static 'img/logos/cfafrica.png'%}" alt="" class="m-2 p-2"></a>
-        </p>
-        <p>With support from:</p>
-        <p class="sponsor-logos mb-3">
-          <a href="https://ga" target="_blank" rel="noopener" class="m-2 p-2">
-            <img src="{% static 'img/logos/bmgf.png'%}" alt="" class="m-2 p-2"></a>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  {% include 'takwimu/_includes/sections/updates.html' %}
-
-  <!-- Extra Styles -->
-
-  <style>
-    .partner-logos img {
-      max-width: 210px;
-      max-height: 90px;
-    }
-    .sponsor-logos img {
-      max-width: 300px;
-    }
-  </style>
-
-  <!-- Video Modal -->
-  <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="videoModalLabel">Building Takwimu</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+{% block head_css_extra %}
+  {{ block.super }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+{% endblock %}
+{% block body %}
+  {% block header %}
+    {% include 'takwimu/_includes/navbar/_index.html' %}
+    {% block header_content %}
+      <div class="text-light" style="background: #074c9c url('{% static 'img/bg/header-databycountry.jpg' %}') no-repeat center; background-size: cover;">
+        <div class="text-center py-3">
+          <div class="container">
+            <nav aria-label="breadcrumb">
+              <ol class="breadcrumb bg-transparent">
+                <li class="breadcrumb-item">
+                  <a href="/" class="text-light"><u>Home</u></a>
+                </li>
+                <li class="breadcrumb-item active text-light">
+                  Countries profiles
+                </li>
+              </ol>
+            </nav>
+            <h1 class="display-4 text-light font-weight-bold">Find data by
+              Country</h1>
+            <p class="p-4">
+              All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
+            </p>
           </div>
         </div>
       </div>
+    {% endblock header_content %}
+  {% endblock %}
+  {% block content_container %}
+    <div class="clearfix">
+      <div id="slippy-map"></div>
+      <div id="map-div" class="py-4 px-4 mt-3 text-center border" style="position: absolute; top: 50%; left: 30%; border-radius: 2px; width: 700px; height: 201px; background-color: #ffffff; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.23)">
+        <p class="text-uppercase font-weight-bold">Browse by Map</p>
+        <p>The data view on pages shown by navigating with this map are still <strong>work in progress</strong>. Please treat them as a sneak peak of what to expect in future releases. We'd though still want your <a href="https://takwimu.zendesk.com/" target="_blank" rel="noopener">feedback</a> on them though.</p>
+        <button class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" style="border-color: #1f6cc6;"
+                onclick="javascript:$('#map-div').css('display', 'none')">
+          GOT IT
+        </button>
+      </div>
     </div>
-  </div>
+    <section class="m-0">
+      {% with countries='nigeria tanzania senegal' %}
+        {% for country in countries.split %}
+          {% include 'takwimu/_includes/profile/country_section.html' with country=country %}
+        {% endfor %}
+      {% endwith %}
 
-{% endblock %}
+    </section>
+    {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
-{% block body_javascript_extra %}
-<script>
-  $('#videoModal').on('shown.bs.modal', function (event) {
-    var src = 'https://www.youtube.com/embed/DvDCCETHsTo?autoplay=1';
-    $('#videoModal iframe').attr('src', src);
-  });
+    {% include 'takwimu/_includes/sections/stories/index.html' %}
 
-  $('#videoModal').on('hidden.bs.modal', function (event) {
-      $('#videoModal iframe').removeAttr('src');
-  });
-</script>
-{% endblock %}
+    {% include 'takwimu/_includes/sections/explore/_index.html' %}
+
+    {% include 'takwimu/_includes/sections/updates.html' %}
+
+  {% endblock content_container %}
+  {% block footer_content %}
+    {% include 'takwimu/_includes/footer.html' %}
+  {% endblock %}
+  <style>
+    .country-container:nth-of-type(odd) {
+      background-color: #fff;
+    }
+
+    .country-container:nth-of-type(even) {
+      background-color: #f4f4f4;
+    }
+    .breadcrumb {
+      padding: 1rem;
+    }
+    .breadcrumb-item {
+      padding-left: .1rem;
+      letter-spacing: 0;
+      font-size: 14px;
+    }
+    .breadcrumb-item+.breadcrumb-item::before {
+        display: inline-block;
+        padding-right: .1rem;
+        color: #fff;
+        content: "\00BB";
+    }
+  </style>
+{% endblock body %}
+
+{% block body_javascript %}
+  <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/plugins.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/svg.js' %}"></script>
+  <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
+
+  <!-- Start of takwimu Zendesk Widget script -->
+  <script>/*<![CDATA[*/
+  window.zE || (function (e, t, s) {
+      var n = window.zE = window.zEmbed = function () {
+          n._.push(arguments)
+      }, a = n.s = e.createElement(t), r = e.getElementsByTagName(t)[0];
+      n.set = function (e) {
+          n.set._.push(e)
+      }, n._ = [], n.set._ = [], a.async = true, a.setAttribute("charset", "utf-8"), a.src = "https://static.zdassets.com/ekr/asset_composer.js?key=" + s, n.t = +new Date, a.type = "text/javascript", r.parentNode.insertBefore(a, r)
+  })(document, "script", "db3ec064-4699-489e-a829-d337d290b7e7");
+  /*]]>*/</script>
+  <!-- End of takwimu Zendesk Widget script -->
+
+  <!-- Bootstrap: Enable Tooltips -->
+  <script>
+      $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+      })
+  </script>
+
+  {% block body_javascript_extra %}
+    {{ block.super }}
+  {% endblock %}
+
+  {{ block.super }}
+
+{% endblock body_javascript %}

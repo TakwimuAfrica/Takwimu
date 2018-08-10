@@ -1,8 +1,14 @@
 gunicorn==19.8.1
 
--e git+https://github.com/CodeForAfricaLabs/HURUmap.git@develop#egg=hurumap
+git+https://github.com/CodeForAfricaLabs/HURUmap.git@develop#egg=hurumap
 
 # workaround: setup keeps installing wazimap from PYPI
--e git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
+git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
+
+git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
+
+git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
+
+Markdown==2.6.11
 
 django-debug-toolbar

@@ -1,8 +1,156 @@
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="alert alert-primary mx-auto" role="alert">
-            <strong>By Topic View</strong>
-            <span>This is work in progress</span>
+{% load staticfiles %}
+
+<div class="row mx-auto p-5 card-deck no-gutters text-white" id="data-topics">
+
+    <!-- Topics: first column, profile sections -->
+    <div class="col-4" id="explore-topics-sections">
+        <h3 class="font-weight-bold text-center">Select a topic </h3>
+        <div class="nav flex-column nav-pills" id="profile-sections-tab" role="tablist" aria-orientation="vertical">
+            {% for section in sections %}
+            <a class="nav-item nav-link nav-link-explore-section text-white text-left pl-5"
+               id="{{ section.id }}"
+               href="#{{ section.href }}"
+               aria-controls="#{{ section.href }}"
+               data-toggle="pill" role="tab" aria-selected="false">
+                {{ section.title }}
+                <i class="fa fa-angle-double-right float-right"></i>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- .col-4 -->
+
+    <!-- Topics: second column, topics -->
+    <div class="col-4" id="explore-topics-topics">
+        <h3 class="font-weight-bold text-center">Select sub-topic </h3>
+        <div class="tab-content" id="profile-sections-topics">
+            {% for section in sections %}
+            <div class="tab-pane fade border-left"
+                 id="{{ section.href }}"
+                 role="tabpanel"
+                 aria-labelledby="{{ section.id }}-tab">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    {% for topic in section.topics %}
+                        <a class="nav-item nav-link text-white text-left pl-5"
+                           id="{{ topic.id }}"
+                           href="#{{ topic.href }}"
+                           aria-controls="{{ topic.href }}"
+                           data-toggle="pill" role="tab" aria-selected="false">
+                            {{ topic.title }}
+                            <i class="fa fa-angle-double-right float-right"></i>
+                        </a>
+                    {% endfor %}
+
+                    {% for key_issue in section.key_issues %}
+                        <a class="nav-item nav-link text-white text-left pl-3"
+                        id="{{ key_issue.id }}"
+                        href="{{ key_issue.href }}#{{ key_issue.title|slugify }}">
+                            <img class="rounded-circle border-light mr-2"
+                                src="{% with 'img/flags/'|add:key_issue.country|lower|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                                border="4" style="border-style:double; width: 40px; height: 40px;"
+                            />
+                            <span>
+                                Key issue - {{ key_issue.title }}
+                                <b>( {{ key_issue.country }})</b>
+                            </span>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <!-- .col-4 -->
+
+    <!-- Topics: third column, indicators -->
+    <div class="col-4" id="explore-topics-indicators">
+        <h3 class="font-weight-bold text-center">Select sub-topic </h3>
+        <div class="tab-content" id="indicators-pills-tabContent" role="tablist" aria-orientation="vertical">
+            {% for section in sections %}
+            {% for topic in section.topics %}
+            <div class="tab-pane fade border-left"
+                id="{{ topic.href }}"
+                role="tabpanel"
+                aria-labelledby="{{ topic.id }}-tab">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    {% for indicator in topic.indicators %}
+                    <a class="nav-item nav-link text-white text-left pl-5 nav-link-explore-indicator"
+                       id="{{ indicator.id }}"
+                       href="#{{ indicator.href }}"
+                       aria-controls="{{ indicator.href }}"
+                       data-toggle="pill" role="tab" aria-selected="false">
+                        {{ indicator.title }}
+                        <i class="fa fa-angle-double-right float-right"></i>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Topics: fourth column, country selection -->
+    <div class="col-4 d-none" id="explore-topics-countries">
+        <h3 class="font-weight-bold text-center">Select country </h3>
+        <div class="tab-content" id="country-pills-tabContent" role="tablist" aria-orientation="vertical">
+            {% for section in sections %}
+            {% for topic in section.topics %}
+            {% for indicator in topic.indicators %}
+            <div class="tab-pane fade border-left"
+                id="{{ indicator.href }}"
+                role="tabpanel"
+                aria-labelledby="{{ indicator.id }}-tab">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    {% for country in indicator.countries %}
+                    <a class="nav-item nav-link text-white text-left pl-3"
+                       href="{{ country.href }}#{{ topic.title|slugify }}">
+                        <img class="rounded-circle border-light mr-2"
+                            src="{% with 'img/flags/'|add:country.title|lower|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                            border="4" style="border-style:double; width: 40px; height: 40px;"
+                        />
+                        <span>
+                            <b>&nbsp;{{ country.title }}</b>
+                        </span>
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+            {% endfor %}
+            {% endfor %}
         </div>
     </div>
 </div>
+                <!-- .row -->
+
+
+<script>
+  window.addEventListener('load', function exploreByTopics() {
+    $('.nav-link-explore-indicator').click(function() {
+        $topics = $('#explore-topics-topics');
+        if(!$topics.hasClass('d-none')) {
+            $topics.removeClass('d-block');
+            $topics.addClass('d-none');
+        }
+        $countries = $('#explore-topics-countries');
+        if(!$countries.hasClass('d-block')) {
+            $countries.removeClass('d-none');
+            $countries.addClass('d-block');
+        }
+    });
+
+    $('.nav-link-explore-section').click(function() {
+        $topics = $('#explore-topics-topics');
+        $countries = $('#explore-topics-countries');
+        if($topics.hasClass('d-none')) {
+            $topics.removeClass('d-none');
+            $countries.addClass('d-block');
+        }
+        if(!$countries.hasClass('d-none')) {
+            $countries.removeClass('d-block');
+            $countries.addClass('d-none');
+        }
+    });
+  });
+</script>

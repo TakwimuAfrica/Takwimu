@@ -1,0 +1,58 @@
+{% extends 'takwimu/_layouts/page.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+
+  {% include 'takwimu/_includes/homepage/hero.html' %}
+
+  {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
+
+  {% include 'takwimu/_includes/sections/how-it-works/index.html' %}
+  
+  {% include 'takwimu/_includes/sections/stories/index.html' %}
+
+  {% include 'takwimu/_includes/sections/updates.html' %}
+
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+
+  <!-- Country profiles explore -->
+  {% include 'takwimu/_includes/sections/explore/_index.html' %}
+
+  {% include 'takwimu/_includes/sections/faq/index.html' %}
+
+  {% include 'takwimu/_includes/sections/testimonials.html' %}
+
+  <!-- Video Modal -->
+  <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="videoModalLabel">Building Takwimu</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+
+{% block body_javascript_extra %}
+<script>
+  $('#videoModal').on('shown.bs.modal', function (event) {
+    var src = 'https://www.youtube.com/embed/DvDCCETHsTo?autoplay=1';
+    $('#videoModal iframe').attr('src', src);
+  });
+
+  $('#videoModal').on('hidden.bs.modal', function (event) {
+      $('#videoModal iframe').removeAttr('src');
+  });
+</script>
+{% endblock %}

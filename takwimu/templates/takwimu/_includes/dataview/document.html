@@ -1,0 +1,13 @@
+{% extends 'takwimu/_includes/dataview/_base.html' %}
+{% load wagtailcore_tags wagtailembeds_tags %}
+
+{% block dataview_tab_class %}pt-5{% endblock %}
+{% block dataview_tab_title %}Document{% endblock %}
+
+{% block dataview_tab_content %}
+  {% embed value.document.file.url  %}
+  <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file={{ HURUMAP.url }}{{ value.document.file.url }}"
+    frameborder="0" width="100%" height="500px">
+  </iframe>
+  
+{% endblock %}

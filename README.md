@@ -1,5 +1,7 @@
 # TAKWIMU
 [![Build Status](https://travis-ci.org/TakwimuAfrica/TAKWIMU.svg?branch=develop)](https://travis-ci.org/TakwimuAfrica/TAKWIMU)
+[![Known Vulnerabilities](https://snyk.io/test/github/TakwimuAfrica/TAKWIMU/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/TakwimuAfrica/TAKWIMU?targetFile=requirements.txt)
+
 
 The TAKWIMU web platform powering insight from human development indicators. Helping to find the stories behind the data. Accessible at https://takwimu.africa/
 
@@ -9,75 +11,122 @@ TODO
 
 ---
 
-## Development
+## Landing Page
 
-1. Clone the repo
-2. ``cd TAKWIMU``
-3. ``virtualenv --no-site-packages env``
-4. ``source env/bin/activate``
-5. ``pip install -r requirements.txt``
+The landing page for TAKWIMU currently lives in the `/docs` folder hosted on [Github Pages](https://pages.github.com/), powered by [Jekyll](https://jekyllrb.com).
+
+Once we replace https://takwimu.africa/ to point to Django App, this directory's contents will be replaced with actual platform documentation:
+
+1. Platform management docs
+2. Sphinx documentation
+3. Style Dictionary
 
 
-***NB:** The set up docs from here assume setting up HURUmap Kenya but is applicable to the rest of the projects.*
+---
 
-You will need a Postgres database:
+# Development
 
+## Setup
+
+There are a couple of ways one can setup their development environment but we currently support [Docker](https://www.docker.com/). It allows us to move away from the "but it works on my machine" issue when making changes or deploying.
+
+You can download Docker Community Edition from here - https://www.docker.com/community-edition
+
+With [Docker Compose](https://docs.docker.com/compose/), development set up is relatively quick:
+
+```sh
+git clone https://github.com/TakwimuAfrica/TAKWIMU.git
+cd TAKWIMU
+docker-compose build
+docker-compose up web
 ```
-psql
-create user takwimu with password takwimu;
-create database takwimu;
-grant all privileges on database takwimu to takwimu;
-```
-Run migrations to keep Django happy:
-```
-python manage.py migrate
-```
 
-Import the data into the new database (will overwrite some tables created by Django, but that's ok).
-```
+## Handling Data
+
+### HURUmap Data
+
+To import HURUmap data, we run the following command in `docker-entrypoint.sh`:
+```sh
 cat takwimu/sql/*.sql | psql -U takwimu -W takwimu
 ```
 
-Start the server:
+To export the HURUmap data you might be working on, run the following command:
+```sh
+docker-compose exec web python manage.py dumppsql --table TABLENAME > sql/TABLENAME.sql
 ```
-python manage.py runserver
+
+To dump all data tables at once, run
+
+```sh
+for t in `ls takwimu/sql/[a-z]*.sql`
+do
+    echo $t
+    pg_dump "postgres://takwimu:takwimu@localhost/takwimu" \
+        -O -c --if-exists -t $(basename $t .sql) \
+      | egrep -v "(idle_in_transaction_session_timeout|row_security)" \
+      > takwimu/sql/$(basename $t .sql).sql
+done
 ```
 
-### Landing Page
+### Django / CMS Data Import
 
-The landing page for TAKWIMU currently lives in the `/docs` folder hosted on Github Pages, powered by Jekyll. This will be fully replaced with actual platform documentation.
+Once done, you'd want to load some data available to you:
 
-### Web Platform
+**CAREFUL: Doing this will override whatever data you already have in the DB.**
 
-TODO
+```sh
+# Docker
+docker-compose exec web ./manage.py loaddata supportservice
+docker-compose exec web ./manage.py loaddata faq
+```
 
-## Tests
+#### Django / CMS Data Export
 
-TODO
+To export data, run the following commands:
+```sh
+# Docker
+docker-compose exec web ./manage.py dumpdata takwimu.SupportService -o takwimu/fixtures/supportservice.json
+docker-compose exec web ./manage.py dumpdata takwimu.FAQ -o takwimu/fixtures/faq.json
+```
 
-## Deployment
+---
+
+# Tests
 
 TODO
 
 ---
 
+# Deployment
+
+TODO
+
+---
 
 ## Contributing
 
-If you'd like to contribute to TAKWIMU, check out the [CONTRIBUTING.md](CONTRIBUTING.md) file on how to get started.
+If you'd like to contribute to TAKWIMU, check out [CONTRIBUTING.md](CONTRIBUTING.md) on how to get started.
+
+---
 
 ## Attribution
 
 TAKWIMU has been made possible thanks to:
 
 - Consortium Members:
-    - @africapractice
-    - @CodeForAfrica
-    - @iHub
+    - [africapractice](http://www.africapractice.com)
+    - [Code for Africa](https://github.com/CodeForAfrica)
+    - [iHub](https://ihub.co.ke)
 - Contributors:
-    - ?
+    - Sean Peaterson, [Zaang Designs](http://www.zaang.com)
 - Technologies:
-    - ?
+    - [HURUmap](https://github.com/CodeForAfrica/HURUmap)
+    - [Wazimap](https://github.com/OpenUpSA/wazimap)
+    - [Census Reporter](https://github.com/censusreporter/censusreporter)
+    - [Django Framework](https://djangoproject.com/)
+    - [Wagtail CMS](https://wagtail.io)
+- Supported by:
+    - [Bill and Melinda Gates Foundation](https://www.gatesfoundation.org)
 
 ---
 

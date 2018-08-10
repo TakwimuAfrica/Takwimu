@@ -3,6 +3,8 @@ version: '3.3'
 services:
   db:
     image: postgres:9.5
+    ports:
+      - "54321:5432"
     environment:
       - POSTGRES_USER=takwimu
       - POSTGRES_PASSWORD=takwimu
@@ -18,7 +20,11 @@ services:
       - "./:/srv/takwimu"
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
+      - DJANGO_SECRET_KEY=somethingsecret
+      - HURUMAP_URL='http://localhost:8000'
       - PGHOST=db
       - PGDATABASE=takwimu
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
+      - PYTHONDONTWRITEBYTECODE="True"
+      # - DJANGO_DEBUG=False  # For testing deploys

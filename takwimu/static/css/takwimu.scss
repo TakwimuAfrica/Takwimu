@@ -5,26 +5,35 @@
  *
  * NOTE: Please don't make edits here unless super necessary.
  */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900');
+@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900');
 
-$brand-color-primary: #005973;
-$brand-color-secondary: #6196a5;
+$brand-color-primary: #1f6cc6;
+$brand-color-primary-alt: #074c9c;
+$brand-color-secondary: #1e4a7e;
+$brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
-$brand-extend-jumbotron: #e9ecef;
+$brand-extend-jumbotron: #fafafa;
 $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 
 body {
-  padding-top: 56px;
+  padding-top: 72px;
 }
 
-* {
-  font-family: 'Roboto', sans-serif;
+// hurumap.css provides default font family for these elements: html, body, h4, h5, h6 & p
+// thus we must overide them (CSS Specificity Hierarchy)
+ html, body, h4, h5, h6, p, * {
+  font-family: 'Montserrat', sans-serif;
+  word-break: break-word;
 }
 
 img {
   max-width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: bold;
 }
 
 
@@ -58,33 +67,50 @@ a {
 .bg-primary {
   background-color: $brand-color-primary !important;
 }
+.bg-primary-alt {
+  background-color: $brand-color-primary-alt !important;
+}
 .bg-secondary {
   background-color: $brand-color-secondary !important;
 }
-
+.bg-info {
+  background-color: #2da4c7 !important;
+}
 // Text Colours
 .text-primary {
   color: $brand-color-primary !important;
+}
+.text-primary-alt {
+  color: $brand-color-primary-alt !important;
 }
 .text-secondary {
   color: $brand-color-secondary !important;
 }
 
-// Button collors
+// Button
+.btn {
+  border-radius: 24px;
+  padding: .375rem 1.25rem;
+}
+.btn-lg {
+  padding: .5rem 1.5rem;
+}
+// Button - colours
 .btn-primary {
   background-color: $brand-color-primary;
   border-color: $brand-color-secondary;
   &:hover, &:focus, &:active {
-    background-color: $brand-color-secondary;
-    border-color: $brand-color-primary;
+    background-color: $brand-color-secondary !important;
+    border-color: $brand-color-primary !important;
   }
 }
 .btn-outline-primary {
   border-color: $brand-color-primary;
   color: $brand-color-primary;
   &:hover, &:focus, &:active {
-    background-color: $brand-color-primary;
-    border-color: $brand-color-secondary;
+    background-color: $brand-color-primary !important;
+    border-color: $brand-color-primary !important;
+    color: $brand-extend-white;
   }
 }
 .btn-primary.disabled, .btn-primary:disabled {
@@ -95,18 +121,63 @@ a {
   &:hover, &:focus, &:active {
     color: $brand-color-primary;
   }
+  &.btn-alt {
+    background-color: rgba(255, 255, 255, 0.4);
+    &:hover, &:focus, &:active {
+      background-color: #fff;
+    }
+  }
 }
 
+.nav-pills.nav-pills-alt .nav-link {
+  color: #929292;
+}
 .nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
   background-color: transparent;
   color: $brand-color-primary;
   border-bottom: 3px $brand-color-primary solid;
   border-radius: 0;
+  color: #4a4a4a;
+  font-weight: 900;
 }
 
- // Custom CSS
+.grayscale {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
+  &:hover {
+    filter: grayscale(0%);
+    -webkit-filter: grayscale(0%); /* Chrome 19+ & Safari 6+ */
+  }
+}
 
- // Navbar goodness
+/*
+* Custom CSS
+* Topics tabs css
+*/
+.custom-nav a {
+  border-bottom: 5px solid transparent;
+  cursor: pointer;
+  text-decoration: none;
+  .border-left {
+    border-left: 1px solid rgba(255, 255, 255, 0.25)!important;
+  }
+  &:hover, &.active {
+    background: $brand-color-dark-alt;
+    border-bottom: 5px solid $brand-extend-white;
+    + a div {
+      border-left: 1px solid transparent !important;
+    }
+    div {
+      border-left: 1px solid transparent !important;
+    }
+  }
+  &.active {
+    background: $brand-color-primary;
+    border-bottom: 5px solid transparent;
+  }
+}
+
+// Navbar goodness
 
 .navbar.fixed-top {
   // Fix position problem of the "containing block" of lg dropdown
@@ -114,40 +185,105 @@ a {
     position: initial;
   }
 
+  .dropdown-toggle::after{
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+    content: '\f107';
+    border: 0;
+    vertical-align: 0;
+    visibility: hidden;
+    margin-left: 0;
+  }
+  .nav-link svg {
+    margin-left: .255em;
+  }
+
+  .nav-item:hover{
+    .dropdowm-menu-lg-tag{
+      display: flex!important;
+    }
+    .dropdown-menu-lg {
+      display: block;
+    }
+  }
+
+  .dropdowm-menu-lg-tag {
+    display: none !important;
+    position: relative;
+    top: -10px; margin-bottom: -10px;
+    span {
+      border-bottom: 10px solid $brand-color-primary-alt;
+      border-left: 10px solid transparent;
+      border-right: 10px solid transparent;
+    }
+  }
   .dropdown-menu-lg {
     display: none;
-    left: 0;
-    width: 100vw;
-    background-color: #005973;
-    &:hover {
-      display: block;
+    position: absolute; left: 0;
+    width: 100vw; z-index: 3000;
+    background-color: $brand-color-primary-alt;
+
+    a {
+      color: $brand-extend-light;
+    }
+    // Color fix for country flag links in navbar
+    .country-flag-links {
+      div {
+        border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
+        a {
+          svg {
+            border: 3px solid #fff;
+            border-radius: 9999px;
+          }
+          &:hover{
+            color: #fff;
+          }
+        }
+      }
     }
 
   }
-  .nav-link:hover {
-    background-color: #005973;
-    & + .dropdown-menu-lg {
-      display: block;
+
+}
+
+/*
+* Profile content css
+* --------------------
+*/
+.profile-content {
+  .is-active {
+    background-color: $brand-extend-jumbotron;
+    + div.border-top {
+      border-top: 0!important;
+    }
+    /* Quick way to remove underline on mouse hover for the current selected item */
+    h1.section-title:hover {
+      text-decoration: none;
     }
   }
   
+  /* Ideally only the section title would underline on mouse hover */
+  h1.section-title:hover, h1.section-title:focus {
+    text-decoration: underline;
+  }
 }
+
+
 
 
 /*
 * Country container css
 * ----------------------
-*/ 
+*/
 
 .country-flag-links {
   .col {
-    padding: 1em;
+    padding: 3em 1em;
     border-right: 1px solid #ddd;
     a {
-      padding: 1em;
       text-decoration: none;
-      color: $brand-color-primary;
-      
+      color: $brand-extend-black;
+
       svg {
         display: block;
         margin: 0 auto;
@@ -155,6 +291,7 @@ a {
         height: 50px;
       }
       span {
+        padding-top: 1.5em;
         display: block;
         font-weight: 400;
       }
@@ -181,18 +318,7 @@ a {
       &[data-toggle="tooltip"] * {
         opacity: 0.5;
       }
-      
-    }
-  }
-}
-// Color fix for country flag links in navbar
-.navbar.fixed-top {
-  .country-flag-links {
-    a {
-      color: $brand-extend-light;
-    }
-    div {
-      border-color: rgba($color: $brand-extend-light, $alpha: 0.1) !important;
+
     }
   }
 }
@@ -218,39 +344,38 @@ a {
   }
 }
 
-/* 
+/*
 * Small devices (landscape phones, 576px and up)
 * Medium devices (tablets, 768px and up)
 */
 
 @media (min-width: 576px) and (max-width: 768px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
-  */ 
+  */
   // body {background: red;}
 }
 
 
 /*
 * Large devices (desktops, 992px and up)
-*/ 
-@media (min-width: 768px) and (max-width: 992px) { 
+*/
+@media (min-width: 768px) and (max-width: 992px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
-  */ 
+  */
   // body { background: yellow;}
  }
 
 /*
 * Extra large devices (large desktops, 1200px and up)
-*/ 
-@media (min-width: 1200px) { 
+*/
+@media (min-width: 1200px) {
   /*
-  * Do not delete the code below, it's useful for css debuging 
+  * Do not delete the code below, it's useful for css debuging
   * during development
-  */ 
+  */
   // body { background: grey;}
  }
-

@@ -10,7 +10,7 @@ log = logging.getLogger(__name__)
 
 SECTIONS = settings.HURUMAP.get('topics', {})
 
-LOCATIONNOTFOUND = {'name': 'No Data Found', 'numerators': {'this': 0},
+LOCATIONNOTFOUND = {'is_missing': True, 'name': 'No Data Found', 'numerators': {'this': 0},
                     'values': {'this': 0}}
 
 
@@ -19,209 +19,165 @@ def get_profile(geo, profile_name, request):
     data = {}
 
     try:
-        data['gni'] = get_gni_dist(geo, session)
-        data['life_expectancy'] = get_life_expectancy(geo, session)
-        data['demographics'] = get_population_stats(geo, session)
-        data['hiv_prevalence'] = get_hiv_prevalence_data(geo, session)
-        data['hdi_overview'] = get_hdi_overview(geo, session)
-        data['gdp'] = get_gdp(geo, session)
-        data['literacy'] = get_literacy(geo, session)
-        data['crops'] = get_crop_production_index(geo, session)
-        data['landscape'] = get_landscape_data(geo, session)
-        print '\n'
+        data['population'] = get_population(geo, session)
+        data['elections'] = get_elections(geo, session)
+        data['crops'] = get_crop_production(geo, session)
+        data['health_centers'] = get_health_centers(geo, session)
+        data['health_workers'] = get_health_workers(geo, session)
+        print '\n\n\n\n\n\n\n'
         print data
+        print '\n\n\n\n\n\n\n'
+
         return data
     finally:
         session.close()
 
 
-def get_gni_dist(geo, session):
+def get_population(geo, session):
     try:
-        gni_overview_dist, _ = get_stat_data('GNI_Year', geo, session,
-                                             table_fields=['GNI_Year'],
-                                             percent=False)
+        sex_dist, total_sex_dist = get_stat_data('Population_Sex', geo,
+                                                 session,
+                                                 table_fields=[
+                                                     'Population_Sex'])
 
-        # print gni_overview_dist.items()
-        return {'gni': get_last_n_years(gni_overview_dist, 5)}
-
-    except LocationNotFound:
-        gni_overview_dist, _ = LOCATIONNOTFOUND, 0
-
-
-def get_life_expectancy(geo, session):
-    try:
-        life_expectancy_dist, _ = get_stat_data('Life_Expectancy_Year', geo,
-                                                session,
-                                                table_fields=[
-                                                    'Life_Expectancy_Year'],
-                                                percent=False)
-
-        return {'life_expectancy': get_last_n_years(life_expectancy_dist, 10)}
-
-    except LocationNotFound:
-        life_expectancy_dist, _ = LOCATIONNOTFOUND, 0
-
-
-def get_population_stats(geo, session):
-    try:
-        population_dist, _ = get_stat_data('Population_Year', geo,
-                                           session,
-                                           table_fields=[
-                                               'Population_Year'],
-                                           percent=False)
-
-        latest_pop = population_dist.get('2015')
+        residence_dist, total_residence_dist = get_stat_data('Population_Residence',
+                                                             geo, session,
+                                                             table_fields=[
+                                                                 'Population_Residence'])
 
         return {
-            'population_dist': get_last_n_years(population_dist, 5),
-            'total_population': {
-                'name': 'People',
-                'values': {'this': latest_pop.get('values')['this']}
+            'sex_dist': sex_dist,
+            'total_sex': {
+                'name': '',
+                'numerators': {'this': total_sex_dist},
+                'values': {'this': total_sex_dist}
+            },
+            'residence_dist': residence_dist,
+            'total_residence': {
+                'name': '',
+                'numerators': {'this': total_residence_dist},
+                'values': {'this': total_residence_dist}
             }
         }
 
     except LocationNotFound:
-        population_dist, _ = LOCATIONNOTFOUND, 0
+        sex_dist, _ = LOCATIONNOTFOUND, 0
+        residence_dist, _ = LOCATIONNOTFOUND, 0
 
 
-def get_hiv_prevalence_data(geo, session):
+def get_elections(geo, session):
+    candidate_dist = LOCATIONNOTFOUND
+    valid_invalid_dist = LOCATIONNOTFOUND
+    registered_accred_dist = LOCATIONNOTFOUND
+
+    # Each of these fetches may fail due to data unavailability but failure of one
+    # does not imply failure of another i.e. they are independent.
     try:
-        hiv_dist, _ = get_stat_data('HIV_Prevalence_Year', geo,
-                                    session,
-                                    table_fields=[
-                                        'HIV_Prevalence_Year'],
-                                    percent=False)
+        candidate_dist, _ = get_stat_data(
+            'candidate', geo, session, table_fields=['candidate'])
+    except LocationNotFound:
+        pass
+    try:
+        valid_invalid_dist, _ = get_stat_data('votes', geo, session, table_fields=[
+                                              'votes'], table_name='valid_invalid_votes')
+    except LocationNotFound:
+        pass
+    try:
+        registered_accred_dist, _ = get_stat_data('voters', geo, session, table_fields=[
+                                                  'voters'], table_name='registered_accredited_voters')
+    except LocationNotFound:
+        pass
 
-        current_prevalence = hiv_dist.get('2016')
+    return {
+        'candidate_dist': candidate_dist,
+        'valid_invalid_dist': valid_invalid_dist,
+        'registered_accred_dist': registered_accred_dist
+    }
 
-        return {
-            'HIV': get_last_n_years(hiv_dist, 10),
-            'current_prevalence': {
-                'name': 'HIV Prevalence Rate',
-                'values': {'this': current_prevalence.get('values')['this']}
-            }
 
-        }
+def get_crop_production(geo, session):
+    crop_distribution = LOCATIONNOTFOUND
+    try:
+        crop_distribution, _ = get_stat_data(
+            'crops', geo, session, table_fields=['crops'])
+    except LocationNotFound:
+        pass
+
+    return {
+        'crop_distribution': crop_distribution
+    }
+
+
+def get_health_centers(geo, session):
+    health_centers_dist, total_health_centers_dist = LOCATIONNOTFOUND, 0
+    health_centers_ownership_dist = LOCATIONNOTFOUND
+    hiv_health_centers_dist, total_hiv_health_centers_dist = LOCATIONNOTFOUND, 0
+
+    try:
+        health_centers_dist, total_health_centers_dist = get_stat_data(
+            'centers', geo, session, table_name='health_centers', order_by='-total')
+    except LocationNotFound:
+        pass
+
+    try:
+        hiv_health_centers_dist, total_hiv_health_centers_dist = get_stat_data(
+            'centers', geo, session, table_name='hiv_health_centers', order_by='-total')
+    except LocationNotFound:
+        pass
+
+    try:
+        health_centers_ownership_dist, _ = get_stat_data(
+            'organization_type', geo, session, table_name='health_centers_ownership', order_by='-total')
+    except LocationNotFound:
+        pass
+
+    return {
+        'health_centers_dist': health_centers_dist,
+        'total_health_centers': {
+            'name': 'Total health centers in operation (2014)',
+            'numerators': {'this': total_health_centers_dist},
+            'values': {'this': total_health_centers_dist}
+        },
+        'hiv_health_centers_dist': hiv_health_centers_dist,
+        'total_hiv_health_centers': {
+            'name': 'HIV care and treatment centers (2014)',
+            'numerators': {'this': total_hiv_health_centers_dist},
+            'values': {'this': total_hiv_health_centers_dist}
+        },
+        'health_centers_ownership_dist': health_centers_ownership_dist
+    }
+
+
+def get_health_workers(geo, session):
+    health_workers_dist, total_health_workers_dist = LOCATIONNOTFOUND, 0
+    hrh_patient_ratio = 0
+
+    try:
+        health_workers_dist, total_health_workers_dist = get_stat_data(
+            'workers', geo, session, table_name='health_workers', order_by='-total')
+        hrh_patient_ratio = health_workers_dist['HRH patient ratio']['numerators']['this']
+        del health_workers_dist['HRH patient ratio']
+        del health_workers_dist['MO and AMO per 10000']
+        del health_workers_dist['Nurses and midwives per 10000']
+        del health_workers_dist['Pharmacists per 10000']
+        del health_workers_dist['Clinicians per 10000']
 
     except LocationNotFound:
-        hiv_dist, _ = LOCATIONNOTFOUND, 0
+        pass
 
-
-def get_hdi_overview(geo, session):
-    try:
-        hdi_data, _ = get_stat_data(['year'], geo,
-                                    session,
-                                    table_fields=[
-                                        'year'],
-                                    percent=False)
-
-        hdi_rank, _ = get_stat_data(['Rank'], geo,
-                                    session,
-                                    table_fields=[
-                                        'Rank'],
-                                    percent=False)
-
-        current_hdi = hdi_data.get('2015')
-
-        return {
-            'hdi': {'values': {'this': current_hdi.get('values')['this']},
-                    'name': 'HD Index'},
-            'rank': {
-                'name': 'World HD Rank',
-                'values': {'this': hdi_rank.values()[0].get('name')}
-            }
-        }
-
-    except LocationNotFound:
-        hdi_data, _ = LOCATIONNOTFOUND, 0
-
-
-def get_gdp(geo, session):
-    try:
-        gdp_dist, _ = get_stat_data('GDP_Year', geo,
-                                    session,
-                                    table_fields=[
-                                        'GDP_Year'],
-                                    percent=False)
-
-        return {
-            'gdp': get_last_n_years(gdp_dist, 10)}
-
-    except LocationNotFound:
-        gdp_dist, _ = LOCATIONNOTFOUND, 0
-
-
-def get_literacy(geo, session):
-    try:
-        literacy_dist, _ = get_stat_data('Literacy_Year', geo,
-                                         session,
-                                         table_fields=[
-                                             'Literacy_Year'],
-                                         percent=False)
-
-        return {
-            'literacy': get_last_n_years(literacy_dist, 10)}
-
-    except LocationNotFound:
-        literacy_dist, _ = LOCATIONNOTFOUND, 0
-
-
-def get_crop_production_index(geo, session):
-    try:
-        crop_dist, _ = get_stat_data('Crop_Production_Year', geo,
-                                     session,
-                                     table_fields=[
-                                         'Crop_Production_Year'],
-                                     percent=False)
-
-        return {
-            'crop': get_last_n_years(crop_dist, 10)}
-
-    except LocationNotFound:
-        crop_dist, _ = LOCATIONNOTFOUND, 0
-
-
-def get_landscape_data(geo, session):
-    try:
-        landscape, _ = get_stat_data('Indicator', geo,
-                                     session,
-                                     table_fields=[
-                                         'Indicator'],
-                                     percent=False)
-
-        keys = landscape.keys()[:-1]
-
-        final_data = {}
-
-        # for i in keys:
-        #     data = {}
-        #     i_no_punct = re.sub(r'[^\w\s]', '', i)
-        #     dict_key = i_no_punct.lower().replace(' ', '_')
-        #     print landscape.get(i)
-        #     data = {
-        #         'name': landscape.get(i)['name'],
-        #         'values': {'this': landscape.get(i)['values']}
-        #     }
-        #     final_data[dict_key] = data
-
-        for i in landscape.values()[:-1]:
-            data = {
-                'name': i.get('name'),
-                'values': {'this': i.get('values')['this']}
-            }
-
-            key = re.sub(r'[^\w\s]', '', i.get('name'))
-            dict_key = key.lower().replace(' ', '_')
-
-            final_data[str(dict_key)] = data
-
-        print final_data
-
-        return final_data
-
-    except LocationNotFound:
-        landscape, _ = LOCATIONNOTFOUND, 0
-
+    return {
+        'total_health_workers': {
+            'name': 'Total health worker population (2014)',
+            'numerators': {'this': total_health_workers_dist},
+            'values': {'this': total_health_workers_dist}
+        },
+        'hrh_patient_ratio': {
+            'name': 'Skilled health worker to patient ratio (2014)',
+            'numerators': {'this': hrh_patient_ratio},
+            'values': {'this': hrh_patient_ratio}
+        },
+        'health_workers_dist': health_workers_dist
+    }
 
 # helpers
 

@@ -1,0 +1,101 @@
+{% load staticfiles %}
+<section class="support-services-tabs">
+  <div class="bg-secondary">
+    <nav
+        class="nav nav-justified container text-center custom-nav"
+        id="nav-tabs" role="tablist">
+      {% for service in settings.takwimu.SupportServicesSetting.services %}
+        {% if service.value.category == "Persona" %}
+        <br />
+        <br />
+        <a class="nav-item nav-link text-light pt-4 pb-3 px-0"
+          id="support-{{ service.value.title|slugify | add:'-btn'}}"
+          data-toggle="tab" href="#support-{{ service.value.title|slugify }}" role="tab"
+          aria-controls="support-{{ service.value.title|slugify }}"
+          aria-selected="true">
+          <div class="text-center {% if not forloop.first %}border-left{% endif %}">
+            <h2 class="py-1"><i class="{{ service.value.icon }}"></i></h2>
+            <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal";>{{ service.value.title }}</p>
+          </div>
+        </a>
+        {% endif %}
+      {% endfor %}
+    </nav>
+  </div>
+
+  <div class="tab-content bg-primary text-light" id="datapriority-content">
+    {% for service in settings.takwimu.SupportServicesSetting.services %}
+      {% if service.value.category == "Persona" %}
+        <div
+            class="tab-pane fade container py-5"
+            id="support-{{ service.value.title|slugify }}" role="tabpanel"
+            aria-labelledby="support-{{ service.value.title|slugify | add:'-btn' }}">
+
+          <button class="close-alt float-right btn btn-outline-light btn-sm px-2 py-1"
+              aria-label="Close">
+            <!-- X -->
+            <span class="fa fa-times mx-1"></span>
+          </button>
+
+          <div class="row">
+            <div class="col-4 pr-5">
+              <h1 class="font-weight-bold" style="font-size: 50px;">
+                {{ service.value.title }}
+              </h3>
+            </div>
+            <div class="col">
+              <div class="col-10 pl-5" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
+                {{ service.value.description | safe }}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</section>
+
+<style>
+  section.support-services-tabs .close-alt:hover::after {
+    content: 'CLOSE';
+  }
+</style>
+
+<script>
+  function linkToTab(){
+    // Javascript to enable link to tab
+    var url = document.location.toString();
+    if (url.match('#')) {
+      $('section.support-services-tabs #nav-tabs a[href="#'+url.split('#')[1]+'"]').tab('show') ;
+    }
+  }
+
+  function listenToNavTabs(event){
+    // https://stackoverflow.com/a/17552459/1298144
+    // Javascript to enable link to tab
+    linkToTab()
+
+    // With HTML5 history API, we can easily prevent scrolling!
+    $('section.support-services-tabs #nav-tabs a').on('shown.bs.tab', function (e) {
+        if("pushState" in history) {
+          history.pushState("", document.title, e.target.hash);
+        } else {
+          window.location.hash = e.target.hash; //Polyfill for old browsers
+        }
+    })
+
+    // When you click close on tab
+    $('section.support-services-tabs button.close-alt').click(function(){
+      $('.support-services-tabs .tab-pane').removeClass('show active');
+      $('.support-services-tabs #nav-tabs a').removeClass('active');
+      if("pushState" in history) {
+        history.pushState("", document.title, window.location.pathname + window.location.search);
+      } else {
+        window.location.href.split('#')[0]; //Polyfill for old browsers
+      }
+    });
+  }
+
+  window.addEventListener("load", listenToNavTabs, false);
+  window.addEventListener("hashchange", linkToTab, false);
+</script>

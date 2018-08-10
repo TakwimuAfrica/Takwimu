@@ -1,0 +1,79 @@
+{% load staticfiles wagtailcore_tags %}
+
+<style>
+  section.how-it-works .nav-link .step-number span {
+    color: #9b9b9b;
+    height: 52px;
+    width: 52px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%; 
+    border: 5px solid #ededec;
+    background-color: #f4f4f4;
+    padding-top: 5px;
+  }
+  section.how-it-works .nav-link.active .step-number span, section.how-it-works .nav-link.active .step-description {
+    background-color: #17a2b8 !important;
+    color: #fff !important;
+  }
+    section.how-it-works .nav-link:hover .step-description {
+      background-color: #17a2b8 !important;
+      color: #fff !important;
+    }
+  section.how-it-works .nav-link.active .step-active {
+    visibility: visible !important;
+  }
+  .links a u {
+    color:#1f6cc6;
+  }
+  .sidebar p {
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: normal;
+    color: #4a4a4a;
+   }
+</style>
+
+<section class="how-it-works pt-4 bg-light">
+  <div class="container text-center">
+    <h1 class="display-4 font-weight-bold d-inline-block px-3 bg-light position-relative mt-5" style="z-index: 101;">How it works</h1>
+    <div class="position-relative" style="outline: 2px dashed #dee2e6; height: 80px; top: -40px;" style="z-index: 100;"></div>
+
+    <ul class="nav nav-justified position-relative" style="top: -75px;" role="tablist">
+      {% for step in explainer_steps.steps %}
+        {% include 'takwimu/_includes/sections/how-it-works/nav_detail.html' %}
+      {% endfor %}
+    </ul>
+
+    <div class="position-relative text-left tab-content" style="top: -119px; z-index: 100; outline: 1px solid #dee2e6;">
+
+      {% for step in explainer_steps.steps %}
+        <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
+            id="step-{{ forloop.counter }}" role="tabpanel" aria-labelledby="step-{{ forloop.counter }}-tab">
+          <div class="row mx-0">
+              <div class="sidebar col-3 py-5 px-4 font-weight-light" style="background-color: rgba(155, 155, 155, 0.17)">
+                {{ step.value.sidebar }}
+          
+                <h5 class="mt-5">Jump in...</h5><br>
+                <ul class="font-weight-bold">
+                  {% with countries='nigeria tanzania senegal' %}
+                  {% for country in countries.split %}
+                  <li class="links"><a href="/profiles/{{ country }}"><u>{{ country|title }} Profile</u></a></li><br>
+                  {% endfor %}
+                  {% endwith %}
+                </ul>
+              </div>
+    
+              <div class="col-9 py-5 px-4" style="background-color: #f3f3f3;">
+                <div class="position-relative">
+                    {{ step.value.body }}
+                </div>
+              </div>
+          </div>
+          
+        </div> <!-- /.row -->
+      {% endfor %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,56 @@
+<!-- Stories Section -->
+
+<section class="stories">
+  <div class="container py-5 border-top border-bottom border-left-0 border-right-0" style="border-style: dashed !important;">
+    <h1 class="display-4 text-center mt-5 mb-5" style="font-weight: 800;">Insights &amp; Stories</h1>
+    <ul class="nav nav-pills nav-pills-alt justify-content-center mb-5" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" href="#latest" role="tab" data-toggle="tab">Latest</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#trending" role="tab" data-toggle="tab">Trending</a>
+      </li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+
+      <div role="tabpanel" class="tab-pane fade active show" id="latest">
+        <div class="row">
+          {% for story in stories_latest %}
+            {% include 'takwimu/_includes/sections/stories/story_detail.html' %}
+          {% endfor %}
+        </div>
+      </div> <!-- /#latest-->
+
+      <div role="tabpanel" class="tab-pane fade" id="trending">
+        <div class="row">
+          {% for story in stories_trending %}
+            {% include 'takwimu/_includes/sections/stories/story_detail.html' %}
+          {% endfor %}
+        </div>
+      </div>  <!-- /#trending -->
+
+    </div>  <!-- /.tab-content -->
+
+    <p class="text-center mb-5">
+      <a class="btn btn-primary btn-lg font-weight-bold text-uppercase px-4" href="https://medium.com/takwimu-africa" target="_blank">
+        <span class="mr-2 pr-2 border-right"><i class="fab fa-medium-m fa-fw"></i></span> 
+        <small class="font-weight-bold" style="vertical-align: text-bottom;">Continue Reading On Medium</small>
+      </a>
+    </p>
+  </div>  <!-- /.container -->
+
+</section>
+
+<style>
+  section.stories .card-img {
+    background-size: cover !important;
+    background: #1f6cc6 center center;
+    height: 200px;
+    opacity: 0.6;
+  }
+    section.stories .card:hover .card-img {
+      opacity: 1;
+    }
+</style>

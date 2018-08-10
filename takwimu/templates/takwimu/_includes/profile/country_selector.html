@@ -1,0 +1,77 @@
+{% load staticfiles %}
+<style>
+  .country-selector button::after {
+    content: none;
+  }
+  .section-list-country-head {
+    text-align: center;
+    display: block;
+    font-size: 31px;
+    font-weight: bold;
+    line-height: 1.29;
+  }
+</style>
+{% if selector == 'False' %}
+  <div class="section-list-country-head">
+      <img class="rounded-circle border-light mr-2"
+        src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
+              {% static image_static %}
+            {% endwith %}
+        border="8"
+        style="border-style:double; width: 68px; height: 67px;"/>
+      {{ current_page.title }}
+  </div>
+{% else %}
+<div class="country-selector btn-group">
+  <button class="btn btn-link btn-lg px-0 dropdown-toggle font-weight-bold {{ class_extra }}"
+      type="button"
+      style="text-decoration: none; color:#000;"
+      id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+      aria-expanded="false">
+    <img class="rounded-circle border-light mr-2"
+      src={% with 'img/flags/'|add:current_page.title|lower|add:'.svg' as image_static %}
+            {% static image_static %}
+          {% endwith %}
+      border="8"
+      style="border: solid 5px; box-shadow: 0 0 0 2pt rgba(237, 237, 236, 0.61); width: 50px; height: 50px;"/>
+    {{ current_page.title }}
+    <span>
+      <i class="fa fa-angle-down fa-fw"></i>
+    </span>
+  </button>
+
+  <div class="dropdown-menu py-0 rounded-0"
+      aria-labelledby="dropdownMenuButton"
+      style="max-width: 180px;">
+
+    {% for profile in current_page.get_siblings %}
+      <a class="dropdown-item px-1" href="{{ profile.get_url }}"
+          data-value="{{ profile.title | lower }}"><img
+          class="rounded-circle border-light mr-2"
+          src={% with 'img/flags/'|add:profile.title|lower|add:'.svg' as image_static %}
+                {% static image_static %}
+              {% endwith %}
+          border="8"
+          style="border: solid 5px; box-shadow: 0 0 0 2pt rgba(237, 237, 236, 0.61); width: 50px; height: 50px;"/>
+        {{ profile.title }}
+      </a>
+    {% endfor %}
+  </div>
+</div>
+{% endif %}
+
+
+<!-- TODO: Add styling here -->
+<style>
+
+</style>
+
+
+<!-- When you select a country, the selector changes. -->
+<script>
+  window.addEventListener('load', function () {
+    $('.country-selector .dropdown-menu a').click(function () {
+      $(".country-selector button:first-child").html($(this).html());
+    });
+  });
+</script>

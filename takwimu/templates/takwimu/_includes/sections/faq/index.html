@@ -1,0 +1,62 @@
+<!-- FAQ section -->
+
+<section class="faq bg-primary-alt text-light py-5">
+  <div class="container">
+    <h3 class="text-center display-4 mt-4 mb-5" style="font-weight: 800;">Common Questions</h3>
+
+    <div class="row mb-5">
+      <div class="col-4">
+        <div class="nav flex-column nav-pills h-100 text-right" id="faqs-tab" role="tablist" aria-orientation="vertical">
+          {% for faq in faqs %}
+            {% include 'takwimu/_includes/sections/faq/nav_detail.html' %}
+          {% endfor %}
+        </div>
+      </div>
+
+      <div class="col-8">
+        <div class="tab-content bg-light text-dark h-100 py-4 px-5" id="faqs-tabContent"
+            style="border-radius: 2px;">
+          {% for faq in faqs %}
+            {% include 'takwimu/_includes/sections/faq/tab_detail.html' %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- /.container-fluid -->
+
+</section>
+
+<style>
+  section.faq .nav-link {
+    color: #ffffff;
+    opacity: 0.5;
+    font-weight: bold;
+    border-radius: 0;
+  }
+  section.faq .nav-item .divider {
+    border-bottom: 3px solid rgba(255, 255, 255, 0.1);
+    width: 50%;
+  }
+
+  section.faq .nav-link.active, section.faq .nav-link:hover {
+    opacity: 1;
+    background-color: transparent;
+  }
+
+  section.faq .list-underline {
+    width: 20%;
+    height: 2px;
+    opacity: 0.5;
+    background-color: #1f6cc6;
+    display: inline-block;
+  }
+
+  section.faq .rich-text p {
+    line-height: 28px;
+    color: #000000;
+    font-weight: lighter;
+  }
+
+
+</style>

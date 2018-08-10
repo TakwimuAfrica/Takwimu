@@ -1,94 +1,103 @@
 {% load staticfiles %}
+{% load datastructuretags %}
 
 <!-- Primary Navbar -->
-<nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top" style="background: #6196a5 url('{% static 'img/bg/header-bg.jpg'%}') no-repeat center; background-size: cover; min-height:56px;">
-    <div class="container">
-      <a class="navbar-brand" href="/">
-        <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
-      </a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
-        aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-5 mr-auto">
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle text-white px-3 py-3" data-target="nav-reports" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Reports
-            </a>
-            <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/reports.html' %}
+<nav class="navbar navbar-expand-lg navbar-dark py-0 fixed-top bg-primary shadow" style="min-height:72px;">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ml-5 mr-auto">
+        <li class="nav-item">
+          <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
+              data-target="nav-profiles" href="/profiles" role="button"
+              aria-haspopup="true" aria-expanded="false">
+            Country Profiles
+          </a>
+          <!-- On large devices -->
+          {% include 'takwimu/_includes/navbar/profiles.html' with button_name="Country Profiles" %}
 
-            <!-- TODO: On small devices -->
-            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">WIP</a>
-            </div>
-            
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle text-white px-3 py-3" href="#"  role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <!-- TODO: On small devices -->
+          <!-- <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">WIP</a>
+          </div> -->
+
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white text-uppercase font-weight-bold px-3 py-4"
+                href="/topics" role="button" aria-expanded="false">
               Topics
             </a>
-            <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/topics.html' %}
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
+              href="/about/support-services" role="button">
+            Our Services
+          </a>
+          <!-- On large devices -->
+          {% include 'takwimu/_includes/navbar/support_services.html' with button_name="Our Services" %}
 
-            <!-- TODO: On small devices -->
-            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">WIP</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link text-white px-3 py-3" href="https://openafrica.net/organization/takwimuafrica" target="_blank" rel="noopener">Data</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-2 py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              About Us
+          <!-- TODO: On small devices -->
+          <!-- <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">WIP</a>
+          </div> -->
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white text-uppercase font-weight-bold px-3 py-4"
+                href="/contact-us" role="button" aria-expanded="false">
+              Contact Us
             </a>
-            <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/about.html' %}
+        </li>
+      </ul>
+      <ul class="navbar-nav">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle text-uppercase font-weight-bold px-3 py-4"
+              href="/about" id="navbarDropdown" role="button" aria-haspopup="true"
+              aria-expanded="false">
+            About Us
+          </a>
+          <!-- On large devices -->
+          {% include 'takwimu/_includes/navbar/about.html' with button_name="About Us" %}
 
-            <!-- TODO: On small devices -->
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/about">About Takwimu</a>
-              <a class="dropdown-item" href="/about/data-services">Data Services</a>
-              <a class="dropdown-item" href="/about/media-center">Media Center</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Community</a>
-              <a class="dropdown-item" href="https://takwimu.zendesk.com/" target="_blank">Help</a>
-              <a class="dropdown-item" href="/about/contact">Contact Us</a>
-              <a class="dropdown-item" href="/login">Login</a>
-            </div>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle px-2 py-3" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Newsletter
-            </a>
-            <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/newsletter.html' %}
+          <!-- TODO: On small devices -->
+          <!-- <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="{% url 'about_page' %}">About Takwimu</a>
+            <a class="dropdown-item" href="{% url 'about_support_services' %}">Our Services</a>
+            <a class="dropdown-item" href="/about/media-center">Media Center</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank">Community</a>
+            <a class="dropdown-item" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank">Help</a>
+            <a class="dropdown-item" href="/contact-us">Contact Us</a>
+            <a class="dropdown-item" href="/login">Login</a>
+          </div> -->
+        </li>
 
-            <!-- TODO: On small devices -->
-            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">Subscribe</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link dropdown-toggle py-3" href="#"><i class="fa fa-search"></i></a>
-            <!-- On large devices -->
-            {% include 'takwimu/_includes/navbar/search.html' %}
+        <li class="nav-item">
+          <a class="nav-link dropdown-toggle py-3" href="#"><i class="fa fa-search"></i></a>
+          <!-- On large devices -->
+          {% include 'takwimu/_includes/navbar/search.html' %}
 
-            <!-- TODO: On small devices -->
-            <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">WIP</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link py-3" href="https://twitter.com/TakwimuAfrica"><i class="fab fa-twitter fa-fw"></i></a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link py-3" href="https://facebook.com/TakwimuAfrica"><i class="fab fa-facebook fa-fw"></i></a>
-          </li>
-      </div>
+          <!-- TODO: On small devices -->
+          <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">WIP</a>
+          </div>
+        </li>
+        
+        {% to_list 'twitter' 'facebook' as social_medias %}
+        {% for social_media in social_medias %}
+          {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+            <li>
+              <a class="nav-link py-4" href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
+                <i class="fab fa-{{ social_media }} fa-fw"></i>
+              </a>
+            </li>
+          {% endif %}
+        {% endfor %}
     </div>
-  </nav>
+  </div>
+</nav>

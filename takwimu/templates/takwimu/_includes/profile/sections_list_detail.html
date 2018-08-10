@@ -1,0 +1,28 @@
+{% if section.title|default:"TKW" == "TKW" and page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
+<div class="pt-4 pb-5 mb-0 is-active border-bottom border-top">
+  <a style="text-decoration: none;">
+      <div class="position-absolute" style="right: 17%; margin-top: -30px;">
+        <span class="text-light py-3 px-4" style="background-color: #074c9c; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.26);"><i class="fa fa-eye mr-2"></i> <b>YOU ARE HERE</b></span>
+      </div>
+{% elif section.title == page.title %}
+<div class="pt-4 pb-5 mb-0 is-active border-bottom border-top">
+  <a style="text-decoration: none!important;">
+    <div class="position-absolute" style="right: 17%; margin-top: -30px;">
+      <span class="text-light py-3 px-4" style="background-color: #074c9c; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.26);"><i class="fa fa-eye mr-2"></i> <b>YOU ARE HERE</b></span>
+    </div>
+{% elif page.subpage_types|first == 'takwimu.ProfileSectionPage' %}
+<div class="container border-top bg-white pt-4 pb-5 mb-0">
+  <a href="{{ section.url|default:'#' }}" style="text-decoration: none;">
+{% else %}
+<div class="container border-top bg-white pt-4 pb-5 mb-0">
+  <a href="{{ section.url|default:'../' }}" style="text-decoration: none;">
+{% endif %}
+    <div class="container">
+      <small class="text-uppercase font-weight-bold" style="color: #4a4a4a;">Section {{ counter | add:"1" }}</small>
+      <h1 class="display-5 font-weight-bold mb-4 section-title">{{ section.title|default:"Country Overview" }}</h1>
+      {% with default_desc="A top-level overview of "|add:page.title|add:" – how it’s governed, the make-up of it’s population, the economy and SDG indicators" %}
+      <p class="mb-0 font-weight-light" style="color: #4a4a4a; font-size: 15px">{{ section.description|default:default_desc }}</p>
+      {% endwith %}
+    </div>
+  </a>
+</div>

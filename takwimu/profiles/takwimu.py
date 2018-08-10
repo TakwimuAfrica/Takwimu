@@ -40,6 +40,7 @@ def get_takwimu_sections(geo, session):
         gni_overview_dist, _ = LOCATIONNOTFOUND, 0
 
 
+
 # HELPERS
 # TODO: Move to something similar to wazimap.data.utils
 

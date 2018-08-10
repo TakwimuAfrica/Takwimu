@@ -1,0 +1,25 @@
+{% extends 'takwimu/_layouts/page.html' %}
+
+{% block content %}
+
+  {% include 'takwimu/_includes/profile/hero.html' %}
+
+  {# Loads all the topics #}
+  {% for topic in page.body %}
+      {% include 'takwimu/_includes/profile/topic_detail.html' %}
+  {% endfor %}
+
+  <!-- <hr/> -->
+
+  {% include 'takwimu/_includes/profile/sections_list.html' %}
+
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+
+  {% include 'takwimu/_includes/sections/stories/index.html' %}
+
+  <!-- Country profile country select -->
+  {% include 'takwimu/_includes/sections/explore/_index.html' %}
+
+  {% include 'takwimu/_includes/sections/updates.html' %}
+
+{% endblock %}

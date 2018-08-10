@@ -1,0 +1,15 @@
+{% load wagtailcore_tags %}
+<div class="tab-pane fade {% if forloop.first %}show active{% endif %}" id="faq-{{ faq.id }}" role="tabpanel" aria-labelledby="faq-{{ faq.id }}-tab">
+
+  <p class="font-weight-bold" style="line-height: 24px; font-size: 21px; color: #000000; margin-bottom: 28px;">{{ faq.question }}</p>
+  {{ faq.answer|richtext }}
+
+  <p class="mb-0 mt-5">
+    {% include 'takwimu/_includes/sections/faq/morebtn_detail.html' %}
+
+    {% if faq.cta_two_name %}
+    {% include 'takwimu/_includes/sections/faq/morebtn_detail.html' with cta_url=faq.cta_two_url cta_name=faq.cta_two_name %}
+    {% endif %}
+
+  </p>
+</div>
