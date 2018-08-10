@@ -24,6 +24,7 @@ def get_profile(geo, profile_name, request):
         data['crops'] = get_crop_production(geo, session)
         data['health_centers'] = get_health_centers(geo, session)
         data['health_workers'] = get_health_workers(geo, session)
+        data['causes_of_death'] = get_causes_of_death(geo, session)
         print '\n\n\n\n\n\n\n'
         print data
         print '\n\n\n\n\n\n\n'
@@ -177,6 +178,45 @@ def get_health_workers(geo, session):
             'values': {'this': hrh_patient_ratio}
         },
         'health_workers_dist': health_workers_dist
+    }
+
+def get_causes_of_death(geo, session):
+    causes_of_death_under_five_dist = LOCATIONNOTFOUND
+    causes_of_death_over_five_dist = LOCATIONNOTFOUND
+    inpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
+    inpatient_diagnosis_under_five_dist = LOCATIONNOTFOUND
+    outpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
+    outpatient_diagnosis_under_five_dist = LOCATIONNOTFOUND
+
+    try:
+        causes_of_death_under_five_dist, _ = get_stat_data('causes_of_death_under_five',
+                        geo, session, order_by='-total')
+        causes_of_death_over_five_dist, _ = get_stat_data('causes_of_death_over_five',
+                        geo, session, order_by='-total')
+        inpatient_diagnosis_under_five_dist, _ = get_stat_data('inpatient_diagnosis_under_five',
+                        geo, session, order_by='-total')
+        inpatient_diagnosis_over_five_dist, _ = get_stat_data('inpatient_diagnosis_over_five',
+                        geo, session, order_by='-total')
+        outpatient_diagnosis_over_five_dist, _ = get_stat_data('outpatient_diagnosis_over_five',
+                        geo, session, order_by='-total')
+        outpatient_diagnosis_under_five_dist, _ = get_stat_data('outpatient_diagnosis_under_five',
+                        geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+
+    # Checking availability of data
+    is_missing = causes_of_death_over_five_dist.get('is_missing') and causes_of_death_under_five_dist.get('is_missing') and \
+        inpatient_diagnosis_under_five_dist.get('is_missing') and inpatient_diagnosis_over_five_dist.get('is_missing') and \
+        outpatient_diagnosis_under_five_dist.get('is_missing') and outpatient_diagnosis_over_five_dist.get('is_missing')
+
+    return {
+        'causes_of_death_under_five_dist': causes_of_death_under_five_dist,
+        'causes_of_death_over_five_dist': causes_of_death_over_five_dist,
+        'inpatient_diagnosis_under_five_dist': inpatient_diagnosis_under_five_dist,
+        'inpatient_diagnosis_over_five_dist': inpatient_diagnosis_over_five_dist,
+        'outpatient_diagnosis_over_five_dist': outpatient_diagnosis_over_five_dist,
+        'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist,
+        'is_missing': is_missing
     }
 
 # helpers
