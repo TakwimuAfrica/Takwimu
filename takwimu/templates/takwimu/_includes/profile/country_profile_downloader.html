@@ -1,0 +1,22 @@
+{% load staticfiles %}
+
+{% if profile_page.document %}
+<a class="btn btn-primary btn-sm text-uppercase px-4 py-2" href="{{ profile_page.document.url }}"
+  role="button">
+  Download full country profile
+  <span class="border-left pl-2 ml-2">
+    <img src="{% static "img/icons/icon-download.svg" %}">
+  </span>
+</a>
+{% else %}
+<!-- Wrapper is required for disabled elements to show tooltips -->
+<span class="d-inline-block" tabindex="0" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+  <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled" href="#"
+    role="button" style="pointer-events: none;">
+    Download full country profile
+    <span class="border-left pl-2 ml-2">
+      <img src="{% static "img/icons/icon-download.svg" %}">
+    </span>
+  </a>
+</span>
+{% endif %}
