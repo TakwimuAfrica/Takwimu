@@ -8,9 +8,10 @@ from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, Pag
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailembeds.blocks import EmbedBlock
 from wagtail.wagtaildocs.blocks import DocumentChooserBlock
+from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
+from wagtail.wagtaildocs.models import Document
 
 from wagtail.wagtailimages.models import Image
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 from wagtail.wagtailimages.blocks import ImageChooserBlock
 
 from wagtail.wagtailcore.fields import StreamField, RichTextField
@@ -262,6 +263,13 @@ class ProfilePage(Page):
     '''
     geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True, db_constraint=False)
     date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    document = models.ForeignKey(
+        'wagtaildocs.Document',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -277,6 +285,7 @@ class ProfilePage(Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('geo'),
+        DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
         InlinePanel('sections', label="Sections"),
     ]
