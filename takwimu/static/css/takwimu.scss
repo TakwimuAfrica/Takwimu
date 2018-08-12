@@ -152,8 +152,20 @@ a {
 
 /*
 * Custom CSS
-* Topics tabs css
+* ----------
 */
+
+// Partner logos in Navbar + Footer
+.partner-logos a {
+  background-color: rgba(244,244,244, 0.06);
+  height: 81px;
+
+  img {
+    max-height: 180px;
+  }
+}
+
+// Custom nav for topics
 .custom-nav a {
   border-bottom: 5px solid transparent;
   cursor: pointer;
