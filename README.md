@@ -76,8 +76,8 @@ Once done, you'd want to load some data available to you:
 
 ```sh
 # Docker
-docker-compose exec web ./manage.py loaddata supportservice
-docker-compose exec web ./manage.py loaddata faq
+docker-compose exec web ./manage.py loaddata $(ls takwimu/fixtures)
+
 ```
 
 #### Django / CMS Data Export
