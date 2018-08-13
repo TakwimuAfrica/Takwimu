@@ -12,7 +12,7 @@ A clear and concise description of the data needed
 
 
 **Which countries is this data related to?**
-*Select the countries from Burkina Faso, DRC Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia.*
+*Select the countries from Burkina Faso,DR Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia.*
 
 
 **Which topics is this data related to?**
