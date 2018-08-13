@@ -141,53 +141,48 @@
             <h1>Causes of death </h1>
         </header>
         <div class="section-container">
-             <section class="clearfix stat-row">
-                {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
-                  </div>
-                {% endif %}
-                <br clear="all">
-                <br clear="all">
-                <br clear="all">
-                {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
-                  </div>
-                {% endif %}
-                <br clear="all">
-                <br clear="all">
-                <br clear="all">
-                {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
-                  </div>
-                {% endif %}
-                <br clear="all">
-                <br clear="all">
-                <br clear="all">
-                {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
-                  </div>
-                {% endif %}
-                <br clear="all">
-                <br clear="all">
-                <br clear="all">
-                {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
-                  </div>
-                {% endif %}
-                <br clear="all">
-                <br clear="all">
-                <br clear="all">
-                {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
-                  </div>
-                {% endif %}
-            </section>
+          {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+              <div class="column-full">
+                <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
+              </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+              <div class="column-full">
+                <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
+              </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
         </div>
       </article>
       {% endif %}

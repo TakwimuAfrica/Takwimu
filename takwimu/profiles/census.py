@@ -191,14 +191,34 @@ def get_causes_of_death(geo, session):
     try:
         causes_of_death_under_five_dist, _ = get_stat_data('causes_of_death_under_five',
                         geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+
+    try:
         causes_of_death_over_five_dist, _ = get_stat_data('causes_of_death_over_five',
                         geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+    
+    try:
         inpatient_diagnosis_under_five_dist, _ = get_stat_data('inpatient_diagnosis_under_five',
                         geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+    
+    try:
         inpatient_diagnosis_over_five_dist, _ = get_stat_data('inpatient_diagnosis_over_five',
                         geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+    
+    try:
         outpatient_diagnosis_over_five_dist, _ = get_stat_data('outpatient_diagnosis_over_five',
                         geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+    
+    try:
         outpatient_diagnosis_under_five_dist, _ = get_stat_data('outpatient_diagnosis_under_five',
                         geo, session, order_by='-total')
     except LocationNotFound:
