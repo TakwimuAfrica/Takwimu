@@ -53,6 +53,7 @@
           <p class="lead my-4 mx-auto"
              style="max-width: 780px;">{{ page.description }}</p>
 
+          {% include 'takwimu/_includes/profile/country_profile_downloader.html' with profile_page=page.get_parent.specific %}
         {% else %}
 
           <p class="font-weight-bold  text-uppercase">Section 1</p>
@@ -62,15 +63,8 @@
             its population, the economy and SDG indicators
           </p>
 
+          {% include 'takwimu/_includes/profile/country_profile_downloader.html' with profile_page=page %}
         {% endif %}
-
-        <a class="btn btn-primary btn-sm text-uppercase px-4 py-2 disabled" href="#"
-          role="button" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-          Download full country profile
-          <span class="border-left pl-2 ml-2">
-            <img src="{% static "img/icons/icon-download.svg" %}">
-          </span>
-        </a>
       </div>
 
     </div>

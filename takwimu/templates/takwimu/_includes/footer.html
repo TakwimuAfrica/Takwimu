@@ -23,32 +23,34 @@
         </h3>
 
 
-        <div class="row">
-          <div class="col-9">
-              <p class="mb-0 text-truncate" style="opacity: 0.6; font-size: 16px">Takwimu is an initiative by:</p>
-              <div class="row">
-                <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
-                    class="col partner-logo-container m-2 px-2 d-flex align-items-center justify-content-center">
-                  <img src="{% static 'img/logos/ap-footer-white.png' %}" class="img-responsive" alt="africapractice">
-                </a>
-                <a href="https://codeforafrica.org" target="_blank" rel="noopener"
-                    class="col partner-logo-container m-2 px-2 d-flex align-items-center justify-content-center">
-                  <img src="{% static 'img/logos/cfafrica-white.png' %}" class="img-responsive" alt="Code for Africa">
-                </a>
-                <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
-                    class="col partner-logo-container m-2 px-2 d-flex align-items-center justify-content-center">
-                  <img src="{% static 'img/logos/ihub-white.png' %}" class="img-responsive" alt="iHub">
-                </a>
-              </div>
+        <div class="partner-logos mt-5 d-flex align-items-stretch">
+          <div class="flex-grow-1">
+            <h6 class="mb-0 text-truncate font-weight-light" style="opacity: 0.6;">An initiative by:</h6>
+            <div class="d-flex">
+              <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
+                  class="my-2 mr-2 d-flex">
+                <img src="{% static 'img/logos/ap-white.png' %}" alt="africapractice" class="p-3 align-self-center">
+              </a>
+              <a href="https://codeforafrica.org" target="_blank" rel="noopener"
+                  class="m-2 d-flex">
+                <img src="{% static 'img/logos/cfafrica-white.png' %}" alt="Code for Africa" class="p-4 align-self-center">
+              </a>
+              <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
+                  class="m-2 d-flex">
+                <img src="{% static 'img/logos/ihub-white.png' %}" alt="iHub" class="p-3 align-self-center">
+              </a>
+            </div>
+            
           </div>
-          <div class="col-3 pr-0">
-            <p class="mb-0 text-truncate text-center" style="opacity: 0.6; font-size: 16px">Supported by:</p>
+          
+          <div class="ml-2">
+            <h6 class="mb-0 pt-0 text-truncate font-weight-light" style="opacity: 0.6;">Supported by:</h6>
             <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
-                class="pr-0 partner-logo-container my-2 px-2 d-flex align-items-center justify-content-center">
-              <img src="{% static 'img/logos/bmgf-white.png' %}" class="img-responsive" alt="Bill and Melinda Gates Foundation">
+              class="my-2 d-flex align-items-center justify-content-center">
+              <img src="{% static 'img/logos/bmgf-white.png' %}" alt="Bill and Melinda Gates Foundation" class="p-2" style="width: 300px;">
             </a>
           </div>
-        </div>
+        </div> <!-- /.partner-logos -->
       </div>
       <div class="col-6 pr-0 pt-5">
         <div class="mt-5 pl-5 ml-4" style="border-left: solid 3px #4081ce;">
@@ -125,14 +127,6 @@
     color: #fff !important;
     text-decoration: underline;
     font-weight: bold;
-  }
-
-  .partner-logo-container {
-    background-color: rgba(244,244,244, 0.06);
-    height: 81px;
-  }
-  .partner-logo-container img {
-    max-height: 50px;
   }
 
   footer .underline {
