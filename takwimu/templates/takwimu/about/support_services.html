@@ -46,14 +46,23 @@
         <div class="row">
           {% for service in settings.takwimu.SupportServicesSetting.services %}
             {% if service.value.category != "Persona" %}
-              <div class="col-lg-4 col-md-6 col-sm-6 col-12 d-flex align-items-stretch mb-5">
-                <div class="shadow-sm card grayscale" style="width: 100%">
-                  {% image service.value.cover width-400 as tmp_photo %}
-                  <div class="card-img" style="background-image: url('{{ tmp_photo.url }}'); "></div>
-                  <div class="card-body text-left pt-3 font-weight-light" style="color: #4a4a4a;">
-                    <h5 class="card-title font-weight-bold" style="color: #000000;">{{ service.value.title }}</h5>
-                    <p class="card-text">{{ service.value.description | richtext }}</p>
-                  </div>
+              <div class="col-12 d-flex align-items-stretch mb-5">
+                <div class="shadow-sm card card-deck" style="width: 100%">
+                  <div class="row container px-0 no-gutters">
+                    <div class="col-4 grayscale">
+                      {% image service.value.cover width-400 as tmp_photo %}
+                      <div class="card-img" style="background-image: url('{{ tmp_photo.url }}'); "></div>
+                    </div>
+                    <div class="col">
+                      <div class="card-body text-left pt-3 font-weight-light" style="color: #4a4a4a;">
+                        <h5 class="card-title font-weight-bold" style="color: #000000;">{{ service.value.title }}</h5>
+                        <p class="card-text">{{ service.value.description | richtext }}</p>
+                        <b class="text-uppercase bg-primary text-white px-4 py-1 position-absolute" style="top:0; right: 2em;">
+                          {{ service.value.category }} Services
+                        </b>
+                      </div>
+                    </div>
+                  </div>                  
                 </div>
               </div>
             {% endif %}

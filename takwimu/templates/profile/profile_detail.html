@@ -29,41 +29,42 @@
 
     {% block profile_detail %}
 
-      <article
-          class="clearfix {% if 'demographics' not in selected_sections %}hide{% endif %}">
+      {% if not population.is_missing %}
+      <article class="clearfix">
         <header class="section-contents">
           <h1>Demographics</h1>
         </header>
         <div class="section-container">
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Total Population </h2>
-            <div class="{% if population.total_residence.numerators.this > 0 %}column-quarter{% else %}column-half{% endif %}">
-              {% include 'profile/_blocks/_stat_list.html' with stat=population.total_sex stat_type='number' %}
+            <h2 class="header-for-columns">Population </h2>
+            <div class="column-third">
+              {% include 'profile/_blocks/_stat_list.html' with stat=population.total_dist stat_type='number' %}
             </div>
-            <div class="column-half" id="chart-pie-population-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
-            {% if population.total_residence.numerators.this > 0 %}
-              <div class="column-quarter" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
+            {% if not population.sex_dist.is_missing %}
+            <div class="column-third" id="chart-pie-population-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
+            {% endif %}
+            {% if not population.residence_dist.is_missing %}
+            <div class="column-third" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
             {% endif %}
           </section>
         </div>
       </article>
+      {% endif %}
 
-      {% if not elections.candidate_dist.is_missing or not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
+      {% if not elections.is_missing %}
       <article class="clearfix">
         <header class="section-contents">
           <h1>Elections</h1>
         </header>
-        {% if not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
         <div class="section-container">
+          {% if not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Votes Distribution </h2>
             <div class="column-half" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid Votes Vs Invalid Votes" data-initial-sort="-value"></div>
             <div class="column-half" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered Voters Vs Total Votes Cast" data-initial-sort="-value"></div>
           </section>
-        </div>
-        {% endif %}
-        {% if not elections.candidate_dist.is_missing %}
-        <div class="section-container">
+          {% endif %}
+          {% if not elections.candidate_dist.is_missing %}
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Total Votes Per Candidate </h2>
             <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage Votes Per Candidate" data-initial-sort="-value"></div>
@@ -87,51 +88,105 @@
       </article>
       {% endif %}
 
-      {% if not health_centers.health_centers_dist.is_missing %}
+      {% if not health_centers.is_missing %}
       <article id="health_centers_distribution" class="clearfix">
         <header class="section-contents">
-            <h1>Health centers distribution</h1>
+          <h1>Health centers distribution</h1>
         </header>
         <div class="section-container">
-             <section class="clearfix stat-row">
-                {% if not health_centers.total_health_centers.is_missing %}
-                  <div class="column-third">
-                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers stat_type='number' %}
-                  </div>
-                {% endif %}
-                {% if not health_centers.total_hiv_health_centers.is_missing %}
-                  <div class="column-third">
-                    {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers stat_type='number' %}
-                  </div>
-                {% endif %}
-                {% if not health_centers.health_centers_ownership_dist.is_missing %}
-                  <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
-                {% endif %}
-                {% if not health_centers.health_centers_dist.is_missing %}
-                  <div class="column-full">
-                    <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by region (2014)"></div>
-                  </div>
-                {% endif %}
-            </section>
+          <section class="clearfix stat-row">
+            {% if not health_centers.health_centers_dist.is_missing %}
+            <div class="column-third">
+              {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}
+            </div>
+            {% endif %}
+            {% if not health_centers.hiv_health_centers_dist.is_missing %}
+            <div class="column-third">
+              {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}
+            </div>
+            {% endif %}
+            {% if not health_centers.health_centers_ownership_dist.is_missing %}
+            <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
+            {% endif %}
+          </section>
+          {% if not health_centers.health_centers_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
         </div>
       </article>
       {% endif %}
 
       {% if not health_workers.health_workers_dist.is_missing %}
       <article id="health_workers_distribution" class="clearfix">
-          <header class="section-contents">
-              <h1>Health workers distribution</h1>
-          </header>
-          <div class="section-container">
-               <section class="clearfix stat-row">
-                   <div class="column-third">
-                      {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio stat_type='number' %}
-                    </div>
-                   <div class="column-full">
-                       <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
-                  </div>
-              </section>
-          </div>
+        <header class="section-contents">
+          <h1>Health workers distribution</h1>
+        </header>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <div class="column-third">
+              {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio_dist stat_type='number' %}
+            </div>
+            <div class="column-full">
+              <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
+            </div>
+          </section>
+        </div>
+      </article>
+      {% endif %}
+
+      {% if not causes_of_death.is_missing %}
+      <article id="causes_of_death" class="clearfix">
+        <header class="section-contents">
+          <h1>Causes of death </h1>
+        </header>
+        <div class="section-container">
+          {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+              <div class="column-full">
+                <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
+              </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+              <div class="column-full">
+                <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
+              </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+        </div>
       </article>
       {% endif %}
     {% endblock %}
@@ -152,7 +207,7 @@
   {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
   <!-- Country profile country select -->
-  {% include 'takwimu/_includes/sections/explore/_index.html' %}
+  {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
 
