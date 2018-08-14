@@ -7,20 +7,18 @@
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
-
-SET default_tablespace = '';
 
 ALTER TABLE IF EXISTS ONLY public.health_centers_ownership DROP CONSTRAINT IF EXISTS pk_health_centers_ownership;
 DROP TABLE IF EXISTS public.health_centers_ownership;
+SET default_tablespace = '';
 
 SET default_with_oids = false;
+
 
 --
 -- Name: health_centers_ownership; Type: TABLE; Schema: public; Owner: -
