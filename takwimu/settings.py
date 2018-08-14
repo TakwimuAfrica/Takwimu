@@ -39,6 +39,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 HURUMAP['name'] = 'Takwimu'
 HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://dev.takwimu.africa')
 
+HURUMAP['title_tagline'] = ''
+HURUMAP['description'] = ''
+
 hurumap_profile = 'census'
 
 HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(hurumap_profile)
