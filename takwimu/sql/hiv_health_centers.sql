@@ -18,6 +18,9 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
+ALTER TABLE IF EXISTS ONLY public.hiv_health_centers DROP CONSTRAINT IF EXISTS pk_hiv_health_centers;
+DROP TABLE IF EXISTS public.hiv_health_centers;
+
 SET default_with_oids = false;
 
 --

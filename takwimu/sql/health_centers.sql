@@ -17,6 +17,10 @@ SET row_security = off;
 
 SET default_tablespace = '';
 
+ALTER TABLE IF EXISTS ONLY public.health_centers DROP CONSTRAINT IF EXISTS pk_health_centers;
+DROP TABLE IF EXISTS public.health_centers;
+SET default_tablespace = '';
+
 SET default_with_oids = false;
 
 --
