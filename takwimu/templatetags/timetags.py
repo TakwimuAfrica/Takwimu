@@ -8,7 +8,8 @@ def print_timestamp(timestamp):
     '''
     try:
         #assume, that timestamp is given in seconds with decimal point
-        ts = float(timestamp)
+        #because medium decided to return Unix Timestamp in milliseconds
+        ts = float(timestamp)/1000
     except ValueError:
         return None
     return time.strftime("%b %d", time.gmtime(ts))

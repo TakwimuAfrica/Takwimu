@@ -169,3 +169,14 @@ row axis, `year` and `value`
 | Tanzania      | Female        | 2001  | 1300   |
 | Senengal      | Female        | 2001  | 1230   |
 
+## Data Requests
+
+Data can be requested through Takwimu Data Requests Community Topic, which can be accessed through [https://takwimu.zendesk.com/hc/en-us/community/topics/360000614871-Data-Requests](https://takwimu.zendesk.com/hc/en-us/community/topics/360000614871-Data-Requests)
+
+**Replying Post**
+
+When responding to data requests post, we should take the following into consideration:
+
+1. Add screenshots - they’re a great way to point people in the right direction
+2. Be brief - answer the question (and not any more stories) in the first sentence.
+3. Add links - don’t just “tell” me. Link to it.
