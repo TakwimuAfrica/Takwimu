@@ -117,37 +117,17 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 # -------------------------------------------------------------------------------------
 # WAGTAIL Search
 # -------------------------------------------------------------------------------------
-if DEBUG:
-    WAGTAILSEARCH_BACKENDS = {
-        'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
-            'URLS': ['http://localhost:9200'],
-            'INDEX': 'takwimu',
-            'TIMEOUT': 5,
-            'OPTIONS': {},
-            'INDEX_SETTINGS': {},
-        }
-    }
-else:
-    ES_ACCESS_KEY = os.environ.get('ES_ACCESS_KEY')
-    ES_SECRET_KEY = os.environ.get('ES_SECRET_KEY')
-    ES_REGION = os.environ.get('ES_REGION')
-    ES_CLUSTER_NAME = os.environ.get('ES_CLUSTERNAME')
 
-    WAGTAILSEARCH_BACKENDS = {
-        'default': {
-            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
-            'INDEX': 'wagtail',
-            'TIMEOUT': 5,
-            'HOSTS': [{
-                'host': '{}.{}.es.amazonaws.com'.format(ES_CLUSTER_NAME, ES_REGION),
-                'port': 443,
-                'use_ssl': True,
-                'verify_certs': True,
-                'http_auth': AWS4Auth(ES_ACCESS_KEY, ES_SECRET_KEY, ES_REGION, 'es'),
-            }],
-            'OPTIONS': {
-                'connection_class': RequestsHttpConnection,
-            },
-        }
+ES_HOST = os.environ.get('ES_HOST', 'http://localhost:9200')
+
+WAGTAILSEARCH_BACKENDS = {
+    'default': {
+        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+        'URLS': [ES_HOST],
+        'INDEX': 'takwimu',
+        'TIMEOUT': 5,
+        'OPTIONS': {},
+        'INDEX_SETTINGS': {},
     }
+}
+

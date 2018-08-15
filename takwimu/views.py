@@ -4,7 +4,7 @@ import requests
 from django.conf import settings
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, View
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
 
@@ -140,8 +140,8 @@ class SupportServicesIndexView(FormView):
 def search_view(request):
     # TODO: 13/08/2018 Remove view, url config and template
     # Search
-    search_query = request.GET.get('query', None)
-    if search_query:
+    search_query = request.GET.get('query', '')
+    if search_query != '':
         search_results = Page.objects.live().search(search_query)
 
         # Log the query so Wagtail can suggest promoted results
@@ -154,3 +154,5 @@ def search_view(request):
         'search_query': search_query,
         'search_results': search_results,
     })
+
+

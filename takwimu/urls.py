@@ -21,7 +21,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
                   url(r'^topics/$', TopicView.as_view(), name='topics'),
                   url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
                   # testing search page
-                  url(r'^search$', search_view, name='search'),
+                  url(r'^search/$', search_view, name='search'),
               ] + \
               hurumap_urlpatterns
 
