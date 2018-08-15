@@ -105,3 +105,9 @@ fabric.properties
 .idea/*
 .vscode
 media/*
+
+
+# TAKWIMU Specific
+
+# ./manage.py compilecss creates this
+takwimu/static/css/takwimu.css
