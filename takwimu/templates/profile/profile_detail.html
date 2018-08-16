@@ -1,11 +1,17 @@
 {% extends 'profile/profile_detail.html' %}
 {% load staticfiles sass_tags %}
 
+{# HEAD #}
+
+{% block head_meta_description %}{{ HURUmap.description }}{% endblock %}
+
 {% block head_css %}
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
 {% endblock %}
+
+{# BODY #}
 
 {% block header %}
   {# Navbar #}
