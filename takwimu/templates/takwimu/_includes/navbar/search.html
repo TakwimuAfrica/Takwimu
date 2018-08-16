@@ -1,50 +1,50 @@
-<div class="dropdown-menu-lg position-absolute text-light py-5 container-fluid {% block dropdown_class %}{% endblock %}"
-    id="{% block dropdown_id %}{% endblock %}" style="{% block dropdown_style %}{% endblock %}">
+<div class="modal dropdown-menu-lg text-light container-fluid shadow"
+    id="search-modal" tabindex="-1" role="dialog" style="top: 72px; height: 400px;">
+    <button type="button" class="close position-absolute" style="top: 1em; right: 1em;" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+    <div class="container" role="document" style="margin-top: 150px;">
+        <form>
+            <div class="input-group col-6 mx-auto">
+                <input type="text" class="form-control border-0 py-3 px-5 text-center" id="search-takwimu" placeholder="Search Takwimu">
 
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                <form>
-                    <div class="input-group col-6 mx-auto">
-                        <input type="text" class="form-control border-0 py-3 px-5 text-center" id="search-takwimu" placeholder="Search Takwimu">
-                        <!-- <div class="input-group-prepend"> -->
-                            <button type="submit" class="btn btn-search">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        <!-- </div> -->
-                    </div>
-                    <div class="form-group text-center py-3">
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="entire-site" name="radio-stacked" checked>
-                            <label class="custom-control-label" for="entire-site">Entire site</label>
-                        </div>
-                        <div class="custom-control custom-radio custom-control-inline">
-                            <input type="radio" class="custom-control-input" id="data-only" name="radio-stacked">
-                            <label class="custom-control-label" for="data-only">Data Only</label>
-                        </div>
-                    </div>
-                </form>
+                <button type="submit" class="btn btn-search">
+                    <i class="fa fa-search"></i>
+                </button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
-
 <style>
+    .close {
+        font-size: 4rem; 
+        font-weight: 100; 
+        color: #fff; 
+        text-shadow: none; 
+        line-height: 0;
+        opacity: 1;
+    }
     .btn-search {
+        position: absolute;
+        right: 1em;
+        bottom: 1em;
         color: #fff;
         background: transparent;
     } 
-    #search-takwimu {
+    input[type="text"]#search-takwimu {
         font-size: 35px;
-        font-weight: bold;
+        font-weight: 300;
         background: transparent;
         border-bottom: solid 2px #ffffff!important;
         color: #fff;
     }
-    #search-takwimu:focus {
-        outline: none;
+    input[type="text"]#search-takwimu:focus {
+        box-shadow: none;
+        outline: 0 none;
     }
     #search-takwimu::-webkit-input-placeholder, #search-takwimu:-moz-placeholder  {
-        color:  rgba(255, 255, 255, 0.32)!important;
+        color: rgba(255, 255, 255, 0.45);
+        font-size: 35px;
+        font-weight: 300;
     }
 </style>
