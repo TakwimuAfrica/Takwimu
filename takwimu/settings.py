@@ -118,16 +118,43 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 # WAGTAIL Search
 # -------------------------------------------------------------------------------------
 
-ES_HOST = os.environ.get('ES_HOST', 'http://localhost:9200')
 
-WAGTAILSEARCH_BACKENDS = {
-    'default': {
-        'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
-        'URLS': [ES_HOST],
-        'INDEX': 'takwimu',
-        'TIMEOUT': 5,
-        'OPTIONS': {},
-        'INDEX_SETTINGS': {},
+TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu')
+TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_HOST', '5'))
+TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')
+
+# Support for AWS ElasticSearch service. If HOST_TYPE is anything other than
+#  'AWS', the default configuration will be used.
+TAKWIMU_ES_HOST_TYPE = os.environ.get('TAKWIMU_ES_HOST_TYPE', '')
+if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
+    TAKWIMU_ES_AWS_ACCESS_KEY = os.environ.get('TAKWIMU_ES_AWS_ACCESS_KEY', '')
+    TAKWIMU_ES_AWS_SECRET_KEY = os.environ.get('TAKWIMU_ES_AWS_SECRET_KEY', '')
+    TAKWIMU_ES_AWS_REGION = os.environ.get('TAKWIMU_ES_AWS_REGION', '')
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+            'INDEX': TAKWIMU_ES_INDEX,
+            'TIMEOUT': TAKWIMU_ES_TIMEOUT,
+            'HOSTS': [{
+                'host': TAKWIMU_ES_URL,
+                'port': 443,
+                'use_ssl': True,
+                'verify_certs': True,
+                'http_auth': AWS4Auth(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
+            }],
+            'OPTIONS': {
+                'connection_class': RequestsHttpConnection,
+            },
+        }
     }
-}
-
+else:
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+            'INDEX': TAKWIMU_ES_INDEX,
+            'TIMEOUT': TAKWIMU_ES_TIMEOUT,
+            'URLS': [TAKWIMU_ES_URL],
+            'OPTIONS': {},
+            'INDEX_SETTINGS': {},
+        }
+    }

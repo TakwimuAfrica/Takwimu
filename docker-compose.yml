@@ -32,6 +32,8 @@ services:
       - PGDATABASE=takwimu
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
+      - TAKWIMU_ES_INDEX=takwimu
+      - TAKWIMU_ES_TIMEOUT=10
+      - TAKWIMU_ES_URL=http://es:9200
       - PYTHONDONTWRITEBYTECODE="True"
-      - ES_HOST=http://es:9200
       # - DJANGO_DEBUG=False  # For testing deploys
