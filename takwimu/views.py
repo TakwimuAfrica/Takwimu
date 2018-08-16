@@ -5,6 +5,7 @@ from django.conf import settings
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.views.generic import TemplateView, FormView, View
+from django.views.generic.base import TemplateView
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
 
@@ -43,6 +44,7 @@ class LegalView(TemplateView):
     View of legal notices: Terms of Use, Privacy and Cookie policies.
     """
     template_name = 'takwimu/about/legal.html'
+
 
 class TopicView(TemplateView):
     """
@@ -136,6 +138,7 @@ class SupportServicesIndexView(FormView):
         print form.data
         return super(SupportServicesIndexView, self).form_invalid(form)
 
+
 # view for testing search functionality
 def search_view(request):
     # TODO: 13/08/2018 Remove view, url config and template
@@ -156,3 +159,20 @@ def search_view(request):
     })
 
 
+class SearchView(TemplateView):
+    template_name = 'search_results.html'
+
+    def get(self, request, *args, **kwargs):
+        search_query = request.GET.get('query', '')
+        if search_query != '':
+            search_results = Page.objects.live().search(search_query)
+
+            # Log the query so Wagtail can suggest promoted results
+            Query.get(search_query).add_hit()
+        else:
+            search_results = Page.objects.none()
+
+        return render(request, self.template_name, {
+            'search_query': search_query,
+            'search_results': search_results,
+        })
