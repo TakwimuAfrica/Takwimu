@@ -120,7 +120,7 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 
 
 TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu')
-TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_HOST', '5'))
+TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '5'))
 TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')
 
 # Support for AWS ElasticSearch service. If HOST_TYPE is anything other than
