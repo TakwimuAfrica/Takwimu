@@ -1,0 +1,13 @@
+{% load staticfiles %}
+
+<div class="row mx-auto">
+    {% for sdg in sdgs %}
+    <div class="col-2 mx-0 p-1">
+        <a href="#{{ sdg.short|slugify }}" data-html="true" 
+            data-container="body" data-toggle="popover" data-placement="bottom" 
+            data-content='{% include "takwimu/_includes/sections/sdg/popover.html"%}'>
+            <img src="{{ sdg.icon_url }}" alt="{{ sdg.short }}">
+        </a>
+    </div>       
+    {% endfor %}
+</div>

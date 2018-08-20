@@ -1,0 +1,75 @@
+{% extends 'takwimu/_layouts/page.html' %}
+
+{% load staticfiles %}
+
+{% block content %}
+<div class="text-light" style="background: #074c9c url('{% static 'img/bg/profile-hero.jpg' %}') no-repeat center; background-size: cover;">
+  <div class="text-center py-3" style="background-color: rgba(7, 76, 156, 0.8)">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-transparent">
+          <li class="breadcrumb-item">
+            <a href="/" class="text-light"><u>Home</u></a>
+          </li>
+          <li class="breadcrumb-item active text-light">
+            Data by sdg Indicator
+          </li>
+        </ol>
+      </nav>
+      <h1 class="display-3 text-light py-2" style="font-weight: 900">Find data by SDG Indicator</h1>
+      <p class="p-4" style="font-size: 18px">
+        All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
+      </p>
+    </div>
+  </div>
+</div>
+
+<div class="explore-topic container-fluid py-2">
+  <div class="container">
+    {% include 'takwimu/_includes/sections/sdg/index.html' %}
+  </div>
+</div>
+
+{% include 'takwimu/_includes/sections/support-services/button.html' %}
+
+{% include 'takwimu/_includes/sections/stories/index.html' %}
+
+<div class="clearfix container text-center py-5">
+  <div class="wrapper p-3">
+    <h4 class="display-4 font-weight-bold">Explore data by country</h4>
+    <p style="font-size: 24px;">Data available at national and sub-national levels for these 10 focus countries</p>
+  </div>
+    <div class="col-lg-8 col-md-10 mx-auto tab-pane fade show active grayscale"
+      id="explore-countries" role="tabpanel" aria-labelledby="explore-countries-tab">
+      {% include 'takwimu/_includes/sections/explore/countries.html' %}
+    </div>
+</div>
+
+{% include 'takwimu/_includes/sections/updates.html' %}
+<style>
+.breadcrumb {
+  padding: 1rem;
+}
+.breadcrumb-item {
+  padding-left: .1rem;
+  letter-spacing: 0;
+  font-size: 14px;
+}
+.breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .1rem;
+    color: #fff;
+    content: "\00BB";
+  }
+.explore-topic h3 {
+    font-size: 35px;
+  }
+.explore-topic .nav-pills .nav-link.active {
+    background-color: #3673bb;
+  }
+.explore-topic a {
+  font-size: 18px;
+}
+</style>
+
+{% endblock %}
