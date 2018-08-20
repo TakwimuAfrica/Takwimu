@@ -47,12 +47,12 @@ class TopicPageDataIndicators(Orderable, TopicPageDataIndicator):
 
 
 class TopicPage(Page):
-    '''
+    """
     Topic Editor
     ------------
     All data indicators are made available to profiles + sections via topics.
     This therefore serves as an editorial interface to create topics and link indicators to it.
-    '''
+    """
     description = models.TextField(blank=True)
     icon = IconField()  #adding icon property that uses the djano-fontawesome app structure
 
@@ -64,7 +64,6 @@ class TopicPage(Page):
     # Search index configuration
 
     search_fields = Page.search_fields + [
-        index.SearchField('title'),
         index.SearchField('description')
     ]
 
@@ -361,12 +360,18 @@ class ExplainerSteps(Page):
         StreamFieldPanel('steps'),
     ]
 
-class FAQ(models.Model):
+
+class FAQ(index.Indexed, models.Model):
     question = models.TextField()
     answer = RichTextField()
     cta_one_url = models.URLField("'Find Out More' button URL", default="https://takwimu.zendesk.com/")
     cta_two_name = models.TextField("Second button Name (optional)", blank=True)
     cta_two_url = models.URLField("Second button URL (optional)", blank=True)
+
+    search_fields = [
+        index.SearchField('question'),
+        index.SearchField('answer'),
+    ]
 
     def __str__(self):
         return self.question.encode('ascii', 'ignore')

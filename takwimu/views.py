@@ -2,9 +2,12 @@ import json
 import requests
 
 from django.conf import settings
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, View
+from django.views.generic.base import TemplateView
+from wagtail.wagtailcore.models import Page
+from wagtail.wagtailsearch.models import Query
 
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial
 from forms import SupportServicesContactForm
@@ -41,6 +44,7 @@ class LegalView(TemplateView):
     View of legal notices: Terms of Use, Privacy and Cookie policies.
     """
     template_name = 'takwimu/about/legal.html'
+
 
 class TopicView(TemplateView):
     """
@@ -133,3 +137,27 @@ class SupportServicesIndexView(FormView):
         print('\n\n\n\n\n\n')
         print form.data
         return super(SupportServicesIndexView, self).form_invalid(form)
+
+
+class SearchView(TemplateView):
+    """
+    Search View
+    -----------
+    Displays search results.
+
+    """
+    template_name = 'search_results.html'
+
+    def get(self, request, *args, **kwargs):
+        search_results = Page.objects.none()
+        search_query = request.GET.get('q', '')
+        if search_query:
+            search_results = Page.objects.live().search(search_query)
+
+            # Log the query so Wagtail can suggest promoted results
+            Query.get(search_query).add_hit()
+
+        return render(request, self.template_name, {
+            'search_query': search_query,
+            'search_results': search_results,
+        })
