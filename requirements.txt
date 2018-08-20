@@ -12,3 +12,8 @@ git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=djang
 Markdown==2.6.11
 
 django-debug-toolbar
+
+elasticsearch==5.5.3
+
+requests-aws4auth==0.9
+
