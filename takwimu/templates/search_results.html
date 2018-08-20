@@ -16,7 +16,27 @@
 
     {% if search_results %}
       <ul>
-        {% for result in search_results %}
+        <h3>By Topic</h3>
+        {% for result in search_results.topic %}
+          <li>
+            <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
+            {% if result.search_description %}
+              {{ result.search_description|safe }}
+            {% endif %}
+          </li>
+        {% endfor %}
+
+        <h3>By Section</h3>
+        {% for result in search_results.section %}
+          <li>
+            <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
+            {% if result.search_description %}
+              {{ result.search_description|safe }}
+            {% endif %}
+          </li>
+        {% endfor %}
+        <h3>By Country</h3>
+        {% for result in search_results.country %}
           <li>
             <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
             {% if result.search_description %}

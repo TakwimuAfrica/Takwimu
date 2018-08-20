@@ -2,6 +2,7 @@ import json
 import requests
 
 from django.conf import settings
+from django.core.serializers import serialize
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.views.generic import TemplateView, FormView, View
@@ -9,7 +10,8 @@ from django.views.generic.base import TemplateView
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
+    TopicPage, ProfileSectionPage, ProfilePage
 from forms import SupportServicesContactForm
 
 
@@ -165,14 +167,30 @@ class SearchView(TemplateView):
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get('query', '')
         if search_query != '':
-            search_results = Page.objects.live().search(search_query)
+            topic_results = TopicPage.objects.live().search(
+                search_query)
+            profilepage_results =ProfilePage.objects.live().search(search_query)
+            profilesectionpage_results =ProfileSectionPage.objects.live().search(search_query)
 
+            search_results = {
+                'country': profilepage_results,
+                'topic': topic_results,
+                'section': profilesectionpage_results
+            }
+
+            # search_results = Page.objects.live().search(search_query)
             # Log the query so Wagtail can suggest promoted results
-            Query.get(search_query).add_hit()
-        else:
-            search_results = Page.objects.none()
 
-        return render(request, self.template_name, {
-            'search_query': search_query,
-            'search_results': search_results,
-        })
+            Query.get(search_query).add_hit()
+            return render(request, self.template_name, {
+                'search_query': search_query,
+                'search_results': search_results,
+            })
+
+        else:
+            search_results = serialize('json', Page.objects.none())
+
+            return render(request, self.template_name, {
+                'search_query': search_query,
+                'search_results': search_results,
+            })
