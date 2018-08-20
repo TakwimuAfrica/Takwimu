@@ -1,0 +1,19 @@
+<nav>
+    <div class="nav nav-tabs font-weight-bold" id="nav-tab" role="tablist">
+        <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home"
+            aria-selected="true">All results <span class="badge badge-pill badge-primary py-1">261</span></a>
+        <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile"
+            aria-selected="false">Results by country <span class="badge badge-pill badge-light py-1">261</span></a>
+        <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#nav-contact" role="tab" aria-controls="nav-contact"
+            aria-selected="false">Results by topic <span class="badge badge-pill badge-light py-1">261</span></a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active p-2 border border-top-0" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+        <span class="d-flex pt-4 px-2">Showing 1-25 results of 2015</span>
+        {% include 'takwimu/_includes/search/table.html' %}
+        {% include 'takwimu/_includes/search/pagination.html' %}
+    </div>
+    <div class="tab-pane fade p-2 border border-top-0" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">Profile</div>
+    <div class="tab-pane fade p-2 border border-top-0" id="nav-contact" role="tabpanel" aria-labelledby="nav-contact-tab">Contact</div>
+</div>
