@@ -24,7 +24,7 @@
             <th scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
                 <a class="btn btn-link text-dark" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" 
                     aria-controls="collapseExample">
-                    <span class="fa fa-fw fa-plus"></span>
+                    <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </th>
             <td class="text-capitalize px-0" valign="top" style="white-space:nowrap">
@@ -54,5 +54,25 @@
                 </button>
             </td>
         </tr>
+        <tr class="collapse" id="collapseExample">
+            <td colspan="4">
+                <div class="card card-body">                    
+                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.   
+                </div>
+            </td>
+        </tr> 
     </tbody>
 </table>
+
+
+<!-- Results - Toggle opening and closing accordion. -->
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        $('a[data-toggle="collapse"]').on('click', function () {
+            $(this)
+                .find('.icon')
+                .toggleClass('fa-minus')
+                .toggleClass('fa-plus');
+        });
+    });
+</script>
