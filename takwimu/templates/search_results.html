@@ -16,8 +16,8 @@
 
     {% if search_results %}
       <ul>
-        <h3>By Topic</h3>
-        {% for result in search_results.topic %}
+        <h3>By Topic- {{ search_results.topic.count }} </h3>
+        {% for result in search_results.topic.results %}
           <li>
             <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
             {% if result.search_description %}
@@ -26,8 +26,8 @@
           </li>
         {% endfor %}
 
-        <h3>By Section</h3>
-        {% for result in search_results.section %}
+        <h3>By Section - {{ search_results.section.count }} </h3>
+        {% for result in search_results.section.results %}
           <li>
             <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
             {% if result.search_description %}
@@ -35,8 +35,8 @@
             {% endif %}
           </li>
         {% endfor %}
-        <h3>By Country</h3>
-        {% for result in search_results.country %}
+        <h3>By Country - {{ search_results.country.count }}</h3>
+        {% for result in search_results.country.results %}
           <li>
             <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
             {% if result.search_description %}

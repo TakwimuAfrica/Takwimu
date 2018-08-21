@@ -151,6 +151,7 @@ class SearchView(TemplateView):
     template_name = 'search_results.html'
 
     def get(self, request, *args, **kwargs):
+        search_results = Page.objects.none()
         search_query = request.GET.get('q', '')
         if search_query:
             topic_results = TopicPage.objects.live().search(
@@ -161,13 +162,23 @@ class SearchView(TemplateView):
                 search_query)
 
             search_results = {
-                'country': profilepage_results,
-                'topic': topic_results,
-                'section': profilesectionpage_results
+                'country': {
+                    'results': profilepage_results,
+                    'count': len(profilepage_results)
+                },
+                'topic': {
+                    'results': topic_results,
+                    'count': len(topic_results)
+                },
+                'section': {
+                    'results': profilesectionpage_results,
+                    'count': len(profilesectionpage_results)
+                }
             }
 
             Query.get(search_query).add_hit()
-            return render(request, self.template_name, {
-                'search_query': search_query,
-                'search_results': search_results,
-            })
+        return render(request, self.template_name, {
+            'search_query': search_query,
+            'search_results': search_results,
+        })
+
