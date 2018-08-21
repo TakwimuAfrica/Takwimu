@@ -4,32 +4,16 @@
 
 {% block content %}
 
-  {% include 'takwimu/_includes/homepage/hero.html' %}
-
   <div class="container">
-  <div class="m-2">
-    <form action="{% url 'search' %}" method="get">
-      <input type="text" name="q" value="{{ search_query }}" class="form-control">
-      <input type="submit" value="Search" class="btn btn-primary">
-    </form>
-  </div>
+    <div class="m-2">
+      <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" value="{{ search_query }}" class="form-control">
+        <input type="submit" value="Search" class="btn btn-primary">
+      </form>
+    </div>
 
-    {% if search_results %}
-      <ul>
-        {% for result in search_results %}
-          <li>
-            <h4><a href="{% pageurl result %}">{{ result }}</a></h4>
-            {% if result.search_description %}
-              {{ result.search_description|safe }}
-            {% endif %}
-          </li>
-        {% endfor %}
-      </ul>
-    {% elif search_query %}
-      No results found
-    {% else %}
-      Please type something into the search box
-    {% endif %}
+    {% include 'takwimu/_includes/search/index.html' with results=search_results query=search_query %}
+
   </div>
 
 {% endblock %}
