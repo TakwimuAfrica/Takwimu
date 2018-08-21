@@ -141,36 +141,24 @@ class SupportServicesIndexView(FormView):
         return super(SupportServicesIndexView, self).form_invalid(form)
 
 
-# view for testing search functionality
-def search_view(request):
-    # TODO: 13/08/2018 Remove view, url config and template
-    # Search
-    search_query = request.GET.get('query', '')
-    if search_query != '':
-        search_results = Page.objects.live().search(search_query)
-
-        # Log the query so Wagtail can suggest promoted results
-        Query.get(search_query).add_hit()
-    else:
-        search_results = Page.objects.none()
-
-    # Render template
-    return render(request, 'search_results.html', {
-        'search_query': search_query,
-        'search_results': search_results,
-    })
-
-
 class SearchView(TemplateView):
+    """
+    Search View
+    -----------
+    Displays search results.
+
+    """
     template_name = 'search_results.html'
 
     def get(self, request, *args, **kwargs):
-        search_query = request.GET.get('query', '')
-        if search_query != '':
+        search_query = request.GET.get('q', '')
+        if search_query:
             topic_results = TopicPage.objects.live().search(
                 search_query)
-            profilepage_results =ProfilePage.objects.live().search(search_query)
-            profilesectionpage_results =ProfileSectionPage.objects.live().search(search_query)
+            profilepage_results = ProfilePage.objects.live().search(
+                search_query)
+            profilesectionpage_results = ProfileSectionPage.objects.live().search(
+                search_query)
 
             search_results = {
                 'country': profilepage_results,
@@ -178,18 +166,7 @@ class SearchView(TemplateView):
                 'section': profilesectionpage_results
             }
 
-            # search_results = Page.objects.live().search(search_query)
-            # Log the query so Wagtail can suggest promoted results
-
             Query.get(search_query).add_hit()
-            return render(request, self.template_name, {
-                'search_query': search_query,
-                'search_results': search_results,
-            })
-
-        else:
-            search_results = serialize('json', Page.objects.none())
-
             return render(request, self.template_name, {
                 'search_query': search_query,
                 'search_results': search_results,

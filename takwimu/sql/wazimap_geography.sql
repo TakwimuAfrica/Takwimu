@@ -50,7 +50,6 @@ CREATE TABLE public.wazimap_geography (
 --
 
 CREATE SEQUENCE public.wazimap_geography_id_seq
-    AS integer
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
