@@ -3,7 +3,7 @@ from django.conf.urls.static import static
 from django.views.generic import RedirectView
 
 from takwimu import settings
-from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, LegalView, TopicView
+from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, LegalView, TopicView, SearchView
 from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
@@ -20,6 +20,7 @@ urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
                   url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
                   url(r'^topics/$', TopicView.as_view(), name='topics'),
                   url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
+                  url(r'^search/$', SearchView.as_view(), name='search'),
               ] + \
               hurumap_urlpatterns
 

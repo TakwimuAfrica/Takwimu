@@ -1,6 +1,9 @@
 # coding=utf-8
 import os
 
+from elasticsearch import RequestsHttpConnection
+from requests_aws4auth import AWS4Auth
+
 from hurumap.settings import *  # noqa
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -110,3 +113,48 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 ZENDESK_API = 'https://takwimu.zendesk.com/api/v2/requests.json'
 
 ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
+
+# -------------------------------------------------------------------------------------
+# WAGTAIL Search
+# -------------------------------------------------------------------------------------
+
+
+TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu')
+TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '5'))
+TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')
+
+# Support for AWS ElasticSearch service. If HOST_TYPE is anything other than
+#  'AWS', the default configuration will be used.
+TAKWIMU_ES_HOST_TYPE = os.environ.get('TAKWIMU_ES_HOST_TYPE', '')
+if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
+    TAKWIMU_ES_AWS_ACCESS_KEY = os.environ.get('TAKWIMU_ES_AWS_ACCESS_KEY', '')
+    TAKWIMU_ES_AWS_SECRET_KEY = os.environ.get('TAKWIMU_ES_AWS_SECRET_KEY', '')
+    TAKWIMU_ES_AWS_REGION = os.environ.get('TAKWIMU_ES_AWS_REGION', '')
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+            'INDEX': TAKWIMU_ES_INDEX,
+            'TIMEOUT': TAKWIMU_ES_TIMEOUT,
+            'HOSTS': [{
+                'host': TAKWIMU_ES_URL,
+                'port': 443,
+                'use_ssl': True,
+                'verify_certs': True,
+                'http_auth': AWS4Auth(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
+            }],
+            'OPTIONS': {
+                'connection_class': RequestsHttpConnection,
+            },
+        }
+    }
+else:
+    WAGTAILSEARCH_BACKENDS = {
+        'default': {
+            'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
+            'INDEX': TAKWIMU_ES_INDEX,
+            'TIMEOUT': TAKWIMU_ES_TIMEOUT,
+            'URLS': [TAKWIMU_ES_URL],
+            'OPTIONS': {},
+            'INDEX_SETTINGS': {},
+        }
+    }
