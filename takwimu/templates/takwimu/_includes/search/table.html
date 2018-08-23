@@ -1,17 +1,15 @@
 <table class="table table-striped">
-    <thead class="table-borderless" style="font-size: 14px;">
-        <tr>
+    <thead class="table-borderless align-items-center">
+        <tr style="font-size: 14px;line-height: 50px; vertical-align: middle;">
             <th scope="col" class="text-center">
                 <a href="#" class="text-nowrap text-dark">Expand all</a>
             </th>
             <th scope="col">Location</th>
             <th scope="col">Data</th>
-            <th scope="col" class="pr-0">
-                <div class="float-right form-group row m-0 p-0">
-                    <div class="p-2">
-                        Sort by: 
-                    </div>
-                    <select class="custom-select col" aria-placeholder="Sort by..">
+            <th scope="col" class="pr-0 pt-0">
+                <div class="form-inline align-items-center">
+                    <label class="mr-sm-2" for="sortby">Sort by: </label>
+                    <select class="custom-select" id="sortby" aria-placeholder="Sort by..">
                         <option value="Relevance">Relevance</option>
                         <option value="Location">Location (A-Z)</option>
                     </select>
@@ -21,6 +19,8 @@
     </thead>
     <tbody class="table-bordered" style="font-size: 12px;">
         {% for result in results %}
+        <!-- The first empty tr helps with table-striped -->
+        <tr></tr>
         <tr>
             <th scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
                 <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}" role="button" aria-expanded="false" 
@@ -30,12 +30,12 @@
             </th>
             <td class="text-capitalize px-0" valign="top" style="white-space:nowrap">
                 <span class="d-flex mb-2">
-                    <strong class="col-5">Country:</strong>
-                    <span class="col pl-1">Senegal</span>
+                    <b class="col-5">Country:</b>
+                    <span class="col pl-3">DRC</span>
                 </span>
-                <span class="d-flex">
+                <span class="d-flex justify-content-center">
                     <b class="col-5">Region:</b>
-                    <span class="col pl-1">National</span>
+                    <span class="col pl-3">National</span>
                 </span>
             </td>
             <td class="text-capitalize px-0" valign="top" style="white-space:wrap">
@@ -53,14 +53,15 @@
                     <i class="far fa-heart mx-1"></i>
                     Add to collection
                 </button>
-            </td>            
+            </td>        
         </tr>
-        <td colspan="4" rowspan="1" class="collapse border-0" id="{{ forloop.counter }}">
-            <div class="card-body">                    
+        <td colspan="4" class="collapse border-0" id="{{ forloop.counter }}"
+            style="{% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
+            <div class="card-body">
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
                 Nihil anim keffiyeh , craft beer labore wes anderson cred nesciunt sapiente ea proident.   
             </div>
-        </td>                
+        </td>
         {% endfor %}        
     </tbody>
 </table>
