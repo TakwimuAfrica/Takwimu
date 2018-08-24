@@ -2,7 +2,8 @@
     <thead class="table-borderless align-items-center">
         <tr style="font-size: 14px;line-height: 50px; vertical-align: middle;">
             <th scope="col" class="text-center">
-                <a href="#" class="text-nowrap text-dark">Expand all</a>
+                <a href="#" class="text-nowrap text-dark" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"
+                    style="text-decoration: underline;">Expand all</a>
             </th>
             <th scope="col">Location</th>
             <th scope="col">Data</th>
@@ -55,8 +56,9 @@
                 </button>
             </td>        
         </tr>
-        <td colspan="4" class="collapse border-0" id="{{ forloop.counter }}"
-            style="{% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
+        <td colspan="4" class="collapse multi-collapse" id="{{ forloop.counter }}"
+            style="border-spacing: 0!important;
+            {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
             <div class="card-body">
                 Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
                 Nihil anim keffiyeh , craft beer labore wes anderson cred nesciunt sapiente ea proident.   
