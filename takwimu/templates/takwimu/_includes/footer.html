@@ -40,9 +40,8 @@
                 <img src="{% static 'img/logos/ihub-white.png' %}" alt="iHub" class="p-3 align-self-center">
               </a>
             </div>
-            
           </div>
-          
+
           <div class="ml-2">
             <h6 class="mb-0 pt-0 text-truncate font-weight-light" style="opacity: 0.6;">Supported by:</h6>
             <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
@@ -88,7 +87,7 @@
             <div class="border-right m-2 float-right" style="height:24px; width:1px;"></div>
           </li>
 
-          {% to_list 'twitter' 'facebook' 'medium' 'github' as social_medias %}
+          {% to_list 'twitter' 'facebook' 'medium' 'linkedin' as social_medias %}
           {% for social_media in social_medias %}
             {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
               <li class="nav-item">
