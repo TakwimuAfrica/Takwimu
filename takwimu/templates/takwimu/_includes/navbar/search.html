@@ -1,21 +1,42 @@
-<div class="modal dropdown-menu-lg text-light container-fluid shadow"
-    id="search-modal" tabindex="-1" role="dialog" style="top: 72px; height: 400px;">
-    <button type="button" class="close position-absolute" style="top: 1em; right: 1em;" data-dismiss="modal" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-    </button>
-    <div class="container" role="document" style="margin-top: 150px;">
-        <form>
-            <div class="input-group col-6 mx-auto">
-                <input type="text" class="form-control border-0 py-3 px-5 text-center" id="search-takwimu" placeholder="Search Takwimu">
+<button type="button" class="close position-absolute" style="top: 1em; right: 1em;" data-dismiss="popover" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+<div class="dropdown-menu-lg text-light container-fluid" style="padding: 10rem 0;">
+    <form>
+        <div class="input-group col-6 mx-auto">
+            <input type="text" class="form-control border-0 py-3 px-5 text-center" id="search-takwimu" placeholder="Search Takwimu">
 
-                <button type="submit" class="btn btn-search">
-                    <i class="fa fa-search"></i>
-                </button>
-            </div>
-        </form>
-    </div>
+            <button type="submit" class="btn btn-search">
+                <i class="fa fa-search"></i>
+            </button>
+        </div>
+    </form>
 </div>
 <style>
+    .popover {
+        transform: translate3d(0px, 72px, 0px)!important;
+        margin-top: -0.25rem;
+        left: 0;
+        right: 0;
+        border-radius: 0;
+        max-width: 100%!important; 
+        background-color: #074c9c;
+    }
+
+    .bs-popover-auto[x-placement^=bottom] .arrow::after, 
+    .bs-popover-auto[x-placement^=bottom] .arrow::before, 
+    .bs-popover-bottom .arrow::after, 
+    .bs-popover-bottom .arrow::before {
+        border-bottom: 10px solid #074c9c;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+
+    .bs-popover-auto[x-placement^=bottom] .arrow::after,
+    .bs-popover-bottom .arrow::after  {
+        border-bottom-color: #074c9c;
+    }
+
     .close {
         font-size: 4rem; 
         font-weight: 100; 
@@ -42,7 +63,8 @@
         box-shadow: none;
         outline: 0 none;
     }
-    #search-takwimu::-webkit-input-placeholder, #search-takwimu:-moz-placeholder  {
+    #search-takwimu::-webkit-input-placeholder, 
+    #search-takwimu:-moz-placeholder  {
         color: rgba(255, 255, 255, 0.45);
         font-size: 35px;
         font-weight: 300;

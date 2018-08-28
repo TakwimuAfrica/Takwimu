@@ -79,6 +79,10 @@
     $(function () {
       $('[data-toggle="tooltip"]').tooltip()
     })
+
+    $('[data-toggle="popover"]').popover({
+      container: 'body'
+    });
   </script>
 
   {% block body_javascript_extra %}{% endblock %}

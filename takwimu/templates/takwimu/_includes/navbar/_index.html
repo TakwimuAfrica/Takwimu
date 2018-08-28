@@ -78,9 +78,10 @@
         </li>
 
         <li>
-          <a class="nav-link py-4" href="#" data-toggle="modal" data-backdrop="false" data-target="#search-modal"><i class="fa fa-search fa-fw"></i></a>
-          <!-- On large devices -->
-          {% include 'takwimu/_includes/navbar/search.html' %}
+          <a class="nav-link py-4" href="#" role="button" data-toggle="popover" data-placement="bottom" data-container="body"
+            data-html="true" data-content='{% include 'takwimu/_includes/navbar/search.html' %}'>
+            <i class="fa fa-search fa-fw"></i>
+          </a>
 
           <!-- TODO: On small devices -->
           <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
