@@ -196,6 +196,14 @@
       </article>
       {% endif %}
     {% endblock %}
+
+    {% if not number_of_births.number_of_births_dist.is_missing %}
+      <article id="number_of_births" class="clearfix">
+        <header class="section-contents">
+          <h1>Number of Births </h1>
+        </header>
+      </article>
+    {% endif %}
   </div>
 
   {% if geography.this.geo_level == 'country' %}

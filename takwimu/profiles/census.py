@@ -25,6 +25,7 @@ def get_profile(geo, profile_name, request):
         data['health_centers'] = get_health_centers(geo, session)
         data['health_workers'] = get_health_workers(geo, session)
         data['causes_of_death'] = get_causes_of_death(geo, session)
+        data['number_of_births'] = get_number_of_births(geo, session)
         print '\n\n\n\n\n\n\n'
         print data
         print '\n\n\n\n\n\n\n'
@@ -241,4 +242,16 @@ def get_causes_of_death(geo, session):
         'inpatient_diagnosis_over_five_dist': inpatient_diagnosis_over_five_dist,
         'outpatient_diagnosis_over_five_dist': outpatient_diagnosis_over_five_dist,
         'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist,
+    }
+
+def get_number_of_births(geo, session):
+    number_of_births_dist, total_number_of_births = LOCATIONNOTFOUND, 0
+
+    try:
+        number_of_births_dist, total_number_of_births = get_stat_data(
+            'number_of_births', geo, session, table_name='number_of_births', order_by='-total')
+    except LocationNotFound:
+        pass
+    return {
+        'number_of_births': number_of_births_dist
     }
