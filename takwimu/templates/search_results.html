@@ -1,6 +1,10 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
 {% block content %}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4a6fdde080ccf5013b9b0233626b86feb00ad1c8
   <div class="container">
     <div class="m-2">
       <form action="{% url 'search' %}" method="get">
@@ -8,8 +12,15 @@
         <input type="submit" value="Search" class="btn btn-primary">
       </form>
     </div>
+<<<<<<< HEAD
 
     {% include 'takwimu/_includes/search/index.html' with results=search_results.items query=search_query %}
+=======
+
+    {% include 'takwimu/_includes/search/index.html' with results=search_results query=search_query %}
+
+  </div>
+>>>>>>> 4a6fdde080ccf5013b9b0233626b86feb00ad1c8
 
   </div>
 {% endblock %}
