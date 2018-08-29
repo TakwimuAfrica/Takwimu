@@ -1,0 +1,68 @@
+<div class="pb-3 pt-5">
+    <b>Search Again</b>
+</div>
+<ul class="list-group">
+    <li class="list-group-item">
+        <form action="{% url 'search' %}" method="get">
+            <label for="search-box">Search by keyword</label>
+            <div class="input-group">
+                <input type="text" class="form-control" name="q" id="search-box" aria-describedby="search-box" placeholder="Search Takwimu"
+                    style="border-radius: 0;" value="{{ query }}">
+                <div class="position-absolute btn text-primary px-2" style="right: 0; z-index: 3;">
+                    <span class="fa fa-times-circle" id="clear-search"></span>
+                </div>
+            </div>
+        </form>        
+    </li>
+    <li class="list-group-item px-0">
+        <div class="px-3 d-flex justify-content-between align-items-center"
+            data-toggle="collapse" data-target="#filterbycountry" aria-expanded="false" aria-controls="filterbycountry">
+            Filter by country                           
+            <span class="fa fa-chevron-right text-right"></span>
+        </div>
+        <div class="collapse my-1" id="filterbycountry">
+            <div class="card-body px-2">
+                <select class="custom-select bg-light">
+                    <option selected>Select country</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item px-0">
+        <div class="px-3 d-flex justify-content-between align-items-center"
+            data-toggle="collapse" data-target="#filterbytopic" aria-expanded="false" aria-controls="filterbytopic">
+            Filter by topic                           
+            <span class="fa fa-chevron-right text-right"></span>
+        </div>
+        <div class="collapse my-1" id="filterbytopic">
+            <div class="card-body px-2">
+                <select class="custom-select bg-light">
+                    <option selected>Select topic</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+    </li>
+    <li class="list-group-item px-0">
+        <div class="px-3 d-flex justify-content-between align-items-center"
+            data-toggle="collapse" data-target="#filterbysdg" aria-expanded="false" aria-controls="filterbysdg">
+            Filter by SDG indicators                           
+            <span class="fa fa-chevron-right text-right"></span>
+        </div>
+        <div class="collapse my-1" id="filterbysdg">
+            <div class="card-body px-2">
+                <select class="custom-select bg-light">
+                    <option selected>Select indicator</option>
+                    <option value="1">One</option>
+                    <option value="2">Two</option>
+                    <option value="3">Three</option>
+                </select>
+            </div>
+        </div>
+    </li>
+</ul>

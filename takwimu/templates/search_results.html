@@ -1,80 +1,15 @@
-{% extends 'takwimu/_layouts/page.html' %}
-{% load wagtailcore_tags %}
-{% load staticfiles %}
+{% extends 'takwimu/_layouts/page.html' %} 
 
 {% block content %}
-
-  {% include 'takwimu/_includes/homepage/hero.html' %}
-
   <div class="container">
-    <form class="my-2" action="{% url 'search' %}" method="get">
-      <input type="text" name="q" value="{{ search_query }}" class="form-control">
-      <input type="submit" value="Search" class="btn btn-primary">
-    </form>
+    <div class="m-2">
+      <form action="{% url 'search' %}" method="get">
+        <input type="text" name="q" value="{{ search_query }}" class="form-control">
+        <input type="submit" value="Search" class="btn btn-primary">
+      </form>
+    </div>
 
-    {% if search_results %}
-    <table class="table table-striped">
-      <tbody class="table-bordered">
-          {% for result in search_results.items %}
-          <!-- The first empty tr helps with table-striped -->
-          <tr></tr>
-          <tr>
-            <th scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
-              <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}" role="button" aria-expanded="false" 
-                  aria-controls="{{ result.data_point|slugify }}">
-                <span class="icon fa fa-fw fa-plus"></span>
-              </a>
-            </th>
-            <td class="text-capitalize px-0" valign="top" style="white-space:nowrap">
-              <span class="d-flex mb-2">
-                <b class="col-5">Country:</b>
-                <span class="col pl-3">{{ result.country|slugify }}</span>
-              </span>
-              <span class="d-flex justify-content-center">
-                <b class="col-5">Region:</b>
-                <span class="col pl-3">{{ result.region|slugify }}</span>
-              </span>
-            </td>
-            <td class="text-capitalize px-0" valign="top" style="white-space:wrap">
-              <span class="d-flex mb-2">
-                <b class="col-5">Category:</b>
-                <span class="col pl-1"><a href="{{ result.url }}">{{ result.category|slugify }}</a></span>
-              </span>
-              <span class="d-flex">
-                <b class="col-5">Data point:</b>
-                <span class="col pl-1">{{ result.data_point.value.title }}</span>
-              </span>
-            </td>
-          </tr>
-          <td colspan="4" class="collapse multi-collapse" id="{{ forloop.counter }}"
-              style="border-spacing: 0!important;
-              {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
-            <div class="card-body">
-            {% for indicator in result.data_point.value.indicators %}
-              <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-                  id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
-                  aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
+    {% include 'takwimu/_includes/search/index.html' with results=search_results.items query=search_query %}
 
-                {% include_block indicator %}
-              </div>
-            {% endfor %}
-            </div>
-          </td>
-          {% endfor %}
-      </tbody>
-    </table>
   </div>
-  {% endif %}
-
-  <!-- Results - Toggle opening and closing accordion. -->
-  <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          $('a[data-toggle="collapse"]').on('click', function () {
-              $(this)
-                  .find('.icon')
-                  .toggleClass('fa-minus')
-                  .toggleClass('fa-plus');
-          });
-      });
-  </script>
 {% endblock %}
