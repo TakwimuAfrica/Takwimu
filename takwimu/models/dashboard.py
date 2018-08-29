@@ -465,9 +465,9 @@ class SupportServicesSetting(BaseSetting):
 class FAQBlock(blocks.StructBlock):
     question = blocks.CharBlock(required=True)
     answer = blocks.RichTextBlock(required=True)
-    cta_one_url = blocks.URLBlock(help_text="'Find Out More' button URL", default="https://takwimu.zendesk.com/")
-    cta_two_name = blocks.CharBlock(help_text="Second button Name (optional)", required=False)
-    cta_two_url = blocks.URLBlock(help_text="Second button URL (optional)", required=False)
+    cta_one_url = blocks.URLBlock(label="'Find Out More' button URL", default="https://takwimu.zendesk.com/")
+    cta_two_name = blocks.CharBlock(label="Second button Name (optional)", required=False)
+    cta_two_url = blocks.URLBlock(label="Second button URL (optional)", required=False)
 
 
 @register_setting
