@@ -401,6 +401,8 @@ class SocialMediaSetting(BaseSetting):
         help_text='TAKWIMU Github page URL')
     instagram = models.URLField(blank=True, null=True,
         max_length=255, help_text='TAKWIMU Instagram account URL')
+    linkedin = models.URLField(blank=True, null=True,
+        max_length=255, help_text='TAKWIMU LinkedIn account URL')
     medium = models.URLField(blank=True, null=True,
         help_text='TAKWIMU Medium page URL')
     twitter = models.URLField(blank=True, null=True,

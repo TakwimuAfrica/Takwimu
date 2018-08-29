@@ -23,7 +23,7 @@
     <h5 class="font-weight-bold pb-2">Follow us</h5>
     <div class="d-inline-block py-3 px-2 rounded social-icons" style="background-color:#1455a0;">
       <ul class="navbar-nav">
-        {% to_list 'twitter' 'facebook' 'medium' 'slack' 'github' as social_medias %}
+        {% to_list 'twitter' 'facebook' 'medium' 'slack' 'linkedin' as social_medias %}
         {% for social_media in social_medias %}
           {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
             <li class="nav-item">
@@ -36,8 +36,7 @@
         {% endfor %}
       </ul>
     </div>
-  
-  
+
     <div class="partner-logos mt-5 d-flex align-items-stretch">
       <div class="flex-grow-1">
         <h5 class="mb-0 text-truncate font-weight-bold">An initiative by</h5>
@@ -55,9 +54,9 @@
             <img src="{% static 'img/logos/ihub-white.png' %}" alt="iHub" class="align-self-center">
           </a>
         </div>
-        
+
       </div>
-      
+
       <div class="ml-2">
         <h5 class="mb-0 pt-0 text-truncate font-weight-bold">Supported by</h5>
         <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener"
