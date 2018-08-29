@@ -2,7 +2,7 @@
     <thead class="table-borderless" style="font-size: 14px;">
         <tr>
             <th scope="col" class="text-center">
-                <a href="#" class="text-dark">Expand all</a>
+                <a href="#" class="text-nowrap text-dark">Expand all</a>
             </th>
             <th scope="col">Location</th>
             <th scope="col">Data</th>
@@ -20,10 +20,11 @@
         </tr>
     </thead>
     <tbody class="table-bordered" style="font-size: 12px;">
+        {% for result in results %}
         <tr>
             <th scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
-                <a class="btn btn-link text-dark" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" 
-                    aria-controls="collapseExample">
+                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}" role="button" aria-expanded="false" 
+                    aria-controls="{{ result.title|slugify }}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </th>
@@ -37,33 +38,32 @@
                     <span class="col pl-1">National</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0" valign="top" style="white-space:nowrap">
+            <td class="text-capitalize px-0" valign="top" style="white-space:wrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Category:</b>
                     <span class="col pl-1">People</span>
                 </span>
                 <span class="d-flex">
                     <b class="col-5">Data point:</b>
-                    <span class="col pl-1">Rural Urban split</span>
+                    <span class="col pl-1">{{ result.title }}</span>
                 </span>
             </td>
             <td style="border-right: 1px solid transparent;" class="text-center align-middle">
-                <button class="btn btn-link font-weight-bold">
+                <button class="btn btn-link btn-sm font-weight-bold">
                     <i class="far fa-heart mx-1"></i>
                     Add to collection
                 </button>
-            </td>
+            </td>            
         </tr>
-        <tr class="collapse" id="collapseExample">
-            <td colspan="4">
-                <div class="card card-body">                    
-                    Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid. Nihil anim keffiyeh helvetica, craft beer labore wes anderson cred nesciunt sapiente ea proident.   
-                </div>
-            </td>
-        </tr> 
+        <td colspan="4" rowspan="1" class="collapse border-0" id="{{ forloop.counter }}">
+            <div class="card-body">                    
+                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
+                Nihil anim keffiyeh , craft beer labore wes anderson cred nesciunt sapiente ea proident.   
+            </div>
+        </td>                
+        {% endfor %}        
     </tbody>
 </table>
-
 
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
