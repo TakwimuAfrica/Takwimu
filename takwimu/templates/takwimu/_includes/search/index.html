@@ -1,0 +1,32 @@
+<div class="container-fluid py-4" id="result-id">
+    <div class="container py-5">
+        <div class="row">
+            <!-- Left navigation of all filters-->
+            <div class="col-3 filter-container">                
+                {% include 'takwimu/_includes/search/sidebar.html' %}                
+            </div>
+            <!-- /.col-3 -->
+
+            <!-- The Main Stage -->
+            <div class="col-9 results">
+                {% if results %}
+                    <h1 class="font-weight-bold py-3">{{ results|length }} Filtered data results</h1>
+                    {% include 'takwimu/_includes/search/tabs.html' %}
+                {% elif query %}
+                    <div class="jumbotron jumbotron-fluid mt-5">
+                        <div class="container">
+                            <h1 class="display-4 text-center font-weight-bold">No results found</h1>
+                        </div>
+                    </div>
+                {% else %}  
+                    <div class="jumbotron jumbotron-fluid mt-5">
+                        <div class="container">
+                            <h1 class="display-4 text-center font-weight-bold">Please type something into the search box</h1>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- container fluid -->

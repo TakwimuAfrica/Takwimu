@@ -1,0 +1,43 @@
+<nav>
+    <div class="nav nav-tabs results-tabs" id="nav-tab" role="tablist" style="font-size: 13px;">
+        <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all"
+            aria-selected="true">All results <span class="badge badge-pill badge-primary py-1">{{ results|length }}</span></a>
+        <a class="nav-item nav-link" id="nav-country-tab" data-toggle="tab" href="#nav-country" role="tab" aria-controls="nav-country"
+            aria-selected="false">Results by country <span class="badge badge-pill badge-light py-1">261</span></a>
+        <a class="nav-item nav-link" id="nav-topic-tab" data-toggle="tab" href="#nav-topic" role="tab" aria-controls="nav-topic"
+            aria-selected="false">Results by topic <span class="badge badge-pill badge-light py-1">105</span></a>
+        <a class="nav-item nav-link" id="nav-sdg-tab" data-toggle="tab" href="#nav-sdg" role="tab" aria-controls="nav-sdg"
+            aria-selected="false">Results by SDG <span class="badge badge-pill badge-light py-1">75</span></a>
+    </div>
+</nav>
+<div class="tab-content" id="nav-tabContent">
+    <div class="tab-pane fade show active p-2 border border-top-0" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
+        <span class="d-flex pt-4 px-2" style="font-size: 15px;">
+            Showing
+            {% if results|length > 25 %}
+                1-25 results  of {{ results|length }}
+            {% else %}
+                {{ results|length }} results
+            {% endif %}
+        </span>
+        {% include 'takwimu/_includes/search/table.html' %}
+        {% include 'takwimu/_includes/search/pagination.html' %}
+    </div>
+    <div class="tab-pane fade p-2 border border-top-0" id="nav-country" role="tabpanel" aria-labelledby="nav-country-tab">Country</div>
+    <div class="tab-pane fade p-2 border border-top-0" id="nav-topic" role="tabpanel" aria-labelledby="nav-topic-tab">Topic</div>
+    <div class="tab-pane fade p-2 border border-top-0" id="nav-sdg" role="tabpanel" aria-labelledby="nav-sdg-tab">SDG</div>
+</div>
+
+<style>
+.results-tabs .nav-item {
+    color: #000;
+    background-color: rgba(0,0,0,.05);
+    margin-right: 0.5em;
+    border-radius: 0;
+    padding: 1.5em 1em;
+}
+
+.results-tabs .nav-item.active {
+    font-weight: bold;
+}
+</style>
