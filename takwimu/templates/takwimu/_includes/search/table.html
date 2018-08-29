@@ -1,3 +1,6 @@
+{% load wagtailcore_tags %}
+{% load staticfiles %}
+
 <table class="table table-striped">
     <thead class="table-borderless align-items-center">
         <tr style="font-size: 14px;line-height: 50px; vertical-align: middle;">
@@ -25,28 +28,28 @@
         <tr>
             <th scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
                 <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}" role="button" aria-expanded="false" 
-                    aria-controls="{{ result.title|slugify }}">
+                    aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </th>
-            <td class="text-capitalize px-0" valign="top" style="white-space:nowrap">
+            <td class="text-capitalize px-0 align-middle" valign="top" style="white-space:nowrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Country:</b>
-                    <span class="col pl-3">DRC</span>
+                    <span class="col pl-3">{{ result.country|slugify }}</span>
                 </span>
                 <span class="d-flex justify-content-center">
                     <b class="col-5">Region:</b>
-                    <span class="col pl-3">National</span>
+                    <span class="col pl-3">{{ result.region|slugify }}</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0" valign="top" style="white-space:wrap">
+            <td class="text-capitalize px-0 align-middle" valign="top" style="white-space:wrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Category:</b>
-                    <span class="col pl-1">People</span>
+                    <span class="col pl-1"><a href="{{ result.url }}">{{ result.category|slugify }}</a></span>
                 </span>
                 <span class="d-flex">
                     <b class="col-5">Data point:</b>
-                    <span class="col pl-1">{{ result.title }}</span>
+                    <span class="col pl-1">{{ result.data_point.value.title }}</span>
                 </span>
             </td>
             <td style="border-right: 1px solid transparent;" class="text-center align-middle">
@@ -56,17 +59,37 @@
                 </button>
             </td>        
         </tr>
-        <td colspan="4" class="collapse multi-collapse" id="{{ forloop.counter }}"
-            style="border-spacing: 0!important;
-            {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
-            <div class="card-body">
-                Anim pariatur cliche reprehenderit, enim eiusmod high life accusamus terry richardson ad squid.
-                Nihil anim keffiyeh , craft beer labore wes anderson cred nesciunt sapiente ea proident.   
-            </div>
-        </td>
-        {% endfor %}        
+        <tr>
+            <td colspan="4" class="collapse multi-collapse" id="{{ forloop.counter }}"
+                style="border: 0!important;
+                {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
+                <div id="{{ result.data_point.value.title|slugify }}" class="carousel slide">                
+                    <ol class="carousel-indicators">
+                        {% for indicator in result.data_point.value.indicators %}
+                            <li data-target="#{{ result.data_point.value.title|slugify }}" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {% endif %}"></li>
+                        {% endfor %}
+                    </ol>
+                    <div class="carousel-inner">
+                        {% for indicator in result.data_point.value.indicators %}
+                            <div class="carousel-item {% if forloop.first %} active {% endif %}">
+                                {% include_block indicator %}
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
     </tbody>
 </table>
+<style>
+    .carousel-indicators li {
+        background-color: #6c757d;
+    }
+    .carousel-indicators li.active {
+        background-color: #000000;
+    }
+</style>
 
 <!-- Results - Toggle opening and closing accordion. -->
 <script>

@@ -1,9 +1,6 @@
 {% extends 'takwimu/_layouts/page.html' %}
-{% load wagtailcore_tags %}
-{% load staticfiles %}
 
 {% block content %}
-
   <div class="container">
     <div class="m-2">
       <form action="{% url 'search' %}" method="get">
@@ -12,20 +9,7 @@
       </form>
     </div>
 
-    {% include 'takwimu/_includes/search/index.html' with results=search_results query=search_query %}
+    {% include 'takwimu/_includes/search/index.html' with results=search_results.items query=search_query %}
 
   </div>
-  {% endif %}
-
-  <!-- Results - Toggle opening and closing accordion. -->
-  <script>
-      document.addEventListener('DOMContentLoaded', function () {
-          $('a[data-toggle="collapse"]').on('click', function () {
-              $(this)
-                  .find('.icon')
-                  .toggleClass('fa-minus')
-                  .toggleClass('fa-plus');
-          });
-      });
-  </script>
 {% endblock %}

@@ -1,7 +1,7 @@
 <nav>
     <div class="nav nav-tabs results-tabs" id="nav-tab" role="tablist" style="font-size: 13px;">
         <a class="nav-item nav-link active" id="nav-all-tab" data-toggle="tab" href="#nav-all" role="tab" aria-controls="nav-all"
-            aria-selected="true">All results <span class="badge badge-pill badge-primary py-1">{{ results.count }}</span></a>
+            aria-selected="true">All results <span class="badge badge-pill badge-primary py-1">{{ results|length }}</span></a>
         <a class="nav-item nav-link" id="nav-country-tab" data-toggle="tab" href="#nav-country" role="tab" aria-controls="nav-country"
             aria-selected="false">Results by country <span class="badge badge-pill badge-light py-1">261</span></a>
         <a class="nav-item nav-link" id="nav-topic-tab" data-toggle="tab" href="#nav-topic" role="tab" aria-controls="nav-topic"
@@ -14,10 +14,10 @@
     <div class="tab-pane fade show active p-2 border border-top-0" id="nav-all" role="tabpanel" aria-labelledby="nav-all-tab">
         <span class="d-flex pt-4 px-2" style="font-size: 15px;">
             Showing
-            {% if results.count > 25 %}
-                1-25 results  of {{ results.count }}
+            {% if results|length > 25 %}
+                1-25 results  of {{ results|length }}
             {% else %}
-                {{ results.count }} results
+                {{ results|length }} results
             {% endif %}
         </span>
         {% include 'takwimu/_includes/search/table.html' %}

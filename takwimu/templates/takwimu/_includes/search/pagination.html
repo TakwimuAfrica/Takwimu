@@ -1,15 +1,15 @@
 <div class="row" style="font-size: 15px; font-style: normal;font-stretch: normal;line-height: normal; letter-spacing: normal;">
     <span class="col-12 py-3">
         Showing
-        {% if results.count > 25 %}
-            1-25 results  of {{ results.count }}
+        {% if results|length > 25 %}
+            1-25 results  of {{ results|length }}
         {% else %}
-            {{ results.count }} results
+            {{ results|length }} results
         {% endif %}
     </span>
     <div class="col">
         <nav aria-label="Showing results">
-            {% if results.count > 25 %}
+            {% if results|length > 25 %}
                 <ul class="pagination pagination-sm">
                     <li class="page-item active"><a class="page-link" href="#">Previous</a></li>
                     <li class="page-item"><a class="page-link mx-1" href="#">1</a></li>

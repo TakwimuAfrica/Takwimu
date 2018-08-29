@@ -10,7 +10,7 @@
             <!-- The Main Stage -->
             <div class="col-9 results">
                 {% if results %}
-                    <h1 class="font-weight-bold py-3">{{ results.count }} Filtered data results</h1>
+                    <h1 class="font-weight-bold py-3">{{ results|length }} Filtered data results</h1>
                     {% include 'takwimu/_includes/search/tabs.html' %}
                 {% elif query %}
                     <div class="jumbotron jumbotron-fluid mt-5">
