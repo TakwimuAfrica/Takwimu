@@ -246,12 +246,46 @@ def get_causes_of_death(geo, session):
 
 def get_number_of_births(geo, session):
     number_of_births_dist, total_number_of_births = LOCATIONNOTFOUND, 0
+    birth_distribution_dist = LOCATIONNOTFOUND
+    reported_birth_weight_dist, total_reported_birth_weight = LOCATIONNOTFOUND, 0
+    less_weight_dist, total_less_weight = LOCATIONNOTFOUND, 0
 
     try:
         number_of_births_dist, total_number_of_births = get_stat_data(
-            'number_of_births', geo, session, table_name='number_of_births', order_by='-total')
+            'number_of_births', geo, session, order_by='-total')
     except LocationNotFound:
         pass
+    
+    try:
+        birth_distribution_dist, _ = get_stat_data('size', geo, session, table_fields=[
+                    'size'], table_name='percentage_of_births_distribution')
+    except LocationNotFound:
+        pass
+
+    try:
+        reported_birth_weight_dist, total_reported_birth_weight = get_stat_data(
+            'reported_birth_weight', geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+    
+    try:
+        less_weight_dist, total_less_weight = get_stat_data(
+            'less_weight', geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+
+    total_number_of_births_dist = _create_single_value_dist(
+        'Total number of births', total_number_of_births)
+    total_reported_birth_weight_dist = _create_single_value_dist(
+        'Percentage of all births that have a reported birth weight', total_reported_birth_weight)
+    total_less_weight_dist = _create_single_value_dist(
+        'Percentage of all reported birth weight with less than 2.5 kg', total_less_weight)
     return {
-        'number_of_births': number_of_births_dist
+        'number_of_births_dist': number_of_births_dist,
+        'total_number_of_births_dist': total_number_of_births_dist,
+        'birth_distribution_dist': birth_distribution_dist,
+        'total_reported_birth_weight_dist': total_reported_birth_weight_dist,
+        'total_less_weight_dist': total_less_weight_dist,
+        'source_link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
+        'source_name': 'Nigeria Demographic and Health Survey 2013'
     }

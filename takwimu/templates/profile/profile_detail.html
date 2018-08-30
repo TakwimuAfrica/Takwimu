@@ -202,6 +202,28 @@
         <header class="section-contents">
           <h1>Number of Births </h1>
         </header>
+        <div class="section-container">
+            <section class="clearfix stat-row">
+              <div class="column-half">
+                  {% include 'profile/_blocks/_stat_list.html' with stat=number_of_births.total_number_of_births_dist stat_type='number' %}
+              </div>
+              <div class="column-half">
+                  {% include 'profile/_blocks/_stat_list.html' with stat=number_of_births.total_reported_birth_weight_dist stat_type='percentage' %}
+              </div>
+            </section>
+            <section class="clearfix stat-row">
+              <div class="column-half">
+                  {% include 'profile/_blocks/_stat_list.html' with stat=number_of_births.total_less_weight_dist stat_type='percentage' %}
+                  
+              </div>
+              <div class="column-half" id="chart-pie-number_of_births-birth_distribution_dist" data-stat-type="percentage" data-chart-title="Percent distribution of all live births by size of child at birth" data-initial-sort="-value"></div>
+            </section>
+            <section class="stat-row">
+              <div class="column-full">
+                <p class="source">Source: <a href="{{number_of_births.source_link}}">{{number_of_births.source_name}}</a></p>
+              </div>
+            </section>
+        </div>
       </article>
     {% endif %}
   </div>
