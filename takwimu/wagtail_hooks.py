@@ -72,5 +72,4 @@ modeladmin_register(DataAdminGroup)
 # modeladmin_register(AboutUsAdminGroup)
 
 modeladmin_register(ExplainerStepsAdmin)
-modeladmin_register(FAQAdmin)
 modeladmin_register(TestimonialAdmin)
