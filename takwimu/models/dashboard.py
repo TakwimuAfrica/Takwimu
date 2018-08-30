@@ -1,4 +1,5 @@
 import re
+import warnings
 
 from django.db import models
 from django import forms
@@ -21,8 +22,8 @@ from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
-from fontawesome.fields import IconField  # importing property from djano-fontawesome app for icons on TopicPage
-from fontawesome.forms import IconFormField  # importing property from djano-fontawesome app for icon field on TopicBlock
+from fontawesome.fields import IconField
+from fontawesome.forms import IconFormField
 
 import logging
 logger = logging.getLogger(__name__)
@@ -42,6 +43,8 @@ class TopicPageDataIndicator(models.Model):
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
+
+
 class TopicPageDataIndicators(Orderable, TopicPageDataIndicator):
     page = ParentalKey('takwimu.TopicPage', related_name='data_indicators')
 
@@ -54,7 +57,7 @@ class TopicPage(Page):
     This therefore serves as an editorial interface to create topics and link indicators to it.
     """
     description = models.TextField(blank=True)
-    icon = IconField()  #adding icon property that uses the djano-fontawesome app structure
+    icon = IconField()
 
     # TODO: For topics heirachy
     #parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
@@ -79,7 +82,8 @@ class TopicPage(Page):
 class EntityStructBlock(blocks.StructBlock):
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
-    description = blocks.RichTextBlock(features=['link'],required=False)
+    description = blocks.RichTextBlock(features=['link'], required=False)
+
     class Meta:
         icon = 'group'
         template = 'takwimu/_includes/dataview/entity_detail.html'
@@ -107,7 +111,8 @@ class IndicatorsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('body', blocks.RichTextBlock(required=False)),
-            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
         ],
         icon='snippet',
         template='takwimu/_includes/dataview/freeform.html'
@@ -120,7 +125,8 @@ class IndicatorsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('embed', EmbedBlock(required=False)),
-            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
         ],
         icon='media',
         template='takwimu/_includes/dataview/embed.html'
@@ -131,7 +137,8 @@ class IndicatorsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('document', DocumentChooserBlock(required=False)),
-            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
         ],
         icon='doc-full',
         template='takwimu/_includes/dataview/document.html'
@@ -143,7 +150,8 @@ class IndicatorsBlock(blocks.StreamBlock):
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('image', ImageChooserBlock(required=False)),
             ('caption', blocks.TextBlock(required=False)),
-            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
         ],
         icon='image',
         template='takwimu/_includes/dataview/image.html'
@@ -154,7 +162,8 @@ class IndicatorsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
-            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
@@ -165,7 +174,8 @@ class IndicatorsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('entities', blocks.ListBlock(EntityStructBlock())),
-            ('source', blocks.RichTextBlock(features=['link'],required=False)),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
         ],
         icon='group',
         template='takwimu/_includes/dataview/entities.html'
@@ -195,10 +205,11 @@ class TopicBlock(blocks.StructBlock):
     def media(self):
         # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
         return super(TopicBlock, self).media + forms.Media(
-            js=['fontawesome/js/django_fontawesome.js','fontawesome/select2/select2.min.js', 'js/dashboard.js'],
+            js=['fontawesome/js/django_fontawesome.js',
+                'fontawesome/select2/select2.min.js', 'js/dashboard.js'],
             css={'all': ['fontawesome/css/fontawesome-all.min.css',
-            'fontawesome/select2/select2.css',
-            'fontawesome/select2/select2-bootstrap.css']}
+                         'fontawesome/select2/select2.css',
+                         'fontawesome/select2/select2-bootstrap.css']}
         )
 
     class Meta:
@@ -212,7 +223,8 @@ class ProfileSectionPage(Page):
     After overview, each of the sections have the following structure
     '''
     description = models.TextField(blank=True)
-    date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    date = models.DateField("Last Updated", blank=True,
+                            null=True, auto_now=True)
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -248,6 +260,7 @@ class ProfilePageSection(models.Model):
     class Meta:
         abstract = True
 
+
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
 # to the model we want to add related links to (TopicPage)
@@ -260,8 +273,10 @@ class ProfilePage(Page):
     Profile Page
     -----------
     '''
-    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,blank=True,null=True, db_constraint=False)
-    date = models.DateField("Last Updated", blank=True, null=True, auto_now=True)
+    geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,
+                            blank=True, null=True, db_constraint=False)
+    date = models.DateField("Last Updated", blank=True,
+                            null=True, auto_now=True)
     document = models.ForeignKey(
         'wagtaildocs.Document',
         null=True,
@@ -295,6 +310,7 @@ class ProfilePage(Page):
 
     def get_absolute_url(self):
         return self.full_url
+
 
 class AboutPage(Page):
     content = RichTextField()
@@ -362,10 +378,19 @@ class ExplainerSteps(Page):
 
 
 class FAQ(index.Indexed, models.Model):
+    """ Frequently asked questions model.
+
+    .. note:: Deprecated in 0_2_0
+        `FAQ` will be removed in 0_3_0. It has been placed with
+        `FAQSetting` which supports ordering.
+    """
+
     question = models.TextField()
     answer = RichTextField()
-    cta_one_url = models.URLField("'Find Out More' button URL", default="https://takwimu.zendesk.com/")
-    cta_two_name = models.TextField("Second button Name (optional)", blank=True)
+    cta_one_url = models.URLField(
+        "'Find Out More' button URL", default="https://takwimu.zendesk.com/")
+    cta_two_name = models.TextField(
+        "Second button Name (optional)", blank=True)
     cta_two_url = models.URLField("Second button URL (optional)", blank=True)
 
     search_fields = [
@@ -377,17 +402,20 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
+#
 # Settings
+#
+
 @register_setting
 class SupportSetting(BaseSetting):
     hello = models.EmailField(blank=True, null=True,
-        help_text='TAKWIMU main email address')
+                              help_text='TAKWIMU main email address')
     zendesk = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU Zendesk account URL')
+                              help_text='TAKWIMU Zendesk account URL')
     community = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU Community forums URL')
+                                help_text='TAKWIMU Community forums URL')
     address = RichTextField(blank=True, null=True,
-        help_text='TAKWIMU address')
+                            help_text='TAKWIMU address')
 
     class Meta:
         verbose_name = 'Support'
@@ -396,19 +424,19 @@ class SupportSetting(BaseSetting):
 @register_setting
 class SocialMediaSetting(BaseSetting):
     facebook = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU Facebook page URL')
+                               help_text='TAKWIMU Facebook page URL')
     github = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU Github page URL')
+                             help_text='TAKWIMU Github page URL')
     instagram = models.URLField(blank=True, null=True,
-        max_length=255, help_text='TAKWIMU Instagram account URL')
+                                max_length=255, help_text='TAKWIMU Instagram account URL')
     linkedin = models.URLField(blank=True, null=True,
-        max_length=255, help_text='TAKWIMU LinkedIn account URL')
+                               max_length=255, help_text='TAKWIMU LinkedIn account URL')
     medium = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU Medium page URL')
+                             help_text='TAKWIMU Medium page URL')
     twitter = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU Twitter account URL')
+                              help_text='TAKWIMU Twitter account URL')
     youtube = models.URLField(blank=True, null=True,
-        help_text='TAKWIMU YouTube channel or account URL')
+                              help_text='TAKWIMU YouTube channel or account URL')
 
     class Meta:
         verbose_name = 'Social Media'
@@ -421,7 +449,6 @@ class AboutUsSetting(BaseSetting):
     class Meta:
         verbose_name = 'About Us'
 
-# Support Service block
 
 class ServiceBlock(blocks.StructBlock):
 
@@ -448,6 +475,7 @@ class ServiceBlock(blocks.StructBlock):
     class Meta:
         icon = 'form'
 
+
 @register_setting
 class SupportServicesSetting(BaseSetting):
     services = StreamField([
@@ -461,13 +489,16 @@ class SupportServicesSetting(BaseSetting):
     class Meta:
         verbose_name = 'Support Services'
 
-# FAQ block
+
 class FAQBlock(blocks.StructBlock):
     question = blocks.CharBlock(required=True)
     answer = blocks.RichTextBlock(required=True)
-    cta_one_url = blocks.URLBlock(label="'Find Out More' button URL", default="https://takwimu.zendesk.com/")
-    cta_two_name = blocks.CharBlock(label="Second button Name (optional)", required=False)
-    cta_two_url = blocks.URLBlock(label="Second button URL (optional)", required=False)
+    cta_one_url = blocks.URLBlock(
+        label="'Find Out More' Button URL", default="https://takwimu.zendesk.com/")
+    cta_two_name = blocks.CharBlock(
+        label="Second Button Name (Optional)", required=False)
+    cta_two_url = blocks.URLBlock(
+        label="Second Button URL (Optional)", required=False)
 
 
 @register_setting
