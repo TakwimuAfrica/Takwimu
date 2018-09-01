@@ -19,7 +19,7 @@ def get_profile(geo, profile_name, request):
     data = {}
 
     try:
-        data['population'] = get_population(geo, session)
+        data['demographics'] = get_population(geo, session)
         data['elections'] = get_elections(geo, session)
         data['crops'] = get_crop_production(geo, session)
         data['health_centers'] = get_health_centers(geo, session)
@@ -56,7 +56,7 @@ def get_population(geo, session):
         'is_missing': is_missing,
         'sex_dist': sex_dist,
         'residence_dist': residence_dist,
-        'total_dist': total_dist,
+        'total_population': total_dist,
     }
 
 

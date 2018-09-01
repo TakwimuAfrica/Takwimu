@@ -44,13 +44,13 @@
           <section class="clearfix stat-row">
             <h2 class="header-for-columns">Population </h2>
             <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=population.total_dist stat_type='number' %}
+              {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
             </div>
-            {% if not population.sex_dist.is_missing %}
-            <div class="column-third" id="chart-pie-population-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
+            {% if not demographics.sex_dist.is_missing %}
+            <div class="column-third" id="chart-pie-demographics-sex_dist" data-stat-type="percentage" data-chart-title="Sex" data-initial-sort="-value"></div>
             {% endif %}
-            {% if not population.residence_dist.is_missing %}
-            <div class="column-third" id="chart-histogram-population-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
+            {% if not demographics.residence_dist.is_missing %}
+            <div class="column-third" id="chart-histogram-demographics-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
             {% endif %}
           </section>
         </div>
