@@ -112,50 +112,50 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 34	level1	NG_1_035	Taraba	54473	country	NG	Taraba	2009
 35	level1	NG_1_036	Yobe	45502	country	NG	Yobe	2009
 36	level1	NG_1_037	Zamfara	39762	country	NG	Zamfara	2009
-37	level1	SN_1_001	Dakar	\N	country	SN	Dakar	2009
-38	level1	SN_1_002	Diourbel	\N	country	SN	Diourbel	2009
-39	level1	SN_1_003	Fatick	\N	country	SN	Fatick	2009
-40	level1	SN_1_004	Kaffrine	\N	country	SN	Kaffrine	2009
-41	level1	SN_1_005	Kaolack	\N	country	SN	Kaolack	2009
-42	level1	SN_1_006	Kedougou	\N	country	SN	Kedougou	2009
-43	level1	SN_1_007	Kolda	\N	country	SN	Kolda	2009
-44	level1	SN_1_008	Louga	\N	country	SN	Louga	2009
-45	level1	SN_1_009	Matam	\N	country	SN	Matam	2009
-46	level1	SN_1_010	Saint Louis	\N	country	SN	Saint Louis	2009
-47	level1	SN_1_011	Sedhiou	\N	country	SN	Sedhiou	2009
-48	level1	SN_1_012	Tambacounda	\N	country	SN	Tambacounda	2009
-49	level1	SN_1_013	Thies	\N	country	SN	Thies	2009
-50	level1	SN_1_014	Ziguinchor	\N	country	SN	Ziguinchor	2009
-51	level1	TZ_1_022	Pwani	\N	country	TZ	Pwani	2009
-52	level1	TZ_1_026	Simiyu	\N	country	TZ	Simiyu	2009
-53	level1	TZ_1_004	Geita	\N	country	TZ	Geita	2009
-54	level1	TZ_1_027	Singida	\N	country	TZ	Singida	2009
-55	level1	TZ_1_005	Iringa	\N	country	TZ	Iringa	2009
-56	level1	TZ_1_023	Rukwa	\N	country	TZ	Rukwa	2009
-57	level1	TZ_1_006	Kagera	\N	country	TZ	Kagera	2009
-58	level1	TZ_1_010	Kigoma	\N	country	TZ	Kigoma	2009
-59	level1	TZ_1_014	Lindi	\N	country	TZ	Lindi	2009
-60	level1	TZ_1_002	Dar es salaam	\N	country	TZ	Dar es salaam	2009
-61	level1	TZ_1_003	Dodoma	\N	country	TZ	Dodoma	2009
-62	level1	TZ_1_028	Tanga	\N	country	TZ	Tanga	2009
-63	level1	TZ_1_019	Mtwara	\N	country	TZ	Mtwara	2009
-64	level1	TZ_1_021	Njombe	\N	country	TZ	Njombe	2009
-65	level1	TZ_1_029	Tabora	\N	country	TZ	Tabora	2009
-66	level1	TZ_1_011	Kilimanjaro	\N	country	TZ	Kilimanjaro	2009
-67	level1	TZ_1_025	Shinyanga	\N	country	TZ	Shinyanga	2009
-68	level1	TZ_1_016	Mara	\N	country	TZ	Mara	2009
-69	level1	TZ_1_024	Ruvuma	\N	country	TZ	Ruvuma	2009
-70	level1	TZ_1_020	Mwanza	\N	country	TZ	Mwanza	2009
-71	level1	TZ_1_017	Mbeya	\N	country	TZ	Mbeya	2009
-72	level1	TZ_1_001	Arusha	\N	country	TZ	Arusha	2009
-73	level1	TZ_1_018	Morogoro	\N	country	TZ	Morogoro	2009
-74	level1	TZ_1_009	Katavi	\N	country	TZ	Katavi	2009
-75	level1	TZ_1_015	Manyara	\N	country	TZ	Manyara	2009
-76	level1	TZ_1_012	Kusini Pemba	\N	country	TZ	Kusini Pemba	2009
-77	level1	TZ_1_008	Kaskazini Unguja	\N	country	TZ	Kaskazini Unguja	2009
-78	level1	TZ_1_013	Kusini Unguja	\N	country	TZ	Kusini Unguja	2009
-79	level1	TZ_1_030	Mjini Magharibi	\N	country	TZ	Mjini Magharibi	2009
-80	level1	TZ_1_007	Kaskazini Pemba	\N	country	TZ	Kaskazini Pemba	2009
+37	level1	SN_1_001	Dakar	547	country	SN	Dakar	2009
+38	level1	SN_1_002	Diourbel	4824	country	SN	Diourbel	2009
+39	level1	SN_1_003	Fatick	6849	country	SN	Fatick	2009
+40	level1	SN_1_004	Kaffrine	11262	country	SN	Kaffrine	2009
+41	level1	SN_1_005	Kaolack	5357	country	SN	Kaolack	2009
+42	level1	SN_1_006	Kedougou	16800	country	SN	Kedougou	2009
+43	level1	SN_1_007	Kolda	13771	country	SN	Kolda	2009
+44	level1	SN_1_008	Louga	24889	country	SN	Louga	2009
+45	level1	SN_1_009	Matam	29445	country	SN	Matam	2009
+46	level1	SN_1_010	Saint Louis	19241	country	SN	Saint Louis	2009
+47	level1	SN_1_011	Sedhiou	7341	country	SN	Sedhiou	2009
+48	level1	SN_1_012	Tambacounda	42364	country	SN	Tambacounda	2009
+49	level1	SN_1_013	Thies	6670	country	SN	Thies	2009
+50	level1	SN_1_014	Ziguinchor	7352	country	SN	Ziguinchor	2009
+51	level1	TZ_1_022	Pwani	32407	country	TZ	Pwani	2009
+52	level1	TZ_1_026	Simiyu	2380	country	TZ	Simiyu	2009
+53	level1	TZ_1_004	Geita	20054	country	TZ	Geita	2009
+54	level1	TZ_1_027	Singida	49437	country	TZ	Singida	2009
+55	level1	TZ_1_005	Iringa	58936	country	TZ	Iringa	2009
+56	level1	TZ_1_023	Rukwa	75240	country	TZ	Rukwa	2009
+57	level1	TZ_1_006	Kagera	39627	country	TZ	Kagera	2009
+58	level1	TZ_1_010	Kigoma	45066	country	TZ	Kigoma	2009
+59	level1	TZ_1_014	Lindi	67000	country	TZ	Lindi	2009
+60	level1	TZ_1_002	Dar es salaam	1393	country	TZ	Dar es salaam	2009
+61	level1	TZ_1_003	Dodoma	41311	country	TZ	Dodoma	2009
+62	level1	TZ_1_028	Tanga	27348	country	TZ	Tanga	2009
+63	level1	TZ_1_019	Mtwara	16707	country	TZ	Mtwara	2009
+64	level1	TZ_1_021	Njombe	21347	country	TZ	Njombe	2009
+65	level1	TZ_1_029	Tabora	76151	country	TZ	Tabora	2009
+66	level1	TZ_1_011	Kilimanjaro	13209	country	TZ	Kilimanjaro	2009
+67	level1	TZ_1_025	Shinyanga	40781	country	TZ	Shinyanga	2009
+68	level1	TZ_1_016	Mara	31150	country	TZ	Mara	2009
+69	level1	TZ_1_024	Ruvuma	66477	country	TZ	Ruvuma	2009
+70	level1	TZ_1_020	Mwanza	35187	country	TZ	Mwanza	2009
+71	level1	TZ_1_017	Mbeya	62420	country	TZ	Mbeya	2009
+72	level1	TZ_1_001	Arusha	34516	country	TZ	Arusha	2009
+73	level1	TZ_1_018	Morogoro	73139	country	TZ	Morogoro	2009
+74	level1	TZ_1_009	Katavi	45843	country	TZ	Katavi	2009
+75	level1	TZ_1_015	Manyara	47913	country	TZ	Manyara	2009
+76	level1	TZ_1_012	Kusini Pemba	332	country	TZ	Kusini Pemba	2009
+77	level1	TZ_1_008	Kaskazini Unguja	470	country	TZ	Kaskazini Unguja	2009
+78	level1	TZ_1_013	Kusini Unguja	854	country	TZ	Kusini Unguja	2009
+79	level1	TZ_1_030	Mjini Magharibi	230	country	TZ	Mjini Magharibi	2009
+80	level1	TZ_1_007	Kaskazini Pemba	574	country	TZ	Kaskazini Pemba	2009
 81	level1	NG_1_001	Abia	6320	country	NG	Abia	2009
 82	level1	NG_1_002	Adamawa	36917	country	NG	Adamawa	2009
 83	level1	NG_1_003	Akwa Ibom	7081	country	NG	Akwa Ibom	2009
