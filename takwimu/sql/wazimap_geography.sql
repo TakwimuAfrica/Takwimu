@@ -77,41 +77,41 @@ ALTER TABLE ONLY public.wazimap_geography ALTER COLUMN id SET DEFAULT nextval('p
 
 COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent_level, parent_code, long_name, version) FROM stdin;
 1	continent	AFR	Africa	\N	\N	\N	\N	2009
-2	country	NG	Nigeria	\N	continent	AFR	\N	2009
-3	country	SN	Senegal	\N	continent	AFR	\N	2009
-4	country	TZ	Tanzania	\N	continent	AFR	\N	2009
-5	level1	NG_1_006	Bayelsa	\N	country	NG	Bayelsa	2009
-6	level1	NG_1_007	Benue	\N	country	NG	Benue	2009
-7	level1	NG_1_008	Borno	\N	country	NG	Borno	2009
-8	level1	NG_1_009	Cross River	\N	country	NG	Cross River	2009
-9	level1	NG_1_010	Delta	\N	country	NG	Delta	2009
-10	level1	NG_1_011	Ebonyi	\N	country	NG	Ebonyi	2009
-11	level1	NG_1_012	Edo	\N	country	NG	Edo	2009
-12	level1	NG_1_013	Ekiti	\N	country	NG	Ekiti	2009
-13	level1	NG_1_014	Enugu	\N	country	NG	Enugu	2009
-14	level1	NG_1_015	Federal Capital Territory	\N	country	NG	Federal Capital Territory	2009
-15	level1	NG_1_016	Gombe	\N	country	NG	Gombe	2009
-16	level1	NG_1_017	Imo	\N	country	NG	Imo	2009
-17	level1	NG_1_018	Jigawa	\N	country	NG	Jigawa	2009
-18	level1	NG_1_019	Kaduna	\N	country	NG	Kaduna	2009
-19	level1	NG_1_020	Kano	\N	country	NG	Kano	2009
-20	level1	NG_1_021	Katsina	\N	country	NG	Katsina	2009
-21	level1	NG_1_022	Kebbi	\N	country	NG	Kebbi	2009
-22	level1	NG_1_023	Kogi	\N	country	NG	Kogi	2009
-23	level1	NG_1_024	Kwara	\N	country	NG	Kwara	2009
-24	level1	NG_1_025	Lagos	\N	country	NG	Lagos	2009
-25	level1	NG_1_026	Nasarawa	\N	country	NG	Nasarawa	2009
-26	level1	NG_1_027	Niger	\N	country	NG	Niger	2009
-27	level1	NG_1_028	Ogun	\N	country	NG	Ogun	2009
-28	level1	NG_1_029	Ondo	\N	country	NG	Ondo	2009
-29	level1	NG_1_030	Osun	\N	country	NG	Osun	2009
-30	level1	NG_1_031	Oyo	\N	country	NG	Oyo	2009
-31	level1	NG_1_032	Plateau	\N	country	NG	Plateau	2009
-32	level1	NG_1_033	Rivers	\N	country	NG	Rivers	2009
-33	level1	NG_1_034	Sokoto	\N	country	NG	Sokoto	2009
-34	level1	NG_1_035	Taraba	\N	country	NG	Taraba	2009
-35	level1	NG_1_036	Yobe	\N	country	NG	Yobe	2009
-36	level1	NG_1_037	Zamfara	\N	country	NG	Zamfara	2009
+2	country	NG	Nigeria	923768	continent	AFR	\N	2009
+3	country	SN	Senegal	196712	continent	AFR	\N	2009
+4	country	TZ	Tanzania	945087	continent	AFR	\N	2009
+5	level1	NG_1_006	Bayelsa	10773	country	NG	Bayelsa	2009
+6	level1	NG_1_007	Benue	34059	country	NG	Benue	2009
+7	level1	NG_1_008	Borno	70898	country	NG	Borno	2009
+8	level1	NG_1_009	Cross River	20156	country	NG	Cross River	2009
+9	level1	NG_1_010	Delta	17698	country	NG	Delta	2009
+10	level1	NG_1_011	Ebonyi	5670	country	NG	Ebonyi	2009
+11	level1	NG_1_012	Edo	17802	country	NG	Edo	2009
+12	level1	NG_1_013	Ekiti	6353	country	NG	Ekiti	2009
+13	level1	NG_1_014	Enugu	7161	country	NG	Enugu	2009
+14	level1	NG_1_015	Federal Capital Territory	7315	country	NG	Federal Capital Territory	2009
+15	level1	NG_1_016	Gombe	18768	country	NG	Gombe	2009
+16	level1	NG_1_017	Imo	5530	country	NG	Imo	2009
+17	level1	NG_1_018	Jigawa	23154	country	NG	Jigawa	2009
+18	level1	NG_1_019	Kaduna	46053	country	NG	Kaduna	2009
+19	level1	NG_1_020	Kano	20131	country	NG	Kano	2009
+20	level1	NG_1_021	Katsina	24192	country	NG	Katsina	2009
+21	level1	NG_1_022	Kebbi	36800	country	NG	Kebbi	2009
+22	level1	NG_1_023	Kogi	29833	country	NG	Kogi	2009
+23	level1	NG_1_024	Kwara	36825	country	NG	Kwara	2009
+24	level1	NG_1_025	Lagos	3345	country	NG	Lagos	2009
+25	level1	NG_1_026	Nasarawa	27117	country	NG	Nasarawa	2009
+26	level1	NG_1_027	Niger	76363	country	NG	Niger	2009
+27	level1	NG_1_028	Ogun	16762	country	NG	Ogun	2009
+28	level1	NG_1_029	Ondo	15500	country	NG	Ondo	2009
+29	level1	NG_1_030	Osun	9251	country	NG	Osun	2009
+30	level1	NG_1_031	Oyo	28454	country	NG	Oyo	2009
+31	level1	NG_1_032	Plateau	30913	country	NG	Plateau	2009
+32	level1	NG_1_033	Rivers	11077	country	NG	Rivers	2009
+33	level1	NG_1_034	Sokoto	25973	country	NG	Sokoto	2009
+34	level1	NG_1_035	Taraba	54473	country	NG	Taraba	2009
+35	level1	NG_1_036	Yobe	45502	country	NG	Yobe	2009
+36	level1	NG_1_037	Zamfara	39762	country	NG	Zamfara	2009
 37	level1	SN_1_001	Dakar	\N	country	SN	Dakar	2009
 38	level1	SN_1_002	Diourbel	\N	country	SN	Diourbel	2009
 39	level1	SN_1_003	Fatick	\N	country	SN	Fatick	2009
@@ -156,11 +156,11 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 78	level1	TZ_1_013	Kusini Unguja	\N	country	TZ	Kusini Unguja	2009
 79	level1	TZ_1_030	Mjini Magharibi	\N	country	TZ	Mjini Magharibi	2009
 80	level1	TZ_1_007	Kaskazini Pemba	\N	country	TZ	Kaskazini Pemba	2009
-81	level1	NG_1_001	Abia	\N	country	NG	Abia	2009
-82	level1	NG_1_002	Adamawa	\N	country	NG	Adamawa	2009
-83	level1	NG_1_003	Akwa Ibom	\N	country	NG	Akwa Ibom	2009
-84	level1	NG_1_004	Anambra	\N	country	NG	Anambra	2009
-85	level1	NG_1_005	Bauchi	\N	country	NG	Bauchi	2009
+81	level1	NG_1_001	Abia	6320	country	NG	Abia	2009
+82	level1	NG_1_002	Adamawa	36917	country	NG	Adamawa	2009
+83	level1	NG_1_003	Akwa Ibom	7081	country	NG	Akwa Ibom	2009
+84	level1	NG_1_004	Anambra	4844	country	NG	Anambra	2009
+85	level1	NG_1_005	Bauchi	45837	country	NG	Bauchi	2009
 \.
 
 
