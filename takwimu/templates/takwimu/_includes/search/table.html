@@ -1,7 +1,7 @@
 {% load wagtailcore_tags %}
 {% load staticfiles %}
 
-<table class="table table-striped">
+<table class="table table-striped" id="results-table">
     <thead class="table-borderless align-items-center">
         <tr style="font-size: 14px;line-height: 50px; vertical-align: middle;">
             <th scope="col" class="text-center">
@@ -25,13 +25,13 @@
         {% for result in results %}
         <!-- The first empty tr helps with table-striped -->
         <tr></tr>
-        <tr>
-            <th scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
+        <tr id="result">
+            <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
                 <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}" role="button" aria-expanded="false" 
                     aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
-            </th>
+            </td>
             <td class="text-capitalize px-0 align-middle" valign="top" style="white-space:nowrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Country:</b>
@@ -42,8 +42,8 @@
                     <span class="col pl-3">{{ result.region|slugify }}</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0 align-middle" valign="top" style="white-space:wrap">
-                <span class="d-flex mb-2">
+            <td class="text-capitalize px-0" valign="middle" style="white-space:wrap">
+                <span class="d-flex mb-2 align-middle">
                     <b class="col-5">Category:</b>
                     <span class="col pl-1"><a href="{{ result.url }}">{{ result.category|slugify }}</a></span>
                 </span>
@@ -57,10 +57,10 @@
                     <i class="far fa-heart mx-1"></i>
                     Add to collection
                 </button>
-            </td>        
+            </td>
         </tr>
-        <tr>
-            <td colspan="4" class="collapse multi-collapse" id="{{ forloop.counter }}"
+        <tr class="collapse multi-collapse table-borderless" id="{{ forloop.counter }}">
+            <td colspan="4"
                 style="border: 0!important;
                 {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
                 <div id="{{ result.data_point.value.title|slugify }}" class="carousel slide">                
@@ -78,11 +78,15 @@
                     </div>
                 </div>
             </td>
-        </tr>
+        </tr>        
+        
         {% endfor %}
     </tbody>
 </table>
 <style>
+    .noBorder td {
+        border: 0!important;
+    }
     .carousel-indicators li {
         background-color: #6c757d;
     }
@@ -94,11 +98,104 @@
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        $('a[data-toggle="collapse"]').on('click', function () {
-            $(this)
-                .find('.icon')
-                .toggleClass('fa-minus')
-                .toggleClass('fa-plus');
-        });
+    $('a[data-toggle="collapse"]').click(function () {
+        $(this)
+            .find('.icon')
+            .toggleClass('fa-minus')
+            .toggleClass('fa-plus');
+    });
+
+    getPagination('#results-table');
+
+    /*					PAGINATION 
+    - on change max rows select options fade out all rows gt option value mx = 25
+    - append pagination list as per numbers of rows / max rows option (100row/25= 4pages )
+    - each pagination li on click -> fade out all tr gt max rows * li num and (25*pagenum 2 = 50 rows)
+    - fade out all tr lt max rows * li num - max rows ((25*pagenum 2 = 10) - 25)
+    - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows 
+    */
+
+    function getPagination(table) {
+
+        var lastPage = 1;
+
+        $('#maxRows').on('change', function (evt) {
+            //$('.paginationprev').html('');	// reset pagination
+
+            lastPage = 1;
+            $('.pagination').find("li").slice(1, -1).remove();
+            var trnum = 0; // reset tr counter 
+            var maxRows = parseInt($(this).val()); // get Max Rows from select option
+
+            if (maxRows == 50) {
+
+                $('.pagination').hide();
+            } else {
+
+                $('.pagination').show();
+            }
+
+            var totalRows = $(table + ' tbody tr#result').length; // numbers of rows 
+            $(table + ' tr#result:gt(0)').each(function () { // each TR in  table and not the header
+                trnum++; // Start Counter 
+                if (trnum > maxRows) { // if tr number gt maxRows
+
+                    $(this).hide(); // fade it out 
+                }
+                if (trnum <= maxRows) {
+                    $(this).show();
+                } // else fade in Important in case if it ..
+            }); //  was fade out to fade it in 
+            if (totalRows > maxRows) { // if tr total rows gt max rows option
+                var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..  
+                //	numbers of pages 
+                for (var i = 1; i <= pagenum;) { // for each page append pagination li 
+                    $('.pagination #prev').before('<li class="page-item" data-page="' + i + '">\
+                        <a class="page-link mx-1">' + i++ + '<span class="sr-only">(current)</span></a>\
+                    </li>').show();
+                } // end for i 
+            } // end if row count > max rows
+            $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li 
+            $('.pagination li').on('click', function (evt) { // on click each page
+                evt.stopImmediatePropagation();
+                evt.preventDefault();
+                var pageNum = $(this).attr('data-page'); // get it's number
+
+                var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
+
+                if (pageNum == "prev") {
+                    if (lastPage == 1) {
+                        return;
+                    }
+                    pageNum = --lastPage;
+                }
+                if (pageNum == "next") {
+                    if (lastPage == ($('.pagination li').length - 2)) {
+                        return;
+                    }
+                    pageNum = ++lastPage;
+                }
+
+                lastPage = pageNum;
+                var trIndex = 0; // reset tr counter
+                $('.pagination li').removeClass('active'); // remove active class from all li 
+                $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked 
+                // $(this).addClass('active');					// add active class to the clicked 
+                $(table + ' tr#result:gt(0)').each(function () { // each tr in table not the header
+                    trIndex++; // tr index counter 
+                    // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
+                    if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
+                        $(this).hide();
+                    } else {
+                        $(this).show();
+                    } //else fade in 
+                }); // end of for each tr in table
+            }); // end of on click pagination list
+
+        }).val(25).change();
+        // end of on select change 
+    // END OF PAGINATION 
+    }
+
     });
 </script>

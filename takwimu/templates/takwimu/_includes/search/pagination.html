@@ -9,24 +9,25 @@
     </span>
     <div class="col">
         <nav aria-label="Showing results">
-            {% if results|length > 25 %}
-                <ul class="pagination pagination-sm">
-                    <li class="page-item active"><a class="page-link" href="#">Previous</a></li>
-                    <li class="page-item"><a class="page-link mx-1" href="#">1</a></li>
-                    <li class="page-item active"><a class="page-link mx-1" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link mx-1" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link mx-1" href="#">4</a></li>
-                    <li class="page-item"><a class="page-link mx-1" href="#">5</a></li>
-                    <li class="page-item active"><a class="page-link mx-1" href="#">Next</a></li>
+        <!-- Start Pagination -->
+        <div class='pagination-container'>
+            <nav>
+                <ul class="pagination pagination-sm"> 
+                    <li class="page-item" data-page="prev">
+                        <a class="page-link mx-1">
+                            Prev 
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <!--Here the JS Function Will Add the Rows -->
+                    <li class="page-item" data-page="next" id="prev">
+                        <a class="page-link mx-1"> Next
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
                 </ul>
-            {% else %}
-                <!-- No pagination -->
-                <ul class="pagination pagination-sm">
-                    <li class="page-item disabled"><a class="page-link mx-1" href="#">Previous</a></li>
-                    <li class="page-item active"><a class="page-link mx-1" href="#">1</a></li>
-                    <li class="page-item disabled"><a class="page-link mx-1" href="#">Next</a></li>
-                </ul>
-            {% endif %}
+            </nav>
+        </div>
             
         </nav>
     </div>
@@ -35,7 +36,7 @@
             <div class="p-2">
                 Results per page:
             </div>
-            <select class="custom-select col form-control-sm" aria-placeholder="Results per page">
+            <select class="custom-select col form-control-sm" aria-placeholder="Results per page" name="state" id="maxRows">
                 <option value="25">25</option>
                 <option value="50">50</option>
             </select>
