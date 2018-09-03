@@ -82,7 +82,12 @@
 
     $('[data-toggle="popover"]').popover({
       container: 'body'
-    });
+    }).on('shown.bs.popover', function (eventShown) {
+      var $popup = $('#' + $(eventShown.target).attr('aria-describedby'));
+      $popup.find('button.close').click(function (e) {
+          $popup.popover('hide');
+      });
+  });
   </script>
 
   {% block body_javascript_extra %}{% endblock %}
