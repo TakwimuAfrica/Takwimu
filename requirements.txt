@@ -1,6 +1,6 @@
 gunicorn==19.8.1
 
-git+https://github.com/CodeForAfricaLabs/HURUmap.git@develop#egg=hurumap
+git+https://github.com/CodeForAfricaLabs/HURUmap.git@master#egg=hurumap
 
 # workaround: setup keeps installing wazimap from PYPI
 git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
