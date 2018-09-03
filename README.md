@@ -41,6 +41,18 @@ docker-compose build
 docker-compose up web
 ```
 
+### Elasticsearch
+Elasticsearch is automatically setup docker for development. To rebuild the search index from scratch,
+we run the following command in `docker-entrypoint.sh`:
+```sh
+python manage.py update_index
+```
+The search index is automatically updated using Wagtail's provided search signal handlers; but in case
+the index has to be rebuilt manually, run the following command:
+```sh
+docker-compose exec web python manage.py update_index
+```
+
 ## Handling Data
 
 ### HURUmap Data
