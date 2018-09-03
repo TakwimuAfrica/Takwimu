@@ -3,10 +3,10 @@
 {% endif %}
 
 <a class="nav-link py-4 {% if forloop.first %}active{% endif %}"
-    id="faq-{{ faq.id }}-tab" style=""
-    data-toggle="pill" href="#faq-{{ faq.id }}" role="tab" aria-controls="faq-{{ faq.id }}"
+    id="faq-{{ id }}-tab" style=""
+    data-toggle="pill" href="#faq-{{ id }}" role="tab" aria-controls="faq-{{ id }}"
     aria-selected="{% if forloop.first %}true{% else %}false{% endif %}">
-  {{ faq.question }}
+  {{ faq.value.question }}
 </a>
 
 {% if forloop.last %}
