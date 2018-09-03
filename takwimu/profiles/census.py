@@ -19,7 +19,7 @@ def get_profile(geo, profile_name, request):
     data = {}
 
     try:
-        data['demographics'] = get_population(geo, session)
+        data['demographics'] = get_demographics(geo, session)
         data['elections'] = get_elections(geo, session)
         data['crops'] = get_crop_production(geo, session)
         data['health_centers'] = get_health_centers(geo, session)
@@ -34,7 +34,7 @@ def get_profile(geo, profile_name, request):
         session.close()
 
 
-def get_population(geo, session):
+def get_demographics(geo, session):
     sex_dist, total_population = LOCATIONNOTFOUND, 0
     residence_dist = LOCATIONNOTFOUND
 
@@ -53,19 +53,18 @@ def get_population(geo, session):
         residence_dist.get('is_missing')
     total_dist = _create_single_value_dist('People', total_population)
 
-    final_data = {
+    demographics_data = {
         'is_missing': is_missing,
         'sex_dist': sex_dist,
         'residence_dist': residence_dist,
         'total_population': total_dist,
     }
-
     if geo.square_kms:
-        final_data['population_density'] = {
+        demographics_data['population_density'] = {
             'name': "people per square kilometre",
             'values': {"this": total_population / geo.square_kms},
         }
-    return final_data
+    return demographics_data
 
 
 def _create_single_value_dist(name='', value=0):
