@@ -52,12 +52,20 @@ def get_population(geo, session):
     is_missing = sex_dist.get('is_missing') and \
         residence_dist.get('is_missing')
     total_dist = _create_single_value_dist('People', total_population)
-    return {
+
+    final_data = {
         'is_missing': is_missing,
         'sex_dist': sex_dist,
         'residence_dist': residence_dist,
         'total_population': total_dist,
     }
+
+    if geo.square_kms:
+        final_data['population_density'] = {
+            'name': "people per square kilometre",
+            'values': {"this": total_population / geo.square_kms},
+        }
+    return final_data
 
 
 def _create_single_value_dist(name='', value=0):
