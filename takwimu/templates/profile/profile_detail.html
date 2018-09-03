@@ -1,5 +1,5 @@
 {% extends 'profile/profile_detail.html' %}
-{% load staticfiles sass_tags %}
+{% load staticfiles sass_tags geotags %}
 
 {# HEAD #}
 
@@ -25,7 +25,19 @@
 
 {% block profile_header_tail %}
   <div class="column-full">
-    <p class="caption"><strong>Census data:</strong> 2014</p>
+    <p class="caption"><strong>Census data:</strong>
+      {% if geography.this.geo_level == 'country' %}
+        {{ geography.this.short_name | census_year }}
+      {% else %}
+        {% if geography.parents %}
+          {% for level, g in geography.parents.items %}
+            {% if g.geo_level == 'country' %}
+              {{ geography.this.short_name | census_year }}
+            {% endif %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+    </p>
   </div>
 {% endblock %}
 
