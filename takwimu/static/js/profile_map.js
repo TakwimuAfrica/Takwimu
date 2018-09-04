@@ -155,9 +155,9 @@ var ProfileMaps = function() {
                     console.log("using new profile maps js");
                     var currentPath = window.location.pathname;
                     if (currentPath.indexOf('profiles') !== -1){
-                        window.location = '/profiles/' + feature.properties.level + '-' + feature.properties.code + '/';
+                        window.location = '/profiles/' + feature.properties.geoid + '-' + feature.properties.name.toLowerCase() + '/';
                     } else if (currentPath.indexOf('sdg') !== -1) {
-                        window.location = '/sdg/' + feature.properties.level + '-' + feature.properties.code + '/';
+                        window.location = '/sdg/' + feature.properties.geoid + '-' + feature.properties.name.toLowerCase() + '/';
                     }
 
                 });

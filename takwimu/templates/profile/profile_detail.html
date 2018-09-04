@@ -256,6 +256,15 @@
   <script src="{% static 'js/svg.js' %}"></script>
   <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
 
+  {% block profile_javascript_libs %}
+    <script src="{% static 'js/vendor/leaflet-0.6.4.js' %}"></script>
+    <script src="{% static 'js/vendor/topojson.v1.min.js' %}"></script>
+    <script src="{% static 'js/vendor/leaflet.label.js' %}"></script>
+    <script src="{% static 'js/charts.js' %}"></script>
+    <script src="{% static 'js/head2head.js' %}"></script>
+    <script src="{% static 'js/maps_static.js' %}"></script>
+    <script src="{% static 'js/profile_map.js' %}"></script>
+  {% endblock %}
   <!-- Start of takwimu Zendesk Widget script -->
   <script>/*<![CDATA[*/
   window.zE || (function (e, t, s) {
