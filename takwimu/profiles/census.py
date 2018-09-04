@@ -35,6 +35,17 @@ def get_profile(geo, profile_name, request):
 
 
 def get_demographics(geo, session):
+    population_data = get_population(geo, session)
+    child_births_data = get_child_births(geo, session)
+    demographics_data = dict(population_data.items() +
+                             child_births_data.items())
+    demographics_data['is_missing'] = population_data.get('is_missing') and \
+        child_births_data.get('is_missing')
+
+    return demographics_data
+
+
+def get_population(geo, session):
     sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
 
@@ -63,6 +74,7 @@ def get_demographics(geo, session):
         'residence_dist': residence_dist,
         'total_population': total_population_dist,
     }
+
     if geo.square_kms:
         demographics_data['population_density'] = {
             'name': "people per square kilometre",
@@ -76,6 +88,65 @@ def _create_single_value_dist(name='', value=0):
         'name': name,
         'numerators': {'this': value},
         'values': {'this': value},
+    }
+
+
+def get_child_births(geo, session):
+    child_births_dist, total_child_births = LOCATIONNOTFOUND, 0
+    child_births_by_size_dist = LOCATIONNOTFOUND
+    total_reported_birth_weights = 0
+    total_low_birth_weights = 0
+
+    try:
+        child_births_dist, total_child_births = get_stat_data(
+            'child_births', geo, session, order_by='-total')
+    except LocationNotFound:
+        pass
+
+    try:
+        child_births_by_size_dist, _ = get_stat_data(
+            'size', geo, session, table_fields=['size'],
+            table_name='child_births_by_size')
+    except LocationNotFound:
+        pass
+
+    try:
+        _, total_reported_birth_weights = get_stat_data(
+            'reported_birth_weights', geo, session,
+            table_fields=['reported_birth_weights'],
+            table_name='child_births_with_reported_birth_weights',
+            order_by='-total')
+    except LocationNotFound:
+        pass
+
+    try:
+        _, total_low_birth_weights = get_stat_data(
+            'low_birth_weights', geo, session,
+            table_fields=['low_birth_weights'],
+            table_name='child_births_with_low_birth_weights')
+    except LocationNotFound:
+        pass
+
+    is_missing = child_births_dist.get('is_missing')
+    total_child_births_dist = _create_single_value_dist(
+        'Total births', total_child_births)
+    total_reported_birth_weights_dist = _create_single_value_dist(
+        'Of all births have a reported birth weight',
+        total_reported_birth_weights)
+    total_low_birth_weights_dist = _create_single_value_dist(
+        'Of all reported birth weights are less than 2.5 kg', total_low_birth_weights)
+
+    return {
+        'is_missing': is_missing,
+        'child_births_dist': child_births_dist,
+        'total_child_births_dist': total_child_births_dist,
+        'child_births_by_size_dist': child_births_by_size_dist,
+        'total_reported_birth_weights_dist': total_reported_birth_weights_dist,
+        'total_low_birth_weights_dist': total_low_birth_weights_dist,
+        'child_births_source': {
+            'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
+            'name': 'Nigeria Demographic and Health Survey 2013',
+        },
     }
 
 

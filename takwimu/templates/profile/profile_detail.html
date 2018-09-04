@@ -63,6 +63,29 @@
             <div class="column-third" id="chart-histogram-demographics-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Residence" data-initial-sort="-value"></div>
             {% endif %}
           </section>
+
+          {% if not demographics.child_births_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Fertility and Births</h2>
+            <div class="column-third">
+                {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_child_births_dist stat_type='number' %}
+            </div>
+            <div class="column-third">
+                {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_reported_birth_weights_dist stat_type='percentage' %}
+            </div>
+            <div class="column-third">
+                {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_low_birth_weights_dist stat_type='percentage' %}
+            </div>
+          </section>
+          <section class="clearfix stat-row">
+            <div class="column-half" id="chart-pie-demographics-child_births_by_size_dist" data-stat-type="percentage" data-chart-title="Percent distribution of all live births by size of child at birth" data-initial-sort="-value"></div>
+          </section>
+          <section class="stat-row">
+            <div class="column-half">
+              <p class="source">Source: <a href="{{demographics.child_births_source.link}}">{{demographics.child_births_source.name}}</a></p>
+            </div>
+          </section>
+          {% endif %}
         </div>
       </article>
       {% endif %}
