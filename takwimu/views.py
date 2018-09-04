@@ -16,6 +16,8 @@ from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
     TopicPage, ProfileSectionPage, ProfilePage
 from forms import SupportServicesContactForm
 
+from sdg import SDG
+
 
 class HomePageView(TemplateView):
     """
@@ -216,8 +218,11 @@ class SDGGeographyDetailView(GeographyDetailView):
         return super(SDGGeographyDetailView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, *args, **kwargs):
-        return super(SDGGeographyDetailView, self).get_context_data(*args,
+        context = super(SDGGeographyDetailView, self).get_context_data(*args,
                                                                     **kwargs)
+        context['sgd'] = SDG
+        print(context)
+        return context
 
     def get_geography(self, geo_id):
         super(SDGGeographyDetailView, self).get_geography(geo_id)

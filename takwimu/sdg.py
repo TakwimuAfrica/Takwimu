@@ -10,7 +10,7 @@ SDG = {
         "short": "Zero Hunger",
         "goal": 2,
         "title": "End hunger, achieve food security and improved nutrition and promote sustainable agriculture",
-        "icon_url": "https://raw.githubusercontent.com/UNStats-SDGs/sdgs-data/master/images/en/TGG_Icon_Color_1.png",
+        "icon_url": "https://raw.githubusercontent.com/UNStats-SDGs/sdgs-data/master/images/en/TGG_Icon_Color_2.png",
         "color": "#e5b735"
     },
     "good_health_and_wellbeing": {

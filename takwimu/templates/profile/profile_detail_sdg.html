@@ -34,7 +34,74 @@
     {% block profile_preamble %} {% endblock %}
 
     {% block profile_detail %}
-
+      {% if not crops.crop_distribution.is_missing %}
+          <article class="clearfix">
+            <header class="section-contents">
+              <h1>{{ sgd.zero_hunger.short }}</h1>
+              <img src="{{ sgd.zero_hunger.icon_url }}" alt="sgd_icon_{{ sgd.zero_hunger.short }}" width="100%">
+            </header>
+            <div class="section-container">
+              <h2>{{ sgd.zero_hunger.title }}</h2>
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Crop Production in Tonnes </h2>
+                <div class="column-full" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop Production" data-initial-sort="-value"></div>
+              </section>
+            </div>
+          </article>
+        {% endif %}
+      {% if not causes_of_death.is_missing %}
+      <article id="causes_of_death" class="clearfix">
+        <header class="section-contents">
+          <h1>{{ sgd.good_health_and_wellbeing.short }}</h1>
+          <img src="{{ sgd.good_health_and_wellbeing.icon_url }}" alt="sgd_icon_{{ sgd.good_health_and_wellbeing.short }}" width="100%">
+        </header>
+        <div class="section-container">
+        <h2>{{ sgd.good_health_and_wellbeing.title }}</h2>
+          {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+              <div class="column-full">
+                <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
+              </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+              <div class="column-full">
+                <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
+              </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+          {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full">
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
+            </div>
+          </section>
+          {% endif %}
+        </div>
+      </article>
+      {% endif %}
     {% endblock %}
   </div>
 
