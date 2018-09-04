@@ -16,8 +16,8 @@ SET row_security = off;
 
 SET search_path = public, pg_catalog;
 
-ALTER TABLE IF EXISTS ONLY public.less_weight DROP CONSTRAINT IF EXISTS pk_less_weight;
-DROP TABLE IF EXISTS public.less_weight;
+ALTER TABLE IF EXISTS ONLY public.child_births_with_low_birth_weights DROP CONSTRAINT IF EXISTS pk_child_births_with_low_birth_weights;
+DROP TABLE IF EXISTS public.child_births_with_low_birth_weights;
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -25,23 +25,23 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: less_weight; Type: TABLE; Schema: public; Owner: -
+-- Name: child_births_with_low_birth_weights; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE less_weight (
+CREATE TABLE child_births_with_low_birth_weights (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    less_weight character varying(128) NOT NULL,
+    low_birth_weights character varying(128) NOT NULL,
     total integer
 );
 
 
 --
--- Data for Name: less_weight; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: child_births_with_low_birth_weights; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY less_weight (geo_level, geo_code, geo_version, less_weight, total) FROM stdin;
+COPY child_births_with_low_birth_weights (geo_level, geo_code, geo_version, child_births_with_low_birth_weights, total) FROM stdin;
 country	NG	2009	less weight	15
 level1	NG_1_015	2009	less weight	5
 level1	NG_1_007	2009	less weight	4
@@ -79,11 +79,11 @@ level1	NG_1_031	2009	less weight	3
 
 
 --
--- Name: less_weight pk_less_weight; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: child_births_with_low_birth_weights pk_child_births_with_low_birth_weights; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY less_weight
-    ADD CONSTRAINT pk_less_weight PRIMARY KEY (geo_level, geo_code, geo_version, less_weight);
+ALTER TABLE ONLY child_births_with_low_birth_weights
+    ADD CONSTRAINT pk_child_births_with_low_birth_weights PRIMARY KEY (geo_level, geo_code, geo_version, child_births_with_low_birth_weights);
 
 
 --

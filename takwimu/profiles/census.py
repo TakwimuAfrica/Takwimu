@@ -25,7 +25,7 @@ def get_profile(geo, profile_name, request):
         data['health_centers'] = get_health_centers(geo, session)
         data['health_workers'] = get_health_workers(geo, session)
         data['causes_of_death'] = get_causes_of_death(geo, session)
-        data['number_of_births'] = get_number_of_births(geo, session)
+        data['child_births'] = get_child_births(geo, session)
         print '\n\n\n\n\n\n\n'
         print data
         print '\n\n\n\n\n\n\n'
@@ -244,15 +244,15 @@ def get_causes_of_death(geo, session):
         'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist,
     }
 
-def get_number_of_births(geo, session):
-    number_of_births_dist, total_number_of_births = LOCATIONNOTFOUND, 0
+def get_child_births(geo, session):
+    child_births_dist, total_child_births = LOCATIONNOTFOUND, 0
     birth_distribution_dist = LOCATIONNOTFOUND
     reported_birth_weight_dist, total_reported_birth_weight = LOCATIONNOTFOUND, 0
-    less_weight_dist, total_less_weight = LOCATIONNOTFOUND, 0
+    low_birth_weights_dist, total_low_birth_weights = LOCATIONNOTFOUND, 0
 
     try:
-        number_of_births_dist, total_number_of_births = get_stat_data(
-            'number_of_births', geo, session, order_by='-total')
+        child_births_dist, total_child_births = get_stat_data(
+            'child_births', geo, session, order_by='-total')
     except LocationNotFound:
         pass
     
@@ -269,23 +269,23 @@ def get_number_of_births(geo, session):
         pass
     
     try:
-        less_weight_dist, total_less_weight = get_stat_data(
-            'less_weight', geo, session, order_by='-total')
+        low_birth_weights_dist, total_low_birth_weights = get_stat_data('low_birth_weights', geo, session, table_fields=[
+            'low_birth_weights'], table_name='child_births_with_low_birth_weights')
     except LocationNotFound:
         pass
 
-    total_number_of_births_dist = _create_single_value_dist(
-        'Total number of births', total_number_of_births)
+    total_child_births_dist = _create_single_value_dist(
+        'Total child births', total_child_births)
     total_reported_birth_weight_dist = _create_single_value_dist(
         'Percentage of all births that have a reported birth weight', total_reported_birth_weight)
-    total_less_weight_dist = _create_single_value_dist(
-        'Percentage of all reported birth weight with less than 2.5 kg', total_less_weight)
+    total_low_birth_weights_dist = _create_single_value_dist(
+        'Percentage of all reported birth weight with less than 2.5 kg', total_low_birth_weights)
     return {
-        'number_of_births_dist': number_of_births_dist,
-        'total_number_of_births_dist': total_number_of_births_dist,
+        'child_births_dist': child_births_dist,
+        'total_child_births_dist': total_child_births_dist,
         'birth_distribution_dist': birth_distribution_dist,
         'total_reported_birth_weight_dist': total_reported_birth_weight_dist,
-        'total_less_weight_dist': total_less_weight_dist,
+        'total_low_birth_weight_dist': total_low_birth_weights_dist,
         'source_link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
         'source_name': 'Nigeria Demographic and Health Survey 2013'
     }

@@ -16,8 +16,8 @@ SET row_security = off;
 
 SET search_path = public, pg_catalog;
 
-ALTER TABLE IF EXISTS ONLY public.number_of_births DROP CONSTRAINT IF EXISTS pk_number_of_births;
-DROP TABLE IF EXISTS public.number_of_births;
+ALTER TABLE IF EXISTS ONLY public.child_births DROP CONSTRAINT IF EXISTS pk_child_births;
+DROP TABLE IF EXISTS public.child_births;
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -25,23 +25,23 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: number_of_births; Type: TABLE; Schema: public; Owner: -
+-- Name: child_births; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE number_of_births (
+CREATE TABLE child_births (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    number_of_births character varying(128) NOT NULL,
+    child_births character varying(128) NOT NULL,
     total integer
 );
 
 
 --
--- Data for Name: number_of_births; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: child_births; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY number_of_births (geo_level, geo_code, geo_version, number_of_births, total) FROM stdin;
+COPY child_births (geo_level, geo_code, geo_version, child_births, total) FROM stdin;
 level1	NG_1_001	2009	number of births	326
 level1	NG_1_002	2009	number of births	732
 level1	NG_1_003	2009	number of births	473
@@ -84,11 +84,11 @@ country	NG	2009	number of births	31830
 
 
 --
--- Name: number_of_births pk_number_of_births; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: child_births pk_child_births; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY number_of_births
-    ADD CONSTRAINT pk_number_of_births PRIMARY KEY (geo_level, geo_code, geo_version, number_of_births);
+ALTER TABLE ONLY child_births
+    ADD CONSTRAINT pk_child_births PRIMARY KEY (geo_level, geo_code, geo_version, child_births);
 
 
 --

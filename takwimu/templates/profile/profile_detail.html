@@ -197,30 +197,31 @@
       {% endif %}
     {% endblock %}
 
-    {% if not number_of_births.number_of_births_dist.is_missing %}
-      <article id="number_of_births" class="clearfix">
+    {% if not child_births.child_births_dist.is_missing %}
+      {{ child_births }}
+      <article id="child_births" class="clearfix">
         <header class="section-contents">
           <h1>Number of Births </h1>
         </header>
         <div class="section-container">
             <section class="clearfix stat-row">
               <div class="column-half">
-                  {% include 'profile/_blocks/_stat_list.html' with stat=number_of_births.total_number_of_births_dist stat_type='number' %}
+                  {% include 'profile/_blocks/_stat_list.html' with stat=child_births.total_child_births_dist stat_type='number' %}
               </div>
               <div class="column-half">
-                  {% include 'profile/_blocks/_stat_list.html' with stat=number_of_births.total_reported_birth_weight_dist stat_type='percentage' %}
+                  {% include 'profile/_blocks/_stat_list.html' with stat=child_births.total_reported_birth_weight_dist stat_type='percentage' %}
               </div>
             </section>
             <section class="clearfix stat-row">
               <div class="column-half">
-                  {% include 'profile/_blocks/_stat_list.html' with stat=number_of_births.total_less_weight_dist stat_type='percentage' %}
+                  {% include 'profile/_blocks/_stat_list.html' with stat=child_births.total_low_birth_weights_dist stat_type='percentage' %}
                   
               </div>
-              <div class="column-half" id="chart-pie-number_of_births-birth_distribution_dist" data-stat-type="percentage" data-chart-title="Percent distribution of all live births by size of child at birth" data-initial-sort="-value"></div>
+              <div class="column-half" id="chart-pie-child_births-birth_distribution_dist" data-stat-type="percentage" data-chart-title="Percent distribution of all live births by size of child at birth" data-initial-sort="-value"></div>
             </section>
             <section class="stat-row">
               <div class="column-full">
-                <p class="source">Source: <a href="{{number_of_births.source_link}}">{{number_of_births.source_name}}</a></p>
+                <p class="source">Source: <a href="{{child_births.source_link}}">{{child_births.source_name}}</a></p>
               </div>
             </section>
         </div>
