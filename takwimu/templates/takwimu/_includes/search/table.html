@@ -27,7 +27,7 @@
         <tr></tr>
         <tr id="result">
             <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
-                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}" role="button" aria-expanded="false" 
+                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
                     aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
@@ -59,7 +59,8 @@
                 </button>
             </td>
         </tr>
-        <tr class="collapse multi-collapse table-borderless" id="{{ forloop.counter }}">
+        <tr class="collapse multi-collapse table-borderless" id="{{ forloop.counter }}{{ result.category|slugify }}" 
+            data-parent="{{ forloop.counter }}{{ result.category|slugify }}">
             <td colspan="4"
                 style="border: 0!important;
                 {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
@@ -104,6 +105,22 @@
             .toggleClass('fa-minus')
             .toggleClass('fa-plus');
     });
+
+    //on close collapse
+    $('.collapse').on('hidden.bs.collapse', function () {
+        var target = '#'+$(this).attr('data-parent');
+        $(target).removeClass('noBorder');
+        $('tbody.table-bordered').removeClass('border-0');
+        $(target).prev('tr#result').removeClass('noBorder');
+    });
+
+    //on open collapse
+    $('.collapse').on('shown.bs.collapse', function () {
+        var target = '#'+$(this).attr('data-parent');
+        $(target).addClass('noBorder');
+        $('tbody.table-bordered').addClass('border-0');
+        $(target).prev('tr#result').addClass('noBorder');
+    })
 
     getPagination('#results-table');
 
