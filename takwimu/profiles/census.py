@@ -35,29 +35,33 @@ def get_profile(geo, profile_name, request):
 
 
 def get_demographics(geo, session):
-    sex_dist, total_population = LOCATIONNOTFOUND, 0
-    residence_dist = LOCATIONNOTFOUND
+    sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
+    residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
 
     try:
-        sex_dist, total_population = get_stat_data(
+        sex_dist, total_population_sex = get_stat_data(
             'Population_Sex', geo, session, table_fields=['Population_Sex'])
     except LocationNotFound:
         pass
     try:
-        residence_dist, total_population = get_stat_data(
+        residence_dist, total_population_residence = get_stat_data(
             'Population_Residence', geo, session, table_fields=['Population_Residence'])
     except LocationNotFound:
         pass
 
+    total_population = 0
     is_missing = sex_dist.get('is_missing') and \
         residence_dist.get('is_missing')
-    total_dist = _create_single_value_dist('People', total_population)
+    if not is_missing:
+        total_population = total_population_sex if total_population_sex > 0 else total_population_residence
+    total_population_dist = _create_single_value_dist(
+        'People', total_population)
 
     demographics_data = {
         'is_missing': is_missing,
         'sex_dist': sex_dist,
         'residence_dist': residence_dist,
-        'total_population': total_dist,
+        'total_population': total_population_dist,
     }
     if geo.square_kms:
         demographics_data['population_density'] = {
