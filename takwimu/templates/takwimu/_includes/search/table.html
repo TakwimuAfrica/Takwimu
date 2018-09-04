@@ -21,13 +21,13 @@
             </th>
         </tr>
     </thead>
-    <tbody class="table-bordered" style="font-size: 12px;">
+    <tbody class="table-bordered accordion" style="font-size: 12px;">
         {% for result in results %}
         <!-- The first empty tr helps with table-striped -->
         <tr></tr>
         <tr id="result">
             <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
-                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" href="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
+                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" data-target="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
                     aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
@@ -64,7 +64,7 @@
             <td colspan="4"
                 style="border: 0!important;
                 {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
-                <div id="{{ result.data_point.value.title|slugify }}" class="carousel slide">                
+                <div id="{{ result.data_point.value.title|slugify }}" class="carousel slide {% if forloop.counter|divisibleby:2 %} odd {% endif %}">                
                     <ol class="carousel-indicators">
                         {% for indicator in result.data_point.value.indicators %}
                             <li data-target="#{{ result.data_point.value.title|slugify }}" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {% endif %}"></li>
@@ -79,14 +79,14 @@
                     </div>
                 </div>
             </td>
-        </tr>        
+        </tr>
         
         {% endfor %}
     </tbody>
 </table>
 <style>
-    .noBorder td {
-        border: 0!important;
+    .noBorder td, .transBorder {
+        border: 1px solid transparent;
     }
     .carousel-indicators li {
         background-color: #6c757d;
@@ -94,33 +94,45 @@
     .carousel-indicators li.active {
         background-color: #000000;
     }
+    .odd .nav-tabs .nav-item.show .nav-link, 
+    .odd .nav-tabs .nav-link.active {
+        background-color: transparent;
+        border-bottom-color: transparent;
+    }
 </style>
 
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
     $('a[data-toggle="collapse"]').click(function () {
-        $(this)
-            .find('.icon')
-            .toggleClass('fa-minus')
-            .toggleClass('fa-plus');
+        var btn = $(this);
+        console.log(btn.attr('data-target'));
+        //on close collapse
+        $('.collapse'+btn.attr('data-target')).on('hide.bs.collapse', function () {
+            // Change collapse button state
+            btn.find('.icon').addClass('fa-plus');
+
+            var target = '#'+$(this).attr('data-parent');
+            // Remove borders
+            $(target).removeClass('noBorder');
+            $('tbody.table-bordered').removeClass('transBorder');
+            $(target).prev('tr#result').removeClass('noBorder');
+        });
+
+        //on open collapse
+        $('.collapse'+btn.attr('data-target')).on('show.bs.collapse', function () {
+            // Change collapse button state
+            btn.find('.icon').toggleClass('fa-minus');
+
+            var target = '#'+$(this).attr('data-parent');
+            // Add back borders
+            $(target).addClass('noBorder');
+            $('tbody.table-bordered').addClass('transBorder');
+            $(target).prev('tr#result').addClass('noBorder');
+        })
     });
 
-    //on close collapse
-    $('.collapse').on('hidden.bs.collapse', function () {
-        var target = '#'+$(this).attr('data-parent');
-        $(target).removeClass('noBorder');
-        $('tbody.table-bordered').removeClass('border-0');
-        $(target).prev('tr#result').removeClass('noBorder');
-    });
-
-    //on open collapse
-    $('.collapse').on('shown.bs.collapse', function () {
-        var target = '#'+$(this).attr('data-parent');
-        $(target).addClass('noBorder');
-        $('tbody.table-bordered').addClass('border-0');
-        $(target).prev('tr#result').addClass('noBorder');
-    })
+    
 
     getPagination('#results-table');
 
