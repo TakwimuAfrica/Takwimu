@@ -41,40 +41,40 @@ CREATE TABLE child_births_with_low_birth_weights (
 -- Data for Name: child_births_with_low_birth_weights; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY child_births_with_low_birth_weights (geo_level, geo_code, geo_version, child_births_with_low_birth_weights, total) FROM stdin;
-country	NG	2009	less weight	15
-level1	NG_1_015	2009	less weight	5
-level1	NG_1_007	2009	less weight	4
-level1	NG_1_023	2009	less weight	7
-level1	NG_1_024	2009	less weight	2
-level1	NG_1_026	2009	less weight	-21
-level1	NG_1_027	2009	less weight	14
-level1	NG_1_032	2009	less weight	9
-level1	NG_1_002	2009	less weight	20
-level1	NG_1_005	2009	less weight	-9
-level1	NG_1_008	2009	less weight	-11
-level1	NG_1_016	2009	less weight	-13
-level1	NG_1_035	2009	less weight	10
-level1	NG_1_019	2009	less weight	36
-level1	NG_1_020	2009	less weight	3
-level1	NG_1_034	2009	less weight	0
-level1	NG_1_001	2009	less weight	2
-level1	NG_1_004	2009	less weight	2
-level1	NG_1_011	2009	less weight	8
-level1	NG_1_014	2009	less weight	7
-level1	NG_1_017	2009	less weight	5
-level1	NG_1_003	2009	less weight	10
-level1	NG_1_006	2009	less weight	12
-level1	NG_1_009	2009	less weight	13
-level1	NG_1_010	2009	less weight	8
-level1	NG_1_012	2009	less weight	9
-level1	NG_1_033	2009	less weight	18
-level1	NG_1_013	2009	less weight	7
-level1	NG_1_025	2009	less weight	4
-level1	NG_1_028	2009	less weight	4
-level1	NG_1_029	2009	less weight	8
-level1	NG_1_030	2009	less weight	1
-level1	NG_1_031	2009	less weight	3
+COPY child_births_with_low_birth_weights (geo_level, geo_code, geo_version, low_birth_weights, total) FROM stdin;
+country	NG	2009	low birth weights	15
+level1	NG_1_015	2009	low birth weights	5
+level1	NG_1_007	2009	low birth weights	4
+level1	NG_1_023	2009	low birth weights	7
+level1	NG_1_024	2009	low birth weights	2
+level1	NG_1_026	2009	low birth weights	21
+level1	NG_1_027	2009	low birth weights	14
+level1	NG_1_032	2009	low birth weights	9
+level1	NG_1_002	2009	low birth weights	20
+level1	NG_1_005	2009	low birth weights	9
+level1	NG_1_008	2009	low birth weights	11
+level1	NG_1_016	2009	low birth weights	13
+level1	NG_1_035	2009	low birth weights	10
+level1	NG_1_019	2009	low birth weights	36
+level1	NG_1_020	2009	low birth weights	3
+level1	NG_1_034	2009	low birth weights	0
+level1	NG_1_001	2009	low birth weights	2
+level1	NG_1_004	2009	low birth weights	2
+level1	NG_1_011	2009	low birth weights	8
+level1	NG_1_014	2009	low birth weights	7
+level1	NG_1_017	2009	low birth weights	5
+level1	NG_1_003	2009	low birth weights	10
+level1	NG_1_006	2009	low birth weights	12
+level1	NG_1_009	2009	low birth weights	13
+level1	NG_1_010	2009	low birth weights	8
+level1	NG_1_012	2009	low birth weights	9
+level1	NG_1_033	2009	low birth weights	18
+level1	NG_1_013	2009	low birth weights	7
+level1	NG_1_025	2009	low birth weights	4
+level1	NG_1_028	2009	low birth weights	4
+level1	NG_1_029	2009	low birth weights	8
+level1	NG_1_030	2009	low birth weights	1
+level1	NG_1_031	2009	low birth weights	3
 \.
 
 
@@ -83,7 +83,7 @@ level1	NG_1_031	2009	less weight	3
 --
 
 ALTER TABLE ONLY child_births_with_low_birth_weights
-    ADD CONSTRAINT pk_child_births_with_low_birth_weights PRIMARY KEY (geo_level, geo_code, geo_version, child_births_with_low_birth_weights);
+    ADD CONSTRAINT pk_child_births_with_low_birth_weights PRIMARY KEY (geo_level, geo_code, geo_version, ow_birth_weights);
 
 
 --

@@ -16,8 +16,8 @@ SET row_security = off;
 
 SET search_path = public, pg_catalog;
 
-ALTER TABLE IF EXISTS ONLY public.percentage_of_births_distribution DROP CONSTRAINT IF EXISTS pk_percentage_of_births_distribution;
-DROP TABLE IF EXISTS public.percentage_of_births_distribution;
+ALTER TABLE IF EXISTS ONLY public.child_births_by_size DROP CONSTRAINT IF EXISTS pk_child_births_by_size;
+DROP TABLE IF EXISTS public.child_births_by_size;
 SET search_path = public, pg_catalog;
 
 SET default_tablespace = '';
@@ -25,10 +25,10 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: percentage_of_births_distribution; Type: TABLE; Schema: public; Owner: -
+-- Name: child_births_by_size; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE percentage_of_births_distribution (
+CREATE TABLE child_births_by_size (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -38,10 +38,10 @@ CREATE TABLE percentage_of_births_distribution (
 
 
 --
--- Data for Name: percentage_of_births_distribution; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: child_births_by_size; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY percentage_of_births_distribution (geo_level, geo_code, geo_version, size, total) FROM stdin;
+COPY child_births_by_size (geo_level, geo_code, geo_version, size, total) FROM stdin;
 level1	NG_1_001	2009	Very Small	1
 level1	NG_1_001	2009	Smaller than Average	7
 level1	NG_1_001	2009	Average	85
@@ -198,11 +198,11 @@ country	NG	2009	Missing	2
 
 
 --
--- Name: percentage_of_births_distribution pk_percentage_of_births_distribution; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: child_births_by_size pk_child_births_by_size; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY percentage_of_births_distribution
-    ADD CONSTRAINT pk_percentage_of_births_distribution PRIMARY KEY (geo_level, geo_code, geo_version, size);
+ALTER TABLE ONLY child_births_by_size
+    ADD CONSTRAINT pk_child_births_by_size PRIMARY KEY (geo_level, geo_code, geo_version, size);
 
 
 --
