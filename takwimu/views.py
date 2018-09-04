@@ -10,7 +10,7 @@ from django.views.generic import TemplateView, FormView, View
 from django.views.generic.base import TemplateView
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
-from wazimap.views import GeographyDetailView
+from wazimap.views import HomepageView, GeographyDetailView
 
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
     TopicPage, ProfileSectionPage, ProfilePage
@@ -203,18 +203,24 @@ class SearchView(TemplateView):
         return results
 
 
-class SDGView(GeographyDetailView):
+class SDGHomePageView(HomepageView):
+    template_name = 'sgd_homepage.html'
 
     def get_context_data(self, *args, **kwargs):
-        page_context = super(SDGView, self).get_context_data(*args, **kwargs)
-        sdg_constants = None
-        with open('data/sdg.json') as f:
-            sdg_constants = f
+        return super(SDGHomePageView, self).get_context_data(*args, **kwargs)
 
-        page_context['sdg_labels'] = sdg_constants
-        return page_context
+
+class SDGGeographyDetailView(GeographyDetailView):
+
+    def dispatch(self, *args, **kwargs):
+        return super(SDGGeographyDetailView, self).dispatch(*args, **kwargs)
+
+    def get_context_data(self, *args, **kwargs):
+        return super(SDGGeographyDetailView, self).get_context_data(*args,
+                                                                    **kwargs)
+
+    def get_geography(self, geo_id):
+        super(SDGGeographyDetailView, self).get_geography(geo_id)
 
     def get_template_names(self):
-        return ['profile/sdg_detail.html']
-
-
+        return ['profile/profile_detail_sdg.html',]

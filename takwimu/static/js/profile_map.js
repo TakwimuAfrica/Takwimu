@@ -156,8 +156,8 @@ var ProfileMaps = function() {
                     var currentPath = window.location.pathname;
                     if (currentPath.indexOf('profiles') !== -1){
                         window.location = '/profiles/' + feature.properties.level + '-' + feature.properties.code + '/';
-                    } else if (currentPath.indexOf('sdgs') !== -1) {
-                        window.location = '/sdgs/' + feature.properties.level + '-' + feature.properties.code + '/';
+                    } else if (currentPath.indexOf('sdg') !== -1) {
+                        window.location = '/sdg/' + feature.properties.level + '-' + feature.properties.code + '/';
                     }
 
                 });
