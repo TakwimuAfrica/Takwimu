@@ -7,8 +7,8 @@
     <div class="row mb-5">
       <div class="col-4">
         <div class="nav flex-column nav-pills h-100 text-right" id="faqs-tab" role="tablist" aria-orientation="vertical">
-          {% for faq in faqs %}
-            {% include 'takwimu/_includes/sections/faq/nav_detail.html' %}
+          {% for faq in settings.takwimu.FAQSetting.faqs %}
+            {% include 'takwimu/_includes/sections/faq/nav_detail.html' with id=forloop.counter %}
           {% endfor %}
         </div>
       </div>
@@ -16,8 +16,8 @@
       <div class="col-8">
         <div class="tab-content bg-light text-dark h-100 py-4 px-5" id="faqs-tabContent"
             style="border-radius: 2px;">
-          {% for faq in faqs %}
-            {% include 'takwimu/_includes/sections/faq/tab_detail.html' %}
+          {% for faq in settings.takwimu.FAQSetting.faqs %}
+            {% include 'takwimu/_includes/sections/faq/tab_detail.html' with id=forloop.counter %}
           {% endfor %}
         </div>
       </div>

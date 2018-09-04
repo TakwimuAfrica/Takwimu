@@ -1,12 +1,18 @@
 import json
 import requests
 
+from collections import OrderedDict
 from django.conf import settings
-from django.shortcuts import render_to_response
+from django.core.serializers import serialize
+from django.shortcuts import render_to_response, render
 from django.template import RequestContext
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, View
+from django.views.generic.base import TemplateView
+from wagtail.wagtailcore.models import Page
+from wagtail.wagtailsearch.models import Query
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
+    TopicPage, ProfileSectionPage, ProfilePage
 from forms import SupportServicesContactForm
 
 
@@ -41,6 +47,7 @@ class LegalView(TemplateView):
     View of legal notices: Terms of Use, Privacy and Cookie policies.
     """
     template_name = 'takwimu/about/legal.html'
+
 
 class TopicView(TemplateView):
     """
@@ -151,3 +158,63 @@ class SupportServicesIndexView(FormView):
         print('\n\n\n\n\n\n')
         print form.data
         return super(SupportServicesIndexView, self).form_invalid(form)
+
+
+class SearchView(TemplateView):
+    """
+    Search View
+    -----------
+    Displays search results.
+
+    """
+    template_name = 'search_results.html'
+
+    def get(self, request, *args, **kwargs):
+        search_query = request.GET.get('q', '')
+        items = []
+        countries = OrderedDict()
+        topics = OrderedDict()
+        if search_query:
+
+            # Profile page only indexes geo and body but not sections.
+            profilepage_results = ProfilePage.objects.live().search(
+                search_query)
+            for profilepage in profilepage_results.results():
+                countries[profilepage.title] = 1
+                self._extract_search_results(request, profilepage, profilepage.title,
+                                         items)
+
+            # Hence, sections (i.e. topics in the UI) need to be searched independent
+            # of profile page
+            profilesectionpage_results = ProfileSectionPage.objects.live().search(search_query)
+            for profilesectionpage in profilesectionpage_results.results():
+                country = profilesectionpage.get_parent().title
+                countries[country] = 1
+                topics[profilesectionpage.title] = 1
+                self._extract_search_results(request, profilesectionpage, country,
+                                         items)
+
+            Query.get(search_query).add_hit()
+
+        return render(request, self.template_name, {
+            'search_query': search_query,
+            'search_results': {
+                'items': items,
+                'countries': countries.keys(),
+                'topics': topics.keys(),
+            },
+        })
+
+    def _extract_search_results(self, request, page, country, results=[]):
+        url = page.get_url(request)
+        for topic in page.body:
+            result = {
+                'country': country,
+                'region': 'National',
+                'category': page.title,
+                'url': url,
+                'data_point': topic,
+            }
+            results.append(result)
+
+        return results
