@@ -83,7 +83,7 @@ level1	NG_1_031	2009	low birth weights	3
 --
 
 ALTER TABLE ONLY child_births_with_low_birth_weights
-    ADD CONSTRAINT pk_child_births_with_low_birth_weights PRIMARY KEY (geo_level, geo_code, geo_version, ow_birth_weights);
+    ADD CONSTRAINT pk_child_births_with_low_birth_weights PRIMARY KEY (geo_level, geo_code, geo_version, low_birth_weights);
 
 
 --
