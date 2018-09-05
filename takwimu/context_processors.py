@@ -42,7 +42,7 @@ def takwimu_topics(request):
 
     sections = []
     try:
-        profile_sections = ProfileSectionPage.objects.all()
+        profile_sections = ProfileSectionPage.objects.live()
         sections_by_title = OrderedDict()
         section_topics_by_title = OrderedDict()
         section_topic_indicators_by_title = OrderedDict()
