@@ -13,7 +13,7 @@
             <th scope="col" class="pr-0 pt-0">
                 <div class="form-inline align-items-center">
                     <label class="mr-sm-2" for="sortby">Sort by: </label>
-                    <select class="custom-select" id="sortby" aria-placeholder="Sort by..">
+                    <select class="custom-select" id="sortby" aria-placeholder="Sort by.." style="border-radius:0;">
                         <option value="Relevance">Relevance</option>
                         <option value="Location">Location (A-Z)</option>
                     </select>
@@ -32,7 +32,7 @@
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </td>
-            <td class="text-capitalize px-0 align-middle" valign="top" style="white-space:nowrap">
+            <td class="text-capitalize px-0 align-middle" style="white-space:nowrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Country:</b>
                     <span class="col pl-3">{{ result.country|slugify }}</span>
@@ -42,7 +42,7 @@
                     <span class="col pl-3">{{ result.region|slugify }}</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0" valign="center" style="white-space:wrap;">
+            <td class="text-capitalize px-0" style="white-space:wrap;">
                 <span class="d-flex mb-2">
                     <b class="col-5">Category:</b>
                     <span class="col pl-1">{{ result.category|slugify }}</span>
@@ -87,6 +87,16 @@
 <style>
     .noBorder td, .transBorder {
         border: 1px solid transparent;
+    }
+    .carousel-inner .btn-group {
+        border: 1px solid #dedede;
+    }
+    .odd .carousel-inner .btn-group .btn {
+        background: #dedede;
+    }
+    .carousel-inner .btn-group .btn {
+        border-radius: 0;
+        background: #fff;
     }
     .carousel-indicators li {
         background-color: #6c757d;
