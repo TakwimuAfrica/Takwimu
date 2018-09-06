@@ -5,7 +5,7 @@ from collections import OrderedDict
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import ProfileSectionPage
+from takwimu.models.dashboard import ProfilePage, ProfileSectionPage
 from takwimu.models.dashboard import TopicPage
 
 
@@ -21,7 +21,7 @@ def takwimu_stories(request):
         else:
             client = Medium()
             stories = client.get_publication_posts('takwimu-africa',
-                                                    count=20)
+                                                   count=20)
         stories_latest = stories[0:3]
         stories_trending = sorted(
             stories, key=operator.itemgetter('clap_count'), reverse=True)
@@ -42,68 +42,79 @@ def takwimu_topics(request):
 
     sections = []
     try:
-        profile_sections = ProfileSectionPage.objects.all()
-        sections_by_title = OrderedDict()
-        section_topics_by_title = OrderedDict()
-        section_topic_indicators_by_title = OrderedDict()
-        for section_num, profile_section in enumerate(profile_sections, start=1):
-            country = str(profile_section.get_parent())
-            default_section = {
-                'id': 'section-{}'.format(section_num),
-                'title': profile_section.title,
-                'href': 'section-{}-topics'.format(section_num),
-                'key_issues': [],
-            }
-            section = sections_by_title.setdefault(
-                default_section['title'].lower(), default_section)
-            topics_by_title = section_topics_by_title.setdefault(
-                default_section['title'].lower(), OrderedDict())
-            topic_indicators_by_title = section_topic_indicators_by_title.setdefault(
-                default_section['title'].lower(), OrderedDict())
-            for topic_num, section_topic in enumerate(profile_section.body, start=1):
-                # Topics that have no indicators (key issues) should be
-                # displayed separately.
-                topic_title = section_topic.value['title']
-                if not section_topic.value['indicators']:
-                    section['key_issues'].append({
-                        'id': '{}-key_issue-{}'.format(section['id'], topic_num),
-                        'title': topic_title,
-                        'country': country,
-                        'href': profile_section.get_url(request),
-                    })
-                else:
-                    default_topic = {
-                        'id': 'topic-{}'.format(topic_num),
-                        'title': topic_title,
-                        'href': '{}-topic-{}-indicators'.format(section['id'], topic_num),
-                    }
-                    topic = topics_by_title.setdefault(
-                        default_topic['title'].lower(), default_topic)
-                    indicators_by_title = topic_indicators_by_title.setdefault(
-                        topic_title.lower(), OrderedDict())
-                    for indicator_num, topic_indicator in enumerate(section_topic.value['indicators'], start=1):
-                        indicator_title = topic_indicator.value['title']
-                        default_indicator = {
-                            'id': 'indicator-{}'.format(indicator_num),
-                            'title': indicator_title,
-                            'href': '{}-country-selection'.format(topic['href']),
-                            'countries': [],
-                        }
-                        indicator = indicators_by_title.setdefault(
-                            indicator_title.lower(), default_indicator)
-                        indicator['countries'].append({
-                            'title': country,
-                            'href': profile_section.get_url(request),
-                        })
-
-                    topic['indicators'] = indicators_by_title.values()
-
-            section['topics'] = topics_by_title.values()
-
-        sections = sections_by_title.values()
+        profile_topics = _traverse_profile_sections(
+            ProfilePage.objects.live(), request)
+        profile_section_topics = _traverse_profile_sections(
+            ProfileSectionPage.objects.live(), request, len(profile_topics))
+        sections = profile_topics + profile_section_topics
     except Exception as e:
         print(e.message)
 
     return {
         'sections': sections,
     }
+
+
+def _traverse_profile_sections(profile_sections, request, start_section_num=0):
+    sections_by_title = OrderedDict()
+    section_topics_by_title = OrderedDict()
+    section_topic_indicators_by_title = OrderedDict()
+    for section_num, profile_section in enumerate(profile_sections, start=start_section_num + 1):
+        (country, profile_title) = (str(profile_section.get_parent()), profile_section.title) \
+            if isinstance(profile_section, ProfileSectionPage) \
+            else (str(profile_section), 'Country Overview')
+        default_section = {
+            'id': 'section-{}'.format(section_num),
+            'title': profile_title,
+            'href': 'section-{}-topics'.format(section_num),
+            'key_issues': [],
+        }
+        section = sections_by_title.setdefault(
+            profile_title.lower(), default_section)
+        topics_by_title = section_topics_by_title.setdefault(
+            profile_title.lower(), OrderedDict())
+        topic_indicators_by_title = section_topic_indicators_by_title.setdefault(
+            profile_title.lower(), OrderedDict())
+        start_topic_num = len(topics_by_title.keys())
+        for topic_num, section_topic in enumerate(profile_section.body, start=start_topic_num + 1):
+            # Topics that have no indicators (key issues) should be
+            # displayed separately.
+            topic_title = section_topic.value['title']
+            if not section_topic.value['indicators']:
+                section['key_issues'].append({
+                    'id': '{}-key_issue-{}'.format(section['id'], topic_num),
+                    'title': topic_title,
+                    'country': country,
+                    'href': profile_section.get_url(request),
+                })
+            else:
+                default_topic = {
+                    'id': '{}-topic-{}'.format(section['id'], topic_num),
+                    'title': topic_title,
+                    'href': '{}-topic-{}-indicators'.format(section['id'], topic_num),
+                }
+                topic = topics_by_title.setdefault(
+                    topic_title.lower(), default_topic)
+                indicators_by_title = topic_indicators_by_title.setdefault(
+                    topic_title.lower(), OrderedDict())
+                start_indicator_num = len(indicators_by_title.keys())
+                for indicator_num, topic_indicator in enumerate(section_topic.value['indicators'], start=start_indicator_num + 1):
+                    indicator_title = topic_indicator.value['title']
+                    default_indicator = {
+                        'id': '{}-indicator-{}'.format(topic['id'], indicator_num),
+                        'title': indicator_title,
+                        'href': '{}-indicator-{}-country-selections'.format(topic['id'], indicator_num),
+                        'countries': [],
+                    }
+                    indicator = indicators_by_title.setdefault(
+                        indicator_title.lower(), default_indicator)
+                    indicator['countries'].append({
+                        'title': country,
+                        'href': profile_section.get_url(request),
+                    })
+
+                topic['indicators'] = indicators_by_title.values()
+
+        section['topics'] = topics_by_title.values()
+
+    return sections_by_title.values()
