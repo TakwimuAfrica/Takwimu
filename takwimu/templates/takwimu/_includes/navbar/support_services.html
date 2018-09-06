@@ -35,7 +35,7 @@
       <h5 class="font-weight-bold pb-2">Help and support</h5>
       <div class="mt-2 d-inline-block py-3 px-2 rounded social-icons" style="background-color:#1455a0;">
         <ul class="navbar-nav">
-        {% to_list 'twitter' 'facebook' 'medium' 'slack' 'github' as social_medias %}
+        {% to_list 'twitter' 'facebook' 'medium' 'slack' 'linkedin' as social_medias %}
         {% for social_media in social_medias %}
           {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
             <li class="nav-item">
