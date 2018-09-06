@@ -21,18 +21,18 @@
             </th>
         </tr>
     </thead>
-    <tbody class="table-bordered accordion" style="font-size: 12px;">
+    <tbody class="table-bordered accordion list" style="font-size: 12px;">
         {% for result in results %}
         <!-- The first empty tr helps with table-striped -->
         <tr></tr>
         <tr id="result">
-            <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center">
+            <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center expand">
                 <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" data-target="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
                     aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </td>
-            <td class="text-capitalize px-0 align-middle" style="white-space:nowrap">
+            <td class="text-capitalize px-0 align-middle location" style="white-space:nowrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Country:</b>
                     <span class="col pl-3">{{ result.country|slugify }}</span>
@@ -42,7 +42,7 @@
                     <span class="col pl-3">{{ result.region|slugify }}</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0" style="white-space:wrap;">
+            <td class="text-capitalize px-0 data" style="white-space:wrap;">
                 <span class="d-flex mb-2">
                     <b class="col-5">Category:</b>
                     <span class="col pl-1">{{ result.category|slugify }}</span>
@@ -52,7 +52,7 @@
                     <span class="col pl-1">{{ result.data_point.value.title }}</span>
                 </span>
             </td>
-            <td style="border-right: 1px solid transparent;" class="text-center align-middle">
+            <td style="border-right: 1px solid transparent;" class="text-center align-middle collection">
                 <button class="btn btn-link btn-sm font-weight-bold">
                     <i class="far fa-heart mx-1"></i>
                     Add to collection
@@ -80,7 +80,7 @@
                 </div>
             </td>
         </tr>
-        
+             
         {% endfor %}
     </tbody>
 </table>
@@ -114,36 +114,35 @@
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-    $('a[data-toggle="collapse"]').click(function () {
-        var btn = $(this);
-        console.log(btn.attr('data-target'));
-        //on close collapse
-        $('.collapse'+btn.attr('data-target')).on('hide.bs.collapse', function () {
-            // Change collapse button state
-            btn.find('.icon').addClass('fa-plus');
+        $('a[data-toggle="collapse"]').click(function () {
+            var btn = $(this);
+            console.log(btn.attr('data-target'));
+            //on close collapse
+            $('.collapse'+btn.attr('data-target')).on('hide.bs.collapse', function () {
+                // Change collapse button state
+                btn.find('.icon').addClass('fa-plus');
 
-            var target = '#'+$(this).attr('data-parent');
-            // Remove borders
-            $(target).removeClass('noBorder');
-            $('tbody.table-bordered').removeClass('transBorder');
-            $(target).prev('tr#result').removeClass('noBorder');
+                var target = '#'+$(this).attr('data-parent');
+                // Remove borders
+                $(target).removeClass('noBorder');
+                $('tbody.table-bordered').removeClass('transBorder');
+                $(target).prev('tr#result').removeClass('noBorder');
+            });
+
+            //on open collapse
+            $('.collapse'+btn.attr('data-target')).on('show.bs.collapse', function () {
+                // Change collapse button state
+                btn.find('.icon').toggleClass('fa-minus');
+
+                var target = '#'+$(this).attr('data-parent');
+                // Add back borders
+                $(target).addClass('noBorder');
+                $('tbody.table-bordered').addClass('transBorder');
+                $(target).prev('tr#result').addClass('noBorder');
+            })
         });
 
-        //on open collapse
-        $('.collapse'+btn.attr('data-target')).on('show.bs.collapse', function () {
-            // Change collapse button state
-            btn.find('.icon').toggleClass('fa-minus');
-
-            var target = '#'+$(this).attr('data-parent');
-            // Add back borders
-            $(target).addClass('noBorder');
-            $('tbody.table-bordered').addClass('transBorder');
-            $(target).prev('tr#result').addClass('noBorder');
-        })
-    });
-
-    
-
+        
     getPagination('#results-table');
 
     /*					PAGINATION 
@@ -166,8 +165,7 @@
             var trnum = 0; // reset tr counter 
             var maxRows = parseInt($(this).val()); // get Max Rows from select option
 
-            if (maxRows == 50) {
-
+            if (maxRows == 100) {
                 $('.pagination').hide();
             } else {
 
@@ -176,7 +174,7 @@
 
             var totalRows = $(table + ' tbody tr#result').length; // numbers of rows 
             $(table + ' tr#result:gt(0)').each(function () { // each TR in  table and not the header
-                trnum++; // Start Counter 
+                trnum++; // Start Counter
                 if (trnum > maxRows) { // if tr number gt maxRows
 
                     $(this).hide(); // fade it out 
@@ -194,6 +192,9 @@
                     </li>').show();
                 } // end for i 
             } // end if row count > max rows
+            else{
+                $('.pagination').hide();
+            }
             $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li 
             $('.pagination li').on('click', function (evt) { // on click each page
                 evt.stopImmediatePropagation();
@@ -235,6 +236,5 @@
         // end of on select change 
     // END OF PAGINATION 
     }
-
     });
 </script>

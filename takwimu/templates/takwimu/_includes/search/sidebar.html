@@ -22,12 +22,9 @@
         </div>
         <div class="collapse my-1" id="filterbycountry">
             <div class="card-body px-2">
-                <select class="custom-select bg-light">
-                    <option selected>Select country</option>
-                    <option value="1">Tanzania</option>
-                    <option value="2">Kenya</option>
-                    <option value="3">Senegal</option>
-                </select>
+                <input class="form-control" type="text" data-toggle="popover" data-placement="right"
+                    data-title="Select Countries" data-content='{% include 'takwimu/_includes/search/countries.html' %}'
+                    placeholder="Select countries" readonly>
             </div>
         </div>
     </li>
@@ -39,12 +36,9 @@
         </div>
         <div class="collapse my-1" id="filterbytopic">
             <div class="card-body px-2">
-                <select class="custom-select bg-light">
-                    <option selected>Select topic</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <input class="form-control" type="text" data-toggle="popover" data-placement="right"
+                    data-title="Select Topic(s)" data-content='{% include 'takwimu/_includes/search/topic.html' %}'
+                    placeholder="Select Topic(s)" readonly>
             </div>
         </div>
     </li>
@@ -56,12 +50,9 @@
         </div>
         <div class="collapse my-1" id="filterbysdg">
             <div class="card-body px-2">
-                <select class="custom-select bg-light">
-                    <option selected>Select indicator</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
-                </select>
+                <input class="form-control" type="text" data-toggle="popover" data-placement="right"
+                    data-title="Select indicator(s)" data-content='{% include 'takwimu/_includes/search/_popover.html' %}'
+                    placeholder="Select indicator(s)" readonly>
             </div>
         </div>
     </li>
