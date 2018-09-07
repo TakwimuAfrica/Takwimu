@@ -11,7 +11,7 @@
             <div class="col-9 results">
                 {% if results %}
                     <h1 class="font-weight-bold py-3">{{ results|length }} Search results for <q>{{ query }}</q></h1>
-                    <div class="border p-3" id="results-container">
+                    <div class="border p-3 bg-white" id="results-container">
                         <span class="d-flex pt-4 px-2" style="font-size: 15px;">
                             Showing
                             {% if results|length > 25 %}
