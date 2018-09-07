@@ -76,6 +76,15 @@
                                 {% include_block indicator %}
                             </div>
                         {% endfor %}
+                        {% if not result.data_point.value.indicators %}
+                            <div class="alert alert-info" role="alert">
+                                <span class="fas fa-info"></span>
+                                <span class="ml-2">We are working to source additional data for this topic. Please 
+                                    <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a>
+                                    to receive an alert when the data is updated.
+                                </span>
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </td>
