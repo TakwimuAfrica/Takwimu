@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -145,12 +145,12 @@ country	TZ	2009	hospital	263
 
 
 --
+-- TOC entry 3272 (class 2606 OID 43584)
 -- Name: health_centers pk_health_centers; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.health_centers
     ADD CONSTRAINT pk_health_centers PRIMARY KEY (geo_level, geo_code, geo_version, centers);
-
 
 --
 -- PostgreSQL database dump complete

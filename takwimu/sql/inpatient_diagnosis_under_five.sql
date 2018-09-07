@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -30,7 +30,6 @@ CREATE TABLE public.inpatient_diagnosis_under_five (
     inpatient_diagnosis_under_five character varying(128) NOT NULL,
     total integer
 );
-
 
 --
 -- Data for Name: inpatient_diagnosis_under_five; Type: TABLE DATA; Schema: public; Owner: -
@@ -289,7 +288,6 @@ country	TZ	2009	pneumonia	99936
 
 ALTER TABLE ONLY public.inpatient_diagnosis_under_five
     ADD CONSTRAINT pk_inpatient_diagnosis_under_five PRIMARY KEY (geo_level, geo_code, geo_version, inpatient_diagnosis_under_five);
-
 
 --
 -- PostgreSQL database dump complete

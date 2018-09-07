@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -18,6 +18,7 @@ DROP TABLE IF EXISTS public.health_workers;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
 
 --
 -- Name: health_workers; Type: TABLE; Schema: public; Owner: -
@@ -410,7 +411,6 @@ country	TZ	2009	HRH patient ratio	6
 
 ALTER TABLE ONLY public.health_workers
     ADD CONSTRAINT pk_health_workers PRIMARY KEY (geo_level, geo_code, geo_version, workers);
-
 
 --
 -- PostgreSQL database dump complete

@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+-- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -410,7 +410,6 @@ country	TZ	2009	UTI	42853
 
 ALTER TABLE ONLY public.inpatient_diagnosis_over_five
     ADD CONSTRAINT pk_inpatient_diagnosis_over_five PRIMARY KEY (geo_level, geo_code, geo_version, inpatient_diagnosis_over_five);
-
 
 --
 -- PostgreSQL database dump complete

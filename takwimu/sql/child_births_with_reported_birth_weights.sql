@@ -2,19 +2,24 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 9.5.13
+-- Dumped by pg_dump version 9.6.7
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
+SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
-SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
+
+SET search_path = public, pg_catalog;
 
 ALTER TABLE IF EXISTS ONLY public.child_births_with_reported_birth_weights DROP CONSTRAINT IF EXISTS pk_child_births_with_reported_birth_weights;
 DROP TABLE IF EXISTS public.child_births_with_reported_birth_weights;
+SET search_path = public, pg_catalog;
+
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -23,7 +28,7 @@ SET default_with_oids = false;
 -- Name: child_births_with_reported_birth_weights; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.child_births_with_reported_birth_weights (
+CREATE TABLE child_births_with_reported_birth_weights (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -36,7 +41,7 @@ CREATE TABLE public.child_births_with_reported_birth_weights (
 -- Data for Name: child_births_with_reported_birth_weights; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.child_births_with_reported_birth_weights (geo_level, geo_code, geo_version, reported_birth_weights, total) FROM stdin;
+COPY child_births_with_reported_birth_weights (geo_level, geo_code, geo_version, reported_birth_weights, total) FROM stdin;
 level1	NG_1_001	2009	reported birth weight	57
 level1	NG_1_002	2009	reported birth weight	15
 level1	NG_1_003	2009	reported birth weight	18
@@ -82,11 +87,10 @@ country	NG	2009	reported birth weight	16
 -- Name: child_births_with_reported_birth_weights pk_child_births_with_reported_birth_weights; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.child_births_with_reported_birth_weights
+ALTER TABLE ONLY child_births_with_reported_birth_weights
     ADD CONSTRAINT pk_child_births_with_reported_birth_weights PRIMARY KEY (geo_level, geo_code, geo_version, reported_birth_weights);
 
 
 --
 -- PostgreSQL database dump complete
 --
-
