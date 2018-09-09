@@ -119,7 +119,7 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 # -------------------------------------------------------------------------------------
 
 
-TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu')
+TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu-dev')
 TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '30'))
 TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')
 
