@@ -166,18 +166,21 @@ class SearchView(TemplateView):
                 search_query)
             for profilepage in profilepage_results.results():
                 countries[profilepage.title] = 1
-                self._extract_search_results(request, profilepage, profilepage.title,
-                                         items)
+                self._extract_search_results(request, profilepage,
+                                             profilepage.title,
+                                             items)
 
             # Hence, sections (i.e. topics in the UI) need to be searched independent
             # of profile page
-            profilesectionpage_results = ProfileSectionPage.objects.live().search(search_query)
+            profilesectionpage_results = ProfileSectionPage.objects.live().search(
+                search_query)
             for profilesectionpage in profilesectionpage_results.results():
                 country = profilesectionpage.get_parent().title
                 countries[country] = 1
                 topics[profilesectionpage.title] = 1
-                self._extract_search_results(request, profilesectionpage, country,
-                                         items)
+                self._extract_search_results(request, profilesectionpage,
+                                             country,
+                                             items)
 
             Query.get(search_query).add_hit()
 
@@ -205,27 +208,24 @@ class SearchView(TemplateView):
         return results
 
 
-class SDGHomePageView(HomepageView):
-    template_name = 'sgd_homepage.html'
+class GeographySDGDetailView(GeographyDetailView):
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        data = request.GET.get('data')
+        if data == 'sdg':
+            context['data_display'] = 'SDG Analysis'
+            return render(request,
+                          template_name='profile/profile_detail_sdg.html',
+                          context=context)
+        else:
+            return render(request,
+                          template_name='profile/profile_detail_takwimu.html',
+                          context=context)
 
     def get_context_data(self, *args, **kwargs):
-        return super(SDGHomePageView, self).get_context_data(*args, **kwargs)
-
-
-class SDGGeographyDetailView(GeographyDetailView):
-
-    def dispatch(self, *args, **kwargs):
-        return super(SDGGeographyDetailView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(SDGGeographyDetailView, self).get_context_data(*args,
-                                                                    **kwargs)
-        context['sgd'] = SDG
-        print(context)
+        context = super(GeographySDGDetailView, self).get_context_data(*args,
+                                                                       **kwargs)
+        context['sdg'] = SDG
+        context['data_display'] = 'Takwimu Analysis'
         return context
-
-    def get_geography(self, geo_id):
-        super(SDGGeographyDetailView, self).get_geography(geo_id)
-
-    def get_template_names(self):
-        return ['profile/profile_detail_sdg.html',]
