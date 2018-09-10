@@ -2,13 +2,39 @@
     <span aria-hidden="true">&times;</span>
 </button>
 <div class="dropdown-menu-lg text-light container-fluid" style="padding: 10rem 0;">
-    <form>
+    <form action="{% url 'search' %}" method="get">
         <div class="input-group col-6 mx-auto">
-            <input type="text" class="form-control border-0 py-3 px-5 text-center" id="search-takwimu" placeholder="Search Takwimu">
+            <input type="text" class="form-control border-0 py-3 px-5 text-center"  name="q" value="{{ query }}" id="search-takwimu" placeholder="Search Takwimu">
 
-            <button type="submit" class="btn btn-search">
+            <a href="{% url 'search' %}" class="btn btn-search">
                 <i class="fa fa-search"></i>
-            </button>
+            </a>
         </div>
     </form>
 </div>
+<style>
+
+  .popover {
+      margin-top: -0.25rem;
+      left: 0;
+      right: -5px;
+      border-radius: 0;
+      max-width: 100vw;
+      background-color: #074c9c;
+    }
+
+    .bs-popover-auto[x-placement^=bottom] .arrow::after, 
+    .bs-popover-auto[x-placement^=bottom] .arrow::before, 
+    .bs-popover-bottom .arrow::after, 
+    .bs-popover-bottom .arrow::before {
+        border-bottom: 10px solid #074c9c;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+    }
+
+    .bs-popover-auto[x-placement^=bottom] .arrow::after,
+    .bs-popover-bottom .arrow::after  {
+        border-bottom-color: #074c9c;
+    }
+
+</style>
