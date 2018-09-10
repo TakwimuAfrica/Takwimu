@@ -1,9 +1,9 @@
 gunicorn==19.8.1
 
-git+https://github.com/CodeForAfricaLabs/HURUmap.git@develop#egg=hurumap
+git+https://github.com/CodeForAfrica/HURUmap.git@master#egg=hurumap
 
-# workaround: setup keeps installing wazimap from PYPI
-git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
+# workaround: `pip install` keeps installing wazimap from PYPI, we need the one from Github
+git+https://github.com/OpenUpSA/wazimap.git@2cdc95447c95f20d1ba9bb2e272eef25075e14ff#egg=wazimap
 
 git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 
@@ -11,9 +11,8 @@ git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=djang
 
 Markdown==2.6.11
 
-django-debug-toolbar
+django-debug-toolbar==1.9.1
 
 elasticsearch==5.5.3
 
 requests-aws4auth==0.9
-

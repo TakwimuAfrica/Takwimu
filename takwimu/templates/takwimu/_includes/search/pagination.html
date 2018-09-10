@@ -1,0 +1,45 @@
+<div class="row" style="font-size: 15px; font-style: normal;font-stretch: normal;line-height: normal; letter-spacing: normal;">
+    <span class="col-12 py-3 d-none">
+        Showing
+        {% if results|length > 25 %}
+            1-25 results  of {{ results|length }}
+        {% else %}
+            {{ results|length }} results
+        {% endif %}
+    </span>
+    <div class="col">
+        <nav aria-label="Showing results">
+        <!-- Start Pagination -->
+        <div class='pagination-container'>
+            <nav>
+                <ul class="pagination pagination-sm"> 
+                    <li class="page-item" data-page="prev">
+                        <a class="page-link mx-1">
+                            Prev 
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                    <!--Here the JS Function Will Add the Rows -->
+                    <li class="page-item" data-page="next" id="prev">
+                        <a class="page-link mx-1 active"> Next
+                            <span class="sr-only">(current)</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+            
+        </nav>
+    </div>
+    <div class="col">
+        <div class="float-right form-group row m-0 p-0">
+            <div class="p-2">
+                Results per page:
+            </div>
+            <select class="custom-select col form-control-sm" style="border-radius:0;" aria-placeholder="Results per page" name="state" id="maxRows">
+                <option value="25">25</option>
+                <option value="50">50</option>
+            </select>
+        </div>
+    </div>
+</div>

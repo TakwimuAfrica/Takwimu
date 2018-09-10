@@ -1,0 +1,19 @@
+<form class="d-flex flex-column justify-content-center px-1">
+    {% block popover_content %}{% endblock %}
+    <button type="button" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
+</form>
+
+<style>
+.popover {
+    padding: 1em;
+    max-width: 700px;
+    border-radius: 0;
+}
+.popover .popover-header {
+    background: #ffffff;
+    border-bottom: 1px solid #000000;
+    color: #000000;
+    border-radius: 0;
+    font-weight: normal;
+}
+</style>
