@@ -205,9 +205,7 @@ class TopicBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(required=False)
 
     indicators = blocks.StreamBlock([
-        ('indicator_group', blocks.StreamBlock([
-            ('indicator', IndicatorWidgetBlock(required=False))
-        ]))
+        ('indicator_group', IndicatorWidgetBlock(required=False))
     ], required=False)
 
     def js_initializer(self):
