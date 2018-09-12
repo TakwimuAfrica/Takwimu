@@ -212,19 +212,14 @@ class GeographySDGDetailView(GeographyDetailView):
 
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(*args, **kwargs)
+        context['data_display'] = 'Takwimu Analysis'
         data = request.GET.get('data')
         if data and data.lower() == 'sdg':
             context['data_display'] = 'SDG Analysis'
+            context['sdg'] = SDG
             return render(request,
                           template_name='profile/profile_detail_sdg.html',
                           context=context)
         return render(request,
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
-
-    def get_context_data(self, *args, **kwargs):
-        context = super(GeographySDGDetailView, self).get_context_data(*args,
-                                                                       **kwargs)
-        context['sdg'] = SDG
-        context['data_display'] = 'Takwimu Analysis'
-        return context
