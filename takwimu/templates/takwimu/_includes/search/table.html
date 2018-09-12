@@ -3,17 +3,17 @@
 
 <table class="table table-striped" id="results-table">
     <thead class="table-borderless align-items-center">
-        <tr style="font-size: 14px;line-height: 50px; vertical-align: middle;">
-            <th scope="col" class="text-center">
+        <tr style="font-size: 14px; vertical-align: middle;">
+            <th scope="col" class="text-center py-4">
                 <a href="#" class="text-nowrap text-dark" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false"
                     style="text-decoration: underline;">Expand all</a>
             </th>
-            <th scope="col">Location</th>
-            <th scope="col">Data</th>
-            <th scope="col" class="pr-0 pt-0">
+            <th scope="col" class="py-4">Location</th>
+            <th scope="col" class="py-4">Data</th>
+            <th scope="col" class="border-0 pr-0 float-right ">
                 <div class="form-inline align-items-center">
                     <label class="mr-sm-2" for="sortby">Sort by: </label>
-                    <select class="custom-select" id="sortby" aria-placeholder="Sort by.." style="border-radius:0;">
+                    <select class="custom-select" id="sortby" aria-placeholder="Sort by.." style="border-radius:2px;">
                         <option value="Relevance">Relevance</option>
                         <option value="Location">Location (A-Z)</option>
                     </select>
@@ -42,21 +42,15 @@
                     <span class="col pl-3">{{ result.region|slugify }}</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0 data" data-content="{{result.category|slugify}}" style="white-space:wrap;">
+            <td colspan="2" class="text-capitalize px-0 data" style="white-space:wrap;">
                 <span class="d-flex mb-2">
-                    <b class="col-5">Category:</b>
+                    <b class="col-3">Category:</b>
                     <span class="col pl-1">{{ result.category|slugify }}</span>
                 </span>
                 <span class="d-flex">
-                    <b class="col-5">Data point:</b>
+                    <b class="col-3">Data point:</b>
                     <span class="col pl-1">{{ result.data_point.value.title }}</span>
                 </span>
-            </td>
-            <td style="border-right: 1px solid transparent;" class="text-center align-middle collection">
-                <button class="btn btn-link btn-sm font-weight-bold">
-                    <i class="far fa-heart mx-1"></i>
-                    Add to collection
-                </button>
             </td>
         </tr>
         <tr class="collapse multi-collapse table-borderless" id="{{ forloop.counter }}{{ result.category|slugify }}" 
