@@ -2,29 +2,13 @@
 
 {% block popover_content %}
 <div class="form-row d-flex justify-content-center px-1">
-    <div class="col-6 control checkbox py-1">
-        <input class="control-input" type="checkbox" id="Development">
-        <label class="control-label" for="Development">
-            Development Context & Key Issues
-        </label>
-    </div>
-    <div class="col-6 control checkbox py-1">
-        <input class="control-input" type="checkbox" id="budget">
-        <label class="control-label" for="budget">
-            The Budget
-        </label>
-    </div>
-    <div class="col-6 control checkbox py-1">
-        <input class="control-input" type="checkbox" id="policy">
-        <label class="control-label" for="policy">
-            The Policy Makers
-        </label>
-    </div>
-    <div class="col-6 control checkbox py-1">
-        <input class="control-input" type="checkbox" id="finance">
-        <label class="control-label" for="finance">
-            Public Finances
-        </label>
-    </div>
+    {% for topic in results.topics %}
+        <div class="col-6 control custom-checkbox py-1">
+            <input class="control-input filter-checkbox" type="checkbox" id="{{topic|slugify}}">
+            <label class="control-label text-truncate" for="{{topic|slugify}}">
+                {{ topic }}
+            </label>
+        </div>
+    {% endfor %}
 </div>
 {% endblock %}

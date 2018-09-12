@@ -22,17 +22,17 @@
         </tr>
     </thead>
     <tbody class="table-bordered accordion list" style="font-size: 12px;">
-        {% for result in results %}
+        {% for result in results.items %}
         <!-- The first empty tr helps with table-striped -->
         <tr></tr>
-        <tr id="result">
+        <tr id="result" data-country="{{result.country|slugify}}" data-category="{{ result.category|slugify }}">
             <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center expand">
                 <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" data-target="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
                     aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </td>
-            <td class="text-capitalize px-0 align-middle location" style="white-space:nowrap">
+            <td class="text-capitalize px-0 align-middle country" data-content="{{result.country|slugify}}" style="white-space:nowrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Country:</b>
                     <span class="col pl-3">{{ result.country|slugify }}</span>
@@ -42,7 +42,7 @@
                     <span class="col pl-3">{{ result.region|slugify }}</span>
                 </span>
             </td>
-            <td class="text-capitalize px-0 data" style="white-space:wrap;">
+            <td class="text-capitalize px-0 data" data-content="{{result.category|slugify}}" style="white-space:wrap;">
                 <span class="d-flex mb-2">
                     <b class="col-5">Category:</b>
                     <span class="col pl-1">{{ result.category|slugify }}</span>
@@ -122,10 +122,23 @@
 
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
+    document.addEventListener('DOMContentLoaded', function () {        
+
+        // Clear search input function
+        function clearThis(target){
+            if($(target).val()) { 
+                $(target).val('');
+            }
+        }
+        // Clear search input on click 
+        $('#clear-search').click(function(){
+            clearThis("#search-box");
+        });
+
+
         $('a[data-toggle="collapse"]').click(function () {
             var btn = $(this);
-            console.log(btn.attr('data-target'));
+            
             //on close collapse
             $('.collapse'+btn.attr('data-target')).on('hide.bs.collapse', function () {
                 // Change collapse button state

@@ -1,8 +1,22 @@
-<form class="d-flex flex-column justify-content-center px-1">
-    {% block popover_content %}{% endblock %}
-    <button type="button" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
-</form>
+{% if results.items %}
+    <form class="d-flex flex-column justify-content-center px-1">
+        {% block popover_content %}{% endblock %}
+        <button type="button" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
+    </form>
+{% elif query %}
+    <div class="jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6text-center font-weight-bold">No results found</h1>
+        </div>
+    </div>
 
+{% else %}
+    <div class="jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6 text-center font-weight-bold">Please type something into the search box</h1>
+        </div>
+    </div>
+{% endif %}
 <style>
 .popover {
     padding: 1em;
@@ -17,3 +31,25 @@
     font-weight: normal;
 }
 </style>
+<script>
+    // Listen checkbox change state
+    // Filter checkbox 
+    $("input.filter-checkbox").change(function(){
+        var _checked = $(this).attr("id");            
+            _filter(_checked);
+        // if ($(this).is(":checked")) {
+                               
+        // }
+    });
+    function _filter(_input) {
+        var trIndex = 0;
+        $("#results-table tr#result:gt(0)").each(function () {
+            trIndex++; // tr index counter
+            var _country = $(this).attr("data-country"),
+                _category = $(this).attr("data-category");
+
+			$(this).addClass(_input === _country || _category ? "d-none" : "table-row");
+      
+        }); 
+    }
+</script>

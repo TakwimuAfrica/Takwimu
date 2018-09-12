@@ -8,8 +8,8 @@
             <div class="input-group my-1 pb-3">
                 <input type="text" class="form-control" name="q" id="search-box" aria-describedby="search-box" placeholder="Search Takwimu"
                     style="border-radius: 0;" value="{{ query }}">
-                <div class="position-absolute btn text-primary px-2" style="right: 0; z-index: 3;">
-                    <span class="fa fa-times-circle" id="clear-search"></span>
+                <div class="position-absolute btn text-primary px-2" id="clear-search" style="right: 0; z-index: 3;">
+                    <span class="fa fa-times-circle"></span>
                 </div>
             </div>
         </form>        
@@ -22,9 +22,16 @@
         </div>
         <div class="collapse my-1" id="filterbycountry">
             <div class="card-body px-2">
-                <input class="form-control" type="text" data-toggle="popover" data-placement="right"
-                    data-title="Select Countries" data-content='{% include 'takwimu/_includes/search/countries.html' %}'
-                    placeholder="Select countries" readonly>
+                    <button type="button" class="btn w-100 pl-2 py-2" 
+                        data-toggle="popover" data-placement="right"
+                        data-title="Select Countries" data-content='{% include 'takwimu/_includes/search/countries.html' %}'
+                        style="background-color: #e9ecef; border-radius: 4px; text-align: left;">
+                        <span class="d-flex">Select Countries</span>
+                        <span class="d-none p-2 badge text-white" style="background-color: #144681; border-radius: 7px;">
+                            Selected Multiple items 
+                            <span aria-hidden="true" class="btn-sm">&times;</span>
+                        </span>
+                    </button>
             </div>
         </div>
     </li>
@@ -36,9 +43,16 @@
         </div>
         <div class="collapse my-1" id="filterbytopic">
             <div class="card-body px-2">
-                <input class="form-control" type="text" data-toggle="popover" data-placement="right"
-                    data-title="Select Topic(s)" data-content='{% include 'takwimu/_includes/search/topic.html' %}'
-                    placeholder="Select Topic(s)" readonly>
+                    <button type="button" class="btn w-100 pl-2 py-2" 
+                        data-toggle="popover" data-placement="right"
+                        data-title="Select Topic(s)" data-content='{% include 'takwimu/_includes/search/topic.html' %}'
+                        style="background-color: #e9ecef; border-radius: 4px; text-align: left;">
+                        <span class="d-flex">Select Topic(s)</span>
+                        <span class="d-none p-2 badge text-white" style="background-color: #144681; border-radius: 7px;">
+                            Selected Multiple items 
+                            <span aria-hidden="true" class="btn-sm">&times;</span>
+                        </span>
+                    </button>
             </div>
         </div>
     </li>
@@ -49,10 +63,17 @@
             <span class="fa fa-chevron-right text-right" style="color: #9b9b9b; font-size: 12px;"></span>
         </div>
         <div class="collapse my-1" id="filterbysdg">
-            <div class="card-body px-2">
-                <input class="form-control" type="text" data-toggle="popover" data-placement="right"
-                    data-title="Select indicator(s)" data-content='{% include 'takwimu/_includes/search/_popover.html' %}'
-                    placeholder="Select indicator(s)" readonly>
+            <div class="card-body px-2">                
+                    <button type="button" class="btn w-100 pl-2 py-2" 
+                        data-toggle="popover" data-placement="right"
+                        data-title="Select indicator(s)" data-content='{% include 'takwimu/_includes/search/_popover.html' %}'
+                        style="background-color: #e9ecef; border-radius: 4px; text-align: left;">
+                        <span class="d-flex">Select indicator(s)</span>
+                        <span class="d-none p-2 badge text-white" style="background-color: #144681; border-radius: 7px;">
+                            Selected Multiple items 
+                            <span aria-hidden="true" class="btn-sm">&times;</span>
+                        </span>
+                    </button>
             </div>
         </div>
     </li>

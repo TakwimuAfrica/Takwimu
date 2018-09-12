@@ -1,10 +1,10 @@
 <div class="row" style="font-size: 15px; font-style: normal;font-stretch: normal;line-height: normal; letter-spacing: normal;">
     <span class="col-12 py-3 d-none">
         Showing
-        {% if results|length > 25 %}
+        {% if results.items|length > 25 %}
             1-25 results  of {{ results|length }}
         {% else %}
-            {{ results|length }} results
+            {{ results.items|length }} results
         {% endif %}
     </span>
     <div class="col">
