@@ -32,6 +32,8 @@
 }
 </style>
 <script>
+
+    // Clear selected filters
     $("#reset-filter").click(function(){
         $("#results-table tr#result").show();
         $( "input:checkbox:checked" ).prop( "checked", false );
@@ -41,7 +43,7 @@
         var _checked = $("input.filter-checkbox:checked").map(function () {
             return $(this).attr("id");
         }).get();
-        
+                
         var rows = $("#results-table tr#result");
         if(_checked.length > 0) {
             rows.hide();
@@ -49,9 +51,18 @@
             rows.show();
         }
 
+        if(_checked.length >= 1) {
+            console.log(_checked[0]);            
+            $("#filterbytopic button .select-item").addClass("d-none");
+            
+            $("#filterbytopic button .filter-badge").removeClass("d-none").html(_checked[0]);
+
+        }
+
         var countries = rows.filter(function () {
             var country = $(this).attr("data-country"),
                 index2 = $.inArray(country, _checked);
+
             	return index2 >= 0;
         }).show();
 
