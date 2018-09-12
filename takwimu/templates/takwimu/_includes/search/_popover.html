@@ -1,7 +1,7 @@
 {% if results.items %}
-    <form class="d-flex flex-column justify-content-center px-1">
+    <form class="d-flex flex-column justify-content-start px-1">
         {% block popover_content %}{% endblock %}
-        <button type="button" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
+        <button type="button" id="reset-filter" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
     </form>
 {% elif query %}
     <div class="jumbotron-fluid">
@@ -32,24 +32,34 @@
 }
 </style>
 <script>
-    // Listen checkbox change state
-    // Filter checkbox 
-    $("input.filter-checkbox").change(function(){
-        var _checked = $(this).attr("id");            
-            _filter(_checked);
-        // if ($(this).is(":checked")) {
-                               
-        // }
+    $("#reset-filter").click(function(){
+        $("#results-table tr#result").show();
+        $( "input:checkbox:checked" ).prop( "checked", false );
     });
-    function _filter(_input) {
-        var trIndex = 0;
-        $("#results-table tr#result:gt(0)").each(function () {
-            trIndex++; // tr index counter
-            var _country = $(this).attr("data-country"),
-                _category = $(this).attr("data-category");
 
-			$(this).addClass(_input === _country || _category ? "d-none" : "table-row");
-      
-        }); 
-    }
+    $("input.filter-checkbox").on("change", function () {
+        var _checked = $("input.filter-checkbox:checked").map(function () {
+            return $(this).attr("id");
+        }).get();
+        
+        var rows = $("#results-table tr#result");
+        if(_checked.length > 0) {
+            rows.hide();
+        } else {
+            rows.show();
+        }
+
+        var countries = rows.filter(function () {
+            var country = $(this).attr("data-country"),
+                index2 = $.inArray(country, _checked);
+            	return index2 >= 0;
+        }).show();
+
+        var categories = rows.filter(function () {
+            var category = $(this).attr("data-category"),
+                index = $.inArray(category, _checked);
+            return index >= 0;
+        }).show();
+
+    });
 </script>

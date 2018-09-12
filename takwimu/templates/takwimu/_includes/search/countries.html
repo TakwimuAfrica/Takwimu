@@ -1,7 +1,7 @@
 {% extends 'takwimu/_includes/search/_popover.html' %}
 
 {% block popover_content %}
-<div class="form-row d-flex justify-content-left px-1">
+<div class="form-row d-flex justify-content-start px-1">
     {% for country in results.countries %}
     <div class="col-4 custom-control custom-checkbox text-nowrap">
         <input class="control-input filter-checkbox" type="checkbox" id="{{country|slugify}}">
