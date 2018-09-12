@@ -87,11 +87,11 @@
               <div class="column-full">
                 <div class="dropdown">
                   <button class="btn btn-info dropdown-toggle" type="button" id="indicatorsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ data_display }}
+                    {{ data_indicators }}
                   </button>
                   <div class="dropdown-menu" aria-labelledby="indicatorsMenuButton">
-                    <a class="dropdown-item{% if data_display == 'SDG Analysis' %} active{% endif %}" href="{{ request.path }}?data=sdg">SDG Data View</a>
-                    <a class="dropdown-item{% if data_display == 'Takwimu Analysis' %} active{% endif %}" href="{{ request.path }}">Takwimu Data View</a>
+                    <a class="dropdown-item{% if data_indicators == 'SDGs Indicators' %} active{% endif %}" href="{{ request.path }}?data=sdg">SDG Indicators</a>
+                    <a class="dropdown-item{% if data_indicators == 'Takwimu Indicators' %} active{% endif %}" href="{{ request.path }}">Takwimu Indicators</a>
                   </div>
                 </div>
               </div>
@@ -172,6 +172,10 @@
       padding: .67em 1.25em .67em;
     }
 
+    .dropdown-item:active,
+    .dropdown-item.active {
+      background-color: #17a2b8
+    }
   </style>
 {% endblock %}
 
