@@ -2,7 +2,7 @@
 import os
 
 from elasticsearch import RequestsHttpConnection
-from requests_aws4auth import AWS4Auth
+from utils.aws_es import AWS4AuthNotUnicode
 
 from hurumap.settings import *  # noqa
 
@@ -140,7 +140,7 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
                 'port': 443,
                 'use_ssl': True,
                 'verify_certs': True,
-                'http_auth': AWS4Auth(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
+                'http_auth': AWS4AuthNotUnicode(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
             }],
             'OPTIONS': {
                 'connection_class': RequestsHttpConnection,
