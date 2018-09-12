@@ -213,15 +213,14 @@ class GeographySDGDetailView(GeographyDetailView):
     def get(self, request, *args, **kwargs):
         context = self.get_context_data(*args, **kwargs)
         data = request.GET.get('data')
-        if data == 'sdg':
+        if data and data.lower() == 'sdg':
             context['data_display'] = 'SDG Analysis'
             return render(request,
                           template_name='profile/profile_detail_sdg.html',
                           context=context)
-        else:
-            return render(request,
-                          template_name='profile/profile_detail_takwimu.html',
-                          context=context)
+        return render(request,
+                      template_name='profile/profile_detail_takwimu.html',
+                      context=context)
 
     def get_context_data(self, *args, **kwargs):
         context = super(GeographySDGDetailView, self).get_context_data(*args,
