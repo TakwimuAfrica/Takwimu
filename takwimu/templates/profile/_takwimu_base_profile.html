@@ -85,15 +85,16 @@
                 </p>
               </div>
               <div class="column-full">
-                <strong>{{ data_display }}</strong>
-                <div class="tool-group toggle-sub-group release-list">
-                    <a>Change Data View<i class="fa fa-chevron-circle-down"></i></a>
-                    <ul class="sub-group" style="display: none;">
-                        <li><a href="{{ request.path }}?data=sdg">SDG Data View</a></li>
-                        <li><a href="{{ request.path }}">Takwimu Data View</a></li>
-                    </ul>
+                <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="indicatorsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ data_display }}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="indicatorsMenuButton">
+                    <a class="dropdown-item{% if data_display == 'SDG Analysis' %} active{% endif %}" href="{{ request.path }}?data=sdg">SDG Data View</a>
+                    <a class="dropdown-item{% if data_display == 'Takwimu Analysis' %} active{% endif %}" href="{{ request.path }}">Takwimu Data View</a>
+                  </div>
                 </div>
-            </div>
+              </div>
             {% endblock %}
           </article>
       </div>
@@ -168,7 +169,7 @@
     }
 
     #cover-profile article {
-      padding: .67em 1.25em 3.33em;
+      padding: .67em 1.25em .67em;
     }
 
   </style>
