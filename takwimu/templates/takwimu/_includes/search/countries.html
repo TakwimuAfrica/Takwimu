@@ -4,7 +4,7 @@
 <div class="form-row d-flex justify-content-start px-1">
     {% for country in results.countries %}
     <div class="col-4 custom-control custom-checkbox text-nowrap">
-        <input class="control-input filter-checkbox" type="checkbox" id="{{country|slugify}}">
+        <input class="control-input filter-checkbox" type="checkbox" id="{{country|slugify}}" data-parent="filterbycountry">
         <label class="control-label" for="{{country|slugify}}">
             {{country}}
         </label>
