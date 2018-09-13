@@ -77,18 +77,10 @@
   <!-- Bootstrap: Enable Tooltips, Popovers -->
   <script>
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip();
-
-      $('[data-toggle="popover"]').popover({
-          container: 'body',
-          html: true
-      }).on('shown.bs.popover', function (eventShown) {
-          var $popup = $('#' + $(eventShown.target).attr('aria-describedby'));
-          $popup.find('button.close').click(function (e) {
-              $popup.popover('hide');
-          });
-      });
+      $('[data-toggle="tooltip"]').tooltip()
     })
+
+   
   </script>
 
   {% block body_javascript_extra %}{% endblock %}
