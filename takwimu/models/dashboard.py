@@ -189,9 +189,8 @@ class IndicatorWidgetBlock(blocks.StreamBlock):
 
 
 class IndicatorsBlock(blocks.StructBlock):
-    indicator = blocks.StreamBlock([
-        ('Indicator', IndicatorWidgetBlock(required=True))
-    ])
+    group_title = blocks.CharBlock(required=True)
+    indicators = IndicatorWidgetBlock(required = False)
 
 
 class IconChoiceBlock(blocks.FieldBlock):
@@ -205,7 +204,7 @@ class TopicBlock(blocks.StructBlock):
     body = blocks.RichTextBlock(required=False)
 
     indicator_groups = blocks.StreamBlock([
-        ('indicator_group', IndicatorWidgetBlock(required=False))
+        ('indicator_groups', IndicatorsBlock(required=False))
     ], required=False)
 
     def js_initializer(self):
