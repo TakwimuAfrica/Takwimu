@@ -59,67 +59,16 @@
           </div>
           <!-- <div class="bg-white position-relative" style="height:50px; top: -45px; margin-bottom: -45px; z-index: 100;"></div> -->
         </div>
-        <div class="" id="">
-          <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
-            {% block dataview_ctrl %}
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-flag"></i>
-              </button>
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-exchange-alt"></i>
-              </button>
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-code"></i>
-              </button>
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-download"></i>
-              </button>
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-share-alt"></i>
-              </button>
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-heart"></i>
-              </button>
-              <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-                <i class="fa fa-book-open"></i>
-              </button>
-            {% endblock %}
-          </div>
-
-          {% block dataview_tabs_nav %}
-            <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
-              {% for indicator_group in topic.value.indicator_groups %}
-                {% for indicator in indicator_group.value.indicators %}
-                  <li class="nav-item">
-                    <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="d{{ indicator.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ indicator.value.title|slugify }}-tab" role="tab"
-                       aria-controls="d{{ indicator.value.title|slugify }}-tab" aria-selected="true">
-                      {% block dataview_tab_title %}Chart{% endblock %}</a>
-                  </li>
-                {% endfor %}
-              {% endfor %}
-            </ul>
-          {% endblock %}
-
-        </div>
-          <div class="tab-content border border-top-0 p-3 pt-4 pb-2 {% block dataview_tab_class %}{% endblock %}">
-          {% for indicator_group in topic.value.indicator_groups %}
-            {% for indicator in indicator_group.value.indicators %}
-              <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-                id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
-                aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
-
-              {% include_block indicator %}
+        <div class="indicator_groups_container">
+          {% for group in topic.value.indicator_groups %}
+            <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
+                id="d{{ group.value.group_title|slugify }}-tab" role="tabpanel"
+                aria-labelledby="d{{ group.value.group_title|slugify }}-tab-panel">
+            {% include 'takwimu/_includes/dataview/indicator_group.html' with indicator_group=group %}
             </div>
           {% endfor %}
-          {% endfor %}
+        </div>
 
-          </div>
-        {% if not topic.value.indicator_groups %}
-          <div class="alert alert-info" role="alert">
-            <span class="fas fa-info"></span>
-            <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
-          </div>
-        {% endif %}
       </div>
     </div>
   </div>

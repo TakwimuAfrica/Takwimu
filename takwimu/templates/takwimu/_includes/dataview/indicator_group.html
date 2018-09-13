@@ -1,0 +1,54 @@
+{% load wagtailcore_tags %}
+<div class="indicator_group">
+
+  {% if indicator_group %}
+    <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-flag"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-exchange-alt"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-code"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-download"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-share-alt"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-heart"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-book-open"></i>
+      </button>
+    </div>
+    <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
+      {% for indicator in indicator_group.value.indicators %}
+        <li class="nav-item">
+          <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="d{{ indicator.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ indicator.value.title|slugify }}-tab" role="tab"
+             aria-controls="d{{ indicator.value.title|slugify }}-tab" aria-selected="true">{{ indicator.block_type | upper }}</a>
+        </li>
+      {% endfor %}
+    </ul>
+
+    <div class="tab-content border border-top-0 p-3 pt-4 pb-2">
+
+      {% for indicator in indicator_group.value.indicators %}
+        <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
+             id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
+             aria-labelledby="d{{ indicator.value.title|slugify }}-tab-btn">
+          {% include_block indicator %}
+        </div>
+      {% endfor %}
+    </div>
+
+  {% else %}
+    <div class="alert alert-info" role="alert">
+      <span class="fas fa-info"></span>
+      <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
+    </div>
+  {% endif %}
+</div>
