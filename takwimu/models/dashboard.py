@@ -188,10 +188,10 @@ class IndicatorWidgetBlock(blocks.StreamBlock):
         icon = 'form'
 
 
-# class IndicatorsBlock(blocks.StructBlock):
-#     indicator = blocks.StreamBlock([
-#         ('Indicator', IndicatorWidgetBlock(required=True))
-#     ])
+class IndicatorsBlock(blocks.StructBlock):
+    indicator = blocks.StreamBlock([
+        ('Indicator', IndicatorWidgetBlock(required=True))
+    ])
 
 
 class IconChoiceBlock(blocks.FieldBlock):
@@ -204,7 +204,7 @@ class TopicBlock(blocks.StructBlock):
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
 
-    indicators = blocks.StreamBlock([
+    indicator_groups = blocks.StreamBlock([
         ('indicator_group', IndicatorWidgetBlock(required=False))
     ], required=False)
 
