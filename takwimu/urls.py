@@ -36,10 +36,8 @@ if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns = [
-        url(r'^404/$', 'takwimu.views.handler404',
-            name='error_404'),
-        url(r'^500/$', 'takwimu.views.handler500',
-            name='error_500'),
+        url(r'^404/$', handler404, name='error_404'),
+        url(r'^500/$', handler500, name='error_500'),
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
 
