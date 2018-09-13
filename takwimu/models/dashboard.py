@@ -189,7 +189,7 @@ class IndicatorWidgetBlock(blocks.StreamBlock):
 
 
 class IndicatorsBlock(blocks.StructBlock):
-    group_title = blocks.CharBlock(required=True)
+    group_title = blocks.CharBlock(required=False)
     indicators = IndicatorWidgetBlock(required = False)
 
 
