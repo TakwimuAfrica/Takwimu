@@ -10,10 +10,13 @@ from django.views.generic import TemplateView, FormView, View
 from django.views.generic.base import TemplateView
 from wagtail.wagtailcore.models import Page
 from wagtail.wagtailsearch.models import Query
+from wazimap.views import HomepageView, GeographyDetailView
 
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
     TopicPage, ProfileSectionPage, ProfilePage
 from forms import SupportServicesContactForm
+
+from sdg import SDG
 
 
 class HomePageView(TemplateView):
@@ -166,7 +169,8 @@ class SearchView(TemplateView):
 
             # Hence, sections (i.e. topics in the UI) need to be searched independent
             # of profile page
-            profilesectionpage_results = ProfileSectionPage.objects.live().search(search_query)
+            profilesectionpage_results = ProfileSectionPage.objects.live().search(
+                search_query)
             for profilesectionpage in profilesectionpage_results.results():
                 self._extract_search_results(request, profilesectionpage)
 
@@ -196,3 +200,19 @@ class SearchView(TemplateView):
                 'data_point': topic,
             }
             self.items.append(result)
+
+class IndicatorsGeographyDetailView(GeographyDetailView):
+
+    def get(self, request, *args, **kwargs):
+        context = self.get_context_data(*args, **kwargs)
+        context['data_indicators'] = 'Takwimu Indicators'
+        data = request.GET.get('data')
+        if data and data.lower() == 'sdg':
+            context['data_indicators'] = 'SDGs Indicators'
+            context['sdg'] = SDG
+            return render(request,
+                          template_name='profile/profile_detail_sdg.html',
+                          context=context)
+        return render(request,
+                      template_name='profile/profile_detail_takwimu.html',
+                      context=context)
