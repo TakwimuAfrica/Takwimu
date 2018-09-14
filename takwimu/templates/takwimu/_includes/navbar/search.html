@@ -1,0 +1,36 @@
+<div class="d-none justify-content-center" id="search-arrow"
+    style="position: relative;top: -10px; margin-bottom: -10px;">
+    <span style="border-bottom: 10px solid #074c9c;border-left: 10px solid transparent;
+        border-right: 10px solid transparent;"></span>
+</div>
+<div class="dropdown-menu-lg text-light container-fluid" style="padding: 10rem 0;" id="search-panel">
+    
+    <form action="{% url 'search' %}" method="get">
+        <div class="input-group col-6 mx-auto">
+            <input type="text" class="form-control border-0 py-3 px-5 text-center"  name="q" value="{{ query }}" id="search-takwimu" placeholder="Search Takwimu">
+
+            <a href="{% url 'search' %}" class="btn btn-search">
+                <i class="fa fa-search"></i>
+            </a>
+        </div>
+    </form>
+    <button type="button" class="close btn-close position-absolute" style="top: 1em; right: 1em;" data-dismiss="search-panel" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // Open search box dropdown
+    $("#nav-search").click(function () {
+        $("#search-arrow").addClass("d-flex");
+        $("#search-panel").show();
+        
+    });
+    // Dismiss search dropdown
+    $('[data-dismiss="search-panel"]').click(function () {
+        $("#search-panel").hide();
+        $("#search-arrow").removeClass("d-flex");
+    });
+});
+</script>
