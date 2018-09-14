@@ -7,15 +7,15 @@
       <div class="col-3 dataindicators-nav">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
-          {% for indicator_group in topic.value.indicator_groups %}
+          {% for indicator in topic.value.indicators %}
             <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
-               id="d{{ indicator_group.value.group_title|slugify }}-tab-btn"
-               data-toggle="pill" href="#d{{ indicator_group.value.group_title|slugify }}-tab"
-               role="tab" aria-controls="d{{ indicator_group.value.group_title|slugify }}-tab"
+               id="d{{ indicator.value.title|slugify }}-tab-btn"
+               data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
+               role="tab" aria-controls="d{{ indicator.value.title|slugify }}-tab"
                 {% if forloop.first %} aria-selected="true" {% endif %}
                aria-selected="false">
               <i class="fas fa-eye fa-fw"></i>
-              {{ indicator_group.value.group_title }}
+              {{ indicator.value.title }}
             </a>
 
             {% if not forloop.last %}
@@ -59,12 +59,12 @@
           </div>
           <!-- <div class="bg-white position-relative" style="height:50px; top: -45px; margin-bottom: -45px; z-index: 100;"></div> -->
         </div>
-        <div class="indicator_groups_container">
-          {% for group in topic.value.indicator_groups %}
+        <div class="indicators-container">
+          {% for indicator in topic.value.indicators %}
             <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-                id="d{{ group.value.group_title|slugify }}-tab" role="tabpanel"
-                aria-labelledby="d{{ group.value.group_title|slugify }}-tab-panel">
-            {% include 'takwimu/_includes/dataview/indicator_group.html' with indicator_group=group %}
+                id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
+                aria-labelledby="d{{ indicator.value.title|slugify }}-tab-panel">
+            {% include 'takwimu/_includes/dataview/indicator.html' with indicator=indicator %}
             </div>
           {% endfor %}
         </div>
