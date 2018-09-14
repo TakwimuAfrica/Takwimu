@@ -1,7 +1,6 @@
 {% if results.items %}
     <form class="d-flex flex-column justify-content-start px-1">
         {% block popover_content %}{% endblock %}
-        <button type="button" id="reset-filter" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
     </form>
 {% elif query %}
     <div class="jumbotron-fluid">
@@ -35,13 +34,18 @@
 }
 </style>
 <script>
-
+   
     // Clear selected filters
-    $("#reset-filter").click(function(){
+    $(".clear-filter").click(function(){
+        var _parent = $(this).attr("data-target");
+        
         $("#results-table tr#result").show();
-        $( "input:checkbox:checked" ).prop( "checked", false );
+        $("input[data-parent="+_parent+"]:checkbox:checked").prop("checked", false);        
+        
+        $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");            
+        $("#"+_parent+" button .filter-badge").removeClass("d-flex").addClass("d-none");
+        
     });
-
     $("input.filter-checkbox").on("change", function () {
         var _checked = $("input.filter-checkbox:checked").map(function () {
             return $(this).attr("id");
@@ -55,20 +59,21 @@
         } else {
             rows.show();
         }
-
-        if(_checked.length >= 1) {
-            var _btn = _checked[0]+"<span>&times;</span>";
-            
-            $("#"+_parent+" button .select-item").removeClass("d-flex").addClass("d-none");
-            
-            $("#"+_parent+" button .filter-badge").removeClass("d-none").html(_btn);
-
-        } else {
-            $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");
-            
-            $("#"+_parent+" button .filter-badge").addClass("d-none");
+        
+        // Change closable tags state
+        switch (true) {
+            case (_checked.length === 1):
+                $("#"+_parent+" button .select-item").removeClass("d-flex").addClass("d-none");            
+                $("#"+_parent+" button .filter-badge").removeClass("d-none")
+                .addClass("d-flex")
+                .find(".selected-items").html(_checked[0]);
+            break;
+            case ( _checked.length > 1):          
+                $("#"+_parent+" button .filter-badge")
+                .find(".selected-items").html("Multiple "+_parent+" selected");
+            break;
         }
-
+        
         var countries = rows.filter(function () {
             var country = $(this).attr("data-country"),
                 index2 = $.inArray(country, _checked);

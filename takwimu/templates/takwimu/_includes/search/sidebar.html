@@ -8,28 +8,28 @@
             <div class="input-group my-1 pb-3">
                 <input type="text" class="form-control" name="q" id="search-box" aria-describedby="search-box" placeholder="Search Takwimu"
                     style="border-radius: 2px;" value="{{ query }}">
-                <div class="position-absolute btn text-primary px-2" style="right: 0; z-index: 3;">
-                    <span class="fa fa-times-circle" id="clear-search"></span>
+                <div class="position-absolute btn text-primary px-2" style="right: 0; z-index: 3;" id="clear-search">
+                    <span class="fa fa-times-circle"></span>
                 </div>
             </div>
         </form>        
     </li>
     <li class="list-group-item px-0" style="cursor:pointer;">
         <div class="px-3 d-flex justify-content-between align-items-center"
-            data-toggle="collapse" data-target="#filterbycountry" aria-expanded="false" aria-controls="filterbycountry">
+            data-toggle="collapse" data-target="#country" aria-expanded="false" aria-controls="country">
             Filter by country                           
             <span class="fa fa-chevron-right text-right" style="color: #9b9b9b; font-size: 12px;"></span>
         </div>
-        <div class="collapse my-1" id="filterbycountry">
+        <div class="collapse my-1" id="country">
             <div class="card-body px-2">
                     <button type="button" class="btn w-100 pl-2 py-2" 
                         data-toggle="popover" data-placement="right"
                         data-title="Select Countries" data-content='{% include 'takwimu/_includes/search/countries.html' %}'
                         style="background-color: #e9ecef; border-radius: 4px; text-align: left;">
                         <span class="d-flex select-item">Select Countries</span>
-                        <span class="d-none filter-badge p-2 badge text-white" style="background-color: #144681; border-radius: 7px;">
-                            Selected Multiple items 
-                            <span aria-hidden="true" class="btn-sm">&times;</span>
+                        <span class="d-none p-2 badge filter-badge text-white text-capitalize">
+                            <span class="selected-items w-100 text-capitalize wrapword text-left">Selected Multiple items</span>   
+                            <span class="fa fa-times mx-1 flex-shrink-1 clear-filter" data-target="country"></span>
                         </span>
                     </button>
             </div>
@@ -37,20 +37,20 @@
     </li>
     <li class="list-group-item px-0" style="cursor:pointer;">
         <div class="px-3 d-flex justify-content-between align-items-center"
-            data-toggle="collapse" data-target="#filterbytopic" aria-expanded="false" aria-controls="filterbytopic">
+            data-toggle="collapse" data-target="#topic" aria-expanded="false" aria-controls="topic">
             Filter by topic                           
             <span class="fa fa-chevron-right text-right" style="color: #9b9b9b; font-size: 12px;"></span>
         </div>
-        <div class="collapse my-1" id="filterbytopic">
+        <div class="collapse my-1" id="topic">
             <div class="card-body px-2">
                     <button type="button" class="btn w-100 pl-2 py-2" 
                         data-toggle="popover" data-placement="right"
                         data-title="Select Topic(s)" data-content='{% include 'takwimu/_includes/search/topic.html' %}'
                         style="background-color: #e9ecef; border-radius: 4px; text-align: left;">
                         <span class="select-item">Select Topic(s)</span>
-                        <span class="d-none p-2 badge filter-badge text-capitalize">
-                            Selected Multiple items
-                            <span aria-hidden="true" class="btn-sm">&times;</span>
+                        <span class="d-none p-2 badge filter-badge text-white">
+                            <span class="selected-items w-100 text-capitalize wrapword text-left">Selected Multiple items</span>   
+                            <span class="fa fa-times mx-1 flex-shrink-1 clear-filter" data-target="topic"></span>
                         </span>
                     </button>
             </div>
@@ -69,7 +69,7 @@
                         data-title="Select indicator(s)" data-content='{% include 'takwimu/_includes/search/_popover.html' %}'
                         style="background-color: #e9ecef; border-radius: 4px; text-align: left;">
                         <span class="d-flex">Select indicator(s)</span>
-                        <span class="d-none p-2 badge filter-badge">
+                        <span class="d-none p-2 badge filter-badge wrapword">
                             Selected Multiple items 
                             <span aria-hidden="true" class="btn-sm">&times;</span>
                         </span>

@@ -117,17 +117,6 @@
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        // Clear search input function
-        function clearThis(target){
-            if($(target).val()) { 
-                $(target).val('');
-            }
-        }
-        // Clear search input on click 
-        $('#clear-search').click(function(){
-            clearThis("#search-box");
-        });
-
 
         $('a[data-toggle="collapse"]').click(function () {
             var btn = $(this);

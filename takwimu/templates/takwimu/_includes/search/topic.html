@@ -1,14 +1,15 @@
 {% extends 'takwimu/_includes/search/_popover.html' %}
 
 {% block popover_content %}
-<div class="form-row d-flex justify-content-start px-1">
+<div class="form-row px-1">
     {% for topic in results.topics %}
-        <div class="col-6 control custom-checkbox py-1 text-truncate">
-            <input class="control-input filter-checkbox" type="checkbox" id="{{topic|slugify}}" data-parent="filterbytopic">
+        <div class="col-6 py-1 text-truncate">
+            <input class="control-input filter-checkbox" type="checkbox" value="{{topic|slugify}}" id="{{topic|slugify}}" data-parent="topic">
             <label class="control-label" for="{{topic|slugify}}">
                 {{ topic }}
             </label>
         </div>
     {% endfor %}
 </div>
+<button type="button" id="reset-filter" data-parent="topic" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
 {% endblock %}
