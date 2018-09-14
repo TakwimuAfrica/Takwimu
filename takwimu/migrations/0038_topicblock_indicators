@@ -6,51 +6,43 @@ from wagtail.wagtailcore.blocks import StreamValue
 from django.db import migrations
 
 
-def indicators_to_indicator_groups(topic):
-    indicator_groups = []
-    if 'indicators' in topic['value'].keys():
-        try:
-            indicators = topic['value']['indicators']
-            for indicator in indicators:
-                indicator_groups.append({
-                    'type': 'indicator_groups',
-                    'id': str(uuid.uuid1()),
-                    'value': {
-                        'group_title': indicator['value']['title'],
-                        'indicators': [indicator]
-                    }
-                })
-            topic['value']['indicator_groups'] = indicator_groups
-            del topic['value']['indicators']
-            return topic
-        except KeyError as e:
-            print(e)
-            del topic['value']['indicators']
-            topic['value']['indicator_groups'] = []
-            return topic
-    else:
-        return topic
-
-
-def indicator_groups_to_indicators(topic):
+def indicator_to_indicator_widget(topic):
     indicators = []
-    if 'indicator_groups' in topic['value'].keys():
-        try:
-            groups = topic['value']['indicator_groups']
-            for group in groups:
-                indicators.append(
-                    {
-                        'indicators': group['value']['indicators']
-                    }
-                )
-
+    version = topic['value'].get('version', None)
+    if not version:
+        current_indicators = topic['value'].get('indicators', [])
+        for current_indicator in current_indicators:
+            # Current indicator becomes the first widget in indicator v2
+            indicators.append({
+                'type': 'indicators',
+                'id': str(uuid.uuid1()),
+                'value': {
+                    'title': current_indicator['value']['title'],
+                    'widgets': [current_indicator],
+                }
+            })
+        if current_indicators:
             topic['value']['indicators'] = indicators
-            return topic
-        except KeyError:
-            topic['value']['indicators'] = []
-            return topic
-    else:
-        return topic
+        topic['value']['version'] ='v2'
+    return topic
+
+
+def indicator_widget_to_indicator(topic):
+    indicators = []
+    version = topic['value'].get('version', None)
+    if version and version.lower() == 'v2':
+        current_indicators = topic['value'].get('indicators', [])
+        for current_indicator in current_indicators:
+            # Widget was an indicator in v1
+            widgets = current_indicator['value'].get('widgets', [])
+            if widgets:
+                indicators.append({
+                    'indicators': widgets
+                })
+        del topic['value']['version']
+        if current_indicators:
+            topic['value']['indicators'] = indicators
+    return topic
 
 
 def get_stream_data(page, mapper):
@@ -81,14 +73,12 @@ def migrate(apps, mapper):
         page.save()
 
 
-
-
 def forwards(apps, schema_editor):
-    migrate(apps, indicators_to_indicator_groups)
+    migrate(apps, indicator_to_indicator_widget)
 
 
 def backwards(apps, schema_editor):
-    migrate(apps, indicator_groups_to_indicators)
+    migrate(apps, indicator_widget_to_indicator)
 
 
 class Migration(migrations.Migration):

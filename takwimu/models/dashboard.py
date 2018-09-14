@@ -25,7 +25,6 @@ from wazimap.models import Geography
 from hurumap.models import DataTopic, DataIndicator
 from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
-from wagtailclearstream.stream import ClearBlock
 
 import logging
 
@@ -188,9 +187,9 @@ class IndicatorWidgetBlock(blocks.StreamBlock):
         icon = 'form'
 
 
-class IndicatorsBlock(blocks.StructBlock):
-    group_title = blocks.CharBlock(required=False)
-    indicators = IndicatorWidgetBlock(required = False)
+class IndicatorBlock(blocks.StructBlock):
+    indicator = blocks.CharBlock(required=False)
+    widgets = IndicatorWidgetBlock(required = False)
 
 
 class IconChoiceBlock(blocks.FieldBlock):
@@ -203,8 +202,8 @@ class TopicBlock(blocks.StructBlock):
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
 
-    indicator_groups = blocks.StreamBlock([
-        ('indicator_groups', IndicatorsBlock(required=False))
+    indicators = blocks.StreamBlock([
+        ('indicators', IndicatorBlock(required=False))
     ], required=False)
 
     def js_initializer(self):
