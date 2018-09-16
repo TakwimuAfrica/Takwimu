@@ -34,6 +34,16 @@
 }
 </style>
 <script>
+    // Reset filters on popover
+    $(".popover").find("#reset-filter").click(function(e){
+        var _parent = $(this).attr("data-parent");
+        $("#results-table tr#result").show();
+        $("input[data-parent="+_parent+"]:checkbox:checked").prop("checked", false);
+
+
+        $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");            
+        $("#"+_parent+" button .filter-badge").removeClass("d-flex").addClass("d-none");
+    });
    
     // Clear selected filters
     $(".clear-filter").click(function(){
