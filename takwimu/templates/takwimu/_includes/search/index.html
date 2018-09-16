@@ -48,93 +48,11 @@
         background-color: #144681;
         border-radius: 7px;
     }
-    .page-item .page-link {
-        border-radius: 0.25em;
-    }
-
-    .page-item.active .page-link {
-        background-color: #1e4a7e;
-        border-color: #1e4a7e;
-    }
-    
-    .pagination-sm .page-item:first-child .page-link,
-    .pagination-sm .page-item:last-child .page-link {
-        border-radius: 0.2rem;
-    }
-    .pagination .disabled a {
-        background-color: #ededec!important;
-        color: #ffffff!important;
-    }
-    /* Base for label styling */
-    [type="checkbox"]:not(:checked),
-    [type="checkbox"]:checked {
-        position: absolute;
-        left: -9999px;
-    }
-    [type="checkbox"]:not(:checked) + label,
-    [type="checkbox"]:checked + label {
-        position: relative;
-        padding-left: 1.5em;
-        cursor: pointer;
-    }
-
-    /* checkbox aspect */
-    [type="checkbox"]:not(:checked) + label:before,
-    [type="checkbox"]:checked + label:before {
-        content: '';
-        position: absolute;
-        left: 0; top: 0;
-        width: 1.25em; height: 1.25em;
-        border: 1px solid #9b9b9b;
-        background: #ffffff;
-        border-radius: 0;
-        /* box-shadow: inset 0 1px 3px rgba(0,0,0,.1); */
-    }
-    /* checked mark aspect */
-    [type="checkbox"]:not(:checked) + label:after,
-    [type="checkbox"]:checked + label:after {
-        content: '✔';
-        position: absolute;
-        top: .1em; 
-        left: .1em;
-        font-size: 1.4em;
-        line-height: 0.8;
-        color: #000000;
-        transition: all .1s;
-        font-family: Helvetica, Arial, sans-serif;
-    }
-    /* checked mark aspect changes */
-    [type="checkbox"]:not(:checked) + label:after {
-        opacity: 0;
-        transform: scale(0);
-    }
-    [type="checkbox"]:checked + label:after {
-        opacity: 1;
-        transform: scale(1);
-    }
-    /* accessibility */
-    [type="checkbox"]:checked:focus + label:before,
-    [type="checkbox"]:not(:checked):focus + label:before {
-        border: 1px dotted #000;
-    }
 
     /* hover style just for information */
     label:hover:before {
         border: 1px solid #4778d9!important;
     }
-
-    /* Text wrappig */
-    .wrapword {
-        white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
-        white-space: -pre-wrap;      /* Opera 4-6 */
-        white-space: -o-pre-wrap;    /* Opera 7 */
-        white-space: pre-wrap;       /* css-3 */
-        word-wrap: break-word;       /* Internet Explorer 5.5+ */
-        white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
-        word-break: break-all;
-        white-space: normal;
-    }
-
 </style>
 
 <script>
