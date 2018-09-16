@@ -52,7 +52,7 @@
         <div class="tab-pane fade {% if forloop.first %}show active{% endif %}"
             id="step-{{ forloop.counter }}" role="tabpanel" aria-labelledby="step-{{ forloop.counter }}-tab">
           <div class="row mx-0">
-              <div class="sidebar col-md-3 order-2 order-md-1 py-5 px-4 font-weight-light" style="background-color: rgba(155, 155, 155, 0.17)">
+              <div class="sidebar col-md-3 py-5 px-4 font-weight-light" style="background-color: rgba(155, 155, 155, 0.17)">
                 {{ step.value.sidebar }}
           
                 <h5 class="mt-5">Jump in...</h5><br>
@@ -65,7 +65,7 @@
                 </ul>
               </div>
     
-              <div class="col-md-9 order-1 order-md-2 py-5 px-4" style="background-color: #f3f3f3;">
+              <div class="col-md-9 py-5 px-4" style="background-color: #f3f3f3;">
                 <div class="position-relative">
                     {{ step.value.body }}
                 </div>
