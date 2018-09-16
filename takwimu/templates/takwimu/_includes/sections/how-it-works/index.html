@@ -40,7 +40,7 @@
     <h1 class="display-4 font-weight-bold d-inline-block px-3 bg-light position-relative mt-5" style="z-index: 101; max-width: 90%;">How it works</h1>
     <div class="position-relative" style="outline: 2px dashed #dee2e6; height: 80px; top: -40px;" style="z-index: 100;"></div>
 
-    <ul class="nav nav-justified position-relative flex-nowrap" style="top: -75px; overflow-x: scroll;" role="tablist">
+    <ul class="nav nav-justified position-relative flex-scroll" style="top: -75px; overflow-x: scroll;" role="tablist">
       {% for step in explainer_steps.steps %}
         {% include 'takwimu/_includes/sections/how-it-works/nav_detail.html' %}
       {% endfor %}
