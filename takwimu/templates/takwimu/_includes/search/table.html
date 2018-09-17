@@ -22,17 +22,17 @@
         </tr>
     </thead>
     <tbody class="table-bordered accordion list" style="font-size: 12px;">
-        {% for result in results %}
+        {% for result in results.items %}
         <!-- The first empty tr helps with table-striped -->
         <tr></tr>
-        <tr id="result">
+        <tr id="result" data-country="{{result.country|slugify}}" data-category="{{ result.category|slugify }}">
             <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center expand">
                 <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" data-target="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
                     aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </td>
-            <td class="text-capitalize px-0 align-middle location" style="white-space:nowrap">
+            <td class="text-capitalize px-0 align-middle" style="white-space:nowrap">
                 <span class="d-flex mb-2">
                     <b class="col-5">Country:</b>
                     <span class="col pl-3">{{ result.country|slugify }}</span>
@@ -117,9 +117,10 @@
 <!-- Results - Toggle opening and closing accordion. -->
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+
         $('a[data-toggle="collapse"]').click(function () {
             var btn = $(this);
-            console.log(btn.attr('data-target'));
+            
             //on close collapse
             $('.collapse'+btn.attr('data-target')).on('hide.bs.collapse', function () {
                 // Change collapse button state
@@ -145,99 +146,5 @@
             })
         });
 
-        
-    getPagination('#results-table');
-
-    /*					PAGINATION 
-    - on change max rows select options fade out all rows gt option value mx = 25
-    - append pagination list as per numbers of rows / max rows option (100row/25= 4pages )
-    - each pagination li on click -> fade out all tr gt max rows * li num and (25*pagenum 2 = 50 rows)
-    - fade out all tr lt max rows * li num - max rows ((25*pagenum 2 = 10) - 25)
-    - fade in all tr between (maxRows*PageNum) and (maxRows*pageNum)- MaxRows 
-    */
-
-    function getPagination(table) {
-
-        var lastPage = 1;
-
-        $('#maxRows').on('change', function (evt) {
-            //$('.paginationprev').html('');	// reset pagination
-
-            lastPage = 1;
-            $('.pagination').find("li").slice(1, -1).remove();
-            var trnum = 0; // reset tr counter 
-            var maxRows = parseInt($(this).val()); // get Max Rows from select option
-
-            if (maxRows == 100) {
-                $('.pagination').hide();
-            } else {
-
-                $('.pagination').show();
-            }
-
-            var totalRows = $(table + ' tbody tr#result').length; // numbers of rows 
-            $(table + ' tr#result:gt(0)').each(function () { // each TR in  table and not the header
-                trnum++; // Start Counter
-                if (trnum > maxRows) { // if tr number gt maxRows
-
-                    $(this).hide(); // fade it out 
-                }
-                if (trnum <= maxRows) {
-                    $(this).show();
-                } // else fade in Important in case if it ..
-            }); //  was fade out to fade it in 
-            if (totalRows > maxRows) { // if tr total rows gt max rows option
-                var pagenum = Math.ceil(totalRows / maxRows); // ceil total(rows/maxrows) to get ..  
-                //	numbers of pages 
-                for (var i = 1; i <= pagenum;) { // for each page append pagination li 
-                    $('.pagination #prev').before('<li class="page-item" data-page="' + i + '">\
-                        <a class="page-link mx-1">' + i++ + '<span class="sr-only">(current)</span></a>\
-                    </li>').show();
-                } // end for i 
-            } // end if row count > max rows
-            else{
-                $('.pagination').hide();
-            }
-            $('.pagination [data-page="1"]').addClass('active'); // add active class to the first li 
-            $('.pagination li').on('click', function (evt) { // on click each page
-                evt.stopImmediatePropagation();
-                evt.preventDefault();
-                var pageNum = $(this).attr('data-page'); // get it's number
-
-                var maxRows = parseInt($('#maxRows').val()); // get Max Rows from select option
-
-                if (pageNum == "prev") {
-                    if (lastPage == 1) {
-                        return;
-                    }
-                    pageNum = --lastPage;
-                }
-                if (pageNum == "next") {
-                    if (lastPage == ($('.pagination li').length - 2)) {
-                        return;
-                    }
-                    pageNum = ++lastPage;
-                }
-
-                lastPage = pageNum;
-                var trIndex = 0; // reset tr counter
-                $('.pagination li').removeClass('active'); // remove active class from all li 
-                $('.pagination [data-page="' + lastPage + '"]').addClass('active'); // add active class to the clicked 
-                // $(this).addClass('active');					// add active class to the clicked 
-                $(table + ' tr#result:gt(0)').each(function () { // each tr in table not the header
-                    trIndex++; // tr index counter 
-                    // if tr index gt maxRows*pageNum or lt maxRows*pageNum-maxRows fade if out
-                    if (trIndex > (maxRows * pageNum) || trIndex <= ((maxRows * pageNum) - maxRows)) {
-                        $(this).hide();
-                    } else {
-                        $(this).show();
-                    } //else fade in 
-                }); // end of for each tr in table
-            }); // end of on click pagination list
-
-        }).val(25).change();
-        // end of on select change 
-    // END OF PAGINATION 
-    }
     });
 </script>

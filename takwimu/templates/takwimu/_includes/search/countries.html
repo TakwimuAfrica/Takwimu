@@ -1,42 +1,15 @@
 {% extends 'takwimu/_includes/search/_popover.html' %}
 
 {% block popover_content %}
-<div class="form-row d-flex justify-content-center px-1">
-    <div class="col-4 custom-control custom-checkbox">
-        <input class="control-input" type="checkbox" id="Tanzania">
-        <label class="control-label" for="Tanzania">
-            Tanzania
+<div class="form-row px-1" style="min-width: 400px;">
+    {% for country in results.countries %}
+    <div class="col-4 py-1 text-truncate">
+        <input class="control-input filter-checkbox" type="checkbox" value="{{country|slugify}}" id="{{country|slugify}}" data-parent="country">
+        <label class="control-label" for="{{country|slugify}}">
+            {{country}}
         </label>
     </div>
-    <div class="col-4 custom-control custom-checkbox">
-        <input class="control-input" type="checkbox" id="Kenya">
-        <label class="control-label" for="Kenya">
-            Kenya
-        </label>
-    </div>
-    <div class="col-4 custom-control custom-checkbox">
-        <input class="control-input" type="checkbox" id="Ethopia">
-        <label class="control-label" for="Ethopia">
-            Ethopia
-        </label>
-    </div>
-    <div class="col-4 custom-control custom-checkbox">
-        <input class="control-input" type="checkbox" id="Nigeria">
-        <label class="control-label" for="Nigeria">
-            Nigeria
-        </label>
-    </div>
-    <div class="col-4 custom-control custom-checkbox">
-        <input class="control-input" type="checkbox" id="Senegal">
-        <label class="control-label" for="Senegal">
-            Senegal
-        </label>
-    </div>
-    <div class="col-4 custom-control custom-checkbox">
-        <input class="control-input" type="checkbox" id="DRC">
-        <label class="control-label" for="DRC">
-            DRC
-        </label>
-    </div>
+    {% endfor %}
 </div>
+<button type="button" id="reset-filter" data-parent="country" class="btn btn-outline-primary mt-4 mx-auto font-weight-bold">Clear these filters</button>
 {% endblock %}
