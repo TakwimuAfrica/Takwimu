@@ -1,0 +1,65 @@
+<div class="container-fluid pt-2 pb-5">
+    <div class="container pt-2 pb-5">
+        <div class="row">
+            <!-- Left navigation of all filters-->
+            <div class="col-3 filter-container">                
+                {% include 'takwimu/_includes/search/sidebar.html' %}                
+            </div>
+            <!-- /.col-3 -->
+
+            <!-- The Main Stage -->
+            <div class="col-9 results">
+                {% if results.items %}
+                    <h1 class="font-weight-bold py-3">{{ results.items|length }} Search results for <q>{{ query }}</q></h1>
+                    <div class="border p-3 bg-white" id="results-container">
+                        <span class="d-flex pt-4 px-2" style="font-size: 15px;">
+                            Showing
+                            {% if results.items|length > 25 %}
+                                1-25 results  of {{ results.items|length }}
+                            {% else %}
+                                {{ results.items|length }} results
+                            {% endif %}
+                        </span>
+                        {% include 'takwimu/_includes/search/table.html' %}
+                        {% include 'takwimu/_includes/search/pagination.html' %}
+                    </div>
+                {% elif query %}
+                    <div class="jumbotron jumbotron-fluid mt-5">
+                        <div class="container">
+                            <h1 class="display-4 text-center font-weight-bold">No results found</h1>
+                        </div>
+                    </div>
+                {% else %}  
+                    <div class="jumbotron jumbotron-fluid mt-5">
+                        <div class="container">
+                            <h1 class="display-4 text-center font-weight-bold">Please type something into the search box</h1>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<!-- container fluid -->
+
+<style>
+    .filter-badge {
+        color: #ffffff;
+        background-color: #144681;
+        border-radius: 7px;
+    }
+
+    /* hover style just for information */
+    label:hover:before {
+        border: 1px solid #4778d9!important;
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {       
+        // Clear search input on click 
+        $('#clear-search').click(function(){
+            $("#search-box").val('');
+        });
+    });
+</script>

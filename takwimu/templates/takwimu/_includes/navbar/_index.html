@@ -59,7 +59,7 @@
           <a class="nav-link dropdown-toggle text-uppercase font-weight-bold px-3 py-4"
               href="/about" id="navbarDropdown" role="button" aria-haspopup="true"
               aria-expanded="false">
-            About Us
+            About
           </a>
           <!-- On large devices -->
           {% include 'takwimu/_includes/navbar/about.html' with button_name="About Us" %}
@@ -77,6 +77,18 @@
           </div> -->
         </li>
 
+        <li>
+          <a class="nav-link py-4" id="nav-search" href="#" role="button">
+            <i class="fa fa-search fa-fw"></i>
+          </a>
+          <!-- On large devices -->
+          {% include 'takwimu/_includes/navbar/search.html' %}
+
+          <!-- TODO: On small devices -->
+          <div class="dropdown-menu d-none" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#">WIP</a>
+          </div>
+        </li>
 
         {% to_list 'twitter' 'facebook' as social_medias %}
         {% for social_media in social_medias %}
@@ -101,4 +113,45 @@
    .dropdown-menu-lg .social-icons .border-right{ 
      border-right-color: rgba(255, 255, 255, 0.1) !important;
    }
- </style>
+
+  .btn-close {
+    font-size: 4rem; 
+    font-weight: 100; 
+    color: #fff; 
+    text-shadow: none; 
+    line-height: 0;
+    opacity: 1;
+  }
+  .btn-close:focus {
+    outline:0;
+  }
+  .btn-close:hover {
+    color: #fff;
+  }
+  .btn-search {
+      position: absolute;
+      right: 1em;
+      bottom: 1em;
+      color: #fff;
+      background: transparent;
+      z-index: 10;
+  } 
+  input[type="text"]#search-takwimu {
+      width: 90%;
+      font-size: 35px;
+      font-weight: 300;
+      background: transparent;
+      border-bottom: solid 2px #ffffff!important;
+      color: #fff;
+  }
+  input[type="text"]#search-takwimu:focus {
+      box-shadow: none;
+      outline: 0 none;
+  }
+  #search-takwimu::-webkit-input-placeholder, 
+  #search-takwimu:-moz-placeholder  {
+      color: rgba(255, 255, 255, 0.45);
+      font-size: 35px;
+      font-weight: 300;
+  }
+</style>

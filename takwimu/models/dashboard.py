@@ -4,7 +4,8 @@ import warnings
 from django.db import models
 from django import forms
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, PageChooserPanel, InlinePanel
+from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, \
+    PageChooserPanel, InlinePanel
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailembeds.blocks import EmbedBlock
@@ -26,6 +27,7 @@ from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -39,6 +41,7 @@ class TopicPageDataIndicator(models.Model):
 
     class Meta:
         abstract = True
+
 
 # The real model which combines the abstract model, an
 # Orderable helper class, and what amounts to a ForeignKey link
@@ -60,9 +63,9 @@ class TopicPage(Page):
     icon = IconField()
 
     # TODO: For topics heirachy
-    #parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
+    # parent_topic = models.ForeignKey('self',null=True,blank=True,on_delete=models.SET_NULL,related_name='+')
     # TODO: To show other related topics to this one e.g by keywords
-    #related_topics = models.ManyToManyField('self')
+    # related_topics = models.ManyToManyField('self')
 
     # Search index configuration
 
@@ -105,7 +108,6 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
 
 
 class IndicatorsBlock(blocks.StreamBlock):
-
     free_form = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
@@ -274,7 +276,8 @@ class ProfilePage(Page):
     -----------
     '''
     geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,
-                            blank=True, null=True, db_constraint=False)
+                            blank=True, null=True, db_constraint=False,
+                            limit_choices_to={'geo_level': 'country'})
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
     document = models.ForeignKey(
@@ -360,12 +363,13 @@ class Testimonial(models.Model):
 
 
 class ExplainerSteps(Page):
-    sidebar = RichTextField() # TODO: Remove
+    sidebar = RichTextField()  # TODO: Remove
     steps = StreamField([
         ('step', blocks.StructBlock([
             ('title', blocks.CharBlock(required=False)),
             ('brief', blocks.TextBlock(required=False)),
-            ('color', blocks.CharBlock(required=False, help_text='Background colour.')),
+            ('color',
+             blocks.CharBlock(required=False, help_text='Background colour.')),
             ('body', blocks.RichTextBlock(required=False)),
             ('sidebar', blocks.RichTextBlock(required=False)),
         ], icon='user'))
@@ -428,9 +432,11 @@ class SocialMediaSetting(BaseSetting):
     github = models.URLField(blank=True, null=True,
                              help_text='TAKWIMU Github page URL')
     instagram = models.URLField(blank=True, null=True,
-                                max_length=255, help_text='TAKWIMU Instagram account URL')
+                                max_length=255,
+                                help_text='TAKWIMU Instagram account URL')
     linkedin = models.URLField(blank=True, null=True,
-                               max_length=255, help_text='TAKWIMU LinkedIn account URL')
+                               max_length=255,
+                               help_text='TAKWIMU LinkedIn account URL')
     medium = models.URLField(blank=True, null=True,
                              help_text='TAKWIMU Medium page URL')
     twitter = models.URLField(blank=True, null=True,
@@ -451,7 +457,6 @@ class AboutUsSetting(BaseSetting):
 
 
 class ServiceBlock(blocks.StructBlock):
-
     SERVICE_CATEGORIES = [
         ('Standard', 'Standard'), ('Premium', 'Premium'), ('Persona', 'Persona')
     ]
@@ -494,7 +499,8 @@ class FAQBlock(blocks.StructBlock):
     question = blocks.CharBlock(required=True)
     answer = blocks.RichTextBlock(required=True)
     cta_one_url = blocks.URLBlock(
-        label="'Find Out More' Button URL", default="https://takwimu.zendesk.com/")
+        label="'Find Out More' Button URL",
+        default="https://takwimu.zendesk.com/")
     cta_two_name = blocks.CharBlock(
         label="Second Button Name (Optional)", required=False)
     cta_two_url = blocks.URLBlock(
