@@ -78,6 +78,10 @@
                 .addClass("d-flex")
                 .find(".selected-items").html(_checked[0]);
             break;
+            case (_checked.length < 1):
+                $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");
+                $("#"+_parent+" button .filter-badge").removeClass("d-flex").addClass("d-none");
+            break;
             case ( _checked.length > 1):          
                 $("#"+_parent+" button .filter-badge")
                 .find(".selected-items").html("Multiple "+_parent+" selected");
