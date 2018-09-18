@@ -1,0 +1,219 @@
+{% extends 'profile/profile_detail.html' %}
+{% load staticfiles sass_tags geotags %}
+
+{# HEAD #}
+
+{% block head_meta_description %}{{ HURUmap.description }}{% endblock %}
+
+{% block head_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+{% endblock %}
+
+{# BODY #}
+
+{% block header %}
+  {# Navbar #}
+  {% include 'takwimu/_includes/navbar/_index.html' %}
+
+  {% block header_content %}
+  <div id="cover-map" class="clearfix">
+      <div id="slippy-map"></div>
+      <div id="cover-profile" class="wrapper">
+          <article class="clearfix column-half">
+              <header id="header-box" class="column-full">
+                  <h1 class="title">{{ geography.this.short_name }}</h1>
+                  <p class="caption">
+                    {{ geography | geo_level }}
+                    {% if geography.parents %}
+                        in
+                        {% for level, g in geography.parents.items %}
+                          <a href="/profiles/{{ g.full_geoid }}-{{ g.short_name|slugify }}/">{{ g.short_name }}</a>{% if not forloop.last %},{%endif%}
+                        {% endfor %}
+                    {% endif %}
+                  </p>
+              </header>
+
+              <div class="column-half">
+                  <div class="stat">
+                      <span class="primary">
+                          {% block profile_header_population %}
+                          <span class="value">{{ demographics.total_population.values.this|floatformat:"0" }}</span>
+                          <span class="name">Population</span>
+                          {% endblock %}
+                      </span>
+                  </div>
+              </div>
+              {% if geography.this.square_kms %}
+              <div class="column-half">
+                  <div class="stat">
+                      <span class="secondary">
+                          <span class="value">{% if geography.this.square_kms < 1.0 %}{{ geography.this.square_kms|floatformat:"3" }}{% else %}{{ geography.this.square_kms|floatformat:"1" }}{% endif %}</span>
+                          <span class="name"> square kilometres</span>
+                      </span>
+                      {% if demographics.population_density.values.this %}
+                      <span class="secondary">
+                          {% block profile_header_density %}
+                          <span class="value">{{ demographics.population_density.values.this|floatformat:"1" }}</span>
+                          <span class="name"> people per square kilometre</span>
+                          {% endblock %}
+                      </span>
+                      {% endif %}
+                      {% block geography_extra_sq_km %}
+                      {% endblock %}
+                  </div>
+              </div>
+              {% endif %}
+
+              {% if geography.this.show_extra_links %}
+                  {% include "profile/_blocks/_header_extra_links.html" %}
+              {% endif %}
+
+              {% block profile_header_tail %}
+              <div class="column-full">
+                <p class="caption"><strong>Census data:</strong>
+                  {% if geography.this.geo_level == 'country' %}
+                    {{ geography.this.short_name | census_year }}
+                  {% elif geography.parents %}
+                    {% for level, g in geography.parents.items %}
+                      {% if g.geo_level == 'country' %}
+                        {{ g.short_name | census_year }}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </p>
+              </div>
+              <div class="column-full">
+                <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="indicatorsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ data_indicators }}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="indicatorsMenuButton">
+                    <a class="dropdown-item{% if data_indicators == 'SDGs Indicators' %} active{% endif %}" href="{{ request.path }}?data=sdg">SDG Indicators</a>
+                    <a class="dropdown-item{% if data_indicators == 'Takwimu Indicators' %} active{% endif %}" href="{{ request.path }}">Takwimu Indicators</a>
+                  </div>
+                </div>
+              </div>
+            {% endblock %}
+          </article>
+      </div>
+  </div>
+  {% endblock %}
+{% endblock %}
+
+
+
+{% block content_container %}
+  <div class="content-container wrapper clearfix">
+    {% block profile_preamble %}
+    <section class="clearfix" id="compare-place-picker">
+      <h2>Compare with another place</h2>
+      <div class="typeahead-container">
+          <input name="place_select" id="compare-place-select" type="text" placeholder="Start typing a place name or address to compare with..." autocomplete="off">
+      </div>
+    </section>
+
+    <p class="explain">Interact with charts and statistics for additional information.</p>
+    {% endblock %}
+
+    {% block profile_detail %}
+
+    {% endblock %}
+  </div>
+
+  {% if geography.this.geo_level == 'country' %}
+    {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower title='long' %}
+  {% else %}
+    {% if geography.parents %}
+      {% for level, g in geography.parents.items %}
+        {% if g.geo_level == 'country' %}
+          {% include 'takwimu/_includes/profile/country_section.html' with country=g.short_name|lower title='long' %}
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+  {% endif %}
+
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+
+  <!-- Country profile country select -->
+  {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
+
+  {% include 'takwimu/_includes/sections/updates.html' %}
+
+  {# Footer #}
+  {% include 'takwimu/_includes/footer.html' %}
+
+  <style>
+    #profile {
+      background-color: #ffffff;
+    }
+
+    .country-container {
+      background-color: #f9f9f9;
+      height: 400px;
+    }
+
+    #page-footer {
+      display: none;
+    }
+
+    .updates {
+      margin-bottom: 0;
+    }
+
+    article {
+      display: block;
+      overflow: auto;
+      padding-bottom: 10px;
+    }
+
+    #cover-profile article {
+      padding: .67em 1.25em .67em;
+    }
+
+    .dropdown-item:active,
+    .dropdown-item.active {
+      background-color: #17a2b8
+    }
+  </style>
+{% endblock content_container %}
+
+{% block body_javascript_extra %}
+  <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
+  <script src="{% static 'js/plugins.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
+  <script src="{% static 'js/main.js' %}"></script>
+  <script src="{% static 'js/svg.js' %}"></script>
+  <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
+
+  {{ block.super }}
+
+  <!-- Start of takwimu Zendesk Widget script -->
+  <script>/*<![CDATA[*/
+  window.zE || (function (e, t, s) {
+      var n = window.zE = window.zEmbed = function () {
+          n._.push(arguments)
+      }, a = n.s = e.createElement(t), r = e.getElementsByTagName(t)[0];
+      n.set = function (e) {
+          n.set._.push(e)
+      }, n._ = [], n.set._ = [], a.async = true, a.setAttribute("charset", "utf-8"), a.src = "https://static.zdassets.com/ekr/asset_composer.js?key=" + s, n.t = +new Date, a.type = "text/javascript", r.parentNode.insertBefore(a, r)
+  })(document, "script", "db3ec064-4699-489e-a829-d337d290b7e7");
+  /*]]>*/</script>
+  <!-- End of takwimu Zendesk Widget script -->
+
+  <!-- Bootstrap: Enable Tooltips -->
+  <script>
+      $(function () {
+          $('[data-toggle="tooltip"]').tooltip()
+      })
+  </script>
+
+  <script type="text/javascript">
+  $('.release-list').hover(function() {
+      $(this).find('.sub-group').toggle();
+  });
+  </script>
+{% endblock body_javascript_extra %}

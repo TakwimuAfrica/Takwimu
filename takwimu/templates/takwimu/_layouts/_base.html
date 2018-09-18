@@ -60,7 +60,7 @@
   <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
 
   <!-- Start of takwimu Zendesk Widget script -->
-  <script>/*<![CDATA[*/window.zE||(function(e,t,s){var n=window.zE=window.zEmbed=function(){n._.push(arguments)}, a=n.s=e.createElement(t),r=e.getElementsByTagName(t)[0];n.set=function(e){ n.set._.push(e)},n._=[],n.set._=[],a.async=true,a.setAttribute("charset","utf-8"), a.src="https://static.zdassets.com/ekr/asset_composer.js?key="+s, n.t=+new Date,a.type="text/javascript",r.parentNode.insertBefore(a,r)})(document,"script","db3ec064-4699-489e-a829-d337d290b7e7");/*]]>*/</script>
+  <!-- <script>/*<![CDATA[*/window.zE||(function(e,t,s){var n=window.zE=window.zEmbed=function(){n._.push(arguments)}, a=n.s=e.createElement(t),r=e.getElementsByTagName(t)[0];n.set=function(e){ n.set._.push(e)},n._=[],n.set._=[],a.async=true,a.setAttribute("charset","utf-8"), a.src="https://static.zdassets.com/ekr/asset_composer.js?key="+s, n.t=+new Date,a.type="text/javascript",r.parentNode.insertBefore(a,r)})(document,"script","db3ec064-4699-489e-a829-d337d290b7e7");/*]]>*/</script> -->
   <!-- End of takwimu Zendesk Widget script -->
 
   <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
@@ -74,11 +74,23 @@
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
-  <!-- Bootstrap: Enable Tooltips -->
+  <!-- Bootstrap: Enable Tooltips, Popovers -->
   <script>
     $(function () {
-      $('[data-toggle="tooltip"]').tooltip()
+      $('[data-toggle="tooltip"]').tooltip();
+
+      $('[data-toggle="popover"]').popover({
+          container: 'body',
+          html: true
+      }).on('shown.bs.popover', function (eventShown) {
+          var $popup = $('#' + $(eventShown.target).attr('aria-describedby'));
+          $popup.find('button.close').click(function (e) {
+              $popup.popover('hide');
+          });
+      });      
     })
+
+   
   </script>
 
   {% block body_javascript_extra %}{% endblock %}

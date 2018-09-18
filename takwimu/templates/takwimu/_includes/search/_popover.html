@@ -1,0 +1,105 @@
+{% if results.items %}
+    <form class="d-flex flex-column justify-content-start px-1">
+        {% block popover_content %}{% endblock %}
+    </form>
+{% elif query %}
+    <div class="jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6text-center font-weight-bold">No results found</h1>
+        </div>
+    </div>
+
+{% else %}
+    <div class="jumbotron-fluid">
+        <div class="container">
+            <h1 class="display-6 text-center font-weight-bold">Please type something into the search box</h1>
+        </div>
+    </div>
+{% endif %}
+<button type="button" class="close position-absolute" style="opacity: 1; top: 0.5em; right: 1em;" data-dismiss="popover" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+</button>
+<style>
+.popover {
+    padding: 1em;
+    max-width: 700px;
+    border-radius: 0;
+}
+.popover .popover-header {
+    background: #ffffff;
+    border-bottom: 1px solid #000000;
+    color: #000000;
+    border-radius: 0;
+    font-weight: normal;
+}
+</style>
+<script>
+    // Reset filters on popover
+    $(".popover").find("#reset-filter").click(function(e){
+        var _parent = $(this).attr("data-parent");
+        $("#results-table tr#result").show();
+        $("input[data-parent="+_parent+"]:checkbox:checked").prop("checked", false);
+
+
+        $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");            
+        $("#"+_parent+" button .filter-badge").removeClass("d-flex").addClass("d-none");
+    });
+   
+    // Clear selected filters
+    $(".clear-filter").click(function(){
+        var _parent = $(this).attr("data-target");
+        
+        $("#results-table tr#result").show();
+        $("input[data-parent="+_parent+"]:checkbox:checked").prop("checked", false);        
+        
+        $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");            
+        $("#"+_parent+" button .filter-badge").removeClass("d-flex").addClass("d-none");
+        
+    });
+    $("input.filter-checkbox").on("change", function () {
+        var _checked = $("input.filter-checkbox:checked").map(function () {
+            return $(this).attr("id");
+        }).get();
+
+        var _parent = $(this).attr("data-parent");
+        
+        var rows = $("#results-table tr#result");
+        if(_checked.length > 0) {
+            rows.hide();
+        } else {
+            rows.show();
+        }
+        
+        // Change closable tags state
+        switch (true) {
+            case (_checked.length === 1):
+                $("#"+_parent+" button .select-item").removeClass("d-flex").addClass("d-none");            
+                $("#"+_parent+" button .filter-badge").removeClass("d-none")
+                .addClass("d-flex")
+                .find(".selected-items").html(_checked[0]);
+            break;
+            case (_checked.length < 1):
+                $("#"+_parent+" button .select-item").removeClass("d-none").addClass("d-flex");
+                $("#"+_parent+" button .filter-badge").removeClass("d-flex").addClass("d-none");
+            break;
+            case ( _checked.length > 1):          
+                $("#"+_parent+" button .filter-badge")
+                .find(".selected-items").html("Multiple "+_parent+" selected");
+            break;
+        }
+        
+        var countries = rows.filter(function () {
+            var country = $(this).attr("data-country"),
+                index2 = $.inArray(country, _checked);
+
+            	return index2 >= 0;
+        }).show();
+
+        var categories = rows.filter(function () {
+            var category = $(this).attr("data-category"),
+                index = $.inArray(category, _checked);
+            return index >= 0;
+        }).show();
+
+    });
+</script>

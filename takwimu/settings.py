@@ -2,7 +2,7 @@
 import os
 
 from elasticsearch import RequestsHttpConnection
-from requests_aws4auth import AWS4Auth
+from utils.aws_es import AWS4AuthNotUnicode
 
 from hurumap.settings import *  # noqa
 
@@ -24,12 +24,12 @@ MIDDLEWARE_CLASSES = (
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
-TEMPLATE_CONTEXT_PROCESSORS = TEMPLATE_CONTEXT_PROCESSORS + (
+TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context_processors'] + [
     'wagtail.contrib.settings.context_processors.settings',
     'takwimu.context_processors.takwimu_stories',
     'wagtail.contrib.settings.context_processors.settings',
     'takwimu.context_processors.takwimu_topics',
-)
+]
 
 # Static Files Handler
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -50,7 +50,6 @@ hurumap_profile = 'census'
 HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(hurumap_profile)
 HURUMAP['default_geo_version'] = os.environ.get('DEFAULT_GEO_VERSION', '2009')
 HURUMAP['legacy_embed_geo_version'] = '2009'
-
 
 HURUMAP['levels'] = {
     'continent': {
@@ -119,8 +118,8 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 # -------------------------------------------------------------------------------------
 
 
-TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu')
-TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '5'))
+TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu-dev')
+TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '30'))
 TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')
 
 # Support for AWS ElasticSearch service. If HOST_TYPE is anything other than
@@ -129,7 +128,7 @@ TAKWIMU_ES_HOST_TYPE = os.environ.get('TAKWIMU_ES_HOST_TYPE', '')
 if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
     TAKWIMU_ES_AWS_ACCESS_KEY = os.environ.get('TAKWIMU_ES_AWS_ACCESS_KEY', '')
     TAKWIMU_ES_AWS_SECRET_KEY = os.environ.get('TAKWIMU_ES_AWS_SECRET_KEY', '')
-    TAKWIMU_ES_AWS_REGION = os.environ.get('TAKWIMU_ES_AWS_REGION', '')
+    TAKWIMU_ES_AWS_REGION = os.environ.get('TAKWIMU_ES_AWS_REGION', 'eu-west-1')
     WAGTAILSEARCH_BACKENDS = {
         'default': {
             'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
@@ -140,7 +139,7 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
                 'port': 443,
                 'use_ssl': True,
                 'verify_certs': True,
-                'http_auth': AWS4Auth(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
+                'http_auth': AWS4AuthNotUnicode(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
             }],
             'OPTIONS': {
                 'connection_class': RequestsHttpConnection,
