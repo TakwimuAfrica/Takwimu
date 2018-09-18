@@ -1,13 +1,70 @@
 {% load staticfiles %}
 
-<div class="row mx-auto">
-    {% for sdg in sdgs %}
-    <div class="col-2 mx-0 p-1">
-        <a href="#{{ sdg.short|slugify }}" data-html="true" 
-            data-container="body" data-toggle="popover" data-placement="bottom" 
-            data-content='{% include "takwimu/_includes/sections/sdg/popover.html"%}'>
-            <img src="{{ sdg.icon_url }}" alt="{{ sdg.short }}">
-        </a>
-    </div>       
-    {% endfor %}
-</div>
+<section class="sdg-container accordion" id="sdg-container">
+    <div class="row mx-auto">
+        {% for sdg in sdgs|slice:":6" %}
+        <div class="col-2 mx-0 p-1">
+            <a href="#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.sector }}" data-target="#{{ sdg.short|slugify }}"
+                aria-controls="{{ sdg.short|slugify }}">
+                <img src="{% static sdg.icon_url %}" alt="{{ sdg.short }}">
+                <div class="is-collapsed text-center position-absolute mx-auto"
+                    style="bottom:5px; left: 0; right: 0;">
+                    <span class="arrow-up"></span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mx-auto">
+        {% for sdg in sdgs|slice:":6" %}
+        <div id="{{ sdg.short|slugify }}" class="collapse w-100" data-parent="#sdg-container">
+            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg_title=sdg.short sdg_desc=sdg.title sdg_content="true" %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mx-auto">
+        {% for sdg in sdgs|slice:"6:12" %}
+        <div class="col-2 mx-0 p-1">
+            <a href="#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.sector }}" data-target="#{{ sdg.short|slugify }}"
+                aria-controls="{{ sdg.short|slugify }}">
+                <img src="{% static sdg.icon_url %}" alt="{{ sdg.short }}">
+                <div class="is-collapsed text-center position-absolute mx-auto"
+                    style="bottom:5px; left: 0; right: 0;">
+                    <span class="arrow-up"></span>
+                </div>
+            </a>
+            
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mx-auto">
+        {% for sdg in sdgs|slice:"6:12" %}
+        <div id="{{ sdg.short|slugify }}" class="collapse w-100" data-parent="#sdg-container">
+            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg_title=sdg.short sdg_desc=sdg.title %}
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="row mx-auto">
+        {% for sdg in sdgs|slice:"12:" %}
+        <div class="col-2 mx-0 p-1">
+            <a href="#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.sector }}" data-target="#{{ sdg.short|slugify }}"
+                aria-controls="{{ sdg.short|slugify }}">
+                <img src="{% static sdg.icon_url %}" alt="{{ sdg.short }}">
+                <div class="is-collapsed text-center position-absolute mx-auto"
+                    style="bottom:5px; left: 0; right: 0;">
+                    <span class="arrow-up"></span>
+                </div>
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row mx-auto">
+        {% for sdg in sdgs|slice:"12:" %}
+        <div id="{{ sdg.short|slugify }}" class="collapse w-100" data-parent="#sdg-container">
+            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg_title=sdg.short sdg_desc=sdg.title %}
+        </div>
+        {% endfor %}
+    </div>
+</section>
