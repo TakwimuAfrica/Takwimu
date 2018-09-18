@@ -1,9 +1,5 @@
-{% extends 'takwimu/_includes/dataview/_base.html' %}
 {% load wagtailcore_tags %}
 
-{% block dataview_tab_class %}pt-5{% endblock %}
-
-{% block dataview_tab_content %}
 <iframe id="cr-embed-{{id}}"
         class="census-reporter-embed"
         frameborder="0"
@@ -98,5 +94,3 @@
     });
     chart.src='/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.data_stat_type}}'
 </script>
-
-{% endblock %}
