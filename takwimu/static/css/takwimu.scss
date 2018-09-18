@@ -350,6 +350,9 @@ a {
   &.active .page-link {
     background-color: $brand-color-secondary;
     border-color: $brand-color-secondary;
+   &:hover {
+    color: $brand-extend-white;
+   }
   }
 }
 

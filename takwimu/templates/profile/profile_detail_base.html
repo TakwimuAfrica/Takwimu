@@ -177,9 +177,9 @@
       background-color: #17a2b8
     }
   </style>
-{% endblock %}
+{% endblock content_container %}
 
-{% block body_javascript %}
+{% block body_javascript_extra %}
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -189,15 +189,8 @@
   <script src="{% static 'js/svg.js' %}"></script>
   <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
 
-  {% block profile_javascript_libs %}
-    <script src="{% static 'js/vendor/leaflet-0.6.4.js' %}"></script>
-    <script src="{% static 'js/vendor/topojson.v1.min.js' %}"></script>
-    <script src="{% static 'js/vendor/leaflet.label.js' %}"></script>
-    <script src="{% static 'js/charts.js' %}"></script>
-    <script src="{% static 'js/head2head.js' %}"></script>
-    <script src="{% static 'js/maps_static.js' %}"></script>
-    <script src="{% static 'js/profile_map.js' %}"></script>
-  {% endblock %}
+  {{ block.super }}
+
   <!-- Start of takwimu Zendesk Widget script -->
   <script>/*<![CDATA[*/
   window.zE || (function (e, t, s) {
@@ -211,22 +204,6 @@
   /*]]>*/</script>
   <!-- End of takwimu Zendesk Widget script -->
 
-  <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-  <script>
-      window.ga = function () {
-          ga.q.push(arguments)
-      };
-      ga.q = [];
-      ga.l = +new Date;
-      ga('create', '{{ HURUmap.ga_tracking_id }}', 'auto');
-      ga('send', 'pageview')
-      {% for ga_tracking_id in HURUMAP.ga_tracking_ids %}
-          ga('create', '{{ ga_tracking_id }}', 'auto', {'name': 't{{ forloop.counter }}'});
-          ga('t{{ forloop.counter }}.send', 'pageview');
-      {% endfor %}
-  </script>
-  <script src="https://www.google-analytics.com/analytics.js" async defer></script>
-
   <!-- Bootstrap: Enable Tooltips -->
   <script>
       $(function () {
@@ -239,12 +216,4 @@
       $(this).find('.sub-group').toggle();
   });
   </script>
-
-  {% block body_javascript_extra %}
-    {{ block.super }}
-  {% endblock %}
-
-  {{ block.super }}
-
-{% endblock body_javascript %}
-
+{% endblock body_javascript_extra %}
