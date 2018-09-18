@@ -13,3 +13,5 @@ django-debug-toolbar==1.9.1
 elasticsearch==5.5.3
 
 requests-aws4auth==0.9
+
+psycopg2-binary
