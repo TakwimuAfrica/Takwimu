@@ -20,3 +20,13 @@ FieldTable(['child_births'])
 FieldTable(['size'], id="child_births_by_size")
 FieldTable(['reported_birth_weights'], id="child_births_with_reported_birth_weights")
 FieldTable(['low_birth_weights'], id="child_births_with_low_birth_weights")
+FieldTable(
+    ['employment_activity_status', 'sex'],
+    id='employment_activity_status_sex'
+)
+FieldTable(
+    ['highest education level reached'],
+    id='highest_education_level_reached'
+)
+
+
