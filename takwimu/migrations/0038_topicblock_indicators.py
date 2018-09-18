@@ -7,10 +7,14 @@ from django.db import migrations
 
 
 def indicator_to_indicator_widget(topic):
+    """
+    Migrate Indicators in non-versioned Topic to Indicator widgets (Topic v2).
+    """
+
     indicators = []
-    version = topic['value'].get('version', None)
+    version = topic['value'].get('version')
     if not version:
-        current_indicators = topic['value'].get('indicators', [])
+        current_indicators = topic['value'].get('indicators')
         for current_indicator in current_indicators:
             # Current indicator becomes the first widget in indicator v2
             indicators.append({
@@ -23,22 +27,24 @@ def indicator_to_indicator_widget(topic):
             })
         if current_indicators:
             topic['value']['indicators'] = indicators
-        topic['value']['version'] ='v2'
+        topic['value']['version'] = 'v2'
     return topic
 
 
 def indicator_widget_to_indicator(topic):
+    """
+    Migrate Indicators widgets in Topic v2 back to Indicator (and non-versioned Topic).
+    """
+
     indicators = []
-    version = topic['value'].get('version', None)
+    version = topic['value'].get('version')
     if version and version.lower() == 'v2':
-        current_indicators = topic['value'].get('indicators', [])
+        current_indicators = topic['value'].get('indicators')
         for current_indicator in current_indicators:
-            # Widget was an indicator in v1
-            widgets = current_indicator['value'].get('widgets', [])
+            # Current widget was an indicator in indicator v1
+            widgets = current_indicator['value'].get('widgets')
             if widgets:
-                indicators.append({
-                    'indicators': widgets
-                })
+                indicators.extend(widgets)
         del topic['value']['version']
         if current_indicators:
             topic['value']['indicators'] = indicators

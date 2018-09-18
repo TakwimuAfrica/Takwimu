@@ -107,7 +107,7 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
             return value
 
 
-class IndicatorWidgetBlock(blocks.StreamBlock):
+class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
@@ -189,7 +189,7 @@ class IndicatorWidgetBlock(blocks.StreamBlock):
 
 class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
-    widgets = IndicatorWidgetBlock(required = False)
+    widgets = IndicatorWidgetsBlock(required = False)
 
 
 class IconChoiceBlock(blocks.FieldBlock):
