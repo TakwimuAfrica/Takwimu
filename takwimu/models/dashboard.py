@@ -112,9 +112,11 @@ HURUMAP_DATA_DISTS = [
 ]
 
 
-class IndicatorsBlock(blocks.StreamBlock):
+class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('body', blocks.RichTextBlock(required=False)),
@@ -129,6 +131,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     embed = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('embed', EmbedBlock(required=False)),
@@ -141,6 +145,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     document = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('document', DocumentChooserBlock(required=False)),
@@ -153,6 +159,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     image = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('image', ImageChooserBlock(required=False)),
@@ -166,6 +174,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     html = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
@@ -216,6 +226,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     entities = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('entities', blocks.ListBlock(EntityStructBlock())),
@@ -230,6 +242,11 @@ class IndicatorsBlock(blocks.StreamBlock):
         icon = 'form'
 
 
+class IndicatorBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    widgets = IndicatorWidgetsBlock(required=False)
+
+
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
 
@@ -240,7 +257,9 @@ class TopicBlock(blocks.StructBlock):
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
 
-    indicators = IndicatorsBlock(required=False)
+    indicators = blocks.StreamBlock([
+        ('indicators', IndicatorBlock(required=False))
+    ], required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()

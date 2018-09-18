@@ -1,4 +1,4 @@
-version: '3.3'
+version: '3.7'
 
 services:
   db:
@@ -33,8 +33,8 @@ services:
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
       - TAKWIMU_ES_INDEX=takwimu
-      # A lot of ConnectionReadTimeout errors, when value this is low
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
       - PYTHONDONTWRITEBYTECODE="True"
       # - DJANGO_DEBUG=False  # For testing deploys
+

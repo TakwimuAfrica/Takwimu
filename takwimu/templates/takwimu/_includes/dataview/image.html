@@ -1,10 +1,4 @@
-{% extends 'takwimu/_includes/dataview/_base.html' %}
 {% load wagtailcore_tags wagtailimages_tags %}
 
-{% block dataview_tab_class %}pt-5{% endblock %}
-{% block dataview_tab_title %}Image{% endblock %}
-
-{% block dataview_tab_content %}
-  {% image value.image original class="img-thumbnail mb-2" style="width:100%;" %}
-  <p class="text-center text-muted">{{ value.caption }}</p>
-{% endblock %}
+{% image value.image original class="img-thumbnail mb-2" style="width:100%;" %}
+<p class="text-center text-muted">{{ value.caption }}</p>
