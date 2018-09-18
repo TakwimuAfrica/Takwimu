@@ -171,6 +171,22 @@ class IndicatorsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
+    hurumap = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('data_id', blocks.CharBlock(required=False, label='Data ID')),
+            ('chart_type', blocks.CharBlock(required=False, label='Chart Type',
+                                            help_text='histogram, or pie')),
+            ('stat_type', blocks.CharBlock(required=False, label='Stat Type',
+                                           help_text='percentange, or scaled-percentage')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/hurumap.html'
+    )
+
     entities = blocks.StructBlock(
         [
             ('title', blocks.CharBlock(required=False)),
