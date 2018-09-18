@@ -155,6 +155,12 @@ a {
 * Custom CSS
 * ----------
 */
+// SDG disabled
+.sdg-disabled {
+  @extend .grayscale;
+  pointer-events: none;
+  cursor: not-allowed;
+}
 
 // Partner logos in Navbar + Footer
 .partner-logos a {
