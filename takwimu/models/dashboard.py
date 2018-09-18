@@ -108,7 +108,9 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
 
 HURUMAP_DATA_DISTS = [
     ('demographics-residence_dist', 'Population by Residence'),
-    ('elections-candidate_dist', 'Votes Per Candidate'),
+    ('demographics-sex_dist', 'Population by Sex'),
+    ('crops-crop_production', 'Crops Produced'),
+    ('health_workers-prevention_methods_dist', 'Knowledge of HIV Prevention Methods'),
 ]
 
 

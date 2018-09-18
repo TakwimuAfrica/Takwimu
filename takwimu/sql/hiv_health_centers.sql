@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
--- Dumped by pg_dump version 10.4 (Ubuntu 10.4-0ubuntu0.18.04)
+-- Dumped from database version 10.0
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -19,7 +19,6 @@ SET default_tablespace = '';
 
 SET default_with_oids = false;
 
-
 --
 -- Name: hiv_health_centers; Type: TABLE; Schema: public; Owner: -
 --
@@ -31,6 +30,7 @@ CREATE TABLE public.hiv_health_centers (
     centers character varying(128) NOT NULL,
     total integer
 );
+
 
 --
 -- Data for Name: hiv_health_centers; Type: TABLE DATA; Schema: public; Owner: -
@@ -77,6 +77,7 @@ country	TZ	2009	hiv centers	2672
 
 ALTER TABLE ONLY public.hiv_health_centers
     ADD CONSTRAINT pk_hiv_health_centers PRIMARY KEY (geo_level, geo_code, geo_version, centers);
+
 
 --
 -- PostgreSQL database dump complete
