@@ -106,6 +106,11 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+HURUMAP_DATA_DISTS = [
+    ('demographics-residence_dist', 'Population by Residence'),
+    ('elections-candidate_dist', 'Votes Per Candidate'),
+]
+
 
 class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
@@ -179,6 +184,44 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
+    )
+
+    hurumap = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('data_country', blocks.ChoiceBlock(required=True,
+                                                choices=[
+                                                    ('ET', 'Ethiopia'),
+                                                    ('KE', 'Kenya'),
+                                                    ('NG', 'Nigeria'),
+                                                    ('SN', 'Senegal'),
+                                                    ('TZ', 'Tanzania'),
+                                                ],
+                                                label='Country')),
+            ('data_id', blocks.ChoiceBlock(required=True,
+                                           choices=HURUMAP_DATA_DISTS,
+                                           label='Data')),
+            ('chart_type', blocks.ChoiceBlock(required=True,
+                                              choices=[
+                                                  ('histogram', 'Histogram'),
+                                                  ('pie', 'Pie Chart'),
+                                              ],
+                                              label='Chart Type')),
+            ('data_stat_type', blocks.ChoiceBlock(required=True,
+                                                  choices=[
+                                                      ('percentage', 'Percentage'),
+                                                      ('scaled-percentage', 'Scaled Percentage'),
+                                                  ],
+                                                  label='Stat Type')),
+            ('chart_height', blocks.IntegerBlock(required=False,
+                                                 label='Chart Height',
+                                                 help_text='Default is 300px')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/hurumap.html'
     )
 
     entities = blocks.StructBlock(
