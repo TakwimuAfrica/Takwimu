@@ -106,6 +106,11 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+HURUMAP_DATA_DISTS = [
+    ('demographics-residence_dist', 'Population by Residence'),
+    ('elections-candidate_dist', 'Votes Per Candidate'),
+]
+
 
 class IndicatorsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
@@ -175,11 +180,22 @@ class IndicatorsBlock(blocks.StreamBlock):
         [
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
-            ('data_id', blocks.CharBlock(required=False, label='Data ID')),
-            ('chart_type', blocks.CharBlock(required=False, label='Chart Type',
-                                            help_text='histogram, or pie')),
-            ('stat_type', blocks.CharBlock(required=False, label='Stat Type',
-                                           help_text='percentange, or scaled-percentage')),
+            ('data_id', blocks.ChoiceBlock(required=True,
+                                           choices=HURUMAP_DATA_DISTS,
+                                           label='Name')),
+            ('chart_type', blocks.ChoiceBlock(required=True,
+                                              choices=[
+                                                  ('histogram', 'Histogram'),
+                                                  ('pie', 'Pie Chart'),
+                                              ],
+                                              label='Chart Type')),
+            ('stat_type', blocks.ChoiceBlock(required=True,
+                                             choices=[
+                                                 ('percentage', 'Percentage'),
+                                                 ('scaled-percentage', 'Scaled Percentage'),
+                                             ],
+                                             label='Stat Type')),
+            ('chart_height', blocks.IntegerBlock(required=False, label='Chart Height')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],

@@ -10,7 +10,7 @@
         width="100%"
         height="{% firstof value.chart_height 300%}"
         style="margin: 1em; max-width: 720px;"></iframe>
-<script src="https://tanzania.hurumap.org/static/js/embed.chart.make.js"></script>
+<script src="/static/js/embed.chart.make.js"></script>
 
 <script>
     function makeCensusEmbeds() {
@@ -96,7 +96,7 @@
     chart.addEventListener("load", function () {
         window.CensusReporterEmbeds = makeCensusEmbeds();
     });
-    chart.src='https://takwimu.africa/embed/iframe.html?geoID=country-TZ&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.stat_type}}'
+    chart.src='/embed/iframe.html?geoID=country-TZ&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.stat_type}}'
 </script>
 
 {% endblock %}
