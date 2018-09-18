@@ -96,7 +96,7 @@
     chart.addEventListener("load", function () {
         window.CensusReporterEmbeds = makeCensusEmbeds();
     });
-    chart.src='/embed/iframe.html?geoID=country-TZ&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.stat_type}}'
+    chart.src='/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.data_stat_type}}'
 </script>
 
 {% endblock %}
