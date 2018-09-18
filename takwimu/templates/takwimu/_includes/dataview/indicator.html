@@ -29,7 +29,7 @@
       {% for widget in indicator.value.widgets %}
         <li class="nav-item">
           <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="d{{ widget.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ widget.value.title|slugify }}-tab" role="tab"
-             aria-controls="d{{ widget.value.title|slugify }}-tab" aria-selected="true">{{ widget.block_type | upper }}</a>
+             aria-controls="d{{ widget.value.title|slugify }}-tab" aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
         </li>
       {% endfor %}
     </ul>
