@@ -28,5 +28,6 @@ FieldTable(
     ['highest education level reached'],
     id='highest_education_level_reached'
 )
+FieldTable(['method', 'sex'])
 
 

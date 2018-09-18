@@ -115,6 +115,17 @@
             </div>
           </section>
         {% endif %}
+        {% if not health_centers.prevention_methods_dist.is_missing %}
+          <div class="section-container">
+
+            <section class="clearfix stat-row">
+              <div id="chart-grouped_column-health_centers-prevention_methods_dist"
+                   data-stat-type="scaled-percentage"
+                   data-chart-title=""></div>
+            </section>
+
+          </div>
+        {% endif %}
       </div>
     </article>
   {% endif %}
@@ -187,47 +198,48 @@
         {% endif %}
       </div>
     </article>
-
-    {% if not education.is_missing %}
-      <article id="education"
-               class="clearfix {% if 'education' not in selected_sections %}hide{% endif %}">
-        <header class="section-contents">
-          <h1> Education</h1>
-        </header>
-        <div class="section-container">
-
-          <section class="clearfix stat-row">
-            <h2><a class="permalink"
-                   href="#highest-education-level-reached"
-                   id="highest-education-level-reached">Educational
-              level <i
-                  class="fa fa-link"></i></a></h2>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=education.education_reached_secondary_or_higher stat_type='percentage' %}
-            </div>
-            <div class="column-two-thirds"
-                 id="chart-histogram-education-education_reached_distribution"
-                 data-stat-type="scaled-percentage"
-                 data-chart-title="Population by highest education level reached"
-                 data-qualifier="Universe: {{ education.education_reached_distribution.metadata.universe }}"></div>
-          </section>
-          <section class="clearfix stat-row">
-            <h2><a class="permalink" href="#school-attendance"
-                   id="school-attendance">School attendance <i
-                class="fa fa-link"></i></a></h2>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=education.school_attendance_never stat_type='percentage' %}
-            </div>
-            <div class="column-two-thirds"
-                 id="chart-grouped_column-education-school_attendance_distribution"
-                 data-stat-type="scaled-percentage"
-                 data-chart-title="School attendance by sex"
-                 data-qualifier="Universe: {{ education.school_attendance_distribution.metadata.universe }}"></div>
-          </section>
-
-        </div>
-      </article>
-    {% endif %}
-
   {% endif %}
+
+  {% if not education.is_missing %}
+    <article id="education"
+             class="clearfix {% if 'education' not in selected_sections %}hide{% endif %}">
+      <header class="section-contents">
+        <h1> Education</h1>
+      </header>
+      <div class="section-container">
+
+        <section class="clearfix stat-row">
+          <h2><a class="permalink"
+                 href="#highest-education-level-reached"
+                 id="highest-education-level-reached">Educational
+            level <i
+                class="fa fa-link"></i></a></h2>
+          <div class="column-third">
+            {% include 'profile/_blocks/_stat_list.html' with stat=education.education_reached_secondary_or_higher stat_type='percentage' %}
+          </div>
+          <div class="column-two-thirds"
+               id="chart-histogram-education-education_reached_distribution"
+               data-stat-type="scaled-percentage"
+               data-chart-title="Population by highest education level reached"
+               data-qualifier="Universe: {{ education.education_reached_distribution.metadata.universe }}"></div>
+        </section>
+        <section class="clearfix stat-row">
+          <h2><a class="permalink" href="#school-attendance"
+                 id="school-attendance">School attendance <i
+              class="fa fa-link"></i></a></h2>
+          <div class="column-third">
+            {% include 'profile/_blocks/_stat_list.html' with stat=education.school_attendance_never stat_type='percentage' %}
+          </div>
+          <div class="column-two-thirds"
+               id="chart-grouped_column-education-school_attendance_distribution"
+               data-stat-type="scaled-percentage"
+               data-chart-title="School attendance by sex"
+               data-qualifier="Universe: {{ education.school_attendance_distribution.metadata.universe }}"></div>
+        </section>
+
+      </div>
+    </article>
+  {% endif %}
+
+
 {% endblock %}

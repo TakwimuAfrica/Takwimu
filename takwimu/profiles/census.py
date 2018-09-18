@@ -27,6 +27,10 @@ def get_profile(geo, profile_name, request):
         data['health_workers'] = get_health_workers(geo, session)
         data['causes_of_death'] = get_causes_of_death(geo, session)
         data['education'] = get_education_profile(geo, session)
+        data['hiv'] = get_knowledge_of_HIV(geo, session)
+        print '\n\n\n\n\n\n'
+        print data
+        print '\n\n\n\n\n\n'
         return data
     finally:
         session.close()
@@ -205,6 +209,7 @@ def get_health_centers(geo, session):
     health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
     health_centers_ownership_dist = LOCATIONNOTFOUND
     hiv_health_centers_dist, total_hiv_health_centers = LOCATIONNOTFOUND, 0
+    prevention_methods_dist = LOCATIONNOTFOUND
 
     try:
         health_centers_dist, total_health_centers = get_stat_data(
@@ -227,9 +232,16 @@ def get_health_centers(geo, session):
     except LocationNotFound:
         pass
 
+    try:
+        prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo,
+                                                   session)
+    except LocationNotFound:
+        pass
+
     is_missing = health_centers_dist.get('is_missing') and \
                  health_centers_ownership_dist.get('is_missing') and \
-                 hiv_health_centers_dist.get('is_missing')
+                 hiv_health_centers_dist.get('is_missing') and \
+                 prevention_methods_dist.get('is_missing')
     total_health_centers_dist = _create_single_value_dist(
         'Total health centers in operation (2014)', total_health_centers)
     total_hiv_health_centers_dist = _create_single_value_dist(
@@ -241,6 +253,7 @@ def get_health_centers(geo, session):
         'hiv_health_centers_dist': hiv_health_centers_dist,
         'total_hiv_health_centers_dist': total_hiv_health_centers_dist,
         'health_centers_ownership_dist': health_centers_ownership_dist,
+        'prevention_methods_dist': prevention_methods_dist
     }
 
 
@@ -331,7 +344,7 @@ def get_causes_of_death(geo, session):
         'inpatient_diagnosis_under_five_dist': inpatient_diagnosis_under_five_dist,
         'inpatient_diagnosis_over_five_dist': inpatient_diagnosis_over_five_dist,
         'outpatient_diagnosis_over_five_dist': outpatient_diagnosis_over_five_dist,
-        'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist,
+        'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist
     }
 
 
@@ -389,4 +402,16 @@ def get_education_profile(geo, session):
             'numerators': {'this': total_never},
             'values': {'this': round(total_never / total_pop * 100, 2)}
         },
+    }
+
+
+def get_knowledge_of_HIV(geo, session):
+    prevention_methods_dist = LOCATIONNOTFOUND
+    try:
+        prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo, session)
+    except LocationNotFound:
+        pass
+
+    return {
+        'prevention_methods_dist': prevention_methods_dist
     }
