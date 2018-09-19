@@ -41,3 +41,4 @@ FieldTable(['residence', 'poverty_type'], id='residence_poverty_type')
 
 FieldTable(['residence', 'age'], id='poverty_age_residence')
 
+FieldTable(['age'], id='fgm_prevalence')

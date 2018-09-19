@@ -121,6 +121,7 @@ HURUMAP_DATA_DISTS = [
      'Percentage of Population living in Poverty by Residence'),
     ('poverty-poverty_age_dist',
      'Percentage of Population living in Poverty by Age and Residence'),
+    ('fgm-fgm_age_dist', 'Percentage of Women that have undergone FGM by Age'),
 ]
 
 
