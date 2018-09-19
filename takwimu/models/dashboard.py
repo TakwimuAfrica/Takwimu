@@ -208,6 +208,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                               choices=[
                                                   ('histogram', 'Histogram'),
                                                   ('pie', 'Pie Chart'),
+                                                  ('grouped_column', 'Grouped Column')
                                               ],
                                               label='Chart Type')),
             ('data_stat_type', blocks.ChoiceBlock(required=True,
