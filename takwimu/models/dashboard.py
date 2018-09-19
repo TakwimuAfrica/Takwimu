@@ -106,15 +106,21 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+
 HURUMAP_DATA_DISTS = [
     ('demographics-residence_dist', 'Population by Residence'),
     ('demographics-sex_dist', 'Population by Sex'),
     ('crops-crop_distribution', 'Crops Produced'),
-    ('health_centers-prevention_methods_dist', 'Knowledge of HIV Prevention Methods'),
-    ('education-education_reached_distribution', 'Highest Level of Education Attained'),
+    ('health_centers-prevention_methods_dist',
+     'Knowledge of HIV Prevention Methods'),
+    ('education-education_reached_distribution',
+     'Highest Level of Education Attained'),
     ('education-school_attendance_distribution', 'School Attendance by Sex'),
     ('donors-donor_assistance_dist', 'Donor Contribution in millions of US$'),
-    ('poverty-poverty_residence_dist', 'Percentage of Population living in Poverty'),
+    ('poverty-poverty_residence_dist',
+     'Percentage of Population living in Poverty by Residence'),
+    ('poverty-poverty_age_dist',
+     'Percentage of Population living in Poverty by Age and Residence'),
 ]
 
 
@@ -212,13 +218,16 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                               choices=[
                                                   ('histogram', 'Histogram'),
                                                   ('pie', 'Pie Chart'),
-                                                  ('grouped_column', 'Grouped Column')
+                                                  ('grouped_column',
+                                                   'Grouped Column')
                                               ],
                                               label='Chart Type')),
             ('data_stat_type', blocks.ChoiceBlock(required=True,
                                                   choices=[
-                                                      ('percentage', 'Percentage'),
-                                                      ('scaled-percentage', 'Scaled Percentage'),
+                                                      ('percentage',
+                                                       'Percentage'),
+                                                      ('scaled-percentage',
+                                                       'Scaled Percentage'),
                                                   ],
                                                   label='Stat Type')),
             ('chart_height', blocks.IntegerBlock(required=False,

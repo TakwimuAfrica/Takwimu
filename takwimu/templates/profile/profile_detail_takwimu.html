@@ -242,7 +242,7 @@
     </article>
   {% endif %}
 
-    {% if not povery.is_missing %}
+    {% if not poverty.is_missing %}
     <article class="clearfix">
       <header class="section-contents">
         <h1>Poverty</h1>
@@ -253,7 +253,13 @@
           <div class="column-full"
                  id="chart-grouped_column-poverty-poverty_residence_dist"
                  data-stat-type="scaled-percentage">
-
+          </div>
+        </section>
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Percentage of Population living in Poverty by Age and Residence</h2>
+          <div class="column-full"
+                 id="chart-grouped_column-poverty-poverty_age_dist"
+                 data-stat-type="scaled-percentage">
           </div>
         </section>
       </div>

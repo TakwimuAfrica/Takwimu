@@ -267,7 +267,7 @@ def get_health_workers(geo, session):
             'workers', geo, session, table_name='health_workers',
             order_by='-total')
         hrh_patient_ratio = \
-        health_workers_dist['HRH patient ratio']['numerators']['this']
+            health_workers_dist['HRH patient ratio']['numerators']['this']
         del health_workers_dist['HRH patient ratio']
         del health_workers_dist['MO and AMO per 10000']
         del health_workers_dist['Nurses and midwives per 10000']
@@ -388,7 +388,8 @@ def get_education_profile(geo, session):
 def get_knowledge_of_HIV(geo, session):
     prevention_methods_dist = LOCATIONNOTFOUND
     try:
-        prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo, session)
+        prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo,
+                                                   session)
     except LocationNotFound:
         pass
 
@@ -396,10 +397,11 @@ def get_knowledge_of_HIV(geo, session):
         'prevention_methods_dist': prevention_methods_dist
     }
 
+
 def get_donor_assistance(geo, session):
     donor_assistance_dist = LOCATIONNOTFOUND
     try:
-        donor_assistance_dist, _ =  get_stat_data(['donor'], geo, session)
+        donor_assistance_dist, _ = get_stat_data(['donor'], geo, session)
 
     except LocationNotFound:
         pass
@@ -409,15 +411,27 @@ def get_donor_assistance(geo, session):
         'donor_assistance_dist': donor_assistance_dist
     }
 
+
 def get_poverty_profile(geo, session):
     poverty_residence_dist = LOCATIONNOTFOUND
+    poverty_age_dist = LOCATIONNOTFOUND
     try:
-        poverty_residence_dist, _ = get_stat_data(['poverty_type', 'residence'], geo, session)
+        poverty_residence_dist, _ = get_stat_data(['poverty_type', 'residence'],
+                                                  geo, session)
 
     except LocationNotFound:
         pass
 
+    try:
+        poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo, session)
+
+    except LocationNotFound:
+        pass
+
+    is_missing = poverty_residence_dist.get(
+        'is_missing') and poverty_age_dist.get('is_missing')
     return {
-        'is_missing': poverty_residence_dist.get('is_missing'),
-        'poverty_residence_dist': poverty_residence_dist
+        'is_missing': is_missing,
+        'poverty_residence_dist': poverty_residence_dist,
+        'poverty_age_dist': poverty_age_dist
     }
