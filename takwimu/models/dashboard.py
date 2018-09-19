@@ -106,10 +106,19 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+HURUMAP_DATA_DISTS = [
+    ('demographics-residence_dist', 'Population by Residence'),
+    ('demographics-sex_dist', 'Population by Sex'),
+    ('crops-crop_production', 'Crops Produced'),
+    ('health_workers-prevention_methods_dist', 'Knowledge of HIV Prevention Methods'),
+]
 
-class IndicatorsBlock(blocks.StreamBlock):
+
+class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('body', blocks.RichTextBlock(required=False)),
@@ -124,6 +133,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     embed = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('embed', EmbedBlock(required=False)),
@@ -136,6 +147,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     document = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('document', DocumentChooserBlock(required=False)),
@@ -148,6 +161,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     image = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('image', ImageChooserBlock(required=False)),
@@ -161,6 +176,8 @@ class IndicatorsBlock(blocks.StreamBlock):
 
     html = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
@@ -171,8 +188,48 @@ class IndicatorsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
+    hurumap = blocks.StructBlock(
+        [
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('data_country', blocks.ChoiceBlock(required=True,
+                                                choices=[
+                                                    ('ET', 'Ethiopia'),
+                                                    ('KE', 'Kenya'),
+                                                    ('NG', 'Nigeria'),
+                                                    ('SN', 'Senegal'),
+                                                    ('TZ', 'Tanzania'),
+                                                ],
+                                                label='Country')),
+            ('data_id', blocks.ChoiceBlock(required=True,
+                                           choices=HURUMAP_DATA_DISTS,
+                                           label='Data')),
+            ('chart_type', blocks.ChoiceBlock(required=True,
+                                              choices=[
+                                                  ('histogram', 'Histogram'),
+                                                  ('pie', 'Pie Chart'),
+                                              ],
+                                              label='Chart Type')),
+            ('data_stat_type', blocks.ChoiceBlock(required=True,
+                                                  choices=[
+                                                      ('percentage', 'Percentage'),
+                                                      ('scaled-percentage', 'Scaled Percentage'),
+                                                  ],
+                                                  label='Stat Type')),
+            ('chart_height', blocks.IntegerBlock(required=False,
+                                                 label='Chart Height',
+                                                 help_text='Default is 300px')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/hurumap.html'
+    )
+
     entities = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('entities', blocks.ListBlock(EntityStructBlock())),
@@ -187,6 +244,11 @@ class IndicatorsBlock(blocks.StreamBlock):
         icon = 'form'
 
 
+class IndicatorBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    widgets = IndicatorWidgetsBlock(required=False)
+
+
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
 
@@ -197,7 +259,9 @@ class TopicBlock(blocks.StructBlock):
     summary = blocks.TextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
 
-    indicators = IndicatorsBlock(required=False)
+    indicators = blocks.StreamBlock([
+        ('indicators', IndicatorBlock(required=False))
+    ], required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()

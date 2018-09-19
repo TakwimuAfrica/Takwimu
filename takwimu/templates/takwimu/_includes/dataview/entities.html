@@ -1,13 +1,7 @@
-{% extends 'takwimu/_includes/dataview/_base.html' %}
 {% load wagtailcore_tags %}
 
-{% block dataview_tab_class %}pt-5{% endblock %}
-{% block dataview_tab_title %}Key Stakeholders{% endblock %}
-
-{% block dataview_tab_content %}
-  <div class="dataview-entities card-deck mb-3">
-      {% for entity in value.entities %}
-        {% include_block entity %}
-      {% endfor %}
-  </div>
-{% endblock %}
+<div class="dataview-entities card-deck mb-3">
+  {% for entity in value.entities %}
+    {% include_block entity %}
+  {% endfor %}
+</div>

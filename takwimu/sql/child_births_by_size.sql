@@ -2,24 +2,19 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.13
--- Dumped by pg_dump version 9.6.7
+-- Dumped from database version 10.0
+-- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
-
-SET search_path = public, pg_catalog;
 
 ALTER TABLE IF EXISTS ONLY public.child_births_by_size DROP CONSTRAINT IF EXISTS pk_child_births_by_size;
 DROP TABLE IF EXISTS public.child_births_by_size;
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -28,7 +23,7 @@ SET default_with_oids = false;
 -- Name: child_births_by_size; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE child_births_by_size (
+CREATE TABLE public.child_births_by_size (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -41,7 +36,7 @@ CREATE TABLE child_births_by_size (
 -- Data for Name: child_births_by_size; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY child_births_by_size (geo_level, geo_code, geo_version, size, total) FROM stdin;
+COPY public.child_births_by_size (geo_level, geo_code, geo_version, size, total) FROM stdin;
 level1	NG_1_001	2009	Very Small	1
 level1	NG_1_001	2009	Smaller than Average	7
 level1	NG_1_001	2009	Average	85
@@ -201,10 +196,11 @@ country	NG	2009	Missing	2
 -- Name: child_births_by_size pk_child_births_by_size; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY child_births_by_size
+ALTER TABLE ONLY public.child_births_by_size
     ADD CONSTRAINT pk_child_births_by_size PRIMARY KEY (geo_level, geo_code, geo_version, size);
 
 
 --
 -- PostgreSQL database dump complete
 --
+

@@ -16,6 +16,7 @@ $brand-extend-light: #f8f9fa;
 $brand-extend-jumbotron: #fafafa;
 $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
+$brand-extend-disabled: #ededec;
 
 body {
   padding-top: 72px;
@@ -372,8 +373,89 @@ Source: https://iamsteve.me/blog/entry/using-flexbox-for-horizontal-scrolling-na
   }
 }
 
+/* Pagination style*/ 
+.page-item {
+  .page-link {
+    border-radius: 0.25em;
+  }
+  &.active .page-link {
+    background-color: $brand-color-secondary;
+    border-color: $brand-color-secondary;
+   &:hover {
+    color: $brand-extend-white;
+   }
+  }
+}
 
+.pagination-sm .page-item:first-child .page-link,
+.pagination-sm .page-item:last-child .page-link {
+  border-radius: 0.2rem;
+}
+.pagination .disabled a {
+  background-color: $brand-extend-disabled!important;
+  color: $brand-extend-white!important;
+}
 
+/* Base for label styling */
+[type="checkbox"]:not(:checked),
+[type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+    + label {
+      position: relative;
+      padding-left: 1.5em;
+      cursor: pointer;
+      /* checkbox aspect */
+      &:before {
+        content: '';
+        position: absolute;
+        left: 0; top: 0;
+        width: 1.25em; height: 1.25em;
+        border: 1px solid #9b9b9b;
+        background: #ffffff;
+        border-radius: 0;
+      }
+      /* checked mark aspect */
+      &::after{
+        content: '✔';
+        position: absolute;
+        top: .1em; 
+        left: .1em;
+        font-size: 1.4em;
+        line-height: 0.8;
+        color: #000000;
+        transition: all .1s;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+    }
+}
+
+/* checked mark aspect changes */
+[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+/* accessibility */
+[type="checkbox"]:checked:focus + label:before,
+[type="checkbox"]:not(:checked):focus + label:before {
+    border: 1px dotted #000;
+}
+
+ /* Text wrappig */
+ .wrapword {
+  white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+  white-space: -pre-wrap;      /* Opera 4-6 */
+  white-space: -o-pre-wrap;    /* Opera 7 */
+  white-space: pre-wrap;       /* css-3 */
+  word-wrap: break-word;       /* Internet Explorer 5.5+ */
+  white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
+  word-break: break-all;
+  white-space: normal;
+}
 
 /*
 * Extra small devices (portrait phones, less than 576px)
