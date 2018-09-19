@@ -202,6 +202,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
 
     hurumap = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('data_country', blocks.ChoiceBlock(required=True,
