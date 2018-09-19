@@ -139,6 +139,12 @@ def get_child_births(geo, session):
     total_low_birth_weights_dist = _create_single_value_dist(
         'Of all reported birth weights are less than 2.5 kg',
         total_low_birth_weights)
+    child_births_by_size_dist['metadata'] = {
+        'source': {
+            'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
+            'title': 'Nigeria Demographic and Health Survey 2013',
+        }
+    }
 
     return {
         'is_missing': is_missing,
@@ -147,10 +153,6 @@ def get_child_births(geo, session):
         'child_births_by_size_dist': child_births_by_size_dist,
         'total_reported_birth_weights_dist': total_reported_birth_weights_dist,
         'total_low_birth_weights_dist': total_low_birth_weights_dist,
-        'child_births_source': {
-            'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
-            'name': 'Nigeria Demographic and Health Survey 2013',
-        },
     }
 
 
