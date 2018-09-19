@@ -28,7 +28,7 @@ FieldTable(
     ['highest_education_level_reached'],
     id='highest_education_level_reached'
 )
-FieldTable(['method', 'sex'], id="hiv_prevention_methods")
+FieldTable(['method', 'sex'], id="method_sex")
 
 FieldTable(
     ['school_attendance', 'sex'],

@@ -29,7 +29,7 @@ def get_profile(geo, profile_name, request):
         data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
         print '\n\n\n\n\n\n'
-        print data['education']
+        print data['health_centers']
         print '\n\n\n\n\n\n'
         return data
     finally:
