@@ -111,6 +111,8 @@ HURUMAP_DATA_DISTS = [
     ('demographics-sex_dist', 'Population by Sex'),
     ('crops-crop_distribution', 'Crops Produced'),
     ('health_workers-prevention_methods_dist', 'Knowledge of HIV Prevention Methods'),
+    ('education-education_reached_distribution', 'Highest Level of Education Attained'),
+    ('education-school_attendance_distribution', 'School Attendance by Sex'),
 ]
 
 

@@ -29,7 +29,7 @@ def get_profile(geo, profile_name, request):
         data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
         print '\n\n\n\n\n\n'
-        print data
+        print data['education']
         print '\n\n\n\n\n\n'
         return data
     finally:
@@ -352,56 +352,35 @@ def get_education_profile(geo, session):
     # highest level reached
     edu_dist_data = LOCATIONNOTFOUND
     school_attendance_dist = LOCATIONNOTFOUND
-    secondary_or_higher = 0
-    total_never = 0.0
-    total_pop = 1
+
     try:
-        edu_dist_data, total_pop = get_stat_data(
-            'highest education level reached', geo, session,
+        edu_dist_data, _ = get_stat_data(
+            'highest_education_level_reached', geo, session,
             key_order=['None', 'Pre-primary', 'Primary', 'Secondary',
                        'Tertiary',
                        'University', 'Youth polytechnic', 'Basic literacy',
                        'Madrassa'])
 
-        for key, data in edu_dist_data.iteritems():
-            if key in ['Secondary', 'Tertiary', 'University',
-                       'Youth polytechnic']:
-                secondary_or_higher += data['numerators']['this']
     except LocationNotFound:
         pass
 
     try:
         # school attendance by sex
         school_attendance_dist, _ = get_stat_data(
-            ['school attendance', 'sex'], geo, session,
+            ['school_attendance', 'sex'], geo, session,
             key_order={'school attendance': ['Never attended', 'At school',
                                              'Left school', 'Unspecified'],
                        'sex': ['Female', 'Male']})
 
-
-        for data in school_attendance_dist['Never attended'].itervalues():
-            if 'numerators' in data:
-                total_never += data['numerators']['this']
     except LocationNotFound:
         pass
 
-    is_missing = edu_dist_data.get('is_missing') and school_attendance_dist.get(
-        'is_missing')
+    is_missing = edu_dist_data.get('is_missing')
 
     return {
         'is_missing': is_missing,
         'education_reached_distribution': edu_dist_data,
-        'education_reached_secondary_or_higher': {
-            'name': 'Reached Secondary school or higher',
-            'numerators': {'this': secondary_or_higher},
-            'values': {'this': round(secondary_or_higher / total_pop * 100, 2)}
-        },
         'school_attendance_distribution': school_attendance_dist,
-        'school_attendance_never': {
-            'name': 'Never attended school',
-            'numerators': {'this': total_never},
-            'values': {'this': round(total_never / total_pop * 100, 2)}
-        },
     }
 
 

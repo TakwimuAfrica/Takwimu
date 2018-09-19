@@ -207,35 +207,26 @@
         <h1> Education</h1>
       </header>
       <div class="section-container">
-
-        <section class="clearfix stat-row">
-          <h2><a class="permalink"
-                 href="#highest-education-level-reached"
-                 id="highest-education-level-reached">Educational
-            level <i
-                class="fa fa-link"></i></a></h2>
-          <div class="column-third">
-            {% include 'profile/_blocks/_stat_list.html' with stat=education.education_reached_secondary_or_higher stat_type='percentage' %}
-          </div>
-          <div class="column-two-thirds"
-               id="chart-histogram-education-education_reached_distribution"
-               data-stat-type="scaled-percentage"
-               data-chart-title="Population by highest education level reached"
-               data-qualifier="Universe: {{ education.education_reached_distribution.metadata.universe }}"></div>
-        </section>
-        <section class="clearfix stat-row">
-          <h2><a class="permalink" href="#school-attendance"
-                 id="school-attendance">School attendance <i
-              class="fa fa-link"></i></a></h2>
-          <div class="column-third">
-            {% include 'profile/_blocks/_stat_list.html' with stat=education.school_attendance_never stat_type='percentage' %}
-          </div>
-          <div class="column-two-thirds"
-               id="chart-grouped_column-education-school_attendance_distribution"
-               data-stat-type="scaled-percentage"
-               data-chart-title="School attendance by sex"
-               data-qualifier="Universe: {{ education.school_attendance_distribution.metadata.universe }}"></div>
-        </section>
+        {% if not education.education_reached_distribution.is_missing %}
+          <section class="clearfix stat-row">
+            <h2>Education level</h2>
+            <div class="column-full"
+                 id="chart-histogram-education-education_reached_distribution"
+                 data-stat-type="scaled-percentage"
+                 data-chart-title="Population by highest education level reached"
+                 data-qualifier="Universe: {{ education.education_reached_distribution.metadata.universe }}"></div>
+          </section>
+        {% endif %}
+        {% if not education.school_attendance_distribution.is_missing %}
+          <section class="clearfix stat-row">
+            <h2>School attendance</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-education-school_attendance_distribution"
+                 data-stat-type="scaled-percentage"
+                 data-chart-title="School attendance by sex"
+                 data-qualifier="Universe: {{ education.school_attendance_distribution.metadata.universe }}"></div>
+          </section>
+        {% endif %}
 
       </div>
     </article>
