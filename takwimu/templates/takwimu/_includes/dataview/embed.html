@@ -1,9 +1,3 @@
-{% extends 'takwimu/_includes/dataview/_base.html' %}
 {% load wagtailcore_tags %}
 
-{% block dataview_tab_class %}pt-5{% endblock %}
-{% block dataview_tab_title %}Embed{% endblock %}
-
-{% block dataview_tab_content %}
-  {% include_block value.embed %}
-{% endblock %}
+{% include_block value.embed %}
