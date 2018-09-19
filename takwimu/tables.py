@@ -25,9 +25,15 @@ FieldTable(
     id='employment_activity_status_sex'
 )
 FieldTable(
-    ['highest education level reached'],
+    ['highest_education_level_reached'],
     id='highest_education_level_reached'
 )
-FieldTable(['method', 'sex'])
+FieldTable(['method', 'sex'], id="method_sex")
+
+FieldTable(
+    ['school_attendance', 'sex'],
+    id='school_attendance_sex'
+)
+
 
 
