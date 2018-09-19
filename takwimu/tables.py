@@ -35,5 +35,12 @@ FieldTable(
     id='school_attendance_sex'
 )
 
+FieldTable(['donor'], id='donor')
 
+FieldTable(['residence', 'poverty_type'], id='residence_poverty_type')
 
+FieldTable(['residence', 'age'], id='poverty_age_residence')
+
+FieldTable(['age'], id='fgm_prevalence')
+
+FieldTable(['year', 'type'], id='seized_firearms')

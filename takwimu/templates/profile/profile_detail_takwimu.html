@@ -86,40 +86,41 @@
         <h1>Health centers distribution</h1>
       </header>
       {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}
-      <div class="section-container">
-        <section class="clearfix stat-row">
-          {% if not health_centers.health_centers_dist.is_missing %}
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}
-            </div>
-          {% endif %}
-          {% if not health_centers.hiv_health_centers_dist.is_missing %}
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}
-            </div>
-          {% endif %}
-          {% if not health_centers.health_centers_ownership_dist.is_missing %}
-            <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
-          {% endif %}
-          {% if not health_centers.health_centers_dist.is_missing %}
-            <div class="column-full">
-              <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>
-            </div>
-          {% endif %}
-        </section>
-      </div>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            {% if not health_centers.health_centers_dist.is_missing %}
+              <div class="column-third">
+                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}
+              </div>
+            {% endif %}
+            {% if not health_centers.hiv_health_centers_dist.is_missing %}
+              <div class="column-third">
+                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}
+              </div>
+            {% endif %}
+            {% if not health_centers.health_centers_ownership_dist.is_missing %}
+              <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
+            {% endif %}
+            {% if not health_centers.health_centers_dist.is_missing %}
+              <div class="column-full">
+                <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>
+              </div>
+            {% endif %}
+          </section>
+        </div>
       {% endif %}
       {% if not health_centers.prevention_methods_dist.is_missing %}
-      <div class="section-container">
-        <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Knowledge of HIV Prevention Methods</h2>
+        <div class="section-container">
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Knowledge of HIV Prevention
+              Methods</h2>
             <div class="column-full">
               <div id="chart-grouped_column-health_centers-prevention_methods_dist"
                    data-stat-type="scaled-percentage"
                    data-chart-title=""></div>
             </div>
-        </section>
-      </div>
+          </section>
+        </div>
       {% endif %}
     </article>
   {% endif %}
@@ -219,6 +220,92 @@
                  data-stat-type="scaled-percentage"
                  data-chart-title="School attendance by sex"
                  data-qualifier="Universe: {{ education.school_attendance_distribution.metadata.universe }}"></div>
+          </section>
+        {% endif %}
+      </div>
+    </article>
+  {% endif %}
+
+  {% if not donors.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Official Development Assistance</h1>
+      </header>
+      <div class="section-container">
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Principle Donors Contribution </h2>
+          <div class="column-full"
+               id="chart-histogram-donors-donor_assistance_dist"
+               data-stat-type="dollar"
+               data-chart-title="Amount Contributed ('000,000 of USD)"></div>
+        </section>
+      </div>
+    </article>
+  {% endif %}
+
+  {% if not poverty.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Poverty</h1>
+      </header>
+      <div class="section-container">
+        {% if not poverty.poverty_residence_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Percentage of Population in
+              Poverty</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-poverty-poverty_residence_dist"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+        {% if not poverty.poverty_age_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Percentage of Population living in
+              Poverty by Age and Residence</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-poverty-poverty_age_dist"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+      </div>
+    </article>
+  {% endif %}
+
+  {% if not fgm.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Female Genital Mutilation</h1>
+      </header>
+      <div class="section-container">
+        {% if not fgm.fgm_age_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Percentage of Women that have
+              undergone FGM by age</h2>
+            <div class="column-full"
+                 id="chart-histogram-fgm-fgm_age_dist"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+      </div>
+    </article>
+  {% endif %}
+
+  {% if not security.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Security</h1>
+      </header>
+      <div class="section-container">
+        {% if not security.seized_firearms_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Seized Firearms</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-security-seized_firearms_dist"
+                 data-stat-type="scaled-percentage">
+            </div>
           </section>
         {% endif %}
       </div>
