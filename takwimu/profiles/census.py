@@ -28,6 +28,7 @@ def get_profile(geo, profile_name, request):
         data['causes_of_death'] = get_causes_of_death(geo, session)
         data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
+        data['donors'] = get_donor_assistance(geo, session)
         print '\n\n\n\n\n\n'
         print data['health_centers']
         print '\n\n\n\n\n\n'
@@ -395,4 +396,17 @@ def get_knowledge_of_HIV(geo, session):
 
     return {
         'prevention_methods_dist': prevention_methods_dist
+    }
+
+def get_donor_assistance(geo, session):
+    donor_assistance_dist = LOCATIONNOTFOUND
+    try:
+        donor_assistance_dist, _ =  get_stat_data(['donor'], geo, session)
+
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': donor_assistance_dist.get('is_missing'),
+        'donor_assistance_dist': donor_assistance_dist
     }

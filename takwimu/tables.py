@@ -35,5 +35,7 @@ FieldTable(
     id='school_attendance_sex'
 )
 
+FieldTable(['donor'], id='donor')
+
 
 

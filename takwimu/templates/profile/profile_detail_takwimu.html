@@ -224,4 +224,21 @@
       </div>
     </article>
   {% endif %}
+
+  {% if not donors.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Official Development Assistance</h1>
+      </header>
+      <div class="section-container">
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Principle Donors Contribution </h2>
+          <div class="column-full"
+                 id="chart-histogram-donors-donor_assistance_dist"
+                 data-stat-type="dollar"
+                 data-chart-title="Amount Contributed ('000,000 of USD)"></div>
+        </section>
+      </div>
+    </article>
+  {% endif %}
 {% endblock %}
