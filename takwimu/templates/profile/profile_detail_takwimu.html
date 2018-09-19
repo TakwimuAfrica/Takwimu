@@ -92,6 +92,7 @@
       <header class="section-contents">
         <h1>Health centers distribution</h1>
       </header>
+      {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}
       <div class="section-container">
         <section class="clearfix stat-row">
           {% if not health_centers.health_centers_dist.is_missing %}
@@ -109,24 +110,23 @@
           {% endif %}
         </section>
         {% if not health_centers.health_centers_dist.is_missing %}
-          <section class="clearfix stat-row">
-            <div class="column-full">
-              <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>
-            </div>
-          </section>
-        {% endif %}
-        {% if not health_centers.prevention_methods_dist.is_missing %}
-          <div class="section-container">
-
-            <section class="clearfix stat-row">
-              <div id="chart-grouped_column-health_centers-prevention_methods_dist"
-                   data-stat-type="scaled-percentage"
-                   data-chart-title=""></div>
-            </section>
-
+        <section class="clearfix stat-row">
+          <div class="column-full">
+            <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>
           </div>
+        </section>
         {% endif %}
       </div>
+      {% endif %}
+      {% if not health_centers.prevention_methods_dist.is_missing %}
+      <div class="section-container">
+        <section class="clearfix stat-row">
+          <div id="chart-grouped_column-health_centers-prevention_methods_dist"
+                data-stat-type="scaled-percentage"
+                data-chart-title=""></div>
+        </section>
+      </div>
+      {% endif %}
     </article>
   {% endif %}
 
