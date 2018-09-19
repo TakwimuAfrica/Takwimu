@@ -291,4 +291,22 @@
       </div>
     </article>
   {% endif %}
+    {% if not security.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Security</h1>
+      </header>
+      <div class="section-container">
+        {% if not security.seized_firearms_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Seized Firearms</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-security-seized_firearms_dist"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+      </div>
+    </article>
+  {% endif %}
 {% endblock %}
