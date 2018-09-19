@@ -114,6 +114,7 @@ HURUMAP_DATA_DISTS = [
     ('education-education_reached_distribution', 'Highest Level of Education Attained'),
     ('education-school_attendance_distribution', 'School Attendance by Sex'),
     ('donors-donor_assistance_dist', 'Donor Contribution in millions of US$'),
+    ('poverty-poverty_residence_dist', 'Percentage of Population living in Poverty'),
 ]
 
 

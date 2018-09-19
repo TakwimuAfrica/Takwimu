@@ -241,4 +241,22 @@
       </div>
     </article>
   {% endif %}
+
+    {% if not povery.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Poverty</h1>
+      </header>
+      <div class="section-container">
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Percentage of Population in Poverty</h2>
+          <div class="column-full"
+                 id="chart-grouped_column-poverty-poverty_residence_dist"
+                 data-stat-type="scaled-percentage">
+
+          </div>
+        </section>
+      </div>
+    </article>
+  {% endif %}
 {% endblock %}

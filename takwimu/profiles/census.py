@@ -29,9 +29,7 @@ def get_profile(geo, profile_name, request):
         data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
         data['donors'] = get_donor_assistance(geo, session)
-        print '\n\n\n\n\n\n'
-        print data['health_centers']
-        print '\n\n\n\n\n\n'
+        data['poverty'] = get_poverty_profile(geo, session)
         return data
     finally:
         session.close()
@@ -409,4 +407,17 @@ def get_donor_assistance(geo, session):
     return {
         'is_missing': donor_assistance_dist.get('is_missing'),
         'donor_assistance_dist': donor_assistance_dist
+    }
+
+def get_poverty_profile(geo, session):
+    poverty_residence_dist = LOCATIONNOTFOUND
+    try:
+        poverty_residence_dist, _ = get_stat_data(['poverty_type', 'residence'], geo, session)
+
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': poverty_residence_dist.get('is_missing'),
+        'poverty_residence_dist': poverty_residence_dist
     }
