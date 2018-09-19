@@ -68,13 +68,42 @@
             </div>
           {% endfor %}
         </div>
-
+        <!-- Indicator pagination -->
+        <div class="container py-2">
+          <div class="row d-flex justify-content-center my-3">
+            <ol class="nav indicator-pagination" id="v-pills-tab" role="tablist">
+              {% for indicator in topic.value.indicators %}
+              <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
+                id="d{{ indicator.value.title|slugify }}-tab-btn"
+                data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab" role="tab" 
+                aria-controls="d{{ indicator.value.title|slugify }}-tab"
+                {% if forloop.first %} aria-selected="true" {% endif %} aria-selected="false">
+                <i class="fas fa-circle p-1"></i>
+              </a>
+              {% endfor %}
+            </ol>
+          </div>
+          <div class="row d-flex justify-content-around my-3 nav" id="v-pills-tab" role="tablist">
+            <a href="#" class="btn btn-primary border-0 nav-link prev-indicator" data-toggle="pill" role="tab">
+              <span class="fas fa-angle-double-left"></span>
+              <span class="prev font-weight-bold text-uppercase">Previous</span>
+            </a>
+            <span class="border-right"></span>
+            <a href="#" class="btn btn-primary border-0 nav-link next-indicator">
+              <span class="fas fa-angle-double-right"></span>
+              <span class="next font-weight-bold text-uppercase">Next</span>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div><!-- container fluid -->
 
 <style>
+  .indicator-pagination .nav-link.active {
+    color: #bcc7d4;
+  }
   .dataindicators-nav .nav-pills {
     background-color: #1f6cc6;
   }
@@ -136,5 +165,13 @@
     background: #ffffff;
     border-color: #f4f4f4;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+  }
+
+  /* Consistency tab active state for topic details */
+  .indicators-container .nav-tabs .nav-item.show .nav-link, 
+  .indicators-container .nav-tabs .nav-link.active {
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 0;
   }
 </style>

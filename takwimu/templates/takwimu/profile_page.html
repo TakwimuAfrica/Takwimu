@@ -22,4 +22,56 @@
 
   {% include 'takwimu/_includes/sections/updates.html' %}
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Handling multiple IDS
+      $(".data-topic-container").each(function () {
+        // topicIds.push(this.id);
+        var topic_id = this.id;
+
+        var active_indicator = $("#" + topic_id + " .dataindicators-nav .nav-link.active"),
+          prev_indicator = active_indicator.prev().prev().attr("id"),
+          next_indicator = active_indicator.next().next().attr("id"),
+          _prev = active_indicator.prev().prev().text(),
+          _next = active_indicator.next().next().text();
+
+        console.log(prev_indicator);
+
+        $(".prev-indicator").find(".prev").html(_prev);
+        $(".prev-indicator").attr({
+          id: prev_indicator,
+          href: "#" + prev_indicator,
+          "aria-controls": prev_indicator
+        });
+
+        $(".next-indicator").find(".next").html(_next);
+        $(".next-indicator").attr({
+          id: next_indicator,
+          href: "#" + next_indicator,
+          "aria-controls": next_indicator
+        });
+
+        $("#" + topic_id + " .dataindicators-nav .nav-link").click(function () {
+          prev_indicator = $(this).prev().prev().attr("id");
+          next_indicator = $(this).next().next().attr("id");
+          _next = $(this).next().next().text();
+          _prev = $(this).prev().prev().text();
+
+          $(".prev-indicator").find(".prev").html(_prev);
+          $(".prev-indicator").attr({
+            id: prev_indicator,
+            href: "#" + prev_indicator,
+            "aria-controls": prev_indicator
+          });
+
+          $(".next-indicator").find(".next").html(_next);
+          $(".next-indicator").attr({
+            id: next_indicator,
+            href: "#" + next_indicator,
+            "aria-controls": next_indicator
+          });
+        });
+      });
+    });
+  </script>
 {% endblock %}

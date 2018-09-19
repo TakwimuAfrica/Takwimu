@@ -34,10 +34,10 @@
       {% endfor %}
     </ul>
 
-    <div class="tab-content border border-top-0 p-3 pt-4 pb-2">
+    <div class="tab-content border border-top-0 bg-white p-2 pt-4 pb-2">
 
       {% for widget in indicator.value.widgets %}
-        <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
+        <div class="border-0 tab-pane fade {% if forloop.first %} active show {% endif %}"
              id="d{{ widget.value.title|slugify }}-tab" role="tabpanel"
              aria-labelledby="d{{ widget.value.title|slugify }}-tab-btn">
           {% include_block widget %}
