@@ -403,15 +403,25 @@ def get_knowledge_of_HIV(geo, session):
 
 def get_donor_assistance(geo, session):
     donor_assistance_dist = LOCATIONNOTFOUND
+    donor_programmes = LOCATIONNOTFOUND
     try:
         donor_assistance_dist, _ = get_stat_data(['donor'], geo, session)
 
     except LocationNotFound:
         pass
 
+    try:
+        donor_programmes, _ = get_stat_data(['donor', 'programme'], geo, session)
+    except LocationNotFound:
+        pass
+
+    is_missing = donor_assistance_dist.get('is_missing') and \
+        donor_programmes.get('is_missing')
+
     return {
-        'is_missing': donor_assistance_dist.get('is_missing'),
+        'is_missing': is_missing,
         'donor_assistance_dist': donor_assistance_dist,
+        'donor_programmes': donor_programmes
     }
 
 

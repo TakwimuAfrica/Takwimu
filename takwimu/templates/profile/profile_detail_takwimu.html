@@ -232,6 +232,7 @@
         <h1>Official Development Assistance</h1>
       </header>
       <div class="section-container">
+        {% if not donors.donor_assistance_dist.is_missing %}
         <section class="clearfix stat-row">
           <h2 class="header-for-columns">Principle Donors Contribution </h2>
           <div class="column-full"
@@ -239,6 +240,15 @@
                data-stat-type="dollar"
                data-chart-title="Amount Contributed ('000,000 of USD)"></div>
         </section>
+          {% endif %}
+      {% if not donors.donor_programmes.is_missing %}
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Donor Contributions (000,000 of USD) </h2>
+          <div class="column-full"
+               id="chart-grouped_column-donors-donor_programmes"
+               data-stat-type="dollar"></div>
+        </section>
+      {% endif %}
       </div>
     </article>
   {% endif %}
