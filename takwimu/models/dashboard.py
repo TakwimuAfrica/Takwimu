@@ -235,6 +235,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                                        'Percentage'),
                                                       ('scaled-percentage',
                                                        'Scaled Percentage'),
+                                                      ('dollar', 'Dollar')
                                                   ],
                                                   label='Stat Type')),
             ('chart_height', blocks.IntegerBlock(required=False,
