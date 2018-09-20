@@ -2,76 +2,74 @@
 
 {% block content %}
 
-  {% include 'takwimu/_includes/profile/hero.html' %}
+{% include 'takwimu/_includes/profile/hero.html' %}
 
-  {# Loads all the topics #}
-  {% for topic in page.body %}
-      {% include 'takwimu/_includes/profile/topic_detail.html' %}
-  {% endfor %}
+{# Loads all the topics #}
+{% for topic in page.body %}
+{% include 'takwimu/_includes/profile/topic_detail.html' %}
+{% endfor %}
 
-  <!-- <hr/> -->
+<!-- <hr/> -->
 
-  {% include 'takwimu/_includes/profile/sections_list.html' %}
+{% include 'takwimu/_includes/profile/sections_list.html' %}
 
-  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+{% include 'takwimu/_includes/sections/support-services/button.html' %}
 
-  {% include 'takwimu/_includes/sections/stories/index.html' %}
+{% include 'takwimu/_includes/sections/stories/index.html' %}
 
-  <!-- Country profile country select -->
-  {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
+<!-- Country profile country select -->
+{% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
-  {% include 'takwimu/_includes/sections/updates.html' %}
+{% include 'takwimu/_includes/sections/updates.html' %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    
+    // Handling multiple IDS
+    $(".data-topic-container").each(function () {
+      var topic_id = this.id;
 
-  <script>
-    document.addEventListener('DOMContentLoaded', function () {
-      // Handling multiple IDS
-      $(".data-topic-container").each(function () {
-        // topicIds.push(this.id);
-        var topic_id = this.id;
+      var active_indicator = $("#" + topic_id + " .dataindicators-nav .nav-link.active"),
+        prev_indicator = active_indicator.prev().prev().attr("id"),
+        next_indicator = active_indicator.next().next().attr("id"),
+        _prev = (prev_indicator ? active_indicator.prev().prev().text() : active_indicator.text()),
+        _next = (next_indicator ? active_indicator.next().next().text() : active_indicator.text());
+      
+      // Update the indicator pagination item
+      $("#"+topic_id+" .prev-indicator").find(".prev").html(_prev).attr({title: _prev});
+      $("#"+topic_id+" .prev-indicator").attr({
+        id: (prev_indicator ? prev_indicator : active_indicator),
+        href: "#" + (prev_indicator ? prev_indicator : active_indicator.attr("id")),
+        "aria-controls": (prev_indicator ? prev_indicator : active_indicator.attr("id"))
+      });
 
-        var active_indicator = $("#" + topic_id + " .dataindicators-nav .nav-link.active"),
-          prev_indicator = active_indicator.prev().prev().attr("id"),
-          next_indicator = active_indicator.next().next().attr("id"),
-          _prev = active_indicator.prev().prev().text(),
-          _next = active_indicator.next().next().text();
+      $("#"+topic_id+" .next-indicator").find(".next").html(_next).attr({title: _next});
+      $("#"+topic_id+" .next-indicator").attr({
+        id: next_indicator,
+        href: "#" + next_indicator,
+        "aria-controls": next_indicator
+      });
 
-        console.log(prev_indicator);
+      $("#" + topic_id + " .dataindicators-nav .nav-link").click(function () {
+        prev_indicator = $(this).prev().prev().attr("id");
+        next_indicator = $(this).next().next().attr("id");
+        _next = $(this).next().next().text();
+        _prev = $(this).prev().prev().text();
 
-        $(".prev-indicator").find(".prev").html(_prev);
-        $(".prev-indicator").attr({
+        $(this).find(".prev-indicator .prev").html(_prev).attr({title: _prev});
+        $(this).find(".prev-indicator").attr({
           id: prev_indicator,
           href: "#" + prev_indicator,
-          "aria-controls": prev_indicator
+          "aria-controls": prev_indicator          
         });
 
-        $(".next-indicator").find(".next").html(_next);
-        $(".next-indicator").attr({
+        $(this).find(".next-indicator .next").html(_next).attr({title: _next});
+        $(this).find(".next-indicator").attr({
           id: next_indicator,
           href: "#" + next_indicator,
           "aria-controls": next_indicator
         });
-
-        $("#" + topic_id + " .dataindicators-nav .nav-link").click(function () {
-          prev_indicator = $(this).prev().prev().attr("id");
-          next_indicator = $(this).next().next().attr("id");
-          _next = $(this).next().next().text();
-          _prev = $(this).prev().prev().text();
-
-          $(".prev-indicator").find(".prev").html(_prev);
-          $(".prev-indicator").attr({
-            id: prev_indicator,
-            href: "#" + prev_indicator,
-            "aria-controls": prev_indicator
-          });
-
-          $(".next-indicator").find(".next").html(_next);
-          $(".next-indicator").attr({
-            id: next_indicator,
-            href: "#" + next_indicator,
-            "aria-controls": next_indicator
-          });
-        });
       });
     });
-  </script>
+  });
+</script>
 {% endblock %}
