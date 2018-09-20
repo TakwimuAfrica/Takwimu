@@ -116,15 +116,15 @@ HURUMAP_DATA_DISTS = [
     ('education-education_reached_distribution',
      'Highest Level of Education Attained'),
     ('education-school_attendance_distribution', 'School Attendance by Sex'),
-    ('donors-donor_assistance_dist', 'Donor Contribution in millions of US$'),
+    ('donors-donor_assistance_dist', 'Principal Donors'),
     ('poverty-poverty_residence_dist',
      'Percentage of Population living in Poverty by Residence'),
     ('poverty-poverty_age_dist',
      'Percentage of Population living in Poverty by Age and Residence'),
     ('fgm-fgm_age_dist', 'Percentage of Women that have undergone FGM by Age'),
     ('security-seized_firearms_dist', 'Seized Firearms'),
-    ('donors_donor_programmes', 'Donor Funded Programmes in 000,000 USD'),
-    ('budget_government_expenditure', 'Government Expenditure'),
+    ('donors-donor_programmes_dist', 'Donor Funded Programmes'),
+    ('budget-government_expenditure_dist', 'Government Expenditure'),
     ('health_centers-health_centers_dist', 'Number of health centers by type'),
 ]
 
