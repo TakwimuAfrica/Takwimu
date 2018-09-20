@@ -237,8 +237,9 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('chart_height', blocks.IntegerBlock(required=False,
                                                  label='Chart Height',
                                                  help_text='Default is 300px')),
-            ('source', blocks.RichTextBlock(
-                features=['link'], required=False)),
+            ('widget_height', blocks.IntegerBlock(required=False,
+                                                 label='Chart Height',
+                                                 help_text='Default is 450px')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/hurumap.html'
