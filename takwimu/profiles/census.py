@@ -32,6 +32,7 @@ def get_profile(geo, profile_name, request):
         data['poverty'] = get_poverty_profile(geo, session)
         data['fgm'] = get_fgm_profile(geo, session)
         data['security'] = get_security_profile(geo, session)
+        data['budget'] = get_budget_data(geo, session)
         return data
     finally:
         session.close()
@@ -471,4 +472,17 @@ def get_security_profile(geo, session):
     return {
         'is_missing': seized_firearms_dist.get('is_missing'),
         'seized_firearms_dist': seized_firearms_dist,
+    }
+
+
+def get_budget_data(geo, session):
+    government_expenditure = LOCATIONNOTFOUND
+    try:
+        government_expenditure, _ = get_stat_data(['year', 'sector'], geo, session)
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': government_expenditure.get('is_missing'),
+        'government_expenditure': government_expenditure
     }

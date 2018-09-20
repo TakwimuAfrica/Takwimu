@@ -321,4 +321,23 @@
       </div>
     </article>
   {% endif %}
+
+    {% if not budget.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Budget</h1>
+      </header>
+      <div class="section-container">
+        {% if not budget.government_expenditure.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Government Spending</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-budget-government_expenditure"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+      </div>
+    </article>
+  {% endif %}
 {% endblock %}
