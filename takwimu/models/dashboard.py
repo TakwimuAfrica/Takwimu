@@ -106,11 +106,23 @@ class DataIndicatorChooserBlock(blocks.ChooserBlock):
         else:
             return value
 
+
 HURUMAP_DATA_DISTS = [
     ('demographics-residence_dist', 'Population by Residence'),
     ('demographics-sex_dist', 'Population by Sex'),
-    ('crops-crop_production', 'Crops Produced'),
-    ('health_workers-prevention_methods_dist', 'Knowledge of HIV Prevention Methods'),
+    ('crops-crop_distribution', 'Crops Produced'),
+    ('health_centers-prevention_methods_dist',
+     'Knowledge of HIV Prevention Methods'),
+    ('education-education_reached_distribution',
+     'Highest Level of Education Attained'),
+    ('education-school_attendance_distribution', 'School Attendance by Sex'),
+    ('donors-donor_assistance_dist', 'Donor Contribution in millions of US$'),
+    ('poverty-poverty_residence_dist',
+     'Percentage of Population living in Poverty by Residence'),
+    ('poverty-poverty_age_dist',
+     'Percentage of Population living in Poverty by Age and Residence'),
+    ('fgm-fgm_age_dist', 'Percentage of Women that have undergone FGM by Age'),
+    ('security-seized_firearms_dist', 'Seized Firearms'),
 ]
 
 
@@ -190,6 +202,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
 
     hurumap = blocks.StructBlock(
         [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('data_country', blocks.ChoiceBlock(required=True,
@@ -208,12 +222,16 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                               choices=[
                                                   ('histogram', 'Histogram'),
                                                   ('pie', 'Pie Chart'),
+                                                  ('grouped_column',
+                                                   'Grouped Column')
                                               ],
                                               label='Chart Type')),
             ('data_stat_type', blocks.ChoiceBlock(required=True,
                                                   choices=[
-                                                      ('percentage', 'Percentage'),
-                                                      ('scaled-percentage', 'Scaled Percentage'),
+                                                      ('percentage',
+                                                       'Percentage'),
+                                                      ('scaled-percentage',
+                                                       'Scaled Percentage'),
                                                   ],
                                                   label='Stat Type')),
             ('chart_height', blocks.IntegerBlock(required=False,

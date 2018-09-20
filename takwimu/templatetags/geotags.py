@@ -4,8 +4,9 @@ register = template.Library()
 
 CENSUS = {
     'tanzania': '2012',
+    'kenya': '2009',
     'nigeria': '2006',
-    'senegal': '2013'
+    'senegal': '2013',
 }
 
 LEVEL1_NAMES = {
