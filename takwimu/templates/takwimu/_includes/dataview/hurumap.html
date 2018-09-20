@@ -1,6 +1,7 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags datastructuretags %}
 
-<iframe id="cr-embed-{{id}}"
+{% uuid as id %}
+<iframe id="huru-embed-{{id}}"
         class="census-reporter-embed"
         frameborder="0"
         width="100%"
@@ -88,7 +89,7 @@
         return embed;
     }
 
-    var chart = document.getElementById('cr-embed-{{id}}');
+    var chart = document.getElementById('huru-embed-{{id}}');
     chart.addEventListener("load", function () {
         window.CensusReporterEmbeds = makeCensusEmbeds();
     });
