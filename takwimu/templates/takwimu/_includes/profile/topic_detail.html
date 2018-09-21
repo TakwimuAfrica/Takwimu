@@ -68,13 +68,46 @@
             </div>
           {% endfor %}
         </div>
-
+        <!-- Indicator pagination -->
+        <div class="container py-2">
+            <div class="row d-flex justify-content-center my-3">
+              <ol class="nav indicator-pagination" role="tablist">
+                {% for indicator in topic.value.indicators %}
+                  <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
+                    id="d{{ indicator.value.title|slugify }}-tab-btn"
+                    data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
+                    aria-controls="d{{ indicator.value.title|slugify }}-tab"
+                    {% if forloop.first %} aria-selected="true" {% endif %} role="tab" aria-selected="false">
+                      <i class="fas fa-circle p-1"></i>
+                  </a>
+                {% endfor %}
+              </ol>
+            </div>
+            <div class="row d-flex justify-content-around align-items-center my-3 nav" role="tablist">
+                <a href="#" class="btn btn-primary border-0 nav-link prev-indicator col-4" data-toggle="pill" role="tab">
+                  <span class="fas fa-angle-double-left position-absolute my-auto" 
+                    style="left: 5%; top:0; bottom: 0; font-size: 10px;"></span>
+                  <span class="prev font-weight-bold text-uppercase text-truncate d-block px-1" data-toggle="tooltip"
+                    data-placement="bottom" style="font-size:14px; overflow: hidden;text-overflow: ellipsis;">Previous</span>
+                </a>
+                <span style="height: 47px; opacity: 0.3; border: solid 1px #979797;"></span>
+                <a href="#" class="btn btn-primary border-0 nav-link next-indicator col-4" data-toggle="pill" role="tab">
+                  <span class="next font-weight-bold text-uppercase text-truncate d-block px-1" data-toggle="tooltip"
+                    data-placement="bottom" style="font-size: 14px; overflow: hidden;text-overflow: ellipsis;">Next</span>
+                  <span class="fas fa-angle-double-right position-absolute my-auto" 
+                    style="right: 5%; top: 0; bottom: 0; font-size: 10px;"></span>
+                </a>
+            </div>
+        </div>
       </div>
     </div>
   </div>
 </div><!-- container fluid -->
 
 <style>
+  .indicator-pagination .nav-link.active {
+    color: #bcc7d4;
+  }
   .dataindicators-nav .nav-pills {
     background-color: #1f6cc6;
   }
