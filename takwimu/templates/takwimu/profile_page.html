@@ -22,52 +22,30 @@
 
 {% include 'takwimu/_includes/sections/updates.html' %}
 <script>
-  document.addEventListener('DOMContentLoaded', function () {
-    
+  document.addEventListener('DOMContentLoaded', function () {    
+    // Sync selected tabs to reflect on the indicator pagination
     // Handling multiple IDS
     $(".data-topic-container").each(function () {
       var topic_id = this.id;
 
-      var active_indicator = $("#" + topic_id + " .dataindicators-nav .nav-link.active"),
-        prev_indicator = active_indicator.prev().prev().attr("id"),
-        next_indicator = active_indicator.next().next().attr("id"),
-        _prev = (prev_indicator ? active_indicator.prev().prev().text() : active_indicator.text()),
-        _next = (next_indicator ? active_indicator.next().next().text() : active_indicator.text());
-      
-      // Update the indicator pagination item
-      $("#"+topic_id+" .prev-indicator").find(".prev").html(_prev).attr({title: _prev});
-      $("#"+topic_id+" .prev-indicator").attr({
-        id: (prev_indicator ? prev_indicator : active_indicator),
-        href: "#" + (prev_indicator ? prev_indicator : active_indicator.attr("id")),
-        "aria-controls": (prev_indicator ? prev_indicator : active_indicator.attr("id"))
-      });
+      var nav_tabs = "#" + topic_id + " .dataindicators-nav .nav-link, #"+ topic_id + " .indicator-pagination .nav-link";
 
-      $("#"+topic_id+" .next-indicator").find(".next").html(_next).attr({title: _next});
-      $("#"+topic_id+" .next-indicator").attr({
-        id: next_indicator,
-        href: "#" + next_indicator,
-        "aria-controls": next_indicator
-      });
+      //Set all nav tabs to inactive
+      $(nav_tabs).click(function () {
+        //get selected href
+        var href = $(this).attr('href'); 
 
-      $("#" + topic_id + " .dataindicators-nav .nav-link").click(function () {
-        prev_indicator = $(this).prev().prev().attr("id");
-        next_indicator = $(this).next().next().attr("id");
-        _next = $(this).next().next().text();
-        _prev = $(this).prev().prev().text();
+        $(nav_tabs).removeClass("active").attr("aria-selected", false);
 
-        $(this).find(".prev-indicator .prev").html(_prev).attr({title: _prev});
-        $(this).find(".prev-indicator").attr({
-          id: prev_indicator,
-          href: "#" + prev_indicator,
-          "aria-controls": prev_indicator          
-        });
+        //get all nav tabs matching the href and set to active
+        var matching_navtabs = "#" + topic_id + " .dataindicators-nav a[href='"+href+"'], #" + topic_id + "\
+        .indicator-pagination a[href='"+href+"']";
+        
+        $(matching_navtabs).addClass("active").attr("aria-selected", true);
 
-        $(this).find(".next-indicator .next").html(_next).attr({title: _next});
-        $(this).find(".next-indicator").attr({
-          id: next_indicator,
-          href: "#" + next_indicator,
-          "aria-controls": next_indicator
-        });
+        //Trigger active tab
+        $(".topic-"+topic_id+" .tab-pane").removeClass("active show");
+        $(".topic-"+topic_id+" .tab-pane"+href).addClass("active show");        
       });
     });
   });
