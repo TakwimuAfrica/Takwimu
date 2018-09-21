@@ -209,6 +209,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('subtitle', blocks.CharBlock(required=False)),
             ('data_country', blocks.ChoiceBlock(required=True,
                                                 choices=[
                                                     ('ET', 'Ethiopia'),
@@ -238,6 +239,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                                       ('dollar', 'Dollar')
                                                   ],
                                                   label='Stat Type')),
+            ('data_source_link', blocks.URLBlock(required=False, label='Source URL')),
+            ('data_source_title', blocks.CharBlock(required=False, label='Source Title')),
             ('chart_height', blocks.IntegerBlock(required=False,
                                                  label='Chart Height',
                                                  help_text='Default is 300px')),

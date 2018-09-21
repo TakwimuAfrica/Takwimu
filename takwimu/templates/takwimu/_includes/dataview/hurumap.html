@@ -1,13 +1,13 @@
 {% load wagtailcore_tags datastructuretags %}
 
 {% uuid as id %}
-<iframe id="huru-embed-{{id}}"
+<iframe id="cr-embed-{{id}}"
         class="census-reporter-embed"
         frameborder="0"
         width="100%"
+        src="/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartSourceLink={{value.data_source_link}}&chartSourceTitle={{value.data_source_title}}&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&chartSubtitle={{value.subtitle}}&initialSort=&statType={{value.data_stat_type}}"
         height="{% firstof value.widget_height 450%}"
         style="margin: 1em; max-width: 720px;"></iframe>
-<script src="/static/js/embed.chart.make.js"></script>
 
 <script>
     function makeCensusEmbeds() {
@@ -89,9 +89,8 @@
         return embed;
     }
 
-    var chart = document.getElementById('huru-embed-{{id}}');
-    chart.addEventListener("load", function () {
+    var addEmbeds = function addEmbes() {
         window.CensusReporterEmbeds = makeCensusEmbeds();
-    });
-    chart.src='/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.data_stat_type}}'
+    }
+    window.addEventListener("load", addEmbeds);
 </script>
