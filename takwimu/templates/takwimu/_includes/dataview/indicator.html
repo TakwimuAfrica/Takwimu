@@ -25,10 +25,10 @@
         <i class="fa fa-book-open"></i>
       </button>
     </div>
-    <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
+    <ul class="nav nav-tabs justify-content-end pr-4 text-capitalize" role="tablist">
       {% for widget in indicator.value.widgets %}
-        <li class="nav-item">
-          <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="d{{ widget.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ widget.value.title|slugify }}-tab" role="tab"
+        <li class="nav-item mr-1" style="background-color: #ededec;">
+          <a class="nav-link text-uppercase text-dark {% if forloop.first %} active {% endif %}" id="d{{ widget.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ widget.value.title|slugify }}-tab" role="tab"
              aria-controls="d{{ widget.value.title|slugify }}-tab" aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
         </li>
       {% endfor %}
