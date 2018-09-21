@@ -141,6 +141,13 @@ country	TZ	2009	clinic	176
 country	TZ	2009	dispensary	5915
 country	TZ	2009	health centers	717
 country	TZ	2009	hospital	263
+country	KE	2009	Dispensaries	3911
+country	KE	2009	Health centres	932
+country	KE	2009	Medical clinics	2267
+country	KE	2009	Maternity homes	40
+country	KE	2009	Nursing homes	166
+country	KE	2009	County hospitals	463
+country	KE	2009	National hospitals	16
 \.
 
 

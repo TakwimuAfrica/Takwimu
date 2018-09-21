@@ -232,13 +232,24 @@
         <h1>Official Development Assistance</h1>
       </header>
       <div class="section-container">
+        {% if not donors.donor_assistance_dist.is_missing %}
         <section class="clearfix stat-row">
-          <h2 class="header-for-columns">Principle Donors Contribution </h2>
+          <h2 class="header-for-columns">Principle Donors</h2>
           <div class="column-full"
                id="chart-histogram-donors-donor_assistance_dist"
-               data-stat-type="dollar"
-               data-chart-title="Amount Contributed ('000,000 of USD)"></div>
+               data-chart-title="Percentage Contribution by Principal Donors"
+               data-stat-type="scaled-percentage"></div>
         </section>
+          {% endif %}
+      {% if not donors.donor_programmes_dist.is_missing %}
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Contributions</h2>
+          <div class="column-full"
+               id="chart-grouped_column-donors-donor_programmes_dist"
+               data-chart-title="Percentage Contribution by Programme"
+               data-stat-type="scaled-percentage"></div>
+        </section>
+      {% endif %}
       </div>
     </article>
   {% endif %}
@@ -304,6 +315,25 @@
             <h2 class="header-for-columns">Seized Firearms</h2>
             <div class="column-full"
                  id="chart-grouped_column-security-seized_firearms_dist"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+      </div>
+    </article>
+  {% endif %}
+
+    {% if not budget.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Budget</h1>
+      </header>
+      <div class="section-container">
+        {% if not budget.government_expenditure_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Government Spending</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-budget-government_expenditure_dist"
                  data-stat-type="scaled-percentage">
             </div>
           </section>

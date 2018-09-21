@@ -44,3 +44,7 @@ FieldTable(['residence', 'age'], id='poverty_age_residence')
 FieldTable(['age'], id='fgm_prevalence')
 
 FieldTable(['year', 'type'], id='seized_firearms')
+
+FieldTable(['programme', 'donor'], id='donor_funded_programmes')
+
+FieldTable(['year', 'sector'], id='government_funding')
