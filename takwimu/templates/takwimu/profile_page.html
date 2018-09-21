@@ -2,24 +2,52 @@
 
 {% block content %}
 
-  {% include 'takwimu/_includes/profile/hero.html' %}
+{% include 'takwimu/_includes/profile/hero.html' %}
 
-  {# Loads all the topics #}
-  {% for topic in page.body %}
-      {% include 'takwimu/_includes/profile/topic_detail.html' %}
-  {% endfor %}
+{# Loads all the topics #}
+{% for topic in page.body %}
+{% include 'takwimu/_includes/profile/topic_detail.html' %}
+{% endfor %}
 
-  <!-- <hr/> -->
+<!-- <hr/> -->
 
-  {% include 'takwimu/_includes/profile/sections_list.html' %}
+{% include 'takwimu/_includes/profile/sections_list.html' %}
 
-  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+{% include 'takwimu/_includes/sections/support-services/button.html' %}
 
-  {% include 'takwimu/_includes/sections/stories/index.html' %}
+{% include 'takwimu/_includes/sections/stories/index.html' %}
 
-  <!-- Country profile country select -->
-  {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
+<!-- Country profile country select -->
+{% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
-  {% include 'takwimu/_includes/sections/updates.html' %}
+{% include 'takwimu/_includes/sections/updates.html' %}
+<script>
+  document.addEventListener('DOMContentLoaded', function () {    
+    // Sync selected tabs to reflect on the indicator pagination
+    // Handling multiple IDS
+    $(".data-topic-container").each(function () {
+      var topic_id = this.id;
 
+      var nav_tabs = "#" + topic_id + " .dataindicators-nav .nav-link, #"+ topic_id + " .indicator-pagination .nav-link";
+
+      //Set all nav tabs to inactive
+      $(nav_tabs).click(function () {
+        //get selected href
+        var href = $(this).attr('href'); 
+
+        $(nav_tabs).removeClass("active").attr("aria-selected", false);
+
+        //get all nav tabs matching the href and set to active
+        var matching_navtabs = "#" + topic_id + " .dataindicators-nav a[href='"+href+"'], #" + topic_id + "\
+        .indicator-pagination a[href='"+href+"']";
+        
+        $(matching_navtabs).addClass("active").attr("aria-selected", true);
+
+        //Trigger active tab
+        $(".topic-"+topic_id+" .tab-pane").removeClass("active show");
+        $(".topic-"+topic_id+" .tab-pane"+href).addClass("active show");        
+      });
+    });
+  });
+</script>
 {% endblock %}
