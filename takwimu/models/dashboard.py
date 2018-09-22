@@ -116,13 +116,16 @@ HURUMAP_DATA_DISTS = [
     ('education-education_reached_distribution',
      'Highest Level of Education Attained'),
     ('education-school_attendance_distribution', 'School Attendance by Sex'),
-    ('donors-donor_assistance_dist', 'Donor Contribution in millions of US$'),
+    ('donors-donor_assistance_dist', 'Principal Donors'),
     ('poverty-poverty_residence_dist',
      'Percentage of Population living in Poverty by Residence'),
     ('poverty-poverty_age_dist',
      'Percentage of Population living in Poverty by Age and Residence'),
     ('fgm-fgm_age_dist', 'Percentage of Women that have undergone FGM by Age'),
     ('security-seized_firearms_dist', 'Seized Firearms'),
+    ('donors-donor_programmes_dist', 'Donor Funded Programmes'),
+    ('budget-government_expenditure_dist', 'Government Expenditure'),
+    ('health_centers-health_centers_dist', 'Number of health centers by type'),
 ]
 
 
@@ -206,6 +209,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        help_text="This widget's tab label on the indicator")),
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('subtitle', blocks.CharBlock(required=False)),
             ('data_country', blocks.ChoiceBlock(required=True,
                                                 choices=[
                                                     ('ET', 'Ethiopia'),
@@ -232,13 +236,17 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                                        'Percentage'),
                                                       ('scaled-percentage',
                                                        'Scaled Percentage'),
+                                                      ('dollar', 'Dollar')
                                                   ],
                                                   label='Stat Type')),
+            ('data_source_link', blocks.URLBlock(required=False, label='Source URL')),
+            ('data_source_title', blocks.CharBlock(required=False, label='Source Title')),
             ('chart_height', blocks.IntegerBlock(required=False,
                                                  label='Chart Height',
                                                  help_text='Default is 300px')),
-            ('source', blocks.RichTextBlock(
-                features=['link'], required=False)),
+            ('widget_height', blocks.IntegerBlock(required=False,
+                                                 label='Chart Height',
+                                                 help_text='Default is 450px')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/hurumap.html'
