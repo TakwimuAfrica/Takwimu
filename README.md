@@ -38,7 +38,7 @@ With [Docker Compose](https://docs.docker.com/compose/), development set up is r
 git clone https://github.com/TakwimuAfrica/TAKWIMU.git
 cd TAKWIMU
 docker-compose build
-docker-compose up web
+make web
 ```
 
 ### Elasticsearch
