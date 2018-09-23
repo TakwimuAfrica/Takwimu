@@ -7,11 +7,11 @@ git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
 
 Markdown==2.6.11
-
 django-debug-toolbar==1.9.1
-
 elasticsearch==5.5.3
-
 requests-aws4auth==0.9
-
 psycopg2-binary
+
+# Workaround for dependency links
+# Comment out when changes / updates / PR accepted
+git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap

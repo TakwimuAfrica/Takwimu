@@ -8,3 +8,13 @@ image-latest:
 image-release:
 	docker build -t codeforafrica/takwimu:0.0.6
 	docker push codeforafrica/takwimu:0.0.6
+
+
+test:
+	psql -c 'drop database if exists test_takwimu;' -U postgres
+	psql -c 'create database test_takwimu owner takwimu;' -U postgres
+	./manage.py test --keepdb --no-input
+
+web:
+	rm -fr static/*  # Workaround for whitenoise busyness in dev
+	docker-compose up web
