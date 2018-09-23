@@ -41,6 +41,15 @@ docker-compose build
 make web
 ```
 
+### Admin a/c
+
+TODO
+
+### Load initial data
+
+TODO
+
+
 ### Elasticsearch
 Elasticsearch is automatically setup docker for development. To rebuild the search index from scratch,
 we run the following command in `docker-entrypoint.sh`:
