@@ -4,7 +4,7 @@
   <div class="bg-secondary">
     <nav
         class="nav nav-justified align-items-stretch flex-scroll text-center custom-nav"
-        id="nav-tabs" role="tablist" style="overflow-x:scroll;">
+        id="nav-tabs" role="tablist">
       {% for service in settings.takwimu.SupportServicesSetting.services %}
         {% if service.value.category == "Persona" %}
         <a class="nav-item nav-link text-light align-items-stretch pt-4 pb-3 px-0"
