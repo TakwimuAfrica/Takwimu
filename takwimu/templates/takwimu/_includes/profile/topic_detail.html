@@ -69,9 +69,9 @@
           {% endfor %}
         </div>
         <!-- Indicator pagination -->
-        <div class="container py-2">
+        <div class="container py-2 indicator-pagination">
             <div class="row d-flex justify-content-center my-3">
-              <ol class="nav indicator-pagination" role="tablist">
+              <ol class="nav" role="tablist">
                 {% for indicator in topic.value.indicators %}
                   <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
                     id="d{{ indicator.value.title|slugify }}-tab-btn"
