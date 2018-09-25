@@ -208,7 +208,19 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 130	level1	KE_1_016	Machakos	5952.89999999999964	country	KE	Machakos	2009
 131	level1	KE_1_017	Makueni	8008.89999999999964	country	KE	Makueni	2009
 132	level1	KE_1_014	Embu	2555.90000000000009	country	KE	Embu	2009
-133	level1	KE_1_015	Kitui	24385.0999999999985	country	KE	Kitui	2009
+133	level1	KE_1_015  Kitui	24385.0999999999985	country	KE	Kitui	2009
+134 country ET  Ethiopia 1104000 continent AFR Ethiopia 2009
+135 level1  ET_1_001  Addis-Ababa 526.99 country ET Addis-Ababa  2009
+136 level1  ET_1_002  Afar 72052.78 country ET Afar  2009
+137 level1  ET_1_003  Amhara 154708.96 country ET Amhara  2009
+138 level1  ET_1_004  Beneshangul-Gumuz 50698.68 level1 ET Beneshangul-Gumuz  2009
+139 level1  ET_1_005  Dire-Dawa 1558.61 country ET Dire-Dawa  2009
+140 level1  ET_1_006  Gambella 29782.82 country ET Gambella  2009
+141 level1  ET_1_007  Harar 333.94 country ET Harar  2009
+142 level1  ET_1_008  Oromiya 284537.84 country ET Oromiya  2009
+143 level1  ET_1_009  SNNPR 105476 country ET SNNPR  2009
+144 level1  ET_1_010  Somali 279252 country ET Somali  2009
+145 level1  ET_1_011  Tigray 84,722 country ET Tigray  2009
 \.
 
 
