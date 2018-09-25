@@ -4,7 +4,7 @@
   <div class="container py-5">
     <div class="row">
       <!-- Left navigation of all indicators-->
-      <div class="col-3 dataindicators-nav">
+      <div class="col-4 dataindicators-nav sticky-top d-table" style="top: 100px;">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
           {% for indicator in topic.value.indicators %}
@@ -19,7 +19,7 @@
             </a>
 
             {% if not forloop.last %}
-              <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
+              <hr class="mx-3 my-0" style="opacity: 0.37; border-color: rgba(151, 151, 151, 0.58);"/>
             {% endif %}
           {% endfor %}
         </div>
@@ -40,7 +40,7 @@
       </div>  <!-- /.col-3 -->
 
       <!-- The Main Stage -->
-      <div class="col-9 topic topic-{{ topic.value.title|slugify }}">
+      <div class="col-8 topic topic-{{ topic.value.title|slugify }}">
         <h1>{{ topic.value.title }}</h1>
         <div class="text-dark">
           <p>{{ topic.value.summary }}</p>
@@ -99,7 +99,7 @@
 
   .dataindicators-nav .nav-pills .nav-link.active, .dataindicators-nav .nav-pills .show > .nav-link {
     background-color: transparent;
-    font-weight: 500;
+    font-weight: bold;
   }
 
   .topic .btn.read-more::after {
