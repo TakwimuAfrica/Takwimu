@@ -5,10 +5,10 @@ image-latest:
 	docker build -t codeforafrica/takwimu:latest .
 	docker push codeforafrica/takwimu:latest
 
+# TODO: Pull from a VERSION file and connect to git flow release
 image-release:
-	docker build -t codeforafrica/takwimu:0.0.6
-	docker push codeforafrica/takwimu:0.0.6
-
+	docker build -t codeforafrica/takwimu:0.2.1
+	docker push codeforafrica/takwimu:0.2.1
 
 test:
 	psql -c 'drop database if exists test_takwimu;' -U postgres
@@ -18,3 +18,11 @@ test:
 web:
 	rm -fr static/*  # Workaround for whitenoise busyness in dev
 	docker-compose up web
+
+compilescss:
+	docker-compose exec web ./manage.py compilescss
+	rm -fr static/*
+	docker-compose exec web ./manage.py collectstatic --noinput
+
+update_index:
+	docker-compose exec web ./manage.py update_index
