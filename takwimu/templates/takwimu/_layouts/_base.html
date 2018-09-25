@@ -57,6 +57,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/svg.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js"></script>
   <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
 
   <!-- Start of takwimu Zendesk Widget script -->
@@ -89,7 +90,14 @@
           });
       });      
     })
-
+    
+    // Enable Anchors
+    anchors.options = {
+      placement: 'left',
+      class: 'anchor-style'
+    };
+    
+    anchors.add(".anchor");
    
   </script>
 

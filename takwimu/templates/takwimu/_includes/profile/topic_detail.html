@@ -41,7 +41,7 @@
 
       <!-- The Main Stage -->
       <div class="col-9 topic topic-{{ topic.value.title|slugify }}">
-        <h1>{{ topic.value.title }}</h1>
+        <h1 class="anchor" data-anchor-id="{{ topic.value.title|slugify }}">{{ topic.value.title }}</h1>
         <div class="text-dark">
           <p>{{ topic.value.summary }}</p>
           <div class="collapse" id="collapse-{{ topic.value.title|slugify }}">
@@ -136,5 +136,18 @@
     background: #ffffff;
     border-color: #f4f4f4;
     box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+  }
+
+  /* Add anchors before the closing body tag. */
+  .anchor-style {
+    color: #000;
+    margin-top: 0.5em;
+    text-decoration: none!important;
+    font-size: 0.5em!important;
+  }
+  
+  *:hover > .anchor-style {
+    margin-left: -0.8em !important;
+    color: #000;
   }
 </style>
