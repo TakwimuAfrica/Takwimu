@@ -14,36 +14,79 @@ LOCATIONNOTFOUND = {'is_missing': True, 'name': 'No Data Found',
                     'numerators': {'this': 0},
                     'values': {'this': 0}}
 
-SOURCES = {
+METADATA = {
     'kenya': {
         'country': {
             'donor_assistance_dist': {
-                'link': 'http://www.oecd.org/dac/financing-sustainable-development/development-finance-data/aid-at-a-glance.htm',
-                'title': 'OECD, 2016',
+                'qualifier': '\n'.join([
+                    'ADF: African Development Fund',
+                    'BMGF: Bill & Melinda Gates Foundation',
+                    'GF: Global Fund',
+                    'IDA: International Development Association',
+                ]),
+                'source': {
+                    'link': 'http://www.oecd.org/dac/financing-sustainable-development/development-finance-data/aid-at-a-glance.htm',
+                    'title': 'OECD, 2016',
+                },
+            },
+            'donor_programmes_dist': {
+                'qualifier': '\n'.join([
+                    'AGI: Adolescent Girls Initiative',
+                    'DIFPARK: Delivering Increased Family Planning Across Rural Kenya',
+                    'KMAP: Kenya Market Assistance Programme',
+                    'RMNDK: Reducing Maternal and Newborn Deaths in Kenya',
+                    'KCSAP: Kenya Climate Smart Agriculture Project',
+                    'NARIGP: National Agricultural and Rural Inclusive Growth Project',
+                    'PRIEDE: Primary Education Development Project',
+                    'SEQUIP: Kenya Secondary Education Quality Improvement Project',
+                    'THSUCP: Transforming Health Systems for Universal Care Project',
+                ]),
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
             },
             'seized_firearms_dist': {
-                'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
-                'title': 'Kenya National Bureau of Statistics, 2018',
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
             },
             'health_centers_dist': {
-                'link': 'http://www.health.go.ke/wp-content/uploads/2016/04/Kenya-HRH-Strategy-2014-2018.pdf',
-                'title': 'Ministry of Health, 2014',
+                'source': {
+                    'link': 'http://www.health.go.ke/wp-content/uploads/2016/04/Kenya-HRH-Strategy-2014-2018.pdf',
+                    'title': 'Ministry of Health, 2014',
+                },
             },
             'government_expenditure_dist': {
-                'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
-                'title': 'Kenya National Bureau of Statistics, 2018',
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'poverty_age_dist': {
+                'qualifier': '\n'.join([
+                    'N: National',
+                    'P: Peri-Urban',
+                    'R: Rural',
+                    'U: Urban',
+                ]),
             },
             'fgm_age_dist': {
-                'link': 'https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf',
-                'title': 'Kenya Demographic and Health Survey, 2014'
+                'source': {
+                    'link': 'https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf',
+                    'title': 'Kenya Demographic and Health Survey, 2014'
+                },
             },
         },
     },
     'nigeria': {
         'country': {
             'child_births_by_size_dist': {
-                'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
-                'title': 'Nigeria Demographic and Health Survey 2013',
+                'source': {
+                    'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
+                    'title': 'Nigeria Demographic and Health Survey 2013',
+                },
             },
         },
     },
@@ -65,7 +108,7 @@ def get_profile(geo, profile_name, request):
         data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
         data['donors'] = get_donor_assistance(geo, session, country, level)
-        data['poverty'] = get_poverty_profile(geo, session)
+        data['poverty'] = get_poverty_profile(geo, session, country, level)
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
@@ -142,15 +185,22 @@ def _create_single_value_dist(name='', value=0):
     }
 
 
-def _add_source_to_dist(dist, source_name, country, level):
+def _add_metadata_to_dist(dist, dist_name, country, level):
     if not dist.get('is_missing'):
-        country_sources = SOURCES.get(country)
-        if country_sources:
-            level_sources = country_sources.get(level)
-            if level_sources:
-                source = level_sources.get(source_name)
-                if source:
-                    dist['metadata']['source'] = source
+        country_metadata = METADATA.get(country)
+        if country_metadata:
+            level_metadata = country_metadata.get(level)
+
+            # Revert to 'country' level metadata if level-specific metadata is missing
+            level_metadata = level_metadata \
+                if level_metadata or level == 'country' \
+                else country_metadata.get('country')
+            if level_metadata:
+                metadata = level_metadata.get(dist_name)
+                if metadata:
+                    dist['metadata'] = metadata
+                    print('\n\n\n\n')
+                    print(metadata)
     return dist
 
 
@@ -204,7 +254,7 @@ def get_child_births(geo, session, country, level):
         'is_missing': is_missing,
         'child_births_dist': child_births_dist,
         'total_child_births_dist': total_child_births_dist,
-        'child_births_by_size_dist': _add_source_to_dist(child_births_by_size_dist, 'child_births_by_size_dist', country, level),
+        'child_births_by_size_dist': _add_metadata_to_dist(child_births_by_size_dist, 'child_births_by_size_dist', country, level),
         'total_reported_birth_weights_dist': total_reported_birth_weights_dist,
         'total_low_birth_weights_dist': total_low_birth_weights_dist,
     }
@@ -304,7 +354,7 @@ def get_health_centers(geo, session, country, level):
         'HIV care and treatment centers (2014)', total_hiv_health_centers)
     return {
         'is_missing': is_missing,
-        'health_centers_dist': _add_source_to_dist(health_centers_dist, 'health_centers_dist', country, level),
+        'health_centers_dist': _add_metadata_to_dist(health_centers_dist, 'health_centers_dist', country, level),
         'total_health_centers_dist': total_health_centers_dist,
         'hiv_health_centers_dist': hiv_health_centers_dist,
         'total_hiv_health_centers_dist': total_hiv_health_centers_dist,
@@ -472,12 +522,12 @@ def get_donor_assistance(geo, session, country, level):
         donor_programmes_dist.get('is_missing')
     return {
         'is_missing': is_missing,
-        'donor_assistance_dist': _add_source_to_dist(donor_assistance_dist, 'donor_assistance_dist', country, level),
-        'donor_programmes_dist': donor_programmes_dist,
+        'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist, 'donor_assistance_dist', country, level),
+        'donor_programmes_dist': _add_metadata_to_dist(donor_programmes_dist, 'donor_programmes_dist', country, level),
     }
 
 
-def get_poverty_profile(geo, session):
+def get_poverty_profile(geo, session, country, level):
     poverty_residence_dist = LOCATIONNOTFOUND
     poverty_age_dist = LOCATIONNOTFOUND
     try:
@@ -495,8 +545,8 @@ def get_poverty_profile(geo, session):
         poverty_age_dist.get('is_missing')
     return {
         'is_missing': is_missing,
-        'poverty_residence_dist': poverty_residence_dist,
-        'poverty_age_dist': poverty_age_dist,
+        'poverty_residence_dist': _add_metadata_to_dist(poverty_residence_dist, 'poverty_residence_dist', country, level),
+        'poverty_age_dist': _add_metadata_to_dist(poverty_age_dist, 'poverty_age_dist', country, level),
     }
 
 
@@ -509,7 +559,7 @@ def get_fgm_profile(geo, session, country, level):
 
     return {
         'is_missing': fgm_age_dist.get('is_missing'),
-        'fgm_age_dist': _add_source_to_dist(fgm_age_dist, 'fgm_age_dist', country, level),
+        'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist', country, level),
     }
 
 
@@ -522,7 +572,7 @@ def get_security_profile(geo, session, country, level):
 
     return {
         'is_missing': seized_firearms_dist.get('is_missing'),
-        'seized_firearms_dist': _add_source_to_dist(seized_firearms_dist, 'seized_firearms_dist', country, level),
+        'seized_firearms_dist': _add_metadata_to_dist(seized_firearms_dist, 'seized_firearms_dist', country, level),
     }
 
 
@@ -536,5 +586,5 @@ def get_budget_data(geo, session, country, level):
 
     return {
         'is_missing': government_expenditure_dist.get('is_missing'),
-        'government_expenditure_dist': _add_source_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
+        'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
     }
