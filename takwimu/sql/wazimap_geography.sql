@@ -220,7 +220,7 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 142 level1  ET_1_008  Oromiya 284537.84 country ET Oromiya  2009
 143 level1  ET_1_009  SNNPR 105476 country ET SNNPR  2009
 144 level1  ET_1_010  Somali 279252 country ET Somali  2009
-145 level1  ET_1_011  Tigray 84,722 country ET Tigray  2009
+145 level1  ET_1_011  Tigray 84722 country ET Tigray  2009
 \.
 
 
