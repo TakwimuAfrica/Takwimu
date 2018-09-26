@@ -1,9 +1,5 @@
 {% load wagtailcore_tags %}
 
-<div class="card border-0">
-  <div class="card-body">
-    <div class="media">
-      {% include_block value.raw_html %}
-    </div>
-  </div>
+<div class="p-4">
+  {% include_block value.raw_html %}
 </div>
