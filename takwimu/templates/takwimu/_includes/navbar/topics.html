@@ -3,10 +3,47 @@
 {% load staticfiles %}
 
 {% block dropdown_id %}nav-topics{% endblock %}
+{% block dropdown_url %}/topics{% endblock %}
 
-{% block dropdown_title %}Data Topics{% endblock %}
-{% block dropdown_desc %}Lorem ipsum{% endblock %}
+{% block dropdown_title %}Explore data by topic{% endblock %}
+{% block dropdown_desc %}
+    Dolor ullamco amet nulla esse labore in non aliquip do deserunt commodo elit occaecat. 
+    Ex ad Lorem ullamco eu exercitation est ullamco. 
+    Dolore incididunt laboris amet officia labore reprehenderit velit occaecat.
+{% endblock %}
 
 {% block dropdown_content %}
-<p>Topics to be listed here. (WIP)</p>
+<div class="row w-100">
+    <div class="col-4">
+      <h5 class="font-weight-bold pb-2">Key Topics</h5>
+      <ul class="font-weight-bold" style="color:#7ab1f2;">
+        <div class="nav flex-column" id="profile-sections-tab" role="tablist">
+            {% for section in sections %}
+            <li class="pb-1" type="disc">
+                <a class="nav-link-explore-section"
+                    id="{{ section.id }}"
+                    href="#{{ section.href }}"
+                    aria-controls="#{{ section.href }}"
+                    data-toggle="pill" role="tab" aria-selected="false">
+                    {{ section.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </div>
+      </ul>
+    </div>
+    <div class="col-8">
+      <h5 class="font-weight-bold pb-2">Sustainable Development Goals</h5>
+      <div class="row" style="color:#7ab1f2;">
+        {% for key, sdg in sdgs.items %}
+            <div class="col-2 mx-0 p-1 grayscale">
+                <a href="#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.short }}" data-target="#{{ sdg.short|slugify }}"
+                    aria-controls="{{ sdg.short|slugify }}">
+                    <img src="{{ sdg.icon_url }}" alt="{{ sdg.short }}">
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+  </div>
 {% endblock %}
