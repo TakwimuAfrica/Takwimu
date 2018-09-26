@@ -29,6 +29,7 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context
     'takwimu.context_processors.takwimu_stories',
     'wagtail.contrib.settings.context_processors.settings',
     'takwimu.context_processors.takwimu_topics',
+    'takwimu.context_processors.sdgs',
 ]
 
 # Static Files Handler
