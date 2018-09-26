@@ -36,36 +36,41 @@ CREATE TABLE public.poverty_age_residence (
 --
 -- Data for Name: poverty_age_residence; Type: TABLE DATA; Schema: public; Owner: -
 --
+-- Legend:
+-- N National
+-- P Peri-Urban
+-- R Rural
+-- U Urban
 
 COPY public.poverty_age_residence (geo_level, geo_code, geo_version, age, residence, total) FROM stdin;
-country	KE	2009	15 - 19	Rural	26
-country	KE	2009	15 - 19	Urban	32
-country	KE	2009	15 - 19	Peri-Urban	9
-country	KE	2009	15 - 19	National	28
-country	KE	2009	20 - 29	Rural	21
-country	KE	2009	20 - 29	Urban	13
-country	KE	2009	20 - 29	Peri-Urban	8
-country	KE	2009	20 - 29	National	16
-country	KE	2009	30 - 39	Rural	30
-country	KE	2009	30 - 39	Urban	22
-country	KE	2009	30 - 39	Peri-Urban	19
-country	KE	2009	30 - 39	National	26
-country	KE	2009	40 - 49	Rural	37
-country	KE	2009	40 - 49	Urban	22
-country	KE	2009	40 - 49	Peri-Urban	21
-country	KE	2009	40 - 49	National	31
-country	KE	2009	50 - 59	Rural	34
-country	KE	2009	50 - 59	Urban	25
-country	KE	2009	50 - 59	Peri-Urban	25
-country	KE	2009	50 - 59	National	31
-country	KE	2009	60 - 69	Rural	37
-country	KE	2009	60 - 69	Urban	32
-country	KE	2009	60 - 69	Peri-Urban	32
-country	KE	2009	60 - 69	National	35
-country	KE	2009	70 +	Rural	37
-country	KE	2009	70 +	Urban	41
-country	KE	2009	70 +	Peri-Urban	33
-country	KE	2009	70 +	National	37
+country	KE	2009	15 - 19	R	26
+country	KE	2009	15 - 19	U	32
+country	KE	2009	15 - 19	P	9
+country	KE	2009	15 - 19	N	28
+country	KE	2009	20 - 29	R	21
+country	KE	2009	20 - 29	U	13
+country	KE	2009	20 - 29	P	8
+country	KE	2009	20 - 29	N	16
+country	KE	2009	30 - 39	R	30
+country	KE	2009	30 - 39	U	22
+country	KE	2009	30 - 39	P	19
+country	KE	2009	30 - 39	N	26
+country	KE	2009	40 - 49	R	37
+country	KE	2009	40 - 49	U	22
+country	KE	2009	40 - 49	P	21
+country	KE	2009	40 - 49	N	31
+country	KE	2009	50 - 59	R	34
+country	KE	2009	50 - 59	U	25
+country	KE	2009	50 - 59	P	25
+country	KE	2009	50 - 59	N	31
+country	KE	2009	60 - 69	R	37
+country	KE	2009	60 - 69	U	32
+country	KE	2009	60 - 69	P	32
+country	KE	2009	60 - 69	N	35
+country	KE	2009	70 +	R	37
+country	KE	2009	70 +	U	41
+country	KE	2009	70 +	P	33
+country	KE	2009	70 +	N	37
 \.
 
 
