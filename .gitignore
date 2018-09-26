@@ -111,3 +111,4 @@ media/*
 
 # ./manage.py compilecss creates this
 takwimu/static/css/takwimu.css
+.env

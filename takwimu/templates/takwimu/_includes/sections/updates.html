@@ -1,9 +1,9 @@
 <!-- Get Updates section -->
 {% load staticfiles %}
 <section class="updates container-fluid text-center bg-light m-0 p-0">
-  <div class="d-flex">
-    <div class="col py-2 mx-0 px-0">
-      <div class="py-5 my-2" style="border-right: 2px dashed #e7e7e7;">
+  <div class="row mx-0">
+    <div class="col-md-6 py-2 px-0">
+      <div class="my-2 py-5 px-3" style="border-right: 2px dashed #e7e7e7;">
         <h4 class="font-weight-bold" style="font-size: 32px;">
           <img class="pb-2" src={% static 'img/icons/wave.svg' %}
             style="width: auto; height: 45px;"/><br/>
@@ -17,8 +17,11 @@
         </p>
       </div>
     </div>
-    <div class="col py-2 mx-0 px-0">
-      <div class="py-5 my-2">
+    <div class="col-12 d-md-none px-5">
+      <div style="border-top: 2px dashed #e7e7e7;"></div>
+    </div>
+    <div class="col-md-6 py-2 px-0">
+      <div class="my-2 py-5 px-3">
           <h4 class="font-weight-bold" style="font-size: 32px;">
             <img class="pb-2" src={% static 'img/icons/chat.svg' %}
             style="width: auto; height: 50px;"/><br/>
@@ -41,10 +44,10 @@
     text-decoration: underline;
   }
 
-  .updates .col:hover {
+  .updates .col-md-6:hover {
     background-color: #e8e8e8;;
   }
-  .updates .col:hover + .col div {
+  .updates .col-md-6:hover + .col div {
     border-left: 2px dashed transparent!important;
   }
 
