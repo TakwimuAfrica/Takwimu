@@ -4,7 +4,7 @@
   <div class="container py-5">
     <div class="row">
       <!-- Left navigation of all indicators-->
-      <div class="col-3 dataindicators-nav">
+      <div class="col-4 dataindicators-nav sticky-top d-table" style="top: 100px;">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
           {% for indicator in topic.value.indicators %}
@@ -20,7 +20,7 @@
             </a>
 
             {% if not forloop.last %}
-              <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>
+              <hr class="mx-3 my-0" style="opacity: 0.37; border-color: rgba(151, 151, 151, 0.58);"/>
             {% endif %}
           {% endfor %}
         </div>
@@ -41,7 +41,7 @@
       </div>  <!-- /.col-3 -->
 
       <!-- The Main Stage -->
-      <div class="col-9 topic topic-{{ topic.value.title|slugify }}">
+      <div class="col-8 topic topic-{{ topic.value.title|slugify }}">
         <h1>{{ topic.value.title }}</h1>
         <div class="text-dark">
           {{ topic.value.summary }}
@@ -69,68 +69,3 @@
     </div>
   </div>
 </div><!-- container fluid -->
-
-<style>
-  .dataindicators-nav .nav-pills {
-    background-color: #1f6cc6;
-  }
-
-  .dataindicators-nav .nav-link {
-    color: #f0f0f0;
-  }
-
-  .dataindicators-nav .nav-link:hover {
-    color: #f0f0f0;;
-  }
-
-  .dataindicators-nav .nav-link .fa-eye {
-    display: none;
-    margin-left: -2em;
-    position: absolute;
-  }
-
-  .dataindicators-nav .nav-link[aria-selected=true] .fa-eye {
-    display: inline;
-  }
-
-  .dataindicators-nav .nav-pills .nav-link.active, .dataindicators-nav .nav-pills .show > .nav-link {
-    background-color: transparent;
-    font-weight: 500;
-  }
-
-  .topic .btn.read-more::after {
-    content: "Show More \00bb";
-  }
-
-  .topic .btn.read-more.active::after {
-    content: "Show Less \00ab"
-  }
-
-  .data-topic-container:nth-of-type(odd) {
-    background: #f9f9f9;
-  }
-
-  .data-topic-container:nth-of-type(even) {
-    background: #f4f4f4;
-  }
-
-  .topic .tab-content .tab-content {
-    background: #ffffff;
-  }
-
-  .topic > h1 {
-    font-size: 55px;
-  }
-
-  .topic h5 {
-    font-size: 25px;
-  }
-
-  .topic .btn-group .btn {
-    border-radius: 2px;
-    color: #1a1a1a;
-    background: #ffffff;
-    border-color: #f4f4f4;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
-  }
-</style>

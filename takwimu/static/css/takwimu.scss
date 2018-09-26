@@ -338,7 +338,70 @@ a {
   }
 }
 
+/*
+* Topic Detail
+*/
 
+.dataindicators-nav {
+  .nav-pills {
+    background-color: #1f6cc6;
+    .nav-link.active, .show > .nav-link {
+      background-color: transparent;
+      font-weight: bold;
+    }
+  }
+  .nav-link {
+    color: #f0f0f0;
+    &:hover {
+      color: #f0f0f0;;
+    }
+    .fa-eye {
+      display: none;
+      margin-left: -2em;
+      position: absolute;
+    }
+    &[aria-selected=true] .fa-eye {
+      display: inline;
+    }
+  }
+}
+
+.data-topic-container {
+  &:nth-of-type(odd) {
+    background: #f9f9f9;
+  }
+  &:nth-of-type(even) {
+    background: #f4f4f4;
+  }
+}
+
+.topic {
+  .btn.read-more{
+    &::after {
+      content: "Show More \00bb";
+    }
+    &.active::after {
+      content: "Show Less \00ab";
+    }
+  }
+  
+  .tab-content .tab-content {
+    background: #ffffff;
+  }
+  > h1 {
+    font-size: 55px;
+  }
+  h5 {
+    font-size: 25px;
+  }
+  .btn-group .btn {
+    border-radius: 2px;
+    color: #1a1a1a;
+    background: #ffffff;
+    border-color: #f4f4f4;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+  }
+}
 
 
 /*
