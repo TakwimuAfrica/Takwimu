@@ -9,6 +9,7 @@ from takwimu.utils.medium import Medium
 from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, COUNTRIES, CountryProfilesSetting
 from takwimu.models.dashboard import TopicPage
 
+from sdg import SDG
 
 def takwimu_countries(request):
     settings = CountryProfilesSetting.for_site(request.site)
@@ -138,3 +139,11 @@ def _traverse_profile_sections(profile_sections, request, start_section_num=0):
         section['topics'] = topics_by_title.values()
 
     return sections_by_title.values()
+
+def sdgs(request):
+    """
+        SDGs indicators
+    """
+    return {
+        'sdgs': SDG,
+    }
