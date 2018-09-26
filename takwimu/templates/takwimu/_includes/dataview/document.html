@@ -1,6 +1,6 @@
 {% load wagtailcore_tags wagtailembeds_tags %}
 
-<div class="p-4">
+<div class="p-3">
     {% embed value.document.file.url %}
     <iframe src="https://mozilla.github.io/pdf.js/web/viewer.html?file=
         {{ HURUMAP.url }}{{ value.document.file.url }}"
