@@ -8,10 +8,11 @@
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
           {% for indicator in topic.value.indicators %}
+            
             <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
-               id="d{{ indicator.value.title|slugify }}-tab-btn"
-               data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
-               role="tab" aria-controls="d{{ indicator.value.title|slugify }}-tab"
+               id="{{ indicator.id }}-tab-btn"
+               data-toggle="pill" href="#{{ indicator.id }}-tab"
+               role="tab" aria-controls="{{ indicator.id }}-tab"
                 {% if forloop.first %} aria-selected="true" {% endif %}
                aria-selected="false">
               <i class="fas fa-eye fa-fw"></i>
@@ -62,8 +63,8 @@
         <div class="indicators-container">
           {% for indicator in topic.value.indicators %}
             <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-                id="d{{ indicator.value.title|slugify }}-tab" role="tabpanel"
-                aria-labelledby="d{{ indicator.value.title|slugify }}-tab-panel">
+                id="{{ indicator.id }}-tab" role="tabpanel"
+                aria-labelledby="{{ indicator.id }}-tab-panel">
             {% include 'takwimu/_includes/dataview/indicator.html' with indicator=indicator %}
             </div>
           {% endfor %}
