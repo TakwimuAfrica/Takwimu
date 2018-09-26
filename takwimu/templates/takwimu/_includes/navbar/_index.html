@@ -24,10 +24,11 @@
           {% include 'takwimu/_includes/navbar/profiles.html' with button_name="Country Profiles" %}
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white text-uppercase font-weight-bold p-3 py-lg-4"
+          <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold px-3 py-4"
               href="/topics" role="button" aria-expanded="false">
             Topics
           </a>
+          {% include 'takwimu/_includes/navbar/topics.html' with button_name="Topics" %}
         </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle text-white text-uppercase font-weight-bold p-3 py-lg-4"
@@ -43,7 +44,6 @@
             </a>
         </li>
       </ul>
-      
       <!-- Border on mobile -->
       <div class="border-top d-lg-none mx-2 mt-2" style="border-top-color: rgba(222,226,230,0.5) !important;"></div>
 
@@ -78,7 +78,7 @@
 </nav>
 
 <style>
-  
+
   /* Beta Badge */
   .navbar-brand .badge {
     position: absolute;
@@ -93,15 +93,15 @@
     text-decoration: underline;
     line-height: 2.4;
   }
-    .dropdown-menu-lg .social-icons .border-right { 
-      border-right-color: rgba(255, 255, 255, 0.1) !important;
-    }
+  .dropdown-menu-lg .social-icons .border-right {
+    border-right-color: rgba(255, 255, 255, 0.1) !important;
+  }
 
   .btn-close {
-    font-size: 4rem; 
-    font-weight: 100; 
-    color: #fff; 
-    text-shadow: none; 
+    font-size: 4rem;
+    font-weight: 100;
+    color: #fff;
+    text-shadow: none;
     line-height: 0;
     opacity: 1;
   }
@@ -118,7 +118,7 @@
       color: #fff;
       background: transparent;
       z-index: 10;
-  } 
+  }
   input[type="text"]#search-takwimu {
       width: 90%;
       font-size: 35px;
@@ -131,7 +131,7 @@
       box-shadow: none;
       outline: 0 none;
   }
-  #search-takwimu::-webkit-input-placeholder, 
+  #search-takwimu::-webkit-input-placeholder,
   #search-takwimu:-moz-placeholder  {
       color: rgba(255, 255, 255, 0.45);
       font-size: 35px;
