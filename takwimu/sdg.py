@@ -73,6 +73,7 @@ SDG = {
         "goal": 11,
         "title": "Make cities and human settlements inclusive, safe, resilient and sustainable",
         "short": "Sustainable Cities and Communities",
+        "icon_url": "https://raw.githubusercontent.com/UNStats-SDGs/sdgs-data/master/images/en/TGG_Icon_Color_11.png",
         "color": "#fd9d24"
     },
     "responsible_consumption_and_production": {
