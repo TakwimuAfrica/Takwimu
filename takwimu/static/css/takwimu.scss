@@ -255,17 +255,23 @@ a {
     position: initial;
   }
 
-  .dropdown-toggle::after{
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-    content: '\f107';
-    border: 0;
-    vertical-align: 0;
-    visibility: hidden;
-    margin-left: 0;
+  .dropdown-toggle {
+    white-space: nowrap;
+    &::after{
+      font-family: 'Font Awesome 5 Free';
+      font-weight: 900;
+      content: '\f107';
+      border: 0;
+      vertical-align: 0;
+      visibility: hidden;
+      margin-left: 0;
+    }
   }
-  .nav-link svg {
-    margin-left: .255em;
+  .nav-link {
+    white-space: nowrap;
+    svg {
+      margin-left: .255em;
+    }
   }
 
   .nav-item:hover{
