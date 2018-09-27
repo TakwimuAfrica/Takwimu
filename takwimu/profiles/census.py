@@ -198,9 +198,9 @@ def _add_metadata_to_dist(dist, dist_name, country, level):
             if level_metadata:
                 metadata = level_metadata.get(dist_name)
                 if metadata:
-                    dist['metadata'] = metadata
-                    print('\n\n\n\n')
-                    print(metadata)
+
+                    # Only update relevant keys, don't replace the whole thing
+                    dist['metadata'].update(metadata)
     return dist
 
 

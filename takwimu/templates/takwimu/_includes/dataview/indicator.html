@@ -28,8 +28,8 @@
     <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
       {% for widget in indicator.value.widgets %}
         <li class="nav-item">
-          <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="d{{ widget.value.title|slugify }}-dv-chart-tab" data-toggle="tab" href="#d{{ widget.value.title|slugify }}-tab" role="tab"
-             aria-controls="d{{ widget.value.title|slugify }}-tab" aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
+          <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-dv-chart-tab" data-toggle="tab" href="#{{ indicator.id }}-{{ widget.id }}-tab" role="tab"
+             aria-controls="{{ indicator.id }}-{{ widget.id }}-tab" aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
         </li>
       {% endfor %}
     </ul>
@@ -38,8 +38,8 @@
 
       {% for widget in indicator.value.widgets %}
         <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-             id="d{{ widget.value.title|slugify }}-tab" role="tabpanel"
-             aria-labelledby="d{{ widget.value.title|slugify }}-tab-btn">
+             id="{{ indicator.id }}-{{ widget.id }}-tab" role="tabpanel"
+             aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn">
           {% include_block widget %}
         </div>
       {% endfor %}
