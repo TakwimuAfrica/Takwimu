@@ -9,6 +9,7 @@
 
 $brand-color-primary: #1f6cc6;
 $brand-color-primary-alt: #074c9c;
+$brand-color-primary-light: #7ab1f2;
 $brand-color-secondary: #1e4a7e;
 $brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
@@ -18,11 +19,7 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
-body {
-  padding-top: 72px;
-}
-
- html, body, h1, h2, h3, h4, h5, h6, p, * {
+html, body, h1, h2, h3, h4, h5, h6, p, * {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
@@ -61,6 +58,11 @@ a {
   }
 }
 
+// Extra Bold
+.font-weight-extra-bold {
+  font-weight: 900 !important;
+}
+
 // Background colours
 .bg-primary {
   background-color: $brand-color-primary !important;
@@ -80,6 +82,9 @@ a {
 }
 .text-primary-alt {
   color: $brand-color-primary-alt !important;
+}
+.text-primary-light {
+  color: $brand-color-primary-light !important;
 }
 .text-secondary {
   color: $brand-color-secondary !important;
@@ -247,9 +252,10 @@ a {
   }
 }
 
-// Navbar goodness
+// Primary / Main Nav
+// ------------------
 
-.navbar.fixed-top {
+.main-nav.navbar {
   // Fix position problem of the "containing block" of lg dropdown
   .nav-item.dropdown {
     position: initial;
@@ -277,6 +283,7 @@ a {
     }
   }
 
+  // Up arrow below nav link
   .dropdowm-menu-lg-tag {
     display: none !important;
     position: relative;
@@ -287,6 +294,8 @@ a {
       border-right: 10px solid transparent;
     }
   }
+
+  // Dropdown menu
   .dropdown-menu-lg {
     display: none;
     position: absolute; left: 0;
@@ -304,9 +313,25 @@ a {
           svg {
             border: 3px solid #fff;
             border-radius: 9999px;
+            
           }
+
           &:hover{
             color: #fff;
+          }
+
+          @media (max-width: 575.98px) {
+            span {
+              padding-top: 0;
+            }
+            svg {
+              width: 15px;
+              height: 15px;
+              float: left;
+              margin-right: 5px;
+              border: 2px solid #fff;
+              vertical-align: top;
+            }
           }
         }
       }
@@ -348,8 +373,8 @@ a {
 
 .country-flag-links {
   .col {
-    padding: 3em 1em;
-    border-right: 1px solid #ddd;
+    padding: 27px 20px;
+    border-color: #ddd;
     a {
       text-decoration: none;
       color: $brand-extend-black;
@@ -387,6 +412,7 @@ a {
       // Coming soon
       &[data-toggle="tooltip"] * {
         opacity: 0.5;
+        color: #7ab1f2;
       }
 
     }
@@ -477,21 +503,13 @@ a {
   white-space: normal;
 }
 
-/*
-* Extra small devices (portrait phones, less than 576px)
-* Small devices (landscape phones, 576px and down)
-*/
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
 
 @media (max-width: 576px) {
   .nav-item {
     font-size: 0.75em;
-  }
-  .country-container {
-    div.col {
-      &:nth-child(even) {
-        border-right: 1px solid transparent;
-      }
-    }
   }
 }
 

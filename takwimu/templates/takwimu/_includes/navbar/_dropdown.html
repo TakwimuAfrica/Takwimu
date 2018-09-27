@@ -1,24 +1,36 @@
 {% load staticfiles %}
 
+<!-- Arrow pointing up to the nav link -->
 <div class="dropdowm-menu-lg-tag d-flex justify-content-center">
   <span></span>
 </div>
 
-<div class="dropdown-menu-lg text-light py-5 container-fluid shadow {% block dropdown_class %}{% endblock %}"
+<!-- Dropdown container -->
+<div class="dropdown-menu-lg text-light pt-4 pb-5 py-lg-5 container-fluid shadow {% block dropdown_class %}{% endblock %}"
     id="{% block dropdown_id %}{% endblock %}"
     style="{% block dropdown_style %}{% endblock %}">
 
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-3 text-center text-lg-right pr-5">
-        <h2 class="font-weight-bold text-underline">
-          <a href="{% block dropdown_url %}#{% endblock %}">{% block dropdown_title %}Some title{% endblock %}</a>
-        </h2>
-        <p class="font-weight-light d-none d-lg-block">{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
-      </div>
-      <div class="col-lg-9 border-left d-flex align-items-center" style="border-left-style: dashed !important;">
-        {% block dropdown_content %}{% endblock %}
-      </div>
+  <div class="row">
+
+    <!-- Clickable title and a description -->
+    <div class="col-lg-3 text-center text-lg-right px-4 px-lg-5">
+      <h2 class="font-weight-bold mt-lg-1 mb-lg-4">
+        <a href="{% block dropdown_url %}#{% endblock %}">{% block dropdown_title %}Some title{% endblock %}</a>
+      </h2>
+      <p class="font-weight-light">{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
+    </div>
+
+    <!-- Divider -->
+    <!-- Mobile -->
+    <div class="border-top w-100 mb-4 d-lg-none" style="border-top-style:dashed !important;"></div>
+    <!-- Desktop -->
+    <div class="border-left d-none d-lg-inline-block"
+        style="border-left-style: dashed !important; border-left-width: 2px; margin-left: -2px;"></div>
+    
+
+    <!-- Main content -->
+    <div class="col-lg-9 d-flex align-items-center px-4 px-lg-5">
+      {% block dropdown_content %}{% endblock %}
     </div>
   </div>
 </div>

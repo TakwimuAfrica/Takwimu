@@ -1,96 +1,42 @@
 {% load staticfiles %}
+
 <div class="country-flag-links container text-center small {{ extra_css_class }}">
     <div class="row">
-        <div class="col">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/burkina-faso.svg' %}" alt="Burkina Faso">
-                <span class="text-uppercase font-weight-bold">Burkina Faso</span>
-            </a>
-        </div>
-        <div class="col">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/democratic-republic-of-congo.svg' %}" alt="DRC Congo">
-                <span class="text-uppercase font-weight-bold">DR Congo</span>
-            </a>
-        </div>
+        {% for country in countries %}
+            <div class="col">
+                {% if country.published %}
+                    <a href="/profiles/{{ country.name|slugify }}">
+                {% else %}
+                    <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
+                {% endif %}
 
-        <!-- Break point on smartphone view -->
-        <div class="w-100 border-top d-block d-sm-none"></div>
+                    {% with country_slug=country.name|slugify %}
+                    <img class="svg" src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}" alt="{{ country.name }}">
+                    {% endwith %}
+                    <span class="text-uppercase font-weight-extra-bold">{{ country.name_short }}</span>
+                </a>
+            </div>
 
-        <div class="col">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/ethiopia.svg' %}" alt="Ethiopia">
-                <span class="text-uppercase font-weight-bold">Ethiopia</span>
-            </a>
-        </div>
+            <!-- Mobile -->
+            <!-- Borders -->
+            {% if not forloop.counter|divisibleby:"2" %}
+                <div class="border-left d-lg-none"></div>
+            {% endif %}
+            <!-- Break points -->
+            {% if forloop.counter|divisibleby:"2" and not forloop.last %}
+                <div class="w-100 border-top d-lg-none"></div>
+            {% endif %}
 
-        <!-- Break point on tablet view -->
-        <div class="w-100 border-top d-none d-sm-block d-md-none"></div>
+            <!-- Desktop -->
+            <!-- Borders -->
+            {% if not forloop.counter|divisibleby:"5" %}
+                <div class="border-left d-none d-lg-block"></div>
+            {% endif %}
+            <!-- Break points -->
+            {% if forloop.counter|divisibleby:"5" and not forloop.last %}
+                <div class="w-100 border-top d-none d-lg-block"></div>
+            {% endif %}
 
-        <div class="col">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/kenya.svg' %}" alt="Kenya">
-                <span class="text-uppercase font-weight-bold">Kenya</span>
-            </a>
-        </div>
-
-        <!-- Break point on smartphone view -->
-        <div class="w-100 border-top d-block d-sm-none"></div>
-        
-        <div class="col" style="border-right: none;">
-            <a href="/profiles/nigeria">
-                <img class="svg" src="{% static 'img/flags/nigeria.svg' %}" alt="Nigeria">
-                <span class="text-uppercase font-weight-bold">Nigeria</span>
-            </a>
-        </div>
-
-        <!-- Breakpoint on desktop view -->
-        <div class="w-100 border-top d-none d-md-block d-lg-block"></div>
-
-        <div class="col">
-            <a href="/profiles/senegal">
-                <img class="svg" src="{% static 'img/flags/senegal.svg' %}" alt="Senegal">
-                <span class="text-uppercase font-weight-bold">Senegal</span>
-            </a>
-        </div>
-
-        <!-- Break point on smartphone view -->
-        <div class="w-100 border-top d-block d-sm-none"></div>
-
-        <!-- Break point on tablet view -->
-        <div class="w-100 border-top d-none d-sm-block d-md-none"></div>
-
-        <div class="col">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/south-africa.svg' %}" alt="South Africa">
-                <span class="text-uppercase font-weight-bold">South Africa</span>
-            </a>
-        </div>
-        <div class="col">
-            <a href="/profiles/tanzania">
-                <img class="svg" src="{% static 'img/flags/tanzania.svg' %}" alt="Tanzania">
-                <span class="text-uppercase font-weight-bold">Tanzania</span>
-            </a>
-        </div>
-
-        <!-- Break point on smartphone view -->
-        <div class="w-100 border-top d-block d-sm-none"></div>
-
-        <div class="col">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/uganda.svg' %}" alt="Uganda">
-                <span class="text-uppercase font-weight-bold">Uganda</span>
-            </a>
-        </div>
-
-        <!-- Break point on tablet view -->
-        <div class="w-100 border-top d-none d-sm-block d-md-none"></div>
-
-        <div class="col" style="border-right: none;">
-            <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
-                <img class="svg" src="{% static 'img/flags/zambia.svg' %}" alt="Zambia">
-                <span class="text-uppercase font-weight-bold">Zambia</span>
-            </a>
-        </div>
+        {% endfor %}
     </div>
 </div>
