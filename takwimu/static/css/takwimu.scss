@@ -22,9 +22,7 @@ body {
   padding-top: 72px;
 }
 
-// hurumap.css provides default font family for these elements: html, body, h4, h5, h6 & p
-// thus we must overide them (CSS Specificity Hierarchy)
- html, body, h4, h5, h6, p, * {
+ html, body, h1, h2, h3, h4, h5, h6, p, * {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
@@ -38,22 +36,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
-// Geography
 
-.leaflet-label {
-  background-color: $brand-color-secondary !important;
-  border-color: $brand-color-secondary !important;
-}
-
-
-
-/* ------------------------------------------------------------------------------
- * TAKWIMU: New CSS
- * ----------------
- * This looks to make slight tweaks to Bootstrap and make appropriate edits later.
+/* ---------------------
+ * Takwimu Custom Styles
+ * ---------------------
+ * Goals:
+ *  - Theme Bootstrap components for Takwimu
+ *  - Introduce styles missing from Bootstrap
+ *  - Style HURUmap components
  *
- * NOTE: Please don't make edits here unless super necessary.
+ * NOTE: Please avoid edits here unless absolutely necessary
  */
+
+ /* ------------------------
+  * Bootstrap Customizations
+  * ------------------------ */
 
 // Replace Colours
 
@@ -92,6 +89,9 @@ a {
 .btn {
   border-radius: 24px;
   padding: .375rem 1.25rem;
+  max-width: 100%;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 .btn-lg {
   padding: .5rem 1.5rem;
@@ -142,6 +142,27 @@ a {
   font-weight: 900;
 }
 
+
+/* ------------------------
+ * HURUmap Customizations
+ * ------------------------ */
+
+// Geography
+
+.leaflet-label {
+  background-color: $brand-color-secondary !important;
+  border-color: $brand-color-secondary !important;
+}
+
+
+
+/* ------------------------
+ * New Components Styling
+ * ------------------------ */
+
+// Shared styles
+// -------------
+
 .grayscale {
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%); /* Chrome 19+ & Safari 6+ */
@@ -152,9 +173,45 @@ a {
 }
 
 /*
-* Custom CSS
-* ----------
+ * Flex Scroll (Mainly for Navs)
+ * -----------------------------
+ * Source: https://iamsteve.me/blog/entry/using-flexbox-for-horizontal-scrolling-navigation
+ * 
+ * [1]: Make a flex container so all our items align as necessary
+ * [2]: Prevent items from wrapping
+ * [3]: Automatic overflow means a scroll bar won’t be present if it isn’t needed
+ * [4]: Make it smooth scrolling on iOS devices
+ * [5]: Hide the ugly scrollbars in Edge until the scrollable area is hovered
+ * [6]: Hide the scroll bar in WebKit browsers
 */
+.flex-scroll {
+  display: flex; /* [1] */
+  flex-wrap: nowrap; /* [1] */
+  overflow-x: auto; /* [1] */
+  -webkit-overflow-scrolling: touch; /* [4] */
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* [5] */
+}
+  /* [6] */
+  .flex-scroll::-webkit-scrollbar {
+    display: none;
+  }
+  // Custom
+  .flex-scroll .nav-item {
+    flex: 0 0 175px;
+  }
+    .flex-scroll .nav-item:first-child {
+      margin-left: auto;
+    }
+    .flex-scroll .nav-item:last-child {
+      margin-right: auto;
+    }
+
+.text-underline {
+  text-decoration: underline;
+}
+
+// Non-Shared Styles
+// -----------------
 
 // Partner logos in Navbar + Footer
 .partner-logos a {
@@ -260,8 +317,8 @@ a {
 }
 
 /*
-* Profile content css
-* --------------------
+* Profile Content
+* ---------------
 */
 .profile-content {
   .is-active {
@@ -281,12 +338,75 @@ a {
   }
 }
 
+/*
+* Topic Detail
+*/
 
+.dataindicators-nav {
+  .nav-pills {
+    background-color: #1f6cc6;
+    .nav-link.active, .show > .nav-link {
+      background-color: transparent;
+      font-weight: bold;
+    }
+  }
+  .nav-link {
+    color: #f0f0f0;
+    &:hover {
+      color: #f0f0f0;;
+    }
+    .fa-eye {
+      display: none;
+      margin-left: -2em;
+      position: absolute;
+    }
+    &[aria-selected=true] .fa-eye {
+      display: inline;
+    }
+  }
+}
+
+.data-topic-container {
+  &:nth-of-type(odd) {
+    background: #f9f9f9;
+  }
+  &:nth-of-type(even) {
+    background: #f4f4f4;
+  }
+}
+
+.topic {
+  .btn.read-more{
+    &::after {
+      content: "Show More \00bb";
+    }
+    &.active::after {
+      content: "Show Less \00ab";
+    }
+  }
+  
+  .tab-content .tab-content {
+    background: #ffffff;
+  }
+  > h1 {
+    font-size: 55px;
+  }
+  h5 {
+    font-size: 25px;
+  }
+  .btn-group .btn {
+    border-radius: 2px;
+    color: #1a1a1a;
+    background: #ffffff;
+    border-color: #f4f4f4;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+  }
+}
 
 
 /*
-* Country container css
-* ----------------------
+* Country Flags
+* -------------
 */
 
 .country-flag-links {
@@ -336,7 +456,7 @@ a {
   }
 }
 
-/* Pagination style*/ 
+/* Pagination style */ 
 .page-item {
   .page-link {
     border-radius: 0.25em;
