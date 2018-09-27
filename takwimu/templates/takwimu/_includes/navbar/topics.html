@@ -37,7 +37,7 @@
       <div class="row" style="color:#7ab1f2;">
         {% for key, sdg in sdgs.items %}
             <div class="col-2 mx-0 p-1 grayscale">
-                <a href="#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.short }}" data-target="#{{ sdg.short|slugify }}"
+                <a href="/sdg/#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.short }}" data-target="#{{ sdg.short|slugify }}"
                     aria-controls="{{ sdg.short|slugify }}">
                     <img src="{{ sdg.icon_url }}" alt="{{ sdg.short }}">
                 </a>
