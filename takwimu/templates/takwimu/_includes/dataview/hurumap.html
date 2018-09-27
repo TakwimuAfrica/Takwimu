@@ -1,8 +1,7 @@
-{% load wagtailcore_tags datastructuretags %}
+{% load wagtailcore_tags %}
 
-{% uuid as id %}
 <div class="cr-embed">
-    <iframe id="cr-embed-{{id}}"
+    <iframe id="cr-embed-country-{{value.data_country}}-{{value.data_id}}"
             class="census-reporter-embed"
             frameborder="0"
             width="100%"
@@ -10,7 +9,7 @@
             height="{% firstof value.widget_height 450%}"
             style="margin: 1em; max-width: 720px;"></iframe>
 
-    <div class="cr-embed-chart-qualifier small">
+    <div class="small cr-embed-chart-qualifier">
     {{ value.chart_qualifier|richtext }}
     </div>
 </div>
@@ -52,10 +51,13 @@
         }
 
         embed.handleMessage = function (event) {
-            var messageData = JSON.parse(event.data);
-            if (messageData.chartHeight && messageData.containerID) {
-                embed.embeds[messageData.containerID].frameHeight = messageData.chartHeight;
-                embed.setFrameSizes();
+            try {
+                var messageData = JSON.parse(event.data);
+                if (messageData.chartHeight && messageData.containerID) {
+                    embed.embeds[messageData.containerID].frameHeight = messageData.chartHeight;
+                    embed.setFrameSizes();
+                }
+            } catch (err) {
             }
         }
 
@@ -101,8 +103,8 @@
         return embed;
     }
 
-    var addEmbeds = function addEmbes() {
+    var addEmbeds = function addEmbeds() {
         window.CensusReporterEmbeds = makeCensusEmbeds();
     }
-    window.addEventListener("load", addEmbeds);
+    window.addEventListener('load', addEmbeds);
 </script>
