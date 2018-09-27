@@ -9,6 +9,53 @@ from takwimu.models.dashboard import ProfilePage, ProfileSectionPage
 from takwimu.models.dashboard import TopicPage
 
 
+def takwimu_countries(request):
+    return {
+        'countries': [
+            {
+                'name': 'Burkina Faso',
+                'name_short': 'Burkina Faso',
+                'published': False
+            }, {
+                'name': 'Democratic Republic of Congo',
+                'name_short': 'DR Congo',
+                'published': False
+            }, {
+                'name': 'Ethiopia',
+                'name_short': 'Ethiopia',
+                'published': False
+            }, {
+                'name': 'Kenya',
+                'name_short': 'Kenya',
+                'published': False
+            }, {
+                'name': 'Nigeria',
+                'name_short': 'Nigeria',
+                'published': True
+            }, {
+                'name': 'Senegal',
+                'name_short': 'Senegal',
+                'published': True
+            }, {
+                'name': 'South Africa',
+                'name_short': 'South Africa',
+                'published': False
+            },{
+                'name': 'Tanzania',
+                'name_short': 'Tanzania',
+                'published': True
+            }, {
+                'name': 'Uganda',
+                'name_short': 'Uganda',
+                'published': False
+            }, {
+                'name': 'Zambia',
+                'name_short': 'Zambia',
+                'published': False
+            }
+        ]
+    }
+
 def takwimu_stories(request):
 
     stories_latest = []
