@@ -42,7 +42,7 @@
 
       <!-- The Main Stage -->
       <div class="col-8 topic topic-{{ topic.value.title|slugify }}">
-        <h1>{{ topic.value.title }}</h1>
+        <h1 class="anchor" data-anchor-id="{{ topic.value.title|slugify }}">{{ topic.value.title }}</h1>
         <div class="text-dark">
           {{ topic.value.summary }}
           <div class="collapse mt-2" id="collapse-{{ topic.value.title|slugify }}">
