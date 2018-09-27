@@ -70,9 +70,9 @@
               <ol class="nav" role="tablist">
                 {% for indicator in topic.value.indicators %}
                   <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
-                    id="d{{ indicator.value.title|slugify }}-tab-btn"
-                    data-toggle="pill" href="#d{{ indicator.value.title|slugify }}-tab"
-                    aria-controls="d{{ indicator.value.title|slugify }}-tab"
+                    id="{{ indicator.id }}-tab-btn"
+                    data-toggle="pill" href="#{{ indicator.id }}-tab"
+                    aria-controls="{{ indicator.id }}-tab"
                     {% if forloop.first %} aria-selected="true" {% endif %} role="tab" aria-selected="false">
                       <i class="fas fa-circle p-1"></i>
                   </a>

@@ -25,24 +25,32 @@
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       // Sync selected tabs to reflect on the indicator pagination
-      // Handling multiple IDS
+      // Collect data-topic-container IDS
       $(".data-topic-container").each(function () {
-        var topic_id = this.id;
-        var nav_tabs = "#" + topic_id + " .dataindicators-nav .nav-link, #" + topic_id +
-          " .indicator-pagination .nav-link";
-        //Set all nav tabs to inactive
-        $(nav_tabs).click(function () {
-          //get selected href
-          var href = $(this).attr('href');
-          $(nav_tabs).removeClass("active").attr("aria-selected", false);
-          //get all nav tabs matching the href and set to active
-          var matching_navtabs = "#" + topic_id + " .dataindicators-nav a[href='" + href + "'], #" + topic_id +
-            "\ .indicator-pagination a[href='" + href + "']";
+        // Topic id
+        var topic_id = this.id,
+            indicators_tabs = "#" + topic_id + " .dataindicators-nav .nav-link, #" + topic_id +
+            " .indicator-pagination .nav-link";
+        
+        // Tabs Event
+        $(indicators_tabs).on('shown.bs.tab', function (e) {
+          // newly activated tab
+          var active_tab = e.target;
+          // previous active tab
+          var previous_tab = e.relatedTarget;
 
-          $(matching_navtabs).addClass("active").attr("aria-selected", true);
-          //Trigger active tab
-          $(".topic-" + topic_id + " .tab-pane").removeClass("active show");
-          $(".topic-" + topic_id + " .tab-pane" + href).addClass("active show");
+          //set all nav tabs to inactive
+          $(indicators_tabs).removeClass("active").attr("aria-selected", false);
+          
+          // Match indicator navigation tab with the current active tab
+          var href = active_tab.getAttribute('href'),
+              active_dataindicator = "#" + topic_id + " .dataindicators-nav a[href='" + href + "']",
+              active_pagination_indicator = "#" + topic_id + " .indicator-pagination a[href='" + href + "']";
+          
+          //Get all nav tabs matching the href and set to active
+          $(active_pagination_indicator).addClass("active").attr("aria-selected", true);
+          $(active_dataindicator).addClass("active").addClass("active").attr("aria-selected", true);
+
         });
       });
     });
