@@ -31,6 +31,7 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context
     'takwimu.context_processors.takwimu_topics',
 ]
 
+
 # Static Files Handler
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
