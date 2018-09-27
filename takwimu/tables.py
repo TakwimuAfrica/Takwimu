@@ -25,9 +25,26 @@ FieldTable(
     id='employment_activity_status_sex'
 )
 FieldTable(
-    ['highest education level reached'],
+    ['highest_education_level_reached'],
     id='highest_education_level_reached'
 )
-FieldTable(['method', 'sex'])
+FieldTable(['method', 'sex'], id="method_sex")
 
+FieldTable(
+    ['school_attendance', 'sex'],
+    id='school_attendance_sex'
+)
 
+FieldTable(['donor'], id='donor')
+
+FieldTable(['residence', 'poverty_type'], id='residence_poverty_type')
+
+FieldTable(['residence', 'age'], id='poverty_age_residence')
+
+FieldTable(['age'], id='fgm_prevalence')
+
+FieldTable(['year', 'type'], id='seized_firearms')
+
+FieldTable(['programme', 'donor'], id='donor_funded_programmes')
+
+FieldTable(['year', 'sector'], id='government_funding')

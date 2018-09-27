@@ -1,3 +1,4 @@
+import uuid
 from django import template
 from django.template import Variable, VariableDoesNotExist
 
@@ -6,6 +7,10 @@ register = template.Library()
 @register.simple_tag
 def to_list(*args):
     return args
+
+@register.simple_tag(name='uuid')
+def next_uuid():
+    return uuid.uuid4()
 
 @register.filter
 def object_value(obj, attr):

@@ -1,12 +1,24 @@
 {% load wagtailcore_tags %}
 
-<iframe id="cr-embed-{{id}}"
-        class="census-reporter-embed"
-        frameborder="0"
-        width="100%"
-        height="{% firstof value.chart_height 300%}"
-        style="margin: 1em; max-width: 720px;"></iframe>
-<script src="/static/js/embed.chart.make.js"></script>
+<div class="cr-embed">
+    <iframe id="cr-embed-country-{{value.data_country}}-{{value.data_id}}"
+            class="census-reporter-embed"
+            frameborder="0"
+            width="100%"
+            src="/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartSourceLink={{value.data_source_link}}&chartSourceTitle={{value.data_source_title}}&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartSourceLink{{value.data_source_link}}&chartSourceTitle{{value.data_source_title}}=&chartTitle={{value.title}}&chartSubtitle={{value.subtitle}}&initialSort=&statType={{value.data_stat_type}}"
+            height="{% firstof value.widget_height 450%}"
+            style="margin: 1em; max-width: 720px;"></iframe>
+
+    <div class="small cr-embed-chart-qualifier">
+    {{ value.chart_qualifier|richtext }}
+    </div>
+</div>
+
+<style>
+    .cr-embed-chart-qualifier ul {
+        list-style: none;
+    }
+</style>
 
 <script>
     function makeCensusEmbeds() {
@@ -39,10 +51,13 @@
         }
 
         embed.handleMessage = function (event) {
-            var messageData = JSON.parse(event.data);
-            if (messageData.chartHeight && messageData.containerID) {
-                embed.embeds[messageData.containerID].frameHeight = messageData.chartHeight;
-                embed.setFrameSizes();
+            try {
+                var messageData = JSON.parse(event.data);
+                if (messageData.chartHeight && messageData.containerID) {
+                    embed.embeds[messageData.containerID].frameHeight = messageData.chartHeight;
+                    embed.setFrameSizes();
+                }
+            } catch (err) {
             }
         }
 
@@ -88,9 +103,8 @@
         return embed;
     }
 
-    var chart = document.getElementById('cr-embed-{{id}}');
-    chart.addEventListener("load", function () {
+    var addEmbeds = function addEmbeds() {
         window.CensusReporterEmbeds = makeCensusEmbeds();
-    });
-    chart.src='/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartQualifier=&chartTitle={{value.title}}&initialSort=&statType={{value.data_stat_type}}'
+    }
+    window.addEventListener('load', addEmbeds);
 </script>

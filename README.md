@@ -38,8 +38,17 @@ With [Docker Compose](https://docs.docker.com/compose/), development set up is r
 git clone https://github.com/TakwimuAfrica/TAKWIMU.git
 cd TAKWIMU
 docker-compose build
-docker-compose up web
+make web
 ```
+
+### Admin a/c
+
+TODO
+
+### Load initial data
+
+TODO
+
 
 ### Elasticsearch
 Elasticsearch is automatically setup docker for development. To rebuild the search index from scratch,

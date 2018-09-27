@@ -14,35 +14,126 @@ LOCATIONNOTFOUND = {'is_missing': True, 'name': 'No Data Found',
                     'numerators': {'this': 0},
                     'values': {'this': 0}}
 
+METADATA = {
+    'kenya': {
+        'country': {
+            'donor_assistance_dist': {
+                'qualifier': '\n'.join([
+                    'ADF: African Development Fund',
+                    'BMGF: Bill & Melinda Gates Foundation',
+                    'GF: Global Fund',
+                    'IDA: International Development Association',
+                ]),
+                'source': {
+                    'link': 'http://www.oecd.org/dac/financing-sustainable-development/development-finance-data/aid-at-a-glance.htm',
+                    'title': 'OECD, 2016',
+                },
+            },
+            'donor_programmes_dist': {
+                'qualifier': '\n'.join([
+                    'AGI: Adolescent Girls Initiative',
+                    'DIFPARK: Delivering Increased Family Planning Across Rural Kenya',
+                    'KMAP: Kenya Market Assistance Programme',
+                    'RMNDK: Reducing Maternal and Newborn Deaths in Kenya',
+                    'KCSAP: Kenya Climate Smart Agriculture Project',
+                    'NARIGP: National Agricultural and Rural Inclusive Growth Project',
+                    'PRIEDE: Primary Education Development Project',
+                    'SEQUIP: Kenya Secondary Education Quality Improvement Project',
+                    'THSUCP: Transforming Health Systems for Universal Care Project',
+                ]),
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'seized_firearms_dist': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'health_centers_dist': {
+                'source': {
+                    'link': 'http://www.health.go.ke/wp-content/uploads/2016/04/Kenya-HRH-Strategy-2014-2018.pdf',
+                    'title': 'Ministry of Health, 2014',
+                },
+            },
+            'government_expenditure_dist': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'poverty_age_dist': {
+                'qualifier': '\n'.join([
+                    'N: National',
+                    'P: Peri-Urban',
+                    'R: Rural',
+                    'U: Urban',
+                ]),
+            },
+            'fgm_age_dist': {
+                'source': {
+                    'link': 'https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf',
+                    'title': 'Kenya Demographic and Health Survey, 2014'
+                },
+            },
+        },
+    },
+    'nigeria': {
+        'country': {
+            'child_births_by_size_dist': {
+                'source': {
+                    'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
+                    'title': 'Nigeria Demographic and Health Survey 2013',
+                },
+            },
+        },
+    },
+}
+
 
 def get_profile(geo, profile_name, request):
     session = get_session()
+    (country, level) = get_country_and_level(geo)
     data = {}
-
     try:
-        data['demographics'] = get_demographics(geo, session)
+        data['demographics'] = get_demographics(geo, session, country, level)
         data['elections'] = get_elections(geo, session)
         data['crops'] = get_crop_production(geo, session)
-        data['health_centers'] = get_health_centers(geo, session)
+        data['health_centers'] = get_health_centers(
+            geo, session, country, level)
         data['health_workers'] = get_health_workers(geo, session)
         data['causes_of_death'] = get_causes_of_death(geo, session)
         data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
-        print '\n\n\n\n\n\n'
-        print data
-        print '\n\n\n\n\n\n'
+        data['donors'] = get_donor_assistance(geo, session, country, level)
+        data['poverty'] = get_poverty_profile(geo, session, country, level)
+        data['fgm'] = get_fgm_profile(geo, session, country, level)
+        data['security'] = get_security_profile(geo, session, country, level)
+        data['budget'] = get_budget_data(geo, session, country, level)
+
         return data
     finally:
         session.close()
 
 
-def get_demographics(geo, session):
+def get_country_and_level(geo):
+    level = geo.geo_level.lower()
+    country = geo.name.lower() \
+        if level == 'country' \
+        else geo.ancestors()[-1].name.lower()
+
+    return (country, level)
+
+
+def get_demographics(geo, session, country, level):
     population_data = get_population(geo, session)
-    child_births_data = get_child_births(geo, session)
+    child_births_data = get_child_births(geo, session, country, level)
     demographics_data = dict(population_data.items() +
                              child_births_data.items())
     demographics_data['is_missing'] = population_data.get('is_missing') and \
-                                      child_births_data.get('is_missing')
+        child_births_data.get('is_missing')
 
     return demographics_data
 
@@ -65,7 +156,7 @@ def get_population(geo, session):
 
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
-                 residence_dist.get('is_missing')
+        residence_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
     total_population_dist = _create_single_value_dist(
@@ -94,7 +185,26 @@ def _create_single_value_dist(name='', value=0):
     }
 
 
-def get_child_births(geo, session):
+def _add_metadata_to_dist(dist, dist_name, country, level):
+    if not dist.get('is_missing'):
+        country_metadata = METADATA.get(country)
+        if country_metadata:
+            level_metadata = country_metadata.get(level)
+
+            # Revert to 'country' level metadata if level-specific metadata is missing
+            level_metadata = level_metadata \
+                if level_metadata or level == 'country' \
+                else country_metadata.get('country')
+            if level_metadata:
+                metadata = level_metadata.get(dist_name)
+                if metadata:
+
+                    # Only update relevant keys, don't replace the whole thing
+                    dist['metadata'].update(metadata)
+    return dist
+
+
+def get_child_births(geo, session, country, level):
     child_births_dist, total_child_births = LOCATIONNOTFOUND, 0
     child_births_by_size_dist = LOCATIONNOTFOUND
     total_reported_birth_weights = 0
@@ -144,13 +254,9 @@ def get_child_births(geo, session):
         'is_missing': is_missing,
         'child_births_dist': child_births_dist,
         'total_child_births_dist': total_child_births_dist,
-        'child_births_by_size_dist': child_births_by_size_dist,
+        'child_births_by_size_dist': _add_metadata_to_dist(child_births_by_size_dist, 'child_births_by_size_dist', country, level),
         'total_reported_birth_weights_dist': total_reported_birth_weights_dist,
         'total_low_birth_weights_dist': total_low_birth_weights_dist,
-        'child_births_source': {
-            'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
-            'name': 'Nigeria Demographic and Health Survey 2013',
-        },
     }
 
 
@@ -182,8 +288,8 @@ def get_elections(geo, session):
         pass
 
     is_missing = candidate_dist.get('is_missing') and \
-                 valid_invalid_dist.get('is_missing') and \
-                 registered_accred_dist.get('is_missing')
+        valid_invalid_dist.get('is_missing') and \
+        registered_accred_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'candidate_dist': candidate_dist,
@@ -205,7 +311,7 @@ def get_crop_production(geo, session):
     }
 
 
-def get_health_centers(geo, session):
+def get_health_centers(geo, session, country, level):
     health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
     health_centers_ownership_dist = LOCATIONNOTFOUND
     hiv_health_centers_dist, total_hiv_health_centers = LOCATIONNOTFOUND, 0
@@ -239,16 +345,16 @@ def get_health_centers(geo, session):
         pass
 
     is_missing = health_centers_dist.get('is_missing') and \
-                 health_centers_ownership_dist.get('is_missing') and \
-                 hiv_health_centers_dist.get('is_missing') and \
-                 prevention_methods_dist.get('is_missing')
+        health_centers_ownership_dist.get('is_missing') and \
+        hiv_health_centers_dist.get('is_missing') and \
+        prevention_methods_dist.get('is_missing')
     total_health_centers_dist = _create_single_value_dist(
         'Total health centers in operation (2014)', total_health_centers)
     total_hiv_health_centers_dist = _create_single_value_dist(
         'HIV care and treatment centers (2014)', total_hiv_health_centers)
     return {
         'is_missing': is_missing,
-        'health_centers_dist': health_centers_dist,
+        'health_centers_dist': _add_metadata_to_dist(health_centers_dist, 'health_centers_dist', country, level),
         'total_health_centers_dist': total_health_centers_dist,
         'hiv_health_centers_dist': hiv_health_centers_dist,
         'total_hiv_health_centers_dist': total_hiv_health_centers_dist,
@@ -266,7 +372,7 @@ def get_health_workers(geo, session):
             'workers', geo, session, table_name='health_workers',
             order_by='-total')
         hrh_patient_ratio = \
-        health_workers_dist['HRH patient ratio']['numerators']['this']
+            health_workers_dist['HRH patient ratio']['numerators']['this']
         del health_workers_dist['HRH patient ratio']
         del health_workers_dist['MO and AMO per 10000']
         del health_workers_dist['Nurses and midwives per 10000']
@@ -332,11 +438,11 @@ def get_causes_of_death(geo, session):
         pass
 
     is_missing = causes_of_death_over_five_dist.get('is_missing') and \
-                 causes_of_death_under_five_dist.get('is_missing') and \
-                 inpatient_diagnosis_under_five_dist.get('is_missing') and \
-                 inpatient_diagnosis_over_five_dist.get('is_missing') and \
-                 outpatient_diagnosis_under_five_dist.get('is_missing') and \
-                 outpatient_diagnosis_over_five_dist.get('is_missing')
+        causes_of_death_under_five_dist.get('is_missing') and \
+        inpatient_diagnosis_under_five_dist.get('is_missing') and \
+        inpatient_diagnosis_over_five_dist.get('is_missing') and \
+        outpatient_diagnosis_under_five_dist.get('is_missing') and \
+        outpatient_diagnosis_over_five_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'causes_of_death_under_five_dist': causes_of_death_under_five_dist,
@@ -344,7 +450,7 @@ def get_causes_of_death(geo, session):
         'inpatient_diagnosis_under_five_dist': inpatient_diagnosis_under_five_dist,
         'inpatient_diagnosis_over_five_dist': inpatient_diagnosis_over_five_dist,
         'outpatient_diagnosis_over_five_dist': outpatient_diagnosis_over_five_dist,
-        'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist
+        'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist,
     }
 
 
@@ -352,66 +458,133 @@ def get_education_profile(geo, session):
     # highest level reached
     edu_dist_data = LOCATIONNOTFOUND
     school_attendance_dist = LOCATIONNOTFOUND
-    secondary_or_higher = 0
-    total_never = 0.0
-    total_pop = 1
+
     try:
-        edu_dist_data, total_pop = get_stat_data(
-            'highest education level reached', geo, session,
+        edu_dist_data, _ = get_stat_data(
+            'highest_education_level_reached', geo, session,
             key_order=['None', 'Pre-primary', 'Primary', 'Secondary',
                        'Tertiary',
                        'University', 'Youth polytechnic', 'Basic literacy',
                        'Madrassa'])
 
-        for key, data in edu_dist_data.iteritems():
-            if key in ['Secondary', 'Tertiary', 'University',
-                       'Youth polytechnic']:
-                secondary_or_higher += data['numerators']['this']
     except LocationNotFound:
         pass
 
     try:
         # school attendance by sex
         school_attendance_dist, _ = get_stat_data(
-            ['school attendance', 'sex'], geo, session,
+            ['school_attendance', 'sex'], geo, session,
             key_order={'school attendance': ['Never attended', 'At school',
                                              'Left school', 'Unspecified'],
                        'sex': ['Female', 'Male']})
 
-
-        for data in school_attendance_dist['Never attended'].itervalues():
-            if 'numerators' in data:
-                total_never += data['numerators']['this']
     except LocationNotFound:
         pass
 
-    is_missing = edu_dist_data.get('is_missing') and school_attendance_dist.get(
-        'is_missing')
+    is_missing = edu_dist_data.get('is_missing')
 
     return {
         'is_missing': is_missing,
         'education_reached_distribution': edu_dist_data,
-        'education_reached_secondary_or_higher': {
-            'name': 'Reached Secondary school or higher',
-            'numerators': {'this': secondary_or_higher},
-            'values': {'this': round(secondary_or_higher / total_pop * 100, 2)}
-        },
         'school_attendance_distribution': school_attendance_dist,
-        'school_attendance_never': {
-            'name': 'Never attended school',
-            'numerators': {'this': total_never},
-            'values': {'this': round(total_never / total_pop * 100, 2)}
-        },
     }
 
 
 def get_knowledge_of_HIV(geo, session):
     prevention_methods_dist = LOCATIONNOTFOUND
     try:
-        prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo, session)
+        prevention_methods_dist, _ = get_stat_data(
+            ['method', 'sex'], geo, session)
     except LocationNotFound:
         pass
 
     return {
-        'prevention_methods_dist': prevention_methods_dist
+        'is_missing': prevention_methods_dist.get('is_missing'),
+        'prevention_methods_dist': prevention_methods_dist,
+    }
+
+
+def get_donor_assistance(geo, session, country, level):
+    donor_assistance_dist = LOCATIONNOTFOUND
+    donor_programmes_dist = LOCATIONNOTFOUND
+    try:
+        donor_assistance_dist, _ = get_stat_data(['donor'], geo, session)
+    except LocationNotFound:
+        pass
+
+    try:
+        donor_programmes_dist, _ = get_stat_data(
+            ['donor', 'programme'], geo, session)
+    except LocationNotFound:
+        pass
+
+    is_missing = donor_assistance_dist.get('is_missing') and \
+        donor_programmes_dist.get('is_missing')
+    return {
+        'is_missing': is_missing,
+        'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist, 'donor_assistance_dist', country, level),
+        'donor_programmes_dist': _add_metadata_to_dist(donor_programmes_dist, 'donor_programmes_dist', country, level),
+    }
+
+
+def get_poverty_profile(geo, session, country, level):
+    poverty_residence_dist = LOCATIONNOTFOUND
+    poverty_age_dist = LOCATIONNOTFOUND
+    try:
+        poverty_residence_dist, _ = get_stat_data(
+            ['poverty_type', 'residence'], geo, session)
+    except LocationNotFound:
+        pass
+
+    try:
+        poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo, session)
+    except LocationNotFound:
+        pass
+
+    is_missing = poverty_residence_dist.get('is_missing') and \
+        poverty_age_dist.get('is_missing')
+    return {
+        'is_missing': is_missing,
+        'poverty_residence_dist': _add_metadata_to_dist(poverty_residence_dist, 'poverty_residence_dist', country, level),
+        'poverty_age_dist': _add_metadata_to_dist(poverty_age_dist, 'poverty_age_dist', country, level),
+    }
+
+
+def get_fgm_profile(geo, session, country, level):
+    fgm_age_dist = LOCATIONNOTFOUND
+    try:
+        fgm_age_dist, _ = get_stat_data(['age'], geo, session)
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': fgm_age_dist.get('is_missing'),
+        'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist', country, level),
+    }
+
+
+def get_security_profile(geo, session, country, level):
+    seized_firearms_dist = LOCATIONNOTFOUND
+    try:
+        seized_firearms_dist, _ = get_stat_data(['year', 'type'], geo, session)
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': seized_firearms_dist.get('is_missing'),
+        'seized_firearms_dist': _add_metadata_to_dist(seized_firearms_dist, 'seized_firearms_dist', country, level),
+    }
+
+
+def get_budget_data(geo, session, country, level):
+    government_expenditure_dist = LOCATIONNOTFOUND
+    try:
+        government_expenditure_dist, _ = get_stat_data(
+            ['year', 'sector'], geo, session)
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': government_expenditure_dist.get('is_missing'),
+        'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
     }
