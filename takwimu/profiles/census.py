@@ -29,6 +29,18 @@ METADATA = {
                     'title': 'OECD, 2016',
                 },
             },
+            'crop_distribution': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'prevention_methods_dist': {
+                'source': {
+                    'link': 'https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf',
+                    'title': 'Kenya Demographic and Health Survey, 2014'
+                },
+            },
             'donor_programmes_dist': {
                 'qualifier': '\n'.join([
                     'AGI: Adolescent Girls Initiative',
@@ -71,6 +83,16 @@ METADATA = {
                     'R: Rural',
                     'U: Urban',
                 ]),
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'poverty_residence_dist': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
             },
             'fgm_age_dist': {
                 'source': {
