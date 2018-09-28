@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
 from takwimu import settings
@@ -11,7 +12,7 @@ from takwimu.feed import CountryProfileFeed
 from hurumap.urls import urlpatterns as hurumap_urlpatterns
 
 takwimu_urlpatterns = [
-    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^$', cache_page(60*60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
         name='about_support_services'),
