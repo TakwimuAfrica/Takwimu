@@ -1,0 +1,102 @@
+{% load staticfiles %}
+
+<h3 class="display-5 py-3 text-light text-center">
+    Filter suistainable development goals by sector
+</h3>
+<ul class="nav justify-content-center text-center py-3 sdg-category" style="font-size: 14px;">
+    <li class="nav-item px-5 border-shade-right" data-sdg="health">
+        <a class="nav-link active text-light text-uppercase position-relative py-0" href="javascript:void(0)">
+            <span class="active position-absolute check" style="top:0; right: 1em;">
+                <img src="{% static 'img/icons/icon-tick.svg' %}" alt="Checked">
+            </span>
+            <div class="mb-3">
+                <img class="svg" src="{% static 'img/icons/health.svg' %}" alt="Health">
+            </div>
+            Health
+        </a>
+    </li>
+    <li class="nav-item px-5 border-shade-right" data-sdg="agriculture">
+        <a class="nav-link text-light text-uppercase position-relative py-0" href="javascript:void(0)">
+            <span class="active position-absolute check" style="top:0; right: 1em;">
+                <img src="{% static 'img/icons/icon-tick.svg' %}" alt="Checked">
+            </span>
+            <div class="mb-3">
+                <img class="svg" src="{% static 'img/icons/agriculture.svg' %}" alt="Agriculture">
+            </div>
+            Agriculture
+        </a>
+    </li>
+    <li class="nav-item px-5 border-shade-right" data-sdg="financial-inclusion">
+        <a class="nav-link text-light text-uppercase position-relative py-0" href="javascript:void(0)">
+            <span class="active position-absolute check" style="top:0; right: 1em;">
+                <img src="{% static 'img/icons/icon-tick.svg' %}" alt="Checked">
+            </span>
+            <div class="mb-3">
+                <img class="svg" src="{% static 'img/icons/financial-inclusion.svg' %}" alt="Financial Inclusion">
+            </div>
+            Financial Inclusion
+        </a>
+    </li>
+    <li class="nav-item px-5" data-sdg="education">
+        <a class="nav-link text-light text-uppercase position-relative py-0" href="javascript:void(0)">
+            <span class="active position-absolute check" style="top:0; right: 1em;">
+                <img src="{% static 'img/icons/icon-tick.svg' %}" alt="Checked">
+            </span>
+            <div class="mb-3">
+                <img class="svg" src="{% static 'img/icons/education.svg' %}" alt="Education">
+            </div>
+            Education
+        </a>
+    </li>
+</ul>
+<style>
+.sdg-container .is-collapsed{
+    display: none;
+}
+.sdg-category .nav-link.disabled,
+.sdg-category .nav-link.disabled .svg path {
+    color: rgba(255, 255, 255, 0.4)!important;
+    stroke: rgba(255, 255, 255, 0.4)!important;
+    fill: rgba(255, 255, 255, 0.4)!important;
+}
+.sdg-category span.check {
+    display: none;
+}
+.sdg-category span.check.active {
+    display: block;
+}
+.border-shade-right {
+    border-right: 1px solid rgba(255, 255, 255, 0.25);
+}
+.arrow-down {
+  width: 0; 
+  height: 0; 
+  border-left: 40px solid transparent;
+  border-right: 40px solid transparent;
+  
+  border-top: 20px solid #1e4a7e;
+}
+.arrow-up {
+    border-bottom: 20px solid #1e4a7e;
+    border-left: 20px solid transparent;
+    border-right: 20px solid transparent;
+}
+.sdg-container a[aria-expanded="true"] .is-collapsed {
+    display: block;
+}
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Toggle SDG sectors filter
+        $(".sdg-category li.nav-item").click(function() {
+            var sdg = $(this).attr("data-sdg");
+            
+            $(this).find(".nav-link").toggleClass("disabled");
+            $("li[data-sdg="+sdg+"]").find(".check").toggleClass("active");
+            // Disable SDG of the selected sector
+            var _sector = $(".sdg-container .row").find("[data-sector="+sdg+"]");
+                _sector.toggleClass("sdg-disabled");
+        });
+    });
+</script>
