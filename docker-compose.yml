@@ -19,6 +19,10 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
 
+  redis:
+    image: redis
+    ports:
+      - "6379:6379"
   web:
     build: .
     ports:
@@ -26,6 +30,7 @@ services:
     depends_on:
       - db
       - es
+      - redis
     volumes:
       - "./:/srv/takwimu"
     environment:
@@ -41,4 +46,7 @@ services:
       - TAKWIMU_ES_URL=http://es:9200
       - PYTHONDONTWRITEBYTECODE="True"
       # - DJANGO_DEBUG=False  # For testing deploys
+
+  volumes:
+    - redis_data
 

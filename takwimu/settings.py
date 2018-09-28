@@ -18,6 +18,9 @@ ROOT_URLCONF = 'takwimu.urls'
 
 MIDDLEWARE_CLASSES = (
         'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.middleware.cache.FetchFromCacheMiddleware',
+        'django.middleware.cache.UpdateCacheMiddleware',
+
     ) + MIDDLEWARE_CLASSES + (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
@@ -158,3 +161,14 @@ else:
             'INDEX_SETTINGS': {},
         }
     }
+
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django_redis.cache.RedisCache',
+        'LOCATION': os.environ.get('REDIS_URL', '127.0.0.1:6379'),
+        'OPTIONS': {
+            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+        }
+    }
+}
