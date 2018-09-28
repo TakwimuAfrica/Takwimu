@@ -61,11 +61,11 @@ class TopicView(TemplateView):
     template_name = 'takwimu/topic_page.html'
 
 
-class SDGTopicView(TemplateView):
+class SDGIndicatorView(TemplateView):
     """
-    SDG Topic View:
+    SDG Indicator View:
     ---------------
-    Finding Data by SDG Topic View.
+    Finding data by SDG indicator.
     """
 
     template_name = 'takwimu/sdg_topic_page.html'
@@ -73,7 +73,7 @@ class SDGTopicView(TemplateView):
     def get_context_data(self, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json') 
         data = json.load(json_data)
-        context = super(SDGTopicView, self).get_context_data(
+        context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
         context['sdgs'] = data
         return context

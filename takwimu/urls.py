@@ -4,7 +4,7 @@ from django.views.generic import RedirectView
 
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
-    LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, SDGTopicView
+    LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, SDGIndicatorView
 from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
@@ -23,7 +23,7 @@ takwimu_urlpatterns = [
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
     url(r'^topics/$', TopicView.as_view(), name='topics'),
-    url(r'^sdg/$', SDGTopicView.as_view(), name='sdg'),
+    url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^search/$', SearchView.as_view(), name='search'),
 ]
