@@ -122,12 +122,11 @@ def get_profile(geo, profile_name, request):
     try:
         data['demographics'] = get_demographics(geo, session, country, level)
         data['elections'] = get_elections(geo, session)
-        data['crops'] = get_crop_production(geo, session)
+        data['crops'] = get_crop_production(geo, session, country, level)
         data['health_centers'] = get_health_centers(
             geo, session, country, level)
         data['health_workers'] = get_health_workers(geo, session)
         data['causes_of_death'] = get_causes_of_death(geo, session)
-        data['education'] = get_education_profile(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
         data['donors'] = get_donor_assistance(geo, session, country, level)
         data['poverty'] = get_poverty_profile(geo, session, country, level)
@@ -320,7 +319,7 @@ def get_elections(geo, session):
     }
 
 
-def get_crop_production(geo, session):
+def get_crop_production(geo, session, country, level):
     crop_distribution = LOCATIONNOTFOUND
     try:
         crop_distribution, _ = get_stat_data(
@@ -329,7 +328,8 @@ def get_crop_production(geo, session):
         pass
 
     return {
-        'crop_distribution': crop_distribution
+        'crop_distribution': _add_metadata_to_dist(
+            crop_distribution, 'crop_distribution', country, level)
     }
 
 
@@ -376,12 +376,14 @@ def get_health_centers(geo, session, country, level):
         'HIV care and treatment centers (2014)', total_hiv_health_centers)
     return {
         'is_missing': is_missing,
-        'health_centers_dist': _add_metadata_to_dist(health_centers_dist, 'health_centers_dist', country, level),
+        'health_centers_dist': _add_metadata_to_dist(
+            health_centers_dist, 'health_centers_dist', country, level),
         'total_health_centers_dist': total_health_centers_dist,
         'hiv_health_centers_dist': hiv_health_centers_dist,
         'total_hiv_health_centers_dist': total_hiv_health_centers_dist,
         'health_centers_ownership_dist': health_centers_ownership_dist,
-        'prevention_methods_dist': prevention_methods_dist
+        'prevention_methods_dist': _add_metadata_to_dist(
+            prevention_methods_dist, 'prevention_methods_dist', country, level),
     }
 
 
@@ -473,42 +475,6 @@ def get_causes_of_death(geo, session):
         'inpatient_diagnosis_over_five_dist': inpatient_diagnosis_over_five_dist,
         'outpatient_diagnosis_over_five_dist': outpatient_diagnosis_over_five_dist,
         'outpatient_diagnosis_under_five_dist': outpatient_diagnosis_under_five_dist,
-    }
-
-
-def get_education_profile(geo, session):
-    # highest level reached
-    edu_dist_data = LOCATIONNOTFOUND
-    school_attendance_dist = LOCATIONNOTFOUND
-
-    try:
-        edu_dist_data, _ = get_stat_data(
-            'highest_education_level_reached', geo, session,
-            key_order=['None', 'Pre-primary', 'Primary', 'Secondary',
-                       'Tertiary',
-                       'University', 'Youth polytechnic', 'Basic literacy',
-                       'Madrassa'])
-
-    except LocationNotFound:
-        pass
-
-    try:
-        # school attendance by sex
-        school_attendance_dist, _ = get_stat_data(
-            ['school_attendance', 'sex'], geo, session,
-            key_order={'school attendance': ['Never attended', 'At school',
-                                             'Left school', 'Unspecified'],
-                       'sex': ['Female', 'Male']})
-
-    except LocationNotFound:
-        pass
-
-    is_missing = edu_dist_data.get('is_missing')
-
-    return {
-        'is_missing': is_missing,
-        'education_reached_distribution': edu_dist_data,
-        'school_attendance_distribution': school_attendance_dist,
     }
 
 
