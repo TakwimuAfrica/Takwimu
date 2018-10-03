@@ -115,12 +115,16 @@ METADATA = {
     'ethiopia': {
         'country': {
             'sex_dist': {
-                'link': 'http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf',
-                'title': 'Summary and Statistical Report of the 2007 Population and Housing Census'
+                'source': {
+                    'link': 'http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf',
+                    'title': 'Summary and Statistical Report of the 2007 Population and Housing Census'
+                },
             },
             'residence_dist': {
-                'link': 'http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf',
-                'title': 'Summary and Statistical Report of the 2007 Population and Housing Census'
+                'source': {
+                    'link': 'http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf',
+                    'title': 'Summary and Statistical Report of the 2007 Population and Housing Census'
+                },
             }
         }
     }
@@ -161,7 +165,7 @@ def get_country_and_level(geo):
 
 
 def get_demographics(geo, session, country, level):
-    population_data = get_population(geo, session)
+    population_data = get_population(geo, session, country, level)
     child_births_data = get_child_births(geo, session, country, level)
     demographics_data = dict(population_data.items() +
                              child_births_data.items())
@@ -171,7 +175,7 @@ def get_demographics(geo, session, country, level):
     return demographics_data
 
 
-def get_population(geo, session):
+def get_population(geo, session, country, level):
     sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
 
@@ -197,9 +201,9 @@ def get_population(geo, session):
 
     demographics_data = {
         'is_missing': is_missing,
-        'sex_dist': sex_dist,
-        'residence_dist': residence_dist,
-        'total_population': total_population_dist,
+        'sex_dist': _add_metadata_to_dist(sex_dist, 'sex_dist', country, level),
+        'residence_dist': _add_metadata_to_dist(residence_dist, 'residence_dist', country, level),
+        'total_population': _add_metadata_to_dist(total_population_dist, 'total_population_dist', country, level),
     }
 
     if geo.square_kms:
