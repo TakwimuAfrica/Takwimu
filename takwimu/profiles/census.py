@@ -90,6 +90,18 @@ METADATA = {
             },
         },
     },
+    'ethiopia': {
+        'country': {
+            'sex_dist': {
+                'link': 'http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf',
+                'title': 'Summary and Statistical Report of the 2007 Population and Housing Census'
+            },
+            'residence_dist': {
+                'link': 'http://www.ethiopianreview.com/pdf/001/Cen2007_firstdraft(1).pdf',
+                'title': 'Summary and Statistical Report of the 2007 Population and Housing Census'
+            }
+        }
+    }
 }
 
 
