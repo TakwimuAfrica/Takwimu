@@ -35,12 +35,6 @@ CREATE TABLE public.donor (
 --
 -- Data for Name: donor; Type: TABLE DATA; Schema: public; Owner: -
 --
--- Legend:
--- International Development Association IDA
--- African Development Fund ADF
--- Global Fund GF
--- Bill & Melinda Gates Foundation	BMGF
-
 
 COPY public.donor (geo_level, geo_code, geo_version, donor, total) FROM stdin;
 country	KE	2009	Denmark	58
@@ -50,12 +44,12 @@ country	KE	2009	Sweden	65
 country	KE	2009	UK	238
 country	KE	2009	USA	714
 country	KE	2009	Japan	224
-country	KE	2009	IDA	472
-country	KE	2009	ADF	260
+country	KE	2009	International Development Association	472
+country	KE	2009	African Development Fund	260
 country	KE	2009	EU	131
 country	KE	2009	GAVI	69
-country	KE	2009	GF	115
-country	KE	2009	BMGF	53
+country	KE	2009	Global Fund	115
+country	KE	2009	Bill & Melinda Gates Foundation	53
 \.
 
 

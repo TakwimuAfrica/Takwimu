@@ -36,27 +36,17 @@ CREATE TABLE public.donor_funded_programmes (
 --
 -- Data for Name: donor_funded_programmes; Type: TABLE DATA; Schema: public; Owner: -
 --
--- Legend:
--- Kenya Market Assistance Programme KMAP
--- Adolescent Girls Initiative AGI
--- Reducing Maternal and Newborn Deaths in Kenya RMNDK
--- Delivering Increased Family Planning Across Rural Kenya DIFPARK
--- Kenya Climate Smart Agriculture Project KCSAP
--- National Agricultural and Rural Inclusive Growth Project NARIGP
--- Kenya Secondary Education Quality Improvement Project SEQUIP
--- Primary Education Development Project PRIEDE
--- Transforming Health Systems for Universal Care Project THSUCP
 
 COPY public.donor_funded_programmes (geo_level, geo_code, geo_version, programme, donor, total) FROM stdin;
-country	KE	2009	KMAP	 DFID	69000000
-country	KE	2009	AGI	 DFID	15000000
-country	KE	2009	RMNDK	 DFID	85000000
-country	KE	2009	DIFPARK	 DFID	52000000
-country	KE	2009	KCSAP	 World Bank	279000000
-country	KE	2009	NARIGP	 World Bank	219000000
-country	KE	2009	SEQUIP	 World Bank	200000000
-country	KE	2009	PRIEDE	 World Bank	88000000
-country	KE	2009	THSUCP	 World Bank	150000000
+country	KE	2009	Kenya Market Assistance Programme	 DFID	69000000
+country	KE	2009	Adolescent Girls Initiative	 DFID	15000000
+country	KE	2009	Reducing Maternal and Newborn Deaths in Kenya	 DFID	85000000
+country	KE	2009	Delivering Increased Family Planning Across Rural Kenya	 DFID	52000000
+country	KE	2009	Kenya Climate Smart Agriculture Project	 World Bank	279000000
+country	KE	2009	National Agricultural and Rural Inclusive Growth Project	 World Bank	219000000
+country	KE	2009	Kenya Secondary Education Quality Improvement Project (SEQUIP)	 World Bank	200000000
+country	KE	2009	Primary Education Development Project (PRIEDE)	 World Bank	88000000
+country	KE	2009	Transforming Health Systems for Universal Care Project	 World Bank	150000000
 \.
 
 
