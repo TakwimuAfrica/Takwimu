@@ -457,8 +457,6 @@ class Testimonial(models.Model):
         return self.quote.encode('utf8')
 
 
-
-
 class ExplainerSteps(Page):
     sidebar = RichTextField()  # TODO: Remove
     steps = StreamField([
