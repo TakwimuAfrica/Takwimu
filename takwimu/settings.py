@@ -20,7 +20,6 @@ MIDDLEWARE_CLASSES = (
         'whitenoise.middleware.WhiteNoiseMiddleware',
         'django.middleware.cache.FetchFromCacheMiddleware',
         'django.middleware.cache.UpdateCacheMiddleware',
-
     ) + MIDDLEWARE_CLASSES + (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
@@ -163,6 +162,9 @@ else:
     }
 
 
+# -------------------------------------------------------------------------------------
+# CACHE
+# -------------------------------------------------------------------------------------
 TAKWIMU_CACHE = os.environ.get('TAKWIMU_CACHE', '')
 if TAKWIMU_CACHE:
     TAKWIMU_CACHE_URL = os.environ.get('TAKWIMU_CACHE_URL', '127.0.0.1:6379')
