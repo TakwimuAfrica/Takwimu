@@ -172,6 +172,13 @@ a {
   }
 }
 
+// SDG disabled
+.sdg-disabled {
+  @extend .grayscale;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
 /*
  * Flex Scroll (Mainly for Navs)
  * -----------------------------
@@ -184,6 +191,7 @@ a {
  * [5]: Hide the ugly scrollbars in Edge until the scrollable area is hovered
  * [6]: Hide the scroll bar in WebKit browsers
 */
+
 .flex-scroll {
   display: flex; /* [1] */
   flex-wrap: nowrap; /* [1] */
