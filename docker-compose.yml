@@ -8,10 +8,7 @@ services:
     environment:
       - POSTGRES_USER=takwimu
       - POSTGRES_PASSWORD=takwimu
-      - PGDATABASE=takwimu
-      - PGUSER=takwimu
-      - PGPASSWORD=takwimu
-
+      - POSTGRES_DB=takwimu
   es:
     image: elasticsearch:5.6.10
     ports:
@@ -23,6 +20,7 @@ services:
     image: redis
     ports:
       - "6379:6379"
+
   web:
     build: .
     ports:
@@ -44,9 +42,8 @@ services:
       - TAKWIMU_ES_INDEX=takwimu
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
+      - TAKWIMU_CACHE="True"
+      - TAKWIMU_CACHE_URL=reddis://redis:6379
+      - TAKWIMU_CACHE_KEY_PREFIX="takwimu"
       - PYTHONDONTWRITEBYTECODE="True"
       # - DJANGO_DEBUG=False  # For testing deploys
-
-  volumes:
-    - redis_data
-

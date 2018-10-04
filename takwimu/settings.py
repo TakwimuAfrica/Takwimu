@@ -163,13 +163,17 @@ else:
     }
 
 
-CACHES = {
-    'default': {
-        'BACKEND': 'django_redis.cache.RedisCache',
-        'LOCATION': os.environ.get('REDIS_URL', '127.0.0.1:6379'),
-        'OPTIONS': {
-            'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-        },
-        "KEY_PREFIX": "takwimu"
+TAKWIMU_CACHE = os.environ.get('TAKWIMU_CACHE', '')
+if TAKWIMU_CACHE:
+    TAKWIMU_CACHE_URL = os.environ.get('TAKWIMU_CACHE_URL', '127.0.0.1:6379')
+    TAKWIMU_CACHE_KEY_PREFIX = os.environ.get('TAKWIMU_CACHE_KEY', 'takwimu')
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': TAKWIMU_CACHE_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            },
+            "KEY_PREFIX": TAKWIMU_CACHE_KEY_PREFIX,
+        }
     }
-}
