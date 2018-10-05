@@ -1,4 +1,7 @@
 #!/bin/bash
+
+createdb takwimu
+
 python manage.py migrate --noinput        # Apply database migrations
 cat takwimu/sql/*.sql | psql              # Upload tables / data
 python manage.py compilescss              # Compile SCSS (offline)
