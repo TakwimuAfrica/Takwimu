@@ -7,13 +7,15 @@ CENSUS = {
     'kenya': '2009',
     'nigeria': '2006',
     'senegal': '2013',
+    'ethiopia': '2007',
 }
 
 LEVEL1_NAMES = {
     'tanzania': 'Region',
     'kenya': 'County',
     'nigeria': 'State',
-    'senegal': 'Region'
+    'senegal': 'Region',
+    'ethiopia': 'Region',
 }
 
 

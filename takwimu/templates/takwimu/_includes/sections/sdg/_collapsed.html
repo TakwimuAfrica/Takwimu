@@ -1,0 +1,52 @@
+{% load staticfiles %}
+
+<div class="bg-secondary text-light container-fluid mx-auto my-1 position-relative" style="width: calc(100% - 0.5em);">
+    <div class="row px-0 py-5">
+        <div class="col-6 text-left px-5">
+            <h2 class="font-weight-bold">
+                {% if sdg_title %}
+                    {{ sdg_title }}
+                {% else %}
+                    Some title
+                {% endif %}
+            </h2>
+            <p class="font-weight-light">
+                {% if sdg_desc %}
+                    {{ sdg_desc }}
+                {% else %}
+                    Aliqua esse nulla Lorem fugiat aliqua aliqua
+                    aliqua sint id velit ut sit amet. Commodo laboris reprehenderit enim consequat eiusmod voluptate
+                    dolor duis laborum. Nulla id velit deserunt labore eu. Aute consectetur culpa officia consectetur
+                    laboris et tempor labore sint minim. Enim velit et id cupidatat tempor commodo non amet.
+                    Exercitation culpa et ut excepteur anim amet occaecat aute culpa aute.
+                {% endif %}
+            </p>
+        </div>
+        <div class="col-6 d-flex px-5 justify-content-center align-items-center" style="border-left: 1px solid rgba(255, 255, 255, .52);">
+            {% if sdg_content %}
+                <form class="w-100">
+                    <div class="form-group">
+                        <label for="sdg-data" class="display-6 font-weight-bold">View gorvernace data for:</label>
+                        <select class="form-control rounded-0" id="sdg-data">
+                            <option selected>Please select a country</option>
+                            <option value="Tanzania">Tanzania</option>
+                            <option value="Kenya">Kenya</option>
+                            <option value="Senagal">Senagal</option>
+                            <option value="Uganda">Uganda</option>
+                            <option value="DRC">DRC</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="float-right btn btn-outline-light font-weight-bold text-uppercase">View Data</button>
+                </form>
+            {% else %}
+                <div class="d-block text-center" style="color: #78aff5;">
+                    <span class="fas fa-exclamation-circle fa-3x"></span>
+                    <p class="text-info my-3" style="font-size: 14px;">We do not have any data associated with this SDG</p>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <button data-toggle="collapse" data-target="#{{ sdg_title|slugify }}" class="close btn-close position-absolute" style="top: 0.5em; right: 0.5em;" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>

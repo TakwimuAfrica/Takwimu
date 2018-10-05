@@ -224,6 +224,30 @@ level1	KE_1_027	2009	rural	548620
 level1	KE_1_038	2009	rural	380517
 level1	KE_1_008	2009	rural	565086
 level1	KE_1_024	2009	rural	469994
+country	ET	2009	urban	11956170
+level1	ET_1_011	2009	urban	842723
+level1	ET_1_002	2009	urban	188973
+level1	ET_1_003	2009	urban	2112220
+level1	ET_1_008	2009	urban	3370040
+level1	ET_1_010	2009	urban	621210
+level1	ET_1_004	2009	urban	97965
+level1	ET_1_009	2009	urban	1545710
+level1	ET_1_006	2009	urban	77878
+level1	ET_1_007	2009	urban	99321
+level1	ET_1_001	2009	urban	2738248
+level1	ET_1_005	2009	urban	232854
+country	ET	2009	rural	61953185
+level1	ET_1_011	2009	rural	3471733
+level1	ET_1_002	2009	rural	1222119
+level1	ET_1_003	2009	rural	15101836
+level1	ET_1_008	2009	rural	23788431
+level1	ET_1_010	2009	rural	3817937
+level1	ET_1_004	2009	rural	572882
+level1	ET_1_009	2009	rural	13496821
+level1	ET_1_006	2009	rural	229038
+level1	ET_1_007	2009	rural	84023
+level1	ET_1_001	2009	rural	0
+level1	ET_1_005	2009	rural	109973
 \.
 
 
