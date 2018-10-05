@@ -21,13 +21,15 @@
 </style>
 
 <script>
-    function makeCensusEmbeds() {
+
+    // Work with a single iframe at a time
+    function makeCensusEmbeds(selectors) {
         var embed = {
             embeds: {}
         };
 
         embed.init = function () {
-            embed.containers = document.querySelectorAll('.census-reporter-embed');
+            embed.containers = document.querySelectorAll(selectors);
             embed.numContainers = embed.containers.length;
             for (var i = 0; i < embed.numContainers; i++) {
                 embed.embeds[embed.containers[i].id] = {
@@ -103,8 +105,31 @@
         return embed;
     }
 
+    // Create viz for all visible iframes
     var addEmbeds = function addEmbeds() {
-        window.CensusReporterEmbeds = makeCensusEmbeds();
+        this.contentWindow.CensusReporterEmbeds = makeCensusEmbeds('#cr-embed-country-{{value.data_country}}-{{value.data_id}}');
     }
-    window.addEventListener('load', addEmbeds);
+    var viz = document.getElementById('cr-embed-country-{{value.data_country}}-{{value.data_id}}');
+    viz.addEventListener('load', addEmbeds);
+
+    window.addEventListener('load', function() {
+
+        // For all widgets in hidden tabs (on single indicator),
+        // create them when they're shown
+        $('.indicator .nav-link').on('shown.bs.tab', function(e) {
+            widgetId = e.target.getAttribute('href');
+            $(widgetId + ' .census-reporter-embed').each(function(){
+                this.contentWindow.CensusReporterEmbeds = makeCensusEmbeds('#' + this.id);
+            });
+        });
+
+        // For the active widget on a hidden indicator,
+        // create it when the indicator is shown
+        $('.dataindicators-nav .nav-link').on('shown.bs.tab', function(e) {
+            indicatortId = e.target.getAttribute('href');
+            $(indicatortId + ' .tab-pane.active .census-reporter-embed').each(function() {
+                this.contentWindow.CensusReporterEmbeds = makeCensusEmbeds('#' + this.id);
+            });
+        });
+    });
 </script>

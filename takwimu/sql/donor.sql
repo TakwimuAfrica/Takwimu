@@ -41,7 +41,6 @@ CREATE TABLE public.donor (
 -- Global Fund GF
 -- Bill & Melinda Gates Foundation	BMGF
 
-
 COPY public.donor (geo_level, geo_code, geo_version, donor, total) FROM stdin;
 country	KE	2009	Denmark	58
 country	KE	2009	France	103
