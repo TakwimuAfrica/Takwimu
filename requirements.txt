@@ -10,7 +10,8 @@ Markdown==2.6.11
 django-debug-toolbar==1.9.1
 elasticsearch==5.5.3
 requests-aws4auth==0.9
-psycopg2-binary
+psycopg2-binary==2.7.5
+django-redis==4.9.0
 
 # Workaround for dependency links
 # Comment out when changes / updates / PR accepted

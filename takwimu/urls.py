@@ -1,17 +1,18 @@
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
-    LegalView, TopicView, SearchView, IndicatorsGeographyDetailView
+    LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, SDGIndicatorView
 from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
 from hurumap.urls import urlpatterns as hurumap_urlpatterns
 
 takwimu_urlpatterns = [
-    url(r'^$', HomePageView.as_view(), name='home'),
+    url(r'^$', cache_page(60*60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
         name='about_support_services'),
@@ -23,6 +24,7 @@ takwimu_urlpatterns = [
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
     url(r'^topics/$', TopicView.as_view(), name='topics'),
+    url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^search/$', SearchView.as_view(), name='search'),
 ]

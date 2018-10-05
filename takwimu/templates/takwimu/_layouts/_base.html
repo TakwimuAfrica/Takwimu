@@ -88,16 +88,18 @@
           $popup.find('button.close').click(function (e) {
               $popup.popover('hide');
           });
-      });      
-    })
+      });
+      
+      // Enable Anchors
+      anchors.options = {
+        placement: 'right',
+        class: 'anchor-style'
+      };
+      
+      anchors.add(".anchor");
+    });
     
-    // Enable Anchors
-    anchors.options = {
-      placement: 'right',
-      class: 'anchor-style'
-    };
     
-    anchors.add(".anchor");
    
   </script>
 
