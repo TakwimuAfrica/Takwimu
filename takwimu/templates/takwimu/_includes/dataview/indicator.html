@@ -12,7 +12,7 @@
       <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
         <i class="fa fa-code"></i>
       </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Download Visualization" id="{{ indicator.id }}-download-btn">
         <i class="fa fa-download"></i>
       </button>
       <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
@@ -38,7 +38,7 @@
 
       {% for widget in indicator.value.widgets %}
         <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-             id="{{ indicator.id }}-{{ widget.id }}-tab" role="tabpanel"
+             id="{{ indicator.id }}-{{ widget.id }}-tab" role="tabpanel" data-toggle="tabpanel"
              aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn">
           {% include_block widget %}
         </div>
