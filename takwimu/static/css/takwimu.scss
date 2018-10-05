@@ -416,6 +416,24 @@ a {
   }
 }
 
+ /* Consistency tab active state for topic details */
+ .indicators-container {
+  .nav-tabs {
+    .nav-item {
+      .nav-link {
+        font-size: 14px;
+        border-radius: 0;
+        &.active {
+          font-weight: bold;
+        }
+      }
+      &.show .nav-link {
+        font-weight: bold;
+      }
+    }
+  }
+ }
+
 
 /*
 * Country Flags
