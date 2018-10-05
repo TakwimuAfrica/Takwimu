@@ -2,54 +2,110 @@
 <div class="indicator">
 
   {% if indicator %}
-    <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-        <i class="fa fa-flag"></i>
-      </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-        <i class="fa fa-exchange-alt"></i>
-      </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-        <i class="fa fa-code"></i>
-      </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Download Visualization" id="{{ indicator.id }}-download-btn">
-        <i class="fa fa-download"></i>
-      </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-        <i class="fa fa-share-alt"></i>
-      </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-        <i class="fa fa-heart"></i>
-      </button>
-      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-        <i class="fa fa-book-open"></i>
-      </button>
-    </div>
-    <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
-      {% for widget in indicator.value.widgets %}
-        <li class="nav-item">
-          <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-dv-chart-tab" data-toggle="tab" href="#{{ indicator.id }}-{{ widget.id }}-tab" role="tab"
-             aria-controls="{{ indicator.id }}-{{ widget.id }}-tab" aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
-        </li>
-      {% endfor %}
-    </ul>
+  <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-flag"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-exchange-alt"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-code"></i>
+    </button>
+<button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Download Visualization" id="{{ indicator.id }}-download-btn"
+  data-target-pane="{{ indicator.id }}">
+      <i class="fa fa-download"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-share-alt"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-heart"></i>
+    </button>
+    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+      <i class="fa fa-book-open"></i>
+    </button>
+  </div>
+  <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
+    {% for widget in indicator.value.widgets %}
+    <li class="nav-item">
+      <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-dv-chart-tab"
+        data-toggle="tab" href="#{{ indicator.id }}-{{ widget.id }}-tab" role="tab" aria-controls="{{ indicator.id }}-{{ widget.id }}-tab"
+        aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
+    </li>
+    {% endfor %}
+  </ul>
 
-    <div class="tab-content border border-top-0 p-3 pt-4 pb-2">
+  <div class="tab-content border border-top-0 p-3 pt-4 pb-2" data-tab-content-indicator-id="{{ indicator.id }}">
 
-      {% for widget in indicator.value.widgets %}
-        <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
-             id="{{ indicator.id }}-{{ widget.id }}-tab" role="tabpanel" data-toggle="tabpanel"
-             aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn">
-          {% include_block widget %}
-        </div>
-      {% endfor %}
+    {% for widget in indicator.value.widgets %}
+    <div class="tab-pane fade {% if forloop.first %} active show {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-tab"
+      role="tabpanel" data-toggle="tabpanel" aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn"
+      data-widget-id="{{ widget.id }}">
+      {% include_block widget %}
     </div>
+    {% endfor %}
+  </div>
+
+<script>
+  window.addEventListener('load', function () {
+    var indicator_id = "{{ indicator.id }}";
+    var download_btn_id = '#' + indicator_id + "-download-btn";
+
+    var indicator_container_id = '#' + indicator_id + "-tab"
+
+    $(download_btn_id).click(function () {
+      console.log($(this))
+      var targetPaneId = $(this).attr('data-target-pane');
+      $('.tab-content').each(function () {
+        if ($(this).attr('data-tab-content-indicator-id') == targetPaneId) {
+          //console.log('Found it');
+          var targetElem = $(this).children('.tab-pane.fade.active.show');
+          console.log(targetElem.attr('id'));
+          html2canvas(document.querySelector("#" + targetElem.attr('id')), {
+            onrendered: function (canvas) {
+              console.log("Saving...")
+              saveAs(canvas.toDataURL(), targetElem.attr('id') + '.png');
+            }
+          });
+        }
+      });
+    });
+
+  });
+
+  function saveAs(uri, filename) {
+
+    var link = document.createElement('a');
+
+    if (typeof link.download === 'string') {
+
+      link.href = uri;
+      link.download = filename;
+
+      //Firefox requires the link to be in the body
+      document.body.appendChild(link);
+
+      //simulate click
+      link.click();
+
+      //remove the link when done
+      document.body.removeChild(link);
+
+    } else {
+
+      window.open(uri);
+
+    }
+  }
+</script>
 
   {% else %}
-    <div class="alert alert-info" role="alert">
-      <span class="fas fa-info"></span>
-      <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
-    </div>
+  <div class="alert alert-info" role="alert">
+    <span class="fas fa-info"></span>
+    <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX"
+        target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
+  </div>
   {% endif %}
 </div>
 
