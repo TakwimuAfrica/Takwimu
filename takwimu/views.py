@@ -61,6 +61,24 @@ class TopicView(TemplateView):
     template_name = 'takwimu/topic_page.html'
 
 
+class SDGIndicatorView(TemplateView):
+    """
+    SDG Indicator View:
+    ---------------
+    Finding data by SDG indicator.
+    """
+
+    template_name = 'takwimu/sdg_topic_page.html'
+
+    def get_context_data(self, **kwargs):
+        json_data = open('takwimu/fixtures/sdg.json') 
+        data = json.load(json_data)
+        context = super(SDGIndicatorView, self).get_context_data(
+            **kwargs)
+        context['sdgs'] = data
+        return context
+
+
 def handler404(request):
     response = render_to_response('404.html', {},
                                   context_instance=RequestContext(request))

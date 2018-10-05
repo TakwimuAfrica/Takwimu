@@ -452,7 +452,7 @@ class Testimonial(models.Model):
     photo = models.ImageField(blank=True, upload_to='testimonials/')
 
     def __str__(self):
-        return self.quote
+        return self.quote.encode('utf8')
 
 
 class ExplainerSteps(Page):

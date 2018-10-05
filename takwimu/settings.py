@@ -18,6 +18,8 @@ ROOT_URLCONF = 'takwimu.urls'
 
 MIDDLEWARE_CLASSES = (
         'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.middleware.cache.FetchFromCacheMiddleware',
+        'django.middleware.cache.UpdateCacheMiddleware',
     ) + MIDDLEWARE_CLASSES + (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
@@ -31,6 +33,7 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context
     'takwimu.context_processors.takwimu_topics',
     'takwimu.context_processors.sdgs',
 ]
+
 
 # Static Files Handler
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -156,5 +159,24 @@ else:
             'URLS': [TAKWIMU_ES_URL],
             'OPTIONS': {},
             'INDEX_SETTINGS': {},
+        }
+    }
+
+
+# -------------------------------------------------------------------------------------
+# CACHE
+# -------------------------------------------------------------------------------------
+TAKWIMU_CACHE = os.environ.get('TAKWIMU_CACHE', '')
+if TAKWIMU_CACHE:
+    TAKWIMU_CACHE_URL = os.environ.get('TAKWIMU_CACHE_URL', '127.0.0.1:6379')
+    TAKWIMU_CACHE_KEY_PREFIX = os.environ.get('TAKWIMU_CACHE_KEY', 'takwimu')
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': TAKWIMU_CACHE_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            },
+            "KEY_PREFIX": TAKWIMU_CACHE_KEY_PREFIX,
         }
     }

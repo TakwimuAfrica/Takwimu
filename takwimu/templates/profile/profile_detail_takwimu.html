@@ -195,37 +195,6 @@
     </article>
   {% endif %}
 
-  {% if not education.is_missing %}
-    <article id="education"
-             class="clearfix">
-      <header class="section-contents">
-        <h1>Education</h1>
-      </header>
-      <div class="section-container">
-        {% if not education.education_reached_distribution.is_missing %}
-          <section class="clearfix stat-row">
-            <h2>Education level</h2>
-            <div class="column-full"
-                 id="chart-histogram-education-education_reached_distribution"
-                 data-stat-type="scaled-percentage"
-                 data-chart-title="Population by highest education level reached"
-                 data-qualifier="Universe: {{ education.education_reached_distribution.metadata.universe }}"></div>
-          </section>
-        {% endif %}
-        {% if not education.school_attendance_distribution.is_missing %}
-          <section class="clearfix stat-row">
-            <h2>School attendance</h2>
-            <div class="column-full"
-                 id="chart-grouped_column-education-school_attendance_distribution"
-                 data-stat-type="scaled-percentage"
-                 data-chart-title="School attendance by sex"
-                 data-qualifier="Universe: {{ education.school_attendance_distribution.metadata.universe }}"></div>
-          </section>
-        {% endif %}
-      </div>
-    </article>
-  {% endif %}
-
   {% if not donors.is_missing %}
     <article class="clearfix">
       <header class="section-contents">

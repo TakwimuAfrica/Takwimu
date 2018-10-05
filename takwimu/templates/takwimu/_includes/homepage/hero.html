@@ -1,5 +1,5 @@
-{% load staticfiles %}
-
+{% load staticfiles cache %}
+{% cache 600  hero %}
 <div class="text-light" style="background: #074c9c url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
   <div class="py-5" style="background-color: rgba(7, 76, 156, 0.8)">
     <div class="container">
@@ -100,3 +100,5 @@
     background-color: #005e79;
 }
 </style>
+
+{% endcache %}
