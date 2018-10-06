@@ -27,7 +27,7 @@ def takwimu_countries(request):
             }, {
                 'name': 'Kenya',
                 'name_short': 'Kenya',
-                'published': False
+                'published': True
             }, {
                 'name': 'Nigeria',
                 'name_short': 'Nigeria',
