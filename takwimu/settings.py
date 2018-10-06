@@ -18,6 +18,8 @@ ROOT_URLCONF = 'takwimu.urls'
 
 MIDDLEWARE_CLASSES = (
         'whitenoise.middleware.WhiteNoiseMiddleware',
+        'django.middleware.cache.FetchFromCacheMiddleware',
+        'django.middleware.cache.UpdateCacheMiddleware',
     ) + MIDDLEWARE_CLASSES + (
         'debug_toolbar.middleware.DebugToolbarMiddleware',
     )
@@ -31,12 +33,17 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context
     'takwimu.context_processors.takwimu_topics',
 ]
 
-# Static Files Handler
+
+# Static files handler
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media Config
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # -------------------------------------------------------------------------------------
-# Website Details
+# HURUmap / Wazimap Config
 # -------------------------------------------------------------------------------------
 
 HURUMAP['name'] = 'Takwimu'
@@ -79,7 +86,7 @@ HURUMAP['map_zoom'] = None
 
 # -------------------------------------------------------------------------------------
 # Google Analytics
-# Main tracking id: TAKWIMU
+# Main tracking id: Takwimu
 HURUMAP['ga_tracking_id'] = 'UA-115543098-1'
 
 # Additional tracking ids
@@ -87,7 +94,7 @@ HURUMAP['ga_tracking_ids'] = [
     'UA-44795600-8',  # HURUmap
 ]
 
-# Making sure they are the same
+# Making sure these are the same
 WAZIMAP = HURUMAP
 
 
@@ -106,17 +113,15 @@ DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
 LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 ZENDESK_API = 'https://takwimu.zendesk.com/api/v2/requests.json'
 
 ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 
-# -------------------------------------------------------------------------------------
-# WAGTAIL Search
-# -------------------------------------------------------------------------------------
 
+# -------------------------------------------------------------------------------------
+# WAGTAIL Search / Elastic
+# -------------------------------------------------------------------------------------
 
 TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu-dev')
 TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '30'))
@@ -155,5 +160,26 @@ else:
             'URLS': [TAKWIMU_ES_URL],
             'OPTIONS': {},
             'INDEX_SETTINGS': {},
+        }
+    }
+
+
+# -------------------------------------------------------------------------------------
+# CACHE
+# -------------------------------------------------------------------------------------
+
+TAKWIMU_CACHE = os.environ.get('TAKWIMU_CACHE', '')
+
+if TAKWIMU_CACHE:
+    TAKWIMU_CACHE_URL = os.environ.get('TAKWIMU_CACHE_URL', '127.0.0.1:6379')
+    TAKWIMU_CACHE_KEY_PREFIX = os.environ.get('TAKWIMU_CACHE_KEY', 'takwimu')
+    CACHES = {
+        'default': {
+            'BACKEND': 'django_redis.cache.RedisCache',
+            'LOCATION': TAKWIMU_CACHE_URL,
+            'OPTIONS': {
+                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
+            },
+            "KEY_PREFIX": TAKWIMU_CACHE_KEY_PREFIX,
         }
     }

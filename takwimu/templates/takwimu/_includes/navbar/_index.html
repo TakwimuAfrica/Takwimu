@@ -1,6 +1,7 @@
-{% load staticfiles %}
+{% load staticfiles cache %}
 {% load datastructuretags %}
 
+{% cache 600 navbar %}
 <!-- Primary Navbar -->
 <nav class="main-nav navbar navbar-expand-lg navbar-dark py-0 sticky-top bg-primary shadow" style="min-height:72px;">
   <div class="container">
@@ -136,3 +137,4 @@
       font-weight: 300;
   }
 </style>
+{% endcache %}
