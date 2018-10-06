@@ -9,6 +9,8 @@ services:
       - POSTGRES_USER=takwimu
       - POSTGRES_PASSWORD=takwimu
       - POSTGRES_DB=takwimu
+      - PGUSER=takwimu
+      - PGPASSWORD=takwimu
   es:
     image: elasticsearch:5.6.10
     ports:
@@ -42,7 +44,7 @@ services:
       - TAKWIMU_ES_INDEX=takwimu
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
-      - TAKWIMU_CACHE="True"
+      - TAKWIMU_CACHE=${TAKWIMU_CACHE}
       - TAKWIMU_CACHE_URL=reddis://redis:6379
       - TAKWIMU_CACHE_KEY_PREFIX="takwimu"
       - PYTHONDONTWRITEBYTECODE="True"

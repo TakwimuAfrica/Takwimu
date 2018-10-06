@@ -255,7 +255,9 @@ a {
   }
 }
 
-// Navbar goodness
+/* -----------------------------------------
+ * Main Navbar
+ * ----------------------------------------- */
 
 .navbar.fixed-top {
   // Fix position problem of the "containing block" of lg dropdown
@@ -330,31 +332,50 @@ a {
 
 }
 
-/*
-* Profile Content
-* ---------------
-*/
-.profile-content {
-  .is-active {
-    background-color: $brand-extend-jumbotron;
-    + div.border-top {
-      border-top: 0!important;
-    }
-    /* Quick way to remove underline on mouse hover for the current selected item */
-    h1.section-title:hover {
-      text-decoration: none;
-    }
+/* -----------------------------------------------
+ * PAGE: Profile Page
+ * ----------------------------------------------- */
+
+// Profile Page > Topic Detail
+
+.profiletopic {
+  &:nth-of-type(odd) {
+    background: #f9f9f9;
   }
-  
-  /* Ideally only the section title would underline on mouse hover */
-  h1.section-title:hover, h1.section-title:focus {
-    text-decoration: underline;
+  &:nth-of-type(even) {
+    background: #f4f4f4;
+  }
+
+  .profiletopic-content {
+    .btn.read-more{
+      &::after {
+        content: "Show More \00bb";
+      }
+      &.active::after {
+        content: "Show Less \00ab";
+      }
+    }
+    
+    .tab-content .tab-content {
+      background: #ffffff;
+    }
+    > h1 {
+      font-size: 55px;
+    }
+    h5 {
+      font-size: 25px;
+    }
+    .btn-group .btn {
+      border-radius: 2px;
+      color: #1a1a1a;
+      background: #ffffff;
+      border-color: #f4f4f4;
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+    }
   }
 }
 
-/*
-* Topic Detail
-*/
+// Profile Page > Topic > Data Indicators
 
 .dataindicators-nav {
   .nav-pills {
@@ -380,48 +401,51 @@ a {
   }
 }
 
-.data-topic-container {
-  &:nth-of-type(odd) {
-    background: #f9f9f9;
+.dataindicators-content {
+  .nav-tabs {
+    .nav-item {
+      .nav-link {
+        font-size: 14px;
+        border-radius: 0;
+        &.active {
+          font-weight: bold;
+        }
+      }
+    }
   }
-  &:nth-of-type(even) {
-    background: #f4f4f4;
+ }
+
+.dataindicators-pagination {
+  .nav-link.active {
+    color: #bcc7d4;
   }
 }
 
-.topic {
-  .btn.read-more{
-    &::after {
-      content: "Show More \00bb";
+// Profile Page > Sections List
+
+.profile.page .profilesections-list .sections-list {
+  .is-active {
+    background-color: $brand-extend-jumbotron;
+    + div.border-top {
+      border-top: 0!important;
     }
-    &.active::after {
-      content: "Show Less \00ab";
+    /* Quick way to remove underline on mouse hover for the current selected item */
+    h1.section-title:hover {
+      text-decoration: none;
     }
   }
   
-  .tab-content .tab-content {
-    background: #ffffff;
-  }
-  > h1 {
-    font-size: 55px;
-  }
-  h5 {
-    font-size: 25px;
-  }
-  .btn-group .btn {
-    border-radius: 2px;
-    color: #1a1a1a;
-    background: #ffffff;
-    border-color: #f4f4f4;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+  /* Ideally only the section title would underline on mouse hover */
+  h1.section-title:hover, h1.section-title:focus {
+    text-decoration: underline;
   }
 }
 
 
-/*
-* Country Flags
-* -------------
-*/
+
+/* --------------------------------------------
+ * SECTION: Country Flags Navigation
+ * -------------------------------------------- */
 
 .country-flag-links {
   .col {
