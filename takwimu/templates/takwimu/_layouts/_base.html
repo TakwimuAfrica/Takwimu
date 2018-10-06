@@ -57,6 +57,7 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/svg.js' %}"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js"></script>
   <script defer data-search-pseudo-elements  src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
 
   <!-- Start of takwimu Zendesk Widget script -->
@@ -74,11 +75,11 @@
   </script>
   <script src="https://www.google-analytics.com/analytics.js" async defer></script>
 
-  <!-- Bootstrap: Enable Tooltips, Popovers -->
-  <script>
+  <!-- Enable Plugins -->
+  <script type="text/javascript">
+    // Bootstrap: Enable Tooltips, Popovers
     $(function () {
       $('[data-toggle="tooltip"]').tooltip();
-
       $('[data-toggle="popover"]').popover({
           container: 'body',
           html: true
@@ -87,8 +88,14 @@
           $popup.find('button.close').click(function (e) {
               $popup.popover('hide');
           });
-      });      
-    });   
+      });
+      
+      // Anchors: Enable Anchors
+      anchors.options = {
+        icon: '#'
+      };
+      anchors.add(".anchored");
+    });
   </script>
 
   {% block body_javascript_extra %}{% endblock %}

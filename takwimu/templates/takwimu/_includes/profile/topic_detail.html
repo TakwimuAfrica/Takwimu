@@ -35,7 +35,7 @@
           {% endif %}
 
         </div>
-        <!-- Add your voic -->
+        <!-- COMMUNITY: Add your voice -->
         <!-- TODO: Integrate with Zendesk -->
         <div class="row pt-5 pb-5 text-dark">
           {% if page.content_type.model == "profilesectionpage" %}
@@ -53,8 +53,10 @@
       </div>  <!-- /.col-3 -->
 
       <!-- The Main Stage -->
+
       <div class="col-8 profiletopic-content topic-{{ topic.value.title|slugify }}">
-        <h1>{{ topic.value.title }}</h1>
+       
+        <h1 class="anchored" data-anchor-id="{{ topic.value.title|slugify }}">{{ topic.value.title }}</h1>
 
         <div class="text-dark">
 
