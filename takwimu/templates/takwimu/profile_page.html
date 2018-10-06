@@ -33,6 +33,11 @@
   {{ block.super }}
 
   <script type="text/javascript">
+
+    // Global Variables
+    // ----------------
+    var dataindicator_move = function () {}
+
     document.addEventListener('DOMContentLoaded', function () {
 
       // Data Indicators Navigation
@@ -64,6 +69,31 @@
 
         });
       });
+
+      // Prev + Next Pagination
+      dataindicator_move = function (topic_id, next=true) {
+        var btns_length = $('#' + topic_id + ' .dataindicators-nav .nav-link').length;
+        if (btns_length > 0) {
+
+          var btn_active_index = $('#' + topic_id + ' .dataindicators-nav .nav-link.active').index();
+          var btn_move_index = btn_active_index + 1;
+          
+          var btn_move_index_prev = btn_move_index - 2;
+          var btn_move_index_next = btn_move_index + 2;
+          
+          // Prev
+          if(!next && btn_move_index_prev > 0){
+            btn_move_index = btn_move_index_prev;
+          }
+
+          // Next
+          if (next && btn_move_index_next - 1 < btns_length * 2) {
+            btn_move_index = btn_move_index_next;
+          }
+
+          $('#' + topic_id + ' .dataindicators-nav .nav-link:nth-child(' + btn_move_index + ')').tab('show')
+        }
+      }
     });
   </script>
 
