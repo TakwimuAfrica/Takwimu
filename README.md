@@ -48,7 +48,7 @@ $ docker-compose build
 $ make web
 ```
 
-Optionally you can also enable cache in your development environment by doing the following:
+Optionally you can also enable Redis as cache backend in your development environment by doing the following:
 
 ```sh
 $ export TAKWIMU_CACHE=True
