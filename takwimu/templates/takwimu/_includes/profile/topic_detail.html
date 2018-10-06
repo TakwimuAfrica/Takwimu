@@ -1,6 +1,6 @@
 {% load staticfiles wagtailcore_tags %}
 
-<div class="container-fluid data-topic-container py-4" id="{{ topic.value.title|slugify }}">
+<div class="container-fluid profiletopic py-4" id="{{ topic.value.title|slugify }}">
   <div class="container py-5">
     <div class="row">
       <!-- Left navigation of all indicators-->
@@ -41,7 +41,7 @@
       </div>  <!-- /.col-3 -->
 
       <!-- The Main Stage -->
-      <div class="col-8 topic topic-{{ topic.value.title|slugify }}">
+      <div class="col-8 profiletopic-content topic-{{ topic.value.title|slugify }}">
         <h1>{{ topic.value.title }}</h1>
         <div class="text-dark">
           {{ topic.value.summary }}
@@ -51,11 +51,13 @@
           <button class="btn btn-link font-weight-bold px-0 read-more d-inline-block" type="button"
                   data-toggle="collapse" data-target="#collapse-{{ topic.value.title|slugify }}"
                   aria-expanded="false" aria-controls="collapse-{{ topic.value.title|slugify }}"
-                  style="" onclick="javascript:$(this).toggleClass('active')">
+                  onclick="javascript:$(this).toggleClass('active')">
           <!-- "Show More: inserted by CSS for easy toggle -->
           </button>
         </div>
-        <div class="indicators-container">
+
+        <!-- Indicators -->
+        <div class="dataindicators-content">
           {% for indicator in topic.value.indicators %}
             <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
                 id="{{ indicator.id }}-tab" role="tabpanel"
@@ -64,38 +66,40 @@
             </div>
           {% endfor %}
         </div>
-        <!-- Indicator pagination -->
-        <div class="container py-2 indicator-pagination">
-            <div class="row d-flex justify-content-center my-3">
-              <ol class="nav" role="tablist">
-                {% for indicator in topic.value.indicators %}
-                  <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
-                    id="{{ indicator.id }}-tab-btn"
-                    data-toggle="pill" href="#{{ indicator.id }}-tab"
-                    aria-controls="{{ indicator.id }}-tab"
-                    {% if forloop.first %} aria-selected="true" {% endif %} role="tab" aria-selected="false">
-                      <i class="fas fa-circle p-1"></i>
-                  </a>
-                {% endfor %}
-              </ol>
-            </div>
-            <div class="row d-flex justify-content-around align-items-center my-3 nav" role="tablist">
-                <a href="#" class="btn btn-primary border-0 nav-link prev-indicator col-4" data-toggle="pill" role="tab">
-                  <span class="fas fa-angle-double-left position-absolute my-auto" 
-                    style="left: 5%; top:0; bottom: 0; font-size: 10px;"></span>
-                  <span class="prev font-weight-bold text-uppercase text-truncate d-block px-1" data-toggle="tooltip"
-                    data-placement="bottom" style="font-size:14px; overflow: hidden;text-overflow: ellipsis;">Previous</span>
+
+        <!-- Indicators Pagination -->
+        <div class="dataindicators-pagination py-2">
+          <div class="row d-flex justify-content-center my-3">
+            <ol class="nav" role="tablist">
+              {% for indicator in topic.value.indicators %}
+                <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
+                  id="{{ indicator.id }}-tab-indicator" href="#{{ indicator.id }}-tab"
+                  data-toggle="pill" role="tab" 
+                  aria-controls="{{ indicator.id }}-tab" 
+                  aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" >
+                    <i class="fas fa-circle p-1"></i>
                 </a>
-                <span style="height: 47px; opacity: 0.3; border: solid 1px #979797;"></span>
-                <a href="#" class="btn btn-primary border-0 nav-link next-indicator col-4" data-toggle="pill" role="tab">
-                  <span class="next font-weight-bold text-uppercase text-truncate d-block px-1" data-toggle="tooltip"
-                    data-placement="bottom" style="font-size: 14px; overflow: hidden;text-overflow: ellipsis;">Next</span>
-                  <span class="fas fa-angle-double-right position-absolute my-auto" 
-                    style="right: 5%; top: 0; bottom: 0; font-size: 10px;"></span>
-                </a>
-            </div>
-        </div>
-      </div>
-    </div>
+              {% endfor %}
+            </ol>
+          </div>
+          <div class="row d-flex justify-content-around align-items-center my-3 nav" role="tablist">
+            <a href="#" class="btn btn-primary border-0 nav-link prev-indicator col-4" data-toggle="pill" role="tab">
+              <span class="fas fa-angle-double-left position-absolute my-auto" 
+                style="left: 5%; top:0; bottom: 0; font-size: 10px;"></span>
+              <span class="prev font-weight-bold text-uppercase text-truncate d-block px-1" data-toggle="tooltip"
+                data-placement="bottom" style="font-size:14px; overflow: hidden;text-overflow: ellipsis;">Previous</span>
+            </a>
+            <span style="height: 47px; opacity: 0.3; border: solid 1px #979797;"></span>
+            <a href="#" class="btn btn-primary border-0 nav-link next-indicator col-4" data-toggle="pill" role="tab">
+              <span class="next font-weight-bold text-uppercase text-truncate d-block px-1" data-toggle="tooltip"
+                data-placement="bottom" style="font-size: 14px; overflow: hidden;text-overflow: ellipsis;">Next</span>
+              <span class="fas fa-angle-double-right position-absolute my-auto" 
+                style="right: 5%; top: 0; bottom: 0; font-size: 10px;"></span>
+            </a>
+          </div>
+        </div> <!-- /.indicators-pagination -->
+
+      </div> <!-- /.col-8 -->
+    </div> <!-- /.row -->
   </div>
-</div><!-- container fluid -->
+</div><!-- /.container-fluid -->
