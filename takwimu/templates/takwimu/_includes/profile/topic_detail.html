@@ -1,14 +1,15 @@
-{% load staticfiles wagtailcore_tags %}
+{% load static wagtailcore_tags datastructuretags %}
 
-<div class="container-fluid data-topic-container py-4" id="{{ topic.value.title|slugify }}">
+<div class="container-fluid profiletopic py-4" id="{{ topic.value.title|slugify }}">
   <div class="container py-5">
     <div class="row">
-      <!-- Left navigation of all indicators-->
+      <!-- Data Indicators Nav-->
       <div class="col-4 dataindicators-nav sticky-top d-table" style="top: 100px;">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
+          
+          <!-- Nav Pills -->
           {% for indicator in topic.value.indicators %}
-            
             <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
                id="{{ indicator.id }}-tab-btn"
                data-toggle="pill" href="#{{ indicator.id }}-tab"
@@ -23,7 +24,18 @@
               <hr class="mx-3 my-0" style="opacity: 0.37; border-color: rgba(151, 151, 151, 0.58);"/>
             {% endif %}
           {% endfor %}
+
+          <!-- When no data indicators -->
+          {% if topic.value.indicators|length_is:"0" %}
+            <a class="nav-link pl-5 py-3 text-light"
+                data-toggle="collapse" href="#{{ topic.value.title|slugify }}-collapse-missing" role="button" aria-expanded="false" aria-controls="{{ topic.value.title|slugify }}-collapse-missing">
+              <p class="m-0 font-weight-bold">No Data Indicators Found</p>
+              <p class="m-0">We're working on providing more data indicators soon.</p>
+            </a>
+          {% endif %}
+
         </div>
+        <!-- COMMUNITY: Add your voice -->
         <!-- TODO: Integrate with Zendesk -->
         <div class="row pt-5 pb-5 text-dark">
           {% if page.content_type.model == "profilesectionpage" %}
@@ -41,21 +53,32 @@
       </div>  <!-- /.col-3 -->
 
       <!-- The Main Stage -->
-      <div class="col-8 topic topic-{{ topic.value.title|slugify }}">
+
+      <div class="col-8 profiletopic-content topic-{{ topic.value.title|slugify }}">
+       
         <h1 class="anchored" data-anchor-id="{{ topic.value.title|slugify }}">{{ topic.value.title }}</h1>
+
         <div class="text-dark">
+
           {{ topic.value.summary }}
+
           <div class="collapse mt-2" id="collapse-{{ topic.value.title|slugify }}">
           {% include_block topic.value.body %}
           </div>
-          <button class="btn btn-link font-weight-bold px-0 read-more d-inline-block" type="button"
-                  data-toggle="collapse" data-target="#collapse-{{ topic.value.title|slugify }}"
-                  aria-expanded="false" aria-controls="collapse-{{ topic.value.title|slugify }}"
-                  style="" onclick="javascript:$(this).toggleClass('active')">
-          <!-- "Show More: inserted by CSS for easy toggle -->
-          </button>
+
+          <!-- Show more button -->
+          {% if topic.value.body %}
+            <button class="btn btn-link font-weight-bold p-0 ml-2 read-more d-inline-block" type="button"
+                    data-toggle="collapse" data-target="#collapse-{{ topic.value.title|slugify }}"
+                    aria-expanded="false" aria-controls="collapse-{{ topic.value.title|slugify }}"
+                    onclick="javascript:$(this).toggleClass('active')">
+            <!-- "Show More: inserted by CSS for easy toggle -->
+            </button>
+          {% endif %}
         </div>
-        <div class="indicators-container">
+
+        <!-- Indicators -->
+        <div class="dataindicators-content">
           {% for indicator in topic.value.indicators %}
             <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
                 id="{{ indicator.id }}-tab" role="tabpanel"
@@ -65,7 +88,69 @@
           {% endfor %}
         </div>
 
-      </div>
-    </div>
+        <!-- When no indicators -->
+        {% if topic.value.indicators|length_is:"0" %}
+          <hr/>
+          <div class="alert alert-info" role="alert">
+            <p class="alert-heading font-weight-bold mb-0">
+              <a data-toggle="collapse" href="#{{ topic.value.title|slugify }}-collapse-missing" role="button" aria-expanded="false" aria-controls="{{ topic.value.title|slugify }}-collapse-missing">
+                  <i class="fas fa-database fa-fw"></i> No data indicators found...
+              </a>
+            </p>
+            <div class="collapse" id="{{ topic.value.title|slugify }}-collapse-missing">
+              <p class="mt-2">We're working to provide more data indicators for the <i>{{ topic.value.title }}</i> topic. If you have suggestions, or would like us to support you on this topic, <a href="/contact-us">get in touch</a> or check out <a href="/about/support-services">our support services</a>.</p>
+              <hr>
+              <p class="mb-0">To be notified when new data is published on Takwimu, subscribe to
+                <a href="{% url 'rss_feed' %}">our RSS feed</a> or
+                <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">
+                  our mailing list</a>. Also follow us on: 
+                  {% to_list 'facebook' 'twitter' 'medium' as social_medias %}
+                  {% for social_media in social_medias %}
+                    {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
+                      {% if not forloop.first %}.{% endif %}
+                      <a href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener"><span class="text-capitalize">{{ social_media }}</span></a>
+                    {% endif %}
+                  {% endfor %}.
+              </p>
+            </div>
+          </div>
+        {% else %}
+          <!-- Indicators Pagination -->
+          <div class="dataindicators-pagination py-2">
+            <div class="row d-flex justify-content-center my-3">
+              <ol class="nav" role="tablist">
+                {% for indicator in topic.value.indicators %}
+                  <a class="nav-link p-1 d-flex align-items-center {% if forloop.first %} active show {% endif %}" 
+                    id="{{ indicator.id }}-tab-indicator" href="#{{ indicator.id }}-tab"
+                    data-toggle="pill" role="tab" 
+                    aria-controls="{{ indicator.id }}-tab" 
+                    aria-selected="{% if forloop.first %}true{% else %}false{% endif %}" >
+                      <i class="fas fa-circle p-1"></i>
+                  </a>
+                {% endfor %}
+              </ol>
+            </div>
+            <div class="row d-flex justify-content-around align-items-center my-3 nav">
+              <button class="btn btn-primary border-0 nav-link prev-indicator col-4"
+                  onclick="javascript:dataindicator_move('{{ topic.value.title|slugify }}', false);">
+                <span class="fas fa-angle-double-left position-absolute my-auto" 
+                  style="left: 5%; top:0; bottom: 0; font-size: 10px;"></span>
+                <span class="prev font-weight-bold text-uppercase text-truncate d-block px-1"
+                  style="font-size:14px; overflow: hidden;text-overflow: ellipsis;">Prev</span>
+              </button>
+              <span style="height: 47px; opacity: 0.3; border: solid 1px #979797;"></span>
+              <button class="btn btn-primary border-0 nav-link next-indicator col-4"
+                  onclick="javascript:dataindicator_move('{{ topic.value.title|slugify }}', true);">
+                <span class="next font-weight-bold text-uppercase text-truncate d-block px-1"
+                  style="font-size: 14px; overflow: hidden;text-overflow: ellipsis;">Next</span>
+                <span class="fas fa-angle-double-right position-absolute my-auto" 
+                  style="right: 5%; top: 0; bottom: 0; font-size: 10px;"></span>
+            </button>
+            </div>
+          </div> <!-- /.indicators-pagination -->
+        {% endif %}
+
+      </div> <!-- /.col-8 -->
+    </div> <!-- /.row -->
   </div>
-</div><!-- container fluid -->
+</div><!-- /.container-fluid -->
