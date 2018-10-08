@@ -27,9 +27,9 @@
 
       <div class="d-flex justify-content-between align-items-center">
         {% if page.content_type.model == "profilesectionpage" %}
-          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent class_extra='text-light' %}
+          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent class_extra='text-light' dropdownMenuButton_id="hero" %}
         {% else %}
-          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page class_extra='text-light' %}
+          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page class_extra='text-light' dropdownMenuButton_id="hero" %}
         {% endif %}
 
         <!-- TOC Button -->
@@ -87,9 +87,9 @@
 
 </header>
 
-<!-- Table of Contents Sidebar -->
+<!-- Table of Contents -->
 <div id="toc" class="d-none p-4 border-left"
-  style="max-width: 400px; width: 100%; height: 100vh; position: fixed; top: 0; right: 0; overflow-y: scroll; background-color: #fff; z-index: 2000;">
+  style="max-width: 400px; width: 100%; height: 100vh; position: fixed; top: 0; right: 0; overflow-y: scroll; background-color: #fff; z-index: 99999;">
 
   <p class="text-right mb-3">
     <button
@@ -102,9 +102,9 @@
   </p>
 
   {% if page.content_type.model == "profilesectionpage" %}
-    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent %}
+    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent dropdownMenuButton_id="toc" %}
   {% else %}
-    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page %}
+    {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page dropdownMenuButton_id="toc" %}
   {% endif %}
 
   <hr class="my-4"/>
@@ -129,7 +129,6 @@
     {% endfor %}
   {% endif %}
 
-
 </div>
 
 <style>
@@ -141,7 +140,7 @@
   letter-spacing: 0;
   font-size: 14px;
 }
-.breadcrumb-item+.breadcrumb-item::before {
+  .breadcrumb-item+.breadcrumb-item::before {
     display: inline-block;
     padding-right: .1rem;
     color: #fff;
@@ -150,14 +149,14 @@
 </style>
 
 
-<!-- TOC - Toggle opening and closing accordion. -->
+<!-- TOC: Toggle opening and closing accordion. -->
 <script>
-    document.addEventListener('DOMContentLoaded', function () {
-        $('button[data-toggle="collapse"]').on('click', function () {
-            $(this)
-                .find('.icon')
-                .toggleClass('icon-minus')
-                .toggleClass('icon-plus');
-        });
+  document.addEventListener('DOMContentLoaded', function () {
+    $('button[data-toggle="collapse"]').on('click', function () {
+      $(this)
+          .find('.icon')
+          .toggleClass('icon-minus')
+          .toggleClass('icon-plus');
     });
+  });
 </script>
