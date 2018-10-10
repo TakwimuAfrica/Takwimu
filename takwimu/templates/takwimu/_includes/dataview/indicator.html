@@ -52,23 +52,21 @@
     var indicator_id = "{{ indicator.id }}";
     var download_btn_id = '#' + indicator_id + "-download-btn";
 
-    var indicator_container_id = '#' + indicator_id + "-tab"
+    var indicator_container_id = '#' + indicator_id + "-tab";
 
     $(download_btn_id).click(function () {
-      console.log($(this))
       var targetPaneId = $(this).attr('data-target-pane');
       $('.tab-content').each(function () {
-        if ($(this).attr('data-tab-content-indicator-id') == targetPaneId) {
+        if ($(this).attr('data-tab-content-indicator-id') === targetPaneId) {
           //console.log('Found it');
           var targetElem = $(this).children('.tab-pane.fade.active.show');
           console.log(targetElem.attr('id'));
-          html2canvas(document.querySelector("#" + targetElem.attr('id')), {
-            onrendered: function (canvas) {
-              console.log("Saving...")
-              downloadURI(canvas.toDataURL(), targetElem.attr('id') + '.png');
-            }
-          });
-          domtoimage.toJpeg(document.getElementById("#" + targetElem.attr('id')), { quality: 0.95 })
+          var baseElement = document.getElementById(targetElem.attr('id'));
+          var iframe = baseElement.querySelector("iframe");
+          var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
+          var iframeBody = innerDoc.getElementsByTagName('body');
+          console.log(iframeBody);
+          domtoimage.toPng(iframeBody)
             .then(function (dataUrl) {
               var link = document.createElement('a');
               link.download = targetElem.attr('id') + '.jpeg';
