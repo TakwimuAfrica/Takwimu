@@ -221,6 +221,16 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 421	level1	ET_1_009	SNNPR	105476	country	ET	SNNPR	2009
 422	level1	ET_1_010	Somali	279252	country	ET	Somali	2009
 423	level1	ET_1_011	Tigray	84722	country	ET	Tigray	2009
+424	country	ZA	South Africa	1221037	continent	AFR	South Africa	2009
+425	level1	ZA_1_001	KwaZulu-Natal	94361	country	ZA	KwaZulu-Natal	2009
+426	level1	ZA_1_002	Free State	129825	country	ZA	KwaZulu-Natal	2009
+427	level1	ZA_1_003	Eastern Cape	168966	country	ZA	KwaZulu-Natal	2009
+428	level1	ZA_1_004	Mpumalanga	76495	country	ZA	KwaZulu-Natal	2009
+429	level1	ZA_1_005	Limpopo	125754	country	ZA	KwaZulu-Natal	2009
+430	level1	ZA_1_006	Northern Cape	372889	country	ZA	KwaZulu-Natal	2009
+431	level1	ZA_1_007	North West	104882	country	ZA	KwaZulu-Natal	2009
+432	level1	ZA_1_008	Western Cape	129462	country	ZA	KwaZulu-Natal	2009
+433	level1	ZA_1_009	Gauteng	18178	country	ZA	KwaZulu-Natal	2009
 \.
 
 
