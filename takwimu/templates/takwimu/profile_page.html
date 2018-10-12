@@ -2,6 +2,7 @@
 
 {% block body_class %}{{ block.super }} profile{% endblock %}
 
+
 {% block content %}
 
   {% include 'takwimu/_includes/profile/hero.html' %}
@@ -10,8 +11,6 @@
   {% for topic in page.body %}
       {% include 'takwimu/_includes/profile/topic_detail.html' %}
   {% endfor %}
-
-  <!-- <hr/> -->
 
   {% include 'takwimu/_includes/profile/sections_list.html' %}
 
@@ -24,8 +23,8 @@
 
   {% include 'takwimu/_includes/sections/updates.html' %}
 
-  
 {% endblock %}
+
 
 {# Extra Javascript #}
 {% block body_javascript_extra %}
