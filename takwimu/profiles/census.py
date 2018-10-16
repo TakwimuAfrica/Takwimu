@@ -127,6 +127,21 @@ METADATA = {
                 },
             }
         }
+    },
+    'south africa': {
+        'country': {
+            'qualifier': '\n'.join([
+                    'AGI: Adolescent Girls Initiative',
+                    'DIFPARK: Delivering Increased Family Planning Across Rural Kenya',
+                    'KMAP: Kenya Market Assistance Programme',
+                    'RMNDK: Reducing Maternal and Newborn Deaths in Kenya',
+                    'KCSAP: Kenya Climate Smart Agriculture Project',
+                    'NARIGP: National Agricultural and Rural Inclusive Growth Project',
+                    'PRIEDE: Primary Education Development Project',
+                    'SEQUIP: Kenya Secondary Education Quality Improvement Project',
+                    'THSUCP: Transforming Health Systems for Universal Care Project',
+                ]),
+        }
     }
 }
 
@@ -149,6 +164,7 @@ def get_profile(geo, profile_name, request):
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
+        data['crime'] = get_crime_data(geo, session, country, level)
 
         return data
     finally:
@@ -593,6 +609,17 @@ def get_budget_data(geo, session, country, level):
         'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
     }
 
+def get_crime_data(geo, session, country, level):
+    crime_dist = LOCATIONNOTFOUND
+    try:
+        crime_dist, _ = get_stat_data(['crime'], geo, session)
+    except LocationNotFound:
+        pass
+
+    return {
+        'is_missing': crime_dist.get('is_missing'),
+        'crime_dist': _add_metadata_to_dist(crime_dist, 'crime_dist', country, level),
+    }
 
 
 
