@@ -9,6 +9,7 @@
 
 $brand-color-primary: #1f6cc6;
 $brand-color-primary-alt: #074c9c;
+$brand-color-primary-light: #7ab1f2;
 $brand-color-secondary: #1e4a7e;
 $brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
@@ -18,11 +19,7 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
-body {
-  padding-top: 72px;
-}
-
- html, body, h1, h2, h3, h4, h5, h6, p, * {
+html, body, h1, h2, h3, h4, h5, h6, p, * {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
@@ -61,6 +58,11 @@ a {
   }
 }
 
+// Extra Bold
+.font-weight-extra-bold {
+  font-weight: 900 !important;
+}
+
 // Background colours
 .bg-primary {
   background-color: $brand-color-primary !important;
@@ -80,6 +82,9 @@ a {
 }
 .text-primary-alt {
   color: $brand-color-primary-alt !important;
+}
+.text-primary-light {
+  color: $brand-color-primary-light !important;
 }
 .text-secondary {
   color: $brand-color-secondary !important;
@@ -255,9 +260,12 @@ a {
   }
 }
 
-// Navbar goodness
 
-.navbar.fixed-top {
+/* -----------------------------------------
+ * Main Navbar
+ * ----------------------------------------- */
+
+.main-nav.navbar {
   // Fix position problem of the "containing block" of lg dropdown
   .nav-item.dropdown {
     position: initial;
@@ -285,6 +293,7 @@ a {
     }
   }
 
+  // Up arrow below nav link
   .dropdowm-menu-lg-tag {
     display: none !important;
     position: relative;
@@ -295,6 +304,8 @@ a {
       border-right: 10px solid transparent;
     }
   }
+
+  // Dropdown menu
   .dropdown-menu-lg {
     display: none;
     position: absolute; left: 0;
@@ -312,9 +323,25 @@ a {
           svg {
             border: 3px solid #fff;
             border-radius: 9999px;
+            
           }
+
           &:hover{
             color: #fff;
+          }
+
+          @media (max-width: 575.98px) {
+            span {
+              padding-top: 0;
+            }
+            svg {
+              width: 15px;
+              height: 15px;
+              float: left;
+              margin-right: 5px;
+              border: 2px solid #fff;
+              vertical-align: top;
+            }
           }
         }
       }
@@ -324,31 +351,50 @@ a {
 
 }
 
-/*
-* Profile Content
-* ---------------
-*/
-.profile-content {
-  .is-active {
-    background-color: $brand-extend-jumbotron;
-    + div.border-top {
-      border-top: 0!important;
-    }
-    /* Quick way to remove underline on mouse hover for the current selected item */
-    h1.section-title:hover {
-      text-decoration: none;
-    }
+/* -----------------------------------------------
+ * PAGE: Profile Page
+ * ----------------------------------------------- */
+
+// Profile Page > Topic Detail
+
+.profiletopic {
+  &:nth-of-type(odd) {
+    background: #f9f9f9;
   }
-  
-  /* Ideally only the section title would underline on mouse hover */
-  h1.section-title:hover, h1.section-title:focus {
-    text-decoration: underline;
+  &:nth-of-type(even) {
+    background: #f4f4f4;
+  }
+
+  .profiletopic-content {
+    .btn.read-more{
+      &::after {
+        content: "Show More \00bb";
+      }
+      &.active::after {
+        content: "Show Less \00ab";
+      }
+    }
+    
+    .tab-content .tab-content {
+      background: #ffffff;
+    }
+    > h1 {
+      font-size: 55px;
+    }
+    h5 {
+      font-size: 25px;
+    }
+    .btn-group .btn {
+      border-radius: 2px;
+      color: #1a1a1a;
+      background: #ffffff;
+      border-color: #f4f4f4;
+      box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
+    }
   }
 }
 
-/*
-* Topic Detail
-*/
+// Profile Page > Topic > Data Indicators
 
 .dataindicators-nav {
   .nav-pills {
@@ -374,45 +420,7 @@ a {
   }
 }
 
-.data-topic-container {
-  &:nth-of-type(odd) {
-    background: #f9f9f9;
-  }
-  &:nth-of-type(even) {
-    background: #f4f4f4;
-  }
-}
-
-.topic {
-  .btn.read-more{
-    &::after {
-      content: "Show More \00bb";
-    }
-    &.active::after {
-      content: "Show Less \00ab";
-    }
-  }
-  
-  .tab-content .tab-content {
-    background: #ffffff;
-  }
-  > h1 {
-    font-size: 55px;
-  }
-  h5 {
-    font-size: 25px;
-  }
-  .btn-group .btn {
-    border-radius: 2px;
-    color: #1a1a1a;
-    background: #ffffff;
-    border-color: #f4f4f4;
-    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.16);
-  }
-}
-
- /* Consistency tab active state for topic details */
- .indicators-container {
+.dataindicators-content {
   .nav-tabs {
     .nav-item {
       .nav-link {
@@ -422,23 +430,46 @@ a {
           font-weight: bold;
         }
       }
-      &.show .nav-link {
-        font-weight: bold;
-      }
     }
   }
  }
 
+.dataindicators-pagination {
+  .nav-link.active {
+    color: #bcc7d4;
+  }
+}
 
-/*
-* Country Flags
-* -------------
-*/
+// Profile Page > Sections List
+
+.profile.page .profilesections-list .sections-list {
+  .is-active {
+    background-color: $brand-extend-jumbotron;
+    + div.border-top {
+      border-top: 0!important;
+    }
+    /* Quick way to remove underline on mouse hover for the current selected item */
+    h1.section-title:hover {
+      text-decoration: none;
+    }
+  }
+  
+  /* Ideally only the section title would underline on mouse hover */
+  h1.section-title:hover, h1.section-title:focus {
+    text-decoration: underline;
+  }
+}
+
+
+
+/* --------------------------------------------
+ * SECTION: Country Flags Navigation
+ * -------------------------------------------- */
 
 .country-flag-links {
   .col {
-    padding: 3em 1em;
-    border-right: 1px solid #ddd;
+    padding: 27px 20px;
+    border-color: #ddd;
     a {
       text-decoration: none;
       color: $brand-extend-black;
@@ -476,6 +507,7 @@ a {
       // Coming soon
       &[data-toggle="tooltip"] * {
         opacity: 0.5;
+        color: #7ab1f2;
       }
 
     }
@@ -566,21 +598,13 @@ a {
   white-space: normal;
 }
 
-/*
-* Extra small devices (portrait phones, less than 576px)
-* Small devices (landscape phones, 576px and down)
-*/
+
+// Extra small devices (portrait phones, less than 576px)
+// No media query for `xs` since this is the default in Bootstrap
 
 @media (max-width: 576px) {
   .nav-item {
     font-size: 0.75em;
-  }
-  .country-container {
-    div.col {
-      &:nth-child(even) {
-        border-right: 1px solid transparent;
-      }
-    }
   }
 }
 

@@ -1,5 +1,8 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
+{% block body_class %}{{ block.super }} profile{% endblock %}
+
+
 {% block content %}
 
   {% include 'takwimu/_includes/profile/hero.html' %}
@@ -8,8 +11,6 @@
   {% for topic in page.body %}
       {% include 'takwimu/_includes/profile/topic_detail.html' %}
   {% endfor %}
-
-  <!-- <hr/> -->
 
   {% include 'takwimu/_includes/profile/sections_list.html' %}
 
@@ -21,5 +22,78 @@
   {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
+
+{% endblock %}
+
+
+{# Extra Javascript #}
+{% block body_javascript_extra %}
+
+  {{ block.super }}
+
+  <script type="text/javascript">
+
+    // Global Variables
+    // ----------------
+    var dataindicator_move = function () {}
+
+    document.addEventListener('DOMContentLoaded', function () {
+
+      // Data Indicators Navigation
+      // --------------------------
+      // A little Javascript to sync tab navigation by pills on the side and at the bottom (pagination)
+
+      $(".profiletopic").each(function () {
+        
+        var topic_id = this.id,
+            dataindicators_btns = "#" + topic_id + " .dataindicators-nav .nav-link, " +
+                                  "#" + topic_id + " .dataindicators-pagination .nav-link";
+        
+        // On tab shown                        
+        $(dataindicators_btns).on('shown.bs.tab', function (e) {
+          // Get activated btn / tab
+          var active_btn = e.target;
+
+          // Set all the topic's data indicator tabs to inactive
+          $(dataindicators_btns).removeClass("active").removeClass("show").attr("aria-selected", false);
+          
+          // Get specific pill + "indicator"/pagination to make active
+          var active_btn_href = active_btn.getAttribute("href"),
+              active_btn_nav = "#" + topic_id + " .dataindicators-nav a[href='" + active_btn_href + "']",
+              active_btn_pagination = "#" + topic_id + " .dataindicators-pagination a[href='" + active_btn_href + "']";
+          
+          // Set them as active
+          $(active_btn_nav).addClass("active").addClass("show").attr("aria-selected", true);
+          $(active_btn_pagination).addClass("active").addClass("show").attr("aria-selected", true);
+
+        });
+      });
+
+      // Prev + Next Pagination
+      dataindicator_move = function (topic_id, next=true) {
+        var btns_length = $('#' + topic_id + ' .dataindicators-nav .nav-link').length;
+        if (btns_length > 0) {
+
+          var btn_active_index = $('#' + topic_id + ' .dataindicators-nav .nav-link.active').index();
+          var btn_move_index = btn_active_index + 1;
+          
+          var btn_move_index_prev = btn_move_index - 2;
+          var btn_move_index_next = btn_move_index + 2;
+          
+          // Prev
+          if(!next && btn_move_index_prev > 0){
+            btn_move_index = btn_move_index_prev;
+          }
+
+          // Next
+          if (next && btn_move_index_next - 1 < btns_length * 2) {
+            btn_move_index = btn_move_index_next;
+          }
+
+          $('#' + topic_id + ' .dataindicators-nav .nav-link:nth-child(' + btn_move_index + ')').tab('show')
+        }
+      }
+    });
+  </script>
 
 {% endblock %}

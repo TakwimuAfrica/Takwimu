@@ -1,5 +1,6 @@
 {% load staticfiles %}
-<section class="py-5">
+<section class="py-5 profilesections-list">
+  <!-- Country Selector -->
   <div class="container">
     {% if page.content_type.model == "profilesectionpage" %}
       {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent selector='False' %}
@@ -8,7 +9,9 @@
     {% endif %}
     <h1 class="text-center display-4 font-weight-bold my-4">Country profile contents</h1>
   </div>
-  <div class="container-fluid text-center profile-content">
+
+  <!-- Profile Sections List -->
+  <div class="container-fluid text-center sections-list">
     {% include 'takwimu/_includes/profile/sections_list_detail.html' %}
 
     {% for section in page.sections.all %}
