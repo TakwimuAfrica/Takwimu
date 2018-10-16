@@ -1,91 +1,60 @@
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags %}
 <div class="indicator">
-
   {% if indicator %}
-  <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
-    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-      <i class="fa fa-flag"></i>
-    </button>
-    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-      <i class="fa fa-exchange-alt"></i>
-    </button>
-    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-      <i class="fa fa-code"></i>
-    </button>
-<button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Download Visualization" id="{{ indicator.id }}-download-btn"
-  data-target-pane="{{ indicator.id }}">
-      <i class="fa fa-download"></i>
-    </button>
-    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-      <i class="fa fa-share-alt"></i>
-    </button>
-    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-      <i class="fa fa-heart"></i>
-    </button>
-    <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
-      <i class="fa fa-book-open"></i>
-    </button>
-  </div>
-  <ul class="nav nav-tabs justify-content-end pr-4" role="tablist">
-    {% for widget in indicator.value.widgets %}
-    <li class="nav-item">
-      <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-dv-chart-tab"
-        data-toggle="tab" href="#{{ indicator.id }}-{{ widget.id }}-tab" role="tab" aria-controls="{{ indicator.id }}-{{ widget.id }}-tab"
-        aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
-    </li>
-    {% endfor %}
-  </ul>
-
-  <div class="tab-content border border-top-0 p-3 pt-4 pb-2" data-tab-content-indicator-id="{{ indicator.id }}">
-
-    {% for widget in indicator.value.widgets %}
-    <div class="tab-pane fade {% if forloop.first %} active show {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-tab"
-      role="tabpanel" data-toggle="tabpanel" aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn"
-      data-widget-id="{{ widget.id }}">
-      {% include_block widget %}
+    <div class="btn-group ml-4 text-muted" role="group" style="margin-bottom: -100px;">
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-flag"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-exchange-alt"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-code"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-download"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-share-alt"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-heart"></i>
+      </button>
+      <button type="button" class="btn" data-toggle="tooltip" data-placement="top" title="Coming Soon">
+        <i class="fa fa-book-open"></i>
+      </button>
     </div>
-    {% endfor %}
-  </div>
+    <ul class="nav nav-tabs justify-content-end pr-4 text-capitalize" role="tablist">
+      {% for widget in indicator.value.widgets %}
+        <li class="nav-item">
+          <a class="nav-link mr-1 {% if forloop.first %} active {% endif %}" id="{{ indicator.id }}-{{ widget.id }}-dv-chart-tab" data-toggle="tab" href="#{{ indicator.id }}-{{ widget.id }}-tab" role="tab"
+             aria-controls="{{ indicator.id }}-{{ widget.id }}-tab" aria-selected="true">{% firstof widget.value.label widget.block_type|upper %}</a>
+        </li>
+      {% endfor %}
+    </ul>
 
-<script>
-  window.addEventListener('load', function () {
-    var indicator_id = "{{ indicator.id }}";
-    var download_btn_id = '#' + indicator_id + "-download-btn";
+    <div class="tab-content border border-top-0 bg-white p-2 pt-4 pb-2">
 
-    var indicator_container_id = '#' + indicator_id + "-tab";
-
-    $(download_btn_id).click(function () {
-      var targetPaneId = $(this).attr('data-target-pane');
-      $('.tab-content').each(function () {
-        if ($(this).attr('data-tab-content-indicator-id') === targetPaneId) {
-          //console.log('Found it');
-          var targetElem = $(this).children('.tab-pane.fade.active.show');
-          console.log(targetElem.attr('id'));
-          var baseElement = document.getElementById(targetElem.attr('id'));
-          var iframe = baseElement.querySelector("iframe");
-          var innerDoc = iframe.contentDocument || iframe.contentWindow.document;
-          var iframeBody = innerDoc.getElementsByTagName('body');
-          console.log(iframeBody);
-          domtoimage.toPng(iframeBody)
-            .then(function (dataUrl) {
-              var link = document.createElement('a');
-              link.download = targetElem.attr('id') + '.jpeg';
-              link.href = dataUrl;
-              link.click();
-            });
-        }
-      });
-    });
-
-  });
-</script>
+      {% for widget in indicator.value.widgets %}
+        {% image widget.value.download_file original as viz %}
+        <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
+             id="{{ indicator.id }}-{{ widget.id }}-tab" role="tabpanel"
+             aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn"
+             {% if widget.value.download_file %} data-toggle="tooltip"
+             data-placement="top"
+             title="Click the Visualization to download as an image"
+             onclick="downloadImage('testing')"{% endif %}>
+        <p>{{ viz.url }}</p>
+            {% include_block widget %}
+        </div>
+      {% endfor %}
+    </div>
 
   {% else %}
-  <div class="alert alert-info" role="alert">
-    <span class="fas fa-info"></span>
-    <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX"
-        target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
-  </div>
+    <div class="alert alert-info" role="alert">
+      <span class="fas fa-info"></span>
+      <span class="ml-2">We are working to source additional data for this topic. Please <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a> to receive an alert when the data is updated.</span>
+    </div>
   {% endif %}
 </div>
 
@@ -94,8 +63,14 @@
     opacity: 0;
     display: none;
   }
-
   .tab-content {
     background-color: #fff;
   }
 </style>
+
+<script>
+    function downloadImage(url) {
+        console.log("Clicked - ", url)
+    }
+</script>
+

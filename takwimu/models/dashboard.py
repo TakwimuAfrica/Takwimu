@@ -198,9 +198,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('raw_html', blocks.RawHTMLBlock(required=False)),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('download_link', blocks.CharBlock(
-                features=['link'], required=False)
-             ),
+            ('download_file', ImageChooserBlock(required=False)),
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
