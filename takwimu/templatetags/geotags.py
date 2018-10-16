@@ -8,6 +8,7 @@ CENSUS = {
     'nigeria': '2006',
     'senegal': '2013',
     'ethiopia': '2007',
+    'south africa': '2011',
 }
 
 LEVEL1_NAMES = {
@@ -16,13 +17,13 @@ LEVEL1_NAMES = {
     'nigeria': 'State',
     'senegal': 'Region',
     'ethiopia': 'Region',
+    'south africa': 'Province'
 }
 
 
 @register.filter
 def census_year(country):
     return CENSUS.get(country.lower(), 'Unknown')
-
 
 @register.filter
 def geo_level(geo):

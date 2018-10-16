@@ -321,6 +321,30 @@ level1	ZA_1_005	2009	Male	2738547
 level1	ZA_1_005	2009	Female	3060543
 country	ZA	2009	Male	27247226
 country	ZA	2009	Female	28406428
+country	ET	2009	male	37296657
+level1	ET_1_011	2009	male	2124853
+level1	ET_1_002	2009	male	786338
+level1	ET_1_003	2009	male	8636875
+level1	ET_1_008	2009	male	13676159
+level1	ET_1_010	2009	male	2468784
+level1	ET_1_004	2009	male	340378
+level1	ET_1_009	2009	male	7482051
+level1	ET_1_006	2009	male	159679
+level1	ET_1_007	2009	male	92258
+level1	ET_1_001	2009	male	1304518
+level1	ET_1_005	2009	male	171930
+country	ET	2009	female	36621848
+level1	ET_1_011	2009	female	2189603
+level1	ET_1_002	2009	female	624754
+level1	ET_1_003	2009	female	8577181
+level1	ET_1_008	2009	female	13482312
+level1	ET_1_010	2009	female	1970363
+level1	ET_1_004	2009	female	330469
+level1	ET_1_009	2009	female	7560480
+level1	ET_1_006	2009	female	147237
+level1	ET_1_007	2009	female	91086
+level1	ET_1_001	2009	female	1433730
+level1	ET_1_005	2009	female	170897
 \.
 
 
