@@ -197,7 +197,10 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
             ('source', blocks.RichTextBlock(
-                features=['link'], required=False)),
+                features=['link'], required=False),
+             'download_link', blocks.RichTextBlock(
+                features=['link'], required=False)
+             ),
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
