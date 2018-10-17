@@ -48,3 +48,7 @@ FieldTable(['year', 'type'], id='seized_firearms')
 FieldTable(['programme', 'donor'], id='donor_funded_programmes')
 
 FieldTable(['year', 'sector'], id='government_funding')
+
+FieldTable(['crime'], universe='Crimes', dataset='Police Crime Statistics 2014', year='2014')
+
+FieldTable(['official employment status'], universe='Individuals 15 and older')

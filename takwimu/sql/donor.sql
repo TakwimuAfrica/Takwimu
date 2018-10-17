@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
+-- Dumped from database version 10.4
 -- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
@@ -35,11 +35,6 @@ CREATE TABLE public.donor (
 --
 -- Data for Name: donor; Type: TABLE DATA; Schema: public; Owner: -
 --
--- Legend:
--- International Development Association IDA
--- African Development Fund ADF
--- Global Fund GF
--- Bill & Melinda Gates Foundation	BMGF
 
 COPY public.donor (geo_level, geo_code, geo_version, donor, total) FROM stdin;
 country	KE	2009	Denmark	58

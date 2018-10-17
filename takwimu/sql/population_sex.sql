@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
+-- Dumped from database version 10.4
 -- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
@@ -301,18 +301,26 @@ level1	KE_1_027	2009	male	448994
 level1	KE_1_038	2009	male	262716
 level1	KE_1_008	2009	male	363766
 level1	KE_1_024	2009	male	254827
-country	ET	2009	female	36621848
-level1	ET_1_011	2009	female	2189603
-level1	ET_1_002	2009	female	624754
-level1	ET_1_003	2009	female	8577181
-level1	ET_1_008	2009	female	13482312
-level1	ET_1_010	2009	female	1970363
-level1	ET_1_004	2009	female	330469
-level1	ET_1_009	2009	female	7560480
-level1	ET_1_006	2009	female	147237
-level1	ET_1_007	2009	female	91086
-level1	ET_1_001	2009	female	1433730
-level1	ET_1_005	2009	female	170897
+level1	ZA_1_008	2009	Male	3096457
+level1	ZA_1_008	2009	Female	3183273
+level1	ZA_1_003	2009	Male	3327495
+level1	ZA_1_003	2009	Female	3669481
+level1	ZA_1_006	2009	Male	596421
+level1	ZA_1_006	2009	Female	597359
+level1	ZA_1_002	2009	Male	1379965
+level1	ZA_1_002	2009	Female	1454749
+level1	ZA_1_001	2009	Male	5306295
+level1	ZA_1_001	2009	Female	5758945
+level1	ZA_1_007	2009	Male	1909589
+level1	ZA_1_007	2009	Female	1838846
+level1	ZA_1_009	2009	Male	6753269
+level1	ZA_1_009	2009	Female	6646455
+level1	ZA_1_004	2009	Male	2139187
+level1	ZA_1_004	2009	Female	2196776
+level1	ZA_1_005	2009	Male	2738547
+level1	ZA_1_005	2009	Female	3060543
+country	ZA	2009	Male	27247226
+country	ZA	2009	Female	28406428
 country	ET	2009	male	37296657
 level1	ET_1_011	2009	male	2124853
 level1	ET_1_002	2009	male	786338
@@ -325,6 +333,18 @@ level1	ET_1_006	2009	male	159679
 level1	ET_1_007	2009	male	92258
 level1	ET_1_001	2009	male	1304518
 level1	ET_1_005	2009	male	171930
+country	ET	2009	female	36621848
+level1	ET_1_011	2009	female	2189603
+level1	ET_1_002	2009	female	624754
+level1	ET_1_003	2009	female	8577181
+level1	ET_1_008	2009	female	13482312
+level1	ET_1_010	2009	female	1970363
+level1	ET_1_004	2009	female	330469
+level1	ET_1_009	2009	female	7560480
+level1	ET_1_006	2009	female	147237
+level1	ET_1_007	2009	female	91086
+level1	ET_1_001	2009	female	1433730
+level1	ET_1_005	2009	female	170897
 \.
 
 

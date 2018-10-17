@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
+-- Dumped from database version 10.4
 -- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
@@ -36,16 +36,6 @@ CREATE TABLE public.donor_funded_programmes (
 --
 -- Data for Name: donor_funded_programmes; Type: TABLE DATA; Schema: public; Owner: -
 --
--- Legend:
--- Kenya Market Assistance Programme KMAP
--- Adolescent Girls Initiative AGI
--- Reducing Maternal and Newborn Deaths in Kenya RMNDK
--- Delivering Increased Family Planning Across Rural Kenya DIFPARK
--- Kenya Climate Smart Agriculture Project KCSAP
--- National Agricultural and Rural Inclusive Growth Project NARIGP
--- Kenya Secondary Education Quality Improvement Project SEQUIP
--- Primary Education Development Project PRIEDE
--- Transforming Health Systems for Universal Care Project THSUCP
 
 COPY public.donor_funded_programmes (geo_level, geo_code, geo_version, programme, donor, total) FROM stdin;
 country	KE	2009	KMAP	 DFID	69000000

@@ -592,3 +592,5 @@ def get_budget_data(geo, session, country, level):
         'is_missing': government_expenditure_dist.get('is_missing'),
         'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
     }
+
+

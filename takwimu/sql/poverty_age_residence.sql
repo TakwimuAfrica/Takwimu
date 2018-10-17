@@ -2,7 +2,7 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.0
+-- Dumped from database version 10.4
 -- Dumped by pg_dump version 10.4
 
 SET statement_timeout = 0;
@@ -36,11 +36,6 @@ CREATE TABLE public.poverty_age_residence (
 --
 -- Data for Name: poverty_age_residence; Type: TABLE DATA; Schema: public; Owner: -
 --
--- Legend:
--- N National
--- P Peri-Urban
--- R Rural
--- U Urban
 
 COPY public.poverty_age_residence (geo_level, geo_code, geo_version, age, residence, total) FROM stdin;
 country	KE	2009	15 - 19	R	26
