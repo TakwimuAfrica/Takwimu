@@ -40,12 +40,15 @@
         <div class="tab-pane fade {% if forloop.first %} active show {% endif %}"
              id="{{ indicator.id }}-{{ widget.id }}-tab" role="tabpanel"
              aria-labelledby="{{ indicator.id }}-{{ widget.id }}-tab-btn"
-             {% if widget.value.download_file %} data-toggle="tooltip"
+            {% if widget.value.download_file %} data-toggle="tooltip"
              data-placement="top"
              title="Click the Visualization to download as an image"
              onclick="downloadImage('testing')"{% endif %}>
-        <p>{{ viz.url }}</p>
+          <a
+              {% if widget.value.download_file %} href="{{ viz.url }}" target="_blank" {% else %} href="#" {% endif %}>
             {% include_block widget %}
+          </a>
+
         </div>
       {% endfor %}
     </div>
@@ -63,6 +66,7 @@
     opacity: 0;
     display: none;
   }
+
   .tab-content {
     background-color: #fff;
   }
