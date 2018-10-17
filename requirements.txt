@@ -13,6 +13,9 @@ requests-aws4auth==0.9
 psycopg2-binary==2.7.5
 django-redis==4.9.0
 
+# Work around for incompatibility between requests & urllib3
+urllib3==1.23
+
 # Workaround for dependency links
 # Comment out when changes / updates / PR accepted
 git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
