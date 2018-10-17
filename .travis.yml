@@ -18,6 +18,7 @@ services:
 install:
 
   - pip install -r requirements.txt
+  - pip install requests==2.19.1
 
 before_script:
   - sudo rm -f /etc/boto.cfg
