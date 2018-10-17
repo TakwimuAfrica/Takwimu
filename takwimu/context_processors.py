@@ -39,7 +39,7 @@ def takwimu_countries(request):
             }, {
                 'name': 'South Africa',
                 'name_short': 'South Africa',
-                'published': False
+                'published': True
             },{
                 'name': 'Tanzania',
                 'name_short': 'Tanzania',
