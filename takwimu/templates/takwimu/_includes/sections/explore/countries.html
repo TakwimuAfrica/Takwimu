@@ -1,16 +1,16 @@
-{% load staticfiles %}
+{% load staticfiles geotags %}
 
 <div class="country-flag-links container text-center small {{ extra_css_class }}">
     <div class="row">
         {% for country in countries %}
             <div class="col">
                 {% if country.published %}
-                    <a href="/profiles/{{ country.name|slugify }}">
+                    <a href="/profiles/{{ country.name|underscore_slugify }}">
                 {% else %}
                     <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
                 {% endif %}
 
-                    {% with country_slug=country.name|slugify %}
+                    {% with country_slug=country.name|underscore_slugify %}
                     <img class="svg" src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}" alt="{{ country.name }}">
                     {% endwith %}
                     <span class="text-uppercase font-weight-extra-bold">{{ country.name_short }}</span>

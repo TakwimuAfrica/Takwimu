@@ -1,3 +1,6 @@
+import re
+import unicodedata
+
 from django import template
 
 register = template.Library()
@@ -25,6 +28,7 @@ LEVEL1_NAMES = {
 def census_year(country):
     return CENSUS.get(country.lower(), 'Unknown')
 
+
 @register.filter
 def geo_level(geo):
     current_geo = geo.get('this')
@@ -38,4 +42,8 @@ def geo_level(geo):
         return current_geo['geo_level'].title()
 
 
-
+@register.filter
+def underscore_slugify(value):
+    value = str(value)
+    value = re.sub(r'[^\w\s-]', '', value).strip().lower()
+    return re.sub(r'[-\s]+', '_', value)
