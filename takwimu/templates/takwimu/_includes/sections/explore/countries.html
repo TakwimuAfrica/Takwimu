@@ -5,12 +5,12 @@
         {% for country in countries %}
             <div class="col">
                 {% if country.published %}
-                    <a href="/profiles/{{ country.name|underscore_slugify }}">
+                    <a href="/profiles/{{ country.name|format_country_name }}">
                 {% else %}
                     <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
                 {% endif %}
 
-                    {% with country_slug=country.name|underscore_slugify %}
+                    {% with country_slug=country.name|format_country_name %}
                     <img class="svg" src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}" alt="{{ country.name }}">
                     {% endwith %}
                     <span class="text-uppercase font-weight-extra-bold">{{ country.name_short }}</span>

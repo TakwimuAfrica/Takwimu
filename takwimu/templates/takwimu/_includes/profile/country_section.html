@@ -21,7 +21,16 @@
           </select> -->
           <a class="btn btn-primary btn-sm text-uppercase font-weight-bold" href="/profiles/{{ country }}"
              style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px;">
-            Read Country Analysis For {{ country|upper }}
+            Read Country Analysis For
+            {% if country == 'southafrica' %}
+            South Africa
+          {% elif country == 'burkinafaso' %}
+            Burkina Faso
+          {% elif country == 'drc' %}
+            DR Congo
+          {% else %}
+            {{ country|upper }}
+          {% endif %}
           </a>
         </p>
       </div>

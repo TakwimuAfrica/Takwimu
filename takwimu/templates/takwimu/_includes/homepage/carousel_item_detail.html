@@ -1,8 +1,9 @@
 {% load staticfiles geotags %}
 <div class="carousel-item p-5 {% if forloop.first %}active{% endif %}">
+{% with country=country|format_country_name %}
   <div>
     <div class="icon-wrap float-right bg-info">
-      <img src="{% static 'img/flags/'|add:country|underscore_slugify|add:'.svg' %}" class="svg" id="{{ country }}"/>
+      <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="svg" id="{{ country }}"/>
     </div>
     <p class="text-uppercase" style="font-weight: 400; font-size:13px;">
       {% if country == 'beta' %}
@@ -43,4 +44,5 @@
       </a>
     </p>
   </div>
+{% endwith %}
 </div>

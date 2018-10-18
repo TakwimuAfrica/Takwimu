@@ -43,7 +43,9 @@ def geo_level(geo):
 
 
 @register.filter
-def underscore_slugify(value):
+def format_country_name(value):
     value = str(value)
     value = re.sub(r'[^\w\s-]', '', value).strip().lower()
-    return re.sub(r'[-\s]+', '_', value)
+    if value == 'dr congo' or value == 'democratic republic of congo' or value == 'drc':
+        return 'drc'
+    return re.sub(r'[-\s]+', '', value)
