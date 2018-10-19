@@ -1,5 +1,4 @@
 import re
-import unicodedata
 
 from django import template
 
@@ -41,9 +40,3 @@ def geo_level(geo):
     else:
         return current_geo['geo_level'].title()
 
-
-@register.filter
-def underscore_slugify(value):
-    value = str(value)
-    value = re.sub(r'[^\w\s-]', '', value).strip().lower()
-    return re.sub(r'[-\s]+', '_', value)

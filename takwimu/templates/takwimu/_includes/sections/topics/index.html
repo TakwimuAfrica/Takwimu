@@ -44,7 +44,7 @@
                   href={% with "#v-sub-pills-topic"|add:subtopic.id as ref %}{{ ref }}{% endwith %}>
 
                   <img class="rounded-circle border-light mr-2" 
-                    src={% with 'img/flags/'|add:subtopic.title|underscore_slugify|add:'.svg' as image_static %}
+                    src={% with 'img/flags/'|add:subtopic.title|slugify|add:'.svg' as image_static %}
                       {% static image_static %}
                     {% endwith %} 
                     border="4" style="border-style:double; width: 40px; height: 40px;"/>

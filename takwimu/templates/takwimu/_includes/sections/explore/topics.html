@@ -46,7 +46,7 @@
                         id="{{ key_issue.id }}"
                         href="{{ key_issue.href }}#{{ key_issue.title|slugify }}">
                             <img class="rounded-circle border-light mr-2"
-                                src="{% with 'img/flags/'|add:key_issue.country|underscore_slugify|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                                src="{% with 'img/flags/'|add:key_issue.country|slugify|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
                                 border="4" style="border-style:double; width: 40px; height: 40px;"
                             />
                             <span>
@@ -106,7 +106,7 @@
                     <a class="nav-item nav-link text-white text-left pl-3"
                        href="{{ country.href }}#{{ topic.title|slugify }}">
                         <img class="rounded-circle border-light mr-2"
-                            src="{% with 'img/flags/'|add:country.title|underscore_slugify|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                            src="{% with 'img/flags/'|add:country.title|slugify|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
                             border="4" style="border-style:double; width: 40px; height: 40px;"
                         />
                         <span>
