@@ -11,6 +11,10 @@ from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
 from hurumap.urls import urlpatterns as hurumap_urlpatterns
 
+GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
+PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
+    GEOGRAPHY_LEVELS)
+
 takwimu_urlpatterns = [
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
@@ -19,7 +23,7 @@ takwimu_urlpatterns = [
     url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
     url(r'^legal$', LegalView.as_view(), name='legal'),
     url(
-        r'^profiles/(?P<geography_id>[continent|country|level1]+-\w+)(-(?P<slug>[\w-]+))?/$',
+        r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
     url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
