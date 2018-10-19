@@ -19,7 +19,7 @@ takwimu_urlpatterns = [
     url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
     url(r'^legal$', LegalView.as_view(), name='legal'),
     url(
-        r'^profiles/(?P<geography_id>?P<geography_id>[continent|country|level1]+-\w+)-\w+)(-(?P<slug>[\w-]+))?/$',
+        r'^profiles/(?P<geography_id>[continent|country|level1]+-\w+)(-(?P<slug>[\w-]+))?/$',
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
     url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
