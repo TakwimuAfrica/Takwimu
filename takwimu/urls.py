@@ -18,11 +18,11 @@ takwimu_urlpatterns = [
         name='about_support_services'),
     url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
     url(r'^legal$', LegalView.as_view(), name='legal'),
-    url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
     url(
-        r'^profiles/(?P<geography_id>\w+-\w+)(-(?P<slug>[\w-]+))?/$',
+        r'^profiles/(?P<geography_id>?P<geography_id>[continent|country|level1]+-\w+)-\w+)(-(?P<slug>[\w-]+))?/$',
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
+    url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
     url(r'^topics/$', TopicView.as_view(), name='topics'),
     url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
