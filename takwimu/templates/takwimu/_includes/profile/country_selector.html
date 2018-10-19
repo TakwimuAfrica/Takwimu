@@ -1,4 +1,4 @@
-{% load static %}
+{% load static geotags %}
 
 <style>
   .country-selector button::after {
@@ -16,7 +16,7 @@
 {% if selector == 'False' %}
   <div class="section-list-country-head">
       <img class="rounded-circle border-light mr-2"
-          {% with country_slug=current_page.title|slugify %}
+          {% with country_slug=current_page.title|underscore_slugify %}
             src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}"
           {% endwith %}
           style="border-style:double; width: 68px; height: 68px;"/>
@@ -29,7 +29,7 @@
       style="text-decoration: none; color:#000;"
       id="dropdownMenuButton_{{ dropdownMenuButton_id }}" >
     <img class="rounded-circle border-light mr-2"
-        {% with country_slug=current_page.title|slugify %}
+        {% with country_slug=current_page.title|underscore_slugify %}
           src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}"
         {% endwith %}
         style="border: solid 5px; box-shadow: 0 0 0 2pt rgba(237, 237, 236, 0.61); width: 50px; height: 50px;"/>
