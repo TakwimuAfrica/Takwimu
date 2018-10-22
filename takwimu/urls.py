@@ -11,18 +11,22 @@ from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
 from hurumap.urls import urlpatterns as hurumap_urlpatterns
 
+GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
+PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
+    GEOGRAPHY_LEVELS)
+
 takwimu_urlpatterns = [
-    url(r'^$', cache_page(60*60)(HomePageView.as_view()), name='home'),
+    url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
         name='about_support_services'),
     url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
     url(r'^legal$', LegalView.as_view(), name='legal'),
-    url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
     url(
-        r'^profiles/(?P<geography_id>\w+-\w+)(-(?P<slug>[\w-]+))?/$',
+        r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
+    url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
     url(r'^topics/$', TopicView.as_view(), name='topics'),
     url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
