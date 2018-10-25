@@ -5,12 +5,12 @@ from collections import OrderedDict
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, PublishSetting
+from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, CountryPublishSetting
 from takwimu.models.dashboard import TopicPage
 
 
 def takwimu_countries(request):
-    settings = PublishSetting.for_site(request.site)
+    settings = CountryPublishSetting.for_site(request.site)
     settings_dict = settings.__dict__
 
     return {

@@ -615,7 +615,7 @@ class FAQSetting(BaseSetting):
 
 
 @register_setting
-class PublishSetting(BaseSetting):
+class CountryPublishSetting(BaseSetting):
     kenya = models.BooleanField(default=False)
     nigeria = models.BooleanField(default=False)
     tanzania = models.BooleanField(default=False)
