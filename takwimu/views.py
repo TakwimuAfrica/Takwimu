@@ -174,6 +174,8 @@ class SearchView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get('q', '')
+        self.country_filter = request.GET.get('country', '').split(',')
+        self.topic_filter = request.GET.get('topic', '')
         self.items = []
         self.countries = OrderedDict()
         self.topics = OrderedDict()
@@ -189,10 +191,12 @@ class SearchView(TemplateView):
             # of profile page
             profilesectionpage_results = ProfileSectionPage.objects.live().search(
                 search_query)
+
             for profilesectionpage in profilesectionpage_results.results():
                 self._extract_search_results(request, profilesectionpage)
 
             Query.get(search_query).add_hit()
+
         return render(request, self.template_name, {
             'search_query': search_query,
             'search_results': {
@@ -206,18 +210,30 @@ class SearchView(TemplateView):
         (country, category) = (str(page.get_parent()), page.title) \
             if isinstance(page, ProfileSectionPage) \
             else (str(page), u'Country Overview')
-        self.countries[country] = 1
-        self.topics[category] = 1
-        url = page.get_url(request)
-        for topic in page.body:
-            result = {
-                'country': country,
-                'region': 'National',
-                'category': category,
-                'url': url,
-                'data_point': topic,
-            }
-            self.items.append(result)
+        if self._filter_results(country, self.country_filter) and self._filter_results(category, self.topic_filter):
+            self.countries[country] = 1
+            self.topics[category] = 1
+            url = page.get_url(request)
+            for topic in page.body:
+                result = {
+                    'country': country,
+                    'region': 'National',
+                    'category': category,
+                    'url': url,
+                    'data_point': topic,
+                }
+                self.items.append(result)
+
+
+    def _filter_results(self, filter, options):
+        filter = filter.lower()
+        options_list = [i.lower() for i in options]
+        # if no filters are selected
+        if len(options_list)==0 or filter in options_list:
+            return True
+        else:
+            return False
+
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
 
