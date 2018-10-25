@@ -175,7 +175,7 @@ class SearchView(TemplateView):
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get('q', '')
         self.country_filter = request.GET.get('country', '').split(',')
-        self.topic_filter = request.GET.get('topic', '')
+        self.topic_filter = request.GET.get('topic', '').split(',')
         self.items = []
         self.countries = OrderedDict()
         self.topics = OrderedDict()
