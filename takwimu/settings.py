@@ -11,18 +11,19 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # insert our overrides before both census and hurumap
 
-INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome', 'wagtail.contrib.settings'] + INSTALLED_APPS + ['debug_toolbar']
+INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome',
+                  'wagtail.contrib.settings'] + INSTALLED_APPS + ['debug_toolbar']
 
 
 ROOT_URLCONF = 'takwimu.urls'
 
 MIDDLEWARE_CLASSES = (
-        'whitenoise.middleware.WhiteNoiseMiddleware',
-        'django.middleware.cache.FetchFromCacheMiddleware',
-        'django.middleware.cache.UpdateCacheMiddleware',
-    ) + MIDDLEWARE_CLASSES + (
-        'debug_toolbar.middleware.DebugToolbarMiddleware',
-    )
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+) + MIDDLEWARE_CLASSES + (
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+)
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
@@ -47,14 +48,15 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # -------------------------------------------------------------------------------------
 
 HURUMAP['name'] = 'Takwimu'
-HURUMAP['url'] = os.environ.get('HURUMAP_URL','https://dev.takwimu.africa')
+HURUMAP['url'] = os.environ.get('HURUMAP_URL', 'https://dev.takwimu.africa')
 
 HURUMAP['title_tagline'] = ''
 HURUMAP['description'] = ''
 
 hurumap_profile = 'census'
 
-HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(hurumap_profile)
+HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(
+    hurumap_profile)
 HURUMAP['default_geo_version'] = os.environ.get('DEFAULT_GEO_VERSION', '2009')
 HURUMAP['legacy_embed_geo_version'] = '2009'
 
@@ -133,7 +135,8 @@ TAKWIMU_ES_HOST_TYPE = os.environ.get('TAKWIMU_ES_HOST_TYPE', '')
 if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
     TAKWIMU_ES_AWS_ACCESS_KEY = os.environ.get('TAKWIMU_ES_AWS_ACCESS_KEY', '')
     TAKWIMU_ES_AWS_SECRET_KEY = os.environ.get('TAKWIMU_ES_AWS_SECRET_KEY', '')
-    TAKWIMU_ES_AWS_REGION = os.environ.get('TAKWIMU_ES_AWS_REGION', 'eu-west-1')
+    TAKWIMU_ES_AWS_REGION = os.environ.get(
+        'TAKWIMU_ES_AWS_REGION', 'eu-west-1')
     WAGTAILSEARCH_BACKENDS = {
         'default': {
             'BACKEND': 'wagtail.wagtailsearch.backends.elasticsearch5',
@@ -171,15 +174,14 @@ else:
 TAKWIMU_CACHE = os.environ.get('TAKWIMU_CACHE', '')
 
 if TAKWIMU_CACHE:
-    TAKWIMU_CACHE_URL = os.environ.get('TAKWIMU_CACHE_URL', '127.0.0.1:6379')
-    TAKWIMU_CACHE_KEY_PREFIX = os.environ.get('TAKWIMU_CACHE_KEY', 'takwimu')
+    TAKWIMU_CACHE_LOCATION = os.environ.get(
+        'TAKWIMU_CACHE_LOCATION', 'takwimu_cache')
+    TAKWIMU_CACHE_KEY_PREFIX = os.environ.get(
+        'TAKWIMU_CACHE_KEY_PREFIX', 'takwimu')
     CACHES = {
         'default': {
-            'BACKEND': 'django_redis.cache.RedisCache',
-            'LOCATION': TAKWIMU_CACHE_URL,
-            'OPTIONS': {
-                'CLIENT_CLASS': 'django_redis.client.DefaultClient',
-            },
-            "KEY_PREFIX": TAKWIMU_CACHE_KEY_PREFIX,
+            'BACKEND': 'django.core.cache.backends.db.DatabaseCache',
+            'LOCATION': TAKWIMU_CACHE_LOCATION,
+            'KEY_PREFIX': TAKWIMU_CACHE_KEY_PREFIX,
         }
     }
