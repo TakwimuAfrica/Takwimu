@@ -200,6 +200,10 @@ class SearchView(TemplateView):
 
         return render(request, self.template_name, {
             'search_query': search_query,
+            'query_params':{
+                'countries': self.country_filter,
+                'topics': self.topic_filter,
+            },
             'search_results': {
                 'items': self.items,
                 'countries': self.countries.keys(),
