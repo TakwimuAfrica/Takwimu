@@ -77,4 +77,31 @@
             </div>
         </div>
     </li>
+  <li class="list-group-item px-0">
+    <button class="btn btn-outline-primary" id="resubmit" onclick="resubmit()">Search</button>
+  </li>
 </ul>
+
+<script>
+    function resubmit() {
+        var topic_checkboxes = document.getElementsByName('topic-checkbox');
+        var topics = [];
+        for (var i = 0, n = topic_checkboxes.length; i < n; i++) {
+            if (topic_checkboxes[i].checked) {
+                vals.push(topic_checkboxes[i].value);
+            }
+        }
+
+        var country_checkboxes = document.getElementsByName('country-checkbox');
+        var countries = [];
+        for (var i = 0, n = country_checkboxes.length; i < n; i++) {
+            if (country_checkboxess[i].checked) {
+                vals.push(country_checkboxes[i].value);
+            }
+        }
+
+        console.log("topics: ", topics);
+        console.log("countries: ", countries);
+    }
+
+</script>
