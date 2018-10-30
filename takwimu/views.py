@@ -180,8 +180,8 @@ class SearchView(TemplateView):
         self.topics = OrderedDict()
 
         takwimu_search = TakwimuTopicSearch()
-        takwimu_search.es_index = 'test-topics-4'
-        results = []
+        # takwimu_search.es_index = 'test-topics-4'
+        # results = []
         if search_query.startswith('"') and search_query.endswith('"'):
             # search in quotes means phrase search
             search_query = search_query.replace('"', '')
