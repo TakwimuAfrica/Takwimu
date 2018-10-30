@@ -105,7 +105,9 @@ class TakwimuTopicSearch():
             })
 
         if category_filters is not None and len(category_filters) > 0:
-            category_filters = [i.lower() for i in category_filters]
+            # TODO 30/10/2018 all elasticsearch to filter by phrases and not words for categories
+            all_categories = " ".join(category_filters)
+            category_filters = all_categories.lower().split(" ")
             filter_part.append({
                 "terms": {"category": category_filters}
             })
@@ -163,7 +165,9 @@ class TakwimuTopicSearch():
         query = self._build_query(query_string, operator=operator,
                                   country_filters=country_filters,
                                   category_filters=category_filters)
-
+        print '\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
+        print query
+        print '\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
         return self._do_topic_search(query)
 
     def add_to_index(self, topic_id, category, topic_body, country,
