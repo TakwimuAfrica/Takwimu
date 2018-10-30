@@ -3,14 +3,10 @@ import requests
 
 from collections import OrderedDict
 from django.conf import settings
-from django.core.serializers import serialize
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.views.generic import TemplateView, FormView, View
 from django.views.generic.base import TemplateView
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch.backends import get_search_backend
-from wagtail.wagtailsearch.models import Query
 from wazimap.views import HomepageView, GeographyDetailView
 
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
@@ -185,7 +181,13 @@ class SearchView(TemplateView):
 
         takwimu_search = TakwimuTopicSearch()
         takwimu_search.es_index = 'test-topics-4'
-        results = takwimu_search.search(search_query)
+        results = []
+        if search_query.startswith('"') and search_query.endswith('"'):
+            # search in quotes means phrase search
+            search_query = search_query.replace('"', '')
+            results = takwimu_search.search(search_query, operator="and", country_filters=self.country_filter, category_filters=self.topic_filter)
+        else:
+            results = takwimu_search.search(search_query, country_filters=self.country_filter, category_filters=self.topic_filter)
 
         profilepages = ProfilePage.objects.live()
         profilesectionpages = ProfileSectionPage.objects.live()
@@ -195,8 +197,8 @@ class SearchView(TemplateView):
             parent_page_id = result['parent_page_id']
             country = result['country']
             category = result['category']
-            self.countries[country] = 1
-            self.topics[category] = 1
+            self.countries[country.title()] = 1
+            self.topics[category.title()] = 1
 
             page = None
             if result['parent_page_type'] == 'ProfileSectionPage':
@@ -231,75 +233,6 @@ class SearchView(TemplateView):
         for topic in page.body:
             if topic.id == topic_id:
                 return topic
-
-
-
-    # def get(self, request, *args, **kwargs):
-    #     search_query = request.GET.get('q', '')
-    #     self.country_filter = request.GET.getlist('country')
-    #     self.topic_filter = request.GET.getlist('topic')
-    #
-    #     self.items = []
-    #     self.countries = OrderedDict()
-    #     self.topics = OrderedDict()
-    #     if search_query:
-    #
-    #         # Profile page only indexes geo and body but not sections.
-    #         profilepage_results = ProfilePage.objects.live().search(
-    #             search_query)
-    #         for profilepage in profilepage_results.results():
-    #             self._extract_search_results(request, profilepage)
-    #
-    #         # Hence, sections (i.e. topics in the UI) need to be searched independent
-    #         # of profile page
-    #         profilesectionpage_results = ProfileSectionPage.objects.live().search(
-    #             search_query)
-    #
-    #         for profilesectionpage in profilesectionpage_results.results():
-    #             self._extract_search_results(request, profilesectionpage)
-    #
-    #         Query.get(search_query).add_hit()
-    #
-    #     return render(request, self.template_name, {
-    #         'search_query': search_query,
-    #         'query_params':{
-    #             'countries': self.country_filter,
-    #             'topics': self.topic_filter,
-    #         },
-    #         'search_results': {
-    #             'items': self.items,
-    #             'countries': self.countries.keys(),
-    #             'topics': self.topics.keys(),
-    #         },
-    #     })
-
-    def _extract_search_results(self, request, page):
-        (country, category) = (str(page.get_parent()), page.title) \
-            if isinstance(page, ProfileSectionPage) \
-            else (str(page), u'Country Overview')
-        if self._filter_results(country, self.country_filter) and self._filter_results(category, self.topic_filter):
-            self.countries[country] = 1
-            self.topics[category] = 1
-            url = page.get_url(request)
-            for topic in page.body:
-                result = {
-                    'country': country,
-                    'region': 'National',
-                    'category': category,
-                    'url': url,
-                    'data_point': topic,
-                }
-                self.items.append(result)
-
-
-    def _filter_results(self, filter, options):
-        filter = filter.lower()
-        options_list = [i.lower() for i in options]
-        # if no filters are selected
-        if len(options_list)==0 or filter in options_list:
-            return True
-        else:
-            return False
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):

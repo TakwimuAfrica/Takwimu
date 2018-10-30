@@ -36,6 +36,9 @@ def index_topics(queryset, top):
 index_topics(ProfileSectionPage.objects.live(), top)
 index_topics(ProfilePage.objects.live(), top)
 
+p={'query': {'bool': {'must': [{'match': {'body': 'primary'}}]}, 'filter': [{'terms': {'country': ['Kenya']}}]}}
+
+
 
 
 

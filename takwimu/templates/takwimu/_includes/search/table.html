@@ -44,7 +44,7 @@
             <td colspan="2" class="text-capitalize px-0 data" style="white-space:wrap;">
                 <span class="d-flex mb-2">
                     <b class="col-3">Category:</b>
-                    <span class="col pl-1">{{ result.category|slugify }}</span>
+                    <span class="col pl-1">{{ result.category|title }}</span>
                 </span>
                 <span class="d-flex">
                     <b class="col-3">Data point:</b>
@@ -72,7 +72,7 @@
                         {% if not result.data_point.value.indicators %}
                             <div class="alert alert-info" role="alert">
                                 <span class="fas fa-info"></span>
-                                <span class="ml-2">We are working to source additional data for this topic. Please 
+                                <span class="ml-2">We are working to source additional data for this topic. Please
                                     <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a>
                                     to receive an alert when the data is updated.
                                 </span>
