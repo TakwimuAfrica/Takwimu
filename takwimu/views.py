@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.views.generic import TemplateView, FormView, View
 from django.views.generic.base import TemplateView
 from wagtail.wagtailcore.models import Page
+from wagtail.wagtailsearch.backends import get_search_backend
 from wagtail.wagtailsearch.models import Query
 from wazimap.views import HomepageView, GeographyDetailView
 
@@ -17,6 +18,7 @@ from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
 from forms import SupportServicesContactForm
 
 from sdg import SDG
+from takwimu.search import TakwimuTopicSearch
 
 
 class HomePageView(TemplateView):
@@ -180,23 +182,37 @@ class SearchView(TemplateView):
         self.items = []
         self.countries = OrderedDict()
         self.topics = OrderedDict()
-        if search_query:
 
-            # Profile page only indexes geo and body but not sections.
-            profilepage_results = ProfilePage.objects.live().search(
-                search_query)
-            for profilepage in profilepage_results.results():
-                self._extract_search_results(request, profilepage)
+        takwimu_search = TakwimuTopicSearch()
+        takwimu_search.es_index = 'test-topics-4'
+        results = takwimu_search.search(search_query)
 
-            # Hence, sections (i.e. topics in the UI) need to be searched independent
-            # of profile page
-            profilesectionpage_results = ProfileSectionPage.objects.live().search(
-                search_query)
+        profilepages = ProfilePage.objects.live()
+        profilesectionpages = ProfileSectionPage.objects.live()
 
-            for profilesectionpage in profilesectionpage_results.results():
-                self._extract_search_results(request, profilesectionpage)
+        for result in results:
+            topic_id = result['topic_id']
+            parent_page_id = result['parent_page_id']
+            country = result['country']
+            category = result['category']
+            self.countries[country] = 1
+            self.topics[category] = 1
 
-            Query.get(search_query).add_hit()
+            page = None
+            if result['parent_page_type'] == 'ProfileSectionPage':
+                page = profilesectionpages.get(id=parent_page_id)
+            elif result['parent_page_type'] == 'ProfilePage':
+                page = profilepages.get(id=parent_page_id)
+
+            if page:
+                topic = self.get_topic_from_page(topic_id, page)
+                result['data_point'] = topic
+                result['url'] = page.get_url(request)
+                country = result['country']
+                category = result['category']
+                self.countries[country] = 1
+                self.topics[category] = 1
+                self.items.append(result)
 
         return render(request, self.template_name, {
             'search_query': search_query,
@@ -210,6 +226,52 @@ class SearchView(TemplateView):
                 'topics': self.topics.keys(),
             },
         })
+
+    def get_topic_from_page(self, topic_id, page):
+        for topic in page.body:
+            if topic.id == topic_id:
+                return topic
+
+
+
+    # def get(self, request, *args, **kwargs):
+    #     search_query = request.GET.get('q', '')
+    #     self.country_filter = request.GET.getlist('country')
+    #     self.topic_filter = request.GET.getlist('topic')
+    #
+    #     self.items = []
+    #     self.countries = OrderedDict()
+    #     self.topics = OrderedDict()
+    #     if search_query:
+    #
+    #         # Profile page only indexes geo and body but not sections.
+    #         profilepage_results = ProfilePage.objects.live().search(
+    #             search_query)
+    #         for profilepage in profilepage_results.results():
+    #             self._extract_search_results(request, profilepage)
+    #
+    #         # Hence, sections (i.e. topics in the UI) need to be searched independent
+    #         # of profile page
+    #         profilesectionpage_results = ProfileSectionPage.objects.live().search(
+    #             search_query)
+    #
+    #         for profilesectionpage in profilesectionpage_results.results():
+    #             self._extract_search_results(request, profilesectionpage)
+    #
+    #         Query.get(search_query).add_hit()
+    #
+    #     return render(request, self.template_name, {
+    #         'search_query': search_query,
+    #         'query_params':{
+    #             'countries': self.country_filter,
+    #             'topics': self.topic_filter,
+    #         },
+    #         'search_results': {
+    #             'items': self.items,
+    #             'countries': self.countries.keys(),
+    #             'topics': self.topics.keys(),
+    #         },
+    #     })
 
     def _extract_search_results(self, request, page):
         (country, category) = (str(page.get_parent()), page.title) \
