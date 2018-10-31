@@ -1,4 +1,4 @@
-version: '3.7'
+version: "3.7"
 
 services:
   db:
@@ -18,11 +18,6 @@ services:
     environment:
       ES_JAVA_OPTS: -Xms512m -Xmx512m
 
-  redis:
-    image: redis
-    ports:
-      - "6379:6379"
-
   web:
     build: .
     ports:
@@ -30,7 +25,6 @@ services:
     depends_on:
       - db
       - es
-      - redis
     volumes:
       - "./:/srv/takwimu"
     environment:
@@ -44,8 +38,31 @@ services:
       - TAKWIMU_ES_INDEX=takwimu
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
-      - TAKWIMU_CACHE=${TAKWIMU_CACHE}
-      - TAKWIMU_CACHE_URL=reddis://redis:6379
-      - TAKWIMU_CACHE_KEY_PREFIX="takwimu"
       - PYTHONDONTWRITEBYTECODE="True"
-      # - DJANGO_DEBUG=False  # For testing deploys
+  
+  # Test production configuration
+  test-prod:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+      - es
+    volumes:
+      - "./:/srv/takwimu"
+    environment:
+      - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
+      - DJANGO_SECRET_KEY=somethingsecret
+      - HURUMAP_URL=http://localhost:8000
+      - PGHOST=db
+      - PGDATABASE=takwimu
+      - PGUSER=takwimu
+      - PGPASSWORD=takwimu
+      - TAKWIMU_ES_INDEX=takwimu
+      - TAKWIMU_ES_TIMEOUT=30
+      - TAKWIMU_ES_URL=http://es:9200
+      - TAKWIMU_CACHE=True
+      - TAKWIMU_CACHE_LOCATION=takwimu_cache
+      - TAKWIMU_CACHE_KEY_PREFIX=takwimu
+      - PYTHONDONTWRITEBYTECODE="True"
+      # - DJANGO_DEBUG=False  # TODO: Figure out media + static
