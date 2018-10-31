@@ -174,6 +174,8 @@ class SearchView(TemplateView):
         search_query = request.GET.get('q', '')
         self.country_filter = request.GET.getlist('country')
         self.topic_filter = request.GET.getlist('topic')
+        self.topics_widgets_map = {}
+        self.create_results_map()
 
         self.items = []
         self.countries = OrderedDict()
@@ -207,8 +209,10 @@ class SearchView(TemplateView):
                 page = profilepages.get(id=parent_page_id)
 
             if page:
-                topic = self.get_topic_from_page(topic_id, page)
-                result['data_point'] = topic
+                id = result.get('topic_id') or result.get('widget_id')
+                data_point = self.topics_widgets_map.get(id)
+
+                result['data_point'] = data_point
                 result['url'] = page.get_url(request)
                 country = result['country']
                 category = result['category']
@@ -233,6 +237,23 @@ class SearchView(TemplateView):
         for topic in page.body:
             if topic.id == topic_id:
                 return topic
+
+    def create_results_map(self):
+        for profilepage in ProfilePage.objects.live():
+            for topic in profilepage.body:
+                self.topics_widgets_map[topic.id] = topic
+
+                for indicator in topic.value['indicators']:
+                    for widget in indicator.value['widgets']:
+                        self.topics_widgets_map[widget.id] = widget
+
+        for profilesectionpage in ProfileSectionPage.objects.live():
+            for topic in profilesectionpage.body:
+                self.topics_widgets_map[topic.id] = topic
+
+                for indicator in topic.value['indicators']:
+                    for widget in indicator.value['widgets']:
+                        self.topics_widgets_map[widget.id] = widget
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):

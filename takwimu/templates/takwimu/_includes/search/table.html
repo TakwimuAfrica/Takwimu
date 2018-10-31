@@ -48,7 +48,7 @@
                 </span>
                 <span class="d-flex">
                     <b class="col-3">Data point:</b>
-                    <span class="col pl-1">{{ result.data_point.value.title }}</span>
+                    <span class="col pl-1">{{ result.data_point.value.title }} - {% if result.type == 'topic' %} Topic {% elif result.type == 'indicator_widget' %} Indicator {% endif %}</span>
                 </span>
             </td>
         </tr>
@@ -57,29 +57,11 @@
             <td colspan="4"
                 style="border: 0!important;
                 {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
-                <div id="{{ result.data_point.value.title|slugify }}" class="carousel slide {% if forloop.counter|divisibleby:2 %} odd {% endif %}">                
-                    <ol class="carousel-indicators">
-                        {% for indicator in result.data_point.value.indicators %}
-                            <li data-target="#{{ result.data_point.value.title|slugify }}" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {% endif %}"></li>
-                        {% endfor %}
-                    </ol>
-                    <div class="carousel-inner">
-                        {% for indicator in result.data_point.value.indicators %}
-                            <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                                {% include_block indicator %}
-                            </div>
-                        {% endfor %}
-                        {% if not result.data_point.value.indicators %}
-                            <div class="alert alert-info" role="alert">
-                                <span class="fas fa-info"></span>
-                                <span class="ml-2">We are working to source additional data for this topic. Please
-                                    <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a>
-                                    to receive an alert when the data is updated.
-                                </span>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
+            {% if result.type == 'topic' %}
+              {{ result.data_point.value.body }}
+            {% elif result.type == 'indicator_widget' %}
+              {% include_block result.data_point %}
+            {% endif %}
             </td>
         </tr>
              

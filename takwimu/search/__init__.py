@@ -1,1 +1,1 @@
-from .search_utils import TakwimuTopicSearch
+from .takwimu_search import TakwimuTopicSearch

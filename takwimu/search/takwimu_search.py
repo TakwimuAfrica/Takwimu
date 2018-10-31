@@ -151,7 +151,9 @@ class TakwimuTopicSearch():
                 "country": topic.get('country', ''),
                 "region": "National",
                 "category": topic.get("category"),
+                "type": topic.get("type"),
                 "topic_id": topic.get("topic_id"),
+                "widget_id": topic.get("widget_id"),
                 "parent_page_id": topic.get("parent_page_id"),
                 "parent_page_type": topic.get("parent_page_type")
 
@@ -170,8 +172,8 @@ class TakwimuTopicSearch():
         print '\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
         return self._do_topic_search(query)
 
-    def add_to_index(self, topic_id, category, topic_body, country,
-                     parent_page_id, parent_page_type):
+    def add_to_index(self, category, body, country,
+                     parent_page_id, parent_page_type, type='', widget_id=None, topic_id=None,):
         """
         - page type/class : either ProfileSectionPage or ProfilePage
     - topic_id
@@ -182,15 +184,19 @@ class TakwimuTopicSearch():
         :return:
         """
         doc = {
-            "body": topic_body,
+            "body": body,
             "category": category.title(),
             "country": country.title(),
             "parent_page_id": parent_page_id,
             "parent_page_type": parent_page_type,
-            "topic_id": topic_id
+            "topic_id": topic_id,
+            "type": type,
+            "widget_id": widget_id
         }
 
+        doc_id = topic_id or widget_id
+
         result = self.es.index(index=self.es_index, doc_type="topic", body=doc,
-                               id=topic_id)
+                               id=doc_id)
 
         return result.get('result') == 'created', result
