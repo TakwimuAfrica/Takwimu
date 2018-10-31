@@ -14,7 +14,7 @@ from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
 from forms import SupportServicesContactForm
 
 from sdg import SDG
-from takwimu.search import TakwimuTopicSearch
+from takwimu.search.takwimu_search import TakwimuTopicSearch
 
 
 class HomePageView(TemplateView):
@@ -69,7 +69,7 @@ class SDGIndicatorView(TemplateView):
     template_name = 'takwimu/sdg_topic_page.html'
 
     def get_context_data(self, **kwargs):
-        json_data = open('takwimu/fixtures/sdg.json') 
+        json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
         context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
@@ -156,8 +156,6 @@ class SupportServicesIndexView(FormView):
         return self.render_to_response(context)
 
     def form_invalid(self, form):
-        print('\n\n\n\n\n\n')
-        print form.data
         return super(SupportServicesIndexView, self).form_invalid(form)
 
 
@@ -174,6 +172,10 @@ class SearchView(TemplateView):
         search_query = request.GET.get('q', '')
         self.country_filter = request.GET.getlist('country')
         self.topic_filter = request.GET.getlist('topic')
+
+        self.profilepages = ProfilePage.objects.live()
+        self.profilesectionpages = ProfileSectionPage.objects.live()
+
         self.topics_widgets_map = {}
         self.create_results_map()
 
@@ -187,12 +189,14 @@ class SearchView(TemplateView):
         if search_query.startswith('"') and search_query.endswith('"'):
             # search in quotes means phrase search
             search_query = search_query.replace('"', '')
-            results = takwimu_search.search(search_query, operator="and", country_filters=self.country_filter, category_filters=self.topic_filter)
+            results = takwimu_search.search(search_query, operator="and",
+                                            country_filters=self.country_filter,
+                                            category_filters=self.topic_filter)
         else:
-            results = takwimu_search.search(search_query, country_filters=self.country_filter, category_filters=self.topic_filter)
+            results = takwimu_search.search(search_query,
+                                            country_filters=self.country_filter,
+                                            category_filters=self.topic_filter)
 
-        profilepages = ProfilePage.objects.live()
-        profilesectionpages = ProfileSectionPage.objects.live()
 
         for result in results:
             topic_id = result['topic_id']
@@ -204,9 +208,9 @@ class SearchView(TemplateView):
 
             page = None
             if result['parent_page_type'] == 'ProfileSectionPage':
-                page = profilesectionpages.get(id=parent_page_id)
+                page = self.profilesectionpages.get(id=parent_page_id)
             elif result['parent_page_type'] == 'ProfilePage':
-                page = profilepages.get(id=parent_page_id)
+                page = self.profilepages.get(id=parent_page_id)
 
             if page:
                 id = result.get('topic_id') or result.get('widget_id')
@@ -222,7 +226,7 @@ class SearchView(TemplateView):
 
         return render(request, self.template_name, {
             'search_query': search_query,
-            'query_params':{
+            'query_params': {
                 'countries': self.country_filter,
                 'topics': self.topic_filter,
             },
@@ -239,7 +243,7 @@ class SearchView(TemplateView):
                 return topic
 
     def create_results_map(self):
-        for profilepage in ProfilePage.objects.live():
+        for profilepage in self.profilepages:
             for topic in profilepage.body:
                 self.topics_widgets_map[topic.id] = topic
 
@@ -247,7 +251,7 @@ class SearchView(TemplateView):
                     for widget in indicator.value['widgets']:
                         self.topics_widgets_map[widget.id] = widget
 
-        for profilesectionpage in ProfileSectionPage.objects.live():
+        for profilesectionpage in self.profilesectionpages:
             for topic in profilesectionpage.body:
                 self.topics_widgets_map[topic.id] = topic
 

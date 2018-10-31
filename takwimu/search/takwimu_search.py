@@ -3,53 +3,8 @@ import json
 
 from elasticsearch import Elasticsearch, NotFoundError
 from django.conf import settings
-from django.utils.text import slugify
 
 from takwimu.models import ProfilePage, ProfileSectionPage
-
-INDEX_SETTINGS = {
-    'settings': {
-        'analysis': {
-            'analyzer': {
-                'ngram_analyzer': {
-                    'type': 'custom',
-                    'tokenizer': 'lowercase',
-                    'filter': ['asciifolding', 'ngram']
-                },
-                'edgengram_analyzer': {
-                    'type': 'custom',
-                    'tokenizer': 'lowercase',
-                    'filter': ['asciifolding', 'edgengram']
-                }
-            },
-            'tokenizer': {
-                'ngram_tokenizer': {
-                    'type': 'nGram',
-                    'min_gram': 3,
-                    'max_gram': 15,
-                },
-                'edgengram_tokenizer': {
-                    'type': 'edgeNGram',
-                    'min_gram': 2,
-                    'max_gram': 15,
-                    'side': 'front'
-                }
-            },
-            'filter': {
-                'ngram': {
-                    'type': 'nGram',
-                    'min_gram': 3,
-                    'max_gram': 15
-                },
-                'edgengram': {
-                    'type': 'edgeNGram',
-                    'min_gram': 1,
-                    'max_gram': 15
-                }
-            }
-        }
-    }
-}
 
 
 class TakwimuTopicSearch():
@@ -133,7 +88,8 @@ class TakwimuTopicSearch():
             pass
 
         # Create new index
-        self.es.indices.create(self.es_index, INDEX_SETTINGS)
+        self.es.indices.create(self.es_index,
+                               settings.TAKWIMU_ES_INDEX_SETTINGS)
 
     def _do_topic_search(self, query):
         """
@@ -167,13 +123,11 @@ class TakwimuTopicSearch():
         query = self._build_query(query_string, operator=operator,
                                   country_filters=country_filters,
                                   category_filters=category_filters)
-        print '\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
-        print query
-        print '\n\n\n\n\n\n\n\n\n\n\n\n\n\n'
         return self._do_topic_search(query)
 
     def add_to_index(self, category, body, country,
-                     parent_page_id, parent_page_type, type='', widget_id=None, topic_id=None,):
+                     parent_page_id, parent_page_type, type='', widget_id=None,
+                     topic_id=None, ):
         """
         - page type/class : either ProfileSectionPage or ProfilePage
     - topic_id

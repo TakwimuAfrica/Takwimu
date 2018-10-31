@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 from takwimu.models import ProfileSectionPage, ProfilePage
 
-from takwimu.search import TakwimuTopicSearch
+from takwimu.search.takwimu_search import TakwimuTopicSearch
 
 
 class Command(BaseCommand):
@@ -21,24 +21,24 @@ class Command(BaseCommand):
             source = widget['value'].get('source')
             body = None
 
-            type = widget['type']
-            if type == "html":
+            _type = widget['type']
+            if _type == "html":
                 body = widget['value'].get('raw_html', '')
-            elif type == 'free_form':
+            elif _type == 'free_form':
                 body = widget['value'].get('body', '')
-            elif type == 'embed':
+            elif _type == 'embed':
                 body = ''
 
-            elif type == 'document':
+            elif _type == 'document':
                 body = ''
 
-            elif type == 'image':
+            elif _type == 'image':
                 body = widget['value'].get('caption', '')
 
-            elif type == 'hurumap':
+            elif _type == 'hurumap':
                 body = widget['value'].get('subtitle', '')
 
-            elif type == 'entities':
+            elif _type == 'entities':
                 body = ''
                 for entity in widget['value']['entities']:
                     body += entity['description']
@@ -73,31 +73,38 @@ class Command(BaseCommand):
             for topic in i.body.stream_data:
                 topic_id = topic.get('id')
                 topic_body = topic['value'].get('body', '')
+                topic_summary = topic['value'].get('summary', '')
+                body = topic_body + " " + topic_summary
 
-                result, outcome = search_backend.add_to_index(category, topic_body,
-                                                              country, parent_page_id,
-                                                              parent_page_type, type="topic", topic_id=topic_id)
-                self.stdout.write(search_backend.es_index + ": Indexing topic '%s result %s'" % (
-                    topic_id,
-                    outcome,
-                ))
+                result, outcome = search_backend.add_to_index(category,
+                                                              body,
+                                                              country,
+                                                              parent_page_id,
+                                                              parent_page_type,
+                                                              type="topic",
+                                                              topic_id=topic_id)
+                self.stdout.write(
+                    search_backend.es_index + ": Indexing topic '%s result %s'" % (
+                        topic_id,
+                        outcome,
+                    ))
 
                 indicators = topic['value'].get('indicators', '')
                 for indicator in indicators:
                     for widget in indicator['value']['widgets']:
                         data = self.get_widget_data(widget)
                         if data:
-                            result, outcome = search_backend.add_to_index(category,
-                                                               data.get('body'),
-                                                               country,
-                                                               parent_page_id,
-                                                               parent_page_type,
-                                                               type='indicator_widget',
-                                                               widget_id=data.get(
-                                                                   'widget_id'))
+                            result, outcome = search_backend.add_to_index(
+                                category,
+                                data.get('body'),
+                                country,
+                                parent_page_id,
+                                parent_page_type,
+                                type='indicator_widget',
+                                widget_id=data.get(
+                                    'widget_id'))
                             self.stdout.write(
                                 search_backend.es_index + ": Indexing widget '%s result %s'" % (
                                     data.get("widget_id"),
                                     outcome,
                                 ))
-
