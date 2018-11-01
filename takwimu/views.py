@@ -188,8 +188,8 @@ class SearchView(TemplateView):
         # results = []
         if search_query.startswith('"') and search_query.endswith('"'):
             # search in quotes means phrase search
-            search_query = search_query.replace('"', '')
-            results = takwimu_search.search(search_query, operator="and",
+            query = search_query.replace('"', '')
+            results = takwimu_search.search(query, operator="and",
                                             country_filters=self.country_filter,
                                             category_filters=self.topic_filter)
         else:

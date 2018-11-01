@@ -2,6 +2,7 @@ from collections import OrderedDict
 import json
 
 from elasticsearch import Elasticsearch, NotFoundError
+from elasticsearch_dsl import Search
 from django.conf import settings
 
 from takwimu.models import ProfilePage, ProfileSectionPage
@@ -26,59 +27,26 @@ class TakwimuTopicSearch():
 
     def _build_query(self, query_string, operator="or", country_filters=None,
                      category_filters=None):
-        """
-        builds the elasticsearch decides whether to use `match` or
-        `match_phrase`. this also handles the country name and category filter
-        things
-        {
-          "query": {
-            "bool": {
-              "must": [
-                { "match": { "body":   "population"}}
-              ],
-              "filter": [
-                { "terms":  { "country": ["kenya", "uganda"] }},
-                { "terms": { "category": ["Public finances"]}}
-              ]
-            }
-          }
-        }
-'
-        :return:  {}
-        """
-        match_part = {}
-        filter_part = []
+
+        search = Search(using=self.es, index=self.es_index,
+                        doc_type='topics')
+
         if operator == 'and':
-            match_part["match_phrase"] = {"body": query_string}
+            search = search.query("match_phrase", body=query_string)
         else:
-            match_part["match"] = {"body": query_string}
+            search = search.query("match", body=query_string)
 
         if country_filters is not None and len(country_filters) > 0:
             country_filters = [i.lower() for i in country_filters]
-            filter_part.append({
-                "terms": {"country": country_filters}
-            })
+            search = search.filter("terms", country=country_filters)
 
         if category_filters is not None and len(category_filters) > 0:
             # TODO 30/10/2018 all elasticsearch to filter by phrases and not words for categories
             all_categories = " ".join(category_filters)
             category_filters = all_categories.lower().split(" ")
-            filter_part.append({
-                "terms": {"category": category_filters}
-            })
+            search = search.filter("terms", category=category_filters)
 
-        inner_query = OrderedDict()
-        inner_query['must'] = [match_part]
-
-        if filter_part:
-            inner_query['filter'] = filter_part
-
-        query = {
-            "query": {
-                "bool": inner_query
-            }
-        }
-        return json.dumps(query)
+        return search.to_dict()
 
     def reset_index(self):
         # Delete old index
@@ -100,6 +68,7 @@ class TakwimuTopicSearch():
         """
         res = self.es.search(index=self.es_index, doc_type='topic', body=query,
                              size=100)
+
         formatted_results = []
         for i in res['hits']['hits']:
             topic = i.get('_source')
