@@ -13,8 +13,8 @@
                 <div class="form-inline align-items-center">
                     <label class="mr-sm-2" for="sortby">Sort by: </label>
                     <select class="custom-select" id="sortby" aria-placeholder="Sort by.." style="border-radius:2px;">
-                        <option value="Relevance">Relevance</option>
-                        <option value="Location">Location (A-Z)</option>
+                        <option value="relevance">Relevance</option>
+                        <option value="location" {% if orderby == 'location' %}selected="selected"{% endif %}>Location (A-Z)</option>
                     </select>
                 </div>
             </th>
@@ -124,8 +124,29 @@
                 $(target).addClass('noBorder');
                 $('tbody.table-bordered').addClass('transBorder');
                 $(target).prev('tr#result').addClass('noBorder');
-            })
+            });
+
         });
+
+        $('#sortby').on('change', function () {
+            var value = $(this).val(); // get selected value
+            if (value) {
+                var url = window.location.href;
+                console.log(value);
+                var url = new URL(url);
+                var query_string = url.search;
+                var search_params = new URLSearchParams(query_string);
+
+                if (search_params.get("orderby") === null) {
+                    search_params.append('orderby', value);
+                } else {
+                    search_params.set('orderby', value);
+                }
+                window.location.search = search_params.toString();
+            }
+        });
+
+
 
     });
 </script>

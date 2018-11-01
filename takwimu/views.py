@@ -1,5 +1,6 @@
 import json
 import requests
+from operator import itemgetter
 
 from collections import OrderedDict
 from django.conf import settings
@@ -170,6 +171,7 @@ class SearchView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get('q', '')
+        orderby = request.GET.get('orderby', 'relevance')
         self.country_filter = request.GET.getlist('country')
         self.topic_filter = request.GET.getlist('topic')
 
@@ -224,8 +226,12 @@ class SearchView(TemplateView):
                 self.topics[category] = 1
                 self.items.append(result)
 
+        if orderby == 'location':
+            self.items = sorted(self.items, key=itemgetter('country'))
+
         return render(request, self.template_name, {
             'search_query': search_query,
+            'orderby': orderby,
             'query_params': {
                 'countries': self.country_filter,
                 'topics': self.topic_filter,
