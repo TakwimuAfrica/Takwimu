@@ -3,8 +3,8 @@ from takwimu.models import ProfileSectionPage, ProfilePage
 
 def get_widget_data(widget):
     try:
-        title = widget['value'].get('title')
-        source = widget['value'].get('source')
+        title = widget['value'].get('title', '')
+        source = widget['value'].get('source', '')
         body = None
 
         _type = widget['type']
@@ -30,13 +30,12 @@ def get_widget_data(widget):
                 body += entity['description']
                 body += " "
 
-        if title and source:
-            return {
-                "widget_id": widget['id'],
-                "body": body + " " + title + " " + source,
-                "type": "indicator_widget"
-            }
-        return None
+        return {
+            "widget_id": widget['id'],
+            "body": body + " " + title + " " + source,
+            "type": "indicator_widget"
+        }
+
     except KeyError:
         return None
 
