@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand, CommandError
 from takwimu.models import ProfileSectionPage, ProfilePage
 
 from takwimu.search.takwimu_search import TakwimuTopicSearch
-from takwimu.search.utils import get_widget_data
+from takwimu.search.utils import get_widget_data, get_page_details
 
 
 class Command(BaseCommand):
@@ -18,17 +18,7 @@ class Command(BaseCommand):
 
     def index_topics(self, queryset, search_backend):
         for i in queryset:
-            country = ""
-            category = ""
-            parent_page_type = ""
-            if isinstance(i, ProfileSectionPage):
-                country = str(i.get_parent())
-                category = i.title
-                parent_page_type = 'ProfileSectionPage'
-            elif isinstance(i, ProfilePage):
-                country = str(i)
-                category = "Country Overview"
-                parent_page_type = 'ProfilePage'
+            country, category, parent_page_type = get_page_details(i)
 
             parent_page_id = i.id
 

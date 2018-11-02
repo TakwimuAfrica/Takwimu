@@ -10,20 +10,20 @@ Should save
     - country
 """
 
-from django.db.models.signals import post_save
 from takwimu.models import ProfilePage, ProfileSectionPage
 from django.dispatch import receiver
+from wagtail.wagtailcore.signals import page_published
 
 from takwimu.search.takwimu_search import TakwimuTopicSearch
-from takwimu.search.utils import get_widget_data
+from takwimu.search.utils import get_widget_data, get_page_details
 
 
-@receiver(post_save, sender=ProfilePage)
-def index_new_changes_in_profilepage(sender, instance, created,**kwargs):
+@receiver(page_published, sender=ProfilePage)
+@receiver(page_published, sender=ProfileSectionPage)
+def index_new_changes_in_profilepage(sender, instance, created, **kwargs):
     search_backend = TakwimuTopicSearch()
-    country = str(instance)
-    category = "Country Overview"
-    parent_page_type = 'ProfilePage'
+    country, category, parent_page_type = get_page_details(instance)
+
     parent_page_id = instance.id
     for topic in instance.body.stream_data:
         topic_id = topic.get('id')
@@ -53,4 +53,3 @@ def index_new_changes_in_profilepage(sender, instance, created,**kwargs):
                         type='indicator_widget',
                         widget_id=data.get(
                             'widget_id'))
-

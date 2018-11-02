@@ -1,3 +1,5 @@
+from takwimu.models import ProfileSectionPage, ProfilePage
+
 
 def get_widget_data(widget):
     try:
@@ -37,3 +39,19 @@ def get_widget_data(widget):
         return None
     except KeyError:
         return None
+
+
+def get_page_details(page):
+    country = ""
+    category = ""
+    parent_page_type = ""
+    if isinstance(page, ProfileSectionPage):
+        country = str(page.get_parent())
+        category = page.title
+        parent_page_type = 'ProfileSectionPage'
+    elif isinstance(page, ProfilePage):
+        country = str(page)
+        category = "Country Overview"
+        parent_page_type = 'ProfilePage'
+
+    return country, category, parent_page_type
