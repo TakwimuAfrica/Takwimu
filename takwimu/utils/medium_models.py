@@ -114,6 +114,9 @@ class Post:
     def __repr__(self, *args, **kwargs):
         return str(to_dict(self))
 
+    def __dict__(self):
+        return to_dict(self)
+
 
 class Image:
     def __init__(self, image_id):
