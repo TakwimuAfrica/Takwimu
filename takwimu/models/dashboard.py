@@ -612,3 +612,17 @@ class FAQSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'FAQ'
+
+
+@register_setting
+class CountryPublishSetting(BaseSetting):
+    kenya = models.BooleanField(default=False)
+    nigeria = models.BooleanField(default=False)
+    tanzania = models.BooleanField(default=False)
+    uganda = models.BooleanField(default=False)
+    drc = models.BooleanField(default=False)
+    ethiopia = models.BooleanField(default=False)
+    burkina_faso = models.BooleanField(default=False)
+    senegal = models.BooleanField(default=False)
+    south_africa = models.BooleanField(default=False)
+    zambia = models.BooleanField(default=False)
