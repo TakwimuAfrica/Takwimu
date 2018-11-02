@@ -73,8 +73,10 @@ def takwimu_stories(request):
             stories = client.get_publication_posts('takwimu-africa',
                                                    count=20)
         stories_latest = stories[0:3]
+
+        stories_dict = [i.__dict__ for i in stories]
         stories_trending = sorted(
-            stories, key=operator.itemgetter('clap_count'), reverse=True)
+            stories_dict, key=operator.itemgetter('clap_count'), reverse=True)
 
     except Exception as e:
         print(e.message)
