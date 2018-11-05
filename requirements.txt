@@ -1,4 +1,4 @@
-gunicorn==19.8.1
+gunicorn==19.9.0
 
 git+https://github.com/CodeForAfrica/HURUmap.git@master#egg=hurumap
 
@@ -12,10 +12,6 @@ elasticsearch==5.5.3
 elasticsearch-dsl==5.4.0
 requests-aws4auth==0.9
 psycopg2-binary==2.7.5
-django-redis==4.9.0
-
-# Work around for incompatibility between requests & urllib3
-urllib3==1.23
 
 # Workaround for dependency links
 # Comment out when changes / updates / PR accepted
