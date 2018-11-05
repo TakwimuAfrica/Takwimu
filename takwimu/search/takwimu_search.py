@@ -7,98 +7,107 @@ from django.conf import settings
 
 from takwimu.models import ProfilePage, ProfileSectionPage
 
+DOC_TYPE = 'topic'
+
 
 class TakwimuTopicSearch():
 
     def __init__(self):
-        WAGTAILSEARCH_BACKENDS = getattr(
-            settings, 'WAGTAILSEARCH_BACKENDS')
+        DEFAULT_SEARCH_BACKEND = settings.WAGTAILSEARCH_BACKENDS['default']
 
-        self.es_index = WAGTAILSEARCH_BACKENDS['default'].get('INDEX')
-        self.es_timeout = WAGTAILSEARCH_BACKENDS['default'].get('TIMEOUT')
-        self.es_host_type = getattr(settings, 'TAKWIMU_ES_HOST_TYPE', '')
+        self.es_index = DEFAULT_SEARCH_BACKEND['INDEX']
+        self.es_timeout = DEFAULT_SEARCH_BACKEND['TIMEOUT']
+        self.es_host_type = settings.TAKWIMU_ES_HOST_TYPE.lower()
         self.profilepages = ProfilePage.objects.live()
         self.profilesectionpages = ProfileSectionPage.objects.live()
         if self.es_host_type == 'aws':
-            self.es_hosts = WAGTAILSEARCH_BACKENDS['default'].get('HOSTS')
+            self.es_hosts = DEFAULT_SEARCH_BACKEND['HOSTS']
         else:
-            self.es_hosts = WAGTAILSEARCH_BACKENDS['default'].get('URLS')
+            self.es_hosts = DEFAULT_SEARCH_BACKEND['URLS']
 
         self.es = Elasticsearch(hosts=self.es_hosts)
 
     def reset_index(self):
-        # Delete old index
+        """Deletes old index (if any) and creates a new on"""
+
         try:
             self.es.indices.delete(self.es_index)
         except NotFoundError:
             pass
-
-        # Create new index
         self.es.indices.create(self.es_index,
                                settings.TAKWIMU_ES_INDEX_SETTINGS)
 
-    def search(self, query_string, operator="or", country_filters=None,
+    def search(self, query_string, operator='or', country_filters=None,
                category_filters=None):
-        """do search thing"""
+        """Search for query_string using operation applying country and/or category filters"""
+
         search = Search(using=self.es, index=self.es_index,
-                        doc_type='topic').params(size=100)
+                        doc_type=DOC_TYPE).params(size=100)
 
         if operator == 'and':
-            search = search.query("match_phrase", body=query_string)
+            search = search.query('match_phrase', body=query_string)
         else:
-            search = search.query("match", body=query_string)
+            search = search.query('match', body=query_string)
 
-        if country_filters is not None and len(country_filters) > 0:
-            country_filters = [i.lower() for i in country_filters]
-            search = search.filter("terms", country=country_filters)
+        print('\n\n\n\n\n')
+        print(country_filters)
+        print(category_filters)
+        print('\n\n\n\n\n')
 
-        if category_filters is not None and len(category_filters) > 0:
-            all_categories = " ".join(category_filters)
-            category_filters = all_categories.lower().split(" ")
-            search = search.filter("terms", category=category_filters)
+        # Countries and categories may contain whitespace so don't join or
+        # split on ' '.
+        # Best approch is still to `try and see` rather than `checking`
+        # https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
+        try:
+            countries = [i.lower() for i in country_filters]
+            if countries:
+                search = search.filter('terms', country=countries)
+        except TypeError:
+            pass
+        try:
+            categories = [i.lower() for i in category_filters]
+            if categories:
+                search = search.filter('terms', category=categories)
+        except TypeError:
+            pass
 
         results = []
         for hit in search.execute():
             hit = hit.to_dict()
             results.append({
-                "country": hit.get('country', ''),
-                "region": "National",
-                "category": hit.get("category"),
-                "type": hit.get("type"),
-                "topic_id": hit.get("topic_id"),
-                "widget_id": hit.get("widget_id"),
-                "parent_page_id": hit.get("parent_page_id"),
-                "parent_page_type": hit.get("parent_page_type")
+                'category': hit['category'],
+                'country': hit['country'],
+                'region': 'National',
+                'parent_page_id': hit['parent_page_id'],
+                'parent_page_type': hit['parent_page_type'],
+                'content_id': hit['content_id'],
+                'content_type': hit['content_type'],
             })
-
         return results
 
     def add_to_index(self, category, body, country,
-                     parent_page_id, parent_page_type, type='', widget_id=None,
-                     topic_id=None, ):
+                     parent_page_id, parent_page_type, content_id, content_type):
         """
         - page type/class : either ProfileSectionPage or ProfilePage
-    - topic_id
-    - topic_body
-    - parent_page_id
-    - category
-    - country
+        - category
+        - body
+        - country
+        - parent_page_id
+        - parent_page_type
+        - content_id
+        - content_type
         :return:
         """
+
         doc = {
-            "body": body,
-            "category": category.title(),
-            "country": country.title(),
-            "parent_page_id": parent_page_id,
-            "parent_page_type": parent_page_type,
-            "topic_id": topic_id,
-            "type": type,
-            "widget_id": widget_id
+            'category': category.title(),
+            'body': body,
+            'country': country.title(),
+            'parent_page_id': parent_page_id,
+            'parent_page_type': parent_page_type,
+            'content_id': content_id,
+            'content_type': content_type,
         }
-
-        doc_id = topic_id or widget_id
-
-        result = self.es.index(index=self.es_index, doc_type="topic", body=doc,
-                               id=doc_id)
-
+        result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
+                               id=content_id)
         return result.get('result') == 'created', result

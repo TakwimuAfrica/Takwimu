@@ -199,9 +199,7 @@ class SearchView(TemplateView):
                                             country_filters=self.country_filter,
                                             category_filters=self.topic_filter)
 
-
         for result in results:
-            topic_id = result['topic_id']
             parent_page_id = result['parent_page_id']
             country = result['country']
             category = result['category']
@@ -215,7 +213,7 @@ class SearchView(TemplateView):
                 page = self.profilepages.get(id=parent_page_id)
 
             if page:
-                id = result.get('topic_id') or result.get('widget_id')
+                id = result['content_id']
                 data_point = self.topics_widgets_map.get(id)
 
                 result['data_point'] = data_point

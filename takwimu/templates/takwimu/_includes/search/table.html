@@ -64,12 +64,12 @@
             data-parent="{{ forloop.counter }}{{ result.category|slugify }}">
             <td colspan="4" style="border: 0!important;
                 {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
-                {% if result.type == 'topic' %}
+                {% if result.content_type == 'topic' %}
                 <p>
                     {{ result.data_point.value.summary }}
                 </p>
                 {{ result.data_point.value.body }}
-                {% elif result.type == 'indicator_widget' %}
+                {% elif result.content_type == 'indicator_widget' %}
                 {% include_block result.data_point %}
                 {% endif %}
             </td>

@@ -23,18 +23,18 @@ class Command(BaseCommand):
             parent_page_id = i.id
 
             for topic in i.body.stream_data:
-                topic_id = topic.get('id')
+                topic_id = topic['id']
                 topic_body = topic['value'].get('body', '')
                 topic_summary = topic['value'].get('summary', '')
-                body = topic_body + " " + topic_summary
+                body = '\n'.join([topic_summary, topic_body])
 
-                result, outcome = search_backend.add_to_index(category,
-                                                              body,
-                                                              country,
-                                                              parent_page_id,
-                                                              parent_page_type,
-                                                              type="topic",
-                                                              topic_id=topic_id)
+                _, outcome = search_backend.add_to_index(category,
+                                                         body,
+                                                         country,
+                                                         parent_page_id,
+                                                         parent_page_type,
+                                                         topic_id,
+                                                         'topic')
                 self.stdout.write(
                     search_backend.es_index + ": Indexing topic '%s result %s'" % (
                         topic_id,
@@ -46,17 +46,16 @@ class Command(BaseCommand):
                     for widget in indicator['value']['widgets']:
                         data = get_widget_data(widget)
                         if data:
-                            result, outcome = search_backend.add_to_index(
+                            _, outcome = search_backend.add_to_index(
                                 category,
-                                data.get('body'),
+                                data['body'],
                                 country,
                                 parent_page_id,
                                 parent_page_type,
-                                type='indicator_widget',
-                                widget_id=data.get(
-                                    'widget_id'))
+                                data['widget_id'],
+                                'indicator_widget')
                             self.stdout.write(
                                 search_backend.es_index + ": Indexing widget '%s result %s'" % (
-                                    data.get("widget_id"),
+                                    data['widget_id'],
                                     outcome,
                                 ))
