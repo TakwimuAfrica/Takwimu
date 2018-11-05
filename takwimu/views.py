@@ -1,5 +1,7 @@
 import json
 import requests
+import string
+
 from operator import itemgetter
 
 from collections import OrderedDict
@@ -185,19 +187,17 @@ class SearchView(TemplateView):
         self.countries = OrderedDict()
         self.topics = OrderedDict()
 
-        takwimu_search = TakwimuTopicSearch()
-        # takwimu_search.es_index = 'test-topics-4'
-        # results = []
+        operator = 'or'
+        strip_chars = string.whitespace
         if search_query.startswith('"') and search_query.endswith('"'):
             # search in quotes means phrase search
-            query = search_query.replace('"', '')
-            results = takwimu_search.search(query, operator="and",
-                                            country_filters=self.country_filter,
-                                            category_filters=self.topic_filter)
-        else:
-            results = takwimu_search.search(search_query,
-                                            country_filters=self.country_filter,
-                                            category_filters=self.topic_filter)
+            operator = 'and'
+            strip_chars += '"'
+
+        search_query = search_query.strip(strip_chars)
+        results = TakwimuTopicSearch().search(search_query, operator,
+                                              country_filters=self.country_filter,
+                                              category_filters=self.topic_filter)
 
         for result in results:
             parent_page_id = result['parent_page_id']
