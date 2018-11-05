@@ -5,16 +5,23 @@
     <thead class="table-borderless align-items-center">
         <tr style="font-size: 14px; vertical-align: middle;">
             <th scope="col" class="text-center py-4">
-                <a href="#" class="text-nowrap text-dark text-underline" data-toggle="collapse" data-target=".multi-collapse" aria-expanded="false">Expand all</a>
+                <a href="#" class="text-nowrap text-dark text-underline"
+                    data-toggle="collapse" data-target=".multi-collapse"
+                    aria-expanded="false">Expand all</a>
             </th>
             <th scope="col" class="py-4">Location</th>
             <th scope="col" class="py-4">Data</th>
             <th scope="col" class="border-0 pr-0 float-right ">
                 <div class="form-inline align-items-center">
                     <label class="mr-sm-2" for="sortby">Sort by: </label>
-                    <select class="custom-select" id="sortby" aria-placeholder="Sort by.." style="border-radius:2px;">
-                        <option value="Relevance">Relevance</option>
-                        <option value="Location">Location (A-Z)</option>
+                    <select class="custom-select" id="sortby" aria-placeholder="Sort by.."
+                        style="border-radius:2px;">
+                        <option value="relevance">Relevance</option>
+                        {% if orderby == 'location' %}
+                        <option value="location" selected>Location (A-Z)</option>
+                        {% else %}
+                        <option value="location">Location (A-Z)</option>
+                        {% endif %}
                     </select>
                 </div>
             </th>
@@ -26,8 +33,9 @@
         <tr></tr>
         <tr id="result" data-country="{{result.country|slugify}}" data-category="{{ result.category|slugify }}">
             <td scope="row" style="border-left: 1px solid transparent;" class="align-middle text-center expand">
-                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse" data-target="#{{ forloop.counter }}{{ result.category|slugify }}" role="button" aria-expanded="false" 
-                    aria-controls="{{ result.data_point.value.title|slugify }}}">
+                <a class="btn btn-link btn-sm text-dark" data-toggle="collapse"
+                    data-target="#{{ forloop.counter }}{{ result.category|slugify }}"
+                    role="button" aria-expanded="false" aria-controls="{{ result.data_point.value.title|slugify }}}">
                     <span class="icon fa fa-fw fa-plus"></span>
                 </a>
             </td>
@@ -44,7 +52,7 @@
             <td colspan="2" class="text-capitalize px-0 data" style="white-space:wrap;">
                 <span class="d-flex mb-2">
                     <b class="col-3">Category:</b>
-                    <span class="col pl-1">{{ result.category|slugify }}</span>
+                    <span class="col pl-1">{{ result.category|title }}</span>
                 </span>
                 <span class="d-flex">
                     <b class="col-3">Data point:</b>
@@ -52,61 +60,52 @@
                 </span>
             </td>
         </tr>
-        <tr class="collapse multi-collapse table-borderless" id="{{ forloop.counter }}{{ result.category|slugify }}" 
+        <tr class="collapse multi-collapse table-borderless" id="{{ forloop.counter }}{{ result.category|slugify }}"
             data-parent="{{ forloop.counter }}{{ result.category|slugify }}">
-            <td colspan="4"
-                style="border: 0!important;
+            <td colspan="4" style="border: 0!important;
                 {% if forloop.counter|divisibleby:2 %}background-color: rgba(0,0,0,.05);{% else %}background-color: #ffffff;{% endif %}">
-                <div id="{{ result.data_point.value.title|slugify }}" class="carousel slide {% if forloop.counter|divisibleby:2 %} odd {% endif %}">                
-                    <ol class="carousel-indicators">
-                        {% for indicator in result.data_point.value.indicators %}
-                            <li data-target="#{{ result.data_point.value.title|slugify }}" data-slide-to="{{ forloop.counter0 }}" class="{% if forloop.first %} active {% endif %}"></li>
-                        {% endfor %}
-                    </ol>
-                    <div class="carousel-inner">
-                        {% for indicator in result.data_point.value.indicators %}
-                            <div class="carousel-item {% if forloop.first %} active {% endif %}">
-                                {% include_block indicator %}
-                            </div>
-                        {% endfor %}
-                        {% if not result.data_point.value.indicators %}
-                            <div class="alert alert-info" role="alert">
-                                <span class="fas fa-info"></span>
-                                <span class="ml-2">We are working to source additional data for this topic. Please 
-                                    <a href="http://eepurl.com/dynuAX" target="_blank" rel="noopener">subscribe</a>
-                                    to receive an alert when the data is updated.
-                                </span>
-                            </div>
-                        {% endif %}
-                    </div>
-                </div>
+                {% if result.content_type == 'topic' %}
+                <p>
+                    {{ result.data_point.value.summary }}
+                </p>
+                {{ result.data_point.value.body }}
+                {% elif result.content_type == 'indicator_widget' %}
+                {% include_block result.data_point %}
+                {% endif %}
             </td>
         </tr>
-             
+
         {% endfor %}
     </tbody>
 </table>
 <style>
-    .noBorder td, .transBorder {
+    .noBorder td,
+    .transBorder {
         border: 1px solid transparent;
     }
+
     .carousel-inner .btn-group {
         border: 1px solid #dedede;
     }
+
     .odd .carousel-inner .btn-group .btn {
         background: #dedede;
     }
+
     .carousel-inner .btn-group .btn {
         border-radius: 0;
         background: #fff;
     }
+
     .carousel-indicators li {
         background-color: #6c757d;
     }
+
     .carousel-indicators li.active {
         background-color: #000000;
     }
-    .odd .nav-tabs .nav-item.show .nav-link, 
+
+    .odd .nav-tabs .nav-item.show .nav-link,
     .odd .nav-tabs .nav-link.active {
         background-color: transparent;
         border-bottom-color: transparent;
@@ -119,13 +118,13 @@
 
         $('a[data-toggle="collapse"]').click(function () {
             var btn = $(this);
-            
+
             //on close collapse
-            $('.collapse'+btn.attr('data-target')).on('hide.bs.collapse', function () {
+            $('.collapse' + btn.attr('data-target')).on('hide.bs.collapse', function () {
                 // Change collapse button state
                 btn.find('.icon').addClass('fa-plus');
 
-                var target = '#'+$(this).attr('data-parent');
+                var target = '#' + $(this).attr('data-parent');
                 // Remove borders
                 $(target).removeClass('noBorder');
                 $('tbody.table-bordered').removeClass('transBorder');
@@ -133,17 +132,38 @@
             });
 
             //on open collapse
-            $('.collapse'+btn.attr('data-target')).on('show.bs.collapse', function () {
+            $('.collapse' + btn.attr('data-target')).on('show.bs.collapse', function () {
                 // Change collapse button state
                 btn.find('.icon').toggleClass('fa-minus');
 
-                var target = '#'+$(this).attr('data-parent');
+                var target = '#' + $(this).attr('data-parent');
                 // Add back borders
                 $(target).addClass('noBorder');
                 $('tbody.table-bordered').addClass('transBorder');
                 $(target).prev('tr#result').addClass('noBorder');
-            })
+            });
+
         });
+
+        $('#sortby').on('change', function () {
+            var value = $(this).val(); // get selected value
+            if (value) {
+                var url = window.location.href;
+                console.log(value);
+                var url = new URL(url);
+                var query_string = url.search;
+                var search_params = new URLSearchParams(query_string);
+
+                if (search_params.get("orderby") === null) {
+                    search_params.append('orderby', value);
+                } else {
+                    search_params.set('orderby', value);
+                }
+                window.location.search = search_params.toString();
+            }
+        });
+
+
 
     });
 </script>

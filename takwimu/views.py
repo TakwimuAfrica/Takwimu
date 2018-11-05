@@ -1,15 +1,15 @@
 import json
 import requests
+import string
+
+from operator import itemgetter
 
 from collections import OrderedDict
 from django.conf import settings
-from django.core.serializers import serialize
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.views.generic import TemplateView, FormView, View
 from django.views.generic.base import TemplateView
-from wagtail.wagtailcore.models import Page
-from wagtail.wagtailsearch.models import Query
 from wazimap.views import HomepageView, GeographyDetailView
 
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
@@ -17,6 +17,7 @@ from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
 from forms import SupportServicesContactForm
 
 from sdg import SDG
+from takwimu.search.takwimu_search import TakwimuTopicSearch
 
 
 class HomePageView(TemplateView):
@@ -71,7 +72,7 @@ class SDGIndicatorView(TemplateView):
     template_name = 'takwimu/sdg_topic_page.html'
 
     def get_context_data(self, **kwargs):
-        json_data = open('takwimu/fixtures/sdg.json') 
+        json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
         context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
@@ -158,8 +159,6 @@ class SupportServicesIndexView(FormView):
         return self.render_to_response(context)
 
     def form_invalid(self, form):
-        print('\n\n\n\n\n\n')
-        print form.data
         return super(SupportServicesIndexView, self).form_invalid(form)
 
 
@@ -174,27 +173,67 @@ class SearchView(TemplateView):
 
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get('q', '')
+        orderby = request.GET.get('orderby', 'relevance')
+        self.country_filter = request.GET.getlist('country')
+        self.topic_filter = request.GET.getlist('topic')
+
+        self.profilepages = ProfilePage.objects.live()
+        self.profilesectionpages = ProfileSectionPage.objects.live()
+
+        self.topics_widgets_map = {}
+        self.create_results_map()
+
         self.items = []
         self.countries = OrderedDict()
         self.topics = OrderedDict()
-        if search_query:
 
-            # Profile page only indexes geo and body but not sections.
-            profilepage_results = ProfilePage.objects.live().search(
-                search_query)
-            for profilepage in profilepage_results.results():
-                self._extract_search_results(request, profilepage)
+        operator = 'or'
+        strip_chars = string.whitespace
+        if search_query.startswith('"') and search_query.endswith('"'):
+            # search in quotes means phrase search
+            operator = 'and'
+            strip_chars += '"'
 
-            # Hence, sections (i.e. topics in the UI) need to be searched independent
-            # of profile page
-            profilesectionpage_results = ProfileSectionPage.objects.live().search(
-                search_query)
-            for profilesectionpage in profilesectionpage_results.results():
-                self._extract_search_results(request, profilesectionpage)
+        search_query = search_query.strip(strip_chars)
+        results = TakwimuTopicSearch().search(search_query, operator,
+                                              country_filters=self.country_filter,
+                                              category_filters=self.topic_filter)
 
-            Query.get(search_query).add_hit()
+        for result in results:
+            parent_page_id = result['parent_page_id']
+            country = result['country']
+            category = result['category']
+            self.countries[country.title()] = 1
+            self.topics[category.title()] = 1
+
+            page = None
+            if result['parent_page_type'] == 'ProfileSectionPage':
+                page = self.profilesectionpages.get(id=parent_page_id)
+            elif result['parent_page_type'] == 'ProfilePage':
+                page = self.profilepages.get(id=parent_page_id)
+
+            if page:
+                id = result['content_id']
+                data_point = self.topics_widgets_map.get(id)
+
+                result['data_point'] = data_point
+                result['url'] = page.get_url(request)
+                country = result['country']
+                category = result['category']
+                self.countries[country] = 1
+                self.topics[category] = 1
+                self.items.append(result)
+
+        if orderby == 'location':
+            self.items = sorted(self.items, key=itemgetter('country'))
+
         return render(request, self.template_name, {
             'search_query': search_query,
+            'orderby': orderby,
+            'query_params': {
+                'countries': self.country_filter,
+                'topics': self.topic_filter,
+            },
             'search_results': {
                 'items': self.items,
                 'countries': self.countries.keys(),
@@ -202,22 +241,28 @@ class SearchView(TemplateView):
             },
         })
 
-    def _extract_search_results(self, request, page):
-        (country, category) = (str(page.get_parent()), page.title) \
-            if isinstance(page, ProfileSectionPage) \
-            else (str(page), u'Country Overview')
-        self.countries[country] = 1
-        self.topics[category] = 1
-        url = page.get_url(request)
+    def get_topic_from_page(self, topic_id, page):
         for topic in page.body:
-            result = {
-                'country': country,
-                'region': 'National',
-                'category': category,
-                'url': url,
-                'data_point': topic,
-            }
-            self.items.append(result)
+            if topic.id == topic_id:
+                return topic
+
+    def create_results_map(self):
+        for profilepage in self.profilepages:
+            for topic in profilepage.body:
+                self.topics_widgets_map[topic.id] = topic
+
+                for indicator in topic.value['indicators']:
+                    for widget in indicator.value['widgets']:
+                        self.topics_widgets_map[widget.id] = widget
+
+        for profilesectionpage in self.profilesectionpages:
+            for topic in profilesectionpage.body:
+                self.topics_widgets_map[topic.id] = topic
+
+                for indicator in topic.value['indicators']:
+                    for widget in indicator.value['widgets']:
+                        self.topics_widgets_map[widget.id] = widget
+
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
 

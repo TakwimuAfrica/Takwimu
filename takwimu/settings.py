@@ -125,6 +125,51 @@ ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
 # WAGTAIL Search / Elastic
 # -------------------------------------------------------------------------------------
 
+TAKWIMU_ES_INDEX_SETTINGS = {
+    'settings': {
+        'analysis': {
+            'analyzer': {
+                'ngram_analyzer': {
+                    'type': 'custom',
+                    'tokenizer': 'lowercase',
+                    'filter': ['asciifolding', 'ngram']
+                },
+                'edgengram_analyzer': {
+                    'type': 'custom',
+                    'tokenizer': 'lowercase',
+                    'filter': ['asciifolding', 'edgengram']
+                }
+            },
+            'tokenizer': {
+                'ngram_tokenizer': {
+                    'type': 'nGram',
+                    'min_gram': 3,
+                    'max_gram': 15,
+                },
+                'edgengram_tokenizer': {
+                    'type': 'edgeNGram',
+                    'min_gram': 2,
+                    'max_gram': 15,
+                    'side': 'front'
+                }
+            },
+            'filter': {
+                'ngram': {
+                    'type': 'nGram',
+                    'min_gram': 3,
+                    'max_gram': 15
+                },
+                'edgengram': {
+                    'type': 'edgeNGram',
+                    'min_gram': 1,
+                    'max_gram': 15
+                }
+            }
+        }
+    }
+}
+
+
 TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu-dev')
 TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '30'))
 TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')

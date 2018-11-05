@@ -4,7 +4,7 @@
 <div class="form-row px-1">
     {% for topic in results.topics %}
         <div class="col-6 py-1 text-truncate">
-            <input class="control-input filter-checkbox" type="checkbox" value="{{topic|slugify}}" id="{{topic|slugify}}" data-parent="topic">
+            <input class="control-input filter-checkbox" type="checkbox" name="topic-checkbox" value="{{topic}}" id="{{topic|slugify}}" data-parent="topic">
             <label class="control-label" for="{{topic|slugify}}">
                 {{ topic }}
             </label>
