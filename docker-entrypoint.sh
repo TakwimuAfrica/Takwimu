@@ -6,7 +6,7 @@ python manage.py migrate --noinput        # Apply database migrations
 cat takwimu/sql/*.sql | psql              # Upload tables / data
 python manage.py compilescss              # Compile SCSS (offline)
 python manage.py collectstatic --noinput  # Collect static files
-python manage.py update_index             # Update search index
+python manage.py update_topics_index      # Update topics index
 python manage.py createcachetable         # Create CACHE table
 
 # Prepare log files and start outputting logs to stdout
