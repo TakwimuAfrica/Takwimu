@@ -1,9 +1,10 @@
 from collections import OrderedDict
 import json
 
+from django.conf import settings
 from elasticsearch import Elasticsearch, NotFoundError
 from elasticsearch_dsl import Search
-from django.conf import settings
+from requests_aws4auth import AWS4Auth
 
 from takwimu.models import ProfilePage, ProfileSectionPage
 
@@ -17,15 +18,24 @@ class TakwimuTopicSearch():
 
         self.es_index = DEFAULT_SEARCH_BACKEND['INDEX']
         self.es_timeout = DEFAULT_SEARCH_BACKEND['TIMEOUT']
-        self.es_host_type = settings.TAKWIMU_ES_HOST_TYPE.lower()
+        HOST_TYPE = settings.TAKWIMU_ES_HOST_TYPE.lower()
+        if HOST_TYPE == 'aws':
+            DEFAULT_HOST = DEFAULT_SEARCH_BACKEND['HOSTS'][0]
+            DEFAULT_OPTIONS = DEFAULT_SEARCH_BACKEND['OPTIONS']
+            self.es = Elasticsearch(
+                hosts=[{'host': DEFAULT_HOST['host'],
+                        'port': DEFAULT_HOST['port']}],
+                http_auth=DEFAULT_HOST['http_auth'],
+                use_ssl=DEFAULT_HOST['use_ssl'],
+                verify_certs=DEFAULT_HOST['verify_certs'],
+                connection_class=DEFAULT_OPTIONS['connection_class']
+            )
+        else:
+            DEFAULT_HOST = DEFAULT_SEARCH_BACKEND['URLS']
+            self.es = Elasticsearch(hosts=DEFAULT_HOST)
+
         self.profilepages = ProfilePage.objects.live()
         self.profilesectionpages = ProfileSectionPage.objects.live()
-        if self.es_host_type == 'aws':
-            self.es_hosts = DEFAULT_SEARCH_BACKEND['HOSTS']
-        else:
-            self.es_hosts = DEFAULT_SEARCH_BACKEND['URLS']
-
-        self.es = Elasticsearch(hosts=self.es_hosts)
 
     def reset_index(self):
         """Deletes old index (if any) and creates a new on"""
@@ -48,11 +58,6 @@ class TakwimuTopicSearch():
             search = search.query('match_phrase', body=query_string)
         else:
             search = search.query('match', body=query_string)
-
-        print('\n\n\n\n\n')
-        print(country_filters)
-        print(category_filters)
-        print('\n\n\n\n\n')
 
         # Countries and categories may contain whitespace so don't join or
         # split on ' '.
