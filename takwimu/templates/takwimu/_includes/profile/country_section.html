@@ -4,12 +4,12 @@
     <div class="row">
       <div class="col-4">
         <img class=" border-light mr-2"
-             src={% with 'img/maps/'|add:country|lower|add:'.svg' as image_static %}
+             src={% with 'img/maps/'|add:country_slug|lower|add:'.svg' as image_static %}
                {% static image_static %}
              {% endwith %}/>
       </div>
       <div class="col-8">
-        <h2 class="display-4 font-weight-bold mb-4">{{ country|title}}{% if title %}'s Country Profile{% endif %}</h2>
+        <h2 class="display-4 font-weight-bold mb-4">{{ country_name|title}}{% if title %}'s Country Profile{% endif %}</h2>
         <p class="mb-0" style="color: #4a4a4a;">
           Actionable analysis by geo-political and socioeconomic experts across 10 key African countries.
         </p>
@@ -19,9 +19,9 @@
                   style="padding-right: 2em; padding-left: 2px; border-color: rgb(169, 169, 169); height: auto">
             <option value="National Level">National Level</option>
           </select> -->
-          <a class="btn btn-primary btn-sm text-uppercase font-weight-bold" href="/profiles/{{ country }}"
+          <a class="btn btn-primary btn-sm text-uppercase font-weight-bold" href="/profiles/{{ country_slug }}"
              style="border-color: #1f6cc6; padding-top:9px; padding-bottom: 9px;">
-            Read Country Analysis For {{ country|upper }}
+            Read Country Analysis For {{ country_name|upper }}
           </a>
         </p>
       </div>
