@@ -11,7 +11,7 @@ from takwimu.models.dashboard import TopicPage
 
 def takwimu_countries(request):
     settings = CountryPublishSetting.for_site(request.site)
-    settings_dict = settings.__dict__
+    published_status = settings.__dict__
 
     return {
         'countries': [
@@ -19,52 +19,52 @@ def takwimu_countries(request):
                 'name': 'Burkina Faso',
                 'name_short': 'Burkina Faso',
                 'name_slug': 'burkina-faso',
-                'published': settings_dict.get('burkina_faso', False)
+                'published': published_status.get('burkina_faso', False)
             }, {
                 'name': 'Democratic Republic of Congo',
                 'name_short': 'DR Congo',
                 'name_slug': 'democratic-republic-of-congo',
-                'published': settings_dict.get('drc', False)
+                'published': published_status.get('drc', False)
             }, {
                 'name': 'Ethiopia',
                 'name_short': 'Ethiopia',
                 'name_slug': 'ethiopia',
-                'published': settings_dict.get('ethiopia', False)
+                'published': published_status.get('ethiopia', False)
             }, {
                 'name': 'Kenya',
                 'name_short': 'Kenya',
                 'name_slug': 'kenya',
-                'published': settings_dict.get('kenya', False)
+                'published': published_status.get('kenya', False)
             }, {
                 'name': 'Nigeria',
                 'name_short': 'Nigeria',
                 'name_slug': 'nigeria',
-                'published': settings_dict.get('nigeria', False)
+                'published': published_status.get('nigeria', False)
             }, {
                 'name': 'Senegal',
                 'name_short': 'Senegal',
                 'name_slug': 'senegal',
-                'published': settings_dict.get('senegal', False)
+                'published': published_status.get('senegal', False)
             }, {
                 'name': 'South Africa',
                 'name_short': 'South Africa',
                 'name_slug': 'south-africa',
-                'published': settings_dict.get('south_africa', False)
+                'published': published_status.get('south_africa', False)
             },{
                 'name': 'Tanzania',
                 'name_short': 'Tanzania',
                 'name_slug': 'tanzania',
-                'published': settings_dict.get('tanzania', False)
+                'published': published_status.get('tanzania', False)
             }, {
                 'name': 'Uganda',
                 'name_short': 'Uganda',
                 'name_slug': 'uganda',
-                'published': settings_dict.get('uganda', False)
+                'published': published_status.get('uganda', False)
             }, {
                 'name': 'Zambia',
                 'name_short': 'Zambia',
                 'name_slug': 'zambia',
-                'published': settings_dict.get('zambia', False)
+                'published': published_status.get('zambia', False)
             }
         ]
     }
