@@ -4,7 +4,7 @@
     <div class="row">
       <div class="col-4">
         <img class=" border-light mr-2"
-             src={% with 'img/maps/'|add:country_slug|lower|add:'.svg' as image_static %}
+             src={% with 'img/maps/'|add:country_slug|add:'.svg' as image_static %}
                {% static image_static %}
              {% endwith %}/>
       </div>
