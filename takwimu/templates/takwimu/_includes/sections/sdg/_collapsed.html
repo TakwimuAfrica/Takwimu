@@ -24,18 +24,19 @@
         </div>
         <div class="col-6 d-flex px-5 justify-content-center align-items-center" style="border-left: 1px solid rgba(255, 255, 255, .52);">
             {% if sdg_content %}
-                <form class="w-100">
+                <form class="w-100" action="{% url 'sdgs' %}" method="get">
                     <div class="form-group">
                         <label for="sdg-data" class="display-6 font-weight-bold">View gorvernace data for:</label>
-                        <select class="form-control rounded-0" id="sdg-data">
-                            <option selected>Please select a country</option>
-                            <option value="Tanzania">Tanzania</option>
-                            <option value="Kenya">Kenya</option>
-                            <option value="Senagal">Senagal</option>
-                            <option value="Uganda">Uganda</option>
-                            <option value="DRC">DRC</option>
+                        <select class="form-control rounded-0" id="sdg-data" name="country">
+                        <option selected>Please select a country</option>
+                          {% for country in countries %}
+                            {% if country.published %}
+                              <option value="{{ country.name_short|slugify }}">{{ country.name_short }}</option>
+                            {% endif %}
+                          {% endfor %}
                         </select>
                     </div>
+                  <input type="text" name="sdg" value="{{ sdg_title|slugify }}" class="d-none">
                     <button type="submit" class="float-right btn btn-outline-light font-weight-bold text-uppercase">View Data</button>
                 </form>
             {% else %}
