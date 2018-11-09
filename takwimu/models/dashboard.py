@@ -280,8 +280,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('entities', blocks.ListBlock(EntityStructBlock())),
-            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
-                                       label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],
