@@ -2,72 +2,30 @@ import json
 import operator
 
 from collections import OrderedDict
+from django.utils.text import slugify
 from takwimu import settings
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, CountryPublishSetting
+from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, COUNTRIES, CountryProfilesSetting
 from takwimu.models.dashboard import TopicPage
 
 
 def takwimu_countries(request):
-    settings = CountryPublishSetting.for_site(request.site)
+    settings = CountryProfilesSetting.for_site(request.site)
     published_status = settings.__dict__
 
-    return {
-        'countries': [
-            {
-                'name': 'Burkina Faso',
-                'name_short': 'Burkina Faso',
-                'name_slug': 'burkina-faso',
-                'published': published_status.get('burkina_faso', False)
-            }, {
-                'name': 'Democratic Republic of Congo',
-                'name_short': 'DR Congo',
-                'name_slug': 'democratic-republic-of-congo',
-                'published': published_status.get('drc', False)
-            }, {
-                'name': 'Ethiopia',
-                'name_short': 'Ethiopia',
-                'name_slug': 'ethiopia',
-                'published': published_status.get('ethiopia', False)
-            }, {
-                'name': 'Kenya',
-                'name_short': 'Kenya',
-                'name_slug': 'kenya',
-                'published': published_status.get('kenya', False)
-            }, {
-                'name': 'Nigeria',
-                'name_short': 'Nigeria',
-                'name_slug': 'nigeria',
-                'published': published_status.get('nigeria', False)
-            }, {
-                'name': 'Senegal',
-                'name_short': 'Senegal',
-                'name_slug': 'senegal',
-                'published': published_status.get('senegal', False)
-            }, {
-                'name': 'South Africa',
-                'name_short': 'South Africa',
-                'name_slug': 'south-africa',
-                'published': published_status.get('south_africa', False)
-            },{
-                'name': 'Tanzania',
-                'name_short': 'Tanzania',
-                'name_slug': 'tanzania',
-                'published': published_status.get('tanzania', False)
-            }, {
-                'name': 'Uganda',
-                'name_short': 'Uganda',
-                'name_slug': 'uganda',
-                'published': published_status.get('uganda', False)
-            }, {
-                'name': 'Zambia',
-                'name_short': 'Zambia',
-                'name_slug': 'zambia',
-                'published': published_status.get('zambia', False)
-            }
-        ]
-    }
+    countries = []
+    for code, names in COUNTRIES.viewitems():
+        country = {
+            'name': names['name'],
+            'short_name': names['short_name'],
+            'slug': slugify(names['name']),
+            'published': published_status[code]
+        }
+        countries.append(country)
+
+    return {'countries': countries}
+
 
 def takwimu_stories(request):
 

@@ -44,14 +44,12 @@
 
     {% for country in countries %}
     {% if country.published %}
-      <a class="dropdown-item p-3" href="/profiles/{{ country.name|slugify }}"
-          data-value="{{ counrty.name }}">
+      <a class="dropdown-item p-3" href="/profiles/{{ country.slug }}"
+          data-value="{{ country.name }}">
         <img class="rounded-circle border-light mr-2"
-            {% with country_slug=country.name|slugify %}
-              src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}"
-            {% endwith %}
+            src="{% static 'img/flags/'|add:country.slug|add:'.svg' %}"
             style="border: solid 2px; box-shadow: 0 0 0 2pt rgba(237, 237, 236, 0.61); width: 30px; height: 30px;"/>
-        {{ country.name_short }}
+        {{ country.short_name }}
       </a>
     {% endif %}
     {% endfor %}

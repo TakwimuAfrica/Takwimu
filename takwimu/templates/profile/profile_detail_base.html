@@ -125,7 +125,7 @@
   {% if geography.this.geo_level == 'country' %}
     {% for country in countries %}
       {% if country.published %}
-        {% include 'takwimu/_includes/profile/country_section.html' with country_name=country.name country_slug=country.name_slug %}
+        {% include 'takwimu/_includes/profile/country_section.html' with country_name=country.name country_slug=country.slug %}
       {% endif %}
     {% endfor %}
   {% else %}

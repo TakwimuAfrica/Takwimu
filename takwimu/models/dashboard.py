@@ -239,17 +239,19 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                                       ('dollar', 'Dollar')
                                                   ],
                                                   label='Stat Type')),
-            ('data_source_link', blocks.URLBlock(required=False, label='Source URL')),
-            ('data_source_title', blocks.CharBlock(required=False, label='Source Title')),
-            ('chart_qualifier', blocks.RichTextBlock(features=['h5', 'h6', 'ol', 'ul','bold', 'italic', 'hr','link'],
+            ('data_source_link', blocks.URLBlock(
+                required=False, label='Source URL')),
+            ('data_source_title', blocks.CharBlock(
+                required=False, label='Source Title')),
+            ('chart_qualifier', blocks.RichTextBlock(features=['h5', 'h6', 'ol', 'ul', 'bold', 'italic', 'hr', 'link'],
                                                      required=False, label='Chart Qualifier',
                                                      help_text='Chart context e.g. legend, universe, etc.')),
             ('chart_height', blocks.IntegerBlock(required=False,
                                                  label='Chart Height',
                                                  help_text='Default is 300px')),
             ('widget_height', blocks.IntegerBlock(required=False,
-                                                 label='Widget Height',
-                                                 help_text='Default is 450px')),
+                                                  label='Widget Height',
+                                                  help_text='Default is 450px')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/hurumap.html'
@@ -614,15 +616,72 @@ class FAQSetting(BaseSetting):
         verbose_name = 'FAQ'
 
 
+COUNTRIES = {
+    'KE': {
+        'iso_name': 'Kenya',
+        'name': 'Kenya',
+        'short_name': 'Kenya',
+    },
+    'NG': {
+        'iso_name': 'Nigeria',
+        'name': 'Nigeria',
+        'short_name': 'Nigeria',
+    },
+    'TZ': {
+        'iso_name': 'Tanzania, United Republic of',
+        'name': 'Tanzania',
+        'short_name': 'Tanzania',
+    },
+    'UG': {
+        'iso_name': 'Uganda',
+        'name': 'Uganda',
+        'short_name': 'Uganda',
+    },
+    'CD': {
+        'iso_name': 'Congo, the Democratic Republic of the',
+        'name': 'Democratic Republic of Congo',
+        'short_name': 'DR Congo',
+    },
+    'ET': {
+        'iso_name': 'Ethiopia',
+        'name': 'Ethiopia',
+        'short_name': 'Ethiopia',
+    },
+    'BF': {
+        'iso_name': 'Burkina Faso',
+        'name': 'Burkina Faso',
+        'short_name': 'Burkina Faso',
+    },
+    'SN': {
+        'iso_name': 'Senegal',
+        'name': 'Senegal',
+        'short_name': 'Senegal',
+    },
+    'ZA': {
+        'iso_name': 'South Africa',
+        'name': 'South Africa',
+        'short_name': 'South Africa',
+    },
+    'ZM': {
+        'iso_name': 'Zambia',
+        'name': 'Zambia',
+        'short_name': 'Zambia',
+    },
+}
+
+
 @register_setting
-class CountryPublishSetting(BaseSetting):
-    kenya = models.BooleanField(default=False)
-    nigeria = models.BooleanField(default=False)
-    tanzania = models.BooleanField(default=False)
-    uganda = models.BooleanField(default=False)
-    drc = models.BooleanField(default=False)
-    ethiopia = models.BooleanField(default=False)
-    burkina_faso = models.BooleanField(default=False)
-    senegal = models.BooleanField(default=False)
-    south_africa = models.BooleanField(default=False)
-    zambia = models.BooleanField(default=False)
+class CountryProfilesSetting(BaseSetting):
+    BF = models.BooleanField(COUNTRIES['BF']['iso_name'], default=True)
+    CD = models.BooleanField(COUNTRIES['CD']['iso_name'], default=True)
+    ET = models.BooleanField(COUNTRIES['ET']['iso_name'], default=True)
+    KE = models.BooleanField(COUNTRIES['KE']['iso_name'], default=True)
+    NG = models.BooleanField(COUNTRIES['NG']['iso_name'], default=True)
+    SN = models.BooleanField(COUNTRIES['SN']['iso_name'], default=True)
+    ZA = models.BooleanField(COUNTRIES['ZA']['iso_name'], default=True)
+    TZ = models.BooleanField(COUNTRIES['TZ']['iso_name'], default=True)
+    UG = models.BooleanField(COUNTRIES['UG']['iso_name'], default=False)
+    ZM = models.BooleanField(COUNTRIES['ZM']['iso_name'], default=False)
+
+    class Meta:
+        verbose_name = 'Country Profiles'
