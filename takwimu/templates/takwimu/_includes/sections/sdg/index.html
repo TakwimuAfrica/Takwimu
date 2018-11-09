@@ -1,6 +1,11 @@
 {% load staticfiles %}
 
 <section class="sdg-container accordion" id="sdg-container">
+     {% if sdg_status == 'nil' %}
+        <div class="alert alert-info" role="alert">
+          No SDG data was found
+        </div>
+    {% endif %}
     <div class="row mx-auto">
         {% for sdg in sdgs|slice:":6" %}
         <div class="col-2 mx-0 p-1">
@@ -67,4 +72,5 @@
         </div>
         {% endfor %}
     </div>
+
 </section>

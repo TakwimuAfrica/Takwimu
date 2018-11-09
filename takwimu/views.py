@@ -110,7 +110,7 @@ class SDGIndicatorView(TemplateView):
                 # return to sdg page and add a flag to show a pop up that no
                 # indicators matching that SDG were found
                 context = self.get_context_data()
-                context['sdg_found'] = False
+                context['sdg_status'] = 'nil'
                 return render(request, self.template_name, context)
             else:
                 # follow link to profiles page
@@ -141,6 +141,26 @@ class SDGIndicatorView(TemplateView):
                             sdg = widget['value']['sdg']
                             self.indicator_sdg_map[sdg] = {}
                             self.indicator_sdg_map[sdg][country] = {'topic_title': topic_title, 'url': url, 'indicator_id': indicator_id}
+            except KeyError:
+                pass
+
+        for page in ProfilePage.objects.live():
+            country, _, _ = get_page_details(page)
+            country = slugify(country)
+            url = page.url
+            try:
+                for topic in page.body.stream_data:
+
+                    topic_title = slugify(topic['value']['title'])
+                    for indicator in topic['value']['indicators']:
+                        indicator_id = indicator['id']
+                        for widget in indicator['value']['widgets']:
+                            widget_id = widget['id']
+                            sdg = widget['value']['sdg']
+                            self.indicator_sdg_map[sdg] = {}
+                            self.indicator_sdg_map[sdg][country] = {
+                                'topic_title': topic_title, 'url': url,
+                                'indicator_id': indicator_id}
             except KeyError:
                 pass
 
