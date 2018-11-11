@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import re
 import warnings
 
@@ -616,57 +617,56 @@ class FAQSetting(BaseSetting):
         verbose_name = 'FAQ'
 
 
-COUNTRIES = {
-    'KE': {
-        'iso_name': 'Kenya',
-        'name': 'Kenya',
-        'short_name': 'Kenya',
-    },
-    'NG': {
-        'iso_name': 'Nigeria',
-        'name': 'Nigeria',
-        'short_name': 'Nigeria',
-    },
-    'TZ': {
-        'iso_name': 'Tanzania, United Republic of',
-        'name': 'Tanzania',
-        'short_name': 'Tanzania',
-    },
-    'UG': {
-        'iso_name': 'Uganda',
-        'name': 'Uganda',
-        'short_name': 'Uganda',
-    },
-    'CD': {
-        'iso_name': 'Congo, the Democratic Republic of the',
-        'name': 'Democratic Republic of Congo',
-        'short_name': 'DR Congo',
-    },
-    'ET': {
-        'iso_name': 'Ethiopia',
-        'name': 'Ethiopia',
-        'short_name': 'Ethiopia',
-    },
-    'BF': {
-        'iso_name': 'Burkina Faso',
-        'name': 'Burkina Faso',
-        'short_name': 'Burkina Faso',
-    },
-    'SN': {
-        'iso_name': 'Senegal',
-        'name': 'Senegal',
-        'short_name': 'Senegal',
-    },
-    'ZA': {
-        'iso_name': 'South Africa',
-        'name': 'South Africa',
-        'short_name': 'South Africa',
-    },
-    'ZM': {
-        'iso_name': 'Zambia',
-        'name': 'Zambia',
-        'short_name': 'Zambia',
-    },
+COUNTRIES = OrderedDict()
+COUNTRIES['BF'] = {
+    'iso_name': 'Burkina Faso',
+    'name': 'Burkina Faso',
+    'short_name': 'Burkina Faso',
+}
+COUNTRIES['CD'] = {
+    'iso_name': 'Congo, the Democratic Republic of the',
+    'name': 'Democratic Republic of Congo',
+    'short_name': 'DR Congo',
+}
+COUNTRIES['ET'] = {
+    'iso_name': 'Ethiopia',
+    'name': 'Ethiopia',
+    'short_name': 'Ethiopia',
+}
+COUNTRIES['KE'] = {
+    'iso_name': 'Kenya',
+    'name': 'Kenya',
+    'short_name': 'Kenya',
+}
+COUNTRIES['NG'] = {
+    'iso_name': 'Nigeria',
+    'name': 'Nigeria',
+    'short_name': 'Nigeria',
+}
+COUNTRIES['SN'] = {
+    'iso_name': 'Senegal',
+    'name': 'Senegal',
+    'short_name': 'Senegal',
+}
+COUNTRIES['ZA'] = {
+    'iso_name': 'South Africa',
+    'name': 'South Africa',
+    'short_name': 'South Africa',
+}
+COUNTRIES['TZ'] = {
+    'iso_name': 'Tanzania, United Republic of',
+    'name': 'Tanzania',
+    'short_name': 'Tanzania',
+}
+COUNTRIES['UG'] = {
+    'iso_name': 'Uganda',
+    'name': 'Uganda',
+    'short_name': 'Uganda',
+}
+COUNTRIES['ZM'] = {
+    'iso_name': 'Zambia',
+    'name': 'Zambia',
+    'short_name': 'Zambia',
 }
 
 
