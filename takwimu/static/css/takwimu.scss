@@ -152,6 +152,12 @@ a {
  * HURUmap Customizations
  * ------------------------ */
 
+// BODY
+
+body {
+  padding-top: 0;
+}
+
 // Geography
 
 .leaflet-label {
@@ -188,7 +194,7 @@ a {
  * Flex Scroll (Mainly for Navs)
  * -----------------------------
  * Source: https://iamsteve.me/blog/entry/using-flexbox-for-horizontal-scrolling-navigation
- * 
+ *
  * [1]: Make a flex container so all our items align as necessary
  * [2]: Prevent items from wrapping
  * [3]: Automatic overflow means a scroll bar won’t be present if it isn’t needed
@@ -323,7 +329,6 @@ a {
           svg {
             border: 3px solid #fff;
             border-radius: 9999px;
-            
           }
 
           &:hover{
@@ -374,7 +379,6 @@ a {
         content: "Show Less \00ab";
       }
     }
-    
     .tab-content .tab-content {
       background: #ffffff;
     }
@@ -453,7 +457,7 @@ a {
       text-decoration: none;
     }
   }
-  
+
   /* Ideally only the section title would underline on mouse hover */
   h1.section-title:hover, h1.section-title:focus {
     text-decoration: underline;
@@ -514,7 +518,7 @@ a {
   }
 }
 
-/* Pagination style */ 
+/* Pagination style */
 .page-item {
   .page-link {
     border-radius: 0.25em;
@@ -560,7 +564,7 @@ a {
       &::after{
         content: '✔';
         position: absolute;
-        top: .1em; 
+        top: .1em;
         left: .1em;
         font-size: 1.4em;
         line-height: 0.8;

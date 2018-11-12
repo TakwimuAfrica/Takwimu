@@ -47,11 +47,13 @@
       </div>
     </div>
     <section class="m-0">
-      {% with countries='nigeria tanzania senegal kenya ethiopia south-africa' %}
-        {% for country in countries.split %}
-          {% include 'takwimu/_includes/profile/country_section.html' with country=country %}
-        {% endfor %}
-      {% endwith %}
+
+    {% for country in countries %}
+      {% if country.published %}
+        {% include 'takwimu/_includes/profile/country_section.html' with country_name=country.name country_slug=country.slug %}
+      {% endif %}
+    {% endfor %}
+
 
     </section>
     {% include 'takwimu/_includes/sections/support-services/button.html' %}

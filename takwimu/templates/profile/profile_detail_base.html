@@ -123,11 +123,11 @@
   </div>
 
   {% if geography.this.geo_level == 'country' %}
-    {% if geography.this.short_name|lower == "south africa" %}
-      {% include 'takwimu/_includes/profile/country_section.html' with country='south-africa' %}
-    {% else %}
-      {% include 'takwimu/_includes/profile/country_section.html' with country=geography.this.short_name|lower title='long' %}
-    {% endif %}
+    {% for country in countries %}
+      {% if country.published %}
+        {% include 'takwimu/_includes/profile/country_section.html' with country_name=country.name country_slug=country.slug %}
+      {% endif %}
+    {% endfor %}
   {% else %}
     {% if geography.parents %}
       {% for level, g in geography.parents.items %}

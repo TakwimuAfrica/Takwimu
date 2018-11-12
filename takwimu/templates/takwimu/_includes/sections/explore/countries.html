@@ -5,15 +5,14 @@
         {% for country in countries %}
             <div class="col">
                 {% if country.published %}
-                    <a href="/profiles/{{ country.name|slugify }}">
+                    <a href="/profiles/{{ country.slug }}">
                 {% else %}
                     <a href="#" data-toggle="tooltip" data-placement="top" data-container="{{ comingsoon_tooltip_data_container|default:'body' }}" title="Coming Soon">
                 {% endif %}
 
-                    {% with country_slug=country.name|slugify %}
-                    <img class="svg" src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}" alt="{{ country.name }}">
-                    {% endwith %}
-                    <span class="text-uppercase font-weight-extra-bold">{{ country.name_short }}</span>
+                    <img class="svg" src="{% static 'img/flags/'|add:country.slug|add:'.svg' %}" alt="{{ country.name }}">
+
+                    <span class="text-uppercase font-weight-extra-bold">{{ country.short_name }}</span>
                 </a>
             </div>
 
