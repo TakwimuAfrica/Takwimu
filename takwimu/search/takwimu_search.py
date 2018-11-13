@@ -2,6 +2,8 @@ from collections import OrderedDict
 import json
 
 from django.conf import settings
+from django.utils.text import slugify
+
 from elasticsearch import Elasticsearch, NotFoundError
 from elasticsearch_dsl import Search
 from requests_aws4auth import AWS4Auth
@@ -9,6 +11,19 @@ from requests_aws4auth import AWS4Auth
 from takwimu.models import ProfilePage, ProfileSectionPage
 
 DOC_TYPE = 'topic'
+
+
+def wordify(phrase):
+    """
+    Convert a given phrase into a single long word
+    e.g. given `East African Community`, this method returns
+    `eastafricancommunity` as one word.
+
+    It is useful in search filters where spaces and `-` may be seen as word
+    separators.
+    """
+
+    return slugify(phrase.strip()).replace('-', '')
 
 
 class TakwimuTopicSearch():
@@ -54,23 +69,23 @@ class TakwimuTopicSearch():
         search = Search(using=self.es, index=self.es_index,
                         doc_type=DOC_TYPE).params(size=100)
 
+        query_type = 'match'
         if operator == 'and':
-            search = search.query('match_phrase', body=query_string)
-        else:
-            search = search.query('match', body=query_string)
+            query_type = 'match_phrase'
+        search = search.query(query_type, body=query_string)
 
         # Countries and categories may contain whitespace so don't join or
         # split on ' '.
         # Best approch is still to `try and see` rather than `checking`
         # https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
         try:
-            countries = [i.lower() for i in country_filters]
+            countries = [wordify(i) for i in country_filters]
             if countries:
                 search = search.filter('terms', country=countries)
         except TypeError:
             pass
         try:
-            categories = [i.lower() for i in category_filters]
+            categories = [wordify(i) for i in category_filters]
             if categories:
                 search = search.filter('terms', category=categories)
         except TypeError:
@@ -104,10 +119,13 @@ class TakwimuTopicSearch():
         :return:
         """
 
+        # Since we're going to `wordify` `category` & `country` to be useful as
+        # filters, we need to add them to the `body` to be searchable as well.
+        doc_body = '\n'.join([country, category, body])
         doc = {
-            'category': category.title(),
-            'body': body,
-            'country': country.title(),
+            'country': wordify(country),
+            'category': wordify(category),
+            'body': doc_body,
             'parent_page_id': parent_page_id,
             'parent_page_type': parent_page_type,
             'content_id': content_id,
