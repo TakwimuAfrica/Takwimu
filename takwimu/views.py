@@ -18,6 +18,7 @@ from forms import SupportServicesContactForm
 
 from sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
+from takwimu.search.utils import get_page_details
 
 
 class HomePageView(TemplateView):
@@ -172,10 +173,10 @@ class SearchView(TemplateView):
     template_name = 'search_results.html'
 
     def get(self, request, *args, **kwargs):
-        search_query = request.GET.get('q', '')
+        query = request.GET.get('q', '')
         orderby = request.GET.get('orderby', 'relevance')
-        self.country_filter = request.GET.getlist('country')
-        self.topic_filter = request.GET.getlist('topic')
+        countries_filter = request.GET.getlist('country[]')
+        topics_filter = request.GET.getlist('topic[]')
 
         self.profilepages = ProfilePage.objects.live()
         self.profilesectionpages = ProfileSectionPage.objects.live()
@@ -189,23 +190,18 @@ class SearchView(TemplateView):
 
         operator = 'or'
         strip_chars = string.whitespace
-        if search_query.startswith('"') and search_query.endswith('"'):
+        if query.startswith('"') and query.endswith('"'):
             # search in quotes means phrase search
             operator = 'and'
             strip_chars += '"'
 
-        search_query = search_query.strip(strip_chars)
+        search_query = query.strip(strip_chars)
         results = TakwimuTopicSearch().search(search_query, operator,
-                                              country_filters=self.country_filter,
-                                              category_filters=self.topic_filter)
+                                              country_filters=countries_filter,
+                                              category_filters=topics_filter)
 
         for result in results:
             parent_page_id = result['parent_page_id']
-            country = result['country']
-            category = result['category']
-            self.countries[country.title()] = 1
-            self.topics[category.title()] = 1
-
             page = None
             if result['parent_page_type'] == 'ProfileSectionPage':
                 page = self.profilesectionpages.get(id=parent_page_id)
@@ -213,26 +209,28 @@ class SearchView(TemplateView):
                 page = self.profilepages.get(id=parent_page_id)
 
             if page:
+                country, category, _ = get_page_details(page)
+                result['country'] = country
+                result['category'] = category
+                self.countries[country] = 1
+                self.topics[category] = 1
+
                 id = result['content_id']
                 data_point = self.topics_widgets_map.get(id)
 
                 result['data_point'] = data_point
                 result['url'] = page.get_url(request)
-                country = result['country']
-                category = result['category']
-                self.countries[country] = 1
-                self.topics[category] = 1
                 self.items.append(result)
 
         if orderby == 'location':
             self.items = sorted(self.items, key=itemgetter('country'))
 
         return render(request, self.template_name, {
-            'search_query': search_query,
+            'search_query': query,
             'orderby': orderby,
             'query_params': {
-                'countries': self.country_filter,
-                'topics': self.topic_filter,
+                'countries': countries_filter,
+                'topics': topics_filter,
             },
             'search_results': {
                 'items': self.items,
