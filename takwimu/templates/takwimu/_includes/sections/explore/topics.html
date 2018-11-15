@@ -105,10 +105,11 @@
                     {% for country in indicator.countries %}
                     <a class="nav-item nav-link text-white text-left pl-3"
                        href="{{ country.href }}#{{ topic.title|slugify }}">
+                    {% with country_slug=country.title|slugify %}
                         <img class="rounded-circle border-light mr-2"
-                            src="{% with 'img/flags/'|add:country.title|slugify|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
-                            border="4" style="border-style:double; width: 40px; height: 40px;"
-                        />
+                            src="{% with 'img/flags/'|add:country_slug|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                            border="4" style="border-style:double; width: 40px; height: 40px;"/>
+                    {% endwith %}
                         <span>
                             <b>&nbsp;{{ country.title }}</b>
                         </span>

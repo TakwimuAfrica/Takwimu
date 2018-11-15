@@ -1,3 +1,3 @@
-from .dashboard import TopicPageDataIndicator, TopicPageDataIndicators, TopicPage, \
-                       ProfileSectionPage, ProfilePageSection, ProfilePageSections,\
-                       ProfilePage, CountryPublishSetting
+from .dashboard import TopicPageDataIndicator, TopicPageDataIndicators, \
+    TopicPage, ProfileSectionPage, ProfilePageSection, ProfilePageSections, \
+    ProfilePage, CountryProfilesSetting
