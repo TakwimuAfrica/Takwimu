@@ -10,6 +10,7 @@ Markdown==2.6.11
 django-debug-toolbar==1.9.1
 elasticsearch==5.5.3
 elasticsearch-dsl==5.4.0
+# https://github.com/benoitc/gunicorn/issues/1194#issuecomment-269836343
 gevent==1.3.7
 greenlet==0.4.15
 requests-aws4auth==0.9
