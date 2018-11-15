@@ -20,6 +20,7 @@ exec gunicorn takwimu.wsgi:application \
     --name takwimu \
     --bind 0.0.0.0:8000 \
     --workers 3 \
+    --worker-class gevent \
     --log-level=info \
     --log-file=/srv/logs/gunicorn.log \
     --access-logfile=/srv/logs/access.log \
