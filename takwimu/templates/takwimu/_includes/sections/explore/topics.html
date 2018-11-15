@@ -45,10 +45,13 @@
                         <a class="nav-item nav-link text-white text-left pl-3"
                         id="{{ key_issue.id }}"
                         href="{{ key_issue.href }}#{{ key_issue.title|slugify }}">
-                            <img class="rounded-circle border-light mr-2"
-                                src="{% with 'img/flags/'|add:key_issue.country|slugify|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
-                                border="4" style="border-style:double; width: 40px; height: 40px;"
-                            />
+
+
+                            {% with country_slug=key_issue.country|slugify %}
+                                <img class="rounded-circle border-light mr-2"
+                                    src="{% with 'img/flags/'|add:country_slug|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                                    border="4" style="border-style:double; width: 40px; height: 40px;"/>
+                            {% endwith %}
                             <span>
                                 Key issue - {{ key_issue.title }}
                                 <b>( {{ key_issue.country }})</b>
