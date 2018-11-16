@@ -17,7 +17,12 @@ DOC_TYPE = 'topic'
 #      all others,
 #  ii) relevant `category` should be preferred over irrevant one, and
 # iii) matching `title` should be given more weight than just matching `body`.
-QUERY_FIELDS = ['country^3', 'category^2', 'title^2', 'body']
+QUERY_FIELDS = [
+    'country^' + settings.TAKWIMU_ES_FIELDS_COUNTRY_BOOST,
+    'category^' + settings.TAKWIMU_ES_FIELDS_CATEGORY_BOOST,
+    'title^' + settings.TAKWIMU_ES_FIELDS_TITLE_BOOST,
+    'body^' + settings.TAKWIMU_ES_FIELDS_BODY_BOOST,
+]
 
 
 def tagify(phrase):

@@ -168,8 +168,14 @@ TAKWIMU_ES_INDEX_SETTINGS = {
         }
     }
 }
-
-
+TAKWIMU_ES_FIELDS_COUNTRY_BOOST = os.environ.get(
+    'TAKWIMU_ES_FIELDS_COUNTRY_BOOST', '4')
+TAKWIMU_ES_FIELDS_CATEGORY_BOOST = os.environ.get(
+    'TAKWIMU_ES_FIELDS_CATEGORY_BOOST', '3')
+TAKWIMU_ES_FIELDS_TITLE_BOOST = os.environ.get(
+    'TAKWIMU_ES_FIELDS_TITLE_BOOST', '2')
+TAKWIMU_ES_FIELDS_BODY_BOOST = os.environ.get(
+    'TAKWIMU_ES_FIELDS_BODY_BOOST', '1')
 TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu-dev')
 TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '30'))
 TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')
