@@ -12,8 +12,15 @@ from takwimu.models import ProfilePage, ProfileSectionPage
 
 DOC_TYPE = 'topic'
 
+# if a match is found in two or more `body` fields:
+#   i) if `country` was also specified, the matching country should win over
+#      all others,
+#  ii) relevant `category` should be preferred over irrevant one, and
+# iii) matching `title` should be given more weight than just matching `body`.
+QUERY_FIELDS = ['country^3', 'category^2', 'title^2', 'body']
 
-def wordify(phrase):
+
+def tagify(phrase):
     """
     Convert a given phrase into a single long word
     e.g. given `East African Community`, this method returns
@@ -69,25 +76,26 @@ class TakwimuTopicSearch():
         search = Search(using=self.es, index=self.es_index,
                         doc_type=DOC_TYPE).params(size=100)
 
-        query_type = 'match'
+        query_type = 'most_fields'
         if operator == 'and':
-            query_type = 'match_phrase'
-        search = search.query(query_type, body=query_string)
+            query_type = 'phrase'
+        search = search.query('multi_match', query=query_string,
+                              type=query_type, fields=QUERY_FIELDS)
 
         # Countries and categories may contain whitespace so don't join or
         # split on ' '.
         # Best approch is still to `try and see` rather than `checking`
         # https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
         try:
-            countries = [wordify(i) for i in country_filters]
-            if countries:
-                search = search.filter('terms', country=countries)
+            country_tags = [tagify(i) for i in country_filters]
+            if country_tags:
+                search = search.filter('terms', country_tag=country_tags)
         except TypeError:
             pass
         try:
-            categories = [wordify(i) for i in category_filters]
-            if categories:
-                search = search.filter('terms', category=categories)
+            category_tags = [tagify(i) for i in category_filters]
+            if category_tags:
+                search = search.filter('terms', category_tag=category_tags)
         except TypeError:
             pass
 
@@ -105,31 +113,31 @@ class TakwimuTopicSearch():
             })
         return results
 
-    def add_to_index(self, category, body, country,
-                     parent_page_id, parent_page_type, content_id, content_type):
+    def add_to_index(self, content_id, content_type, country, category, title, body,
+                     parent_page_id, parent_page_type):
         """
-        - page type/class : either ProfileSectionPage or ProfilePage
-        - category
-        - body
-        - country
-        - parent_page_id
-        - parent_page_type
         - content_id
         - content_type
+        - country
+        - category
+        - title
+        - body
+        - parent_page_id
+        - parent_page_type
         :return:
         """
 
-        # Since we're going to `wordify` `category` & `country` to be useful as
-        # filters, we need to add them to the `body` to be searchable as well.
-        doc_body = '\n'.join([country, category, body])
         doc = {
-            'country': wordify(country),
-            'category': wordify(category),
-            'body': doc_body,
-            'parent_page_id': parent_page_id,
-            'parent_page_type': parent_page_type,
             'content_id': content_id,
             'content_type': content_type,
+            'country': country,
+            'country_tag': tagify(country),
+            'category': category,
+            'category_tag': tagify(category),
+            'title': title,
+            'body': body,
+            'parent_page_id': parent_page_id,
+            'parent_page_type': parent_page_type,
         }
         result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
                                id=content_id)

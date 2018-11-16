@@ -32,8 +32,9 @@ def get_widget_data(widget):
             body = '\n\n'.join([body, entity_content])
 
     return {
-        'widget_id': widget_id,
-        'body': '\n'.join([title, body, source]),
+        'id': widget_id,
+        'title': title,
+        'body': '\n'.join([body, source]),
     }
 
 
