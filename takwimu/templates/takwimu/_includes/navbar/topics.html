@@ -7,8 +7,8 @@
 
 {% block dropdown_title %}Explore data by topic{% endblock %}
 {% block dropdown_desc %}
-    Dolor ullamco amet nulla esse labore in non aliquip do deserunt commodo elit occaecat. 
-    Ex ad Lorem ullamco eu exercitation est ullamco. 
+    Dolor ullamco amet nulla esse labore in non aliquip do deserunt commodo elit occaecat.
+    Ex ad Lorem ullamco eu exercitation est ullamco.
     Dolore incididunt laboris amet officia labore reprehenderit velit occaecat.
 {% endblock %}
 
@@ -23,7 +23,7 @@
                 <a class="nav-link-explore-section"
                     id="{{ section.id }}"
                     href="#{{ section.href }}"
-                    aria-controls="#{{ section.href }}"
+                    aria-controls="/topics/#{{ section.href }}"
                     data-toggle="pill" role="tab" aria-selected="false">
                     {{ section.title }}
                 </a>
@@ -35,11 +35,14 @@
     <div class="col-8">
       <h5 class="font-weight-bold pb-2">Sustainable Development Goals</h5>
       <div class="row" style="color:#7ab1f2;">
-        {% for key, sdg in sdgs.items %}
+        {% for sdg in sdgs %}
             <div class="col-2 mx-0 p-1 grayscale">
-                <a href="/sdg/#{{ sdg.short|slugify }}" data-toggle="collapse" data-sector="{{ sdg.short }}" data-target="#{{ sdg.short|slugify }}"
-                    aria-controls="{{ sdg.short|slugify }}">
-                    <img src="{{ sdg.icon_url }}" alt="{{ sdg.short }}">
+                <a href="/sdgs/#{{ sdg.short|slugify }}"
+                   data-toggle="collapse"
+                   data-sector="{{ sdg.short }}"
+                   data-target="#{{ sdg.short|slugify }}"
+                   aria-controls="{{ sdg.short|slugify }}">
+                    <img src="{% static sdg.icon_url %}" alt="{{ sdg.short }}" />
                 </a>
             </div>
         {% endfor %}

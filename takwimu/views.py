@@ -72,17 +72,18 @@ class SDGIndicatorView(TemplateView):
     template_name = 'takwimu/sdg_topic_page.html'
 
     def get_context_data(self, **kwargs):
+
+        # `sdgs` are loaded in context processor so check there first
         json_data = open('takwimu/fixtures/sdg.json')
         sdgs = json.load(json_data)
-        context = super(SDGIndicatorView, self).get_context_data(
-            **kwargs)
-        context['sdgs'] = sdgs
         sdg_indicators_map = self.load_sdg_indicators_map()
         for sdg in sdgs:
             sdg_indicators = sdg_indicators_map.get(slugify(sdg['short']))
             if sdg_indicators:
                 sdg['indicators'] = sdg_indicators
-
+        context = super(SDGIndicatorView, self).get_context_data(
+            **kwargs)
+        context['sdgs'] = sdgs
         return context
 
     def load_sdg_indicators_map(self):

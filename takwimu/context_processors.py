@@ -11,6 +11,7 @@ from takwimu.models.dashboard import TopicPage
 
 from sdg import SDG
 
+
 def takwimu_countries(request):
     settings = CountryProfilesSetting.for_site(request.site)
     published_status = settings.__dict__
@@ -140,10 +141,14 @@ def _traverse_profile_sections(profile_sections, request, start_section_num=0):
 
     return sections_by_title.values()
 
+
 def sdgs(request):
     """
         SDGs indicators
     """
+
+    json_sdgs = open('takwimu/fixtures/sdg.json')
+    sdgs = json.load(json_sdgs)
     return {
-        'sdgs': SDG,
+        'sdgs': sdgs,
     }
