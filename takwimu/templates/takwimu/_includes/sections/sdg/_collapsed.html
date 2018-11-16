@@ -4,41 +4,29 @@
     <div class="row px-0 py-5">
         <div class="col-6 text-left px-5">
             <h2 class="font-weight-bold">
-                {% if sdg_title %}
-                    {{ sdg_title }}
-                {% else %}
-                    Some title
-                {% endif %}
+                {{ sdg.short }}
             </h2>
             <p class="font-weight-light">
-                {% if sdg_desc %}
-                    {{ sdg_desc }}
-                {% else %}
-                    Aliqua esse nulla Lorem fugiat aliqua aliqua
-                    aliqua sint id velit ut sit amet. Commodo laboris reprehenderit enim consequat eiusmod voluptate
-                    dolor duis laborum. Nulla id velit deserunt labore eu. Aute consectetur culpa officia consectetur
-                    laboris et tempor labore sint minim. Enim velit et id cupidatat tempor commodo non amet.
-                    Exercitation culpa et ut excepteur anim amet occaecat aute culpa aute.
-                {% endif %}
+                {{ sdg.title }}
             </p>
         </div>
         <div class="col-6 d-flex px-5 justify-content-center align-items-center" style="border-left: 1px solid rgba(255, 255, 255, .52);">
-            {% if sdg_content %}
-                <form class="w-100" action="{% url 'sdgs' %}" method="get">
-                    <div class="form-group">
-                        <label for="sdg-data" class="display-6 font-weight-bold">View gorvernace data for:</label>
-                        <select class="form-control rounded-0" id="sdg-data" name="country">
-                        <option selected>Please select a country</option>
-                          {% for country in countries %}
-                            {% if country.published %}
-                              <option value="{{ country.name_short|slugify }}">{{ country.name_short }}</option>
-                            {% endif %}
-                          {% endfor %}
-                        </select>
-                    </div>
-                  <input type="text" name="sdg" value="{{ sdg_title|slugify }}" class="d-none">
-                    <button type="submit" class="float-right btn btn-outline-light font-weight-bold text-uppercase">View Data</button>
-                </form>
+            {% if sdg.indicators %}
+                <div class="w-100">
+                    <p class="font-weight-bold">View data for:</p>
+                    {% for indicator in sdg.indicators %}
+                        <a class="nav-item nav-link text-white text-left pl-3"
+                        id="{{ indicator.url }}"
+                        href="{{ indicator.url }}">
+                            <img class="rounded-circle border-light mr-2"
+                                src="{% with 'img/flags/'|add:indicator.country_slug|add:'.svg' as image_static %} {% static image_static %} {% endwith %}"
+                                alt="{{ indicator.country }}"
+                                border="4" style="border-style:double; width: 40px; height: 40px;"
+                            />
+                            <span>{{ indicator.title }}</span>
+                        </a>
+                    {% endfor %}
+                </div>
             {% else %}
                 <div class="d-block text-center" style="color: #78aff5;">
                     <span class="fas fa-exclamation-circle fa-3x"></span>
@@ -47,7 +35,7 @@
             {% endif %}
         </div>
     </div>
-    <button data-toggle="collapse" data-target="#{{ sdg_title|slugify }}" class="close btn-close position-absolute" style="top: 0.5em; right: 0.5em;" aria-label="Close">
+    <button data-toggle="collapse" data-target="#{{ sdg.short|slugify }}" class="close btn-close position-absolute" style="top: 0.5em; right: 0.5em;" aria-label="Close">
         <span aria-hidden="true">&times;</span>
     </button>
 </div>

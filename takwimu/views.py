@@ -1,24 +1,21 @@
+from collections import OrderedDict
+from operator import itemgetter
 import json
-import requests
 import string
 
-from operator import itemgetter
-
-from collections import OrderedDict
 from django.conf import settings
-from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.utils.text import slugify
-from django.views.generic import TemplateView, FormView, View
-from django.views.generic.base import TemplateView
-from wazimap.views import HomepageView, GeographyDetailView
+from django.views.generic import TemplateView, FormView
 
+import requests
+from wazimap.views import GeographyDetailView
+
+from takwimu.forms import SupportServicesContactForm
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
-    TopicPage, ProfileSectionPage, ProfilePage
-from forms import SupportServicesContactForm
-
-from sdg import SDG
+    ProfileSectionPage, ProfilePage
+from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
@@ -74,93 +71,54 @@ class SDGIndicatorView(TemplateView):
 
     template_name = 'takwimu/sdg_topic_page.html'
 
-    """
-    {'zero-hunger': {
-        'kenya': {'id': '32dsdfdf4', 'url': '/profiles/kenya/sector-policies-and-programming/'},
-        'tanzania': {'id': '32dsdfdf4', 'url': '/profiles/tanzania/sector-policies-and-programming/'},
-        'uganda': {'id': '32dsdfdf4', 'url': '/profiles/uganda/sector-policies-and-programming/'},
-        },
-      'no-poverty': {
-        'kenya': {'id': '32dsdfdf4', 'url': '/profiles/kenya/sector-policies-and-programming/'},
-        'tanzania': {'id': '32dsdfdf4', 'url': '/profiles/tanzania/sector-policies-and-programming/'},
-        'uganda': {'id': '32dsdfdf4', 'url': '/profiles/uganda/sector-policies-and-programming/'},
-        },
-    }
-    """
-    indicator_sdg_map = {}
-
     def get_context_data(self, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
-        data = json.load(json_data)
+        sdgs = json.load(json_data)
         context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
-        context['sdgs'] = data
+        context['sdgs'] = sdgs
+        sdg_indicators_map = self.load_sdg_indicators_map()
+        for sdg in sdgs:
+            sdg_indicators = sdg_indicators_map.get(slugify(sdg['short']))
+            if sdg_indicators:
+                sdg['indicators'] = sdg_indicators
+
         return context
 
-    def get(self, request, *args, **kwargs):
-        sdg = request.GET.get('sdg', '')
-        country = request.GET.get('country', '')
+    def load_sdg_indicators_map(self):
+        """
+        Process all live pages looking for widgets tagged with SGD goals.
+        """
 
+        sdg_indicators_map = {}
+        self._extract_sdgs_from_pages(
+            ProfilePage.objects.live(), sdg_indicators_map)
+        self._extract_sdgs_from_pages(
+            ProfileSectionPage.objects.live(), sdg_indicators_map)
+        return sdg_indicators_map
 
-        self.create_indicator_sdg_map()
-
-        if sdg and country:
-            link = self.get_indicator_link(sdg, country)
-            if not link:
-                # return to sdg page and add a flag to show a pop up that no
-                # indicators matching that SDG were found
-                context = self.get_context_data()
-                context['sdg_status'] = 'nil'
-                return render(request, self.template_name, context)
-            else:
-                # follow link to profiles page
-                return HttpResponseRedirect(link)
-        return super(SDGIndicatorView, self).get(request, *args, **kwargs)
-
-    def get_indicator_link(self, sdg, country):
-        try:
-            indicator = self.indicator_sdg_map[sdg][country]
-            link = indicator['url'] + '#' +  indicator['topic_title']
-            return link
-        except KeyError:
-            return None
-
-    def create_indicator_sdg_map(self):
-        for page in ProfileSectionPage.objects.live():
-            country, _, _ = get_page_details(page)
-            country = slugify(country)
-            url = page.url
+    def _extract_sdgs_from_pages(self, pages, sdg_indicators_map):
+        for page in pages:
             try:
                 for topic in page.body.stream_data:
-
                     topic_title = slugify(topic['value']['title'])
-                    for indicator in topic['value']['indicators']:
-                        indicator_id = indicator['id']
-                        for widget in indicator['value']['widgets']:
-                            widget_id = widget['id']
-                            sdg = widget['value']['sdg']
-                            self.indicator_sdg_map[sdg] = {}
-                            self.indicator_sdg_map[sdg][country] = {'topic_title': topic_title, 'url': url, 'indicator_id': indicator_id}
-            except KeyError:
-                pass
-
-        for page in ProfilePage.objects.live():
-            country, _, _ = get_page_details(page)
-            country = slugify(country)
-            url = page.url
-            try:
-                for topic in page.body.stream_data:
-
-                    topic_title = slugify(topic['value']['title'])
-                    for indicator in topic['value']['indicators']:
-                        indicator_id = indicator['id']
-                        for widget in indicator['value']['widgets']:
-                            widget_id = widget['id']
-                            sdg = widget['value']['sdg']
-                            self.indicator_sdg_map[sdg] = {}
-                            self.indicator_sdg_map[sdg][country] = {
-                                'topic_title': topic_title, 'url': url,
-                                'indicator_id': indicator_id}
+                    indicators = topic['value'].get('indicators')
+                    for indicator in indicators:
+                        widgets = indicator['value'].get('widgets')
+                        for widget in widgets:
+                            sdg = widget['value'].get('sdg')
+                            if sdg:
+                                country, _, _ = get_page_details(page)
+                                url = page.get_url(self.request)
+                                indicator = {
+                                    'title': indicator['value'].get('title'),
+                                    'country': country,
+                                    'country_slug': slugify(country),
+                                    'url': '{}#{}_{}'.format(url, slugify(topic_title), indicator['id']),
+                                }
+                                sdg_indicators = sdg_indicators_map.setdefault(
+                                    sdg, [])
+                                sdg_indicators.append(indicator)
             except KeyError:
                 pass
 

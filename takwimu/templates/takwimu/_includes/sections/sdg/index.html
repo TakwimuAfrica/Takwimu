@@ -26,7 +26,7 @@
     <div class="row mx-auto">
         {% for sdg in sdgs|slice:":6" %}
         <div id="{{ sdg.short|slugify }}" class="collapse w-100" data-parent="#sdg-container">
-            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg_title=sdg.short sdg_desc=sdg.title sdg_content="true" %}
+            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg=sdg %}
         </div>
         {% endfor %}
     </div>
@@ -42,14 +42,13 @@
                     <span class="arrow-up"></span>
                 </div>
             </a>
-            
         </div>
         {% endfor %}
     </div>
     <div class="row mx-auto">
         {% for sdg in sdgs|slice:"6:12" %}
         <div id="{{ sdg.short|slugify }}" class="collapse w-100" data-parent="#sdg-container">
-            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg_title=sdg.short sdg_desc=sdg.title %}
+            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg=sdg %}
         </div>
         {% endfor %}
     </div>
@@ -71,7 +70,7 @@
     <div class="row mx-auto">
         {% for sdg in sdgs|slice:"12:" %}
         <div id="{{ sdg.short|slugify }}" class="collapse w-100" data-parent="#sdg-container">
-            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg_title=sdg.short sdg_desc=sdg.title %}
+            {% include 'takwimu/_includes/sections/sdg/_collapsed.html' with sdg=sdg %}
         </div>
         {% endfor %}
     </div>
