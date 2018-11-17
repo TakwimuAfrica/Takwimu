@@ -1,17 +1,20 @@
+COMPOSE = docker-compose
+DEVDOCKER = $(COMPOSE) exec web
+
 build:
-	docker-compose build .
+	$(COMPOSE) build web
 
 web:
 	rm -fr static/*  # Workaround for whitenoise busyness in dev
-	docker-compose up web
+	$(COMPOSE) up web
 
 compilescss:
-	docker-compose exec web ./manage.py compilescss
+	$(DEVDOCKER) web ./manage.py compilescss
 	rm -fr static/*
-	docker-compose exec web ./manage.py collectstatic --noinput
+	$(DEVDOCKER) web ./manage.py collectstatic --noinput
 
 update_index:
-	docker-compose exec web ./manage.py update_index
+	$(DEVDOCKER) web ./manage.py update_index
 
 # TODO - Do in Docker
 test:
