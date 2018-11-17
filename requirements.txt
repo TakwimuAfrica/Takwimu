@@ -1,6 +1,6 @@
 gunicorn==19.9.0
 
-git+https://github.com/CodeForAfrica/HURUmap.git@master#egg=hurumap
+git+https://github.com/CodeForAfrica/HURUmap.git@v0.0.1#egg=hurumap
 
 git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 
