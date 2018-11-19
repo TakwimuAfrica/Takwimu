@@ -115,7 +115,7 @@ class SDGIndicatorView(TemplateView):
                                     'title': indicator['value'].get('title'),
                                     'country': country,
                                     'country_slug': slugify(country),
-                                    'url': '{}#{}_{}'.format(url, slugify(topic_title), indicator['id']),
+                                    'url': '{}#{}_{}-tab'.format(url, slugify(topic_title), indicator['id']),
                                 }
                                 sdg_indicators = sdg_indicators_map.setdefault(
                                     sdg, [])

@@ -40,17 +40,16 @@
         var hash = document.location.hash;
         if (hash) {
 
-          // Topic and indicator are separated by '_'
-          var indicatorIdIndex = hash.indexOf('_');
-          if (indicatorIdIndex > 0) {
-            var topicSlug = hash.substring(0, indicatorIdIndex);
-            var indicatorId = hash.substring(indicatorIdIndex + 1);
+          // Topic and tab are separated by '_'
+          var tabIdIndex = hash.indexOf('_');
+          if (tabIdIndex > 0) {
+            var topicSlug = hash.substring(0, tabIdIndex);
+            var tabId = hash.substring(tabIdIndex + 1);
 
             // First move to the nearest topic, then show the specific tab
             window.location.hash = topicSlug;
 
-            // Indicator tabs have `-tab`appended to their id.
-            $('.nav a[href="#' + indicatorId + '-tab"]').tab('show');
+            $('.nav a[href="#' + tabId + '"]').tab('show');
 
             // Change back hash for page-reload to work
             $('.nav a').on('shown.bs.tab', function (e) {
