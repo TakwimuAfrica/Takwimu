@@ -37,8 +37,13 @@
       <div class="row" style="color:#7ab1f2;">
         {% for sdg in sdgs %}
             <div class="col-2 mx-0 p-1 grayscale">
-                <a href="/sdgs/#{{ sdg.short|slugify }}"
-                   data-toggle="collapse"
+            {% if forloop.counter <= 6 %}
+                <a href="/sdgs/#sdgs-section-1_{{ sdg.short|slugify }}-collapse"
+            {% elif forloop.counter >= 12 %}
+                <a href="/sdgs/#sdgs-section-3_{{ sdg.short|slugify }}-collapse"
+            {% else %}
+                <a href="/sdgs/#sdgs-section-2_{{ sdg.short|slugify }}-collapse"
+            {% endif %}
                    data-sector="{{ sdg.short }}"
                    data-target="#{{ sdg.short|slugify }}"
                    aria-controls="{{ sdg.short|slugify }}">

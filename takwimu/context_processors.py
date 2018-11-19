@@ -88,7 +88,7 @@ def _traverse_profile_sections(profile_sections, request, start_section_num=0):
         default_section = {
             'id': 'section-{}'.format(section_num),
             'title': profile_title,
-            'href': 'section-{}-topics'.format(section_num),
+            'href': 'section-{}-topics-tab'.format(section_num),
             'key_issues': [],
         }
         section = sections_by_title.setdefault(
@@ -113,7 +113,7 @@ def _traverse_profile_sections(profile_sections, request, start_section_num=0):
                 default_topic = {
                     'id': '{}-topic-{}'.format(section['id'], topic_num),
                     'title': topic_title,
-                    'href': '{}-topic-{}-indicators'.format(section['id'], topic_num),
+                    'href': '{}-topic-{}-indicators-tab'.format(section['id'], topic_num),
                 }
                 topic = topics_by_title.setdefault(
                     topic_title.lower(), default_topic)
@@ -125,7 +125,7 @@ def _traverse_profile_sections(profile_sections, request, start_section_num=0):
                     default_indicator = {
                         'id': '{}-indicator-{}'.format(topic['id'], indicator_num),
                         'title': indicator_title,
-                        'href': '{}-indicator-{}-country-selections'.format(topic['id'], indicator_num),
+                        'href': '{}-indicator-{}-country-selections-tab'.format(topic['id'], indicator_num),
                         'countries': [],
                     }
                     indicator = indicators_by_title.setdefault(

@@ -40,21 +40,28 @@
         var hash = document.location.hash;
         if (hash) {
 
-          // Topic and tab are separated by '_'
+          // Topic and component are separated by '_'
           var tabIdIndex = hash.indexOf('_');
           if (tabIdIndex > 0) {
             var topicSlug = hash.substring(0, tabIdIndex);
-            var tabId = hash.substring(tabIdIndex + 1);
+            var componentId = hash.substring(tabIdIndex + 1);
 
-            // First move to the nearest topic, then show the specific tab
+            // First move to the nearest topic, then show the specific component
+            // Remember to change back hash for page-reloads to work
             window.location.hash = topicSlug;
+            if (componentId.endsWith('-tab')) {
+              $('.nav a[href="#' + componentId + '"]').tab('show');
 
-            $('.nav a[href="#' + tabId + '"]').tab('show');
+              $('.nav a').on('shown.bs.tab', function (e) {
+                window.location.hash = hash;
+              });
+            } else if (componentId.endsWith('-collapse')) {
+              $('#' + componentId).collapse('show');
 
-            // Change back hash for page-reload to work
-            $('.nav a').on('shown.bs.tab', function (e) {
-              window.location.hash = hash;
-            });
+              $('#' + componentId).on('shown.bs.collapse', function(e) {
+                window.location.hash = hash;
+              });
+            }
           }
         }
       });
