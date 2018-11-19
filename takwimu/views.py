@@ -20,6 +20,9 @@ from sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
+from wagtail.contrib.settings.context_processors import settings
+from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
+
 
 class HomePageView(TemplateView):
     """
@@ -34,6 +37,11 @@ class HomePageView(TemplateView):
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
         return context
 
 
@@ -42,6 +50,12 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+
         return context
 
 
@@ -53,6 +67,16 @@ class LegalView(TemplateView):
     """
     template_name = 'takwimu/about/legal.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(LegalView, self).get_context_data(**kwargs)
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+
+        return context
+
 
 class TopicView(TemplateView):
     """
@@ -61,6 +85,16 @@ class TopicView(TemplateView):
     Finding Data by Topic View.
     """
     template_name = 'takwimu/topic_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(TopicView, self).get_context_data(**kwargs)
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+
+        return context
 
 
 class SDGIndicatorView(TemplateView):
@@ -75,9 +109,16 @@ class SDGIndicatorView(TemplateView):
     def get_context_data(self, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
+
         context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
         context['sdgs'] = data
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+        
         return context
 
 
@@ -109,6 +150,12 @@ class SupportServicesIndexView(FormView):
         context = super(SupportServicesIndexView, self).get_context_data(
             **kwargs)
         context['ticket_success'] = False
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+        
         return context
 
     def form_valid(self, form):
@@ -260,6 +307,21 @@ class SearchView(TemplateView):
                 for indicator in topic.value['indicators']:
                     for widget in indicator.value['widgets']:
                         self.topics_widgets_map[widget.id] = widget
+    
+    def get_context_data(self, **kwargs):
+        json_data = open('takwimu/fixtures/sdg.json')
+        data = json.load(json_data)
+
+        context = super(SearchView, self).get_context_data(
+            **kwargs)
+        context['sdgs'] = data
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+        
+        return context
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
@@ -277,3 +339,18 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         return render(request,
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
+    
+    def get_context_data(self, **kwargs):
+        json_data = open('takwimu/fixtures/sdg.json')
+        data = json.load(json_data)
+
+        context = super(IndicatorsGeographyDetailView, self).get_context_data(
+            **kwargs)
+        context['sdgs'] = data
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+        
+        return context
