@@ -1,5 +1,5 @@
 # Takwimu
-[![Build Status](https://travis-ci.org/TakwimuAfrica/TAKWIMU.svg?branch=develop)](https://travis-ci.org/TakwimuAfrica/TAKWIMU)
+[![Build Status](https://travis-ci.org/TakwimuAfrica/Takwimu.svg?branch=master)](https://travis-ci.org/TakwimuAfrica/Takwimu)
 [![Known Vulnerabilities](https://snyk.io/test/github/TakwimuAfrica/TAKWIMU/badge.svg?targetFile=requirements.txt)](https://snyk.io/test/github/TakwimuAfrica/TAKWIMU?targetFile=requirements.txt)
 
 

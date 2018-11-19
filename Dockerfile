@@ -1,8 +1,6 @@
 FROM codeforafrica/hurumap-base:0.1.0
 ENV DEBIAN_FRONTEND noninteractive
 
-MAINTAINER Code for Africa
-
 # Set env variables used in this Dockerfile
 # Local directory with project source
 ENV TAKWIMU_SRC=.
