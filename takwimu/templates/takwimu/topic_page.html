@@ -8,11 +8,19 @@
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
-          <li class="breadcrumb-item">
+          <li class="breadcrumb-item d-flex align-items-center">
             <a href="/" class="text-light"><u>Home</u></a>
           </li>
           <li class="breadcrumb-item active text-light">
-            Data by topic
+            <div class="dropdown  d-inline">
+              <button class="btn btn-primary dropdown-toggle" type="button" id="topicsSDG" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Data by topic
+              </button>
+              <div class="dropdown-menu" aria-labelledby="topicsSDG">
+                <a class="dropdown-item active" href="/topics">Data by Topic</a>
+                <a class="dropdown-item" href="/sdgs">Data by SDG Indicator</a>
+              </div>
+            </div>
           </li>
         </ol>
       </nav>

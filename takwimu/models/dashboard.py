@@ -1,9 +1,11 @@
 from collections import OrderedDict
+import json
 import re
 import warnings
 
 from django.db import models
 from django import forms
+from django.utils.text import slugify
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, \
     PageChooserPanel, InlinePanel
@@ -30,6 +32,11 @@ from fontawesome.forms import IconFormField
 import logging
 
 logger = logging.getLogger(__name__)
+
+json_data = open('takwimu/fixtures/sdg.json')
+sdg_data = json.load(json_data)
+sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
+sdg_choices = [('', 'Please select an SDG')] + sdg_choices
 
 
 # The abstract model for data indicators, complete with panels
@@ -138,6 +145,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('body', blocks.RichTextBlock(required=False)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],
@@ -154,6 +163,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('embed', EmbedBlock(required=False)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],
@@ -168,6 +179,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('document', DocumentChooserBlock(required=False)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],
@@ -183,6 +196,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('image', ImageChooserBlock(required=False)),
             ('caption', blocks.TextBlock(required=False)),
+            ('sdg', blocks.ChoiceBlock(required=False,
+                                       choices=sdg_choices, label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],
@@ -197,6 +212,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
         ],
@@ -220,6 +237,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                                     ('TZ', 'Tanzania'),
                                                 ],
                                                 label='Country')),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
             ('data_id', blocks.ChoiceBlock(required=True,
                                            choices=HURUMAP_DATA_DISTS,
                                            label='Data')),

@@ -28,10 +28,11 @@ MIDDLEWARE_CLASSES = (
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
 TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context_processors'] + [
-    # 'wagtail.contrib.settings.context_processors.settings',
-    # 'takwimu.context_processors.takwimu_countries',
-    # 'takwimu.context_processors.takwimu_stories',
-    # 'takwimu.context_processors.takwimu_topics',
+    'wagtail.contrib.settings.context_processors.settings',
+    'takwimu.context_processors.takwimu_countries',
+    'takwimu.context_processors.takwimu_stories',
+    'takwimu.context_processors.takwimu_topics',
+    'takwimu.context_processors.sdgs',
 ]
 
 

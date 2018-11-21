@@ -1,22 +1,21 @@
+from collections import OrderedDict
+from operator import itemgetter
 import json
-import requests
 import string
 
-from operator import itemgetter
-
-from collections import OrderedDict
 from django.conf import settings
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
-from django.views.generic import TemplateView, FormView, View
-from django.views.generic.base import TemplateView
-from wazimap.views import HomepageView, GeographyDetailView
+from django.utils.text import slugify
+from django.views.generic import TemplateView, FormView
 
+import requests
+from wazimap.views import GeographyDetailView
+
+from takwimu.forms import SupportServicesContactForm
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
-    TopicPage, ProfileSectionPage, ProfilePage
-from forms import SupportServicesContactForm
-
-from sdg import SDG
+    ProfileSectionPage, ProfilePage
+from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
@@ -107,19 +106,62 @@ class SDGIndicatorView(TemplateView):
     template_name = 'takwimu/sdg_topic_page.html'
 
     def get_context_data(self, **kwargs):
-        json_data = open('takwimu/fixtures/sdg.json')
-        data = json.load(json_data)
 
+        # `sdgs` are loaded in context processor so check there first
+        json_data = open('takwimu/fixtures/sdg.json')
+        sdgs = json.load(json_data)
+        sdg_indicators_map = self.load_sdg_indicators_map()
+        for sdg in sdgs:
+            sdg_indicators = sdg_indicators_map.get(slugify(sdg['short']))
+            if sdg_indicators:
+                sdg['indicators'] = sdg_indicators
         context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
-        context['sdgs'] = data
+        context['sdgs'] = sdgs
 
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
         context.update(takwimu_topics(self.request))
-        
+
         return context
+
+    def load_sdg_indicators_map(self):
+        """
+        Process all live pages looking for widgets tagged with SGD goals.
+        """
+
+        sdg_indicators_map = {}
+        self._extract_sdgs_from_pages(
+            ProfilePage.objects.live(), sdg_indicators_map)
+        self._extract_sdgs_from_pages(
+            ProfileSectionPage.objects.live(), sdg_indicators_map)
+        return sdg_indicators_map
+
+    def _extract_sdgs_from_pages(self, pages, sdg_indicators_map):
+        for page in pages:
+            try:
+                for topic in page.body.stream_data:
+                    topic_title = slugify(topic['value']['title'])
+                    indicators = topic['value'].get('indicators')
+                    for indicator in indicators:
+                        widgets = indicator['value'].get('widgets')
+                        for widget in widgets:
+                            sdg = widget['value'].get('sdg')
+                            if sdg:
+                                country, _, _ = get_page_details(page)
+                                url = page.get_url(self.request)
+                                indicator = {
+                                    'title': indicator['value'].get('title'),
+                                    'country': country,
+                                    'country_slug': slugify(country),
+                                    'url': '{}#{}_{}-tab'.format(url, slugify(topic_title), indicator['id']),
+                                }
+                                sdg_indicators = sdg_indicators_map.setdefault(
+                                    sdg, [])
+                                sdg_indicators.append(indicator)
+            except KeyError:
+                pass
 
 
 def handler404(request):
@@ -155,7 +197,7 @@ class SupportServicesIndexView(FormView):
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
         context.update(takwimu_topics(self.request))
-        
+
         return context
 
     def form_valid(self, form):
@@ -307,7 +349,7 @@ class SearchView(TemplateView):
                 for indicator in topic.value['indicators']:
                     for widget in indicator.value['widgets']:
                         self.topics_widgets_map[widget.id] = widget
-    
+
     def get_context_data(self, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
@@ -320,7 +362,7 @@ class SearchView(TemplateView):
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
         context.update(takwimu_topics(self.request))
-        
+
         return context
 
 
@@ -339,7 +381,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         return render(request,
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
-    
+
     def get_context_data(self, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
@@ -352,5 +394,5 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
         context.update(takwimu_topics(self.request))
-        
+
         return context
