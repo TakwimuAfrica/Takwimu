@@ -641,6 +641,13 @@ body {
   * during development
   */
   // body { background: yellow;}
+
+  // Partner logos in Navbar + Footer
+  .partner-logos a {
+    img {
+      max-height: 80px;
+    }
+  }
  }
 
 /*
@@ -652,4 +659,11 @@ body {
   * during development
   */
   // body { background: grey;}
+
+  // Partner logos in Navbar + Footer
+  .partner-logos a {
+    img {
+      max-height: 80px;
+    }
+  }
  }
