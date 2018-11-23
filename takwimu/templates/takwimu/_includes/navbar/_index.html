@@ -62,17 +62,7 @@
           </a>
           {% include 'takwimu/_includes/navbar/search.html' %}
         </li>
-
-        {% to_list 'twitter' 'facebook' as social_medias %}
-        {% for social_media in social_medias %}
-          {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
-            <li>
-              <a class="nav-link p-3 py-lg-4" href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
-                <i class="fab fa-{{ social_media }} fa-fw"></i>
-              </a>
-            </li>
-          {% endif %}
-        {% endfor %}
+      </ul>
     </div>
   </div>
 </nav>
