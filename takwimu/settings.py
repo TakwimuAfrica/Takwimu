@@ -4,7 +4,7 @@ import os
 from elasticsearch import RequestsHttpConnection
 from utils.aws_es import AWS4AuthNotUnicode
 
-from hurumap.settings import *  # noqa
+from hurumap.dashboard.settings import *  # noqa
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
