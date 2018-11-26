@@ -1,29 +1,6 @@
-language: python
-
-addons:
-  postgresql: "9.5"
-
-python:
-
-  - "2.7"
-
-env:
-
-- DJANGO_VERSION=1.9.7
-
-services:
-
-- postgresql
-
-install:
-
-  - pip install -r requirements.txt
-
 before_script:
-  - sudo rm -f /etc/boto.cfg
-  - psql -c "create user takwimu with password 'takwimu';" -U postgres
-  - psql -c 'create database test_takwimu;' -U postgres
-  - psql -c 'alter database test_takwimu owner to takwimu;' -U postgres
+  - make build
+  - make web
 
 script:
-  - python manage.py test --keepdb
+  - make test
