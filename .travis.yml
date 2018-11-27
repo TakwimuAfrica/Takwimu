@@ -3,4 +3,5 @@ before_script:
 
 script:
   - docker-compose up -d web
+  - sleep 15
   - make test
