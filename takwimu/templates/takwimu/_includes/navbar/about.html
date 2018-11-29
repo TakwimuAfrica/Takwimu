@@ -28,7 +28,7 @@
         {% for social_media in social_medias %}
           {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
             <li class="nav-item">
-              <a class="nav-link py-0 px-3 {% if not forloop.last %} border-right {% endif %}"
+              <a class="nav-link py-0 px-3 {% if not forloop.last %} border-right {% endif %}" 
                 href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
                 <i class="fab fa-{{ social_media }} fa-fw"></i>
               </a>
@@ -38,7 +38,7 @@
       </ul>
     </div>
 
-    <div class="partner-logos mt-5 d-flex align-items-stretch">
+    <div class="partner-logos partner-logos-navbar mt-5 d-flex align-items-stretch">
       <div class="flex-grow-1">
         <h5 class="mb-0 text-truncate font-weight-bold">An initiative by</h5>
         <div class="d-flex">
