@@ -14,7 +14,7 @@ compilescss:
 	$(COMPOSE) exec web python manage.py collectstatic --clear --noinput
 
 update_index:
-	$(COMPOSE) exec web python manage.py update_index
+	$(COMPOSE) exec web python manage.py update_topics_index
 
 makemigrations:
 	$(COMPOSE) exec web python manage.py makemigrations
