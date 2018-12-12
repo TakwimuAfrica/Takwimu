@@ -97,6 +97,15 @@ HURUMAP['ga_tracking_ids'] = [
     'UA-44795600-8',  # HURUmap
 ]
 
+HURUMAP['primary_release_year'] = {
+    'country': 2017,
+}
+HURUMAP['latest_release_year'] = '2017'
+HURUMAP['primary_dataset_name'] = 'Census'
+HURUMAP['available_release_years'] = {
+    'country': [2017]
+}
+
 # Making sure these are the same
 WAZIMAP = HURUMAP
 

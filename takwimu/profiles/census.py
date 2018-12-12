@@ -3,8 +3,11 @@ import re
 from collections import OrderedDict
 
 from django.conf import settings
-from wazimap.data.utils import (LocationNotFound, get_session, get_stat_data,
-                                merge_dicts)
+from wazimap.data.utils import get_session, get_stat_data, group_remainder, \
+    current_context, dataset_context
+from wazimap.models.data import DataNotFound
+
+from wazimap.geo import LocationNotFound
 
 log = logging.getLogger(__name__)
 
@@ -139,8 +142,8 @@ def get_profile(geo, profile_name, request):
         data['demographics'] = get_demographics(geo, session, country, level)
         data['elections'] = get_elections(geo, session)
         data['crops'] = get_crop_production(geo, session, country, level)
-        data['health_centers'] = get_health_centers(
-            geo, session, country, level)
+        # data['health_centers'] = get_health_centers(
+        #     geo, session, country, level)
         data['health_workers'] = get_health_workers(geo, session)
         data['causes_of_death'] = get_causes_of_death(geo, session)
         data['hiv'] = get_knowledge_of_HIV(geo, session)
@@ -149,6 +152,10 @@ def get_profile(geo, profile_name, request):
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
+
+        print '\n\n\n\n'
+        print data['causes_of_death']
+        print '\n\n\n\n'
 
         return data
     finally:
@@ -167,37 +174,40 @@ def get_country_and_level(geo):
 def get_demographics(geo, session, country, level):
     population_data = get_population(geo, session, country, level)
     child_births_data = get_child_births(geo, session, country, level)
-    demographics_data = dict(population_data.items() +
-                             child_births_data.items())
-    demographics_data['is_missing'] = population_data.get('is_missing') and \
-        child_births_data.get('is_missing')
+    demographics_data = dict(population_data.items() + child_births_data.items())
+    demographics_data['is_missing'] = population_data.get('is_missing')
 
     return demographics_data
 
 
 def get_population(geo, session, country, level):
-    sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
-    residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
+    with dataset_context(year='2017'):
+        sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
+        residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
 
-    try:
-        sex_dist, total_population_sex = get_stat_data(
-            'Population_Sex', geo, session, table_fields=['Population_Sex'])
-    except LocationNotFound:
-        pass
-    try:
-        residence_dist, total_population_residence = get_stat_data(
-            'Population_Residence', geo, session,
-            table_fields=['Population_Residence'])
-    except LocationNotFound:
-        pass
+        try:
+            sex_dist, total_population_sex = get_stat_data(
+                'Population_Sex', geo, session, table_fields=['Population_Sex'])
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
+        try:
+            residence_dist, total_population_residence = get_stat_data(
+                'Population_Residence', geo, session,
+                table_fields=['Population_Residence'])
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    total_population = 0
-    is_missing = sex_dist.get('is_missing') and \
-        residence_dist.get('is_missing')
-    if not is_missing:
-        total_population = total_population_sex if total_population_sex > 0 else total_population_residence
-    total_population_dist = _create_single_value_dist(
-        'People', total_population)
+        total_population = 0
+        is_missing = sex_dist.get('is_missing') and \
+            residence_dist.get('is_missing')
+        if not is_missing:
+            total_population = total_population_sex if total_population_sex > 0 else total_population_residence
+        total_population_dist = _create_single_value_dist(
+            'People', total_population)
 
     demographics_data = {
         'is_missing': is_missing,
@@ -242,40 +252,49 @@ def _add_metadata_to_dist(dist, dist_name, country, level):
 
 
 def get_child_births(geo, session, country, level):
-    child_births_dist, total_child_births = LOCATIONNOTFOUND, 0
-    child_births_by_size_dist = LOCATIONNOTFOUND
-    total_reported_birth_weights = 0
-    total_low_birth_weights = 0
+    with dataset_context(year='2017'):
+        child_births_dist, total_child_births = LOCATIONNOTFOUND, 0
+        child_births_by_size_dist = LOCATIONNOTFOUND
+        total_reported_birth_weights = 0
+        total_low_birth_weights = 0
 
-    try:
-        child_births_dist, total_child_births = get_stat_data(
-            'child_births', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            child_births_dist, total_child_births = get_stat_data(
+                'child_births', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        child_births_by_size_dist, _ = get_stat_data(
-            'size', geo, session, table_fields=['size'],
-            table_name='child_births_by_size')
-    except LocationNotFound:
-        pass
+        try:
+            child_births_by_size_dist, _ = get_stat_data(
+                'size', geo, session, table_fields=['size'],
+                table_name='child_births_by_size')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        _, total_reported_birth_weights = get_stat_data(
-            'reported_birth_weights', geo, session,
-            table_fields=['reported_birth_weights'],
-            table_name='child_births_with_reported_birth_weights',
-            order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            _, total_reported_birth_weights = get_stat_data(
+                'reported_birth_weights', geo, session,
+                table_fields=['reported_birth_weights'],
+                table_name='child_births_with_reported_birth_weights',
+                order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        _, total_low_birth_weights = get_stat_data(
-            'low_birth_weights', geo, session,
-            table_fields=['low_birth_weights'],
-            table_name='child_births_with_low_birth_weights')
-    except LocationNotFound:
-        pass
+        try:
+            _, total_low_birth_weights = get_stat_data(
+                'low_birth_weights', geo, session,
+                table_fields=['low_birth_weights'],
+                table_name='child_births_with_low_birth_weights')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     is_missing = child_births_dist.get('is_missing')
     total_child_births_dist = _create_single_value_dist(
@@ -298,31 +317,39 @@ def get_child_births(geo, session, country, level):
 
 
 def get_elections(geo, session):
-    candidate_dist = LOCATIONNOTFOUND
-    valid_invalid_dist = LOCATIONNOTFOUND
-    registered_accred_dist = LOCATIONNOTFOUND
+    with dataset_context(year='2017'):
+        candidate_dist = LOCATIONNOTFOUND
+        valid_invalid_dist = LOCATIONNOTFOUND
+        registered_accred_dist = LOCATIONNOTFOUND
 
-    # Each of these fetches may fail due to data unavailability but failure of one
-    # does not imply failure of another i.e. they are independent.
-    try:
-        candidate_dist, _ = get_stat_data(
-            'candidate', geo, session, table_fields=['candidate'])
-    except LocationNotFound:
-        pass
-    try:
-        valid_invalid_dist, _ = get_stat_data('votes', geo, session,
-                                              table_fields=[
-                                                  'votes'],
-                                              table_name='valid_invalid_votes')
-    except LocationNotFound:
-        pass
-    try:
-        registered_accred_dist, _ = get_stat_data('voters', geo, session,
+        # Each of these fetches may fail due to data unavailability but failure of one
+        # does not imply failure of another i.e. they are independent.
+        try:
+            candidate_dist, _ = get_stat_data(
+                'candidate', geo, session, table_fields=['candidate'])
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
+        try:
+            valid_invalid_dist, _ = get_stat_data('votes', geo, session,
                                                   table_fields=[
-                                                      'voters'],
-                                                  table_name='registered_accredited_voters')
-    except LocationNotFound:
-        pass
+                                                      'votes'],
+                                                  table_name='valid_invalid_votes')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
+
+        try:
+            registered_accred_dist, _ = get_stat_data('voters', geo, session,
+                                                      table_fields=[
+                                                          'voters'],
+                                                      table_name='registered_accredited_voters')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     is_missing = candidate_dist.get('is_missing') and \
         valid_invalid_dist.get('is_missing') and \
@@ -336,12 +363,15 @@ def get_elections(geo, session):
 
 
 def get_crop_production(geo, session, country, level):
-    crop_distribution = LOCATIONNOTFOUND
-    try:
-        crop_distribution, _ = get_stat_data(
-            'crops', geo, session, table_fields=['crops'])
-    except LocationNotFound:
-        pass
+    with dataset_context(year='2017'):
+        crop_distribution = LOCATIONNOTFOUND
+        try:
+            crop_distribution, _ = get_stat_data(
+                'crops', geo, session, table_fields=['crops'])
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     return {
         'crop_distribution': _add_metadata_to_dist(
@@ -350,37 +380,46 @@ def get_crop_production(geo, session, country, level):
 
 
 def get_health_centers(geo, session, country, level):
-    health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
-    health_centers_ownership_dist = LOCATIONNOTFOUND
-    hiv_health_centers_dist, total_hiv_health_centers = LOCATIONNOTFOUND, 0
-    prevention_methods_dist = LOCATIONNOTFOUND
+    with dataset_context(year='2017'):
+        health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
+        health_centers_ownership_dist = LOCATIONNOTFOUND
+        hiv_health_centers_dist, total_hiv_health_centers = LOCATIONNOTFOUND, 0
+        prevention_methods_dist = LOCATIONNOTFOUND
 
-    try:
-        health_centers_dist, total_health_centers = get_stat_data(
-            'centers', geo, session, table_name='health_centers',
-            order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            health_centers_dist, total_health_centers = get_stat_data(
+                'centers', geo, session, table_name='health_centers',
+                order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        hiv_health_centers_dist, total_hiv_health_centers = get_stat_data(
-            'centers', geo, session, table_name='hiv_health_centers',
-            order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            hiv_health_centers_dist, total_hiv_health_centers = get_stat_data(
+                'centers', geo, session, table_name='hiv_health_centers',
+                order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        health_centers_ownership_dist, _ = get_stat_data(
-            'organization_type', geo, session,
-            table_name='health_centers_ownership', order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            health_centers_ownership_dist, _ = get_stat_data(
+                'organization_type', geo, session,
+                table_name='health_centers_ownership', order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo,
-                                                   session)
-    except LocationNotFound:
-        pass
+        try:
+            prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo,
+                                                       session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     is_missing = health_centers_dist.get('is_missing') and \
         health_centers_ownership_dist.get('is_missing') and \
@@ -404,23 +443,26 @@ def get_health_centers(geo, session, country, level):
 
 
 def get_health_workers(geo, session):
-    health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
-    hrh_patient_ratio = 0
+    with dataset_context(year='2017'):
+        health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
+        hrh_patient_ratio = 0
 
-    try:
-        health_workers_dist, total_health_workers = get_stat_data(
-            'workers', geo, session, table_name='health_workers',
-            order_by='-total')
-        hrh_patient_ratio = \
-            health_workers_dist['HRH patient ratio']['numerators']['this']
-        del health_workers_dist['HRH patient ratio']
-        del health_workers_dist['MO and AMO per 10000']
-        del health_workers_dist['Nurses and midwives per 10000']
-        del health_workers_dist['Pharmacists per 10000']
-        del health_workers_dist['Clinicians per 10000']
+        try:
+            health_workers_dist, total_health_workers = get_stat_data(
+                'workers', geo, session, table_name='health_workers',
+                order_by='-total')
+            hrh_patient_ratio = \
+                health_workers_dist['HRH patient ratio']['numerators']['this']
+            del health_workers_dist['HRH patient ratio']
+            del health_workers_dist['MO and AMO per 10000']
+            del health_workers_dist['Nurses and midwives per 10000']
+            del health_workers_dist['Pharmacists per 10000']
+            del health_workers_dist['Clinicians per 10000']
 
-    except LocationNotFound:
-        pass
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     total_health_workers_dist = _create_single_value_dist(
         'Total health worker population (2014)', total_health_workers)
@@ -434,48 +476,61 @@ def get_health_workers(geo, session):
 
 
 def get_causes_of_death(geo, session):
-    causes_of_death_under_five_dist = LOCATIONNOTFOUND
-    causes_of_death_over_five_dist = LOCATIONNOTFOUND
-    inpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
-    inpatient_diagnosis_under_five_dist = LOCATIONNOTFOUND
-    outpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
-    outpatient_diagnosis_under_five_dist = LOCATIONNOTFOUND
+    with dataset_context(year='2017'):
+        causes_of_death_under_five_dist = LOCATIONNOTFOUND
+        causes_of_death_over_five_dist = LOCATIONNOTFOUND
+        inpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
+        inpatient_diagnosis_under_five_dist = LOCATIONNOTFOUND
+        outpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
+        outpatient_diagnosis_under_five_dist = LOCATIONNOTFOUND
 
-    try:
-        causes_of_death_under_five_dist, _ = get_stat_data(
-            'causes_of_death_under_five', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            causes_of_death_under_five_dist, _ = get_stat_data(
+                'causes_of_death_under_five', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        causes_of_death_over_five_dist, _ = get_stat_data(
-            'causes_of_death_over_five', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            causes_of_death_over_five_dist, _ = get_stat_data(
+                'causes_of_death_over_five', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        inpatient_diagnosis_under_five_dist, _ = get_stat_data(
-            'inpatient_diagnosis_under_five', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            inpatient_diagnosis_under_five_dist, _ = get_stat_data(
+                'inpatient_diagnosis_under_five', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        inpatient_diagnosis_over_five_dist, _ = get_stat_data(
-            'inpatient_diagnosis_over_five', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            inpatient_diagnosis_over_five_dist, _ = get_stat_data(
+                'inpatient_diagnosis_over_five', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        outpatient_diagnosis_over_five_dist, _ = get_stat_data(
-            'outpatient_diagnosis_over_five', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            outpatient_diagnosis_over_five_dist, _ = get_stat_data(
+                'outpatient_diagnosis_over_five', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        outpatient_diagnosis_under_five_dist, _ = get_stat_data(
-            'outpatient_diagnosis_under_five', geo, session, order_by='-total')
-    except LocationNotFound:
-        pass
+        try:
+            outpatient_diagnosis_under_five_dist, _ = get_stat_data(
+                'outpatient_diagnosis_under_five', geo, session, order_by='-total')
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     is_missing = causes_of_death_over_five_dist.get('is_missing') and \
         causes_of_death_under_five_dist.get('is_missing') and \
@@ -495,12 +550,15 @@ def get_causes_of_death(geo, session):
 
 
 def get_knowledge_of_HIV(geo, session):
-    prevention_methods_dist = LOCATIONNOTFOUND
-    try:
-        prevention_methods_dist, _ = get_stat_data(
-            ['method', 'sex'], geo, session)
-    except LocationNotFound:
-        pass
+    with dataset_context(year='2017'):
+        prevention_methods_dist = LOCATIONNOTFOUND
+        try:
+            prevention_methods_dist, _ = get_stat_data(
+                ['method', 'sex'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     return {
         'is_missing': prevention_methods_dist.get('is_missing'),
@@ -509,21 +567,26 @@ def get_knowledge_of_HIV(geo, session):
 
 
 def get_donor_assistance(geo, session, country, level):
-    donor_assistance_dist = LOCATIONNOTFOUND
-    donor_programmes_dist = LOCATIONNOTFOUND
-    try:
-        donor_assistance_dist, _ = get_stat_data(['donor'], geo, session)
-    except LocationNotFound:
-        pass
+    with dataset_context(year='2017'):
+        donor_assistance_dist = LOCATIONNOTFOUND
+        donor_programmes_dist = LOCATIONNOTFOUND
+        try:
+            donor_assistance_dist, _ = get_stat_data(['donor'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        donor_programmes_dist, _ = get_stat_data(
-            ['donor', 'programme'], geo, session)
-    except LocationNotFound:
-        pass
+        try:
+            donor_programmes_dist, _ = get_stat_data(
+                ['donor', 'programme'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    is_missing = donor_assistance_dist.get('is_missing') and \
-        donor_programmes_dist.get('is_missing')
+        is_missing = donor_assistance_dist.get('is_missing') and \
+            donor_programmes_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist, 'donor_assistance_dist', country, level),
@@ -532,18 +595,23 @@ def get_donor_assistance(geo, session, country, level):
 
 
 def get_poverty_profile(geo, session, country, level):
-    poverty_residence_dist = LOCATIONNOTFOUND
-    poverty_age_dist = LOCATIONNOTFOUND
-    try:
-        poverty_residence_dist, _ = get_stat_data(
-            ['poverty_type', 'residence'], geo, session)
-    except LocationNotFound:
-        pass
+    with dataset_context(year='2017'):
+        poverty_residence_dist = LOCATIONNOTFOUND
+        poverty_age_dist = LOCATIONNOTFOUND
+        try:
+            poverty_residence_dist, _ = get_stat_data(
+                ['poverty_type', 'residence'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
-    try:
-        poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo, session)
-    except LocationNotFound:
-        pass
+        try:
+            poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     is_missing = poverty_residence_dist.get('is_missing') and \
         poverty_age_dist.get('is_missing')
@@ -555,11 +623,14 @@ def get_poverty_profile(geo, session, country, level):
 
 
 def get_fgm_profile(geo, session, country, level):
-    fgm_age_dist = LOCATIONNOTFOUND
-    try:
-        fgm_age_dist, _ = get_stat_data(['age'], geo, session)
-    except LocationNotFound:
-        pass
+    with dataset_context(year='2017'):
+        fgm_age_dist = LOCATIONNOTFOUND
+        try:
+            fgm_age_dist, _ = get_stat_data(['age'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     return {
         'is_missing': fgm_age_dist.get('is_missing'),
@@ -568,10 +639,13 @@ def get_fgm_profile(geo, session, country, level):
 
 
 def get_security_profile(geo, session, country, level):
-    seized_firearms_dist = LOCATIONNOTFOUND
+    with dataset_context(year='2017'):
+            seized_firearms_dist = LOCATIONNOTFOUND
     try:
         seized_firearms_dist, _ = get_stat_data(['year', 'type'], geo, session)
     except LocationNotFound:
+        pass
+    except DataNotFound:
         pass
 
     return {
@@ -581,12 +655,15 @@ def get_security_profile(geo, session, country, level):
 
 
 def get_budget_data(geo, session, country, level):
-    government_expenditure_dist = LOCATIONNOTFOUND
-    try:
-        government_expenditure_dist, _ = get_stat_data(
-            ['year', 'sector'], geo, session)
-    except LocationNotFound:
-        pass
+    with dataset_context(year='2017'):
+        government_expenditure_dist = LOCATIONNOTFOUND
+        try:
+            government_expenditure_dist, _ = get_stat_data(
+                ['year', 'sector'], geo, session)
+        except LocationNotFound:
+            pass
+        except DataNotFound:
+            pass
 
     return {
         'is_missing': government_expenditure_dist.get('is_missing'),

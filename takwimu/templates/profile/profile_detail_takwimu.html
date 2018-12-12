@@ -1,6 +1,22 @@
 {% extends 'profile/profile_detail_base.html' %}
 {% load staticfiles sass_tags geotags %}
 
+{% block profile_header_tail %}
+<div class="column-full">
+    <strong>{{ primary_releases.active.name }} {{ primary_releases.active.year }}</strong>
+    {% if primary_releases.other %}
+    <div class="tool-group toggle-sub-group release-list">
+        <a>Change release<i class="fa fa-chevron-circle-down"></i></a>
+        <ul class="sub-group" style="display: none;">
+        {% for release in primary_releases.other %}
+            <li><a href="{{ request.path }}?release={{release.year}}">{{ release.name }} {{ release.year }}</a></li>
+        {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}
+
 {% block profile_detail %}
 
   {% if not demographics.is_missing %}
@@ -80,50 +96,50 @@
     </article>
   {% endif %}
 
-  {% if not health_centers.is_missing %}
-    <article id="health_centers_distribution" class="clearfix">
-      <header class="section-contents">
-        <h1>Health centers distribution</h1>
-      </header>
-      {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            {% if not health_centers.health_centers_dist.is_missing %}
-              <div class="column-third">
-                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}
-              </div>
-            {% endif %}
-            {% if not health_centers.hiv_health_centers_dist.is_missing %}
-              <div class="column-third">
-                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}
-              </div>
-            {% endif %}
-            {% if not health_centers.health_centers_ownership_dist.is_missing %}
-              <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>
-            {% endif %}
-            {% if not health_centers.health_centers_dist.is_missing %}
-              <div class="column-full">
-                <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>
-              </div>
-            {% endif %}
-          </section>
-        </div>
-      {% endif %}
-      {% if not health_centers.prevention_methods_dist.is_missing %}
-        <div class="section-container">
-          <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Knowledge of HIV Prevention
-              Methods</h2>
-            <div class="column-full">
-              <div id="chart-grouped_column-health_centers-prevention_methods_dist"
-                   data-stat-type="scaled-percentage"
-                   data-chart-title=""></div>
-            </div>
-          </section>
-        </div>
-      {% endif %}
-    </article>
-  {% endif %}
+{#  {% if not health_centers.is_missing %}#}
+{#    <article id="health_centers_distribution" class="clearfix">#}
+{#      <header class="section-contents">#}
+{#        <h1>Health centers distribution</h1>#}
+{#      </header>#}
+{#      {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}#}
+{#        <div class="section-container">#}
+{#          <section class="clearfix stat-row">#}
+{#            {% if not health_centers.health_centers_dist.is_missing %}#}
+{#              <div class="column-third">#}
+{#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}#}
+{#              </div>#}
+{#            {% endif %}#}
+{#            {% if not health_centers.hiv_health_centers_dist.is_missing %}#}
+{#              <div class="column-third">#}
+{#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}#}
+{#              </div>#}
+{#            {% endif %}#}
+{#            {% if not health_centers.health_centers_ownership_dist.is_missing %}#}
+{#              <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>#}
+{#            {% endif %}#}
+{#            {% if not health_centers.health_centers_dist.is_missing %}#}
+{#              <div class="column-full">#}
+{#                <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>#}
+{#              </div>#}
+{#            {% endif %}#}
+{#          </section>#}
+{#        </div>#}
+{#      {% endif %}#}
+{#      {% if not health_centers.prevention_methods_dist.is_missing %}#}
+{#        <div class="section-container">#}
+{#          <section class="clearfix stat-row">#}
+{#            <h2 class="header-for-columns">Knowledge of HIV Prevention#}
+{#              Methods</h2>#}
+{#            <div class="column-full">#}
+{#              <div id="chart-grouped_column-health_centers-prevention_methods_dist"#}
+{#                   data-stat-type="scaled-percentage"#}
+{#                   data-chart-title=""></div>#}
+{#            </div>#}
+{#          </section>#}
+{#        </div>#}
+{#      {% endif %}#}
+{#    </article>#}
+{#  {% endif %}#}
 
   {% if not health_workers.health_workers_dist.is_missing %}
     <article id="health_workers_distribution" class="clearfix">
