@@ -153,10 +153,6 @@ def get_profile(geo, profile_name, request):
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
 
-        print '\n\n\n\n'
-        print data['causes_of_death']
-        print '\n\n\n\n'
-
         return data
     finally:
         session.close()

@@ -24,14 +24,9 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
     dataset_releases = [
         r.as_dict() for r in query.all()]
 
-    if year == 'latest':
-        releases['active'] = dataset_releases[0]
-        releases['other'] = dataset_releases[1:]
-    else:
-        for r in dataset_releases:
-            if r['year'] == str(year):
-                releases['active'] = r
-            else:
-                releases['other'].append(r)
+    # since countries might have census in different years, always make the latest the primary dataset
+
+    releases['active'] = dataset_releases[0]
+    releases['other'] = dataset_releases[1:]
 
     return releases
