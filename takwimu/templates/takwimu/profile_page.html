@@ -116,7 +116,7 @@
 
     var trackEvent = function trackEvent(category, event, target) {
       if (window.ga) {
-        window.ga('t1.send', 'event', category, event, target);
+        window.ga('send', 'event', category, event, target);
       }
     };
 
