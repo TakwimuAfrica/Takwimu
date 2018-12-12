@@ -103,8 +103,14 @@ HURUMAP['primary_release_year'] = {
 HURUMAP['latest_release_year'] = '2017'
 HURUMAP['primary_dataset_name'] = 'Census'
 HURUMAP['available_release_years'] = {
-    'country': [2017]
+    'tanzania': [2017],
+    'kenya': [2017],
+    'ethiopia': [2017],
+    'senegal': [2017],
+    'south africa': [2017],
+    'nigeria': [2017],
 }
+
 
 # Making sure these are the same
 WAZIMAP = HURUMAP
