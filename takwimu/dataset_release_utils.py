@@ -1,6 +1,14 @@
 from django.conf import settings
 
-from takwimu.profiles.census import get_country_and_level
+
+def get_country_geo_code(geo):
+    level = geo.geo_level.lower()
+    country = geo.geo_code \
+        if level == 'country' \
+        else geo.ancestors()[-1].geo_code
+
+    return country
+
 
 def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True):
     """
@@ -14,10 +22,21 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
 
     query = Dataset.objects.get(name=dataset_name).releases.order_by('-year')
 
-    country, _ = get_country_and_level(geo)
+    # get available release years for this particular level
+    available_years = settings.HURUMAP['available_release_years'].get(
+        geo.geo_level, 9000)
 
-    # Some releases don't have data for all geo_levels
-    available_years = settings.WAZIMAP['available_release_years'].get(country, None)
+    # get the available releases for this country
+    country_code = get_country_geo_code(geo)
+    print '\n\n\n\n\n\n\n\n\n\n'
+    print country_code
+    print '\n\n\n\n\n\n\n\n\n\n'
+    country_available_years = settings.HURUMAP[
+        'releases_available_per_country'].get(country_code, 8000)
+    
+    # get the available years for the level and country in which chosen geography exists
+    available_years = list(set(available_years).intersection(set(country_available_years)))
+
     if filter_releases and available_years:
         query = query.filter(year__in=available_years)
 
