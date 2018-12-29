@@ -7,7 +7,7 @@
             width="100%"
             src="/embed/iframe.html?geoID=country-{{value.data_country}}&geoVersion=2009&chartDataID={{value.data_id}}&dataYear=2011&chartSourceLink={{value.data_source_link}}&chartSourceTitle={{value.data_source_title}}&chartType={{value.chart_type}}&chartHeight={% firstof value.chart_height 300%}&chartSourceLink{{value.data_source_link}}&chartSourceTitle{{value.data_source_title}}=&chartTitle={{value.title}}&chartSubtitle={{value.subtitle}}&initialSort=&statType={{value.data_stat_type}}"
             height="{% firstof value.widget_height 450%}"
-            style="margin: 1em; max-width: 720px;"></iframe>
+            style="margin: 1em; max-width: 680px;"></iframe>
 
     <div class="small cr-embed-chart-qualifier">
     {{ value.chart_qualifier|richtext }}
@@ -22,48 +22,35 @@
 
 <script>
 
-    // Work with a single iframe at a time
-    function makeCensusEmbeds(selectors) {
+    // Work with a single iframe at a time and only resize it to it's
+    // "natural" dimensions
+    function makeCensusEmbed(containerId) {
         var embed = {
-            embeds: {}
+            embed: {}
         };
 
         embed.init = function () {
-            embed.containers = document.querySelectorAll(selectors);
-            embed.numContainers = embed.containers.length;
-            for (var i = 0; i < embed.numContainers; i++) {
-                embed.embeds[embed.containers[i].id] = {
-                    naturalWidth: embed.containers[i].width,
-                    naturalHeight: embed.containers[i].height,
-                    frameHeight: embed.containers[i].height
+            embed.container = document.getElementById(containerId);
+            if (embed.container) {
+                embed.embed = {
+                    naturalWidth: embed.container.width,
+                    naturalHeight: embed.container.height,
+                    frameHeight: embed.container.height
                 }
+                embed.addListeners();
+                embed.sendDataToFrame({ resize: 'resize' });
             }
-            embed.addListeners();
-            embed.sendDataToFrames({ resize: 'resize' });
         }
 
         embed.addListeners = function () {
             var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent',
                 eventListener = window[eventMethod],
-                messageEvent = (eventMethod == 'attachEvent') ? 'onmessage' : 'message',
                 resizeEvent = (eventMethod == 'attachEvent') ? 'onresize' : 'resize';
 
-            eventListener(messageEvent, embed.handleMessage, false);
             eventListener(resizeEvent, embed.resize);
         }
 
-        embed.handleMessage = function (event) {
-            try {
-                var messageData = JSON.parse(event.data);
-                if (messageData.chartHeight && messageData.containerID) {
-                    embed.embeds[messageData.containerID].frameHeight = messageData.chartHeight;
-                    embed.setFrameSizes();
-                }
-            } catch (err) {
-            }
-        }
-
-        embed.debounce = function (func, wait, immediate) {
+        embed.debounce = function debounce(func, wait, immediate) {
             var timeout;
             return function () {
                 var context = this, args = arguments;
@@ -78,26 +65,24 @@
             };
         };
 
-        embed.resize = embed.debounce(function () {
-            embed.setFrameSizes();
-            embed.sendDataToFrames({ resize: 'resize' });
+        embed.resize = embed.debounce(function resizeEmbed() {
+            embed.setFrameSize();
+            embed.sendDataToFrame({ resize: 'resize' });
         }, 100);
 
-        embed.setFrameSizes = function () {
-            for (var i = 0; i < embed.numContainers; i++) {
-                var thisContainer = embed.containers[i],
-                    thisEmbed = embed.embeds[embed.containers[i].id],
-                    parentWidth = thisContainer.offsetWidth;
-                thisContainer.width = (parentWidth <= thisEmbed.naturalWidth) ? parentWidth : thisEmbed.naturalWidth;
-                thisContainer.height = ((thisEmbed.frameHeight + 80) >= thisEmbed.naturalHeight) ? +thisEmbed.frameHeight + 80 : thisEmbed.naturalHeight;
-            }
+        embed.setFrameSize = function setFrameSize() {
+            var thisContainer = embed.container,
+                thisEmbed = embed.embed,
+                parentWidth = thisContainer.offsetWidth,
+                minimumHeight = thisEmbed.frameHeight + 80;
+            thisContainer.width = (parentWidth <= thisEmbed.naturalWidth) ? parentWidth : thisEmbed.naturalWidth;
+            thisContainer.height = (minimumHeight >= thisEmbed.naturalHeight) ? minimumHeight : thisEmbed.naturalHeight;
         }
 
-        embed.sendDataToFrames = function (data) {
+        embed.sendDataToFrame = function (data) {
+
             // IE9 can only send strings
-            for (var i = 0; i < embed.numContainers; i++) {
-                embed.containers[i].contentWindow.postMessage(JSON.stringify(data), '*');
-            }
+            embed.container.contentWindow.postMessage(JSON.stringify(data), '*');
         }
 
         embed.init();
@@ -105,31 +90,34 @@
         return embed;
     }
 
-    // Create viz for all visible iframes
-    var addEmbeds = function addEmbeds() {
-        this.contentWindow.CensusReporterEmbeds = makeCensusEmbeds('#cr-embed-country-{{value.data_country}}-{{value.data_id}}');
-    }
-    var viz = document.getElementById('cr-embed-country-{{value.data_country}}-{{value.data_id}}');
-    viz.addEventListener('load', addEmbeds);
+    var embedWidgets = function embedWidgets() {
+        var embedWidget = function embedWidget(selector) {
+            $(selector).each(function(){
+                this.contentWindow.CensusReporterEmbeds = makeCensusEmbed(this.id);
+            });
+        };
 
-    window.addEventListener('load', function() {
+        // 1. ACTIVE INDICATOR, ACTIVE WIDGET
+        $('.dataindicators-nav .nav-link.active').each(function() {
+            // Need the written href and not the full href provided by this.href
+            var widgetId = $(this).attr('href');
+            embedWidget(widgetId + ' .census-reporter-embed');
+        });
 
-        // For all widgets in hidden tabs (on single indicator),
-        // create them when they're shown
+        // 2. ACTIVE INDICATOR, HIDDEN WIDGET
+        // Embed the widget AFTER the widget tab is shown
         $('.indicator .nav-link').on('shown.bs.tab', function(e) {
             widgetId = e.target.getAttribute('href');
-            $(widgetId + ' .census-reporter-embed').each(function(){
-                this.contentWindow.CensusReporterEmbeds = makeCensusEmbeds('#' + this.id);
-            });
+            embedWidget(widgetId + ' .census-reporter-embed');
         });
 
-        // For the active widget on a hidden indicator,
-        // create it when the indicator is shown
+        // 3. HIDDEN INDICATOR
+        // Embed the widget on the active tab (if any) AFTER the indicator
+        // is shown
         $('.dataindicators-nav .nav-link').on('shown.bs.tab', function(e) {
-            indicatortId = e.target.getAttribute('href');
-            $(indicatortId + ' .tab-pane.active .census-reporter-embed').each(function() {
-                this.contentWindow.CensusReporterEmbeds = makeCensusEmbeds('#' + this.id);
-            });
+            indicatorId = e.target.getAttribute('href');
+            embedWidget(indicatorId + ' .indicator .tab-pane.active .census-reporter-embed');
         });
-    });
+    };
+    window.addEventListener('load', embedWidgets);
 </script>

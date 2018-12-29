@@ -16,4 +16,4 @@ psycopg2-binary==2.7.5
 
 # Workaround for dependency links
 # Comment out when changes / updates / PR accepted
-git+https://github.com/CodeForAfricaLabs/wazimap.git@master#egg=wazimap
+git+https://github.com/CodeForAfricaLabs/wazimap.git@0.0.1#egg=wazimap
