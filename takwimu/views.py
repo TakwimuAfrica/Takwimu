@@ -23,8 +23,8 @@ from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
 from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
-from takwimu.dataset_release_utils import get_page_releases_per_country
 
+from data.utils import get_page_releases_per_country
 from wagtail.contrib.settings.context_processors import settings
 from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
 
@@ -241,10 +241,6 @@ class SupportServicesIndexView(FormView):
             headers=headers
         )
 
-        print '\n\n\n\n\n\n\n\n'
-        print request.status_code
-        print request.json()
-
         if request.status_code != 201:
             # add non field error
             form.add_error(None,
@@ -390,21 +386,6 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
 
-    # def get_context_data(self, **kwargs):
-    #     json_data = open('takwimu/fixtures/sdg.json')
-    #     data = json.load(json_data)
-
-    #     context = super(IndicatorsGeographyDetailView, self).get_context_data(
-    #         **kwargs)
-    #     context['sdgs'] = data
-
-    #     context.update(settings(self.request))
-    #     context.update(takwimu_countries(self.request))
-    #     context.update(takwimu_stories(self.request))
-    #     context.update(takwimu_topics(self.request))
-
-    #     return context
-
 
     def get_context_data(self, *args, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
@@ -413,15 +394,15 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         page_context = {}
 
         # load the profile
-        profile_method = takwimu_settings.WAZIMAP.get('profile_builder', None)
-        self.profile_name = takwimu_settings.WAZIMAP.get('default_profile', 'default')
+        profile_method = takwimu_settings.HURUMAP.get('profile_builder', None)
+        self.profile_name = takwimu_settings.HURUMAP.get('default_profile', 'default')
 
         if not profile_method:
             raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
         profile_method = import_string(profile_method)
 
         year = self.request.GET.get('release', geo_data.primary_release_year(self.geo))
-        if takwimu_settings.WAZIMAP['latest_release_year'] == year:
+        if takwimu_settings.HURUMAP['latest_release_year'] == year:
             year = 'latest'
 
         with dataset_context(year=year):
@@ -429,7 +410,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
         profile_data['geography'] = self.geo.as_dict_deep()
         profile_data['primary_releases'] = get_page_releases_per_country(
-            takwimu_settings.WAZIMAP['primary_dataset_name'], self.geo, year)
+            takwimu_settings.HURUMAP['primary_dataset_name'], self.geo, year)
 
         profile_data = enhance_api_data(profile_data)
         page_context.update(profile_data)

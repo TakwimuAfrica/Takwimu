@@ -153,6 +153,13 @@ def get_profile(geo, profile_name, request):
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
 
+        print '\n\n\n\n\n\n'
+        print 'kotido'
+
+        print data['demographics']
+
+        print '\n\n\n\n\n\n'
+
         return data
     finally:
         session.close()
@@ -160,9 +167,11 @@ def get_profile(geo, profile_name, request):
 
 def get_country_and_level(geo):
     level = geo.geo_level.lower()
-    country = geo.name.lower() \
-        if level == 'country' \
-        else geo.ancestors()[-1].name.lower()
+    country = ''
+    if level != 'continent':
+        country = geo.name.lower() \
+            if level == 'country' \
+            else geo.ancestors()[-1].name.lower()
 
     return (country, level)
 
@@ -177,16 +186,17 @@ def get_demographics(geo, session, country, level):
 
 
 def get_population(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='latest'):
         sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
         residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
-
         try:
             sex_dist, total_population_sex = get_stat_data(
                 'Population_Sex', geo, session, table_fields=['Population_Sex'])
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
         try:
             residence_dist, total_population_residence = get_stat_data(
@@ -195,6 +205,8 @@ def get_population(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         total_population = 0
@@ -261,6 +273,8 @@ def get_child_births(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             child_births_by_size_dist, _ = get_stat_data(
@@ -269,6 +283,8 @@ def get_child_births(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         try:
@@ -281,6 +297,8 @@ def get_child_births(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             _, total_low_birth_weights = get_stat_data(
@@ -290,6 +308,8 @@ def get_child_births(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
     is_missing = child_births_dist.get('is_missing')
@@ -327,6 +347,8 @@ def get_elections(geo, session):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
         try:
             valid_invalid_dist, _ = get_stat_data('votes', geo, session,
                                                   table_fields=[
@@ -335,6 +357,8 @@ def get_elections(geo, session):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         try:
@@ -345,6 +369,8 @@ def get_elections(geo, session):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
     is_missing = candidate_dist.get('is_missing') and \
@@ -368,6 +394,8 @@ def get_crop_production(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
     return {
         'crop_distribution': _add_metadata_to_dist(
@@ -390,6 +418,8 @@ def get_health_centers(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             hiv_health_centers_dist, total_hiv_health_centers = get_stat_data(
@@ -398,6 +428,8 @@ def get_health_centers(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         try:
@@ -408,6 +440,8 @@ def get_health_centers(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo,
@@ -415,6 +449,8 @@ def get_health_centers(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
     is_missing = health_centers_dist.get('is_missing') and \
@@ -459,6 +495,8 @@ def get_health_workers(geo, session):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
     total_health_workers_dist = _create_single_value_dist(
         'Total health worker population (2014)', total_health_workers)
@@ -487,6 +525,8 @@ def get_causes_of_death(geo, session):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             causes_of_death_over_five_dist, _ = get_stat_data(
@@ -494,6 +534,8 @@ def get_causes_of_death(geo, session):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         try:
@@ -503,6 +545,8 @@ def get_causes_of_death(geo, session):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             inpatient_diagnosis_over_five_dist, _ = get_stat_data(
@@ -510,6 +554,8 @@ def get_causes_of_death(geo, session):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         try:
@@ -519,6 +565,8 @@ def get_causes_of_death(geo, session):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             outpatient_diagnosis_under_five_dist, _ = get_stat_data(
@@ -526,6 +574,8 @@ def get_causes_of_death(geo, session):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
     is_missing = causes_of_death_over_five_dist.get('is_missing') and \
@@ -555,6 +605,8 @@ def get_knowledge_of_HIV(geo, session):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
     return {
         'is_missing': prevention_methods_dist.get('is_missing'),
@@ -572,6 +624,8 @@ def get_donor_assistance(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             donor_programmes_dist, _ = get_stat_data(
@@ -579,6 +633,8 @@ def get_donor_assistance(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
         is_missing = donor_assistance_dist.get('is_missing') and \
@@ -601,12 +657,16 @@ def get_poverty_profile(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
         try:
             poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo, session)
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
     is_missing = poverty_residence_dist.get('is_missing') and \
@@ -627,6 +687,8 @@ def get_fgm_profile(geo, session, country, level):
             pass
         except DataNotFound:
             pass
+        except ValueError:
+            pass
 
     return {
         'is_missing': fgm_age_dist.get('is_missing'),
@@ -642,6 +704,8 @@ def get_security_profile(geo, session, country, level):
     except LocationNotFound:
         pass
     except DataNotFound:
+        pass
+    except ValueError:
         pass
 
     return {
@@ -659,6 +723,8 @@ def get_budget_data(geo, session, country, level):
         except LocationNotFound:
             pass
         except DataNotFound:
+            pass
+        except ValueError:
             pass
 
     return {

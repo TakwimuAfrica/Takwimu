@@ -100,21 +100,39 @@ HURUMAP['ga_tracking_ids'] = [
 HURUMAP['primary_release_year'] = {
     'country': 2017,
 }
-HURUMAP['latest_release_year'] = '2017'
+HURUMAP['latest_release_year'] = 'latest'
 HURUMAP['primary_dataset_name'] = 'Census'
+# default census release years
 HURUMAP['available_release_years'] = {
-    'country': [2011, 2013, 2014, 2017]
+    'country': [2009, 2012, 2013, 2006, 2007, 2011]
 }
 
 # census release years for each country and it's subnational geographies
 HURUMAP['releases_available_per_country'] = {
-    'KE': [2017],
-    'TZ': [2017],
-    'SN': [2017],
-    'NG': [2017],
-    'ET': [2017],
-    'ZA': [2017],
-
+    'KE': {
+        'country': [2009],
+        'level1': [2009]
+    },
+    'TZ': {
+        'country': [2012],
+        'level1': [2012]
+    },
+    'SN': {
+        'country': [2013],
+        'level1': [2013]
+    },
+    'NG': {
+        'country': [2006],
+        'level1': [2006]
+    },
+    'ET': {
+        'country': [2007],
+        'level1': [2007]
+    },
+    'ZA': {
+        'country': [2011],
+        'level1': [2011]
+    },
 }
 
 # Making sure these are the same
