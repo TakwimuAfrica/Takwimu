@@ -13,30 +13,30 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.population_residence DROP CONSTRAINT IF EXISTS pk_population_residence;
-DROP TABLE IF EXISTS public.population_residence;
+ALTER TABLE IF EXISTS ONLY public.population_residence_ke_2009 DROP CONSTRAINT IF EXISTS pk_population_residence_ke_2009;
+DROP TABLE IF EXISTS public.population_residence_ke_2009;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: population_residence; Type: TABLE; Schema: public; Owner: -
+-- Name: population_residence_ke_2009; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.population_residence (
+CREATE TABLE public.population_residence_ke_2009 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    "Population_Residence" character varying(128) NOT NULL,
+    "Population_Residence_Ke_2009" character varying(128) NOT NULL,
     total integer
 );
 
 
 --
--- Data for Name: population_residence; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: population_residence_ke_2009; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_residence (geo_level, geo_code, geo_version, "Population_Residence", total) FROM stdin;
+COPY public.population_residence_ke_2009 (geo_level, geo_code, geo_version, "Population_Residence_Ke_2009", total) FROM stdin;
 level1	KE_1_030	2009	urban	61551
 level1	KE_1_036	2009	urban	132255
 level1	KE_1_039	2009	urban	298696
@@ -137,11 +137,11 @@ level1	KE_1_024	2009	rural	469994
 
 
 --
--- Name: population_residence pk_population_residence; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: population_residence_ke_2009 pk_population_residence_ke_2009; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.population_residence
-    ADD CONSTRAINT pk_population_residence PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Residence");
+ALTER TABLE ONLY public.population_residence_ke_2009
+    ADD CONSTRAINT pk_population_residence_ke_2009 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Residence_Ke_2009");
 
 
 --

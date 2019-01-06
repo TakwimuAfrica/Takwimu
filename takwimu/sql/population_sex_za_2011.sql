@@ -13,30 +13,30 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.population_sex DROP CONSTRAINT IF EXISTS pk_population_sex;
-DROP TABLE IF EXISTS public.population_sex;
+ALTER TABLE IF EXISTS ONLY public.population_sex_za_2011 DROP CONSTRAINT IF EXISTS pk_population_sex_za_2011;
+DROP TABLE IF EXISTS public.population_sex_za_2011;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: population_sex; Type: TABLE; Schema: public; Owner: -
+-- Name: population_sex_za_2011; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.population_sex (
+CREATE TABLE public.population_sex_za_2011 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    "Population_Sex" character varying(128) NOT NULL,
+    "Population_Sex_Za_2011" character varying(128) NOT NULL,
     total integer
 );
 
 
 --
--- Data for Name: population_sex; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: population_sex_za_2011; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_sex (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
+COPY public.population_sex_za_2011 (geo_level, geo_code, geo_version, "Population_Sex_Za_2011", total) FROM stdin;
 country	TZ	2009	male	21869990
 level1	ZA_1_008	2009	Male	3096457
 level1	ZA_1_008	2009	Female	3183273
@@ -62,11 +62,11 @@ country	ZA	2009	Female	28406428
 
 
 --
--- Name: population_sex pk_population_sex; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: population_sex pk_population_sex_za_2011; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.population_sex
-    ADD CONSTRAINT pk_population_sex PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
+ALTER TABLE ONLY public.population_sex_za_2011
+    ADD CONSTRAINT pk_population_sex_za_2011 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex_Za_2011");
 
 
 --

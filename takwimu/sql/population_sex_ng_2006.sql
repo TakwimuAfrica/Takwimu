@@ -13,8 +13,8 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.population_sex DROP CONSTRAINT IF EXISTS pk_population_sex;
-DROP TABLE IF EXISTS public.population_sex;
+ALTER TABLE IF EXISTS ONLY public.population_sex_ng_2006 DROP CONSTRAINT IF EXISTS pk_population_sex_ng_2006;
+DROP TABLE IF EXISTS public.population_sex_ng_2006;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -23,20 +23,20 @@ SET default_with_oids = false;
 -- Name: population_sex; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.population_sex (
+CREATE TABLE public.population_sex_ng_2006 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    "Population_Sex" character varying(128) NOT NULL,
+    "Population_Sex_Ng_2006" character varying(128) NOT NULL,
     total integer
 );
 
 
 --
--- Data for Name: population_sex; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: ppopulation_sex_ng_2006; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_sex (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
+COPY public.population_sex_ng_2006 (geo_level, geo_code, geo_version, "Population_Sex_Ng_2006", total) FROM stdin;
 country	NG	2009	male	98630184
 country	NG	2009	female	94762333
 level1	NG_1_001	2009	male	1900947
@@ -117,11 +117,11 @@ level1	NG_1_037	2009	female	2212559
 
 
 --
--- Name: population_sex pk_population_sex; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: population_sex pk_population_sex_ng_2006; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.population_sex
-    ADD CONSTRAINT pk_population_sex PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
+ALTER TABLE ONLY public.population_sex_ng_2006
+    ADD CONSTRAINT pk_population_sex_ng_2006 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex_Ng_2006");
 
 
 --
