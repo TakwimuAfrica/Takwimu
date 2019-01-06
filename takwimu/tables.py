@@ -52,16 +52,16 @@ FieldTable(['crime'], universe='Crimes', dataset='Other', year='2017')
 
 FieldTable(['official employment status'], universe='Individuals 15 and older', dataset='Other', year='2017')
 
-FieldTable(['Population_Residence_Ke_2009'], id='population_residence_ke_2009', universe='Population', dataset='Census', year='2009')
-FieldTable(['Population_Residence_Tz_2012'], id='population_residence_tz_2012', universe='Population', dataset='Census', year='2012')
-FieldTable(['Population_Residence_Sn_2013'], id='population_residence_sn_2013', universe='Population', dataset='Census', year='2013')
+FieldTable(['Population_Residence'], id='population_residence_ke_2009', universe='Population', dataset='Census', year='2009')
+FieldTable(['Population_Residence'], id='population_residence_tz_2012', universe='Population', dataset='Census', year='2012')
+FieldTable(['Population_Residence'], id='population_residence_sn_2013', universe='Population', dataset='Census', year='2013')
 
-FieldTable(['Population_Sex_Et_2007'], id='population_sex_et_2007', universe='Population', dataset='Census', year='2007')
-FieldTable(['Population_Sex_Ke_2009'], id='population_sex_ke_2009', universe='Population', dataset='Census', year='2009')
-FieldTable(['Population_Sex_Ng_2006'], id='population_sex_ng_2006', universe='Population', dataset='Census', year='2016')
-FieldTable(['Population_Sex_Sn_2013'], id='population_sex_sn_2013', universe='Population', dataset='Census', year='2013')
-FieldTable(['Population_Sex_Tz_2012'], id='population_sex_tz_2012', universe='Population', dataset='Census', year='2012')
-FieldTable(['Population_Sex_Za_2011'], id='population_sex_za_2011', universe='Population', dataset='Census', year='2011')
+FieldTable(['Population_Sex'], id='population_sex_et_2007', universe='Population', dataset='Census', year='2007')
+FieldTable(['Population_Sex'], id='population_sex_ke_2009', universe='Population', dataset='Census', year='2009')
+FieldTable(['Population_Sex'], id='population_sex_ng_2006', universe='Population', dataset='Census', year='2016')
+FieldTable(['Population_Sex'], id='population_sex_sn_2013', universe='Population', dataset='Census', year='2013')
+FieldTable(['Population_Sex'], id='population_sex_tz_2012', universe='Population', dataset='Census', year='2012')
+FieldTable(['Population_Sex'], id='population_sex_za_2011', universe='Population', dataset='Census', year='2011')
 
 
 
