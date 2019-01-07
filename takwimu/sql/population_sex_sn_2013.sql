@@ -23,7 +23,7 @@ SET default_with_oids = false;
 -- Name: population_sex_sn_2013; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.population_sex (
+CREATE TABLE public.population_sex_sn_2013 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
