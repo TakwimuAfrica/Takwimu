@@ -9,6 +9,7 @@ from wazimap.models.data import DataNotFound
 
 from wazimap.geo import LocationNotFound
 
+
 log = logging.getLogger(__name__)
 
 SECTIONS = settings.HURUMAP.get('topics', {})
@@ -152,14 +153,6 @@ def get_profile(geo, profile_name, request):
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
-
-        print '\n\n\n\n\n\n'
-        print 'kotido'
-
-        print data['demographics']
-
-        print '\n\n\n\n\n\n'
-
         return data
     finally:
         session.close()
@@ -186,36 +179,35 @@ def get_demographics(geo, session, country, level):
 
 
 def get_population(geo, session, country, level):
-    with dataset_context(year='latest'):
-        sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
-        residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
-        try:
-            sex_dist, total_population_sex = get_stat_data(
-                'Population_Sex', geo, session, table_fields=['Population_Sex'])
-        except LocationNotFound:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
-        try:
-            residence_dist, total_population_residence = get_stat_data(
-                'Population_Residence', geo, session,
-                table_fields=['Population_Residence'])
-        except LocationNotFound:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
+    sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
+    residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
+    try:
+        sex_dist, total_population_sex = get_stat_data(
+            'Population_Sex', geo, session, table_fields=['Population_Sex'])
+    except LocationNotFound:
+        pass
+    except DataNotFound:
+        pass
+    except ValueError:
+        pass
+    try:
+        residence_dist, total_population_residence = get_stat_data(
+            'Population_Residence', geo, session,
+            table_fields=['Population_Residence'])
+    except LocationNotFound:
+        pass
+    except DataNotFound:
+        pass
+    except ValueError:
+        pass
 
-        total_population = 0
-        is_missing = sex_dist.get('is_missing') and \
-            residence_dist.get('is_missing')
-        if not is_missing:
-            total_population = total_population_sex if total_population_sex > 0 else total_population_residence
-        total_population_dist = _create_single_value_dist(
-            'People', total_population)
+    total_population = 0
+    is_missing = sex_dist.get('is_missing') and \
+        residence_dist.get('is_missing')
+    if not is_missing:
+        total_population = total_population_sex if total_population_sex > 0 else total_population_residence
+    total_population_dist = _create_single_value_dist(
+        'People', total_population)
 
     demographics_data = {
         'is_missing': is_missing,

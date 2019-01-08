@@ -13,17 +13,17 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.population_sex_et_2007_et_2007 DROP CONSTRAINT IF EXISTS pk_population_sex_et_2007_et_2007;
-DROP TABLE IF EXISTS public.population_sex_et_2007;
+ALTER TABLE IF EXISTS ONLY public.population_sex_2007 DROP CONSTRAINT IF EXISTS pk_population_sex_2007;
+DROP TABLE IF EXISTS public.population_sex_2007;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: population_sex_et_2007; Type: TABLE; Schema: public; Owner: -
+-- Name: population_sex_2007; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.population_sex_et_2007 (
+CREATE TABLE public.population_sex_2007 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -33,10 +33,10 @@ CREATE TABLE public.population_sex_et_2007 (
 
 
 --
--- Data for Name: population_sex_et_2007; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: population_sex_2007; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_sex_et_2007 (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
+COPY public.population_sex_2007 (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
 country	ET	2009	male	37296657
 level1	ET_1_011	2009	male	2124853
 level1	ET_1_002	2009	male	786338
@@ -65,11 +65,11 @@ level1	ET_1_005	2009	female	170897
 
 
 --
--- Name: population_sex_et_2007 pk_population_sex_et_2007; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: population_sex_2007 pk_population_sex_2007; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.population_sex_et_2007
-    ADD CONSTRAINT pk_population_sex_et_2007 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
+ALTER TABLE ONLY public.population_sex_2007
+    ADD CONSTRAINT pk_population_sex_2007 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
 
 
 --

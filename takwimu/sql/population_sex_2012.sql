@@ -13,17 +13,17 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.population_sex_tz_2012 DROP CONSTRAINT IF EXISTS pk_population_sex_tz_2012;
-DROP TABLE IF EXISTS public.population_sex_tz_2012;
+ALTER TABLE IF EXISTS ONLY public.population_sex_2012 DROP CONSTRAINT IF EXISTS pk_population_sex_2012;
+DROP TABLE IF EXISTS public.population_sex_2012;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: population_sex_tz_2012; Type: TABLE; Schema: public; Owner: -
+-- Name: population_sex_2012; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.population_sex_tz_2012 (
+CREATE TABLE public.population_sex_2012 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -33,10 +33,10 @@ CREATE TABLE public.population_sex_tz_2012 (
 
 
 --
--- Data for Name: population_sex_tz_2012; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: population_sex_2012; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_sex_tz_2012 (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
+COPY public.population_sex_2012 (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
 country	TZ	2009	male	21869990
 country	TZ	2009	female	23058933
 level1	TZ_1_001	2009	male	769375
@@ -103,11 +103,11 @@ level1	TZ_1_021	2009	female	352927
 
 
 --
--- Name: population_sex_tz_2012 pk_population_sex_tz_2012; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: population_sex_2012 pk_population_sex_2012; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.population_sex_tz_2012
-    ADD CONSTRAINT pk_population_sex_tz_2012 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
+ALTER TABLE ONLY public.population_sex_2012
+    ADD CONSTRAINT pk_population_sex_2012 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Sex");
 
 
 --

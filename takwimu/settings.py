@@ -5,6 +5,7 @@ from elasticsearch import RequestsHttpConnection
 from utils.aws_es import AWS4AuthNotUnicode
 
 from hurumap.settings import *  # noqa
+from hurumap.settings import INSTALLED_APPS as HURU_IA
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -12,7 +13,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # insert our overrides before both census and hurumap
 
 INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome',
-                  'wagtail.contrib.settings'] + INSTALLED_APPS + ['debug_toolbar']
+                  'wagtail.contrib.settings'] + HURU_IA + ['debug_toolbar']
 
 
 ROOT_URLCONF = 'takwimu.urls'
@@ -97,11 +98,36 @@ HURUMAP['ga_tracking_ids'] = [
     'UA-44795600-8',  # HURUmap
 ]
 
+HURUMAP['primary_dataset_name'] = 'Census'
+
 HURUMAP['primary_release_year'] = {
-    'country': 2017,
+    'ke': {
+        'country': 2009,
+        'level1': 2009
+    },
+    'tz': {
+        'country': 2012,
+        'level1': 2012
+    },
+    'sn': {
+        'country': 2013,
+        'level1': 2013
+    },
+    'ng': {
+        'country': 2006,
+        'level1': 2006
+    },
+    'et': {
+        'country': 2007,
+        'level1': 2007
+    },
+    'za': {
+        'country': 2011,
+        'level1': 2011
+    },
 }
 HURUMAP['latest_release_year'] = 'latest'
-HURUMAP['primary_dataset_name'] = 'Census'
+
 # default census release years
 HURUMAP['available_release_years'] = {
     'country': [2009, 2012, 2013, 2006, 2007, 2011]
@@ -109,27 +135,27 @@ HURUMAP['available_release_years'] = {
 
 # census release years for each country and it's subnational geographies
 HURUMAP['releases_available_per_country'] = {
-    'KE': {
+    'ke_years': {
         'country': [2009],
         'level1': [2009]
     },
-    'TZ': {
+    'tz_years': {
         'country': [2012],
         'level1': [2012]
     },
-    'SN': {
+    'sn_years': {
         'country': [2013],
         'level1': [2013]
     },
-    'NG': {
+    'ng_years': {
         'country': [2006],
         'level1': [2006]
     },
-    'ET': {
+    'et_years': {
         'country': [2007],
         'level1': [2007]
     },
-    'ZA': {
+    'za_years': {
         'country': [2011],
         'level1': [2011]
     },

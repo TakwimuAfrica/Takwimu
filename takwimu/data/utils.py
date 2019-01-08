@@ -2,15 +2,14 @@ from django.conf import settings
 
 
 def get_country_geo_code(geo):
-    geo_code = 'AFR'
+    geo_code = 'afr'
     level = geo.geo_level.lower()
-    print level
     if level != 'continent':
         geo_code = geo.geo_code \
             if level == 'country' \
             else geo.ancestors()[-1].geo_code
 
-    return geo_code, level
+    return geo_code.lower(), level
 
 
 def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True):
@@ -27,7 +26,7 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
 
     # get the available releases for this country
     country_code, level = get_country_geo_code(geo)
-    country_releases = settings.HURUMAP['releases_available_per_country'].get(country_code)
+    country_releases = settings.HURUMAP['releases_available_per_country'].get('{}_years'.format(country_code))
     available_years = country_releases.get(level)
 
     if filter_releases and available_years:
@@ -42,3 +41,10 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
     releases['other'] = dataset_releases[1:]
 
     return releases
+
+
+def get_primary_release_year_per_geography(geo):
+    country_code, level = get_country_geo_code(geo)
+    country_primary_releases = settings.HURUMAP['primary_release_year'].get(country_code)
+    return country_primary_releases.get(level, 'latest')
+

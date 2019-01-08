@@ -24,7 +24,8 @@ from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
-from data.utils import get_page_releases_per_country
+from data.utils import get_page_releases_per_country, \
+    get_primary_release_year_per_geography
 from wagtail.contrib.settings.context_processors import settings
 from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
 
@@ -401,9 +402,9 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
             raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
         profile_method = import_string(profile_method)
 
-        year = self.request.GET.get('release', geo_data.primary_release_year(self.geo))
-        if takwimu_settings.HURUMAP['latest_release_year'] == year:
-            year = 'latest'
+        year = self.request.GET.get('release', get_primary_release_year_per_geography(self.geo))
+        # if takwimu_settings.HURUMAP['latest_release_year'] == year:
+        #     year = 'latest'
 
         with dataset_context(year=year):
             profile_data = profile_method(self.geo, self.profile_name, self.request)
