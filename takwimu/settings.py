@@ -5,7 +5,6 @@ from elasticsearch import RequestsHttpConnection
 from utils.aws_es import AWS4AuthNotUnicode
 
 from hurumap.settings import *  # noqa
-from hurumap.settings import INSTALLED_APPS as HURU_IA
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -13,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # insert our overrides before both census and hurumap
 
 INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome',
-                  'wagtail.contrib.settings'] + HURU_IA + ['debug_toolbar']
+                  'wagtail.contrib.settings'] + INSTALLED_APPS + ['debug_toolbar']
 
 
 ROOT_URLCONF = 'takwimu.urls'
