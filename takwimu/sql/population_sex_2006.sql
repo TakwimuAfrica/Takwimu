@@ -20,7 +20,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: population_sex; Type: TABLE; Schema: public; Owner: -
+-- Name: population_sex_2006; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.population_sex_2006 (
@@ -127,4 +127,3 @@ ALTER TABLE ONLY public.population_sex_2006
 --
 -- PostgreSQL database dump complete
 --
-

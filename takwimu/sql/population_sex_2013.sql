@@ -36,7 +36,7 @@ CREATE TABLE public.population_sex_2013 (
 -- Data for Name: population_sex_2013; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_sex (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
+COPY public.population_sex_2013 (geo_level, geo_code, geo_version, "Population_Sex", total) FROM stdin;
 country	SN	2009	male	6735421
 country	SN	2009	female	6773294
 level1	SN_1_001	2009	male	1466748

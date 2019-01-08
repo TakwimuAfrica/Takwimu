@@ -26,7 +26,7 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
 
     # get the available releases for this country
     country_code, level = get_country_geo_code(geo)
-    country_releases = settings.HURUMAP['releases_available_per_country'].get('{}_years'.format(country_code))
+    country_releases = settings.HURUMAP['available_releases_years_per_country'].get(country_code)
     available_years = country_releases.get(level)
 
     if filter_releases and available_years:
