@@ -149,6 +149,7 @@ def get_profile(geo, profile_name, request):
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
+        data['gdp'] = get_gdp(geo, session, country, level)
 
         return data
     finally:
@@ -591,6 +592,24 @@ def get_budget_data(geo, session, country, level):
     return {
         'is_missing': government_expenditure_dist.get('is_missing'),
         'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
+    }
+
+def get_gdp(geo, session, country, level):
+    gdp = LOCATIONNOTFOUND
+    try:
+        gdp, _ = get_stat_data(
+            'gdp_year', geo, session, table_fields=['gdp_year'])
+    except LocationNotFound:
+        pass
+
+    print('\n\n\n\n\n\n')
+    print 'kotido'
+    print gdp
+    print('\n\n\n\n\n\n')
+
+    return {
+        'gdp': _add_metadata_to_dist(
+            gdp, 'gdp', country, level)
     }
 
 

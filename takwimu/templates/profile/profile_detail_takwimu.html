@@ -311,4 +311,18 @@
     </article>
   {% endif %}
 
+    {% if not gdp.gdp.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>GDP</h1>
+      </header>
+      <div class="section-container">
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">GDP </h2>
+          <div class="column-full" id="chart-histogram-gdp-gdp" data-stat-type="dollar" data-chart-title="GDP"></div>
+        </section>
+      </div>
+    </article>
+  {% endif %}
+
 {% endblock %}

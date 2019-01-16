@@ -52,3 +52,5 @@ FieldTable(['year', 'sector'], id='government_funding')
 FieldTable(['crime'], universe='Crimes', dataset='Police Crime Statistics 2014', year='2014')
 
 FieldTable(['official employment status'], universe='Individuals 15 and older')
+
+FieldTable(['gdp_year'], universe='Growth', year='2018', value_type='Float')
