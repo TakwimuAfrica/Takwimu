@@ -601,12 +601,6 @@ def get_gdp(geo, session, country, level):
             'gdp_year', geo, session, table_fields=['gdp_year'])
     except LocationNotFound:
         pass
-
-    print('\n\n\n\n\n\n')
-    print 'kotido'
-    print gdp
-    print('\n\n\n\n\n\n')
-
     return {
         'gdp': _add_metadata_to_dist(
             gdp, 'gdp', country, level)
