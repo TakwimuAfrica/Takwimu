@@ -28,6 +28,7 @@ class Command(BaseCommand):
                 topic_body = topic['value'].get('body', '')
                 topic_summary = topic['value'].get('summary', '')
                 body = '\n'.join([topic_summary, topic_body])
+                metadata = ''
 
                 _, outcome = search_backend.add_to_index(topic_id,
                                                          'topic',
@@ -35,6 +36,7 @@ class Command(BaseCommand):
                                                          category,
                                                          title,
                                                          body,
+                                                         metadata,
                                                          parent_page_id,
                                                          parent_page_type,
                                                          )
@@ -56,6 +58,7 @@ class Command(BaseCommand):
                                 category,
                                 data['title'],
                                 data['body'],
+                                data['metadata'],
                                 parent_page_id,
                                 parent_page_type
                             )

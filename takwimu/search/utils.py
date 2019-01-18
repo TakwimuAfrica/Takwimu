@@ -10,6 +10,7 @@ def get_widget_data(widget):
         return None
 
     title = widget_value.get('title', '')
+    label = widget_value.get('label', '')
     source = widget_value.get('source', '')
 
     if widget_type == 'html':
@@ -34,7 +35,8 @@ def get_widget_data(widget):
     return {
         'id': widget_id,
         'title': title,
-        'body': '\n'.join([body, source]),
+        'body': body,
+        'metadata': '\n'.join([label, source]),
     }
 
 
