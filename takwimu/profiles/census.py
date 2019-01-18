@@ -594,16 +594,15 @@ def get_budget_data(geo, session, country, level):
         'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
     }
 
+
 def get_gdp(geo, session, country, level):
     gdp = LOCATIONNOTFOUND
     try:
         gdp, _ = get_stat_data(
-            'gdp_year', geo, session, table_fields=['gdp_year'])
+            'gdp_year', geo, session, table_fields=['gdp_year'], exclude=['2002', '2003'])
     except LocationNotFound:
         pass
     return {
         'gdp': _add_metadata_to_dist(
             gdp, 'gdp', country, level)
     }
-
-

@@ -7,7 +7,6 @@
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
-SET idle_in_transaction_session_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SELECT pg_catalog.set_config('search_path', '', false);
@@ -18,6 +17,9 @@ SET row_security = off;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
+
+ALTER TABLE IF EXISTS ONLY public.gdp_year DROP CONSTRAINT IF EXISTS pk_gdp_year;
+DROP TABLE IF EXISTS public.gdp_year;
 
 --
 -- Name: gdp_year; Type: TABLE; Schema: public; Owner: takwimu
