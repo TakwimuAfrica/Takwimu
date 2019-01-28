@@ -529,6 +529,8 @@ class FAQ(index.Indexed, models.Model):
 class SupportSetting(BaseSetting):
     hello = models.EmailField(blank=True, null=True,
                               help_text='TAKWIMU main email address')
+    support = models.EmailField(blank=True, null=True,
+                                help_text='TAKWIMU support email address')
     zendesk = models.URLField(blank=True, null=True,
                               help_text='TAKWIMU Zendesk account URL')
     community = models.URLField(blank=True, null=True,
