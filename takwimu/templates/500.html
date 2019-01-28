@@ -7,7 +7,7 @@
         Error</h2>
       <p style="font-size: 18px;">The server encountered an internal error and
         was unable to process your request. Please contact the server
-        administrator, <a href="mailto:support@takwimu.africa">support@takwimu.africa</a>
+        administrator, at <a href="mailto:{{ settings.takwimu.SupportSetting.support }}">{{ settings.takwimu.SupportSetting.support }}</a>
         if this error persists.</p>
     </div>
   </section>
@@ -17,7 +17,7 @@
         following instead?</p>
       <div style="width: 70%;" class="d-inline-block p-4">
         <a href="/contact_us/" class="btn btn-primary float-left mr-5 btn-option">Contact Us</a>
-        <a href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener" class="btn btn-primary float-right btn-option">Help and Support</a>
+        <a href="mailto:{{ settings.takwimu.SupportSetting.support }}" target="_blank" rel="noopener" class="btn btn-primary float-right btn-option">Help and Support</a>
       </div>
 
     </div>

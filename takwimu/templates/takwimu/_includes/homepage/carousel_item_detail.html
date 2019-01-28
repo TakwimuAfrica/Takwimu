@@ -30,7 +30,7 @@
     <p>
       <a class="btn btn-info px-4 text-uppercase" style="font-size: 80%; height: 44px; line-height: 2.4"
           {% if country == 'beta' %}
-          href="https://takwimu.zendesk.com/hc/en-us/community/topics" target="_blank"
+          href="mailto:{{ settings.takwimu.SupportSetting.support }}" target="_blank"
           {% else %}
           href="/profiles/{{ country }}"
           {% endif %} >
