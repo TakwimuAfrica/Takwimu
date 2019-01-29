@@ -12,7 +12,6 @@ from django.views.generic import TemplateView
 import requests
 from wazimap.views import GeographyDetailView
 
-from takwimu.forms import SupportServicesContactForm
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
     ProfileSectionPage, ProfilePage
 from takwimu.sdg import SDG
