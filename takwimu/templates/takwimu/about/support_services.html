@@ -30,7 +30,6 @@
 
         <div class="font-weight-light">
           <p>We understand that access to data and analysis is not enough - there is a gulf between looking at a web page and being able to harness information to make your work easier and your efforts more effective.</p>
-              
           <p>Our Standard Services are free; currently they include using advanced tools to download data visuals, create alerts, manage collections, access data over API and attend best practice webinars.</p>
           <p>Our Premium Services add further value by customising and packaging analysis and related data to your specific requirements as well as the option to showcase your own content to a growing African and international audience. We will usually charge for Premium services and use this income to re-invest in the Takwimu platform.</p>
         </div>
@@ -62,7 +61,7 @@
                         </b>
                       </div>
                     </div>
-                  </div>                  
+                  </div>
                 </div>
               </div>
             {% endif %}
@@ -76,73 +75,54 @@
         Enquire about these services
       </h2>
       <div class="container p-5" style="background-color: #1e4a7e; color: #ffffff;">
-        {% if ticket_success == True %}
-          <div class="success w-100 text-center">
-            <i class="fas fa-check-circle fa-3x"></i>
-            <div class="px-5 py-2">
-              <p>Your enquiry has been successfully sent. You will hear back
-                from our Data Services team within 2 working days.</p>
-              <a class="btn btn-outline-light mt-2" href="{% url 'about_support_services' %}">MAKE ANOTHER ENQUIRY</a>
+        <form id="servicesEnquiryForm" class="px-5" method="post" action="mailto:{{ settings.takwimu.SupportSetting.support }}?subject=Enquiry About Takwimu Services" enctype="text/plain">
+          <div class="form-row py-2 px-5">
+            <div class="col">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" name="body" id="id_name" required="" placeholder="Jane Doe" class="form-control form-control-lg rounded-0" maxlength="254">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="location">Your Location</label>
+                <select name="location" class="form-control form-control-lg rounded-0" id="id_location">
+                  <option value="Burkina Faso">Burkina Faso</option>
+                  <option value="DR Congo">DR Congo</option>
+                  <option value="Ethiopia">Ethiopia</option>
+                  <option value="Kenya">Kenya</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Senegal">Senegal</option>
+                  <option value="South Africa">South Africa</option>
+                  <option value="Uganda">Uganda</option>
+                  <option value="Zambia">Zambia</option>
+                  <option value="Tanzania">Tanzania</option>
+                </select>
+              </div>
             </div>
           </div>
-        {% else %}
-          <form class="px-5" method="post">
-            {% csrf_token %}
 
-            {{ form.non_field_errors }}
-            <div class="form-group py-2 px-5">
-              <label for="{{ form.name.name }}">{{ form.name.label }}</label>
-              {{ form.name }}
-              <small class="text-danger">
-                {{ form.name.errors }}
-              </small>
-            </div>
+          <div class="form-group py-2 px-5">
+            <label for="role">What best describes your
+              role?</label>
+            <select name="role" class="form-control form-control-lg rounded-0" id="id_role">
+              <option value="Investor">Investor</option>
+              <option value="NGO">NGO</option>
+              <option value="Journalist">Journalist</option>
+            </select>
+          </div>
 
-            <div class="form-row py-2 px-5">
-              <div class="col">
-                <div class="form-group">
-                  <label for="email">{{ form.email.label }}</label>
-                  {{ form.email }}
-                  <small class="text-danger">
-                    {{ form.email.errors }}
-                  </small>
-                </div>
-              </div>
-              <div class="col">
-                <div class="form-group">
-                  <label for="{{ form.location.name }}">{{ form.location.label }}</label>
-                  {{ form.location }}
-                  <small class="text-danger">
-                    {{ form.location.errors }}
-                  </small>
-                </div>
-              </div>
-            </div>
-
-            <div class="form-group py-2 px-5">
-              <label for="{{ form.role.name }}">What best describes your
-                role?</label>
-              {{ form.role }}
-              <small class="text-danger">
-                {{ form.role.errors }}
-              </small>
-            </div>
-
-            <div class="form-group px-5 py-2">
-              <label for="{{ form.help.name }}">{{ form.help.label }}</label>
-              {{ form.help }}
-              <small class="text-danger">
-                {{ form.email.errors }}
-              </small>
-            </div>
-            <div class="py-5">
-              <button type="submit" class="btn btn-outline-light" style="float: right; height:48px; width: 260px;">
-                Submit Enquiry
-              </button>
-            </div>
-          </form>
-        {% endif %}
-
+          <div class="form-group px-5 py-2">
+            <label for="help">How can we help you?</label>
+            <textarea name="help" id="id_help" required rows="5" cols="40" class="form-control form-control-lg rounded-0"></textarea>
+          </div>
+          <div class="py-5">
+            <button id="sendMail" type="submit" class="btn btn-outline-light" style="float: right; height:48px; width: 260px;"
+            onclick="location.href='mailto:support@takwimu.africa';">
+              Submit Enquiry
+            </button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -177,4 +157,20 @@
 
 {% endblock %}
 
+{% block body_javascript_extra %}
+  <script>
+    $( "#servicesEnquiryForm" ).submit(function(e) {
+      e.preventDefault();
+
+      var $name = $('#id_name').val();
+      var $location = $('#id_location').val();
+      var $role = $('#id_role').val();
+      var $help = $('#id_help').val();
+      var $body = $help + '\r\n\r\n' + $name + ',\r\n' + $role + ',\r\n' + $location;
+      var href = 'mailto:{{ settings.takwimu.SupportSetting.support }}?subject=Enquiring About Takwimu Services&body=' +
+                  window.encodeURIComponent($body)
+      window.location.href = href;
+    });
+  </script>
+{% endblock body_javascript_extra %}
 

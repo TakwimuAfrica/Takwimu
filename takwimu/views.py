@@ -7,7 +7,7 @@ from django.conf import settings
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.utils.text import slugify
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView
 
 import requests
 from wazimap.views import GeographyDetailView
@@ -178,20 +178,17 @@ def handler500(request):
     return response
 
 
-class SupportServicesIndexView(FormView):
+class SupportServicesIndexView(TemplateView):
     """
     Support Services View
     --------------------
     View of support services page.
     """
     template_name = 'takwimu/about/support_services.html'
-    form_class = SupportServicesContactForm
-    success_url = '/'
 
     def get_context_data(self, **kwargs):
         context = super(SupportServicesIndexView, self).get_context_data(
             **kwargs)
-        context['ticket_success'] = False
 
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
@@ -199,57 +196,6 @@ class SupportServicesIndexView(FormView):
         context.update(takwimu_topics(self.request))
 
         return context
-
-    def form_valid(self, form):
-        email = form.cleaned_data['email']
-        name = form.cleaned_data['name']
-        location = form.cleaned_data['location']
-        role = form.cleaned_data['role']
-        help_wanted = form.cleaned_data['help']
-        print '\n\n\n\n\n\n\n\n'
-        data = {
-            'request': {
-                'requester': {
-                    "name": name,
-                    "email": email
-                },
-                'subject': 'Enquiry: {} a(n) {} from {} asks'.format(name, role,
-                                                                     location),
-                'comment': {
-                    'body': help_wanted
-                }
-            }
-        }
-
-        headers = {'content-type': 'application/json'}
-
-        user = email + '/token'
-        api_token = settings.ZENDESK_API_TOKEN
-
-        request = requests.post(
-            settings.ZENDESK_API,
-            data=json.dumps(data),
-            auth=(user, api_token),
-            headers=headers
-        )
-
-        print '\n\n\n\n\n\n\n\n'
-        print request.status_code
-        print request.json()
-
-        if request.status_code != 201:
-            # add non field error
-            form.add_error(None,
-                           'Could not open a ticket at the moment. Please try again later')
-            return super(SupportServicesIndexView, self).form_invalid(form)
-
-        context = self.get_context_data(form=form)
-        # hide form and show the success dialog
-        context['ticket_success'] = True
-        return self.render_to_response(context)
-
-    def form_invalid(self, form):
-        return super(SupportServicesIndexView, self).form_invalid(form)
 
 
 class SearchView(TemplateView):
