@@ -149,6 +149,7 @@ def get_profile(geo, profile_name, request):
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
+        data['demographics_by_gender'] = get_gender_disaggregated_data(geo, session)
 
         return data
     finally:
@@ -170,7 +171,7 @@ def get_demographics(geo, session, country, level):
     demographics_data = dict(population_data.items() +
                              child_births_data.items())
     demographics_data['is_missing'] = population_data.get('is_missing') and \
-        child_births_data.get('is_missing')
+                                      child_births_data.get('is_missing')
 
     return demographics_data
 
@@ -193,7 +194,7 @@ def get_population(geo, session, country, level):
 
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
-        residence_dist.get('is_missing')
+                 residence_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
     total_population_dist = _create_single_value_dist(
@@ -202,8 +203,12 @@ def get_population(geo, session, country, level):
     demographics_data = {
         'is_missing': is_missing,
         'sex_dist': _add_metadata_to_dist(sex_dist, 'sex_dist', country, level),
-        'residence_dist': _add_metadata_to_dist(residence_dist, 'residence_dist', country, level),
-        'total_population': _add_metadata_to_dist(total_population_dist, 'total_population_dist', country, level),
+        'residence_dist': _add_metadata_to_dist(residence_dist,
+                                                'residence_dist', country,
+                                                level),
+        'total_population': _add_metadata_to_dist(total_population_dist,
+                                                  'total_population_dist',
+                                                  country, level),
     }
 
     if geo.square_kms:
@@ -235,7 +240,6 @@ def _add_metadata_to_dist(dist, dist_name, country, level):
             if level_metadata:
                 metadata = level_metadata.get(dist_name)
                 if metadata:
-
                     # Only update relevant keys, don't replace the whole thing
                     dist['metadata'].update(metadata)
     return dist
@@ -291,7 +295,9 @@ def get_child_births(geo, session, country, level):
         'is_missing': is_missing,
         'child_births_dist': child_births_dist,
         'total_child_births_dist': total_child_births_dist,
-        'child_births_by_size_dist': _add_metadata_to_dist(child_births_by_size_dist, 'child_births_by_size_dist', country, level),
+        'child_births_by_size_dist': _add_metadata_to_dist(
+            child_births_by_size_dist, 'child_births_by_size_dist', country,
+            level),
         'total_reported_birth_weights_dist': total_reported_birth_weights_dist,
         'total_low_birth_weights_dist': total_low_birth_weights_dist,
     }
@@ -325,8 +331,8 @@ def get_elections(geo, session):
         pass
 
     is_missing = candidate_dist.get('is_missing') and \
-        valid_invalid_dist.get('is_missing') and \
-        registered_accred_dist.get('is_missing')
+                 valid_invalid_dist.get('is_missing') and \
+                 registered_accred_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'candidate_dist': candidate_dist,
@@ -383,9 +389,9 @@ def get_health_centers(geo, session, country, level):
         pass
 
     is_missing = health_centers_dist.get('is_missing') and \
-        health_centers_ownership_dist.get('is_missing') and \
-        hiv_health_centers_dist.get('is_missing') and \
-        prevention_methods_dist.get('is_missing')
+                 health_centers_ownership_dist.get('is_missing') and \
+                 hiv_health_centers_dist.get('is_missing') and \
+                 prevention_methods_dist.get('is_missing')
     total_health_centers_dist = _create_single_value_dist(
         'Total health centers in operation (2014)', total_health_centers)
     total_hiv_health_centers_dist = _create_single_value_dist(
@@ -478,11 +484,11 @@ def get_causes_of_death(geo, session):
         pass
 
     is_missing = causes_of_death_over_five_dist.get('is_missing') and \
-        causes_of_death_under_five_dist.get('is_missing') and \
-        inpatient_diagnosis_under_five_dist.get('is_missing') and \
-        inpatient_diagnosis_over_five_dist.get('is_missing') and \
-        outpatient_diagnosis_under_five_dist.get('is_missing') and \
-        outpatient_diagnosis_over_five_dist.get('is_missing')
+                 causes_of_death_under_five_dist.get('is_missing') and \
+                 inpatient_diagnosis_under_five_dist.get('is_missing') and \
+                 inpatient_diagnosis_over_five_dist.get('is_missing') and \
+                 outpatient_diagnosis_under_five_dist.get('is_missing') and \
+                 outpatient_diagnosis_over_five_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'causes_of_death_under_five_dist': causes_of_death_under_five_dist,
@@ -523,11 +529,15 @@ def get_donor_assistance(geo, session, country, level):
         pass
 
     is_missing = donor_assistance_dist.get('is_missing') and \
-        donor_programmes_dist.get('is_missing')
+                 donor_programmes_dist.get('is_missing')
     return {
         'is_missing': is_missing,
-        'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist, 'donor_assistance_dist', country, level),
-        'donor_programmes_dist': _add_metadata_to_dist(donor_programmes_dist, 'donor_programmes_dist', country, level),
+        'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist,
+                                                       'donor_assistance_dist',
+                                                       country, level),
+        'donor_programmes_dist': _add_metadata_to_dist(donor_programmes_dist,
+                                                       'donor_programmes_dist',
+                                                       country, level),
     }
 
 
@@ -546,11 +556,15 @@ def get_poverty_profile(geo, session, country, level):
         pass
 
     is_missing = poverty_residence_dist.get('is_missing') and \
-        poverty_age_dist.get('is_missing')
+                 poverty_age_dist.get('is_missing')
     return {
         'is_missing': is_missing,
-        'poverty_residence_dist': _add_metadata_to_dist(poverty_residence_dist, 'poverty_residence_dist', country, level),
-        'poverty_age_dist': _add_metadata_to_dist(poverty_age_dist, 'poverty_age_dist', country, level),
+        'poverty_residence_dist': _add_metadata_to_dist(poverty_residence_dist,
+                                                        'poverty_residence_dist',
+                                                        country, level),
+        'poverty_age_dist': _add_metadata_to_dist(poverty_age_dist,
+                                                  'poverty_age_dist', country,
+                                                  level),
     }
 
 
@@ -563,7 +577,8 @@ def get_fgm_profile(geo, session, country, level):
 
     return {
         'is_missing': fgm_age_dist.get('is_missing'),
-        'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist', country, level),
+        'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist',
+                                              country, level),
     }
 
 
@@ -576,7 +591,9 @@ def get_security_profile(geo, session, country, level):
 
     return {
         'is_missing': seized_firearms_dist.get('is_missing'),
-        'seized_firearms_dist': _add_metadata_to_dist(seized_firearms_dist, 'seized_firearms_dist', country, level),
+        'seized_firearms_dist': _add_metadata_to_dist(seized_firearms_dist,
+                                                      'seized_firearms_dist',
+                                                      country, level),
     }
 
 
@@ -590,7 +607,54 @@ def get_budget_data(geo, session, country, level):
 
     return {
         'is_missing': government_expenditure_dist.get('is_missing'),
-        'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
+        'government_expenditure_dist': _add_metadata_to_dist(
+            government_expenditure_dist, 'government_expenditure_dist', country,
+            level),
     }
 
 
+def get_gender_disaggregated_data(geo, session):
+    gender_dist_data = LOCATIONNOTFOUND
+    age_group_dist_data = LOCATIONNOTFOUND
+    rural_dist_data = LOCATIONNOTFOUND
+    total_pop = 0
+    total_under_15 = 0
+    try:
+        gender_dist_data, total_pop = get_stat_data(
+            'gender', geo, session,
+            table_fields=['gender', 'age_group'])
+
+        # age group
+        age_group_dist_data, _ = get_stat_data(
+            'age_group', geo, session,
+            table_fields=['gender', 'age_group'])
+        total_under_15 = age_group_dist_data['0-14 Years']['numerators']['this']
+
+    except:
+        pass
+
+    try:
+        # rural or urban
+        rural_dist_data, _ = get_stat_data(
+            ['gender', 'rural_or_urban'], geo, session,
+            table_fields=['gender', 'rural_or_urban'])
+    except:
+        pass
+
+    final_data = {
+        'is_missing': gender_dist_data.get(
+            'is_missing') and rural_dist_data.get(
+            'is_missing') and age_group_dist_data.get('is_missing'),
+        'gender_ratio': gender_dist_data,
+        'age_group_distribution': age_group_dist_data,
+        'under_15': {
+            'name': 'Under 15 years',
+            'values': {'this': total_under_15}
+        },
+        'rural_distribution': rural_dist_data,
+        'total_population': {
+            'name': 'People',
+            'values': {'this': total_pop}
+        }}
+
+    return final_data

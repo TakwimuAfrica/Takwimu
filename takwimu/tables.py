@@ -52,3 +52,7 @@ FieldTable(['year', 'sector'], id='government_funding')
 FieldTable(['crime'], universe='Crimes', dataset='Police Crime Statistics 2014', year='2014')
 
 FieldTable(['official employment status'], universe='Individuals 15 and older')
+
+FieldTable(['gender', 'age_group'], dataset='Census', year=2010)
+
+FieldTable(['gender', 'rural_or_urban'], dataset='Census', year=2010)
