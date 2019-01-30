@@ -627,17 +627,17 @@ def get_gender_disaggregated_data(geo, session):
         # age group
         age_group_dist_data, _ = get_stat_data(
             'age_group', geo, session,
-            table_fields=['gender', 'age_group'])
+            table_fields=['gender', 'age_group'], table_name='gender_age_group')
         total_under_15 = age_group_dist_data['0-14 Years']['numerators']['this']
 
-    except:
+    except Exception as e:
         pass
 
     try:
         # rural or urban
         rural_dist_data, _ = get_stat_data(
             ['gender', 'rural_or_urban'], geo, session,
-            table_fields=['gender', 'rural_or_urban'])
+            table_fields=['gender', 'rural_or_urban'], table_name='gender_rural_or_urban')
     except:
         pass
 

@@ -22,26 +22,36 @@
           {% endif %}
         </section>
 
-        {% if not demographics_by_gender.is_missing %}
-          <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Demographics by Gender </h2>
+      {% if not demographics_by_gender.is_missing %}
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Demographics by Gender</h2>
+          {% if not demographics_by_gender.gender_ratio.is_missing %}
             <div class="column-half" id="chart-pie-demographics_by_gender-gender_ratio" data-stat-type="percentage" data-chart-title="Gender"></div>
+          {% endif %} <!-- end if -->
+          {% if not demographics_by_gender.rural_distribution.is_missing %}
             <div class="column-quarter" id="chart-grouped_column-demographics_by_gender-rural_distribution" data-stat-type="scaled-percentage" data-chart-title="Rural vs Urban"></div>
-          </section>
-          <section class="clearfix stat-row">
-            <h2 class="header-for-columns">
-              <a class="permalink" href="#age" id="age">Age
-                <i class="fa fa-link"></i></a></h2>
-            <div class="column-quarter">
-              {% include 'profile/_blocks/_stat_list.html' with stat=demographics_by_gender.under_15 stat_type='number' %}
-            </div>
+          {% endif %} <!-- end if -->
+        </section>
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">
+            <a class="permalink" href="#age" id="age">Age
+              <i class="fa fa-link"></i></a></h2>
+          <div class="column-quarter">
+            {% include 'profile/_blocks/_stat_list.html' with stat=demographics_by_gender.under_15 stat_type='number' %}
+          </div>
+
+          {% if not demographics_by_gender.age_group_distribution.is_missing %}
             <div class="column-half">
               <div id="chart-histogram-demographics_by_gender-age_group_distribution" data-stat-type="scaled-percentage" data-chart-title="Population by age range"></div>
             </div>
-            <div class="column-quarter" id="chart-pie-demographics_by_gender-age_group_distribution" data-stat-type="percentage" data-chart-title="Population by age category"></div>
-          </section>
+          {% endif %} <!-- end if -->
 
-        {% endif %} <!-- end if -->
+          {% if not demographics_by_gender.age_group_distribution.is_missing %}
+            <div class="column-quarter" id="chart-pie-demographics_by_gender-age_group_distribution</div>" data-stat-type="percentage" data-chart-title="Population by age category"></div>
+          {% endif %} <!-- end if -->
+        </section>
+
+      {% endif %} <!-- end if -->
 
         {% if not demographics.child_births_dist.is_missing %}
           <section class="clearfix stat-row">
@@ -60,11 +70,9 @@
             <div class="column-half" id="chart-pie-demographics-child_births_by_size_dist" data-stat-type="percentage" data-chart-title="Percent distribution of all live births by size of child at birth" data-initial-sort="-value"></div>
           </section>
         {% endif %}
-
       </div>
     </article>
   {% endif %}
-
 
   {% if not elections.is_missing %}
     <article class="clearfix">
@@ -225,23 +233,23 @@
       </header>
       <div class="section-container">
         {% if not donors.donor_assistance_dist.is_missing %}
-          <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Principle Donors</h2>
-            <div class="column-full"
-                 id="chart-histogram-donors-donor_assistance_dist"
-                 data-chart-title="Percentage Contribution by Principal Donors"
-                 data-stat-type="scaled-percentage"></div>
-          </section>
-        {% endif %}
-        {% if not donors.donor_programmes_dist.is_missing %}
-          <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Contributions</h2>
-            <div class="column-full"
-                 id="chart-grouped_column-donors-donor_programmes_dist"
-                 data-chart-title="Percentage Contribution by Programme"
-                 data-stat-type="scaled-percentage"></div>
-          </section>
-        {% endif %}
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Principle Donors</h2>
+          <div class="column-full"
+               id="chart-histogram-donors-donor_assistance_dist"
+               data-chart-title="Percentage Contribution by Principal Donors"
+               data-stat-type="scaled-percentage"></div>
+        </section>
+          {% endif %}
+      {% if not donors.donor_programmes_dist.is_missing %}
+        <section class="clearfix stat-row">
+          <h2 class="header-for-columns">Contributions</h2>
+          <div class="column-full"
+               id="chart-grouped_column-donors-donor_programmes_dist"
+               data-chart-title="Percentage Contribution by Programme"
+               data-stat-type="scaled-percentage"></div>
+        </section>
+      {% endif %}
       </div>
     </article>
   {% endif %}
