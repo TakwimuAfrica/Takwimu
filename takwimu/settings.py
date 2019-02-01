@@ -117,11 +117,6 @@ DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 
-ZENDESK_API = 'https://takwimu.zendesk.com/api/v2/requests.json'
-
-ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
-
-
 # -------------------------------------------------------------------------------------
 # WAGTAIL Search / Elastic
 # -------------------------------------------------------------------------------------
