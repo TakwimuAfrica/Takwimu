@@ -594,3 +594,327 @@ def get_budget_data(geo, session, country, level):
     }
 
 
+def get_worldbank_data(geo, session):
+    cereal_yield_kg_per_hectare = LOCATIONNOTFOUND
+    agricultural_land = LOCATIONNOTFOUND
+    gini_index = LOCATIONNOTFOUND
+    access_to_basic_services = LOCATIONNOTFOUND
+    primary_school_enrollment = LOCATIONNOTFOUND
+    account_ownership = LOCATIONNOTFOUND
+    youth_unemployment = LOCATIONNOTFOUND
+    adult_literacy_rate = LOCATIONNOTFOUND
+    foreign_direct_investment_net_inflows = LOCATIONNOTFOUND
+    maternal_mortality = LOCATIONNOTFOUND
+    hiv_prevalence = LOCATIONNOTFOUND
+    employment_to_population_ratio = LOCATIONNOTFOUND
+    total_population = LOCATIONNOTFOUND
+    gdp_per_capita = LOCATIONNOTFOUND
+    primary_education_completion_rate = LOCATIONNOTFOUND
+    secondary_school_enrollment = LOCATIONNOTFOUND
+    fgm_prevalence = LOCATIONNOTFOUND
+    nurses_and_midwives = LOCATIONNOTFOUND
+    mobile_phone_subscriptions = LOCATIONNOTFOUND
+    gdp_per_capita_growth = LOCATIONNOTFOUND
+    prevalence_of_undernourishment = LOCATIONNOTFOUND
+    physicians_nurses_and_midwives = LOCATIONNOTFOUND
+    life_expectancy_at_birth = LOCATIONNOTFOUND
+    tax_as_percentage_of_gdp = LOCATIONNOTFOUND
+    births_attended_by_skilled_health_staff = LOCATIONNOTFOUND
+    incidence_of_malaria_per_1000_population_at_risk = LOCATIONNOTFOUND
+    tax_revenue = LOCATIONNOTFOUND
+    gdp = LOCATIONNOTFOUND
+    gdp_growth = LOCATIONNOTFOUND
+
+    try:
+        cereal_yield_kg_per_hectare, _ = get_stat_data(
+            'cereal_yield_kg_per_hectare', geo, session,
+            table_fields=['Cereal yield (kg per hectare)', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        agricultural_land, _ = get_stat_data('agricultural_land', geo, session,
+                                             table_fields=[
+                                                 'Agricultural land (% of land area)',
+                                                 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        gini_index, _ = get_stat_data('gini_index', geo, session, table_fields=[
+            'GINI index (World Bank estimate)', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        access_to_basic_services, _ = get_stat_data('access_to_basic_services',
+                                                    geo,
+                                                    session, table_fields=[
+                'People using at least basic drinking water services (% of population)',
+                'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        primary_school_enrollment, _ = get_stat_data(
+            'primary_school_enrollment',
+            geo, session, table_fields=[
+                'School enrollment, primary (% gross)', 'year', 'sex', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        account_ownership, _ = get_stat_data('account_ownership', geo, session,
+                                             table_fields=[
+                                                 'Account ownership at a financial institution or with a mobile-money-service provider, female (% of population ages 15+)',
+                                                 'year', 'sex', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        youth_unemployment, _ = get_stat_data('youth_unemployment', geo,
+                                              session,
+                                              table_fields=[
+                                                  'Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)',
+                                                  'sex', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        adult_literacy_rate, _ = get_stat_data('adult_literacy_rate', geo,
+                                               session,
+                                               table_fields=['year',
+                                                             'Literacy rate, adult (% of population ages 15 and above)',
+                                                             'sex', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        foreign_direct_investment_net_inflows, _ = get_stat_data(
+            'foreign_direct_investment_net_inflows', geo, session,
+            table_fields=['Foreign direct investment, net inflows (% of GDP)',
+                          'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        maternal_mortality, _ = get_stat_data('maternal_mortality', geo,
+                                              session,
+                                              table_fields=[
+                                                  'Maternal mortality ratio (modeled estimate, per 100,000 live births)',
+                                                  'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        hiv_prevalence, _ = get_stat_data('hiv_prevalence', geo, session,
+                                          table_fields=[
+                                              'Prevalence of HIV, (% ages 15-24)',
+                                              'year', 'sex', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        employment_to_population_ratio, _ = get_stat_data(
+            'employment_to_population_ratio', geo, session, table_fields=['sex',
+                                                                          'Employment to population ratio, 15+, (%) (modeled ILO estimate)',
+                                                                          'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        total_population, _ = get_stat_data('total_population', geo, session,
+                                            table_fields=['Population, total',
+                                                          'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        gdp_per_capita, _ = get_stat_data('gdp_per_capita', geo, session,
+                                          table_fields=[
+                                              'GDP per capita (current US$)',
+                                              'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        primary_education_completion_rate, _ = get_stat_data(
+            'primary_education_completion_rate', geo, session, table_fields=[
+                'Primary completion rate, female (% of relevant age group)',
+                'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        secondary_school_enrollment, _ = get_stat_data(
+            'secondary_school_enrollment', geo, session,
+            table_fields=['year', 'School enrollment, secondary (% gross)',
+                          'sex', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        fgm_prevalence, _ = get_stat_data('fgm_prevalence', geo, session,
+                                          table_fields=[
+                                              'Female genital mutilation prevalence (%)',
+                                              'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        nurses_and_midwives, _ = get_stat_data('nurses_and_midwives', geo,
+                                               session,
+                                               table_fields=[
+                                                   'Nurses and midwives (per 1,000 people)',
+                                                   'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        mobile_phone_subscriptions, _ = get_stat_data(
+            'mobile_phone_subscriptions',
+            geo, session, table_fields=[
+                'Mobile cellular subscriptions (per 100 people)', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        gdp_per_capita_growth, _ = get_stat_data('gdp_per_capita_growth', geo,
+                                                 session, table_fields=[
+                'GDP per capita growth (annual %)', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        prevalence_of_undernourishment, _ = get_stat_data(
+            'prevalence_of_undernourishment', geo, session,
+            table_fields=['Prevalence of undernourishment (% of population)',
+                          'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        physicians_nurses_and_midwives, _ = get_stat_data(
+            'physicians_nurses_and_midwives', geo, session,
+            table_fields=['Physicians (per 1,000 people)', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        life_expectancy_at_birth, _ = get_stat_data('life_expectancy_at_birth',
+                                                    geo,
+                                                    session, table_fields=[
+                'Life expectancy at birth (years)', 'year', 'sex', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        tax_as_percentage_of_gdp, _ = get_stat_data('tax_as_percentage_of_gdp',
+                                                    geo,
+                                                    session,
+                                                    table_fields=['year',
+                                                                  'Tax revenue (% of GDP)', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        births_attended_by_skilled_health_staff, _ = get_stat_data(
+            'births_attended_by_skilled_health_staff', geo, session,
+            table_fields=['year',
+                          'Births attended by skilled health staff (% of total)', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        incidence_of_malaria_per_1000_population_at_risk, _ = get_stat_data(
+            'incidence_of_malaria_per_1000_population_at_risk', geo, session,
+            table_fields=['Incidence of malaria (per 1,000 population at risk)',
+                          'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        tax_revenue, _ = get_stat_data('tax_revenue', geo, session,
+                                       table_fields=[
+                                           'Tax revenue (current LCU)',
+                                           'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        gdp, _ = get_stat_data('gdp', geo, session,
+                               table_fields=['GDP (current US$)', 'year', ])
+    except LocationNotFound:
+        pass
+
+    try:
+        gdp_growth, _ = get_stat_data('gdp_growth', geo, session,
+                                      table_fields=['GDP growth (annual %)',
+                                                    'year', ])
+    except LocationNotFound:
+        pass
+
+    is_missing = cereal_yield_kg_per_hectare.get(
+        'is_missing') and agricultural_land.get(
+        'is_missing') and gini_index.get(
+        'is_missing') and access_to_basic_services.get(
+        'is_missing') and primary_school_enrollment.get(
+        'is_missing') and account_ownership.get(
+        'is_missing') and youth_unemployment.get(
+        'is_missing') and adult_literacy_rate.get(
+        'is_missing') and foreign_direct_investment_net_inflows.get(
+        'is_missing') and maternal_mortality.get(
+        'is_missing') and hiv_prevalence.get(
+        'is_missing') and employment_to_population_ratio.get(
+        'is_missing') and total_population.get(
+        'is_missing') and gdp_per_capita.get(
+        'is_missing') and primary_education_completion_rate.get(
+        'is_missing') and secondary_school_enrollment.get(
+        'is_missing') and fgm_prevalence.get(
+        'is_missing') and nurses_and_midwives.get(
+        'is_missing') and mobile_phone_subscriptions.get(
+        'is_missing') and gdp_per_capita_growth.get(
+        'is_missing') and prevalence_of_undernourishment.get(
+        'is_missing') and physicians_nurses_and_midwives.get(
+        'is_missing') and life_expectancy_at_birth.get(
+        'is_missing') and tax_as_percentage_of_gdp.get(
+        'is_missing') and births_attended_by_skilled_health_staff.get(
+        'is_missing') and incidence_of_malaria_per_1000_population_at_risk.get(
+        'is_missing') and tax_revenue.get('is_missing') and gdp.get(
+        'is_missing') and gdp_growth.get('is_missing')
+
+    final_data = {
+        'cereal_yield_kg_per_hectare': cereal_yield_kg_per_hectare,
+        'agricultural_land': agricultural_land,
+        'gini_index': gini_index,
+        'access_to_basic_services': access_to_basic_services,
+        'primary_school_enrollment': primary_school_enrollment,
+        'account_ownership': account_ownership,
+        'youth_unemployment': youth_unemployment,
+        'adult_literacy_rate': adult_literacy_rate,
+        'foreign_direct_investment_net_inflows': foreign_direct_investment_net_inflows,
+        'maternal_mortality': maternal_mortality,
+        'hiv_prevalence': hiv_prevalence,
+        'employment_to_population_ratio': employment_to_population_ratio,
+        'total_population': total_population,
+        'gdp_per_capita': gdp_per_capita,
+        'primary_education_completion_rate': primary_education_completion_rate,
+        'secondary_school_enrollment': secondary_school_enrollment,
+        'fgm_prevalence': fgm_prevalence,
+        'nurses_and_midwives': nurses_and_midwives,
+        'mobile_phone_subscriptions': mobile_phone_subscriptions,
+        'gdp_per_capita_growth': gdp_per_capita_growth,
+        'prevalence_of_undernourishment': prevalence_of_undernourishment,
+        'physicians_nurses_and_midwives': physicians_nurses_and_midwives,
+        'life_expectancy_at_birth': life_expectancy_at_birth,
+        'tax_as_percentage_of_gdp': tax_as_percentage_of_gdp,
+        'births_attended_by_skilled_health_staff': births_attended_by_skilled_health_staff,
+        'incidence_of_malaria_per_1000_population_at_risk': incidence_of_malaria_per_1000_population_at_risk,
+        'tax_revenue': tax_revenue,
+        'gdp': gdp,
+        'gdp_growth': gdp_growth,
+
+    }
+    return final_data
+
+
