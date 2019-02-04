@@ -55,72 +55,61 @@ FieldTable(['crime'], universe='Crimes', dataset='Police Crime Statistics 2014',
 
 FieldTable(['official employment status'], universe='Individuals 15 and older')
 
-FieldTable(['Cereal yield (kg per hectare)', 'year', ], year=2017,
+FieldTable(['cereal_yield_kg_per_hectare_year'], year=2017,
            dataset='WorldBank', id='cereal_yield_kg_per_hectare')
-FieldTable(['Agricultural land (% of land area)', 'year', ], year=2017,
-           dataset='WorldBank', id='agricultural_land')
-FieldTable(['GINI index (World Bank estimate)', 'year', ], year=2017,
-           dataset='WorldBank', id='gini_index')
-FieldTable(
-    ['People using at least basic drinking water services (% of population)',
-     'year', ], year=2017, dataset='WorldBank', id='access_to_basic_services')
-FieldTable(['School enrollment, primary (% gross)', 'year', 'sex', ], year=2017,
+FieldTable(['agricultural_land_year'], year=2017, dataset='WorldBank',
+           id='agricultural_land')
+FieldTable(['gini_index_year'], year=2017, dataset='WorldBank',
+           id='gini_index')
+FieldTable(['access_to_basic_services_year'], year=2017, dataset='WorldBank',
+           id='access_to_basic_services')
+FieldTable(['primary_school_enrollment_year', 'sex'], year=2017,
            dataset='WorldBank', id='primary_school_enrollment')
-FieldTable([
-               'Account ownership at a financial institution or with a mobile-money-service provider, female (% of population ages 15+)',
-               'year', 'sex', ], year=2017, dataset='WorldBank',
+FieldTable(['sex', 'account_ownership_year'], year=2017, dataset='WorldBank',
            id='account_ownership')
-FieldTable(
-    ['Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)',
-     'sex', 'year', ], year=2017, dataset='WorldBank', id='youth_unemployment')
-FieldTable(['year', 'Literacy rate, adult (% of population ages 15 and above)',
-            'sex', ], year=2017, dataset='WorldBank', id='adult_literacy_rate')
-FieldTable(['Foreign direct investment, net inflows (% of GDP)', 'year', ],
-           year=2017, dataset='WorldBank',
-           id='foreign_direct_investment_net_inflows')
-FieldTable(
-    ['Maternal mortality ratio (modeled estimate, per 100,000 live births)',
-     'year', ], year=2017, dataset='WorldBank', id='maternal_mortality')
-FieldTable(['Prevalence of HIV, (% ages 15-24)', 'year', 'sex', ], year=2017,
-           dataset='WorldBank', id='hiv_prevalence')
-FieldTable(
-    ['sex', 'Employment to population ratio, 15+, (%) (modeled ILO estimate)',
-     'year', ], year=2017, dataset='WorldBank',
-    id='employment_to_population_ratio')
-FieldTable(['Population, total', 'year', ], year=2017, dataset='WorldBank',
+FieldTable(['youth_unemployment_year', 'sex'], year=2017, dataset='WorldBank',
+           id='youth_unemployment')
+FieldTable(['adult_literacy_rate_year', 'sex'], year=2017,
+           dataset='WorldBank', id='adult_literacy_rate')
+FieldTable(['foreign_direct_investment_net_inflows_year'], year=2017,
+           dataset='WorldBank', id='foreign_direct_investment_net_inflows')
+FieldTable(['maternal_mortality_year'], year=2017, dataset='WorldBank',
+           id='maternal_mortality')
+FieldTable(['hiv_prevalence_year', 'sex'], year=2017, dataset='WorldBank',
+           id='hiv_prevalence')
+FieldTable(['employment_to_population_ratio_year', 'sex'], year=2017,
+           dataset='WorldBank', id='employment_to_population_ratio')
+FieldTable(['total_population_year'], year=2017, dataset='WorldBank',
            id='total_population')
-FieldTable(['GDP per capita (current US$)', 'year', ], year=2017,
-           dataset='WorldBank', id='gdp_per_capita')
-FieldTable(
-    ['Primary completion rate, female (% of relevant age group)', 'year', ],
-    year=2017, dataset='WorldBank', id='primary_education_completion_rate')
-FieldTable(['year', 'School enrollment, secondary (% gross)', 'sex', ],
-           year=2017, dataset='WorldBank', id='secondary_school_enrollment')
-FieldTable(['Female genital mutilation prevalence (%)', 'year', ], year=2017,
-           dataset='WorldBank', id='fgm_prevalence')
-FieldTable(['Nurses and midwives (per 1,000 people)', 'year', ], year=2017,
-           dataset='WorldBank', id='nurses_and_midwives')
-FieldTable(['Mobile cellular subscriptions (per 100 people)', 'year', ],
-           year=2017, dataset='WorldBank', id='mobile_phone_subscriptions')
-FieldTable(['GDP per capita growth (annual %)', 'year', ], year=2017,
-           dataset='WorldBank', id='gdp_per_capita_growth')
-FieldTable(['Prevalence of undernourishment (% of population)', 'year', ],
-           year=2017, dataset='WorldBank', id='prevalence_of_undernourishment')
-FieldTable(['Physicians (per 1,000 people)', 'year', ], year=2017,
+FieldTable(['gdp_per_capita_year'], year=2017, dataset='WorldBank',
+           id='gdp_per_capita')
+FieldTable(['primary_education_completion_rate_year'], year=2017,
+           dataset='WorldBank', id='primary_education_completion_rate')
+FieldTable(['secondary_school_enrollment_year', 'sex'], year=2017,
+           dataset='WorldBank', id='secondary_school_enrollment')
+# FieldTable(['fgm_prevalence_year'], year=2017, dataset='WorldBank',
+#            id='fgm_prevalence')
+FieldTable(['nurses_and_midwives_year'], year=2017, dataset='WorldBank',
+           id='nurses_and_midwives')
+FieldTable(['mobile_phone_subscriptions_year'], year=2017,
+           dataset='WorldBank', id='mobile_phone_subscriptions')
+FieldTable(['gdp_per_capita_growth_year'], year=2017, dataset='WorldBank',
+           id='gdp_per_capita_growth')
+FieldTable(['prevalence_of_undernourishment_year'], year=2017,
+           dataset='WorldBank', id='prevalence_of_undernourishment')
+FieldTable(['physicians_nurses_and_midwives_year'], year=2017,
            dataset='WorldBank', id='physicians_nurses_and_midwives')
-FieldTable(['Life expectancy at birth (years)', 'year', 'sex', ], year=2017,
+FieldTable(['life_expectancy_at_birth_year', 'sex'], year=2017,
            dataset='WorldBank', id='life_expectancy_at_birth')
-FieldTable(['year', 'Tax revenue (% of GDP)', ], year=2017, dataset='WorldBank',
+FieldTable(['tax_as_percentage_of_gdp_year'], year=2017, dataset='WorldBank',
            id='tax_as_percentage_of_gdp')
-FieldTable(['year', 'Births attended by skilled health staff (% of total)', ],
-           year=2017, dataset='WorldBank',
-           id='births_attended_by_skilled_health_staff')
-FieldTable(['Incidence of malaria (per 1,000 population at risk)', 'year', ],
+FieldTable(['births_attended_by_skilled_health_staff_year'], year=2017,
+           dataset='WorldBank', id='births_attended_by_skilled_health_staff')
+FieldTable(['incidence_of_malaria_per_1000_population_at_risk_year'],
            year=2017, dataset='WorldBank',
            id='incidence_of_malaria_per_1000_population_at_risk')
-FieldTable(['Tax revenue (current LCU)', 'year', ], year=2017,
-           dataset='WorldBank', id='tax_revenue')
-FieldTable(['GDP (current US$)', 'year', ], year=2017, dataset='WorldBank',
-           id='gdp')
-FieldTable(['GDP growth (annual %)', 'year', ], year=2017, dataset='WorldBank',
+FieldTable(['tax_revenue_year'], year=2017, dataset='WorldBank',
+           id='tax_revenue')
+FieldTable(['gdp_year'], year=2017, dataset='WorldBank', id='gdp')
+FieldTable(['gdp_growth_year'], year=2017, dataset='WorldBank',
            id='gdp_growth')

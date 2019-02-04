@@ -202,23 +202,23 @@
       </header>
       <div class="section-container">
         {% if not donors.donor_assistance_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <h2 class="header-for-columns">Principle Donors</h2>
-          <div class="column-full"
-               id="chart-histogram-donors-donor_assistance_dist"
-               data-chart-title="Percentage Contribution by Principal Donors"
-               data-stat-type="scaled-percentage"></div>
-        </section>
-          {% endif %}
-      {% if not donors.donor_programmes_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <h2 class="header-for-columns">Contributions</h2>
-          <div class="column-full"
-               id="chart-grouped_column-donors-donor_programmes_dist"
-               data-chart-title="Percentage Contribution by Programme"
-               data-stat-type="scaled-percentage"></div>
-        </section>
-      {% endif %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Principle Donors</h2>
+            <div class="column-full"
+                 id="chart-histogram-donors-donor_assistance_dist"
+                 data-chart-title="Percentage Contribution by Principal Donors"
+                 data-stat-type="scaled-percentage"></div>
+          </section>
+        {% endif %}
+        {% if not donors.donor_programmes_dist.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Contributions</h2>
+            <div class="column-full"
+                 id="chart-grouped_column-donors-donor_programmes_dist"
+                 data-chart-title="Percentage Contribution by Programme"
+                 data-stat-type="scaled-percentage"></div>
+          </section>
+        {% endif %}
       </div>
     </article>
   {% endif %}
@@ -310,5 +310,337 @@
       </div>
     </article>
   {% endif %}
+
+  {% if not worldbank.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>WorldBank</h1>
+      </header>
+      <div class="section-container">
+
+            {% if not worldbank.cereal_yield_kg_per_hectare.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Cereal Yield Kg Per Hectare</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-cereal_yield_kg_per_hectare"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.agricultural_land.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Agricultural Land</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-agricultural_land"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.gini_index.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Gini Index</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-gini_index"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.access_to_basic_services.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Access To Basic Services</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-access_to_basic_services"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+                {% if not worldbank.primary_school_enrollment.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Primary School Enrollment</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-primary_school_enrollment"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+                {% if not worldbank.account_ownership.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Account Ownership</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-account_ownership"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+                {% if not worldbank.youth_unemployment.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Youth Unemployment</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-youth_unemployment"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+                {% if not worldbank.adult_literacy_rate.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Adult Literacy Rate</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-adult_literacy_rate"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+            {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Foreign Direct Investment Net Inflows</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.maternal_mortality.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Maternal Mortality</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-maternal_mortality"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+                {% if not worldbank.hiv_prevalence.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Hiv Prevalence</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-hiv_prevalence"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+                {% if not worldbank.employment_to_population_ratio.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Employment To Population Ratio</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-employment_to_population_ratio"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+            {% if not worldbank.total_population.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Total Population</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-total_population"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.gdp_per_capita.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Gdp Per Capita</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-gdp_per_capita"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.primary_education_completion_rate.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Primary Education Completion Rate</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-primary_education_completion_rate"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+                {% if not worldbank.secondary_school_enrollment.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Secondary School Enrollment</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-secondary_school_enrollment"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+            {% if not worldbank.fgm_prevalence.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Fgm Prevalence</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-fgm_prevalence"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.nurses_and_midwives.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Nurses And Midwives</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-nurses_and_midwives"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.mobile_phone_subscriptions.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Mobile Phone Subscriptions</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-mobile_phone_subscriptions"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.gdp_per_capita_growth.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Gdp Per Capita Growth</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-gdp_per_capita_growth"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.prevalence_of_undernourishment.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Prevalence Of Undernourishment</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-prevalence_of_undernourishment"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.physicians_nurses_and_midwives.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Physicians Nurses And Midwives</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-physicians_nurses_and_midwives"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+                {% if not worldbank.life_expectancy_at_birth.is_missing %}
+              <section class="clearfix stat-row">
+                <h2 class="header-for-columns">Life Expectancy At Birth</h2>
+                <div class="column-full"
+                     id="chart-grouped_column-worldbank-life_expectancy_at_birth"
+                     data-stat-type="scaled-percentage">
+                </div>
+              </section>
+            {% endif %}
+
+
+            {% if not worldbank.tax_as_percentage_of_gdp.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Tax As Percentage Of Gdp</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-tax_as_percentage_of_gdp"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.births_attended_by_skilled_health_staff.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Births Attended By Skilled Health Staff</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-births_attended_by_skilled_health_staff"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.incidence_of_malaria_per_1000_population_at_risk.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Incidence Of Malaria Per 1000 Population At Risk</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-incidence_of_malaria_per_1000_population_at_risk"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.tax_revenue.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Tax Revenue</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-tax_revenue"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.gdp.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Gdp</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-gdp"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+            {% if not worldbank.gdp_growth.is_missing %}
+          <section class="clearfix stat-row">
+            <h2 class="header-for-columns">Gdp Growth</h2>
+            <div class="column-full"
+                 id="chart-histogram-worldbank-gdp_growth"
+                 data-stat-type="scaled-percentage">
+            </div>
+          </section>
+        {% endif %}
+
+
+
+      </div>
+    </article>
+
+  {% endif %} <!-- end if -->
 
 {% endblock %}

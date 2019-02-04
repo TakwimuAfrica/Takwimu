@@ -149,6 +149,7 @@ def get_profile(geo, profile_name, request):
         data['fgm'] = get_fgm_profile(geo, session, country, level)
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
+        data['worldbank'] = get_worldbank_data(geo, session)
 
         return data
     finally:
@@ -170,7 +171,7 @@ def get_demographics(geo, session, country, level):
     demographics_data = dict(population_data.items() +
                              child_births_data.items())
     demographics_data['is_missing'] = population_data.get('is_missing') and \
-        child_births_data.get('is_missing')
+                                      child_births_data.get('is_missing')
 
     return demographics_data
 
@@ -193,7 +194,7 @@ def get_population(geo, session, country, level):
 
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
-        residence_dist.get('is_missing')
+                 residence_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
     total_population_dist = _create_single_value_dist(
@@ -202,8 +203,12 @@ def get_population(geo, session, country, level):
     demographics_data = {
         'is_missing': is_missing,
         'sex_dist': _add_metadata_to_dist(sex_dist, 'sex_dist', country, level),
-        'residence_dist': _add_metadata_to_dist(residence_dist, 'residence_dist', country, level),
-        'total_population': _add_metadata_to_dist(total_population_dist, 'total_population_dist', country, level),
+        'residence_dist': _add_metadata_to_dist(residence_dist,
+                                                'residence_dist', country,
+                                                level),
+        'total_population': _add_metadata_to_dist(total_population_dist,
+                                                  'total_population_dist',
+                                                  country, level),
     }
 
     if geo.square_kms:
@@ -235,7 +240,6 @@ def _add_metadata_to_dist(dist, dist_name, country, level):
             if level_metadata:
                 metadata = level_metadata.get(dist_name)
                 if metadata:
-
                     # Only update relevant keys, don't replace the whole thing
                     dist['metadata'].update(metadata)
     return dist
@@ -291,7 +295,9 @@ def get_child_births(geo, session, country, level):
         'is_missing': is_missing,
         'child_births_dist': child_births_dist,
         'total_child_births_dist': total_child_births_dist,
-        'child_births_by_size_dist': _add_metadata_to_dist(child_births_by_size_dist, 'child_births_by_size_dist', country, level),
+        'child_births_by_size_dist': _add_metadata_to_dist(
+            child_births_by_size_dist, 'child_births_by_size_dist', country,
+            level),
         'total_reported_birth_weights_dist': total_reported_birth_weights_dist,
         'total_low_birth_weights_dist': total_low_birth_weights_dist,
     }
@@ -325,8 +331,8 @@ def get_elections(geo, session):
         pass
 
     is_missing = candidate_dist.get('is_missing') and \
-        valid_invalid_dist.get('is_missing') and \
-        registered_accred_dist.get('is_missing')
+                 valid_invalid_dist.get('is_missing') and \
+                 registered_accred_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'candidate_dist': candidate_dist,
@@ -383,9 +389,9 @@ def get_health_centers(geo, session, country, level):
         pass
 
     is_missing = health_centers_dist.get('is_missing') and \
-        health_centers_ownership_dist.get('is_missing') and \
-        hiv_health_centers_dist.get('is_missing') and \
-        prevention_methods_dist.get('is_missing')
+                 health_centers_ownership_dist.get('is_missing') and \
+                 hiv_health_centers_dist.get('is_missing') and \
+                 prevention_methods_dist.get('is_missing')
     total_health_centers_dist = _create_single_value_dist(
         'Total health centers in operation (2014)', total_health_centers)
     total_hiv_health_centers_dist = _create_single_value_dist(
@@ -478,11 +484,11 @@ def get_causes_of_death(geo, session):
         pass
 
     is_missing = causes_of_death_over_five_dist.get('is_missing') and \
-        causes_of_death_under_five_dist.get('is_missing') and \
-        inpatient_diagnosis_under_five_dist.get('is_missing') and \
-        inpatient_diagnosis_over_five_dist.get('is_missing') and \
-        outpatient_diagnosis_under_five_dist.get('is_missing') and \
-        outpatient_diagnosis_over_five_dist.get('is_missing')
+                 causes_of_death_under_five_dist.get('is_missing') and \
+                 inpatient_diagnosis_under_five_dist.get('is_missing') and \
+                 inpatient_diagnosis_over_five_dist.get('is_missing') and \
+                 outpatient_diagnosis_under_five_dist.get('is_missing') and \
+                 outpatient_diagnosis_over_five_dist.get('is_missing')
     return {
         'is_missing': is_missing,
         'causes_of_death_under_five_dist': causes_of_death_under_five_dist,
@@ -523,11 +529,15 @@ def get_donor_assistance(geo, session, country, level):
         pass
 
     is_missing = donor_assistance_dist.get('is_missing') and \
-        donor_programmes_dist.get('is_missing')
+                 donor_programmes_dist.get('is_missing')
     return {
         'is_missing': is_missing,
-        'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist, 'donor_assistance_dist', country, level),
-        'donor_programmes_dist': _add_metadata_to_dist(donor_programmes_dist, 'donor_programmes_dist', country, level),
+        'donor_assistance_dist': _add_metadata_to_dist(donor_assistance_dist,
+                                                       'donor_assistance_dist',
+                                                       country, level),
+        'donor_programmes_dist': _add_metadata_to_dist(donor_programmes_dist,
+                                                       'donor_programmes_dist',
+                                                       country, level),
     }
 
 
@@ -546,11 +556,15 @@ def get_poverty_profile(geo, session, country, level):
         pass
 
     is_missing = poverty_residence_dist.get('is_missing') and \
-        poverty_age_dist.get('is_missing')
+                 poverty_age_dist.get('is_missing')
     return {
         'is_missing': is_missing,
-        'poverty_residence_dist': _add_metadata_to_dist(poverty_residence_dist, 'poverty_residence_dist', country, level),
-        'poverty_age_dist': _add_metadata_to_dist(poverty_age_dist, 'poverty_age_dist', country, level),
+        'poverty_residence_dist': _add_metadata_to_dist(poverty_residence_dist,
+                                                        'poverty_residence_dist',
+                                                        country, level),
+        'poverty_age_dist': _add_metadata_to_dist(poverty_age_dist,
+                                                  'poverty_age_dist', country,
+                                                  level),
     }
 
 
@@ -563,7 +577,8 @@ def get_fgm_profile(geo, session, country, level):
 
     return {
         'is_missing': fgm_age_dist.get('is_missing'),
-        'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist', country, level),
+        'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist',
+                                              country, level),
     }
 
 
@@ -576,7 +591,9 @@ def get_security_profile(geo, session, country, level):
 
     return {
         'is_missing': seized_firearms_dist.get('is_missing'),
-        'seized_firearms_dist': _add_metadata_to_dist(seized_firearms_dist, 'seized_firearms_dist', country, level),
+        'seized_firearms_dist': _add_metadata_to_dist(seized_firearms_dist,
+                                                      'seized_firearms_dist',
+                                                      country, level),
     }
 
 
@@ -590,7 +607,9 @@ def get_budget_data(geo, session, country, level):
 
     return {
         'is_missing': government_expenditure_dist.get('is_missing'),
-        'government_expenditure_dist': _add_metadata_to_dist(government_expenditure_dist, 'government_expenditure_dist', country, level),
+        'government_expenditure_dist': _add_metadata_to_dist(
+            government_expenditure_dist, 'government_expenditure_dist', country,
+            level),
     }
 
 
@@ -627,230 +646,166 @@ def get_worldbank_data(geo, session):
 
     try:
         cereal_yield_kg_per_hectare, _ = get_stat_data(
-            'cereal_yield_kg_per_hectare', geo, session,
-            table_fields=['Cereal yield (kg per hectare)', 'year', ])
+            ['cereal_yield_kg_per_hectare_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        agricultural_land, _ = get_stat_data('agricultural_land', geo, session,
-                                             table_fields=[
-                                                 'Agricultural land (% of land area)',
-                                                 'year', ])
+        agricultural_land, _ = get_stat_data(['agricultural_land_year', ], geo,
+                                             session)
     except LocationNotFound:
         pass
 
     try:
-        gini_index, _ = get_stat_data('gini_index', geo, session, table_fields=[
-            'GINI index (World Bank estimate)', 'year', ])
+        gini_index, _ = get_stat_data(['gini_index_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        access_to_basic_services, _ = get_stat_data('access_to_basic_services',
-                                                    geo,
-                                                    session, table_fields=[
-                'People using at least basic drinking water services (% of population)',
-                'year', ])
+        access_to_basic_services, _ = get_stat_data(
+            ['access_to_basic_services_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         primary_school_enrollment, _ = get_stat_data(
-            'primary_school_enrollment',
-            geo, session, table_fields=[
-                'School enrollment, primary (% gross)', 'year', 'sex', ])
+            ['primary_school_enrollment_year', 'sex', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        account_ownership, _ = get_stat_data('account_ownership', geo, session,
-                                             table_fields=[
-                                                 'Account ownership at a financial institution or with a mobile-money-service provider, female (% of population ages 15+)',
-                                                 'year', 'sex', ])
+        account_ownership, _ = get_stat_data(
+            ['sex', 'account_ownership_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        youth_unemployment, _ = get_stat_data('youth_unemployment', geo,
-                                              session,
-                                              table_fields=[
-                                                  'Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)',
-                                                  'sex', 'year', ])
+        youth_unemployment, _ = get_stat_data(
+            ['youth_unemployment_year', 'sex', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        adult_literacy_rate, _ = get_stat_data('adult_literacy_rate', geo,
-                                               session,
-                                               table_fields=['year',
-                                                             'Literacy rate, adult (% of population ages 15 and above)',
-                                                             'sex', ])
+        adult_literacy_rate, _ = get_stat_data(
+            ['adult_literacy_rate_year', 'sex', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         foreign_direct_investment_net_inflows, _ = get_stat_data(
-            'foreign_direct_investment_net_inflows', geo, session,
-            table_fields=['Foreign direct investment, net inflows (% of GDP)',
-                          'year', ])
+            ['foreign_direct_investment_net_inflows_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        maternal_mortality, _ = get_stat_data('maternal_mortality', geo,
-                                              session,
-                                              table_fields=[
-                                                  'Maternal mortality ratio (modeled estimate, per 100,000 live births)',
-                                                  'year', ])
+        maternal_mortality, _ = get_stat_data(['maternal_mortality_year', ],
+                                              geo, session)
     except LocationNotFound:
         pass
 
     try:
-        hiv_prevalence, _ = get_stat_data('hiv_prevalence', geo, session,
-                                          table_fields=[
-                                              'Prevalence of HIV, (% ages 15-24)',
-                                              'year', 'sex', ])
+        hiv_prevalence, _ = get_stat_data(['hiv_prevalence_year', 'sex', ], geo,
+                                          session)
     except LocationNotFound:
         pass
 
     try:
         employment_to_population_ratio, _ = get_stat_data(
-            'employment_to_population_ratio', geo, session, table_fields=['sex',
-                                                                          'Employment to population ratio, 15+, (%) (modeled ILO estimate)',
-                                                                          'year', ])
+            ['employment_to_population_ratio_year', 'sex', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        total_population, _ = get_stat_data('total_population', geo, session,
-                                            table_fields=['Population, total',
-                                                          'year', ])
+        total_population, _ = get_stat_data(['total_population_year', ], geo,
+                                            session)
     except LocationNotFound:
         pass
 
     try:
-        gdp_per_capita, _ = get_stat_data('gdp_per_capita', geo, session,
-                                          table_fields=[
-                                              'GDP per capita (current US$)',
-                                              'year', ])
+        gdp_per_capita, _ = get_stat_data(['gdp_per_capita_year', ], geo,
+                                          session)
     except LocationNotFound:
         pass
 
     try:
         primary_education_completion_rate, _ = get_stat_data(
-            'primary_education_completion_rate', geo, session, table_fields=[
-                'Primary completion rate, female (% of relevant age group)',
-                'year', ])
+            ['primary_education_completion_rate_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         secondary_school_enrollment, _ = get_stat_data(
-            'secondary_school_enrollment', geo, session,
-            table_fields=['year', 'School enrollment, secondary (% gross)',
-                          'sex', ])
+            ['secondary_school_enrollment_year', 'sex', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        fgm_prevalence, _ = get_stat_data('fgm_prevalence', geo, session,
-                                          table_fields=[
-                                              'Female genital mutilation prevalence (%)',
-                                              'year', ])
-    except LocationNotFound:
-        pass
-
-    try:
-        nurses_and_midwives, _ = get_stat_data('nurses_and_midwives', geo,
-                                               session,
-                                               table_fields=[
-                                                   'Nurses and midwives (per 1,000 people)',
-                                                   'year', ])
+        nurses_and_midwives, _ = get_stat_data(['nurses_and_midwives_year', ],
+                                               geo, session)
     except LocationNotFound:
         pass
 
     try:
         mobile_phone_subscriptions, _ = get_stat_data(
-            'mobile_phone_subscriptions',
-            geo, session, table_fields=[
-                'Mobile cellular subscriptions (per 100 people)', 'year', ])
+            ['mobile_phone_subscriptions_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        gdp_per_capita_growth, _ = get_stat_data('gdp_per_capita_growth', geo,
-                                                 session, table_fields=[
-                'GDP per capita growth (annual %)', 'year', ])
+        gdp_per_capita_growth, _ = get_stat_data(
+            ['gdp_per_capita_growth_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         prevalence_of_undernourishment, _ = get_stat_data(
-            'prevalence_of_undernourishment', geo, session,
-            table_fields=['Prevalence of undernourishment (% of population)',
-                          'year', ])
+            ['prevalence_of_undernourishment_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         physicians_nurses_and_midwives, _ = get_stat_data(
-            'physicians_nurses_and_midwives', geo, session,
-            table_fields=['Physicians (per 1,000 people)', 'year', ])
+            ['physicians_nurses_and_midwives_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        life_expectancy_at_birth, _ = get_stat_data('life_expectancy_at_birth',
-                                                    geo,
-                                                    session, table_fields=[
-                'Life expectancy at birth (years)', 'year', 'sex', ])
+        life_expectancy_at_birth, _ = get_stat_data(
+            ['life_expectancy_at_birth_year', 'sex', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        tax_as_percentage_of_gdp, _ = get_stat_data('tax_as_percentage_of_gdp',
-                                                    geo,
-                                                    session,
-                                                    table_fields=['year',
-                                                                  'Tax revenue (% of GDP)', ])
+        tax_as_percentage_of_gdp, _ = get_stat_data(
+            ['tax_as_percentage_of_gdp_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         births_attended_by_skilled_health_staff, _ = get_stat_data(
-            'births_attended_by_skilled_health_staff', geo, session,
-            table_fields=['year',
-                          'Births attended by skilled health staff (% of total)', ])
+            ['births_attended_by_skilled_health_staff_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
         incidence_of_malaria_per_1000_population_at_risk, _ = get_stat_data(
-            'incidence_of_malaria_per_1000_population_at_risk', geo, session,
-            table_fields=['Incidence of malaria (per 1,000 population at risk)',
-                          'year', ])
+            ['incidence_of_malaria_per_1000_population_at_risk_year', ], geo,
+            session)
     except LocationNotFound:
         pass
 
     try:
-        tax_revenue, _ = get_stat_data('tax_revenue', geo, session,
-                                       table_fields=[
-                                           'Tax revenue (current LCU)',
-                                           'year', ])
+        tax_revenue, _ = get_stat_data(['tax_revenue_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        gdp, _ = get_stat_data('gdp', geo, session,
-                               table_fields=['GDP (current US$)', 'year', ])
+        gdp, _ = get_stat_data(['gdp_year', ], geo, session)
     except LocationNotFound:
         pass
 
     try:
-        gdp_growth, _ = get_stat_data('gdp_growth', geo, session,
-                                      table_fields=['GDP growth (annual %)',
-                                                    'year', ])
+        gdp_growth, _ = get_stat_data(['gdp_growth_year', ], geo, session)
     except LocationNotFound:
         pass
 
@@ -870,7 +825,6 @@ def get_worldbank_data(geo, session):
         'is_missing') and gdp_per_capita.get(
         'is_missing') and primary_education_completion_rate.get(
         'is_missing') and secondary_school_enrollment.get(
-        'is_missing') and fgm_prevalence.get(
         'is_missing') and nurses_and_midwives.get(
         'is_missing') and mobile_phone_subscriptions.get(
         'is_missing') and gdp_per_capita_growth.get(
@@ -916,5 +870,3 @@ def get_worldbank_data(geo, session):
 
     }
     return final_data
-
-
