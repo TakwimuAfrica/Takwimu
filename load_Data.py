@@ -22,9 +22,14 @@ def batch_import_csv(paths):
 
 if __name__ == '__main__':
     paths = glob.glob("/Users/ahereza/Work/CodeForAfrica/takwimu_scrapers/scraped_data/*.csv")
-    batch_import_csv(paths)
+    # batch_import_csv(paths)
 
     for path in paths:
+        x = path.split('/')
+        s = x[-1]
+        table = s.split('.')[0]
+        path = path.replace('/Users/ahereza/Work/CodeForAfrica/takwimu_scrapers/scraped_data/', '/Users/ahereza/Work/CodeForAfrica/Takwimu/takwimu/sql/')
         path = path.replace('.csv', '.sql')
+        path = path.replace(table, table.lower())
         f = open(path, "w")
         f.close()
