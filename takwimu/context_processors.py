@@ -149,7 +149,6 @@ def sdgs(request):
 
     json_sdgs = open('takwimu/fixtures/sdg.json')
     sdgs = json.load(json_sdgs)
-    sdgs = []
     return {
         'sdgs': sdgs,
     }
