@@ -54,6 +54,8 @@ HURUMAP['url'] = os.environ.get('HURUMAP_URL', 'https://takwimu.africa')
 HURUMAP['title_tagline'] = ''
 HURUMAP['description'] = ''
 
+HURUMAP['twitter'] = os.environ.get('HURUMAP_TWITTER', '@TakwimuAfrica')
+
 hurumap_profile = 'census'
 
 HURUMAP['profile_builder'] = 'takwimu.profiles.{}.get_profile'.format(
@@ -239,6 +241,7 @@ if TAKWIMU_CACHE:
 # -------------------------------------------------------------------------------------
 # META
 # -------------------------------------------------------------------------------------
+
 
 if HURUMAP['url']:
     url_parts = HURUMAP['url'].split('://')
