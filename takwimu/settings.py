@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # insert our overrides before both census and hurumap
 
 INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome',
-                  'wagtail.contrib.settings'] + INSTALLED_APPS + ['debug_toolbar']
+                  'wagtail.contrib.settings', 'meta'] + INSTALLED_APPS + ['debug_toolbar']
 
 
 ROOT_URLCONF = 'takwimu.urls'
@@ -49,10 +49,12 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # -------------------------------------------------------------------------------------
 
 HURUMAP['name'] = 'Takwimu'
-HURUMAP['url'] = os.environ.get('HURUMAP_URL', 'https://dev.takwimu.africa')
+HURUMAP['url'] = os.environ.get('HURUMAP_URL', 'https://takwimu.africa')
 
 HURUMAP['title_tagline'] = ''
 HURUMAP['description'] = ''
+
+HURUMAP['twitter'] = os.environ.get('HURUMAP_TWITTER', '@TakwimuAfrica')
 
 hurumap_profile = 'census'
 
@@ -234,3 +236,19 @@ if TAKWIMU_CACHE:
             'KEY_PREFIX': TAKWIMU_CACHE_KEY_PREFIX,
         }
     }
+
+
+# -------------------------------------------------------------------------------------
+# META
+# -------------------------------------------------------------------------------------
+
+
+if HURUMAP['url']:
+    url_parts = HURUMAP['url'].split('://')
+    if url_parts and len(url_parts) == 2:
+        META_SITE_PROTOCOL = url_parts[0]
+        META_SITE_DOMAIN = url_parts[1]
+
+if HURUMAP['twitter']:
+    META_USE_TWITTER_PROPERTIES = True
+    META_TWITTER_SITE = HURUMAP['twitter']

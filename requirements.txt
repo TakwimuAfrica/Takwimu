@@ -7,6 +7,7 @@ git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
 
 Markdown==2.6.11
+django-meta==1.4.1
 django-debug-toolbar==1.9.1
 elasticsearch==5.5.3
 elasticsearch-dsl==5.4.0
