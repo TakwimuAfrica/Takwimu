@@ -7,7 +7,7 @@
       <div class="col-4 dataindicators-nav sticky-top d-table" style="top: 100px;">
         <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist"
              aria-orientation="vertical">
-          
+
           <!-- Nav Pills -->
           {% for indicator in topic.value.indicators %}
             <a class="nav-link pl-5 py-3 d-flex align-items-center {% if forloop.first %} active show {% endif %}"
@@ -36,7 +36,6 @@
 
         </div>
         <!-- COMMUNITY: Add your voice -->
-        <!-- TODO: Integrate with Zendesk -->
         <div class="row pt-5 pb-5 text-dark">
           {% if page.content_type.model == "profilesectionpage" %}
             <p class=" pl-3">Add your voice to the discussion
@@ -45,7 +44,7 @@
             <p class=" pl-3">Add your voice to the discussion
               of {{ page.title }}'s development context </p>
           {% endif %}
-          <a class="pl-3 font-weight-bold" href="{{ settings.takwimu.SupportSetting.zendesk }}" target="_blank" rel="noopener"
+          <a class="pl-3 font-weight-bold" href="{{ settings.takwimu.SocialMediaSetting.twitter }}" target="_blank" rel="noopener"
              style="text-decoration: none;">
             <span class="mr-1"><i class="fas fa-comments fa-lg"></i></span> Have
             your say</a>
@@ -55,7 +54,7 @@
       <!-- The Main Stage -->
 
       <div class="col-8 profiletopic-content topic-{{ topic.value.title|slugify }}">
-       
+
         <h1 class="anchored" data-anchor-id="{{ topic.value.title|slugify }}">{{ topic.value.title }}</h1>
 
         <div class="text-dark">

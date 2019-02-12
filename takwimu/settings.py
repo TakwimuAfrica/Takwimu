@@ -180,11 +180,6 @@ DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 
-ZENDESK_API = 'https://takwimu.zendesk.com/api/v2/requests.json'
-
-ZENDESK_API_TOKEN = os.environ.get('ZENDESK_API_TOKEN')
-
-
 # -------------------------------------------------------------------------------------
 # WAGTAIL Search / Elastic
 # -------------------------------------------------------------------------------------
@@ -240,6 +235,8 @@ TAKWIMU_ES_FIELDS_TITLE_BOOST = os.environ.get(
     'TAKWIMU_ES_FIELDS_TITLE_BOOST', '2')
 TAKWIMU_ES_FIELDS_BODY_BOOST = os.environ.get(
     'TAKWIMU_ES_FIELDS_BODY_BOOST', '1')
+TAKWIMU_ES_FIELDS_METADATA_BOOST = os.environ.get(
+    'TAKWIMU_ES_FIELDS_METADATA_BOOST', '1')
 TAKWIMU_ES_INDEX = os.environ.get('TAKWIMU_ES_INDEX', 'takwimu-dev')
 TAKWIMU_ES_TIMEOUT = int(os.environ.get('TAKWIMU_ES_TIMEOUT', '30'))
 TAKWIMU_ES_URL = os.environ.get('TAKWIMU_ES_URL', 'http://localhost:9200')

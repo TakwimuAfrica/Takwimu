@@ -22,11 +22,6 @@
             <hr class="mx-3 my-0" style="border-color: rgba(255, 255, 255, 0.2);"/>{% endif %}
         {% endfor %}
       </div>
-      <!-- TODO: Integrate with Zendesk -->
-      <!-- <div class="row pt-5 pb-5 text-dark">
-              <p class=" pl-3">Add your voice to the discussion of Nigeria's <br>development context </p>
-              <a class="pl-3" href=""><i class="fas fa-comments fa-1x"></i> &nbsp 89 comments</a>
-          </div> -->
     </div>  <!-- /.col-3 -->
 
     <!-- The Main Stage -->
@@ -42,7 +37,7 @@
               aria-labelledby="d{{ indicator.indicator.id }}-tab-btn">
 
             {% include 'takwimu/_includes/dataview/_index.html' with indicator=indicator.indicator %}
-            
+
           </div>
         {% endfor %}
       </div>
