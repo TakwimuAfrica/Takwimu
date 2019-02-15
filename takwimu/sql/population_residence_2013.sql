@@ -27,7 +27,7 @@ CREATE TABLE public.population_residence_2013 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    "Population_Residence" character varying(128) NOT NULL,
+    "population_residence_2013" character varying(128) NOT NULL,
     total integer
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE public.population_residence_2013 (
 -- Data for Name: population_residence_2013; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_residence_2013 (geo_level, geo_code, geo_version, "Population_Residence", total) FROM stdin;
+COPY public.population_residence_2013 (geo_level, geo_code, geo_version, "population_residence_2013", total) FROM stdin;
 country	SN	2009	urban	6102800
 country	SN	2009	rural	7405915
 level1	SN_1_001	2009	urban	2845954
@@ -75,7 +75,7 @@ level1	SN_1_014	2009	rural	427385
 --
 
 ALTER TABLE ONLY public.population_residence_2013
-    ADD CONSTRAINT pk_population_residence_2013 PRIMARY KEY (geo_level, geo_code, geo_version, "Population_Residence");
+    ADD CONSTRAINT pk_population_residence_2013 PRIMARY KEY (geo_level, geo_code, geo_version, "population_residence_2013");
 
 
 --

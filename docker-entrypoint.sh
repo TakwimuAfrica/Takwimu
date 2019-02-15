@@ -24,5 +24,5 @@ exec gunicorn takwimu.wsgi:application \
     --log-level=info \
     --log-file=/srv/logs/gunicorn.log \
     --access-logfile=/srv/logs/access.log \
-    --reload \
+    --preload \
     "$@"

@@ -4,37 +4,34 @@ import os
 from elasticsearch import RequestsHttpConnection
 from utils.aws_es import AWS4AuthNotUnicode
 
-from hurumap.settings import *  # noqa
+from hurumap.dashboard.settings import *  # noqa
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # insert our overrides before both census and hurumap
 
-INSTALLED_APPS = ['takwimu', 'wagtail.contrib.modeladmin', 'fontawesome',
-                  'wagtail.contrib.settings'] + INSTALLED_APPS + ['debug_toolbar']
-
+INSTALLED_APPS = ['takwimu', 'fontawesome'] + INSTALLED_APPS + ['debug_toolbar']
 
 ROOT_URLCONF = 'takwimu.urls'
 
 MIDDLEWARE_CLASSES = (
-    'whitenoise.middleware.WhiteNoiseMiddleware',
-    'django.middleware.cache.FetchFromCacheMiddleware',
-    'django.middleware.cache.UpdateCacheMiddleware',
-) + MIDDLEWARE_CLASSES + (
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
-)
+                         'whitenoise.middleware.WhiteNoiseMiddleware',
+                         'django.middleware.cache.FetchFromCacheMiddleware',
+                         'django.middleware.cache.UpdateCacheMiddleware',
+                     ) + MIDDLEWARE_CLASSES + (
+                         'debug_toolbar.middleware.DebugToolbarMiddleware',
+                     )
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
-TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS']['context_processors'] + [
-    'wagtail.contrib.settings.context_processors.settings',
-    'takwimu.context_processors.takwimu_countries',
-    'takwimu.context_processors.takwimu_stories',
-    'takwimu.context_processors.takwimu_topics',
-    'takwimu.context_processors.sdgs',
-]
-
+TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
+                                                    'context_processors'] + [
+                                                    'takwimu.context_processors.takwimu_countries',
+                                                    'takwimu.context_processors.takwimu_stories',
+                                                    'takwimu.context_processors.takwimu_topics',
+                                                    'takwimu.context_processors.sdgs',
+                                                ]
 
 # Static files handler
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
@@ -42,7 +39,6 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 # Media Config
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 # -------------------------------------------------------------------------------------
 # HURUmap / Wazimap Config
@@ -163,7 +159,6 @@ HURUMAP['available_releases_years_per_country'] = {
 # Making sure these are the same
 WAZIMAP = HURUMAP
 
-
 # -------------------------------------------------------------------------------------
 # Database Configs
 # -------------------------------------------------------------------------------------
@@ -172,13 +167,11 @@ DATABASE_URL = os.environ.get('DATABASE_URL',
                               'postgresql://takwimu:takwimu@localhost/takwimu')
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
 
-
 # -------------------------------------------------------------------------------------
 # Logging Configs
 # -------------------------------------------------------------------------------------
 
 LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
-
 
 # -------------------------------------------------------------------------------------
 # WAGTAIL Search / Elastic
@@ -259,7 +252,9 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
                 'port': 443,
                 'use_ssl': True,
                 'verify_certs': True,
-                'http_auth': AWS4AuthNotUnicode(TAKWIMU_ES_AWS_ACCESS_KEY, TAKWIMU_ES_AWS_SECRET_KEY, TAKWIMU_ES_AWS_REGION, 'es'),
+                'http_auth': AWS4AuthNotUnicode(TAKWIMU_ES_AWS_ACCESS_KEY,
+                                                TAKWIMU_ES_AWS_SECRET_KEY,
+                                                TAKWIMU_ES_AWS_REGION, 'es'),
             }],
             'OPTIONS': {
                 'connection_class': RequestsHttpConnection,
@@ -277,7 +272,6 @@ else:
             'INDEX_SETTINGS': {},
         }
     }
-
 
 # -------------------------------------------------------------------------------------
 # CACHE
