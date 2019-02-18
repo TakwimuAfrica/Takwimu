@@ -9,6 +9,7 @@ from wazimap.models.data import DataNotFound
 
 from wazimap.geo import LocationNotFound
 
+from takwimu.data.utils import get_primary_release_year_per_geography
 
 log = logging.getLogger(__name__)
 
@@ -1242,9 +1243,10 @@ def get_appropriate_dbtable(country, table_prefix):
 def get_profile(geo, profile_name, request):
     session = get_session()
     (country, level) = get_country_and_level(geo)
+    year = request.GET.get('release',get_primary_release_year_per_geography(geo))
     data = {}
     try:
-        data['demographics'] = get_demographics(geo, session, country, level)
+        data['demographics'] = get_demographics(geo, session, country, level, year)
         data['elections'] = get_elections(geo, session)
         data['crops'] = get_crop_production(geo, session, country, level)
         # data['health_centers'] = get_health_centers(
@@ -1275,8 +1277,8 @@ def get_country_and_level(geo):
     return (country, level)
 
 
-def get_demographics(geo, session, country, level):
-    population_data = get_population(geo, session, country, level)
+def get_demographics(geo, session, country, level, year):
+    population_data = get_population(geo, session, country, level, year)
     child_births_data = get_child_births(geo, session, country, level)
     demographics_data = dict(population_data.items() + child_births_data.items())
     demographics_data['is_missing'] = population_data.get('is_missing')
@@ -1284,12 +1286,13 @@ def get_demographics(geo, session, country, level):
     return demographics_data
 
 
-def get_population(geo, session, country, level):
+def get_population(geo, session, country, level, year):
     sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
+    db_table = db_column_name = 'population_sex_' + str(year)
     try:
         sex_dist, total_population_sex = get_stat_data(
-            'population_sex_2009', geo, session, table_fields=['population_sex_2009'])
+            db_table, geo, session, table_fields=[db_column_name])
 
     except LocationNotFound:
         pass
@@ -1299,9 +1302,10 @@ def get_population(geo, session, country, level):
         pass
 
     try:
+        db_table = db_column_name = 'population_residence_' + str(year)
         residence_dist, total_population_residence = get_stat_data(
-            'Population_Residence', geo, session,
-            table_fields=['Population_Residence'])
+            db_table, geo, session,
+            table_fields=[db_column_name])
     except LocationNotFound:
         pass
     except DataNotFound:
@@ -1379,9 +1383,8 @@ def get_child_births(geo, session, country, level):
         # except ValueError:
         #     pass
         except Exception as e:
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-            print e.message
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            pass
+
 
         try:
             child_births_by_size_dist, _ = get_stat_data(
@@ -1442,7 +1445,7 @@ def get_child_births(geo, session, country, level):
 
 
 def get_elections(geo, session):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         candidate_dist = LOCATIONNOTFOUND
         valid_invalid_dist = LOCATIONNOTFOUND
         registered_accred_dist = LOCATIONNOTFOUND
@@ -1494,17 +1497,19 @@ def get_elections(geo, session):
 
 
 def get_crop_production(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         crop_distribution = LOCATIONNOTFOUND
         try:
             crop_distribution, _ = get_stat_data(
                 'crops', geo, session, table_fields=['crops'])
-        except LocationNotFound:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
+        except Exception as e:
+            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+            print e.message
+            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
+        # except DataNotFound:
+        #     pass
+        # except ValueError:
+        #     pass
 
     return {
         'crop_distribution': _add_metadata_to_dist(
@@ -1513,7 +1518,7 @@ def get_crop_production(geo, session, country, level):
 
 
 def get_health_centers(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
         health_centers_ownership_dist = LOCATIONNOTFOUND
         hiv_health_centers_dist, total_hiv_health_centers = LOCATIONNOTFOUND, 0
@@ -1584,7 +1589,7 @@ def get_health_centers(geo, session, country, level):
 
 
 def get_health_workers(geo, session):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
         hrh_patient_ratio = 0
 
@@ -1619,7 +1624,7 @@ def get_health_workers(geo, session):
 
 
 def get_causes_of_death(geo, session):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         causes_of_death_under_five_dist = LOCATIONNOTFOUND
         causes_of_death_over_five_dist = LOCATIONNOTFOUND
         inpatient_diagnosis_over_five_dist = LOCATIONNOTFOUND
@@ -1705,7 +1710,7 @@ def get_causes_of_death(geo, session):
 
 
 def get_knowledge_of_HIV(geo, session):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         prevention_methods_dist = LOCATIONNOTFOUND
         try:
             prevention_methods_dist, _ = get_stat_data(
@@ -1724,7 +1729,7 @@ def get_knowledge_of_HIV(geo, session):
 
 
 def get_donor_assistance(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         donor_assistance_dist = LOCATIONNOTFOUND
         donor_programmes_dist = LOCATIONNOTFOUND
         try:
@@ -1761,7 +1766,7 @@ def get_donor_assistance(geo, session, country, level):
 
 
 def get_poverty_profile(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         poverty_residence_dist = LOCATIONNOTFOUND
         poverty_age_dist = LOCATIONNOTFOUND
         try:
@@ -1797,7 +1802,7 @@ def get_poverty_profile(geo, session, country, level):
 
 
 def get_fgm_profile(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         fgm_age_dist = LOCATIONNOTFOUND
         try:
             fgm_age_dist, _ = get_stat_data(['age'], geo, session)
@@ -1816,7 +1821,7 @@ def get_fgm_profile(geo, session, country, level):
 
 
 def get_security_profile(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
             seized_firearms_dist = LOCATIONNOTFOUND
     try:
         seized_firearms_dist, _ = get_stat_data(['year', 'type'], geo, session)
@@ -1836,7 +1841,7 @@ def get_security_profile(geo, session, country, level):
 
 
 def get_budget_data(geo, session, country, level):
-    with dataset_context(year='2017'):
+    with dataset_context(year='2014'):
         government_expenditure_dist = LOCATIONNOTFOUND
         try:
             government_expenditure_dist, _ = get_stat_data(
