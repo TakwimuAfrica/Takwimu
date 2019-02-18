@@ -17,7 +17,7 @@ greenlet==0.4.15
 requests-aws4auth==0.9
 psycopg2-binary==2.7.5
 wagtail>=1.13.1,<1.14
-django-allauth==0.37.1'
+django-allauth==0.37.1
 
 git+https://github.com/OpenUpSA/wazimap.git@releases#egg=wazimap
 
