@@ -2173,22 +2173,99 @@
     "model": "wazimap.dataset",
     "pk": 1,
     "fields": {
-      "name": "Other"
+      "name": "Education"
     }
   },
   {
     "model": "wazimap.dataset",
     "pk": 2,
     "fields": {
+      "name": "WorldBank"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 3,
+    "fields": {
+      "name": "Health"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 4,
+    "fields": {
+      "name": "Census 2011"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 5,
+    "fields": {
+      "name": "Donor Assistance"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 6,
+    "fields": {
       "name": "Census"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 7,
+    "fields": {
+      "name": "Security"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 8,
+    "fields": {
+      "name": "Elections"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 9,
+    "fields": {
+      "name": "Social Welfare"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 10,
+    "fields": {
+      "name": "Employment"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 11,
+    "fields": {
+      "name": "Government"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 12,
+    "fields": {
+      "name": "Crime"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 13,
+    "fields": {
+      "name": "Agriculture"
     }
   },
   {
     "model": "wazimap.release",
     "pk": 1,
     "fields": {
-      "name": "Other",
-      "year": "2017",
+      "name": "Education",
+      "year": "2014",
       "citation": null,
       "dataset": 1
     }
@@ -2197,8 +2274,8 @@
     "model": "wazimap.release",
     "pk": 2,
     "fields": {
-      "name": "Census",
-      "year": "2012",
+      "name": "WorldBank",
+      "year": "2017",
       "citation": null,
       "dataset": 2
     }
@@ -2207,30 +2284,30 @@
     "model": "wazimap.release",
     "pk": 3,
     "fields": {
-      "name": "Census",
-      "year": "2009",
+      "name": "Health",
+      "year": "2014",
       "citation": null,
-      "dataset": 2
+      "dataset": 3
     }
   },
   {
     "model": "wazimap.release",
     "pk": 4,
     "fields": {
-      "name": "Census",
-      "year": "2006",
-      "citation": "",
-      "dataset": 2
+      "name": "Census 2011",
+      "year": "2011",
+      "citation": null,
+      "dataset": 4
     }
   },
   {
     "model": "wazimap.release",
     "pk": 5,
     "fields": {
-      "name": "Census",
-      "year": "2007",
-      "citation": "",
-      "dataset": 2
+      "name": "Donor Assistance",
+      "year": "2014",
+      "citation": null,
+      "dataset": 5
     }
   },
   {
@@ -2238,9 +2315,9 @@
     "pk": 6,
     "fields": {
       "name": "Census",
-      "year": "2011",
-      "citation": "",
-      "dataset": 2
+      "year": "2013",
+      "citation": null,
+      "dataset": 6
     }
   },
   {
@@ -2248,9 +2325,109 @@
     "pk": 7,
     "fields": {
       "name": "Census",
-      "year": "2013",
-      "citation": "",
-      "dataset": 2
+      "year": "2012",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 8,
+    "fields": {
+      "name": "Security",
+      "year": "2014",
+      "citation": null,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 9,
+    "fields": {
+      "name": "Elections",
+      "year": "2014",
+      "citation": null,
+      "dataset": 8
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 10,
+    "fields": {
+      "name": "Social Welfare",
+      "year": "2014",
+      "citation": null,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 11,
+    "fields": {
+      "name": "Census",
+      "year": "2006",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 12,
+    "fields": {
+      "name": "Census",
+      "year": "2007",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 13,
+    "fields": {
+      "name": "Employment",
+      "year": "2014",
+      "citation": null,
+      "dataset": 10
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 14,
+    "fields": {
+      "name": "Government",
+      "year": "2014",
+      "citation": null,
+      "dataset": 11
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 15,
+    "fields": {
+      "name": "Crime",
+      "year": "2014",
+      "citation": null,
+      "dataset": 12
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 16,
+    "fields": {
+      "name": "Census",
+      "year": "2009",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 17,
+    "fields": {
+      "name": "Agriculture",
+      "year": "2014",
+      "citation": null,
+      "dataset": 13
     }
   },
   {
@@ -2264,266 +2441,448 @@
     "model": "wazimap.dbtable",
     "pk": 2,
     "fields": {
-      "name": "fgm_prevalence"
+      "name": "foreign_direct_investment_net_inflows"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 3,
     "fields": {
-      "name": "child_births"
+      "name": "agricultural_land"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 4,
     "fields": {
-      "name": "child_births_with_reported_birth_weights"
+      "name": "births_attended_by_skilled_health_staff"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 5,
     "fields": {
-      "name": "child_births_by_size"
+      "name": "tax_revenue"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 6,
     "fields": {
-      "name": "inpatient_diagnosis_under_five"
+      "name": "adult_literacy_rate"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 7,
     "fields": {
-      "name": "population_residence_2012"
+      "name": "hiv_health_centers"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 8,
     "fields": {
-      "name": "donor"
+      "name": "child_births_with_reported_birth_weights"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 9,
     "fields": {
-      "name": "seized_firearms"
+      "name": "access_to_basic_services"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 10,
     "fields": {
-      "name": "health_workers"
+      "name": "maternal_mortality"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 11,
     "fields": {
-      "name": "votes_per_candidate"
+      "name": "child_births_by_size"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 12,
     "fields": {
-      "name": "causes_of_death_over_five"
+      "name": "inpatient_diagnosis_under_five"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 13,
     "fields": {
-      "name": "valid_invalid_votes"
+      "name": "donor"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 14,
     "fields": {
-      "name": "population_sex_2009"
+      "name": "population_residence_2013"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 15,
     "fields": {
-      "name": "outpatient_diagnosis_over_five"
+      "name": "population_residence_2012"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 16,
     "fields": {
-      "name": "crime"
+      "name": "hiv_prevalence"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 17,
     "fields": {
-      "name": "employment_activity_status_sex"
+      "name": "seized_firearms"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 18,
     "fields": {
-      "name": "donor_funded_programmes"
+      "name": "health_workers"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 19,
     "fields": {
-      "name": "inpatient_diagnosis_over_five"
+      "name": "votes_per_candidate"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 20,
     "fields": {
-      "name": "child_births_with_low_birth_weights"
+      "name": "causes_of_death_over_five"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 21,
     "fields": {
-      "name": "health_centers_ownership"
+      "name": "primary_education_completion_rate"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 22,
     "fields": {
-      "name": "health_centers"
+      "name": "physicians_nurses_and_midwives"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 23,
     "fields": {
-      "name": "government_funding"
+      "name": "poverty_age_residence"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 24,
     "fields": {
-      "name": "officialemploymentstatus"
+      "name": "gini_index"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 25,
     "fields": {
-      "name": "registered_accredited_voters"
+      "name": "prevalence_of_undernourishment"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 26,
     "fields": {
-      "name": "poverty_age_residence"
+      "name": "outpatient_diagnosis_over_five"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 27,
     "fields": {
-      "name": "highest_education_level_reached"
+      "name": "mobile_phone_subscriptions"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 28,
     "fields": {
-      "name": "residence_poverty_type"
+      "name": "population_sex_2006"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 29,
     "fields": {
-      "name": "food_production"
+      "name": "population_sex_2007"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 30,
     "fields": {
-      "name": "outpatient_diagnosis_under_five"
+      "name": "employment_activity_status_sex"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 31,
     "fields": {
-      "name": "causes_of_death_under_five"
+      "name": "gdp_growth"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 32,
     "fields": {
-      "name": "method_sex"
+      "name": "donor_funded_programmes"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 33,
     "fields": {
-      "name": "population_residence_2009"
+      "name": "inpatient_diagnosis_over_five"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 34,
     "fields": {
-      "name": "population_residence_2013"
+      "name": "incidence_of_malaria_per_1000_pop_at_risk"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 35,
     "fields": {
-      "name": "population_sex_2006"
+      "name": "child_births_with_low_birth_weights"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 36,
     "fields": {
-      "name": "population_sex_2007"
+      "name": "health_centers_ownership"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 37,
     "fields": {
-      "name": "population_sex_2011"
+      "name": "total_population"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 38,
     "fields": {
-      "name": "population_sex_2013"
+      "name": "government_funding"
     }
   },
   {
     "model": "wazimap.dbtable",
     "pk": 39,
     "fields": {
+      "name": "nurses_and_midwives"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 40,
+    "fields": {
+      "name": "employment_to_population_ratio"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 41,
+    "fields": {
+      "name": "secondary_school_enrollment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 42,
+    "fields": {
+      "name": "crime"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 43,
+    "fields": {
+      "name": "primary_school_enrollment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 44,
+    "fields": {
+      "name": "officialemploymentstatus"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 45,
+    "fields": {
+      "name": "population_residence_2009"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 46,
+    "fields": {
+      "name": "gdp_per_capita"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 47,
+    "fields": {
+      "name": "valid_invalid_votes"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 48,
+    "fields": {
+      "name": "registered_accredited_voters"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 49,
+    "fields": {
+      "name": "gdp"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 50,
+    "fields": {
+      "name": "tax_as_percentage_of_gdp"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 51,
+    "fields": {
+      "name": "population_sex_2009"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 52,
+    "fields": {
+      "name": "highest_education_level_reached"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 53,
+    "fields": {
+      "name": "residence_poverty_type"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 54,
+    "fields": {
+      "name": "life_expectancy_at_birth"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 55,
+    "fields": {
+      "name": "food_production"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 56,
+    "fields": {
+      "name": "population_sex_2013"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 57,
+    "fields": {
       "name": "population_sex_2012"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 58,
+    "fields": {
+      "name": "outpatient_diagnosis_under_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 59,
+    "fields": {
+      "name": "account_ownership"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 60,
+    "fields": {
+      "name": "causes_of_death_under_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 61,
+    "fields": {
+      "name": "cereal_yield_kg_per_hectare"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 62,
+    "fields": {
+      "name": "method_sex"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 63,
+    "fields": {
+      "name": "youth_unemployment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 64,
+    "fields": {
+      "name": "child_births"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 65,
+    "fields": {
+      "name": "gdp_per_capita_growth"
     }
   },
   {
@@ -2545,12 +2904,12 @@
     "model": "wazimap.fieldtable",
     "pk": 2,
     "fields": {
-      "name": "FGM_PREVALENCE",
+      "name": "FOREIGN_DIRECT_INVESTMENT_NET_INFLOWS",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 2,
       "stat_type": "number",
-      "description": "Population by age",
-      "fields": "[\"age\"]",
+      "description": "Population by foreign_direct_investment_net_inflows_year",
+      "fields": "[\"foreign_direct_investment_net_inflows_year\"]",
       "denominator_key": null,
       "has_total": true,
       "value_type": "Integer"
@@ -2560,12 +2919,12 @@
     "model": "wazimap.fieldtable",
     "pk": 3,
     "fields": {
-      "name": "CHILD_BIRTHS",
+      "name": "AGRICULTURAL_LAND",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 2,
       "stat_type": "number",
-      "description": "Population by child_births",
-      "fields": "[\"child_births\"]",
+      "description": "Population by agricultural_land_year",
+      "fields": "[\"agricultural_land_year\"]",
       "denominator_key": null,
       "has_total": true,
       "value_type": "Integer"
@@ -2575,12 +2934,12 @@
     "model": "wazimap.fieldtable",
     "pk": 4,
     "fields": {
-      "name": "CHILD_BIRTHS_WITH_REPORTED_BIRTH_WEIGHTS",
+      "name": "BIRTHS_ATTENDED_BY_SKILLED_HEALTH_STAFF",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 2,
       "stat_type": "number",
-      "description": "Population by reported_birth_weights",
-      "fields": "[\"reported_birth_weights\"]",
+      "description": "Population by births_attended_by_skilled_health_staff_year",
+      "fields": "[\"births_attended_by_skilled_health_staff_year\"]",
       "denominator_key": null,
       "has_total": true,
       "value_type": "Integer"
@@ -2590,12 +2949,12 @@
     "model": "wazimap.fieldtable",
     "pk": 5,
     "fields": {
-      "name": "CHILD_BIRTHS_BY_SIZE",
+      "name": "TAX_REVENUE",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 2,
       "stat_type": "number",
-      "description": "Population by size",
-      "fields": "[\"size\"]",
+      "description": "Population by tax_revenue_year",
+      "fields": "[\"tax_revenue_year\"]",
       "denominator_key": null,
       "has_total": true,
       "value_type": "Integer"
@@ -2605,12 +2964,12 @@
     "model": "wazimap.fieldtable",
     "pk": 6,
     "fields": {
-      "name": "INPATIENT_DIAGNOSIS_UNDER_FIVE",
+      "name": "ADULT_LITERACY_RATE",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 2,
       "stat_type": "number",
-      "description": "Population by inpatient_diagnosis_under_five",
-      "fields": "[\"inpatient_diagnosis_under_five\"]",
+      "description": "Population by adult_literacy_rate_year, sex",
+      "fields": "[\"adult_literacy_rate_year\", \"sex\"]",
       "denominator_key": null,
       "has_total": true,
       "value_type": "Integer"
@@ -2620,234 +2979,9 @@
     "model": "wazimap.fieldtable",
     "pk": 7,
     "fields": {
-      "name": "POPULATION_RESIDENCE",
+      "name": "HIV_HEALTH_CENTERS",
       "universe": "Population",
-      "dataset": 2,
-      "stat_type": "number",
-      "description": "Population by Population_Residence",
-      "fields": "[\"Population_Residence\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 8,
-    "fields": {
-      "name": "DONOR",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by donor",
-      "fields": "[\"donor\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 9,
-    "fields": {
-      "name": "SEIZED_FIREARMS",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by year, type",
-      "fields": "[\"year\", \"type\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 10,
-    "fields": {
-      "name": "HEALTH_WORKERS",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by workers",
-      "fields": "[\"workers\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 11,
-    "fields": {
-      "name": "VOTES_PER_CANDIDATE",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by candidate",
-      "fields": "[\"candidate\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 12,
-    "fields": {
-      "name": "CAUSES_OF_DEATH_OVER_FIVE",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by causes_of_death_over_five",
-      "fields": "[\"causes_of_death_over_five\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 13,
-    "fields": {
-      "name": "VALID_INVALID_VOTES",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by votes",
-      "fields": "[\"votes\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 14,
-    "fields": {
-      "name": "POPULATION_SEX",
-      "universe": "Population",
-      "dataset": 2,
-      "stat_type": "number",
-      "description": "Population by Population_Sex",
-      "fields": "[\"Population_Sex\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 15,
-    "fields": {
-      "name": "OUTPATIENT_DIAGNOSIS_OVER_FIVE",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by outpatient_diagnosis_over_five",
-      "fields": "[\"outpatient_diagnosis_over_five\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 16,
-    "fields": {
-      "name": "CRIME",
-      "universe": "Crimes",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Crimes by crime",
-      "fields": "[\"crime\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 17,
-    "fields": {
-      "name": "EMPLOYMENT_ACTIVITY_STATUS_SEX",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by employment_activity_status, sex",
-      "fields": "[\"employment_activity_status\", \"sex\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 18,
-    "fields": {
-      "name": "DONOR_FUNDED_PROGRAMMES",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by programme, donor",
-      "fields": "[\"programme\", \"donor\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 19,
-    "fields": {
-      "name": "INPATIENT_DIAGNOSIS_OVER_FIVE",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by inpatient_diagnosis_over_five",
-      "fields": "[\"inpatient_diagnosis_over_five\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 20,
-    "fields": {
-      "name": "CHILD_BIRTHS_WITH_LOW_BIRTH_WEIGHTS",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by low_birth_weights",
-      "fields": "[\"low_birth_weights\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 21,
-    "fields": {
-      "name": "HEALTH_CENTERS_OWNERSHIP",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by organization_type",
-      "fields": "[\"organization_type\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 22,
-    "fields": {
-      "name": "HEALTH_CENTERS",
-      "universe": "Population",
-      "dataset": 1,
+      "dataset": 3,
       "stat_type": "number",
       "description": "Population by centers",
       "fields": "[\"centers\"]",
@@ -2858,56 +2992,236 @@
   },
   {
     "model": "wazimap.fieldtable",
+    "pk": 8,
+    "fields": {
+      "name": "CHILD_BIRTHS_WITH_REPORTED_BIRTH_WEIGHTS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by reported_birth_weights",
+      "fields": "[\"reported_birth_weights\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 9,
+    "fields": {
+      "name": "ACCESS_TO_BASIC_SERVICES",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by access_to_basic_services_year",
+      "fields": "[\"access_to_basic_services_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 10,
+    "fields": {
+      "name": "MATERNAL_MORTALITY",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by maternal_mortality_year",
+      "fields": "[\"maternal_mortality_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 11,
+    "fields": {
+      "name": "CHILD_BIRTHS_BY_SIZE",
+      "universe": "Population",
+      "dataset": 4,
+      "stat_type": "number",
+      "description": "Population by size",
+      "fields": "[\"size\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 12,
+    "fields": {
+      "name": "INPATIENT_DIAGNOSIS_UNDER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by inpatient_diagnosis_under_five",
+      "fields": "[\"inpatient_diagnosis_under_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 13,
+    "fields": {
+      "name": "DONOR",
+      "universe": "Population",
+      "dataset": 5,
+      "stat_type": "number",
+      "description": "Population by donor",
+      "fields": "[\"donor\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 14,
+    "fields": {
+      "name": "POPULATION_RESIDENCE_2013",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_residence_2013",
+      "fields": "[\"population_residence_2013\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 15,
+    "fields": {
+      "name": "POPULATION_RESIDENCE_2012",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_residence_2012",
+      "fields": "[\"population_residence_2012\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 16,
+    "fields": {
+      "name": "HIV_PREVALENCE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by hiv_prevalence_year, sex",
+      "fields": "[\"hiv_prevalence_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 17,
+    "fields": {
+      "name": "SEIZED_FIREARMS",
+      "universe": "Population",
+      "dataset": 7,
+      "stat_type": "number",
+      "description": "Population by year, type",
+      "fields": "[\"year\", \"type\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 18,
+    "fields": {
+      "name": "HEALTH_WORKERS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by workers",
+      "fields": "[\"workers\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 19,
+    "fields": {
+      "name": "VOTES_PER_CANDIDATE",
+      "universe": "Population",
+      "dataset": 8,
+      "stat_type": "number",
+      "description": "Population by candidate",
+      "fields": "[\"candidate\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 20,
+    "fields": {
+      "name": "CAUSES_OF_DEATH_OVER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by causes_of_death_over_five",
+      "fields": "[\"causes_of_death_over_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 21,
+    "fields": {
+      "name": "PRIMARY_EDUCATION_COMPLETION_RATE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by primary_education_completion_rate_year",
+      "fields": "[\"primary_education_completion_rate_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 22,
+    "fields": {
+      "name": "PHYSICIANS_NURSES_AND_MIDWIVES",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by physicians_nurses_and_midwives_year",
+      "fields": "[\"physicians_nurses_and_midwives_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
     "pk": 23,
-    "fields": {
-      "name": "GOVERNMENT_FUNDING",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by year, sector",
-      "fields": "[\"year\", \"sector\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 24,
-    "fields": {
-      "name": "OFFICIALEMPLOYMENTSTATUS",
-      "universe": "Individuals 15 and older",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Individuals 15 and older by official employment status",
-      "fields": "[\"official employment status\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 25,
-    "fields": {
-      "name": "REGISTERED_ACCREDITED_VOTERS",
-      "universe": "Population",
-      "dataset": 1,
-      "stat_type": "number",
-      "description": "Population by voters",
-      "fields": "[\"voters\"]",
-      "denominator_key": null,
-      "has_total": true,
-      "value_type": "Integer"
-    }
-  },
-  {
-    "model": "wazimap.fieldtable",
-    "pk": 26,
     "fields": {
       "name": "POVERTY_AGE_RESIDENCE",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 9,
       "stat_type": "number",
       "description": "Population by residence, age",
       "fields": "[\"residence\", \"age\"]",
@@ -2918,7 +3232,427 @@
   },
   {
     "model": "wazimap.fieldtable",
+    "pk": 24,
+    "fields": {
+      "name": "GINI_INDEX",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gini_index_year",
+      "fields": "[\"gini_index_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 25,
+    "fields": {
+      "name": "PREVALENCE_OF_UNDERNOURISHMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by prevalence_of_undernourishment_year",
+      "fields": "[\"prevalence_of_undernourishment_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 26,
+    "fields": {
+      "name": "OUTPATIENT_DIAGNOSIS_OVER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by outpatient_diagnosis_over_five",
+      "fields": "[\"outpatient_diagnosis_over_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
     "pk": 27,
+    "fields": {
+      "name": "MOBILE_PHONE_SUBSCRIPTIONS",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by mobile_phone_subscriptions_year",
+      "fields": "[\"mobile_phone_subscriptions_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 28,
+    "fields": {
+      "name": "POPULATION_SEX_2006",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2006",
+      "fields": "[\"population_sex_2006\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 29,
+    "fields": {
+      "name": "POPULATION_SEX_2007",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2007",
+      "fields": "[\"population_sex_2007\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 30,
+    "fields": {
+      "name": "EMPLOYMENT_ACTIVITY_STATUS_SEX",
+      "universe": "Population",
+      "dataset": 10,
+      "stat_type": "number",
+      "description": "Population by employment_activity_status, sex",
+      "fields": "[\"employment_activity_status\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 31,
+    "fields": {
+      "name": "GDP_GROWTH",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_growth_year",
+      "fields": "[\"gdp_growth_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 32,
+    "fields": {
+      "name": "DONOR_FUNDED_PROGRAMMES",
+      "universe": "Population",
+      "dataset": 5,
+      "stat_type": "number",
+      "description": "Population by programme, donor",
+      "fields": "[\"programme\", \"donor\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 33,
+    "fields": {
+      "name": "INPATIENT_DIAGNOSIS_OVER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by inpatient_diagnosis_over_five",
+      "fields": "[\"inpatient_diagnosis_over_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 34,
+    "fields": {
+      "name": "INCIDENCE_OF_MALARIA_PER_1000_POP_AT_RISK",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by incidence_of_malaria_per_1000_pop_at_risk_year",
+      "fields": "[\"incidence_of_malaria_per_1000_pop_at_risk_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 35,
+    "fields": {
+      "name": "CHILD_BIRTHS_WITH_LOW_BIRTH_WEIGHTS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by low_birth_weights",
+      "fields": "[\"low_birth_weights\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 36,
+    "fields": {
+      "name": "HEALTH_CENTERS_OWNERSHIP",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by organization_type",
+      "fields": "[\"organization_type\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 37,
+    "fields": {
+      "name": "TOTAL_POPULATION",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by total_population_year",
+      "fields": "[\"total_population_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 38,
+    "fields": {
+      "name": "GOVERNMENT_FUNDING",
+      "universe": "Population",
+      "dataset": 11,
+      "stat_type": "number",
+      "description": "Population by year, sector",
+      "fields": "[\"year\", \"sector\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 39,
+    "fields": {
+      "name": "NURSES_AND_MIDWIVES",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by nurses_and_midwives_year",
+      "fields": "[\"nurses_and_midwives_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 40,
+    "fields": {
+      "name": "EMPLOYMENT_TO_POPULATION_RATIO",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by employment_to_population_ratio_year, sex",
+      "fields": "[\"employment_to_population_ratio_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 41,
+    "fields": {
+      "name": "SECONDARY_SCHOOL_ENROLLMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by secondary_school_enrollment_year, sex",
+      "fields": "[\"secondary_school_enrollment_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 42,
+    "fields": {
+      "name": "CRIME",
+      "universe": "Crimes",
+      "dataset": 12,
+      "stat_type": "number",
+      "description": "Crimes by crime",
+      "fields": "[\"crime\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 43,
+    "fields": {
+      "name": "PRIMARY_SCHOOL_ENROLLMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by primary_school_enrollment_year, sex",
+      "fields": "[\"primary_school_enrollment_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 44,
+    "fields": {
+      "name": "OFFICIALEMPLOYMENTSTATUS",
+      "universe": "Individuals 15 and older",
+      "dataset": 10,
+      "stat_type": "number",
+      "description": "Individuals 15 and older by official employment status",
+      "fields": "[\"official employment status\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 45,
+    "fields": {
+      "name": "POPULATION_RESIDENCE_2009",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_residence_2009",
+      "fields": "[\"population_residence_2009\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 46,
+    "fields": {
+      "name": "GDP_PER_CAPITA",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_per_capita_year",
+      "fields": "[\"gdp_per_capita_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 47,
+    "fields": {
+      "name": "VALID_INVALID_VOTES",
+      "universe": "Population",
+      "dataset": 8,
+      "stat_type": "number",
+      "description": "Population by votes",
+      "fields": "[\"votes\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 48,
+    "fields": {
+      "name": "REGISTERED_ACCREDITED_VOTERS",
+      "universe": "Population",
+      "dataset": 8,
+      "stat_type": "number",
+      "description": "Population by voters",
+      "fields": "[\"voters\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 49,
+    "fields": {
+      "name": "GDP",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_year",
+      "fields": "[\"gdp_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 50,
+    "fields": {
+      "name": "TAX_AS_PERCENTAGE_OF_GDP",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by tax_as_percentage_of_gdp_year",
+      "fields": "[\"tax_as_percentage_of_gdp_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 51,
+    "fields": {
+      "name": "POPULATION_SEX_2009",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2009",
+      "fields": "[\"population_sex_2009\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 52,
     "fields": {
       "name": "HIGHEST_EDUCATION_LEVEL_REACHED",
       "universe": "Population",
@@ -2933,11 +3667,11 @@
   },
   {
     "model": "wazimap.fieldtable",
-    "pk": 28,
+    "pk": 53,
     "fields": {
       "name": "RESIDENCE_POVERTY_TYPE",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 9,
       "stat_type": "number",
       "description": "Population by residence, poverty_type",
       "fields": "[\"residence\", \"poverty_type\"]",
@@ -2948,11 +3682,26 @@
   },
   {
     "model": "wazimap.fieldtable",
-    "pk": 29,
+    "pk": 54,
+    "fields": {
+      "name": "LIFE_EXPECTANCY_AT_BIRTH",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by life_expectancy_at_birth_year, sex",
+      "fields": "[\"life_expectancy_at_birth_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 55,
     "fields": {
       "name": "FOOD_PRODUCTION",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 13,
       "stat_type": "number",
       "description": "Population by crops",
       "fields": "[\"crops\"]",
@@ -2963,11 +3712,41 @@
   },
   {
     "model": "wazimap.fieldtable",
-    "pk": 30,
+    "pk": 56,
+    "fields": {
+      "name": "POPULATION_SEX_2013",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2013",
+      "fields": "[\"population_sex_2013\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 57,
+    "fields": {
+      "name": "POPULATION_SEX_2012",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2012",
+      "fields": "[\"population_sex_2012\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 58,
     "fields": {
       "name": "OUTPATIENT_DIAGNOSIS_UNDER_FIVE",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 3,
       "stat_type": "number",
       "description": "Population by outpatient_diagnosis_under_five",
       "fields": "[\"outpatient_diagnosis_under_five\"]",
@@ -2978,11 +3757,26 @@
   },
   {
     "model": "wazimap.fieldtable",
-    "pk": 31,
+    "pk": 59,
+    "fields": {
+      "name": "ACCOUNT_OWNERSHIP",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by sex, account_ownership_year",
+      "fields": "[\"sex\", \"account_ownership_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 60,
     "fields": {
       "name": "CAUSES_OF_DEATH_UNDER_FIVE",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 3,
       "stat_type": "number",
       "description": "Population by causes_of_death_under_five",
       "fields": "[\"causes_of_death_under_five\"]",
@@ -2993,14 +3787,74 @@
   },
   {
     "model": "wazimap.fieldtable",
-    "pk": 32,
+    "pk": 61,
+    "fields": {
+      "name": "CEREAL_YIELD_KG_PER_HECTARE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by cereal_yield_kg_per_hectare_year",
+      "fields": "[\"cereal_yield_kg_per_hectare_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 62,
     "fields": {
       "name": "METHOD_SEX",
       "universe": "Population",
-      "dataset": 1,
+      "dataset": 3,
       "stat_type": "number",
       "description": "Population by method, sex",
       "fields": "[\"method\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 63,
+    "fields": {
+      "name": "YOUTH_UNEMPLOYMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by youth_unemployment_year, sex",
+      "fields": "[\"youth_unemployment_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 64,
+    "fields": {
+      "name": "CHILD_BIRTHS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by child_births",
+      "fields": "[\"child_births\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 65,
+    "fields": {
+      "name": "GDP_PER_CAPITA_GROWTH",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_per_capita_growth_year",
+      "fields": "[\"gdp_per_capita_growth_year\"]",
       "denominator_key": null,
       "has_total": true,
       "value_type": "Integer"
@@ -3021,7 +3875,7 @@
     "fields": {
       "data_table": 2,
       "db_table": 2,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3030,7 +3884,7 @@
     "fields": {
       "data_table": 3,
       "db_table": 3,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3039,7 +3893,7 @@
     "fields": {
       "data_table": 4,
       "db_table": 4,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3048,7 +3902,7 @@
     "fields": {
       "data_table": 5,
       "db_table": 5,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3057,7 +3911,7 @@
     "fields": {
       "data_table": 6,
       "db_table": 6,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3066,7 +3920,7 @@
     "fields": {
       "data_table": 7,
       "db_table": 7,
-      "release": 2
+      "release": 3
     }
   },
   {
@@ -3075,7 +3929,7 @@
     "fields": {
       "data_table": 8,
       "db_table": 8,
-      "release": 1
+      "release": 3
     }
   },
   {
@@ -3084,7 +3938,7 @@
     "fields": {
       "data_table": 9,
       "db_table": 9,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3093,7 +3947,7 @@
     "fields": {
       "data_table": 10,
       "db_table": 10,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3102,7 +3956,7 @@
     "fields": {
       "data_table": 11,
       "db_table": 11,
-      "release": 1
+      "release": 4
     }
   },
   {
@@ -3111,7 +3965,7 @@
     "fields": {
       "data_table": 12,
       "db_table": 12,
-      "release": 1
+      "release": 3
     }
   },
   {
@@ -3120,7 +3974,7 @@
     "fields": {
       "data_table": 13,
       "db_table": 13,
-      "release": 1
+      "release": 5
     }
   },
   {
@@ -3129,7 +3983,7 @@
     "fields": {
       "data_table": 14,
       "db_table": 14,
-      "release": 3
+      "release": 6
     }
   },
   {
@@ -3138,7 +3992,7 @@
     "fields": {
       "data_table": 15,
       "db_table": 15,
-      "release": 1
+      "release": 7
     }
   },
   {
@@ -3147,7 +4001,7 @@
     "fields": {
       "data_table": 16,
       "db_table": 16,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3156,7 +4010,7 @@
     "fields": {
       "data_table": 17,
       "db_table": 17,
-      "release": 1
+      "release": 8
     }
   },
   {
@@ -3165,7 +4019,7 @@
     "fields": {
       "data_table": 18,
       "db_table": 18,
-      "release": 1
+      "release": 3
     }
   },
   {
@@ -3174,7 +4028,7 @@
     "fields": {
       "data_table": 19,
       "db_table": 19,
-      "release": 1
+      "release": 9
     }
   },
   {
@@ -3183,7 +4037,7 @@
     "fields": {
       "data_table": 20,
       "db_table": 20,
-      "release": 1
+      "release": 3
     }
   },
   {
@@ -3192,7 +4046,7 @@
     "fields": {
       "data_table": 21,
       "db_table": 21,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3201,7 +4055,7 @@
     "fields": {
       "data_table": 22,
       "db_table": 22,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3210,7 +4064,7 @@
     "fields": {
       "data_table": 23,
       "db_table": 23,
-      "release": 1
+      "release": 10
     }
   },
   {
@@ -3219,7 +4073,7 @@
     "fields": {
       "data_table": 24,
       "db_table": 24,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3228,7 +4082,7 @@
     "fields": {
       "data_table": 25,
       "db_table": 25,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3237,7 +4091,7 @@
     "fields": {
       "data_table": 26,
       "db_table": 26,
-      "release": 1
+      "release": 3
     }
   },
   {
@@ -3246,7 +4100,7 @@
     "fields": {
       "data_table": 27,
       "db_table": 27,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3255,7 +4109,7 @@
     "fields": {
       "data_table": 28,
       "db_table": 28,
-      "release": 1
+      "release": 11
     }
   },
   {
@@ -3264,7 +4118,7 @@
     "fields": {
       "data_table": 29,
       "db_table": 29,
-      "release": 1
+      "release": 12
     }
   },
   {
@@ -3273,7 +4127,7 @@
     "fields": {
       "data_table": 30,
       "db_table": 30,
-      "release": 1
+      "release": 13
     }
   },
   {
@@ -3282,7 +4136,7 @@
     "fields": {
       "data_table": 31,
       "db_table": 31,
-      "release": 1
+      "release": 2
     }
   },
   {
@@ -3291,70 +4145,304 @@
     "fields": {
       "data_table": 32,
       "db_table": 32,
-      "release": 1
+      "release": 5
     }
   },
   {
     "model": "wazimap.fieldtablerelease",
     "pk": 33,
     "fields": {
-      "data_table": 14,
-      "db_table": 35,
-      "release": 4
-    }
-  },
-  {
-    "model": "wazimap.fieldtablerelease",
-    "pk": 34,
-    "fields": {
-      "data_table": 14,
-      "db_table": 36,
-      "release": 5
-    }
-  },
-  {
-    "model": "wazimap.fieldtablerelease",
-    "pk": 35,
-    "fields": {
-      "data_table": 14,
-      "db_table": 37,
-      "release": 6
-    }
-  },
-  {
-    "model": "wazimap.fieldtablerelease",
-    "pk": 36,
-    "fields": {
-      "data_table": 14,
-      "db_table": 39,
-      "release": 2
-    }
-  },
-  {
-    "model": "wazimap.fieldtablerelease",
-    "pk": 37,
-    "fields": {
-      "data_table": 14,
-      "db_table": 38,
-      "release": 7
-    }
-  },
-  {
-    "model": "wazimap.fieldtablerelease",
-    "pk": 38,
-    "fields": {
-      "data_table": 7,
+      "data_table": 33,
       "db_table": 33,
       "release": 3
     }
   },
   {
     "model": "wazimap.fieldtablerelease",
+    "pk": 34,
+    "fields": {
+      "data_table": 34,
+      "db_table": 34,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 35,
+    "fields": {
+      "data_table": 35,
+      "db_table": 35,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 36,
+    "fields": {
+      "data_table": 36,
+      "db_table": 36,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 37,
+    "fields": {
+      "data_table": 37,
+      "db_table": 37,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 38,
+    "fields": {
+      "data_table": 38,
+      "db_table": 38,
+      "release": 14
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
     "pk": 39,
     "fields": {
-      "data_table": 7,
-      "db_table": 34,
+      "data_table": 39,
+      "db_table": 39,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 40,
+    "fields": {
+      "data_table": 40,
+      "db_table": 40,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 41,
+    "fields": {
+      "data_table": 41,
+      "db_table": 41,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 42,
+    "fields": {
+      "data_table": 42,
+      "db_table": 42,
+      "release": 15
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 43,
+    "fields": {
+      "data_table": 43,
+      "db_table": 43,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 44,
+    "fields": {
+      "data_table": 44,
+      "db_table": 44,
+      "release": 13
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 45,
+    "fields": {
+      "data_table": 45,
+      "db_table": 45,
+      "release": 11
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 46,
+    "fields": {
+      "data_table": 46,
+      "db_table": 46,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 47,
+    "fields": {
+      "data_table": 47,
+      "db_table": 47,
+      "release": 9
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 48,
+    "fields": {
+      "data_table": 48,
+      "db_table": 48,
+      "release": 9
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 49,
+    "fields": {
+      "data_table": 49,
+      "db_table": 49,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 50,
+    "fields": {
+      "data_table": 50,
+      "db_table": 50,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 51,
+    "fields": {
+      "data_table": 51,
+      "db_table": 51,
+      "release": 16
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 52,
+    "fields": {
+      "data_table": 52,
+      "db_table": 52,
+      "release": 1
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 53,
+    "fields": {
+      "data_table": 53,
+      "db_table": 53,
+      "release": 10
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 54,
+    "fields": {
+      "data_table": 54,
+      "db_table": 54,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 55,
+    "fields": {
+      "data_table": 55,
+      "db_table": 55,
+      "release": 17
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 56,
+    "fields": {
+      "data_table": 56,
+      "db_table": 56,
+      "release": 6
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 57,
+    "fields": {
+      "data_table": 57,
+      "db_table": 57,
       "release": 7
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 58,
+    "fields": {
+      "data_table": 58,
+      "db_table": 58,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 59,
+    "fields": {
+      "data_table": 59,
+      "db_table": 59,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 60,
+    "fields": {
+      "data_table": 60,
+      "db_table": 60,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 61,
+    "fields": {
+      "data_table": 61,
+      "db_table": 61,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 62,
+    "fields": {
+      "data_table": 62,
+      "db_table": 62,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 63,
+    "fields": {
+      "data_table": 63,
+      "db_table": 63,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 64,
+    "fields": {
+      "data_table": 64,
+      "db_table": 64,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 65,
+    "fields": {
+      "data_table": 65,
+      "db_table": 65,
+      "release": 2
     }
   }
 ]
