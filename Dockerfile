@@ -19,10 +19,6 @@ COPY ./requirements.txt /
 RUN pip install -q -U pip setuptools
 RUN pip install -q -r /requirements.txt
 
-# GDAL pains
-RUN pip install -q GDAL==2.1.3 --global-option=build_ext --global-option="-I/usr/include/gdal"
-RUN pip install -q "Shapely>=1.5.13"
-
 # Add application source code to SRCDIR
 ADD $TAKWIMU_SRC $TAKWIMU_SRVPROJ
 
