@@ -9,7 +9,6 @@ from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
 from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
-from hurumap.urls import urlpatterns as hurumap_urlpatterns
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
 
 GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
@@ -36,7 +35,7 @@ takwimu_urlpatterns = [
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
     static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + \
-    takwimu_urlpatterns + hurumap_urlpatterns + hurumap_dashboard_urlpatterns
+    takwimu_urlpatterns + hurumap_dashboard_urlpatterns
 
 if settings.DEBUG:
     import debug_toolbar
