@@ -4,6 +4,7 @@ from wazimap.data.tables import FieldTable
 FieldTable(['population_sex_2006'], id='population_sex_2006', year='2006', dataset='Census')
 FieldTable(['population_sex_2007'], id='population_sex_2007', year='2007', dataset='Census')
 FieldTable(['population_sex_2009'], id='population_sex_2009', year='2009', dataset='Census')
+FieldTable(['population_sex_2011'], id='population_sex_2011', year='2011', dataset='Census')
 FieldTable(['population_sex_2012'], id='population_sex_2012', year='2012', dataset='Census')
 FieldTable(['population_sex_2013'], id='population_sex_2013', year='2013', dataset='Census')
 
