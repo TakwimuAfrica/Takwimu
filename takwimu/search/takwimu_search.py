@@ -22,6 +22,7 @@ QUERY_FIELDS = [
     'category^' + settings.TAKWIMU_ES_FIELDS_CATEGORY_BOOST,
     'title^' + settings.TAKWIMU_ES_FIELDS_TITLE_BOOST,
     'body^' + settings.TAKWIMU_ES_FIELDS_BODY_BOOST,
+    'metadata^' + settings.TAKWIMU_ES_FIELDS_METADATA_BOOST,
 ]
 
 
@@ -39,7 +40,6 @@ def tagify(phrase):
 
 
 class TakwimuTopicSearch():
-
     def __init__(self):
         DEFAULT_SEARCH_BACKEND = settings.WAGTAILSEARCH_BACKENDS['default']
 
@@ -118,7 +118,8 @@ class TakwimuTopicSearch():
             })
         return results
 
-    def add_to_index(self, content_id, content_type, country, category, title, body,
+    def add_to_index(self, content_id, content_type,
+                     country, category, title, body, metadata,
                      parent_page_id, parent_page_type):
         """
         - content_id
@@ -127,6 +128,7 @@ class TakwimuTopicSearch():
         - category
         - title
         - body
+        - metadata
         - parent_page_id
         - parent_page_type
         :return:
@@ -141,6 +143,7 @@ class TakwimuTopicSearch():
             'category_tag': tagify(category),
             'title': title,
             'body': body,
+            'metadata': metadata,
             'parent_page_id': parent_page_id,
             'parent_page_type': parent_page_type,
         }

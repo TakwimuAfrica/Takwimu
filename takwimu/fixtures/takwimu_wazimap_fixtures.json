@@ -1,0 +1,4448 @@
+[
+  {
+    "model": "wazimap.geography",
+    "pk": 279,
+    "fields": {
+      "geo_level": "continent",
+      "geo_code": "AFR",
+      "version": "2009",
+      "name": "Africa",
+      "long_name": "Africa",
+      "square_kms": null,
+      "parent_level": null,
+      "parent_code": null
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 280,
+    "fields": {
+      "geo_level": "country",
+      "geo_code": "NG",
+      "version": "2009",
+      "name": "Nigeria",
+      "long_name": "Nigeria",
+      "square_kms": 923768.0,
+      "parent_level": "continent",
+      "parent_code": "AFR"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 281,
+    "fields": {
+      "geo_level": "country",
+      "geo_code": "SN",
+      "version": "2009",
+      "name": "Senegal",
+      "long_name": "Senegal",
+      "square_kms": 196712.0,
+      "parent_level": "continent",
+      "parent_code": "AFR"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 282,
+    "fields": {
+      "geo_level": "country",
+      "geo_code": "TZ",
+      "version": "2009",
+      "name": "Tanzania",
+      "long_name": "Tanzania",
+      "square_kms": 945087.0,
+      "parent_level": "continent",
+      "parent_code": "AFR"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 283,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_006",
+      "version": "2009",
+      "name": "Bayelsa",
+      "long_name": "Bayelsa",
+      "square_kms": 10773.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 284,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_007",
+      "version": "2009",
+      "name": "Benue",
+      "long_name": "Benue",
+      "square_kms": 34059.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 285,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_008",
+      "version": "2009",
+      "name": "Borno",
+      "long_name": "Borno",
+      "square_kms": 70898.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 286,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_009",
+      "version": "2009",
+      "name": "Cross River",
+      "long_name": "Cross River",
+      "square_kms": 20156.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 287,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_010",
+      "version": "2009",
+      "name": "Delta",
+      "long_name": "Delta",
+      "square_kms": 17698.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 288,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_011",
+      "version": "2009",
+      "name": "Ebonyi",
+      "long_name": "Ebonyi",
+      "square_kms": 5670.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 289,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_012",
+      "version": "2009",
+      "name": "Edo",
+      "long_name": "Edo",
+      "square_kms": 17802.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 290,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_013",
+      "version": "2009",
+      "name": "Ekiti",
+      "long_name": "Ekiti",
+      "square_kms": 6353.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 291,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_014",
+      "version": "2009",
+      "name": "Enugu",
+      "long_name": "Enugu",
+      "square_kms": 7161.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 292,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_015",
+      "version": "2009",
+      "name": "Federal Capital Territory",
+      "long_name": "Federal Capital Territory",
+      "square_kms": 7315.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 293,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_016",
+      "version": "2009",
+      "name": "Gombe",
+      "long_name": "Gombe",
+      "square_kms": 18768.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 294,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_017",
+      "version": "2009",
+      "name": "Imo",
+      "long_name": "Imo",
+      "square_kms": 5530.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 295,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_018",
+      "version": "2009",
+      "name": "Jigawa",
+      "long_name": "Jigawa",
+      "square_kms": 23154.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 296,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_019",
+      "version": "2009",
+      "name": "Kaduna",
+      "long_name": "Kaduna",
+      "square_kms": 46053.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 297,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_020",
+      "version": "2009",
+      "name": "Kano",
+      "long_name": "Kano",
+      "square_kms": 20131.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 298,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_021",
+      "version": "2009",
+      "name": "Katsina",
+      "long_name": "Katsina",
+      "square_kms": 24192.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 299,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_022",
+      "version": "2009",
+      "name": "Kebbi",
+      "long_name": "Kebbi",
+      "square_kms": 36800.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 300,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_023",
+      "version": "2009",
+      "name": "Kogi",
+      "long_name": "Kogi",
+      "square_kms": 29833.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 301,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_024",
+      "version": "2009",
+      "name": "Kwara",
+      "long_name": "Kwara",
+      "square_kms": 36825.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 302,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_025",
+      "version": "2009",
+      "name": "Lagos",
+      "long_name": "Lagos",
+      "square_kms": 3345.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 303,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_026",
+      "version": "2009",
+      "name": "Nasarawa",
+      "long_name": "Nasarawa",
+      "square_kms": 27117.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 304,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_027",
+      "version": "2009",
+      "name": "Niger",
+      "long_name": "Niger",
+      "square_kms": 76363.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 305,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_028",
+      "version": "2009",
+      "name": "Ogun",
+      "long_name": "Ogun",
+      "square_kms": 16762.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 306,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_029",
+      "version": "2009",
+      "name": "Ondo",
+      "long_name": "Ondo",
+      "square_kms": 15500.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 307,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_030",
+      "version": "2009",
+      "name": "Osun",
+      "long_name": "Osun",
+      "square_kms": 9251.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 308,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_031",
+      "version": "2009",
+      "name": "Oyo",
+      "long_name": "Oyo",
+      "square_kms": 28454.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 309,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_032",
+      "version": "2009",
+      "name": "Plateau",
+      "long_name": "Plateau",
+      "square_kms": 30913.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 310,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_033",
+      "version": "2009",
+      "name": "Rivers",
+      "long_name": "Rivers",
+      "square_kms": 11077.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 311,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_034",
+      "version": "2009",
+      "name": "Sokoto",
+      "long_name": "Sokoto",
+      "square_kms": 25973.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 312,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_035",
+      "version": "2009",
+      "name": "Taraba",
+      "long_name": "Taraba",
+      "square_kms": 54473.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 313,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_036",
+      "version": "2009",
+      "name": "Yobe",
+      "long_name": "Yobe",
+      "square_kms": 45502.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 314,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_037",
+      "version": "2009",
+      "name": "Zamfara",
+      "long_name": "Zamfara",
+      "square_kms": 39762.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 315,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_001",
+      "version": "2009",
+      "name": "Dakar",
+      "long_name": "Dakar",
+      "square_kms": 547.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 316,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_002",
+      "version": "2009",
+      "name": "Diourbel",
+      "long_name": "Diourbel",
+      "square_kms": 4824.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 317,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_003",
+      "version": "2009",
+      "name": "Fatick",
+      "long_name": "Fatick",
+      "square_kms": 6849.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 318,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_004",
+      "version": "2009",
+      "name": "Kaffrine",
+      "long_name": "Kaffrine",
+      "square_kms": 11262.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 319,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_005",
+      "version": "2009",
+      "name": "Kaolack",
+      "long_name": "Kaolack",
+      "square_kms": 5357.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 320,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_006",
+      "version": "2009",
+      "name": "Kedougou",
+      "long_name": "Kedougou",
+      "square_kms": 16800.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 321,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_007",
+      "version": "2009",
+      "name": "Kolda",
+      "long_name": "Kolda",
+      "square_kms": 13771.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 322,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_008",
+      "version": "2009",
+      "name": "Louga",
+      "long_name": "Louga",
+      "square_kms": 24889.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 323,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_009",
+      "version": "2009",
+      "name": "Matam",
+      "long_name": "Matam",
+      "square_kms": 29445.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 324,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_010",
+      "version": "2009",
+      "name": "Saint Louis",
+      "long_name": "Saint Louis",
+      "square_kms": 19241.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 325,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_011",
+      "version": "2009",
+      "name": "Sedhiou",
+      "long_name": "Sedhiou",
+      "square_kms": 7341.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 326,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_012",
+      "version": "2009",
+      "name": "Tambacounda",
+      "long_name": "Tambacounda",
+      "square_kms": 42364.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 327,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_013",
+      "version": "2009",
+      "name": "Thies",
+      "long_name": "Thies",
+      "square_kms": 6670.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 328,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "SN_1_014",
+      "version": "2009",
+      "name": "Ziguinchor",
+      "long_name": "Ziguinchor",
+      "square_kms": 7352.0,
+      "parent_level": "country",
+      "parent_code": "SN"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 329,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_022",
+      "version": "2009",
+      "name": "Pwani",
+      "long_name": "Pwani",
+      "square_kms": 32407.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 330,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_026",
+      "version": "2009",
+      "name": "Simiyu",
+      "long_name": "Simiyu",
+      "square_kms": 2380.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 331,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_004",
+      "version": "2009",
+      "name": "Geita",
+      "long_name": "Geita",
+      "square_kms": 20054.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 332,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_027",
+      "version": "2009",
+      "name": "Singida",
+      "long_name": "Singida",
+      "square_kms": 49437.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 333,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_005",
+      "version": "2009",
+      "name": "Iringa",
+      "long_name": "Iringa",
+      "square_kms": 58936.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 334,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_023",
+      "version": "2009",
+      "name": "Rukwa",
+      "long_name": "Rukwa",
+      "square_kms": 75240.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 335,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_006",
+      "version": "2009",
+      "name": "Kagera",
+      "long_name": "Kagera",
+      "square_kms": 39627.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 336,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_010",
+      "version": "2009",
+      "name": "Kigoma",
+      "long_name": "Kigoma",
+      "square_kms": 45066.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 337,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_014",
+      "version": "2009",
+      "name": "Lindi",
+      "long_name": "Lindi",
+      "square_kms": 67000.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 338,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_002",
+      "version": "2009",
+      "name": "Dar es salaam",
+      "long_name": "Dar es salaam",
+      "square_kms": 1393.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 339,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_003",
+      "version": "2009",
+      "name": "Dodoma",
+      "long_name": "Dodoma",
+      "square_kms": 41311.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 340,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_028",
+      "version": "2009",
+      "name": "Tanga",
+      "long_name": "Tanga",
+      "square_kms": 27348.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 341,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_019",
+      "version": "2009",
+      "name": "Mtwara",
+      "long_name": "Mtwara",
+      "square_kms": 16707.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 342,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_021",
+      "version": "2009",
+      "name": "Njombe",
+      "long_name": "Njombe",
+      "square_kms": 21347.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 343,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_029",
+      "version": "2009",
+      "name": "Tabora",
+      "long_name": "Tabora",
+      "square_kms": 76151.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 344,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_011",
+      "version": "2009",
+      "name": "Kilimanjaro",
+      "long_name": "Kilimanjaro",
+      "square_kms": 13209.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 345,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_025",
+      "version": "2009",
+      "name": "Shinyanga",
+      "long_name": "Shinyanga",
+      "square_kms": 40781.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 346,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_016",
+      "version": "2009",
+      "name": "Mara",
+      "long_name": "Mara",
+      "square_kms": 31150.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 347,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_024",
+      "version": "2009",
+      "name": "Ruvuma",
+      "long_name": "Ruvuma",
+      "square_kms": 66477.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 348,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_020",
+      "version": "2009",
+      "name": "Mwanza",
+      "long_name": "Mwanza",
+      "square_kms": 35187.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 349,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_017",
+      "version": "2009",
+      "name": "Mbeya",
+      "long_name": "Mbeya",
+      "square_kms": 62420.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 350,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_001",
+      "version": "2009",
+      "name": "Arusha",
+      "long_name": "Arusha",
+      "square_kms": 34516.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 351,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_018",
+      "version": "2009",
+      "name": "Morogoro",
+      "long_name": "Morogoro",
+      "square_kms": 73139.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 352,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_009",
+      "version": "2009",
+      "name": "Katavi",
+      "long_name": "Katavi",
+      "square_kms": 45843.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 353,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_015",
+      "version": "2009",
+      "name": "Manyara",
+      "long_name": "Manyara",
+      "square_kms": 47913.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 354,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_012",
+      "version": "2009",
+      "name": "Kusini Pemba",
+      "long_name": "Kusini Pemba",
+      "square_kms": 332.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 355,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_008",
+      "version": "2009",
+      "name": "Kaskazini Unguja",
+      "long_name": "Kaskazini Unguja",
+      "square_kms": 470.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 356,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_013",
+      "version": "2009",
+      "name": "Kusini Unguja",
+      "long_name": "Kusini Unguja",
+      "square_kms": 854.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 357,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_030",
+      "version": "2009",
+      "name": "Mjini Magharibi",
+      "long_name": "Mjini Magharibi",
+      "square_kms": 230.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 358,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "TZ_1_007",
+      "version": "2009",
+      "name": "Kaskazini Pemba",
+      "long_name": "Kaskazini Pemba",
+      "square_kms": 574.0,
+      "parent_level": "country",
+      "parent_code": "TZ"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 359,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_001",
+      "version": "2009",
+      "name": "Abia",
+      "long_name": "Abia",
+      "square_kms": 6320.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 360,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_002",
+      "version": "2009",
+      "name": "Adamawa",
+      "long_name": "Adamawa",
+      "square_kms": 36917.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 361,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_003",
+      "version": "2009",
+      "name": "Akwa Ibom",
+      "long_name": "Akwa Ibom",
+      "square_kms": 7081.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 362,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_004",
+      "version": "2009",
+      "name": "Anambra",
+      "long_name": "Anambra",
+      "square_kms": 4844.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 363,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "NG_1_005",
+      "version": "2009",
+      "name": "Bauchi",
+      "long_name": "Bauchi",
+      "square_kms": 45837.0,
+      "parent_level": "country",
+      "parent_code": "NG"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 364,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_020",
+      "version": "2009",
+      "name": "Kirinyaga",
+      "long_name": "Kirinyaga",
+      "square_kms": 1205.4,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 365,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_021",
+      "version": "2009",
+      "name": "Muranga",
+      "long_name": "Muranga",
+      "square_kms": 2325.8,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 366,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_018",
+      "version": "2009",
+      "name": "Nyandarua",
+      "long_name": "Nyandarua",
+      "square_kms": 3107.7,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 367,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_019",
+      "version": "2009",
+      "name": "Nyeri",
+      "long_name": "Nyeri",
+      "square_kms": 2361.0,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 368,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_024",
+      "version": "2009",
+      "name": "West-Pokot",
+      "long_name": "West-Pokot",
+      "square_kms": 8418.2,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 369,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_025",
+      "version": "2009",
+      "name": "Samburu",
+      "long_name": "Samburu",
+      "square_kms": 20182.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 370,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_022",
+      "version": "2009",
+      "name": "Kiambu",
+      "long_name": "Kiambu",
+      "square_kms": 2449.2,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 371,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_023",
+      "version": "2009",
+      "name": "Turkana",
+      "long_name": "Turkana",
+      "square_kms": 71597.8,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 372,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_028",
+      "version": "2009",
+      "name": "Elgeyo-Marakwet",
+      "long_name": "Elgeyo-Marakwet",
+      "square_kms": 3049.7,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 373,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_029",
+      "version": "2009",
+      "name": "Nandi",
+      "long_name": "Nandi",
+      "square_kms": 2884.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 374,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_026",
+      "version": "2009",
+      "name": "Trans-Nzoia",
+      "long_name": "Trans-Nzoia",
+      "square_kms": 2469.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 375,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_027",
+      "version": "2009",
+      "name": "Uasin-Gishu",
+      "long_name": "Uasin-Gishu",
+      "square_kms": 2955.3,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 376,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_032",
+      "version": "2009",
+      "name": "Nakuru",
+      "long_name": "Nakuru",
+      "square_kms": 7509.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 377,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_033",
+      "version": "2009",
+      "name": "Narok",
+      "long_name": "Narok",
+      "square_kms": 17921.2,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 378,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_030",
+      "version": "2009",
+      "name": "Baringo",
+      "long_name": "Baringo",
+      "square_kms": 11075.3,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 379,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_031",
+      "version": "2009",
+      "name": "Laikipia",
+      "long_name": "Laikipia",
+      "square_kms": 8696.1,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 380,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_036",
+      "version": "2009",
+      "name": "Bomet",
+      "long_name": "Bomet",
+      "square_kms": 1997.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 381,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_037",
+      "version": "2009",
+      "name": "Kakamega",
+      "long_name": "Kakamega",
+      "square_kms": 3033.8,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 382,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_034",
+      "version": "2009",
+      "name": "Kajiado",
+      "long_name": "Kajiado",
+      "square_kms": 21292.7,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 383,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_035",
+      "version": "2009",
+      "name": "Kericho",
+      "long_name": "Kericho",
+      "square_kms": 2454.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 384,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_040",
+      "version": "2009",
+      "name": "Busia",
+      "long_name": "Busia",
+      "square_kms": 1628.4,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 385,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_041",
+      "version": "2009",
+      "name": "Siaya",
+      "long_name": "Siaya",
+      "square_kms": 2496.1,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 386,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_038",
+      "version": "2009",
+      "name": "Vihiga",
+      "long_name": "Vihiga",
+      "square_kms": 531.3,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 387,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_039",
+      "version": "2009",
+      "name": "Bungoma",
+      "long_name": "Bungoma",
+      "square_kms": 2206.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 388,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_044",
+      "version": "2009",
+      "name": "Migori",
+      "long_name": "Migori",
+      "square_kms": 2586.4,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 389,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_045",
+      "version": "2009",
+      "name": "Kisii",
+      "long_name": "Kisii",
+      "square_kms": 1317.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 390,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_042",
+      "version": "2009",
+      "name": "Kisumu",
+      "long_name": "Kisumu",
+      "square_kms": 2009.0,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 391,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_043",
+      "version": "2009",
+      "name": "Homa-Bay",
+      "long_name": "Homa-Bay",
+      "square_kms": 3154.7,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 392,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_046",
+      "version": "2009",
+      "name": "Nyamira",
+      "long_name": "Nyamira",
+      "square_kms": 912.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 393,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_047",
+      "version": "2009",
+      "name": "Nairobi",
+      "long_name": "Nairobi",
+      "square_kms": 694.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 394,
+    "fields": {
+      "geo_level": "country",
+      "geo_code": "KE",
+      "version": "2009",
+      "name": "Kenya",
+      "long_name": "Kenya",
+      "square_kms": 581309.0,
+      "parent_level": "continent",
+      "parent_code": "AFR"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 395,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_001",
+      "version": "2009",
+      "name": "Mombasa",
+      "long_name": "Mombasa",
+      "square_kms": 212.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 396,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_004",
+      "version": "2009",
+      "name": "Tana-River",
+      "long_name": "Tana-River",
+      "square_kms": 35375.8,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 397,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_005",
+      "version": "2009",
+      "name": "Lamu",
+      "long_name": "Lamu",
+      "square_kms": 6497.7,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 398,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_002",
+      "version": "2009",
+      "name": "Kwale",
+      "long_name": "Kwale",
+      "square_kms": 8270.3,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 399,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_003",
+      "version": "2009",
+      "name": "Kilifi",
+      "long_name": "Kilifi",
+      "square_kms": 12245.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 400,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_008",
+      "version": "2009",
+      "name": "Wajir",
+      "long_name": "Wajir",
+      "square_kms": 55840.6,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 401,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_009",
+      "version": "2009",
+      "name": "Mandera",
+      "long_name": "Mandera",
+      "square_kms": 25797.7,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 402,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_006",
+      "version": "2009",
+      "name": "Taita-Taveta",
+      "long_name": "Taita-Taveta",
+      "square_kms": 17083.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 403,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_007",
+      "version": "2009",
+      "name": "Garissa",
+      "long_name": "Garissa",
+      "square_kms": 45720.2,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 404,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_012",
+      "version": "2009",
+      "name": "Meru",
+      "long_name": "Meru",
+      "square_kms": 6930.1,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 405,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_013",
+      "version": "2009",
+      "name": "Tharaka-Nithi",
+      "long_name": "Tharaka-Nithi",
+      "square_kms": 2409.5,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 406,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_010",
+      "version": "2009",
+      "name": "Marsabit",
+      "long_name": "Marsabit",
+      "square_kms": 66923.1,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 407,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_011",
+      "version": "2009",
+      "name": "Isiolo",
+      "long_name": "Isiolo",
+      "square_kms": 25336.1,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 408,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_016",
+      "version": "2009",
+      "name": "Machakos",
+      "long_name": "Machakos",
+      "square_kms": 5952.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 409,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_017",
+      "version": "2009",
+      "name": "Makueni",
+      "long_name": "Makueni",
+      "square_kms": 8008.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 410,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_014",
+      "version": "2009",
+      "name": "Embu",
+      "long_name": "Embu",
+      "square_kms": 2555.9,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 411,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "KE_1_015",
+      "version": "2009",
+      "name": "Kitui",
+      "long_name": "Kitui",
+      "square_kms": 24385.1,
+      "parent_level": "country",
+      "parent_code": "KE"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 412,
+    "fields": {
+      "geo_level": "country",
+      "geo_code": "ET",
+      "version": "2009",
+      "name": "Ethiopia",
+      "long_name": "Ethiopia",
+      "square_kms": 1104000.0,
+      "parent_level": "continent",
+      "parent_code": "AFR"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 413,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_001",
+      "version": "2009",
+      "name": "Addis Ababa",
+      "long_name": "Addis Ababa",
+      "square_kms": 526.99,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 414,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_002",
+      "version": "2009",
+      "name": "Afar",
+      "long_name": "Afar",
+      "square_kms": 72052.78,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 415,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_003",
+      "version": "2009",
+      "name": "Amhara",
+      "long_name": "Amhara",
+      "square_kms": 154708.96,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 416,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_004",
+      "version": "2009",
+      "name": "Beneshangul Gumuz",
+      "long_name": "Beneshangul Gumuz",
+      "square_kms": 50698.68,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 417,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_005",
+      "version": "2009",
+      "name": "Dire Dawa",
+      "long_name": "Dire Dawa",
+      "square_kms": 1558.61,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 418,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_006",
+      "version": "2009",
+      "name": "Gambella",
+      "long_name": "Gambella",
+      "square_kms": 29782.82,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 419,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_007",
+      "version": "2009",
+      "name": "Harar",
+      "long_name": "Harar",
+      "square_kms": 333.94,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 420,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_008",
+      "version": "2009",
+      "name": "Oromiya",
+      "long_name": "Oromiya",
+      "square_kms": 284537.84,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 421,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_009",
+      "version": "2009",
+      "name": "SNNPR",
+      "long_name": "SNNPR",
+      "square_kms": 105476.0,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 422,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_010",
+      "version": "2009",
+      "name": "Somali",
+      "long_name": "Somali",
+      "square_kms": 279252.0,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 423,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ET_1_011",
+      "version": "2009",
+      "name": "Tigray",
+      "long_name": "Tigray",
+      "square_kms": 84722.0,
+      "parent_level": "country",
+      "parent_code": "ET"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 424,
+    "fields": {
+      "geo_level": "country",
+      "geo_code": "ZA",
+      "version": "2009",
+      "name": "South Africa",
+      "long_name": "South Africa",
+      "square_kms": 1221037.0,
+      "parent_level": "continent",
+      "parent_code": "AFR"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 425,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_001",
+      "version": "2009",
+      "name": "KwaZulu-Natal",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 94361.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 426,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_002",
+      "version": "2009",
+      "name": "Free State",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 129825.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 427,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_003",
+      "version": "2009",
+      "name": "Eastern Cape",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 168966.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 428,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_004",
+      "version": "2009",
+      "name": "Mpumalanga",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 76495.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 429,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_005",
+      "version": "2009",
+      "name": "Limpopo",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 125754.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 430,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_006",
+      "version": "2009",
+      "name": "Northern Cape",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 372889.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 431,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_007",
+      "version": "2009",
+      "name": "North West",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 104882.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 432,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_008",
+      "version": "2009",
+      "name": "Western Cape",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 129462.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.geography",
+    "pk": 433,
+    "fields": {
+      "geo_level": "level1",
+      "geo_code": "ZA_1_009",
+      "version": "2009",
+      "name": "Gauteng",
+      "long_name": "KwaZulu-Natal",
+      "square_kms": 18178.0,
+      "parent_level": "country",
+      "parent_code": "ZA"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 1,
+    "fields": {
+      "name": "Education"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 2,
+    "fields": {
+      "name": "WorldBank"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 3,
+    "fields": {
+      "name": "Health"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 4,
+    "fields": {
+      "name": "Census 2011"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 5,
+    "fields": {
+      "name": "Donor Assistance"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 6,
+    "fields": {
+      "name": "Census"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 7,
+    "fields": {
+      "name": "Security"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 8,
+    "fields": {
+      "name": "Elections"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 9,
+    "fields": {
+      "name": "Social Welfare"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 10,
+    "fields": {
+      "name": "Employment"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 11,
+    "fields": {
+      "name": "Government"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 12,
+    "fields": {
+      "name": "Crime"
+    }
+  },
+  {
+    "model": "wazimap.dataset",
+    "pk": 13,
+    "fields": {
+      "name": "Agriculture"
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 1,
+    "fields": {
+      "name": "Education",
+      "year": "2014",
+      "citation": null,
+      "dataset": 1
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 2,
+    "fields": {
+      "name": "WorldBank",
+      "year": "2017",
+      "citation": null,
+      "dataset": 2
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 3,
+    "fields": {
+      "name": "Health",
+      "year": "2014",
+      "citation": null,
+      "dataset": 3
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 4,
+    "fields": {
+      "name": "Census 2011",
+      "year": "2011",
+      "citation": null,
+      "dataset": 4
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 5,
+    "fields": {
+      "name": "Donor Assistance",
+      "year": "2014",
+      "citation": null,
+      "dataset": 5
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 6,
+    "fields": {
+      "name": "Census",
+      "year": "2013",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 7,
+    "fields": {
+      "name": "Census",
+      "year": "2012",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 8,
+    "fields": {
+      "name": "Security",
+      "year": "2014",
+      "citation": null,
+      "dataset": 7
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 9,
+    "fields": {
+      "name": "Elections",
+      "year": "2014",
+      "citation": null,
+      "dataset": 8
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 10,
+    "fields": {
+      "name": "Social Welfare",
+      "year": "2014",
+      "citation": null,
+      "dataset": 9
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 11,
+    "fields": {
+      "name": "Census",
+      "year": "2006",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 12,
+    "fields": {
+      "name": "Census",
+      "year": "2007",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 13,
+    "fields": {
+      "name": "Employment",
+      "year": "2014",
+      "citation": null,
+      "dataset": 10
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 14,
+    "fields": {
+      "name": "Government",
+      "year": "2014",
+      "citation": null,
+      "dataset": 11
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 15,
+    "fields": {
+      "name": "Crime",
+      "year": "2014",
+      "citation": null,
+      "dataset": 12
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 16,
+    "fields": {
+      "name": "Census",
+      "year": "2009",
+      "citation": null,
+      "dataset": 6
+    }
+  },
+  {
+    "model": "wazimap.release",
+    "pk": 17,
+    "fields": {
+      "name": "Agriculture",
+      "year": "2014",
+      "citation": null,
+      "dataset": 13
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 1,
+    "fields": {
+      "name": "school_attendance_sex"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 2,
+    "fields": {
+      "name": "foreign_direct_investment_net_inflows"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 3,
+    "fields": {
+      "name": "agricultural_land"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 4,
+    "fields": {
+      "name": "births_attended_by_skilled_health_staff"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 5,
+    "fields": {
+      "name": "tax_revenue"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 6,
+    "fields": {
+      "name": "adult_literacy_rate"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 7,
+    "fields": {
+      "name": "hiv_health_centers"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 8,
+    "fields": {
+      "name": "child_births_with_reported_birth_weights"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 9,
+    "fields": {
+      "name": "access_to_basic_services"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 10,
+    "fields": {
+      "name": "maternal_mortality"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 11,
+    "fields": {
+      "name": "child_births_by_size"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 12,
+    "fields": {
+      "name": "inpatient_diagnosis_under_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 13,
+    "fields": {
+      "name": "donor"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 14,
+    "fields": {
+      "name": "population_residence_2013"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 15,
+    "fields": {
+      "name": "population_residence_2012"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 16,
+    "fields": {
+      "name": "hiv_prevalence"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 17,
+    "fields": {
+      "name": "seized_firearms"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 18,
+    "fields": {
+      "name": "health_workers"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 19,
+    "fields": {
+      "name": "votes_per_candidate"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 20,
+    "fields": {
+      "name": "causes_of_death_over_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 21,
+    "fields": {
+      "name": "primary_education_completion_rate"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 22,
+    "fields": {
+      "name": "physicians_nurses_and_midwives"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 23,
+    "fields": {
+      "name": "poverty_age_residence"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 24,
+    "fields": {
+      "name": "gini_index"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 25,
+    "fields": {
+      "name": "prevalence_of_undernourishment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 26,
+    "fields": {
+      "name": "outpatient_diagnosis_over_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 27,
+    "fields": {
+      "name": "mobile_phone_subscriptions"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 28,
+    "fields": {
+      "name": "population_sex_2006"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 29,
+    "fields": {
+      "name": "population_sex_2007"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 30,
+    "fields": {
+      "name": "employment_activity_status_sex"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 31,
+    "fields": {
+      "name": "gdp_growth"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 32,
+    "fields": {
+      "name": "donor_funded_programmes"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 33,
+    "fields": {
+      "name": "inpatient_diagnosis_over_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 34,
+    "fields": {
+      "name": "incidence_of_malaria_per_1000_pop_at_risk"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 35,
+    "fields": {
+      "name": "child_births_with_low_birth_weights"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 36,
+    "fields": {
+      "name": "health_centers_ownership"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 37,
+    "fields": {
+      "name": "total_population"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 38,
+    "fields": {
+      "name": "government_funding"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 39,
+    "fields": {
+      "name": "nurses_and_midwives"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 40,
+    "fields": {
+      "name": "employment_to_population_ratio"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 41,
+    "fields": {
+      "name": "secondary_school_enrollment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 42,
+    "fields": {
+      "name": "crime"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 43,
+    "fields": {
+      "name": "primary_school_enrollment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 44,
+    "fields": {
+      "name": "officialemploymentstatus"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 45,
+    "fields": {
+      "name": "population_residence_2009"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 46,
+    "fields": {
+      "name": "gdp_per_capita"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 47,
+    "fields": {
+      "name": "valid_invalid_votes"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 48,
+    "fields": {
+      "name": "registered_accredited_voters"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 49,
+    "fields": {
+      "name": "gdp"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 50,
+    "fields": {
+      "name": "tax_as_percentage_of_gdp"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 51,
+    "fields": {
+      "name": "population_sex_2009"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 52,
+    "fields": {
+      "name": "highest_education_level_reached"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 53,
+    "fields": {
+      "name": "residence_poverty_type"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 54,
+    "fields": {
+      "name": "life_expectancy_at_birth"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 55,
+    "fields": {
+      "name": "food_production"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 56,
+    "fields": {
+      "name": "population_sex_2013"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 57,
+    "fields": {
+      "name": "population_sex_2012"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 58,
+    "fields": {
+      "name": "outpatient_diagnosis_under_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 59,
+    "fields": {
+      "name": "account_ownership"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 60,
+    "fields": {
+      "name": "causes_of_death_under_five"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 61,
+    "fields": {
+      "name": "cereal_yield_kg_per_hectare"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 62,
+    "fields": {
+      "name": "method_sex"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 63,
+    "fields": {
+      "name": "youth_unemployment"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 64,
+    "fields": {
+      "name": "child_births"
+    }
+  },
+  {
+    "model": "wazimap.dbtable",
+    "pk": 65,
+    "fields": {
+      "name": "gdp_per_capita_growth"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 1,
+    "fields": {
+      "name": "SCHOOL_ATTENDANCE_SEX",
+      "universe": "Population",
+      "dataset": 1,
+      "stat_type": "number",
+      "description": "Population by school_attendance, sex",
+      "fields": "[\"school_attendance\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 2,
+    "fields": {
+      "name": "FOREIGN_DIRECT_INVESTMENT_NET_INFLOWS",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by foreign_direct_investment_net_inflows_year",
+      "fields": "[\"foreign_direct_investment_net_inflows_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 3,
+    "fields": {
+      "name": "AGRICULTURAL_LAND",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by agricultural_land_year",
+      "fields": "[\"agricultural_land_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 4,
+    "fields": {
+      "name": "BIRTHS_ATTENDED_BY_SKILLED_HEALTH_STAFF",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by births_attended_by_skilled_health_staff_year",
+      "fields": "[\"births_attended_by_skilled_health_staff_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 5,
+    "fields": {
+      "name": "TAX_REVENUE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by tax_revenue_year",
+      "fields": "[\"tax_revenue_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 6,
+    "fields": {
+      "name": "ADULT_LITERACY_RATE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by adult_literacy_rate_year, sex",
+      "fields": "[\"adult_literacy_rate_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 7,
+    "fields": {
+      "name": "HIV_HEALTH_CENTERS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by centers",
+      "fields": "[\"centers\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 8,
+    "fields": {
+      "name": "CHILD_BIRTHS_WITH_REPORTED_BIRTH_WEIGHTS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by reported_birth_weights",
+      "fields": "[\"reported_birth_weights\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 9,
+    "fields": {
+      "name": "ACCESS_TO_BASIC_SERVICES",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by access_to_basic_services_year",
+      "fields": "[\"access_to_basic_services_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 10,
+    "fields": {
+      "name": "MATERNAL_MORTALITY",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by maternal_mortality_year",
+      "fields": "[\"maternal_mortality_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 11,
+    "fields": {
+      "name": "CHILD_BIRTHS_BY_SIZE",
+      "universe": "Population",
+      "dataset": 4,
+      "stat_type": "number",
+      "description": "Population by size",
+      "fields": "[\"size\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 12,
+    "fields": {
+      "name": "INPATIENT_DIAGNOSIS_UNDER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by inpatient_diagnosis_under_five",
+      "fields": "[\"inpatient_diagnosis_under_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 13,
+    "fields": {
+      "name": "DONOR",
+      "universe": "Population",
+      "dataset": 5,
+      "stat_type": "number",
+      "description": "Population by donor",
+      "fields": "[\"donor\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 14,
+    "fields": {
+      "name": "POPULATION_RESIDENCE_2013",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_residence_2013",
+      "fields": "[\"population_residence_2013\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 15,
+    "fields": {
+      "name": "POPULATION_RESIDENCE_2012",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_residence_2012",
+      "fields": "[\"population_residence_2012\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 16,
+    "fields": {
+      "name": "HIV_PREVALENCE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by hiv_prevalence_year, sex",
+      "fields": "[\"hiv_prevalence_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 17,
+    "fields": {
+      "name": "SEIZED_FIREARMS",
+      "universe": "Population",
+      "dataset": 7,
+      "stat_type": "number",
+      "description": "Population by year, type",
+      "fields": "[\"year\", \"type\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 18,
+    "fields": {
+      "name": "HEALTH_WORKERS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by workers",
+      "fields": "[\"workers\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 19,
+    "fields": {
+      "name": "VOTES_PER_CANDIDATE",
+      "universe": "Population",
+      "dataset": 8,
+      "stat_type": "number",
+      "description": "Population by candidate",
+      "fields": "[\"candidate\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 20,
+    "fields": {
+      "name": "CAUSES_OF_DEATH_OVER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by causes_of_death_over_five",
+      "fields": "[\"causes_of_death_over_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 21,
+    "fields": {
+      "name": "PRIMARY_EDUCATION_COMPLETION_RATE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by primary_education_completion_rate_year",
+      "fields": "[\"primary_education_completion_rate_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 22,
+    "fields": {
+      "name": "PHYSICIANS_NURSES_AND_MIDWIVES",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by physicians_nurses_and_midwives_year",
+      "fields": "[\"physicians_nurses_and_midwives_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 23,
+    "fields": {
+      "name": "POVERTY_AGE_RESIDENCE",
+      "universe": "Population",
+      "dataset": 9,
+      "stat_type": "number",
+      "description": "Population by residence, age",
+      "fields": "[\"residence\", \"age\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 24,
+    "fields": {
+      "name": "GINI_INDEX",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gini_index_year",
+      "fields": "[\"gini_index_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 25,
+    "fields": {
+      "name": "PREVALENCE_OF_UNDERNOURISHMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by prevalence_of_undernourishment_year",
+      "fields": "[\"prevalence_of_undernourishment_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 26,
+    "fields": {
+      "name": "OUTPATIENT_DIAGNOSIS_OVER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by outpatient_diagnosis_over_five",
+      "fields": "[\"outpatient_diagnosis_over_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 27,
+    "fields": {
+      "name": "MOBILE_PHONE_SUBSCRIPTIONS",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by mobile_phone_subscriptions_year",
+      "fields": "[\"mobile_phone_subscriptions_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 28,
+    "fields": {
+      "name": "POPULATION_SEX_2006",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2006",
+      "fields": "[\"population_sex_2006\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 29,
+    "fields": {
+      "name": "POPULATION_SEX_2007",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2007",
+      "fields": "[\"population_sex_2007\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 30,
+    "fields": {
+      "name": "EMPLOYMENT_ACTIVITY_STATUS_SEX",
+      "universe": "Population",
+      "dataset": 10,
+      "stat_type": "number",
+      "description": "Population by employment_activity_status, sex",
+      "fields": "[\"employment_activity_status\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 31,
+    "fields": {
+      "name": "GDP_GROWTH",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_growth_year",
+      "fields": "[\"gdp_growth_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 32,
+    "fields": {
+      "name": "DONOR_FUNDED_PROGRAMMES",
+      "universe": "Population",
+      "dataset": 5,
+      "stat_type": "number",
+      "description": "Population by programme, donor",
+      "fields": "[\"programme\", \"donor\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 33,
+    "fields": {
+      "name": "INPATIENT_DIAGNOSIS_OVER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by inpatient_diagnosis_over_five",
+      "fields": "[\"inpatient_diagnosis_over_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 34,
+    "fields": {
+      "name": "INCIDENCE_OF_MALARIA_PER_1000_POP_AT_RISK",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by incidence_of_malaria_per_1000_pop_at_risk_year",
+      "fields": "[\"incidence_of_malaria_per_1000_pop_at_risk_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 35,
+    "fields": {
+      "name": "CHILD_BIRTHS_WITH_LOW_BIRTH_WEIGHTS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by low_birth_weights",
+      "fields": "[\"low_birth_weights\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 36,
+    "fields": {
+      "name": "HEALTH_CENTERS_OWNERSHIP",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by organization_type",
+      "fields": "[\"organization_type\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 37,
+    "fields": {
+      "name": "TOTAL_POPULATION",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by total_population_year",
+      "fields": "[\"total_population_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 38,
+    "fields": {
+      "name": "GOVERNMENT_FUNDING",
+      "universe": "Population",
+      "dataset": 11,
+      "stat_type": "number",
+      "description": "Population by year, sector",
+      "fields": "[\"year\", \"sector\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 39,
+    "fields": {
+      "name": "NURSES_AND_MIDWIVES",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by nurses_and_midwives_year",
+      "fields": "[\"nurses_and_midwives_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 40,
+    "fields": {
+      "name": "EMPLOYMENT_TO_POPULATION_RATIO",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by employment_to_population_ratio_year, sex",
+      "fields": "[\"employment_to_population_ratio_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 41,
+    "fields": {
+      "name": "SECONDARY_SCHOOL_ENROLLMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by secondary_school_enrollment_year, sex",
+      "fields": "[\"secondary_school_enrollment_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 42,
+    "fields": {
+      "name": "CRIME",
+      "universe": "Crimes",
+      "dataset": 12,
+      "stat_type": "number",
+      "description": "Crimes by crime",
+      "fields": "[\"crime\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 43,
+    "fields": {
+      "name": "PRIMARY_SCHOOL_ENROLLMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by primary_school_enrollment_year, sex",
+      "fields": "[\"primary_school_enrollment_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 44,
+    "fields": {
+      "name": "OFFICIALEMPLOYMENTSTATUS",
+      "universe": "Individuals 15 and older",
+      "dataset": 10,
+      "stat_type": "number",
+      "description": "Individuals 15 and older by official employment status",
+      "fields": "[\"official employment status\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 45,
+    "fields": {
+      "name": "POPULATION_RESIDENCE_2009",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_residence_2009",
+      "fields": "[\"population_residence_2009\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 46,
+    "fields": {
+      "name": "GDP_PER_CAPITA",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_per_capita_year",
+      "fields": "[\"gdp_per_capita_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 47,
+    "fields": {
+      "name": "VALID_INVALID_VOTES",
+      "universe": "Population",
+      "dataset": 8,
+      "stat_type": "number",
+      "description": "Population by votes",
+      "fields": "[\"votes\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 48,
+    "fields": {
+      "name": "REGISTERED_ACCREDITED_VOTERS",
+      "universe": "Population",
+      "dataset": 8,
+      "stat_type": "number",
+      "description": "Population by voters",
+      "fields": "[\"voters\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 49,
+    "fields": {
+      "name": "GDP",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_year",
+      "fields": "[\"gdp_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 50,
+    "fields": {
+      "name": "TAX_AS_PERCENTAGE_OF_GDP",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by tax_as_percentage_of_gdp_year",
+      "fields": "[\"tax_as_percentage_of_gdp_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 51,
+    "fields": {
+      "name": "POPULATION_SEX_2009",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2009",
+      "fields": "[\"population_sex_2009\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 52,
+    "fields": {
+      "name": "HIGHEST_EDUCATION_LEVEL_REACHED",
+      "universe": "Population",
+      "dataset": 1,
+      "stat_type": "number",
+      "description": "Population by highest_education_level_reached",
+      "fields": "[\"highest_education_level_reached\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 53,
+    "fields": {
+      "name": "RESIDENCE_POVERTY_TYPE",
+      "universe": "Population",
+      "dataset": 9,
+      "stat_type": "number",
+      "description": "Population by residence, poverty_type",
+      "fields": "[\"residence\", \"poverty_type\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 54,
+    "fields": {
+      "name": "LIFE_EXPECTANCY_AT_BIRTH",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by life_expectancy_at_birth_year, sex",
+      "fields": "[\"life_expectancy_at_birth_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 55,
+    "fields": {
+      "name": "FOOD_PRODUCTION",
+      "universe": "Population",
+      "dataset": 13,
+      "stat_type": "number",
+      "description": "Population by crops",
+      "fields": "[\"crops\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Float"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 56,
+    "fields": {
+      "name": "POPULATION_SEX_2013",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2013",
+      "fields": "[\"population_sex_2013\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 57,
+    "fields": {
+      "name": "POPULATION_SEX_2012",
+      "universe": "Population",
+      "dataset": 6,
+      "stat_type": "number",
+      "description": "Population by population_sex_2012",
+      "fields": "[\"population_sex_2012\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 58,
+    "fields": {
+      "name": "OUTPATIENT_DIAGNOSIS_UNDER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by outpatient_diagnosis_under_five",
+      "fields": "[\"outpatient_diagnosis_under_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 59,
+    "fields": {
+      "name": "ACCOUNT_OWNERSHIP",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by sex, account_ownership_year",
+      "fields": "[\"sex\", \"account_ownership_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 60,
+    "fields": {
+      "name": "CAUSES_OF_DEATH_UNDER_FIVE",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by causes_of_death_under_five",
+      "fields": "[\"causes_of_death_under_five\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 61,
+    "fields": {
+      "name": "CEREAL_YIELD_KG_PER_HECTARE",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by cereal_yield_kg_per_hectare_year",
+      "fields": "[\"cereal_yield_kg_per_hectare_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 62,
+    "fields": {
+      "name": "METHOD_SEX",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by method, sex",
+      "fields": "[\"method\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 63,
+    "fields": {
+      "name": "YOUTH_UNEMPLOYMENT",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by youth_unemployment_year, sex",
+      "fields": "[\"youth_unemployment_year\", \"sex\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 64,
+    "fields": {
+      "name": "CHILD_BIRTHS",
+      "universe": "Population",
+      "dataset": 3,
+      "stat_type": "number",
+      "description": "Population by child_births",
+      "fields": "[\"child_births\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtable",
+    "pk": 65,
+    "fields": {
+      "name": "GDP_PER_CAPITA_GROWTH",
+      "universe": "Population",
+      "dataset": 2,
+      "stat_type": "number",
+      "description": "Population by gdp_per_capita_growth_year",
+      "fields": "[\"gdp_per_capita_growth_year\"]",
+      "denominator_key": null,
+      "has_total": true,
+      "value_type": "Integer"
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 1,
+    "fields": {
+      "data_table": 1,
+      "db_table": 1,
+      "release": 1
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 2,
+    "fields": {
+      "data_table": 2,
+      "db_table": 2,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 3,
+    "fields": {
+      "data_table": 3,
+      "db_table": 3,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 4,
+    "fields": {
+      "data_table": 4,
+      "db_table": 4,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 5,
+    "fields": {
+      "data_table": 5,
+      "db_table": 5,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 6,
+    "fields": {
+      "data_table": 6,
+      "db_table": 6,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 7,
+    "fields": {
+      "data_table": 7,
+      "db_table": 7,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 8,
+    "fields": {
+      "data_table": 8,
+      "db_table": 8,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 9,
+    "fields": {
+      "data_table": 9,
+      "db_table": 9,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 10,
+    "fields": {
+      "data_table": 10,
+      "db_table": 10,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 11,
+    "fields": {
+      "data_table": 11,
+      "db_table": 11,
+      "release": 4
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 12,
+    "fields": {
+      "data_table": 12,
+      "db_table": 12,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 13,
+    "fields": {
+      "data_table": 13,
+      "db_table": 13,
+      "release": 5
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 14,
+    "fields": {
+      "data_table": 14,
+      "db_table": 14,
+      "release": 6
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 15,
+    "fields": {
+      "data_table": 15,
+      "db_table": 15,
+      "release": 7
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 16,
+    "fields": {
+      "data_table": 16,
+      "db_table": 16,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 17,
+    "fields": {
+      "data_table": 17,
+      "db_table": 17,
+      "release": 8
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 18,
+    "fields": {
+      "data_table": 18,
+      "db_table": 18,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 19,
+    "fields": {
+      "data_table": 19,
+      "db_table": 19,
+      "release": 9
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 20,
+    "fields": {
+      "data_table": 20,
+      "db_table": 20,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 21,
+    "fields": {
+      "data_table": 21,
+      "db_table": 21,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 22,
+    "fields": {
+      "data_table": 22,
+      "db_table": 22,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 23,
+    "fields": {
+      "data_table": 23,
+      "db_table": 23,
+      "release": 10
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 24,
+    "fields": {
+      "data_table": 24,
+      "db_table": 24,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 25,
+    "fields": {
+      "data_table": 25,
+      "db_table": 25,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 26,
+    "fields": {
+      "data_table": 26,
+      "db_table": 26,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 27,
+    "fields": {
+      "data_table": 27,
+      "db_table": 27,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 28,
+    "fields": {
+      "data_table": 28,
+      "db_table": 28,
+      "release": 11
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 29,
+    "fields": {
+      "data_table": 29,
+      "db_table": 29,
+      "release": 12
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 30,
+    "fields": {
+      "data_table": 30,
+      "db_table": 30,
+      "release": 13
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 31,
+    "fields": {
+      "data_table": 31,
+      "db_table": 31,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 32,
+    "fields": {
+      "data_table": 32,
+      "db_table": 32,
+      "release": 5
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 33,
+    "fields": {
+      "data_table": 33,
+      "db_table": 33,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 34,
+    "fields": {
+      "data_table": 34,
+      "db_table": 34,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 35,
+    "fields": {
+      "data_table": 35,
+      "db_table": 35,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 36,
+    "fields": {
+      "data_table": 36,
+      "db_table": 36,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 37,
+    "fields": {
+      "data_table": 37,
+      "db_table": 37,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 38,
+    "fields": {
+      "data_table": 38,
+      "db_table": 38,
+      "release": 14
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 39,
+    "fields": {
+      "data_table": 39,
+      "db_table": 39,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 40,
+    "fields": {
+      "data_table": 40,
+      "db_table": 40,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 41,
+    "fields": {
+      "data_table": 41,
+      "db_table": 41,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 42,
+    "fields": {
+      "data_table": 42,
+      "db_table": 42,
+      "release": 15
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 43,
+    "fields": {
+      "data_table": 43,
+      "db_table": 43,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 44,
+    "fields": {
+      "data_table": 44,
+      "db_table": 44,
+      "release": 13
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 45,
+    "fields": {
+      "data_table": 45,
+      "db_table": 45,
+      "release": 11
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 46,
+    "fields": {
+      "data_table": 46,
+      "db_table": 46,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 47,
+    "fields": {
+      "data_table": 47,
+      "db_table": 47,
+      "release": 9
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 48,
+    "fields": {
+      "data_table": 48,
+      "db_table": 48,
+      "release": 9
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 49,
+    "fields": {
+      "data_table": 49,
+      "db_table": 49,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 50,
+    "fields": {
+      "data_table": 50,
+      "db_table": 50,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 51,
+    "fields": {
+      "data_table": 51,
+      "db_table": 51,
+      "release": 16
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 52,
+    "fields": {
+      "data_table": 52,
+      "db_table": 52,
+      "release": 1
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 53,
+    "fields": {
+      "data_table": 53,
+      "db_table": 53,
+      "release": 10
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 54,
+    "fields": {
+      "data_table": 54,
+      "db_table": 54,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 55,
+    "fields": {
+      "data_table": 55,
+      "db_table": 55,
+      "release": 17
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 56,
+    "fields": {
+      "data_table": 56,
+      "db_table": 56,
+      "release": 6
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 57,
+    "fields": {
+      "data_table": 57,
+      "db_table": 57,
+      "release": 7
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 58,
+    "fields": {
+      "data_table": 58,
+      "db_table": 58,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 59,
+    "fields": {
+      "data_table": 59,
+      "db_table": 59,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 60,
+    "fields": {
+      "data_table": 60,
+      "db_table": 60,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 61,
+    "fields": {
+      "data_table": 61,
+      "db_table": 61,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 62,
+    "fields": {
+      "data_table": 62,
+      "db_table": 62,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 63,
+    "fields": {
+      "data_table": 63,
+      "db_table": 63,
+      "release": 2
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 64,
+    "fields": {
+      "data_table": 64,
+      "db_table": 64,
+      "release": 3
+    }
+  },
+  {
+    "model": "wazimap.fieldtablerelease",
+    "pk": 65,
+    "fields": {
+      "data_table": 65,
+      "db_table": 65,
+      "release": 2
+    }
+  }
+]

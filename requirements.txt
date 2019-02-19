@@ -5,6 +5,7 @@ git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
 
 Markdown==2.6.11
+django-meta==1.4.1
 django-debug-toolbar==1.9.1
 elasticsearch==5.5.3
 elasticsearch-dsl==5.4.0
@@ -13,7 +14,8 @@ gevent==1.3.7
 greenlet==0.4.15
 requests-aws4auth==0.9
 psycopg2-binary==2.7.5
+wagtail>=1.13.1,<1.14
+django-allauth==0.37.1
 
-# Workaround for dependency links
-# Comment out when changes / updates / PR accepted
-git+https://github.com/CodeForAfricaLabs/wazimap.git@0.0.1#egg=wazimap
+git+https://github.com/OpenUpSA/wazimap.git@releases#egg=wazimap
+

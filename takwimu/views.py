@@ -3,24 +3,32 @@ from operator import itemgetter
 import json
 import string
 
-from django.conf import settings
+from django.core.serializers.json import DjangoJSONEncoder
+from django.utils.safestring import SafeString
+from django.utils.module_loading import import_string
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.utils.text import slugify
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView
 
 import requests
 from wazimap.views import GeographyDetailView
+from wazimap.geo import geo_data, LocationNotFound
+from wazimap.data.utils import dataset_context
+from wazimap.profiles import enhance_api_data
 
-from takwimu.forms import SupportServicesContactForm
 from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
     ProfileSectionPage, ProfilePage
 from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
+from data.utils import get_page_releases_per_country, \
+    get_primary_release_year_per_geography
 from wagtail.contrib.settings.context_processors import settings
 from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
+
+from django.conf import settings as takwimu_settings
 
 
 class HomePageView(TemplateView):
@@ -178,20 +186,17 @@ def handler500(request):
     return response
 
 
-class SupportServicesIndexView(FormView):
+class SupportServicesIndexView(TemplateView):
     """
     Support Services View
     --------------------
     View of support services page.
     """
     template_name = 'takwimu/about/support_services.html'
-    form_class = SupportServicesContactForm
-    success_url = '/'
 
     def get_context_data(self, **kwargs):
         context = super(SupportServicesIndexView, self).get_context_data(
             **kwargs)
-        context['ticket_success'] = False
 
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
@@ -199,57 +204,6 @@ class SupportServicesIndexView(FormView):
         context.update(takwimu_topics(self.request))
 
         return context
-
-    def form_valid(self, form):
-        email = form.cleaned_data['email']
-        name = form.cleaned_data['name']
-        location = form.cleaned_data['location']
-        role = form.cleaned_data['role']
-        help_wanted = form.cleaned_data['help']
-        print '\n\n\n\n\n\n\n\n'
-        data = {
-            'request': {
-                'requester': {
-                    "name": name,
-                    "email": email
-                },
-                'subject': 'Enquiry: {} a(n) {} from {} asks'.format(name, role,
-                                                                     location),
-                'comment': {
-                    'body': help_wanted
-                }
-            }
-        }
-
-        headers = {'content-type': 'application/json'}
-
-        user = email + '/token'
-        api_token = settings.ZENDESK_API_TOKEN
-
-        request = requests.post(
-            settings.ZENDESK_API,
-            data=json.dumps(data),
-            auth=(user, api_token),
-            headers=headers
-        )
-
-        print '\n\n\n\n\n\n\n\n'
-        print request.status_code
-        print request.json()
-
-        if request.status_code != 201:
-            # add non field error
-            form.add_error(None,
-                           'Could not open a ticket at the moment. Please try again later')
-            return super(SupportServicesIndexView, self).form_invalid(form)
-
-        context = self.get_context_data(form=form)
-        # hide form and show the success dialog
-        context['ticket_success'] = True
-        return self.render_to_response(context)
-
-    def form_invalid(self, form):
-        return super(SupportServicesIndexView, self).form_invalid(form)
 
 
 class SearchView(TemplateView):
@@ -382,17 +336,48 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
 
-    def get_context_data(self, **kwargs):
+
+    def get_context_data(self, *args, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
 
-        context = super(IndicatorsGeographyDetailView, self).get_context_data(
-            **kwargs)
-        context['sdgs'] = data
+        page_context = {}
 
-        context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
+        # load the profile
+        profile_method = takwimu_settings.HURUMAP.get('profile_builder', None)
+        self.profile_name = takwimu_settings.HURUMAP.get('default_profile', 'default')
 
-        return context
+        if not profile_method:
+            raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
+        profile_method = import_string(profile_method)
+
+        year = self.request.GET.get('release', get_primary_release_year_per_geography(self.geo))
+        # if takwimu_settings.HURUMAP['latest_release_year'] == year:
+        #     year = 'latest'
+
+        with dataset_context(year=year):
+            profile_data = profile_method(self.geo, self.profile_name, self.request)
+
+        profile_data['geography'] = self.geo.as_dict_deep()
+        profile_data['primary_releases'] = get_page_releases_per_country(
+            takwimu_settings.HURUMAP['primary_dataset_name'], self.geo, year)
+
+        profile_data = enhance_api_data(profile_data)
+        page_context.update(profile_data)
+
+        profile_data_json = SafeString(json.dumps(profile_data, cls=DjangoJSONEncoder))
+
+        page_context.update({
+            'profile_data_json': profile_data_json
+        })
+
+        # is this a head-to-head view?
+        page_context['head2head'] = 'h2h' in self.request.GET
+
+        page_context['sdgs'] = data
+        page_context.update(settings(self.request))
+        page_context.update(takwimu_countries(self.request))
+        page_context.update(takwimu_stories(self.request))
+        page_context.update(takwimu_topics(self.request))
+
+        return page_context

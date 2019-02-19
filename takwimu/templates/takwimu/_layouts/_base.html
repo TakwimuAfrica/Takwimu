@@ -1,4 +1,4 @@
-{% load staticfiles sass_tags %}
+{% load staticfiles sass_tags meta %}
 
 <!doctype html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -6,12 +6,14 @@
 <!--[if IE 8]>         <html lang="en" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
 
-<head>
+<head {% meta_namespaces %}>
   <meta charset="utf-8">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   <title>{% block head_title %}{{ HURUMAP.name }}{% endblock %}</title>
   <meta name="description" content="{% block head_meta_description %}{% endblock %}">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  {% include 'meta/meta.html' %}
 
   {% block favicon %}
     <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicons/apple-touch-icon.png' %}">
@@ -59,10 +61,6 @@
   <script src="{% static 'js/svg.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js"></script>
   <script defer data-search-pseudo-elements  src="https://use.fontawesome.com/releases/v5.3.1/js/all.js" integrity="sha384-kW+oWsYx3YpxvjtZjFXqazFpA7UP/MbiY4jvs+RWZo2+N94PFZ36T6TFkc9O3qoB" crossorigin="anonymous"></script>
-
-  <!-- Start of takwimu Zendesk Widget script -->
-  <!-- <script>/*<![CDATA[*/window.zE||(function(e,t,s){var n=window.zE=window.zEmbed=function(){n._.push(arguments)}, a=n.s=e.createElement(t),r=e.getElementsByTagName(t)[0];n.set=function(e){ n.set._.push(e)},n._=[],n.set._=[],a.async=true,a.setAttribute("charset","utf-8"), a.src="https://static.zdassets.com/ekr/asset_composer.js?key="+s, n.t=+new Date,a.type="text/javascript",r.parentNode.insertBefore(a,r)})(document,"script","db3ec064-4699-489e-a829-d337d290b7e7");/*]]>*/</script> -->
-  <!-- End of takwimu Zendesk Widget script -->
 
   <!-- Google Analytics -->
   <script>

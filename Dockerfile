@@ -1,4 +1,4 @@
-FROM codeforafrica/hurumap-dashboard:0.0.12
+FROM codeforafrica/hurumap-dashboard:0.2.2
 
 # Set env variables used in this Dockerfile
 # HURUmap App and Django settings
@@ -20,4 +20,3 @@ WORKDIR $APP_SRVPROJ
 # Install app dependencies
 COPY ./requirements.txt /
 RUN pip install -q -r /requirements.txt
-

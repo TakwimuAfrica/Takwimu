@@ -2,22 +2,19 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.6.2
--- Dumped by pg_dump version 9.6.2
+-- Dumped from database version 10.5
+-- Dumped by pg_dump version 10.5
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
+SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-SET search_path = public, pg_catalog;
-
 ALTER TABLE IF EXISTS ONLY public.officialemploymentstatus DROP CONSTRAINT IF EXISTS pk_officialemploymentstatus;
 DROP TABLE IF EXISTS public.officialemploymentstatus;
-SET search_path = public, pg_catalog;
-
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -26,7 +23,7 @@ SET default_with_oids = false;
 -- Name: officialemploymentstatus; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE officialemploymentstatus (
+CREATE TABLE public.officialemploymentstatus (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     "official employment status" character varying(128) NOT NULL,
@@ -39,7 +36,7 @@ CREATE TABLE officialemploymentstatus (
 -- Data for Name: officialemploymentstatus; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY officialemploymentstatus (geo_level, geo_code, "official employment status", total, geo_version) FROM stdin;
+COPY public.officialemploymentstatus (geo_level, geo_code, "official employment status", total, geo_version) FROM stdin;
 province	EC	Employed	1028964	2009
 province	EC	Unemployed	615849	2009
 province	EC	Discouraged work-seeker	306376	2009
@@ -97,10 +94,11 @@ country	ZA	Not applicable	17866080	2009
 -- Name: officialemploymentstatus pk_officialemploymentstatus; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY officialemploymentstatus
+ALTER TABLE ONLY public.officialemploymentstatus
     ADD CONSTRAINT pk_officialemploymentstatus PRIMARY KEY (geo_level, geo_code, geo_version, "official employment status");
 
 
 --
 -- PostgreSQL database dump complete
 --
+

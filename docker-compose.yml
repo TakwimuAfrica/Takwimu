@@ -39,7 +39,7 @@ services:
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
       - PYTHONDONTWRITEBYTECODE="True"
-  
+
   # Test production configuration
   test-prod:
     build: .

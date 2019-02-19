@@ -8,7 +8,8 @@ from django import forms
 from django.utils.text import slugify
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, \
-    PageChooserPanel, InlinePanel
+    PageChooserPanel, InlinePanel, MultiFieldPanel
+from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
 
 from wagtail.wagtailcore import blocks
 from wagtail.wagtailembeds.blocks import EmbedBlock
@@ -22,6 +23,9 @@ from wagtail.wagtailimages.blocks import ImageChooserBlock
 from wagtail.wagtailcore.fields import StreamField, RichTextField
 from wagtail.wagtailcore.models import Orderable, Page
 from wagtail.wagtailsearch import index
+
+from meta.models import ModelMeta
+
 from modelcluster.fields import ParentalKey
 
 from wazimap.models import Geography
@@ -333,7 +337,15 @@ class TopicBlock(blocks.StructBlock):
         icon = 'form'
 
 
-class ProfileSectionPage(Page):
+TWITTER_CARD = (
+    ('summary', 'Summary'),
+    ('summary_large_image', 'Summary with image'),
+    ('player', 'Media player'),
+    ('app', 'Link to download app'),
+)
+
+
+class ProfileSectionPage(ModelMeta, Page):
     '''
     Profile Section Page
     -------------------
@@ -345,6 +357,27 @@ class ProfileSectionPage(Page):
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
+
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
 
     # Search index configuration
 
@@ -360,10 +393,27 @@ class ProfileSectionPage(Page):
         StreamFieldPanel('body'),
     ]
 
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
+    ]
+
     # Parent page / subpage type rules
 
     parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
+
+    def get_context(self, request):
+        context = super(ProfileSectionPage, self).get_context(request)
+
+        context['meta'] = self.as_meta(request)
+        return context
+
+    def get_promotion_image(self):
+        if self.promotion_image:
+            return self.promotion_image.file.url
 
 
 # The abstract model for topics, complete with panels
@@ -385,7 +435,7 @@ class ProfilePageSections(Orderable, ProfilePageSection):
     profile_page = ParentalKey('takwimu.ProfilePage', related_name='sections')
 
 
-class ProfilePage(Page):
+class ProfilePage(ModelMeta, Page):
     '''
     Profile Page
     -----------
@@ -406,6 +456,27 @@ class ProfilePage(Page):
         ('topic', TopicBlock())
     ], blank=True)
 
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
+
     # Search index configuration
 
     search_fields = Page.search_fields + [
@@ -422,12 +493,29 @@ class ProfilePage(Page):
         InlinePanel('sections', label="Sections"),
     ]
 
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
+    ]
+
     # Parent page / subpage type rules
 
     subpage_types = ['takwimu.ProfileSectionPage']
 
     def get_absolute_url(self):
         return self.full_url
+
+    def get_context(self, request):
+        context = super(ProfilePage, self).get_context(request)
+
+        context['meta'] = self.as_meta(request)
+        return context
+
+    def get_promotion_image(self):
+        if self.promotion_image:
+            return self.promotion_image.file.url
 
 
 class AboutPage(Page):
@@ -529,6 +617,8 @@ class FAQ(index.Indexed, models.Model):
 class SupportSetting(BaseSetting):
     hello = models.EmailField(blank=True, null=True,
                               help_text='TAKWIMU main email address')
+    support = models.EmailField(blank=True, null=True,
+                                help_text='TAKWIMU support email address')
     zendesk = models.URLField(blank=True, null=True,
                               help_text='TAKWIMU Zendesk account URL')
     community = models.URLField(blank=True, null=True,
