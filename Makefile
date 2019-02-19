@@ -16,8 +16,20 @@ compilescss:
 update_index:
 	$(COMPOSE) exec web python manage.py update_topics_index
 
+migrate:
+	$(COMPOSE) exec web python manage.py migrate
+
+createdb:
+	$(COMPOSE) exec db createdb takwimu
+
+dropdb:
+	$(COMPOSE) exec db dropdb takwimu
+
 makemigrations:
 	$(COMPOSE) exec web python manage.py makemigrations
+
+loaddata:
+	$(COMPOSE) exec -T web ./contrib/loaddata.sh  # Load the DB with data
 
 
 test:

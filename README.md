@@ -46,6 +46,7 @@ git clone https://github.com/TakwimuAfrica/TAKWIMU.git
 cd TAKWIMU
 make build
 make web
+make loaddata
 ```
 
 Optionally you can also enable Redis as cache backend in your development environment by doing the following:
