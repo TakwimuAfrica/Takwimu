@@ -2,12 +2,13 @@
 
 createdb takwimu
 
-python manage.py migrate --noinput        # Apply database migrations
-cat takwimu/sql/*.sql | psql              # Upload tables / data
-python manage.py compilescss              # Compile SCSS (offline)
-python manage.py collectstatic --noinput  # Collect static files
-python manage.py update_topics_index      # Update topics index
-python manage.py createcachetable         # Create CACHE table
+python manage.py migrate --noinput                                         # Apply database migrations
+python manage.py loaddata takwimu/fixtures/takwimu_wazimap_fixtures.json   # Load releases and datasets
+cat takwimu/sql/*.sql | psql                                               # Upload tables / data
+python manage.py compilescss                                               # Compile SCSS (offline)
+python manage.py collectstatic --noinput                                   # Collect static files
+python manage.py update_topics_index                                       # Update topics index
+python manage.py createcachetable                                          # Create CACHE table
 
 # Prepare log files and start outputting logs to stdout
 touch /srv/logs/gunicorn.log

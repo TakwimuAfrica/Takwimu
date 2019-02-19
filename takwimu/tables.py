@@ -1,59 +1,70 @@
 from wazimap.data.tables import FieldTable
 
-FieldTable(['Population_Sex'])
-FieldTable(['Population_Residence'])
-FieldTable(['candidate'], id="votes_per_candidate")
-FieldTable(['votes'], id="valid_invalid_votes")
-FieldTable(['voters'], id="registered_accredited_voters")
-FieldTable(['crops'], id='food_production', value_type='Float')
-FieldTable(['centers'], id="health_centers")
-FieldTable(['centers'], id="hiv_health_centers")
-FieldTable(['organization_type'], id="health_centers_ownership")
-FieldTable(['workers'], id="health_workers")
-FieldTable(['causes_of_death_over_five'])
-FieldTable(['causes_of_death_under_five'])
-FieldTable(['inpatient_diagnosis_over_five'])
-FieldTable(['inpatient_diagnosis_under_five'])
-FieldTable(['outpatient_diagnosis_over_five'])
-FieldTable(['outpatient_diagnosis_under_five'])
-FieldTable(['child_births'])
+
+FieldTable(['population_sex_2006'], id='population_sex_2006', year='2006', dataset='Census')
+FieldTable(['population_sex_2007'], id='population_sex_2007', year='2007', dataset='Census')
+FieldTable(['population_sex_2009'], id='population_sex_2009', year='2009', dataset='Census')
+FieldTable(['population_sex_2012'], id='population_sex_2012', year='2012', dataset='Census')
+FieldTable(['population_sex_2013'], id='population_sex_2013', year='2013', dataset='Census')
+
+FieldTable(['population_residence_2009'], id='population_residence_2009', year='2006', dataset='Census')
+FieldTable(['population_residence_2012'], id='population_residence_2012', year='2012', dataset='Census')
+FieldTable(['population_residence_2013'], id='population_residence_2013', year='2013', dataset='Census')
+
+
+FieldTable(['candidate'], id="votes_per_candidate", dataset='Elections', year='2014')
+FieldTable(['votes'], id="valid_invalid_votes", dataset='Elections', year='2014')
+FieldTable(['voters'], id="registered_accredited_voters", dataset='Elections', year='2014')
+FieldTable(['crops'], id='food_production', value_type='Float', dataset='Agriculture', year='2014')
+FieldTable(['centers'], id="health_centers", dataset='Health', year='2014')
+FieldTable(['centers'], id="hiv_health_centers", dataset='Health', year='2014')
+FieldTable(['organization_type'], id="health_centers_ownership", dataset='Health', year='2014')
+FieldTable(['workers'], id="health_workers", dataset='Health', year='2014')
+FieldTable(['causes_of_death_over_five'], dataset='Health', year='2014')
+FieldTable(['causes_of_death_under_five'], dataset='Health', year='2014')
+FieldTable(['inpatient_diagnosis_over_five'], dataset='Health', year='2014')
+FieldTable(['inpatient_diagnosis_under_five'], dataset='Health', year='2014')
+FieldTable(['outpatient_diagnosis_over_five'], dataset='Health', year='2014')
+FieldTable(['outpatient_diagnosis_under_five'], dataset='Health', year='2014')
+FieldTable(['child_births'], dataset='Health', year='2014')
 FieldTable(['size'], id="child_births_by_size")
-FieldTable(['reported_birth_weights'],
+FieldTable(['reported_birth_weights'], dataset='Health', year='2014',
            id="child_births_with_reported_birth_weights")
-FieldTable(['low_birth_weights'], id="child_births_with_low_birth_weights")
+FieldTable(['low_birth_weights'], id="child_births_with_low_birth_weights", dataset='Health', year='2014')
 FieldTable(
     ['employment_activity_status', 'sex'],
-    id='employment_activity_status_sex'
+    id='employment_activity_status_sex', dataset='Employment', year='2014'
 )
 FieldTable(
     ['highest_education_level_reached'],
-    id='highest_education_level_reached'
+    id='highest_education_level_reached', dataset='Education', year='2014'
 )
-FieldTable(['method', 'sex'], id="method_sex")
+FieldTable(['method', 'sex'], id="method_sex", year='2014', dataset='Health')
 
 FieldTable(
     ['school_attendance', 'sex'],
-    id='school_attendance_sex'
+    id='school_attendance_sex',
+    dataset='Education', year='2014'
 )
 
-FieldTable(['donor'], id='donor')
+FieldTable(['donor'], id='donor', dataset='Donor Assistance', year='2014')
 
-FieldTable(['residence', 'poverty_type'], id='residence_poverty_type')
+FieldTable(['residence', 'poverty_type'], id='residence_poverty_type', dataset='Social Welfare', year='2014')
 
-FieldTable(['residence', 'age'], id='poverty_age_residence')
+FieldTable(['residence', 'age'], id='poverty_age_residence', dataset='Social Welfare', year='2014')
 
-FieldTable(['age'], id='fgm_prevalence')
+FieldTable(['year', 'type'], id='seized_firearms', dataset='Security', year='2014')
 
-FieldTable(['year', 'type'], id='seized_firearms')
+FieldTable(['programme', 'donor'], id='donor_funded_programmes', dataset='Donor Assistance', year='2014')
 
-FieldTable(['programme', 'donor'], id='donor_funded_programmes')
+FieldTable(['year', 'sector'], id='government_funding', dataset='Government', year='2014')
 
-FieldTable(['year', 'sector'], id='government_funding')
-
-FieldTable(['crime'], universe='Crimes', dataset='Police Crime Statistics 2014',
+FieldTable(['crime'], universe='Crimes', dataset='Crime',
            year='2014')
 
-FieldTable(['official employment status'], universe='Individuals 15 and older')
+FieldTable(['official employment status'], universe='Individuals 15 and older', dataset='Employment', year='2014')
+
+# worldbank
 
 FieldTable(['cereal_yield_kg_per_hectare_year'], year=2017,
            dataset='WorldBank', id='cereal_yield_kg_per_hectare')
@@ -105,9 +116,9 @@ FieldTable(['tax_as_percentage_of_gdp_year'], year=2017, dataset='WorldBank',
            id='tax_as_percentage_of_gdp')
 FieldTable(['births_attended_by_skilled_health_staff_year'], year=2017,
            dataset='WorldBank', id='births_attended_by_skilled_health_staff')
-FieldTable(['incidence_of_malaria_per_1000_population_at_risk_year'],
+FieldTable(['incidence_of_malaria_per_1000_pop_at_risk_year'],
            year=2017, dataset='WorldBank',
-           id='incidence_of_malaria_per_1000_population_at_risk')
+           id='incidence_of_malaria_per_1000_pop_at_risk')
 FieldTable(['tax_revenue_year'], year=2017, dataset='WorldBank',
            id='tax_revenue')
 FieldTable(['gdp_year'], year=2017, dataset='WorldBank', id='gdp')
