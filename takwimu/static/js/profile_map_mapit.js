@@ -90,16 +90,17 @@ var ProfileMaps = function() {
         var child_level = this.geo.this.child_level;
         var geo_name = this.geo.this.name;
 
+        console.log(geo_level + geo_code + child_level)
+
         // load all map shapes for this level
         //demarcation boundaries
-        if (geo_level == 'country') {
-            this.map.setView( this.mapit_country.centre, this.mapit_country.zoom);
-        } else {
-            // draw the current geo
-            GeometryLoader.loadGeometryForGeo(geo_level, geo_code, geo_version, function(feature) {
-              self.drawFocusFeature(feature);
-            });
-        }
+
+
+        // draw the current geo
+        GeometryLoader.loadGeometryForGeo(geo_level, geo_code, geo_version, function(feature) {
+          self.drawFocusFeature(feature);
+        });
+
 
         // draw the others at this level
         GeometryLoader.loadGeometryForLevel(geo_level, geo_version, function(features) {
