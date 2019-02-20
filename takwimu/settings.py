@@ -42,8 +42,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # HURUmap / Wazimap Config
 # -------------------------------------------------------------------------------------
 
-HURUMAP['USE_MAPIT'] = False
-
 HURUMAP['name'] = 'Takwimu'
 HURUMAP['url'] = os.environ.get('HURUMAP_URL', 'https://takwimu.africa')
 
