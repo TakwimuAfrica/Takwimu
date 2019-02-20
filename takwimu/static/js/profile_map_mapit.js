@@ -145,6 +145,7 @@ var ProfileMaps = function() {
         // draw all others
         var url = this.mapit_url;
         var mapit_codetype = this.mapit_codetype;
+        console.log(features)
 
         return L.geoJson(features, {
             style: this.layerStyle,
