@@ -43,7 +43,7 @@ var ProfileMaps = function() {
         if (centre) {
             self.map.setView(centre, zoom);
         }
-        GeometryLoader.loadGeometryForLevel(geo_level, geo_version, function(features) {
+        GeometryLoader.loadGeometryForLevel(geo_level, 'TZ', geo_version, function(features) {
             console.log("drawing homepage");
             console.log(features);
             var layer = self.drawFeatures(features.features);
@@ -90,30 +90,29 @@ var ProfileMaps = function() {
         var child_level = this.geo.this.child_level;
         var geo_name = this.geo.this.name;
 
-        console.log(geo_level + geo_code + child_level)
-
-        // load all map shapes for this level
-        //demarcation boundaries
-
-
-        // draw the current geo
-        GeometryLoader.loadGeometryForGeo(geo_level, geo_code, geo_version, function(feature) {
-          self.drawFocusFeature(feature);
-        });
-
-
-        // draw the others at this level
-        GeometryLoader.loadGeometryForLevel(geo_level, geo_version, function(features) {
-
-            self.drawFeatures(features.features);
-        });
-
-        // load shapes at the child level, if any
-        if (child_level) {
-            GeometryLoader.loadGeometryForChildLevel(child_level, geo_level, geo_code, geo_version, function(features) {
-                self.drawFeatures(features.features);
+        // if we are in a root geo, only setView
+        if (Object.getOwnPropertyNames(this.geo.parents).length==0) {
+            this.map.setView( this.mapit_country.centre, this.mapit_country.zoom);
+        } else {
+            // draw the current geo
+            GeometryLoader.loadGeometryForGeo(geo_level, geo_code, geo_version, function(feature) {
+              self.drawFocusFeature(feature);
             });
         }
+
+        // draw the others at this level
+        GeometryLoader.loadGeometryForLevel(geo_level, geo_code, geo_version, function(features) {
+            self.drawFeatures(features.features);
+
+            // load shapes at the child level, if any once all features all drawn
+            if (child_level) {
+                GeometryLoader.loadGeometryForChildLevel(child_level, geo_level, geo_code, geo_version, function(features) {
+                    self.drawFeatures(features.features);
+                });
+            }
+        });
+
+
     };
 
     this.drawFocusFeature = function(feature) {
@@ -145,7 +144,6 @@ var ProfileMaps = function() {
         // draw all others
         var url = this.mapit_url;
         var mapit_codetype = this.mapit_codetype;
-        console.log(features)
 
         return L.geoJson(features, {
             style: this.layerStyle,
@@ -160,14 +158,18 @@ var ProfileMaps = function() {
                 });
                 layer.on('click', function() {
                   var uri = '/areas/'+ feature.properties.name.toLowerCase() + '?generation=1' + '&type=';
-                  uri = uri + feature.properties.level.toUpperCase() + '&country='+ feature.properties.country_code;
-                  console.log(uri)
+                  uri = uri + feature.properties.area_type.toUpperCase();
+
+                  if (feature.properties.country_code)
+                    uri = uri +  '&country='+ feature.properties.country_code;
+
+                  console.log(uri);
                   d3.json(url + uri,  function(error, data) {
                     if (error) return console.warn(error);
                     var featureInfo = Object.values(data);
-                    console.log(featureInfo)
 
                     var geo_id = featureInfo[0]['codes'][mapit_codetype];
+                    console.log(geo_id)
                     //var geo_level = featureInfo[0]['type'];
                     window.location = '/profiles/' + geo_id + '/';
                   });

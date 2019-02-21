@@ -231,6 +231,10 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 431	level1	ZA_1_007	North West	104882	country	ZA	KwaZulu-Natal	2009
 432	level1	ZA_1_008	Western Cape	129462	country	ZA	KwaZulu-Natal	2009
 433	level1	ZA_1_009	Gauteng	18178	country	ZA	KwaZulu-Natal	2009
+434	country	UG	Uganda	241038	continent	AFR	Uganda	2009
+435	country	ZM	Zambia	752618	continent	AFR	Zambia	2009
+436	country	BF	Burkina Faso	274200	continent	AFR	Burkina Faso	2009
+437	country	CD	Democratic Republic of Congo	2345409	continent	AFR	Democratic Republic of Congo	2009
 \.
 
 

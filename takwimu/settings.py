@@ -70,38 +70,28 @@ HURUMAP['levels'] = {
 
     }
 }
-use_mapit = os.environ.get('USE_MAPIT', False)
-HURUMAP['USE_MAPIT'] = strtobool(str(use_mapit))
 HURUMAP['USE_MAPIT'] = True
-
-if HURUMAP['USE_MAPIT']:
-    # use mapit settings
-    HURUMAP['geodata'] = 'hurumap.mapit_geo.GeoData'
-    HURUMAP['geometry_data'] = {}
-    HURUMAP['mapit'] = {
-        'url': 'https://mapit.hurumap.org',
-        'country_code': '',
-        'generations': {
-            '2009': '1',
-            None: '1',
-            # this should be based on the default_geo_version wazimap setting
-        },
-        'code_type': 'AFR',
-        'level_simplify': {
-            'continent': 0,
-            'country': 0,
-            'level1': 0
-        },
-        'map_country': {
-            'centre': None,
-            'zoom': None
-        }
-    }
+HURUMAP['geometry_data'] = {}
+HURUMAP['mapit'] = {
+    'url': 'https://mapit.hurumap.org',
+    'country_code': '',
+    'generations': {
+        '2009': '1',
+        '2016': '1',
+        None: '1',
+        # this should be based on the default_geo_version wazimap setting
+    },
+    'code_type': 'AFR',
+    'level_simplify': {
+        'continent': 0,
+        'country': 0,
+        'level1': 0
+    },
+}
 
 # Map config
 HURUMAP['map_centre'] = None
 HURUMAP['map_zoom'] = None
-
 # -------------------------------------------------------------------------------------
 # Google Analytics
 # Main tracking id: Takwimu
@@ -139,6 +129,22 @@ HURUMAP['primary_release_year'] = {
         'country': 2011,
         'level1': 2011
     },
+    'ug': {
+        'country': 2011,
+        'level1': 2011
+    },
+    'cd': {
+        'country': 2011,
+        'level1': 2011
+    },
+    'bf': {
+        'country': 2006,
+        'level1': 2006
+    },
+    'zm': {
+        'country': 2011,
+        'level1': 2011
+    }
 }
 HURUMAP['latest_release_year'] = 'latest'
 
