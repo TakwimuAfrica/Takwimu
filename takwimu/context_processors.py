@@ -49,7 +49,7 @@ def takwimu_stories(request):
             stories_dict, key=operator.itemgetter('clap_count'), reverse=True)
 
     except Exception as e:
-        print(e.message)
+        pass
 
     return {
         'stories_latest': stories_latest,
@@ -70,7 +70,7 @@ def takwimu_topics(request):
             ProfileSectionPage.objects.live(), request, len(profile_topics))
         sections = profile_topics + profile_section_topics
     except Exception as e:
-        print(e.message)
+        pass
 
     return {
         'sections': sections,
