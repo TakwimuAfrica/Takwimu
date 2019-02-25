@@ -41,18 +41,19 @@ You can download Docker Community Edition from here - https://www.docker.com/com
 
 With [Docker Compose](https://docs.docker.com/compose/), development set up is relatively quick:
 
-```sh
-$ git clone https://github.com/TakwimuAfrica/TAKWIMU.git
-$ cd TAKWIMU
-$ docker-compose build
-$ make web
+```shell
+git clone https://github.com/TakwimuAfrica/TAKWIMU.git
+cd TAKWIMU
+make build
+make web
+make loaddata
 ```
 
 Optionally you can also enable Redis as cache backend in your development environment by doing the following:
 
-```sh
-$ export TAKWIMU_CACHE=True
-$ make web
+```shell
+export TAKWIMU_CACHE=True
+make web
 ```
 
 ### Admin a/c
@@ -65,15 +66,11 @@ TODO
 
 
 ### Elasticsearch
-Elasticsearch is automatically setup docker for development. To rebuild the search index from scratch,
-we run the following command in `docker-entrypoint.sh`:
-```sh
-python manage.py update_index
-```
+
 The search index is automatically updated using Wagtail's provided search signal handlers; but in case
 the index has to be rebuilt manually, run the following command:
-```sh
-docker-compose exec web python manage.py update_index
+```shell
+make update_index
 ```
 
 ## Handling Data
@@ -81,18 +78,18 @@ docker-compose exec web python manage.py update_index
 ### HURUmap Data
 
 To import HURUmap data, we run the following command in `docker-entrypoint.sh`:
-```sh
+```shell
 cat takwimu/sql/*.sql | psql -U takwimu -W takwimu
 ```
 
 To export the HURUmap data you might be working on, run the following command:
-```sh
+```shell
 docker-compose exec web python manage.py dumppsql --table TABLENAME > sql/TABLENAME.sql
 ```
 
 To dump all data tables at once, run
 
-```sh
+```shell
 for t in `ls takwimu/sql/[a-z]*.sql`
 do
     echo $t
@@ -109,16 +106,15 @@ Once done, you'd want to load some data available to you:
 
 **CAREFUL: Doing this will override whatever data you already have in the DB.**
 
-```sh
+```shell
 # Docker
 docker-compose exec web ./manage.py loaddata $(ls takwimu/fixtures)
-
 ```
 
 #### Django / CMS Data Export
 
 To export data, run the following commands:
-```sh
+```shell
 # Docker
 docker-compose exec web ./manage.py dumpdata takwimu.SupportService -o takwimu/fixtures/supportservice.json
 docker-compose exec web ./manage.py dumpdata takwimu.FAQ -o takwimu/fixtures/faq.json

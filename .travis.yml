@@ -1,29 +1,16 @@
-language: python
-
-addons:
-  postgresql: "9.5"
-
-python:
-
-  - "2.7"
-
-env:
-
-- DJANGO_VERSION=1.9.7
+language: ruby
 
 services:
-
-- postgresql
-
-install:
-
-  - pip install -r requirements.txt
+  - docker
 
 before_script:
-  - sudo rm -f /etc/boto.cfg
-  - psql -c "create user takwimu with password 'takwimu';" -U postgres
-  - psql -c 'create database test_takwimu;' -U postgres
-  - psql -c 'alter database test_takwimu owner to takwimu;' -U postgres
+  - make build
+  - docker-compose up -d web
+  - sleep 15
+  - docker ps -a
 
 script:
-  - python manage.py test --keepdb
+  - make test
+
+after_script:
+  - docker-compose down

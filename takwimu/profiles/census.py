@@ -1503,13 +1503,7 @@ def get_crop_production(geo, session, country, level):
             crop_distribution, _ = get_stat_data(
                 'crops', geo, session, table_fields=['crops'])
         except Exception as e:
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-            print e.message
-            print "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n"
-        # except DataNotFound:
-        #     pass
-        # except ValueError:
-        #     pass
+            pass
 
     return {
         'crop_distribution': _add_metadata_to_dist(

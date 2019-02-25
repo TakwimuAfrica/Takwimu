@@ -1,31 +1,22 @@
-FROM codeforafrica/hurumap-base:0.1.0
-ENV DEBIAN_FRONTEND noninteractive
+FROM codeforafrica/hurumap-dashboard:0.2.4
 
 # Set env variables used in this Dockerfile
+# HURUmap App and Django settings
+ENV HURUMAP_APP=takwimu
+ENV DJANGO_SETTINGS_MODULE=takwimu.settings
 # Local directory with project source
-ENV TAKWIMU_SRC=.
+ENV APP_SRC=.
 # Directory in container for all project files
-ENV TAKWIMU_SRVHOME=/srv
+ENV APP_SRVHOME=/src
 # Directory in container for project source files
-ENV TAKWIMU_SRVPROJ=/srv/takwimu
-
-# Create application subdirectories
-WORKDIR $TAKWIMU_SRVHOME
-RUN mkdir media static logs
-VOLUME ["$TAKWIMU_SRVHOME/media/", "$TAKWIMU_SRVHOME/logs/"]
-
-# Install Python dependencies
-COPY ./requirements.txt /
-RUN pip install -q -U pip setuptools
-RUN pip install -q -r /requirements.txt
+ENV APP_SRVPROJ=/src/takwimu
 
 # Add application source code to SRCDIR
-ADD $TAKWIMU_SRC $TAKWIMU_SRVPROJ
-
-# Expose Django service
-EXPOSE 8000
+ADD $APP_SRC $APP_SRVPROJ
 
 # Copy entrypoint script into the image
-WORKDIR $TAKWIMU_SRVPROJ
-COPY ./docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+WORKDIR $APP_SRVPROJ
+
+# Install app dependencies
+COPY ./requirements.txt /
+RUN pip install -q -r /requirements.txt
