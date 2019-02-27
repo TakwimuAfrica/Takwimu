@@ -1,13 +1,22 @@
 from django.conf import settings
 
 
+def get_country_from_ancestors(geo):
+    for i in geo.ancestors():
+        if i.geo_level.lower() == 'country':
+            return i
+    return 'afr'
+
+
 def get_country_geo_code(geo):
     geo_code = 'afr'
     level = geo.geo_level.lower()
     if level != 'continent':
-        geo_code = geo.geo_code \
-            if level == 'country' \
-            else geo.ancestors()[-1].geo_code
+        geo_code = geo.geo_code if level == 'country' else get_country_from_ancestors(geo).geo_code
+        print "\n\n\n\n\n\n\n\n\n"
+        print geo.__dict__
+        print geo_code
+        print "\n\n\n\n\n\n\n\n\n"
 
     return geo_code.lower(), level
 
@@ -26,7 +35,7 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
 
     # get the available releases for this country
     country_code, level = get_country_geo_code(geo)
-    country_releases = settings.HURUMAP['available_releases_years_per_country'].get(country_code)
+    country_releases = settings.HURUMAP['available_releases_years_per_country'].get(country_code, {})
     available_years = country_releases.get(level)
 
     if filter_releases and available_years:
@@ -45,6 +54,6 @@ def get_page_releases_per_country(dataset_name, geo, year, filter_releases=True)
 
 def get_primary_release_year_per_geography(geo):
     country_code, level = get_country_geo_code(geo)
-    country_primary_releases = settings.HURUMAP['primary_release_year'].get(country_code)
+    country_primary_releases = settings.HURUMAP['primary_release_year'].get(country_code, {})
     return country_primary_releases.get(level, 'latest')
 

@@ -132,7 +132,7 @@
     {% if geography.parents %}
       {% for level, g in geography.parents.items %}
         {% if g.geo_level == 'country' %}
-          {% include 'takwimu/_includes/profile/country_section.html' with country=g.short_name|lower title='long' %}
+          {% include 'takwimu/_includes/profile/country_section.html' with country_name=g.name country_slug=g.short_name|lower title='long' %}
         {% endif %}
       {% endfor %}
     {% endif %}
@@ -212,3 +212,12 @@
   });
   </script>
 {% endblock body_javascript_extra %}
+
+{% block profile_javascript_libs %}
+  <script src="{% static 'js/vendor/dom-to-image.min.js' %}"></script>
+  {{ block.super }}
+  {% if HURUMAP.USE_MAPIT %}
+    <script src="{% static 'js/map_mapit.js' %}"></script>
+    <script src="{% static 'js/profile_map_mapit.js' %}"></script>
+  {% endif %}
+{% endblock profile_javascript_libs %}
