@@ -1,3 +1,4 @@
+from __future__ import print_function
 import logging
 import re
 from collections import OrderedDict
@@ -1891,9 +1892,9 @@ def get_worldbank_data(geo, session, country, level):
             cereal_yield_kg_per_hectare, _ = get_stat_data(
                 ['cereal_yield_kg_per_hectare_year', ], geo, session, percent=False)
         except Exception as e:
-            print "\n\n\n\n\n\n\n\n\n\n"
-            print e.message
-            print "\n\n\n\n\n\n\n\n\n\n"
+            print("\n\n\n\n\n\n\n\n\n\n")
+            print(e.message)
+            print("\n\n\n\n\n\n\n\n\n\n")
             pass
 
         try:
