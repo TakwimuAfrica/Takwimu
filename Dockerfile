@@ -14,14 +14,6 @@ ENV APP_SRVPROJ=/src/takwimu
 # Add application source code to SRCDIR
 ADD $APP_SRC $APP_SRVPROJ
 
-# temporary fix for media files from old deployment
-# to be removed when media files moved to S3 
-# Create application subdirectories
-WORKDIR $APP_SRVHOME
-RUN mkdir media static logs
-VOLUME ["$APP_SRVHOME/media/", "$APP_SRVHOME/logs/"]
-
-
 # Copy entrypoint script into the image
 WORKDIR $APP_SRVPROJ
 
