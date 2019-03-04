@@ -26,7 +26,7 @@ services:
       - db
       - es
     volumes:
-      - "./:/srv/takwimu"
+      - "./:/src/takwimu"
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
       - DJANGO_SECRET_KEY=somethingsecret
