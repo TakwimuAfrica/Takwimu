@@ -31,12 +31,6 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'takwimu.context_processors.takwimu_topics',
                                                     'takwimu.context_processors.sdgs',]
 
-# Static files handler
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Media Config
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # -------------------------------------------------------------------------------------
 # HURUmap / Wazimap Config
