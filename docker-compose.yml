@@ -27,6 +27,9 @@ services:
       - es
     volumes:
       - "./:/src/takwimu"
+    entrypoint:
+      - python
+    command: ["manage.py", "runserver", "0.0.0.0:8000"]
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
       - DJANGO_SECRET_KEY=somethingsecret
@@ -39,4 +42,4 @@ services:
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
       - PYTHONDONTWRITEBYTECODE="True"
-      - DJANGO_DEBUG=${DJANGO_DEBUG:-True}  # (For production deploys) TODO: Figure out media + static in S3
+      - DJANGO_DEBUG=${DJANGO_DEBUG:-true}  # (For production deploys) TODO: Figure out media + static in S3
