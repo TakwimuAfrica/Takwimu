@@ -14,7 +14,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta'] + INSTALLED_APPS + [
-    'debug_toolbar']
+    'debug_toolbar',]
 
 ROOT_URLCONF = 'takwimu.urls'
 
@@ -30,14 +30,8 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'takwimu.context_processors.takwimu_countries',
                                                     'takwimu.context_processors.takwimu_stories',
                                                     'takwimu.context_processors.takwimu_topics',
-                                                    'takwimu.context_processors.sdgs', ]
+                                                    'takwimu.context_processors.sdgs',]
 
-# Static files handler
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Media Config
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # -------------------------------------------------------------------------------------
 # HURUmap / Wazimap Config

@@ -311,7 +311,7 @@ class IconChoiceBlock(blocks.FieldBlock):
 class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
-    summary = blocks.TextBlock(required=False)
+    summary = blocks.RichTextBlock(required=False)
     body = blocks.RichTextBlock(required=False)
 
     indicators = blocks.StreamBlock([
