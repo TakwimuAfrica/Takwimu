@@ -5,13 +5,13 @@
  *
  * NOTE: Please don't make edits here unless super necessary.
  */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900');
+@import url('https://fonts.googleapis.com/css?family=Lora|Muli');
 
-$brand-color-primary: #1f6cc6;
-$brand-color-primary-alt: #074c9c;
-$brand-color-primary-light: #7ab1f2;
-$brand-color-secondary: #1e4a7e;
-$brand-color-dark-alt: #46648c;
+$brand-color-primary: #29a87c;
+$brand-color-primary-alt: #4abc70;
+$brand-color-primary-light: #f6fbfa;
+$brand-color-secondary: #4abc70;
+$brand-color-dark-alt: #8ed3a5;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
 $brand-extend-jumbotron: #fafafa;
@@ -19,17 +19,20 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
-html, body, h1, h2, h3, h4, h5, h6, p, * {
-  font-family: 'Montserrat', sans-serif;
+html, body, p, * {
+  font-family: 'Muli', serif;
   word-break: break-word;
 }
 
-img {
-  max-width: 100%;
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
+  font-weight: bold;
+  word-break: break-word;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  font-weight: bold;
+
+img {
+  max-width: 100%;
 }
 
 
