@@ -1281,7 +1281,7 @@ def get_country_and_level(geo):
 def get_demographics(geo, session, country, level, year):
     population_data = get_population(geo, session, country, level, year)
     child_births_data = get_child_births(geo, session, country, level)
-    demographics_data = dict(population_data.items() + child_births_data.items())
+    demographics_data = dict(list(population_data.items()) + list(child_births_data.items()))
     demographics_data['is_missing'] = population_data.get('is_missing')
 
     return demographics_data
