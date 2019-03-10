@@ -414,6 +414,59 @@ body {
 }
 
 /* -----------------------------------------------
+ * PAGE: Homepage
+ * ----------------------------------------------- */
+
+// Carousel
+
+#carousel-homepage-hero .icon-wrap {
+  border-radius: 999px;
+  height: 50px; width: 50px;
+  text-align: center;
+  text-align: center;
+  overflow: hidden;
+}
+  #carousel-homepage-hero .country-flag.svg {
+    height: 50px;
+    width: 50px;
+    opacity: 0.76;
+    mix-blend-mode: screen;
+    filter: saturate(0%);
+  }
+    #carousel-homepage-hero svg#beta {
+      padding: 10px;
+      opacity: 1.0;
+      filter: none;
+      mix-blend-mode: normal;
+      background: #fff;
+    }
+
+#carousel-homepage-hero .carousel-item .btn {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+#carousel-homepage-hero .carousel-item .btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: transparent;
+}
+.carousel-indicators li {
+  position: relative;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 10px;
+  height: 10px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  border-radius:10px;
+  background-color:white;
+}
+.carousel-indicators .active {
+  background-color: $brand-color-primary-alt;
+}
+
+
+/* -----------------------------------------------
  * PAGE: Profile Page
  * ----------------------------------------------- */
 
