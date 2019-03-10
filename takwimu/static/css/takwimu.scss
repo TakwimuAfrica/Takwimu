@@ -20,21 +20,19 @@ $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
 html, body, p, * {
-  font-family: 'Muli', serif;
+  font-family: 'Muli', sans-serif;
   word-break: break-word;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lora', serif;
-  font-weight: bold;
-  word-break: break-word;
 }
 
 .font-heading {
   font-family: 'Lora', serif;
 }
 .font-paragraph {
-  font-family: 'Muli', serif;
+  font-family: 'Muli', sans-serif;
 }
 
 
