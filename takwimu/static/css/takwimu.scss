@@ -5,7 +5,7 @@
  *
  * NOTE: Please don't make edits here unless super necessary.
  */
-@import url('https://fonts.googleapis.com/css?family=Lora|Muli');
+@import url('https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700,900');
 
 $brand-color-primary: #29a87c;
 $brand-color-primary-alt: #4abc70;
@@ -79,6 +79,9 @@ a {
 .bg-info {
   background-color: #2da4c7 !important;
 }
+.bg-black {
+  background-color: #000;
+}
 // Text Colours
 .text-primary {
   color: $brand-color-primary !important;
@@ -95,7 +98,7 @@ a {
 
 // Button
 .btn {
-  border-radius: 24px;
+  border-radius: 12px;
   padding: .375rem 1.25rem;
   max-width: 100%;
   text-overflow: ellipsis;
@@ -302,6 +305,8 @@ body {
     white-space: nowrap;
     svg {
       margin-left: .255em;
+      margin-right: .255em;
+      margin-bottom: -2px;
     }
   }
 
