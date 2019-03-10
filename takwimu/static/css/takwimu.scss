@@ -288,9 +288,10 @@ body {
 .support-services-button:hover {
   background-color: $brand-color-primary-alt !important;
 }
-.support-services-button a:hover {
-  text-decoration: none !important;
-}
+  .support-services-button a:hover {
+    text-decoration: none !important;
+    color: $brand-extend-white !important;
+  }
 .support-services-button u {
   text-decoration: none;
   border-bottom: 2px solid #fff;
