@@ -4,11 +4,11 @@
   <div class="row mx-0">
     <div class="col-md-6 py-2 px-0">
       <div class="my-2 py-5 px-3" style="border-right: 2px dashed #e7e7e7;">
-        <h4 class="font-weight-bold" style="font-size: 32px;">
+        <h2>
           <img class="pb-2" src={% static 'img/icons/wave.svg' %}
-            style="width: auto; height: 45px;"/><br/>
+              style="width: auto; height: 45px;"/><br/>
           Stay up-to-date
-        </h4>
+        </h2>
         <p class="mx-auto" style="max-width: 400px; color: #4a4a4a;">
           To be notified when new data is published on Takwimu, subscribe to
           <a href="{% url 'rss_feed' %}">our RSS feed</a> or
@@ -22,12 +22,11 @@
     </div>
     <div class="col-md-6 py-2 px-0">
       <div class="my-2 py-5 px-3">
-          <h4 class="font-weight-bold" style="font-size: 32px;">
+          <h2>
             <img class="pb-2" src={% static 'img/icons/chat.svg' %}
-            style="width: auto; height: 50px;"/><br/>
-            <img src="" alt="">
+                style="width: auto; height: 50px;"/><br/>
             Join the discussion
-          </h4>
+          </h2>
           <p class="mx-auto" style="max-width: 400px; color: #4a4a4a;">
             Contribute to Takwimu by sharing your thoughts and ideas on
             <a href="{{ settings.takwimu.SocialMediaSetting.twitter }}" target="_blank" rel="noopener">twitter</a>
