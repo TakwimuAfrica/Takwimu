@@ -267,11 +267,12 @@ body {
   cursor: pointer;
   text-decoration: none;
   .border-left {
-    border-left: 1px solid rgba(255, 255, 255, 0.25)!important;
+    border-left: 1px solid rgba(255, 255, 255, 0.3)!important;
   }
   &:hover, &.active {
     background: $brand-color-dark-alt;
     border-bottom: 5px solid $brand-extend-white;
+    color: $brand-extend-white !important;
     + a div {
       border-left: 1px solid transparent !important;
     }
@@ -280,8 +281,7 @@ body {
     }
   }
   &.active {
-    background: $brand-color-primary;
-    border-bottom: 5px solid transparent;
+    border-bottom: 5px solid $brand-extend-white;
   }
 }
 
