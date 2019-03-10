@@ -361,7 +361,7 @@ body {
     position: relative;
     top: -10px; margin-bottom: -10px;
     span {
-      border-bottom: 10px solid $brand-color-primary-alt;
+      border-bottom: 10px solid $brand-color-primary;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
     }
@@ -372,7 +372,7 @@ body {
     display: none;
     position: absolute; left: 0;
     width: 100vw; z-index: 3000;
-    background-color: $brand-color-primary-alt;
+    background-color: $brand-color-primary;
 
     a {
       color: $brand-extend-light;
