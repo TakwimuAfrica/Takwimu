@@ -19,8 +19,8 @@ takwimu_urlpatterns = [
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
-        name='about_support_services'),
-    url(r'^about/?$', AboutUsView.as_view(), name='about_page'),
+        name='about_supportservices'),
+    url(r'^about/?$', AboutUsView.as_view(), name='about'),
     url(r'^legal$', LegalView.as_view(), name='legal'),
     url(
         r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),
