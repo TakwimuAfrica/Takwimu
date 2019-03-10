@@ -13,17 +13,19 @@
         <a href="#about-takwimu">About Takwimu</a>
         <a href="#services" class="ml-4">Services</a>
       </div>
-      <div class="bg-primary my-4" style="height: 2px;"></div>
-      <a name="about-takwimu"></a>
-      <h1 class="mb-3">About Takwimu</h1>
+      <div class="bg-primary mb-5 mt-4" style="height: 2px;"></div>
+      <a name="about-takwimu">
+        <h1 class="mb-3" style="padding-top: 120px; margin-top:-120px;">About Takwimu</h1>
+      </a>
       {{ settings.takwimu.AboutUsSetting.about_us | richtext }}
     </div>
   </div>
 
   <section class="bg-primary">
     <div class="container text-center text-light py-5">
-      <a name="services"></a>
-      <h1>Services for...</h1>
+      <a name="services">
+          <h1 style="padding-top: 120px; margin-top:-120px;">Services for...</h1>
+      </a>
     </div>
     {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
 
