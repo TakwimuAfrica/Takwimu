@@ -300,6 +300,22 @@ body {
 }
 
 
+// Updates section
+
+.updates a {
+  font-weight: bold;
+  color: $brand-color-primary;
+  text-decoration: underline;
+}
+
+.updates .col-md-6:hover {
+  background-color: #e8e8e8;;
+}
+.updates .col-md-6:hover + .col div {
+  border-left: 2px dashed transparent!important;
+}
+
+
 /* -----------------------------------------
  * Main Navbar
  * ----------------------------------------- */
