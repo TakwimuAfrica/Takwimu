@@ -7,14 +7,23 @@
   </section>
   <div style="background-color: #f9f9f9;">
     <div class="py-5 container" style="max-width: 800px;">
-      <h1>About Takwimu</h1>
+      <h1 class="mb-4 display-4">About Us</h1>
+      <div class="px-4 py-3" style="background-color: #f6fbfa">
+        <p class="small text-muted">On this page</p>
+        <a href="#about-takwimu">About Takwimu</a>
+        <a href="#services" class="ml-4">Services</a>
+      </div>
+      <div class="bg-primary my-4" style="height: 2px;"></div>
+      <a name="about-takwimu"></a>
+      <h1 class="mb-3">About Takwimu</h1>
       {{ settings.takwimu.AboutUsSetting.about_us | richtext }}
     </div>
   </div>
 
   <section class="bg-primary">
     <div class="container text-center text-light py-5">
-      <h1 class="font-weight-bold display-3">Services for...</h1>
+      <a name="services"></a>
+      <h1>Services for...</h1>
     </div>
     {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
 
