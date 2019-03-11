@@ -22,9 +22,11 @@ $brand-extend-disabled: #ededec;
 html, body, p, * {
   font-family: 'Muli', sans-serif;
   word-break: break-word;
+  line-height: initial;
 }
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lora', serif;
+  line-height: initial;
 }
 .font-heading {
   font-family: 'Lora', serif;
@@ -40,6 +42,18 @@ p, .rich-text {
 a, .breadcrumb-item {
   font-size: 18px;
   line-height: 43px;
+}
+.line-height-md {
+  line-height: 31px;
+}
+.line-height-sm {
+  line-height: 22px;
+}
+.line-height-initial {
+  line-height: initial;
+}
+.display-1, .display-2, .display-3, .display-4 {
+  line-height: initial;
 }
 
 img {
@@ -771,7 +785,7 @@ body {
   * during development
   */
   // body { background: grey;}
-  
+
   // Container fluid max-width:
   .container {
     max-width: 1249px;
