@@ -4,10 +4,10 @@
 {% cache 600 navbar %}
 <!-- Primary Navbar -->
 <nav class="main-nav navbar navbar-expand-lg navbar-dark py-0 sticky-top bg-primary shadow"
-    style="min-height:72px; z-index: 9999;">
+    style="min-height:101px; z-index: 9999;">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <img class="pl-4" src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
+      <img src="{% static 'img/logo-white-all.png' %}" style="max-height: 22px;">
       <span class="badge badge-pill badge-primary">beta</span>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false"
@@ -18,8 +18,8 @@
       <ul class="navbar-nav ml-3 mr-auto">
         <li class="nav-item">
           <a class="nav-link dropdown-toggle text-white p-3 py-lg-4"
-               href="#" role="button">
-               <img class="svg" src="{% static 'img/icons/file-paragraph.svg' %}" alt=""> Country Profiles
+              href="#" role="button">
+            <img class="svg" src="{% static 'img/icons/file-paragraph.svg' %}" alt=""> Country Profiles
           </a>
           {% include 'takwimu/_includes/navbar/profiles.html' with button_name="Country Profiles" %}
         </li>
