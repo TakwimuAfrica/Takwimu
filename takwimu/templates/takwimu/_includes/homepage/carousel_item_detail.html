@@ -5,14 +5,14 @@
     <div class="icon-wrap float-right bg-primary-alt">
       <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="country-flag svg" id="{{ country }}"/>
     </div>
-    <p style="font-weight: 400; font-size:13px;">
+    <p style="font-size:13px;">
       {% if country == 'beta' %}
       News
       {% else %}
       New Country
       {% endif %}
     </p>
-    <h2 style="font-weight: 600;">
+    <h2>
       {% if country == 'beta' %}
       We'd love to hear your feedback!
       {% else %}
