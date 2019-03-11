@@ -34,10 +34,10 @@
 
         <!-- TOC Button -->
         <button
-            class="btn btn-light btn-lg text-uppercase pr-4 pl-3 py-3 position-fixed font-weight-bold"
+            class="btn btn-light btn-lg pr-4 pl-3 py-3 position-fixed font-heading"
             style="right: 0; border-radius: 2px 0 0 2px; font-size: 13px; z-index: 1000; border: 0px; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.29)"
             onclick="javascript:$('#toc').removeClass('d-none')">
-          <span class="mr-2"><img src="{% static "img/icons/toc-menu.svg" %}"></span>
+          <span class="mr-2"><img src="{% static 'img/icons/toc-menu.svg' %}"></span>
           Table of Contents
         </button>
       </div>
@@ -45,19 +45,21 @@
       <div class="text-center">
         {% if page.content_type.model == "profilesectionpage" %}
 
-          <p class="font-weight-bold text-uppercase">Section
+          <p>Section
             {% for section in page.get_parent.specific.sections.all %}
               {% if page.title == section.section.title %}
-                {{ forloop.counter | add:"1" }} {% endif %}{% endfor %}</p>
-          <h1 class="text-white" style="font-weight: 900; font-size: 60px">{{ page.title }}</h1>
-          <p class="lead my-4 mx-auto"
-             style="max-width: 780px;">{{ page.description }}</p>
+                {{ forloop.counter | add:"1" }}
+              {% endif %}
+            {% endfor %}
+          </p>
+          <h1 class="text-white" style="font-size: 60px">{{ page.title }}</h1>
+          <p class="lead my-4 mx-auto" style="max-width: 780px;">{{ page.description }}</p>
 
           {% include 'takwimu/_includes/profile/country_profile_downloader.html' with profile_page=page.get_parent.specific %}
         {% else %}
 
-          <p class="font-weight-bold  text-uppercase">Section 1</p>
-          <h1 class="text-white" style="font-weight: 900; font-size: 60px">Country Overview</h1>
+          <p>Section 1</p>
+          <h1 class="text-white" style="font-size: 60px">Country Overview</h1>
           <p class="lead my-4 mx-auto" style="max-width: 780px;">
             A top-level overview of {{ page.title }} – how it’s governed, the make-up of
             its population, the economy and SDG indicators
@@ -74,10 +76,10 @@
     <div class="container">
       <nav class="nav nav-justified container text-center custom-nav">
         {% for topic in page.body %}
-        <a href="#{{ topic.value.title|slugify }}" class=" nav-item nav-link text-light pt-4 pb-2 px-0">
+        <a href="#{{ topic.value.title|slugify }}" class="nav-item nav-link text-light pt-4 pb-2 px-0">
           <div class="pt-2 col text-center {% if not forloop.first %}border-left{% endif %} d-flex align-items-center flex-column">
             <span class="d-block my-1 {{ topic.value.icon }} text-white py-0" style="font-size: 1.559em;"></span>
-            <p class="pt-1 text-uppercase" style="font-size: 14px; font-weight:normal;">{{ topic.value.title }}</p>
+            <h5 class="pt-1" style="font-size: 16px;">{{ topic.value.title }}</h5>
           </div>
         </a>
         {% endfor %}
@@ -93,7 +95,7 @@
 
   <p class="text-right mb-3">
     <button
-        class="btn btn-link text-uppercase font-weight-bold ml-auto border-0 py-2"
+        class="btn btn-link font-weight-bold ml-auto border-0 py-2"
         style="text-decoration: none; color: #000;"
         onclick="javascript:$('#toc').addClass('d-none')">
       Close
