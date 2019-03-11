@@ -13,7 +13,7 @@
             aria-controls="support-{{ service.value.title|slugify }}"
             aria-selected="true">
           <div class="text-center {% if not forloop.first %}border-left{% endif %} h-100 px-3">
-            <h2 class="py-1"><i class="{{ service.value.icon }}"></i></h2>
+            <h4 class="py-1"><i class="{{ service.value.icon }}"></i></h4>
             <h5 class="pt-1">{{ service.value.title }}</h5>
           </div>
         </a>
@@ -38,9 +38,9 @@
 
           <div class="row">
             <div class="col-md-4 pr-5">
-              <h1 class="font-weight-bold" style="font-size: 50px;">
+              <h1 style="font-size: 50px;">
                 {{ service.value.title }}
-              </h3>
+              </h1>
             </div>
             <div class="col pl-md-5 mt-3 mt-md-0 pt-2" style="border-left: solid 1px rgba(255, 255, 255, 0.49);">
               {{ service.value.description | safe }}
