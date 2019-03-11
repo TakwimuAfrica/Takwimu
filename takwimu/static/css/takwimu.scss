@@ -23,11 +23,9 @@ html, body, p, * {
   font-family: 'Muli', sans-serif;
   word-break: break-word;
 }
-
 h1, h2, h3, h4, h5, h6 {
   font-family: 'Lora', serif;
 }
-
 .font-heading {
   font-family: 'Lora', serif;
 }
@@ -35,6 +33,14 @@ h1, h2, h3, h4, h5, h6 {
   font-family: 'Muli', sans-serif;
 }
 
+p, .rich-text {
+  font-size: 20px;
+  line-height: 41px;
+}
+a, .breadcrumb-item {
+  font-size: 18px;
+  line-height: 43px;
+}
 
 img {
   max-width: 100%;
@@ -145,17 +151,22 @@ a {
     }
   }
 }
+.btn-link {
+  color: $brand-color-primary-alt;
+  &:hover {
+    color: $brand-color-primary;
+  }
+}
 
 .nav-pills.nav-pills-alt .nav-link {
-  color: #929292;
+  color: #4a4a4a;
 }
 .nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
   background-color: transparent;
   color: $brand-color-primary;
   border-bottom: 3px $brand-color-primary solid;
   border-radius: 0;
-  color: #4a4a4a;
-  font-weight: 900;
+  color: $brand-extend-black;
 }
 
 
@@ -339,6 +350,7 @@ body {
   }
   .nav-link {
     white-space: nowrap;
+    font-size: 18px;
     svg {
       margin-left: .255em;
       margin-right: .255em;
@@ -418,6 +430,9 @@ body {
 
 // Carousel
 
+#carousel-homepage-hero {
+  line-height: 31px;
+}
 #carousel-homepage-hero .icon-wrap {
   border-radius: 999px;
   height: 50px; width: 50px;
@@ -511,20 +526,21 @@ body {
 
 .dataindicators-nav {
   .nav-pills {
-    background-color: #1f6cc6;
+    background-color: $brand-color-primary;
     .nav-link.active, .show > .nav-link {
-      background-color: transparent;
+      background-color: rgba($color: $brand-extend-light, $alpha: 0.1);
       font-weight: bold;
     }
   }
   .nav-link {
     color: #f0f0f0;
     &:hover {
-      color: #f0f0f0;;
+      color: #fff;
+      background-color: rgba($color: $brand-extend-light, $alpha: 0.1);
     }
     .fa-eye {
       display: none;
-      margin-left: -2em;
+      margin-left: -35px;
       position: absolute;
     }
     &[aria-selected=true] .fa-eye {
@@ -600,9 +616,9 @@ body {
       }
 
       &:hover,&:focus {
-        color: $brand-color-secondary;
+        color: $brand-color-primary;
         svg  {
-          filter: $brand-color-secondary; /* IE6-9 */
+          filter: $brand-color-primary; /* IE6-9 */
           -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
           filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
         }
@@ -755,4 +771,9 @@ body {
   * during development
   */
   // body { background: grey;}
+  
+  // Container fluid max-width:
+  .container {
+    max-width: 1249px;
+  }
  }
