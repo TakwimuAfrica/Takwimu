@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import fontawesome.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('icon', fontawesome.fields.IconField(blank=True, max_length=60)),
                 ('title', models.TextField()),
-                ('benefit', wagtail.wagtailcore.fields.RichTextField()),
+                ('benefit', wagtail.core.fields.RichTextField()),
             ],
         ),
     ]

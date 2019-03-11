@@ -7,22 +7,22 @@ from django.db import models
 from django import forms
 from django.utils.text import slugify
 from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.wagtailadmin.edit_handlers import FieldPanel, StreamFieldPanel, \
+from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
     PageChooserPanel, InlinePanel, MultiFieldPanel
-from wagtail.wagtailimages.edit_handlers import ImageChooserPanel
+from wagtail.images.edit_handlers import ImageChooserPanel
 
-from wagtail.wagtailcore import blocks
-from wagtail.wagtailembeds.blocks import EmbedBlock
-from wagtail.wagtaildocs.blocks import DocumentChooserBlock
-from wagtail.wagtaildocs.edit_handlers import DocumentChooserPanel
-from wagtail.wagtaildocs.models import Document
+from wagtail.core import blocks
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.documents.models import Document
 
-from wagtail.wagtailimages.models import Image
-from wagtail.wagtailimages.blocks import ImageChooserBlock
+from wagtail.images.models import Image
+from wagtail.images.blocks import ImageChooserBlock
 
-from wagtail.wagtailcore.fields import StreamField, RichTextField
-from wagtail.wagtailcore.models import Orderable, Page
-from wagtail.wagtailsearch import index
+from wagtail.core.fields import StreamField, RichTextField
+from wagtail.core.models import Orderable, Page
+from wagtail.search import index
 
 from meta.models import ModelMeta
 

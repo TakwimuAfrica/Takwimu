@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -19,9 +19,9 @@ class Migration(migrations.Migration):
             name='LegalNoticeSetting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('terms_of_use', wagtail.wagtailcore.fields.RichTextField(blank=True, null=True)),
-                ('privacy_policy', wagtail.wagtailcore.fields.RichTextField(blank=True, null=True)),
-                ('cookie_policy', wagtail.wagtailcore.fields.RichTextField(blank=True, null=True)),
+                ('terms_of_use', wagtail.core.fields.RichTextField(blank=True, null=True)),
+                ('privacy_policy', wagtail.core.fields.RichTextField(blank=True, null=True)),
+                ('cookie_policy', wagtail.core.fields.RichTextField(blank=True, null=True)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
             options={

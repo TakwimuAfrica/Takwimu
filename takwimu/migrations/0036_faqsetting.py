@@ -4,8 +4,8 @@ from __future__ import unicode_literals
 
 from django.db import migrations, models
 import django.db.models.deletion
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
             name='FAQSetting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('faqs', wagtail.wagtailcore.fields.StreamField([(b'faq', wagtail.wagtailcore.blocks.StructBlock([(b'question', wagtail.wagtailcore.blocks.CharBlock(required=True)), (b'answer', wagtail.wagtailcore.blocks.RichTextBlock(required=True)), (b'cta_one_url', wagtail.wagtailcore.blocks.URLBlock(default=b'https://takwimu.zendesk.com/', label=b"'Find Out More' Button URL")), (b'cta_two_name', wagtail.wagtailcore.blocks.CharBlock(label=b'Second Button Name (Optional)', required=False)), (b'cta_two_url', wagtail.wagtailcore.blocks.URLBlock(label=b'Second Button URL (Optional)', required=False))]))], blank=True)),
+                ('faqs', wagtail.core.fields.StreamField([(b'faq', wagtail.core.blocks.StructBlock([(b'question', wagtail.core.blocks.CharBlock(required=True)), (b'answer', wagtail.core.blocks.RichTextBlock(required=True)), (b'cta_one_url', wagtail.core.blocks.URLBlock(default=b'https://takwimu.zendesk.com/', label=b"'Find Out More' Button URL")), (b'cta_two_name', wagtail.core.blocks.CharBlock(label=b'Second Button Name (Optional)', required=False)), (b'cta_two_url', wagtail.core.blocks.URLBlock(label=b'Second Button URL (Optional)', required=False))]))], blank=True)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
             options={

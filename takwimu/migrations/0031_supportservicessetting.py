@@ -5,9 +5,9 @@ from __future__ import unicode_literals
 from django.db import migrations, models
 import django.db.models.deletion
 import takwimu.models.dashboard
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
-import wagtail.wagtailimages.blocks
+import wagtail.core.blocks
+import wagtail.core.fields
+import wagtail.images.blocks
 
 
 class Migration(migrations.Migration):
@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
             name='SupportServicesSetting',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('services', wagtail.wagtailcore.fields.StreamField([(b'service', wagtail.wagtailcore.blocks.StructBlock([(b'title', wagtail.wagtailcore.blocks.CharBlock(required=True)), (b'icon', takwimu.models.dashboard.IconChoiceBlock(required=False)), (b'cover', wagtail.wagtailimages.blocks.ImageChooserBlock(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name=b'+', required=False)), (b'description', wagtail.wagtailcore.blocks.RichTextBlock(required=True)), (b'category', wagtail.wagtailcore.blocks.ChoiceBlock(choices=[(b'Standard', b'Standard'), (b'Premium', b'Premium'), (b'Persona', b'Persona')], max_length=20))]))], blank=True)),
+                ('services', wagtail.core.fields.StreamField([(b'service', wagtail.core.blocks.StructBlock([(b'title', wagtail.core.blocks.CharBlock(required=True)), (b'icon', takwimu.models.dashboard.IconChoiceBlock(required=False)), (b'cover', wagtail.images.blocks.ImageChooserBlock(blank=True, null=True, on_delete=django.db.models.deletion.SET_NULL, related_name=b'+', required=False)), (b'description', wagtail.core.blocks.RichTextBlock(required=True)), (b'category', wagtail.core.blocks.ChoiceBlock(choices=[(b'Standard', b'Standard'), (b'Premium', b'Premium'), (b'Persona', b'Persona')], max_length=20))]))], blank=True)),
                 ('site', models.OneToOneField(editable=False, on_delete=django.db.models.deletion.CASCADE, to='wagtailcore.Site')),
             ],
             options={

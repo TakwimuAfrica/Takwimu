@@ -3,8 +3,8 @@
 from __future__ import unicode_literals
 
 from django.db import migrations
-import wagtail.wagtailcore.blocks
-import wagtail.wagtailcore.fields
+import wagtail.core.blocks
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -17,6 +17,6 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='explainersteps',
             name='steps',
-            field=wagtail.wagtailcore.fields.StreamField([(b'step', wagtail.wagtailcore.blocks.StructBlock([(b'title', wagtail.wagtailcore.blocks.CharBlock(required=False)), (b'brief', wagtail.wagtailcore.blocks.TextBlock(required=False)), (b'color', wagtail.wagtailcore.blocks.CharBlock(help_text=b'Background colour.', required=False)), (b'body', wagtail.wagtailcore.blocks.RichTextBlock(required=False)), (b'sidebar', wagtail.wagtailcore.blocks.RichTextBlock(required=False))], icon=b'user'))]),
+            field=wagtail.core.fields.StreamField([(b'step', wagtail.core.blocks.StructBlock([(b'title', wagtail.core.blocks.CharBlock(required=False)), (b'brief', wagtail.core.blocks.TextBlock(required=False)), (b'color', wagtail.core.blocks.CharBlock(help_text=b'Background colour.', required=False)), (b'body', wagtail.core.blocks.RichTextBlock(required=False)), (b'sidebar', wagtail.core.blocks.RichTextBlock(required=False))], icon=b'user'))]),
         ),
     ]

@@ -6,7 +6,7 @@ from django.db import migrations, models
 import django.db.models.deletion
 import fontawesome.fields
 import modelcluster.fields
-import wagtail.wagtailcore.fields
+import wagtail.core.fields
 
 
 class Migration(migrations.Migration):
@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             name='AboutPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('content', wagtail.wagtailcore.fields.RichTextField()),
+                ('content', wagtail.core.fields.RichTextField()),
             ],
             options={
                 'abstract': False,
@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='ContactUsPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('address', wagtail.wagtailcore.fields.RichTextField()),
+                ('address', wagtail.core.fields.RichTextField()),
             ],
             options={
                 'abstract': False,
