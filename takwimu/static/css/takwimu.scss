@@ -44,13 +44,19 @@ a, .breadcrumb-item {
   line-height: 43px;
 }
 .line-height-md {
-  line-height: 31px;
+  &, a, .breadcrumb-item, p, .rich-text, * {
+    line-height: 31px;
+  }
 }
 .line-height-sm {
-  line-height: 22px;
+  &, a, .breadcrumb-item, p, .rich-text, * {
+    line-height: 22px;
+  }
 }
 .line-height-initial {
-  line-height: initial;
+  &, a, .breadcrumb-item, p, .rich-text, * {
+    line-height: initial;
+  }
 }
 .display-1, .display-2, .display-3, .display-4 {
   line-height: initial;
