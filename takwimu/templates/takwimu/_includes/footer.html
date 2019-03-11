@@ -29,16 +29,13 @@
           <div class="flex-grow-1">
             <h6 class="mb-0 text-truncate font-weight-light" style="opacity: 0.6;">An initiative by:</h6>
             <div class="d-flex">
-              <a href="http://www.africapractice.com/" target="_blank" rel="noopener"
-                  class="my-2 mr-2 d-flex">
+              <a href="http://www.africapractice.com/" target="_blank" rel="noopener" class="my-2 mr-2 d-flex">
                 <img src="{% static 'img/logos/ap-white.png' %}" alt="africapractice" class="p-3 align-self-center img">
               </a>
-              <a href="https://codeforafrica.org" target="_blank" rel="noopener"
-                  class="m-2 d-flex">
+              <a href="https://codeforafrica.org" target="_blank" rel="noopener" class="m-2 d-flex">
                 <img src="{% static 'img/logos/cfafrica-white.png' %}" alt="Code for Africa" class="p-4 align-self-center img">
               </a>
-              <a href="https://ihub.co.ke/" target="_blank" rel="noopener"
-                  class="m-2 d-flex">
+              <a href="https://ihub.co.ke/" target="_blank" rel="noopener" class="m-2 d-flex">
                 <img src="{% static 'img/logos/ihub-white.png' %}" alt="iHub" class="p-3 align-self-center img">
               </a>
             </div>
@@ -73,11 +70,11 @@
     <div class="container py-2 d-flex justify-content-between">
 
       <ul class="navbar-nav flex-row mx-auto mx-md-0">
-        <li class="nav-item navbar-text">Stay in touch with us:</li>
+        <li class="nav-item navbar-text"><p class="small mb-0">Stay in touch with us:</p></li>
         <li class="nav-item ml-2 px-2 my-2 border-right">
           <a class="nav-link py-0" href="mailto:{{ settings.takwimu.SupportSetting.hello }}"
               target="_blank">
-            <i class="fa fa-at fa-fw"></i>
+            <i class="fa fa-at fa-fw fa-xs"></i>
           </a>
         </li>
         {% to_list 'twitter' 'facebook' 'medium' 'linkedin' as social_medias %}
@@ -86,7 +83,7 @@
             <li class="nav-item px-2 my-2 {% if not forloop.last %}border-right{% endif %}">
               <a class="nav-link py-0" href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}"
                 target="_blank" rel="noopener">
-                <i class="fab fa-{{ social_media }} fa-fw"></i>
+                <i class="fab fa-{{ social_media }} fa-fw fa-xs"></i>
               </a>
             </li>
           {% endif %}
