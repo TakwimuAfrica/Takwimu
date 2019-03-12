@@ -61,6 +61,9 @@ a, .breadcrumb-item {
 .display-1, .display-2, .display-3, .display-4 {
   line-height: initial;
 }
+.anchorjs-link {
+  font-size: inherit;
+}
 
 img {
   max-width: 100%;
@@ -293,7 +296,7 @@ body {
   border-bottom: 5px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  .border-left {
+  &.border-left, .border-left {
     border-left: 1px solid rgba(255, 255, 255, 0.3)!important;
   }
   &:hover, &.active {
