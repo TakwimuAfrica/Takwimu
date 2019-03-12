@@ -3,17 +3,17 @@
 <div class="bg-secondary text-light container-fluid mx-auto my-1 position-relative" style="width: calc(100% - 0.5em);">
     <div class="row px-0 py-5">
         <div class="col-6 text-left px-5">
-            <h2 class="font-weight-bold">
+            <h1>
                 {{ sdg.short }}
-            </h2>
-            <p class="font-weight-light">
+            </h1>
+            <p class="line-height-md">
                 {{ sdg.title }}
             </p>
         </div>
         <div class="col-6 d-flex px-5 justify-content-center align-items-center" style="border-left: 1px solid rgba(255, 255, 255, .52);">
             {% if sdg.indicators %}
                 <div class="w-100">
-                    <p class="font-weight-bold">View data for:</p>
+                    <h5>View data for:</h5>
                     {% for indicator in sdg.indicators %}
                         <a class="nav-item nav-link text-white text-left pl-3"
                         id="{{ indicator.url }}"
@@ -28,9 +28,9 @@
                     {% endfor %}
                 </div>
             {% else %}
-                <div class="d-block text-center" style="color: #78aff5;">
+                <div class="d-block text-center text-white">
                     <span class="fas fa-exclamation-circle fa-3x"></span>
-                    <p class="text-info my-3" style="font-size: 14px;">We do not have any data associated with this SDG</p>
+                    <p class="my-3 px-2 line-height-md">We do not have any data<br/>associated with this SDG yet.</p>
                 </div>
             {% endif %}
         </div>
