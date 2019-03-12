@@ -53,14 +53,14 @@
             {% endfor %}
           </p>
           <h1 class="text-white" style="font-size: 60px">{{ page.title }}</h1>
-          <p class="lead my-4 mx-auto" style="max-width: 780px;">{{ page.description }}</p>
+          <p class="my-4 mx-auto line-height-md" style="max-width: 780px;">{{ page.description }}</p>
 
           {% include 'takwimu/_includes/profile/country_profile_downloader.html' with profile_page=page.get_parent.specific %}
         {% else %}
 
           <p>Section 1</p>
           <h1 class="text-white" style="font-size: 60px">Country Overview</h1>
-          <p class="lead my-4 mx-auto" style="max-width: 780px;">
+          <p class="my-4 mx-auto line-height-md" style="max-width: 780px;">
             A top-level overview of {{ page.title }} – how it’s governed, the make-up of
             its population, the economy and SDG indicators
           </p>
@@ -76,10 +76,10 @@
     <div class="container">
       <nav class="nav nav-justified container text-center custom-nav">
         {% for topic in page.body %}
-        <a href="#{{ topic.value.title|slugify }}" class="nav-item nav-link text-light pt-4 pb-2 px-0">
-          <div class="pt-2 col text-center {% if not forloop.first %}border-left{% endif %} d-flex align-items-center flex-column">
-            <span class="d-block my-1 {{ topic.value.icon }} text-white py-0" style="font-size: 1.559em;"></span>
-            <h5 class="pt-1" style="font-size: 16px;">{{ topic.value.title }}</h5>
+        <a href="#{{ topic.value.title|slugify }}" class="nav-item nav-link text-light py-4 px-0 d-flex {% if not forloop.first %}border-left{% endif %}">
+          <div class="col align-self-center px-2 my-1 text-center">
+            <!-- <span class="d-block my-1 {{ topic.value.icon }} text-white py-0" style="font-size: 1.559em;"></span> -->
+            <h5 class="m-0">{{ topic.value.title }}</h5>
           </div>
         </a>
         {% endfor %}
