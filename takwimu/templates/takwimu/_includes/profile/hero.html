@@ -1,35 +1,16 @@
 {% load staticfiles %}
 
-<header class="text-light" style="background: #074c9c url('{% static 'img/bg/profile-hero.jpg'%}') no-repeat center; background-size: cover;">
-  <div class="jumbotron jumbotron-fluid pt-0 mb-0" style="background-color: rgba(7, 76, 156, 0.8)">
+<header style="background: #fff url('{% static 'img/bg/profile-hero-line.png'%}') no-repeat center; background-size: cover;">
+  <div class="jumbotron jumbotron-fluid pt-4 mb-0" style="background-color: rgba(255,255,255,0.85);">
 
     <div class="container">
-      <nav aria-label="breadcrumb">
-        <ol class="breadcrumb bg-transparent">
-          <li class="breadcrumb-item">
-            <a href="/" class="text-light"><u>Home</u></a><i class="glyphicon glyphicon-thumbs-up"></i>
-          </li>
-          <li class="breadcrumb-item">
-            <a href="/profiles" class="text-light"><u>Country Profiles</u></a>
-          </li>
-          {% if page.content_type.model == "profilesectionpage" %}
-            <li class="breadcrumb-item">
-              <ahref="{{ page.get_parent.url }}" class="text-light">
-                <u>{{ page.get_parent.title }}</u>
-              </a>
-            </li>
-          {% endif %}
-          <li class="breadcrumb-item active text-light" aria-current="page">
-              {{ page.title }}
-          </li>
-        </ol>
-      </nav>
-
+      <p class="small text-muted line-height-sm mb-0">Change Country</p>
       <div class="d-flex justify-content-between align-items-center">
+        
         {% if page.content_type.model == "profilesectionpage" %}
-          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent class_extra='text-light' dropdownMenuButton_id="hero" %}
+          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page.get_parent dropdownMenuButton_id="hero" %}
         {% else %}
-          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page class_extra='text-light' dropdownMenuButton_id="hero" %}
+          {% include 'takwimu/_includes/profile/country_selector.html' with current_page=page dropdownMenuButton_id="hero" %}
         {% endif %}
 
         <!-- TOC Button -->
@@ -52,14 +33,14 @@
               {% endif %}
             {% endfor %}
           </p>
-          <h1 class="text-white" style="font-size: 60px">{{ page.title }}</h1>
+          <h1 class="display-3">{{ page.title }}</h1>
           <p class="my-4 mx-auto line-height-md" style="max-width: 780px;">{{ page.description }}</p>
 
           {% include 'takwimu/_includes/profile/country_profile_downloader.html' with profile_page=page.get_parent.specific %}
         {% else %}
 
           <p>Section 1</p>
-          <h1 class="text-white" style="font-size: 60px">Country Overview</h1>
+          <h1 class="display-3">Country Overview</h1>
           <p class="my-4 mx-auto line-height-md" style="max-width: 780px;">
             A top-level overview of {{ page.title }} – how it’s governed, the make-up of
             its population, the economy and SDG indicators
@@ -72,7 +53,7 @@
     </div>
 
   </div>
-  <div class="bg-secondary">
+  <div class="bg-primary">
     <div class="container">
       <nav class="nav nav-justified container text-center custom-nav">
         {% for topic in page.body %}
