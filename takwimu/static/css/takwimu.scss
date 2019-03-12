@@ -555,6 +555,7 @@ body {
   }
   .nav-link {
     color: #f0f0f0;
+    line-height: 2;
     &:hover {
       color: #fff;
       background-color: rgba($color: $brand-extend-light, $alpha: 0.1);
@@ -575,6 +576,7 @@ body {
     .nav-item {
       .nav-link {
         font-size: 14px;
+        line-height: 2;
         border-radius: 0;
         &.active {
           font-weight: bold;
@@ -588,6 +590,11 @@ body {
   .nav-link.active {
     color: #bcc7d4;
   }
+}
+
+.dataview-entities {
+  font-size: 80%;
+  line-height: 2;
 }
 
 // Profile Page > Sections List
