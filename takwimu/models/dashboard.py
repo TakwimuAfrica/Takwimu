@@ -158,7 +158,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/freeform.html'
     )
 
-    data_indicator = DataIndicatorChooserBlock()
+    # data_indicator = DataIndicatorChooserBlock()
 
     embed = blocks.StructBlock(
         [
