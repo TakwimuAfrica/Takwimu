@@ -1,39 +1,29 @@
-from collections import OrderedDict
 import json
-import re
-import warnings
+import logging
+from collections import OrderedDict
 
-from django.db import models
 from django import forms
+from django.db import models
 from django.utils.text import slugify
-from wagtail.contrib.settings.models import BaseSetting, register_setting
-from wagtail.admin.edit_handlers import FieldPanel, StreamFieldPanel, \
-    PageChooserPanel, InlinePanel, MultiFieldPanel
-from wagtail.images.edit_handlers import ImageChooserPanel
-
-from wagtail.core import blocks
-from wagtail.embeds.blocks import EmbedBlock
-from wagtail.documents.blocks import DocumentChooserBlock
-from wagtail.documents.edit_handlers import DocumentChooserPanel
-from wagtail.documents.models import Document
-
-from wagtail.images.models import Image
-from wagtail.images.blocks import ImageChooserBlock
-
-from wagtail.core.fields import StreamField, RichTextField
-from wagtail.core.models import Orderable, Page
-from wagtail.search import index
-
-from meta.models import ModelMeta
-
-from modelcluster.fields import ParentalKey
-
-from wazimap.models import Geography
-from hurumap.models import DataTopic, DataIndicator
 from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
-
-import logging
+from hurumap.models import DataIndicator
+from meta.models import ModelMeta
+from modelcluster.fields import ParentalKey
+from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
+                                         MultiFieldPanel, PageChooserPanel,
+                                         StreamFieldPanel)
+from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.core import blocks
+from wagtail.core.fields import RichTextField, StreamField
+from wagtail.core.models import Orderable, Page
+from wagtail.documents.blocks import DocumentChooserBlock
+from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.search import index
+from wazimap.models import Geography
 
 logger = logging.getLogger(__name__)
 
@@ -158,8 +148,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/freeform.html'
     )
 
-    # data_indicator = DataIndicatorChooserBlock()
-
     embed = blocks.StructBlock(
         [
             ('label', blocks.CharBlock(required=False,
@@ -267,9 +255,11 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                 required=False, label='Source URL')),
             ('data_source_title', blocks.CharBlock(
                 required=False, label='Source Title')),
-            ('chart_qualifier', blocks.RichTextBlock(features=['h5', 'h6', 'ol', 'ul', 'bold', 'italic', 'hr', 'link'],
-                                                     required=False, label='Chart Qualifier',
-                                                     help_text='Chart context e.g. legend, universe, etc.')),
+            ('chart_qualifier', blocks.RichTextBlock(
+                features=['h5', 'h6', 'ol', 'ul', 'bold', 'italic', 'hr',
+                          'link'],
+                required=False, label='Chart Qualifier',
+                help_text='Chart context e.g. legend, universe, etc.')),
             ('chart_height', blocks.IntegerBlock(required=False,
                                                  label='Chart Height',
                                                  help_text='Default is 300px')),
