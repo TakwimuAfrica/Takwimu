@@ -2,7 +2,7 @@
 import os
 
 from elasticsearch import RequestsHttpConnection
-from utils.aws_es import AWS4AuthNotUnicode
+from .utils.aws_es import AWS4AuthNotUnicode
 
 from hurumap.dashboard.settings import *  # noqa
 

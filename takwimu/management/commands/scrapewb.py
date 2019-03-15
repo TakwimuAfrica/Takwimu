@@ -1,7 +1,7 @@
 from django.core.management.base import BaseCommand, CommandError
 
 import csv
-import urllib2
+from  urllib.request import urlopen
 
 import wbdata
 from hurumap.models.data import DataIndicatorPublisher, DataIndicator
@@ -26,7 +26,7 @@ class Command(BaseCommand):
         )
 
         # CSV to array
-        scraper_source_csv = csv.reader(urllib2.urlopen(scraper_source_url))
+        scraper_source_csv = csv.reader(urlopen(scraper_source_url))
         scraper_source_csv_data = []
         for row in scraper_source_csv:
             scraper_source_csv_data.append(row)
@@ -130,7 +130,7 @@ class Command(BaseCommand):
             # Change data_value keys from scraper_countries to wazimap_geo_ids
             data_values_old = data_values
             data_values = {}
-            for data_value_old_key, data_value_old in data_values_old.iteritems():
+            for data_value_old_key, data_value_old in data_values_old.items():
                 data_values[scraper_countries_wazimap[data_value_old_key]] = data_value_old
 
             # Create DataIndicator if it doesn't exist, update otherwise

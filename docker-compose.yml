@@ -1,4 +1,4 @@
-version: "3.3"
+version: "3.3"  # Travis only supports 3.3 for now
 
 services:
   db:
@@ -27,6 +27,9 @@ services:
       - es
     volumes:
       - "./:/src/takwimu"
+    entrypoint:
+      - python
+    command: ["manage.py", "runserver", "0.0.0.0:8000"]
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
       - DJANGO_SECRET_KEY=somethingsecret
@@ -39,30 +42,4 @@ services:
       - TAKWIMU_ES_TIMEOUT=30
       - TAKWIMU_ES_URL=http://es:9200
       - PYTHONDONTWRITEBYTECODE="True"
-
-  # Test production configuration
-  test-prod:
-    build: .
-    ports:
-      - "8000:8000"
-    depends_on:
-      - db
-      - es
-    volumes:
-      - "./:/srv/takwimu"
-    environment:
-      - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
-      - DJANGO_SECRET_KEY=somethingsecret
-      - HURUMAP_URL=http://localhost:8000
-      - PGHOST=db
-      - PGDATABASE=takwimu
-      - PGUSER=takwimu
-      - PGPASSWORD=takwimu
-      - TAKWIMU_ES_INDEX=takwimu
-      - TAKWIMU_ES_TIMEOUT=30
-      - TAKWIMU_ES_URL=http://es:9200
-      - TAKWIMU_CACHE=True
-      - TAKWIMU_CACHE_LOCATION=takwimu_cache
-      - TAKWIMU_CACHE_KEY_PREFIX=takwimu
-      - PYTHONDONTWRITEBYTECODE="True"
-      # - DJANGO_DEBUG=False  # TODO: Figure out media + static
+      - DJANGO_DEBUG=${DJANGO_DEBUG:-true}  # (For production deploys) TODO: Figure out media + static in S3

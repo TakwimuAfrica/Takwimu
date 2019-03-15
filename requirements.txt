@@ -1,6 +1,6 @@
 git+https://github.com/CodeForAfricaLabs/wbdata.git@dev#egg=wbdata
 
-git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@master#egg=django-fontawesome
+git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@feature/python3#egg=django-fontawesome
 
 Markdown==2.6.11
 django-meta==1.4.1
@@ -10,7 +10,4 @@ elasticsearch-dsl==5.4.0
 # https://github.com/benoitc/gunicorn/issues/1194#issuecomment-269836343
 greenlet==0.4.15
 requests-aws4auth==0.9
-psycopg2-binary==2.7.5
-
-
-
+psycopg2==2.7.7

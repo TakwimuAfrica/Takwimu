@@ -9,7 +9,7 @@ from takwimu.utils.medium import Medium
 from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, COUNTRIES, CountryProfilesSetting
 from takwimu.models.dashboard import TopicPage
 
-from sdg import SDG
+from .sdg import SDG
 
 
 def takwimu_countries(request):
@@ -17,7 +17,7 @@ def takwimu_countries(request):
     published_status = settings.__dict__
 
     countries = []
-    for code, names in COUNTRIES.viewitems():
+    for code, names in COUNTRIES.items():
         country = {
             'name': names['name'],
             'short_name': names['short_name'],

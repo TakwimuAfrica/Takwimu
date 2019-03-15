@@ -23,7 +23,7 @@ from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
-from data.utils import get_page_releases_per_country, \
+from .data.utils import get_page_releases_per_country, \
     get_primary_release_year_per_geography
 from wagtail.contrib.settings.context_processors import settings
 from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
@@ -173,17 +173,10 @@ class SDGIndicatorView(TemplateView):
 
 
 def handler404(request):
-    response = render_to_response('404.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 404
-    return response
-
+    return render(request, '404.html')
 
 def handler500(request):
-    response = render_to_response('500.html', {},
-                                  context_instance=RequestContext(request))
-    response.status_code = 500
-    return response
+    return render(request, '500.html')
 
 
 class SupportServicesIndexView(TemplateView):

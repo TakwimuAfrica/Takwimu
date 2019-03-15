@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from medium_models import Image, Post, to_dict
+from .medium_models import Image, Post, to_dict
 
 try:
     from urllib.parse import urlencode
