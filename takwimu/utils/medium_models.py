@@ -109,13 +109,11 @@ class Post:
         self._post_tags = tags
 
     def __str__(self, *args, **kwargs):
-        return str(to_dict(self))
+        return self.title
 
     def __repr__(self, *args, **kwargs):
-        return str(to_dict(self))
+        return self.title
 
-    def __dict__(self):
-        return to_dict(self)
 
 
 class Image:

@@ -13,10 +13,6 @@ def get_country_geo_code(geo):
     level = geo.geo_level.lower()
     if level != 'continent':
         geo_code = geo.geo_code if level == 'country' else get_country_from_ancestors(geo).geo_code
-        print("\n\n\n\n\n\n\n\n\n")
-        print(geo.__dict__)
-        print(geo_code)
-        print("\n\n\n\n\n\n\n\n\n")
 
     return geo_code.lower(), level
 
