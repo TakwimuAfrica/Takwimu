@@ -1,25 +1,37 @@
 from wazimap.data.tables import FieldTable
 
+FieldTable(['population_sex_2006'], id='population_sex_2006', year='2006',
+           dataset='Census')
+FieldTable(['population_sex_2007'], id='population_sex_2007', year='2007',
+           dataset='Census')
+FieldTable(['population_sex_2009'], id='population_sex_2009', year='2009',
+           dataset='Census')
+FieldTable(['population_sex_2011'], id='population_sex_2011', year='2011',
+           dataset='Census')
+FieldTable(['population_sex_2012'], id='population_sex_2012', year='2012',
+           dataset='Census')
+FieldTable(['population_sex_2013'], id='population_sex_2013', year='2013',
+           dataset='Census')
 
-FieldTable(['population_sex_2006'], id='population_sex_2006', year='2006', dataset='Census')
-FieldTable(['population_sex_2007'], id='population_sex_2007', year='2007', dataset='Census')
-FieldTable(['population_sex_2009'], id='population_sex_2009', year='2009', dataset='Census')
-FieldTable(['population_sex_2011'], id='population_sex_2011', year='2011', dataset='Census')
-FieldTable(['population_sex_2012'], id='population_sex_2012', year='2012', dataset='Census')
-FieldTable(['population_sex_2013'], id='population_sex_2013', year='2013', dataset='Census')
+FieldTable(['population_residence_2009'], id='population_residence_2009',
+           year='2006', dataset='Census')
+FieldTable(['population_residence_2012'], id='population_residence_2012',
+           year='2012', dataset='Census')
+FieldTable(['population_residence_2013'], id='population_residence_2013',
+           year='2013', dataset='Census')
 
-FieldTable(['population_residence_2009'], id='population_residence_2009', year='2006', dataset='Census')
-FieldTable(['population_residence_2012'], id='population_residence_2012', year='2012', dataset='Census')
-FieldTable(['population_residence_2013'], id='population_residence_2013', year='2013', dataset='Census')
-
-
-FieldTable(['candidate'], id="votes_per_candidate", dataset='Elections', year='2014')
-FieldTable(['votes'], id="valid_invalid_votes", dataset='Elections', year='2014')
-FieldTable(['voters'], id="registered_accredited_voters", dataset='Elections', year='2014')
-FieldTable(['crops'], id='food_production', value_type='Float', dataset='Agriculture', year='2014')
+FieldTable(['candidate'], id="votes_per_candidate", dataset='Elections',
+           year='2014')
+FieldTable(['votes'], id="valid_invalid_votes", dataset='Elections',
+           year='2014')
+FieldTable(['voters'], id="registered_accredited_voters", dataset='Elections',
+           year='2014')
+FieldTable(['crops'], id='food_production', value_type='Float',
+           dataset='Agriculture', year='2014')
 FieldTable(['centers'], id="health_centers", dataset='Health', year='2014')
 FieldTable(['centers'], id="hiv_health_centers", dataset='Health', year='2014')
-FieldTable(['organization_type'], id="health_centers_ownership", dataset='Health', year='2014')
+FieldTable(['organization_type'], id="health_centers_ownership",
+           dataset='Health', year='2014')
 FieldTable(['workers'], id="health_workers", dataset='Health', year='2014')
 FieldTable(['causes_of_death_over_five'], dataset='Health', year='2014')
 FieldTable(['causes_of_death_under_five'], dataset='Health', year='2014')
@@ -31,7 +43,8 @@ FieldTable(['child_births'], dataset='Health', year='2014')
 FieldTable(['size'], id="child_births_by_size")
 FieldTable(['reported_birth_weights'], dataset='Health', year='2014',
            id="child_births_with_reported_birth_weights")
-FieldTable(['low_birth_weights'], id="child_births_with_low_birth_weights", dataset='Health', year='2014')
+FieldTable(['low_birth_weights'], id="child_births_with_low_birth_weights",
+           dataset='Health', year='2014')
 FieldTable(
     ['employment_activity_status', 'sex'],
     id='employment_activity_status_sex', dataset='Employment', year='2014'
@@ -50,20 +63,26 @@ FieldTable(
 
 FieldTable(['donor'], id='donor', dataset='Donor Assistance', year='2014')
 
-FieldTable(['residence', 'poverty_type'], id='residence_poverty_type', dataset='Social Welfare', year='2014')
+FieldTable(['residence', 'poverty_type'], id='residence_poverty_type',
+           dataset='Social Welfare', year='2014')
 
-FieldTable(['residence', 'age'], id='poverty_age_residence', dataset='Social Welfare', year='2014')
+FieldTable(['residence', 'age'], id='poverty_age_residence',
+           dataset='Social Welfare', year='2014')
 
-FieldTable(['year', 'type'], id='seized_firearms', dataset='Security', year='2014')
+FieldTable(['year', 'type'], id='seized_firearms', dataset='Security',
+           year='2014')
 
-FieldTable(['programme', 'donor'], id='donor_funded_programmes', dataset='Donor Assistance', year='2014')
+FieldTable(['programme', 'donor'], id='donor_funded_programmes',
+           dataset='Donor Assistance', year='2014')
 
-FieldTable(['year', 'sector'], id='government_funding', dataset='Government', year='2014')
+FieldTable(['year', 'sector'], id='government_funding', dataset='Government',
+           year='2014')
 
 FieldTable(['crime'], universe='Crimes', dataset='Crime',
            year='2014')
 
-FieldTable(['official employment status'], universe='Individuals 15 and older', dataset='Employment', year='2014')
+FieldTable(['official employment status'], universe='Individuals 15 and older',
+           dataset='Employment', year='2014')
 
 # worldbank
 
@@ -125,3 +144,52 @@ FieldTable(['tax_revenue_year'], year=2017, dataset='WorldBank',
 FieldTable(['gdp_year'], year=2017, dataset='WorldBank', id='gdp')
 FieldTable(['gdp_growth_year'], year=2017, dataset='WorldBank',
            id='gdp_growth')
+
+# gender facts and figures
+
+FieldTable(['wealth_quintile'], year=2017, dataset='Women and Men in Kenya',
+           id='wealth_quintile')
+FieldTable(['marital_status', 'physical_violence_perpetrator', 'sex'],
+           year=2017, dataset='Women and Men in Kenya',
+           id='marital_status_physical_violence_perpetrator_sex')
+FieldTable(['age_group_of_violence'], year=2017,
+           dataset='Women and Men in Kenya', id='age_group_of_violence')
+FieldTable(['disability', 'sex'], year=2017, dataset='Women and Men in Kenya',
+           id='disability_sex')
+FieldTable(['year_wage_service_activities', 'sex'], year=2017,
+           dataset='Women and Men in Kenya',
+           id='year_wage_service_activities_sex')
+FieldTable(['education_level', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='education_level_sex')
+FieldTable(['sexual_violence_perpetrator', 'sex'], year=2017,
+           dataset='Women and Men in Kenya',
+           id='sexual_violence_perpetrator_sex')
+FieldTable(['hypertension_or_diabetes', 'sex', 'agegroup'], year=2017,
+           dataset='Women and Men in Kenya',
+           id='hypertension_or_diabetes_sex_agegroup')
+FieldTable(['sex', 'year_wage_education'], year=2017,
+           dataset='Women and Men in Kenya', id='sex_year_wage_education')
+FieldTable(['year_wage_agric', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='year_wage_agric_sex')
+FieldTable(['sex', 'age_group_people_who_smoke'], year=2017,
+           dataset='Women and Men in Kenya',
+           id='sex_age_group_people_who_smoke')
+FieldTable(['age_group', 'status_of_prostate'], year=2017,
+           dataset='Women and Men in Kenya', id='age_group_status_of_prostate')
+FieldTable(['examination', 'age_group'], year=2017,
+           dataset='Women and Men in Kenya', id='examination_age_group')
+FieldTable(['violence_during_preg_educ_level'], year=2017,
+           dataset='Women and Men in Kenya',
+           id='violence_during_preg_educ_level')
+FieldTable(['age_group', 'cervical_cancer'], year=2017,
+           dataset='Women and Men in Kenya', id='age_group_cervical_cancer')
+FieldTable(['year_wage_wholesale', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='year_wage_wholesale_sex')
+FieldTable(['year_wage_manufacturing', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='year_wage_manufacturing_sex')
+FieldTable(['year_wage_public_admin', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='year_wage_public_admin_sex')
+FieldTable(['examination', 'agegroup'], year=2017,
+           dataset='Women and Men in Kenya', id='examination_agegroup')
+FieldTable(['prostate_cancer', 'agegroup'], year=2017,
+           dataset='Women and Men in Kenya', id='prostate_cancer_agegroup')

@@ -1236,6 +1236,7 @@ METADATA = {
         }}
 }
 
+
 def get_appropriate_dbtable(country, table_prefix):
     pass
 
@@ -1243,10 +1244,12 @@ def get_appropriate_dbtable(country, table_prefix):
 def get_profile(geo, profile_name, request):
     session = get_session()
     (country, level) = get_country_and_level(geo)
-    year = request.GET.get('release',get_primary_release_year_per_geography(geo))
+    year = request.GET.get('release',
+                           get_primary_release_year_per_geography(geo))
     data = {}
     try:
-        data['demographics'] = get_demographics(geo, session, country, level, year)
+        data['demographics'] = get_demographics(geo, session, country, level,
+                                                year)
         data['elections'] = get_elections(geo, session)
         data['crops'] = get_crop_production(geo, session, country, level)
         # data['health_centers'] = get_health_centers(
@@ -1280,7 +1283,8 @@ def get_country_and_level(geo):
 def get_demographics(geo, session, country, level, year):
     population_data = get_population(geo, session, country, level, year)
     child_births_data = get_child_births(geo, session, country, level)
-    demographics_data = dict(list(population_data.items()) + list(child_births_data.items()))
+    demographics_data = dict(
+        list(population_data.items()) + list(child_births_data.items()))
     demographics_data['is_missing'] = population_data.get('is_missing')
 
     return demographics_data
@@ -1376,15 +1380,8 @@ def get_child_births(geo, session, country, level):
         try:
             child_births_dist, total_child_births = get_stat_data(
                 'child_births', geo, session, order_by='-total')
-        # except Exception:
-        #     pass
-        # except DataNotFound:
-        #     pass
-        # except ValueError:
-        #     pass
         except Exception as e:
             pass
-
 
         try:
             child_births_by_size_dist, _ = get_stat_data(
@@ -1648,7 +1645,8 @@ def get_causes_of_death(geo, session):
 
         try:
             inpatient_diagnosis_under_five_dist, _ = get_stat_data(
-                'inpatient_diagnosis_under_five', geo, session, order_by='-total')
+                'inpatient_diagnosis_under_five', geo, session,
+                order_by='-total')
         except Exception:
             pass
         except DataNotFound:
@@ -1658,7 +1656,8 @@ def get_causes_of_death(geo, session):
 
         try:
             inpatient_diagnosis_over_five_dist, _ = get_stat_data(
-                'inpatient_diagnosis_over_five', geo, session, order_by='-total')
+                'inpatient_diagnosis_over_five', geo, session,
+                order_by='-total')
         except Exception:
             pass
         except DataNotFound:
@@ -1668,7 +1667,8 @@ def get_causes_of_death(geo, session):
 
         try:
             outpatient_diagnosis_over_five_dist, _ = get_stat_data(
-                'outpatient_diagnosis_over_five', geo, session, order_by='-total')
+                'outpatient_diagnosis_over_five', geo, session,
+                order_by='-total')
         except Exception:
             pass
         except DataNotFound:
@@ -1678,7 +1678,8 @@ def get_causes_of_death(geo, session):
 
         try:
             outpatient_diagnosis_under_five_dist, _ = get_stat_data(
-                'outpatient_diagnosis_under_five', geo, session, order_by='-total')
+                'outpatient_diagnosis_under_five', geo, session,
+                order_by='-total')
         except Exception:
             pass
         except DataNotFound:
@@ -1746,7 +1747,7 @@ def get_donor_assistance(geo, session, country, level):
             pass
 
         is_missing = donor_assistance_dist.get('is_missing') and \
-            donor_programmes_dist.get('is_missing')
+                     donor_programmes_dist.get('is_missing')
 
     return {
         'is_missing': is_missing,
@@ -1774,7 +1775,8 @@ def get_poverty_profile(geo, session, country, level):
             pass
 
         try:
-            poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo, session)
+            poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo,
+                                                session)
         except Exception:
             pass
         except DataNotFound:
@@ -1816,7 +1818,7 @@ def get_fgm_profile(geo, session, country, level):
 
 def get_security_profile(geo, session, country, level):
     with dataset_context(year='2014'):
-            seized_firearms_dist = LOCATIONNOTFOUND
+        seized_firearms_dist = LOCATIONNOTFOUND
     try:
         seized_firearms_dist, _ = get_stat_data(['year', 'type'], geo, session)
     except Exception:
@@ -1889,7 +1891,8 @@ def get_worldbank_data(geo, session, country, level):
 
         try:
             cereal_yield_kg_per_hectare, _ = get_stat_data(
-                ['cereal_yield_kg_per_hectare_year', ], geo, session, percent=False)
+                ['cereal_yield_kg_per_hectare_year', ], geo, session,
+                percent=False)
         except Exception as e:
             print("\n\n\n\n\n\n\n\n\n\n")
             print(e.message)
@@ -1897,7 +1900,8 @@ def get_worldbank_data(geo, session, country, level):
             pass
 
         try:
-            agricultural_land, _ = get_stat_data(['agricultural_land_year', ], geo,
+            agricultural_land, _ = get_stat_data(['agricultural_land_year', ],
+                                                 geo,
                                                  session, percent=False)
         except Exception:
             pass
@@ -1910,7 +1914,8 @@ def get_worldbank_data(geo, session, country, level):
 
         try:
             access_to_basic_services, _ = get_stat_data(
-                ['access_to_basic_services_year', ], geo, session, percent=False)
+                ['access_to_basic_services_year', ], geo, session,
+                percent=False)
         except Exception:
             pass
 
@@ -1923,19 +1928,22 @@ def get_worldbank_data(geo, session, country, level):
 
         try:
             account_ownership, _ = get_stat_data(
-                ['sex', 'account_ownership_year', ], geo, session, percent=False)
+                ['sex', 'account_ownership_year', ], geo, session,
+                percent=False)
         except Exception:
             pass
 
         try:
             youth_unemployment, _ = get_stat_data(
-                ['youth_unemployment_year', 'sex', ], geo, session, percent=False)
+                ['youth_unemployment_year', 'sex', ], geo, session,
+                percent=False)
         except Exception:
             pass
 
         try:
             adult_literacy_rate, _ = get_stat_data(
-                ['adult_literacy_rate_year', 'sex', ], geo, session, percent=False)
+                ['adult_literacy_rate_year', 'sex', ], geo, session,
+                percent=False)
         except Exception:
             pass
 
@@ -1953,7 +1961,8 @@ def get_worldbank_data(geo, session, country, level):
             pass
 
         try:
-            hiv_prevalence, _ = get_stat_data(['hiv_prevalence_year', 'sex', ], geo,
+            hiv_prevalence, _ = get_stat_data(['hiv_prevalence_year', 'sex', ],
+                                              geo,
                                               session, percent=False)
         except Exception:
             pass
@@ -1966,7 +1975,8 @@ def get_worldbank_data(geo, session, country, level):
             pass
 
         try:
-            total_population, _ = get_stat_data(['total_population_year', ], geo,
+            total_population, _ = get_stat_data(['total_population_year', ],
+                                                geo,
                                                 session, percent=False)
         except Exception:
             pass
@@ -1992,14 +2002,16 @@ def get_worldbank_data(geo, session, country, level):
             pass
 
         try:
-            nurses_and_midwives, _ = get_stat_data(['nurses_and_midwives_year', ],
-                                                   geo, session, percent=False)
+            nurses_and_midwives, _ = get_stat_data(
+                ['nurses_and_midwives_year', ],
+                geo, session, percent=False)
         except Exception:
             pass
 
         try:
             mobile_phone_subscriptions, _ = get_stat_data(
-                ['mobile_phone_subscriptions_year', ], geo, session, percent=False)
+                ['mobile_phone_subscriptions_year', ], geo, session,
+                percent=False)
         except Exception:
             pass
 
@@ -2032,13 +2044,15 @@ def get_worldbank_data(geo, session, country, level):
 
         try:
             tax_as_percentage_of_gdp, _ = get_stat_data(
-                ['tax_as_percentage_of_gdp_year', ], geo, session, percent=False)
+                ['tax_as_percentage_of_gdp_year', ], geo, session,
+                percent=False)
         except Exception:
             pass
 
         try:
             births_attended_by_skilled_health_staff, _ = get_stat_data(
-                ['births_attended_by_skilled_health_staff_year', ], geo, session,
+                ['births_attended_by_skilled_health_staff_year', ], geo,
+                session,
                 percent=False)
         except Exception:
             pass
@@ -2181,4 +2195,164 @@ def get_worldbank_data(geo, session, country, level):
                                             level)
 
     }
+    return final_data
+
+
+def gender_stats_data(geo, session, country, level):
+    with dataset_context(year='2017'):
+        pregnancy_wealth_quantile = LOCATIONNOTFOUND
+        physical_violence_perpetrator = LOCATIONNOTFOUND
+        age_group_of_violence = LOCATIONNOTFOUND
+        disability = LOCATIONNOTFOUND
+        year_wage_service_activities = LOCATIONNOTFOUND
+        education_level = LOCATIONNOTFOUND
+        sexual_violence_perpetrator = LOCATIONNOTFOUND
+        hypertension_or_diabetes = LOCATIONNOTFOUND
+        year_wage_education = LOCATIONNOTFOUND
+        year_wage_agric = LOCATIONNOTFOUND
+        age_group_people_who_smoke = LOCATIONNOTFOUND
+        violence_during_preg_educ_level = LOCATIONNOTFOUND
+        cervical_cancer = LOCATIONNOTFOUND
+        year_wage_manufacturing = LOCATIONNOTFOUND
+        year_wage_public_admin = LOCATIONNOTFOUND
+        breast_cancer_examination = LOCATIONNOTFOUND
+        prostate_cancer = LOCATIONNOTFOUND
+
+
+        try:
+            pregnancy_wealth_quantile, _ = get_stat_data(['wealth_quintile'],
+                                                         geo, session)
+        except Exception:
+            pass
+
+        try:
+            physical_violence_perpetrator, _ = get_stat_data(
+                ['marital_status', 'physical_violence_perpetrator', 'sex'], geo,
+                session)
+        except Exception:
+            pass
+
+        try:
+            age_group_of_violence, _ = get_stat_data(['age_group_of_violence'],
+                                                     geo, session)
+        except Exception:
+            pass
+
+        try:
+            disability, _ = get_stat_data(['disability', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            year_wage_service_activities, _ = get_stat_data(
+                ['year_wage_service_activities', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            education_level, _ = get_stat_data(['education_level', 'sex'], geo,
+                                               session)
+        except Exception:
+            pass
+
+        try:
+            sexual_violence_perpetrator, _ = get_stat_data(
+                ['sexual_violence_perpetrator', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            hypertension_or_diabetes, _ = get_stat_data(
+                ['hypertension_or_diabetes', 'sex', 'agegroup'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            year_wage_education, _ = get_stat_data(
+                ['sex', 'year_wage_education'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            age_group_people_who_smoke, _ = get_stat_data(
+                ['age_group', 'status_of_prostate'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            violence_during_preg_educ_level, _ = get_stat_data(
+                ['violence_during_preg_educ_level'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            cervical_cancer, _ = get_stat_data(['age_group', 'cervical_cancer'],
+                                               geo, session)
+        except Exception:
+            pass
+
+        try:
+            prostate_cancer, _ = get_stat_data(['agegroup', 'prostate_cancer'],
+                                               geo, session)
+        except Exception:
+            pass
+
+        try:
+            year_wage_manufacturing, _ = get_stat_data(
+                ['year_wage_manufacturing', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            year_wage_public_admin, _ = get_stat_data(
+                ['year_wage_public_admin', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            breast_cancer_examination, _ = get_stat_data(['examination', 'agegroup'], geo, session)
+        except Exception:
+            pass
+
+
+    is_missing = pregnancy_wealth_quantile.get(
+        'is_missing') and physical_violence_perpetrator.get(
+        'is_missing') and age_group_of_violence.get('is_missing') and \
+                 disability.get(
+                     'is_missing') and year_wage_service_activities.get(
+        'is_missing') and education_level.get('is_missing') and \
+                 sexual_violence_perpetrator.get(
+                     'is_missing') and hypertension_or_diabetes.get(
+        'is_missing') and year_wage_education.get('is_missing') and \
+                 year_wage_agric.get(
+                     'is_missing') and age_group_people_who_smoke.get(
+        'is_missing') and violence_during_preg_educ_level.get(
+        'is_missing') and cervical_cancer.get('is_missing') and \
+                 year_wage_manufacturing.get(
+                     'is_missing') and year_wage_public_admin.get(
+        'is_missing') and breast_cancer_examination.get('is_missing') and prostate_cancer.get('is_missing')
+
+    final_data = {
+        'is_missing': is_missing,
+        'pregnancy_wealth_quantile' : pregnancy_wealth_quantile,
+        'physical_violence_perpetrator' : physical_violence_perpetrator,
+        'age_group_of_violence' : age_group_of_violence,
+        'disability' : disability,
+        'year_wage_service_activities' : year_wage_service_activities,
+        'education_level' : education_level,
+        'sexual_violence_perpetrator' : sexual_violence_perpetrator,
+        'hypertension_or_diabetes' : hypertension_or_diabetes,
+        'year_wage_education' : year_wage_education,
+        'year_wage_agric' : year_wage_agric,
+        'age_group_people_who_smoke' : age_group_people_who_smoke,
+        'violence_during_preg_educ_level' : violence_during_preg_educ_level,
+        'cervical_cancer' : cervical_cancer,
+        'year_wage_manufacturing' : year_wage_manufacturing,
+        'year_wage_public_admin' : year_wage_public_admin,
+        'breast_cancer_examination': breast_cancer_examination,
+        'prostate_cancer': prostate_cancer
+
+
+    }
+
     return final_data
