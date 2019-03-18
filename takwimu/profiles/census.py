@@ -1,13 +1,8 @@
 import logging
-import re
-from collections import OrderedDict
 
 from django.conf import settings
-from wazimap.data.utils import get_session, get_stat_data, group_remainder, \
-    current_context, dataset_context
+from wazimap.data.utils import dataset_context, get_session, get_stat_data
 from wazimap.models.data import DataNotFound
-
-from wazimap.geo import LocationNotFound
 
 from takwimu.data.utils import get_primary_release_year_per_geography
 
@@ -1300,10 +1295,6 @@ def get_population(geo, session, country, level, year):
 
     except Exception:
         pass
-    except DataNotFound:
-        pass
-    except ValueError:
-        pass
 
     try:
         db_table = db_column_name = 'population_residence_' + str(year)
@@ -1311,10 +1302,6 @@ def get_population(geo, session, country, level, year):
             db_table, geo, session,
             table_fields=[db_column_name])
     except Exception:
-        pass
-    except DataNotFound:
-        pass
-    except ValueError:
         pass
 
     total_population = 0
@@ -1454,20 +1441,13 @@ def get_elections(geo, session):
                 'candidate', geo, session, table_fields=['candidate'])
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
+
         try:
             valid_invalid_dist, _ = get_stat_data('votes', geo, session,
                                                   table_fields=[
                                                       'votes'],
                                                   table_name='valid_invalid_votes')
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
         try:
@@ -1476,10 +1456,6 @@ def get_elections(geo, session):
                                                           'voters'],
                                                       table_name='registered_accredited_voters')
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
     is_missing = candidate_dist.get('is_missing') and \
@@ -1521,20 +1497,12 @@ def get_health_centers(geo, session, country, level):
                 order_by='-total')
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             hiv_health_centers_dist, total_hiv_health_centers = get_stat_data(
                 'centers', geo, session, table_name='hiv_health_centers',
                 order_by='-total')
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
         try:
@@ -1543,19 +1511,11 @@ def get_health_centers(geo, session, country, level):
                 table_name='health_centers_ownership', order_by='-total')
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             prevention_methods_dist, _ = get_stat_data(['method', 'sex'], geo,
                                                        session)
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
     is_missing = health_centers_dist.get('is_missing') and \
@@ -1598,10 +1558,6 @@ def get_health_workers(geo, session):
 
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
     total_health_workers_dist = _create_single_value_dist(
         'Total health worker population (2014)', total_health_workers)
@@ -1628,19 +1584,11 @@ def get_causes_of_death(geo, session):
                 'causes_of_death_under_five', geo, session, order_by='-total')
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             causes_of_death_over_five_dist, _ = get_stat_data(
                 'causes_of_death_over_five', geo, session, order_by='-total')
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
         try:
@@ -1649,20 +1597,12 @@ def get_causes_of_death(geo, session):
                 order_by='-total')
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             inpatient_diagnosis_over_five_dist, _ = get_stat_data(
                 'inpatient_diagnosis_over_five', geo, session,
                 order_by='-total')
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
         try:
@@ -1671,20 +1611,12 @@ def get_causes_of_death(geo, session):
                 order_by='-total')
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             outpatient_diagnosis_under_five_dist, _ = get_stat_data(
                 'outpatient_diagnosis_under_five', geo, session,
                 order_by='-total')
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
     is_missing = causes_of_death_over_five_dist.get('is_missing') and \
@@ -1712,10 +1644,6 @@ def get_knowledge_of_HIV(geo, session):
                 ['method', 'sex'], geo, session)
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
     return {
         'is_missing': prevention_methods_dist.get('is_missing'),
@@ -1731,19 +1659,11 @@ def get_donor_assistance(geo, session, country, level):
             donor_assistance_dist, _ = get_stat_data(['donor'], geo, session)
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             donor_programmes_dist, _ = get_stat_data(
                 ['donor', 'programme'], geo, session)
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
         is_missing = donor_assistance_dist.get('is_missing') and \
@@ -1769,19 +1689,11 @@ def get_poverty_profile(geo, session, country, level):
                 ['poverty_type', 'residence'], geo, session)
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
         try:
             poverty_age_dist, _ = get_stat_data(['age', 'residence'], geo,
                                                 session)
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
     is_missing = poverty_residence_dist.get('is_missing') and \
@@ -1804,10 +1716,6 @@ def get_fgm_profile(geo, session, country, level):
             fgm_age_dist, _ = get_stat_data(['age'], geo, session)
         except Exception:
             pass
-        except DataNotFound:
-            pass
-        except ValueError:
-            pass
 
     return {
         'is_missing': fgm_age_dist.get('is_missing'),
@@ -1822,10 +1730,6 @@ def get_security_profile(geo, session, country, level):
     try:
         seized_firearms_dist, _ = get_stat_data(['year', 'type'], geo, session)
     except Exception:
-        pass
-    except DataNotFound:
-        pass
-    except ValueError:
         pass
 
     return {
@@ -1843,10 +1747,6 @@ def get_budget_data(geo, session, country, level):
             government_expenditure_dist, _ = get_stat_data(
                 ['year', 'sector'], geo, session)
         except Exception:
-            pass
-        except DataNotFound:
-            pass
-        except ValueError:
             pass
 
     return {
@@ -1894,9 +1794,6 @@ def get_worldbank_data(geo, session, country, level):
                 ['cereal_yield_kg_per_hectare_year', ], geo, session,
                 percent=False)
         except Exception as e:
-            print("\n\n\n\n\n\n\n\n\n\n")
-            print(e.message)
-            print("\n\n\n\n\n\n\n\n\n\n")
             pass
 
         try:
