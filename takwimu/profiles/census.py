@@ -1258,6 +1258,7 @@ def get_profile(geo, profile_name, request):
         data['security'] = get_security_profile(geo, session, country, level)
         data['budget'] = get_budget_data(geo, session, country, level)
         data['worldbank'] = get_worldbank_data(geo, session, country, level)
+        data['gender'] = gender_stats_data(geo, session, country, level)
 
         return data
     finally:
