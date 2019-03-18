@@ -36,7 +36,7 @@ CREATE TABLE public.population_residence_2009 (
 -- Data for Name: population_residence_2009; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_residence_2009 (geo_level, geo_code, geo_version, "population_residence_2009", total) FROM stdin;
+COPY public.population_residence_2009 (geo_level, geo_code, geo_version, population_residence_2009, total) FROM stdin;
 level1	KE_1_030	2009	urban	61551
 level1	KE_1_036	2009	urban	132255
 level1	KE_1_039	2009	urban	298696
@@ -141,7 +141,7 @@ level1	KE_1_024	2009	rural	469994
 --
 
 ALTER TABLE ONLY public.population_residence_2009
-    ADD CONSTRAINT pk_population_residence_2009 PRIMARY KEY (geo_level, geo_code, geo_version, "population_residence_2009");
+    ADD CONSTRAINT pk_population_residence_2009 PRIMARY KEY (geo_level, geo_code, geo_version, population_residence_2009);
 
 
 --

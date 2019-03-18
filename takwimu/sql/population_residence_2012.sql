@@ -2,8 +2,8 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 10.4
--- Dumped by pg_dump version 10.4
+-- Dumped from database version 10.6
+-- Dumped by pg_dump version 10.6
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -27,7 +27,7 @@ CREATE TABLE public.population_residence_2012 (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    "population_residence_2012" character varying(128) NOT NULL,
+    population_residence_2012 character varying(128) NOT NULL,
     total integer
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE public.population_residence_2012 (
 -- Data for Name: population_residence_2012; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.population_residence_2012 (geo_level, geo_code, geo_version, "population_residence_2012", total) FROM stdin;
+COPY public.population_residence_2012 (geo_level, geo_code, geo_version, population_residence_2012, total) FROM stdin;
 country	TZ	2009	urban	13305004
 country	TZ	2009	rural	31623919
 level1	TZ_1_001	2009	urban	530630
@@ -106,7 +106,7 @@ level1	TZ_1_021	2009	rural	505396
 --
 
 ALTER TABLE ONLY public.population_residence_2012
-    ADD CONSTRAINT pk_population_residence_2012 PRIMARY KEY (geo_level, geo_code, geo_version, "population_residence_2012");
+    ADD CONSTRAINT pk_population_residence_2012 PRIMARY KEY (geo_level, geo_code, geo_version, population_residence_2012);
 
 
 --
