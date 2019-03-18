@@ -2,19 +2,21 @@
 {% load staticfiles sass_tags geotags %}
 
 {% block profile_header_tail %}
-<div class="column-full">
+  <div class="column-full">
     <strong>{{ primary_releases.active.name }} {{ primary_releases.active.year }}</strong>
     {% if primary_releases.other %}
-    <div class="tool-group toggle-sub-group release-list">
+      <div class="tool-group toggle-sub-group release-list">
         <a>Change release<i class="fa fa-chevron-circle-down"></i></a>
         <ul class="sub-group" style="display: none;">
-        {% for release in primary_releases.other %}
-            <li><a href="{{ request.path }}?release={{release.year}}">{{ release.name }} {{ release.year }}</a></li>
-        {% endfor %}
+          {% for release in primary_releases.other %}
+            <li>
+              <a href="{{ request.path }}?release={{ release.year }}">{{ release.name }} {{ release.year }}</a>
+            </li>
+          {% endfor %}
         </ul>
-    </div>
+      </div>
     {% endif %}
-</div>
+  </div>
 {% endblock %}
 
 {% block profile_detail %}
@@ -96,50 +98,50 @@
     </article>
   {% endif %}
 
-{#  {% if not health_centers.is_missing %}#}
-{#    <article id="health_centers_distribution" class="clearfix">#}
-{#      <header class="section-contents">#}
-{#        <h1>Health centers distribution</h1>#}
-{#      </header>#}
-{#      {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}#}
-{#        <div class="section-container">#}
-{#          <section class="clearfix stat-row">#}
-{#            {% if not health_centers.health_centers_dist.is_missing %}#}
-{#              <div class="column-third">#}
-{#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}#}
-{#              </div>#}
-{#            {% endif %}#}
-{#            {% if not health_centers.hiv_health_centers_dist.is_missing %}#}
-{#              <div class="column-third">#}
-{#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}#}
-{#              </div>#}
-{#            {% endif %}#}
-{#            {% if not health_centers.health_centers_ownership_dist.is_missing %}#}
-{#              <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>#}
-{#            {% endif %}#}
-{#            {% if not health_centers.health_centers_dist.is_missing %}#}
-{#              <div class="column-full">#}
-{#                <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>#}
-{#              </div>#}
-{#            {% endif %}#}
-{#          </section>#}
-{#        </div>#}
-{#      {% endif %}#}
-{#      {% if not health_centers.prevention_methods_dist.is_missing %}#}
-{#        <div class="section-container">#}
-{#          <section class="clearfix stat-row">#}
-{#            <h2 class="header-for-columns">Knowledge of HIV Prevention#}
-{#              Methods</h2>#}
-{#            <div class="column-full">#}
-{#              <div id="chart-grouped_column-health_centers-prevention_methods_dist"#}
-{#                   data-stat-type="scaled-percentage"#}
-{#                   data-chart-title=""></div>#}
-{#            </div>#}
-{#          </section>#}
-{#        </div>#}
-{#      {% endif %}#}
-{#    </article>#}
-{#  {% endif %}#}
+  {#  {% if not health_centers.is_missing %}#}
+  {#    <article id="health_centers_distribution" class="clearfix">#}
+  {#      <header class="section-contents">#}
+  {#        <h1>Health centers distribution</h1>#}
+  {#      </header>#}
+  {#      {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}#}
+  {#        <div class="section-container">#}
+  {#          <section class="clearfix stat-row">#}
+  {#            {% if not health_centers.health_centers_dist.is_missing %}#}
+  {#              <div class="column-third">#}
+  {#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}#}
+  {#              </div>#}
+  {#            {% endif %}#}
+  {#            {% if not health_centers.hiv_health_centers_dist.is_missing %}#}
+  {#              <div class="column-third">#}
+  {#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}#}
+  {#              </div>#}
+  {#            {% endif %}#}
+  {#            {% if not health_centers.health_centers_ownership_dist.is_missing %}#}
+  {#              <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>#}
+  {#            {% endif %}#}
+  {#            {% if not health_centers.health_centers_dist.is_missing %}#}
+  {#              <div class="column-full">#}
+  {#                <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>#}
+  {#              </div>#}
+  {#            {% endif %}#}
+  {#          </section>#}
+  {#        </div>#}
+  {#      {% endif %}#}
+  {#      {% if not health_centers.prevention_methods_dist.is_missing %}#}
+  {#        <div class="section-container">#}
+  {#          <section class="clearfix stat-row">#}
+  {#            <h2 class="header-for-columns">Knowledge of HIV Prevention#}
+  {#              Methods</h2>#}
+  {#            <div class="column-full">#}
+  {#              <div id="chart-grouped_column-health_centers-prevention_methods_dist"#}
+  {#                   data-stat-type="scaled-percentage"#}
+  {#                   data-chart-title=""></div>#}
+  {#            </div>#}
+  {#          </section>#}
+  {#        </div>#}
+  {#      {% endif %}#}
+  {#    </article>#}
+  {#  {% endif %}#}
 
   {% if not health_workers.health_workers_dist.is_missing %}
     <article id="health_workers_distribution" class="clearfix">
@@ -247,21 +249,19 @@
       <div class="section-container">
         {% if not poverty.poverty_residence_dist.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Percentage of Population in
-              Poverty</h2>
             <div class="column-full"
                  id="chart-grouped_column-poverty-poverty_residence_dist"
-                 data-stat-type="scaled-percentage">
+                 data-stat-type="scaled-percentage" data-chart-title="Percentage of Population in
+              Poverty">
             </div>
           </section>
         {% endif %}
         {% if not poverty.poverty_age_dist.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Percentage of Population living in
-              Poverty by Age and Residence</h2>
             <div class="column-full"
                  id="chart-grouped_column-poverty-poverty_age_dist"
-                 data-stat-type="scaled-percentage">
+                 data-stat-type="scaled-percentage" data-chart-title="Percentage of Population living in
+              Poverty by Age and Residence">
             </div>
           </section>
         {% endif %}
@@ -277,11 +277,10 @@
       <div class="section-container">
         {% if not fgm.fgm_age_dist.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Percentage of Women that have
-              undergone FGM by age</h2>
             <div class="column-full"
                  id="chart-histogram-fgm-fgm_age_dist"
-                 data-stat-type="scaled-percentage">
+                 data-stat-type="scaled-percentage" data-chart-title="Percentage of Women that have
+              undergone FGM by age">
             </div>
           </section>
         {% endif %}
@@ -297,10 +296,9 @@
       <div class="section-container">
         {% if not security.seized_firearms_dist.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Seized Firearms</h2>
             <div class="column-full"
                  id="chart-grouped_column-security-seized_firearms_dist"
-                 data-stat-type="scaled-percentage">
+                 data-stat-type="scaled-percentage" data-chart-title="Seized Firearms">
             </div>
           </section>
         {% endif %}
@@ -316,13 +314,134 @@
       <div class="section-container">
         {% if not budget.government_expenditure_dist.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Government Spending</h2>
             <div class="column-full"
                  id="chart-grouped_column-budget-government_expenditure_dist"
-                 data-stat-type="scaled-percentage">
+                 data-stat-type="scaled-percentage" data-chart-title="Government Spending">
             </div>
           </section>
         {% endif %}
+      </div>
+    </article>
+  {% endif %}
+
+  {% if not gender.is_missing %}
+    <article class="clearfix">
+      <header class="section-contents">
+        <h1>Gender</h1>
+      </header>
+      <div class="section-container">
+        {% if not gender.hypertension_and_diabetes.is_missing %}
+          <section class="clearfix stat-row">
+            <div class="column-full"
+                 id="chart-grouped_column-gender-hypertension_or_diabetes_sex"
+                 data-stat-type="scaled-percentage"
+                 data-chart-title="Occurence of Hypertension or Diabetes by sex">
+            </div>
+            <div class="column-full"
+                 id="chart-grouped_column-gender-hypertension_or_diabetes_agegroup"
+                 data-stat-type="scaled-percentage" data-chart-title="Occurence of Hypertension and Diabetes by age group">
+            </div>
+          </section>{% endif %}
+
+        <section class="clearfix stat-row">
+          {% if not gender.cervical_cancer.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-cervical_cancer"
+                 data-stat-type="scaled-percentage"
+                 data-chart-title="Women who have heard of Cervical Cancer">
+            </div>
+          {% endif %}
+          {% if not gender.prostate_cancer.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-prostate_cancer"
+                 data-stat-type="scaled-percentage" data-chart-title="Men who have heard of Prostate Cancer">
+          {% endif %}
+        </section>
+
+        <section class="clearfix stat-row">
+          {% if not gender.physical_violence_perpetrator_sex.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-physical_violence_perpetrator_sex"
+                 data-stat-type="scaled-percentage"
+                 data-chart-title="Perpetrators of Physical Violence by Sex">
+            </div>
+            </section>
+            <section class="clearfix stat-row">
+              <div class="column-full"
+                   id="chart-grouped_column-gender-physical_violence_perpetrator_marital_status"
+                   data-stat-type="scaled-percentage"
+                   data-chart-title="Perpetrators of Physical Violence by Marital Status">
+              </div>
+            </section>
+          {% endif %}
+        <section class="clearfix stat-row">
+          {% if not gender.sexual_violence_perpetrator.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-sexual_violence_perpetrator"
+                 data-stat-type="scaled-percentage" data-chart-title="Perpetrators of Sexual Violence">
+          {% endif %}
+        </section>
+
+        <section class="clearfix stat-row">
+          {% if not gender.year_wage_service_activities.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-year_wage_service_activities"
+                 data-stat-type=""
+                 data-chart-title="Employment Wage in Service Activities">
+          {% endif %}
+        </section>
+
+        <section class="clearfix stat-row">
+          {% if not gender.year_wage_education.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-year_wage_education"
+                 data-stat-type=""
+                 data-chart-title="Employment Wage in Education"></div>
+          {% endif %}
+        </section>
+        <section class="clearfix stat-row">
+          {% if not gender.year_wage_agric.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-year_wage_agric"
+                 data-stat-type=""
+                 data-chart-title="Employment Wage in Agriculture">{{ gender.year_wage_agric }}</div>
+          {% endif %}
+        </section>
+        <section class="clearfix stat-row">
+          {% if not gender.year_wage_manufacturing.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-year_wage_manufacturing"
+                 data-stat-type=""
+                 data-chart-title="Employment Wage in Manufacturing"></div>
+          {% endif %}
+        </section>
+
+        <section class="clearfix stat-row">
+          {% if not gender.year_wage_public_admin.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-year_wage_public_admin"
+                 data-stat-type=""
+                 data-chart-title="Employment Wage in Public Administration"></div>
+          {% endif %}
+        </section>
+
+        <section class="clearfix stat-row">
+          {% if not gender.year_wage_wholesale.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-year_wage_wholesale"
+                 data-stat-type=""
+                 data-chart-title="Employment Wage in Wholesale"></div>
+          {% endif %}
+        </section>
+
+        <section class="clearfix stat-row">
+          {% if not gender.disability.is_missing %}
+            <div class="column-full"
+                 id="chart-grouped_column-gender-disability"
+                 data-stat-type="scaled-percentage"
+                 data-chart-title="Disability by Sex"></div>
+          {% endif %}
+        </section>
       </div>
     </article>
   {% endif %}
@@ -336,7 +455,8 @@
 
         {% if not worldbank.cereal_yield_kg_per_hectare.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Cereal Yield in Kg Per Hectare (Thousands)</h2>
+            <h2 class="header-for-columns">Cereal Yield in Kg Per Hectare
+              (Thousands)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-cereal_yield_kg_per_hectare"
                  data-stat-type="">
@@ -346,7 +466,8 @@
 
         {% if not worldbank.agricultural_land.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Agricultural land (% of land area)</h2>
+            <h2 class="header-for-columns">Agricultural land (% of land
+              area)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-agricultural_land"
                  data-stat-type="">
@@ -368,7 +489,8 @@
 
         {% if not worldbank.access_to_basic_services.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">People using at least basic drinking water services (% of population)</h2>
+            <h2 class="header-for-columns">People using at least basic drinking
+              water services (% of population)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-access_to_basic_services"
                  data-stat-type="">
@@ -379,7 +501,8 @@
 
         {% if not worldbank.primary_school_enrollment.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">School enrollment, primary, male (% gross)</h2>
+            <h2 class="header-for-columns">School enrollment, primary, male (%
+              gross)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-primary_school_enrollment"
                  data-stat-type="">
@@ -390,7 +513,9 @@
 
         {% if not worldbank.account_ownership.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Account ownership at a financial institution or with a mobile-money-service provider, (% of population ages 15+)</h2>
+            <h2 class="header-for-columns">Account ownership at a financial
+              institution or with a mobile-money-service provider, (% of
+              population ages 15+)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-account_ownership"
                  data-stat-type="">
@@ -401,7 +526,8 @@
 
         {% if not worldbank.youth_unemployment.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)</h2>
+            <h2 class="header-for-columns">Unemployment, youth (% of labor force
+              ages 15-24) (modeled ILO estimate)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-youth_unemployment"
                  data-stat-type="">
@@ -412,7 +538,8 @@
 
         {% if not worldbank.adult_literacy_rate.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Literacy rate, adult (% of population ages 15 and above)</h2>
+            <h2 class="header-for-columns">Literacy rate, adult (% of population
+              ages 15 and above)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-adult_literacy_rate"
                  data-stat-type="">
@@ -423,7 +550,8 @@
 
         {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Foreign direct investment, net inflows (% of GDP)</h2>
+            <h2 class="header-for-columns">Foreign direct investment, net
+              inflows (% of GDP)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"
                  data-stat-type="">
@@ -434,7 +562,8 @@
 
         {% if not worldbank.maternal_mortality.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Maternal mortality ratio (modeled estimate, per 100,000 live births)</h2>
+            <h2 class="header-for-columns">Maternal mortality ratio (modeled
+              estimate, per 100,000 live births)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-maternal_mortality"
                  data-stat-type="">
@@ -445,7 +574,8 @@
 
         {% if not worldbank.hiv_prevalence.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Prevalence of HIV, (% ages 15-24)</h2>
+            <h2 class="header-for-columns">Prevalence of HIV, (% ages
+              15-24)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-hiv_prevalence"
                  data-stat-type="">
@@ -456,7 +586,8 @@
 
         {% if not worldbank.employment_to_population_ratio.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Employment to population ratio, 15+, (%) (modeled ILO estimate)</h2>
+            <h2 class="header-for-columns">Employment to population ratio, 15+,
+              (%) (modeled ILO estimate)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-employment_to_population_ratio"
                  data-stat-type="">
@@ -477,7 +608,8 @@
 
         {% if not worldbank.primary_education_completion_rate.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Primary completion rate,(% of relevant age group)</h2>
+            <h2 class="header-for-columns">Primary completion rate,(% of
+              relevant age group)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-primary_education_completion_rate"
                  data-stat-type="">
@@ -488,7 +620,8 @@
 
         {% if not worldbank.secondary_school_enrollment.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">School enrollment, secondary (% gross)</h2>
+            <h2 class="header-for-columns">School enrollment, secondary (%
+              gross)</h2>
             <div class="column-full"
                  id="chart-grouped_column-worldbank-secondary_school_enrollment"
                  data-stat-type="">
@@ -499,7 +632,8 @@
 
         {% if not worldbank.nurses_and_midwives.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Nurses and midwives (per 1,000 people)</h2>
+            <h2 class="header-for-columns">Nurses and midwives (per 1,000
+              people)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-nurses_and_midwives"
                  data-stat-type="scaled-percentage">
@@ -510,7 +644,8 @@
 
         {% if not worldbank.mobile_phone_subscriptions.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Mobile Phone Subscriptions (per 100 people)</h2>
+            <h2 class="header-for-columns">Mobile Phone Subscriptions (per 100
+              people)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-mobile_phone_subscriptions"
                  data-stat-type="">
@@ -532,7 +667,8 @@
 
         {% if not worldbank.prevalence_of_undernourishment.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Prevalence of undernourishment (% of population)</h2>
+            <h2 class="header-for-columns">Prevalence of undernourishment (% of
+              population)</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-prevalence_of_undernourishment"
                  data-stat-type="scaled-percentage">
@@ -577,7 +713,8 @@
 
         {% if not worldbank.incidence_of_malaria_per_1000_pop_at_risk.is_missing %}
           <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Incidence Of Malaria Per 1000 Population At Risk</h2>
+            <h2 class="header-for-columns">Incidence Of Malaria Per 1000
+              Population At Risk</h2>
             <div class="column-full"
                  id="chart-histogram-worldbank-incidence_of_malaria_per_1000_pop_at_risk"
                  data-stat-type="">

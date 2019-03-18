@@ -174,10 +174,8 @@ FieldTable(['year_wage_agric', 'sex'], year=2017,
 FieldTable(['sex', 'age_group_people_who_smoke'], year=2017,
            dataset='Women and Men in Kenya',
            id='sex_age_group_people_who_smoke')
-FieldTable(['age_group', 'status_of_prostate'], year=2017,
-           dataset='Women and Men in Kenya', id='age_group_status_of_prostate')
-FieldTable(['examination', 'age_group'], year=2017,
-           dataset='Women and Men in Kenya', id='examination_age_group')
+FieldTable(['agegroup', 'prostate_cancer'], year=2017,
+           dataset='Women and Men in Kenya', id='agegroup_prostate_cancer')
 FieldTable(['violence_during_preg_educ_level'], year=2017,
            dataset='Women and Men in Kenya',
            id='violence_during_preg_educ_level')
@@ -189,6 +187,10 @@ FieldTable(['year_wage_manufacturing', 'sex'], year=2017,
            dataset='Women and Men in Kenya', id='year_wage_manufacturing_sex')
 FieldTable(['year_wage_public_admin', 'sex'], year=2017,
            dataset='Women and Men in Kenya', id='year_wage_public_admin_sex')
+FieldTable(['year_wage_agric', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='year_wage_agric_sex')
+FieldTable(['year_wage_wholesale', 'sex'], year=2017,
+           dataset='Women and Men in Kenya', id='year_wage_wholesale_sex')
 FieldTable(['examination', 'agegroup'], year=2017,
            dataset='Women and Men in Kenya', id='examination_agegroup')
 FieldTable(['prostate_cancer', 'agegroup'], year=2017,

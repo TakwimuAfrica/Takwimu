@@ -282,6 +282,103 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "physical_violence_perpetrator_sex": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "physical_violence_perpetrator_marital_status": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "disability": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "year_wage_service_activities": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "education_level": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "sexual_violence_perpetrator": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "hypertension_or_diabetes_sex": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "hypertension_or_diabetes_agegroup": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "year_wage_education": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "year_wage_agric": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "year_wage_wholesale": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "violence_during_preg_educ_level": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "cervical_cancer": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "year_wage_manufacturing": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "year_wage_public_admin": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+            "prostate_cancer": {
+                "source": {
+                    "link": "https://africaopendata.org/dataset/kenya-gender-facts-and-figures",
+                    "title": "Kenya Gender Facts and Figures"
+                }
+            },
+
         },
     },
     'nigeria': {
@@ -2098,41 +2195,34 @@ def get_worldbank_data(geo, session, country, level):
 
 def gender_stats_data(geo, session, country, level):
     with dataset_context(year='2017'):
-        pregnancy_wealth_quantile = LOCATIONNOTFOUND
-        physical_violence_perpetrator = LOCATIONNOTFOUND
-        age_group_of_violence = LOCATIONNOTFOUND
+        physical_violence_perpetrator_sex = LOCATIONNOTFOUND
+        physical_violence_perpetrator_marital_status = LOCATIONNOTFOUND
         disability = LOCATIONNOTFOUND
         year_wage_service_activities = LOCATIONNOTFOUND
         education_level = LOCATIONNOTFOUND
         sexual_violence_perpetrator = LOCATIONNOTFOUND
-        hypertension_or_diabetes = LOCATIONNOTFOUND
+        hypertension_or_diabetes_sex = LOCATIONNOTFOUND
+        hypertension_or_diabetes_agegroup = LOCATIONNOTFOUND
         year_wage_education = LOCATIONNOTFOUND
         year_wage_agric = LOCATIONNOTFOUND
-        age_group_people_who_smoke = LOCATIONNOTFOUND
+        year_wage_wholesale = LOCATIONNOTFOUND
         violence_during_preg_educ_level = LOCATIONNOTFOUND
         cervical_cancer = LOCATIONNOTFOUND
         year_wage_manufacturing = LOCATIONNOTFOUND
         year_wage_public_admin = LOCATIONNOTFOUND
-        breast_cancer_examination = LOCATIONNOTFOUND
         prostate_cancer = LOCATIONNOTFOUND
 
-
         try:
-            pregnancy_wealth_quantile, _ = get_stat_data(['wealth_quintile'],
-                                                         geo, session)
-        except Exception:
-            pass
-
-        try:
-            physical_violence_perpetrator, _ = get_stat_data(
-                ['marital_status', 'physical_violence_perpetrator', 'sex'], geo,
+            physical_violence_perpetrator_sex, _ = get_stat_data(
+                ['physical_violence_perpetrator', 'sex'], geo,
                 session)
         except Exception:
             pass
 
         try:
-            age_group_of_violence, _ = get_stat_data(['age_group_of_violence'],
-                                                     geo, session)
+            physical_violence_perpetrator_marital_status, _ = get_stat_data(
+                ['physical_violence_perpetrator', 'marital_status'], geo,
+                session)
         except Exception:
             pass
 
@@ -2160,20 +2250,20 @@ def gender_stats_data(geo, session, country, level):
             pass
 
         try:
-            hypertension_or_diabetes, _ = get_stat_data(
-                ['hypertension_or_diabetes', 'sex', 'agegroup'], geo, session)
+            hypertension_or_diabetes_sex, _ = get_stat_data(
+                ['hypertension_or_diabetes', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            hypertension_or_diabetes_agegroup, _ = get_stat_data(
+                ['hypertension_or_diabetes', 'agegroup'], geo, session)
         except Exception:
             pass
 
         try:
             year_wage_education, _ = get_stat_data(
-                ['sex', 'year_wage_education'], geo, session)
-        except Exception:
-            pass
-
-        try:
-            age_group_people_who_smoke, _ = get_stat_data(
-                ['age_group', 'status_of_prostate'], geo, session)
+                ['year_wage_education', 'sex'], geo, session)
         except Exception:
             pass
 
@@ -2184,15 +2274,16 @@ def gender_stats_data(geo, session, country, level):
             pass
 
         try:
-            cervical_cancer, _ = get_stat_data(['age_group', 'cervical_cancer'],
-                                               geo, session)
+            cervical_cancer, _ = get_stat_data(
+                ['cervical_cancer', 'age_group', ],
+                geo, session)
         except Exception:
             pass
 
         try:
-            prostate_cancer, _ = get_stat_data(['agegroup', 'prostate_cancer'],
+            prostate_cancer, _ = get_stat_data(['prostate_cancer', 'agegroup'],
                                                geo, session)
-        except Exception:
+        except Exception as e:
             pass
 
         try:
@@ -2202,54 +2293,90 @@ def gender_stats_data(geo, session, country, level):
             pass
 
         try:
+            year_wage_agric, _ = get_stat_data(
+                ['year_wage_agric', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            year_wage_wholesale, _ = get_stat_data(
+                ['year_wage_wholesale', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
             year_wage_public_admin, _ = get_stat_data(
                 ['year_wage_public_admin', 'sex'], geo, session)
         except Exception:
             pass
 
-        try:
-            breast_cancer_examination, _ = get_stat_data(['examination', 'agegroup'], geo, session)
-        except Exception:
-            pass
-
-
-    is_missing = pregnancy_wealth_quantile.get(
-        'is_missing') and physical_violence_perpetrator.get(
-        'is_missing') and age_group_of_violence.get('is_missing') and \
-                 disability.get(
-                     'is_missing') and year_wage_service_activities.get(
-        'is_missing') and education_level.get('is_missing') and \
-                 sexual_violence_perpetrator.get(
-                     'is_missing') and hypertension_or_diabetes.get(
-        'is_missing') and year_wage_education.get('is_missing') and \
-                 year_wage_agric.get(
-                     'is_missing') and age_group_people_who_smoke.get(
-        'is_missing') and violence_during_preg_educ_level.get(
-        'is_missing') and cervical_cancer.get('is_missing') and \
-                 year_wage_manufacturing.get(
-                     'is_missing') and year_wage_public_admin.get(
-        'is_missing') and breast_cancer_examination.get('is_missing') and prostate_cancer.get('is_missing')
+    is_missing = \
+        physical_violence_perpetrator_sex.get('is_missing') and \
+        disability.get('is_missing') and \
+        year_wage_service_activities.get('is_missing') and \
+        education_level.get('is_missing') and \
+        sexual_violence_perpetrator.get('is_missing') and \
+        hypertension_or_diabetes_sex.get('is_missing') and \
+        year_wage_education.get('is_missing') and \
+        year_wage_agric.get('is_missing') and \
+        violence_during_preg_educ_level.get('is_missing') and \
+        cervical_cancer.get('is_missing') and \
+        year_wage_manufacturing.get('is_missing') and \
+        year_wage_agric.get('is_missing') and \
+        year_wage_wholesale.get('is_missing') and \
+        year_wage_public_admin.get('is_missing') and \
+        prostate_cancer.get('is_missing') and \
+        hypertension_or_diabetes_agegroup.get('is_missing') and \
+        physical_violence_perpetrator_marital_status.get('is_missing')
 
     final_data = {
         'is_missing': is_missing,
-        'pregnancy_wealth_quantile' : pregnancy_wealth_quantile,
-        'physical_violence_perpetrator' : physical_violence_perpetrator,
-        'age_group_of_violence' : age_group_of_violence,
-        'disability' : disability,
-        'year_wage_service_activities' : year_wage_service_activities,
-        'education_level' : education_level,
-        'sexual_violence_perpetrator' : sexual_violence_perpetrator,
-        'hypertension_or_diabetes' : hypertension_or_diabetes,
-        'year_wage_education' : year_wage_education,
-        'year_wage_agric' : year_wage_agric,
-        'age_group_people_who_smoke' : age_group_people_who_smoke,
-        'violence_during_preg_educ_level' : violence_during_preg_educ_level,
-        'cervical_cancer' : cervical_cancer,
-        'year_wage_manufacturing' : year_wage_manufacturing,
-        'year_wage_public_admin' : year_wage_public_admin,
-        'breast_cancer_examination': breast_cancer_examination,
-        'prostate_cancer': prostate_cancer
-
+        'physical_violence_perpetrator_sex': _add_metadata_to_dist(
+            physical_violence_perpetrator_sex,
+            "physical_violence_perpetrator_sex", country, level),
+        'physical_violence_perpetrator_marital_status': _add_metadata_to_dist(
+            physical_violence_perpetrator_marital_status,
+            "physical_violence_perpetrator_marital_status", country, level),
+        'disability': _add_metadata_to_dist(disability, "disability", country,
+                                            level),
+        'year_wage_service_activities': _add_metadata_to_dist(
+            year_wage_service_activities, "year_wage_service_activities",
+            country, level),
+        'education_level': _add_metadata_to_dist(education_level,
+                                                 "education_level", country,
+                                                 level),
+        'sexual_violence_perpetrator': _add_metadata_to_dist(
+            sexual_violence_perpetrator, "sexual_violence_perpetrator", country,
+            level),
+        'hypertension_or_diabetes_sex': _add_metadata_to_dist(
+            sexual_violence_perpetrator, "sexual_violence_perpetrator", country,
+            level),
+        'hypertension_or_diabetes_agegroup': _add_metadata_to_dist(
+            hypertension_or_diabetes_agegroup,
+            "hypertension_or_diabetes_agegroup", country, level),
+        'year_wage_education': _add_metadata_to_dist(year_wage_education,
+                                                     "year_wage_education",
+                                                     country, level),
+        'year_wage_agric': _add_metadata_to_dist(year_wage_agric,
+                                                 "year_wage_agric", country,
+                                                 level),
+        'year_wage_wholesale': _add_metadata_to_dist(year_wage_wholesale,
+                                                     "year_wage_wholesale",
+                                                     country, level),
+        'violence_during_preg_educ_level': _add_metadata_to_dist(
+            violence_during_preg_educ_level, "violence_during_preg_educ_level",
+            country, level),
+        'cervical_cancer': _add_metadata_to_dist(cervical_cancer,
+                                                 "cervical_cancer", country,
+                                                 level),
+        'year_wage_manufacturing': _add_metadata_to_dist(
+            year_wage_manufacturing, "year_wage_manufacturing", country, level),
+        'year_wage_public_admin': _add_metadata_to_dist(year_wage_public_admin,
+                                                        "year_wage_public_admin",
+                                                        country, level),
+        'prostate_cancer': _add_metadata_to_dist(prostate_cancer,
+                                                 "prostate_cancer", country,
+                                                 level),
 
     }
 
