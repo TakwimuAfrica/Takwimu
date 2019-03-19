@@ -28,7 +28,7 @@ services:
     volumes:
       - "./:/src/takwimu"
     entrypoint:
-      - python
+      - /usr/local/bin/python
     command: ["manage.py", "runserver", "0.0.0.0:8000"]
     environment:
       - DATABASE_URL=postgresql://takwimu:takwimu@db:5432/takwimu
