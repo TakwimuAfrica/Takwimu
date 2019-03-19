@@ -207,6 +207,11 @@ body {
   background-color: $brand-color-secondary !important;
   border-color: $brand-color-secondary !important;
 }
+.leaflet-container a {
+  font-size: 11px;
+  line-height: initial;
+  color: $brand-color-primary;
+}
 
 
 
@@ -346,6 +351,12 @@ body {
   border-left: 2px dashed transparent!important;
 }
 
+// Country Map SVG
+.country-map.svg {
+  path {
+    fill: $brand-color-primary;
+  }
+}
 
 /* -----------------------------------------
  * Main Navbar
@@ -754,6 +765,9 @@ body {
   word-break: break-all;
   white-space: normal;
 }
+
+
+
 
 
 // Extra small devices (portrait phones, less than 576px)
