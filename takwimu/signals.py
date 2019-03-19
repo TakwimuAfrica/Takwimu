@@ -12,7 +12,7 @@ Should save
 
 from takwimu.models import ProfilePage, ProfileSectionPage
 from django.dispatch import receiver
-from wagtail.wagtailcore.signals import page_published
+from wagtail.core.signals import page_published
 
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_widget_data, get_page_details

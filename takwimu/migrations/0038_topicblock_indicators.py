@@ -2,7 +2,7 @@ import json
 import uuid
 
 from django.core.serializers.json import DjangoJSONEncoder
-from wagtail.wagtailcore.blocks import StreamValue
+from wagtail.core.blocks import StreamValue
 from django.db import migrations
 
 
