@@ -24,7 +24,7 @@
         <div class="col">
           <h3>Social</h3>
           <ul class="list-unstyled">
-          {% to_list 'facebook' 'twitter' 'medium' 'youtube' 'instagram' 'github' as social_medias %}
+          {% to_list 'twitter' 'medium' 'facebook' 'github' as social_medias %}
           {% for social_media in social_medias %}
             {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
               <li>
