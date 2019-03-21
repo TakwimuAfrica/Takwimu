@@ -166,7 +166,8 @@ def asset_manifest(request):
             'debug': True,
             'main': 'js/main.chunk.js',
             'vendor': 'js/bundle.js',
-            'runtime': 'js/0.chunk.js',
+            'runtime0': 'js/0.chunk.js',
+            'runtime1': 'js/1.chunk.js',
             'port': os.environ.get('TAKWIMU_REACT_PORT', '3000')
         }
     else:

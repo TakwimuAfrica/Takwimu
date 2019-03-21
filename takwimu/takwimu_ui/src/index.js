@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom';
 
 import withRoot from './withRoot';
 
+import MakingOfTakwimu from './components/MakingOfTakwimu';
+
 const renderApp = (Component, id) => {
   const el = document.getElementById(id);
   if (el) {
@@ -12,4 +14,4 @@ const renderApp = (Component, id) => {
   }
 };
 
-renderApp(<div />, '');
+renderApp(MakingOfTakwimu, 'takwimuMakingOf');
