@@ -167,7 +167,7 @@ def asset_manifest(request):
             'main': 'js/main.chunk.js',
             'vendor': 'js/bundle.js',
             'runtime': 'js/0.chunk.js',
-            'port': os.environ.get('TAKWIMU_REACT_PORT', 3000)
+            'port': os.environ.get('TAKWIMU_REACT_PORT', '3000')
         }
     else:
         try:
