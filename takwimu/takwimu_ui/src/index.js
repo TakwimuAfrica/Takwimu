@@ -9,4 +9,3 @@ const renderApp = (Component, id) => {
     }
 };
 
-renderApp(App, 'page');
