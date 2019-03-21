@@ -1,8 +1,8 @@
 {% load staticfiles cache %}
 {% cache 600  hero %}
-<div style="/*background: #074c9c url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;*/">
-  <div class="py-5">
-    <div class="container">
+<div style="background: #fff url('{% static 'img/bg/parliament.jpg'%}') no-repeat right bottom; background-size: contain;">
+  <div class="py-5" style="background-image: linear-gradient(135deg, #fff, #fff, transparent);">
+    <div class="container mt-3">
       <div class="row align-items-center">
         <div class="col-md-6 col-lg-8">
           <h1 class="font-weight-bold display-4">
@@ -19,6 +19,7 @@
           <hr class="d-md-none border-light"/>
         </div>
 
+        {% comment %}
         <div class="col-md-6 col-lg-4">
           <div id="carousel-homepage-hero"
                data-toggle="carousel"
@@ -39,6 +40,7 @@
             </div>
           </div>
         </div>
+        {% endcomment %}
       </div>
     </div>
   </div>
