@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Typography, Grid, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
-import Section from './comon/Section';
+import Section from './Section';
 
 const styles = theme => ({
   box: {
@@ -25,8 +25,7 @@ const styles = theme => ({
 
 function WhereToNext({ classes }) {
   return (
-    <Section>
-      <Typography variant="h2">Where to next</Typography>
+    <Section title="Where to next" titleVariant="h2">
       <Grid container justify="space-between" alignItems="center">
         <Grid item>
           <div className={classes.box}>
