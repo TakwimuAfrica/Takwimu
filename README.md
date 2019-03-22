@@ -45,8 +45,18 @@ With [Docker Compose](https://docs.docker.com/compose/), development set up is r
 git clone https://github.com/TakwimuAfrica/TAKWIMU.git
 cd TAKWIMU
 make build
+make createdb
 make web
+make migrate
+make compilescss
 make loaddata
+```
+
+On another terminal
+
+```shell
+cd takwimu/takwimu_ui
+yarn start
 ```
 
 Optionally you can also enable Redis as cache backend in your development environment by doing the following:
