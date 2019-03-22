@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Typography } from '@material-ui/core';
 
-import Section from './Section';
+import Section from './comon/Section';
 
 function MakingOfTakwimu() {
   return (
