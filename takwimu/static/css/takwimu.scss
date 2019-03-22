@@ -215,6 +215,23 @@ body {
   line-height: initial;
   color: $brand-color-primary;
 }
+.leaflet-bar a, .leaflet-control-layers-toggle {
+  font-size: initial;
+  line-height: initial;
+}
+
+// Profile
+
+.caption {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0; padding: 0;
+  margin-bottom: 15px;
+  a {
+    font-size: inherit;
+    line-height: inherit;
+  }
+}
 
 
 
