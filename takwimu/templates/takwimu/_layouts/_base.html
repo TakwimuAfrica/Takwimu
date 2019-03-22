@@ -102,16 +102,9 @@
     });
   </script>
 
-  {% if asset_manifest.debug %}
-    <script src="http://localhost:{{ asset_manifest.port }}{% static asset_manifest.runtime0 %}"></script>
-    <script src="http://localhost:{{ asset_manifest.port }}{% static asset_manifest.runtime1 %}"></script>
-    <script src="http://localhost:{{ asset_manifest.port }}{% static asset_manifest.vendor %}"></script>
-    <script src="http://localhost:{{ asset_manifest.port }}{% static asset_manifest.main %}"></script>
-  {% else %}
-    <script src="{% static asset_manifest.runtime %}"></script>
-    <script src="{% static asset_manifest.vendor %}"></script>
-    <script src="{% static asset_manifest.main %}"></script>
-  {% endif %}
+  <script src="{% static asset_manifest.runtime %}"></script>
+  <script src="{% static asset_manifest.vendor %}"></script>
+  <script src="{% static asset_manifest.main %}"></script>
 
   {% block body_javascript_extra %}{% endblock %}
 
