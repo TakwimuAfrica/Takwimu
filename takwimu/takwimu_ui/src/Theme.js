@@ -1,7 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
 const FONT_FAMILY_HEADING = '"Lora", "serif"';
-const FONT_FAMILY_BODY = '"Muli"';
+const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const Theme = createMuiTheme({
   palette: {
@@ -10,7 +10,7 @@ const Theme = createMuiTheme({
   },
   typography: {
     fontHeading: FONT_FAMILY_HEADING,
-    fontBody: FONT_FAMILY_BODY,
+    fontText: FONT_FAMILY_TEXT,
     h1: {
       fontFamily: FONT_FAMILY_HEADING,
       margin: '3.063rem 0',
@@ -34,7 +34,7 @@ const Theme = createMuiTheme({
       color: 'black'
     },
     body1: {
-      fontFamily: FONT_FAMILY_BODY,
+      fontFamily: FONT_FAMILY_TEXT,
       fontSize: '1.25rem',
       fontStyle: 'normal',
       fontStretch: 'normal',
@@ -42,13 +42,24 @@ const Theme = createMuiTheme({
       letterSpacing: 'normal'
     },
     body2: {
-      fontFamily: FONT_FAMILY_BODY,
+      fontFamily: FONT_FAMILY_TEXT,
       fontSize: '1.25rem',
+      fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: '2.05',
       letterSpacing: 'normal'
-    }
+    },
+    subtitle1: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal'
+    },
+    useNextVariants: true
   }
 });
 
