@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import withRoot from './withRoot';
 
 import MakingOfTakwimu from './components/MakingOfTakwimu';
+import WhereToNext from './components/WhereToNext';
 
 const renderApp = (Component, id) => {
   const el = document.getElementById(id);
@@ -15,3 +16,4 @@ const renderApp = (Component, id) => {
 };
 
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
+renderApp(WhereToNext, 'takwimuWhereToNext');
