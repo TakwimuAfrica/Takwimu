@@ -1,6 +1,7 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const FONT_FAMILY_HEADING = '"Lora", "serif"';
+const FONT_FAMILY_HEADING = '"Lora", serif';
+const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const Theme = createMuiTheme({
   palette: {
@@ -19,14 +20,25 @@ const Theme = createMuiTheme({
       letterSpacing: 'normal',
       color: 'black'
     },
-    body1: {
-      fontFamily: 'Muli',
-      fontSize: '1.25rem',
+    subtitle1: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: 'normal',
       letterSpacing: 'normal'
-    }
+    },
+    body1: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.25rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: '2.05',
+      letterSpacing: 'normal'
+    },
+    useNextVariants: true
   }
 });
 

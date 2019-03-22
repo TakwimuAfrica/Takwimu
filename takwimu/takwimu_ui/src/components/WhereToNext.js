@@ -1,22 +1,38 @@
 import React from 'react';
+import { PropTypes } from 'prop-types';
 
 import { Typography, Grid, withStyles } from '@material-ui/core';
-import { PropTypes } from 'prop-types';
+
 import Section from './Section';
 
 const styles = theme => ({
+  root: {
+    flexGrow: 1
+  },
   box: {
     backgroundColor: theme.palette.primary.main,
-    width: '24.5rem',
+    width: '100%',
     height: '14.875rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    padding: '1.25rem'
+    [theme.breakpoints.up('md')]: {
+      width: '18.375rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '24.5rem'
+    }
+  },
+  middlebox: {
+    margin: '2rem 0',
+    [theme.breakpoints.up('md')]: {
+      margin: '0 1.5rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '0 2rem'
+    }
   },
   label: {
-    fontSize: '1.75rem',
-    fontWeight: 'bold',
     textAlign: 'center',
     color: 'white',
     margin: '0 auto'
@@ -25,29 +41,28 @@ const styles = theme => ({
 
 function WhereToNext({ classes }) {
   return (
-    <Section title="Where to next" titleVariant="h2">
-      <Grid container justify="space-between" alignItems="center">
-        <Grid item>
-          <div className={classes.box}>
-            <Typography variant="body1" className={classes.label}>
-              Stay up-to-date with new data and analysis
-            </Typography>
-          </div>
-        </Grid>
-        <Grid item>
-          <div className={classes.box}>
-            <Typography variant="body1" className={classes.label}>
-              Looking for other services?
-            </Typography>
-          </div>
-        </Grid>
-        <Grid item>
-          <div className={classes.box}>
-            <Typography variant="body1" className={classes.label}>
-              Talk to us
-            </Typography>
-          </div>
-        </Grid>
+    <Section title="Where to next" variant="h2">
+      <Grid
+        container
+        justify="center"
+        alignItems="center"
+        className={classes.root}
+      >
+        <div className={classes.box}>
+          <Typography variant="subtitle1" className={classes.label}>
+            Stay up-to-date with <br /> new data and analysis
+          </Typography>
+        </div>
+        <div className={`${classes.box} ${classes.middlebox}`}>
+          <Typography variant="subtitle1" className={classes.label}>
+            Looking for other <br /> services?
+          </Typography>
+        </div>
+        <div className={classes.box}>
+          <Typography variant="subtitle1" className={classes.label}>
+            Talk to us
+          </Typography>
+        </div>
       </Grid>
     </Section>
   );
