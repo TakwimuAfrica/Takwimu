@@ -29,8 +29,13 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'takwimu.context_processors.takwimu_countries',
                                                     'takwimu.context_processors.takwimu_stories',
                                                     'takwimu.context_processors.takwimu_topics',
-                                                    'takwimu.context_processors.sdgs',]
+                                                    'takwimu.context_processors.sdgs',
+                                                    'takwimu.context_processors.asset_manifest']
 
+
+STATICFILES_DIRS = [
+     os.path.join(BASE_DIR, 'takwimu/takwimu_ui/build/static') # build appropriate path
+]
 
 # -------------------------------------------------------------------------------------
 # HURUmap / Wazimap Config
