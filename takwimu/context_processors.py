@@ -35,13 +35,9 @@ def takwimu_stories(request):
     stories_trending = []
 
     try:
-        if settings.HURUMAP.get('url') != 'https://takwimu.africa':
-            with open('data/articles.json') as f:
-                stories = json.load(f)
-        else:
-            client = Medium()
-            stories = client.get_publication_posts('takwimu-africa',
-                                                   count=20)
+        client = Medium()
+        stories = client.get_publication_posts('takwimu-africa',
+                                                count=20)
         stories_latest = stories[0:3]
 
         stories_dict = [i.__dict__ for i in stories]
