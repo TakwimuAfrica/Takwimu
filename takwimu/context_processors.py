@@ -164,9 +164,6 @@ def asset_manifest(request):
         with open(manifest_filepath) as f:
             asset_manifest_contents = json.load(f)
             for key, value in asset_manifest_contents.items():
-                print("\n\n\n\n\n\n\n\n\n\n\n")
-                print(key, value)
-                print("\n\n\n\n\n\n\n\n\n\n\n")
                 # Strip starting `/static/` from values
                 if key == 'main.js':
                     asset_manifest['main'] = value[8:]
