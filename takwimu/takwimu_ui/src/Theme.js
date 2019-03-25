@@ -16,7 +16,6 @@ const Theme = createMuiTheme({
     fontHeading: FONT_FAMILY_HEADING,
     h2: {
       fontFamily: FONT_FAMILY_HEADING,
-      margin: '3.0625rem 0',
       fontSize: '3.375rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
@@ -27,7 +26,6 @@ const Theme = createMuiTheme({
     },
     h3: {
       fontFamily: FONT_FAMILY_HEADING,
-      margin: '2.375rem 0',
       fontSize: '2.375rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
@@ -38,7 +36,6 @@ const Theme = createMuiTheme({
     },
     h4: {
       fontFamily: FONT_FAMILY_HEADING,
-      margin: '2.375rem 0',
       fontSize: '1.875rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
