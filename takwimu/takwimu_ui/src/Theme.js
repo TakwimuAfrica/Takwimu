@@ -5,13 +5,13 @@ const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const Theme = createMuiTheme({
   palette: {
-    primary: { main: '#29a87c' }
+    primary: { main: '#29a87c' },
+    text: { secondary: 'white' }
   },
   typography: {
     fontHeading: FONT_FAMILY_HEADING,
     h2: {
       fontFamily: FONT_FAMILY_HEADING,
-      margin: '2.375rem 0',
       fontSize: '2.375rem',
       fontWeight: 'normal',
       fontStyle: 'normal',

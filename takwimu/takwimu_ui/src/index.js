@@ -5,6 +5,7 @@ import withRoot from './withRoot';
 
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhereToNext from './components/WhereToNext';
+import DataByTopic from './components/Navigation/DataByTopic';
 
 const renderApp = (Component, id) => {
   const el = document.getElementById(id);
@@ -15,5 +16,6 @@ const renderApp = (Component, id) => {
   }
 };
 
+renderApp(DataByTopic, 'takwimuDataByTopic');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhereToNext, 'takwimuWhereToNext');
