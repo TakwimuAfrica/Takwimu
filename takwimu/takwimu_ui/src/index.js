@@ -6,6 +6,7 @@ import withRoot from './withRoot';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
+import FeaturedAnalysis from './components/FeaturedAnalysis';
 
 const renderApp = (Component, id) => {
   const el = document.getElementById(id);
@@ -16,6 +17,7 @@ const renderApp = (Component, id) => {
   }
 };
 
+renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
 renderApp(WhereToNext, 'takwimuWhereToNext');

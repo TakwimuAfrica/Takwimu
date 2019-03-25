@@ -41,7 +41,7 @@ const styles = theme => ({
 
 function WhereToNext({ classes }) {
   return (
-    <Section title="Where to next" variant="h2">
+    <Section title="Where to next" variant="h3">
       <Grid
         container
         justify="center"
