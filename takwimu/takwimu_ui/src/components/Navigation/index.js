@@ -32,7 +32,7 @@ function Navigation({ classes }) {
       </Grid>
       <Grid item>
         <Grid container justify="space-evenly" style={{ width: '400px' }}>
-          <Link href="/">About us</Link>
+          <Link href="/">About Us</Link>
           <Link href="/">FAQs</Link>
           <Link href="/">Contact Us</Link>
           <Link href="/">
