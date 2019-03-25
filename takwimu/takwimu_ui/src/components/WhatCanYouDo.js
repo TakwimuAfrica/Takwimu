@@ -10,16 +10,16 @@ import presentIcon from './assets/computer-upload.svg';
 
 const styles = theme => ({
   container: {
-    backgroundColor: theme.palette.iceBlue
+    backgroundColor: theme.palette.iceBlue,
+    padding: '2.438rem 5.125rem'
   },
   box: {
     width: '19rem',
-    height: '17.5rem',
+    height: '16.25rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    padding: '1.25rem'
+    alignItems: 'flex-start'
   },
   label: {
     fontWeight: 'bold'
@@ -31,8 +31,8 @@ function WhatCanYouDo({ classes }) {
     <Section title="What can you do with Takwimu" titleVariant="h1">
       <Grid
         container
-        justify="center"
         alignItems="center"
+        justify="space-between"
         className={classes.container}
       >
         <Grid item>
