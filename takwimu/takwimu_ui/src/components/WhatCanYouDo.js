@@ -11,7 +11,10 @@ import presentIcon from './assets/computer-upload.svg';
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.iceBlue,
-    padding: '2.438rem 5.125rem'
+    padding: '2.438rem',
+    [theme.breakpoints.up('md')]: {
+      padding: '2.438rem 5.125rem'
+    }
   },
   box: {
     width: '19rem',
