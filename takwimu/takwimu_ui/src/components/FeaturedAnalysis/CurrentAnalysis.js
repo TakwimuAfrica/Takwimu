@@ -17,7 +17,7 @@ const styles = theme => ({
   },
   content: {
     flexGrow: 1,
-    backgroundColor: '#f6fbfa', // ice-blue
+    backgroundColor: theme.palette.info.main,
     width: '100%',
     display: 'flex',
     justifyContent: 'center',

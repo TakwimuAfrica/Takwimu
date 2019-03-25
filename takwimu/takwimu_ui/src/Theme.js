@@ -6,7 +6,7 @@ const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 const Theme = createMuiTheme({
   palette: {
     primary: { main: '#29a87c' },
-    analysis: {
+    info: {
       main: '#f6fbfa' // ice-blue
     }
   },
