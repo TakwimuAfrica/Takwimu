@@ -7,6 +7,8 @@ import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
 
+import content from './content';
+
 const styles = () => ({
   root: {
     flexGrow: 1
@@ -19,20 +21,44 @@ const styles = () => ({
   }
 });
 
-function FeaturedAnalysis({ classes }) {
-  return (
-    <Section title="Featured Analysis" variant="h2">
-      <Grid
-        container
-        justify="flex-start"
-        alignItems="stretch"
-        className={classes.root}
-      >
-        <CurrentAnalysis classes={{ content: classes.content }} />
-        <AnalysisList classes={{ content: classes.list }} />
-      </Grid>
-    </Section>
-  );
+class FeaturedAnalysis extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = { current: 1 };
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick(index) {
+    this.setState({ current: index });
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { current } = this.state;
+
+    return (
+      <Section title="Featured Analysis" variant="h2">
+        <Grid
+          container
+          justify="flex-start"
+          alignItems="stretch"
+          className={classes.root}
+        >
+          <CurrentAnalysis
+            content={content[current]}
+            classes={{ content: classes.content }}
+          />
+          <AnalysisList
+            content={content}
+            current={current}
+            onClick={this.handleClick}
+            classes={{ content: classes.list }}
+          />
+        </Grid>
+      </Section>
+    );
+  }
 }
 
 FeaturedAnalysis.propTypes = {
