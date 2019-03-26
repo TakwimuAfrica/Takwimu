@@ -5,14 +5,24 @@ import classnames from 'classnames';
 
 import { ButtonBase, withStyles, Grid, Typography } from '@material-ui/core';
 
-import downArrow from '../../assets/down-arrow.svg';
-import upArrow from '../../assets/up-arrow.svg';
+import downArrow from '../../assets/images/down-arrow.svg';
+import upArrow from '../../assets/images/up-arrow.svg';
 
 const styles = theme => ({
   root: {
-    margin: '1.563rem',
+    justifyContent: 'unset',
     color: theme.palette.text.primary,
-    outline: 'none'
+    outline: 'none',
+    margin: '1.25rem',
+    [theme.breakpoints.up('md')]: {
+      margin: '0.625rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      margin: '1.563rem'
+    }
+  },
+  rootCenter: {
+    justifyContent: 'center'
   },
   img: {
     height: 'fit-content'
@@ -47,7 +57,7 @@ function DropDownButton({
     <ButtonBase
       disableRipple
       disableTouchRipple
-      className={classes.root}
+      className={classnames(classes.root, { [classes.rootCenter]: isActive })}
       onClick={handleClick}
     >
       <span className={classnames({ [classes.bubble]: isActive })}>
@@ -64,7 +74,7 @@ function DropDownButton({
           <Grid item component="span">
             <Typography
               variant="body1"
-              color={isActive ? 'textSecondary' : 'textPrimary'}
+              color={!isActive ? 'textSecondary' : 'textPrimary'}
               style={{ fontSize: '1.125rem' }}
             >
               {title}

@@ -1,17 +1,24 @@
-import React, { Fragment } from 'react';
-import { PropTypes } from 'prop-types';
+import React from 'react';
+import PropTypes from 'prop-types';
 
 import { Drawer, withStyles } from '@material-ui/core';
-
-import DataByTopic from './DataByTopic';
 import DropDownButton from './DropDownButton';
+import DataByTopic from './DataByTopic';
 
-import topicIcon from '../../assets/a-chart-white.svg';
-import topicIconActive from '../../assets/a-chart-active.svg';
-import analysisIcon from '../../assets/file-paragraph.svg';
-import analysisIconActive from '../../assets/file-paragraph-active.svg';
+import topicIcon from '../../assets/images/a-chart-white.svg';
+import topicIconActive from '../../assets/images/a-chart-active.svg';
+import analysisIcon from '../../assets/images/file-paragraph.svg';
+import analysisIconActive from '../../assets/images/file-paragraph-active.svg';
 
 const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'flex-start',
+    [theme.breakpoints.up('md')]: {
+      display: 'unset'
+    }
+  },
   modal: {
     top: '6.313rem'
   },
@@ -44,7 +51,7 @@ class DropDowns extends React.Component {
     const { classes } = this.props;
     const { isActive } = this.state;
     return (
-      <Fragment>
+      <div className={classes.root}>
         <DropDownButton
           isActive={isActive === 'analysis'}
           title="Country Analysis"
@@ -80,7 +87,7 @@ class DropDowns extends React.Component {
           {isActive === 'topic' ? <DataByTopic /> : null}
           {isActive === 'analysis' ? null : null}
         </Drawer>
-      </Fragment>
+      </div>
     );
   }
 }

@@ -7,7 +7,7 @@ const Theme = createMuiTheme({
   palette: {
     primary: { main: '#29a87c' },
     secondary: { main: '#ffffff' },
-    text: { primary: '#fff', secondary: '#000' },
+    text: { primary: '#000', secondary: '#fff' },
     info: {
       main: '#f6fbfa' // ice-blue
     }

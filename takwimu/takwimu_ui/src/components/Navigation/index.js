@@ -5,9 +5,11 @@ import {
   withWidth,
   withStyles,
   Grid,
+  MenuList,
   Link,
   Drawer,
-  IconButton
+  IconButton,
+  MenuItem
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
@@ -21,9 +23,16 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main,
     height: '6.313rem',
     padding: '1.25rem',
-    justifyContent: 'space-between',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  container: {
     [theme.breakpoints.up('md')]: {
-      justifyContent: 'space-around'
+      width: '58.265625rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '77.6875rem'
     }
   },
   drawer: {
@@ -33,7 +42,10 @@ const styles = theme => ({
   },
   link: {
     margin: '1.375rem 0.7rem',
-    [theme.breakpoints.up('sm')]: {
+    [theme.breakpoints.up('md')]: {
+      margin: '0.625rem'
+    },
+    [theme.breakpoints.up('lg')]: {
       margin: '1.375rem'
     }
   },
@@ -60,84 +72,99 @@ class Navigation extends React.Component {
     const { classes, width } = this.props;
     const { isDrawerOpen } = this.state;
     return (
-      <Grid container alignItems="center" className={classes.root}>
-        <Grid item>
-          <Link href="/">
-            <img alt="logo" src={logoWhite} height={22} />
-          </Link>
-        </Grid>
-        {isWidthUp('md', width) ? (
-          <Fragment>
-            <Grid item>
-              <DropDowns />
-            </Grid>
-            <Grid item>
-              <Link className={classes.link} href="/">
-                About Us
-              </Link>
-              <Link className={classes.link} href="/">
-                FAQs
-              </Link>
-              <Link className={classes.link} href="/">
-                Contact Us
-              </Link>
-              <Link className={classes.link} href="/">
-                <Search className={classes.search} />
-              </Link>
-            </Grid>
-          </Fragment>
-        ) : (
-          <Fragment>
-            <Grid item>
-              <IconButton
-                disableRipple
-                disableTouchRipple
-                color="secondary"
-                onClick={this.toggleDrawer}
-              >
-                <MenuOutlined color="inherit" />
-              </IconButton>
-            </Grid>
-
-            <Drawer
-              anchor="top"
-              BackdropProps={{
-                style: {
-                  backgroundColor: 'transparent'
-                }
-              }}
-              PaperProps={{
-                className: classes.drawer
-              }}
-              open={isDrawerOpen}
-              elevation={0}
-              transitionDuration={0}
-              onEscapeKeyDown={this.toggleDrawer}
-              onBackdropClick={this.toggleDrawer}
-            >
-              <Grid container direction="column" alignItems="center">
-                <Grid item>
-                  <Link className={classes.link} href="/">
-                    About Us
-                  </Link>
-                  <Link className={classes.link} href="/">
-                    FAQs
-                  </Link>
-                  <Link className={classes.link} href="/">
-                    Contact Us
-                  </Link>
-                  <Link className={classes.link} href="/">
-                    <Search className={classes.search} />
-                  </Link>
-                </Grid>
-                <Grid item>
-                  <DropDowns />
-                </Grid>
+      <nav className={classes.root}>
+        <Grid
+          item
+          container
+          wrap="nowrap"
+          alignItems="center"
+          justify="space-between"
+          className={classes.container}
+        >
+          <Grid item>
+            <Link href="/">
+              <img alt="logo" src={logoWhite} height={22} />
+            </Link>
+          </Grid>
+          {isWidthUp('md', width) ? (
+            <Fragment>
+              <Grid item>
+                <DropDowns />
               </Grid>
-            </Drawer>
-          </Fragment>
-        )}
-      </Grid>
+              <Grid item>
+                <Link className={classes.link} href="/">
+                  About Us
+                </Link>
+                <Link className={classes.link} href="/">
+                  FAQs
+                </Link>
+                <Link className={classes.link} href="/">
+                  Contact Us
+                </Link>
+                <Link className={classes.link} href="/">
+                  <Search className={classes.search} />
+                </Link>
+              </Grid>
+            </Fragment>
+          ) : (
+            <Fragment>
+              <Grid item>
+                <IconButton
+                  disableRipple
+                  disableTouchRipple
+                  color="secondary"
+                  onClick={this.toggleDrawer}
+                >
+                  <MenuOutlined color="inherit" />
+                </IconButton>
+              </Grid>
+
+              <Drawer
+                anchor="top"
+                BackdropProps={{
+                  style: {
+                    backgroundColor: 'transparent'
+                  }
+                }}
+                PaperProps={{
+                  className: classes.drawer
+                }}
+                open={isDrawerOpen}
+                elevation={0}
+                transitionDuration={0}
+                onEscapeKeyDown={this.toggleDrawer}
+                onBackdropClick={this.toggleDrawer}
+              >
+                <Grid container direction="column" alignItems="flex-start">
+                  <MenuList>
+                    <DropDowns />
+                    <MenuItem>
+                      <Link className={classes.link} href="/">
+                        About Us
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link className={classes.link} href="/">
+                        FAQs
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link className={classes.link} href="/">
+                        Contact Us
+                      </Link>
+                    </MenuItem>
+                    <MenuItem>
+                      <Link className={classes.link} href="/">
+                        <Search className={classes.search} />
+                      </Link>
+                    </MenuItem>
+                  </MenuList>
+                </Grid>
+              </Drawer>
+            </Fragment>
+          )}
+        </Grid>
+      </nav>
     );
   }
 }
