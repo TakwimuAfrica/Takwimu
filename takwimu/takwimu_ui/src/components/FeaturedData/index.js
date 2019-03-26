@@ -31,10 +31,10 @@ function FeaturedData({ classes }) {
         className={classes.root}
       >
         <Grid md={6} item container>
-          <DataContainer data={featuredData[0]} />
+          <DataContainer color="secondary" data={featuredData[0]} />
         </Grid>
         <Grid md={6} item container>
-          <DataContainer data={featuredData[1]} />
+          <DataContainer color="primary" data={featuredData[1]} />
         </Grid>
       </Grid>
     </Section>

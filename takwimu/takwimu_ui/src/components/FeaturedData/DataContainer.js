@@ -12,20 +12,30 @@ const styles = theme => ({
     backgroundColor: theme.palette.data.main
   },
   title: {
-    fontFamily: 'Roboto',
-    fontSize: '1.25rem'
+    fontFamily: '"Roboto"',
+    fontSize: '1.25rem',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: 1.2,
+    letterSpacing: 'normal'
   },
   description: {
     marginLeft: '0.625rem'
   }
 });
 
-function DataContainer({ classes, data }) {
+function DataContainer({ classes, color, data }) {
   return (
     <div>
       <div className={classes.root}>
-        <Typography className={classes.title}>{data.title}</Typography>
-        <DataActions />
+        <Grid container direction="column" alignItems="center">
+          <Typography className={classes.title} color={color}>
+            {data.title}
+          </Typography>
+          <DataActions />
+        </Grid>
       </div>
       <Grid container direction="row" wrap="nowrap">
         <Grid item>
@@ -43,7 +53,8 @@ function DataContainer({ classes, data }) {
 
 DataContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  color: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(DataContainer);

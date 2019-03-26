@@ -13,12 +13,22 @@ import {
 const styles = () => ({
   root: {
     backgroundColor: 'white',
-    borderRadius: '0.625rem'
+    borderRadius: '0.625rem',
+    width: 'fit-content',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   button: {
+    borderRadius: '0',
     '&:hover': {
       backgroundColor: 'transparent'
     }
+  },
+  verticalDivider: {
+    height: '60%',
+    width: '1px',
+    borderRight: '1px solid #eaeaea'
   }
 });
 
@@ -55,18 +65,22 @@ function DataActions({ classes }) {
         <ShareOutlined />
         <Typography>Share</Typography>
       </ActionButton>
+      <div className={classes.verticalDivider} />
       <ActionButton>
         <CloudDownload />
         <Typography>Download</Typography>
       </ActionButton>
+      <div className={classes.verticalDivider} />
       <ActionButton>
         <Code />
         <Typography>Embed</Typography>
       </ActionButton>
+      <div className={classes.verticalDivider} />
       <ActionButton>
         <CompareArrows />
         <Typography>Compare</Typography>
       </ActionButton>
+      <div className={classes.verticalDivider} />
       <ActionButton>
         <List />
         <Typography>Show Data</Typography>
