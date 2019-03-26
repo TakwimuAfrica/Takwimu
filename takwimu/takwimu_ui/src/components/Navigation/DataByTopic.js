@@ -9,9 +9,8 @@ const styles = theme => ({
   root: {
     display: 'flex',
     justifyContent: 'center',
-    backgroundColor: theme.palette.primary.main,
-    width: '100%',
-    height: '15.5rem'
+    padding: '0 0 1.5rem 0',
+    backgroundColor: theme.palette.primary.main
   },
   container: {
     [theme.breakpoints.up('md')]: {
@@ -28,9 +27,11 @@ const styles = theme => ({
     padding: 0,
     display: 'flex',
     justifyContent: 'left',
-    minWidth: '11.25rem',
     '&:hover': {
       backgroundColor: 'transparent'
+    },
+    [theme.breakpoints.up('lg')]: {
+      minWidth: '11.25rem'
     }
   },
   flag: {
@@ -41,6 +42,7 @@ const styles = theme => ({
     borderRadius: '1.187rem'
   },
   leftContent: {
+    height: '15.625rem',
     backgroundImage: `url(${chartBackground})`,
     backgroundRepeat: 'no-repeat'
   },

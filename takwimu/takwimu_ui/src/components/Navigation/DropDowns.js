@@ -20,10 +20,16 @@ const styles = theme => ({
     }
   },
   modal: {
-    top: '6.313rem'
+    top: '17.313rem',
+    [theme.breakpoints.up('md')]: {
+      top: '6.313rem'
+    }
   },
   backdrop: {
-    marginTop: '6.313rem',
+    marginTop: '17.313rem',
+    [theme.breakpoints.up('md')]: {
+      marginTop: '6.313rem'
+    },
     backgroundColor: 'transparent'
   },
   drawer: {
