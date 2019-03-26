@@ -5,8 +5,8 @@ import classnames from 'classnames';
 
 import { ButtonBase, withStyles, Grid, Typography } from '@material-ui/core';
 
-import downArrow from '../../assets/down-arrow.svg';
-import upArrow from '../../assets/up-arrow.svg';
+import downArrow from '../../assets/images/down-arrow.svg';
+import upArrow from '../../assets/images/up-arrow.svg';
 
 const styles = theme => ({
   root: {

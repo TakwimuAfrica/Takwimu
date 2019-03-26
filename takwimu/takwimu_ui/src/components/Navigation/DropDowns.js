@@ -4,10 +4,10 @@ import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core';
 import DropDownButton from './DropDownButton';
 
-import topicIcon from '../../assets/a-chart-white.svg';
-import topicIconActive from '../../assets/a-chart-active.svg';
-import analysisIcon from '../../assets/file-paragraph.svg';
-import analysisIconActive from '../../assets/file-paragraph-active.svg';
+import topicIcon from '../../assets/images/a-chart-white.svg';
+import topicIconActive from '../../assets/images/a-chart-active.svg';
+import analysisIcon from '../../assets/images/file-paragraph.svg';
+import analysisIconActive from '../../assets/images/file-paragraph-active.svg';
 
 const styles = theme => ({
   root: {
