@@ -171,7 +171,7 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  width: PropTypes.isRequired
+  width: PropTypes.string.isRequired
 };
 
 export default withWidth()(withStyles(styles)(Navigation));
