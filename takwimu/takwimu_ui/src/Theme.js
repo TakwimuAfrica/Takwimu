@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const FONT_FAMILY_HEADING = '"Lora", "serif"';
+const FONT_FAMILY_HEADING = '"Lora", serif';
 const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const Theme = createMuiTheme({
@@ -60,6 +60,7 @@ const Theme = createMuiTheme({
     subtitle1: {
       fontFamily: FONT_FAMILY_TEXT,
       fontSize: '1.25rem',
+      fontWeight: 'bold',
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: 'normal',
