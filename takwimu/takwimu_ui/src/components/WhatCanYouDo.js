@@ -4,9 +4,9 @@ import { Typography, Grid, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 import Section from './Section';
 
-import reasearchIcon from '../assets/a-chart.svg';
-import downloadIcon from '../assets/cloud-download-93.svg';
-import presentIcon from '../assets/computer-upload.svg';
+import reasearchIcon from '../assets/images/a-chart.svg';
+import downloadIcon from '../assets/images/cloud-download-93.svg';
+import presentIcon from '../assets/images/computer-upload.svg';
 
 const styles = theme => ({
   container: {
