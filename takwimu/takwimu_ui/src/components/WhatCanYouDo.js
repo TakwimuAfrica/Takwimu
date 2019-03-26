@@ -11,8 +11,13 @@ import presentIcon from '../assets/images/computer-upload.svg';
 const styles = theme => ({
   container: {
     backgroundColor: theme.palette.info.main,
-    padding: '2.438rem',
+    padding: '2.438rem 0.625rem',
+    justifyContent: 'center',
+    flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
+      flexDirection: 'row'
+    },
+    [theme.breakpoints.up('lg')]: {
       padding: '2.438rem 5.125rem'
     }
   },
@@ -22,7 +27,11 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'flex-start'
+    alignItems: 'flex-start',
+    margin: '1.25rem',
+    [theme.breakpoints.up('md')]: {
+      margin: '0'
+    }
   },
   label: {
     fontWeight: 'bold'
