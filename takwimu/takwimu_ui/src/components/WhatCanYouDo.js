@@ -12,7 +12,6 @@ const styles = theme => ({
   container: {
     backgroundColor: theme.palette.info.main,
     padding: '2.438rem 0.625rem',
-    justifyContent: 'center',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
       flexDirection: 'row'
@@ -22,7 +21,7 @@ const styles = theme => ({
     }
   },
   box: {
-    width: '19rem',
+    width: '18.125rem',
     height: '16.25rem',
     display: 'flex',
     flexDirection: 'column',
@@ -44,7 +43,7 @@ function WhatCanYouDo({ classes }) {
       <Grid
         container
         alignItems="center"
-        justify="space-between"
+        justify="space-evenly"
         className={classes.container}
       >
         <Grid item>
