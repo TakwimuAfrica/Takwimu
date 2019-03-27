@@ -39,7 +39,7 @@ const styles = theme => ({
 
 function WhatCanYouDo({ classes }) {
   return (
-    <Section title="What can you do with Takwimu" titleVariant="h1">
+    <Section title="What can you do with Takwimu">
       <Grid
         container
         alignItems="center"
