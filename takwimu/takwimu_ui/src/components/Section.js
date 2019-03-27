@@ -44,7 +44,7 @@ Section.propTypes = {
 
 Section.defaultProps = {
   title: null,
-  variant: 'h1'
+  variant: 'h2'
 };
 
 export default withStyles(styles)(Section);
