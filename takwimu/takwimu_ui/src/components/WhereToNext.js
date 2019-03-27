@@ -7,7 +7,8 @@ import Section from './Section';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingBottom: '6.25rem'
   },
   box: {
     backgroundColor: theme.palette.primary.main,
@@ -35,7 +36,8 @@ const styles = theme => ({
   label: {
     textAlign: 'center',
     color: 'white',
-    margin: '0 auto'
+    margin: '0 auto',
+    fontWeight: 'bold'
   }
 });
 
@@ -49,17 +51,17 @@ function WhereToNext({ classes }) {
         className={classes.root}
       >
         <div className={classes.box}>
-          <Typography variant="subtitle1" className={classes.label}>
+          <Typography variant="body1" className={classes.label}>
             Stay up-to-date with <br /> new data and analysis
           </Typography>
         </div>
         <div className={`${classes.box} ${classes.middlebox}`}>
-          <Typography variant="subtitle1" className={classes.label}>
+          <Typography variant="body1" className={classes.label}>
             Looking for other <br /> services?
           </Typography>
         </div>
         <div className={classes.box}>
-          <Typography variant="subtitle1" className={classes.label}>
+          <Typography variant="body1" className={classes.label}>
             Talk to us
           </Typography>
         </div>

@@ -14,6 +14,7 @@ const Theme = createMuiTheme({
   },
   typography: {
     fontHeading: FONT_FAMILY_HEADING,
+    fontText: FONT_FAMILY_TEXT,
     h2: {
       fontFamily: FONT_FAMILY_HEADING,
       fontSize: '3.375rem',
@@ -65,6 +66,15 @@ const Theme = createMuiTheme({
     body1: {
       fontFamily: FONT_FAMILY_TEXT,
       fontSize: '1.25rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal'
+    },
+    body2: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.125rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
