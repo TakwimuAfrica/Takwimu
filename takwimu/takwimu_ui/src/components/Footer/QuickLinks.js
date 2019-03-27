@@ -43,7 +43,7 @@ const LEGAL = [
 function QuickLinks({ classes }) {
   return (
     <div className={classes.root}>
-      <Title className={classes.text}>Quick Links</Title>
+      <Title>Quick Links</Title>
       <Typography
         variant="subtitle2"
         className={classNames([classes.text, classes.list])}
