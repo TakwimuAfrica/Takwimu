@@ -6,6 +6,8 @@ const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 const Theme = createMuiTheme({
   palette: {
     primary: { main: '#29a87c' },
+    secondary: { main: '#ffffff' },
+    text: { primary: '#000', secondary: '#fff' },
     info: {
       main: '#f6fbfa' // ice-blue
     }
@@ -110,6 +112,18 @@ const Theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiLink: {
+      root: {
+        fontFamily: FONT_FAMILY_TEXT,
+        fontSize: '1.125rem',
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        color: '#ffffff'
+      }
+    },
     MuiButton: {
       root: {
         borderRadius: '0.75rem',
