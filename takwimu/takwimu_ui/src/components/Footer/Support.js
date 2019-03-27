@@ -12,9 +12,7 @@ const styles = () => ({
     width: '14.375rem'
   },
   img: {
-    marginTop: '2.5625rem',
-    width: '8.0625rem',
-    height: 'auto'
+    marginTop: '2.5625rem'
   }
 });
 

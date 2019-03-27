@@ -16,13 +16,7 @@ const styles = theme => ({
   img: {
     marginTop: '2.5625rem'
   },
-  imgAp: {
-    width: '7.375rem',
-    height: 'auto'
-  },
   imgCfa: {
-    width: '3.9375rem',
-    height: 'auto',
     marginLeft: '1rem',
     marginRight: '1rem',
     [theme.breakpoints.up('md')]: {
@@ -33,10 +27,6 @@ const styles = theme => ({
       marginLeft: '2.875rem',
       marginRight: '3rem'
     }
-  },
-  imgIhub: {
-    width: '2.1875rem',
-    height: 'auto'
   }
 });
 
@@ -45,9 +35,9 @@ function Initiative({ classes }) {
     <div className={classes.root}>
       <Title>An initiative by</Title>
       <div className={classes.img}>
-        <img src={ap} alt="Takwimu" className={classes.imgAp} />
+        <img src={ap} alt="Takwimu" />
         <img src={cfa} alt="Code for Africa" className={classes.imgCfa} />
-        <img src={ihub} alt="iHub" className={classes.imgIhub} />
+        <img src={ihub} alt="iHub" />
       </div>
     </div>
   );
