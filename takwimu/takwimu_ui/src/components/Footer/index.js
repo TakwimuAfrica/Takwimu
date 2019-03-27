@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
+import A from '../A';
+import Section from '../Section';
+
 import Takwimu from './Takwimu';
 import QuickLinks from './QuickLinks';
 import StayInTouch from './StayInTouch';
@@ -18,13 +21,8 @@ const styles = theme => ({
     paddingTop: '4.5625rem',
     paddingBottom: '5.3125rem'
   },
-  row: {
-    [theme.breakpoints.up('md')]: {
-      width: '58.265625rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '77.6875rem'
-    }
+  license: {
+    marginTop: '2.3125rem'
   },
   takwimu: {
     width: '100%',
@@ -42,8 +40,9 @@ const styles = theme => ({
     marginTop: '3.125rem'
   },
   links: {
+    paddingTop: '2.25rem',
     [theme.breakpoints.up('md')]: {
-      // width: '58.265625rem' // .75 of lg
+      paddingTop: 0,
       paddingLeft: '4.6875rem',
       paddingRight: '3.9375rem',
       borderLeft: '0.125rem solid rgba(151, 151, 151, 0.45)',
@@ -56,10 +55,12 @@ const styles = theme => ({
   },
   project: {
     width: '100%',
+    paddingTop: '2.25rem',
     [theme.breakpoints.up('md')]: {
       width: '14.53125rem', // .75 of lg
       // Should be marginLeft: '5.109375rem' but won't fit
-      marginLeft: '2rem'
+      marginLeft: '2rem',
+      padding: 0
     },
     [theme.breakpoints.up('lg')]: {
       width: '19.375rem',
@@ -68,6 +69,11 @@ const styles = theme => ({
   },
   support: {
     marginTop: '4.0625rem'
+  },
+  text: {
+    marginTop: '2.3125rem',
+    fontSize: '0.9375rem',
+    color: 'white'
   }
 });
 
@@ -79,7 +85,7 @@ function Footer({ classes }) {
       justify="center"
       alignItems="flex-start"
     >
-      <div className={classes.row}>
+      <Section>
         <Grid container justify="flex-start" alignItems="flex-start">
           <div className={classes.takwimu}>
             <Takwimu classes={{ root: classes.takwimu }} />
@@ -93,10 +99,19 @@ function Footer({ classes }) {
             <Support classes={{ root: classes.stayInTouch }} />
           </div>
         </Grid>
-      </div>
-      <div className={classes.row}>
-        <Typography variant="button">2018 Takwimu CC by 4.0</Typography>
-      </div>
+      </Section>
+
+      <Section className={classes.license}>
+        <Typography variant="subtitle2" className={classes.text}>
+          2018 Takwimu{' '}
+          <A
+            href="//creativecommons.org/licenses/by/4.0/"
+            className={classes.text}
+          >
+            CC by 4.0
+          </A>
+        </Typography>
+      </Section>
     </Grid>
   );
 }

@@ -6,7 +6,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({});
 
-function A({ children, href, variant, underline }) {
+function A({ children, href, variant, underline, ...props }) {
   return (
     <Link
       href={href}
@@ -14,6 +14,7 @@ function A({ children, href, variant, underline }) {
       rel="noopener noreferrer"
       underline={underline}
       variant={variant}
+      {...props}
     >
       {children}
     </Link>

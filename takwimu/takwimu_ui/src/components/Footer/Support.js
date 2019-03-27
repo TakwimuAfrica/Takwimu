@@ -18,7 +18,7 @@ const styles = () => ({
   }
 });
 
-function StayInTouch({ classes }) {
+function Support({ classes }) {
   return (
     <div className={classes.root}>
       <Title>With support from</Title>
@@ -27,8 +27,8 @@ function StayInTouch({ classes }) {
   );
 }
 
-StayInTouch.propTypes = {
+Support.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(StayInTouch);
+export default withStyles(styles)(Support);

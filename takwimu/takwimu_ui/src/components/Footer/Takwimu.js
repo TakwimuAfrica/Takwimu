@@ -17,7 +17,7 @@ const styles = () => ({
   }
 });
 
-function StayInTouch({ classes }) {
+function Takwimu({ classes }) {
   return (
     <div className={classes.root}>
       <img src={takwimu} alt="Takwimu" />
@@ -35,8 +35,8 @@ function StayInTouch({ classes }) {
   );
 }
 
-StayInTouch.propTypes = {
+Takwimu.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(StayInTouch);
+export default withStyles(styles)(Takwimu);

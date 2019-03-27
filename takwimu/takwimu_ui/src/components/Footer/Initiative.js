@@ -23,6 +23,8 @@ const styles = theme => ({
   imgCfa: {
     width: '3.9375rem',
     height: 'auto',
+    marginLeft: '1rem',
+    marginRight: '1rem',
     [theme.breakpoints.up('md')]: {
       marginLeft: '2.15625rem',
       marginRight: '2.25rem'

@@ -12,7 +12,8 @@ const styles = theme => ({
   root: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '12.8125rem'
+      width: '12.8125rem',
+      paddingBottom: '0.5rem'
     }
   },
   text: {
