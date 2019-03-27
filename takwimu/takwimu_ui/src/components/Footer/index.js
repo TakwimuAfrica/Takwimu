@@ -1,98 +1,65 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid } from '@material-ui/core';
+import { Grid, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
+import Takwimu from './Takwimu';
+import QuickLinks from './QuickLinks';
 import StayInTouch from './StayInTouch';
+import Initiative from './Initiative';
+import Support from './Support';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     color: 'white',
-    backgroundColor: 'black'
+    backgroundColor: 'black',
+    paddingTop: '4.5625rem',
+    paddingBottom: '5.3125rem'
   },
-  footerContainer: {
+  row: {
     [theme.breakpoints.up('md')]: {
-      paddingBottom: '5rem'
-    }
-  },
-  footerContentContainer: {
-    textAlign: 'center',
-    paddingTop: '2rem',
-    paddingBottom: '1rem',
-    [theme.breakpoints.up('md')]: {
-      marginTop: '3rem',
-      width: '19.875rem'
+      width: '58.265625rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '26.5rem'
+      width: '77.6875rem'
     }
   },
-  footerAboutContainer: {
-    textAlign: 'center',
-    paddingTop: '2rem',
-    paddingBottom: '1rem',
-    borderTop: '1px solid white',
-    borderBottom: '1px solid white',
+  takwimu: {
+    width: '100%',
     [theme.breakpoints.up('md')]: {
-      marginTop: '3rem',
-      width: '19.875rem',
-      border: '1px solid white',
-      borderTop: 'none',
-      borderBottom: 'none'
+      // width: '58.265625rem' // .75 of lg
+      marginRight: '2.578125rem'
     },
     [theme.breakpoints.up('lg')]: {
-      width: '26.5rem'
+      width: '19.5625rem',
+      marginRight: '3.4375rem'
     }
   },
-  titles: {
-    color: 'white',
-    fontWeight: 800,
-    textTransform: 'none'
-  },
-  socialMediaContainer: {
-    paddingTop: '1rem',
-    paddingBottom: '1rem'
-  },
-  aboutContent: {
-    color: 'white',
-    padding: '1rem',
-    textalign: 'justify',
-    textAlignLast: 'center'
-  },
-  footerButton: {
-    color: 'white',
-    '&:hover': {
-      color: theme.palette.secondary.main
-    },
-    backgroundColor: theme.palette.secondary.dark,
-    fontWeight: 800,
-    fontSize: theme.typography.subtitle2.fontSize,
-    height: '3rem',
-    [theme.breakpoints.up('lg')]: {
-      fontSize: theme.typography.subtitle1.fontSize,
-      height: '3.5rem',
-      marginTop: '1rem',
-      paddingLeft: '2rem',
-      paddingRight: '2rem'
-    }
-  },
-  buttonLink: {
-    textDecoration: 'none'
-  },
-  supportText: {
-    color: 'white',
-    padding: '1.2rem',
+  links: {
     [theme.breakpoints.up('md')]: {
-      marginLeft: '1.5rem',
-      marginRight: '1.5rem',
-      textAlign: 'center'
+      // width: '58.265625rem' // .75 of lg
+      padidngLeft: '4.6875rem',
+      paddingRight: '3.9375rem',
+      borderLeft: '0.125rem solid rgba(151, 151, 151, 0.45)',
+      borderRight: '0.125rem solid rgba(151, 151, 151, 0.45)'
+    },
+    [theme.breakpoints.up('lg')]: {
+      paddingLeft: '6.25rem',
+      paddingRight: '5.25rem'
     }
   },
-  img: {
-    maxWidth: '100%',
-    height: '100px'
+  project: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      // width: '58.265625rem' // .75 of lg
+      marginLeft: '5.109375rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '19.375rem',
+      marginLeft: '6.8125rem'
+    }
   }
 });
 
@@ -100,77 +67,28 @@ function Footer({ classes }) {
   return (
     <Grid
       container
-      color="secondary"
       className={classes.root}
       justify="center"
-      alignItems="center"
+      alignItems="flex-start"
     >
-      <Grid
-        item
-        xs={12}
-        container
-        className={classes.footerContainer}
-        justify="center"
-        alignItems="flex-start"
-      >
-        <Grid item className={classes.footerContentContainer}>
-          <div className={classes.socialMediaContainer}>
+      <div className={classes.row}>
+        <Grid container justify="flex-start" alignItems="flex-start">
+          <div className={classes.takwimu}>
+            <Takwimu />
             <StayInTouch />
           </div>
+          <div className={classes.links}>
+            <QuickLinks />
+          </div>
+          <div className={classes.project}>
+            <Initiative />
+            <Support />
+          </div>
         </Grid>
-
-        {/* <Grid item className={classes.footerAboutContainer}>
-          <Typography variant="h6" className={classes.titles}>
-            ABOUT sensors.AFRICA
-          </Typography>
-          <Typography variant="caption" className={classes.aboutContent}>
-            sensors.AFRICA is a pan-African citizen science initiative that uses
-            sensors to monitor air, water and sound pollution to give citizens
-            actionable information about their cities.
-          </Typography>
-          <Link to="/about" className={classes.buttonLink}>
-            <Button variant="contained" className={classes.footerButton}>
-              READ MORE
-            </Button>
-          </Link>
-        </Grid>
-        <Grid item className={classes.footerContentContainer}>
-          <Typography variant="h6" className={classes.titles}>
-            FUNDED BY
-          </Typography>
-          <Typography variant="caption" className={classes.supportText}>
-            This initiative was seed-funded by innovateAFRICA and is being
-            incubated by Code for Africa.
-          </Typography>
-          <Grid container justify="center" alignItems="center">
-            <Grid item xs>
-              <a
-                href="https://codeforafrica.org/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={codeforafrica}
-                  alt="Code for Africa"
-                  className={classes.img}
-                />
-              </a>
-            </Grid>
-            <Grid item xs>
-              <a
-                href="https://innovateafrica.fund/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  src={innovateafrica}
-                  alt="innovateAFRICA"
-                  className={classes.img}
-                />
-              </a>
-            </Grid>
-          </Grid> */}
-      </Grid>
+      </div>
+      <div className={classes.row}>
+        <Typography variant="button">2018 Takwimu CC by 4.0</Typography>
+      </div>
     </Grid>
   );
 }
