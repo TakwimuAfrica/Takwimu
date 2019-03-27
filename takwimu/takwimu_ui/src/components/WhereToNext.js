@@ -7,7 +7,8 @@ import Section from './Section';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    paddingBottom: '6.25rem'
   },
   box: {
     backgroundColor: theme.palette.primary.main,
