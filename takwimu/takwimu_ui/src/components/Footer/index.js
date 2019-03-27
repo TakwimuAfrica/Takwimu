@@ -29,8 +29,9 @@ const styles = theme => ({
   takwimu: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      // width: '58.265625rem' // .75 of lg
-      marginRight: '2.578125rem'
+      width: '14.375rem', // match thinnest component
+      // Should be marginRight: '2.578125rem' but won't fit
+      marginRight: '2rem'
     },
     [theme.breakpoints.up('lg')]: {
       width: '19.5625rem',
@@ -43,7 +44,7 @@ const styles = theme => ({
   links: {
     [theme.breakpoints.up('md')]: {
       // width: '58.265625rem' // .75 of lg
-      padidngLeft: '4.6875rem',
+      paddingLeft: '4.6875rem',
       paddingRight: '3.9375rem',
       borderLeft: '0.125rem solid rgba(151, 151, 151, 0.45)',
       borderRight: '0.125rem solid rgba(151, 151, 151, 0.45)'
@@ -56,8 +57,9 @@ const styles = theme => ({
   project: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      // width: '58.265625rem' // .75 of lg
-      marginLeft: '5.109375rem'
+      width: '14.53125rem', // .75 of lg
+      // Should be marginLeft: '5.109375rem' but won't fit
+      marginLeft: '2rem'
     },
     [theme.breakpoints.up('lg')]: {
       width: '19.375rem',
@@ -80,7 +82,7 @@ function Footer({ classes }) {
       <div className={classes.row}>
         <Grid container justify="flex-start" alignItems="flex-start">
           <div className={classes.takwimu}>
-            <Takwimu />
+            <Takwimu classes={{ root: classes.takwimu }} />
             <StayInTouch classes={{ root: classes.stayInTouch }} />
           </div>
           <div className={classes.links}>
