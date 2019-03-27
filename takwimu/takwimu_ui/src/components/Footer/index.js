@@ -71,7 +71,6 @@ const styles = theme => ({
     marginTop: '4.0625rem'
   },
   text: {
-    marginTop: '2.3125rem',
     fontSize: '0.9375rem',
     color: 'white'
   }
@@ -99,18 +98,17 @@ function Footer({ classes }) {
             <Support classes={{ root: classes.stayInTouch }} />
           </div>
         </Grid>
-      </Section>
-
-      <Section className={classes.license}>
-        <Typography variant="subtitle2" className={classes.text}>
-          2018 Takwimu{' '}
-          <A
-            href="//creativecommons.org/licenses/by/4.0/"
-            className={classes.text}
-          >
-            CC by 4.0
-          </A>
-        </Typography>
+        <div className={classes.license}>
+          <Typography variant="subtitle2" className={classes.text}>
+            2018 Takwimu{' '}
+            <A
+              href="//creativecommons.org/licenses/by/4.0/"
+              className={classes.text}
+            >
+              CC by 4.0
+            </A>
+          </Typography>
+        </div>
       </Section>
     </Grid>
   );
