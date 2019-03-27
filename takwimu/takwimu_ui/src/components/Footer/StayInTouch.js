@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 
 import Grid from '@material-ui/core/Grid';
 
-import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import A from '../A';
+import Title from './Title';
 
 import email from '../../assets/images/email.svg';
 import facebook from '../../assets/images/facebook.svg';
@@ -17,10 +17,6 @@ import twitter from '../../assets/images/twitter.svg';
 const styles = () => ({
   root: {
     width: '14.375rem'
-  },
-  label: {
-    color: 'white',
-    fontWeight: 800
   },
   icons: {
     marginTop: '2.25rem'
@@ -36,9 +32,7 @@ const styles = () => ({
 function StayInTouch({ classes }) {
   return (
     <div className={classes.root}>
-      <Typography variant="body2" className={classes.label}>
-        Stay in touch
-      </Typography>
+      <Title>Stay in touch</Title>
       <Grid
         container
         justify="flex-start"

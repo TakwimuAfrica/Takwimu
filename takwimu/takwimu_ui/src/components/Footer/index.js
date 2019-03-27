@@ -37,6 +37,9 @@ const styles = theme => ({
       marginRight: '3.4375rem'
     }
   },
+  stayInTouch: {
+    marginTop: '3.125rem'
+  },
   links: {
     [theme.breakpoints.up('md')]: {
       // width: '58.265625rem' // .75 of lg
@@ -60,6 +63,9 @@ const styles = theme => ({
       width: '19.375rem',
       marginLeft: '6.8125rem'
     }
+  },
+  support: {
+    marginTop: '4.0625rem'
   }
 });
 
@@ -75,14 +81,14 @@ function Footer({ classes }) {
         <Grid container justify="flex-start" alignItems="flex-start">
           <div className={classes.takwimu}>
             <Takwimu />
-            <StayInTouch />
+            <StayInTouch classes={{ root: classes.stayInTouch }} />
           </div>
           <div className={classes.links}>
             <QuickLinks />
           </div>
           <div className={classes.project}>
             <Initiative />
-            <Support />
+            <Support classes={{ root: classes.stayInTouch }} />
           </div>
         </Grid>
       </div>

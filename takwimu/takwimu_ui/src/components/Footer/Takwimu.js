@@ -12,8 +12,8 @@ const styles = () => ({
   },
   text: {
     marginTop: '2.3125rem',
+    fontSize: '0.9375rem',
     color: 'white'
-    // fontWeight: 800
   }
 });
 
@@ -21,13 +21,13 @@ function StayInTouch({ classes }) {
   return (
     <div className={classes.root}>
       <img src={takwimu} alt="Takwimu" />
-      <Typography variant="button" className={classes.text}>
+      <Typography variant="subtitle2" className={classes.text}>
         Actionable insights for African change makers. Takwimu provides quality
         insights and data-driven analysis to empower African development
         champions.
       </Typography>
-      <Typography variant="button" className={classes.text}>
-        <Link href="/about" className={classes.text}>
+      <Typography variant="subtitle2" className={classes.text}>
+        <Link href="/about" className={classes.text} underline="always">
           Find out more about us.
         </Link>
       </Typography>

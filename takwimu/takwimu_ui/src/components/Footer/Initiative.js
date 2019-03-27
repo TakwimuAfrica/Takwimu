@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+
+import Title from './Title';
 
 import ap from '../../assets/images/ap.png';
 import cfa from '../../assets/images/cfa.png';
@@ -11,10 +12,6 @@ import ihub from '../../assets/images/ihub.png';
 const styles = () => ({
   root: {
     width: '19.375rem'
-  },
-  text: {
-    color: 'white',
-    fontWeight: 800
   },
   img: {
     marginTop: '2.5625rem'
@@ -38,9 +35,7 @@ const styles = () => ({
 function StayInTouch({ classes }) {
   return (
     <div className={classes.root}>
-      <Typography variant="body2" className={classes.text}>
-        An initiative by
-      </Typography>
+      <Title>An initiative by</Title>
       <div className={classes.img}>
         <img src={ap} alt="Takwimu" className={classes.imgAp} />
         <img src={cfa} alt="Code for Africa" className={classes.imgCfa} />

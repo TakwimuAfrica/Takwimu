@@ -1,8 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import classNames from 'classnames';
+
 import { Link, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+
+import Title from './Title';
 
 const styles = theme => ({
   root: {
@@ -11,59 +15,66 @@ const styles = theme => ({
       width: '12.8125rem'
     }
   },
-  title: {
-    color: 'white',
-    fontWeight: 800
-  },
   text: {
-    marginTop: '2.3125rem',
-    color: 'white',
-    // fontWeight: 800
+    color: '#fff'
+  },
+  list: {
     listStyle: 'none',
-    margin: 0,
+    margin: '1.5rem 0 0 0',
     padding: 0
+  },
+  link: {
+    fontSize: '0.9375rem'
   }
 });
 
 const LINKS = [
-  'Explore data by topic',
-  'Explore data by topic',
-  'Expert insights and analysis',
-  'About Takwimu',
-  'FAQs',
-  'Contact Us'
+  { href: '/topics', label: 'Explore data by topic' },
+  { href: '/profiles', label: 'Expert insights and analysis' },
+  { href: '/about', label: 'About Takwimu' },
+  { href: '/faq', label: 'FAQs' },
+  { href: '/contact-us', label: 'Contact Us' }
 ];
-const TERMS = ['Terms of use', 'Privacy Policy'];
+const LEGAL = [
+  { href: '/legal', label: 'Terms of use' },
+  { href: '/legal', label: 'Privacy Policy' }
+];
 function QuickLinks({ classes }) {
   return (
     <div className={classes.root}>
-      <Typography variant="button" className={classes.title}>
-        Quick Links
-      </Typography>
-      <Typography variant="button" className={classes.text} component="ul">
+      <Title className={classes.text}>Quick Links</Title>
+      <Typography
+        variant="subtitle2"
+        className={classNames([classes.text, classes.list])}
+        component="ul"
+      >
         {LINKS.map(link => (
           <li>
             <Link
-              key={link}
-              href="/about"
-              className={classes.text}
+              key={link.href}
+              href={link.href}
               underline="always"
+              className={classNames([classes.text, classes.link])}
             >
-              {link}
+              {link.label}
             </Link>
           </li>
         ))}
       </Typography>
-      <Typography variant="button" className={classes.text} component="ul">
-        {TERMS.map(link => (
+      <Typography
+        variant="subtitle2"
+        className={classNames([classes.text, classes.list])}
+        component="ul"
+      >
+        {LEGAL.map(link => (
           <li>
             <Link
-              key={link}
-              href="/about"
-              className={classes.text}
+              key={link.href}
+              href={link.href}
+              className={classNames([classes.text, classes.link])}
               underline="always"
             >
-              {link}
+              {link.label}
             </Link>
           </li>
         ))}
