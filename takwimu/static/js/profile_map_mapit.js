@@ -73,15 +73,15 @@ var ProfileMaps = function() {
         }
     };
 
+
     this.addImagery = function() {
         // add imagery
-        L.tileLayer('//{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-          subdomains: 'abc',
-          maxZoom: 17
+        L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
+          attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+          minZoom: 1,
+        	maxZoom: 19
         }).addTo(this.map);
     };
-
     this.drawAllFeatures = function() {
         var geo_level = this.geo.this.geo_level;
         var geo_code = this.geo.this.geo_code;
