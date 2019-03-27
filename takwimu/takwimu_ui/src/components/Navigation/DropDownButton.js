@@ -13,7 +13,7 @@ const styles = theme => ({
     justifyContent: 'unset',
     color: theme.palette.text.primary,
     outline: 'none',
-    margin: '1.25rem',
+    margin: '1.25rem 1.75rem',
     [theme.breakpoints.up('md')]: {
       margin: '0.625rem'
     },
@@ -81,11 +81,11 @@ function DropDownButton({
             </Typography>
           </Grid>
           <Grid item component="span">
-            {isActive ? (
-              <img className={classes.img} alt="Up Arrow" src={upArrow} />
-            ) : (
-              <img className={classes.img} alt="Down Arrow" src={downArrow} />
-            )}
+            <img
+              className={classes.img}
+              alt="Arrow"
+              src={isActive ? upArrow : downArrow}
+            />
           </Grid>
         </Grid>
       </span>
