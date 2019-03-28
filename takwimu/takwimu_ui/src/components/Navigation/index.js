@@ -13,6 +13,8 @@ import {
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
+import classeNames from 'classnames';
+
 import { isWidthUp } from '@material-ui/core/withWidth';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
@@ -34,7 +36,7 @@ const styles = theme => ({
     outline: 'none'
   },
   link: {
-    margin: '1.375rem 0.7rem',
+    margin: '1.375rem 3.25rem',
     [theme.breakpoints.up('md')]: {
       margin: '0.625rem'
     },
@@ -44,6 +46,9 @@ const styles = theme => ({
   },
   search: {
     marginBottom: '-0.313rem'
+  },
+  iconLink: {
+    margin: '1.375rem 0.7rem'
   }
 });
 
@@ -139,7 +144,10 @@ class Navigation extends React.Component {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link
+                className={classeNames([classes.link, classes.iconLink])}
+                href="/"
+              >
                 <Search className={classes.search} />
               </Link>
             </MenuItem>

@@ -20,7 +20,7 @@ const styles = theme => ({
     }
   },
   modal: {
-    top: '17.313rem',
+    top: '15.313rem',
     [theme.breakpoints.up('md')]: {
       top: '6.313rem'
     }

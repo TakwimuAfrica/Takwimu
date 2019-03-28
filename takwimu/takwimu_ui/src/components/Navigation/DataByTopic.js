@@ -8,9 +8,12 @@ import chartBackground from '../../assets/a-chart-bg.svg';
 const styles = theme => ({
   root: {
     display: 'flex',
+    padding: '0 1.25rem',
     justifyContent: 'center',
-    padding: '0 0 1.5rem 0',
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.main,
+    [theme.breakpoints.up('md')]: {
+      padding: '0 0 1.5rem 0'
+    }
   },
   container: {
     [theme.breakpoints.up('md')]: {
@@ -21,17 +24,22 @@ const styles = theme => ({
     }
   },
   countryButton: {
-    margin: '0 1.5rem',
+    height: 'fit-content',
     marginBottom: '1.25em',
     textTransform: 'none',
     padding: 0,
     display: 'flex',
+    minWidth: '9rem',
+    margin: 0,
     justifyContent: 'left',
     '&:hover': {
       backgroundColor: 'transparent'
     },
-    [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('sm')]: {
       minWidth: '11.25rem'
+    },
+    [theme.breakpoints.up('md')]: {
+      margin: '0 1.5rem'
     }
   },
   flag: {
@@ -40,6 +48,20 @@ const styles = theme => ({
     marginRight: '0.625rem',
     border: '2px solid white',
     borderRadius: '1.187rem'
+  },
+  flagName: {
+    borderBottom: '1px solid',
+    lineHeight: 'unset'
+  },
+  flagsContainer: {
+    justifyContent: 'space-between',
+    overflow: 'scroll',
+    height: '10rem',
+    [theme.breakpoints.up('sm')]: {
+      justifyContent: 'unset',
+      overflow: 'unset',
+      height: 'unset'
+    }
   },
   leftContent: {
     height: '15.625rem',
@@ -51,6 +73,7 @@ const styles = theme => ({
   }
 });
 function DataByTopic({ classes }) {
+  const countries = window.countries.sort((a, b) => a.name[0] > b.name[0]);
   return (
     <div className={classes.root}>
       <Grid
@@ -75,8 +98,15 @@ function DataByTopic({ classes }) {
             </Typography>
           </div>
         </Grid>
-        <Grid item container md={9} direction="row" wrap="wrap">
-          {window.countries.map(country => (
+        <Grid
+          item
+          container
+          md={9}
+          direction="row"
+          wrap="wrap"
+          className={classes.flagsContainer}
+        >
+          {countries.map(country => (
             <ButtonBase
               key={country.slug}
               disableRipple
@@ -88,7 +118,7 @@ function DataByTopic({ classes }) {
                 src={`/static/img/flags/${country.slug}.svg`}
                 className={classes.flag}
               />
-              <Typography color="textSecondary">
+              <Typography color="textSecondary" className={classes.flagName}>
                 {country.short_name}
               </Typography>
             </ButtonBase>
