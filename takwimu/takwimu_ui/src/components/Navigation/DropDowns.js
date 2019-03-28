@@ -22,13 +22,13 @@ const styles = theme => ({
   modal: {
     top: '15.313rem',
     [theme.breakpoints.up('md')]: {
-      top: '6.313rem'
+      top: '0'
     }
   },
   backdrop: {
     marginTop: '17.313rem',
     [theme.breakpoints.up('md')]: {
-      marginTop: '6.313rem'
+      marginTop: '0'
     },
     backgroundColor: 'transparent'
   },
@@ -37,69 +37,86 @@ const styles = theme => ({
     outline: 'none'
   }
 });
-class DropDowns extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      isActive: null
-    };
-  }
 
-  toggle(dropdown) {
-    return () => {
-      this.setState(prevState => ({
-        isActive: prevState.isActive !== dropdown ? dropdown : null
-      }));
-    };
-  }
+function DropDownDrawerComponent({
+  classes,
+  children,
+  countries,
+  active,
+  toggle
+}) {
+  return (
+    <Drawer
+      anchor="top"
+      ModalProps={{
+        className: classes.modal
+      }}
+      BackdropProps={{
+        className: classes.backdrop
+      }}
+      PaperProps={{
+        className: classes.drawer
+      }}
+      open={active !== null}
+      elevation={0}
+      transitionDuration={0}
+      onEscapeKeyDown={toggle('')}
+      onBackdropClick={toggle('')}
+    >
+      {children}
+      {active === 'topic' ? <DataByTopic countries={countries} /> : null}
+      {active === 'analysis' ? null : null}
+    </Drawer>
+  );
+}
 
-  render() {
-    const { classes } = this.props;
-    const { isActive } = this.state;
-    return (
-      <div className={classes.root}>
-        <DropDownButton
-          isActive={isActive === 'analysis'}
-          title="Country Analysis"
-          icon={analysisIcon}
-          iconActive={analysisIconActive}
-          handleClick={this.toggle('analysis')}
-        />
-        <DropDownButton
-          isActive={isActive === 'topic'}
-          title="Data by Topic"
-          icon={topicIcon}
-          iconActive={topicIconActive}
-          handleClick={this.toggle('topic')}
-        />
+DropDownDrawerComponent.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  countries: PropTypes.shape({}).isRequired,
+  active: PropTypes.string,
+  toggle: PropTypes.func.isRequired,
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
+};
 
-        <Drawer
-          anchor="top"
-          ModalProps={{
-            className: classes.modal
-          }}
-          BackdropProps={{
-            className: classes.backdrop
-          }}
-          PaperProps={{
-            className: classes.drawer
-          }}
-          open={isActive !== null}
-          elevation={0}
-          transitionDuration={0}
-          onEscapeKeyDown={this.toggle(null)}
-          onBackdropClick={this.toggle(null)}
-        >
-          {isActive === 'topic' ? <DataByTopic /> : null}
-          {isActive === 'analysis' ? null : null}
-        </Drawer>
-      </div>
-    );
-  }
+DropDownDrawerComponent.defaultProps = {
+  active: null
+};
+
+const DropDownDrawer = withStyles(styles)(DropDownDrawerComponent);
+export { DropDownDrawer };
+
+function DropDowns({ classes, active, toggle }) {
+  return (
+    <div className={classes.root}>
+      <DropDownButton
+        isActive={active === 'analysis'}
+        title="Country Analysis"
+        icon={analysisIcon}
+        iconActive={analysisIconActive}
+        handleClick={toggle('analysis')}
+      />
+      <DropDownButton
+        isActive={active === 'topic'}
+        title="Data by Topic"
+        icon={topicIcon}
+        iconActive={topicIconActive}
+        handleClick={toggle('topic')}
+      />
+    </div>
+  );
 }
 
 DropDowns.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  active: PropTypes.string,
+  toggle: PropTypes.func.isRequired
+};
+
+DropDowns.defaultProps = {
+  active: null
 };
 
 export default withStyles(styles)(DropDowns);

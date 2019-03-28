@@ -74,8 +74,9 @@ const styles = theme => ({
     marginBottom: '1.25rem'
   }
 });
-function DataByTopic({ classes }) {
-  const countries = window.countries.sort((a, b) => a.name[0] > b.name[0]);
+
+function DataByTopic({ classes, countries }) {
+  const sortedCountries = countries.sort((a, b) => a.name[0] > b.name[0]);
   return (
     <div className={classes.root}>
       <Grid
@@ -108,7 +109,7 @@ function DataByTopic({ classes }) {
           wrap="wrap"
           className={classes.flagsContainer}
         >
-          {countries.map(country => (
+          {sortedCountries.map(country => (
             <ButtonBase
               key={country.slug}
               disableRipple
@@ -132,7 +133,8 @@ function DataByTopic({ classes }) {
 }
 
 DataByTopic.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  countries: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(DataByTopic);
