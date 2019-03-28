@@ -85,7 +85,6 @@ function DataByTopic({ classes, countries }) {
   return (
     <div className={classes.root}>
       <Grid
-        item
         container
         direction="row"
         justify="center"
