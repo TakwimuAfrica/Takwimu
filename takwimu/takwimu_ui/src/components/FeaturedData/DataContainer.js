@@ -8,8 +8,25 @@ import DataActions from './DataActions';
 
 const styles = theme => ({
   root: {
-    padding: '20px',
-    backgroundColor: theme.palette.data.main
+    margin: '20px 0',
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '45%',
+      margin: '20px'
+    }
+  },
+  descriptionContainer: {
+    padding: '0 0.625em',
+    [theme.breakpoints.up('md')]: {
+      padding: '0 2.625rem'
+    }
+  },
+  dataContainer: {
+    padding: '0.625rem',
+    backgroundColor: theme.palette.data.main,
+    [theme.breakpoints.up('md')]: {
+      padding: '1.25rem'
+    }
   },
   title: {
     fontFamily: '"Roboto"',
@@ -22,14 +39,14 @@ const styles = theme => ({
     letterSpacing: 'normal'
   },
   description: {
-    marginLeft: '0.625rem'
+    marginLeft: '1.25rem'
   }
 });
 
 function DataContainer({ classes, color, data }) {
   return (
-    <div>
-      <div className={classes.root}>
+    <div className={classes.root}>
+      <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           <Typography className={classes.title} color={color}>
             {data.title}
@@ -37,16 +54,18 @@ function DataContainer({ classes, color, data }) {
           <DataActions />
         </Grid>
       </div>
-      <Grid container direction="row" wrap="nowrap">
-        <Grid item>
-          <ArrowDropUp color="primary" />
+      <div className={classes.descriptionContainer}>
+        <Grid container direction="row" wrap="nowrap">
+          <Grid item>
+            <ArrowDropUp color="primary" />
+          </Grid>
+          <Grid item>
+            <Typography className={classes.description}>
+              {data.description}
+            </Typography>
+          </Grid>
         </Grid>
-        <Grid item>
-          <Typography className={classes.description}>
-            {data.description}
-          </Typography>
-        </Grid>
-      </Grid>
+      </div>
     </div>
   );
 }

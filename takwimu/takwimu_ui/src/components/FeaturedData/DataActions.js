@@ -25,6 +25,15 @@ const styles = () => ({
       backgroundColor: 'transparent'
     }
   },
+  actionText: {
+    fontFamily: 'Muli',
+    fontSize: '0.6rem',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: 'normal',
+    letterSpacing: '0.019rem'
+  },
   verticalDivider: {
     height: '60%',
     width: '1px',
@@ -63,27 +72,27 @@ function DataActions({ classes }) {
     <div className={classes.root}>
       <ActionButton>
         <ShareOutlined />
-        <Typography>Share</Typography>
+        <Typography className={classes.actionText}>Share</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
         <CloudDownload />
-        <Typography>Download</Typography>
+        <Typography className={classes.actionText}>Download</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
         <Code />
-        <Typography>Embed</Typography>
+        <Typography className={classes.actionText}>Embed</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
         <CompareArrows />
-        <Typography>Compare</Typography>
+        <Typography className={classes.actionText}>Compare</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
         <List />
-        <Typography>Show Data</Typography>
+        <Typography className={classes.actionText}>Show Data</Typography>
       </ActionButton>
     </div>
   );

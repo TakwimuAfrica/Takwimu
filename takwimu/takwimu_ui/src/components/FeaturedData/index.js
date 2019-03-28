@@ -25,17 +25,12 @@ function FeaturedData({ classes }) {
     <Section title="Featured Data" variant="h2">
       <Grid
         container
-        spacing={40}
         direction="row"
         justify="space-between"
         className={classes.root}
       >
-        <Grid md={6} item container>
-          <DataContainer color="secondary" data={featuredData[0]} />
-        </Grid>
-        <Grid md={6} item container>
-          <DataContainer color="primary" data={featuredData[1]} />
-        </Grid>
+        <DataContainer color="secondary" data={featuredData[0]} />
+        <DataContainer color="primary" data={featuredData[1]} />
       </Grid>
     </Section>
   );
