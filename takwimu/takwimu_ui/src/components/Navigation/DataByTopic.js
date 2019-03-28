@@ -18,6 +18,8 @@ const styles = theme => ({
     }
   },
   container: {
+    backgroundImage: `url(${chartBackground})`,
+    backgroundRepeat: 'no-repeat',
     [theme.breakpoints.up('md')]: {
       width: '58.265625rem' // .75 of lg
     },
@@ -58,7 +60,7 @@ const styles = theme => ({
   flagsContainer: {
     justifyContent: 'space-between',
     overflow: 'scroll',
-    height: '10rem',
+    height: '14.5rem',
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'unset',
       overflow: 'unset',
@@ -66,9 +68,12 @@ const styles = theme => ({
     }
   },
   leftContent: {
-    height: '15.625rem',
-    backgroundImage: `url(${chartBackground})`,
-    backgroundRepeat: 'no-repeat'
+    height: 'fit-content',
+    marginBottom: '1.25rem',
+    [theme.breakpoints.up('md')]: {
+      height: '15.625rem',
+      marginBottom: '0'
+    }
   },
   title: {
     marginBottom: '1.25rem'
