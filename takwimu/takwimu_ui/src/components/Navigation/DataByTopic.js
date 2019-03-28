@@ -5,6 +5,8 @@ import { withStyles, Grid, Typography, ButtonBase } from '@material-ui/core';
 
 import chartBackground from '../../assets/images/a-chart-bg.svg';
 
+const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -115,7 +117,7 @@ function DataByTopic({ classes }) {
             >
               <img
                 alt={country.name}
-                src={`/static/img/flags/${country.slug}.svg`}
+                src={flagSrc(`./${country.slug}.svg`)}
                 className={classes.flag}
               />
               <Typography color="textSecondary" className={classes.flagName}>
