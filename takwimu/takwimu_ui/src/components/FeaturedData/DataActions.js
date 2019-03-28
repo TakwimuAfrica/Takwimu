@@ -35,9 +35,9 @@ const styles = () => ({
     letterSpacing: '0.019rem'
   },
   verticalDivider: {
-    height: '60%',
-    width: '1px',
-    borderRight: '1px solid #eaeaea'
+    width: '0.07rem',
+    height: '1.913rem',
+    backgroundColor: '#eaeaea'
   }
 });
 
