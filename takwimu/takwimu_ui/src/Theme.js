@@ -11,6 +11,7 @@ const Theme = createMuiTheme({
     secondary: {
       main: '#004494' // darkish-blue
     },
+    text: { primary: '#000', secondary: '#fff' },
     info: {
       main: '#f6fbfa' // ice-blue
     },
@@ -20,6 +21,7 @@ const Theme = createMuiTheme({
   },
   typography: {
     fontHeading: FONT_FAMILY_HEADING,
+    fontText: FONT_FAMILY_TEXT,
     h2: {
       fontFamily: FONT_FAMILY_HEADING,
       margin: '3.0625rem 0',
@@ -77,6 +79,24 @@ const Theme = createMuiTheme({
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal'
+    },
+    body2: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.25rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: '2.05',
+      letterSpacing: 'normal'
+    },
+    body2: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.125rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
       lineHeight: '2.05',
       letterSpacing: 'normal'
     },
@@ -99,6 +119,18 @@ const Theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiLink: {
+      root: {
+        fontFamily: FONT_FAMILY_TEXT,
+        fontSize: '1.125rem',
+        fontWeight: 'normal',
+        fontStyle: 'normal',
+        fontStretch: 'normal',
+        lineHeight: 'normal',
+        letterSpacing: 'normal',
+        color: '#ffffff'
+      }
+    },
     MuiButton: {
       root: {
         borderRadius: '0.75rem',

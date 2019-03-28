@@ -2,15 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Typography, withStyles } from '@material-ui/core';
 
+import Layout from './Layout';
+
 const styles = theme => ({
   root: {
-    margin: '0 auto',
-    [theme.breakpoints.up('md')]: {
-      width: '58.265625rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '77.6875rem'
-    }
+    margin: '0 auto'
   },
   title: {
     [theme.breakpoints.up('md')]: {
@@ -21,14 +17,14 @@ const styles = theme => ({
 
 function Section({ children, classes, title, variant }) {
   return (
-    <div className={classes.root}>
+    <Layout classes={{ root: classes.root }}>
       {title && (
         <Typography variant={variant} className={classes.title}>
           {title}
         </Typography>
       )}
       {children}
-    </div>
+    </Layout>
   );
 }
 
@@ -44,7 +40,7 @@ Section.propTypes = {
 
 Section.defaultProps = {
   title: null,
-  variant: 'h1'
+  variant: 'h2'
 };
 
 export default withStyles(styles)(Section);
