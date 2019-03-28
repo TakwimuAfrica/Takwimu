@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles, Grid, Typography, ButtonBase } from '@material-ui/core';
 
-import chartBackground from '../../assets/a-chart-bg.svg';
+import chartBackground from '../../assets/images/a-chart-bg.svg';
 
 const styles = theme => ({
   root: {
