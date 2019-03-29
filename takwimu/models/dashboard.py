@@ -3,7 +3,9 @@ import logging
 from collections import OrderedDict
 
 from django import forms
+from django.core.exceptions import ValidationError
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from django.utils.text import slugify
 from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
@@ -405,6 +407,9 @@ class ProfileSectionPage(ModelMeta, Page):
         if self.promotion_image:
             return self.promotion_image.file.url
 
+    def __str__(self):
+        return f"{self.get_parent().title} - {self.title}"
+
 
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
@@ -784,3 +789,10 @@ class CountryProfilesSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Country Profiles'
+
+
+@register_setting
+class FeaturedAnalysis(BaseSetting):
+    featured_analysis_1 = models.ForeignKey(ProfileSectionPage, related_name='Analysis1', null=True)
+    featured_analysis_2 = models.ForeignKey(ProfileSectionPage, related_name='Analysis2', null=True)
+    featured_analysis_3 = models.ForeignKey(ProfileSectionPage, related_name='Analysis3', null=True)
