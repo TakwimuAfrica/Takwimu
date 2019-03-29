@@ -66,7 +66,8 @@ class Navigation extends React.Component {
 
   toggleMobileDrawer() {
     this.setState(prevState => ({
-      isMobileDrawerOpen: !prevState.isMobileDrawerOpen
+      isMobileDrawerOpen: !prevState.isMobileDrawerOpen,
+      openDrawer: !prevState.isMobileDrawerOpen ? prevState.openDrawer : null
     }));
   }
 
@@ -152,8 +153,12 @@ class Navigation extends React.Component {
     return (
       <DropDownDrawer
         active={openDrawer}
-        toggle={this.toggleDrawer}
         countries={countries}
+        toggle={
+          isWidthUp('md', width)
+            ? this.toggleDrawer(null)
+            : this.toggleMobileDrawer
+        }
       >
         {isWidthUp('md', width) ? this.renderNavBar() : <div />}
       </DropDownDrawer>

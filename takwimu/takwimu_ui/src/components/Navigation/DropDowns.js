@@ -73,8 +73,8 @@ function DropDownDrawerComponent({
       open={active !== null}
       elevation={0}
       transitionDuration={0}
-      onEscapeKeyDown={toggle(null)}
-      onBackdropClick={toggle(null)}
+      onEscapeKeyDown={toggle}
+      onBackdropClick={toggle}
     >
       {children}
       {active === 'topic' ? <DataByTopic countries={countries} /> : null}
