@@ -10,12 +10,16 @@ import WhereToNext from './components/WhereToNext';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import Footer from './components/Footer';
 
+const props = {
+  countries: window.countries
+};
+
 const renderApp = (Component, id) => {
   const el = document.getElementById(id);
   if (el) {
     const App = withRoot(Component);
 
-    ReactDOM.render(<App />, el);
+    ReactDOM.render(<App {...props} />, el);
   }
 };
 

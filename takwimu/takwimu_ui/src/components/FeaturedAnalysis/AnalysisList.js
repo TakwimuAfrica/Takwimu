@@ -15,7 +15,8 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       width: '19.375rem'
     }
-  }
+  },
+  content: {}
 });
 
 function AnalysisList({ classes, content, current, onClick }) {
