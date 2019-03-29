@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 
 import DropDownContent from './DropDownContent';
 
-import bg from '../../assets/images/a-chart-bg.svg';
+import bg from '../../assets/images/file-paragraph-bg.svg';
 
 const styles = {
   container: {
@@ -14,23 +14,23 @@ const styles = {
   }
 };
 
-function DataByTopic({ classes, countries }) {
+function CountryAnalysis({ classes, countries }) {
   const sortedCountries = countries.sort((a, b) => a.name[0] > b.name[0]);
   return (
     <DropDownContent
       classes={{
         container: classes.container
       }}
-      title="Data by Topic"
+      title="Country Analysis"
       description="Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet."
       countries={sortedCountries}
     />
   );
 }
 
-DataByTopic.propTypes = {
+CountryAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(DataByTopic);
+export default withStyles(styles)(CountryAnalysis);
