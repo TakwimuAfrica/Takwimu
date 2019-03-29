@@ -3,6 +3,7 @@ var ProfileMaps = function() {
     this.mapit_url = GeometryLoader.mapit_url;
     this.mapit_codetype = GeometryLoader.mapit_codetype;
     this.mapit_country = GeometryLoader.mapit_country;
+    this.map_tiles = GeometryLoader.mapit_tiles_source;
 
     this.featureGeoStyle = {
         "fillColor": "#66c2a5",
@@ -76,11 +77,7 @@ var ProfileMaps = function() {
 
     this.addImagery = function() {
         // add imagery
-        L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png', {
-          attribution: '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
-          minZoom: 1,
-        	maxZoom: 19
-        }).addTo(this.map);
+        L.tileLayer(map_tiles.tiles_url, map_tiles.tiles_option).addTo(this.map);
     };
     this.drawAllFeatures = function() {
         var geo_level = this.geo.this.geo_level;

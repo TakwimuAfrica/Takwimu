@@ -7,6 +7,7 @@ function MapItGeometryLoader() {
     self.mapit_url = MAPIT.url;
     self.mapit_codetype = MAPIT.code_type;
     self.mapit_country = MAPIT.map_country;
+    self.map_tiles_source = map_tiles_source;
     /**
      * Fetches geometry data for a comparison view and calls the +success+
      * callback with an object mapping each geo-id to a GeoJSON object.
