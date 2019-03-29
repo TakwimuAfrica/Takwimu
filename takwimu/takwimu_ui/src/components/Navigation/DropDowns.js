@@ -1,9 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import classNames from 'classnames';
+
 import { Drawer, withStyles } from '@material-ui/core';
 import DropDownButton from './DropDownButton';
+
 import DataByTopic from './DataByTopic';
+import CountryAnalysis from './CountryAnalysis';
 
 import topicIcon from '../../assets/images/a-chart-white.svg';
 import topicIconActive from '../../assets/images/a-chart-active.svg';
@@ -19,8 +23,14 @@ const styles = theme => ({
       display: 'unset'
     }
   },
-  modal: {
+  modalTopic: {
     top: '15.313rem',
+    [theme.breakpoints.up('md')]: {
+      top: '0'
+    }
+  },
+  modalAnalysis: {
+    top: '11.313rem',
     [theme.breakpoints.up('md')]: {
       top: '0'
     }
@@ -49,7 +59,10 @@ function DropDownDrawerComponent({
     <Drawer
       anchor="top"
       ModalProps={{
-        className: classes.modal
+        className: classNames({
+          [classes.modalTopic]: active === 'topic',
+          [classes.modalAnalysis]: active === 'analysis'
+        })
       }}
       BackdropProps={{
         className: classes.backdrop
@@ -60,12 +73,12 @@ function DropDownDrawerComponent({
       open={active !== null}
       elevation={0}
       transitionDuration={0}
-      onEscapeKeyDown={toggle('')}
-      onBackdropClick={toggle('')}
+      onEscapeKeyDown={toggle(null)}
+      onBackdropClick={toggle(null)}
     >
       {children}
       {active === 'topic' ? <DataByTopic countries={countries} /> : null}
-      {active === 'analysis' ? null : null}
+      {active === 'analysis' ? <CountryAnalysis countries={countries} /> : null}
     </Drawer>
   );
 }

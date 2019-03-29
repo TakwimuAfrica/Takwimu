@@ -177,8 +177,8 @@ class Navigation extends React.Component {
         open={isMobileDrawerOpen}
         elevation={0}
         transitionDuration={0}
-        onEscapeKeyDown={this.toggleDrawer}
-        onBackdropClick={this.toggleDrawer}
+        onEscapeKeyDown={this.toggleMobileDrawer}
+        onBackdropClick={this.toggleMobileDrawer}
       >
         <Grid container direction="column" alignItems="flex-start">
           {this.renderNavBar()}
