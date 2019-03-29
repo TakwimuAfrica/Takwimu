@@ -13,11 +13,13 @@ import {
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
+import classeNames from 'classnames';
+
 import { isWidthUp } from '@material-ui/core/withWidth';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
 import Layout from '../Layout';
-import DropDowns from './DropDowns';
+import DropDowns, { DropDownDrawer } from './DropDowns';
 
 const styles = theme => ({
   root: {
@@ -34,7 +36,7 @@ const styles = theme => ({
     outline: 'none'
   },
   link: {
-    margin: '1.375rem 0.7rem',
+    margin: '1.375rem 3.25rem',
     [theme.breakpoints.up('md')]: {
       margin: '0.625rem'
     },
@@ -44,6 +46,9 @@ const styles = theme => ({
   },
   search: {
     marginBottom: '-0.313rem'
+  },
+  iconLink: {
+    margin: '1.375rem 0.7rem'
   }
 });
 
@@ -51,14 +56,26 @@ class Navigation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isDrawerOpen: false
+      isMobileDrawerOpen: false,
+      openDrawer: null
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
+    this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
   }
 
-  toggleDrawer() {
-    this.setState(prevState => ({ isDrawerOpen: !prevState.isDrawerOpen }));
+  toggleMobileDrawer() {
+    this.setState(prevState => ({
+      isMobileDrawerOpen: !prevState.isMobileDrawerOpen
+    }));
+  }
+
+  toggleDrawer(drawer) {
+    return () => {
+      this.setState(prevState => ({
+        openDrawer: prevState.openDrawer !== drawer ? drawer : null
+      }));
+    };
   }
 
   renderNavBar() {
@@ -90,7 +107,7 @@ class Navigation extends React.Component {
             disableRipple
             disableTouchRipple
             color="secondary"
-            onClick={this.toggleDrawer}
+            onClick={this.toggleMobileDrawer}
           >
             <MenuOutlined color="inherit" />
           </IconButton>
@@ -99,62 +116,17 @@ class Navigation extends React.Component {
     );
   }
 
-  renderMobileDrawer() {
-    const { classes } = this.props;
-    const { isDrawerOpen } = this.state;
-    return (
-      <Drawer
-        anchor="top"
-        BackdropProps={{
-          style: {
-            backgroundColor: 'transparent'
-          }
-        }}
-        PaperProps={{
-          className: classes.drawer
-        }}
-        open={isDrawerOpen}
-        elevation={0}
-        transitionDuration={0}
-        onEscapeKeyDown={this.toggleDrawer}
-        onBackdropClick={this.toggleDrawer}
-      >
-        <Grid container direction="column" alignItems="flex-start">
-          {this.renderNavBar()}
-          <MenuList>
-            <DropDowns />
-            <MenuItem>
-              <Link className={classes.link} href="/">
-                About Us
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className={classes.link} href="/">
-                FAQs
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className={classes.link} href="/">
-                Contact Us
-              </Link>
-            </MenuItem>
-            <MenuItem>
-              <Link className={classes.link} href="/">
-                <Search className={classes.search} />
-              </Link>
-            </MenuItem>
-          </MenuList>
-        </Grid>
-      </Drawer>
-    );
-  }
-
   renderDesktopNav() {
-    const { classes } = this.props;
+    const { classes, countries } = this.props;
+    const { openDrawer } = this.state;
     return (
       <Fragment>
         <Grid item>
-          <DropDowns />
+          <DropDowns
+            active={openDrawer}
+            toggle={this.toggleDrawer}
+            countries={countries}
+          />
         </Grid>
         <Grid item>
           <Link className={classes.link} href="/">
@@ -174,11 +146,83 @@ class Navigation extends React.Component {
     );
   }
 
+  renderDropDownDrawer() {
+    const { width, countries } = this.props;
+    const { openDrawer } = this.state;
+    return (
+      <DropDownDrawer
+        active={openDrawer}
+        toggle={this.toggleDrawer}
+        countries={countries}
+      >
+        {isWidthUp('md', width) ? this.renderNavBar() : <div />}
+      </DropDownDrawer>
+    );
+  }
+
+  renderMobileDrawer() {
+    const { classes, countries } = this.props;
+    const { openDrawer, isMobileDrawerOpen } = this.state;
+    return (
+      <Drawer
+        anchor="top"
+        BackdropProps={{
+          style: {
+            backgroundColor: 'transparent'
+          }
+        }}
+        PaperProps={{
+          className: classes.drawer
+        }}
+        open={isMobileDrawerOpen}
+        elevation={0}
+        transitionDuration={0}
+        onEscapeKeyDown={this.toggleDrawer}
+        onBackdropClick={this.toggleDrawer}
+      >
+        <Grid container direction="column" alignItems="flex-start">
+          {this.renderNavBar()}
+          <MenuList>
+            <DropDowns
+              active={openDrawer}
+              countries={countries}
+              toggle={this.toggleDrawer}
+            />
+            <MenuItem>
+              <Link className={classes.link} href="/">
+                About Us
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className={classes.link} href="/">
+                FAQs
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link className={classes.link} href="/">
+                Contact Us
+              </Link>
+            </MenuItem>
+            <MenuItem>
+              <Link
+                className={classeNames([classes.link, classes.iconLink])}
+                href="/"
+              >
+                <Search className={classes.search} />
+              </Link>
+            </MenuItem>
+          </MenuList>
+        </Grid>
+      </Drawer>
+    );
+  }
+
   render() {
     return (
       <Fragment>
         {this.renderNavBar()}
         {this.renderMobileDrawer()}
+        {this.renderDropDownDrawer()}
       </Fragment>
     );
   }
@@ -186,7 +230,8 @@ class Navigation extends React.Component {
 
 Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  width: PropTypes.isRequired
+  width: PropTypes.string.isRequired,
+  countries: PropTypes.shape({}).isRequired
 };
 
 export default withWidth()(withStyles(styles)(Navigation));

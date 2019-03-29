@@ -9,6 +9,7 @@ const styles = theme => ({
     margin: '0 auto'
   },
   title: {
+    margin: '2.375rem 0',
     [theme.breakpoints.up('md')]: {
       width: '51.125rem'
     }
