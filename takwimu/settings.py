@@ -180,6 +180,15 @@ HURUMAP['available_releases_years_per_country'] = {
     },
 }
 
+HURUMAP['map_tiles_source'] = {
+    'tiles_url': 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
+    'tiles_option': {
+        'attribution': '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
+        'minZoom': 1,
+        'maxZoom': 19
+    }
+}
+
 # Making sure these are the same
 WAZIMAP = HURUMAP
 
