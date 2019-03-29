@@ -3,7 +3,6 @@ var ProfileMaps = function() {
     this.mapit_url = GeometryLoader.mapit_url;
     this.mapit_codetype = GeometryLoader.mapit_codetype;
     this.mapit_country = GeometryLoader.mapit_country;
-    this.map_tiles = GeometryLoader.mapit_tiles_source;
 
     this.featureGeoStyle = {
         "fillColor": "#66c2a5",
@@ -77,7 +76,8 @@ var ProfileMaps = function() {
 
     this.addImagery = function() {
         // add imagery
-        L.tileLayer(map_tiles.tiles_url, map_tiles.tiles_option).addTo(this.map);
+        var tileLayer = window.tile_layer;
+        L.tileLayer(tileLayer.url_template, tileLayer.options).addTo(this.map);
     };
     this.drawAllFeatures = function() {
         var geo_level = this.geo.this.geo_level;
