@@ -280,6 +280,7 @@ pip-selfcheck.json
 .vscode
 media/*
 
+build/
 
 # TAKWIMU Specific
 
