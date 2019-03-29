@@ -7,20 +7,18 @@ import { withStyles } from '@material-ui/core/styles';
 import Section from './Section';
 
 const styles = () => ({
-  videoWrapper: {
+  container: {
     position: 'relative',
     paddingBottom: '56.25%',
-    paddingTop: '2rem',
-    marginTop: '2rem',
-    height: 0,
-    border: 0
+    margin: '2.8125rem 0'
   },
-  youtubeIframe: {
+  iframe: {
     position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
-    height: '100%'
+    height: '100%',
+    border: 0
   }
 });
 
@@ -31,12 +29,13 @@ function MakingOfTakwimu({ classes }) {
         Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor
         sit amet, consectetur adipiscing elit.
       </Typography>
-      <div className={classes.videoWrapper}>
+      <div className={classes.container}>
         <iframe
           title="making takwimu"
           src="https://www.youtube-nocookie.com/embed/DvDCCETHsTo"
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
+          className={classes.iframe}
         />
       </div>
     </Section>
