@@ -84,15 +84,6 @@ const Theme = createMuiTheme({
       lineHeight: '2.05',
       letterSpacing: 'normal'
     },
-    body2: {
-      fontFamily: FONT_FAMILY_TEXT,
-      fontSize: '1.125rem',
-      fontWeight: 'normal',
-      fontStyle: 'normal',
-      fontStretch: 'normal',
-      lineHeight: '2.05',
-      letterSpacing: 'normal'
-    },
     button: {
       fontFamily: FONT_FAMILY_TEXT,
       fontSize: '0.875rem',
