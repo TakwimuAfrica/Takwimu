@@ -10,9 +10,10 @@ const styles = () => ({
   videoWrapper: {
     position: 'relative',
     paddingBottom: '56.25%',
-    paddingTop: '25px',
-    marginTop: '25px',
-    height: 0
+    paddingTop: '2rem',
+    marginTop: '2rem',
+    height: 0,
+    border: 0
   },
   youtubeIframe: {
     position: 'absolute',
@@ -32,13 +33,9 @@ function MakingOfTakwimu({ classes }) {
       </Typography>
       <div className={classes.videoWrapper}>
         <iframe
-          className={classes.youtubeIframe}
-          title="Making of Takwimu"
-          width="560"
-          height="315"
-          src="https://www.youtube.com/embed/DvDCCETHsTo"
-          frameBorder="0"
-          allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+          title="making takwimu"
+          src="https://www.youtube-nocookie.com/embed/DvDCCETHsTo"
+          allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
         />
       </div>
