@@ -10,6 +10,9 @@ const Theme = createMuiTheme({
     text: { primary: '#000', secondary: '#fff' },
     info: {
       main: '#f6fbfa' // ice-blue
+    },
+    background: {
+      lightGray: '#f6f6f6'
     }
   },
   typography: {
@@ -79,6 +82,15 @@ const Theme = createMuiTheme({
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: '2.05',
+      letterSpacing: 'normal'
+    },
+    body3: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '1.0625rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
       letterSpacing: 'normal'
     },
     button: {
