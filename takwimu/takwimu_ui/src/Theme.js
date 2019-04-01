@@ -16,7 +16,8 @@ const Theme = createMuiTheme({
       main: '#f6fbfa' // ice-blue
     },
     data: {
-      main: '#F5F5F5' // #4a4a4a opacity 0.05
+      main: '#4a4a4a',
+      light: '#F5F5F5' // #4a4a4a opacity 0.05
     }
   },
   typography: {
@@ -57,11 +58,11 @@ const Theme = createMuiTheme({
     },
     subtitle1: {
       fontFamily: FONT_FAMILY_TEXT,
-      fontSize: '1.25rem',
-      fontWeight: 'normal',
+      fontSize: '1.75rem',
+      fontWeight: 'bold',
       fontStyle: 'normal',
       fontStretch: 'normal',
-      lineHeight: '2.05',
+      lineHeight: 'normal',
       letterSpacing: 'normal'
     },
     subtitle2: {
@@ -98,6 +99,15 @@ const Theme = createMuiTheme({
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: '2.05',
+      letterSpacing: 'normal'
+    },
+    caption: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '0.813rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: '1.69',
       letterSpacing: 'normal'
     },
     button: {

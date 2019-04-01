@@ -2,13 +2,12 @@ import React from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles, IconButton, Typography, Grid } from '@material-ui/core';
-import {
-  ShareOutlined,
-  CloudDownload,
-  Code,
-  CompareArrows,
-  List
-} from '@material-ui/icons';
+
+import shareIcon from '../../assets/images/network-connection.svg';
+import embedIcon from '../../assets/images/code.svg';
+import compareIcon from '../../assets/images/compare.svg';
+import downloadIcon from '../../assets/images/download.svg';
+import showIcon from '../../assets/images/tablet-reader-31.svg';
 
 const styles = () => ({
   root: {
@@ -71,27 +70,27 @@ function DataActions({ classes }) {
   return (
     <div className={classes.root}>
       <ActionButton>
-        <ShareOutlined />
+        <img alt="" src={shareIcon} />
         <Typography className={classes.actionText}>Share</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
-        <CloudDownload />
+        <img alt="" src={downloadIcon} />
         <Typography className={classes.actionText}>Download</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
-        <Code />
+        <img alt="" src={embedIcon} />
         <Typography className={classes.actionText}>Embed</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
-        <CompareArrows />
+        <img alt="" src={compareIcon} />
         <Typography className={classes.actionText}>Compare</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
       <ActionButton>
-        <List />
+        <img alt="" src={showIcon} />
         <Typography className={classes.actionText}>Show Data</Typography>
       </ActionButton>
     </div>

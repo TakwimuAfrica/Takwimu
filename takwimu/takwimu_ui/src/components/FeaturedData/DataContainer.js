@@ -8,11 +8,11 @@ import DataActions from './DataActions';
 
 const styles = theme => ({
   root: {
-    margin: '20px 0',
+    margin: '1.25rem 0',
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '45%',
-      margin: '20px'
+      margin: '1.25rem'
     }
   },
   descriptionContainer: {
@@ -23,7 +23,7 @@ const styles = theme => ({
   },
   dataContainer: {
     padding: '0.625rem',
-    backgroundColor: theme.palette.data.main,
+    backgroundColor: theme.palette.data.light,
     [theme.breakpoints.up('md')]: {
       padding: '1.25rem'
     }
@@ -39,6 +39,7 @@ const styles = theme => ({
     letterSpacing: 'normal'
   },
   description: {
+    color: theme.palette.data.main,
     marginLeft: '1.25rem'
   }
 });
@@ -60,7 +61,7 @@ function DataContainer({ classes, color, data }) {
             <ArrowDropUp color="primary" />
           </Grid>
           <Grid item>
-            <Typography className={classes.description}>
+            <Typography variant="caption" className={classes.description}>
               {data.description}
             </Typography>
           </Grid>
