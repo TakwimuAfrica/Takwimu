@@ -8,6 +8,7 @@ import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
+import ProfileTabs from './components/ProfileTabs';
 import Footer from './components/Footer';
 
 const props = {
@@ -25,6 +26,7 @@ const renderApp = (Component, id) => {
 
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
+renderApp(ProfileTabs, 'takwimuProfileTabs');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
 renderApp(WhereToNext, 'takwimuWhereToNext');
