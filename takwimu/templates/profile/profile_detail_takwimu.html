@@ -17,8 +17,11 @@
 </div>
 {% endblock %}
 
-{% block profile_detail %}
+{% block profile_preamble %}
+{% endblock profile_preamble%}
 
+{% block profile_detail %}
+  <div id="takwimuProfileTabs"></div>
   {% if not demographics.is_missing %}
     <article class="clearfix">
       <header class="section-contents">

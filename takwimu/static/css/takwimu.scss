@@ -19,7 +19,7 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
-html, body, h1, h2, h3, h4, h5, h6, p, * {
+html, body, h1, h2, h3, h4, h5, h6, p {
   font-family: 'Montserrat', sans-serif;
   word-break: break-word;
 }
@@ -659,3 +659,23 @@ body {
   */
   // body { background: grey;}
  }
+
+
+//overrides
+#profile .content-container {
+  padding-top: 0;
+}
+#cover-map {
+    margin-bottom: 0;
+}
+.wrapper {
+  margin: 0;
+  width: auto;
+}
+#profile a:focus {
+  outline: none;
+}
+#profile a:hover {
+  text-decoration: none;
+  color: inherit;
+}

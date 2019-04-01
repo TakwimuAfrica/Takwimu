@@ -10,41 +10,10 @@
 {% block body %}
   {% block header %}
     {% include 'takwimu/_includes/navbar/_index.html' %}
-    {% block header_content %}
-      <div class="text-light" style="background: #074c9c url('{% static 'img/bg/header-databycountry.jpg' %}') no-repeat center; background-size: cover;">
-        <div class="text-center py-3">
-          <div class="container">
-            <nav aria-label="breadcrumb">
-              <ol class="breadcrumb bg-transparent">
-                <li class="breadcrumb-item">
-                  <a href="/" class="text-light"><u>Home</u></a>
-                </li>
-                <li class="breadcrumb-item active text-light">
-                  Countries profiles
-                </li>
-              </ol>
-            </nav>
-            <h1 class="display-4 text-light font-weight-bold">Find data by
-              Country</h1>
-            <p class="p-4">
-              All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
-            </p>
-          </div>
-        </div>
-      </div>
-    {% endblock header_content %}
   {% endblock %}
   {% block content_container %}
     <div class="clearfix">
       <div id="slippy-map"></div>
-      <div id="map-div" class="py-4 px-4 mt-3 text-center border" style="position: absolute; top: 50%; left: 30%; border-radius: 2px; width: 700px; height: 201px; background-color: #ffffff; box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.23)">
-        <p class="text-uppercase font-weight-bold">Browse by Map</p>
-        <p>The data view on pages shown by navigating with this map are still <strong>work in progress</strong>. Please treat them as a sneak peak of what to expect in future releases. We'd though still want your <a href="mailto:{{ settings.takwimu.SupportSetting.hello }}" target="_blank" rel="noopener">feedback</a> on them though.</p>
-        <button class="btn btn-primary btn-sm text-uppercase px-4 font-weight-bold" style="border-color: #1f6cc6;"
-                onclick="javascript:$('#map-div').css('display', 'none')">
-          GOT IT
-        </button>
-      </div>
     </div>
     <section class="m-0">
 
