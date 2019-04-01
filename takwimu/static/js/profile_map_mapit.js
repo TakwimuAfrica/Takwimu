@@ -76,7 +76,7 @@ var ProfileMaps = function() {
 
     this.addImagery = function() {
         // add imagery
-        var tileLayer = window.tile_layer;
+        var tileLayer = window.TILE_LAYER;
         L.tileLayer(tileLayer.url_template, tileLayer.options).addTo(this.map);
     };
     this.drawAllFeatures = function() {

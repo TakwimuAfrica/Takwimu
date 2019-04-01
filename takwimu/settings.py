@@ -181,7 +181,7 @@ HURUMAP['available_releases_years_per_country'] = {
 }
 
 HURUMAP['tile_layer'] = {
-    'url_template': 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}{r}.png',
+    'url_template': 'https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png',
     'options': {
         'attribution': '<a href="https://wikimediafoundation.org/wiki/Maps_Terms_of_Use">Wikimedia</a>',
         'minZoom': 1,
