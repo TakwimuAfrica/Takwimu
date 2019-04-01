@@ -1,6 +1,6 @@
 
-# Created by https://www.gitignore.io/api/vim,node,venv,emacs,linux,macos,django,python,jekyll,virtualenv,intellij+all,visualstudiocode
-# Edit at https://www.gitignore.io/?templates=vim,node,venv,emacs,linux,macos,django,python,jekyll,virtualenv,intellij+all,visualstudiocode
+# Created by https://www.gitignore.io/api/vim,node,venv,emacs,linux,macos,django,python,virtualenv,intellij+all,visualstudiocode
+# Edit at https://www.gitignore.io/?templates=vim,node,venv,emacs,linux,macos,django,python,virtualenv,intellij+all,visualstudiocode
 
 ### Django ###
 *.log
@@ -197,6 +197,7 @@ flycheck_*.el
 .idea/**/shelf
 atom-amd64.deb
 
+
 # Generated files
 .idea/**/contentModel.xml
 
@@ -272,12 +273,6 @@ modules.xml
 
 # Sonarlint plugin
 .idea/sonarlint
-
-### Jekyll ###
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
 
 ### Linux ###
 
@@ -504,6 +499,6 @@ tags
 # Ignore all local history of files
 .history
 
-# End of https://www.gitignore.io/api/vim,node,venv,emacs,linux,macos,django,python,jekyll,virtualenv,intellij+all,visualstudiocode
+# End of https://www.gitignore.io/api/vim,node,venv,emacs,linux,macos,django,python,virtualenv,intellij+all,visualstudiocode
 
 /static
