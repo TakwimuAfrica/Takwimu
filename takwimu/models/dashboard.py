@@ -15,6 +15,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
+from wagtail.contrib.settings.context_processors import settings
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
@@ -791,8 +792,41 @@ class CountryProfilesSetting(BaseSetting):
         verbose_name = 'Country Profiles'
 
 
-@register_setting
-class FeaturedAnalysis(BaseSetting):
-    featured_analysis_1 = models.ForeignKey(ProfileSectionPage, related_name='Analysis1', null=True)
-    featured_analysis_2 = models.ForeignKey(ProfileSectionPage, related_name='Analysis2', null=True)
-    featured_analysis_3 = models.ForeignKey(ProfileSectionPage, related_name='Analysis3', null=True)
+class IndexPage(Page):
+    """
+    The process for integrating Wagtail into an existing project is definitely
+    less polished than starting a project from Wagtail's built-in template.
+    The project template comes with an editable HomePage model.
+    When you add wagtail to an existing project, it automatically create a root
+    page for your site that can not be edited or extended
+    (https://github.com/wagtail/wagtail/issues/3992)
+    """
+    template = 'takwimu/home_page.html'
+
+    featured_analysis_1 = models.ForeignKey(ProfileSectionPage,
+                                            related_name='Analysis1', null=True,
+                                            on_delete=models.PROTECT)
+    featured_analysis_2 = models.ForeignKey(ProfileSectionPage,
+                                            related_name='Analysis2', null=True,
+                                            on_delete=models.PROTECT)
+    featured_analysis_3 = models.ForeignKey(ProfileSectionPage,
+                                            related_name='Analysis3', null=True,
+                                            on_delete=models.PROTECT)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('featured_analysis_1'),
+        FieldPanel('featured_analysis_2'),
+        FieldPanel('featured_analysis_3'),
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(IndexPage, self).get_context(**kwargs)
+        context['explainer_steps'] = ExplainerSteps.objects.first()
+        context['faqs'] = FAQ.objects.all()
+        context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
+
+        context.update(settings(request))
+        # context.update(takwimu_countries(request))
+        # context.update(takwimu_stories(request))
+        # context.update(takwimu_topics(request))
+        return context
