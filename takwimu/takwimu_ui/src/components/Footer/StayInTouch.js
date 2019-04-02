@@ -29,7 +29,7 @@ const styles = () => ({
   }
 });
 
-function StayInTouch({ classes }) {
+function StayInTouch({ classes, settings: { support, socialMedia } }) {
   return (
     <div className={classes.root}>
       <Title>Stay in touch</Title>
@@ -41,7 +41,7 @@ function StayInTouch({ classes }) {
       >
         <div className={classes.iconContainer}>
           <A
-            href="mailto://hello@takwimu.africa"
+            href={support.hello}
             className={classes.links}
             target="_blank"
             rel="noopener noreferrer"
@@ -51,25 +51,22 @@ function StayInTouch({ classes }) {
           </A>
         </div>
         <div className={classes.iconContainer}>
-          <A href="https://twitter.com/TakwimuAfrica" className={classes.links}>
+          <A href={socialMedia.twitter} className={classes.links}>
             <img src={twitter} alt="" className={classes.icon} />
           </A>
         </div>
         <div className={classes.iconContainer}>
-          <A href="https://facebook.com/TakwimuAfrica" className={classes.icon}>
+          <A href={socialMedia.facebook} className={classes.icon}>
             <img src={facebook} alt="" className={classes.icon} />
           </A>
         </div>
         <div className={classes.iconContainer}>
-          <A href="https://medium.com/takwimu-africa" className={classes.links}>
+          <A href={socialMedia.medium} className={classes.links}>
             <img src={group3} alt="" className={classes.icon} />
           </A>
         </div>
         <div className={classes.iconContainer}>
-          <A
-            href="https://www.linkedin.com/company/takwimu-africa/"
-            className={classes.links}
-          >
+          <A href={socialMedia.linkedin} className={classes.links}>
             <img src={group3Copy} alt="" className={classes.icon} />
           </A>
         </div>
@@ -79,7 +76,8 @@ function StayInTouch({ classes }) {
 }
 
 StayInTouch.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  settings: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(StayInTouch);

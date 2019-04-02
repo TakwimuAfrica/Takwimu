@@ -10,8 +10,9 @@ import WhereToNext from './components/WhereToNext';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import Footer from './components/Footer';
 
-const props = {
-  countries: window.countries
+const PROPS = {
+  takwimu: window.takwimu,
+  settings: window.settings
 };
 
 const renderApp = (Component, id) => {
@@ -19,7 +20,7 @@ const renderApp = (Component, id) => {
   if (el) {
     const App = withRoot(Component);
 
-    ReactDOM.render(<App {...props} />, el);
+    ReactDOM.render(<App {...PROPS} />, el);
   }
 };
 

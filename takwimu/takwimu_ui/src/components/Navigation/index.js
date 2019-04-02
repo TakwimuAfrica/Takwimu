@@ -118,7 +118,10 @@ class Navigation extends React.Component {
   }
 
   renderDesktopNav() {
-    const { classes, countries } = this.props;
+    const {
+      classes,
+      takwimu: { countries }
+    } = this.props;
     const { openDrawer } = this.state;
     return (
       <Fragment>
@@ -130,16 +133,16 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/about">
             About Us
           </Link>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/faq">
             FAQs
           </Link>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/contact-us">
             Contact Us
           </Link>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/#">
             <Search className={classes.search} />
           </Link>
         </Grid>
@@ -148,7 +151,10 @@ class Navigation extends React.Component {
   }
 
   renderDropDownDrawer() {
-    const { width, countries } = this.props;
+    const {
+      width,
+      takwimu: { countries }
+    } = this.props;
     const { openDrawer } = this.state;
     return (
       <DropDownDrawer
@@ -166,7 +172,10 @@ class Navigation extends React.Component {
   }
 
   renderMobileDrawer() {
-    const { classes, countries } = this.props;
+    const {
+      classes,
+      takwimu: { countries }
+    } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
     return (
       <Drawer
@@ -236,7 +245,9 @@ class Navigation extends React.Component {
 Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
-  countries: PropTypes.shape({}).isRequired
+  takwimu: PropTypes.shape({
+    countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired
 };
 
 export default withWidth()(withStyles(styles)(Navigation));
