@@ -41,7 +41,7 @@ function StayInTouch({ classes, settings: { support, socialMedia } }) {
       >
         <div className={classes.iconContainer}>
           <A
-            href={support.hello}
+            href={`mailto:${support.hello}`}
             className={classes.links}
             target="_blank"
             rel="noopener noreferrer"
