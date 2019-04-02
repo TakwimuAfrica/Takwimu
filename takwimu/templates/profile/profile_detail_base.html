@@ -1,5 +1,5 @@
 {% extends 'profile/profile_detail.html' %}
-{% load staticfiles sass_tags geotags %}
+{% load staticfiles sass_tags jsonify geotags %}
 
 {# HEAD #}
 
@@ -107,14 +107,6 @@
 {% block content_container %}
   <div class="content-container wrapper clearfix">
     {% block profile_preamble %}
-    <section class="clearfix" id="compare-place-picker">
-      <h2>Compare with another place</h2>
-      <div class="typeahead-container">
-          <input name="place_select" id="compare-place-select" type="text" placeholder="Start typing a place name or address to compare with..." autocomplete="off">
-      </div>
-    </section>
-
-    <p class="explain">Interact with charts and statistics for additional information.</p>
     {% endblock %}
 
     {% block profile_detail %}
@@ -122,6 +114,7 @@
     {% endblock %}
   </div>
 
+  {% comment %}
   {% if geography.this.geo_level == 'country' %}
     {% for country in countries %}
       {% if country.published %}
@@ -144,6 +137,7 @@
   {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
+  {% endcomment %}
 
   {# Footer #}
   {% include 'takwimu/_includes/footer.html' %}
@@ -211,6 +205,28 @@
       $(this).find('.sub-group').toggle();
   });
   </script>
+
+  <script>
+    var takwimu = {
+      countries: {{countries|jsonify|safe}}
+    };
+    var settings = {
+      support: {
+        hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+        support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+      },
+      socialMedia: {
+        facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+        twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+        medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+        linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+      }
+    };
+  </script>
+
+  <script src="{% static asset_manifest.runtime %}"></script>
+  <script src="{% static asset_manifest.vendor %}"></script>
+  <script src="{% static asset_manifest.main %}"></script>
 {% endblock body_javascript_extra %}
 
 {% block profile_javascript_libs %}
