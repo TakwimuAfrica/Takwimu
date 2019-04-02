@@ -4,6 +4,7 @@ import ReactDOM from 'react-dom';
 import withRoot from './withRoot';
 
 import Navigation from './components/Navigation';
+import ProfileDetail from './components/ProfileDetail';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
@@ -24,6 +25,7 @@ const renderApp = (Component, id) => {
 };
 
 renderApp(Navigation, 'takwimuNavigation');
+renderApp(ProfileDetail, 'takwimuProfileDetail');
 renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');

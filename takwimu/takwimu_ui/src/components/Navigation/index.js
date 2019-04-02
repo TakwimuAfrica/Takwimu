@@ -24,6 +24,8 @@ import DropDowns, { DropDownDrawer } from './DropDowns';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
+    position: 'relative',
+    zIndex: '999',
     width: '100%',
     height: '6.313rem',
     padding: '1.25rem',
