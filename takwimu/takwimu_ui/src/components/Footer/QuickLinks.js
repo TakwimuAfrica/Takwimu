@@ -30,10 +30,10 @@ const styles = theme => ({
 });
 
 const LINKS = [
-  { href: '/topics', label: 'Explore data by topic' },
-  { href: '/profiles', label: 'Expert insights and analysis' },
+  { href: '#', label: 'Explore data by topic' },
+  { href: '#', label: 'Expert insights and analysis' },
   { href: '/about', label: 'About Takwimu' },
-  { href: '/faq', label: 'FAQs' },
+  { href: '#', label: 'FAQs' },
   { href: '/contact-us', label: 'Contact Us' }
 ];
 const LEGAL = [

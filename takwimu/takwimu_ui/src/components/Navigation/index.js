@@ -42,6 +42,12 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       margin: '1.375rem'
+    },
+
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.text.secondary,
+      textDecoration: 'none'
     }
   },
   search: {
@@ -136,13 +142,13 @@ class Navigation extends React.Component {
           <Link className={classes.link} href="/about">
             About Us
           </Link>
-          <Link className={classes.link} href="/faq">
+          <Link className={classes.link} href="#/">
             FAQs
           </Link>
           <Link className={classes.link} href="/contact-us">
             Contact Us
           </Link>
-          <Link className={classes.link} href="/#">
+          <Link className={classes.link} href="/search">
             <Search className={classes.search} />
           </Link>
         </Grid>
@@ -203,24 +209,24 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link className={classes.link} href="/about">
                 About Us
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link className={classes.link} href="#/">
                 FAQs
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link className={classes.link} href="/contact-us">
                 Contact Us
               </Link>
             </MenuItem>
             <MenuItem>
               <Link
                 className={classeNames([classes.link, classes.iconLink])}
-                href="/"
+                href="/search"
               >
                 <Search className={classes.search} />
               </Link>

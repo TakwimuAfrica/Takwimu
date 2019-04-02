@@ -47,6 +47,13 @@ const styles = theme => ({
   actions: {
     marginBottom: '3.0625rem'
   },
+  primaryAction: {
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.text.secondary,
+      textDecoration: 'none'
+    }
+  },
   secondaryAction: {
     marginTop: '1rem',
     [theme.breakpoints.up('md')]: {
@@ -55,6 +62,12 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       marginLeft: '2.875rem'
+    },
+
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.primary.dark,
+      textDecoration: 'none'
     }
   }
 });
@@ -93,7 +106,10 @@ function CurrentAnalysis({ classes, content }) {
             alignItems="center"
             className={classes.actions}
           >
-            <Button href={content.links.analysis}>
+            <Button
+              href={content.links.analysis}
+              className={classes.primaryAction}
+            >
               Read the full analysis
             </Button>
             <Button
