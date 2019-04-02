@@ -18,6 +18,7 @@ import classNames from 'classnames';
 
 import searchIcon from '../../assets/images/icon-search.svg';
 import downArrowBlack from '../../assets/images/down-arrow-black.svg';
+import upArrowBlack from '../../assets/images/up-arrow-black.svg';
 import downArrow from '../../assets/images/down-arrow-green.svg';
 // import upArrow from '../../assets/images/up-arrow.svg';
 
@@ -92,7 +93,8 @@ const styles = theme => ({
     top: '16px'
   },
   releasesPopup: {
-    zIndex: 2
+    zIndex: 2,
+    width: '197px'
   }
 });
 
@@ -130,6 +132,7 @@ class ProfileDetail extends React.Component {
             disableRipple
             disableTouchRipple
             className={classes.chooserButton}
+            onClick={window.toggleDrawer('topic')}
           >
             <img alt="" height="37" src={flagSrc('./south-africa.svg')} />
             <Typography variant="subtitle1" className={classes.countryName}>
@@ -193,7 +196,10 @@ class ProfileDetail extends React.Component {
             <Typography className={classes.datasetName}>
               Community Survey 2016
             </Typography>
-            <img alt="" src={downArrowBlack} />
+            <img
+              alt=""
+              src={releasesMenuIsOpen ? upArrowBlack : downArrowBlack}
+            />
           </ButtonBase>
 
           <Popper
