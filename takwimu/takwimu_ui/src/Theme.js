@@ -5,11 +5,19 @@ const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const Theme = createMuiTheme({
   palette: {
-    primary: { main: '#29a87c' },
-    secondary: { main: '#ffffff' },
+    primary: {
+      main: '#29a87c' // dark-mint
+    },
+    secondary: {
+      main: '#004494' // darkish-blue
+    },
     text: { primary: '#000', secondary: '#fff' },
     info: {
       main: '#f6fbfa' // ice-blue
+    },
+    data: {
+      main: '#4a4a4a',
+      light: '#F5F5F5' // #4a4a4a opacity 0.05
     }
   },
   typography: {
@@ -79,6 +87,15 @@ const Theme = createMuiTheme({
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: '2.05',
+      letterSpacing: 'normal'
+    },
+    caption: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '0.813rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: '1.69',
       letterSpacing: 'normal'
     },
     button: {
