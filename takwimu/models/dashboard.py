@@ -34,6 +34,7 @@ json_data = open('takwimu/fixtures/sdg.json')
 sdg_data = json.load(json_data)
 sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
 sdg_choices = [('', 'Please select an SDG')] + sdg_choices
+country_choices = [(i['name'], i['name']) for i in COUNTRIES.values()]
 
 
 # The abstract model for data indicators, complete with panels
@@ -605,7 +606,13 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
-class IndexPage(Page):
+class FeaturedAnalysisBlock(blocks.StructBlock):
+    country = blocks.ChoiceBlock(choices=country_choices)
+    featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
+    name = 'featured_analysis'
+
+
+class IndexPage(ModelMeta, Page):
     """
     The process for integrating Wagtail into an existing project is definitely
     less polished than starting a project from Wagtail's built-in template.
@@ -614,22 +621,12 @@ class IndexPage(Page):
     page for your site that can not be edited or extended
     (https://github.com/wagtail/wagtail/issues/3992)
     """
-    template = 'takwimu/home_page.html'
-
-    featured_analysis_1 = models.ForeignKey(ProfileSectionPage,
-                                            related_name='Analysis1', null=True,
-                                            on_delete=models.PROTECT)
-    featured_analysis_2 = models.ForeignKey(ProfileSectionPage,
-                                            related_name='Analysis2', null=True,
-                                            on_delete=models.PROTECT)
-    featured_analysis_3 = models.ForeignKey(ProfileSectionPage,
-                                            related_name='Analysis3', null=True,
-                                            on_delete=models.PROTECT)
+    analysis = StreamField([
+        ('featured_analysis', FeaturedAnalysisBlock())
+    ], blank=True)
 
     content_panels = Page.content_panels + [
-        FieldPanel('featured_analysis_1'),
-        FieldPanel('featured_analysis_2'),
-        FieldPanel('featured_analysis_3'),
+        StreamFieldPanel('analysis')
     ]
 
     def get_context(self, request, *args, **kwargs):
