@@ -4,9 +4,10 @@ import operator
 from collections import OrderedDict
 from django.utils.text import slugify
 from takwimu import settings
+from takwimu.utils.helpers import get_takwimu_stories, get_takwimu_countries
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, COUNTRIES, CountryProfilesSetting
+from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, CountryProfilesSetting
 from takwimu.models.dashboard import TopicPage
 
 from .sdg import SDG
@@ -15,46 +16,11 @@ from .sdg import SDG
 def takwimu_countries(request):
     settings = CountryProfilesSetting.for_site(request.site)
     published_status = settings.__dict__
-
-    countries = []
-    for code, names in COUNTRIES.items():
-        country = {
-            'name': names['name'],
-            'short_name': names['short_name'],
-            'slug': slugify(names['name']),
-            'published': published_status[code]
-        }
-        countries.append(country)
-
-    return {'countries': countries}
+    return get_takwimu_countries(published_status)
 
 
 def takwimu_stories(request):
-
-    stories_latest = []
-    stories_trending = []
-
-    try:
-        if settings.HURUMAP.get('url') != 'https://takwimu.africa':
-            with open('data/articles.json') as f:
-                stories = json.load(f)
-        else:
-            client = Medium()
-            stories = client.get_publication_posts('takwimu-africa',
-                                                   count=20)
-        stories_latest = stories[0:3]
-
-        stories_dict = [i.__dict__ for i in stories]
-        stories_trending = sorted(
-            stories_dict, key=operator.itemgetter('clap_count'), reverse=True)
-
-    except Exception as e:
-        pass
-
-    return {
-        'stories_latest': stories_latest,
-        'stories_trending': stories_trending[0:3]
-    }
+    return get_takwimu_stories()
 
 
 def takwimu_topics(request):

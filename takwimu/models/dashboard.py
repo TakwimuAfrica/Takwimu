@@ -28,6 +28,9 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wazimap.models import Geography
 
+from takwimu.utils.helpers import get_takwimu_stories, COUNTRIES, \
+    get_takwimu_countries
+
 logger = logging.getLogger(__name__)
 
 json_data = open('takwimu/fixtures/sdg.json')
@@ -721,60 +724,6 @@ class FAQSetting(BaseSetting):
     class Meta:
         verbose_name = 'FAQ'
 
-
-COUNTRIES = OrderedDict()
-COUNTRIES['BF'] = {
-    'iso_name': 'Burkina Faso',
-    'name': 'Burkina Faso',
-    'short_name': 'Burkina Faso',
-}
-COUNTRIES['CD'] = {
-    'iso_name': 'Congo, the Democratic Republic of the',
-    'name': 'Democratic Republic of Congo',
-    'short_name': 'DR Congo',
-}
-COUNTRIES['ET'] = {
-    'iso_name': 'Ethiopia',
-    'name': 'Ethiopia',
-    'short_name': 'Ethiopia',
-}
-COUNTRIES['KE'] = {
-    'iso_name': 'Kenya',
-    'name': 'Kenya',
-    'short_name': 'Kenya',
-}
-COUNTRIES['NG'] = {
-    'iso_name': 'Nigeria',
-    'name': 'Nigeria',
-    'short_name': 'Nigeria',
-}
-COUNTRIES['SN'] = {
-    'iso_name': 'Senegal',
-    'name': 'Senegal',
-    'short_name': 'Senegal',
-}
-COUNTRIES['ZA'] = {
-    'iso_name': 'South Africa',
-    'name': 'South Africa',
-    'short_name': 'South Africa',
-}
-COUNTRIES['TZ'] = {
-    'iso_name': 'Tanzania, United Republic of',
-    'name': 'Tanzania',
-    'short_name': 'Tanzania',
-}
-COUNTRIES['UG'] = {
-    'iso_name': 'Uganda',
-    'name': 'Uganda',
-    'short_name': 'Uganda',
-}
-COUNTRIES['ZM'] = {
-    'iso_name': 'Zambia',
-    'name': 'Zambia',
-    'short_name': 'Zambia',
-}
-
-
 @register_setting
 class CountryProfilesSetting(BaseSetting):
     BF = models.BooleanField(COUNTRIES['BF']['iso_name'], default=True)
@@ -820,13 +769,15 @@ class IndexPage(Page):
     ]
 
     def get_context(self, request, *args, **kwargs):
-        context = super(IndexPage, self).get_context(**kwargs)
+        settings = CountryProfilesSetting.for_site(request.site)
+        published_status = settings.__dict__
+
+        context = super(IndexPage, self).get_context(request, *args, **kwargs)
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
 
         context.update(settings(request))
-        # context.update(takwimu_countries(request))
-        # context.update(takwimu_stories(request))
-        # context.update(takwimu_topics(request))
+        context.update(get_takwimu_countries(published_status))
+        context.update(get_takwimu_stories())
         return context
