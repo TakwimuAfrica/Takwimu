@@ -1,6 +1,5 @@
 import json
 import logging
-from collections import OrderedDict
 
 from django import forms
 from django.db import models
@@ -13,6 +12,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
+from wagtail.contrib.settings.context_processors import settings
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
@@ -24,6 +24,9 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wazimap.models import Geography
+
+from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
+                                   get_takwimu_stories)
 
 logger = logging.getLogger(__name__)
 
@@ -405,6 +408,9 @@ class ProfileSectionPage(ModelMeta, Page):
         if self.promotion_image:
             return self.promotion_image.file.url
 
+    def __str__(self):
+        return f"{self.get_parent().title} - {self.title}"
+
 
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
@@ -599,6 +605,49 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
+class IndexPage(Page):
+    """
+    The process for integrating Wagtail into an existing project is definitely
+    less polished than starting a project from Wagtail's built-in template.
+    The project template comes with an editable HomePage model.
+    When you add wagtail to an existing project, it automatically create a root
+    page for your site that can not be edited or extended
+    (https://github.com/wagtail/wagtail/issues/3992)
+    """
+    template = 'takwimu/home_page.html'
+
+    featured_analysis_1 = models.ForeignKey(ProfileSectionPage,
+                                            related_name='Analysis1', null=True,
+                                            on_delete=models.PROTECT)
+    featured_analysis_2 = models.ForeignKey(ProfileSectionPage,
+                                            related_name='Analysis2', null=True,
+                                            on_delete=models.PROTECT)
+    featured_analysis_3 = models.ForeignKey(ProfileSectionPage,
+                                            related_name='Analysis3', null=True,
+                                            on_delete=models.PROTECT)
+
+    content_panels = Page.content_panels + [
+        FieldPanel('featured_analysis_1'),
+        FieldPanel('featured_analysis_2'),
+        FieldPanel('featured_analysis_3'),
+    ]
+
+    def get_context(self, request, *args, **kwargs):
+        settings = CountryProfilesSetting.for_site(request.site)
+        published_status = settings.__dict__
+
+        context = super(IndexPage, self).get_context(request, *args, **kwargs)
+        context['explainer_steps'] = ExplainerSteps.objects.first()
+        context['faqs'] = FAQ.objects.all()
+        context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
+
+        context.update(settings(request))
+        context.update(settings(request))
+        context.update(get_takwimu_countries(published_status))
+        context.update(get_takwimu_stories())
+        return context
+
+
 #
 # Settings
 #
@@ -715,60 +764,6 @@ class FAQSetting(BaseSetting):
     class Meta:
         verbose_name = 'FAQ'
 
-
-COUNTRIES = OrderedDict()
-COUNTRIES['BF'] = {
-    'iso_name': 'Burkina Faso',
-    'name': 'Burkina Faso',
-    'short_name': 'Burkina Faso',
-}
-COUNTRIES['CD'] = {
-    'iso_name': 'Congo, the Democratic Republic of the',
-    'name': 'Democratic Republic of Congo',
-    'short_name': 'DR Congo',
-}
-COUNTRIES['ET'] = {
-    'iso_name': 'Ethiopia',
-    'name': 'Ethiopia',
-    'short_name': 'Ethiopia',
-}
-COUNTRIES['KE'] = {
-    'iso_name': 'Kenya',
-    'name': 'Kenya',
-    'short_name': 'Kenya',
-}
-COUNTRIES['NG'] = {
-    'iso_name': 'Nigeria',
-    'name': 'Nigeria',
-    'short_name': 'Nigeria',
-}
-COUNTRIES['SN'] = {
-    'iso_name': 'Senegal',
-    'name': 'Senegal',
-    'short_name': 'Senegal',
-}
-COUNTRIES['ZA'] = {
-    'iso_name': 'South Africa',
-    'name': 'South Africa',
-    'short_name': 'South Africa',
-}
-COUNTRIES['TZ'] = {
-    'iso_name': 'Tanzania, United Republic of',
-    'name': 'Tanzania',
-    'short_name': 'Tanzania',
-}
-COUNTRIES['UG'] = {
-    'iso_name': 'Uganda',
-    'name': 'Uganda',
-    'short_name': 'Uganda',
-}
-COUNTRIES['ZM'] = {
-    'iso_name': 'Zambia',
-    'name': 'Zambia',
-    'short_name': 'Zambia',
-}
-
-
 @register_setting
 class CountryProfilesSetting(BaseSetting):
     BF = models.BooleanField(COUNTRIES['BF']['iso_name'], default=True)
@@ -784,3 +779,4 @@ class CountryProfilesSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Country Profiles'
+
