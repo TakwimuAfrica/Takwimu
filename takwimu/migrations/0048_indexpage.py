@@ -21,7 +21,7 @@ class Migration(migrations.Migration):
             name='IndexPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('body', wagtail.core.fields.StreamField([('featured_analysis', takwimu.models.dashboard.FeaturedAnalysisBlock())], blank=True)),
+                ('analysis', wagtail.core.fields.StreamField([('featured_analysis', takwimu.models.dashboard.FeaturedAnalysisBlock())], blank=True)),
             ],
             options={
                 'abstract': False,
