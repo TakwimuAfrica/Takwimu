@@ -8,6 +8,7 @@ from django.utils.text import slugify
 from takwimu.utils.medium import Medium
 
 COUNTRIES = OrderedDict()
+
 COUNTRIES['BF'] = {
     'iso_name': 'Burkina Faso',
     'name': 'Burkina Faso',
