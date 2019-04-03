@@ -114,6 +114,10 @@ const Theme = createMuiTheme({
     MuiButton: {
       color: 'primary',
       variant: 'contained'
+    },
+    MuiPaper: {
+      elevation: 0,
+      square: true
     }
   },
   overrides: {
@@ -146,6 +150,16 @@ const Theme = createMuiTheme({
       label: {
         paddingTop: '1.125rem',
         paddingBottom: '1.0625rem'
+      }
+    },
+    MuiPaper: {
+      elevation1: {
+        boxShadow: 'none'
+      }
+    },
+    MuiCardContent: {
+      root: {
+        padding: '1.4375rem 0'
       }
     }
   }
