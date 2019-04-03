@@ -1,4 +1,4 @@
-{% load staticfiles sass_tags meta %}
+{% load staticfiles sass_tags meta %}{% load jsonify %}
 
 <!doctype html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -101,6 +101,14 @@
       anchors.add(".anchored");
     });
   </script>
+
+  <script>
+    var countries = {{countries|jsonify|safe}};
+  </script>
+
+  <script src="{% static asset_manifest.runtime %}"></script>
+  <script src="{% static asset_manifest.vendor %}"></script>
+  <script src="{% static asset_manifest.main %}"></script>
 
   {% block body_javascript_extra %}{% endblock %}
 
