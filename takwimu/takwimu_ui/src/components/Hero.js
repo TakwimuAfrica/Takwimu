@@ -11,22 +11,34 @@ import triangle from '../assets/images/triangle.svg';
 const styles = theme => ({
   section: {
     marginTop: '2.25rem',
+
+    // On mobile, ensure we don't have unnecessary horizontal scroll
+    overflow: 'hidden'
+  },
+  root: {
+    width: '100%',
     backgroundImage: `url(${africanParliament})`,
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'right bottom',
-    backgroundSize: 'auto 100%'
+    backgroundSize: 'cover'
   },
-  root: {
-    flexGrow: 1,
-    backgroundImage:
-      'linear-gradient(89deg, #ffffff, rgba(255, 255, 255, 0.9), transparent);'
+  gradient: {
+    backgroundImage: `linear-gradient(89deg, #ffffff, rgba(255, 255, 255, 0)),
+      linear-gradient(to bottom, #ffffff, transparent)`
+  },
+  hero: {
+    flexGrow: 1
   },
   title: {
     margin: 0,
     width: '100%',
     paddingTop: '0.5625rem',
+
+    // Some words are too big to fit mobile so break them
+    wordBreak: 'break-all',
     [theme.breakpoints.up('md')]: {
-      maxWidth: '40rem'
+      maxWidth: '40rem',
+      wordBreak: 'initial'
     }
   },
   description: {
@@ -48,45 +60,49 @@ const styles = theme => ({
   }
 });
 
-function WhereToNext({ classes }) {
+function Hero({ classes }) {
   return (
-    <Section classes={{ root: classes.section }}>
-      <Grid
-        container
-        justify="flex-start"
-        alignItems="flex-start"
-        className={classes.root}
-      >
-        <Grid xs={12}>
-          <Typography variant="h1" className={classes.title}>
-            Actionable insights for African changemakers
-          </Typography>
-        </Grid>
-        <Grid xs={12}>
-          <Typography variant="body1" className={classes.description}>
-            Lorem ipsum dolor sit amet, adipiscing elitauris con{' '}
-            <Link
-              href="/about"
-              className={classes.aboutLink}
-              underline="always"
-            >
-              find out more about us
-            </Link>
-          </Typography>
-        </Grid>
-        <Grid xs={12}>
-          <Button href="#takwimuMakingOf" className={classes.button}>
-            Watch the overview video{' '}
-            <img alt="play" src={triangle} className={classes.buttonIcon} />
-          </Button>
-        </Grid>
-      </Grid>
-    </Section>
+    <div className={classes.root}>
+      <div className={classes.gradient}>
+        <Section classes={{ root: classes.section }}>
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="flex-start"
+            className={classes.hero}
+          >
+            <Grid xs={12}>
+              <Typography variant="h1" className={classes.title}>
+                Actionable insights for African changemakers
+              </Typography>
+            </Grid>
+            <Grid xs={12}>
+              <Typography variant="body1" className={classes.description}>
+                Lorem ipsum dolor sit amet, adipiscing elitauris con{' '}
+                <Link
+                  href="/about"
+                  className={classes.aboutLink}
+                  underline="always"
+                >
+                  find out more about us
+                </Link>
+              </Typography>
+            </Grid>
+            <Grid xs={12}>
+              <Button href="#takwimuMakingOf" className={classes.button}>
+                Watch the overview video{' '}
+                <img alt="play" src={triangle} className={classes.buttonIcon} />
+              </Button>
+            </Grid>
+          </Grid>
+        </Section>
+      </div>
+    </div>
   );
 }
 
-WhereToNext.propTypes = {
+Hero.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(WhereToNext);
+export default withStyles(styles)(Hero);
