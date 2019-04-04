@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import withRoot from './withRoot';
 
+import Hero from './components/Hero';
 import Navigation from './components/Navigation';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
@@ -25,6 +26,7 @@ const renderApp = (Component, id) => {
 };
 
 renderApp(Navigation, 'takwimuNavigation');
+renderApp(Hero, 'takwimuHero');
 renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
 renderApp(FeaturedData, 'takwimuFeaturedData');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
