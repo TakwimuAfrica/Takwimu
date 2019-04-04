@@ -25,20 +25,23 @@ const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const styles = theme => ({
   root: {
-    zIndex: '1',
-    position: 'absolute',
-    top: '99px',
-    left: '99px',
-    width: '374px',
+    position: 'relative',
     height: '544px',
     padding: '23px',
-    borderRadius: '0 0 1.063rem 1.063rem',
-    border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
     backgroundColor: '#ffffff',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    [theme.breakpoints.up('md')]: {
+      position: 'absolute',
+      width: '374px',
+      top: '99px',
+      left: '99px',
+      zIndex: '1',
+      border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
+      borderRadius: '0 0 1.063rem 1.063rem'
+    }
   },
   label: {
     fontSize: '15px',
