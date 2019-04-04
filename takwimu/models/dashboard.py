@@ -13,6 +13,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
+from wagtail.api import APIField
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
@@ -369,6 +370,12 @@ class ProfileSectionPage(ModelMeta, Page):
         'twitter_creator': 'tweet_creator',
     }
 
+    api_fields = [
+        APIField('description'),
+        APIField('body'),
+        APIField('promotion_image'),
+    ]
+
     # Search index configuration
 
     search_fields = Page.search_fields + [
@@ -516,6 +523,8 @@ class AboutPage(Page):
         FieldPanel('content'),
     ]
 
+    api_fields = [APIField('content'),]
+
 
 class ContactUsPage(Page):
     address = RichTextField()
@@ -525,6 +534,13 @@ class ContactUsPage(Page):
         FieldPanel('address'),
         InlinePanel('key_contacts', label='Key Contacts'),
         InlinePanel('social_media', label='Social Media')
+    ]
+
+    api_fields = [
+        APIField('title'),
+        APIField('address'),
+        APIField('key_contacts'),
+        APIField('social_media'),
     ]
 
 

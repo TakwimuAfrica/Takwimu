@@ -10,12 +10,14 @@ from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
+from .api import api_router
 
 GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
 PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
     GEOGRAPHY_LEVELS)
 
 takwimu_urlpatterns = [
+    url(r'^api/v2/', api_router.urls),
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
