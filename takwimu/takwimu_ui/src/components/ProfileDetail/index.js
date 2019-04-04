@@ -181,7 +181,7 @@ class ProfileDetail extends React.Component {
           <ButtonBase
             disableRipple
             disableTouchRipple
-            styl={{ outline: 'none' }}
+            style={{ outline: 'none' }}
             className={classes.chooserButton}
             onClick={window.toggleDrawer('topic')}
           >
@@ -246,7 +246,7 @@ class ProfileDetail extends React.Component {
             <ButtonBase
               disableRipple
               disableTouchRipple
-              styl={{ outline: 'none' }}
+              style={{ outline: 'none' }}
               buttonRef={node => {
                 this.releasesButton = node;
               }}
