@@ -278,7 +278,7 @@ class ProfileDetail extends React.Component {
                     href={`?release=${primaryReleases.active.year}`}
                     className={classes.releasesMenuItem}
                   >
-                    {primaryReleases.active.citation}
+                    {primaryReleases.active.name} {primaryReleases.active.year}
                   </MenuItem>
                   {primaryReleases.other.length
                     ? primaryReleases.other.map(release => (
