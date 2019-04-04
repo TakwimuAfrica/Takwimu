@@ -196,7 +196,7 @@ class ProfileDetail extends React.Component {
           <Grid item>
             <div className={classes.verticalLine} />
           </Grid>
-          <Grid item container direction="column">
+          <Grid item container direction="column" justify="space-between">
             {population && (
               <Grid item>
                 <Typography
@@ -251,7 +251,7 @@ class ProfileDetail extends React.Component {
               onClick={this.toggleReleasesMenu}
             >
               <Typography className={classes.datasetName}>
-                {activeRelease.citation}
+                {activeRelease.name} {activeRelease.year}
               </Typography>
               <img
                 alt=""
@@ -288,7 +288,7 @@ class ProfileDetail extends React.Component {
                           href={`?release=${release.year}`}
                           className={classes.releasesMenuItem}
                         >
-                          {release.citation}
+                          {release.name} {release.year}
                         </MenuItem>
                       ))
                     : null}
