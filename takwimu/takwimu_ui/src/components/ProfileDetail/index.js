@@ -167,7 +167,7 @@ class ProfileDetail extends React.Component {
       );
     }
     const { active: activeRelease } = primaryReleases;
-    const { square_kms: squarekms } = geography.this;
+    const { square_kms: squarekms, full_name: fullName } = geography.this;
     return (
       <div className={classes.root}>
         <div>
@@ -181,12 +181,13 @@ class ProfileDetail extends React.Component {
           <ButtonBase
             disableRipple
             disableTouchRipple
+            styl={{ outline: 'none' }}
             className={classes.chooserButton}
             onClick={window.toggleDrawer('topic')}
           >
             <img alt="" height="37" src={flagSrc('./south-africa.svg')} />
             <Typography variant="subtitle1" className={classes.countryName}>
-              South Africa
+              {fullName}
             </Typography>
             <img alt="" src={downArrow} />
           </ButtonBase>
@@ -245,6 +246,7 @@ class ProfileDetail extends React.Component {
             <ButtonBase
               disableRipple
               disableTouchRipple
+              styl={{ outline: 'none' }}
               buttonRef={node => {
                 this.releasesButton = node;
               }}
