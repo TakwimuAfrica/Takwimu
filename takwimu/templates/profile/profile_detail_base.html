@@ -1,5 +1,6 @@
 {% extends 'profile/profile_detail.html' %}
 {% load staticfiles sass_tags geotags %}
+{% load jsonify %}
 
 {# HEAD #}
 
@@ -111,6 +112,14 @@
 {% endblock content_container %}
 
 {% block body_javascript_extra %}
+  <script>
+    {% if profile_data_json %}
+      var profileDataJson = {{ profile_data_json }};
+      {% if primary_releases %}
+        profileDataJson.primary_releases = {{ primary_releases | jsonify | safe }}
+      {% endif %}
+    {% endif %}
+  </script>
   <script src="{% static asset_manifest.runtime %}"></script>
   <script src="{% static asset_manifest.vendor %}"></script>
   <script src="{% static asset_manifest.main %}"></script>

@@ -20,7 +20,6 @@ import searchIcon from '../../assets/images/icon-search.svg';
 import downArrowBlack from '../../assets/images/down-arrow-black.svg';
 import upArrowBlack from '../../assets/images/up-arrow-black.svg';
 import downArrow from '../../assets/images/down-arrow-green.svg';
-// import upArrow from '../../assets/images/up-arrow.svg';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
@@ -145,7 +144,30 @@ class ProfileDetail extends React.Component {
 
   render() {
     const { showSearchResults, releasesMenuIsOpen } = this.state;
-    const { classes } = this.props;
+    const {
+      classes,
+      profile: {
+        demographics = {},
+        primary_releases: primaryReleases = {},
+        geography = { this: {} }
+      }
+    } = this.props;
+
+    let population;
+    if (demographics.total_population && demographics.total_population.values) {
+      population = demographics.total_population.values.this.toFixed(0);
+    }
+    let populationDensity;
+    if (
+      demographics.population_density &&
+      demographics.population_density.values
+    ) {
+      populationDensity = demographics.population_density.values.this.toFixed(
+        1
+      );
+    }
+    const { active: activeRelease } = primaryReleases;
+    const { square_kms: squarekms } = geography.this;
     return (
       <div className={classes.root}>
         <div>
@@ -174,61 +196,69 @@ class ProfileDetail extends React.Component {
           <Grid item>
             <div className={classes.verticalLine} />
           </Grid>
-          <Grid item container>
-            <Grid item>
-              <Typography
-                variant="body1"
-                className={classNames([classes.label, classes.detailLabel])}
-              >
-                Population
-              </Typography>
-              <Typography variant="body1" className={classes.detail}>
-                55,653,654
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography
-                variant="body1"
-                className={classNames([classes.label, classes.detailLabel])}
-              >
-                Square kilometres
-              </Typography>
-              <Typography variant="body1" className={classes.detail}>
-                1,229,341.5
-              </Typography>
-            </Grid>
-            <Grid item>
-              <Typography
-                variant="body1"
-                className={classNames([classes.label, classes.detailLabel])}
-              >
-                People per square kilometre
-              </Typography>
-              <Typography variant="body1" className={classes.detail}>
-                45.3
-              </Typography>
-            </Grid>
+          <Grid item container direction="column">
+            {population && (
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  className={classNames([classes.label, classes.detailLabel])}
+                >
+                  Population
+                </Typography>
+                <Typography variant="body1" className={classes.detail}>
+                  {Number(population).toLocaleString()}
+                </Typography>
+              </Grid>
+            )}
+            {squarekms && (
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  className={classNames([classes.label, classes.detailLabel])}
+                >
+                  Square kilometres
+                </Typography>
+                <Typography variant="body1" className={classes.detail}>
+                  {Number(squarekms).toLocaleString()}
+                </Typography>
+              </Grid>
+            )}
+            {populationDensity && (
+              <Grid item>
+                <Typography
+                  variant="body1"
+                  className={classNames([classes.label, classes.detailLabel])}
+                >
+                  People per square kilometre
+                </Typography>
+                <Typography variant="body1" className={classes.detail}>
+                  {Number(populationDensity).toLocaleString()}
+                </Typography>
+              </Grid>
+            )}
           </Grid>
         </Grid>
 
         <Grid container>
           <Typography className={classes.label}>Release:</Typography>
-          <ButtonBase
-            disableRipple
-            disableTouchRipple
-            buttonRef={node => {
-              this.releasesButton = node;
-            }}
-            onClick={this.toggleReleasesMenu}
-          >
-            <Typography className={classes.datasetName}>
-              Community Survey 2016
-            </Typography>
-            <img
-              alt=""
-              src={releasesMenuIsOpen ? upArrowBlack : downArrowBlack}
-            />
-          </ButtonBase>
+          {activeRelease && (
+            <ButtonBase
+              disableRipple
+              disableTouchRipple
+              buttonRef={node => {
+                this.releasesButton = node;
+              }}
+              onClick={this.toggleReleasesMenu}
+            >
+              <Typography className={classes.datasetName}>
+                {activeRelease.citation}
+              </Typography>
+              <img
+                alt=""
+                src={releasesMenuIsOpen ? upArrowBlack : downArrowBlack}
+              />
+            </ButtonBase>
+          )}
 
           <Popper
             className={classes.popperIndex}
@@ -243,7 +273,25 @@ class ProfileDetail extends React.Component {
             <ClickAwayListener onClickAway={this.toggleReleasesMenu}>
               <Paper>
                 <MenuList>
-                  <MenuItem>Example</MenuItem>
+                  <MenuItem
+                    component="a"
+                    href={`?release=${primaryReleases.active.year}`}
+                    className={classes.releasesMenuItem}
+                  >
+                    {primaryReleases.active.citation}
+                  </MenuItem>
+                  {primaryReleases.other.length
+                    ? primaryReleases.other.map(release => (
+                        <MenuItem
+                          key={release.year}
+                          component="a"
+                          href={`?release=${release.year}`}
+                          className={classes.releasesMenuItem}
+                        >
+                          {release.citation}
+                        </MenuItem>
+                      ))
+                    : null}
                 </MenuList>
               </Paper>
             </ClickAwayListener>
@@ -292,7 +340,8 @@ class ProfileDetail extends React.Component {
 }
 
 ProfileDetail.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  profile: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(ProfileDetail);

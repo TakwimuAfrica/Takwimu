@@ -12,7 +12,19 @@ import FeaturedAnalysis from './components/FeaturedAnalysis';
 import Footer from './components/Footer';
 
 const props = {
-  countries: window.countries
+  countries: window.countries,
+  profile: window.profileDataJson || {
+    demographics: {},
+    geography: {
+      full_geoid: '',
+      this: {
+        square_kms: '',
+        short_name: '',
+        parents: []
+      }
+    },
+    primary_releases: { active: {}, other: [] }
+  }
 };
 
 const renderApp = (Component, id) => {
