@@ -63,8 +63,9 @@ class Navigation extends React.Component {
     };
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
-    window.toggleDrawer = this.toggleDrawer;
     this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
+
+    window.toggleDrawer = this.toggleDrawer;
   }
 
   toggleMobileDrawer() {
@@ -75,10 +76,17 @@ class Navigation extends React.Component {
   }
 
   toggleDrawer(drawer) {
+    const { openDrawer, isMobileDrawerOpen } = this.state;
+    const newOpenDrawer = openDrawer !== drawer ? drawer : null;
+
     return () => {
-      this.setState(prevState => ({
-        openDrawer: prevState.openDrawer !== drawer ? drawer : null
-      }));
+      const { width } = this.props;
+      this.setState({
+        isMobileDrawerOpen: isWidthUp('md', width)
+          ? false
+          : newOpenDrawer !== null || isMobileDrawerOpen,
+        openDrawer: openDrawer !== drawer ? drawer : null
+      });
     };
   }
 
