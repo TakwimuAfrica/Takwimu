@@ -92,9 +92,8 @@ const styles = theme => ({
     right: '16px',
     top: '16px'
   },
-  releasesPopup: {
-    zIndex: 2,
-    width: '197px'
+  popperIndex: {
+    zIndex: 2
   }
 });
 
@@ -103,10 +102,15 @@ class ProfileDetail extends React.Component {
     super(props);
 
     this.state = {
-      releasesMenuIsOpen: false
+      searchTerm: '',
+      releasesMenuIsOpen: false,
+      showSearchResults: false
     };
 
     this.toggleReleasesMenu = this.toggleReleasesMenu.bind(this);
+    this.showSearchResults = this.showSearchResults.bind(this);
+    this.hideSearchResults = this.hideSearchResults.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   toggleReleasesMenu() {
@@ -115,8 +119,32 @@ class ProfileDetail extends React.Component {
     }));
   }
 
+  showSearchResults() {
+    this.setState({
+      showSearchResults: true
+    });
+  }
+
+  hideSearchResults() {
+    this.setState({
+      showSearchResults: false
+    });
+  }
+
+  handleSearch(e) {
+    const { searchTerm } = this.state;
+    const newSearchTerm = e && e.target ? e.target.value : searchTerm;
+    this.setState({ searchTerm: newSearchTerm }, () => {
+      if (newSearchTerm.length) {
+        this.showSearchResults();
+      } else {
+        this.hideSearchResults();
+      }
+    });
+  }
+
   render() {
-    const { releasesMenuIsOpen } = this.state;
+    const { showSearchResults, releasesMenuIsOpen } = this.state;
     const { classes } = this.props;
     return (
       <div className={classes.root}>
@@ -203,9 +231,14 @@ class ProfileDetail extends React.Component {
           </ButtonBase>
 
           <Popper
-            className={classes.releasesPopup}
+            className={classes.popperIndex}
             open={releasesMenuIsOpen}
             anchorEl={this.releasesButton}
+            style={{
+              width: this.releasesButton
+                ? this.releasesButton.clientWidth
+                : null
+            }}
           >
             <ClickAwayListener onClickAway={this.toggleReleasesMenu}>
               <Paper>
@@ -218,15 +251,38 @@ class ProfileDetail extends React.Component {
         </Grid>
 
         <Grid container>
-          <div className={classes.searchBar}>
+          <div
+            ref={node => {
+              this.searchBarRef = node;
+            }}
+            className={classes.searchBar}
+          >
             <Input
               fullWidth
               disableUnderline
               className={classes.searchBarInput}
+              onFocus={this.handleSearch}
+              onBlur={this.hideSearchResults}
               placeholder="Compare with"
+              onChange={this.handleSearch}
             />
             <img alt="" src={searchIcon} className={classes.searchBarIcon} />
           </div>
+
+          <Popper
+            className={classes.popperIndex}
+            open={showSearchResults}
+            anchorEl={this.searchBarRef}
+            style={{
+              width: this.searchBarRef ? this.searchBarRef.clientWidth : null
+            }}
+          >
+            <Paper>
+              <MenuList>
+                <MenuItem>Example</MenuItem>
+              </MenuList>
+            </Paper>
+          </Popper>
         </Grid>
 
         <Button fullWidth>Read the full country analysis</Button>
