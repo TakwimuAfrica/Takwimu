@@ -10,10 +10,7 @@ import triangle from '../assets/images/triangle.svg';
 
 const styles = theme => ({
   section: {
-    marginTop: '2.25rem',
-
-    // On mobile, ensure we don't have unnecessary horizontal scroll
-    overflow: 'hidden'
+    marginTop: '2.25rem'
   },
   root: {
     width: '100%',
