@@ -7,7 +7,6 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = () => ({
   root: {
-    width: '23.625rem',
     lineHeight: 2.05
   }
 });

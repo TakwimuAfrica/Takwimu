@@ -8,12 +8,7 @@ import { withStyles } from '@material-ui/core/styles';
 import A from '../A';
 
 const styles = theme => ({
-  sectionTitle: {
-    margin: '0 0 1.1875rem 0'
-  },
-  root: {
-    width: '23.625rem'
-  },
+  root: {},
   media: {
     height: '17.625rem'
   },

@@ -1,19 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Typography } from '@material-ui/core';
+import { Button, Grid, Typography } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/core/styles';
 
 import Section from '../Section';
-import Story from './Story';
+import StoryList from './StoryList';
+
 import stories from './stories';
 
 const styles = () => ({
   sectionTitle: {
     margin: '0 0 1.1875rem 0'
   },
-  story: {}
+  root: {},
+  descriptionRoot: {
+    marginBottom: '2.1875rem'
+  },
+  buttonRoot: {
+    marginBottom: '3.0625rem'
+  }
 });
 
 function LatestNewsStories({ classes }) {
@@ -23,16 +30,32 @@ function LatestNewsStories({ classes }) {
       variant="h2"
       classes={{ title: classes.sectionTitle }}
     >
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor
-        sit amet, consectetur adipiscing elit.
-      </Typography>
-      <Grid container justify="flex-start" alignItems="stretch">
-        {stories.map(story => (
-          <div className={classes.story}>
-            <Story key={story.link} story={story} />
-          </div>
-        ))}
+      <Grid
+        container
+        justify="flex-start"
+        alignItems="flex-start"
+        className={classes.root}
+      >
+        <Grid item xs={12}>
+          <Typography
+            variant="body1"
+            classes={{ root: classes.descriptionRoot }}
+          >
+            Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum
+            dolor sit amet, consectetur adipiscing elit.
+          </Typography>
+        </Grid>
+        <Grid item xs={12}>
+          <Button
+            href="https://medium.com/takwimu-africa"
+            classes={{ root: classes.buttonRoot }}
+          >
+            Read more stories on Medium
+          </Button>
+        </Grid>
+        <Grid item xs={12}>
+          <StoryList stories={stories} />
+        </Grid>
       </Grid>
     </Section>
   );

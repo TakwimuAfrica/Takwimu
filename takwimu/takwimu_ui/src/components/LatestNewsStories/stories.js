@@ -6,21 +6,21 @@ export default [
   {
     img: bitmap,
     title: 'Building Takwimu',
-    link: '#',
+    link: 'https://medium.com/takwimu-africa',
     summary:
       'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
   },
   {
     img: bitmap1,
     title: 'Mapping Africa’s Future- The role data needs to play',
-    link: '#',
+    link: 'https://medium.com/takwimu-africa',
     summary:
       'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
   },
   {
     img: bitmap2,
     title: 'Takwimu: Decoding Africa’s Data',
-    link: '#',
+    link: 'https://medium.com/takwimu-africa',
     summary:
       'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
   }

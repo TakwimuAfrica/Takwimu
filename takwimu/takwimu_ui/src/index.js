@@ -28,8 +28,8 @@ const renderApp = (Component, id) => {
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
 renderApp(FeaturedData, 'takwimuFeaturedData');
-renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
+renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
 renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
