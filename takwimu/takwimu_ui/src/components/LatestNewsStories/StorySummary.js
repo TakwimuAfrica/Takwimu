@@ -27,7 +27,6 @@ function StorySummary({ classes, story }) {
 StorySummary.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
-    link: PropTypes.string.isRequired,
     summary: PropTypes.string.isRequired
   }).isRequired
 };
