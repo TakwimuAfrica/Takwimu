@@ -659,3 +659,17 @@ body {
   */
   // body { background: grey;}
  }
+
+//static/css/_censusreporter.scss conflicts with compre with input
+input[type='text'] {    
+  border: unset;
+  height: unset;
+  line-height: unset;
+  padding: inherit;
+}
+
+//static/css/_censusreporter.scss conflicts with compre with input
+input:focus {    
+  border: unset;
+  box-shadow: unset;
+}

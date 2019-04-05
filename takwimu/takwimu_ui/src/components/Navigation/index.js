@@ -24,6 +24,8 @@ import DropDowns, { DropDownDrawer } from './DropDowns';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
+    position: 'relative',
+    zIndex: '999',
     width: '100%',
     height: '6.313rem',
     padding: '1.25rem',
@@ -68,6 +70,8 @@ class Navigation extends React.Component {
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
+
+    window.toggleDrawer = this.toggleDrawer;
   }
 
   toggleMobileDrawer() {
@@ -78,10 +82,16 @@ class Navigation extends React.Component {
   }
 
   toggleDrawer(drawer) {
+    const { openDrawer, isMobileDrawerOpen } = this.state;
+    const newOpenDrawer = openDrawer !== drawer ? drawer : null;
+    const hasDrawer = newOpenDrawer !== null || isMobileDrawerOpen;
+
     return () => {
-      this.setState(prevState => ({
-        openDrawer: prevState.openDrawer !== drawer ? drawer : null
-      }));
+      const { width } = this.props;
+      this.setState({
+        isMobileDrawerOpen: isWidthUp('md', width) ? false : hasDrawer,
+        openDrawer: newOpenDrawer
+      });
     };
   }
 
