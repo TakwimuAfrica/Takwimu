@@ -1,5 +1,6 @@
 export default [
   {
+    country_slug: 'tanzania',
     title: 'Healthcare in Tanzania',
     summary: `
             Tanzania’s current political system was established with the
@@ -13,6 +14,7 @@ export default [
     }
   },
   {
+    country_slug: 'south-africa',
     title: 'South Africa’s Political System',
     summary: `
             South Africa’s current political system was established with the
@@ -29,6 +31,7 @@ export default [
     }
   },
   {
+    country_slug: 'senegal',
     title: 'Senegal’s Budgetary Cycle',
     summary: `
             Senegal’s current political system was established with the
