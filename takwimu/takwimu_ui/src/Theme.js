@@ -131,6 +131,13 @@ const Theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          backgroundColor: 'white'
+        }
+      }
+    },
     MuiLink: {
       root: {
         fontFamily: FONT_FAMILY_TEXT,
