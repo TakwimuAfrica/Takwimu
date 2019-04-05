@@ -81,9 +81,12 @@ def get_takwimu_stories():
     except Exception as e:
         pass
 
+    if len(stories_latest) > 3:
+        stories_latest = stories_latest[:3]
+
     return {
         'stories_latest': stories_latest,
-        'stories_trending': stories_trending[0:3]
+        'stories_trending': stories_trending[:3]
     }
 
 
@@ -91,6 +94,7 @@ def get_takwimu_countries(published_status):
     countries = []
     for code, names in COUNTRIES.items():
         country = {
+            'iso_code': code,
             'name': names['name'],
             'short_name': names['short_name'],
             'slug': slugify(names['name']),

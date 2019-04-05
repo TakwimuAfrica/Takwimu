@@ -3,6 +3,7 @@ import logging
 
 from django import forms
 from django.db import models
+from django.utils.html import format_html
 from django.utils.text import slugify
 from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
@@ -34,7 +35,6 @@ json_data = open('takwimu/fixtures/sdg.json')
 sdg_data = json.load(json_data)
 sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
 sdg_choices = [('', 'Please select an SDG')] + sdg_choices
-country_choices = [(i['name'], i['name']) for i in COUNTRIES.values()]
 
 
 # The abstract model for data indicators, complete with panels
@@ -607,7 +607,6 @@ class FAQ(index.Indexed, models.Model):
 
 
 class FeaturedAnalysisBlock(blocks.StructBlock):
-    country = blocks.ChoiceBlock(choices=country_choices)
     featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
     name = 'featured_analysis'
 
@@ -621,12 +620,12 @@ class IndexPage(ModelMeta, Page):
     page for your site that can not be edited or extended
     (https://github.com/wagtail/wagtail/issues/3992)
     """
-    analysis = StreamField([
+    featured_analysis = StreamField([
         ('featured_analysis', FeaturedAnalysisBlock())
     ], blank=True)
 
     content_panels = Page.content_panels + [
-        StreamFieldPanel('analysis')
+        StreamFieldPanel('featured_analysis')
     ]
 
     def get_context(self, request, *args, **kwargs):
@@ -637,8 +636,6 @@ class IndexPage(ModelMeta, Page):
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
-
-        context.update(settings(request))
         context.update(settings(request))
         context.update(get_takwimu_countries(published_status))
         context.update(get_takwimu_stories())
@@ -761,6 +758,7 @@ class FAQSetting(BaseSetting):
     class Meta:
         verbose_name = 'FAQ'
 
+
 @register_setting
 class CountryProfilesSetting(BaseSetting):
     BF = models.BooleanField(COUNTRIES['BF']['iso_name'], default=True)
@@ -776,4 +774,3 @@ class CountryProfilesSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Country Profiles'
-
