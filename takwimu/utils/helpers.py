@@ -91,6 +91,7 @@ def get_takwimu_countries(published_status):
     countries = []
     for code, names in COUNTRIES.items():
         country = {
+            'code': code,
             'name': names['name'],
             'short_name': names['short_name'],
             'slug': slugify(names['name']),
