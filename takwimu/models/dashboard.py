@@ -20,6 +20,7 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
+from wagtail.contrib.settings.context_processors import settings as wagtail_settings
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -658,6 +659,7 @@ class IndexPage(ModelMeta, Page):
     page for your site that can not be edited or extended
     (https://github.com/wagtail/wagtail/issues/3992)
     """
+    template = 'takwimu/home_page.html'
     featured_analysis = StreamField([
         ('featured_analysis', FeaturedAnalysisBlock())
     ], blank=True)
@@ -672,14 +674,14 @@ class IndexPage(ModelMeta, Page):
     ]
 
     def get_context(self, request, *args, **kwargs):
-        settings = CountryProfilesSetting.for_site(request.site)
-        published_status = settings.__dict__
+        country_profile_settings = CountryProfilesSetting.for_site(request.site)
+        published_status = country_profile_settings.__dict__
 
         context = super(IndexPage, self).get_context(request, *args, **kwargs)
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
-        context.update(settings(request))
+        context.update(wagtail_settings(request))
         context.update(get_takwimu_countries(published_status))
         context.update(get_takwimu_stories())
         return context

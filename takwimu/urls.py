@@ -16,7 +16,6 @@ PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-
     GEOGRAPHY_LEVELS)
 
 takwimu_urlpatterns = [
-    url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
         name='about_support_services'),
