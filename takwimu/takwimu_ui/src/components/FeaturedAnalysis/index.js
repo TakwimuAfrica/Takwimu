@@ -26,7 +26,7 @@ class FeaturedAnalysis extends React.Component {
     super(props);
 
     this.state = {
-      current: 0,
+      current: 1,
       analysis: []
     };
     this.handleClick = this.handleClick.bind(this);
@@ -53,6 +53,7 @@ class FeaturedAnalysis extends React.Component {
     console.log(analysis);
 
     const contents = analysis.map(a => ({
+      country: a.value.country,
       title: a.value.featured_page.title,
       description: a.value.featured_page.description
     }));
@@ -67,7 +68,6 @@ class FeaturedAnalysis extends React.Component {
             alignItems="stretch"
             className={classes.root}
           >
-            {console.log('here')}
             <CurrentAnalysis
               content={contents[current]}
               classes={{ content: classes.content }}

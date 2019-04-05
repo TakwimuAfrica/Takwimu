@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import { withStyles, Button, Grid, Typography } from '@material-ui/core';
 
-import flag from '../../assets/images/flag.png';
+const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const styles = theme => ({
   root: {
@@ -88,7 +88,14 @@ function CurrentAnalysis({ classes, content }) {
             alignItems="center"
             className={classes.header}
           >
-            <img src={flag} alt="South Africa" className={classes.flag} />
+            <img
+              src={flagSrc(
+                `./${content.country.toLowerCase().replace(' ', '-')}.svg`
+              )}
+              height={37}
+              alt="South Africa"
+              className={classes.flag}
+            />
             <Typography variant="h4" component="h1" className={classes.title}>
               {content.title}
             </Typography>
