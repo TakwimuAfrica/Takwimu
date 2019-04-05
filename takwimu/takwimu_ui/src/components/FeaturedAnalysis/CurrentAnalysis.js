@@ -36,7 +36,7 @@ const styles = theme => ({
     paddingBottom: '1.875rem'
   },
   flag: {
-    height: 37,
+    height: '4.4375rem',
     marginRight: '1.5rem'
   },
   title: {
@@ -112,13 +112,15 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.actions}
           >
             <Button
-              href={content.links.analysis}
+              href={`/profiles/${content.country_slug}`}
               className={classes.primaryAction}
             >
               Read the full analysis
             </Button>
             <Button
-              href={content.links.data}
+              href={`/profiles/country-${content.country_code}-${
+                content.country_slug
+              }`}
               className={classes.secondaryAction}
               variant="outlined"
             >

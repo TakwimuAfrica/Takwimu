@@ -1,5 +1,6 @@
 export default [
   {
+    country_code: 'TZ',
     country_slug: 'tanzania',
     title: 'Healthcare in Tanzania',
     summary: `
@@ -7,13 +8,10 @@ export default [
             proclamation of a new constitution after the overthrow of apartheid
             in the early 1990s, which marked the introduction of universal
             suffrage.
-    `,
-    links: {
-      analysis: '#',
-      data: '#'
-    }
+    `
   },
   {
+    country_code: 'ZA',
     country_slug: 'south-africa',
     title: 'South Africa’s Political System',
     summary: `
@@ -24,13 +22,10 @@ export default [
             National Congress, which has dominated the national political
             landscape. Cyril Ramaphosa became President in early 2018 following
             the resignation of Jacob Zuma.
-    `,
-    links: {
-      analysis: '#',
-      data: '#'
-    }
+    `
   },
   {
+    country_code: 'SN',
     country_slug: 'senegal',
     title: 'Senegal’s Budgetary Cycle',
     summary: `
@@ -48,10 +43,6 @@ export default [
             National Congress, which has dominated the national political
             landscape. Cyril Ramaphosa became President in early 2018 following
             the resignation of Jacob Zuma.
-    `,
-    links: {
-      analysis: '#',
-      data: '#'
-    }
+    `
   }
 ];
