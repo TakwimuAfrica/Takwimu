@@ -15,8 +15,8 @@ from .sdg import SDG
 
 
 def takwimu_countries(request):
-    settings = CountryProfilesSetting.for_site(request.site)
-    published_status = settings.__dict__
+    country_profile_settings = CountryProfilesSetting.for_site(request.site)
+    published_status = country_profile_settings.__dict__
     return get_takwimu_countries(published_status)
 
 
