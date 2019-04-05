@@ -5,6 +5,7 @@ import { Button, Grid, Typography } from '@material-ui/core';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import A from '../A';
 import Section from '../Section';
 import StoryList from './StoryList';
 
@@ -46,12 +47,11 @@ function LatestNewsStories({ classes }) {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            href="https://medium.com/takwimu-africa"
-            classes={{ root: classes.buttonRoot }}
-          >
-            Read more stories on Medium
-          </Button>
+          <A href="https://medium.com/takwimu-africa">
+            <Button classes={{ root: classes.buttonRoot }}>
+              Read more stories on Medium
+            </Button>
+          </A>
         </Grid>
         <Grid item xs={12}>
           <StoryList stories={stories} />
