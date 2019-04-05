@@ -78,14 +78,13 @@ class Navigation extends React.Component {
   toggleDrawer(drawer) {
     const { openDrawer, isMobileDrawerOpen } = this.state;
     const newOpenDrawer = openDrawer !== drawer ? drawer : null;
+    const hasDrawer = newOpenDrawer !== null || isMobileDrawerOpen;
 
     return () => {
       const { width } = this.props;
       this.setState({
-        isMobileDrawerOpen: isWidthUp('md', width)
-          ? false
-          : newOpenDrawer !== null || isMobileDrawerOpen,
-        openDrawer: openDrawer !== drawer ? drawer : null
+        isMobileDrawerOpen: isWidthUp('md', width) ? false : hasDrawer,
+        openDrawer: newOpenDrawer
       });
     };
   }
