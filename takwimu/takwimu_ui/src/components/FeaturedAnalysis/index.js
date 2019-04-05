@@ -34,7 +34,9 @@ class FeaturedAnalysis extends React.Component {
 
   componentDidMount() {
     fetch(
-      'http://localhost:8000/api/v2/pages/?type=takwimu.IndexPage&fields=analysis&format=json'
+      `${
+        process.env.REACT_APP_TAKWIMU_WAGTAIL_API_URL
+      }/pages/?type=takwimu.IndexPage&fields=analysis&format=json`
     )
       .then(response => response.json())
       .then(json => this.setState({ analysis: json.items[0].analysis }));

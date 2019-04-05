@@ -66,6 +66,12 @@ export TAKWIMU_CACHE=True
 make web
 ```
 
+Set the react app .env variable:
+
+```env
+REACT_APP_TAKWIMU_WAGTAIL_API_URL=http://localhost:8000/api/v2
+```
+
 ### Admin a/c
 
 TODO
@@ -140,9 +146,11 @@ TODO
 
 # Deployment
 
-TODO
+Before building the react app, set the .env variable:
 
----
+```env
+REACT_APP_TAKWIMU_WAGTAIL_API_URL=http://takwimu.africa/api/v2
+```
 
 ## Contributing
 
