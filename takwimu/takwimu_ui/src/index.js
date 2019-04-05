@@ -10,6 +10,8 @@ import WhereToNext from './components/WhereToNext';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import Footer from './components/Footer';
 
+import TestProfileSection from './components/TestProfileSection';
+
 const props = {
   countries: window.countries
 };
@@ -29,3 +31,5 @@ renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
 renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
+
+renderApp(TestProfileSection, 'takwimuTestProfileSection');
