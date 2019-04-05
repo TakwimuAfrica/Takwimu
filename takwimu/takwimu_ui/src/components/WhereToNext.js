@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, Grid, withStyles } from '@material-ui/core';
+import { withStyles, ButtonBase, Grid, Typography } from '@material-ui/core';
 
 import Section from './Section';
 
@@ -51,20 +51,24 @@ function WhereToNext({ classes }) {
         className={classes.root}
       >
         <div className={classes.box}>
-          <Typography variant="body1" className={classes.label}>
+          <Typography variant="subtitle1" className={classes.label}>
             Stay up-to-date with <br /> new data and analysis
           </Typography>
         </div>
-        <div className={`${classes.box} ${classes.middlebox}`}>
-          <Typography variant="body1" className={classes.label}>
+        <ButtonBase
+          href="/about"
+          className={`${classes.box} ${classes.middlebox}`}
+        >
+          <Typography variant="subtitle1" className={classes.label}>
             Looking for other <br /> services?
           </Typography>
-        </div>
-        <div className={classes.box}>
-          <Typography variant="body1" className={classes.label}>
+        </ButtonBase>
+
+        <ButtonBase href="/contact-us" className={classes.box}>
+          <Typography variant="subtitle1" className={classes.label}>
             Talk to us
           </Typography>
-        </div>
+        </ButtonBase>
       </Grid>
     </Section>
   );
