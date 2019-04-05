@@ -1,5 +1,6 @@
 {% extends 'profile/profile_detail.html' %}
 {% load staticfiles sass_tags geotags %}
+{% load jsonify %}
 
 {# HEAD #}
 
@@ -9,86 +10,9 @@
 
 {% block header %}
   {% block header_content %}
+  <div id="takwimuProfileDetail"></div>
   <div id="cover-map" class="clearfix">
       <div id="slippy-map"></div>
-      <div id="cover-profile" class="wrapper">
-          <article class="clearfix column-half">
-              <header id="header-box" class="column-full">
-                  <h1 class="title">{{ geography.this.short_name }}</h1>
-                  <p class="caption">
-                    {{ geography | geo_level }}
-                    {% if geography.parents %}
-                        in
-                        {% for level, g in geography.parents.items %}
-                          <a href="/profiles/{{ g.full_geoid }}-{{ g.short_name|slugify }}/">{{ g.short_name }}</a>{% if not forloop.last %},{%endif%}
-                        {% endfor %}
-                    {% endif %}
-                  </p>
-              </header>
-
-              <div class="column-half">
-                  <div class="stat">
-                      <span class="primary">
-                          {% block profile_header_population %}
-                          <span class="value">{{ demographics.total_population.values.this|floatformat:"0" }}</span>
-                          <span class="name">Population</span>
-                          {% endblock %}
-                      </span>
-                  </div>
-              </div>
-              {% if geography.this.square_kms %}
-              <div class="column-half">
-                  <div class="stat">
-                      <span class="secondary">
-                          <span class="value">{% if geography.this.square_kms < 1.0 %}{{ geography.this.square_kms|floatformat:"3" }}{% else %}{{ geography.this.square_kms|floatformat:"1" }}{% endif %}</span>
-                          <span class="name"> square kilometres</span>
-                      </span>
-                      {% if demographics.population_density.values.this %}
-                      <span class="secondary">
-                          {% block profile_header_density %}
-                          <span class="value">{{ demographics.population_density.values.this|floatformat:"1" }}</span>
-                          <span class="name"> people per square kilometre</span>
-                          {% endblock %}
-                      </span>
-                      {% endif %}
-                      {% block geography_extra_sq_km %}
-                      {% endblock %}
-                  </div>
-              </div>
-              {% endif %}
-
-              {% if geography.this.show_extra_links %}
-                  {% include "profile/_blocks/_header_extra_links.html" %}
-              {% endif %}
-
-              {% block profile_header_tail %}
-              <div class="column-full">
-                <p class="caption"><strong>Census data:</strong>
-                  {% if geography.this.geo_level == 'country' %}
-                    {{ geography.this.short_name | census_year }}
-                  {% elif geography.parents %}
-                    {% for level, g in geography.parents.items %}
-                      {% if g.geo_level == 'country' %}
-                        {{ g.short_name | census_year }}
-                      {% endif %}
-                    {% endfor %}
-                  {% endif %}
-                </p>
-              </div>
-              <div class="column-full">
-                <div class="dropdown">
-                  <button class="btn btn-info dropdown-toggle" type="button" id="indicatorsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    {{ data_indicators }}
-                  </button>
-                  <div class="dropdown-menu" aria-labelledby="indicatorsMenuButton">
-                    <a class="dropdown-item{% if data_indicators == 'SDGs Indicators' %} active{% endif %}" href="{{ request.path }}?data=sdg">SDG Indicators</a>
-                    <a class="dropdown-item{% if data_indicators == 'Takwimu Indicators' %} active{% endif %}" href="{{ request.path }}">Takwimu Indicators</a>
-                  </div>
-                </div>
-              </div>
-            {% endblock %}
-          </article>
-      </div>
   </div>
   {% endblock %}
 {% endblock %}
@@ -179,6 +103,21 @@
 {% endblock content_container %}
 
 {% block body_javascript_extra %}
+  <script>
+    {% if profile_data_json %}
+      var profileDataJson = {{ profile_data_json }};
+      {% if primary_releases %}
+        profileDataJson.primary_releases = {{ primary_releases | jsonify | safe }}
+      {% endif %}
+    {% endif %}
+  </script>
+  <script>
+    var countries = {{countries|jsonify|safe}};
+  </script>
+  <script src="{% static asset_manifest.runtime %}"></script>
+  <script src="{% static asset_manifest.vendor %}"></script>
+  <script src="{% static asset_manifest.main %}"></script>
+
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
