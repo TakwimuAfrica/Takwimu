@@ -611,6 +611,44 @@ class FeaturedAnalysisBlock(blocks.StructBlock):
     name = 'featured_analysis'
 
 
+class FeatureDataBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    country = blocks.ChoiceBlock(required=True,
+                                 choices=[
+                                     ('ET', 'Ethiopia'),
+                                     ('KE', 'Kenya'),
+                                     ('NG', 'Nigeria'),
+                                     ('SN', 'Senegal'),
+                                     ('TZ', 'Tanzania'),
+                                 ],
+                                 label='Country')
+
+    data_id = blocks.ChoiceBlock(required=True,
+                                 choices=HURUMAP_DATA_DISTS,
+                                 label='Data')
+    chart_type = blocks.ChoiceBlock(required=True,
+                                    choices=[
+                                        ('histogram', 'Histogram'),
+                                        ('pie', 'Pie Chart'),
+                                        ('grouped_column',
+                                         'Grouped Column')
+                                    ],
+                                    label='Chart Type')
+
+    data_stat_type = blocks.ChoiceBlock(required=True,
+                                        choices=[
+                                            ('percentage',
+                                             'Percentage'),
+                                            ('scaled-percentage',
+                                             'Scaled Percentage'),
+                                            ('dollar', 'Dollar')
+                                        ],
+                                        label='Stat Type')
+    chart_height = blocks.IntegerBlock(required=False,
+                                       label='Chart Height',
+                                       help_text='Default is 300px')
+
+
 class IndexPage(ModelMeta, Page):
     """
     The process for integrating Wagtail into an existing project is definitely
@@ -624,8 +662,13 @@ class IndexPage(ModelMeta, Page):
         ('featured_analysis', FeaturedAnalysisBlock())
     ], blank=True)
 
+    featured_data = StreamField([
+        ('featured_data', FeatureDataBlock())
+    ], blank=True)
+
     content_panels = Page.content_panels + [
-        StreamFieldPanel('featured_analysis')
+        StreamFieldPanel('featured_analysis'),
+        StreamFieldPanel('featured_data')
     ]
 
     def get_context(self, request, *args, **kwargs):
