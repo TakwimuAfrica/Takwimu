@@ -7,7 +7,7 @@ import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
 
-import content from './content';
+// import content from './content';
 
 const styles = () => ({
   root: {
@@ -25,8 +25,19 @@ class FeaturedAnalysis extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { current: 1 };
+    this.state = {
+      current: 0,
+      analysis: []
+    };
     this.handleClick = this.handleClick.bind(this);
+  }
+
+  componentDidMount() {
+    fetch(
+      'http://localhost:8000/api/v2/pages/?type=takwimu.IndexPage&fields=analysis&format=json'
+    )
+      .then(response => response.json())
+      .then(json => this.setState({ analysis: json.items[0].analysis }));
   }
 
   handleClick(index) {
@@ -35,27 +46,38 @@ class FeaturedAnalysis extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { current } = this.state;
+    const { current, analysis } = this.state;
+
+    console.log(analysis);
+
+    const contents = analysis.map(a => ({
+      title: a.value.featured_page.title,
+      description: a.value.featured_page.description
+    }));
+    console.log(contents);
 
     return (
       <Section title="Featured Analysis" variant="h2">
-        <Grid
-          container
-          justify="flex-start"
-          alignItems="stretch"
-          className={classes.root}
-        >
-          <CurrentAnalysis
-            content={content[current]}
-            classes={{ content: classes.content }}
-          />
-          <AnalysisList
-            content={content}
-            current={current}
-            onClick={this.handleClick}
-            classes={{ content: classes.list }}
-          />
-        </Grid>
+        {contents.length && (
+          <Grid
+            container
+            justify="flex-start"
+            alignItems="stretch"
+            className={classes.root}
+          >
+            {console.log('here')}
+            <CurrentAnalysis
+              content={contents[current]}
+              classes={{ content: classes.content }}
+            />
+            <AnalysisList
+              content={contents}
+              current={current}
+              onClick={this.handleClick}
+              classes={{ content: classes.list }}
+            />
+          </Grid>
+        )}
       </Section>
     );
   }

@@ -622,11 +622,23 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
+from rest_framework import serializers
+
+class PageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfileSectionPage
+        fields = ['title', 'description']
+        
 class FeaturedAnalysisBlock(blocks.StructBlock):
+    name = 'featured_analysis'
     country = blocks.ChoiceBlock(choices=country_choices)
     featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
-    name = 'featured_analysis'
 
+    def get_api_representation(self, value, context=None):
+        return dict([
+            ('country', value['country']),
+            ('featured_page', PageSerializer(context=context).to_representation(value['featured_page']))
+        ])
 
 class IndexPage(ModelMeta, Page):
     """
@@ -640,6 +652,11 @@ class IndexPage(ModelMeta, Page):
     analysis = StreamField([
         ('featured_analysis', FeaturedAnalysisBlock())
     ], blank=True)
+
+
+    api_fields = [
+        APIField('analysis')
+    ]
 
     content_panels = Page.content_panels + [
         StreamFieldPanel('analysis')

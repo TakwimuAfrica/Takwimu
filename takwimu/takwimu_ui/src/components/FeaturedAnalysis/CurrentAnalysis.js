@@ -83,7 +83,7 @@ function CurrentAnalysis({ classes, content }) {
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1" className={classes.body}>
-            {content.summary}
+            {content.description}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -93,11 +93,9 @@ function CurrentAnalysis({ classes, content }) {
             alignItems="center"
             className={classes.actions}
           >
-            <Button href={content.links.analysis}>
-              Read the full analysis
-            </Button>
+            <Button href="#">Read the full analysis</Button>
             <Button
-              href={content.links.data}
+              href="#"
               className={classes.secondaryAction}
               variant="outlined"
             >
