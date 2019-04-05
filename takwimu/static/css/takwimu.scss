@@ -21,6 +21,10 @@ $brand-extend-disabled: #ededec;
 
 $font-size-base: 16px;
 
+html, body {
+  font-size: $font-size-base;
+  background-color: '#fff';
+}
 html, body, h1, h2, h3, h4, h5, h6, p, * {
   font-family: 'Muli', sans-serif;
   word-break: break-word;
@@ -168,41 +172,66 @@ body {
   border-color: $brand-color-secondary !important;
 }
 
+// Media query: Match Material UI
+@media only screen and (min-width: 1280px) {
+  .wrapper {
+    width: 77.6875rem;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 960px) and (max-width: 1279px) {
+  .wrapper {
+    width: 58.265625rem; // .75 of lg
+    margin: 0 auto;
+  }
+}
 
 // Profile
 
-.section-contents h1,
-.section-contents h2,
-.section-contents h3,
-.section-contents h4,
-.section-contents h5,
-.section-contents h6 {
-  font-family: 'Muli', sans-serif;
-  font-weight: bold;
-}
 
 #profile {
   background-color: #fff;
-
 }
-#profile article {
+
+header.section-contents {
+  width: 100%;
+  float: initial;
+  background-color: $brand-color-primary;
+}
+header.section-contents h1,
+header.section-contents h2,
+header.section-contents h3,
+header.section-contents h4,
+header.section-contents h5,
+header.section-contents h6,
+.chart-header {
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+}
+header.section-contents h1 {
+  background-color: inherit;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.05;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+#profile .section-container {
+  margin-left: 0;
+  border: none;
+  padding: 0;
+}
+
+#profile .section-container section {
+  background-color: #f6f6f6;
   padding-top: 2.375rem;
   padding-bottom: 1rem;
   padding-left: 1.9375rem;
-  background-color: #f6f6f6;
   border-radius: 4px;
-}
-
-#profile article .section-container {
-  background-color: inherit;
-  border: none;
-}
-
-header.section-contents h1,
-section h2,
-.chart-header {
-  font-family: 'Muli', sans-serif;
-  border: none;
 }
 
 #profile .chart .action-links {
