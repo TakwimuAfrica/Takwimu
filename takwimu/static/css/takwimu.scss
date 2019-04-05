@@ -5,12 +5,12 @@
  *
  * NOTE: Please don't make edits here unless super necessary.
  */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900');
+@import url("https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700");
 
-$brand-color-primary: #1f6cc6;
+$brand-color-primary: #29a87c;
 $brand-color-primary-alt: #074c9c;
 $brand-color-primary-light: #7ab1f2;
-$brand-color-secondary: #1e4a7e;
+$brand-color-secondary: #29a87c;
 $brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
@@ -19,8 +19,10 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
+$font-size-base: 16px;
+
 html, body, h1, h2, h3, h4, h5, h6, p, * {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Muli', sans-serif;
   word-break: break-word;
 }
 
@@ -29,6 +31,7 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
   font-weight: bold;
 }
 
@@ -165,6 +168,46 @@ body {
   border-color: $brand-color-secondary !important;
 }
 
+
+// Profile
+
+.section-contents h1,
+.section-contents h2,
+.section-contents h3,
+.section-contents h4,
+.section-contents h5,
+.section-contents h6 {
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+}
+
+#profile {
+  background-color: #fff;
+
+}
+#profile article {
+  padding-top: 2.375rem;
+  padding-bottom: 1rem;
+  padding-left: 1.9375rem;
+  background-color: #f6f6f6;
+  border-radius: 4px;
+}
+
+#profile article .section-container {
+  background-color: inherit;
+  border: none;
+}
+
+header.section-contents h1,
+section h2,
+.chart-header {
+  font-family: 'Muli', sans-serif;
+  border: none;
+}
+
+#profile .chart .action-links {
+  color: $brand-color-primary;
+}
 
 
 /* ------------------------
