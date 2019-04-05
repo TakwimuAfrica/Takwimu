@@ -33,7 +33,7 @@ const LINKS = [
   { href: '#', label: 'Explore data by topic' },
   { href: '#', label: 'Expert insights and analysis' },
   { href: '/about', label: 'About Takwimu' },
-  { href: '#', label: 'FAQs' },
+  { href: '/about', label: 'FAQs' },
   { href: '/contact-us', label: 'Contact Us' }
 ];
 const LEGAL = [

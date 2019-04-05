@@ -47,7 +47,7 @@ function LatestNewsStories({ classes }) {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <A href="https://medium.com/takwimu-africa">
+          <A href="https://medium.com/takwimu-africa" underline="none">
             <Button classes={{ root: classes.buttonRoot }}>
               Read more stories on Medium
             </Button>
