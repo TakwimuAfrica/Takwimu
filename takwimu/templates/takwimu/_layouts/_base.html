@@ -103,7 +103,21 @@
   </script>
 
   <script>
-    var countries = {{countries|jsonify|safe}};
+    var takwimu = {
+      countries: {{countries|jsonify|safe}}
+    };
+    var settings = {
+      support: {
+        hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+        support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+      },
+      socialMedia: {
+        facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+        twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+        medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+        linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+      }
+    };
   </script>
 
   <script src="{% static asset_manifest.runtime %}"></script>

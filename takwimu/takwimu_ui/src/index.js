@@ -15,7 +15,9 @@ import Footer from './components/Footer';
 
 import TestProfileSection from './components/TestProfileSection';
 
-const props = {
+const PROPS = {
+  takwimu: window.takwimu,
+  settings: window.settings,
   countries: window.countries,
   profile: window.profileDataJson || {
     demographics: {},
@@ -36,7 +38,7 @@ const renderApp = (Component, id) => {
   if (el) {
     const App = withRoot(Component);
 
-    ReactDOM.render(<App {...props} />, el);
+    ReactDOM.render(<App {...PROPS} />, el);
   }
 };
 
