@@ -17,11 +17,13 @@
 </div>
 {% endblock %}
 
+
+
 {% block profile_detail %}
 
 {# DEMOGRAPHICS #}
 {% if not demographics.is_missing %}
-<article class="clearfix">
+<article id="demographics" class="clearfix">
   <header class="section-contents"><h1>Demographics</h1></header>
   <div class="section-container">
     {% if not demographics.sex_dist.is_missing %}
@@ -57,52 +59,10 @@
 </article>
 {% endif %}
 
-{% comment %}
-  {% if not demographics.is_missing %}
-    <article class="clearfix">
-      <header class="section-contents">
-      </header>
-      <div class="section-container">
-        <section class="clearfix stat-row">
-          <h2 class="header-for-columns">Population </h2>
-          <div class="column-third">
-            {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-          </div>
-
-          {% if not demographics.sex_dist.is_missing %}
-            <div class="column-full" id="chart-pie-demographics-sex_dist" data-stat-type="percentage" data-chart-title="Population by sex" data-initial-sort="-value"></div>
-          {% endif %}
-          {% if not demographics.residence_dist.is_missing %}
-            <div class="column-full" id="chart-histogram-demographics-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Population by residence" data-initial-sort="-value"></div>
-          {% endif %}
-        </section>
-
-        {% if not demographics.child_births_dist.is_missing %}
-          <section class="clearfix stat-row">
-            <h2 class="header-for-columns">Fertility and Births</h2>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_child_births_dist stat_type='number' %}
-            </div>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_reported_birth_weights_dist stat_type='percentage' %}
-            </div>
-            <div class="column-third">
-              {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_low_birth_weights_dist stat_type='percentage' %}
-            </div>
-          </section>
-          <section class="clearfix stat-row">
-            <div class="column-half" id="chart-pie-demographics-child_births_by_size_dist" data-stat-type="percentage" data-chart-title="Percent distribution of all live births by size of child at birth" data-initial-sort="-value"></div>
-          </section>
-        {% endif %}
-      </div>
-    </article>
-  {% endif %}
-{% endcomment %}
-
 
 {# ELECTIONS #}
 {% if not elections.is_missing %}
-<article class="clearfix">
+<article id="elections" class="clearfix">
   <header class="section-contents"><h1>Elections</h1></header>
   <div class="section-container">
     {% if not elections.valid_invalid_dist.is_missing %}
@@ -138,33 +98,10 @@
 </article>
 {% endif %}
 
-{% comment %}
-  {% if not elections.is_missing %}
-    <article class="clearfix">
-      <header class="section-contents">
-        <!-- <h1>Elections</h1> -->
-      </header>
-      <div class="section-container">
-        {% if not elections.valid_invalid_dist.is_missing or not elections.registered_accred_dist.is_missing %}
-          <section class="clearfix stat-row">
-            <div class="column-full" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid vs invalid votes" data-initial-sort="-value"></div>
-            <div class="column-full" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered voters vs total votes cast" data-initial-sort="-value"></div>
-          </section>
-        {% endif %}
-        {% if not elections.candidate_dist.is_missing %}
-          <section class="clearfix stat-row">
-            <div class="column-full" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage votes per candidate" data-initial-sort="-value"></div>
-          </section>
-          </div>
-        {% endif %}
-    </article>
-  {% endif %}
-{% endcomment %}
-
 
 {# CROPS #}
 {% if not crops.crop_distribution.is_missing %}
-<article class="clearfix">
+<article id="agriculture" class="clearfix">
   <header class="section-contents"><h1>Agriculture</h1></header>
   <div class="section-container">
     {% if not crops.crop_distribution.is_missing %}
@@ -180,51 +117,6 @@
 </article>
 {% endif %}
 
-
-{#  {% if not health_centers.is_missing %}#}
-{#    <article id="health_centers_distribution" class="clearfix">#}
-{#      <header class="section-contents">#}
-{#        <h1>Health centers distribution</h1>#}
-{#      </header>#}
-{#      {% if not health_centers.health_centers_dist.is_missing or not health_centers.hiv_health_centers_dist.is_missing or not health_centers.health_centers_ownership_dist.is_missing or not health_centers.health_centers_dist.is_missing %}#}
-{#        <div class="section-container">#}
-{#          <section class="clearfix stat-row">#}
-{#            {% if not health_centers.health_centers_dist.is_missing %}#}
-{#              <div class="column-third">#}
-{#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_health_centers_dist stat_type='number' %}#}
-{#              </div>#}
-{#            {% endif %}#}
-{#            {% if not health_centers.hiv_health_centers_dist.is_missing %}#}
-{#              <div class="column-third">#}
-{#                {% include 'profile/_blocks/_stat_list.html' with stat=health_centers.total_hiv_health_centers_dist stat_type='number' %}#}
-{#              </div>#}
-{#            {% endif %}#}
-{#            {% if not health_centers.health_centers_ownership_dist.is_missing %}#}
-{#              <div class="column-third" id="chart-pie-health_centers-health_centers_ownership_dist" data-initial-sort="-value" data-stat-type="scaled-percentage" data-initial-sort="-value" data-chart-title="Ownership"></div>#}
-{#            {% endif %}#}
-{#            {% if not health_centers.health_centers_dist.is_missing %}#}
-{#              <div class="column-full">#}
-{#                <div id="chart-histogram-health_centers-health_centers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health centers by types (2014)"></div>#}
-{#              </div>#}
-{#            {% endif %}#}
-{#          </section>#}
-{#        </div>#}
-{#      {% endif %}#}
-{#      {% if not health_centers.prevention_methods_dist.is_missing %}#}
-{#        <div class="section-container">#}
-{#          <section class="clearfix stat-row">#}
-{#            <h2 class="header-for-columns">Knowledge of HIV Prevention#}
-{#              Methods</h2>#}
-{#            <div class="column-full">#}
-{#              <div id="chart-grouped_column-health_centers-prevention_methods_dist"#}
-{#                   data-stat-type="scaled-percentage"#}
-{#                   data-chart-title=""></div>#}
-{#            </div>#}
-{#          </section>#}
-{#        </div>#}
-{#      {% endif %}#}
-{#    </article>#}
-{#  {% endif %}#}
 
   {% if not health_workers.health_workers_dist.is_missing %}
     <article id="health_workers_distribution" class="clearfix">
@@ -298,7 +190,7 @@
 
 {# ODA #}
 {% if not donors.is_missing %}
-<article class="clearfix">
+<article id="oda" class="clearfix">
   <header class="section-contents"><h1>Official Development Assistance</h1></header>
   <div class="section-container">
     {% if not donors.donor_assistance_dist.is_missing %}
@@ -333,7 +225,7 @@
 
 {# HOUSEHOLDS #}
 {% if not poverty.is_missing %}
-<article class="clearfix">
+<article id="households" class="clearfix">
   <header class="section-contents"><h1>Households</h1></header>
   <div class="section-container">
     {% if not poverty.poverty_residence_dist.is_missing %}
@@ -370,7 +262,7 @@
 
 {# HEALTH #}
 {% if not fgm.is_missing %}
-<article class="clearfix">
+<article id="health" class="clearfix">
   <header class="section-contents"><h1>Health</h1></header>
   <div class="section-container">
     {% if not fgm.fgm_age_dist.is_missing %}
@@ -390,9 +282,10 @@
 </article>
 {% endif %}
 
-{# HEALTH #}
+
+{# CRIME REPORS #}
 {% if not security.is_missing %}
-<article class="clearfix">
+<article id="crime-reports" class="clearfix" data-tab="Crime Reports">
   <header class="section-contents"><h1>Crime Reports</h1></header>
   <div class="section-container">
     {% if not security.is_missing and not security.seized_firearms_dist.is_missing %}
@@ -415,7 +308,7 @@
 
 {# BUDGET #}
 {% if not budget.is_missing %}
-<article class="clearfix">
+<article id="budget" class="clearfix">
   <header class="section-contents"><h1>Budget</h1></header>
   <div class="section-container">
     {% if not budget.government_expenditure_dist.is_missing %}
@@ -438,7 +331,7 @@
 
 {# WORLD BANK #}
 {% if not worldbank.is_missing %}
-<article class="clearfix">
+<article id="worldbank" class="clearfix">
   <header class="section-contents"><h1>World Bank</h1></header>
   <div class="section-container">
     {% if not worldbank.cereal_yield_kg_per_hectare.is_missing %}

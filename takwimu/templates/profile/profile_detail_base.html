@@ -26,8 +26,9 @@
 {% endblock %}
 
 
-
 {% block content_container %}
+  <div id="takwimuProfile"></div>
+
   <div class="content-container wrapper clearfix">
     {% block profile_preamble %}
     {% endblock %}
@@ -105,9 +106,6 @@
 {% endblock content_container %}
 
 {% block body_javascript_extra %}
-  <script src="{% static asset_manifest.runtime %}"></script>
-  <script src="{% static asset_manifest.vendor %}"></script>
-  <script src="{% static asset_manifest.main %}"></script>
 
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
@@ -119,6 +117,81 @@
   <script defer data-search-pseudo-elements src="https://use.fontawesome.com/releases/v5.2.0/js/all.js" integrity="sha384-4oV5EgaV02iISL2ban6c/RmotsABqE4yZxZLcYMAdG7FAPsyHYAPpywE9PJo+Khy" crossorigin="anonymous"></script>
 
   {{ block.super }}
+
+    <!-- Takwimu & HURUmap  -->
+    <script>
+      // I. Takwimu 
+      var takwimu = {
+        countries: {{ countries|jsonify|safe }}
+      };
+      var settings = {
+        support: {
+          hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+          support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+        },
+        socialMedia: {
+          facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+          twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+          medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+          linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+        }
+      };
+
+      // II. HURUmap
+      // profileData is created in hurumap/profile_detail.html
+      var profileData = window.profileData || {}
+      profileData.tabs = [{ name: 'All', href: ''}];
+      if (!profileData.demographics.is_missing){
+          profileData.tabs.push({ name: 'Demographics', href: '#demographics'});
+      }
+      if (!profileData.elections.is_missing) {
+          profileData.tabs.push({ name: 'Elections', href: '#elections'});
+      }
+      if (!profileData.crops.crop_distribution.is_missing) {
+          profileData.tabs.push({ name: 'Agriculture', href: '#agriculture'});
+      }
+      if (!profileData.donors.is_missing) {
+          profileData.tabs.push({ name: 'ODA', href: '#oda'});
+      }
+      if (!profileData.poverty.is_missing) {
+          profileData.tabs.push({ name: 'Households', href: '#households'});
+      }
+      if (!profileData.fgm.is_missing) {
+          profileData.tabs.push({ name: 'Health', href: '#health'});
+      }
+      if (!profileData.security.is_missing) {
+          profileData.tabs.push({ name: 'Crime Reports', href: '#crime-reports'});
+      }
+      if (!profileData.budget.is_missing) {
+          profileData.tabs.push({ name: 'Budget', href: '#budget'});
+      }
+      if (!profileData.worldbank.is_missing) {
+          profileData.tabs.push({ name: 'World Bank', href: '#worldbank'});
+      }
+
+      // While viz are created outside React, lets stick to using jQuery
+      // for handling Profile Tabs
+      // i. Function to switch tabs on client side
+      profileData.switchToTab = function switchToProfileTab(index) {
+        var i = Number.parseInt(index);
+        if (Number.isNaN(i) || i >= profileData.tabs.length) {
+          return;
+        }
+        var $tabs = $('#profile article');
+        if (i === 0) {
+          $tabs.find('header').show();
+          $tabs.show();
+        } else {
+          var tab = profileData.tabs[i];
+          var $tab = $(tab.href);
+          $tabs.hide();
+          if ($tab) {
+            $tab.find('header').hide();
+            $tab.show();
+          }
+        }
+      };
+    </script>
 
   <!-- Bootstrap: Enable Tooltips -->
   <script>
@@ -133,40 +206,8 @@
   });
   </script>
 
-  <script>
-    var takwimu = {
-      countries: {{countries|jsonify|safe}}
-    };
-    var settings = {
-      support: {
-        hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
-        support: '{{ settings.takwimu.SupportSetting.support|safe }}'
-      },
-      socialMedia: {
-        facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
-        twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
-        medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
-        linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
-      }
-    };
-    {% if profile_data_json %}
-    var profileDataJson = {{ profile_data_json }};
-    {% if primary_releases %}
-    profileDataJson.primary_releases = {{ primary_releases | jsonify | safe }}
-    {% endif %}
-    {% endif %}
-  </script>
-
+  <!-- React UI -->
   <script src="{% static asset_manifest.runtime %}"></script>
   <script src="{% static asset_manifest.vendor %}"></script>
   <script src="{% static asset_manifest.main %}"></script>
 {% endblock body_javascript_extra %}
-
-{% block profile_javascript_libs %}
-  <script src="{% static 'js/vendor/dom-to-image.min.js' %}"></script>
-  {{ block.super }}
-  {% if HURUMAP.USE_MAPIT %}
-    <script src="{% static 'js/map_mapit.js' %}"></script>
-    <script src="{% static 'js/profile_map_mapit.js' %}"></script>
-  {% endif %}
-{% endblock profile_javascript_libs %}
