@@ -5,16 +5,34 @@ const FONT_FAMILY_TEXT = '"Muli", sans-serif';
 
 const Theme = createMuiTheme({
   palette: {
-    primary: { main: '#29a87c' },
-    secondary: { main: '#ffffff' },
+    primary: {
+      main: '#29a87c' // dark-mint
+    },
+    secondary: {
+      main: '#004494' // darkish-blue
+    },
     text: { primary: '#000', secondary: '#fff' },
     info: {
       main: '#f6fbfa' // ice-blue
+    },
+    data: {
+      main: '#4a4a4a',
+      light: '#F5F5F5' // #4a4a4a opacity 0.05
     }
   },
   typography: {
     fontHeading: FONT_FAMILY_HEADING,
     fontText: FONT_FAMILY_TEXT,
+    h1: {
+      fontFamily: FONT_FAMILY_HEADING,
+      fontSize: '3.375rem',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+      color: 'black'
+    },
     h2: {
       fontFamily: FONT_FAMILY_HEADING,
       fontSize: '3.375rem',
@@ -81,6 +99,15 @@ const Theme = createMuiTheme({
       lineHeight: '2.05',
       letterSpacing: 'normal'
     },
+    caption: {
+      fontFamily: FONT_FAMILY_TEXT,
+      fontSize: '0.813rem',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: '1.69',
+      letterSpacing: 'normal'
+    },
     button: {
       fontFamily: FONT_FAMILY_TEXT,
       fontSize: '0.875rem',
@@ -97,6 +124,10 @@ const Theme = createMuiTheme({
     MuiButton: {
       color: 'primary',
       variant: 'contained'
+    },
+    MuiPaper: {
+      elevation: 0,
+      square: true
     }
   },
   overrides: {
@@ -129,6 +160,16 @@ const Theme = createMuiTheme({
       label: {
         paddingTop: '1.125rem',
         paddingBottom: '1.0625rem'
+      }
+    },
+    MuiPaper: {
+      elevation1: {
+        boxShadow: 'none'
+      }
+    },
+    MuiCardContent: {
+      root: {
+        padding: '1.4375rem 0'
       }
     }
   }
