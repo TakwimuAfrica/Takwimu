@@ -17,7 +17,6 @@ GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
 PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
     GEOGRAPHY_LEVELS)
 
-api_router = WagtailAPIRouter('wagtailapi')
 
 takwimu_urlpatterns = [
     url(r'^api/v2/', api_router.urls),
