@@ -63,7 +63,6 @@ COUNTRIES['ZM'] = {
 
 def get_takwimu_stories():
     stories_latest = []
-    stories_trending = []
 
     try:
         if settings.HURUMAP.get('url') != 'https://takwimu.africa':
@@ -72,13 +71,10 @@ def get_takwimu_stories():
         else:
             client = Medium()
             stories = client.get_publication_posts('takwimu-africa',
-                                                   count=20)
-        stories_latest = stories[0:3]
+                                                   count=3)
 
-        stories_dict = [i.__dict__ for i in stories]
-        stories_trending = sorted(
-            stories_dict, key=operator.itemgetter('clap_count'), reverse=True)
-    except Exception as e:
+        stories_latest = stories[0:3]
+    except Exception:
         pass
 
     if len(stories_latest) > 3:
@@ -86,7 +82,6 @@ def get_takwimu_stories():
 
     return {
         'stories_latest': stories_latest,
-        'stories_trending': stories_trending[:3]
     }
 
 
