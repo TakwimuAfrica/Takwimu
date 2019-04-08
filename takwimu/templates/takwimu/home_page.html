@@ -1,6 +1,6 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
-{% load staticfiles %}
+{% load staticfiles wagtailcore_tags %}
 
 {% block content %}
 
@@ -51,6 +51,99 @@
 {% endblock %}
 
 {% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script>
+    var takwimu = window.takwimu || {};
+    takwimu.featuredAnalysis = [
+      {% for analysis in page.featured_analysis %}
+      {
+        countrySlug: '{{ analysis.value.featured_page.specific.get_parent.specific.slug }}',
+        summary: '{{ analysis.value.featured_page.description }}',
+      },
+      {% endfor %}
+    ];
+    takwimu.featuredData = [
+      {% for data in page.featured_data %}
+      {
+        countryCode: '{{ data.value.country }}',
+        title: '{{ data.value.title }}',
+        id: '{{ data.value.data_id }}',
+        type: '{{ data.value.chart_type }}',
+        statType: '{{ data.value.data_stat_type }}',
+        description: '{{ data.value.description }}',
+        height: '{{ data.value.chart_height }}',
+      },
+      {% endfor %}
+    ];
+
+    // These charts are still jQuery/D3 dependent so lets stick to using this
+    // function to plot/embed them
+    takwimu.embedWidgets = function embedWidgets(selector) {
+        // Work with a single iframe at a time and only resize it to it's
+        // "natural" dimensions
+        function makeCensusEmbed(containerId) {
+            var embed = {
+                embed: {}
+            };
+            embed.init = function () {
+                embed.container = document.getElementById(containerId);
+                if (embed.container) {
+                    embed.embed = {
+                        naturalWidth: embed.container.width,
+                        naturalHeight: embed.container.height,
+                        frameHeight: embed.container.height
+                    }
+                    embed.addListeners();
+                    embed.sendDataToFrame({ resize: 'resize' });
+                }
+            }
+            embed.addListeners = function () {
+                var eventMethod = window.addEventListener ? 'addEventListener' : 'attachEvent',
+                    eventListener = window[eventMethod],
+                    resizeEvent = (eventMethod == 'attachEvent') ? 'onresize' : 'resize';
+                eventListener(resizeEvent, embed.resize);
+            }
+            embed.debounce = function debounce(func, wait, immediate) {
+                var timeout;
+                return function () {
+                    var context = this, args = arguments;
+                    var later = function () {
+                        timeout = null;
+                        if (!immediate) func.apply(context, args);
+                    };
+                    var callNow = immediate && !timeout;
+                    clearTimeout(timeout);
+                    timeout = setTimeout(later, wait);
+                    if (callNow) func.apply(context, args);
+                };
+            };
+            embed.resize = embed.debounce(function resizeEmbed() {
+                embed.setFrameSize();
+                embed.sendDataToFrame({ resize: 'resize' });
+            }, 100);
+            embed.setFrameSize = function setFrameSize() {
+                var thisContainer = embed.container,
+                    thisEmbed = embed.embed,
+                    parentWidth = thisContainer.offsetWidth,
+                    minimumHeight = thisEmbed.frameHeight + 80;
+                thisContainer.width = (parentWidth <= thisEmbed.naturalWidth) ? parentWidth : thisEmbed.naturalWidth;
+                thisContainer.height = (minimumHeight >= thisEmbed.naturalHeight) ? minimumHeight : thisEmbed.naturalHeight;
+            }
+            embed.sendDataToFrame = function (data) {
+                // IE9 can only send strings
+                embed.container.contentWindow.postMessage(JSON.stringify(data), '*');
+            }
+            embed.init();
+            return embed;
+        }
+
+        $(selector).each(function(){
+            this.contentWindow.CensusReporterEmbeds = makeCensusEmbed(this.id);
+        });
+    };
+  </script>
+
 <script>
   window.addEventListener('load', function() {
     $('#videoModal').on('shown.bs.modal', function (event) {
