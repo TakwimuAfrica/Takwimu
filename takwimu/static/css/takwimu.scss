@@ -27,7 +27,7 @@ html, body {
 }
 html, body, h1, h2, h3, h4, h5, h6, p, * {
   font-family: 'Muli', sans-serif;
-  word-break: break-word;
+  word-break: break-all;
 }
 
 img {
@@ -166,6 +166,10 @@ body {
 }
 
 // Geography
+
+#cover-map {
+  margin-bottom: 0;
+}
 
 .leaflet-label {
   background-color: $brand-color-secondary !important;
