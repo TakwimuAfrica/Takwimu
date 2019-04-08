@@ -640,13 +640,6 @@ class FAQ(index.Indexed, models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
-
-class FeaturedAnalysisBlock(blocks.StructBlock):
-    featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
-    from_country = blocks.ChoiceBlock(required=True, choices=country_choices)
-    name = 'featured_analysis'
-
-
 class FeatureDataBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     country = blocks.ChoiceBlock(required=True,
@@ -687,6 +680,24 @@ class FeatureDataBlock(blocks.StructBlock):
     description = blocks.TextBlock(required=False, label='Description of the data')
 
 
+from rest_framework import serializers
+
+class PageSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ProfileSectionPage
+        fields = ['title', 'description']
+
+class FeaturedAnalysisBlock(blocks.StructBlock):
+    name = 'featured_analysis'
+    from_country = blocks.ChoiceBlock(choices=country_choices)
+    featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
+
+    def get_api_representation(self, value, context=None):
+        return dict([
+            ('from_country', value['from_country']),
+            ('featured_page', PageSerializer(context=context).to_representation(value['featured_page']))
+        ])
+
 class IndexPage(ModelMeta, Page):
     """
     The process for integrating Wagtail into an existing project is definitely
@@ -708,6 +719,11 @@ class IndexPage(ModelMeta, Page):
     content_panels = Page.content_panels + [
         StreamFieldPanel('featured_analysis'),
         StreamFieldPanel('featured_data')
+    ]
+
+    api_fields = [
+        APIField('featured_analysis'),
+        APIField('featured_data')
     ]
 
     def get_context(self, request, *args, **kwargs):
