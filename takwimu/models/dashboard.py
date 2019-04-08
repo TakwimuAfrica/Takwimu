@@ -13,6 +13,7 @@ from modelcluster.fields import ParentalKey
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
+from wagtail.api import APIField
 from wagtail.contrib.settings.context_processors import settings
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
@@ -401,6 +402,14 @@ class ProfileSectionPage(ModelMeta, Page):
     parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
 
+    api_fields = [
+        APIField('body'),
+        APIField('description'),
+        APIField('date'),
+        APIField('promotion_image'),
+        APIField('promotion_image_thumbnail'),
+    ]
+
     def get_context(self, request):
         context = super(ProfileSectionPage, self).get_context(request)
 
@@ -475,6 +484,15 @@ class ProfilePage(ModelMeta, Page):
         'image': 'get_promotion_image',
         'twitter_creator': 'tweet_creator',
     }
+    api_fields = [
+        APIField('title'),
+        APIField('geo'),
+        APIField('date'),
+        APIField('document'),
+        APIField('body'),
+        APIField('promotion_image'),
+        APIField('promotion_image_thumbnail'),
+    ]
 
     # Search index configuration
 
