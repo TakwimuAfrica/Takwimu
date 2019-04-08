@@ -10,6 +10,7 @@ from fontawesome.forms import IconFormField
 from hurumap.models import DataIndicator
 from meta.models import ModelMeta
 from modelcluster.fields import ParentalKey
+from rest_framework import serializers
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
@@ -37,7 +38,7 @@ json_data = open('takwimu/fixtures/sdg.json')
 sdg_data = json.load(json_data)
 sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
 sdg_choices = [('', 'Please select an SDG')] + sdg_choices
-country_choices = [(k, v['name']) for k,v in COUNTRIES.items()]
+country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
 
 
 # The abstract model for data indicators, complete with panels
@@ -135,6 +136,46 @@ HURUMAP_DATA_DISTS = [
     ('donors-donor_programmes_dist', 'Donor Funded Programmes'),
     ('budget-government_expenditure_dist', 'Government Expenditure'),
     ('health_centers-health_centers_dist', 'Number of health centers by type'),
+    ('worldbank-cereal_yield_kg_per_hectare', 'Cereal Yield in Kg Per Hectare'),
+    ('worldbank-agricultural_land', 'Agricultural land (% of land area)'),
+    ('worldbank-gini_index', 'GINI Index'),
+    ('worldbank-access_to_basic_services',
+     'People using at least basic drinking water services (% of population)'),
+    ('worldbank-primary_school_enrollment',
+     'School enrollment, primary, male (% gross)'),
+    ('worldbank-account_ownership',
+     'Account ownership at a financial institution or with a mobile-money-service provider, (% of population ages 15+)'),
+    ('worldbank-youth_unemployment',
+     'Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)'),
+    ('worldbank-adult_literacy_rate',
+     'Literacy rate, adult (% of population ages 15 and above)'),
+    ('worldbank-foreign_direct_investment_net_inflows',
+     'Foreign direct investment, net inflows (% of GDP)'),
+    ('worldbank-maternal_mortality',
+     'Maternal mortality ratio (modeled estimate, per 100,000 live births)'),
+    ('worldbank-hiv_prevalence', 'Prevalence of HIV, (% ages 15-24)'),
+    ('worldbank-employment_to_population_ratio',
+     'Employment to population ratio, 15+, (%) (modeled ILO estimate)'),
+    ('worldbank-gdp_per_capita', 'GDP per capita (current US$)'),
+    ('worldbank-primary_education_completion_rate',
+     'Primary completion rate,(% of relevant age group)'),
+    ('worldbank-secondary_school_enrollment',
+     'School enrollment, secondary (% gross)'),
+    ('worldbank-nurses_and_midwives', 'Nurses and midwives (per 1,000 people)'),
+    ('worldbank-mobile_phone_subscriptions',
+     'Mobile Phone Subscriptions(per 100 people)'),
+    ('worldbank-gdp_per_capita_growth', 'GDP per capita growth (annual %)'),
+    ('worldbank-prevalence_of_undernourishment',
+     'Prevalence of undernourishment (% of population)'),
+    ('worldbank-life_expectancy_at_birth', 'Life Expectancy At Birth (Years)'),
+    ('worldbank-tax_as_percentage_of_gdp', 'Tax As Percentage Of GDP'),
+    ('worldbank-births_attended_by_skilled_health_staff',
+     'Births Attended By Skilled Health Staff (% of total)'),
+    ('worldbank-incidence_of_malaria_per_1000_pop_at_risk',
+     'Incidence Of Malaria Per 1000 Population At Risk'),
+    ('worldbank-tax_revenue', 'Tax revenue (current LCU)'),
+    ('worldbank-gdp', 'GDP'),
+    ('worldbank-gdp_growth', 'GDP Growth'),
 ]
 
 
@@ -549,7 +590,7 @@ class AboutPage(Page):
         FieldPanel('content'),
     ]
 
-    api_fields = [APIField('content'),]
+    api_fields = [APIField('content'), ]
 
 
 class ContactUsPage(Page):
@@ -640,7 +681,8 @@ class FAQ(index.Indexed, models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
-class FeatureDataBlock(blocks.StructBlock):
+
+class FeaturedDataBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     country = blocks.ChoiceBlock(required=True,
                                  choices=[
@@ -651,7 +693,6 @@ class FeatureDataBlock(blocks.StructBlock):
                                      ('TZ', 'Tanzania'),
                                  ],
                                  label='Country')
-
     data_id = blocks.ChoiceBlock(required=True,
                                  choices=HURUMAP_DATA_DISTS,
                                  label='Data')
@@ -663,7 +704,6 @@ class FeatureDataBlock(blocks.StructBlock):
                                          'Grouped Column')
                                     ],
                                     label='Chart Type')
-
     data_stat_type = blocks.ChoiceBlock(required=True,
                                         choices=[
                                             ('percentage',
@@ -676,16 +716,15 @@ class FeatureDataBlock(blocks.StructBlock):
     chart_height = blocks.IntegerBlock(required=False,
                                        label='Chart Height',
                                        help_text='Default is 300px')
+    description = blocks.TextBlock(
+        required=False, label='Description of the data')
 
-    description = blocks.TextBlock(required=False, label='Description of the data')
-
-
-from rest_framework import serializers
 
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileSectionPage
         fields = ['title', 'description']
+
 
 class FeaturedAnalysisBlock(blocks.StructBlock):
     name = 'featured_analysis'
@@ -695,8 +734,10 @@ class FeaturedAnalysisBlock(blocks.StructBlock):
     def get_api_representation(self, value, context=None):
         return dict([
             ('from_country', value['from_country']),
-            ('featured_page', PageSerializer(context=context).to_representation(value['featured_page']))
+            ('featured_page', PageSerializer(
+                context=context).to_representation(value['featured_page']))
         ])
+
 
 class IndexPage(ModelMeta, Page):
     """
@@ -713,7 +754,7 @@ class IndexPage(ModelMeta, Page):
     ], blank=True)
 
     featured_data = StreamField([
-        ('featured_data', FeatureDataBlock())
+        ('featured_data', FeaturedDataBlock())
     ], blank=True)
 
     content_panels = Page.content_panels + [
@@ -727,7 +768,8 @@ class IndexPage(ModelMeta, Page):
     ]
 
     def get_context(self, request, *args, **kwargs):
-        country_profile_settings = CountryProfilesSetting.for_site(request.site)
+        country_profile_settings = CountryProfilesSetting.for_site(
+            request.site)
         published_status = country_profile_settings.__dict__
 
         context = super(IndexPage, self).get_context(request, *args, **kwargs)
