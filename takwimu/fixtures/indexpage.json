@@ -1,1 +1,0 @@
-[{"model": "takwimu.indexpage", "pk": 159, "fields": {"featured_analysis": "[]", "featured_data": "[]"}}, {"model": "wagtailcore.site", "pk": 1, "fields": {"hostname": "dev.takwimu.africa", "port": 80, "site_name": "TAKWIMU", "root_page": 159, "is_default_site": true}}]
