@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
+from wagtail.api.v2.router import WagtailAPIRouter
 
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
@@ -14,6 +15,8 @@ from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
 GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
 PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
     GEOGRAPHY_LEVELS)
+
+api_router = WagtailAPIRouter('wagtailapi')
 
 takwimu_urlpatterns = [
     url(r'^about/support-services',
@@ -30,6 +33,7 @@ takwimu_urlpatterns = [
     url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^search/$', SearchView.as_view(), name='search'),
+    url(r'^api/v2/', api_router.urls),
 ]
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \

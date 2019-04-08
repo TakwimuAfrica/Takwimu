@@ -12,7 +12,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # insert our overrides before both census and hurumap
 
 
-INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta'] + INSTALLED_APPS + [
+INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta', 'wagtail.api.v2'] + INSTALLED_APPS + [
     'debug_toolbar',]
 
 ROOT_URLCONF = 'takwimu.urls'

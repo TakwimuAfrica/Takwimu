@@ -36,6 +36,7 @@ json_data = open('takwimu/fixtures/sdg.json')
 sdg_data = json.load(json_data)
 sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
 sdg_choices = [('', 'Please select an SDG')] + sdg_choices
+country_choices = [(k, v['name']) for k,v in COUNTRIES.items()]
 
 
 # The abstract model for data indicators, complete with panels
@@ -609,6 +610,7 @@ class FAQ(index.Indexed, models.Model):
 
 class FeaturedAnalysisBlock(blocks.StructBlock):
     featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
+    from_country = blocks.ChoiceBlock(required=True, choices=country_choices)
     name = 'featured_analysis'
 
 
@@ -648,6 +650,8 @@ class FeatureDataBlock(blocks.StructBlock):
     chart_height = blocks.IntegerBlock(required=False,
                                        label='Chart Height',
                                        help_text='Default is 300px')
+
+    description = blocks.TextBlock(required=False, label='Description of the data')
 
 
 class IndexPage(ModelMeta, Page):
