@@ -6,6 +6,7 @@ import withRoot from './withRoot';
 import Hero from './components/Hero';
 import Navigation from './components/Navigation';
 import ProfileDetail from './components/ProfileDetail';
+import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
@@ -17,20 +18,8 @@ import LatestNewsStories from './components/LatestNewsStories';
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
-  profile: window.profileDataJson || {
-    demographics: {},
-    geography: {
-      full_geoid: '',
-      this: {
-        square_kms: '',
-        short_name: '',
-        parents: []
-      }
-    },
-    primary_releases: { active: {}, other: [] }
-  }
+  profile: window.profileData
 };
-
 const renderApp = (Component, id) => {
   const el = document.getElementById(id);
   if (el) {
@@ -43,6 +32,7 @@ const renderApp = (Component, id) => {
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(ProfileDetail, 'takwimuProfileDetail');
 renderApp(Hero, 'takwimuHero');
+renderApp(Profile, 'takwimuProfile');
 renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
 renderApp(FeaturedData, 'takwimuFeaturedData');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
