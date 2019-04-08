@@ -12,10 +12,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # insert our overrides before both census and hurumap
 
 
-INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta', 'wagtail.api.v2'] + INSTALLED_APPS + [
-    'debug_toolbar',]
+INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta'] + INSTALLED_APPS + [
+    'debug_toolbar', 'wagtail.api.v2']
 
 ROOT_URLCONF = 'takwimu.urls'
+
+WAGTAILAPI_SEARCH_ENABLED = True
 
 MIDDLEWARE_CLASSES = ('whitenoise.middleware.WhiteNoiseMiddleware',
                       'django.middleware.cache.FetchFromCacheMiddleware',
