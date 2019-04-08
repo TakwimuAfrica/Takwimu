@@ -28,7 +28,7 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'context_processors'] + [
                                                     'takwimu.context_processors.takwimu_countries',
                                                     'takwimu.context_processors.takwimu_stories',
-                                                    'takwimu.context_processors.sdgs',]
+                                                    'takwimu.context_processors.sdgs']
 
 # -------------------------------------------------------------------------------------
 # HURUmap / Wazimap Config

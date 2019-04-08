@@ -14,10 +14,12 @@
 
     <!-- Clickable title and a description -->
     <div class="col-lg-3 text-center text-lg-right px-4 px-lg-5">
-      <h2 class="font-weight-bold mt-lg-1 mb-lg-4">
-        <a href="{% block dropdown_url %}#{% endblock %}">{% block dropdown_title %}Some title{% endblock %}</a>
-      </h2>
-      <p class="font-weight-light">{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
+      <a href="{% block dropdown_url %}#{% endblock %}">
+        <h1 class="mt-lg-1 mb-lg-4">
+          {% block dropdown_title %}Some title{% endblock %}
+        </h1>
+      </a>
+      <p>{% block dropdown_desc %}Lorem ipsum{% endblock %}</p>
     </div>
 
     <!-- Divider -->

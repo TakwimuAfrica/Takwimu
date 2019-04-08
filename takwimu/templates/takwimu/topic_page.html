@@ -3,15 +3,12 @@
 {% load staticfiles %}
 
 {% block content %}
-<div class="text-light" style="background: #074c9c url('{% static 'img/bg/profile-hero.jpg' %}') no-repeat center; background-size: cover;">
-  <div class="text-center py-3" style="background-color: rgba(7, 76, 156, 0.8)">
+<div style="background: #fff url('{% static 'img/bg/profile-hero-line.png' %}') no-repeat center; background-size: cover;">
+  <div class="text-center py-3" style="background-color: rgba(255, 255, 255, 0.9)">
     <div class="container">
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb bg-transparent">
-          <li class="breadcrumb-item d-flex align-items-center">
-            <a href="/" class="text-light"><u>Home</u></a>
-          </li>
-          <li class="breadcrumb-item active text-light">
+          <li class="breadcrumb-item active">
             <div class="dropdown  d-inline">
               <button class="btn btn-primary dropdown-toggle" type="button" id="topicsSDG" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Data by topic
@@ -24,8 +21,8 @@
           </li>
         </ol>
       </nav>
-      <h1 class="display-3 text-light py-2" style="font-weight: 900">Find data by topic</h1>
-      <p class="p-4" style="font-size: 18px">
+      <h1 class="display-3 py-2">Find data by topic</h1>
+      <p class="p-4 line-height-md">
         All Takwimu data comes with analysis from our expert team, providing you with the insights you need.
       </p>
     </div>
@@ -37,19 +34,20 @@
   </div>
 </div>
 
+<div class="clearfix container text-center py-5">
+  <div class="wrapper p-3 mb-2">
+    <h1>Explore the data by country</h1>
+  </div>
+  <div class="col-lg-8 col-md-10 mx-auto tab-pane fade show active"
+    id="explore-countries" role="tabpanel" aria-labelledby="explore-countries-tab">
+    {% include 'takwimu/_includes/sections/explore/countries.html' %}
+  </div>
+</div>
+
 {% include 'takwimu/_includes/sections/support-services/button.html' %}
 
 {% include 'takwimu/_includes/sections/stories/index.html' %}
 
-<div class="clearfix container text-center py-5">
-  <div class="wrapper p-3">
-    <h4 class="display-4 font-weight-bold">Explore the data by country</h4>
-  </div>
-    <div class="col-lg-8 col-md-10 mx-auto tab-pane fade show active"
-      id="explore-countries" role="tabpanel" aria-labelledby="explore-countries-tab">
-      {% include 'takwimu/_includes/sections/explore/countries.html' %}
-    </div>
-</div>
 
 {% include 'takwimu/_includes/sections/updates.html' %}
 <style>
