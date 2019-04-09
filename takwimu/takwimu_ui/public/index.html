@@ -29,73 +29,150 @@
     <title>React App</title>
     <script>
       var takwimu = {
+        url: 'http://localhost:8000',
         countries: [
           {
-              name: 'United Republic of Tanzania',
-              slug: 'tanzania',
-              short_name: 'Tanzania'
+            name: 'United Republic of Tanzania',
+            slug: 'tanzania',
+            short_name: 'Tanzania'
           },
           {
-              name: 'Senegal',
-              slug: 'senegal',
-              short_name: 'Senegal'
+            name: 'Senegal',
+            slug: 'senegal',
+            short_name: 'Senegal'
           },
           {
-              name: 'Kenya',
-              slug: 'kenya',
-              short_name: 'Kenya'
+            name: 'Kenya',
+            slug: 'kenya',
+            short_name: 'Kenya'
           },
           {
-              name: 'Ethiopia',
-              slug: 'ethiopia',
-              short_name: 'Ethiopia'
+            name: 'Ethiopia',
+            slug: 'ethiopia',
+            short_name: 'Ethiopia'
           },
           {
-              name: 'Uganda',
-              slug: 'uganda',
-              short_name: 'Uganda'
+            name: 'Uganda',
+            slug: 'uganda',
+            short_name: 'Uganda'
           },
           {
-              name: 'Nigeria',
-              slug: 'nigeria',
-              short_name: 'Nigeria'
+            name: 'Nigeria',
+            slug: 'nigeria',
+            short_name: 'Nigeria'
           },
           {
-              name: 'South Africa',
-              slug: 'south-africa',
-              short_name: 'South Africa'
+            name: 'South Africa',
+            slug: 'south-africa',
+            short_name: 'South Africa'
           },
           {
-              name: 'Burkina Faso',
-              slug: 'burkina-faso',
-              short_name: 'Burkina Faso'
+            name: 'Burkina Faso',
+            slug: 'burkina-faso',
+            short_name: 'Burkina Faso'
           },
           {
-              name: 'Democratic Republic of Congo',
-              slug: 'democratic-republic-of-congo',
-              short_name: 'DR Congo'
+            name: 'Democratic Republic of Congo',
+            slug: 'democratic-republic-of-congo',
+            short_name: 'DR Congo'
           },
           {
-              name: 'Zambia',
-              slug: 'zambia',
-              short_name: 'Zambia'
+            name: 'Zambia',
+            slug: 'zambia',
+            short_name: 'Zambia'
           }
-        ]
-      };
-      var settings = {
-        support: {
-          hello: 'hello@takwimu.africa'
+        ],
+        settings: {
+          support: {
+            hello: 'hello@takwimu.africa'
+          },
+          socialMedia: {
+            twitter: '//twitter.com/TakwimuAfrica',
+            facebook: '//facebook.com/TakwimuAfrica',
+            medium: '//medium.com/takwimu-africa',
+            linkedin: '//www.linkedin.com/company/takwimu-africa'
+          }
         },
-        socialMedia: {
-          twitter: '//twitter.com/TakwimuAfrica',
-          facebook: '//facebook.com/TakwimuAfrica',
-          medium: '//medium.com/takwimu-africa',
-          linkedin: '//www.linkedin.com/company/takwimu-africa'
+        embedWidgets: function embedWidgets(selector) {
+          // Work with a single iframe at a time and only resize it to it's
+          // "natural" dimensions
+          function makeCensusEmbed(containerId) {
+            var embed = {
+              embed: {}
+            };
+            embed.init = function() {
+              embed.container = document.getElementById(containerId);
+              if (embed.container) {
+                embed.embed = {
+                  naturalWidth: embed.container.width,
+                  naturalHeight: embed.container.height,
+                  frameHeight: embed.container.height
+                };
+                embed.addListeners();
+                embed.sendDataToFrame({ resize: 'resize' });
+              }
+            };
+            embed.addListeners = function() {
+              var eventMethod = window.addEventListener
+                  ? 'addEventListener'
+                  : 'attachEvent',
+                eventListener = window[eventMethod],
+                resizeEvent =
+                  eventMethod == 'attachEvent' ? 'onresize' : 'resize';
+              eventListener(resizeEvent, embed.resize);
+            };
+            embed.debounce = function debounce(func, wait, immediate) {
+              var timeout;
+              return function() {
+                var context = this,
+                  args = arguments;
+                var later = function() {
+                  timeout = null;
+                  if (!immediate) func.apply(context, args);
+                };
+                var callNow = immediate && !timeout;
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+                if (callNow) func.apply(context, args);
+              };
+            };
+            embed.resize = embed.debounce(function resizeEmbed() {
+              embed.setFrameSize();
+              embed.sendDataToFrame({ resize: 'resize' });
+            }, 100);
+            embed.setFrameSize = function setFrameSize() {
+              var thisContainer = embed.container,
+                thisEmbed = embed.embed,
+                parentWidth = thisContainer.offsetWidth,
+                minimumHeight = thisEmbed.frameHeight + 80;
+              thisContainer.width =
+                parentWidth <= thisEmbed.naturalWidth
+                  ? parentWidth
+                  : thisEmbed.naturalWidth;
+              thisContainer.height =
+                minimumHeight >= thisEmbed.naturalHeight
+                  ? minimumHeight
+                  : thisEmbed.naturalHeight;
+            };
+            embed.sendDataToFrame = function(data) {
+              // IE9 can only send strings
+              embed.container.contentWindow.postMessage(
+                JSON.stringify(data),
+                '*'
+              );
+            };
+            embed.init();
+            return embed;
+          }
+
+          $(selector).each(function() {
+            this.contentWindow.CensusReporterEmbeds = makeCensusEmbed(this.id);
+          });
         }
       };
     </script>
   </head>
-  <body style="background-color: #fff">
+  <body id="homepage" style="background-color: #fff">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <nav id="takwimuNavigation"></nav>
     <div id="takwimuProfileDetail"></div>

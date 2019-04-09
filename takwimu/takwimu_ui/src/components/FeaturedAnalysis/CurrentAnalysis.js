@@ -94,14 +94,17 @@ function CurrentAnalysis({ classes, content }) {
               alt="South Africa"
               className={classes.flag}
             />
-            <Typography variant="h4" component="h1" className={classes.title}>
-              {content.title}
-            </Typography>
+            <Typography
+              variant="h4"
+              component="h1"
+              className={classes.title}
+              dangerouslySetInnerHTML={{ __html: content.title }}
+            />
           </Grid>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1" className={classes.body}>
-            {content.summary}
+            {content.description}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -112,7 +115,7 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.actions}
           >
             <Button
-              href={`/profiles/${content.country_slug}`}
+              href={`/profiles/${content.country_slug}/${content.slug}`}
               className={classes.primaryAction}
             >
               Read the full analysis

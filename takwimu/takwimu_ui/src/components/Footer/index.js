@@ -76,7 +76,7 @@ const styles = theme => ({
   }
 });
 
-function Footer({ classes, settings }) {
+function Footer({ classes, takwimu: { settings } }) {
   return (
     <Grid
       container
@@ -119,7 +119,9 @@ function Footer({ classes, settings }) {
 
 Footer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  settings: PropTypes.shape({}).isRequired
+  takwimu: PropTypes.shape({
+    settings: PropTypes.shape({}).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(Footer);
