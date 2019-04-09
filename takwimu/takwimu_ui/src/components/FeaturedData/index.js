@@ -25,6 +25,7 @@ function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
         container
         direction="row"
         justify="space-between"
+        alignItems="flex-start"
         className={classes.root}
       >
         <DataContainer color="secondary" data={featuredData[0].value} />

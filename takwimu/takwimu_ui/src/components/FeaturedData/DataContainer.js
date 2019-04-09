@@ -12,14 +12,10 @@ const styles = theme => ({
     margin: '1.25rem 0',
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '45%',
-      margin: '1.25rem'
-    }
-  },
-  descriptionContainer: {
-    padding: '0 0.625em',
-    [theme.breakpoints.up('md')]: {
-      padding: '0 2.625rem'
+      width: '28.03125rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '37.375rem'
     }
   },
   dataContainer: {
@@ -29,15 +25,11 @@ const styles = theme => ({
       padding: '1.25rem'
     }
   },
-  title: {
-    fontFamily: '"Roboto"',
-    fontSize: '1.25rem',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontStyle: 'normal',
-    fontStretch: 'normal',
-    lineHeight: 1.2,
-    letterSpacing: 'normal'
+  descriptionContainer: {
+    padding: '0 0.625em',
+    [theme.breakpoints.up('md')]: {
+      padding: '0 2.625rem'
+    }
   },
   description: {
     color: theme.palette.data.main,

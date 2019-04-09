@@ -5,19 +5,35 @@ import classNames from 'classnames';
 
 import { withStyles } from '@material-ui/core/styles';
 
-const styles = () => ({
+const styles = theme => ({
   container: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '28.03125rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '37.375rem'
+    },
     position: 'relative',
-    paddingBottom: '56.25%',
-    margin: '2.8125rem 0'
+    paddingBottom: '56.25%'
+    // margin: '2.8125rem 0'
   },
   iframe: {
     position: 'absolute',
     top: 0,
     left: 0,
-    width: '500px',
-    height: '450px',
-    border: 0
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '26.71875rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '33.875rem'
+    },
+    height: '540px',
+    border: 0,
+    '& .census-chart-embed': {
+      background: 'none'
+    }
   }
 });
 
