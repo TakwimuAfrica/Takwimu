@@ -30,8 +30,8 @@ const styles = theme => ({
 });
 
 const LINKS = [
-  { href: '#', label: 'Explore data by topic' },
-  { href: '#', label: 'Expert insights and analysis' },
+  { href: '#topic', label: 'Explore data by topic' },
+  { href: '#analysis', label: 'Expert insights and analysis' },
   { href: '/about', label: 'About Takwimu' },
   { href: '/about', label: 'FAQs' },
   { href: '/contact-us', label: 'Contact Us' }
@@ -40,7 +40,18 @@ const LEGAL = [
   { href: '/legal', label: 'Terms of use' },
   { href: '/legal', label: 'Privacy Policy' }
 ];
+
 function QuickLinks({ classes }) {
+  const handleClick = clicked => {
+    if (clicked === '#topic') {
+      return window.toggleDrawer('topic')();
+    }
+    if (clicked === '#analysis') {
+      return window.toggleDrawer('analysis')();
+    }
+    return null;
+  };
+
   return (
     <div className={classes.root}>
       <Title>Quick Links</Title>
@@ -56,6 +67,7 @@ function QuickLinks({ classes }) {
               href={link.href}
               underline="always"
               className={classNames([classes.text, classes.link])}
+              onClick={() => handleClick(link.href)}
             >
               {link.label}
             </Link>
