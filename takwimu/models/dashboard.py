@@ -723,7 +723,7 @@ class FeaturedDataBlock(blocks.StructBlock):
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
         model = ProfileSectionPage
-        fields = ['title', 'description']
+        fields = ['title', 'description', 'slug']
 
 
 class FeaturedAnalysisBlock(blocks.StructBlock):
@@ -733,11 +733,14 @@ class FeaturedAnalysisBlock(blocks.StructBlock):
         choices=country_choices, help_text="This is for labelling only.")
 
     def get_api_representation(self, value, context=None):
-        return dict([
-            ('featured_page', PageSerializer(
-                context=context).to_representation(value['featured_page'])),
-            ('from_country', value['from_country']),
-        ])
+        representation = PageSerializer(
+            context=context).to_representation(value['featured_page'])
+        country_slug = value['featured_page'].get_parent().slug
+        country_code, = [
+            code for (code, country) in COUNTRIES.items() if slugify(country['name']) == country_slug]
+        representation['country_slug'] = country_slug
+        representation['country_code'] = country_code
+        return representation
 
 
 class IndexPage(ModelMeta, Page):
