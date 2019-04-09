@@ -5,6 +5,7 @@ import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
 import DataActions from './DataActions';
+import IFrame from './IFrame';
 
 const styles = theme => ({
   root: {
@@ -44,14 +45,12 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ classes, color, data }) {
+function DataContainer({ classes, data }) {
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          <Typography className={classes.title} color={color}>
-            {data.title}
-          </Typography>
+          <IFrame featuredData={data} />
           <DataActions />
         </Grid>
       </div>
@@ -73,8 +72,7 @@ function DataContainer({ classes, color, data }) {
 
 DataContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired,
-  color: PropTypes.string.isRequired
+  data: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(DataContainer);
