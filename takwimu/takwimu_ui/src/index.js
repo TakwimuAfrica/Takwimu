@@ -10,6 +10,7 @@ import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
+import AnalysisPage from './pages/AnalysisPage';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
@@ -49,3 +50,5 @@ renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
 renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
+
+renderApp(AnalysisPage, 'takwimuAnalysisPage');

@@ -106,6 +106,57 @@ const styles = theme => ({
   }
 });
 
+function slugify(text) {
+  return text
+    .toString()
+    .toLowerCase()
+    .replace(/\s+/g, '-')
+    .replace(/[^\w-]+/g, '')
+    .replace(/--+/g, '-')
+    .replace(/^-+/, '')
+    .replace(/-+$/, '');
+}
+
+function CountrySelectorComponent({ classes, countryName }) {
+  return (
+    <div>
+      <Typography
+        variant="caption"
+        className={classNames([classes.label, classes.changeCountryLabel])}
+      >
+        Change Country
+      </Typography>
+
+      <ButtonBase
+        disableRipple
+        disableTouchRipple
+        style={{ outline: 'none' }}
+        className={classes.chooserButton}
+        onClick={window.toggleDrawer('topic')}
+      >
+        <img
+          alt=""
+          height="37"
+          src={flagSrc(`./${slugify(countryName)}.svg`)}
+        />
+        <Typography variant="subtitle1" className={classes.countryName}>
+          {countryName}
+        </Typography>
+        <img alt="" src={downArrow} />
+      </ButtonBase>
+    </div>
+  );
+}
+
+CountrySelectorComponent.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
+};
+
+const CountrySelector = withStyles(styles)(CountrySelectorComponent);
+
+export { CountrySelector };
+
 class ProfileDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -182,32 +233,7 @@ class ProfileDetail extends React.Component {
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
           <div className={classes.root}>
-            <div>
-              <Typography
-                variant="caption"
-                className={classNames([
-                  classes.label,
-                  classes.changeCountryLabel
-                ])}
-              >
-                Change Country
-              </Typography>
-
-              <ButtonBase
-                disableRipple
-                disableTouchRipple
-                style={{ outline: 'none' }}
-                className={classes.chooserButton}
-                onClick={window.toggleDrawer('topic')}
-              >
-                <img alt="" height="37" src={flagSrc('./south-africa.svg')} />
-                <Typography variant="subtitle1" className={classes.countryName}>
-                  {fullName}
-                </Typography>
-                <img alt="" src={downArrow} />
-              </ButtonBase>
-            </div>
-
+            <CountrySelector countryName={fullName} />
             <Grid container direction="row" wrap="nowrap">
               <Grid item>
                 <div className={classes.verticalLine} />
@@ -263,7 +289,6 @@ class ProfileDetail extends React.Component {
                 )}
               </Grid>
             </Grid>
-
             <Grid container>
               <Typography className={classes.label}>Release:</Typography>
               {activeRelease && (
@@ -324,7 +349,6 @@ class ProfileDetail extends React.Component {
                 </ClickAwayListener>
               </Popper>
             </Grid>
-
             <Grid container>
               <div
                 ref={node => {
@@ -365,7 +389,6 @@ class ProfileDetail extends React.Component {
                 </Paper>
               </Popper>
             </Grid>
-
             <Button fullWidth>Read the full country analysis</Button>
           </div>
         </Layout>
