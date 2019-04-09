@@ -728,14 +728,15 @@ class PageSerializer(serializers.ModelSerializer):
 
 class FeaturedAnalysisBlock(blocks.StructBlock):
     name = 'featured_analysis'
-    from_country = blocks.ChoiceBlock(choices=country_choices)
     featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
+    from_country = blocks.ChoiceBlock(
+        choices=country_choices, help_text="This is for labelling only.")
 
     def get_api_representation(self, value, context=None):
         return dict([
-            ('from_country', value['from_country']),
             ('featured_page', PageSerializer(
-                context=context).to_representation(value['featured_page']))
+                context=context).to_representation(value['featured_page'])),
+            ('from_country', value['from_country']),
         ])
 
 
@@ -757,9 +758,37 @@ class IndexPage(ModelMeta, Page):
         ('featured_data', FeaturedDataBlock())
     ], blank=True)
 
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
+
     content_panels = Page.content_panels + [
         StreamFieldPanel('featured_analysis'),
         StreamFieldPanel('featured_data')
+    ]
+
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
     ]
 
     api_fields = [
@@ -779,7 +808,12 @@ class IndexPage(ModelMeta, Page):
         context.update(wagtail_settings(request))
         context.update(get_takwimu_countries(published_status))
         context.update(get_takwimu_stories())
+        context['meta'] = self.as_meta(request)
         return context
+
+    def get_promotion_image(self):
+        if self.promotion_image:
+            return self.promotion_image.file.url
 
 
 #
