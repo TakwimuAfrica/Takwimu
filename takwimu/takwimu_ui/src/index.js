@@ -40,44 +40,38 @@ const renderApp = (Component, id, props = PROPS) => {
 };
 
 const renderHomepage = () => {
-  const el = document.getElementById('homepage');
-  if (el) {
-    fetch(
-      `${
-        PROPS.takwimu.url
-      }/api/v2/pages/?type=takwimu.IndexPage&fields=featured_analysis,featured_data&format=json`
-    )
-      .then(response => response.json())
-      .then(data => {
-        if (data.items && data.items.length) {
-          const {
+  fetch(
+    `${
+      PROPS.takwimu.url
+    }/api/v2/pages/?type=takwimu.IndexPage&fields=featured_analysis,featured_data&format=json`
+  )
+    .then(response => response.json())
+    .then(data => {
+      if (data.items && data.items.length) {
+        const {
+          featured_analysis: featuredAnalysis,
+          featured_data: featuredData
+        } = data.items[0];
+        const props = Object.assign({}, PROPS, {
+          takwimu: {
             featured_analysis: featuredAnalysis,
             featured_data: featuredData
-          } = data.items[0];
-          const props = Object.assign({}, PROPS, {
-            takwimu: {
-              featured_analysis: featuredAnalysis,
-              featured_data: featuredData
-            }
-          });
-          renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
-          renderApp(FeaturedData, 'takwimuFeaturedData', props);
-        }
-      });
-    renderApp(Hero, 'takwimuHero');
-    renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
-    renderApp(MakingOfTakwimu, 'takwimuMakingOf');
-    renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
-    renderApp(WhereToNext, 'takwimuWhereToNext');
-    renderApp(Footer, 'takwimuFooter');
-  }
+          }
+        });
+        renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
+        renderApp(FeaturedData, 'takwimuFeaturedData', props);
+      }
+    });
+  renderApp(Hero, 'takwimuHero');
+  renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
+  renderApp(MakingOfTakwimu, 'takwimuMakingOf');
+  renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
+  renderApp(WhereToNext, 'takwimuWhereToNext');
+  renderApp(Footer, 'takwimuFooter');
 };
 
 const renderDatabyTopicPage = () => {
-  const el = document.getElementById('#profile');
-  if (el) {
-    renderApp(ProfileDetail, 'takwimuProfileDetail');
-  }
+  renderApp(ProfileDetail, 'takwimuProfileDetail');
 };
 
 // Render common elements

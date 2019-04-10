@@ -96,18 +96,47 @@
       };
     </script>
   </head>
+
   <body id="homepage" style="background-color: #fff">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
     <nav id="takwimuNavigation"></nav>
-    <div id="takwimuProfileDetail"></div>
-    <div id="takwimuHero"></div>
-    <div id="takwimuFeaturedAnalysis"></div>
-    <div id="takwimuFeaturedData"></div>
-    <div id="takwimuWhatCanYouDo"></div>
-    <div id="takwimuMakingOf"></div>
-    <div id="takwimuLatestNewsStories"></div>
-    <div id="takwimuWhereToNext"></div>
+    <script>
+      // Simulate multiple pages using 'page' query param e.g.
+      // http//localhost:3000/?page='profile' to show profile page
+      var searchParams = new URLSearchParams(window.location.search);
+      var page = searchParams.get('page') || 'homepage';
+      var body = document.getElementsByTagName('body')[0];
+      if (page === 'homepage') {
+        let el = document.createElement('div');
+        el.setAttribute('id', 'takwimuHero');
+        body.appendChild(el);
+        el = document.createElement('div');
+        el.setAttribute('id', 'takwimuFeaturedAnalysis');
+        body.appendChild(el);
+        el = document.createElement('div');
+        el.setAttribute('id', 'takwimuFeaturedData');
+        body.appendChild(el);
+        el = document.createElement('div');
+        el.setAttribute('id', 'takwimuWhatCanYouDo');
+        body.appendChild(el);
+        el = document.createElement('div');
+        el.setAttribute('id', 'takwimuMakingOf');
+        body.appendChild(el);
+        el = document.createElement('div');
+        el.setAttribute('id', 'takwimuLatestNewsStories');
+        body.appendChild(el);
+        el = document.createElement('div');
+        el.setAttribute('id', 'takwimuWhereToNext');
+        body.appendChild(el);
+      } else if (page === 'profile') {
+        const el = document.createElement('div');
+        el.setAttribute('id', 'takwimuProfileDetail');
+        body.appendChild(el);
+      }
+    </script>
     <div id="takwimuFooter"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
