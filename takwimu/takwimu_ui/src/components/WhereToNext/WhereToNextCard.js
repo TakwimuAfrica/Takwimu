@@ -17,7 +17,6 @@ const styles = theme => ({
       width: '24.5rem'
     }
   },
-
   label: {
     textAlign: 'center',
     fontSize: '22px',
