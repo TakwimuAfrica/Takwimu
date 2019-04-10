@@ -4,6 +4,7 @@ import { PropTypes } from 'prop-types';
 import { Typography, Grid, withStyles } from '@material-ui/core';
 
 import Section from './Section';
+import WhereToNextCard from './WhereToNextCard';
 
 const styles = theme => ({
   root: {
@@ -50,11 +51,7 @@ function WhereToNext({ classes }) {
         alignItems="center"
         className={classes.root}
       >
-        <div className={classes.box}>
-          <Typography variant="body1" className={classes.label}>
-            Stay up-to-date with <br /> new data and analysis
-          </Typography>
-        </div>
+        <WhereToNextCard title=" Stay up-to-date with  new data and analysis" />
         <div className={`${classes.box} ${classes.middlebox}`}>
           <Typography variant="body1" className={classes.label}>
             Looking for other <br /> services?
