@@ -106,7 +106,6 @@
 {% endblock content_container %}
 
 {% block body_javascript_extra %}
-
   <script src="{% static 'js/vendor/modernizr-3.6.0.min.js' %}"></script>
   <script src="{% static 'js/plugins.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -121,10 +120,10 @@
     <!-- Takwimu & HURUmap  -->
     <script>
       // I. Takwimu 
-      var takwimu = {
-        countries: {{ countries|jsonify|safe }}
-      };
-      var settings = {
+      var takwimu = window.takwimu || {};
+      takwimu.url = '{{ HURUMAP.url }}';
+      takwimu.countries = {{ countries|jsonify|safe }};
+      takwimu.settings = {
         support: {
           hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
           support: '{{ settings.takwimu.SupportSetting.support|safe }}'

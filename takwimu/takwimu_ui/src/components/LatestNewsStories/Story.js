@@ -10,16 +10,10 @@ import { withStyles } from '@material-ui/core/styles';
 import StoryCard from './StoryCard';
 import StorySummary from './StorySummary';
 
-const styles = theme => ({
+const styles = () => ({
   root: {},
   story: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '17.72625rem'
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '23.625rem'
-    }
+    width: '100%'
   }
 });
 

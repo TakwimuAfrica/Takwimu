@@ -85,7 +85,7 @@ function DropDownDrawerComponent({
 
 DropDownDrawerComponent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.shape({}).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   active: PropTypes.string,
   toggle: PropTypes.func.isRequired,
   children: PropTypes.oneOfType([

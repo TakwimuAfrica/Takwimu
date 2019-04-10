@@ -4,24 +4,24 @@ import bitmap2 from '../../assets/images/bitmap2.png';
 
 export default [
   {
-    img: bitmap,
+    preview_image: { url: bitmap },
     title: 'Building Takwimu',
-    link: 'https://medium.com/takwimu-africa',
-    summary:
-      'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
+    url: 'https://medium.com/takwimu-africa',
+    subtitle:
+      'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit'
   },
   {
-    img: bitmap1,
+    preview_image: { url: bitmap1 },
     title: 'Mapping Africa’s Future- The role data needs to play',
-    link: 'https://medium.com/takwimu-africa',
-    summary:
+    url: 'https://medium.com/takwimu-africa',
+    subtitle:
       'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
   },
   {
-    img: bitmap2,
+    preview_image: { url: bitmap2 },
     title: 'Takwimu: Decoding Africa’s Data',
-    link: 'https://medium.com/takwimu-africa',
-    summary:
+    url: 'https://medium.com/takwimu-africa',
+    subtitle:
       'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
   }
 ];

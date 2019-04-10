@@ -1,8 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, Grid, withStyles } from '@material-ui/core';
+import { withStyles, ButtonBase, Grid, Typography } from '@material-ui/core';
 
+import A from './A';
 import Section from './Section';
 
 const styles = theme => ({
@@ -50,21 +51,28 @@ function WhereToNext({ classes }) {
         alignItems="center"
         className={classes.root}
       >
-        <div className={classes.box}>
-          <Typography variant="body1" className={classes.label}>
-            Stay up-to-date with <br /> new data and analysis
-          </Typography>
-        </div>
-        <div className={`${classes.box} ${classes.middlebox}`}>
-          <Typography variant="body1" className={classes.label}>
+        <A href="//eepurl.com/dynuAX" underline="none">
+          <ButtonBase className={classes.box}>
+            <Typography variant="subtitle1" className={classes.label}>
+              Stay up-to-date with <br /> new data and analysis
+            </Typography>
+          </ButtonBase>
+        </A>
+
+        <ButtonBase
+          href="/about"
+          className={`${classes.box} ${classes.middlebox}`}
+        >
+          <Typography variant="subtitle1" className={classes.label}>
             Looking for other <br /> services?
           </Typography>
-        </div>
-        <div className={classes.box}>
-          <Typography variant="body1" className={classes.label}>
+        </ButtonBase>
+
+        <ButtonBase href="/contact-us" className={classes.box}>
+          <Typography variant="subtitle1" className={classes.label}>
             Talk to us
           </Typography>
-        </div>
+        </ButtonBase>
       </Grid>
     </Section>
   );

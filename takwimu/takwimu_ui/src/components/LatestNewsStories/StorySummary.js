@@ -19,7 +19,7 @@ function StorySummary({ classes, story }) {
       component="p"
       classes={{ root: classes.root }}
     >
-      {story.summary}
+      {story.subtitle}
     </Typography>
   );
 }
@@ -27,7 +27,7 @@ function StorySummary({ classes, story }) {
 StorySummary.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
-    summary: PropTypes.string.isRequired
+    subtitle: PropTypes.string.isRequired
   }).isRequired
 };
 

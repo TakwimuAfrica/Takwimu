@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Grid, Typography } from '@material-ui/core';
-
 import { withStyles } from '@material-ui/core/styles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
+import A from '../A';
 import Section from '../Section';
+import StoryBlocks from './StoryBlocks';
 import StoryList from './StoryList';
-
-import stories from './stories';
 
 const styles = () => ({
   sectionTitle: {
@@ -23,7 +23,8 @@ const styles = () => ({
   }
 });
 
-function LatestNewsStories({ classes }) {
+function LatestNewsStories({ classes, takwimu: { stories }, width }) {
+  const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
   return (
     <Section
       title="Latest News &amp; Stories"
@@ -46,23 +47,28 @@ function LatestNewsStories({ classes }) {
           </Typography>
         </Grid>
         <Grid item xs={12}>
-          <Button
-            href="https://medium.com/takwimu-africa"
-            classes={{ root: classes.buttonRoot }}
-          >
-            Read more stories on Medium
-          </Button>
+          <A href="https://medium.com/takwimu-africa" underline="none">
+            <Button classes={{ root: classes.buttonRoot }}>
+              Read more stories on Medium
+            </Button>
+          </A>
         </Grid>
-        <Grid item xs={12}>
-          <StoryList stories={stories} />
-        </Grid>
+        {stories && stories.length && (
+          <Grid item xs={12}>
+            <Stories stories={stories} />
+          </Grid>
+        )}
       </Grid>
     </Section>
   );
 }
 
 LatestNewsStories.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+  }).isRequired,
+  width: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(LatestNewsStories);
+export default withWidth()(withStyles(styles)(LatestNewsStories));

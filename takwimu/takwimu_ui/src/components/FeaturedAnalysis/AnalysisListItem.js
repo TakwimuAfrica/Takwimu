@@ -60,9 +60,8 @@ function AnalysisListItem({ children, classes, isCurrent, onClick }) {
         className={classNames(classes.label, {
           [classes.currentLabel]: isCurrent
         })}
-      >
-        {children}
-      </Typography>
+        dangerouslySetInnerHTML={{ __html: children }}
+      />
     </ButtonBase>
   );
 }

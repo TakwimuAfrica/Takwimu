@@ -68,12 +68,12 @@ function Hero({ classes }) {
             alignItems="flex-start"
             className={classes.hero}
           >
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Typography variant="h1" className={classes.title}>
                 Actionable insights for African changemakers
               </Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Typography variant="body1" className={classes.description}>
                 Lorem ipsum dolor sit amet, adipiscing elitauris con{' '}
                 <Link
@@ -85,7 +85,7 @@ function Hero({ classes }) {
                 </Link>
               </Typography>
             </Grid>
-            <Grid xs={12}>
+            <Grid item xs={12}>
               <Button href="#takwimuMakingOf" className={classes.button}>
                 Watch the overview video{' '}
                 <img alt="play" src={triangle} className={classes.buttonIcon} />

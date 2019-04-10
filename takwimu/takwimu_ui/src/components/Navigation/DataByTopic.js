@@ -15,7 +15,8 @@ const styles = {
 };
 
 function profile(country) {
-  return `country-${country.code}-${country.slug}`;
+  console.log(`COUNTRIES ${JSON.stringify(country)}`);
+  return `country-${country.iso_code}-${country.slug}`;
 }
 
 function DataByTopic({ classes, countries }) {

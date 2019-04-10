@@ -2,6 +2,7 @@ from django.conf.urls import include, url
 from django.conf.urls.static import static
 from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
+from wagtail.api.v2.router import WagtailAPIRouter
 
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
@@ -10,10 +11,12 @@ from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
+from .api import api_router
 
 GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
 PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
     GEOGRAPHY_LEVELS)
+
 
 takwimu_urlpatterns = [
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
@@ -31,6 +34,7 @@ takwimu_urlpatterns = [
     url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^search/$', SearchView.as_view(), name='search'),
+    url(r'^api/v2/', api_router.urls),
 ]
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \

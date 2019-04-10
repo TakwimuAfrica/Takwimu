@@ -20,23 +20,55 @@ const PROPS = {
   settings: window.settings,
   profile: window.profileData
 };
-const renderApp = (Component, id) => {
+
+const renderApp = (Component, id, props = PROPS) => {
   const el = document.getElementById(id);
   if (el) {
     const App = withRoot(Component);
 
-    ReactDOM.render(<App {...PROPS} />, el);
+    ReactDOM.render(<App {...props} />, el);
   }
 };
 
+const renderHomepage = () => {
+  fetch(
+    `${
+      PROPS.takwimu.url
+    }/api/v2/pages/?type=takwimu.IndexPage&fields=featured_analysis,featured_data&format=json`
+  )
+    .then(response => response.json())
+    .then(data => {
+      if (data.items && data.items.length) {
+        const {
+          featured_analysis: featuredAnalysis,
+          featured_data: featuredData
+        } = data.items[0];
+        const props = Object.assign({}, PROPS, {
+          takwimu: {
+            featured_analysis: featuredAnalysis,
+            featured_data: featuredData
+          }
+        });
+        renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
+        renderApp(FeaturedData, 'takwimuFeaturedData', props);
+      }
+    });
+  renderApp(Hero, 'takwimuHero');
+  renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
+  renderApp(MakingOfTakwimu, 'takwimuMakingOf');
+  renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
+  renderApp(WhereToNext, 'takwimuWhereToNext');
+};
+
+const renderDatabyTopicPage = () => {
+  renderApp(ProfileDetail, 'takwimuProfileDetail');
+  renderApp(Profile, 'takwimuProfile');
+};
+
+// Render common elements
 renderApp(Navigation, 'takwimuNavigation');
-renderApp(ProfileDetail, 'takwimuProfileDetail');
-renderApp(Hero, 'takwimuHero');
-renderApp(Profile, 'takwimuProfile');
-renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
-renderApp(FeaturedData, 'takwimuFeaturedData');
-renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
-renderApp(MakingOfTakwimu, 'takwimuMakingOf');
-renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
-renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
+
+// Render specific pages
+renderHomepage();
+renderDatabyTopicPage();

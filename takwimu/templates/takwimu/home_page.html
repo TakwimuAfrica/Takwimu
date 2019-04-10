@@ -1,23 +1,26 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
-{% load staticfiles %}
+{% load staticfiles jsonify wagtailcore_tags %}
+
+{% block body_id %}homepage{% endblock %}
 
 {% block content %}
+
+  <div id="takwimuHero"></div>
+  <div id="takwimuFeaturedAnalysis"></div>
+  <div id="takwimuFeaturedData"></div>
+  <div id="takwimuWhatCanYouDo"></div>
+  <div id="takwimuMakingOf"></div>
+  <div id="takwimuLatestNewsStories"></div>
+  <div id="takwimuWhereToNext"></div>
 
   {% comment %}
   {% include 'takwimu/_includes/homepage/hero.html' %}
 
   {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
-  {% endcomment %}
 
-  <div id="takwimuFeaturedAnalysis"></div>
-  <div id="takwimuFeaturedData"></div>
-  <div id="takwimuWhatCanYouDo"></div>
-  <div id="takwimuMakingOf"></div>
-
-  {% comment %}
   {% include 'takwimu/_includes/sections/how-it-works/index.html' %}
-  
+
   {% include 'takwimu/_includes/sections/stories/index.html' %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
@@ -32,6 +35,13 @@
   {% include 'takwimu/_includes/sections/testimonials.html' %}
   {% endcomment %}
 
-  <div id="takwimuWhereToNext"></div>
+{% endblock content %}
 
-{% endblock %}
+{% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script>
+    var takwimu = window.takwimu || {};
+    takwimu.stories = {{ stories_latest |jsonify|safe }};
+  </script>
+{% endblock body_javascript_extra %}
