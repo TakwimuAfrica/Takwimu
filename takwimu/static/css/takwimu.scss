@@ -8,10 +8,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700");
 
 $brand-color-primary: #29a87c;
-$brand-color-primary-alt: #074c9c;
-$brand-color-primary-light: #7ab1f2;
-$brand-color-secondary: #29a87c;
-$brand-color-dark-alt: #46648c;
+$brand-color-primary-alt: #4abc70;
+$brand-color-primary-light: #f6fbfa;
+$brand-color-secondary: #4abc70;
+$brand-color-dark-alt: #8ed3a5;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
 $brand-extend-jumbotron: #fafafa;
@@ -25,18 +25,55 @@ html, body {
   font-size: $font-size-base;
   background-color: '#fff';
 }
-html, body, h1, h2, h3, h4, h5, h6, p, * {
+
+html, body, p, * {
   font-family: 'Muli', sans-serif;
   word-break: initial;
+  line-height: initial;
+}
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
+  line-height: initial;
+}
+.font-heading {
+  font-family: 'Lora', serif;
+}
+.font-paragraph {
+  font-family: 'Muli', sans-serif;
+}
+
+p, .rich-text {
+  font-size: 20px;
+  line-height: 41px;
+}
+a, .breadcrumb-item {
+  font-size: 18px;
+  line-height: 43px;
+}
+.line-height-md {
+  &, a, .breadcrumb-item, p, .rich-text, * {
+    line-height: 31px;
+  }
+}
+.line-height-sm {
+  &, a, .breadcrumb-item, p, .rich-text, * {
+    line-height: 22px;
+  }
+}
+.line-height-initial {
+  &, a, .breadcrumb-item, p, .rich-text, * {
+    line-height: initial;
+  }
+}
+.display-1, .display-2, .display-3, .display-4 {
+  line-height: initial;
+}
+.anchorjs-link {
+  font-size: inherit;
 }
 
 img {
   max-width: 100%;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'Lora', serif;
-  font-weight: bold;
 }
 
 
@@ -83,6 +120,12 @@ a {
 .bg-info {
   background-color: #2da4c7 !important;
 }
+.bg-black {
+  background-color: #000;
+}
+.bg-light {
+  background-color: #f6fbfa;
+}
 // Text Colours
 .text-primary {
   color: $brand-color-primary !important;
@@ -99,15 +142,13 @@ a {
 
 // Button
 .btn {
-  border-radius: 24px;
+  border-radius: 12px;
   padding: .375rem 1.25rem;
   max-width: 100%;
   text-overflow: ellipsis;
   overflow: hidden;
 }
-.btn-lg {
-  padding: .5rem 1.5rem;
-}
+
 // Button - colours
 .btn-primary {
   background-color: $brand-color-primary;
@@ -141,17 +182,22 @@ a {
     }
   }
 }
+.btn-link {
+  color: $brand-color-primary-alt;
+  &:hover {
+    color: $brand-color-primary;
+  }
+}
 
 .nav-pills.nav-pills-alt .nav-link {
-  color: #929292;
+  color: #4a4a4a;
 }
 .nav-pills.nav-pills-alt .nav-link.active, .nav-pills.nav-pills-alt .show>.nav-link {
   background-color: transparent;
   color: $brand-color-primary;
   border-bottom: 3px $brand-color-primary solid;
   border-radius: 0;
-  color: #4a4a4a;
-  font-weight: 900;
+  color: $brand-extend-black;
 }
 
 
@@ -174,6 +220,28 @@ body {
 .leaflet-label {
   background-color: $brand-color-secondary !important;
   border-color: $brand-color-secondary !important;
+}
+.leaflet-container a {
+  font-size: 11px;
+  line-height: initial;
+  color: $brand-color-primary;
+}
+.leaflet-bar a, .leaflet-control-layers-toggle {
+  font-size: initial;
+  line-height: initial;
+}
+
+// Profile
+
+.caption {
+  font-size: inherit;
+  line-height: inherit;
+  margin: 0; padding: 0;
+  margin-bottom: 15px;
+  a {
+    font-size: inherit;
+    line-height: inherit;
+  }
 }
 
 // Media query: Match Material UI
@@ -333,12 +401,13 @@ header.section-contents h1 {
   border-bottom: 5px solid transparent;
   cursor: pointer;
   text-decoration: none;
-  .border-left {
-    border-left: 1px solid rgba(255, 255, 255, 0.25)!important;
+  &.border-left, .border-left {
+    border-left: 1px solid rgba(255, 255, 255, 0.3)!important;
   }
   &:hover, &.active {
     background: $brand-color-dark-alt;
     border-bottom: 5px solid $brand-extend-white;
+    color: $brand-extend-white !important;
     + a div {
       border-left: 1px solid transparent !important;
     }
@@ -347,11 +416,47 @@ header.section-contents h1 {
     }
   }
   &.active {
-    background: $brand-color-primary;
-    border-bottom: 5px solid transparent;
+    border-bottom: 5px solid $brand-extend-white;
   }
 }
 
+// Support Services Button
+
+.support-services-button:hover {
+  background-color: $brand-color-primary-alt !important;
+}
+  .support-services-button a:hover {
+    text-decoration: none !important;
+    color: $brand-extend-white !important;
+  }
+.support-services-button u {
+  text-decoration: none;
+  border-bottom: 2px solid #fff;
+  display: inline-block;
+}
+
+
+// Updates section
+
+.updates a {
+  font-weight: bold;
+  color: $brand-color-primary;
+  text-decoration: underline;
+}
+
+.updates .col-md-6:hover {
+  background-color: #e8e8e8;;
+}
+.updates .col-md-6:hover + .col div {
+  border-left: 2px dashed transparent!important;
+}
+
+// Country Map SVG
+.country-map.svg {
+  path {
+    fill: $brand-color-primary;
+  }
+}
 
 /* -----------------------------------------
  * Main Navbar
@@ -377,8 +482,11 @@ header.section-contents h1 {
   }
   .nav-link {
     white-space: nowrap;
+    font-size: 18px;
     svg {
       margin-left: .255em;
+      margin-right: .255em;
+      margin-bottom: -2px;
     }
   }
 
@@ -397,7 +505,7 @@ header.section-contents h1 {
     position: relative;
     top: -10px; margin-bottom: -10px;
     span {
-      border-bottom: 10px solid $brand-color-primary-alt;
+      border-bottom: 10px solid $brand-color-primary;
       border-left: 10px solid transparent;
       border-right: 10px solid transparent;
     }
@@ -408,7 +516,7 @@ header.section-contents h1 {
     display: none;
     position: absolute; left: 0;
     width: 100vw; z-index: 3000;
-    background-color: $brand-color-primary-alt;
+    background-color: $brand-color-primary;
 
     a {
       color: $brand-extend-light;
@@ -447,6 +555,62 @@ header.section-contents h1 {
   }
 
 }
+
+/* -----------------------------------------------
+ * PAGE: Homepage
+ * ----------------------------------------------- */
+
+// Carousel
+
+#carousel-homepage-hero {
+  line-height: 31px;
+}
+#carousel-homepage-hero .icon-wrap {
+  border-radius: 999px;
+  height: 50px; width: 50px;
+  text-align: center;
+  text-align: center;
+  overflow: hidden;
+}
+  #carousel-homepage-hero .country-flag.svg {
+    height: 50px;
+    width: 50px;
+    opacity: 0.76;
+    mix-blend-mode: screen;
+    filter: saturate(0%);
+  }
+    #carousel-homepage-hero svg#beta {
+      padding: 10px;
+      opacity: 1.0;
+      filter: none;
+      mix-blend-mode: normal;
+      background: #fff;
+    }
+
+#carousel-homepage-hero .carousel-item .btn {
+  background-color: rgba(255, 255, 255, 0.28);
+}
+#carousel-homepage-hero .carousel-item .btn:hover {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-color: transparent;
+}
+.carousel-indicators li {
+  position: relative;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 10px;
+  height: 10px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  border-radius:10px;
+  background-color:white;
+}
+.carousel-indicators .active {
+  background-color: $brand-color-primary-alt;
+}
+
 
 /* -----------------------------------------------
  * PAGE: Profile Page
@@ -494,20 +658,22 @@ header.section-contents h1 {
 
 .dataindicators-nav {
   .nav-pills {
-    background-color: #1f6cc6;
+    background-color: $brand-color-primary;
     .nav-link.active, .show > .nav-link {
-      background-color: transparent;
+      background-color: rgba($color: $brand-extend-light, $alpha: 0.1);
       font-weight: bold;
     }
   }
   .nav-link {
     color: #f0f0f0;
+    line-height: 2;
     &:hover {
-      color: #f0f0f0;;
+      color: #fff;
+      background-color: rgba($color: $brand-extend-light, $alpha: 0.1);
     }
     .fa-eye {
       display: none;
-      margin-left: -2em;
+      margin-left: -35px;
       position: absolute;
     }
     &[aria-selected=true] .fa-eye {
@@ -521,6 +687,7 @@ header.section-contents h1 {
     .nav-item {
       .nav-link {
         font-size: 14px;
+        line-height: 2;
         border-radius: 0;
         &.active {
           font-weight: bold;
@@ -534,6 +701,11 @@ header.section-contents h1 {
   .nav-link.active {
     color: #bcc7d4;
   }
+}
+
+.dataview-entities {
+  font-size: 80%;
+  line-height: 2;
 }
 
 // Profile Page > Sections List
@@ -583,9 +755,9 @@ header.section-contents h1 {
       }
 
       &:hover,&:focus {
-        color: $brand-color-secondary;
+        color: $brand-color-primary;
         svg  {
-          filter: $brand-color-secondary; /* IE6-9 */
+          filter: $brand-color-primary; /* IE6-9 */
           -webkit-filter: grayscale(1); /* Google Chrome, Safari 6+ & Opera 15+ */
           filter: grayscale(1); /* Microsoft Edge and Firefox 35+ */
         }
@@ -695,6 +867,9 @@ header.section-contents h1 {
 }
 
 
+
+
+
 // Extra small devices (portrait phones, less than 576px)
 // No media query for `xs` since this is the default in Bootstrap
 
@@ -738,6 +913,11 @@ header.section-contents h1 {
   * during development
   */
   // body { background: grey;}
+
+  // Container fluid max-width:
+  .container {
+    max-width: 1249px;
+  }
  }
 
 //static/css/_censusreporter.scss conflicts with compre with input

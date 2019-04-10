@@ -2,17 +2,17 @@
 <div class="carousel-item p-5 {% if forloop.first %}active{% endif %}">
 {% with country=country|slugify %}
   <div>
-    <div class="icon-wrap float-right bg-info">
-      <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="svg" id="{{ country }}"/>
+    <div class="icon-wrap float-right bg-primary-alt">
+      <img src="{% static 'img/flags/'|add:country|add:'.svg' %}" class="country-flag svg" id="{{ country }}"/>
     </div>
-    <p class="text-uppercase" style="font-weight: 400; font-size:13px;">
+    <p style="font-size:13px;">
       {% if country == 'beta' %}
       News
       {% else %}
       New Country
       {% endif %}
     </p>
-    <h2 style="font-weight: 600;">
+    <h2>
       {% if country == 'beta' %}
       We'd love to hear your feedback!
       {% else %}
@@ -28,7 +28,7 @@
       {% endif %}
       </p>
     <p>
-      <a class="btn btn-info px-4 text-uppercase" style="font-size: 80%; height: 44px; line-height: 2.4"
+      <a class="btn btn-success px-4 py-1" style="font-size: 80%; line-height: 2.4;"
           {% if country == 'beta' %}
           href="mailto:{{ settings.takwimu.SupportSetting.support }}" target="_blank"
           {% else %}
@@ -39,8 +39,8 @@
         {% else %}
         View Country Profile
         {% endif %}
-        <img class="border-0" src="{% static 'img/icons/button-arrow.svg' %}" alt="button arrow"
-            style="height:15px; width: 23px; box-shadow: none; object-fit: contain;">
+        <img class="border-0 svg pt-1 ml-1" src="{% static 'img/icons/button-arrow.svg' %}" alt="button arrow"
+            style="height:12px;">
       </a>
     </p>
   </div>

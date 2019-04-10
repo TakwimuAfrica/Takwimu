@@ -1,37 +1,30 @@
 {% load staticfiles cache %}
 {% cache 600  hero %}
-<div class="text-light" style="background: #074c9c url('{% static 'img/bg/homepage-hero.jpg'%}') no-repeat center; background-size: cover;">
-  <div class="py-5" style="background-color: rgba(7, 76, 156, 0.8)">
-    <div class="container">
+<div style="background: #fff url('{% static 'img/bg/africanparliament-homepage.jpg'%}') no-repeat right bottom; background-size: 100%;">
+  <div class="py-5" style="background-image: linear-gradient(135deg, #fff, rgba(255,255,255,0.8), transparent);">
+    <div class="container mt-3">
       <div class="row align-items-center">
         <div class="col-md-6 col-lg-8">
-          <h1 class="font-weight-regular display-4">
-            <span style="font-weight: 800;">Actionable</span>
-            <span class="position-relative">
-              insights
-              <div class="position-absolute"
-                  style="background: rgba(255, 255, 255, 0.4); height: 20px; width: 223px; bottom: 5px; left: -3px; -webkit-transform: skew(340deg); -moz-transform: skew(340deg); -o-transform: skew(340deg);">
-              </div>
-            </span> for African
-            <span style="font-weight: 800;">changemakers</span>
+          <h1 class="font-weight-bold display-4">
+            Actionable insights for African changemakers
           </h1>
+          <p>Takwimu provides quality insights and data-driven analysis on Human Development Indicators across 10 African countries.</p>
+          <p class="line-height-md" style="font-size: 16px"><span style="opacity: 0.6;">Explore data and analysis by</span> <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">country</a>, <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">topic</a> <span style="opacity: 0.6;">, and</span> <a href="#" data-toggle="tooltip" data-placement="top" title="Coming Soon">SDG indicator</a><span style="opacity: 0.6;">, discover</span> <a href="https://medium.com/takwimu-africa" target="_blank" rel="noopener">expert insights</a> <span style="opacity: 0.6;">on key development issues, and</span> <a href="/about">see how we created Takwimu</a><span style="opacity: 0.6;">.</span>
+          </p>
           <p class="mt-2">
-            <a href="/about/" class="btn btn-outline-light text-uppercase font-weight-bold my-2 mr-3 py-3 px-5 " style="font-size: 80%; border-radius: 30px;">
-              Find out more
+            <a href="/about/" class="btn btn-primary font-weight-bold my-2 mr-3 pt-2 pb-2 px-5">
+              Find out more <i class="fas fa-caret-right fa-lg ml-3"></i>
             </a>
-            <button type="button" class="btn btn-outline-light btn-alt text-uppercase font-weight-bold my-2 py-3 px-5 "
-                data-toggle="modal" data-target="#videoModal" style="font-size: 80%; border-radius: 30px;">
-              <i class="fas fa-play mr-2"></i> Watch the video
-            </button>
           </p>
           <hr class="d-md-none border-light"/>
         </div>
 
+        {% comment %}
         <div class="col-md-6 col-lg-4">
           <div id="carousel-homepage-hero"
                data-toggle="carousel"
-               class="carousel slide bg-info shaddow"
-               style="height: 425px">
+               class="carousel slide bg-primary text-light"
+               style="min-height: 510px;">
             <ol class="carousel-indicators">
               <li data-target="#carousel-homepage-hero" data-slide-to="0" class="active"></li>
               <li data-target="#carousel-homepage-hero" data-slide-to="1"></li>
@@ -47,58 +40,10 @@
             </div>
           </div>
         </div>
+        {% endcomment %}
       </div>
     </div>
   </div>
 </div>
-
-<style>
-  #carousel-homepage-hero .icon-wrap {
-    border-radius: 999px;
-    height: 50px; width: 50px;
-    text-align: center;
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.25);
-    text-align: center;
-    overflow: hidden;
-  }
-    #carousel-homepage-hero svg {
-      height: 50px;
-      width: 50px;
-      opacity: 0.76;
-      mix-blend-mode: screen;
-      filter: saturate(0%);
-    }
-      #carousel-homepage-hero svg#beta {
-        padding: 10px;
-        opacity: 1.0;
-        filter: none;
-        mix-blend-mode: normal;
-        background: #fff;
-      }
-
-  #carousel-homepage-hero .carousel-item .btn {
-    background-color: rgba(255, 255, 255, 0.28);
-  }
-  #carousel-homepage-hero .carousel-item .btn:hover {
-    background-color: rgba(255, 255, 255, 0.6);
-    border-color: transparent;
-  }
-  .carousel-indicators li {
-    position: relative;
-    -ms-flex: 0 1 auto;
-    flex: 0 1 auto;
-    width: 10px;
-    height: 10px;
-    margin-right: 3px;
-    margin-left: 3px;
-    text-indent: -999px;
-    cursor: pointer;
-    border-radius:10px;
-    background-color:white;
-  }
-  .carousel-indicators .active {
-    background-color: #005e79;
-}
-</style>
 
 {% endcache %}
