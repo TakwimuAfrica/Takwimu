@@ -13,6 +13,7 @@ import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import ViewChooser from './components/ViewChooser';
 
 const props = {
   countries: window.countries,
@@ -47,5 +48,6 @@ renderApp(FeaturedData, 'takwimuFeaturedData');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
+renderApp(ViewChooser, 'takwimuViewChooser');
 renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
