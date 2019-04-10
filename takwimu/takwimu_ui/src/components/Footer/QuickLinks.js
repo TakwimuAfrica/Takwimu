@@ -61,9 +61,8 @@ function QuickLinks({ classes }) {
         component="ul"
       >
         {LINKS.map(link => (
-          <li>
+          <li key={link.label}>
             <Link
-              key={link.href}
               href={link.href}
               underline="always"
               className={classNames([classes.text, classes.link])}
@@ -80,9 +79,8 @@ function QuickLinks({ classes }) {
         component="ul"
       >
         {LEGAL.map(link => (
-          <li>
+          <li key={link.label}>
             <Link
-              key={link.href}
               href={link.href}
               className={classNames([classes.text, classes.link])}
               underline="always"

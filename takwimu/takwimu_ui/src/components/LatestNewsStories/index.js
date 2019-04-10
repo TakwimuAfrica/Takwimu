@@ -64,7 +64,7 @@ function LatestNewsStories({ classes, takwimu: { stories } }) {
 LatestNewsStories.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+    stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
   }).isRequired
 };
 
