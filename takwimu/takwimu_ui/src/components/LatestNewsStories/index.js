@@ -2,11 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Button, Grid, Typography } from '@material-ui/core';
-
 import { withStyles } from '@material-ui/core/styles';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import A from '../A';
 import Section from '../Section';
+import StoryBlocks from './StoryBlocks';
 import StoryList from './StoryList';
 
 const styles = () => ({
@@ -22,7 +23,8 @@ const styles = () => ({
   }
 });
 
-function LatestNewsStories({ classes, takwimu: { stories } }) {
+function LatestNewsStories({ classes, takwimu: { stories }, width }) {
+  const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
   return (
     <Section
       title="Latest News &amp; Stories"
@@ -53,7 +55,7 @@ function LatestNewsStories({ classes, takwimu: { stories } }) {
         </Grid>
         {stories && stories.length && (
           <Grid item xs={12}>
-            <StoryList stories={stories} />
+            <Stories stories={stories} />
           </Grid>
         )}
       </Grid>
@@ -65,7 +67,8 @@ LatestNewsStories.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
-  }).isRequired
+  }).isRequired,
+  width: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(LatestNewsStories);
+export default withWidth()(withStyles(styles)(LatestNewsStories));

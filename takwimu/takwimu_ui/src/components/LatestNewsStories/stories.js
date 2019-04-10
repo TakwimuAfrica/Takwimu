@@ -8,7 +8,7 @@ export default [
     title: 'Building Takwimu',
     url: 'https://medium.com/takwimu-africa',
     subtitle:
-      'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vel pellentesque lacus, non lobortis velit.'
+      'Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet, consectetur adipiscing elit'
   },
   {
     preview_image: { url: bitmap1 },
