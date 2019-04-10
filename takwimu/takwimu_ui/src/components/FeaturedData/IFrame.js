@@ -29,7 +29,7 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       width: '33.875rem'
     },
-    height: '540px',
+    height: '450px',
     border: 0,
     '& .census-chart-embed': {
       background: 'none'
