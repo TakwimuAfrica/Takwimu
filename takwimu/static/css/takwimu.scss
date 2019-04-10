@@ -5,12 +5,12 @@
  *
  * NOTE: Please don't make edits here unless super necessary.
  */
-@import url('https://fonts.googleapis.com/css?family=Montserrat:300,400,600,700,800,900');
+@import url("https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700");
 
-$brand-color-primary: #1f6cc6;
+$brand-color-primary: #29a87c;
 $brand-color-primary-alt: #074c9c;
 $brand-color-primary-light: #7ab1f2;
-$brand-color-secondary: #1e4a7e;
+$brand-color-secondary: #29a87c;
 $brand-color-dark-alt: #46648c;
 $brand-extend-white: #ffffff;
 $brand-extend-light: #f8f9fa;
@@ -19,9 +19,15 @@ $brand-extend-black: #000000;
 $brand-extend-muted: #6c757d;
 $brand-extend-disabled: #ededec;
 
+$font-size-base: 16px;
+
+html, body {
+  font-size: $font-size-base;
+  background-color: '#fff';
+}
 html, body, h1, h2, h3, h4, h5, h6, p, * {
-  font-family: 'Montserrat', sans-serif;
-  word-break: break-word;
+  font-family: 'Muli', sans-serif;
+  word-break: initial;
 }
 
 img {
@@ -29,6 +35,7 @@ img {
 }
 
 h1, h2, h3, h4, h5, h6 {
+  font-family: 'Lora', serif;
   font-weight: bold;
 }
 
@@ -160,11 +167,84 @@ body {
 
 // Geography
 
+#cover-map {
+  margin-bottom: 0;
+}
+
 .leaflet-label {
   background-color: $brand-color-secondary !important;
   border-color: $brand-color-secondary !important;
 }
 
+// Media query: Match Material UI
+@media only screen and (min-width: 1280px) {
+  .wrapper {
+    width: 77.6875rem;
+    margin: 0 auto;
+  }
+}
+@media only screen and (min-width: 960px) and (max-width: 1279px) {
+  .wrapper {
+    width: 58.265625rem; // .75 of lg
+    margin: 0 auto;
+  }
+}
+
+// Profile
+
+
+#profile {
+  background-color: #fff;
+}
+
+header.section-contents {
+  width: 100%;
+  float: initial;
+  background-color: $brand-color-primary;
+}
+header.section-contents h1,
+header.section-contents h2,
+header.section-contents h3,
+header.section-contents h4,
+header.section-contents h5,
+header.section-contents h6,
+.chart-header {
+  font-family: 'Muli', sans-serif;
+  font-weight: bold;
+}
+header.section-contents h1 {
+  background-color: inherit;
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 2.05;
+  letter-spacing: normal;
+  color: #ffffff;
+}
+
+#profile .section-container {
+  margin-left: 0;
+  border: none;
+  padding: 0;
+}
+
+#profile .section-container section {
+  background-color: #f6f6f6;
+  padding-top: 2.375rem;
+  padding-bottom: 1rem;
+  padding-left: 1.9375rem;
+  border-radius: 4px;
+}
+
+#profile .chart .action-links {
+  color: $brand-color-primary;
+}
+
+.chart-header {
+  word-break: normal;
+}
 
 
 /* ------------------------

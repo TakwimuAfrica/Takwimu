@@ -256,7 +256,7 @@ fabric.properties
 .idea/caches/build_file_checksums.ser
 
 # JetBrains templates
-**___jb_tmp___
+*___jb_tmp___
 
 ### Intellij+all Patch ###
 # Ignores the whole .idea folder and all .iml files
@@ -490,6 +490,10 @@ tags
 
 ### VisualStudioCode ###
 .vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.jso
 
 ### VisualStudioCode Patch ###
 # Ignore all local history of files
@@ -497,4 +501,14 @@ tags
 
 # End of https://www.gitignore.io/api/vim,node,venv,emacs,linux,macos,django,python,virtualenv,intellij+all,visualstudiocode
 
-/static
+# Custom configuration for hurumap,visualstudiocode
+
+### HURUmap ###
+static/*
+**/static/css/*.css
+
+### VisualStudioCode ###
+# Ignore the whole folder
+.vscode/*
+
+# End of custom configuration

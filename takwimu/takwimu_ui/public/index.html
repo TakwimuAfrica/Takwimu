@@ -94,10 +94,29 @@
           }
         }
       };
+      var profileData = {
+        demographics: {},
+        geography: {
+          this: {
+            child_level: 'level1',
+            full_geoid: 'country-KE',
+            full_name: 'Kenya',
+            geo_code: 'KE',
+            geo_level: 'country',
+            name: 'Kenya',
+            parent_geoid: 'continent-AFR',
+            short_name: 'Kenya',
+            square_kms: 581309,
+            version: '2009'
+          }
+        },
+        primary_releases: { active: {}, other: [] },
+        tabs: [{ name: 'All', href: '' }]
+      };
     </script>
   </head>
 
-  <body id="homepage" style="background-color: #fff">
+  <body id="homepage">
     <noscript>You need to enable JavaScript to run this app.</noscript>
 
     <nav id="takwimuNavigation"></nav>
@@ -122,9 +141,11 @@
           body.appendChild(el);
         });
       } else if (page === 'profile') {
-        const el = document.createElement('div');
-        el.setAttribute('id', 'takwimuProfileDetail');
-        body.appendChild(el);
+        ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
+          const el = document.createElement('div');
+          el.setAttribute('id', id);
+          body.appendChild(el);
+        });
       }
     </script>
     <div id="takwimuFooter"></div>

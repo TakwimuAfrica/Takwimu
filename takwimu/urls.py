@@ -19,7 +19,6 @@ PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-
 
 
 takwimu_urlpatterns = [
-    url(r'^api/v2/', api_router.urls),
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),

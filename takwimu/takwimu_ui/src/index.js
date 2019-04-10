@@ -6,6 +6,7 @@ import withRoot from './withRoot';
 import Hero from './components/Hero';
 import Navigation from './components/Navigation';
 import ProfileDetail from './components/ProfileDetail';
+import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
@@ -16,18 +17,8 @@ import LatestNewsStories from './components/LatestNewsStories';
 
 const PROPS = {
   takwimu: window.takwimu,
-  profile: window.profileDataJson || {
-    demographics: {},
-    geography: {
-      full_geoid: '',
-      this: {
-        square_kms: '',
-        short_name: '',
-        parents: []
-      }
-    },
-    primary_releases: { active: {}, other: [] }
-  }
+  settings: window.settings,
+  profile: window.profileData
 };
 
 const renderApp = (Component, id, props = PROPS) => {
@@ -67,11 +58,11 @@ const renderHomepage = () => {
   renderApp(MakingOfTakwimu, 'takwimuMakingOf');
   renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
   renderApp(WhereToNext, 'takwimuWhereToNext');
-  renderApp(Footer, 'takwimuFooter');
 };
 
 const renderDatabyTopicPage = () => {
   renderApp(ProfileDetail, 'takwimuProfileDetail');
+  renderApp(Profile, 'takwimuProfile');
 };
 
 // Render common elements
