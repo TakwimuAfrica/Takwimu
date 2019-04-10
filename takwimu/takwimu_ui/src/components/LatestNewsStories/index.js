@@ -9,8 +9,6 @@ import A from '../A';
 import Section from '../Section';
 import StoryList from './StoryList';
 
-import stories from './stories';
-
 const styles = () => ({
   sectionTitle: {
     margin: '0 0 1.1875rem 0'
@@ -24,7 +22,7 @@ const styles = () => ({
   }
 });
 
-function LatestNewsStories({ classes }) {
+function LatestNewsStories({ classes, takwimu: { stories } }) {
   return (
     <Section
       title="Latest News &amp; Stories"
@@ -53,16 +51,21 @@ function LatestNewsStories({ classes }) {
             </Button>
           </A>
         </Grid>
-        <Grid item xs={12}>
-          <StoryList stories={stories} />
-        </Grid>
+        {stories && stories.length && (
+          <Grid item xs={12}>
+            <StoryList stories={stories} />
+          </Grid>
+        )}
       </Grid>
     </Section>
   );
 }
 
 LatestNewsStories.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(LatestNewsStories);
