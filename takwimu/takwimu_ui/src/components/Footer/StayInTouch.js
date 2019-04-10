@@ -56,7 +56,7 @@ function StayInTouch({ classes, settings: { support, socialMedia } }) {
           </A>
         </div>
         <div className={classes.iconContainer}>
-          <A href={socialMedia.facebook} className={classes.icon}>
+          <A href={socialMedia.facebook} className={classes.links}>
             <img src={facebook} alt="" className={classes.icon} />
           </A>
         </div>
