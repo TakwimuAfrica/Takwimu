@@ -7,8 +7,6 @@ import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
 
-import content from './content';
-
 const styles = () => ({
   root: {
     flexGrow: 1
@@ -25,7 +23,7 @@ class FeaturedAnalysis extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { current: 1 };
+    this.state = { current: 0 };
     this.handleClick = this.handleClick.bind(this);
   }
 
@@ -34,7 +32,10 @@ class FeaturedAnalysis extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const {
+      classes,
+      takwimu: { featured_analysis: featuredAnalysis }
+    } = this.props;
     const { current } = this.state;
 
     return (
@@ -46,11 +47,11 @@ class FeaturedAnalysis extends React.Component {
           className={classes.root}
         >
           <CurrentAnalysis
-            content={content[current]}
+            content={featuredAnalysis[current].value}
             classes={{ content: classes.content }}
           />
           <AnalysisList
-            content={content}
+            content={featuredAnalysis}
             current={current}
             onClick={this.handleClick}
             classes={{ content: classes.list }}
@@ -62,7 +63,20 @@ class FeaturedAnalysis extends React.Component {
 }
 
 FeaturedAnalysis.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    featured_analysis: PropTypes.arrayOf(
+      PropTypes.shape({
+        value: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+          description: PropTypes.string.isRequired,
+          slug: PropTypes.string.isRequired,
+          country_slug: PropTypes.string.isRequired,
+          country_code: PropTypes.string.isRequired
+        }).isRequired
+      }).isRequired
+    ).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(FeaturedAnalysis);

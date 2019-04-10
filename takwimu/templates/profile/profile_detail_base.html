@@ -121,7 +121,9 @@
     {% endif %}
   </script>
   <script>
-    var countries = {{countries|jsonify|safe}};
+    var takwimu = {
+        countries: {{countries|jsonify|safe}}
+    };
   </script>
   <script src="{% static asset_manifest.runtime %}"></script>
   <script src="{% static asset_manifest.vendor %}"></script>

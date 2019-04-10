@@ -14,8 +14,8 @@ import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
 
-const props = {
-  countries: window.countries,
+const PROPS = {
+  takwimu: window.takwimu,
   profile: window.profileDataJson || {
     demographics: {},
     geography: {
@@ -30,7 +30,7 @@ const props = {
   }
 };
 
-const renderApp = (Component, id) => {
+const renderApp = (Component, id, props = PROPS) => {
   const el = document.getElementById(id);
   if (el) {
     const App = withRoot(Component);
@@ -39,13 +39,45 @@ const renderApp = (Component, id) => {
   }
 };
 
+const renderHomepage = () => {
+  fetch(
+    `${
+      PROPS.takwimu.url
+    }/api/v2/pages/?type=takwimu.IndexPage&fields=featured_analysis,featured_data&format=json`
+  )
+    .then(response => response.json())
+    .then(data => {
+      if (data.items && data.items.length) {
+        const {
+          featured_analysis: featuredAnalysis,
+          featured_data: featuredData
+        } = data.items[0];
+        const props = Object.assign({}, PROPS, {
+          takwimu: {
+            featured_analysis: featuredAnalysis,
+            featured_data: featuredData
+          }
+        });
+        renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
+        renderApp(FeaturedData, 'takwimuFeaturedData', props);
+      }
+    });
+  renderApp(Hero, 'takwimuHero');
+  renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
+  renderApp(MakingOfTakwimu, 'takwimuMakingOf');
+  renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
+  renderApp(WhereToNext, 'takwimuWhereToNext');
+  renderApp(Footer, 'takwimuFooter');
+};
+
+const renderDatabyTopicPage = () => {
+  renderApp(ProfileDetail, 'takwimuProfileDetail');
+};
+
+// Render common elements
 renderApp(Navigation, 'takwimuNavigation');
-renderApp(ProfileDetail, 'takwimuProfileDetail');
-renderApp(Hero, 'takwimuHero');
-renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
-renderApp(FeaturedData, 'takwimuFeaturedData');
-renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
-renderApp(MakingOfTakwimu, 'takwimuMakingOf');
-renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
-renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
+
+// Render specific pages
+renderHomepage();
+renderDatabyTopicPage();

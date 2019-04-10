@@ -28,72 +28,107 @@
     />
     <title>React App</title>
     <script>
-      var countries = [
-        {
-          name: 'United Republic of Tanzania',
-          slug: 'tanzania',
-          short_name: 'Tanzania'
-        },
-        {
-          name: 'Senegal',
-          slug: 'senegal',
-          short_name: 'Senegal'
-        },
-        {
-          name: 'Kenya',
-          slug: 'kenya',
-          short_name: 'Kenya'
-        },
-        {
-          name: 'Ethiopia',
-          slug: 'ethiopia',
-          short_name: 'Ethiopia'
-        },
-        {
-          name: 'Uganda',
-          slug: 'uganda',
-          short_name: 'Uganda'
-        },
-        {
-          name: 'Nigeria',
-          slug: 'nigeria',
-          short_name: 'Nigeria'
-        },
-        {
-          name: 'South Africa',
-          slug: 'south-africa',
-          short_name: 'South Africa'
-        },
-        {
-          name: 'Burkina Faso',
-          slug: 'burkina-faso',
-          short_name: 'Burkina Faso'
-        },
-        {
-          name: 'Democratic Republic of Congo',
-          slug: 'democratic-republic-of-congo',
-          short_name: 'DR Congo'
-        },
-        {
-          name: 'Zambia',
-          slug: 'zambia',
-          short_name: 'Zambia'
+      var takwimu = {
+        url: 'http://localhost:8000',
+        countries: [
+          {
+            name: 'United Republic of Tanzania',
+            slug: 'tanzania',
+            short_name: 'Tanzania'
+          },
+          {
+            name: 'Senegal',
+            slug: 'senegal',
+            short_name: 'Senegal'
+          },
+          {
+            name: 'Kenya',
+            slug: 'kenya',
+            short_name: 'Kenya'
+          },
+          {
+            name: 'Ethiopia',
+            slug: 'ethiopia',
+            short_name: 'Ethiopia'
+          },
+          {
+            name: 'Uganda',
+            slug: 'uganda',
+            short_name: 'Uganda'
+          },
+          {
+            name: 'Nigeria',
+            slug: 'nigeria',
+            short_name: 'Nigeria'
+          },
+          {
+            name: 'South Africa',
+            slug: 'south-africa',
+            short_name: 'South Africa'
+          },
+          {
+            name: 'Burkina Faso',
+            slug: 'burkina-faso',
+            short_name: 'Burkina Faso'
+          },
+          {
+            name: 'Democratic Republic of Congo',
+            slug: 'democratic-republic-of-congo',
+            short_name: 'DR Congo'
+          },
+          {
+            name: 'Zambia',
+            slug: 'zambia',
+            short_name: 'Zambia'
+          }
+        ],
+        settings: {
+          support: {
+            hello: 'hello@takwimu.africa'
+          },
+          socialMedia: {
+            twitter: '//twitter.com/TakwimuAfrica',
+            facebook: '//facebook.com/TakwimuAfrica',
+            medium: '//medium.com/takwimu-africa',
+            linkedin: '//www.linkedin.com/company/takwimu-africa'
+          }
         }
-      ];
+      };
     </script>
   </head>
-  <body style="background-color: #fff">
+
+  <body id="homepage" style="background-color: #fff">
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
     <nav id="takwimuNavigation"></nav>
-    <div id="takwimuProfileDetail"></div>
-    <div id="takwimuHero"></div>
-    <div id="takwimuFeaturedAnalysis"></div>
-    <div id="takwimuFeaturedData"></div>
-    <div id="takwimuWhatCanYouDo"></div>
-    <div id="takwimuMakingOf"></div>
-    <div id="takwimuLatestNewsStories"></div>
-    <div id="takwimuWhereToNext"></div>
+    <script>
+      // Simulate multiple pages using 'page' query param e.g.
+      // http//localhost:3000/?page='profile' to show profile page
+      const body = document.getElementsByTagName('body')[0];
+      const searchParams = new URLSearchParams(window.location.search);
+      const page = searchParams.get('page') || 'homepage';
+      if (page === 'homepage') {
+        [
+          'takwimuHero',
+          'takwimuFeaturedAnalysis',
+          'takwimuFeaturedData',
+          'takwimuWhatCanYouDo',
+          'takwimuMakingOf',
+          'takwimuLatestNewsStories',
+          'takwimuWhereToNext'
+        ].forEach(id => {
+          const el = document.createElement('div');
+          el.setAttribute('id', id);
+          body.appendChild(el);
+        });
+      } else if (page === 'profile') {
+        const el = document.createElement('div');
+        el.setAttribute('id', 'takwimuProfileDetail');
+        body.appendChild(el);
+      }
+    </script>
     <div id="takwimuFooter"></div>
+
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

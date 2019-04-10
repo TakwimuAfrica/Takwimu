@@ -1,4 +1,4 @@
-{% load staticfiles sass_tags meta %}{% load jsonify %}
+{% load staticfiles sass_tags meta jsonify %}
 
 <!doctype html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -103,7 +103,21 @@
   </script>
 
   <script>
-    var countries = {{countries|jsonify|safe}};
+    var takwimu = window.takwimu || {};
+    takwimu.url = '{{ HURUMAP.url }}';
+    takwimu.countries = {{ countries|jsonify|safe }};
+    takwimu.settings = {
+      support: {
+        hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+        support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+      },
+      socialMedia: {
+        facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+        twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+        medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+        linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+      }
+    };
   </script>
 
   <script src="{% static asset_manifest.runtime %}"></script>

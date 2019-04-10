@@ -12,6 +12,9 @@ const Theme = createMuiTheme({
       main: '#004494' // darkish-blue
     },
     text: { primary: '#000', secondary: '#fff' },
+    background: {
+      default: '#fff'
+    },
     info: {
       main: '#f6fbfa' // ice-blue
     },

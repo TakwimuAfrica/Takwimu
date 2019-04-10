@@ -26,7 +26,7 @@ function StoryCard({ classes, story }) {
     <Card classes={{ root: classes.root }}>
       <CardMedia
         className={classes.media}
-        image={story.img}
+        image={story.preview_image.url}
         title={story.title}
       />
       <CardContent>
@@ -36,7 +36,7 @@ function StoryCard({ classes, story }) {
           component="h2"
           classes={{ gutterBottom: classes.titleGutterBottom }}
         >
-          <A href={story.link} className={classes.link}>
+          <A href={story.url} className={classes.link}>
             {story.title}
           </A>
         </Typography>
@@ -48,9 +48,9 @@ function StoryCard({ classes, story }) {
 StoryCard.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   story: PropTypes.shape({
-    img: PropTypes.string.isRequired,
+    preview_image: PropTypes.shape({}).isRequired,
     title: PropTypes.string.isRequired,
-    link: PropTypes.string.isRequired
+    url: PropTypes.string.isRequired
   }).isRequired
 };
 
