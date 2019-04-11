@@ -44,20 +44,20 @@ const styles = theme => ({
     backgroundColor: 'red'
   },
   menuPaper: {
-    backgroundColor: theme.palette.text.secondary
+    backgroundColor: theme.palette.background.default
   },
   menuList: {
     fontSize: theme.typography.body1.fontSize,
     fontFamily: theme.typography.body1.fontFamily,
     '&:selected': {
-      backgroundColor: theme.palette.text.secondary
+      backgroundColor: theme.palette.background.default
     }
   },
   selectForm: {
     marginLeft: '0.9375rem',
     marginRight: '1.0625rem',
     flexBasis: 258,
-    backgroundColor: theme.palette.text.secondary
+    backgroundColor: theme.palette.background.default
   },
   selectInput: {
     borderRadius: theme.spacing.unit * 0.5,
@@ -141,7 +141,10 @@ class ViewAnalysis extends Component {
   }
 
   render() {
-    const { classes, countries } = this.props;
+    const {
+      classes,
+      takwimu: { countries }
+    } = this.props;
     const { topic, country, topicActive, countryActive } = this.state;
     const sortedCountries = countries.sort((a, b) => a.name[0] > b.name[0]);
     return (
@@ -236,7 +239,9 @@ class ViewAnalysis extends Component {
 
 ViewAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.shape([]).isRequired
+  takwimu: PropTypes.shape({
+    countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(ViewAnalysis);
