@@ -101,7 +101,7 @@ DropdownAdornment.propTypes = {
 
 const DropdownAction = withStyles(styles)(DropdownAdornment);
 
-class ViewChooser extends Component {
+class ViewAnalysis extends Component {
   constructor() {
     super();
     this.state = {
@@ -234,9 +234,9 @@ class ViewChooser extends Component {
   }
 }
 
-ViewChooser.propTypes = {
+ViewAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.shape([]).isRequired
 };
 
-export default withStyles(styles)(ViewChooser);
+export default withStyles(styles)(ViewAnalysis);
