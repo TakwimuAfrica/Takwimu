@@ -59,12 +59,15 @@ const renderHomepage = () => {
   renderApp(MakingOfTakwimu, 'takwimuMakingOf');
   renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
   renderApp(WhereToNext, 'takwimuWhereToNext');
-  renderApp(ViewAnalysis, 'takwimuViewAnalysis');
 };
 
 const renderDatabyTopicPage = () => {
   renderApp(ProfileDetail, 'takwimuProfileDetail');
   renderApp(Profile, 'takwimuProfile');
+};
+
+const renderCountryAnalysisPage = () => {
+  renderApp(ViewAnalysis, 'takwimuViewAnalysis');
 };
 
 // Render common elements
@@ -74,3 +77,4 @@ renderApp(Footer, 'takwimuFooter');
 // Render specific pages
 renderHomepage();
 renderDatabyTopicPage();
+renderCountryAnalysisPage();
