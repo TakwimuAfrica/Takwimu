@@ -7,11 +7,8 @@ import {
   Select,
   FormControl,
   OutlinedInput,
-  Popper,
-  Paper,
-  MenuList,
-  MenuItem,
-  TextField
+  Button,
+  MenuItem
 } from '@material-ui/core';
 
 import KeyboardArrowDown from '@material-ui/icons/KeyboardArrowDown';
@@ -22,33 +19,71 @@ import Section from './Section';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.light,
-    height: '13.9375rem',
+    height: '22rem',
     paddingTop: '3.125rem',
     paddingBottom: '3.5rem',
     paddingLeft: '2.8125rem',
-    paddingRight: '2.8125rem'
-  },
-  button: {
-    borderRadius: 0,
-    padding: 0
+    paddingRight: '2.8125rem',
+    [theme.breakpoints.up('md')]: {
+      height: '13.9375rem'
+    }
   },
   keyboardArrow: {
+    top: 'calc(50% - 12px)',
+    right: theme.spacing.unit * 2.5,
+    position: 'absolute',
+    pointerEvents: 'none',
     color: '#29a87c'
   },
-  formControl: {
-    width: '258px'
+  selectText: {
+    fontSize: theme.typography.body1.fontSize,
+    fontFamily: theme.typography.body1.fontFamily
   },
-  menu: {
-    paddingTop: 0,
+  selectMenu: {
+    display: 'block',
     backgroundColor: 'red'
   },
-  textField: {
+  menuPaper: {
+    backgroundColor: theme.palette.text.secondary
+  },
+  menuList: {
+    fontSize: theme.typography.body1.fontSize,
+    fontFamily: theme.typography.body1.fontFamily,
+    '&:selected': {
+      backgroundColor: theme.palette.text.secondary
+    }
+  },
+  selectForm: {
     marginLeft: '0.9375rem',
     marginRight: '1.0625rem',
-    flexBasis: 258
+    flexBasis: 258,
+    backgroundColor: theme.palette.text.secondary
+  },
+  selectInput: {
+    borderRadius: theme.spacing.unit * 0.5,
+    borderColor: 'solid 1px rgba(151, 151, 151, 0.3)'
+  },
+  selectbuttonroot: {
+    width: '6.8125rem',
+    padding: 0,
+    marginLeft: '1rem',
+    [theme.breakpoints.up('md')]: {
+      width: '8rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: '1.875rem',
+      width: '8.8125rem'
+    }
+  },
+  selectbuttonlabel: {
+    fontSize: theme.typography.body1.fontSize,
+    fontFamily: theme.typography.body1.fontFamily,
+    paddingTop: '1.125rem',
+    paddingBottom: '1.0625rem'
   },
   title: {
-    paddingBottom: '2.375rem'
+    paddingBottom: '2.375rem',
+    fontWeight: 'bold'
   }
 });
 
@@ -111,89 +146,88 @@ class ViewChooser extends Component {
     const sortedCountries = countries.sort((a, b) => a.name[0] > b.name[0]);
     return (
       <Section classes={{ root: classes.root }}>
-        <Typography variant="body2" className={classes.title}>
+        <Typography variant="body1" className={classes.title}>
           View analysis or data for a specific country
         </Typography>
         <Grid container direction="row" display="flex" alignItems="center">
-          <Typography variant="body2">Show me</Typography>
-          <FormControl variant="outlined" className={classes.formControl}>
+          <Typography variant="body1">Show me</Typography>
+          <FormControl variant="outlined" className={classes.selectForm}>
             <Select
               value={topic}
               displayEmpty
               onChange={this.handleTopicChange}
-              MenuProps={{
-                className: classes.menu
-              }}
+              classes={{ root: classes.selectText }}
               IconComponent={() => <DropdownAction isActive={topicActive} />}
+              onClick={this.handleTopicDropdown}
               input={
-                <OutlinedInput
-                  name="topic"
-                  id="outlined-age-simple"
-                  classes={{ formControl: classes.formControl }}
-                  endAdornment={<DropdownAction isActive={topicActive} />}
-                />
+                <OutlinedInput notched={false} name="topic" labelWidth={240} />
               }
+              MenuProps={{
+                classes: { paper: classes.menuPaper },
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left'
+                },
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left'
+                },
+                getContentAnchorEl: null
+              }}
             >
-              <MenuItem value="">Data by topic</MenuItem>
-              <MenuItem value={10}>Ten</MenuItem>
-              <MenuItem value={20}>Twenty</MenuItem>
-              <MenuItem value={30}>Thirty</MenuItem>
+              <MenuItem className={classes.menuList} value="">
+                Data by topic
+              </MenuItem>
             </Select>
           </FormControl>
-          <TextField
-            autoFocus={false}
-            onChange={this.handleTopicChange}
-            variant="outlined"
-            placeholder="Data by topic"
-            className={classes.textField}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
+          <Typography variant="body1"> for</Typography>
+          <FormControl variant="outlined" className={classes.selectForm}>
+            <Select
+              value={country}
+              displayEmpty
+              onChange={this.handleCountryChange}
+              classes={{ root: classes.selectText }}
+              IconComponent={() => <DropdownAction isActive={countryActive} />}
+              onClick={this.handleCountryDropdown}
+              input={
+                <OutlinedInput
+                  notched={false}
+                  labelWidth={240}
+                  className={classes.selectInput}
+                />
               }
+              MenuProps={{
+                classes: { paper: classes.menuPaper },
+                anchorOrigin: {
+                  vertical: 'bottom',
+                  horizontal: 'left'
+                },
+                transformOrigin: {
+                  vertical: 'top',
+                  horizontal: 'left'
+                },
+                getContentAnchorEl: null
+              }}
+            >
+              {sortedCountries.map(xcountry => (
+                <MenuItem
+                  className={classes.menuList}
+                  key={xcountry.slug}
+                  value={xcountry.slug}
+                >
+                  {xcountry.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+          <Button
+            classes={{
+              label: classes.selectbuttonlabel,
+              root: classes.selectbuttonroot
             }}
-            InputProps={{
-              endAdornment: (
-                <DropdownAction
-                  isActive={topicActive}
-                  handleClick={this.handleTopicDropdown}
-                />
-              )
-            }}
-          />
-          <Popper className={classes.popperIndex} open={topicActive}>
-            <Paper>
-              <MenuList>
-                {sortedCountries.map(xcountry => (
-                  <MenuItem>{xcountry.name}</MenuItem>
-                ))}
-              </MenuList>
-            </Paper>
-          </Popper>
-          <Typography variant="body2"> for</Typography>
-          <TextField
-            select
-            variant="outlined"
-            onChange={this.handleCountryChange}
-            className={classes.textField}
-            placeholder="Country"
-            value={country}
-            InputProps={{
-              endAdornment: (
-                <DropdownAction
-                  isActive={countryActive}
-                  handleClick={this.handleCountryDropdown}
-                />
-              )
-            }}
-          />
-
-          <Popper className={classes.popperIndex} open={countryActive}>
-            <Paper>
-              <MenuList>
-                <MenuItem>Example</MenuItem>
-              </MenuList>
-            </Paper>
-          </Popper>
+          >
+            Go
+          </Button>
         </Grid>
       </Section>
     );
@@ -202,7 +236,7 @@ class ViewChooser extends Component {
 
 ViewChooser.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.shape({}).isRequired
+  countries: PropTypes.shape([]).isRequired
 };
 
 export default withStyles(styles)(ViewChooser);
