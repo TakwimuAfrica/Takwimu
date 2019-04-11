@@ -36,7 +36,7 @@ const styles = theme => ({
   }
 });
 
-function WhereToNext({ classes }) {
+function AboutWhereToNext({ classes }) {
   return (
     <Section title="Where to next" variant="h3">
       <Grid
@@ -53,8 +53,8 @@ function WhereToNext({ classes }) {
   );
 }
 
-WhereToNext.propTypes = {
+AboutWhereToNext.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(WhereToNext);
+export default withStyles(styles)(AboutWhereToNext);
