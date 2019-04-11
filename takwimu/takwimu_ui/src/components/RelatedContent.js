@@ -10,7 +10,7 @@ const styles = theme => ({
   link: {
     color: theme.palette.primary.main
   },
-  linkGrid: { height: '18.456rem' }
+  linkGrid: { height: '18.456rem', width: '100%' }
 });
 
 function RelatedContent({ classes }) {
