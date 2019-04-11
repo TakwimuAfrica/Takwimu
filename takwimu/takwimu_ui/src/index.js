@@ -9,6 +9,7 @@ import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
+import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 
 const props = {
@@ -30,4 +31,5 @@ renderApp(FeaturedData, 'takwimuFeaturedData');
 renderApp(MakingOfTakwimu, 'takwimuMakingOf');
 renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
 renderApp(WhereToNext, 'takwimuWhereToNext');
+renderApp(RelatedContent, 'takwimuRelatedContent');
 renderApp(Footer, 'takwimuFooter');
