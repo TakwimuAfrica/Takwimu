@@ -1,4 +1,4 @@
-{% load staticfiles sass_tags meta %}{% load jsonify %}
+{% load staticfiles sass_tags meta jsonify %}
 
 <!doctype html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -56,7 +56,7 @@
   <script src="{% static 'js/plugins.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha256-98vAGjEDGN79TjHkYWVD4s87rvWkdWLHPs5MC3FvFX4=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha256-xaF9RpdtRxzwYMWg4ldJoyPWqyDPCRD0Cv7YEEe6Ie8=" crossorigin="anonymous"></script>
   <script src="{% static 'js/main.js' %}"></script>
   <script src="{% static 'js/svg.js' %}"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/4.1.1/anchor.min.js"></script>
@@ -103,7 +103,21 @@
   </script>
 
   <script>
-    var countries = {{countries|jsonify|safe}};
+    var takwimu = window.takwimu || {};
+    takwimu.url = '{{ HURUMAP.url }}';
+    takwimu.countries = {{ countries|jsonify|safe }};
+    takwimu.settings = {
+      support: {
+        hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+        support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+      },
+      socialMedia: {
+        facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+        twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+        medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+        linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+      }
+    };
   </script>
 
   <script src="{% static asset_manifest.runtime %}"></script>

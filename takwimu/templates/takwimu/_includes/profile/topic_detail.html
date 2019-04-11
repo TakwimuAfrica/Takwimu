@@ -36,18 +36,17 @@
 
         </div>
         <!-- COMMUNITY: Add your voice -->
-        <div class="row pt-5 pb-5 text-dark">
+        <div class="row py-5 text-dark">
           {% if page.content_type.model == "profilesectionpage" %}
-            <p class=" pl-3">Add your voice to the discussion
+            <p class="pl-3 line-height-md">Add your voice to the discussion
               of {{ page.get_parent.title }}'s development context </p>
           {% else %}
-            <p class=" pl-3">Add your voice to the discussion
+            <p class="pl-3 line-height-md">Add your voice to the discussion
               of {{ page.title }}'s development context </p>
           {% endif %}
-          <a class="pl-3 font-weight-bold" href="{{ settings.takwimu.SocialMediaSetting.twitter }}" target="_blank" rel="noopener"
-             style="text-decoration: none;">
-            <span class="mr-1"><i class="fas fa-comments fa-lg"></i></span> Have
-            your say</a>
+          <a class="pl-3" href="{{ settings.takwimu.SocialMediaSetting.twitter }}" target="_blank" rel="noopener">
+            <span class="mr-1"><i class="fas fa-comments fa-lg"></i></span> Have your say
+          </a>
         </div> <!-- /row pt-5 pb-5 text-dark -->
       </div>  <!-- /.col-3 -->
 
@@ -67,7 +66,7 @@
 
           <!-- Show more button -->
           {% if topic.value.body %}
-            <button class="btn btn-link font-weight-bold p-0 ml-2 read-more d-inline-block" type="button"
+            <button class="btn btn-link font-weight-bold p-0 mt-2 read-more d-inline-block" type="button"
                     data-toggle="collapse" data-target="#collapse-{{ topic.value.title|slugify }}"
                     aria-expanded="false" aria-controls="collapse-{{ topic.value.title|slugify }}"
                     onclick="javascript:$(this).toggleClass('active')">

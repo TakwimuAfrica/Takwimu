@@ -8,19 +8,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Story from './Story';
 
-const styles = theme => ({
+const styles = () => ({
   root: {
     flexGrow: 1
   },
   margin: {
-    marginTop: '3.375rem',
-    [theme.breakpoints.up('md')]: {
-      marginTop: 0,
-      marginLeft: '2.53125rem'
-    },
-    [theme.breakpoints.up('lg')]: {
-      marginLeft: '3.375rem'
-    }
+    marginTop: '3.375rem'
   }
 });
 

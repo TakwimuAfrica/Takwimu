@@ -12,15 +12,16 @@ const Theme = createMuiTheme({
       main: '#004494' // darkish-blue
     },
     text: { primary: '#000', secondary: '#fff' },
+    background: {
+      default: '#fff',
+      light: '#f6f6f6' // light gray
+    },
     info: {
       main: '#f6fbfa' // ice-blue
     },
     data: {
       main: '#4a4a4a',
       light: '#F5F5F5' // #4a4a4a opacity 0.05
-    },
-    background: {
-      light: '#f6f6f6' // light gray
     }
   },
   typography: {

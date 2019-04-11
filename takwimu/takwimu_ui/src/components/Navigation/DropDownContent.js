@@ -1,7 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles, Grid, Typography, ButtonBase } from '@material-ui/core';
+import {
+  withStyles,
+  Grid,
+  Link,
+  Typography,
+  ButtonBase
+} from '@material-ui/core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
@@ -49,15 +55,22 @@ const styles = theme => ({
     border: '2px solid white',
     borderRadius: '1.187rem'
   },
-  flagName: {
-    borderBottom: '1px solid',
-    lineHeight: 'unset'
-  },
   flagsContainer: {
     justifyContent: 'space-between',
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'unset'
     }
+  },
+  countryLink: {
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.text.secondary,
+      textDecoration: 'none'
+    }
+  },
+  countryName: {
+    borderBottom: '1px solid',
+    lineHeight: 'unset'
   },
   leftContent: {
     height: 'fit-content',
@@ -72,7 +85,7 @@ const styles = theme => ({
   }
 });
 
-function DropDownContent({ classes, title, description, countries }) {
+function DropDownContent({ classes, title, description, countries, profile }) {
   return (
     <div className={classes.root}>
       <Grid
@@ -110,14 +123,21 @@ function DropDownContent({ classes, title, description, countries }) {
               disableTouchRipple
               className={classes.countryButton}
             >
-              <img
-                alt={country.name}
-                src={flagSrc(`./${country.slug}.svg`)}
-                className={classes.flag}
-              />
-              <Typography color="textSecondary" className={classes.flagName}>
-                {country.short_name}
-              </Typography>
+              <Link
+                href={`/profiles/${profile(country)}`}
+                color="textSecondary"
+                className={classes.countryLink}
+                underline="none"
+              >
+                <img
+                  alt={country.name}
+                  src={flagSrc(`./${country.slug}.svg`)}
+                  className={classes.flag}
+                />
+                <span className={classes.countryName}>
+                  {country.short_name}
+                </span>
+              </Link>
             </ButtonBase>
           ))}
         </Grid>
@@ -130,7 +150,8 @@ DropDownContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired
+  description: PropTypes.string.isRequired,
+  profile: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(DropDownContent);
