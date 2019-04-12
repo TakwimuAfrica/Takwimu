@@ -122,7 +122,8 @@
     <nav id="takwimuNavigation"></nav>
     <script>
       // Simulate multiple pages using 'page' query param e.g.
-      // http//localhost:3000/?page='profile' to show profile page
+      // http//localhost:3000/?page=profile to show profile page
+      // http//localhost:3000/?page=analysis to show analysis page
       const body = document.getElementsByTagName('body')[0];
       const searchParams = new URLSearchParams(window.location.search);
       const page = searchParams.get('page') || 'homepage';
@@ -134,8 +135,7 @@
           'takwimuWhatCanYouDo',
           'takwimuMakingOf',
           'takwimuLatestNewsStories',
-          'takwimuWhereToNext',
-          'takwimuViewAnalysis'
+          'takwimuWhereToNext'
         ].forEach(id => {
           const el = document.createElement('div');
           el.setAttribute('id', id);
@@ -143,6 +143,12 @@
         });
       } else if (page === 'profile') {
         ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
+          const el = document.createElement('div');
+          el.setAttribute('id', id);
+          body.appendChild(el);
+        });
+      } else if (page === 'analysis') {
+        ['takwimuViewAnalysis'].forEach(id => {
           const el = document.createElement('div');
           el.setAttribute('id', id);
           body.appendChild(el);
