@@ -37,12 +37,12 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ classes, data }) {
+function DataContainer({ classes, featuredData, url }) {
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          <IFrame featuredData={data} />
+          <IFrame featuredData={featuredData} url={url} />
           <DataActions />
         </Grid>
       </div>
@@ -53,7 +53,7 @@ function DataContainer({ classes, data }) {
           </Grid>
           <Grid item>
             <Typography variant="caption" className={classes.description}>
-              {data.description}
+              {featuredData.description}
             </Typography>
           </Grid>
         </Grid>
@@ -64,7 +64,8 @@ function DataContainer({ classes, data }) {
 
 DataContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  featuredData: PropTypes.shape({}).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(DataContainer);

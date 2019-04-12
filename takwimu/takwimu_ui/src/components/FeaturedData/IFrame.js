@@ -37,91 +37,45 @@ const styles = theme => ({
   }
 });
 
-// Work with a single iframe at a time and only resize it to it's
-// "natural" dimensions
-const makeCensusEmbed = containerId => {
-  const embed = {
-    embed: {}
-  };
-  embed.init = () => {
-    embed.container = document.getElementById(containerId);
-    if (embed.container) {
-      embed.embed = {
-        naturalWidth: embed.container.width,
-        naturalHeight: embed.container.height,
-        frameHeight: embed.container.height
-      };
-      embed.addListeners();
-      embed.sendDataToFrame({ resize: 'resize' });
-    }
-  };
-  embed.addListeners = () => {
-    const eventMethod = window.addEventListener
-      ? 'addEventListener'
-      : 'attachEvent';
-    const eventListener = window[eventMethod];
-    const resizeEvent = eventMethod === 'attachEvent' ? 'onresize' : 'resize';
-    eventListener(resizeEvent, embed.resize);
-  };
-  embed.debounce = (func, wait, immediate) => {
-    let timeout;
-    return (...args) => {
-      const context = this;
-      const later = () => {
-        timeout = null;
-        if (!immediate) func.apply(context, args);
-      };
-      const callNow = immediate && !timeout;
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-      if (callNow) func.apply(context, args);
-    };
-  };
-  embed.resize = embed.debounce(() => {
-    embed.setFrameSize();
-    embed.sendDataToFrame({ resize: 'resize' });
-  }, 100);
-  embed.setFrameSize = () => {
-    const thisContainer = embed.container;
-    const thisEmbed = embed.embed;
-    const parentWidth = thisContainer.offsetWidth;
-    const minimumHeight = thisEmbed.frameHeight + 80;
-    thisContainer.width =
-      parentWidth <= thisEmbed.naturalWidth
-        ? parentWidth
-        : thisEmbed.naturalWidth;
-    thisContainer.height =
-      minimumHeight >= thisEmbed.naturalHeight
-        ? minimumHeight
-        : thisEmbed.naturalHeight;
-  };
-  embed.sendDataToFrame = data => {
-    // IE9 can only send strings
-    embed.container.contentWindow.postMessage(JSON.stringify(data), '*');
-  };
-  embed.init();
-  return embed;
-};
-
 class IFrame extends React.Component {
-  componentDidMount() {
-    const { featuredData } = this.props;
+  constructor(props) {
+    super(props);
+
+    const { featuredData } = props;
     const id = `cr-embed-country-${featuredData.country}-${
       featuredData.data_id
     }`;
-    makeCensusEmbed(id);
+    this.state = { id };
+    this.handleFrameLoad = this.handleFrameLoad.bind(this);
+  }
+
+  componentDidMount() {
+    const { id } = this.state;
+    const iframe = document.getElementById(id);
+    iframe.addEventListener('load', this.handleFrameLoad, true);
+  }
+
+  handleFrameLoad() {
+    const { id } = this.state;
+    const iframe = document.getElementById(id);
+    // eslint-disable-next-line no-return-assign, no-param-reassign
+    const hideFooter = n => (n.style = 'display: none');
+    iframe.contentWindow.document.body.style.background = 'none';
+    iframe.contentWindow.document
+      .querySelectorAll('.embed-footer')
+      .forEach(hideFooter);
   }
 
   render() {
-    const { classes, featuredData } = this.props;
+    const { classes, featuredData, url } = this.props;
+    const { id } = this.state;
+
     return (
       <div className={classNames(['cr-embed', classes.container])}>
         <iframe
-          id={`cr-embed-country-${featuredData.country}-${
-            featuredData.data_id
-          }`}
+          id={id}
           title={featuredData.title}
-          src={`//localhost:8000/embed/iframe.html?geoID=country-${
+          src={`${url}/embed/iframe.html?geoID=country-${
             featuredData.country
           }&geoVersion=2009&chartDataID=${
             featuredData.data_id
@@ -140,7 +94,8 @@ class IFrame extends React.Component {
 
 IFrame.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  featuredData: PropTypes.shape({}).isRequired
+  featuredData: PropTypes.shape({}).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(IFrame);

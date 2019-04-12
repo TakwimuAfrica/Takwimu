@@ -43,12 +43,11 @@ const renderHomepage = () => {
           featured_analysis: featuredAnalysis,
           featured_data: featuredData
         } = data.items[0];
-        const props = Object.assign({}, PROPS, {
-          takwimu: {
-            featured_analysis: featuredAnalysis,
-            featured_data: featuredData
-          }
+        const takwimu = Object.assign({}, PROPS.takwimu, {
+          featured_analysis: featuredAnalysis,
+          featured_data: featuredData
         });
+        const props = Object.assign({}, PROPS, { takwimu });
         renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
         renderApp(FeaturedData, 'takwimuFeaturedData', props);
       }

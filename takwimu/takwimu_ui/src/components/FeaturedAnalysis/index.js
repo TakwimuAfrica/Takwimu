@@ -46,16 +46,20 @@ class FeaturedAnalysis extends React.Component {
           alignItems="stretch"
           className={classes.root}
         >
-          <CurrentAnalysis
-            content={featuredAnalysis[current].value}
-            classes={{ content: classes.content }}
-          />
-          <AnalysisList
-            content={featuredAnalysis}
-            current={current}
-            onClick={this.handleClick}
-            classes={{ content: classes.list }}
-          />
+          {featuredAnalysis && featuredAnalysis.length && (
+            <React.Fragment>
+              <CurrentAnalysis
+                content={featuredAnalysis[current].value}
+                classes={{ content: classes.content }}
+              />
+              <AnalysisList
+                content={featuredAnalysis}
+                current={current}
+                onClick={this.handleClick}
+                classes={{ content: classes.list }}
+              />
+            </React.Fragment>
+          )}
         </Grid>
       </Section>
     );
