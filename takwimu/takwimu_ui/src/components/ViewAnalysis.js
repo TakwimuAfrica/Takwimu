@@ -6,7 +6,7 @@ import {
   withStyles,
   Select,
   FormControl,
-  OutlinedInput,
+  Input,
   Button,
   MenuItem
 } from '@material-ui/core';
@@ -39,9 +39,9 @@ const styles = theme => ({
     fontSize: theme.typography.body1.fontSize,
     fontFamily: theme.typography.body1.fontFamily
   },
-  selectMenu: {
-    display: 'block',
-    backgroundColor: 'red'
+  selectInput: {
+    borderBottom: 0,
+    transition: 0
   },
   menuPaper: {
     backgroundColor: theme.palette.background.default
@@ -56,12 +56,15 @@ const styles = theme => ({
   selectForm: {
     marginLeft: '0.9375rem',
     marginRight: '1.0625rem',
-    flexBasis: 258,
-    backgroundColor: theme.palette.background.default
+    flexBasis: 258
   },
-  selectInput: {
+  selectMenu: {
     borderRadius: theme.spacing.unit * 0.5,
-    borderColor: 'solid 1px rgba(151, 151, 151, 0.3)'
+    border: '1px solid rgba(151, 151, 151, 0.3)',
+    paddingLeft: theme.spacing.unit,
+    paddingTop: theme.spacing.unit * 2,
+    paddingBottom: theme.spacing.unit * 2,
+    backgroundColor: theme.palette.background.default
   },
   selectbuttonroot: {
     width: '6.8125rem',
@@ -159,12 +162,13 @@ class ViewAnalysis extends Component {
               value={topic}
               displayEmpty
               onChange={this.handleTopicChange}
-              classes={{ root: classes.selectText }}
+              classes={{
+                root: classes.selectText,
+                selectMenu: classes.selectMenu
+              }}
               IconComponent={() => <DropdownAction isActive={topicActive} />}
               onClick={this.handleTopicDropdown}
-              input={
-                <OutlinedInput notched={false} name="topic" labelWidth={240} />
-              }
+              input={<Input disableUnderline />}
               MenuProps={{
                 classes: { paper: classes.menuPaper },
                 anchorOrigin: {
@@ -192,16 +196,13 @@ class ViewAnalysis extends Component {
               value={country}
               displayEmpty
               onChange={this.handleCountryChange}
-              classes={{ root: classes.selectText }}
+              classes={{
+                root: classes.selectText,
+                selectMenu: classes.selectMenu
+              }}
               IconComponent={() => <DropdownAction isActive={countryActive} />}
               onClick={this.handleCountryDropdown}
-              input={
-                <OutlinedInput
-                  notched={false}
-                  labelWidth={240}
-                  className={classes.selectInput}
-                />
-              }
+              input={<Input disableUnderline />}
               MenuProps={{
                 classes: { paper: classes.menuPaper },
                 anchorOrigin: {
