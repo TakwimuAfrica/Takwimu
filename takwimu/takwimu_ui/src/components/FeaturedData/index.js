@@ -18,7 +18,10 @@ const styles = () => ({
   }
 });
 
-function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
+function FeaturedData({
+  classes,
+  takwimu: { url, featured_data: featuredData }
+}) {
   return (
     <Section title="Featured Data" variant="h2">
       <Grid
@@ -28,8 +31,16 @@ function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
         alignItems="flex-start"
         className={classes.root}
       >
-        <DataContainer color="secondary" data={featuredData[0].value} />
-        <DataContainer color="primary" data={featuredData[1].value} />
+        <DataContainer
+          color="secondary"
+          featuredData={featuredData[0].value}
+          url={url}
+        />
+        <DataContainer
+          color="primary"
+          featuredData={featuredData[1].value}
+          url={url}
+        />
       </Grid>
     </Section>
   );
@@ -38,6 +49,7 @@ function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
 FeaturedData.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    url: PropTypes.string.isRequired,
     featured_data: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.shape({

@@ -291,7 +291,9 @@ header.section-contents h1 {
   letter-spacing: normal;
   color: #ffffff;
 }
-
+#profile .chart h3 {
+  font-size: 1.15rem;
+}
 #profile .section-container {
   margin-left: 0;
   border: none;
@@ -310,8 +312,12 @@ header.section-contents h1 {
   color: $brand-color-primary;
 }
 
-.chart-header {
+#profile .chart-header {
   word-break: normal;
+}
+
+#profile .chart a {
+  font-size: 0.75rem;
 }
 
 

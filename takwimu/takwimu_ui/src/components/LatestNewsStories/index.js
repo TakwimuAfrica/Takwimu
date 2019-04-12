@@ -23,7 +23,11 @@ const styles = () => ({
   }
 });
 
-function LatestNewsStories({ classes, takwimu: { stories }, width }) {
+function LatestNewsStories({
+  classes,
+  takwimu: { latest_news_stories: latestNewsStories, stories },
+  width
+}) {
   const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
   return (
     <Section
@@ -37,15 +41,16 @@ function LatestNewsStories({ classes, takwimu: { stories }, width }) {
         alignItems="flex-start"
         className={classes.root}
       >
-        <Grid item xs={12}>
-          <Typography
-            variant="body1"
-            classes={{ root: classes.descriptionRoot }}
-          >
-            Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum
-            dolor sit amet, consectetur adipiscing elit.
-          </Typography>
-        </Grid>
+        {latestNewsStories && latestNewsStories.description && (
+          <Grid item xs={12}>
+            <Typography
+              variant="body1"
+              classes={{ root: classes.descriptionRoot }}
+            >
+              {latestNewsStories.description}
+            </Typography>
+          </Grid>
+        )}
         <Grid item xs={12}>
           <A href="https://medium.com/takwimu-africa" underline="none">
             <Button classes={{ root: classes.buttonRoot }}>
@@ -66,6 +71,7 @@ function LatestNewsStories({ classes, takwimu: { stories }, width }) {
 LatestNewsStories.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    latest_news_stories: PropTypes.shape({}).isRequired,
     stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
   }).isRequired,
   width: PropTypes.string.isRequired
