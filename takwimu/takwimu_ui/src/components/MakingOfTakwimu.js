@@ -47,8 +47,7 @@ function MakingOfTakwimu({
 MakingOfTakwimu.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    making_of_takwimu: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
-      .isRequired
+    making_of_takwimu: PropTypes.shape({}).isRequired
   }).isRequired
 };
 

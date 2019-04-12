@@ -89,9 +89,7 @@ function WhatCanYouDo({
 WhatCanYouDo.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    what_you_can_do_with_takwimu: PropTypes.arrayOf(
-      PropTypes.shape({}).isRequired
-    ).isRequired
+    what_you_can_do_with_takwimu: PropTypes.shape({}).isRequired
   }).isRequired
 };
 

@@ -15,7 +15,6 @@ const styles = {
 };
 
 function profile(country) {
-  console.log(`COUNTRIES ${JSON.stringify(country)}`);
   return `country-${country.iso_code}-${country.slug}`;
 }
 

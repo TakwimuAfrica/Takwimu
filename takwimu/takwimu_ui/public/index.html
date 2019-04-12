@@ -32,51 +32,61 @@
         url: 'http://localhost:8000',
         countries: [
           {
+            iso_code: 'TZ',
             name: 'United Republic of Tanzania',
             slug: 'tanzania',
             short_name: 'Tanzania'
           },
           {
+            iso_code: 'SN',
             name: 'Senegal',
             slug: 'senegal',
             short_name: 'Senegal'
           },
           {
+            iso_code: 'KE',
             name: 'Kenya',
             slug: 'kenya',
             short_name: 'Kenya'
           },
           {
+            iso_code: 'ET',
             name: 'Ethiopia',
             slug: 'ethiopia',
             short_name: 'Ethiopia'
           },
           {
+            iso_code: 'UG',
             name: 'Uganda',
             slug: 'uganda',
             short_name: 'Uganda'
           },
           {
+            iso_code: 'NG',
             name: 'Nigeria',
             slug: 'nigeria',
             short_name: 'Nigeria'
           },
           {
+            iso_code: 'ZA',
             name: 'South Africa',
             slug: 'south-africa',
             short_name: 'South Africa'
           },
           {
+            iso_code: 'BF',
             name: 'Burkina Faso',
             slug: 'burkina-faso',
             short_name: 'Burkina Faso'
           },
           {
+            iso_code: 'CD',
             name: 'Democratic Republic of Congo',
             slug: 'democratic-republic-of-congo',
             short_name: 'DR Congo'
           },
           {
+            iso_code: 'ZM',
             name: 'Zambia',
             slug: 'zambia',
             short_name: 'Zambia'
@@ -126,6 +136,7 @@
       const body = document.getElementsByTagName('body')[0];
       const searchParams = new URLSearchParams(window.location.search);
       const page = searchParams.get('page') || 'homepage';
+      body.id = page;
       if (page === 'homepage') {
         [
           'takwimuHero',

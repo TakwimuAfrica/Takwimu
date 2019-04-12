@@ -103,7 +103,7 @@ function Hero({ classes, takwimu: { tagline } }) {
 Hero.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    tagline: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+    tagline: PropTypes.shape({}).isRequired
   }).isRequired
 };
 

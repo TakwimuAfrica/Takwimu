@@ -185,6 +185,7 @@ class ProfileDetail extends React.Component {
       geo_code: countryCode
     } = geography.this;
     const country = countries.find(c => c.iso_code === countryCode);
+
     return (
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
