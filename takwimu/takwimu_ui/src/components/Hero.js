@@ -57,7 +57,7 @@ const styles = theme => ({
   }
 });
 
-function Hero({ classes }) {
+function Hero({ classes, takwimu: { tagline } }) {
   return (
     <div className={classes.root}>
       <div className={classes.gradient}>
@@ -73,18 +73,20 @@ function Hero({ classes }) {
                 Actionable insights for African changemakers
               </Typography>
             </Grid>
-            <Grid item xs={12}>
-              <Typography variant="body1" className={classes.description}>
-                Lorem ipsum dolor sit amet, adipiscing elitauris con{' '}
-                <Link
-                  href="/about"
-                  className={classes.aboutLink}
-                  underline="always"
-                >
-                  find out more about us
-                </Link>
-              </Typography>
-            </Grid>
+            {tagline && tagline.description && (
+              <Grid item xs={12}>
+                <Typography variant="body1" className={classes.description}>
+                  {tagline.description}{' '}
+                  <Link
+                    href="/about"
+                    className={classes.aboutLink}
+                    underline="always"
+                  >
+                    find out more about us
+                  </Link>
+                </Typography>
+              </Grid>
+            )}
             <Grid item xs={12}>
               <Button href="#takwimuMakingOf" className={classes.button}>
                 Watch the overview video{' '}
@@ -99,7 +101,10 @@ function Hero({ classes }) {
 }
 
 Hero.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    tagline: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(Hero);

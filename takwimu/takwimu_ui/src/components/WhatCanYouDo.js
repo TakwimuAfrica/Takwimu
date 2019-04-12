@@ -37,58 +37,62 @@ const styles = theme => ({
   }
 });
 
-function WhatCanYouDo({ classes }) {
+function WhatCanYouDo({
+  classes,
+  takwimu: { what_you_can_do_with_takwimu: whatYouCanDo }
+}) {
   return (
     <Section title="What can you do with Takwimu">
-      <Grid
-        container
-        alignItems="center"
-        justify="space-evenly"
-        className={classes.container}
-      >
-        <Grid item>
-          <div className={classes.box}>
-            <img alt="research" src={reasearchIcon} />
-            <Typography variant="body1" className={classes.label}>
-              Research
-            </Typography>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum
-              dolor sit amet.
-            </Typography>
-          </div>
-        </Grid>
-        <Grid item>
-          <div className={classes.box}>
-            <img alt="download" src={downloadIcon} />
-            <Typography variant="body1" className={classes.label}>
-              Download
-            </Typography>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum
-              dolor sit amet.
-            </Typography>
-          </div>
-        </Grid>
-        <Grid item>
-          <div className={classes.box}>
-            <img alt="present" src={presentIcon} />
-            <Typography variant="body1" className={classes.label}>
-              Present
-            </Typography>
-            <Typography variant="body2">
-              Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum
-              dolor sit amet.
-            </Typography>
-          </div>
-        </Grid>
-      </Grid>
+      {whatYouCanDo &&
+        whatYouCanDo.research &&
+        whatYouCanDo.download &&
+        whatYouCanDo.present && (
+          <Grid
+            container
+            alignItems="center"
+            justify="space-evenly"
+            className={classes.container}
+          >
+            <Grid item>
+              <div className={classes.box}>
+                <img alt="research" src={reasearchIcon} />
+                <Typography variant="body1" className={classes.label}>
+                  Research
+                </Typography>
+                <Typography variant="body2">{whatYouCanDo.research}</Typography>
+              </div>
+            </Grid>
+            <Grid item>
+              <div className={classes.box}>
+                <img alt="download" src={downloadIcon} />
+                <Typography variant="body1" className={classes.label}>
+                  Download
+                </Typography>
+                <Typography variant="body2">{whatYouCanDo.download}</Typography>
+              </div>
+            </Grid>
+            <Grid item>
+              <div className={classes.box}>
+                <img alt="present" src={presentIcon} />
+                <Typography variant="body1" className={classes.label}>
+                  Present
+                </Typography>
+                <Typography variant="body2">{whatYouCanDo.present}</Typography>
+              </div>
+            </Grid>
+          </Grid>
+        )}
     </Section>
   );
 }
 
 WhatCanYouDo.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    what_you_can_do_with_takwimu: PropTypes.arrayOf(
+      PropTypes.shape({}).isRequired
+    ).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(WhatCanYouDo);

@@ -22,13 +22,15 @@ const styles = () => ({
   }
 });
 
-function MakingOfTakwimu({ classes }) {
+function MakingOfTakwimu({
+  classes,
+  takwimu: { making_of_takwimu: makingOf }
+}) {
   return (
     <Section title="The Making of Takwimu" variant="h3">
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor
-        sit amet, consectetur adipiscing elit.
-      </Typography>
+      {makingOf && makingOf.description && (
+        <Typography variant="body1">{makingOf.description}</Typography>
+      )}
       <div className={classes.container}>
         <iframe
           title="making takwimu"
@@ -43,7 +45,11 @@ function MakingOfTakwimu({ classes }) {
 }
 
 MakingOfTakwimu.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    making_of_takwimu: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+      .isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(MakingOfTakwimu);

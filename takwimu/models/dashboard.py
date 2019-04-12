@@ -753,6 +753,11 @@ class IndexPage(ModelMeta, Page):
     (https://github.com/wagtail/wagtail/issues/3992)
     """
     template = 'takwimu/home_page.html'
+
+    tagline_description = models.CharField(max_length=255,
+                                           default='Lorem ipsum dolor sit amet, adipiscing elitauris con',
+                                           verbose_name='Description')
+
     featured_analysis = StreamField([
         ('featured_analysis', FeaturedAnalysisBlock())
     ], blank=True)
@@ -760,6 +765,24 @@ class IndexPage(ModelMeta, Page):
     featured_data = StreamField([
         ('featured_data', FeaturedDataBlock())
     ], blank=True)
+
+    what_you_can_do_research = models.CharField(max_length=255,
+                                                default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
+                                                verbose_name='Research')
+    what_you_can_do_download = models.CharField(max_length=255,
+                                                default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
+                                                verbose_name='Download')
+    what_you_can_do_present = models.CharField(max_length=255,
+                                               default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
+                                               verbose_name='Present')
+
+    making_description = models.CharField(max_length=1024,
+                                          default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
+                                          verbose_name='Description')
+
+    latest_news_stories_description = models.CharField(max_length=1024,
+                                                       default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
+                                                       verbose_name='Description')
 
     # Social media: Twitter card
 
@@ -783,8 +806,31 @@ class IndexPage(ModelMeta, Page):
     }
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+            FieldPanel('tagline_description'),
+        ],
+            heading='Tagline',
+        ),
         StreamFieldPanel('featured_analysis'),
-        StreamFieldPanel('featured_data')
+        StreamFieldPanel('featured_data'),
+        MultiFieldPanel([
+            FieldPanel('what_you_can_do_research'),
+            FieldPanel('what_you_can_do_download'),
+            FieldPanel('what_you_can_do_present'),
+        ],
+            heading='What you can do with Takwimu',
+            classname='collapsible',
+        ),
+        MultiFieldPanel([
+            FieldPanel('making_description'),
+        ],
+            heading='Making of Takwimu',
+        ),
+        MultiFieldPanel([
+            FieldPanel('latest_news_stories_description'),
+        ],
+            heading='Latest News & Stories',
+        ),
     ]
 
     promote_panels = [
@@ -795,8 +841,20 @@ class IndexPage(ModelMeta, Page):
     ]
 
     api_fields = [
+        APIField('tagline',
+                 serializer=serializers.DictField(child=serializers.CharField(),
+                                                  source='get_tagline')),
         APIField('featured_analysis'),
-        APIField('featured_data')
+        APIField('featured_data'),
+        APIField('what_you_can_do_with_takwimu',
+                 serializer=serializers.DictField(child=serializers.CharField(),
+                                                  source='get_what_you_can_do_with_takwimu')),
+        APIField('making_of_takwimu',
+                 serializer=serializers.DictField(child=serializers.CharField(),
+                                                  source='get_making_of_takwimu')),
+        APIField('latest_news_stories',
+                 serializer=serializers.DictField(child=serializers.CharField(),
+                                                  source='get_latest_news_stories')),
     ]
 
     def get_context(self, request, *args, **kwargs):
@@ -818,10 +876,32 @@ class IndexPage(ModelMeta, Page):
         if self.promotion_image:
             return self.promotion_image.file.url
 
+    def get_tagline(self):
+        return {
+            'description': self.tagline_description,
+        }
+
+    def get_what_you_can_do_with_takwimu(self):
+        return {
+            'research': self.what_you_can_do_research,
+            'download': self.what_you_can_do_download,
+            'present': self.what_you_can_do_present
+        }
+
+    def get_making_of_takwimu(self):
+        return {
+            'description': self.making_description,
+        }
+
+    def get_latest_news_stories(self):
+        return {
+            'description': self.latest_news_stories_description,
+        }
 
 #
 # Settings
 #
+
 
 @register_setting
 class SupportSetting(BaseSetting):
