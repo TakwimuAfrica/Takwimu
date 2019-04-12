@@ -181,6 +181,9 @@ class ViewAnalysis extends Component {
               <MenuItem className={classes.menuList} value="">
                 Data by topic
               </MenuItem>
+              <MenuItem className={classes.menuList} value="sdg-indicators">
+                SDG Indicators
+              </MenuItem>
             </Select>
           </FormControl>
           <Typography variant="body1"> for</Typography>
@@ -224,6 +227,7 @@ class ViewAnalysis extends Component {
             </Select>
           </FormControl>
           <Button
+            href={`/profiles/${country}/#${topic}`}
             classes={{
               label: classes.selectbuttonlabel,
               root: classes.selectbuttonroot
