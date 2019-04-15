@@ -52,15 +52,16 @@ class HomePageView(TemplateView):
         context.update(takwimu_topics(self.request))
         return context
 
-class AnalysisView(TemplateView):
+class ProfileView(TemplateView):
     """
     Analysis Page View:
     ---------------
     """
-    template_name = 'takwimu/analysis_page.html'
+    template_name = 'takwimu/profile_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(AnalysisView, self).get_context_data(**kwargs)
+        context = super(ProfileView, self).get_context_data(**kwargs)
+
         
         for code, names in COUNTRIES.items():
             if self.kwargs['country_slug'] == slugify(names['name']):
