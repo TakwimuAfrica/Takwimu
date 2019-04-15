@@ -31,7 +31,7 @@
 
   {% include 'takwimu/_includes/sections/updates.html' %}
 
-  <div id="takwimuViewAnalysis"></div>
+  <div id="takwimuViewCountry"></div>
 
 {% endblock %}
 
@@ -40,10 +40,7 @@
 {% block body_javascript_extra %}
 
   {{ block.super }}
-  <script>
-    var takwimu = window.takwimu || {};
-    takwimu.analysisPage = page;
-  </script>
+
   <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/share-this.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/sharers/twitter.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/sharers/email.min.js"></script>
