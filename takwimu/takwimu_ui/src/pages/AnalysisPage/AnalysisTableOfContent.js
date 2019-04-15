@@ -44,7 +44,7 @@ function AnalysisTableOfContent({
 }) {
   return (
     <div className={classes.root}>
-      <CountrySelector countryName={content.title} />
+      <CountrySelector countryName={content.title} context="analysis" />
       <MenuList style={{ width: 227 }}>
         {content.body.map((body, index) => (
           <li className={classes.listItem}>

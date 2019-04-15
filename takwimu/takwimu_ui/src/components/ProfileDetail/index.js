@@ -108,7 +108,7 @@ const styles = theme => ({
   }
 });
 
-function CountrySelectorComponent({ classes, countryName }) {
+function CountrySelectorComponent({ classes, countryName, context }) {
   return (
     <div>
       <Typography
@@ -123,7 +123,7 @@ function CountrySelectorComponent({ classes, countryName }) {
         disableTouchRipple
         style={{ outline: 'none' }}
         className={classes.chooserButton}
-        onClick={window.toggleDrawer('topic')}
+        onClick={window.toggleDrawer(context)}
       >
         <img
           alt=""
@@ -141,7 +141,8 @@ function CountrySelectorComponent({ classes, countryName }) {
 
 CountrySelectorComponent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countryName: PropTypes.string.isRequired
+  countryName: PropTypes.string.isRequired,
+  context: PropTypes.string.isRequired
 };
 
 const CountrySelector = withStyles(styles)(CountrySelectorComponent);
@@ -219,12 +220,15 @@ class ProfileDetail extends React.Component {
       );
     }
     const { active: activeRelease } = primaryReleases;
-    const { square_kms: squarekms, full_name: fullName } = geography.this;
+    const {
+      square_kms: squarekms,
+      full_name: fullName = 'Nigeria'
+    } = geography.this;
     return (
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
           <div className={classes.root}>
-            <CountrySelector countryName={fullName} />
+            <CountrySelector countryName={fullName} context="topic" />
             <Grid container direction="row" wrap="nowrap">
               <Grid item>
                 <div className={classes.verticalLine} />
