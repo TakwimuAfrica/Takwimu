@@ -1,0 +1,8 @@
+{% extends 'settings_js.html' %}
+{% load jsonify %}
+
+{% block settings_javascript %}
+{{block.super}}
+
+var HURUMAP_THEME = {{ HURUMAP.theme|jsonify|safe }};
+{% endblock settings_javascript %}

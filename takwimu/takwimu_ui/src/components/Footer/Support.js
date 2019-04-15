@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import A from '../A';
 import Title from './Title';
 
 import gates from '../../assets/images/gates.png';
@@ -20,7 +21,9 @@ function Support({ classes }) {
   return (
     <div className={classes.root}>
       <Title>With support from</Title>
-      <img src={gates} alt="Bill & Melinda Gates" className={classes.img} />
+      <A href="//www.gatesfoundation.org">
+        <img src={gates} alt="Bill & Melinda Gates" className={classes.img} />
+      </A>
     </div>
   );
 }

@@ -13,9 +13,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta'] + INSTALLED_APPS + [
-    'debug_toolbar',]
+    'debug_toolbar', 'wagtail.api.v2']
 
 ROOT_URLCONF = 'takwimu.urls'
+
+WAGTAILAPI_SEARCH_ENABLED = True
 
 MIDDLEWARE_CLASSES = ('whitenoise.middleware.WhiteNoiseMiddleware',
                       'django.middleware.cache.FetchFromCacheMiddleware',
@@ -27,8 +29,6 @@ INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'context_processors'] + [
                                                     'takwimu.context_processors.takwimu_countries',
-                                                    'takwimu.context_processors.takwimu_stories',
-                                                    'takwimu.context_processors.takwimu_topics',
                                                     'takwimu.context_processors.sdgs',
                                                     'takwimu.context_processors.asset_manifest']
 
@@ -190,6 +190,23 @@ WAZIMAP = HURUMAP
 DATABASE_URL = os.environ.get('DATABASE_URL',
                               'postgresql://takwimu:takwimu@localhost/takwimu')
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+
+# -------------------------------------------------------------------------------------
+# Theme
+# -------------------------------------------------------------------------------------
+
+HURUMAP['theme'] = {
+    'charts': {
+        'colorbrewer': {
+            'takwimu': [
+                "#8ed3a5", "#29a87c", "#223a07", "#7d8c6c",
+                "#5bc17d"
+            ],
+        },
+        'color_scale': 'takwimu',
+        'chart_height': 300
+    }
+}
 
 # -------------------------------------------------------------------------------------
 # Logging Configs

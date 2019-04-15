@@ -88,7 +88,6 @@ function MapItGeometryLoader() {
           else
             url_ = url_ + '&country=' + area_country;
 
-          console.log(url_)
           d3.json(self.mapit_url + url_, function(error, data) {
             var areas = Object.keys(data);
             areas = areas.join();
@@ -133,8 +132,6 @@ function MapItGeometryLoader() {
 
             children_Ids = children_Ids.join();
             let children_url = '/areas/' + children_Ids + '.geojson';
-            console.log(area_country)
-            console.log(child_type)
 
             d3.json(self.mapit_url + children_url, function(error, geojson) {
                 let features = _.values(geojson.features);

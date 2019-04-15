@@ -14,9 +14,12 @@ const styles = () => ({
     backgroundColor: 'white',
     borderRadius: '0.625rem',
     width: 'fit-content',
+    clear: 'both',
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginTop: '2rem', // Separate it from Viz
+    zIndex: '1' // Ensure it appears on top of Viz
   },
   button: {
     borderRadius: '0',

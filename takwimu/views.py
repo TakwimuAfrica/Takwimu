@@ -57,7 +57,6 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
@@ -76,7 +75,6 @@ class LegalView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(LegalView, self).get_context_data(**kwargs)
-
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
@@ -126,7 +124,6 @@ class SDGIndicatorView(TemplateView):
         context = super(SDGIndicatorView, self).get_context_data(
             **kwargs)
         context['sdgs'] = sdgs
-
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))

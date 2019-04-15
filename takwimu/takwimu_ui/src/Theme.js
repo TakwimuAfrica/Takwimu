@@ -12,6 +12,10 @@ const Theme = createMuiTheme({
       main: '#004494' // darkish-blue
     },
     text: { primary: '#000', secondary: '#fff' },
+    background: {
+      default: '#fff',
+      light: '#f6f6f6' // light gray
+    },
     info: {
       main: '#f6fbfa' // ice-blue
     },
@@ -23,6 +27,16 @@ const Theme = createMuiTheme({
   typography: {
     fontHeading: FONT_FAMILY_HEADING,
     fontText: FONT_FAMILY_TEXT,
+    h1: {
+      fontFamily: FONT_FAMILY_HEADING,
+      fontSize: '3.375rem',
+      fontWeight: 'bold',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal',
+      color: 'black'
+    },
     h2: {
       fontFamily: FONT_FAMILY_HEADING,
       fontSize: '3.375rem',
@@ -114,6 +128,10 @@ const Theme = createMuiTheme({
     MuiButton: {
       color: 'primary',
       variant: 'contained'
+    },
+    MuiPaper: {
+      elevation: 0,
+      square: true
     }
   },
   overrides: {
@@ -146,6 +164,16 @@ const Theme = createMuiTheme({
       label: {
         paddingTop: '1.125rem',
         paddingBottom: '1.0625rem'
+      }
+    },
+    MuiPaper: {
+      elevation1: {
+        boxShadow: 'none'
+      }
+    },
+    MuiCardContent: {
+      root: {
+        padding: '1.4375rem 0'
       }
     }
   }

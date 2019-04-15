@@ -8,7 +8,6 @@
     text-align: center;
     display: block;
     font-size: 31px;
-    font-weight: bold;
     line-height: 1.29;
   }
 </style>
@@ -23,38 +22,39 @@
       {{ current_page.title }}
   </div>
 {% else %}
-<div class="country-selector btn-group">
-  <button class="btn btn-link btn-lg px-0 dropdown-toggle font-weight-bold {{ class_extra }}"
-      type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
-      style="text-decoration: none; color:#000;"
-      id="dropdownMenuButton_{{ dropdownMenuButton_id }}" >
-    <img class="rounded-circle border-light mr-2"
-        {% with country_slug=current_page.title|slugify %}
-          src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}"
-        {% endwith %}
-        style="border: solid 5px; box-shadow: 0 0 0 2pt rgba(237, 237, 236, 0.61); width: 50px; height: 50px;"/>
-    {{ current_page.title }}
-    <span>
-      <i class="fa fa-angle-down fa-fw"></i>
-    </span>
-  </button>
+  <div class="country-selector btn-group">
+    <button class="btn btn-link btn-lg px-0 dropdown-toggle {{ class_extra }}"
+        type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        style="text-decoration: none; color:#000;"
+        id="dropdownMenuButton_{{ dropdownMenuButton_id }}" >
+      <img class="rounded-circle border-light mr-2"
+          {% with country_slug=current_page.title|slugify %}
+            src="{% static 'img/flags/'|add:country_slug|add:'.svg' %}"
+          {% endwith %}
+          style="border: solid 2px; width: 40px; height: 40px;"/>
+      {{ current_page.title }}
+      <span>
+        <i class="fa fa-angle-down fa-fw"></i>
+      </span>
+    </button>
 
-  <div class="dropdown-menu py-0 rounded-0"
-      aria-labelledby="dropdownMenuButton_{{ dropdownMenuButton_id }}">
+    <div class="dropdown-menu py-0 rounded-0"
+        aria-labelledby="dropdownMenuButton_{{ dropdownMenuButton_id }}"
+        style="z-index: 9200;">
 
-    {% for country in countries %}
-    {% if country.published %}
-      <a class="dropdown-item p-3" href="/profiles/{{ country.slug }}"
-          data-value="{{ country.name }}">
-        <img class="rounded-circle border-light mr-2"
-            src="{% static 'img/flags/'|add:country.slug|add:'.svg' %}"
-            style="border: solid 2px; box-shadow: 0 0 0 2pt rgba(237, 237, 236, 0.61); width: 30px; height: 30px;"/>
-        {{ country.short_name }}
-      </a>
-    {% endif %}
-    {% endfor %}
+      {% for country in countries %}
+      {% if country.published %}
+        <a class="dropdown-item p-3" href="/profiles/{{ country.slug }}"
+            data-value="{{ country.name }}">
+          <img class="rounded-circle border-light mr-2"
+              src="{% static 'img/flags/'|add:country.slug|add:'.svg' %}"
+              style="border: solid 2px; width: 30px; height: 30px;"/>
+          {{ country.short_name }}
+        </a>
+      {% endif %}
+      {% endfor %}
+    </div>
   </div>
-</div>
 {% endif %}
 
 

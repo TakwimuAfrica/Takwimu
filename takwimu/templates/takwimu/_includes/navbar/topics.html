@@ -6,5 +6,45 @@
 {% block dropdown_url %}/topics{% endblock %}
 
 {% block dropdown_content %}
-    <div id="takwimuDataByTopic"></div>
+<div class="row w-100">
+    <div class="col-4">
+      <h4 class="pb-2">Key Topics</h4>
+      <ul>
+        <div class="nav flex-column" id="profile-sections-tab" role="tablist">
+            {% for section in sections %}
+            <li class="pb-1" type="disc">
+                <a class="nav-link-explore-section"
+                    id="{{ section.id }}"
+                    href="/topics/#data-topics_{{ section.href }}"
+                    aria-controls="{{ section.id }}"
+                    role="tab" aria-selected="false">
+                    {{ section.title }}
+                </a>
+            </li>
+            {% endfor %}
+        </div>
+      </ul>
+    </div>
+    <div class="col-8">
+      <h4 class="pb-2">Sustainable Development Goals</h4>
+      <div class="row">
+        {% for sdg in sdgs %}
+            <div class="col-2 mx-0 p-1 grayscale">
+            {% if forloop.counter <= 6 %}
+                <a href="/sdgs/#sdgs-section-1_{{ sdg.short|slugify }}-collapse"
+            {% elif forloop.counter >= 12 %}
+                <a href="/sdgs/#sdgs-section-3_{{ sdg.short|slugify }}-collapse"
+            {% else %}
+                <a href="/sdgs/#sdgs-section-2_{{ sdg.short|slugify }}-collapse"
+            {% endif %}
+                   data-sector="{{ sdg.short }}"
+                   data-target="#{{ sdg.short|slugify }}"
+                   aria-controls="{{ sdg.short|slugify }}">
+                    <img src="{% static sdg.icon_url %}" alt="{{ sdg.short }}" />
+                </a>
+            </div>
+        {% endfor %}
+        </div>
+    </div>
+  </div>
 {% endblock %}

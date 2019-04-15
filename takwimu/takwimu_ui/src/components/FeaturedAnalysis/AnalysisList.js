@@ -30,11 +30,11 @@ function AnalysisList({ classes, content, current, onClick }) {
     >
       {content.map((c, index) => (
         <AnalysisListItem
-          key={c.title}
+          key={`${c.value.country_slug}-${c.value.slug}`}
           isCurrent={index === current}
           onClick={() => onClick(index)}
         >
-          {c.title}
+          {c.value.title}
         </AnalysisListItem>
       ))}
     </Grid>
@@ -43,7 +43,11 @@ function AnalysisList({ classes, content, current, onClick }) {
 
 AnalysisList.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  content: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.shape({}).isRequired
+    })
+  ).isRequired,
   current: PropTypes.number,
   onClick: PropTypes.func.isRequired
 };
