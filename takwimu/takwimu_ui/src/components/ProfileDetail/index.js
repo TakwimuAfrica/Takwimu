@@ -17,6 +17,8 @@ import {
 import classNames from 'classnames';
 import Layout from '../Layout';
 
+import slugify from '../../slugify';
+
 import searchIcon from '../../assets/images/icon-search.svg';
 import downArrowBlack from '../../assets/images/down-arrow-black.svg';
 import upArrowBlack from '../../assets/images/up-arrow-black.svg';
@@ -105,17 +107,6 @@ const styles = theme => ({
     zIndex: 2
   }
 });
-
-function slugify(text) {
-  return text
-    .toString()
-    .toLowerCase()
-    .replace(/\s+/g, '-')
-    .replace(/[^\w-]+/g, '')
-    .replace(/--+/g, '-')
-    .replace(/^-+/, '')
-    .replace(/-+$/, '');
-}
 
 function CountrySelectorComponent({ classes, countryName }) {
   return (

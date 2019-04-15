@@ -11,8 +11,11 @@ export default class AnalysisPage extends React.Component {
     super(props);
 
     this.state = {
-      analysis: null
+      analysis: null,
+      current: 0
     };
+
+    this.changeContent = this.changeContent.bind(this);
   }
 
   componentDidMount() {
@@ -27,8 +30,12 @@ export default class AnalysisPage extends React.Component {
     });
   }
 
+  changeContent(contentIndex) {
+    this.setState({ current: contentIndex });
+  }
+
   render() {
-    const { analysis } = this.state;
+    const { analysis, current } = this.state;
     return (
       <React.Fragment>
         <AnalysisPageNav />
@@ -36,10 +43,14 @@ export default class AnalysisPage extends React.Component {
           <Section>
             <Grid container justify="space-between">
               <Grid item>
-                <AnalysisTableOfContent content={analysis} />
+                <AnalysisTableOfContent
+                  content={analysis}
+                  current={current}
+                  onChangeContent={this.changeContent}
+                />
               </Grid>
               <Grid item>
-                <AnalysisContent content={analysis.body[0]} />
+                <AnalysisContent content={analysis.body[current]} />
               </Grid>
             </Grid>
           </Section>

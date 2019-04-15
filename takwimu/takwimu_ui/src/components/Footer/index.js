@@ -15,6 +15,8 @@ import Support from './Support';
 
 const styles = theme => ({
   root: {
+    position: 'relative',
+    zIndex: 1,
     flexGrow: 1,
     color: 'white',
     backgroundColor: 'black',

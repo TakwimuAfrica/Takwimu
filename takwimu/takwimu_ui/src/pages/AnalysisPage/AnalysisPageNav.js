@@ -13,6 +13,7 @@ const styles = theme => ({
     justifyContent: 'center',
     position: 'fixed',
     top: 0,
+    zIndex: 1,
     backgroundColor: theme.palette.primary.main
   },
   otherTopicLinks: {
