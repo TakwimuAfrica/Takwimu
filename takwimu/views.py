@@ -61,7 +61,6 @@ class AnalysisView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AnalysisView, self).get_context_data(**kwargs)
-
         
         for code, names in COUNTRIES.items():
             if self.kwargs['country_slug'] == slugify(names['name']):
