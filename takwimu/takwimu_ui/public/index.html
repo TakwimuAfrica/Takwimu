@@ -139,6 +139,7 @@
       const body = document.getElementsByTagName('body')[0];
       const searchParams = new URLSearchParams(window.location.search);
       const page = searchParams.get('page') || 'homepage';
+      takwimu.page = page;
       body.id = page;
       if (page === 'homepage') {
         [

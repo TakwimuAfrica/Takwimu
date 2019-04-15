@@ -136,13 +136,14 @@ class Navigation extends React.Component {
   renderDesktopNav() {
     const {
       classes,
-      takwimu: { countries }
+      takwimu: { page, countries }
     } = this.props;
     const { openDrawer } = this.state;
     return (
       <Fragment>
         <Grid item>
           <DropDowns
+            page={page}
             active={openDrawer}
             toggle={this.toggleDrawer}
             countries={countries}
@@ -194,7 +195,7 @@ class Navigation extends React.Component {
   renderMobileDrawer() {
     const {
       classes,
-      takwimu: { countries }
+      takwimu: { page, countries }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
     return (
@@ -218,6 +219,7 @@ class Navigation extends React.Component {
           {this.renderNavBar()}
           <MenuList>
             <DropDowns
+              page={page}
               active={openDrawer}
               countries={countries}
               toggle={this.toggleDrawer}
@@ -266,6 +268,7 @@ Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
   takwimu: PropTypes.shape({
+    page: PropTypes.string.isRequired,
     countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
   }).isRequired
 };

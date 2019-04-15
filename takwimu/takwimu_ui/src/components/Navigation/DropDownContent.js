@@ -124,7 +124,7 @@ function DropDownContent({ classes, title, description, countries, profile }) {
               className={classes.countryButton}
             >
               <Link
-                href={`/analysis/${profile(country)}`}
+                href={`/profiles/${profile(country)}`}
                 color="textSecondary"
                 className={classes.countryLink}
                 underline="none"
