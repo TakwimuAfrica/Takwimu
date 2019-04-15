@@ -20,6 +20,10 @@ const styles = theme => ({
     '& > a:nth-child(2)': {
       margin: '0 50px'
     }
+  },
+  label: {
+    fontSize: '0.813rem',
+    marginBottom: '1rem'
   }
 });
 
@@ -27,7 +31,7 @@ function AnalysisPageNav({ classes }) {
   return (
     <div className={classes.root}>
       <Layout>
-        <Typography color="textSecondary">
+        <Typography className={classes.label} color="textSecondary">
           Other topics in <strong>Politics</strong>
         </Typography>
         <div className={classes.otherTopicLinks}>

@@ -12,14 +12,19 @@ const styles = theme => ({
     '& > a:nth-child(2)': {
       margin: '0 50px'
     }
+  },
+  label: {
+    color: '#848484',
+    fontSize: '0.813rem',
+    marginBottom: '1rem'
   }
 });
 
 function OtherTopics({ classes }) {
   return (
     <div className={classes.root}>
-      <Typography>
-        Other topics in <strong>Politics</strong>
+      <Typography className={classes.label}>
+        Other topics in <strong style={{ color: 'black' }}>Politics</strong>
       </Typography>
       <div className={classes.otherTopicLinks}>
         <Link color="primary" href="x">

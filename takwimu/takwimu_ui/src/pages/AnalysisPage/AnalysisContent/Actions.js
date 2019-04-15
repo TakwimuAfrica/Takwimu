@@ -20,6 +20,14 @@ const styles = {
   },
   actionIcon: {
     marginRight: '21px'
+  },
+  lastUpdated: {
+    fontSize: '0.875rem',
+    fontStyle: 'italic'
+  },
+  shareButton: {
+    fontSize: '0.813rem',
+    color: '#848484'
   }
 };
 
@@ -27,15 +35,15 @@ function Actions({ classes, hideLastUpdated }) {
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
-        <Typography>
-          Last Updated <strong>18th December 2018</strong>
+        <Typography className={classes.lastUpdated}>
+          Last Updated: <strong>18th December 2018</strong>
         </Typography>
       )}
-      <ButtonBase>
+      <ButtonBase className={classes.shareButton}>
         <img alt="share" src={shareIcon} className={classes.actionIcon} />
         Share this analysis
       </ButtonBase>
-      <ButtonBase>
+      <ButtonBase className={classes.shareButton}>
         <img alt="download" src={downloadIcon} className={classes.actionIcon} />
         Download this analysis (PDF 800kb)
       </ButtonBase>
