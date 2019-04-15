@@ -30,6 +30,7 @@ from takwimu.context_processors import takwimu_countries, takwimu_stories, takwi
 
 from django.conf import settings as takwimu_settings
 
+from takwimu.utils.helpers import COUNTRIES
 
 class HomePageView(TemplateView):
     """
@@ -51,6 +52,32 @@ class HomePageView(TemplateView):
         context.update(takwimu_topics(self.request))
         return context
 
+class AnalysisView(TemplateView):
+    """
+    Analysis Page View:
+    ---------------
+    """
+    template_name = 'takwimu/analysis_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(AnalysisView, self).get_context_data(**kwargs)
+
+        
+        for code, names in COUNTRIES.items():
+            if self.kwargs['country_slug'] == slugify(names['name']):
+                context['country'] = {
+                    'iso_code': code,
+                    'name': names['name'],
+                    'short_name': names['short_name'],
+                    'slug': slugify(names['name'])
+                }
+                break
+
+        context.update(settings(self.request))
+        context.update(takwimu_countries(self.request))
+        context.update(takwimu_stories(self.request))
+        context.update(takwimu_topics(self.request))
+        return context
 
 class AboutUsView(TemplateView):
     template_name = 'takwimu/about/index.html'
@@ -93,6 +120,7 @@ class TopicView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TopicView, self).get_context_data(**kwargs)
+        context['country_slug'] = self.kwargs['country_slug']
 
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))

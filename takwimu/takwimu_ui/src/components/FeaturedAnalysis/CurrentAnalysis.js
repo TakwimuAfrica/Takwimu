@@ -115,7 +115,7 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.actions}
           >
             <Button
-              href={`/profiles/${content.country_slug}/${content.slug}`}
+              href={`/analysis/${content.country_slug}/${content.slug}`}
               className={classes.primaryAction}
             >
               Read the full analysis

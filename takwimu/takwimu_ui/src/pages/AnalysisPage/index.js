@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { Grid } from '@material-ui/core';
+import { PropTypes } from 'prop-types';
 import Section from '../../components/Section';
 import AnalysisContent from './AnalysisContent';
-import AnalysisPageNav from './AnalysisPageNav';
-import AnalysisTableOfContent from './AnalysisTableOfContent';
+import AnalysisPageNav from './ActionsNav';
+import AnalysisTableOfContent from './TableOfContent';
 
 export default class AnalysisPage extends React.Component {
   constructor(props) {
@@ -19,8 +20,12 @@ export default class AnalysisPage extends React.Component {
   }
 
   componentDidMount() {
+    const { takwimu } = this.props;
+    const countryName = takwimu.selectedCountry.name;
     fetch(
-      'http://localhost:8000/api/v2/pages/?type=takwimu.ProfilePage&fields=body,title&title=Nigeria&format=json'
+      `${
+        takwimu.url
+      }/api/v2/pages/?type=takwimu.ProfilePage&fields=body,title&title=${countryName}&format=json`
     ).then(response => {
       if (response.status === 200) {
         response
@@ -59,3 +64,7 @@ export default class AnalysisPage extends React.Component {
     );
   }
 }
+
+AnalysisPage.propTypes = {
+  takwimu: PropTypes.shape({}).isRequired
+};
