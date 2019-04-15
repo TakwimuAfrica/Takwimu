@@ -6,6 +6,7 @@ import withRoot from './withRoot';
 import Hero from './components/Hero';
 import Navigation from './components/Navigation';
 import ProfileDetail from './components/ProfileDetail';
+import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
@@ -15,23 +16,13 @@ import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
 
-const props = {
-  countries: window.countries,
-  profile: window.profileDataJson || {
-    demographics: {},
-    geography: {
-      full_geoid: '',
-      this: {
-        square_kms: '',
-        short_name: '',
-        parents: []
-      }
-    },
-    primary_releases: { active: {}, other: [] }
-  }
+const PROPS = {
+  takwimu: window.takwimu,
+  settings: window.settings,
+  profile: window.profileData
 };
 
-const renderApp = (Component, id) => {
+const renderApp = (Component, id, props = PROPS) => {
   const el = document.getElementById(id);
   if (el) {
     const App = withRoot(Component);
@@ -40,15 +31,69 @@ const renderApp = (Component, id) => {
   }
 };
 
+const renderHomepage = () => {
+  // check for anything that's *must* be present on this page
+  const el = document.getElementById('takwimuHero');
+  if (el) {
+    fetch(
+      `${
+        PROPS.takwimu.url
+      }/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json`
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          const {
+            tagline,
+            featured_analysis: featuredAnalysis,
+            featured_data: featuredData,
+            what_you_can_do_with_takwimu: whatYouCanDo,
+            making_of_takwimu: makingOf,
+            latest_news_stories: latestNewsStories
+          } = data.items[0];
+          const takwimu = Object.assign({}, PROPS.takwimu, {
+            tagline,
+            featured_analysis: featuredAnalysis,
+            featured_data: featuredData,
+            what_you_can_do_with_takwimu: whatYouCanDo,
+            making_of_takwimu: makingOf,
+            latest_news_stories: latestNewsStories
+          });
+          const props = Object.assign({}, PROPS, { takwimu });
+
+          renderApp(Hero, 'takwimuHero', props);
+          renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
+          renderApp(FeaturedData, 'takwimuFeaturedData', props);
+          renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo', props);
+          renderApp(MakingOfTakwimu, 'takwimuMakingOf', props);
+          renderApp(LatestNewsStories, 'takwimuLatestNewsStories', props);
+        }
+      });
+    renderApp(WhereToNext, 'takwimuWhereToNext');
+  }
+};
+
+const renderDatabyTopicPage = () => {
+  // check for anything that's *must* be present on this page
+  const el = document.getElementById('takwimuProfile');
+  if (el) {
+    renderApp(ProfileDetail, 'takwimuProfileDetail');
+    renderApp(Profile, 'takwimuProfile');
+  }
+};
+
+const rendeAnalysisPage = () => {
+  const el = document.getElementById('takwimuAnalysisPage');
+  if (el) {
+    renderApp(AnalysisPage, 'takwimuAnalysisPage');
+  }
+};
+
+// Render common elements
 renderApp(Navigation, 'takwimuNavigation');
-renderApp(ProfileDetail, 'takwimuProfileDetail');
-renderApp(Hero, 'takwimuHero');
-renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis');
-renderApp(FeaturedData, 'takwimuFeaturedData');
-renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
-renderApp(MakingOfTakwimu, 'takwimuMakingOf');
-renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
-renderApp(WhereToNext, 'takwimuWhereToNext');
 renderApp(Footer, 'takwimuFooter');
 
-renderApp(AnalysisPage, 'takwimuAnalysisPage');
+// Render specific pages
+renderHomepage();
+renderDatabyTopicPage();
+rendeAnalysisPage();

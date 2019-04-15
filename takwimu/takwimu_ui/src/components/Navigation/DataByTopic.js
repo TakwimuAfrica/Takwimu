@@ -14,6 +14,10 @@ const styles = {
   }
 };
 
+function profile(country) {
+  return `country-${country.iso_code}-${country.slug}`;
+}
+
 function DataByTopic({ classes, countries }) {
   const sortedCountries = countries.sort((a, b) => a.name[0] > b.name[0]);
   return (
@@ -24,6 +28,7 @@ function DataByTopic({ classes, countries }) {
       title="Data by Topic"
       description="Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet."
       countries={sortedCountries}
+      profile={profile}
     />
   );
 }

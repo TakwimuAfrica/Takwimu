@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
 
+import A from '../A';
 import Title from './Title';
 
 import ap from '../../assets/images/ap.png';
@@ -35,9 +36,15 @@ function Initiative({ classes }) {
     <div className={classes.root}>
       <Title>An initiative by</Title>
       <div className={classes.img}>
-        <img src={ap} alt="Takwimu" />
-        <img src={cfa} alt="Code for Africa" className={classes.imgCfa} />
-        <img src={ihub} alt="iHub" />
+        <A href="//www.africapractice.com/">
+          <img src={ap} alt="africapractice" />
+        </A>
+        <A href="//codeforafrica.org/">
+          <img src={cfa} alt="Code for Africa" className={classes.imgCfa} />
+        </A>
+        <A href="//ihub.co.ke/">
+          <img src={ihub} alt="iHub" />
+        </A>
       </div>
     </div>
   );

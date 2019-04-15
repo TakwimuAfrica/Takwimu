@@ -3,9 +3,9 @@
 <div class="card grayscale">
   <div class="card-img" style="background-image: url('{{ story.preview_image.url }}'); "></div>
   <div class="card-body text-left pt-5 font-weight-light" style="color: #4a4a4a;">
-    <h5 class="card-title font-weight-bold" style="color: #000000;">{{ story.title }}</h5>
+    <h3 class="card-title" style="color: #000000;">{{ story.title }}</h3>
     <p class="small text-muted">{{ story.post_date|print_timestamp }} . {{ story.read_time|floatformat:"0" }} min read</p>
-    <p class="card-text">{{ story.subtitle }}</p>
+    <p class="card-text line-height-md">{{ story.subtitle }}</p>
   </div>
   <div class="card-footer text-center bg-white border-top-0 pb-4">
     <a href="{{ story.url }}" target="_blank" rel="noopener"

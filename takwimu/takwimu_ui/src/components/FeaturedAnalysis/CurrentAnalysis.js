@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import { withStyles, Button, Grid, Typography } from '@material-ui/core';
 
-import flag from '../../assets/images/flag.png';
+const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const styles = theme => ({
   root: {
@@ -36,6 +36,7 @@ const styles = theme => ({
     paddingBottom: '1.875rem'
   },
   flag: {
+    height: '4.4375rem',
     marginRight: '1.5rem'
   },
   title: {
@@ -47,6 +48,13 @@ const styles = theme => ({
   actions: {
     marginBottom: '3.0625rem'
   },
+  primaryAction: {
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.text.secondary,
+      textDecoration: 'none'
+    }
+  },
   secondaryAction: {
     marginTop: '1rem',
     [theme.breakpoints.up('md')]: {
@@ -55,6 +63,12 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       marginLeft: '2.875rem'
+    },
+
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.primary.dark,
+      textDecoration: 'none'
     }
   }
 });
@@ -75,15 +89,22 @@ function CurrentAnalysis({ classes, content }) {
             alignItems="center"
             className={classes.header}
           >
-            <img src={flag} alt="South Africa" className={classes.flag} />
-            <Typography variant="h4" component="h1" className={classes.title}>
-              {content.title}
-            </Typography>
+            <img
+              src={flagSrc(`./${content.country_slug}.svg`)}
+              alt="South Africa"
+              className={classes.flag}
+            />
+            <Typography
+              variant="h4"
+              component="h1"
+              className={classes.title}
+              dangerouslySetInnerHTML={{ __html: content.title }}
+            />
           </Grid>
         </Grid>
         <Grid item xs={12}>
           <Typography variant="body1" className={classes.body}>
-            {content.summary}
+            {content.description}
           </Typography>
         </Grid>
         <Grid item xs={12}>
@@ -93,11 +114,16 @@ function CurrentAnalysis({ classes, content }) {
             alignItems="center"
             className={classes.actions}
           >
-            <Button href={content.links.analysis}>
+            <Button
+              href={`/profiles/${content.country_slug}/${content.slug}`}
+              className={classes.primaryAction}
+            >
               Read the full analysis
             </Button>
             <Button
-              href={content.links.data}
+              href={`/profiles/country-${content.country_code}-${
+                content.country_slug
+              }`}
               className={classes.secondaryAction}
               variant="outlined"
             >

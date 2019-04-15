@@ -68,7 +68,7 @@ var ProfileMaps = function() {
 
         if (allowMapDrag) {
             this.map.addControl(new L.Control.Zoom({
-                position: 'topright'
+                position: 'bottomright'
             }));
         }
     };

@@ -3,7 +3,6 @@ import operator
 import os
 
 from collections import OrderedDict
-from django.utils.text import slugify
 from takwimu import settings
 from takwimu.utils.helpers import get_takwimu_stories, get_takwimu_countries
 from takwimu.utils.medium import Medium
@@ -122,7 +121,8 @@ def sdgs(request):
 
 
 def asset_manifest(request):
-    manifest_filepath = os.path.join(settings.BASE_DIR, 'takwimu/takwimu_ui/build/asset-manifest.json')
+    manifest_filepath = os.path.join(
+        settings.BASE_DIR, 'takwimu/takwimu_ui/build/asset-manifest.json')
     asset_manifest = {}
     try:
         with open(manifest_filepath) as f:
@@ -142,4 +142,3 @@ def asset_manifest(request):
     return {
         'asset_manifest': asset_manifest
     }
-

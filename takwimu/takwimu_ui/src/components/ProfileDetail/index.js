@@ -199,7 +199,9 @@ class ProfileDetail extends React.Component {
     const { showSearchResults, releasesMenuIsOpen } = this.state;
     const {
       classes,
+      takwimu: { countries },
       profile: {
+        comparable = false,
         demographics = {},
         primary_releases: primaryReleases = {},
         geography = { this: {} }
@@ -222,8 +224,11 @@ class ProfileDetail extends React.Component {
     const { active: activeRelease } = primaryReleases;
     const {
       square_kms: squarekms,
-      full_name: fullName = 'Nigeria'
+      full_name: fullName = 'Nigeria',
+      geo_code: countryCode
     } = geography.this;
+    const country = countries.find(c => c.iso_code === countryCode);
+
     return (
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
@@ -344,47 +349,53 @@ class ProfileDetail extends React.Component {
                 </ClickAwayListener>
               </Popper>
             </Grid>
-            <Grid container>
-              <div
-                ref={node => {
-                  this.searchBarRef = node;
-                }}
-                className={classes.searchBar}
-              >
-                <Input
-                  fullWidth
-                  disableUnderline
-                  className={classes.searchBarInput}
-                  onFocus={this.handleSearch}
-                  onBlur={this.hideSearchResults}
-                  placeholder="Compare with"
-                  onChange={this.handleSearch}
-                />
-                <img
-                  alt=""
-                  src={searchIcon}
-                  className={classes.searchBarIcon}
-                />
-              </div>
 
-              <Popper
-                className={classes.popperIndex}
-                open={showSearchResults}
-                anchorEl={this.searchBarRef}
-                style={{
-                  width: this.searchBarRef
-                    ? this.searchBarRef.clientWidth
-                    : null
-                }}
-              >
-                <Paper>
-                  <MenuList>
-                    <MenuItem>Example</MenuItem>
-                  </MenuList>
-                </Paper>
-              </Popper>
-            </Grid>
-            <Button fullWidth>Read the full country analysis</Button>
+            {comparable && (
+              <Grid container>
+                <div
+                  ref={node => {
+                    this.searchBarRef = node;
+                  }}
+                  className={classes.searchBar}
+                >
+                  <Input
+                    fullWidth
+                    disableUnderline
+                    className={classes.searchBarInput}
+                    onFocus={this.handleSearch}
+                    onBlur={this.hideSearchResults}
+                    placeholder="Compare with"
+                    onChange={this.handleSearch}
+                  />
+                  <img
+                    alt=""
+                    src={searchIcon}
+                    className={classes.searchBarIcon}
+                  />
+                </div>
+
+                <Popper
+                  className={classes.popperIndex}
+                  open={showSearchResults}
+                  anchorEl={this.searchBarRef}
+                  style={{
+                    width: this.searchBarRef
+                      ? this.searchBarRef.clientWidth
+                      : null
+                  }}
+                >
+                  <Paper>
+                    <MenuList>
+                      <MenuItem>Example</MenuItem>
+                    </MenuList>
+                  </Paper>
+                </Popper>
+              </Grid>
+            )}
+
+            <Button href={`/profiles/${country.slug}`} fullWidth>
+              Read the full country analysis
+            </Button>
           </div>
         </Layout>
       </Grid>
@@ -394,6 +405,9 @@ class ProfileDetail extends React.Component {
 
 ProfileDetail.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired,
   profile: PropTypes.shape({}).isRequired
 };
 

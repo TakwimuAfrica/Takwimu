@@ -5,20 +5,17 @@ import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
 import DataActions from './DataActions';
+import IFrame from './IFrame';
 
 const styles = theme => ({
   root: {
     margin: '1.25rem 0',
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '45%',
-      margin: '1.25rem'
-    }
-  },
-  descriptionContainer: {
-    padding: '0 0.625em',
-    [theme.breakpoints.up('md')]: {
-      padding: '0 2.625rem'
+      width: '28.03125rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '37.375rem'
     }
   },
   dataContainer: {
@@ -28,15 +25,11 @@ const styles = theme => ({
       padding: '1.25rem'
     }
   },
-  title: {
-    fontFamily: '"Roboto"',
-    fontSize: '1.25rem',
-    textAlign: 'center',
-    fontWeight: 'bold',
-    fontStyle: 'normal',
-    fontStretch: 'normal',
-    lineHeight: 1.2,
-    letterSpacing: 'normal'
+  descriptionContainer: {
+    padding: '0 0.625em',
+    [theme.breakpoints.up('md')]: {
+      padding: '0 2.625rem'
+    }
   },
   description: {
     color: theme.palette.data.main,
@@ -44,14 +37,12 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ classes, color, data }) {
+function DataContainer({ classes, featuredData, url }) {
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          <Typography className={classes.title} color={color}>
-            {data.title}
-          </Typography>
+          <IFrame featuredData={featuredData} url={url} />
           <DataActions />
         </Grid>
       </div>
@@ -62,7 +53,7 @@ function DataContainer({ classes, color, data }) {
           </Grid>
           <Grid item>
             <Typography variant="caption" className={classes.description}>
-              {data.description}
+              {featuredData.description}
             </Typography>
           </Grid>
         </Grid>
@@ -73,8 +64,8 @@ function DataContainer({ classes, color, data }) {
 
 DataContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired,
-  color: PropTypes.string.isRequired
+  featuredData: PropTypes.shape({}).isRequired,
+  url: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(DataContainer);
