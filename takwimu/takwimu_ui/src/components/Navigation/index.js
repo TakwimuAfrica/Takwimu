@@ -123,7 +123,7 @@ class Navigation extends React.Component {
           <IconButton
             disableRipple
             disableTouchRipple
-            color="secondary"
+            color="textSecondary"
             onClick={this.toggleMobileDrawer}
           >
             <MenuOutlined color="inherit" />

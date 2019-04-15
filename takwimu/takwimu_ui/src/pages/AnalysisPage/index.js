@@ -47,14 +47,14 @@ export default class AnalysisPage extends React.Component {
         {analysis && (
           <Section>
             <Grid container justify="space-between">
-              <Grid item>
+              <Grid item container xs="12" md="3">
                 <AnalysisTableOfContent
                   content={analysis}
                   current={current}
                   onChangeContent={this.changeContent}
                 />
               </Grid>
-              <Grid item>
+              <Grid item container xs="12" md="9">
                 <AnalysisContent content={analysis.body[current]} />
               </Grid>
             </Grid>
