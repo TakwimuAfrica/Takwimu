@@ -588,9 +588,18 @@ class AboutPage(Page):
     content_panels = [
         FieldPanel('title'),
         FieldPanel('content'),
+        InlinePanel('related_content', label='Related Content'),
     ]
 
-    api_fields = [APIField('content'), ]
+    api_fields = [
+        APIField('content'), 
+        APIField('related_content'),
+    ]
+
+class RelatedContent(Orderable):
+    title = models.TextField()
+    link = models.URLField()
+    page = ParentalKey(AboutPage, related_name='related_content')
 
 
 class ContactUsPage(Page):
