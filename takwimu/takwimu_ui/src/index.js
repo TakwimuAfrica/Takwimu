@@ -9,7 +9,10 @@ import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
-import WhereToNext from './components/WhereToNext';
+import HomeWhereToNext, {
+  About as AboutWhereToNext,
+  Analysis as AnalysisReadNext
+} from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
@@ -32,42 +35,68 @@ const renderApp = (Component, id, props = PROPS) => {
 };
 
 const renderHomepage = () => {
-  fetch(
-    `${
-      PROPS.takwimu.url
-    }/api/v2/pages/?type=takwimu.IndexPage&fields=featured_analysis,featured_data&format=json`
-  )
-    .then(response => response.json())
-    .then(data => {
-      if (data.items && data.items.length) {
-        const {
-          featured_analysis: featuredAnalysis,
-          featured_data: featuredData
-        } = data.items[0];
-        const props = Object.assign({}, PROPS, {
-          takwimu: {
+  // check for anything that *must* be present on this page
+  const el = document.getElementById('takwimuHero');
+  if (el) {
+    fetch(
+      `${
+        PROPS.takwimu.url
+      }/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json`
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          const {
+            tagline,
             featured_analysis: featuredAnalysis,
-            featured_data: featuredData
-          }
-        });
-        renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
-        renderApp(FeaturedData, 'takwimuFeaturedData', props);
-      }
-    });
-  renderApp(Hero, 'takwimuHero');
-  renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo');
-  renderApp(MakingOfTakwimu, 'takwimuMakingOf');
-  renderApp(LatestNewsStories, 'takwimuLatestNewsStories');
-  renderApp(WhereToNext, 'takwimuWhereToNext');
+            featured_data: featuredData,
+            what_you_can_do_with_takwimu: whatYouCanDo,
+            making_of_takwimu: makingOf,
+            latest_news_stories: latestNewsStories
+          } = data.items[0];
+          const takwimu = Object.assign({}, PROPS.takwimu, {
+            tagline,
+            featured_analysis: featuredAnalysis,
+            featured_data: featuredData,
+            what_you_can_do_with_takwimu: whatYouCanDo,
+            making_of_takwimu: makingOf,
+            latest_news_stories: latestNewsStories
+          });
+          const props = Object.assign({}, PROPS, { takwimu });
+
+          renderApp(Hero, 'takwimuHero', props);
+          renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
+          renderApp(FeaturedData, 'takwimuFeaturedData', props);
+          renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo', props);
+          renderApp(MakingOfTakwimu, 'takwimuMakingOf', props);
+          renderApp(LatestNewsStories, 'takwimuLatestNewsStories', props);
+        }
+      });
+    renderApp(HomeWhereToNext, 'takwimuWhereToNext');
+  }
+};
+
+const renderAnalysisPage = () => {
+  const el = document.getElementById('takwimuReadNext');
+  if (el) {
+    renderApp(AnalysisReadNext, 'takwimuReadNext');
+    renderApp(ViewAnalysis, 'takwimuViewCountry');
+  }
 };
 
 const renderDatabyTopicPage = () => {
-  renderApp(ProfileDetail, 'takwimuProfileDetail');
-  renderApp(Profile, 'takwimuProfile');
+  const el = document.getElementById('takwimuProfile');
+  if (el) {
+    renderApp(ProfileDetail, 'takwimuProfileDetail');
+    renderApp(Profile, 'takwimuProfile');
+  }
 };
 
-const renderCountryAnalysisPage = () => {
-  renderApp(ViewAnalysis, 'takwimuViewAnalysis');
+const renderAboutPage = () => {
+  const el = document.getElementById('takwimuWhereToNext');
+  if (el) {
+    renderApp(AboutWhereToNext, 'takwimuWhereToNext');
+  }
 };
 
 // Render common elements
@@ -75,6 +104,7 @@ renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
-renderHomepage();
+renderAboutPage();
 renderDatabyTopicPage();
-renderCountryAnalysisPage();
+renderAnalysisPage();
+renderHomepage();

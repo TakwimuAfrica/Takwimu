@@ -32,51 +32,61 @@
         url: 'http://localhost:8000',
         countries: [
           {
+            iso_code: 'TZ',
             name: 'United Republic of Tanzania',
             slug: 'tanzania',
             short_name: 'Tanzania'
           },
           {
+            iso_code: 'SN',
             name: 'Senegal',
             slug: 'senegal',
             short_name: 'Senegal'
           },
           {
+            iso_code: 'KE',
             name: 'Kenya',
             slug: 'kenya',
             short_name: 'Kenya'
           },
           {
+            iso_code: 'ET',
             name: 'Ethiopia',
             slug: 'ethiopia',
             short_name: 'Ethiopia'
           },
           {
+            iso_code: 'UG',
             name: 'Uganda',
             slug: 'uganda',
             short_name: 'Uganda'
           },
           {
+            iso_code: 'NG',
             name: 'Nigeria',
             slug: 'nigeria',
             short_name: 'Nigeria'
           },
           {
+            iso_code: 'ZA',
             name: 'South Africa',
             slug: 'south-africa',
             short_name: 'South Africa'
           },
           {
+            iso_code: 'BF',
             name: 'Burkina Faso',
             slug: 'burkina-faso',
             short_name: 'Burkina Faso'
           },
           {
+            iso_code: 'CD',
             name: 'Democratic Republic of Congo',
             slug: 'democratic-republic-of-congo',
             short_name: 'DR Congo'
           },
           {
+            iso_code: 'ZM',
             name: 'Zambia',
             slug: 'zambia',
             short_name: 'Zambia'
@@ -121,38 +131,55 @@
 
     <nav id="takwimuNavigation"></nav>
     <script>
-      // Simulate multiple pages using 'page' query param e.g.
-      // http//localhost:3000/?page=profile to show profile page
-      // http//localhost:3000/?page=analysis to show analysis page
+      // Simulate multiple pages using `pathname`s e.g.
+      // `http//localhost:3000/about` should show about page
       const body = document.getElementsByTagName('body')[0];
-      const searchParams = new URLSearchParams(window.location.search);
-      const page = searchParams.get('page') || 'homepage';
-      if (page === 'homepage') {
-        [
-          'takwimuHero',
-          'takwimuFeaturedAnalysis',
-          'takwimuFeaturedData',
-          'takwimuWhatCanYouDo',
-          'takwimuMakingOf',
-          'takwimuLatestNewsStories',
-          'takwimuWhereToNext'
-        ].forEach(id => {
-          const el = document.createElement('div');
-          el.setAttribute('id', id);
-          body.appendChild(el);
-        });
-      } else if (page === 'profile') {
-        ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
-          const el = document.createElement('div');
-          el.setAttribute('id', id);
-          body.appendChild(el);
-        });
-      } else if (page === 'analysis') {
-        ['takwimuViewAnalysis'].forEach(id => {
-          const el = document.createElement('div');
-          el.setAttribute('id', id);
-          body.appendChild(el);
-        });
+      const pathname = window.location.pathname;
+      let page;
+      if (pathname.startsWith('/about')) {
+        page = 'about';
+      } else if (pathname.startsWith('/profiles/country-')) {
+        page = 'profile';
+      } else if (pathname.startsWith('/profiles/')) {
+        page = 'analysis';
+      }
+      switch (page) {
+        case 'about':
+          ['takwimuWhereToNext'].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
+          break;
+        case 'profile':
+          ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
+          break;
+        case 'analysis':
+          ['takwimuReadNext', 'takwimuViewCountry'].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
+          break;
+        case 'homepage': // fall through
+        default:
+          [
+            'takwimuHero',
+            'takwimuFeaturedAnalysis',
+            'takwimuFeaturedData',
+            'takwimuWhatCanYouDo',
+            'takwimuMakingOf',
+            'takwimuLatestNewsStories',
+            'takwimuWhereToNext'
+          ].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
       }
     </script>
     <div id="takwimuFooter"></div>
