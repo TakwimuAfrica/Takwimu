@@ -13,7 +13,8 @@ const Theme = createMuiTheme({
     },
     text: { primary: '#000', secondary: '#fff' },
     background: {
-      default: '#fff'
+      default: '#fff',
+      light: '#f6f6f6' // light gray
     },
     info: {
       main: '#f6fbfa' // ice-blue

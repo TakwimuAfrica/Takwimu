@@ -19,7 +19,6 @@ function profile(country) {
 }
 
 function CountryAnalysis({ classes, countries }) {
-  const sortedCountries = countries.sort((a, b) => a.name[0] > b.name[0]);
   return (
     <DropDownContent
       classes={{
@@ -27,7 +26,7 @@ function CountryAnalysis({ classes, countries }) {
       }}
       title="Country Analysis"
       description="Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet."
-      countries={sortedCountries}
+      countries={countries}
       profile={profile}
     />
   );
