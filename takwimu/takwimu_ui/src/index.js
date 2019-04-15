@@ -10,6 +10,7 @@ import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 import WhereToNext from './components/WhereToNext';
+import FAQ from './components/FAQ';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
@@ -68,6 +69,7 @@ const renderHomepage = () => {
           renderApp(LatestNewsStories, 'takwimuLatestNewsStories', props);
         }
       });
+    renderApp(FAQ, 'takwimuFAQ');
     renderApp(WhereToNext, 'takwimuWhereToNext');
   }
 };
