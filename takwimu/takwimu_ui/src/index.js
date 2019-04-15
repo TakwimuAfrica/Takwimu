@@ -9,7 +9,10 @@ import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
-import WhereToNext from './components/WhereToNext';
+import HomeWhereToNext, {
+  About as AboutWhereToNext,
+  Analysis as AnalysisReadNext
+} from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
@@ -31,7 +34,7 @@ const renderApp = (Component, id, props = PROPS) => {
 };
 
 const renderHomepage = () => {
-  // check for anything that's *must* be present on this page
+  // check for anything that *must* be present on this page
   const el = document.getElementById('takwimuHero');
   if (el) {
     fetch(
@@ -68,16 +71,29 @@ const renderHomepage = () => {
           renderApp(LatestNewsStories, 'takwimuLatestNewsStories', props);
         }
       });
-    renderApp(WhereToNext, 'takwimuWhereToNext');
+    renderApp(HomeWhereToNext, 'takwimuWhereToNext');
+  }
+};
+
+const renderAnalysisPage = () => {
+  const el = document.getElementById('takwimuReadNext');
+  if (el) {
+    renderApp(AnalysisReadNext, 'takwimuReadNext');
   }
 };
 
 const renderDatabyTopicPage = () => {
-  // check for anything that's *must* be present on this page
   const el = document.getElementById('takwimuProfile');
   if (el) {
     renderApp(ProfileDetail, 'takwimuProfileDetail');
     renderApp(Profile, 'takwimuProfile');
+  }
+};
+
+const renderAboutPage = () => {
+  const el = document.getElementById('takwimuWhereToNext');
+  if (el) {
+    renderApp(AboutWhereToNext, 'takwimuWhereToNext');
   }
 };
 
@@ -86,5 +102,7 @@ renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
-renderHomepage();
+renderAboutPage();
 renderDatabyTopicPage();
+renderAnalysisPage();
+renderHomepage();
