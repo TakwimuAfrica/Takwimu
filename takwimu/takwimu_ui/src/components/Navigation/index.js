@@ -24,6 +24,8 @@ import DropDowns, { DropDownDrawer } from './DropDowns';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
+    position: 'relative',
+    zIndex: '999',
     width: '100%',
     height: '6.313rem',
     padding: '1.25rem',
@@ -42,6 +44,12 @@ const styles = theme => ({
     },
     [theme.breakpoints.up('lg')]: {
       margin: '1.375rem'
+    },
+
+    // Override original Takwimu & Bootstrap styles
+    '&:hover': {
+      color: theme.palette.text.secondary,
+      textDecoration: 'none'
     }
   },
   search: {
@@ -62,6 +70,8 @@ class Navigation extends React.Component {
 
     this.toggleDrawer = this.toggleDrawer.bind(this);
     this.toggleMobileDrawer = this.toggleMobileDrawer.bind(this);
+
+    window.toggleDrawer = this.toggleDrawer;
   }
 
   toggleMobileDrawer() {
@@ -72,10 +82,16 @@ class Navigation extends React.Component {
   }
 
   toggleDrawer(drawer) {
+    const { openDrawer, isMobileDrawerOpen } = this.state;
+    const newOpenDrawer = openDrawer !== drawer ? drawer : null;
+    const hasDrawer = newOpenDrawer !== null || isMobileDrawerOpen;
+
     return () => {
-      this.setState(prevState => ({
-        openDrawer: prevState.openDrawer !== drawer ? drawer : null
-      }));
+      const { width } = this.props;
+      this.setState({
+        isMobileDrawerOpen: isWidthUp('md', width) ? false : hasDrawer,
+        openDrawer: newOpenDrawer
+      });
     };
   }
 
@@ -118,7 +134,10 @@ class Navigation extends React.Component {
   }
 
   renderDesktopNav() {
-    const { classes, countries } = this.props;
+    const {
+      classes,
+      takwimu: { countries }
+    } = this.props;
     const { openDrawer } = this.state;
     return (
       <Fragment>
@@ -130,16 +149,16 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/about">
             About Us
           </Link>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/about">
             FAQs
           </Link>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/contact-us">
             Contact Us
           </Link>
-          <Link className={classes.link} href="/">
+          <Link className={classes.link} href="/search">
             <Search className={classes.search} />
           </Link>
         </Grid>
@@ -148,7 +167,10 @@ class Navigation extends React.Component {
   }
 
   renderDropDownDrawer() {
-    const { width, countries } = this.props;
+    const {
+      width,
+      takwimu: { countries }
+    } = this.props;
     const { openDrawer } = this.state;
     return (
       <DropDownDrawer
@@ -166,7 +188,10 @@ class Navigation extends React.Component {
   }
 
   renderMobileDrawer() {
-    const { classes, countries } = this.props;
+    const {
+      classes,
+      takwimu: { countries }
+    } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
     return (
       <Drawer
@@ -194,24 +219,24 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link className={classes.link} href="/about">
                 About Us
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link className={classes.link} href="/about">
                 FAQs
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/">
+              <Link className={classes.link} href="/contact-us">
                 Contact Us
               </Link>
             </MenuItem>
             <MenuItem>
               <Link
                 className={classeNames([classes.link, classes.iconLink])}
-                href="/"
+                href="/search"
               >
                 <Search className={classes.search} />
               </Link>
@@ -236,7 +261,9 @@ class Navigation extends React.Component {
 Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
-  countries: PropTypes.shape({}).isRequired
+  takwimu: PropTypes.shape({
+    countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired
 };
 
 export default withWidth()(withStyles(styles)(Navigation));

@@ -76,7 +76,7 @@ const styles = theme => ({
   }
 });
 
-function Footer({ classes }) {
+function Footer({ classes, takwimu: { settings } }) {
   return (
     <Grid
       container
@@ -88,7 +88,10 @@ function Footer({ classes }) {
         <Grid container justify="flex-start" alignItems="flex-start">
           <div className={classes.takwimu}>
             <Takwimu classes={{ root: classes.takwimu }} />
-            <StayInTouch classes={{ root: classes.stayInTouch }} />
+            <StayInTouch
+              settings={settings}
+              classes={{ root: classes.stayInTouch }}
+            />
           </div>
           <div className={classes.links}>
             <QuickLinks />
@@ -115,7 +118,10 @@ function Footer({ classes }) {
 }
 
 Footer.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    settings: PropTypes.shape({}).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(Footer);

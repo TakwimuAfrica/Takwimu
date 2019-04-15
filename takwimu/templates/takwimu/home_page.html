@@ -1,17 +1,26 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
-{% load staticfiles %}
+{% load staticfiles jsonify wagtailcore_tags %}
+
+{% block body_id %}homepage{% endblock %}
 
 {% block content %}
 
+  <div id="takwimuHero"></div>
+  <div id="takwimuFeaturedAnalysis"></div>
+  <div id="takwimuFeaturedData"></div>
+  <div id="takwimuWhatCanYouDo"></div>
+  <div id="takwimuMakingOf"></div>
+  <div id="takwimuLatestNewsStories"></div>
+  <div id="takwimuWhereToNext"></div>
+
+  {% comment %}
   {% include 'takwimu/_includes/homepage/hero.html' %}
 
   {% include 'takwimu/_includes/sections/support-services/tabs.html' %}
 
-  <div id="takwimuMakingOf"></div>
-
   {% include 'takwimu/_includes/sections/how-it-works/index.html' %}
-  
+
   {% include 'takwimu/_includes/sections/stories/index.html' %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
@@ -24,41 +33,15 @@
   {% include 'takwimu/_includes/sections/faq/index.html' %}
 
   {% include 'takwimu/_includes/sections/testimonials.html' %}
+  {% endcomment %}
 
-  <div id="takwimuWhereToNext"></div>
-
-  <!-- Video Modal -->
-  <div class="modal fade" id="videoModal" tabindex="-1" role="dialog" aria-labelledby="videoModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="videoModalLabel">Building Takwimu</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="embed-responsive embed-responsive-16by9">
-            <iframe class="embed-responsive-item" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-{% endblock %}
+{% endblock content %}
 
 {% block body_javascript_extra %}
-<script>
-  window.addEventListener('load', function() {
-    $('#videoModal').on('shown.bs.modal', function (event) {
-      var src = 'https://www.youtube.com/embed/DvDCCETHsTo?autoplay=1';
-      $('#videoModal iframe').attr('src', src);
-    });
+  {{ block.super }}
 
-    $('#videoModal').on('hidden.bs.modal', function (event) {
-        $('#videoModal iframe').removeAttr('src');
-    });
-  });
-</script>
-{% endblock %}
+  <script>
+    var takwimu = window.takwimu || {};
+    takwimu.stories = {{ stories_latest |jsonify|safe }};
+  </script>
+{% endblock body_javascript_extra %}

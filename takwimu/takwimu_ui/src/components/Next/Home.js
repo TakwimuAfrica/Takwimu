@@ -3,35 +3,29 @@ import { PropTypes } from 'prop-types';
 
 import { Grid, withStyles } from '@material-ui/core';
 
+import A from '../A';
+import Card from './Card';
 import Section from '../Section';
-import WhereToNextCard from './WhereToNextCard';
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
     paddingBottom: '6.25rem'
   },
-  box: {
-    backgroundColor: theme.palette.primary.main,
+  link: {
     width: '100%',
-    height: '14.875rem',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
     [theme.breakpoints.up('md')]: {
-      width: '18.375rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '24.5rem'
+      width: 'auto'
     }
   },
-  middlebox: {
-    margin: '2rem 0',
+  cardMargin: {
+    marginTop: '2rem',
     [theme.breakpoints.up('md')]: {
-      margin: '0 1.5rem' // .75 of lg
+      marginTop: 0,
+      marginLeft: '1.5rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      margin: '0 2rem'
+      marginLeft: '2rem'
     }
   }
 });
@@ -41,14 +35,21 @@ function HomeWhereToNext({ classes }) {
     <Section title="Where to next" variant="h3">
       <Grid
         container
-        spacing={40}
         justify="center"
         alignItems="center"
         className={classes.root}
       >
-        <WhereToNextCard title="Stay up-to-date with new data and analysis" />
-        <WhereToNextCard title="Looking for other services?" />
-        <WhereToNextCard title="Talk to us" />
+        <Card href="//eepurl.com/dynuAX" component={A}>
+          Stay up-to-date with <br /> new data and analysis
+        </Card>
+
+        <Card href="/about" classes={{ root: classes.cardMargin }}>
+          Looking for other <br /> services?
+        </Card>
+
+        <Card href="/contact-us" classes={{ root: classes.cardMargin }}>
+          Talk to us
+        </Card>
       </Grid>
     </Section>
   );
