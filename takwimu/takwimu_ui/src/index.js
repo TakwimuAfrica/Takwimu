@@ -17,6 +17,7 @@ import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import AboutUs from './components/AboutUs';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -93,6 +94,7 @@ const renderDatabyTopicPage = () => {
 const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
+    renderApp(AboutUs, 'takwimuAboutUs');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
   }
 };
