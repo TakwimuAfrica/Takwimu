@@ -8,8 +8,8 @@ import {
   withStyles,
   IconButton
 } from '@material-ui/core';
-
-import { Add, Minimize } from '@material-ui/icons';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const styles = theme => ({
   panel: {
@@ -19,26 +19,23 @@ const styles = theme => ({
       backgroundColor: 'transparent'
     }
   },
-  activeSummary: {
+  activeExpandSummary: {
     backgroundColor: theme.palette.primary.main
   },
-  inactiveSummary: {
-    backgroundColor: '#f6f6f6'
+  inactiveExpandSummary: {
+    backgroundColor: theme.palette.info.main
   },
-  inactiveSummaryTitle: {
+  inactiveExpandSummaryTitle: {
     color: theme.palette.primary.main,
     margin: '0.5rem',
     fontWeight: 600
   },
-  activeSummaryTitle: {
+  activeExpandSummaryTitle: {
     color: 'white',
     margin: '0.5rem',
     fontWeight: 600
   },
-  icon: { textAlign: 'center' },
-  panelDetails: {
-    backgroundColor: '#f6fbfa'
-  }
+  iconMinus: { color: 'white' }
 });
 
 class PanelContent extends React.Component {
@@ -62,21 +59,25 @@ class PanelContent extends React.Component {
     const { bgColor, txtColor, iconChange } = this.state;
 
     const AddBgColor = bgColor
-      ? `${classes.inactiveSummary}`
-      : `${classes.activeSummary}`;
+      ? `${classes.inactiveExpandSummary}`
+      : `${classes.activeExpandSummary}`;
 
     const AddTxtColor = txtColor
-      ? `${classes.inactiveSummaryTitle}`
-      : `${classes.activeSummaryTitle}`;
+      ? `${classes.inactiveExpandSummaryTitle}`
+      : `${classes.activeExpandSummaryTitle}`;
 
     return (
-      <ExpansionPanel className={classes.panel}>
+      <ExpansionPanel square className={classes.panel}>
         <ExpansionPanelSummary
           className={AddBgColor}
           onClick={this.handleChange}
           expandIcon={
             <IconButton className={this.handleChange}>
-              {iconChange ? <Add /> : <Minimize />}
+              {iconChange ? (
+                <FontAwesomeIcon icon={faPlus} />
+              ) : (
+                <FontAwesomeIcon icon={faMinus} className={classes.iconMinus} />
+              )}
             </IconButton>
           }
         >
@@ -88,7 +89,7 @@ class PanelContent extends React.Component {
             {expandTitle}
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.panelDetails}>
+        <ExpansionPanelDetails className={classes.inactiveExpandSummary}>
           <Typography>{expandDetails}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
