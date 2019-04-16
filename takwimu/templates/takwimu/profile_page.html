@@ -1,6 +1,6 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
-{% load jsonify staticfiles %}
+{% load staticfiles jsonify sass_tags %}
 
 {% block head_css %}
   {{ block.super }}
@@ -17,10 +17,9 @@
 
 {% block body_javascript_extra %}
   {{ block.super }}
-
   <script>
     var takwimu = window.takwimu || {};
     takwimu.page = 'analysis';
-    takwimu.selectedCountry = {{ country|jsonify|safe }};
+    takwimu.country = {{ country|jsonify|safe }};
   </script>
 {% endblock body_javascript_extra %}

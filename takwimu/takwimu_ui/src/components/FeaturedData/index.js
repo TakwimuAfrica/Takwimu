@@ -24,24 +24,27 @@ function FeaturedData({
 }) {
   return (
     <Section title="Featured Data" variant="h2">
-      <Grid
-        container
-        direction="row"
-        justify="space-between"
-        alignItems="flex-start"
-        className={classes.root}
-      >
-        <DataContainer
-          color="secondary"
-          featuredData={featuredData[0].value}
-          url={url}
-        />
-        <DataContainer
-          color="primary"
-          featuredData={featuredData[1].value}
-          url={url}
-        />
-      </Grid>
+      {(featuredData && featuredData.length && (
+        <Grid
+          container
+          direction="row"
+          justify="space-between"
+          alignItems="flex-start"
+          className={classes.root}
+        >
+          <DataContainer
+            color="secondary"
+            featuredData={featuredData[0].value}
+            url={url}
+          />
+          <DataContainer
+            color="primary"
+            featuredData={featuredData[1].value}
+            url={url}
+          />
+        </Grid>
+      )) ||
+        null}
     </Section>
   );
 }

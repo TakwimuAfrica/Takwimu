@@ -7,6 +7,9 @@ import AnalysisContent from './AnalysisContent';
 import AnalysisPageNav from './ActionsNav';
 import AnalysisTableOfContent from './TableOfContent';
 
+import { Analysis as AnalysisReadNext } from '../../components/Next';
+import ViewCountry from '../../components/ViewCountry';
+
 export default class AnalysisPage extends React.Component {
   constructor(props) {
     super(props);
@@ -21,7 +24,7 @@ export default class AnalysisPage extends React.Component {
 
   componentDidMount() {
     const { takwimu } = this.props;
-    const countryName = takwimu.selectedCountry.name;
+    const countryName = takwimu.country.name;
     fetch(
       `${
         takwimu.url
@@ -41,6 +44,7 @@ export default class AnalysisPage extends React.Component {
 
   render() {
     const { analysis, current } = this.state;
+    const { takwimu } = this.props;
     return (
       <React.Fragment>
         <AnalysisPageNav />
@@ -56,6 +60,8 @@ export default class AnalysisPage extends React.Component {
               </Grid>
               <Grid item container xs="12" md="9">
                 <AnalysisContent content={analysis.body[current]} />
+                <ViewCountry takwimu={takwimu} />
+                <AnalysisReadNext />
               </Grid>
             </Grid>
           </Section>

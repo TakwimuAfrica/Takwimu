@@ -1,6 +1,6 @@
 import json
-import operator
 from collections import OrderedDict
+from operator import itemgetter
 
 from django.conf import settings
 from django.utils.text import slugify
@@ -91,10 +91,11 @@ def get_takwimu_countries(published_status):
         country = {
             'iso_code': code,
             'name': names['name'],
+            'iso_name': names['iso_name'],
             'short_name': names['short_name'],
             'slug': slugify(names['name']),
             'published': published_status[code]
         }
         countries.append(country)
 
-    return {'countries': countries}
+    return {'countries': sorted(countries, key=itemgetter('iso_name'))}
