@@ -382,6 +382,20 @@ TWITTER_CARD = (
     ('app', 'Link to download app'),
 )
 
+class RelatedContentWidgetsBlock(blocks.StreamBlock):
+    free_form = blocks.StructBlock([
+        ('title', blocks.TextBlock()),
+        ('link', blocks.URLBlock()),
+    ])
+    page = blocks.PageChooserBlock(required=False)
+
+    class Meta:
+        icon = 'cogs'
+
+class RelatedContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    widgets = RelatedContentWidgetsBlock(required=False)
+
 class ProfileSectionPage(ModelMeta, Page):
     '''
     Profile Section Page
@@ -391,6 +405,9 @@ class ProfileSectionPage(ModelMeta, Page):
     description = models.TextField(blank=True)
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
+    related_content = StreamField([
+        ('related_content', RelatedContentBlock(required=False))
+    ], blank=True)
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -419,7 +436,7 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('description'),
         APIField('body'),
-        APIField('analysis_related_content'),
+        APIField('related_content'),
         APIField('promotion_image'),
     ]
 
@@ -434,7 +451,7 @@ class ProfileSectionPage(ModelMeta, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
-        InlinePanel('analysis_related_content', label="Related Content"),
+        StreamFieldPanel('related_content'),
         StreamFieldPanel('body'),
     ]
 
@@ -453,6 +470,7 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('body'),
         APIField('description'),
+        APIField('related_content'),
         APIField('date'),
         APIField('promotion_image'),
         APIField('promotion_image_thumbnail'),
@@ -471,17 +489,6 @@ class ProfileSectionPage(ModelMeta, Page):
     def __str__(self):
         return f"{self.get_parent().title} - {self.title}"
 
-
-
-class AnalysisRelatedContent(Orderable):
-    title = models.TextField()
-    link = models.URLField()
-    page = ParentalKey(ProfileSectionPage, on_delete=models.CASCADE, related_name='analysis_related_content')
-
-    panels = [
-        FieldPanel('title'),
-        FieldPanel('link'),
-    ]
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
     section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
