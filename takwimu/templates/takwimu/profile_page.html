@@ -1,6 +1,6 @@
 {% extends 'takwimu/_layouts/page.html' %}
 
-{% load staticfiles %}
+{% load staticfiles jsonify sass_tags %}
 
 {% block head_css %}
   {{ block.super }}
@@ -30,6 +30,8 @@
   {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
+
+  <div id="takwimuViewCountry"></div>
 
 {% endblock %}
 
