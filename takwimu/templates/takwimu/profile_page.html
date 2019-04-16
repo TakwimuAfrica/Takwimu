@@ -13,6 +13,23 @@
 
 {% block content %}
     <div id="takwimuAnalysisPage"></div>
+    {% comment %} {% include 'takwimu/_includes/profile/hero.html' %}	
+
+    {# Loads all the topics #}	
+    {% for topic in page.body %}	
+      {% include 'takwimu/_includes/profile/topic_detail.html' %}	
+    {% endfor %}	
+
+    {% include 'takwimu/_includes/profile/sections_list.html' %}	
+
+    {% include 'takwimu/_includes/sections/support-services/button.html' %}	
+
+    {% include 'takwimu/_includes/sections/stories/index.html' %}	
+
+    <!-- Country profile country select -->	
+    {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}	
+
+    {% include 'takwimu/_includes/sections/updates.html' %} {% endcomment %}
 {% endblock %}
 
 {% block body_javascript_extra %}
@@ -22,4 +39,121 @@
     takwimu.page = 'analysis';
     takwimu.country = {{ country|jsonify|safe }};
   </script>
+
+  {% comment %} <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/share-this.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/sharers/twitter.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/sharers/email.min.js"></script>
+
+   <script type="text/javascript">
+    // Global Variables	
+    // ----------------	
+    var dataindicator_move = function () {}	
+     document.addEventListener('DOMContentLoaded', function () {	
+       // Data Indicators Navigation	
+      // --------------------------	
+      // A little Javascript to sync tab navigation by pills on the side and at the bottom (pagination)	
+       $(".profiletopic").each(function () {	
+        var topic_id = this.id,	
+            dataindicators_btns = "#" + topic_id + " .dataindicators-nav .nav-link, " +	
+                                  "#" + topic_id + " .dataindicators-pagination .nav-link";	
+         // On tab shown	
+        $(dataindicators_btns).on('shown.bs.tab', function (e) {	
+          // Get activated btn / tab	
+          var active_btn = e.target;	
+           // Set all the topic's data indicator tabs to inactive	
+          $(dataindicators_btns).removeClass("active").removeClass("show").attr("aria-selected", false);	
+           // Get specific pill + "indicator"/pagination to make active	
+          var active_btn_href = active_btn.getAttribute("href"),	
+              active_btn_nav = "#" + topic_id + " .dataindicators-nav a[href='" + active_btn_href + "']",	
+              active_btn_pagination = "#" + topic_id + " .dataindicators-pagination a[href='" + active_btn_href + "']";	
+           // Set them as active	
+          $(active_btn_nav).addClass("active").addClass("show").attr("aria-selected", true);	
+          $(active_btn_pagination).addClass("active").addClass("show").attr("aria-selected", true);	
+        });	
+      });	
+       // Prev + Next Pagination	
+      var dataindicator_move = function (topic_id, next=true) {	
+        var btns_length = $('#' + topic_id + ' .dataindicators-nav .nav-link').length;	
+        if (btns_length > 0) {	
+           var btn_active_index = $('#' + topic_id + ' .dataindicators-nav .nav-link.active').index();	
+          var btn_move_index = btn_active_index + 1;	
+          var btn_move_index_prev = btn_move_index - 2;	
+          var btn_move_index_next = btn_move_index + 2;	
+           // Prev	
+          if(!next && btn_move_index_prev > 0){	
+            btn_move_index = btn_move_index_prev;	
+          }	
+           // Next	
+          if (next && btn_move_index_next - 1 < btns_length * 2) {	
+            btn_move_index = btn_move_index_next;	
+          }	
+           $('#' + topic_id + ' .dataindicators-nav .nav-link:nth-child(' + btn_move_index + ')').tab('show')	
+        }	
+      }	
+    });	
+     var getSelectionText = function getSelectionText() {	
+      var text;	
+      if (window.getSelection) {	
+        text = window.getSelection().toString();	
+      } else if (document.selection && document.selection.type != 'Control') {	
+        text = document.selection.createRange().text;	
+      }	
+      return text;	
+    }	
+     var trackEvent = function trackEvent(category, event, target) {	
+      if (window.ga) {	
+        window.ga('send', 'event', category, event, target);	
+      }	
+    };	
+     window.addEventListener('load', function() {	
+       // Track copy events	
+      document.addEventListener('copy', function(e){	
+        var text = getSelectionText();	
+        if (text) {	
+          var url = document.URL;	
+          var target = `${url}?text=${encodeURIComponent(text)}`;	
+          trackEvent('Site', 'copy', target);	
+        }	
+      });	
+       // Enable social/email sharing	
+      var twitterSharer = window.ShareThisViaTwitter;	
+       // Override the URL generation function to include `via` & `hashtags`	
+      twitterSharer.getShareUrl = function getShareUrl(text, refUrl) {	
+        const via = this.via;	
+        const hashtags = this.hashtags;	
+        let shareUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(refUrl)}`;	
+        if (via) {	
+            shareUrl = `${shareUrl}&via=${via}`;	
+        }	
+        if (hashtags) {	
+            shareUrl = `${shareUrl}&hashtags=${hashtags}`;	
+        }	
+        return shareUrl;	
+      };	
+      twitterSharer.via = 'TakwimuAfrica';	
+      twitterSharer.hashtags = ['Takwimu'];	
+       // Override the action function to add GA tracking	
+      twitterSharer.action = function action(event, item) {	
+        event.preventDefault();	
+        const popup = item.ownerDocument.defaultView.open(	
+            item.firstChild.href,	
+            "share_via_twitter",	
+            "height=440,location=no,menubar=no,scrollbars=no,status=no,toolbar=no,width=640"	
+        );	
+        popup.opener = null;	
+         trackEvent('Country Profile', 'tweet', item.firstChild.href);	
+      }	
+       var emailSharer = window.ShareThisViaEmail;	
+       // Override the action function to add GA tracking	
+      emailSharer.action = function action(event, item) {	
+        trackEvent('Country Profile', 'email', item.firstChild.href);	
+      }	
+       var shareThis = window.ShareThis;	
+      var selectionShare = shareThis({	
+        selector: ".profiletopic-content",	
+        sharers: [twitterSharer, emailSharer]	
+      });	
+      selectionShare.init();	
+    });	
+  </script> {% endcomment %}
 {% endblock body_javascript_extra %}
