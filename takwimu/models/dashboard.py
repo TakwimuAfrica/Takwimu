@@ -451,7 +451,7 @@ class ProfileSectionPage(ModelMeta, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
-        StreamFieldPanel('related_content'),
+        StreamFieldPanel('related_content', label="Related Content"),
         StreamFieldPanel('body'),
     ]
 
@@ -576,7 +576,7 @@ class ProfilePage(ModelMeta, Page):
         FieldPanel('geo'),
         DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
-        StreamFieldPanel('related_content')
+        StreamFieldPanel('related_content', label="Related Content")
         InlinePanel('sections', label="Sections"),
     ]
 
