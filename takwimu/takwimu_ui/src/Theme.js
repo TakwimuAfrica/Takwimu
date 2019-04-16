@@ -143,8 +143,7 @@ const Theme = createMuiTheme({
         fontStyle: 'normal',
         fontStretch: 'normal',
         lineHeight: 'normal',
-        letterSpacing: 'normal',
-        color: '#ffffff'
+        letterSpacing: 'normal'
       }
     },
     MuiButton: {
