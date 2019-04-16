@@ -52,33 +52,6 @@ class HomePageView(TemplateView):
         context.update(takwimu_topics(self.request))
         return context
 
-class ProfileView(TemplateView):
-    """
-    Analysis Page View:
-    ---------------
-    """
-    template_name = 'takwimu/profile_page.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ProfileView, self).get_context_data(**kwargs)
-
-        
-        for code, names in COUNTRIES.items():
-            if self.kwargs['country_slug'] == slugify(names['name']):
-                context['country'] = {
-                    'iso_code': code,
-                    'name': names['name'],
-                    'short_name': names['short_name'],
-                    'slug': slugify(names['name'])
-                }
-                break
-
-        context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
-        return context
-
 class AboutUsView(TemplateView):
     template_name = 'takwimu/about/index.html'
 
