@@ -382,7 +382,6 @@ TWITTER_CARD = (
     ('app', 'Link to download app'),
 )
 
-
 class ProfileSectionPage(ModelMeta, Page):
     '''
     Profile Section Page
@@ -420,6 +419,7 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('description'),
         APIField('body'),
+        APIField('analysis_related_content'),
         APIField('promotion_image'),
     ]
 
@@ -434,6 +434,7 @@ class ProfileSectionPage(ModelMeta, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        InlinePanel('analysis_related_content', label="Related Content"),
         StreamFieldPanel('body'),
     ]
 
@@ -471,6 +472,16 @@ class ProfileSectionPage(ModelMeta, Page):
         return f"{self.get_parent().title} - {self.title}"
 
 
+
+class AnalysisRelatedContent(Orderable):
+    title = models.TextField()
+    link = models.URLField()
+    page = ParentalKey(ProfileSectionPage, on_delete=models.CASCADE, related_name='analysis_related_content')
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('link'),
+    ]
 # The abstract model for topics, complete with panels
 class ProfilePageSection(models.Model):
     section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
@@ -596,10 +607,15 @@ class AboutPage(Page):
         APIField('related_content'),
     ]
 
-class RelatedContent(Orderable):
+class AboutPageRelatedContent(Orderable):
     title = models.TextField()
     link = models.URLField()
-    page = ParentalKey(AboutPage, related_name='related_content')
+    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='related_content')
+
+    panels = [
+        FieldPanel('title'),
+        FieldPanel('link'),
+    ]
 
 
 class ContactUsPage(Page):
