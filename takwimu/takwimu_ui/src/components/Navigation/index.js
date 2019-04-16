@@ -9,7 +9,8 @@ import {
   Link,
   Drawer,
   IconButton,
-  MenuItem
+  MenuItem,
+  ButtonBase
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
@@ -20,6 +21,7 @@ import logoWhite from '../../assets/images/logo-white-all.png';
 
 import Layout from '../Layout';
 import DropDowns, { DropDownDrawer } from './DropDowns';
+import SearchDrawer from './SearchDrawer';
 
 const styles = theme => ({
   root: {
@@ -53,8 +55,9 @@ const styles = theme => ({
       textDecoration: 'none'
     }
   },
-  search: {
-    marginBottom: '-0.313rem'
+  searchButton: {
+    color: theme.palette.text.secondary,
+    marginBottom: '0.313rem' // Move to align icon
   },
   iconLink: {
     margin: '1.375rem 0.7rem'
@@ -159,9 +162,12 @@ class Navigation extends React.Component {
           <Link className={classes.link} href="/contact-us">
             Contact Us
           </Link>
-          <Link className={classes.link} href="/search">
+          <ButtonBase
+            className={classes.searchButton}
+            onClick={this.toggleDrawer('search')}
+          >
             <Search className={classes.search} />
-          </Link>
+          </ButtonBase>
         </Grid>
       </Fragment>
     );
@@ -185,6 +191,15 @@ class Navigation extends React.Component {
       >
         {isWidthUp('md', width) ? this.renderNavBar() : <div />}
       </DropDownDrawer>
+    );
+  }
+
+  renderSearchDrawer() {
+    const { openDrawer } = this.state;
+    return (
+      <SearchDrawer active={openDrawer === 'search'}>
+        {this.renderNavBar()}
+      </SearchDrawer>
     );
   }
 
@@ -254,6 +269,7 @@ class Navigation extends React.Component {
         {this.renderNavBar()}
         {this.renderMobileDrawer()}
         {this.renderDropDownDrawer()}
+        {this.renderSearchDrawer()}
       </Fragment>
     );
   }
