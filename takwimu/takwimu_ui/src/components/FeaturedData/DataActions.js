@@ -43,9 +43,14 @@ const styles = () => ({
   }
 });
 
-function ActionButtonComponent({ classes, children }) {
+function ActionButtonComponent({ classes, children, onClick }) {
   return (
-    <IconButton disableRipple disableTouchRipple className={classes.button}>
+    <IconButton
+      disableRipple
+      disableTouchRipple
+      className={classes.button}
+      onClick={onClick}
+    >
       <Grid
         component="span"
         container
@@ -61,15 +66,20 @@ function ActionButtonComponent({ classes, children }) {
 
 ActionButtonComponent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  onClick: PropTypes.func,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]).isRequired
 };
 
+ActionButtonComponent.defaultProps = {
+  onClick: () => {}
+};
+
 const ActionButton = withStyles(styles)(ActionButtonComponent);
 
-function DataActions({ classes }) {
+function DataActions({ classes, onDownload }) {
   return (
     <div className={classes.root}>
       <ActionButton>
@@ -77,7 +87,7 @@ function DataActions({ classes }) {
         <Typography className={classes.actionText}>Share</Typography>
       </ActionButton>
       <div className={classes.verticalDivider} />
-      <ActionButton>
+      <ActionButton onClick={onDownload}>
         <img alt="" src={downloadIcon} />
         <Typography className={classes.actionText}>Download</Typography>
       </ActionButton>
@@ -101,7 +111,8 @@ function DataActions({ classes }) {
 }
 
 DataActions.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  onDownload: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(DataActions);

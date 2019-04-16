@@ -43,7 +43,17 @@ function DataContainer({ classes, featuredData, url }) {
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           <IFrame featuredData={featuredData} url={url} />
-          <DataActions />
+          <DataActions
+            onDownload={() =>
+              document
+                .getElementById(
+                  `cr-embed-country-${featuredData.country}-${
+                    featuredData.data_id
+                  }`
+                )
+                .contentWindow.print()
+            }
+          />
         </Grid>
       </div>
       <div className={classes.descriptionContainer}>
