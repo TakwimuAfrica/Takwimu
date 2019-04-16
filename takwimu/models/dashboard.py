@@ -525,6 +525,10 @@ class ProfilePage(ModelMeta, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    related_content = StreamField([
+        ('related_content', RelatedContentBlock(required=False))
+    ], blank=True)
+
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -572,6 +576,7 @@ class ProfilePage(ModelMeta, Page):
         FieldPanel('geo'),
         DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
+        StreamFieldPanel('related_content')
         InlinePanel('sections', label="Sections"),
     ]
 
