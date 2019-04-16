@@ -1,9 +1,10 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import OtherTopics from './OtherTopics';
+import OtherInfoNav from './OtherInfoNav';
+import OtherInfo from './OtherInfo';
 import Actions from './Actions';
 
 const styles = {
@@ -46,27 +47,43 @@ class AnalysisContent extends React.Component {
     }
 
     return (
-      <div className={classes.root}>
-        <Typography className={classes.title} variant="h2">
-          {content.body[current].value.title}
-        </Typography>
-        <OtherTopics
-          current={current}
+      <Fragment>
+        <OtherInfoNav
+          labelText="Other topics in"
+          labelTextStrong={content.title}
           content={content}
+          current={current}
           showContent={this.showContent}
         />
-        <Actions />
-        <Typography
-          className={classes.body}
-          dangerouslySetInnerHTML={{ __html: content.body[current].value.body }}
-        />
-        <Actions hideLastUpdated />
-        <OtherTopics
-          current={current}
-          content={content}
-          showContent={this.showContent}
-        />
-      </div>
+
+        <div className={classes.root}>
+          <Typography className={classes.title} variant="h2">
+            {content.body[current].value.title}
+          </Typography>
+          <OtherInfo
+            labelText="Other topics in"
+            labelTextStrong={content.title}
+            current={current}
+            content={content}
+            showContent={this.showContent}
+          />
+          <Actions />
+          <Typography
+            className={classes.body}
+            dangerouslySetInnerHTML={{
+              __html: content.body[current].value.body
+            }}
+          />
+          <Actions hideLastUpdated />
+          <OtherInfo
+            labelText="Other topics in"
+            labelTextStrong={content.title}
+            current={current}
+            content={content}
+            showContent={this.showContent}
+          />
+        </div>
+      </Fragment>
     );
   }
 }

@@ -27,12 +27,18 @@ const styles = theme => ({
   }
 });
 
-function OtherTopics({ classes, current, content, showContent }) {
+function OtherTopics({
+  classes,
+  labelText,
+  labelTextStrong,
+  current,
+  content,
+  showContent
+}) {
   return (
     <div className={classes.root}>
       <Typography className={classes.label}>
-        Other topics in{' '}
-        <strong style={{ color: 'black' }}>{content.title}</strong>
+        {labelText} <strong>{labelTextStrong}</strong>
       </Typography>
       <div className={classes.otherTopicLinks}>
         {content.body.map((c, index) => (
@@ -56,6 +62,8 @@ function OtherTopics({ classes, current, content, showContent }) {
 }
 
 OtherTopics.propTypes = {
+  labelText: PropTypes.string.isRequired,
+  labelTextStrong: PropTypes.string.isRequired,
   classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({}).isRequired,

@@ -3,8 +3,8 @@ import React from 'react';
 import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import shareIcon from '../../../assets/images/analysis/share.svg';
-import downloadIcon from '../../../assets/images/analysis/download.svg';
+import shareIcon from '../../assets/images/analysis/share.svg';
+import downloadIcon from '../../assets/images/analysis/download.svg';
 
 const styles = {
   root: {

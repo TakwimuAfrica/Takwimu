@@ -4,7 +4,7 @@ import { withStyles, MenuList, Link } from '@material-ui/core';
 
 import classNames from 'classnames';
 
-import { CountrySelector } from '../../components/ProfileDetail';
+import { CountrySelector } from '../ProfileDetail';
 
 import activePageIcon from '../../assets/images/active-page.svg';
 
