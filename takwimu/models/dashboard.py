@@ -386,14 +386,15 @@ class RelatedContentWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock([
         ('title', blocks.TextBlock()),
         ('link', blocks.URLBlock()),
-    ])
+    ],
+    icon='snippet'
+    )
     page = blocks.PageChooserBlock(required=False)
 
     class Meta:
         icon = 'cogs'
 
 class RelatedContentBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False)
     widgets = RelatedContentWidgetsBlock(required=False)
 
 class ProfileSectionPage(ModelMeta, Page):
