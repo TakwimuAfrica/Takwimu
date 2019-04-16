@@ -103,6 +103,7 @@ const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
+    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 
