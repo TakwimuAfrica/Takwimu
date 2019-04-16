@@ -9,8 +9,7 @@ import {
   IconButton
 } from '@material-ui/core';
 
-import Add from '@material-ui/icons/Add';
-import Minimize from '@material-ui/icons/Minimize';
+import { Add, Minimize } from '@material-ui/icons';
 
 const styles = theme => ({
   panel: {
@@ -45,35 +44,46 @@ const styles = theme => ({
 class PanelContent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { isDetailView: false };
-    this.handleClick = this.handleClick.bind(this);
+    this.state = { bgColor: true, txtColor: true, iconChange: true };
+    this.handleChange = this.handleChange.bind(this);
   }
 
-  handleClick() {
+  handleChange(event) {
     this.setState(state => ({
-      isDetailView: !state.isDetailView
+      iconChange: !state.iconChange,
+      bgColor: !state.bgColor,
+      txtColor: !state.txtColor
     }));
+    event.preventDefault();
   }
 
   render() {
     const { classes, expandTitle, expandDetails } = this.props;
-    const { isDetailView } = this.state;
+    const { bgColor, txtColor, iconChange } = this.state;
+
+    const AddBgColor = bgColor
+      ? `${classes.inactiveSummary}`
+      : `${classes.activeSummary}`;
+
+    const AddTxtColor = txtColor
+      ? `${classes.inactiveSummaryTitle}`
+      : `${classes.activeSummaryTitle}`;
 
     return (
       <ExpansionPanel className={classes.panel}>
         <ExpansionPanelSummary
-          onClick={this.isActive}
-          className={classes.inactiveSummary}
+          className={AddBgColor}
+          onClick={this.handleChange}
           expandIcon={
-            <IconButton className={classes.icon} onClick={this.handleClick}>
-              {isDetailView ? <Minimize /> : <Add />}
+            <IconButton className={this.handleChange}>
+              {iconChange ? <Add /> : <Minimize />}
             </IconButton>
           }
         >
           <Typography
             variant="body1"
-            className={classes.inactiveSummaryTitle}
-            onClick={this.handleClick}
+            className={AddTxtColor}
+            onClick={this.handleChange}
           >
             {expandTitle}
           </Typography>
