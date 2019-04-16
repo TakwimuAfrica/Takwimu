@@ -29,7 +29,7 @@ const styles = theme => ({
   },
   listItem: {
     decorator: 'none',
-    padding: '10px 0'
+    padding: '0.625rem 0'
   },
   activeLink: {
     textDecoration: 'underline'
@@ -38,15 +38,16 @@ const styles = theme => ({
 
 function AnalysisTableOfContent({
   classes,
+  profile,
   content,
   current,
   onChangeContent
 }) {
   return (
     <div className={classes.root}>
-      <CountrySelector countryName={content.title} context="analysis" />
-      <MenuList style={{ width: 227 }}>
-        {content.body.map((body, index) => (
+      <CountrySelector countryName={profile.title} context="analysis" />
+      <MenuList style={{ width: '14.188rem' }}>
+        {content.map((c, index) => (
           <li className={classes.listItem}>
             <img
               alt=""
@@ -65,7 +66,7 @@ function AnalysisTableOfContent({
                 onChangeContent(index);
               }}
             >
-              {body.value.title}
+              {c.title}
             </Link>
           </li>
         ))}
@@ -76,6 +77,7 @@ function AnalysisTableOfContent({
 
 AnalysisTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  profile: PropTypes.shape({}).isRequired,
   content: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   onChangeContent: PropTypes.func.isRequired

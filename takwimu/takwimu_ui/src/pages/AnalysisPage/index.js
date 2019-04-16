@@ -15,6 +15,7 @@ export default class AnalysisPage extends React.Component {
     super(props);
 
     this.state = {
+      profile: null,
       analysis: null,
       current: 0
     };
@@ -28,12 +29,31 @@ export default class AnalysisPage extends React.Component {
     fetch(
       `${
         takwimu.url
-      }/api/v2/pages/?type=takwimu.ProfilePage&fields=body,title&title=${countryName}&format=json`
+      }/api/v2/pages/?type=takwimu.ProfilePage&title=${countryName}&format=json`
     ).then(response => {
       if (response.status === 200) {
         response
           .json()
-          .then(json => this.setState({ analysis: json.items[0] }));
+          .then(json =>
+            this.setState({ profile: json.items[0] }, this.fetchAnalysis)
+          );
+      }
+    });
+  }
+
+  fetchAnalysis() {
+    const { takwimu } = this.props;
+    const { profile } = this.state;
+
+    fetch(
+      `${
+        takwimu.url
+      }/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body&descendant_of=${
+        profile.id
+      }&format=json`
+    ).then(response => {
+      if (response.status === 200) {
+        response.json().then(json => this.setState({ analysis: json.items }));
       }
     });
   }
@@ -43,7 +63,7 @@ export default class AnalysisPage extends React.Component {
   }
 
   render() {
-    const { analysis, current } = this.state;
+    const { profile, analysis, current } = this.state;
     const { takwimu } = this.props;
     return (
       <React.Fragment>
@@ -53,13 +73,14 @@ export default class AnalysisPage extends React.Component {
             <Grid container justify="space-between">
               <Grid item container xs="12" md="3">
                 <AnalysisTableOfContent
+                  profile={profile}
                   content={analysis}
                   current={current}
                   onChangeContent={this.changeContent}
                 />
               </Grid>
               <Grid item container xs="12" md="9">
-                <AnalysisContent content={analysis.body[current]} />
+                <AnalysisContent content={analysis[current]} />
                 <ViewCountry takwimu={takwimu} />
                 <AnalysisReadNext />
               </Grid>

@@ -1,18 +1,25 @@
 import React from 'react';
 
-import { Link, Typography, withStyles } from '@material-ui/core';
+import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+
+import classNames from 'classnames';
 
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.info.main,
-    padding: '18px 26px'
+    padding: '1.125rem 1.625rem'
   },
   otherTopicLinks: {
-    '& > a:nth-child(2)': {
-      margin: '0 50px'
+    '& > button:nth-child(2n)': {
+      margin: '0 3.125rem'
     }
   },
+  otherTopic: {
+    color: theme.palette.primary.main,
+    textDecoration: 'underline'
+  },
+  otherTopicSelected: {},
   label: {
     color: '#848484',
     fontSize: '0.813rem',
@@ -20,29 +27,39 @@ const styles = theme => ({
   }
 });
 
-function OtherTopics({ classes }) {
+function OtherTopics({ classes, current, content, showContent }) {
   return (
     <div className={classes.root}>
       <Typography className={classes.label}>
-        Other topics in <strong style={{ color: 'black' }}>Politics</strong>
+        Other topics in{' '}
+        <strong style={{ color: 'black' }}>{content.title}</strong>
       </Typography>
       <div className={classes.otherTopicLinks}>
-        <Link color="primary" href="x">
-          South Africa’s Political System
-        </Link>
-        <Link color="primary" href="x">
-          Politician Profiles
-        </Link>
-        <Link color="primary" href="x">
-          Government Bodies
-        </Link>
+        {content.body.map((c, index) => (
+          <ButtonBase
+            className={classNames({
+              [classes.otherTopic]: current !== index
+            })}
+            onClick={showContent(index)}
+          >
+            <Typography
+              variant="body2"
+              color={current === index ? 'textPrimary' : 'primary'}
+            >
+              {c.value.title}
+            </Typography>
+          </ButtonBase>
+        ))}
       </div>
     </div>
   );
 }
 
 OtherTopics.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  current: PropTypes.number.isRequired,
+  content: PropTypes.shape({}).isRequired,
+  showContent: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(OtherTopics);

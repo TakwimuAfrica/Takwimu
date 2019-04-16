@@ -18,22 +18,57 @@ const styles = {
   }
 };
 
-function AnalysisContent({ classes, content }) {
-  return (
-    <div className={classes.root}>
-      <Typography className={classes.title} variant="h2">
-        {content.value.title}
-      </Typography>
-      <OtherTopics />
-      <Actions />
-      <Typography
-        className={classes.body}
-        dangerouslySetInnerHTML={{ __html: content.value.body }}
-      />
-      <Actions hideLastUpdated />
-      <OtherTopics />
-    </div>
-  );
+class AnalysisContent extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      current: 0,
+      currentId: null
+    };
+
+    this.showContent = this.showContent.bind(this);
+  }
+
+  showContent(index) {
+    return () => {
+      this.setState({ current: index });
+    };
+  }
+
+  render() {
+    const { classes, content } = this.props;
+    const { current, currentId } = this.state;
+
+    // Reset index when main content changes
+    if (content.id !== currentId) {
+      this.setState({ currentId: content.id, current: 0 });
+    }
+
+    return (
+      <div className={classes.root}>
+        <Typography className={classes.title} variant="h2">
+          {content.body[current].value.title}
+        </Typography>
+        <OtherTopics
+          current={current}
+          content={content}
+          showContent={this.showContent}
+        />
+        <Actions />
+        <Typography
+          className={classes.body}
+          dangerouslySetInnerHTML={{ __html: content.body[current].value.body }}
+        />
+        <Actions hideLastUpdated />
+        <OtherTopics
+          current={current}
+          content={content}
+          showContent={this.showContent}
+        />
+      </div>
+    );
+  }
 }
 
 AnalysisContent.propTypes = {
