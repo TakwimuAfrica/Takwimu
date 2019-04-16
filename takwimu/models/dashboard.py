@@ -558,6 +558,7 @@ class ProfilePage(ModelMeta, Page):
         APIField('geo'),
         APIField('date'),
         APIField('document'),
+        APIField('related_content'),
         APIField('body'),
         APIField('promotion_image'),
         APIField('promotion_image_thumbnail'),
@@ -576,7 +577,7 @@ class ProfilePage(ModelMeta, Page):
         FieldPanel('geo'),
         DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
-        StreamFieldPanel('related_content', label="Related Content")
+        StreamFieldPanel('related_content', label="Related Content"),
         InlinePanel('sections', label="Sections"),
     ]
 
