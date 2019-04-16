@@ -38,14 +38,14 @@ const styles = theme => ({
 
 function AnalysisTableOfContent({
   classes,
-  profile,
   content,
   current,
+  country,
   onChangeContent
 }) {
   return (
     <div className={classes.root}>
-      <CountrySelector countryName={profile.title} context="analysis" />
+      <CountrySelector country={country} context="analysis" />
       <MenuList style={{ width: '14.188rem' }}>
         {content.map((c, index) => (
           <li className={classes.listItem}>
@@ -77,9 +77,9 @@ function AnalysisTableOfContent({
 
 AnalysisTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  profile: PropTypes.shape({}).isRequired,
   content: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
+  country: PropTypes.shape({}).isRequired,
   onChangeContent: PropTypes.func.isRequired
 };
 

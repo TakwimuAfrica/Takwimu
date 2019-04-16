@@ -17,8 +17,6 @@ import {
 import classNames from 'classnames';
 import Layout from '../Layout';
 
-import slugify from '../../slugify';
-
 import searchIcon from '../../assets/images/icon-search.svg';
 import downArrowBlack from '../../assets/images/down-arrow-black.svg';
 import upArrowBlack from '../../assets/images/up-arrow-black.svg';
@@ -108,7 +106,7 @@ const styles = theme => ({
   }
 });
 
-function CountrySelectorComponent({ classes, countryName, context }) {
+function CountrySelectorComponent({ classes, country, context }) {
   return (
     <div>
       <Typography
@@ -125,13 +123,9 @@ function CountrySelectorComponent({ classes, countryName, context }) {
         className={classes.chooserButton}
         onClick={window.toggleDrawer(context)}
       >
-        <img
-          alt=""
-          height="37"
-          src={flagSrc(`./${slugify(countryName)}.svg`)}
-        />
+        <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
         <Typography variant="subtitle1" className={classes.countryName}>
-          {countryName}
+          {country.name}
         </Typography>
         <img alt="" src={downArrow} />
       </ButtonBase>
@@ -141,7 +135,7 @@ function CountrySelectorComponent({ classes, countryName, context }) {
 
 CountrySelectorComponent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countryName: PropTypes.string.isRequired,
+  country: PropTypes.shape({}).isRequired,
   context: PropTypes.string.isRequired
 };
 
@@ -222,18 +216,14 @@ class ProfileDetail extends React.Component {
       );
     }
     const { active: activeRelease } = primaryReleases;
-    const {
-      square_kms: squarekms,
-      full_name: fullName = 'Nigeria',
-      geo_code: countryCode
-    } = geography.this;
+    const { square_kms: squarekms, geo_code: countryCode } = geography.this;
     const country = countries.find(c => c.iso_code === countryCode);
 
     return (
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
           <div className={classes.root}>
-            <CountrySelector countryName={fullName} context="topic" />
+            <CountrySelector country={country} context="topic" />
             <Grid container direction="row" wrap="nowrap">
               <Grid item>
                 <div className={classes.verticalLine} />

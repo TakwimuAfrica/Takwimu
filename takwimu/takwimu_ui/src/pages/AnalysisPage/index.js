@@ -63,14 +63,14 @@ export default class AnalysisPage extends React.Component {
   }
 
   render() {
-    const { profile, analysis, current } = this.state;
+    const { analysis, current } = this.state;
     const { takwimu } = this.props;
     return analysis !== null ? (
       <Section>
         <Grid container justify="space-between">
           <Grid item container xs="12" md="3">
             <AnalysisTableOfContent
-              profile={profile}
+              country={takwimu.country}
               content={analysis}
               current={current}
               onChangeContent={this.changeContent}
