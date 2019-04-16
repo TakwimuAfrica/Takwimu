@@ -25,6 +25,7 @@ function FAQ({ classes }) {
         alignItems="center"
       >
         <ExpansionPanelContent
+          style={{ padding: '1rem' }}
           expandTitle="Where is the data sourced from? "
           expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
           Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis

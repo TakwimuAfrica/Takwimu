@@ -13,14 +13,18 @@ import Add from '@material-ui/icons/Add';
 import Minimize from '@material-ui/icons/Minimize';
 
 const styles = theme => ({
-  root: {
-    padding: '2rem 0'
+  panel: {
+    paddingBottom: '0.5rem',
+    '&::before': {
+      content: '',
+      backgroundColor: 'transparent'
+    }
   },
   activeSummary: {
     backgroundColor: theme.palette.primary.main
   },
   inactiveSummary: {
-    backgroundColor: theme.palette.background.default
+    backgroundColor: '#f6f6f6'
   },
   inactiveSummaryTitle: {
     color: theme.palette.primary.main,
@@ -32,7 +36,10 @@ const styles = theme => ({
     margin: '0.5rem',
     fontWeight: 600
   },
-  icon: { textAlign: 'center' }
+  icon: { textAlign: 'center' },
+  panelDetails: {
+    backgroundColor: '#f6fbfa'
+  }
 });
 
 class PanelContent extends React.Component {
@@ -51,9 +58,11 @@ class PanelContent extends React.Component {
   render() {
     const { classes, expandTitle, expandDetails } = this.props;
     const { isDetailView } = this.state;
+
     return (
-      <ExpansionPanel>
+      <ExpansionPanel className={classes.panel}>
         <ExpansionPanelSummary
+          onClick={this.isActive}
           className={classes.inactiveSummary}
           expandIcon={
             <IconButton className={classes.icon} onClick={this.handleClick}>
@@ -69,7 +78,7 @@ class PanelContent extends React.Component {
             {expandTitle}
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails>
+        <ExpansionPanelDetails className={classes.panelDetails}>
           <Typography>{expandDetails}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
