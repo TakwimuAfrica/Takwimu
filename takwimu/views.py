@@ -93,7 +93,6 @@ class TopicView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(TopicView, self).get_context_data(**kwargs)
-        context['country_slug'] = self.kwargs['country_slug']
 
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
