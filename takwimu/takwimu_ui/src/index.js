@@ -15,8 +15,10 @@ import HomeWhereToNext, {
 } from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
+import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import ViewCountry from './components/ViewCountry';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -78,7 +80,14 @@ const renderHomepage = () => {
 const renderAnalysisPage = () => {
   const el = document.getElementById('takwimuReadNext');
   if (el) {
-    renderApp(AnalysisReadNext, 'takwimuReadNext');
+    const countrySlug = window.location.pathname.replace(/^\/profiles\//, '');
+    const country = PROPS.takwimu.countries.find(c => c.slug === countrySlug);
+    const takwimu = Object.assign({}, PROPS.takwimu, { country });
+    const props = Object.assign({}, PROPS, { takwimu });
+
+    renderApp(AnalysisReadNext, 'takwimuReadNext', props);
+    renderApp(ViewCountry, 'takwimuViewCountry', props);
+    renderApp(RelatedContent, 'takwimuRelatedContent', props);
   }
 };
 
@@ -94,6 +103,7 @@ const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
+    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 
