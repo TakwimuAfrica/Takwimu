@@ -34,7 +34,7 @@ function DataByTopic({ classes, countries }) {
 
 DataByTopic.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.shape({}).isRequired
+  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
 };
 
 export default withStyles(styles)(DataByTopic);

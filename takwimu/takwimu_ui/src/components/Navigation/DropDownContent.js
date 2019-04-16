@@ -148,7 +148,7 @@ function DropDownContent({ classes, title, description, countries, profile }) {
 
 DropDownContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.shape({}).isRequired,
+  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
   description: PropTypes.string.isRequired,
   profile: PropTypes.func.isRequired

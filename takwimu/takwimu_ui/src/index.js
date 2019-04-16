@@ -15,6 +15,7 @@ import HomeWhereToNext, {
 } from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
+import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
 import ViewCountry from './components/ViewCountry';
@@ -86,6 +87,7 @@ const renderAnalysisPage = () => {
 
     renderApp(AnalysisReadNext, 'takwimuReadNext', props);
     renderApp(ViewCountry, 'takwimuViewCountry', props);
+    renderApp(RelatedContent, 'takwimuRelatedContent', props);
   }
 };
 
@@ -101,6 +103,7 @@ const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
+    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 
