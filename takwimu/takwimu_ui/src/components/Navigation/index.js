@@ -38,6 +38,7 @@ const styles = theme => ({
     outline: 'none'
   },
   link: {
+    color: theme.palette.text.secondary,
     margin: '1.375rem 3.25rem',
     [theme.breakpoints.up('md')]: {
       margin: '0.625rem'

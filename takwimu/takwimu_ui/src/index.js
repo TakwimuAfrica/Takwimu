@@ -13,6 +13,7 @@ import HomeWhereToNext, { About as AboutWhereToNext } from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import AnalysisPage from './pages/AnalysisPage';
 import FeaturedData from './components/FeaturedData';
+import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
 
@@ -92,6 +93,7 @@ const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
+    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 
