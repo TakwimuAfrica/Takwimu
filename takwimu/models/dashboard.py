@@ -602,28 +602,20 @@ class ProfilePage(ModelMeta, Page):
 
 class AboutPage(Page):
     content = RichTextField()
+    related_content = StreamField([
+        ('related_content', RelatedContentBlock(required=False))
+    ], blank=True)
 
     content_panels = [
         FieldPanel('title'),
         FieldPanel('content'),
-        InlinePanel('related_content', label='Related Content'),
+        StreamFieldPanel('related_content', label='Related Content'),
     ]
 
     api_fields = [
         APIField('content'), 
         APIField('related_content'),
     ]
-
-class AboutPageRelatedContent(Orderable):
-    title = models.TextField()
-    link = models.URLField()
-    page = ParentalKey(AboutPage, on_delete=models.CASCADE, related_name='related_content')
-
-    panels = [
-        FieldPanel('title'),
-        FieldPanel('link'),
-    ]
-
 
 class ContactUsPage(Page):
     address = RichTextField()
