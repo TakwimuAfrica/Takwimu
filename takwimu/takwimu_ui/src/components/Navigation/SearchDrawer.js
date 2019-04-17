@@ -1,7 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Grid, Drawer, Input, withStyles } from '@material-ui/core';
+import {
+  Grid,
+  Drawer,
+  Input,
+  withStyles,
+  MenuList,
+  MenuItem,
+  Typography
+} from '@material-ui/core';
 
 import classNames from 'classnames';
 
@@ -36,15 +44,17 @@ const styles = theme => ({
   searchField: {
     height: '71px',
     width: '750px',
-    fontFamily: theme.typography.fontText,
-    fontSize: '57px',
-    fontWeight: '600',
-    opacity: 1,
-    color: 'white',
-    fontStyle: 'normal',
-    fontStretch: 'normal',
-    lineHeight: 'normal',
-    letterSpacing: 'normal'
+    '& > input': {
+      fontFamily: theme.typography.fontText,
+      fontSize: '57px',
+      fontWeight: '600',
+      opacity: 1,
+      color: 'white',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 'normal',
+      letterSpacing: 'normal'
+    }
   },
   searchFieldPlaceholder: {
     opacity: 0.59
@@ -58,6 +68,23 @@ const styles = theme => ({
   },
   searchFieldBackgroundColor: {
     backgroundColor: '#d8d8d826'
+  },
+  searchResults: {
+    maxWidth: '780px',
+    width: '100%',
+    marginRight: '100px',
+    '& > a': {
+      height: '45px'
+    },
+    '& > a > p': {
+      fontFamily: theme.typography.fontText,
+      fontSize: '47px',
+      fontWeight: 'normal',
+      fontStyle: 'normal',
+      fontStretch: 'normal',
+      lineHeight: 1.7,
+      letterSpacing: 'normal'
+    }
   }
 });
 
@@ -66,7 +93,8 @@ class SearchDrawer extends React.Component {
     super(props);
 
     this.state = {
-      backgroundVisible: false
+      backgroundVisible: false,
+      searchResults: []
     };
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
@@ -79,11 +107,33 @@ class SearchDrawer extends React.Component {
     } else if (backgroundVisible && e.target.value.length === 0) {
       this.setState({ backgroundVisible: false });
     }
+
+    // TODO:
+    if (e.target.value.length > 0) {
+      this.setState({
+        searchResults: [
+          {
+            title: 'South Africa',
+            link: '/profiles/south-africa'
+          },
+          {
+            title: 'Senegal',
+            link: '/profiles/senegal'
+          },
+          {
+            title: 'Nigeria',
+            link: '/profiles/nigere'
+          }
+        ]
+      });
+    } else {
+      this.setState({ searchResults: [] });
+    }
   }
 
   render() {
     const { classes, children, active, toggle } = this.props;
-    const { backgroundVisible } = this.state;
+    const { backgroundVisible, searchResults } = this.state;
     return (
       <Drawer
         anchor="top"
@@ -124,6 +174,17 @@ class SearchDrawer extends React.Component {
                   src={backgroundVisible ? rightArrow : rightArrowTransparent}
                   className={classes.arrow}
                 />
+              </Grid>
+              <Grid container justify="flex-end">
+                <MenuList className={classes.searchResults}>
+                  {searchResults.map(result => (
+                    <MenuItem component="a" href={`${result.link}`}>
+                      <Typography color="textSecondary">
+                        {result.title}
+                      </Typography>
+                    </MenuItem>
+                  ))}
+                </MenuList>
               </Grid>
             </Layout>
           </Grid>
