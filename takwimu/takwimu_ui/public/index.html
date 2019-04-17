@@ -30,6 +30,10 @@
     <script>
       var takwimu = {
         url: 'http://localhost:8000',
+        country: {
+            name: 'Senegal',
+            slug: 'senegal'
+        },
         page: {
           relatedContent: [
             {
@@ -191,6 +195,7 @@
       } else if (pathname.startsWith('/profiles/')) {
         page = 'analysis';
       }
+      takwimu.page = page;
       switch (page) {
         case 'about':
           ['takwimuWhereToNext'].forEach(id => {
@@ -207,15 +212,9 @@
           });
           break;
         case 'analysis':
-          [
-            'takwimuReadNext',
-            'takwimuViewCountry',
-            'takwimuRelatedContent'
-          ].forEach(id => {
             const el = document.createElement('div');
-            el.setAttribute('id', id);
+            el.setAttribute('id', 'takwimuAnalysisPage');
             body.appendChild(el);
-          });
           break;
         case 'homepage': // fall through
         default:
