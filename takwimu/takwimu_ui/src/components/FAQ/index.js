@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { withStyles, Grid, Link, Typography } from '@material-ui/core';
 
 import Section from '../Section';
-import ExpansionPanelContent from './ExpansionPanelContent';
+import Faq from './Faq';
 
 const styles = theme => ({
   root: { flexGrow: 1 },
@@ -31,7 +31,7 @@ function FAQ({ classes }) {
         justify="flex-start"
         alignItems="center"
       >
-        <ExpansionPanelContent expandTitle="Where is the data sourced from? ">
+        <Faq expandTitle="Where is the data sourced from? ">
           <Typography variant="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
             lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
@@ -39,9 +39,9 @@ function FAQ({ classes }) {
             consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
             Phasellus efficitur tincidunt lorem ut blandit.
           </Typography>
-        </ExpansionPanelContent>
+        </Faq>
 
-        <ExpansionPanelContent expandTitle="How often is the data reviewed and updated? ">
+        <Faq expandTitle="How often is the data reviewed and updated? ">
           <Typography variant="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
             lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
@@ -49,9 +49,9 @@ function FAQ({ classes }) {
             consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
             Phasellus efficitur tincidunt lorem ut blandit.
           </Typography>
-        </ExpansionPanelContent>
+        </Faq>
 
-        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+        <Faq expandTitle="Is this another question that might be asked? ">
           <Typography variant="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
             lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
@@ -59,9 +59,9 @@ function FAQ({ classes }) {
             consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
             Phasellus efficitur tincidunt lorem ut blandit.
           </Typography>
-        </ExpansionPanelContent>
+        </Faq>
 
-        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+        <Faq expandTitle="Is this another question that might be asked? ">
           <Typography variant="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
             lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
@@ -69,9 +69,9 @@ function FAQ({ classes }) {
             consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
             Phasellus efficitur tincidunt lorem ut blandit.
           </Typography>
-        </ExpansionPanelContent>
+        </Faq>
 
-        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+        <Faq expandTitle="Is this another question that might be asked? ">
           <Typography variant="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
             lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
@@ -79,9 +79,9 @@ function FAQ({ classes }) {
             consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
             Phasellus efficitur tincidunt lorem ut blandit.
           </Typography>
-        </ExpansionPanelContent>
+        </Faq>
 
-        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+        <Faq expandTitle="Is this another question that might be asked? ">
           <Typography variant="body2">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
             lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
@@ -89,7 +89,7 @@ function FAQ({ classes }) {
             consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
             Phasellus efficitur tincidunt lorem ut blandit.
           </Typography>
-        </ExpansionPanelContent>
+        </Faq>
       </Grid>
     </Section>
   );

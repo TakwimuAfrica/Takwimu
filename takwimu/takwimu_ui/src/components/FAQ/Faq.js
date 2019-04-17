@@ -53,7 +53,7 @@ const styles = theme => ({
   panelDetails: { backgroundColor: theme.palette.info.main }
 });
 
-class PanelContent extends React.Component {
+class Faq extends React.Component {
   constructor(props) {
     super(props);
 
@@ -126,7 +126,7 @@ class PanelContent extends React.Component {
   }
 }
 
-PanelContent.propTypes = {
+Faq.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   expandTitle: PropTypes.string,
   children: PropTypes.oneOfType([
@@ -134,8 +134,8 @@ PanelContent.propTypes = {
     PropTypes.node
   ]).isRequired
 };
-PanelContent.defaultProps = {
+Faq.defaultProps = {
   expandTitle: ''
 };
 
-export default withStyles(styles)(PanelContent);
+export default withStyles(styles)(Faq);
