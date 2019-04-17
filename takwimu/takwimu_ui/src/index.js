@@ -9,6 +9,7 @@ import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
+import Faqs from './components/Faqs';
 import HomeWhereToNext, { About as AboutWhereToNext } from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import AnalysisPage from './pages/AnalysisPage';
@@ -92,6 +93,7 @@ const renderDatabyTopicPage = () => {
 const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
+    renderApp(Faqs, 'takwimuFAQ');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
     renderApp(RelatedContent, 'takwimuRelatedContent');
   }
