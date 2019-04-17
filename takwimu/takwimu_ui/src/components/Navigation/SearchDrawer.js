@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 
 import { Grid, Drawer, Input, withStyles } from '@material-ui/core';
 
-// import rightArrow from '../../assets/images/right-arrow.svg';
+import classNames from 'classnames';
+
+import rightArrow from '../../assets/images/right-arrow.svg';
 import rightArrowTransparent from '../../assets/images/right-arrow-transparent.svg';
 
 import Layout from '../Layout';
@@ -52,53 +54,83 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '9px',
+    borderRadius: '9px'
+  },
+  searchFieldBackgroundColor: {
     backgroundColor: '#d8d8d826'
   }
 });
 
-function SearchDrawer({ classes, children, active, toggle }) {
-  return (
-    <Drawer
-      anchor="top"
-      ModalProps={{
-        className: classes.modal
-      }}
-      BackdropProps={{
-        className: classes.backdrop
-      }}
-      PaperProps={{
-        className: classes.drawer
-      }}
-      open={active}
-      elevation={0}
-      transitionDuration={0}
-      onEscapeKeyDown={toggle}
-      onBackdropClick={toggle}
-    >
-      {children}
-      <div style={{ marginTop: '100px', height: '100vh' }}>
-        <Grid container justify="center">
-          <Layout>
-            <Grid container direction="row" justify="flex-end">
-              <div className={classes.searchFieldBackground}>
-                <Input
-                  disableUnderline
-                  className={classes.searchField}
-                  placeholder="What are you looking for ?"
+class SearchDrawer extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      backgroundVisible: false
+    };
+
+    this.handleSearchInput = this.handleSearchInput.bind(this);
+  }
+
+  handleSearchInput(e) {
+    const { backgroundVisible } = this.state;
+    if (!backgroundVisible && e.target.value.length > 0) {
+      this.setState({ backgroundVisible: true });
+    } else if (backgroundVisible && e.target.value.length === 0) {
+      this.setState({ backgroundVisible: false });
+    }
+  }
+
+  render() {
+    const { classes, children, active, toggle } = this.props;
+    const { backgroundVisible } = this.state;
+    return (
+      <Drawer
+        anchor="top"
+        ModalProps={{
+          className: classes.modal
+        }}
+        BackdropProps={{
+          className: classes.backdrop
+        }}
+        PaperProps={{
+          className: classes.drawer
+        }}
+        open={active}
+        elevation={0}
+        transitionDuration={0}
+        onEscapeKeyDown={toggle}
+        onBackdropClick={toggle}
+      >
+        {children}
+        <div style={{ marginTop: '100px', height: '100vh' }}>
+          <Grid container justify="center">
+            <Layout>
+              <Grid container direction="row" justify="flex-end">
+                <div
+                  className={classNames(classes.searchFieldBackground, {
+                    [classes.searchFieldBackgroundColor]: backgroundVisible
+                  })}
+                >
+                  <Input
+                    disableUnderline
+                    className={classes.searchField}
+                    placeholder="What are you looking for ?"
+                    onChange={this.handleSearchInput}
+                  />
+                </div>
+                <img
+                  alt=""
+                  src={backgroundVisible ? rightArrow : rightArrowTransparent}
+                  className={classes.arrow}
                 />
-              </div>
-              <img
-                alt=""
-                src={rightArrowTransparent}
-                className={classes.arrow}
-              />
-            </Grid>
-          </Layout>
-        </Grid>
-      </div>
-    </Drawer>
-  );
+              </Grid>
+            </Layout>
+          </Grid>
+        </div>
+      </Drawer>
+    );
+  }
 }
 
 SearchDrawer.propTypes = {
