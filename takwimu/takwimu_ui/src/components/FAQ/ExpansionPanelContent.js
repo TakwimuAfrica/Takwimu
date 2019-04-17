@@ -8,8 +8,6 @@ import {
   withStyles,
   IconButton
 } from '@material-ui/core';
-import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const styles = theme => ({
   panel: {
@@ -74,9 +72,9 @@ class PanelContent extends React.Component {
           expandIcon={
             <IconButton className={this.handleChange}>
               {iconChange ? (
-                <FontAwesomeIcon icon={faPlus} />
+                <span>&#43;</span>
               ) : (
-                <FontAwesomeIcon icon={faMinus} className={classes.iconMinus} />
+                <span className={classes.iconMinus}>&#8722;</span>
               )}
             </IconButton>
           }
