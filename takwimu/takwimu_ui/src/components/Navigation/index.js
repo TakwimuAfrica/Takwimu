@@ -14,8 +14,6 @@ import {
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
-import classeNames from 'classnames';
-
 import { isWidthUp } from '@material-ui/core/withWidth';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
@@ -250,12 +248,12 @@ class Navigation extends React.Component {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link
-                className={classeNames([classes.link, classes.iconLink])}
-                href="/search"
+              <ButtonBase
+                className={classes.searchButton}
+                onClick={this.toggleDrawer('search')}
               >
                 <Search className={classes.search} />
-              </Link>
+              </ButtonBase>
             </MenuItem>
           </MenuList>
         </Grid>

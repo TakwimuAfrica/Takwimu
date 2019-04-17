@@ -38,47 +38,73 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main,
     outline: 'none'
   },
+  search: {
+    height: '100vh',
+    marginTop: '2.813rem',
+    [theme.breakpoints.up('md')]: {
+      marginTop: '6.25rem'
+    }
+  },
   arrow: {
-    marginLeft: '4.406rem'
+    marginLeft: '1rem',
+    marginRight: '1.25rem',
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '4.406rem'
+    }
   },
   searchField: {
-    height: '71px',
-    width: '750px',
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '46.875rem'
+    },
     '& > input': {
       fontFamily: theme.typography.fontText,
-      fontSize: '57px',
+      fontSize: '1.563rem',
       fontWeight: '600',
       opacity: 1,
+      padding: 0,
       color: 'white',
       fontStyle: 'normal',
       fontStretch: 'normal',
       lineHeight: 'normal',
-      letterSpacing: 'normal'
+      letterSpacing: 'normal',
+      [theme.breakpoints.up('md')]: {
+        fontSize: '3.563rem'
+      }
     }
   },
   searchFieldPlaceholder: {
     opacity: 0.59
   },
   searchFieldBackground: {
-    padding: '20px',
+    width: '100%',
+    padding: '0.625rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    borderRadius: '9px'
+    borderRadius: '0.563rem',
+    marginLeft: '1.25rem',
+    [theme.breakpoints.up('md')]: {
+      maxWidth: '46.875rem',
+      padding: '1.25rem'
+    }
   },
   searchFieldBackgroundColor: {
     backgroundColor: '#d8d8d826'
   },
   searchResults: {
-    maxWidth: '780px',
     width: '100%',
-    marginRight: '100px',
+    maxWidth: '780px',
+    marginRight: '3.75rem',
+    [theme.breakpoints.up('md')]: {
+      marginRight: '6.25rem'
+    },
     '& > a': {
-      height: '45px'
+      height: '2.813rem'
     },
     '& > a > p': {
       fontFamily: theme.typography.fontText,
-      fontSize: '47px',
+      fontSize: '2.938rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
@@ -153,10 +179,10 @@ class SearchDrawer extends React.Component {
         onBackdropClick={toggle}
       >
         {children}
-        <div style={{ marginTop: '100px', height: '100vh' }}>
+        <div className={classes.search}>
           <Grid container justify="center">
             <Layout>
-              <Grid container direction="row" justify="flex-end">
+              <Grid container direction="row" wrap="nowrap" justify="flex-end">
                 <div
                   className={classNames(classes.searchFieldBackground, {
                     [classes.searchFieldBackgroundColor]: backgroundVisible
