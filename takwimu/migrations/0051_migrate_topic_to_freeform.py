@@ -15,7 +15,7 @@ import wagtail.embeds.blocks
 import wagtail.images.blocks
 
 
-def topic_to_topic_blogstyle(topic):
+def topic_to_topic_freeform(topic):
     """
     Migrate Indicators widgets in Topic v2 back to Indicator (and non-versioned Topic).
     """
@@ -23,7 +23,13 @@ def topic_to_topic_blogstyle(topic):
                   'id': str(uuid.uuid1()),
                   'value': topic['value'].get('body')}
 
-    topic_indicators = topic['value'].get('indicators')
+    topic_indicators = []
+    current_indicators = topic['value'].get('indicators')
+    for current_indicator in current_indicators:
+        widgets = current_indicator['value'].get('widgets')
+        if widgets:
+            topic_indicators.extend(widgets)
+
     body = [topic_body] + topic_indicators
     topic['value']['body'] = body
     try:
@@ -33,13 +39,24 @@ def topic_to_topic_blogstyle(topic):
     return topic
 
 
-def topic_blogstyle_to_topic(topic):
+def topic_freeform_to_topic(topic):
     body = [i for i in topic['value'] if i['type'] == 'paragraph']
-    indicators = [i for i in topic['value'] if i['type'] == 'indicators']
+    indicators = []
+
+    current_indicators = topic['value'].get('indicators')
+    for current_indicator in current_indicators:
+        indicators.append({
+            'type': 'indicators',
+            'id': str(uuid.uuid1()),
+            'value': {
+                'title': current_indicator['value']['title'],
+                'widgets': [current_indicator],
+            }
+        })
+    if current_indicators:
+        topic['value']['indicators'] = indicators
 
     topic['value']['body'] = body
-    topic['value']['indicators'] = [indicators]
-
     return topic
 
 
@@ -72,11 +89,11 @@ def migrate(apps, mapper):
 
 
 def forwards(apps, schema_editor):
-    migrate(apps, topic_to_topic_blogstyle)
+    migrate(apps, topic_to_topic_freeform)
 
 
 def backwards(apps, schema_editor):
-    migrate(apps, topic_blogstyle_to_topic)
+    migrate(apps, topic_freeform_to_topic)
 
 
 class Migration(migrations.Migration):
