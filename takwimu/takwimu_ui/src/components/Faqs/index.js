@@ -13,9 +13,13 @@ const styles = theme => ({
   contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' }
 });
 
-function FAQ({ classes }) {
+function Faqs({ classes }) {
   return (
-    <Section title="Frequently Asked Question" className={classes.root}>
+    <Section
+      title="Frequently Asked Questions"
+      variant="h3"
+      className={classes.root}
+    >
       <Typography variant="body1">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Cant find the answer
@@ -95,8 +99,8 @@ function FAQ({ classes }) {
   );
 }
 
-FAQ.propTypes = {
+Faqs.propTypes = {
   classes: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(FAQ);
+export default withStyles(styles)(Faqs);
