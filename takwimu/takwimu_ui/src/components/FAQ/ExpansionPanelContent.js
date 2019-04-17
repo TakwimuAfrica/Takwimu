@@ -10,17 +10,21 @@ import {
 
 const styles = theme => ({
   panel: {
-    paddingBottom: '0.5rem',
+    marginTop: '0.3125rem',
+    marginBottom: '0.0625rem',
     '&::before': {
       content: '',
       backgroundColor: 'transparent'
     }
   },
+  panelExpanded: {
+    margin: '0.3125rem 0 0 0'
+  },
   activeExpandSummary: {
     backgroundColor: theme.palette.primary.main
   },
   inactiveExpandSummary: {
-    backgroundColor: theme.palette.info.main
+    backgroundColor: theme.palette.background.light
   },
   inactiveExpandSummaryTitle: {
     color: theme.palette.primary.main,
@@ -32,7 +36,15 @@ const styles = theme => ({
     margin: '0.5rem',
     fontWeight: 600
   },
-  iconMinus: { color: 'white' }
+  iconButton: {
+    '&:hover': {
+      backgroundColor: 'transparent'
+    }
+  },
+  icon: {
+    fontSize: '2.4375rem'
+  },
+  iconExpanded: { fontSize: '2.4375rem', color: 'white' }
 });
 
 class PanelContent extends React.Component {
@@ -64,16 +76,26 @@ class PanelContent extends React.Component {
       : `${classes.activeExpandSummaryTitle}`;
 
     return (
-      <ExpansionPanel square className={classes.panel}>
+      <ExpansionPanel
+        square
+        classes={{ root: classes.panel, expanded: classes.panelExpanded }}
+      >
         <ExpansionPanelSummary
           className={AddBgColor}
           onClick={this.handleChange}
+          disableRipple
           expandIcon={
-            <IconButton className={this.handleChange}>
+            <IconButton className={classes.iconButton}>
               {iconChange ? (
-                <span>&#43;</span>
+                <Typography
+                  variant="subtitle1"
+                  component="span"
+                  className={classes.icon}
+                >
+                  &#43;
+                </Typography>
               ) : (
-                <span className={classes.iconMinus}>&#8722;</span>
+                <span className={classes.iconExpanded}>&#8722;</span>
               )}
             </IconButton>
           }

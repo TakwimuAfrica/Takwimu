@@ -193,11 +193,13 @@
       }
       switch (page) {
         case 'about':
-          ['takwimuWhereToNext'].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          ['takwimuFAQ', 'takwimuWhereToNext', 'takwimuRelatedContent'].forEach(
+            id => {
+              const el = document.createElement('div');
+              el.setAttribute('id', id);
+              body.appendChild(el);
+            }
+          );
           break;
         case 'profile':
           ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
@@ -234,7 +236,6 @@
           });
       }
     </script>
-    <div id="takwimuFAQ"></div>
     <div id="takwimuFooter"></div>
 
     <!--

@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-  Grid,
-  Typography,
   withStyles,
-  ExpansionPanelDetails
+  ExpansionPanelDetails,
+  Grid,
+  Link,
+  Typography
 } from '@material-ui/core';
 
 import Section from '../Section';
@@ -12,6 +13,9 @@ import ExpansionPanelContent from './ExpansionPanelContent';
 
 const styles = theme => ({
   root: { flexGrow: 1 },
+  link: {
+    fontSize: theme.typography.body1.fontSize
+  },
   contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' },
   panelDetails: { backgroundColor: theme.palette.info.main }
 });
@@ -22,7 +26,10 @@ function FAQ({ classes }) {
       <Typography variant="body1">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua. Cant find the answer
-        you need? <a href="/">Get in touch with us</a>
+        you need?{' '}
+        <Link href="/contact-us" underline="always" className={classes.link}>
+          Get in touch with us
+        </Link>
       </Typography>
       <Grid
         container

@@ -104,6 +104,7 @@ const renderDatabyTopicPage = () => {
 const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
+    renderApp(FAQ, 'takwimuFAQ');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
     renderApp(RelatedContent, 'takwimuRelatedContent');
   }
