@@ -619,6 +619,16 @@ class ProfilePage(ModelMeta, Page):
 
     def get_context(self, request):
         context = super(ProfilePage, self).get_context(request)
+        
+        for code, names in COUNTRIES.items():
+            if self.slug == slugify(names['name']):
+                context['country'] = {
+                    'iso_code': code,
+                    'name': names['name'],
+                    'short_name': names['short_name'],
+                    'slug': slugify(names['name'])
+                }
+                break
 
         context['meta'] = self.as_meta(request)
         return context

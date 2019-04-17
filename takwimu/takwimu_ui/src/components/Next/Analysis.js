@@ -8,6 +8,9 @@ import Section from '../Section';
 
 const styles = theme => ({
   root: {
+    width: '100% !important'
+  },
+  container: {
     flexGrow: 1,
     paddingBottom: '6.25rem'
   },
@@ -25,12 +28,12 @@ const styles = theme => ({
 
 function AnalysisReadNext({ classes }) {
   return (
-    <Section title="Read next..." variant="h3">
+    <Section classes={{ root: classes.root }} title="Read next..." variant="h3">
       <Grid
         container
         justify="center"
         alignItems="center"
-        className={classes.root}
+        className={classes.container}
       >
         <Card href="#/" variant="dual">
           South African <br /> Politician Profiles

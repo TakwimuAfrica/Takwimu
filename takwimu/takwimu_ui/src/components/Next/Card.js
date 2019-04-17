@@ -19,10 +19,10 @@ const styles = theme => ({
   },
   cardDual: {
     [theme.breakpoints.up('md')]: {
-      width: '21.09375rem' // .75 of lg
+      width: '20.09375rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '28.125rem'
+      width: '27.125rem'
     }
   },
   cardTriple: {

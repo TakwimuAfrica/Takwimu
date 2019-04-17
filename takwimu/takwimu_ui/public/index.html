@@ -30,6 +30,10 @@
     <script>
       var takwimu = {
         url: 'http://localhost:8000',
+        country: {
+          name: 'Senegal',
+          slug: 'senegal'
+        },
         page: {
           relatedContent: [
             {
@@ -209,15 +213,9 @@
           });
           break;
         case 'analysis':
-          [
-            'takwimuReadNext',
-            'takwimuViewCountry',
-            'takwimuRelatedContent'
-          ].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          const el = document.createElement('div');
+          el.setAttribute('id', 'takwimuAnalysisPage');
+          body.appendChild(el);
           break;
         case 'homepage': // fall through
         default:
