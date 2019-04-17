@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import classNames from 'classnames';
+
 import {
   Typography,
   ExpansionPanel,
@@ -20,22 +23,23 @@ const styles = theme => ({
   panelExpanded: {
     margin: '0.3125rem 0 0 0'
   },
-  activeExpandSummary: {
-    backgroundColor: theme.palette.primary.main
-  },
-  inactiveExpandSummary: {
+
+  expandSummary: {
     backgroundColor: theme.palette.background.light
   },
-  inactiveExpandSummaryTitle: {
+  expandedExpandSummary: {
+    backgroundColor: theme.palette.primary.main
+  },
+
+  expandSummaryTitle: {
     color: theme.palette.primary.main,
     margin: '0.5rem',
     fontWeight: 600
   },
-  activeExpandSummaryTitle: {
-    color: 'white',
-    margin: '0.5rem',
-    fontWeight: 600
+  expandedExpandSummaryTitle: {
+    color: 'white'
   },
+
   iconButton: {
     '&:hover': {
       backgroundColor: 'transparent'
@@ -50,30 +54,21 @@ const styles = theme => ({
 class PanelContent extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { bgColor: true, txtColor: true, iconChange: true };
+
+    this.state = { expanded: false };
     this.handleChange = this.handleChange.bind(this);
   }
 
   handleChange(event) {
     this.setState(state => ({
-      iconChange: !state.iconChange,
-      bgColor: !state.bgColor,
-      txtColor: !state.txtColor
+      expanded: !state.expanded
     }));
     event.preventDefault();
   }
 
   render() {
     const { classes, expandTitle, children } = this.props;
-    const { bgColor, txtColor, iconChange } = this.state;
-
-    const AddBgColor = bgColor
-      ? `${classes.inactiveExpandSummary}`
-      : `${classes.activeExpandSummary}`;
-
-    const AddTxtColor = txtColor
-      ? `${classes.inactiveExpandSummaryTitle}`
-      : `${classes.activeExpandSummaryTitle}`;
+    const { expanded } = this.state;
 
     return (
       <ExpansionPanel
@@ -81,12 +76,23 @@ class PanelContent extends React.Component {
         classes={{ root: classes.panel, expanded: classes.panelExpanded }}
       >
         <ExpansionPanelSummary
-          className={AddBgColor}
+          className={classNames([
+            classes.expandSummary,
+            { [classes.expandedExpandSummary]: expanded }
+          ])}
           onClick={this.handleChange}
           disableRipple
           expandIcon={
             <IconButton className={classes.iconButton}>
-              {iconChange ? (
+              {expanded ? (
+                <Typography
+                  variant="subtitle1"
+                  component="span"
+                  className={classes.iconExpanded}
+                >
+                  &#8722;
+                </Typography>
+              ) : (
                 <Typography
                   variant="subtitle1"
                   component="span"
@@ -94,15 +100,16 @@ class PanelContent extends React.Component {
                 >
                   &#43;
                 </Typography>
-              ) : (
-                <span className={classes.iconExpanded}>&#8722;</span>
               )}
             </IconButton>
           }
         >
           <Typography
             variant="body1"
-            className={AddTxtColor}
+            className={classNames([
+              classes.expandSummaryTitle,
+              { [classes.expandedExpandSummaryTitle]: expanded }
+            ])}
             onClick={this.handleChange}
           >
             {expandTitle}
