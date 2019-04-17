@@ -12,6 +12,7 @@ import ExpansionPanelContent from './ExpansionPanelContent';
 
 const styles = theme => ({
   root: { flexGrow: 1 },
+  contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' },
   panelDetails: { backgroundColor: theme.palette.info.main }
 });
 
@@ -25,17 +26,14 @@ function FAQ({ classes }) {
       </Typography>
       <Grid
         container
-        style={{ paddingTop: '1.5rem', paddingBottom: '1.5rem' }}
+        className={classes.contentGrid}
         direction="column"
         justify="flex-start"
         alignItems="center"
       >
-        <ExpansionPanelContent
-          style={{ padding: '1rem' }}
-          expandTitle="Where is the data sourced from? "
-        >
+        <ExpansionPanelContent expandTitle="Where is the data sourced from? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
-            <Typography varian="body1">
+            <Typography variant="body2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
               vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
@@ -47,7 +45,7 @@ function FAQ({ classes }) {
 
         <ExpansionPanelContent expandTitle="How often is the data reviewed and updated? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
-            <Typography varian="body1">
+            <Typography variant="body2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
               vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
@@ -58,7 +56,7 @@ function FAQ({ classes }) {
         </ExpansionPanelContent>
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
-            <Typography varian="body1">
+            <Typography variant="body2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
               vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
@@ -69,7 +67,7 @@ function FAQ({ classes }) {
         </ExpansionPanelContent>
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
-            <Typography varian="body1">
+            <Typography variant="body2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
               vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
@@ -80,7 +78,7 @@ function FAQ({ classes }) {
         </ExpansionPanelContent>
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
-            <Typography varian="body1">
+            <Typography variant="body2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
               vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
@@ -91,7 +89,7 @@ function FAQ({ classes }) {
         </ExpansionPanelContent>
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
-            <Typography varian="body1">
+            <Typography variant="body2">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
               et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
               vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
