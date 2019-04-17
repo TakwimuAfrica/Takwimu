@@ -54,6 +54,7 @@ function FAQ({ classes }) {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanelContent>
+
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
             <Typography variant="body2">
@@ -65,6 +66,7 @@ function FAQ({ classes }) {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanelContent>
+
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
             <Typography variant="body2">
@@ -76,6 +78,7 @@ function FAQ({ classes }) {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanelContent>
+
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
             <Typography variant="body2">
@@ -87,6 +90,7 @@ function FAQ({ classes }) {
             </Typography>
           </ExpansionPanelDetails>
         </ExpansionPanelContent>
+
         <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
           <ExpansionPanelDetails className={classes.panelDetails}>
             <Typography variant="body2">
