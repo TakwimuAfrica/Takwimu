@@ -30,7 +30,6 @@ from takwimu.context_processors import takwimu_countries, takwimu_stories, takwi
 
 from django.conf import settings as takwimu_settings
 
-from takwimu.utils.helpers import COUNTRIES
 
 class HomePageView(TemplateView):
     """
@@ -51,6 +50,7 @@ class HomePageView(TemplateView):
         context.update(takwimu_stories(self.request))
         context.update(takwimu_topics(self.request))
         return context
+
 
 class AboutUsView(TemplateView):
     template_name = 'takwimu/about/index.html'

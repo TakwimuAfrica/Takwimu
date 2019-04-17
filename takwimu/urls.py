@@ -7,7 +7,7 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
     LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, SDGIndicatorView
-from wazimap.views import HomepageView as ProfilesListView
+from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
@@ -29,7 +29,7 @@ takwimu_urlpatterns = [
         r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
-    url(r'^profiles/$', ProfilesListView.as_view(), name='profiles'),
+    url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
     url(r'^topics/$', TopicView.as_view(), name='topics'),
     url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
