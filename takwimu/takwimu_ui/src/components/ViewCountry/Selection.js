@@ -18,7 +18,7 @@ const styles = theme => ({
       marginTop: 0,
       marginLeft: '0.9375rem',
       marginRight: '1.0625rem',
-      width: '16.125rem'
+      width: '13.125rem'
     }
   },
   keyboardArrow: {

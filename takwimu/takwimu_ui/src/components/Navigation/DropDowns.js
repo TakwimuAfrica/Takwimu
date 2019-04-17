@@ -101,11 +101,13 @@ DropDownDrawerComponent.defaultProps = {
 const DropDownDrawer = withStyles(styles)(DropDownDrawerComponent);
 export { DropDownDrawer };
 
-function DropDowns({ classes, active, toggle }) {
+function DropDowns({ classes, active, page, toggle }) {
   return (
     <div className={classes.root}>
+      {console.log(page)}
       <DropDownButton
         isActive={active === 'analysis'}
+        isHighlighted={page === 'analysis'}
         title="Country Analysis"
         icon={analysisIcon}
         iconActive={analysisIconActive}
@@ -113,6 +115,7 @@ function DropDowns({ classes, active, toggle }) {
       />
       <DropDownButton
         isActive={active === 'topic'}
+        isHighlighted={page === 'topic'}
         title="Data by Topic"
         icon={topicIcon}
         iconActive={topicIconActive}
@@ -125,11 +128,13 @@ function DropDowns({ classes, active, toggle }) {
 DropDowns.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   active: PropTypes.string,
-  toggle: PropTypes.func.isRequired
+  toggle: PropTypes.func.isRequired,
+  page: PropTypes.string
 };
 
 DropDowns.defaultProps = {
-  active: null
+  active: null,
+  page: null
 };
 
 export default withStyles(styles)(DropDowns);
