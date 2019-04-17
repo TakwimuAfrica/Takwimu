@@ -30,66 +30,114 @@
     <script>
       var takwimu = {
         url: 'http://localhost:8000',
+        page: {
+          relatedContent: [
+            {
+              name: 'Lorem ipsom dolor sit amec',
+              href: '#1/'
+            },
+            {
+              name: 'South Africa Data visuals for politics',
+              href: '#2/'
+            },
+            {
+              name: 'Source 1 lorem ipsumo',
+              href: '#3/'
+            },
+            {
+              name: 'Source 2 lorem ipsum dolor',
+              href: '#4/'
+            },
+            {
+              name: 'Lorem ipsom dolor sit amec',
+              href: '#5/'
+            },
+            {
+              name: 'South Africa Data visuals for politics',
+              href: '#6/'
+            }
+          ]
+        },
         countries: [
-          {
-            iso_code: 'TZ',
-            name: 'United Republic of Tanzania',
-            slug: 'tanzania',
-            short_name: 'Tanzania'
-          },
-          {
-            iso_code: 'SN',
-            name: 'Senegal',
-            slug: 'senegal',
-            short_name: 'Senegal'
-          },
-          {
-            iso_code: 'KE',
-            name: 'Kenya',
-            slug: 'kenya',
-            short_name: 'Kenya'
-          },
-          {
-            iso_code: 'ET',
-            name: 'Ethiopia',
-            slug: 'ethiopia',
-            short_name: 'Ethiopia'
-          },
-          {
-            iso_code: 'UG',
-            name: 'Uganda',
-            slug: 'uganda',
-            short_name: 'Uganda'
-          },
-          {
-            iso_code: 'NG',
-            name: 'Nigeria',
-            slug: 'nigeria',
-            short_name: 'Nigeria'
-          },
-          {
-            iso_code: 'ZA',
-            name: 'South Africa',
-            slug: 'south-africa',
-            short_name: 'South Africa'
-          },
           {
             iso_code: 'BF',
             name: 'Burkina Faso',
+            iso_name: 'Burkina Faso',
+            short_name: 'Burkina Faso',
             slug: 'burkina-faso',
-            short_name: 'Burkina Faso'
+            published: true
           },
           {
             iso_code: 'CD',
             name: 'Democratic Republic of Congo',
+            iso_name: 'Congo, the Democratic Republic of the',
+            short_name: 'DR Congo',
             slug: 'democratic-republic-of-congo',
-            short_name: 'DR Congo'
+            published: true
+          },
+          {
+            iso_code: 'ET',
+            name: 'Ethiopia',
+            iso_name: 'Ethiopia',
+            short_name: 'Ethiopia',
+            slug: 'ethiopia',
+            published: true
+          },
+          {
+            iso_code: 'KE',
+            name: 'Kenya',
+            iso_name: 'Kenya',
+            short_name: 'Kenya',
+            slug: 'kenya',
+            published: true
+          },
+          {
+            iso_code: 'NG',
+            name: 'Nigeria',
+            iso_name: 'Nigeria',
+            short_name: 'Nigeria',
+            slug: 'nigeria',
+            published: true
+          },
+          {
+            iso_code: 'SN',
+            name: 'Senegal',
+            iso_name: 'Senegal',
+            short_name: 'Senegal',
+            slug: 'senegal',
+            published: true
+          },
+          {
+            iso_code: 'ZA',
+            name: 'South Africa',
+            iso_name: 'South Africa',
+            short_name: 'South Africa',
+            slug: 'south-africa',
+            published: true
+          },
+          {
+            iso_code: 'TZ',
+            name: 'Tanzania',
+            iso_name: 'Tanzania, United Republic of',
+            short_name: 'Tanzania',
+            slug: 'tanzania',
+            published: true
+          },
+          {
+            iso_code: 'UG',
+            name: 'Uganda',
+            iso_name: 'Uganda',
+            short_name: 'Uganda',
+            slug: 'uganda',
+            published: true
           },
           {
             iso_code: 'ZM',
             name: 'Zambia',
+            iso_name: 'Zambia',
+            short_name: 'Zambia',
             slug: 'zambia',
-            short_name: 'Zambia'
+            published: true
           }
         ],
         settings: {
@@ -131,32 +179,59 @@
 
     <nav id="takwimuNavigation"></nav>
     <script>
-      // Simulate multiple pages using 'page' query param e.g.
-      // http//localhost:3000/?page='profile' to show profile page
+      // Simulate multiple pages using `pathname`s e.g.
+      // `http//localhost:3000/about` should show about page
       const body = document.getElementsByTagName('body')[0];
-      const searchParams = new URLSearchParams(window.location.search);
-      const page = searchParams.get('page') || 'homepage';
-      body.id = page;
-      if (page === 'homepage') {
-        [
-          'takwimuHero',
-          'takwimuFeaturedAnalysis',
-          'takwimuFeaturedData',
-          'takwimuWhatCanYouDo',
-          'takwimuMakingOf',
-          'takwimuLatestNewsStories',
-          'takwimuWhereToNext'
-        ].forEach(id => {
-          const el = document.createElement('div');
-          el.setAttribute('id', id);
-          body.appendChild(el);
-        });
-      } else if (page === 'profile') {
-        ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
-          const el = document.createElement('div');
-          el.setAttribute('id', id);
-          body.appendChild(el);
-        });
+      const pathname = window.location.pathname;
+      let page;
+      if (pathname.startsWith('/about')) {
+        page = 'about';
+      } else if (pathname.startsWith('/profiles/country-')) {
+        page = 'profile';
+      } else if (pathname.startsWith('/profiles/')) {
+        page = 'analysis';
+      }
+      switch (page) {
+        case 'about':
+          ['takwimuWhereToNext'].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
+          break;
+        case 'profile':
+          ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
+          break;
+        case 'analysis':
+          [
+            'takwimuReadNext',
+            'takwimuViewCountry',
+            'takwimuRelatedContent'
+          ].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
+          break;
+        case 'homepage': // fall through
+        default:
+          [
+            'takwimuHero',
+            'takwimuFeaturedAnalysis',
+            'takwimuFeaturedData',
+            'takwimuWhatCanYouDo',
+            'takwimuMakingOf',
+            'takwimuLatestNewsStories',
+            'takwimuWhereToNext'
+          ].forEach(id => {
+            const el = document.createElement('div');
+            el.setAttribute('id', id);
+            body.appendChild(el);
+          });
       }
     </script>
     <div id="takwimuFAQ"></div>

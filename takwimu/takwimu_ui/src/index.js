@@ -9,12 +9,17 @@ import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
-import WhereToNext from './components/WhereToNext';
 import FAQ from './components/FAQ';
+import HomeWhereToNext, {
+  About as AboutWhereToNext,
+  Analysis as AnalysisReadNext
+} from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import FeaturedData from './components/FeaturedData';
+import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import ViewCountry from './components/ViewCountry';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -32,7 +37,7 @@ const renderApp = (Component, id, props = PROPS) => {
 };
 
 const renderHomepage = () => {
-  // check for anything that's *must* be present on this page
+  // check for anything that *must* be present on this page
   const el = document.getElementById('takwimuHero');
   if (el) {
     fetch(
@@ -70,16 +75,37 @@ const renderHomepage = () => {
         }
       });
     renderApp(FAQ, 'takwimuFAQ');
-    renderApp(WhereToNext, 'takwimuWhereToNext');
+    renderApp(HomeWhereToNext, 'takwimuWhereToNext');
+  }
+};
+
+const renderAnalysisPage = () => {
+  const el = document.getElementById('takwimuReadNext');
+  if (el) {
+    const countrySlug = window.location.pathname.replace(/^\/profiles\//, '');
+    const country = PROPS.takwimu.countries.find(c => c.slug === countrySlug);
+    const takwimu = Object.assign({}, PROPS.takwimu, { country });
+    const props = Object.assign({}, PROPS, { takwimu });
+
+    renderApp(AnalysisReadNext, 'takwimuReadNext', props);
+    renderApp(ViewCountry, 'takwimuViewCountry', props);
+    renderApp(RelatedContent, 'takwimuRelatedContent', props);
   }
 };
 
 const renderDatabyTopicPage = () => {
-  // check for anything that's *must* be present on this page
   const el = document.getElementById('takwimuProfile');
   if (el) {
     renderApp(ProfileDetail, 'takwimuProfileDetail');
     renderApp(Profile, 'takwimuProfile');
+  }
+};
+
+const renderAboutPage = () => {
+  const el = document.getElementById('takwimuWhereToNext');
+  if (el) {
+    renderApp(AboutWhereToNext, 'takwimuWhereToNext');
+    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 
@@ -88,5 +114,7 @@ renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
-renderHomepage();
+renderAboutPage();
 renderDatabyTopicPage();
+renderAnalysisPage();
+renderHomepage();

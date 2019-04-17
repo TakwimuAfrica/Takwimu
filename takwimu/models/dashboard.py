@@ -383,6 +383,41 @@ TWITTER_CARD = (
 )
 
 
+class LinkBlock(blocks.StreamBlock):
+    url = blocks.StructBlock([
+        ('title', blocks.TextBlock()),
+        ('link', blocks.URLBlock()),
+    ],
+        icon='link'
+    )
+    page = blocks.PageChooserBlock(required=False)
+
+    # Since this block will only have one of url or page, there is no need
+    # to return a list; return the first item & convert it to (title, link)
+    # if it's a page
+    def get_api_representation(self, value, context=None):
+        representation = super(LinkBlock, self).get_api_representation(value, context=context)[0]
+        if representation['type'] == 'page':
+            representation['value'] = {
+                'title': value[0].value.title,
+                'link': value[0].value.get_url()
+            }
+        return representation
+
+    class Meta:
+        icon = 'cogs'
+
+
+class RelatedContentBlock(blocks.StructBlock):
+    link = LinkBlock(min_num=1, max_num=1, block_counts={'url': { 'max_num': 1 }, 'page': { 'max_num': 1 } })
+
+    # This block purpose is only to enable the selection of either url or page
+    # and hence shouldn't be included in the representation
+    def get_api_representation(self, value, context=None):
+        (name, val) = list(value.items())[0]
+        return self.child_blocks[name].get_api_representation(val, context=context)
+
+
 class ProfileSectionPage(ModelMeta, Page):
     '''
     Profile Section Page
@@ -392,6 +427,9 @@ class ProfileSectionPage(ModelMeta, Page):
     description = models.TextField(blank=True)
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
+    related_content = StreamField([
+        ('link', RelatedContentBlock(required=False))
+    ], blank=True)
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -420,6 +458,7 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('description'),
         APIField('body'),
+        APIField('related_content'),
         APIField('promotion_image'),
     ]
 
@@ -434,6 +473,7 @@ class ProfileSectionPage(ModelMeta, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        StreamFieldPanel('related_content'),
         StreamFieldPanel('body'),
     ]
 
@@ -452,9 +492,9 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('body'),
         APIField('description'),
+        APIField('related_content'),
         APIField('date'),
         APIField('promotion_image'),
-        APIField('promotion_image_thumbnail'),
     ]
 
     def get_context(self, request):
@@ -470,8 +510,9 @@ class ProfileSectionPage(ModelMeta, Page):
     def __str__(self):
         return f"{self.get_parent().title} - {self.title}"
 
-
 # The abstract model for topics, complete with panels
+
+
 class ProfilePageSection(models.Model):
     section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
 
@@ -507,6 +548,10 @@ class ProfilePage(ModelMeta, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    related_content = StreamField([
+        ('link', RelatedContentBlock(required=False))
+    ], blank=True)
+
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -536,9 +581,9 @@ class ProfilePage(ModelMeta, Page):
         APIField('geo'),
         APIField('date'),
         APIField('document'),
+        APIField('related_content'),
         APIField('body'),
         APIField('promotion_image'),
-        APIField('promotion_image_thumbnail'),
     ]
 
     # Search index configuration
@@ -554,6 +599,7 @@ class ProfilePage(ModelMeta, Page):
         FieldPanel('geo'),
         DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
+        StreamFieldPanel('related_content'),
         InlinePanel('sections', label="Sections"),
     ]
 
@@ -584,13 +630,20 @@ class ProfilePage(ModelMeta, Page):
 
 class AboutPage(Page):
     content = RichTextField()
+    related_content = StreamField([
+        ('link', RelatedContentBlock(required=False))
+    ], blank=True)
 
     content_panels = [
         FieldPanel('title'),
         FieldPanel('content'),
+        StreamFieldPanel('related_content'),
     ]
 
-    api_fields = [APIField('content'), ]
+    api_fields = [
+        APIField('content'),
+        APIField('related_content'),
+    ]
 
 
 class ContactUsPage(Page):
