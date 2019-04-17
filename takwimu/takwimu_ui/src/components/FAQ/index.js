@@ -1,12 +1,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Typography, withStyles } from '@material-ui/core';
+import {
+  Grid,
+  Typography,
+  withStyles,
+  ExpansionPanelDetails
+} from '@material-ui/core';
 
 import Section from '../Section';
 import ExpansionPanelContent from './ExpansionPanelContent';
 
-const styles = () => ({
-  root: { flexGrow: 1 }
+const styles = theme => ({
+  root: { flexGrow: 1 },
+  panelDetails: { backgroundColor: theme.palette.info.main }
 });
 
 function FAQ({ classes }) {
@@ -27,40 +33,73 @@ function FAQ({ classes }) {
         <ExpansionPanelContent
           style={{ padding: '1rem' }}
           expandTitle="Where is the data sourced from? "
-          expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
-           vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit. "
-        />
-        <ExpansionPanelContent
-          expandTitle="How often is the data reviewed and updated? "
-          expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
-           vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit. "
-        />
-        <ExpansionPanelContent
-          expandTitle="Is this another question that might be asked? "
-          expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
-           vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit. "
-        />
-        <ExpansionPanelContent
-          expandTitle="Is this another question that might be asked? "
-          expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
-           vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit. "
-        />
-        <ExpansionPanelContent
-          expandTitle="Is this another question that might be asked? "
-          expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
-           vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit. "
-        />
-        <ExpansionPanelContent
-          expandTitle="Is this another question that might be asked? "
-          expandDetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
-           vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit. "
-        />
+        >
+          <ExpansionPanelDetails className={classes.panelDetails}>
+            <Typography varian="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
+              vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
+              lorem at, consequat finibus libero. Ut tincidunt rutrum purus
+              vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanelContent>
+
+        <ExpansionPanelContent expandTitle="How often is the data reviewed and updated? ">
+          <ExpansionPanelDetails className={classes.panelDetails}>
+            <Typography varian="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
+              vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
+              lorem at, consequat finibus libero. Ut tincidunt rutrum purus
+              vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanelContent>
+        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+          <ExpansionPanelDetails className={classes.panelDetails}>
+            <Typography varian="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
+              vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
+              lorem at, consequat finibus libero. Ut tincidunt rutrum purus
+              vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanelContent>
+        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+          <ExpansionPanelDetails className={classes.panelDetails}>
+            <Typography varian="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
+              vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
+              lorem at, consequat finibus libero. Ut tincidunt rutrum purus
+              vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanelContent>
+        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+          <ExpansionPanelDetails className={classes.panelDetails}>
+            <Typography varian="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
+              vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
+              lorem at, consequat finibus libero. Ut tincidunt rutrum purus
+              vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanelContent>
+        <ExpansionPanelContent expandTitle="Is this another question that might be asked? ">
+          <ExpansionPanelDetails className={classes.panelDetails}>
+            <Typography varian="body1">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer
+              et lorem eros. Integer vel venenatis urna. Nam vestibulum felis
+              vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu
+              lorem at, consequat finibus libero. Ut tincidunt rutrum purus
+              vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.
+            </Typography>
+          </ExpansionPanelDetails>
+        </ExpansionPanelContent>
       </Grid>
     </Section>
   );

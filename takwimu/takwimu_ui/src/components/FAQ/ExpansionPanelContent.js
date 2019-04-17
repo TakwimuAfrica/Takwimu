@@ -4,7 +4,6 @@ import {
   Typography,
   ExpansionPanel,
   ExpansionPanelSummary,
-  ExpansionPanelDetails,
   withStyles,
   IconButton
 } from '@material-ui/core';
@@ -53,7 +52,7 @@ class PanelContent extends React.Component {
   }
 
   render() {
-    const { classes, expandTitle, expandDetails } = this.props;
+    const { classes, expandTitle, children } = this.props;
     const { bgColor, txtColor, iconChange } = this.state;
 
     const AddBgColor = bgColor
@@ -87,9 +86,7 @@ class PanelContent extends React.Component {
             {expandTitle}
           </Typography>
         </ExpansionPanelSummary>
-        <ExpansionPanelDetails className={classes.inactiveExpandSummary}>
-          <Typography>{expandDetails}</Typography>
-        </ExpansionPanelDetails>
+        {children}
       </ExpansionPanel>
     );
   }
@@ -98,11 +95,13 @@ class PanelContent extends React.Component {
 PanelContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   expandTitle: PropTypes.string,
-  expandDetails: PropTypes.string
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 PanelContent.defaultProps = {
-  expandTitle: '',
-  expandDetails: ''
+  expandTitle: ''
 };
 
 export default withStyles(styles)(PanelContent);
