@@ -382,20 +382,41 @@ TWITTER_CARD = (
     ('app', 'Link to download app'),
 )
 
-class RelatedContentWidgetsBlock(blocks.StreamBlock):
-    free_form = blocks.StructBlock([
+
+class LinkBlock(blocks.StreamBlock):
+    url = blocks.StructBlock([
         ('title', blocks.TextBlock()),
         ('link', blocks.URLBlock()),
     ],
-    icon='snippet'
+        icon='link'
     )
     page = blocks.PageChooserBlock(required=False)
+
+    # Since this block will only have one of url or page, there is no need
+    # to return a list; return the first item & convert it to (title, link)
+    # if it's a page
+    def get_api_representation(self, value, context=None):
+        representation = super(LinkBlock, self).get_api_representation(value, context=context)[0]
+        if representation['type'] == 'page':
+            representation['value'] = {
+                'title': value[0].value.title,
+                'link': value[0].value.get_url()
+            }
+        return representation
 
     class Meta:
         icon = 'cogs'
 
+
 class RelatedContentBlock(blocks.StructBlock):
-    widgets = RelatedContentWidgetsBlock(required=False)
+    link = LinkBlock(min_num=1, max_num=1, block_counts={'url': { 'max_num': 1 }, 'page': { 'max_num': 1 } })
+
+    # This block purpose is only to enable the selection of either url or page
+    # and hence shouldn't be included in the representation
+    def get_api_representation(self, value, context=None):
+        (name, val) = list(value.items())[0]
+        return self.child_blocks[name].get_api_representation(val, context=context)
+
 
 class ProfileSectionPage(ModelMeta, Page):
     '''
@@ -407,7 +428,7 @@ class ProfileSectionPage(ModelMeta, Page):
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
     related_content = StreamField([
-        ('related_content', RelatedContentBlock(required=False))
+        ('link', RelatedContentBlock(min_num=1, max_num=1, required=True))
     ], blank=True)
     body = StreamField([
         ('topic', TopicBlock())
@@ -474,7 +495,6 @@ class ProfileSectionPage(ModelMeta, Page):
         APIField('related_content'),
         APIField('date'),
         APIField('promotion_image'),
-        APIField('promotion_image_thumbnail'),
     ]
 
     def get_context(self, request):
@@ -491,6 +511,8 @@ class ProfileSectionPage(ModelMeta, Page):
         return f"{self.get_parent().title} - {self.title}"
 
 # The abstract model for topics, complete with panels
+
+
 class ProfilePageSection(models.Model):
     section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
 
@@ -527,7 +549,7 @@ class ProfilePage(ModelMeta, Page):
         related_name='+'
     )
     related_content = StreamField([
-        ('related_content', RelatedContentBlock(required=False))
+        ('link', RelatedContentBlock(required=False))
     ], blank=True)
 
     body = StreamField([
@@ -562,7 +584,6 @@ class ProfilePage(ModelMeta, Page):
         APIField('related_content'),
         APIField('body'),
         APIField('promotion_image'),
-        APIField('promotion_image_thumbnail'),
     ]
 
     # Search index configuration
@@ -610,7 +631,7 @@ class ProfilePage(ModelMeta, Page):
 class AboutPage(Page):
     content = RichTextField()
     related_content = StreamField([
-        ('related_content', RelatedContentBlock(required=False))
+        ('link', RelatedContentBlock(required=False))
     ], blank=True)
 
     content_panels = [
@@ -620,9 +641,10 @@ class AboutPage(Page):
     ]
 
     api_fields = [
-        APIField('content'), 
+        APIField('content'),
         APIField('related_content'),
     ]
+
 
 class ContactUsPage(Page):
     address = RichTextField()
