@@ -7,6 +7,7 @@ import {
   Typography,
   ExpansionPanel,
   ExpansionPanelSummary,
+  ExpansionPanelDetails,
   withStyles,
   IconButton
 } from '@material-ui/core';
@@ -48,7 +49,8 @@ const styles = theme => ({
   icon: {
     fontSize: '2.4375rem'
   },
-  iconExpanded: { fontSize: '2.4375rem', color: 'white' }
+  iconExpanded: { fontSize: '2.4375rem', color: 'white' },
+  panelDetails: { backgroundColor: theme.palette.info.main }
 });
 
 class PanelContent extends React.Component {
@@ -115,7 +117,10 @@ class PanelContent extends React.Component {
             {expandTitle}
           </Typography>
         </ExpansionPanelSummary>
-        {children}
+
+        <ExpansionPanelDetails className={classes.panelDetails}>
+          {children}
+        </ExpansionPanelDetails>
       </ExpansionPanel>
     );
   }
