@@ -1,34 +1,48 @@
 import React from 'react';
-import { Grid, Typography, MenuList, Link } from '@material-ui/core';
+import { Grid } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
 
 import Section from '../Section';
+import SideMenu from './SideMenu';
 
-function SideMenu() {
-  return (
-    <div>
-      <Typography variant="subtitle2">Jump to:</Typography>
-      <MenuList>
-        {[
-          { title: 'About Takwimu', link: '#about' },
-          { title: 'Methodology', link: '#methodology' },
-          { title: 'Services', link: '#services' },
-          { title: 'FAQs', link: '#faqs' }
-        ].map(item => (
-          <li>
-            <Link href={item.link}>{item.title}</Link>
-          </li>
-        ))}
-      </MenuList>
-    </div>
-  );
-}
+const styles = theme => ({
+  sideMenuRoot: {
+    position: 'relative',
+    display: 'flex',
+    justifyContent: 'flex-start',
+    width: '100%',
+    height: '34rem',
+    padding: '1.438rem',
+    flexDirection: 'column',
+    alignItems: 'flex-start',
+    [theme.breakpoints.up('md')]: {
+      position: 'fixed',
+      width: '14.375rem'
+    }
+  },
+  sideMenuHeader: {
+    fontColor: theme.palette.info.other
+  },
+  activePageIndicator: {
+    marginLeft: '-1.5rem',
+    marginRight: '1rem'
+  },
+  listItem: {
+    decorator: 'none',
+    padding: '0.625rem 0',
+    fontWeight: 'bold'
+  },
+  activeLink: {
+    textDecoration: 'underline'
+  }
+});
 
 function AboutUs() {
   return (
     <Section>
       <Grid container justify="space-between">
         <Grid item container xs="12" md="3">
-          <SideMenu />
+          <SideMenu activeContent="methodology" />
         </Grid>
         <Grid item container xs="12" md="9" />
       </Grid>
@@ -36,4 +50,4 @@ function AboutUs() {
   );
 }
 
-export default AboutUs;
+export default withStyles(styles)(AboutUs);
