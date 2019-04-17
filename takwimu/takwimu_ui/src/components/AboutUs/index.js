@@ -37,12 +37,19 @@ const styles = theme => ({
   }
 });
 
+const content = [
+  { title: 'About Takwimu', link: 'about' },
+  { title: 'Methodology', link: 'methodology' },
+  { title: 'Services', link: 'services' },
+  { title: 'FAQs', link: 'faqs' }
+];
+
 function AboutUs() {
   return (
     <Section>
       <Grid container justify="space-between">
         <Grid item container xs="12" md="3">
-          <SideMenu activeContent="methodology" />
+          <SideMenu activeContent="methodology" content={content} />
         </Grid>
         <Grid item container xs="12" md="9" />
       </Grid>
