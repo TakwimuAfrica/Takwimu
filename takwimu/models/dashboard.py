@@ -428,7 +428,7 @@ class ProfileSectionPage(ModelMeta, Page):
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
     related_content = StreamField([
-        ('link', RelatedContentBlock(min_num=1, max_num=1, required=True))
+        ('link', RelatedContentBlock(required=False))
     ], blank=True)
     body = StreamField([
         ('topic', TopicBlock())
