@@ -350,11 +350,15 @@ class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.RichTextBlock(required=False)
-    body = blocks.RichTextBlock(required=False)
-
-    indicators = blocks.StreamBlock([
+    # body = blocks.RichTextBlock(required=False)
+    body = blocks.StreamBlock([
+        ('paragraph', blocks.RichTextBlock(required=False)),
         ('indicators', IndicatorBlock(required=False))
     ], required=False)
+
+    # indicators = blocks.StreamBlock([
+    #     ('indicators', IndicatorBlock(required=False))
+    # ], required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()
