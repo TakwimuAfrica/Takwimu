@@ -78,20 +78,24 @@ export default class AnalysisPage extends React.Component {
             }
           } = this.props;
           const paths = window.location.pathname.split(`/profiles/${slug}/`);
-          let current = 0;
+          let foundIndex = -1;
           if (paths.length === 2) {
             const sectionSlug = paths[1].replace('/', '');
-            current = json.items.findIndex(
+            foundIndex = json.items.findIndex(
               item => item.meta.slug === sectionSlug
             );
           }
           this.setState(prevState => {
-            let { analysis } = prevState;
-            if (current === -1) {
-              ({ current } = prevState);
+            let { current, analysis } = prevState;
+            if (foundIndex !== -1) {
+              current = foundIndex;
             }
             if (analysis) {
-              analysis = Array.concat(analysis, json.items);
+              if (foundIndex !== -1) {
+                // Adjust for `Country Overview`
+                current += analysis.length;
+              }
+              analysis = analysis.concat(json.items);
             }
             return { current, analysis };
           });

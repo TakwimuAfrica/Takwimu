@@ -46,6 +46,15 @@ function AnalysisTableOfContent({
   country,
   onChangeContent
 }) {
+  const { slug: countrySlug } = country;
+  const generateHref = index => {
+    const analysisUrl = `/profiles/${countrySlug}`;
+    if (content[index].meta.slug === countrySlug) {
+      return analysisUrl;
+    }
+    return `${analysisUrl}/${content[index].meta.slug}`;
+  };
+
   return (
     <div className={classes.root}>
       <CountrySelector
@@ -66,10 +75,12 @@ function AnalysisTableOfContent({
               className={classNames({
                 [classes.activeLink]: current !== index
               })}
-              href={`#${index}`}
+              href={generateHref(index)}
               color={current !== index ? 'primary' : 'textPrimary'}
               onClick={e => {
                 e.preventDefault();
+
+                window.history.pushState(null, '', generateHref(index));
                 onChangeContent(index);
               }}
             >
