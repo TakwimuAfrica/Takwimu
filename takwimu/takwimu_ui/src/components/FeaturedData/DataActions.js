@@ -1,7 +1,14 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, IconButton, Typography, Grid } from '@material-ui/core';
+import {
+  withStyles,
+  IconButton,
+  Typography,
+  Grid,
+  Popover,
+  ClickAwayListener
+} from '@material-ui/core';
 
 import shareIcon from '../../assets/images/network-connection.svg';
 import embedIcon from '../../assets/images/code.svg';
@@ -79,40 +86,91 @@ ActionButtonComponent.defaultProps = {
 
 const ActionButton = withStyles(styles)(ActionButtonComponent);
 
-function DataActions({ classes, onDownload }) {
-  return (
-    <div className={classes.root}>
-      <ActionButton>
-        <img alt="" src={shareIcon} />
-        <Typography className={classes.actionText}>Share</Typography>
-      </ActionButton>
-      <div className={classes.verticalDivider} />
-      <ActionButton onClick={onDownload}>
-        <img alt="" src={downloadIcon} />
-        <Typography className={classes.actionText}>Download</Typography>
-      </ActionButton>
-      <div className={classes.verticalDivider} />
-      <ActionButton>
-        <img alt="" src={embedIcon} />
-        <Typography className={classes.actionText}>Embed</Typography>
-      </ActionButton>
-      <div className={classes.verticalDivider} />
-      <ActionButton>
-        <img alt="" src={compareIcon} />
-        <Typography className={classes.actionText}>Compare</Typography>
-      </ActionButton>
-      <div className={classes.verticalDivider} />
-      <ActionButton>
-        <img alt="" src={showIcon} />
-        <Typography className={classes.actionText}>Show Data</Typography>
-      </ActionButton>
-    </div>
-  );
+class DataActions extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      anchorEl: null
+    };
+
+    this.handleEmbed = this.handleEmbed.bind(this);
+  }
+
+  handleEmbed(event) {
+    this.setState({
+      anchorEl: event.currentTarget
+    });
+  }
+
+  render() {
+    const { classes, onDownload, embedCode } = this.props;
+    const { anchorEl } = this.state;
+    const open = Boolean(anchorEl);
+    return (
+      <div className={classes.root}>
+        <ActionButton>
+          <img alt="" src={shareIcon} />
+          <Typography className={classes.actionText}>Share</Typography>
+        </ActionButton>
+        <div className={classes.verticalDivider} />
+        <ActionButton onClick={onDownload}>
+          <img alt="" src={downloadIcon} />
+          <Typography className={classes.actionText}>Download</Typography>
+        </ActionButton>
+        <div className={classes.verticalDivider} />
+        <ActionButton onClick={this.handleEmbed}>
+          <img alt="" src={embedIcon} />
+          <Typography className={classes.actionText}>Embed</Typography>
+        </ActionButton>
+        <div className={classes.verticalDivider} />
+        <ActionButton>
+          <img alt="" src={compareIcon} />
+          <Typography className={classes.actionText}>Compare</Typography>
+        </ActionButton>
+        <div className={classes.verticalDivider} />
+        <ActionButton>
+          <img alt="" src={showIcon} />
+          <Typography className={classes.actionText}>Show Data</Typography>
+        </ActionButton>
+        <Popover
+          open={open}
+          anchorEl={anchorEl}
+          anchorOrigin={{
+            vertical: 'top',
+            horizontal: 'center'
+          }}
+          transformOrigin={{
+            vertical: 'bottom',
+            horizontal: 'center'
+          }}
+        >
+          <ClickAwayListener
+            onClickAway={() => this.setState({ anchorEl: null })}
+          >
+            <textarea
+              disabled
+              style={{
+                width: '400px',
+                height: '115px',
+                margin: '20px',
+                border: 'none',
+                outline: 'none'
+              }}
+            >
+              {embedCode}
+            </textarea>
+          </ClickAwayListener>
+        </Popover>
+      </div>
+    );
+  }
 }
 
 DataActions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  onDownload: PropTypes.func.isRequired
+  onDownload: PropTypes.func.isRequired,
+  embedCode: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(DataActions);

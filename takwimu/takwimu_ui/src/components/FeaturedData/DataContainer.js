@@ -39,6 +39,19 @@ const styles = theme => ({
 });
 
 function DataContainer({ classes, featuredData, url }) {
+  const embedCode = `<iframe
+    allowFullScreen
+    title="${featuredData.title}"
+    src="${url}/embed/iframe.html?geoID=country-${
+    featuredData.country
+  }&geoVersion=2009&chartDataID=${
+    featuredData.data_id
+  }&dataYear=2011&chartType=${
+    featuredData.chart_type
+  }&chartHeight=300&chartTitle=${featuredData.title}&initialSort=&statType=${
+    featuredData.data_stat_type
+  }"
+/>`;
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
@@ -60,6 +73,7 @@ function DataContainer({ classes, featuredData, url }) {
                   link.click();
                 });
             }}
+            embedCode={embedCode}
           />
         </Grid>
       </div>
