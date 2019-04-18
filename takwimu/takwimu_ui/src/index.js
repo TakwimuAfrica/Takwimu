@@ -25,6 +25,8 @@ const PROPS = {
   profile: window.profileData
 };
 
+console.log(window.takwimu);
+
 const renderApp = (Component, id, props = PROPS) => {
   const el = document.getElementById(id);
   if (el) {

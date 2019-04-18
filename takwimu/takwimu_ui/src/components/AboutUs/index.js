@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import Section from '../Section';
 import SideMenu from './SideMenu';
+import AboutContent from './AboutContent';
 
 const styles = theme => ({
   sideMenuRoot: {
@@ -51,7 +52,9 @@ function AboutUs() {
         <Grid item container xs="12" md="3">
           <SideMenu activeContent="methodology" content={content} />
         </Grid>
-        <Grid item container xs="12" md="9" />
+        <Grid item container xs="12" md="9">
+          <AboutContent activeContent="methodology" content={content} />
+        </Grid>
       </Grid>
     </Section>
   );
