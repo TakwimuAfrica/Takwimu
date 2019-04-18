@@ -63,7 +63,8 @@ const styles = theme => ({
   },
   countryName: {
     marginLeft: '1.125rem',
-    marginRight: '0.75rem'
+    marginRight: '0.75rem',
+    textAlign: 'left'
   },
   chooserButton: {
     marginTop: '0.938rem',
@@ -125,7 +126,7 @@ function CountrySelectorComponent({ classes, country, context }) {
       >
         <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
         <Typography variant="subtitle1" className={classes.countryName}>
-          {country.name}
+          {country.short_name}
         </Typography>
         <img alt="" src={downArrow} />
       </ButtonBase>
