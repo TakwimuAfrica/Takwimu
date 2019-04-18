@@ -18,10 +18,7 @@ const styles = () => ({
   }
 });
 
-function FeaturedData({
-  classes,
-  takwimu: { url, featured_data: featuredData }
-}) {
+function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
   return (
     <Section title="Featured Data" variant="h2">
       {featuredData && featuredData.length ? (
@@ -35,13 +32,8 @@ function FeaturedData({
           <DataContainer
             color="secondary"
             featuredData={featuredData[0].value}
-            url={url}
           />
-          <DataContainer
-            color="primary"
-            featuredData={featuredData[1].value}
-            url={url}
-          />
+          <DataContainer color="primary" featuredData={featuredData[1].value} />
         </Grid>
       ) : null}
     </Section>
@@ -51,7 +43,6 @@ function FeaturedData({
 FeaturedData.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    url: PropTypes.string.isRequired,
     featured_data: PropTypes.arrayOf(
       PropTypes.shape({
         value: PropTypes.shape({
