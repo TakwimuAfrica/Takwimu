@@ -24,7 +24,7 @@ function FeaturedData({
 }) {
   return (
     <Section title="Featured Data" variant="h2">
-      {(featuredData && featuredData.length && (
+      {featuredData && featuredData.length ? (
         <Grid
           container
           direction="row"
@@ -43,8 +43,7 @@ function FeaturedData({
             url={url}
           />
         </Grid>
-      )) ||
-        null}
+      ) : null}
     </Section>
   );
 }
