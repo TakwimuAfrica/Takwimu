@@ -7,9 +7,6 @@ import AnalysisContent from '../../components/AnalysisContent';
 
 import AnalysisTableOfContent from '../../components/AnalysisContent/TableOfContent';
 
-import { Analysis as AnalysisReadNext } from '../../components/Next';
-import ViewCountry from '../../components/ViewCountry';
-
 export default class AnalysisPage extends React.Component {
   constructor(props) {
     super(props);
@@ -77,9 +74,7 @@ export default class AnalysisPage extends React.Component {
             />
           </Grid>
           <Grid item container xs="12" md="9">
-            <AnalysisContent content={analysis[current]} />
-            <ViewCountry takwimu={takwimu} />
-            <AnalysisReadNext />
+            <AnalysisContent content={analysis[current]} takwimu={takwimu} />
           </Grid>
         </Grid>
       </Section>

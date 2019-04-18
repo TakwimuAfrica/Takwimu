@@ -3,9 +3,11 @@ import React, { Fragment } from 'react';
 import { Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
+import { Analysis as AnalysisReadNext } from '../Next';
 import OtherInfoNav from './OtherInfoNav';
 import OtherInfo from './OtherInfo';
 import Actions from './Actions';
+import ViewCountry from '../ViewCountry';
 
 const styles = {
   root: {
@@ -38,7 +40,7 @@ class AnalysisContent extends React.Component {
   }
 
   render() {
-    const { classes, content } = this.props;
+    const { classes, content, takwimu } = this.props;
     const { current, currentId } = this.state;
 
     // Reset index when main content changes
@@ -82,6 +84,12 @@ class AnalysisContent extends React.Component {
             content={content}
             showContent={this.showContent}
           />
+          <ViewCountry takwimu={takwimu} />
+          <AnalysisReadNext
+            current={current}
+            content={content}
+            showContent={this.showContent}
+          />
         </div>
       </Fragment>
     );
@@ -90,7 +98,8 @@ class AnalysisContent extends React.Component {
 
 AnalysisContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired
+  content: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(AnalysisContent);
