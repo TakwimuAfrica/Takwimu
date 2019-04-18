@@ -17,12 +17,15 @@ import FeaturedData from './components/FeaturedData';
 import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import Services from './components/Services';
 
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
   profile: window.profileData
 };
+
+console.log(window.takwimu);
 
 const renderApp = (Component, id, props = PROPS) => {
   const el = document.getElementById(id);
@@ -93,6 +96,7 @@ const renderDatabyTopicPage = () => {
 const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
+    renderApp(Services, 'takwimuServices');
     renderApp(Faqs, 'takwimuFAQ');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
     renderApp(RelatedContent, 'takwimuRelatedContent');

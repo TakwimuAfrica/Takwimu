@@ -1,5 +1,5 @@
 {% extends 'takwimu/_layouts/page.html' %}
-{% load wagtailcore_tags static %}
+{% load wagtailcore_tags static jsonify %}
 
 {% block content %}
   <div style="background-color: #fff;">
@@ -69,3 +69,12 @@
   {% include 'takwimu/_includes/sections/updates.html' %}
 
 {% endblock %}
+{% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script>
+    var takwimu = window.takwimu || {};
+    takwimu.faqs = {{ faqs }};
+    console.log(takwimu)
+  </script>
+{% endblock body_javascript_extra %}

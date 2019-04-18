@@ -17,7 +17,7 @@ from wazimap.geo import geo_data, LocationNotFound
 from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, FAQSetting, \
     ProfileSectionPage, ProfilePage
 from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
@@ -57,6 +57,7 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
+        context['faqs'] = FAQ.objects.all()
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
