@@ -23,6 +23,9 @@ const styles = theme => ({
       width: '14.375rem'
     }
   },
+  label: {
+    fontSize: theme.typography.caption.fontSize
+  },
   activePageIndicator: {
     marginLeft: '-1.5rem',
     marginRight: '1rem'
@@ -45,7 +48,11 @@ function AnalysisTableOfContent({
 }) {
   return (
     <div className={classes.root}>
-      <CountrySelector country={country} context="analysis" />
+      <CountrySelector
+        country={country}
+        context="analysis"
+        classes={{ label: classes.label }}
+      />
       <MenuList style={{ width: '14.188rem' }}>
         {content.map((c, index) => (
           <li className={classes.listItem}>
