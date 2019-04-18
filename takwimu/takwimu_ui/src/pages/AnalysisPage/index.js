@@ -21,12 +21,13 @@ export default class AnalysisPage extends React.Component {
   }
 
   componentDidMount() {
-    const { takwimu } = this.props;
-    const countryName = takwimu.country.name;
+    const {
+      takwimu: {
+        country: { slug }
+      }
+    } = this.props;
     fetch(
-      `${
-        takwimu.url
-      }/api/v2/pages/?type=takwimu.ProfilePage&title=${countryName}&format=json`
+      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&format=json`
     ).then(response => {
       if (response.status === 200) {
         response
@@ -39,18 +40,62 @@ export default class AnalysisPage extends React.Component {
   }
 
   fetchAnalysis() {
-    const { takwimu } = this.props;
-    const { profile } = this.state;
+    const {
+      takwimu: {
+        country: { slug }
+      }
+    } = this.props;
 
     fetch(
-      `${
-        takwimu.url
-      }/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body&descendant_of=${
-        profile.id
-      }&format=json`
+      `/api/v2/pages/?type=takwimu.ProfilePage&fields=body&slug=${slug}&format=json`
     ).then(response => {
       if (response.status === 200) {
-        response.json().then(json => this.setState({ analysis: json.items }));
+        response.json().then(json => {
+          const { items: analysis } = json;
+          if (analysis && analysis.length) {
+            analysis[0].title = 'Country Overview';
+          }
+          this.setState({ analysis });
+          this.fetchSectionAnalysis();
+        });
+      }
+    });
+  }
+
+  fetchSectionAnalysis() {
+    const {
+      profile: { id }
+    } = this.state;
+
+    fetch(
+      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body&descendant_of=${id}&format=json`
+    ).then(response => {
+      if (response.status === 200) {
+        response.json().then(json => {
+          const {
+            takwimu: {
+              country: { slug }
+            }
+          } = this.props;
+          const paths = window.location.pathname.split(`/profiles/${slug}/`);
+          let current = 0;
+          if (paths.length === 2) {
+            const sectionSlug = paths[1].replace('/', '');
+            current = json.items.findIndex(
+              item => item.meta.slug === sectionSlug
+            );
+          }
+          this.setState(prevState => {
+            let { analysis } = prevState;
+            if (current === -1) {
+              ({ current } = prevState);
+            }
+            if (analysis) {
+              analysis = Array.concat(analysis, json.items);
+            }
+            return { current, analysis };
+          });
+        });
       }
     });
   }
