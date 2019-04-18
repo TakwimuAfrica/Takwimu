@@ -21,6 +21,7 @@ const styles = theme => ({
   dataContainer: {
     padding: '0.625rem',
     backgroundColor: theme.palette.data.light,
+    overflow: 'hidden',
     [theme.breakpoints.up('md')]: {
       padding: '1.25rem'
     }
@@ -44,15 +45,21 @@ function DataContainer({ classes, featuredData, url }) {
         <Grid container direction="column" alignItems="center">
           <IFrame featuredData={featuredData} url={url} />
           <DataActions
-            onDownload={() =>
-              document
-                .getElementById(
-                  `cr-embed-country-${featuredData.country}-${
-                    featuredData.data_id
-                  }`
-                )
-                .contentWindow.print()
-            }
+            onDownload={() => {
+              const iframe = document.getElementById(
+                `cr-embed-country-${featuredData.country}-${
+                  featuredData.data_id
+                }`
+              );
+              iframe.contentWindow.domtoimage
+                .toJpeg(iframe.contentDocument.body)
+                .then(dataUrl => {
+                  const link = document.createElement('a');
+                  link.download = `${featuredData.title}.jpeg`;
+                  link.href = dataUrl;
+                  link.click();
+                });
+            }}
           />
         </Grid>
       </div>
