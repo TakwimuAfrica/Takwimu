@@ -11,8 +11,8 @@ const styles = theme => ({
     padding: '1.125rem 1.625rem'
   },
   otherTopicLinks: {
-    '& > button:nth-child(2n)': {
-      margin: '0 3.125rem'
+    '& > button:nth-child(n)': {
+      marginRight: '3.125rem'
     }
   },
   otherTopic: {

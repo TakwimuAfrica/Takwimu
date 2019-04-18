@@ -20,8 +20,8 @@ const styles = theme => ({
     backgroundColor: theme.palette.primary.main
   },
   otherTopicLinks: {
-    '& > button:nth-child(2n)': {
-      margin: '0 3.125rem'
+    '& > button:nth-child(n)': {
+      marginRight: '3.125rem'
     }
   },
   otherTopic: {
