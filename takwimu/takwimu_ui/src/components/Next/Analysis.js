@@ -42,6 +42,7 @@ function AnalysisReadNext({ classes, current, content, showContent }) {
         {content.body.map((c, index) =>
           index > current && index - current <= 2 ? (
             <Card
+              key={c.id}
               variant="dual"
               classes={{
                 root: classNames({ [classes.cardMargin]: index - current > 1 })

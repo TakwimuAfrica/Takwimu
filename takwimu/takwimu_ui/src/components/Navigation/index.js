@@ -269,7 +269,7 @@ Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
   takwimu: PropTypes.shape({
-    page: PropTypes.string.isRequired,
+    page: PropTypes.shape({}).isRequired,
     countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
   }).isRequired
 };

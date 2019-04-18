@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { ButtonBase, Typography, withStyles } from '@material-ui/core';
+import { Link, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
@@ -42,19 +42,19 @@ function OtherTopics({
       </Typography>
       <div className={classes.otherTopicLinks}>
         {content.body.map((c, index) => (
-          <ButtonBase
+          <Link
+            key={c.id}
+            href={c.id}
+            component="button"
+            variant="body2"
+            color={current === index ? 'textPrimary' : 'primary'}
             className={classNames({
               [classes.otherTopic]: current !== index
             })}
             onClick={showContent(index)}
           >
-            <Typography
-              variant="body2"
-              color={current === index ? 'textPrimary' : 'primary'}
-            >
-              {c.value.title}
-            </Typography>
-          </ButtonBase>
+            {c.value.title}
+          </Link>
         ))}
       </div>
     </div>

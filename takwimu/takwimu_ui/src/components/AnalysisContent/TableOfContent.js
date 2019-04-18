@@ -64,7 +64,7 @@ function AnalysisTableOfContent({
       />
       <MenuList style={{ width: '14.188rem' }}>
         {content.map((c, index) => (
-          <li className={classes.listItem}>
+          <li key={c.id} className={classes.listItem}>
             <img
               alt=""
               src={activePageIcon}
@@ -95,7 +95,7 @@ function AnalysisTableOfContent({
 
 AnalysisTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   country: PropTypes.shape({}).isRequired,
   onChangeContent: PropTypes.func.isRequired

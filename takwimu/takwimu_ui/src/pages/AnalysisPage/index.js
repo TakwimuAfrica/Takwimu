@@ -12,7 +12,7 @@ export default class AnalysisPage extends React.Component {
     super(props);
 
     this.state = {
-      profile: null,
+      id: null,
       analysis: null,
       current: 0
     };
@@ -27,45 +27,22 @@ export default class AnalysisPage extends React.Component {
       }
     } = this.props;
     fetch(
-      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&format=json`
-    ).then(response => {
-      if (response.status === 200) {
-        response
-          .json()
-          .then(json =>
-            this.setState({ profile: json.items[0] }, this.fetchAnalysis)
-          );
-      }
-    });
-  }
-
-  fetchAnalysis() {
-    const {
-      takwimu: {
-        country: { slug }
-      }
-    } = this.props;
-
-    fetch(
-      `/api/v2/pages/?type=takwimu.ProfilePage&fields=body&slug=${slug}&format=json`
+      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&fields=body&format=json`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
           const { items: analysis } = json;
-          if (analysis && analysis.length) {
+          if (analysis.length) {
             analysis[0].title = 'Country Overview';
           }
-          this.setState({ analysis });
-          this.fetchSectionAnalysis();
+          this.setState({ id: analysis[0].id, analysis }, this.fetchAnalysis);
         });
       }
     });
   }
 
-  fetchSectionAnalysis() {
-    const {
-      profile: { id }
-    } = this.state;
+  fetchAnalysis() {
+    const { id } = this.state;
 
     fetch(
       `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body&descendant_of=${id}&format=json`
@@ -115,7 +92,7 @@ export default class AnalysisPage extends React.Component {
     return analysis !== null ? (
       <Section>
         <Grid container justify="space-between">
-          <Grid item container xs="12" md="3">
+          <Grid item xs={12} md={3} container>
             <AnalysisTableOfContent
               country={takwimu.country}
               content={analysis}
@@ -123,7 +100,7 @@ export default class AnalysisPage extends React.Component {
               onChangeContent={this.changeContent}
             />
           </Grid>
-          <Grid item container xs="12" md="9">
+          <Grid item xs={12} md={9} container>
             <AnalysisContent content={analysis[current]} takwimu={takwimu} />
           </Grid>
         </Grid>

@@ -51,7 +51,7 @@ function ProfileTabs({ classes, handleChange, tabs, value }) {
           onChange={handleChange}
           value={value}
           variant="scrollable"
-          scrollButtons="false"
+          scrollButtons="off"
         >
           {tabs.map((tab, index) => (
             <LinkTab

@@ -191,10 +191,11 @@
       if (pathname.startsWith('/about')) {
         page = 'about';
       } else if (pathname.startsWith('/profiles/country-')) {
-        page = 'profile';
+        page = 'topic';
       } else if (pathname.startsWith('/profiles/')) {
         page = 'analysis';
       }
+      takwimu.page.id = page;
       switch (page) {
         case 'about':
           ['takwimuFAQ', 'takwimuWhereToNext', 'takwimuRelatedContent'].forEach(
@@ -205,7 +206,7 @@
             }
           );
           break;
-        case 'profile':
+        case 'topic':
           ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
             const el = document.createElement('div');
             el.setAttribute('id', id);

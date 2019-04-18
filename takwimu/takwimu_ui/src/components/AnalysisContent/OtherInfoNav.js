@@ -52,6 +52,7 @@ function OtherInfoNav({
         <div className={classes.otherTopicLinks}>
           {content.body.map((c, index) => (
             <ButtonBase
+              key={c.id}
               className={classNames({
                 [classes.otherTopic]: current !== index
               })}
