@@ -36,6 +36,7 @@ class AnalysisContent extends React.Component {
   showContent(index) {
     return () => {
       this.setState({ current: index });
+      window.scrollTo(0, 0);
     };
   }
 

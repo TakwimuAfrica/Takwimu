@@ -57,6 +57,7 @@ export default class AnalysisPage extends React.Component {
 
   changeContent(contentIndex) {
     this.setState({ current: contentIndex });
+    window.scrollTo(0, 0);
   }
 
   render() {
