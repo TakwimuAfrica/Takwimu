@@ -15,7 +15,7 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     width: '100%',
     height: '34rem',
-    padding: '1.438rem',
+    padding: '1.438rem 1.438rem 1.438rem 0',
     flexDirection: 'column',
     alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
