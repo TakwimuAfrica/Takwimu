@@ -33,6 +33,16 @@ class AnalysisContent extends React.Component {
     this.showContent = this.showContent.bind(this);
   }
 
+  componentDidMount() {
+    const { content } = this.props;
+    const { currentId } = this.state;
+
+    // Reset index when main content changes
+    if (content.id !== currentId) {
+      this.setState({ currentId: content.id, current: 0 });
+    }
+  }
+
   showContent(index) {
     return () => {
       this.setState({ current: index });
@@ -42,12 +52,7 @@ class AnalysisContent extends React.Component {
 
   render() {
     const { classes, content, takwimu } = this.props;
-    const { current, currentId } = this.state;
-
-    // Reset index when main content changes
-    if (content.id !== currentId) {
-      this.setState({ currentId: content.id, current: 0 });
-    }
+    const { current } = this.state;
 
     return (
       <Fragment>
