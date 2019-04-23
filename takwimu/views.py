@@ -42,7 +42,6 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['explainer_steps'] = ExplainerSteps.objects.first()
-        context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
 
         context.update(settings(self.request))
@@ -57,7 +56,6 @@ class AboutUsView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(AboutUsView, self).get_context_data(**kwargs)
-        context['faqs'] = FAQ.objects.all()
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
         context.update(takwimu_stories(self.request))
