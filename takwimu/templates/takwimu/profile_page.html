@@ -36,7 +36,8 @@
   {{ block.super }}
   <script>
     var takwimu = window.takwimu || {};
-    takwimu.page = 'analysis';
+    takwimu.page = takwimu.page || {};
+    takwimu.page.id = 'analysis';
     takwimu.country = {{ country|jsonify|safe }};
   </script>
 
