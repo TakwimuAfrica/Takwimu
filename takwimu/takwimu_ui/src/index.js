@@ -9,18 +9,14 @@ import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
-import Faqs from './components/Faqs';
-import HomeWhereToNext, { About as AboutWhereToNext } from './components/Next';
+import HomeWhereToNext from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import AnalysisPage from './pages/AnalysisPage';
 import FeaturedData from './components/FeaturedData';
-import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
-import Services from './components/Services';
-import Methodology from './components/Methodology';
 
-// import AboutUs from './components/AboutUs';
+import AboutUsPage from './components/AboutUsPage';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -90,8 +86,8 @@ const renderDatabyTopicPage = () => {
   }
 };
 
-const renderAboutPage = () => {
-  const el = document.getElementById('takwimuServices');
+const renderAboutUsPage = () => {
+  const el = document.getElementById('takwimuAboutUsPage');
   if (el) {
     fetch(
       `${
@@ -112,13 +108,9 @@ const renderAboutPage = () => {
             related_content: relatedContent
           });
           const props = Object.assign({}, PROPS, { takwimu });
-          renderApp(Methodology, 'takwimuMethodoloy', props);
-          renderApp(RelatedContent, 'takwimuRelatedContent', props);
+          renderApp(AboutUsPage, 'takwimuAboutUsPage', props);
         }
       });
-    renderApp(Services, 'takwimuServices');
-    renderApp(Faqs, 'takwimuFAQ');
-    renderApp(AboutWhereToNext, 'takwimuWhereToNext');
   }
 };
 
@@ -127,7 +119,8 @@ renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
-renderAboutPage();
+// renderAboutPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();
+renderAboutUsPage();

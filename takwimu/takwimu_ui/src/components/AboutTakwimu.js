@@ -13,13 +13,13 @@ const styles = {
   }
 };
 
-function Methodology({ classes, methodology }) {
+function AboutTakwimu({ classes, content }) {
   return (
-    <Section title="Methodology" variant="h3" className={classes.root}>
+    <Section title="About Takwimu" variant="h3" className={classes.root}>
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: methodology
+          __html: content
         }}
       />
       <Grid className={classes.contentGrid} />
@@ -27,9 +27,9 @@ function Methodology({ classes, methodology }) {
   );
 }
 
-Methodology.propTypes = {
+AboutTakwimu.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  methodology: PropTypes.string.isRequired
+  content: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(Methodology);
+export default withStyles(styles)(AboutTakwimu);

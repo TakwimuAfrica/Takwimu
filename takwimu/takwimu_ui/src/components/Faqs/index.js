@@ -10,7 +10,7 @@ const styles = {
   contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' }
 };
 
-function Faqs({ classes, takwimu: { faqs } }) {
+function Faqs({ classes, faqs }) {
   return (
     <Section
       title="Frequently Asked Questions"
@@ -46,9 +46,7 @@ function Faqs({ classes, takwimu: { faqs } }) {
 
 Faqs.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    faqs: PropTypes.shape({}).isRequired
-  }).isRequired
+  faqs: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(Faqs);

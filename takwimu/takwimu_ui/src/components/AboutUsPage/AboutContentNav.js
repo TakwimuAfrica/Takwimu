@@ -35,7 +35,7 @@ const styles = theme => ({
   }
 });
 
-function AboutContentNav({ classes, content, current }) {
+function AboutContentNav({ classes, currentContent, contentHeadings }) {
   return (
     <div className={classes.root}>
       <Layout>
@@ -43,14 +43,15 @@ function AboutContentNav({ classes, content, current }) {
           On this page
         </Typography>
         <div className={classes.otherTopicLinks}>
-          {content.body.map((c, index) => (
+          {contentHeadings.map(item => (
             <ButtonBase
               className={classNames({
-                [classes.otherTopic]: current !== index
+                [classes.otherTopic]: currentContent !== item.link
               })}
+              key={item.link}
             >
               <Typography variant="body2" color="textSecondary">
-                {c.value.title}
+                {item.title}
               </Typography>
             </ButtonBase>
           ))}
@@ -62,8 +63,8 @@ function AboutContentNav({ classes, content, current }) {
 
 AboutContentNav.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  current: PropTypes.number.isRequired,
-  content: PropTypes.shape({}).isRequired
+  currentContent: PropTypes.string.isRequired,
+  contentHeadings: PropTypes.shape([]).isRequired
 };
 
 export default withStyles(styles)(AboutContentNav);

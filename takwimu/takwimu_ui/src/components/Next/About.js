@@ -23,18 +23,10 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '1.632352941rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      marginLeft: '2.176470588rem'
     }
   }
 });
-function AboutWhereToNext({
-  classes,
-  takwimu: {
-    settings: { socialMedia }
-  }
-}) {
+function AboutWhereToNext({ classes, socialMedia }) {
   return (
     <Section title="Where to next..." variant="h3">
       <Grid
@@ -61,9 +53,7 @@ function AboutWhereToNext({
 
 AboutWhereToNext.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    settings: PropTypes.shape({}).isRequired
-  }).isRequired
+  socialMedia: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(AboutWhereToNext);

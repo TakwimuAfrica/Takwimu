@@ -12,7 +12,7 @@ const styles = () => ({
   }
 });
 
-function RelatedContent({ classes, takwimu: { relatedContent } }) {
+function RelatedContent({ classes, relatedContent }) {
   const firstBatch = relatedContent.slice(0, 4);
   const secondBatch = relatedContent.slice(4, 8);
 
@@ -35,9 +35,7 @@ function RelatedContent({ classes, takwimu: { relatedContent } }) {
 
 RelatedContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
-  }).isRequired
+  relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
 };
 
 export default withStyles(styles)(RelatedContent);

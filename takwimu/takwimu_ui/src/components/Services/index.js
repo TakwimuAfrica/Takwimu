@@ -18,11 +18,7 @@ const styles = {
   }
 };
 
-function Services(props) {
-  const {
-    classes,
-    takwimu: { services }
-  } = props;
+function Services({ classes, services }) {
   return (
     <Section title="Services" variant="h3" className={classes.root}>
       <Typography variant="body1">{services.overview}</Typography>
@@ -51,9 +47,7 @@ function Services(props) {
 
 Services.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    services: PropTypes.shape({}).isRequired
-  }).isRequired
+  services: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(Services);
