@@ -12,16 +12,20 @@
 
   <script type='text/javascript'>
     var takwimu = window.takwimu || {};
-    var services = [];
+    var servicesList = [];
 
     {% for service in settings.takwimu.SupportServicesSetting.services %}
       {% if service.value.category != "Persona" %}
-        services.push ({
+        servicesList.push ({
         'title': '{{ service.value.title }}',
         'description': '{{ service.value.description }}'
         })
       {% endif %}
     {% endfor %}
-    takwimu.services = services;
-  </script>
+
+    takwimu.services = { 
+      overview: '{{ settings.takwimu.SupportServicesSetting.overview | safe }}',
+      servicesList: servicesList
+    }
+   </script>
 {% endblock body_javascript_extra %}

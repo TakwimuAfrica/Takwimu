@@ -25,13 +25,9 @@ function Services(props) {
   } = props;
   return (
     <Section title="Services" variant="h3" className={classes.root}>
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Cant find the answer
-        you need?
-      </Typography>
+      <Typography variant="body1">{services.overview}</Typography>
       <Grid className={classes.contentGrid}>
-        {services.map(service => (
+        {services.servicesList.map(service => (
           <React.Fragment>
             <Typography variant="subtitle2" className={classes.serviceHeading}>
               {service.title}
@@ -52,7 +48,7 @@ function Services(props) {
 Services.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    services: PropTypes.shape([]).isRequired
+    services: PropTypes.shape({}).isRequired
   }).isRequired
 };
 

@@ -1043,11 +1043,13 @@ class ServiceBlock(blocks.StructBlock):
 
 @register_setting
 class SupportServicesSetting(BaseSetting):
+    overview = RichTextField(blank=True)
     services = StreamField([
         ('service', ServiceBlock())
     ], blank=True)
 
     panels = [
+        FieldPanel('overview'),
         StreamFieldPanel('services')
     ]
 
