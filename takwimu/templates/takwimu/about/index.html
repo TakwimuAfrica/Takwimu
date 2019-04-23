@@ -72,9 +72,18 @@
 {% block body_javascript_extra %}
   {{ block.super }}
 
-  <script>
+  <script type='text/javascript'>
     var takwimu = window.takwimu || {};
-    takwimu.faqs = {{ faqs }};
-    console.log(takwimu)
+    var services = [];
+
+    {% for service in settings.takwimu.SupportServicesSetting.services %}
+      {% if service.value.category != "Persona" %}
+        services.push ({
+        'title': '{{ service.value.title }}',
+        'description': '{{ service.value.description }}'
+        })
+      {% endif %}
+    {% endfor %}
+    takwimu.services = services;
   </script>
 {% endblock body_javascript_extra %}
