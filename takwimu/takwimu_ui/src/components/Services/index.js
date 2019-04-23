@@ -28,7 +28,7 @@ function Services(props) {
       <Typography variant="body1">{services.overview}</Typography>
       <Grid className={classes.contentGrid}>
         {services.servicesList.map(service => (
-          <React.Fragment>
+          <React.Fragment key={service.title}>
             <Typography
               variant="subtitle2"
               className={classes.serviceHeading}
