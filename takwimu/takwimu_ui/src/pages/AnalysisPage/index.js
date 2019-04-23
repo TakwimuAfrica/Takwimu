@@ -51,7 +51,7 @@ class AnalysisPage extends React.Component {
       }
     } = this.props;
     fetch(
-      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&fields=body&format=json`
+      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&fields=body,related_content&format=json`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
@@ -69,7 +69,7 @@ class AnalysisPage extends React.Component {
     const { id } = this.state;
 
     fetch(
-      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body&descendant_of=${id}&format=json`
+      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body,related_content&descendant_of=${id}&format=json`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
