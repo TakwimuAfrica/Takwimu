@@ -1071,7 +1071,7 @@ class FAQBlock(blocks.StructBlock):
 
 @register_setting
 class FAQSetting(BaseSetting):
-    overview = RichTextField(blank=True),
+    overview = RichTextField(blank=True)
     faqs = StreamField([
         ('faq', FAQBlock())
     ], blank=True)
