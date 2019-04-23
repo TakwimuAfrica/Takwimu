@@ -149,11 +149,11 @@ class DataActions extends React.Component {
             onClickAway={() => this.setState({ anchorEl: null })}
           >
             <textarea
-              disabled
+              readOnly
               style={{
-                width: '400px',
-                height: '115px',
-                margin: '20px',
+                width: '25rem',
+                height: '10rem',
+                margin: '1.25rem',
                 border: 'none',
                 outline: 'none'
               }}
