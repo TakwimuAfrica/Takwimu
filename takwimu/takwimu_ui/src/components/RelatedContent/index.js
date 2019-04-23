@@ -26,7 +26,7 @@ function RelatedContent({
       <Grid
         container
         className={classes.root}
-        justify="center"
+        justify="flex-start"
         alignItems="flex-start"
       >
         {firstBatch && firstBatch.length && <Links items={firstBatch} />}

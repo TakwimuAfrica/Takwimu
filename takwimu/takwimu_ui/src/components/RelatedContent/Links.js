@@ -9,7 +9,11 @@ const styles = theme => ({
   listItem: {
     display: 'block',
     lineHeight: 2.28,
+    width: '100%',
     [theme.breakpoints.up('md')]: {
+      width: '21.375rem'
+    },
+    [theme.breakpoints.up('lg')]: {
       width: '28.5rem'
     }
   },
