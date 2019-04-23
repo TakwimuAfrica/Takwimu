@@ -154,7 +154,13 @@
             medium: '//medium.com/takwimu-africa',
             linkedin: '//www.linkedin.com/company/takwimu-africa'
           }
-        }
+        },
+        services: [
+          { 'title': 'Service one name',
+            'description': 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqua.'
+          }
+        ]
       };
       var profileData = {
         demographics: {},
@@ -197,7 +203,7 @@
       }
       switch (page) {
         case 'about':
-          ['takwimuFAQ', 'takwimuWhereToNext', 'takwimuRelatedContent'].forEach(
+          ['takwimuServices','takwimuFAQ', 'takwimuWhereToNext', 'takwimuRelatedContent'].forEach(
             id => {
               const el = document.createElement('div');
               el.setAttribute('id', id);
