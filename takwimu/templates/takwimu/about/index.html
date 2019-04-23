@@ -13,6 +13,7 @@
   <script type='text/javascript'>
     var takwimu = window.takwimu || {};
     var servicesList = [];
+    var faqsList = [];
 
     {% for service in settings.takwimu.SupportServicesSetting.services %}
       {% if service.value.category != "Persona" %}
@@ -23,9 +24,21 @@
       {% endif %}
     {% endfor %}
 
+    {% for faq in settings.takwimu.FAQSetting.faqs %}
+        faqsList.push ({
+        'question': '{{ faq.value.question }}',
+        'answer': '{{ faq.value.answer }}'
+        })
+    {% endfor %}
+
     takwimu.services = { 
       overview: '{{ settings.takwimu.SupportServicesSetting.overview | safe }}',
       servicesList: servicesList
+    }
+
+    takwimu.faqs = {
+      overview: '{{ settings.takwimu.FAQSetting.overview | safe }}',
+      faqsList: faqsList
     }
    </script>
 {% endblock body_javascript_extra %}
