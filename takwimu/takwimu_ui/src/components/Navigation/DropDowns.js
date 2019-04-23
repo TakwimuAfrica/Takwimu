@@ -104,7 +104,6 @@ export { DropDownDrawer };
 function DropDowns({ classes, active, page, toggle }) {
   return (
     <div className={classes.root}>
-      {console.log(page)}
       <DropDownButton
         isActive={active === 'analysis'}
         isHighlighted={page === 'analysis'}
