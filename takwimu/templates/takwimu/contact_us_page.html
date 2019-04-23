@@ -52,4 +52,14 @@
 
 {% include 'takwimu/_includes/sections/updates.html' %}
 
-{% endblock %}
+{% endblock content %}
+
+{% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script>
+    var takwimu = window.takwimu || {};
+    takwimu.page = takwimu.page || {};
+    takwimu.page.id = 'contact';
+  </script>
+{% endblock body_javascript_extra %}
