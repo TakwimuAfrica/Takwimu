@@ -11,7 +11,14 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.light,
     paddingTop: '3.125rem',
     paddingBottom: '3.5rem',
+    width: '100%',
     [theme.breakpoints.up('md')]: {
+      width: '44.015625rem', // .75 of lg
+      paddingLeft: '1.625rem',
+      paddingRight: '1.625rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '58.6875rem',
       paddingLeft: '2.8125rem',
       paddingRight: '2.8125rem'
     }
@@ -31,12 +38,11 @@ const styles = theme => ({
     padding: 0,
     marginTop: '0.9375rem',
     [theme.breakpoints.up('md')]: {
-      marginTop: 0,
-      marginLeft: '1rem',
-      width: '8rem'
+      width: '6.609375rem'
     },
     [theme.breakpoints.up('lg')]: {
-      marginLeft: '1.875rem',
+      marginTop: 0,
+      marginLeft: '0.9375rem',
       width: '8.8125rem'
     }
   },
