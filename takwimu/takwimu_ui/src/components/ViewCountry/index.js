@@ -9,6 +9,7 @@ import Selection from './Selection';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.light,
+    margin: '0 0 2.3125rem 0',
     paddingTop: '3.125rem',
     paddingBottom: '3.5rem',
     width: '100%',
