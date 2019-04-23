@@ -1,13 +1,35 @@
 import React from 'react';
-
-import { Grid } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
-import Section from '../../components/Section';
+
+import { Grid, withStyles } from '@material-ui/core';
+
 import AnalysisContent from '../../components/AnalysisContent';
-
 import AnalysisTableOfContent from '../../components/AnalysisContent/TableOfContent';
+import Section from '../../components/Section';
 
-export default class AnalysisPage extends React.Component {
+const styles = theme => ({
+  root: {},
+  aside: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '10.5rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '14rem'
+    }
+  },
+  main: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '44.671875rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '59.5625rem'
+    }
+  }
+});
+
+class AnalysisPage extends React.Component {
   constructor(props) {
     super(props);
 
@@ -95,26 +117,26 @@ export default class AnalysisPage extends React.Component {
 
   render() {
     const { analysis, current, topicIndex } = this.state;
-    const { takwimu } = this.props;
+    const { classes, takwimu } = this.props;
     return analysis !== null ? (
       <Section>
         <Grid container justify="space-between">
-          <Grid item xs={12} md={3} container>
+          <div className={classes.aside}>
             <AnalysisTableOfContent
               country={takwimu.country}
               content={analysis}
               current={current}
               onChangeContent={this.changeContent}
             />
-          </Grid>
-          <Grid item xs={12} md={9} container>
+          </div>
+          <div className={classes.main}>
             <AnalysisContent
               content={analysis[current]}
               onChange={this.changeTopic}
               takwimu={takwimu}
               topicIndex={topicIndex}
             />
-          </Grid>
+          </div>
         </Grid>
       </Section>
     ) : null;
@@ -122,5 +144,8 @@ export default class AnalysisPage extends React.Component {
 }
 
 AnalysisPage.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({}).isRequired
 };
+
+export default withStyles(styles)(AnalysisPage);

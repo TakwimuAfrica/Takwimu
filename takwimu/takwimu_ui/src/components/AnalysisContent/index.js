@@ -1,12 +1,14 @@
 /* eslint-disable react/no-danger */
 import React, { Fragment } from 'react';
-import { Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
+import { Typography, withStyles } from '@material-ui/core';
+
+import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import OtherInfoNav from './OtherInfoNav';
 import OtherInfo from './OtherInfo';
-import Actions from './Actions';
+import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
 
 const styles = {
@@ -18,6 +20,9 @@ const styles = {
   },
   body: {
     padding: '0 19px'
+  },
+  readNextContainer: {
+    paddingBottom: '2.3125rem'
   }
 };
 
@@ -74,12 +79,14 @@ class AnalysisContent extends React.Component {
             content={content}
             showContent={this.showContent}
           />
-          <ViewCountry takwimu={takwimu} />
           <AnalysisReadNext
-            current={topicIndex}
+            classes={{ container: classes.readNextContainer }}
             content={content}
+            current={topicIndex}
             showContent={this.showContent}
           />
+          <ViewCountry takwimu={takwimu} />
+          <RelatedContent takwimu={takwimu} />
         </div>
       </Fragment>
     );
