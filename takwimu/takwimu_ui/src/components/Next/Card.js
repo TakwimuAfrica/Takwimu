@@ -8,7 +8,6 @@ import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    width: '100%',
     height: '14.875rem',
     display: 'flex',
     justifyContent: 'center',
@@ -18,14 +17,16 @@ const styles = theme => ({
     textDecoration: 'none'
   },
   cardDual: {
+    width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '20.09375rem' // .75 of lg
+      width: '21.09375rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '27.125rem'
+      width: '28.125rem'
     }
   },
   cardTriple: {
+    width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '18.375rem' // .75 of lg
     },

@@ -9,9 +9,7 @@ import Card from './Card';
 import Section from '../Section';
 
 const styles = theme => ({
-  root: {
-    width: '100% !important'
-  },
+  root: {},
   container: {
     flexGrow: 1,
     paddingBottom: '6.25rem'
@@ -20,10 +18,10 @@ const styles = theme => ({
     marginTop: '2rem',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
-      marginLeft: '1.632352941rem' // .75 of lg
+      marginLeft: '1.734375rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      marginLeft: '2.176470588rem'
+      marginLeft: '2.3125rem'
     }
   }
 });
