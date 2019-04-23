@@ -81,7 +81,7 @@ ActionButtonComponent.propTypes = {
 };
 
 ActionButtonComponent.defaultProps = {
-  onClick: () => {}
+  onClick: null
 };
 
 const ActionButton = withStyles(styles)(ActionButtonComponent);
@@ -157,9 +157,8 @@ class DataActions extends React.Component {
                 border: 'none',
                 outline: 'none'
               }}
-            >
-              {embedCode}
-            </textarea>
+              value={embedCode}
+            />
           </ClickAwayListener>
         </Popover>
       </div>
