@@ -101,22 +101,22 @@ const renderAboutPage = () => {
         if (data.items && data.items.length) {
           const {
             content,
-            related_content: relatedContent,
-            methodology
+            methodology,
+            related_content: relatedContent
           } = data.items[0];
           const takwimu = Object.assign({}, PROPS.takwimu, {
             content,
-            related_content: relatedContent,
-            methodology
+            methodology,
+            related_content: relatedContent
           });
           const props = Object.assign({}, PROPS, { takwimu });
           renderApp(Methodology, 'takwimuMethodoloy', props);
+          renderApp(RelatedContent, 'takwimuRelatedContent', props);
         }
       });
     renderApp(Services, 'takwimuServices');
     renderApp(Faqs, 'takwimuFAQ');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
-    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 

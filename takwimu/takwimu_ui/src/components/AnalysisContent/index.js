@@ -86,7 +86,7 @@ class AnalysisContent extends React.Component {
             showContent={this.showContent}
           />
           <ViewCountry takwimu={takwimu} />
-          <RelatedContent content={content.related_content} />
+          <RelatedContent relatedContent={content.related_content} />
         </div>
       </Fragment>
     );

@@ -7,25 +7,18 @@ import Links from './Links';
 import Section from '../Section';
 
 const styles = () => ({
-  sectionRoot: {
-    margin: '0 0 2.3125rem 0'
-  },
   root: {
     flexGrow: 1
   }
 });
 
-function RelatedContent({ classes, content }) {
-  const firstBatch = content.slice(0, 4);
-  const secondBatch = content.slice(4, 8);
+function RelatedContent({ classes, takwimu: { relatedContent } }) {
+  const firstBatch = relatedContent.slice(0, 4);
+  const secondBatch = relatedContent.slice(4, 8);
 
   return (
     firstBatch.length > 0 && (
-      <Section
-        title="Related Content"
-        variant="h3"
-        classes={{ root: classes.sectionRoot }}
-      >
+      <Section title="Related Content" variant="h3">
         <Grid
           container
           className={classes.root}
@@ -42,7 +35,9 @@ function RelatedContent({ classes, content }) {
 
 RelatedContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  takwimu: PropTypes.shape({
+    relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(RelatedContent);
