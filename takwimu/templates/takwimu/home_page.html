@@ -21,6 +21,8 @@
 
   <script>
     var takwimu = window.takwimu || {};
+    takwimu.page = takwimu.page || {};
+    takwimu.page.id = 'homepage';
     takwimu.stories = {{ stories_latest |jsonify|safe }};
   </script>
 {% endblock body_javascript_extra %}

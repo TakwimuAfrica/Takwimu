@@ -105,7 +105,7 @@ const Theme = createMuiTheme({
     },
     caption: {
       fontFamily: FONT_FAMILY_TEXT,
-      fontSize: '0.813rem',
+      fontSize: '0.8125rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',

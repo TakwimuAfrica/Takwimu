@@ -53,7 +53,11 @@ function Actions({ classes, hideLastUpdated }) {
 
 Actions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  hideLastUpdated: PropTypes.isRequired
+  hideLastUpdated: PropTypes.bool
+};
+
+Actions.defaultProps = {
+  hideLastUpdated: false
 };
 
 export default withStyles(styles)(Actions);

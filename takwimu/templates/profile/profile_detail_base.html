@@ -121,7 +121,8 @@
     <script>
       // I. Takwimu 
       var takwimu = window.takwimu || {};
-      takwimu.page = 'topic';
+      takwimu.page = takwimu.page || {};
+      takwimu.page.id = 'topic';
       takwimu.url = '{{ HURUMAP.url }}';
       takwimu.countries = {{ countries|jsonify|safe }};
       takwimu.settings = {

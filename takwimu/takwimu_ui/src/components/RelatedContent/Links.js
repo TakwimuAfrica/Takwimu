@@ -9,7 +9,11 @@ const styles = theme => ({
   listItem: {
     display: 'block',
     lineHeight: 2.28,
+    width: '100%',
     [theme.breakpoints.up('md')]: {
+      width: '21.375rem'
+    },
+    [theme.breakpoints.up('lg')]: {
       width: '28.5rem'
     }
   },
@@ -29,21 +33,21 @@ function Links({ classes, items }) {
         component="ul"
       >
         {items.map(item => (
-          <li key={item.href}>
+          <li key={item.value.value.link}>
             <Tooltip
-              title={item.name}
+              title={item.value.value.title}
               placement="bottom-start"
               classes={{ tooltip: classes.tooltip }}
             >
               <Link
-                href={item.href}
+                href={item.value.value.link}
                 variant="inherit"
                 color="inherit"
                 underline="always"
                 noWrap
                 className={classes.listItem}
               >
-                {item.name}
+                {item.value.value.title}
               </Link>
             </Tooltip>
           </li>

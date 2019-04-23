@@ -15,13 +15,16 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     width: '100%',
     height: '34rem',
-    padding: '1.438rem',
+    padding: '1.438rem 1.438rem 1.438rem 0',
     flexDirection: 'column',
     alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
       width: '14.375rem'
     }
+  },
+  label: {
+    fontSize: theme.typography.caption.fontSize
   },
   activePageIndicator: {
     marginLeft: '-1.5rem',
@@ -43,12 +46,25 @@ function AnalysisTableOfContent({
   country,
   onChangeContent
 }) {
+  const { slug: countrySlug } = country;
+  const generateHref = index => {
+    const analysisUrl = `/profiles/${countrySlug}`;
+    if (content[index].meta.slug === countrySlug) {
+      return analysisUrl;
+    }
+    return `${analysisUrl}/${content[index].meta.slug}`;
+  };
+
   return (
     <div className={classes.root}>
-      <CountrySelector country={country} context="analysis" />
+      <CountrySelector
+        country={country}
+        context="analysis"
+        classes={{ label: classes.label }}
+      />
       <MenuList style={{ width: '14.188rem' }}>
         {content.map((c, index) => (
-          <li className={classes.listItem}>
+          <li key={c.id} className={classes.listItem}>
             <img
               alt=""
               src={activePageIcon}
@@ -59,10 +75,12 @@ function AnalysisTableOfContent({
               className={classNames({
                 [classes.activeLink]: current !== index
               })}
-              href={`#${index}`}
+              href={generateHref(index)}
               color={current !== index ? 'primary' : 'textPrimary'}
               onClick={e => {
                 e.preventDefault();
+
+                window.history.pushState(null, '', generateHref(index));
                 onChangeContent(index);
               }}
             >
@@ -77,7 +95,7 @@ function AnalysisTableOfContent({
 
 AnalysisTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   country: PropTypes.shape({}).isRequired,
   onChangeContent: PropTypes.func.isRequired
