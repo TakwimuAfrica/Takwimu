@@ -106,6 +106,43 @@ const styles = theme => ({
   }
 });
 
+function CountrySelectorComponent({ classes, country, context }) {
+  return (
+    <div>
+      <Typography
+        variant="caption"
+        className={classNames([classes.label, classes.changeCountryLabel])}
+      >
+        Change Country
+      </Typography>
+
+      <ButtonBase
+        disableRipple
+        disableTouchRipple
+        style={{ outline: 'none' }}
+        className={classes.chooserButton}
+        onClick={window.toggleDrawer(context)}
+      >
+        <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
+        <Typography variant="subtitle1" className={classes.countryName}>
+          {country.name}
+        </Typography>
+        <img alt="" src={downArrow} />
+      </ButtonBase>
+    </div>
+  );
+}
+
+CountrySelectorComponent.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  country: PropTypes.shape({}).isRequired,
+  context: PropTypes.string.isRequired
+};
+
+const CountrySelector = withStyles(styles)(CountrySelectorComponent);
+
+export { CountrySelector };
+
 class ProfileDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -179,43 +216,14 @@ class ProfileDetail extends React.Component {
       );
     }
     const { active: activeRelease } = primaryReleases;
-    const {
-      square_kms: squarekms,
-      full_name: fullName,
-      geo_code: countryCode
-    } = geography.this;
+    const { square_kms: squarekms, geo_code: countryCode } = geography.this;
     const country = countries.find(c => c.iso_code === countryCode);
 
     return (
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
           <div className={classes.root}>
-            <div>
-              <Typography
-                variant="caption"
-                className={classNames([
-                  classes.label,
-                  classes.changeCountryLabel
-                ])}
-              >
-                Change Country
-              </Typography>
-
-              <ButtonBase
-                disableRipple
-                disableTouchRipple
-                style={{ outline: 'none' }}
-                className={classes.chooserButton}
-                onClick={window.toggleDrawer('topic')}
-              >
-                <img alt="" height="37" src={flagSrc('./south-africa.svg')} />
-                <Typography variant="subtitle1" className={classes.countryName}>
-                  {fullName}
-                </Typography>
-                <img alt="" src={downArrow} />
-              </ButtonBase>
-            </div>
-
+            <CountrySelector country={country} context="topic" />
             <Grid container direction="row" wrap="nowrap">
               <Grid item>
                 <div className={classes.verticalLine} />
@@ -271,7 +279,6 @@ class ProfileDetail extends React.Component {
                 )}
               </Grid>
             </Grid>
-
             <Grid container>
               <Typography className={classes.label}>Release:</Typography>
               {activeRelease && (

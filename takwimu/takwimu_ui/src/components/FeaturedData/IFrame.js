@@ -78,7 +78,7 @@ class IFrame extends React.Component {
   }
 
   render() {
-    const { classes, featuredData, url } = this.props;
+    const { classes, featuredData } = this.props;
     const { id } = this.state;
 
     return (
@@ -86,7 +86,7 @@ class IFrame extends React.Component {
         <iframe
           id={id}
           title={featuredData.title}
-          src={`${url}/embed/iframe.html?geoID=country-${
+          src={`/embed/iframe.html?geoID=country-${
             featuredData.country
           }&geoVersion=2009&chartDataID=${
             featuredData.data_id
@@ -105,8 +105,7 @@ class IFrame extends React.Component {
 
 IFrame.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  featuredData: PropTypes.shape({}).isRequired,
-  url: PropTypes.string.isRequired
+  featuredData: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(IFrame);

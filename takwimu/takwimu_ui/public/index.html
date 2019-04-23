@@ -30,6 +30,10 @@
     <script>
       var takwimu = {
         url: 'http://localhost:8000',
+        country: {
+          name: 'Senegal',
+          slug: 'senegal'
+        },
         page: {
           relatedContent: [
             {
@@ -187,19 +191,30 @@
       if (pathname.startsWith('/about')) {
         page = 'about';
       } else if (pathname.startsWith('/profiles/country-')) {
-        page = 'profile';
+        page = 'topic';
       } else if (pathname.startsWith('/profiles/')) {
+        var paths = pathname.replace('/profiles/', '').split('/');
+        if (paths.length) {
+          var countrySlug = paths[0];
+          var country = takwimu.countries.find(c => c.slug === countrySlug);
+          if (country) {
+            takwimu.country = country;
+          }
+        }
         page = 'analysis';
       }
+      takwimu.page.id = page;
       switch (page) {
         case 'about':
-          ['takwimuWhereToNext'].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          ['takwimuFAQ', 'takwimuWhereToNext', 'takwimuRelatedContent'].forEach(
+            id => {
+              const el = document.createElement('div');
+              el.setAttribute('id', id);
+              body.appendChild(el);
+            }
+          );
           break;
-        case 'profile':
+        case 'topic':
           ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
             const el = document.createElement('div');
             el.setAttribute('id', id);
@@ -207,15 +222,9 @@
           });
           break;
         case 'analysis':
-          [
-            'takwimuReadNext',
-            'takwimuViewCountry',
-            'takwimuRelatedContent'
-          ].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          const el = document.createElement('div');
+          el.setAttribute('id', 'takwimuAnalysisPage');
+          body.appendChild(el);
           break;
         case 'homepage': // fall through
         default:

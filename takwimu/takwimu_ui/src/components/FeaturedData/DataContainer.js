@@ -38,13 +38,13 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ classes, featuredData, url }) {
+function DataContainer({ classes, featuredData }) {
   const embedCode = `<iframe
     allowFullScreen
     title="${featuredData.title}"
-    src="${url}/embed/iframe.html?geoID=country-${
-    featuredData.country
-  }&geoVersion=2009&chartDataID=${
+    src="/embed/iframe.html?geoID=country-${
+      featuredData.country
+    }&geoVersion=2009&chartDataID=${
     featuredData.data_id
   }&dataYear=2011&chartType=${
     featuredData.chart_type
@@ -52,11 +52,12 @@ function DataContainer({ classes, featuredData, url }) {
     featuredData.data_stat_type
   }"
 />`;
+
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          <IFrame featuredData={featuredData} url={url} />
+          <IFrame featuredData={featuredData} />
           <DataActions
             onDownload={() => {
               const iframe = document.getElementById(
@@ -95,8 +96,7 @@ function DataContainer({ classes, featuredData, url }) {
 
 DataContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  featuredData: PropTypes.shape({}).isRequired,
-  url: PropTypes.string.isRequired
+  featuredData: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(DataContainer);

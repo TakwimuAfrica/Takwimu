@@ -6,6 +6,7 @@ import classnames from 'classnames';
 import { ButtonBase, withStyles, Grid, Typography } from '@material-ui/core';
 
 import downArrow from '../../assets/images/down-arrow.svg';
+import downArrowGreen from '../../assets/images/down-arrow-green.svg';
 import upArrow from '../../assets/images/up-arrow.svg';
 
 const styles = theme => ({
@@ -51,16 +52,21 @@ function DropDownButton({
   iconActive,
   title,
   handleClick,
+  isHighlighted,
   isActive
 }) {
   return (
     <ButtonBase
       disableRipple
       disableTouchRipple
-      className={classnames(classes.root, { [classes.rootCenter]: isActive })}
+      className={classnames(classes.root, {
+        [classes.rootCenter]: isHighlighted || isActive
+      })}
       onClick={handleClick}
     >
-      <span className={classnames({ [classes.bubble]: isActive })}>
+      <span
+        className={classnames({ [classes.bubble]: isHighlighted || isActive })}
+      >
         <Grid
           container
           spacing={16}
@@ -69,12 +75,17 @@ function DropDownButton({
           alignItems="center"
         >
           <Grid item component="span">
-            <img alt={`${title} Icon`} src={isActive ? iconActive : icon} />
+            <img
+              alt={`${title} Icon`}
+              src={isHighlighted || isActive ? iconActive : icon}
+            />
           </Grid>
           <Grid item component="span">
             <Typography
               variant="body1"
-              color={!isActive ? 'textSecondary' : 'textPrimary'}
+              color={
+                isActive || isHighlighted ? 'textPrimary' : 'textSecondary'
+              }
               style={{ fontSize: '1.125rem' }}
             >
               {title}
@@ -84,7 +95,10 @@ function DropDownButton({
             <img
               className={classes.img}
               alt="Arrow"
-              src={isActive ? upArrow : downArrow}
+              src={
+                // eslint-disable-next-line no-nested-ternary
+                isActive ? upArrow : isHighlighted ? downArrowGreen : downArrow
+              }
             />
           </Grid>
         </Grid>
@@ -100,6 +114,7 @@ DropDownButton.propTypes = {
   iconActive: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   isActive: PropTypes.bool.isRequired,
+  isHighlighted: PropTypes.bool.isRequired,
   handleClick: PropTypes.func.isRequired
 };
 
