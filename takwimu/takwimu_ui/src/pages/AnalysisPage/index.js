@@ -14,10 +14,12 @@ export default class AnalysisPage extends React.Component {
     this.state = {
       id: null,
       analysis: null,
-      current: 0
+      current: 0,
+      topicIndex: 0
     };
 
     this.changeContent = this.changeContent.bind(this);
+    this.changeTopic = this.changeTopic.bind(this);
   }
 
   componentDidMount() {
@@ -82,12 +84,17 @@ export default class AnalysisPage extends React.Component {
   }
 
   changeContent(contentIndex) {
-    this.setState({ current: contentIndex });
+    this.setState({ current: contentIndex, topicIndex: 0 });
+    window.scrollTo(0, 0);
+  }
+
+  changeTopic(topicIndex) {
+    this.setState({ topicIndex });
     window.scrollTo(0, 0);
   }
 
   render() {
-    const { analysis, current } = this.state;
+    const { analysis, current, topicIndex } = this.state;
     const { takwimu } = this.props;
     return analysis !== null ? (
       <Section>
@@ -101,7 +108,12 @@ export default class AnalysisPage extends React.Component {
             />
           </Grid>
           <Grid item xs={12} md={9} container>
-            <AnalysisContent content={analysis[current]} takwimu={takwimu} />
+            <AnalysisContent
+              content={analysis[current]}
+              onChange={this.changeTopic}
+              takwimu={takwimu}
+              topicIndex={topicIndex}
+            />
           </Grid>
         </Grid>
       </Section>

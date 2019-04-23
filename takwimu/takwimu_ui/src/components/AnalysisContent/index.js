@@ -25,34 +25,18 @@ class AnalysisContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      current: 0,
-      currentId: null
-    };
-
     this.showContent = this.showContent.bind(this);
   }
 
-  componentDidMount() {
-    const { content } = this.props;
-    const { currentId } = this.state;
-
-    // Reset index when main content changes
-    if (content.id !== currentId) {
-      this.setState({ currentId: content.id, current: 0 });
-    }
-  }
-
   showContent(index) {
+    const { onChange } = this.props;
     return () => {
-      this.setState({ current: index });
-      window.scrollTo(0, 0);
+      onChange(index);
     };
   }
 
   render() {
-    const { classes, content, takwimu } = this.props;
-    const { current } = this.state;
+    const { classes, content, topicIndex, takwimu } = this.props;
 
     return (
       <Fragment>
@@ -60,18 +44,18 @@ class AnalysisContent extends React.Component {
           labelText="Other topics in"
           labelTextStrong={content.title}
           content={content}
-          current={current}
+          current={topicIndex}
           showContent={this.showContent}
         />
 
         <div className={classes.root}>
           <Typography className={classes.title} variant="h2">
-            {content.body[current].value.title}
+            {content.body[topicIndex].value.title}
           </Typography>
           <OtherInfo
             labelText="Other topics in"
             labelTextStrong={content.title}
-            current={current}
+            current={topicIndex}
             content={content}
             showContent={this.showContent}
           />
@@ -79,20 +63,20 @@ class AnalysisContent extends React.Component {
           <Typography
             className={classes.body}
             dangerouslySetInnerHTML={{
-              __html: content.body[current].value.body
+              __html: content.body[topicIndex].value.body
             }}
           />
           <Actions hideLastUpdated />
           <OtherInfo
             labelText="Other topics in"
             labelTextStrong={content.title}
-            current={current}
+            current={topicIndex}
             content={content}
             showContent={this.showContent}
           />
           <ViewCountry takwimu={takwimu} />
           <AnalysisReadNext
-            current={current}
+            current={topicIndex}
             content={content}
             showContent={this.showContent}
           />
@@ -105,6 +89,8 @@ class AnalysisContent extends React.Component {
 AnalysisContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   content: PropTypes.shape({}).isRequired,
+  topicIndex: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
   takwimu: PropTypes.shape({}).isRequired
 };
 
