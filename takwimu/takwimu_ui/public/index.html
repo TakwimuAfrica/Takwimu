@@ -193,6 +193,14 @@
       } else if (pathname.startsWith('/profiles/country-')) {
         page = 'topic';
       } else if (pathname.startsWith('/profiles/')) {
+        var paths = pathname.replace('/profiles/', '').split('/')
+        if (paths.length) {
+          var countrySlug = paths[0];
+          var country = takwimu.countries.find(c => c.slug === countrySlug);
+          if (country) {
+            takwimu.country = country;
+          }
+        }
         page = 'analysis';
       }
       takwimu.page.id = page;
