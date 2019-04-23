@@ -29,15 +29,19 @@ function Services(props) {
       <Grid className={classes.contentGrid}>
         {services.servicesList.map(service => (
           <React.Fragment>
-            <Typography variant="subtitle2" className={classes.serviceHeading}>
-              {service.title}
-            </Typography>
-            <Typography variant="body1">
-              {service.description.replace(
-                /<br\/>|<p>|<\/div>|<div class="rich-text">|<\/p>/gi,
-                ''
-              )}
-            </Typography>
+            <Typography
+              variant="subtitle2"
+              className={classes.serviceHeading}
+              dangerouslySetInnerHTML={{
+                __html: service.title
+              }}
+            />
+            <Typography
+              variant="body1"
+              dangerouslySetInnerHTML={{
+                __html: service.description
+              }}
+            />
           </React.Fragment>
         ))}
       </Grid>
