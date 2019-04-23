@@ -37,11 +37,7 @@ const renderHomepage = () => {
   // check for anything that *must* be present on this page
   const el = document.getElementById('takwimuHero');
   if (el) {
-    fetch(
-      `${
-        PROPS.takwimu.url
-      }/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json`
-    )
+    fetch('/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json')
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {

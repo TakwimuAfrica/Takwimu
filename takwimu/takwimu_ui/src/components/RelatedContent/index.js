@@ -7,43 +7,42 @@ import Links from './Links';
 import Section from '../Section';
 
 const styles = () => ({
+  sectionRoot: {
+    margin: '0 0 2.3125rem 0'
+  },
   root: {
     flexGrow: 1
   }
 });
 
-function RelatedContent({
-  classes,
-  takwimu: {
-    page: { relatedContent }
-  }
-}) {
-  const firstBatch = relatedContent.slice(0, 4);
-  const secondBatch = relatedContent.slice(4, 8);
+function RelatedContent({ classes, content }) {
+  const firstBatch = content.slice(0, 4);
+  const secondBatch = content.slice(4, 8);
 
   return (
-    <Section title="Related Content" variant="h3">
-      <Grid
-        container
-        className={classes.root}
-        justify="center"
-        alignItems="flex-start"
+    firstBatch.length > 0 && (
+      <Section
+        title="Related Content"
+        variant="h3"
+        classes={{ root: classes.sectionRoot }}
       >
-        {firstBatch && firstBatch.length && <Links items={firstBatch} />}
-        {secondBatch && secondBatch.length && <Links items={secondBatch} />}
-      </Grid>
-    </Section>
+        <Grid
+          container
+          className={classes.root}
+          justify="flex-start"
+          alignItems="flex-start"
+        >
+          <Links items={firstBatch} />
+          {secondBatch.length > 0 && <Links items={secondBatch} />}
+        </Grid>
+      </Section>
+    )
   );
 }
 
 RelatedContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    page: PropTypes.shape({
-      relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
-        .isRequired
-    }).isRequired
-  }).isRequired
+  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
 };
 
 export default withStyles(styles)(RelatedContent);

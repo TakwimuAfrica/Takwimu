@@ -500,7 +500,25 @@ class ProfileSectionPage(ModelMeta, Page):
     def get_context(self, request):
         context = super(ProfileSectionPage, self).get_context(request)
 
+        slug = self.get_parent().slug
+        print('\n\n\n\n\n\n\n\n\n')
+        print(slug)
+        print('\n\n\n\n\n\n\n\n\n')
+        for code, names in COUNTRIES.items():
+            if slug == slugify(names['name']):
+                context['country'] = {
+                    'iso_code': code,
+                    'name': names['name'],
+                    'short_name': names['short_name'],
+                    'slug': slugify(names['name'])
+                }
+                break
+        print('\n\n\n\n\n\n\n\n\n')
+        print(context['country'])
+        print('\n\n\n\n\n\n\n\n\n')
+
         context['meta'] = self.as_meta(request)
+
         return context
 
     def get_promotion_image(self):
