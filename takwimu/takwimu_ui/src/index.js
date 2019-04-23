@@ -89,7 +89,7 @@ const renderDatabyTopicPage = () => {
 };
 
 const renderAboutPage = () => {
-  const el = document.getElementById('takwimuWhereToNext');
+  const el = document.getElementById('takwimuServices');
   if (el) {
     fetch(
       `${
