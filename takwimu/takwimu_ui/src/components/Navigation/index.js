@@ -31,11 +31,13 @@ const styles = theme => ({
     padding: '1.25rem',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
   },
   drawer: {
     backgroundColor: theme.palette.primary.main,
-    outline: 'none'
+    outline: 'none',
+    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
   },
   link: {
     color: theme.palette.text.secondary,
