@@ -18,6 +18,7 @@ import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
 import Services from './components/Services';
+import Methodology from './components/Methodology';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -94,6 +95,28 @@ const renderDatabyTopicPage = () => {
 const renderAboutPage = () => {
   const el = document.getElementById('takwimuWhereToNext');
   if (el) {
+    fetch(
+      `${
+        PROPS.takwimu.url
+      }/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json`
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          const {
+            content,
+            related_content: relatedContent,
+            methodology
+          } = data.items[0];
+          const takwimu = Object.assign({}, PROPS.takwimu, {
+            content,
+            related_content: relatedContent,
+            methodology
+          });
+          const props = Object.assign({}, PROPS, { takwimu });
+          renderApp(Methodology, 'takwimuMethodoloy', props);
+        }
+      });
     renderApp(Services, 'takwimuServices');
     renderApp(Faqs, 'takwimuFAQ');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
