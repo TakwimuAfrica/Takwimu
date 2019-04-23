@@ -194,6 +194,8 @@
         page = 'profile';
       } else if (pathname.startsWith('/profiles/')) {
         page = 'analysis';
+      } else if (pathname.startsWith('/search')) {
+          page='search_results'
       }
       switch (page) {
         case 'about':
@@ -210,6 +212,13 @@
             const el = document.createElement('div');
             el.setAttribute('id', id);
             body.appendChild(el);
+          });
+          break;
+        case 'search_results':
+          ['takwimuSearchResults'].forEach(id=>{
+              const el = document.createElement('div');
+              el.setAttribute('id', id);
+              body.append(el);
           });
           break;
         case 'analysis':

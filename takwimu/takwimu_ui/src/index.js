@@ -17,6 +17,7 @@ import FeaturedData from './components/FeaturedData';
 import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import SearchResults from './components/SearchResults';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -99,6 +100,13 @@ const renderAboutPage = () => {
   }
 };
 
+const renderSearchResultsPage = () => {
+  const el = document.getElementById('takwimuSearchResultsPage');
+  if (el) {
+    renderApp(SearchResults, 'takwimuSearchResults');
+  }
+};
+
 // Render common elements
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
@@ -108,3 +116,4 @@ renderAboutPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();
+renderSearchResultsPage();
