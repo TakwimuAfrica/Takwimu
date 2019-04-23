@@ -32,7 +32,7 @@ const styles = theme => ({
     height: '450px',
     border: 0,
     '& .census-chart-embed': {
-      background: 'none'
+      background: theme.palette.data.light
     }
   }
 });
@@ -58,9 +58,20 @@ class IFrame extends React.Component {
   handleFrameLoad() {
     const { id } = this.state;
     const iframe = document.getElementById(id);
+
+    // add domtoimage
+    const frameHead = iframe.contentDocument
+      .getElementsByTagName('head')
+      .item(0);
+    const script = iframe.contentDocument.createElement('script');
+    script.type = 'text/javascript';
+    script.src =
+      'https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js';
+    frameHead.appendChild(script);
+
     // eslint-disable-next-line no-return-assign, no-param-reassign
     const hideFooter = n => (n.style = 'display: none');
-    iframe.contentWindow.document.body.style.background = 'none';
+    iframe.contentWindow.document.body.style.background = '#F5F5F5';
     iframe.contentWindow.document
       .querySelectorAll('.embed-footer')
       .forEach(hideFooter);

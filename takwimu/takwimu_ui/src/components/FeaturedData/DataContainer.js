@@ -21,6 +21,7 @@ const styles = theme => ({
   dataContainer: {
     padding: '0.625rem',
     backgroundColor: theme.palette.data.light,
+    overflow: 'hidden',
     [theme.breakpoints.up('md')]: {
       padding: '1.25rem'
     }
@@ -38,12 +39,43 @@ const styles = theme => ({
 });
 
 function DataContainer({ classes, featuredData }) {
+  const embedCode = `<iframe
+    allowFullScreen
+    title="${featuredData.title}"
+    src="/embed/iframe.html?geoID=country-${
+      featuredData.country
+    }&geoVersion=2009&chartDataID=${
+    featuredData.data_id
+  }&dataYear=2011&chartType=${
+    featuredData.chart_type
+  }&chartHeight=300&chartTitle=${featuredData.title}&initialSort=&statType=${
+    featuredData.data_stat_type
+  }"
+/>`;
+
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           <IFrame featuredData={featuredData} />
-          <DataActions />
+          <DataActions
+            onDownload={() => {
+              const iframe = document.getElementById(
+                `cr-embed-country-${featuredData.country}-${
+                  featuredData.data_id
+                }`
+              );
+              iframe.contentWindow.domtoimage
+                .toJpeg(iframe.contentDocument.body)
+                .then(dataUrl => {
+                  const link = document.createElement('a');
+                  link.download = `${featuredData.title}.jpeg`;
+                  link.href = dataUrl;
+                  link.click();
+                });
+            }}
+            embedCode={embedCode}
+          />
         </Grid>
       </div>
       <div className={classes.descriptionContainer}>
