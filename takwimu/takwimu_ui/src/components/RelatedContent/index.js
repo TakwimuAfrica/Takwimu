@@ -12,37 +12,31 @@ const styles = () => ({
   }
 });
 
-function RelatedContent({
-  classes,
-  takwimu: {
-    page: { relatedContent }
-  }
-}) {
+function RelatedContent({ classes, takwimu: { relatedContent } }) {
   const firstBatch = relatedContent.slice(0, 4);
   const secondBatch = relatedContent.slice(4, 8);
 
   return (
-    <Section title="Related Content" variant="h3">
-      <Grid
-        container
-        className={classes.root}
-        justify="center"
-        alignItems="flex-start"
-      >
-        {firstBatch && firstBatch.length && <Links items={firstBatch} />}
-        {secondBatch && secondBatch.length && <Links items={secondBatch} />}
-      </Grid>
-    </Section>
+    firstBatch.length > 0 && (
+      <Section title="Related Content" variant="h3">
+        <Grid
+          container
+          className={classes.root}
+          justify="flex-start"
+          alignItems="flex-start"
+        >
+          <Links items={firstBatch} />
+          {secondBatch.length > 0 && <Links items={secondBatch} />}
+        </Grid>
+      </Section>
+    )
   );
 }
 
 RelatedContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    page: PropTypes.shape({
-      relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
-        .isRequired
-    }).isRequired
+    relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
   }).isRequired
 };
 

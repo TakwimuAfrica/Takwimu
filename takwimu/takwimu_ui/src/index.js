@@ -9,6 +9,7 @@ import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
+import Faqs from './components/Faqs';
 import HomeWhereToNext, { About as AboutWhereToNext } from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
 import AnalysisPage from './pages/AnalysisPage';
@@ -16,16 +17,16 @@ import FeaturedData from './components/FeaturedData';
 import RelatedContent from './components/RelatedContent';
 import Footer from './components/Footer';
 import LatestNewsStories from './components/LatestNewsStories';
+import Services from './components/Services';
+import Methodology from './components/Methodology';
 
-import AboutUs from './components/AboutUs';
+// import AboutUs from './components/AboutUs';
 
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
   profile: window.profileData
 };
-
-console.log(window.takwimu);
 
 const renderApp = (Component, id, props = PROPS) => {
   const el = document.getElementById(id);
@@ -40,11 +41,7 @@ const renderHomepage = () => {
   // check for anything that *must* be present on this page
   const el = document.getElementById('takwimuHero');
   if (el) {
-    fetch(
-      `${
-        PROPS.takwimu.url
-      }/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json`
-    )
+    fetch('/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json')
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {
@@ -94,11 +91,34 @@ const renderDatabyTopicPage = () => {
 };
 
 const renderAboutPage = () => {
-  const el = document.getElementById('takwimuWhereToNext');
+  const el = document.getElementById('takwimuServices');
   if (el) {
-    renderApp(AboutUs, 'takwimuAboutUs');
+    fetch(
+      `${
+        PROPS.takwimu.url
+      }/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json`
+    )
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          const {
+            content,
+            methodology,
+            related_content: relatedContent
+          } = data.items[0];
+          const takwimu = Object.assign({}, PROPS.takwimu, {
+            content,
+            methodology,
+            related_content: relatedContent
+          });
+          const props = Object.assign({}, PROPS, { takwimu });
+          renderApp(Methodology, 'takwimuMethodoloy', props);
+          renderApp(RelatedContent, 'takwimuRelatedContent', props);
+        }
+      });
+    renderApp(Services, 'takwimuServices');
+    renderApp(Faqs, 'takwimuFAQ');
     renderApp(AboutWhereToNext, 'takwimuWhereToNext');
-    renderApp(RelatedContent, 'takwimuRelatedContent');
   }
 };
 

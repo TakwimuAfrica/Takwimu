@@ -46,7 +46,7 @@ class FeaturedAnalysis extends React.Component {
           alignItems="stretch"
           className={classes.root}
         >
-          {featuredAnalysis && featuredAnalysis.length && (
+          {featuredAnalysis && featuredAnalysis.length ? (
             <React.Fragment>
               <CurrentAnalysis
                 content={featuredAnalysis[current].value}
@@ -59,7 +59,7 @@ class FeaturedAnalysis extends React.Component {
                 classes={{ content: classes.list }}
               />
             </React.Fragment>
-          )}
+          ) : null}
         </Grid>
       </Section>
     );
