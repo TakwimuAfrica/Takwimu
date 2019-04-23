@@ -1071,11 +1071,13 @@ class FAQBlock(blocks.StructBlock):
 
 @register_setting
 class FAQSetting(BaseSetting):
+    overview = RichTextField(blank=True),
     faqs = StreamField([
         ('faq', FAQBlock())
     ], blank=True)
 
     panels = [
+        FieldPanel('overview'),
         StreamFieldPanel('faqs')
     ]
 
