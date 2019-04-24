@@ -57,7 +57,8 @@ class AboutUsPage extends React.Component {
     this.setState({
       activeContent: content
     });
-    window.scrollTo(0, 0);
+    const activeElement = document.getElementById(content);
+    window.scrollTo(0, activeElement.offsetTop - 90);
   }
 
   render() {
