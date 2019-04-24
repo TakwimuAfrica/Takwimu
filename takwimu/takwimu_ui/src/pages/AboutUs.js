@@ -52,7 +52,6 @@ class AboutUsPage extends React.Component {
     const { activeContent } = this.state;
     return (
       <ContentPage
-        classes={{ root: classes.root }}
         aside={
           <SideMenu
             activeContent={activeContent}
@@ -60,6 +59,7 @@ class AboutUsPage extends React.Component {
             changeActiveContent={this.changeActiveContent}
           />
         }
+        classes={{ root: classes.root }}
       >
         <AboutUsContent
           content={content}

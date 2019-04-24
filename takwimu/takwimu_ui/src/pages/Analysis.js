@@ -7,7 +7,11 @@ import AnalysisContent from '../components/AnalysisContent';
 import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
 import ContentPage from '../components/ContentPage';
 
-const styles = () => ({});
+const styles = () => ({
+  root: {
+    marginBottom: '5.5rem'
+  }
+});
 
 class AnalysisPage extends React.Component {
   constructor(props) {
@@ -97,7 +101,7 @@ class AnalysisPage extends React.Component {
 
   render() {
     const { analysis, current, topicIndex } = this.state;
-    const { takwimu } = this.props;
+    const { classes, takwimu } = this.props;
     return analysis !== null ? (
       <ContentPage
         aside={
@@ -108,6 +112,7 @@ class AnalysisPage extends React.Component {
             onChangeContent={this.changeContent}
           />
         }
+        classes={{ root: classes.root }}
       >
         <AnalysisContent
           content={analysis[current]}
@@ -121,6 +126,7 @@ class AnalysisPage extends React.Component {
 }
 
 AnalysisPage.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({}).isRequired
 };
 
