@@ -30,11 +30,11 @@ function SearchResultItem({
 }) {
   return (
     <div className={classes.root}>
-      <Typography variant="subtitle2" className={classes.resultType}>
+      <Typography variant="body1" className={classes.resultType}>
         {resultType}
       </Typography>
       <a href={link} className={classes.link}>
-        <Typography variant="body2" className={classes.searchResultItem}>
+        <Typography variant="body1" className={classes.searchResultItem}>
           {country} - {title}
         </Typography>
       </a>

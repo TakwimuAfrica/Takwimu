@@ -9,22 +9,29 @@ import SearchResultItem from './SearchResultItem';
 const styles = theme => ({
   root: {},
   searchResultsList: {
-    borderBottomStyle: 'solid',
-    borderColor: theme.palette.primary.main,
-    borderWidth: '3px',
-    borderTopStyle: 'solid',
     paddingTop: '1.5rem',
     paddingBottom: '3rem',
-    paddingLeft: '3rem',
-    paddingRight: '3rem'
+    marginLeft: '1.5rem',
+    marginRight: '1.5rem'
   },
   resultsFilter: {
     paddingTop: '2rem',
-    paddingBottom: '2rem'
+    paddingBottom: '2rem',
+    marginLeft: '1.5rem',
+    display: 'flex'
+  },
+  filter: {
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    display: 'flex',
+    width: '70%'
+  },
+  showResult: {
+    width: '30%'
   },
   filterItem: {
     display: 'inline-block',
-    marginRight: '1rem',
+    marginLeft: '1rem',
     color: theme.palette.primary.main,
     textDecoration: 'underline'
   },
@@ -33,11 +40,15 @@ const styles = theme => ({
     textDecoration: 'none'
   },
   filterItemLabel: {
-    display: 'inline-block',
-    marginRight: '1rem'
+    display: 'inline-block'
   },
   paginationContainer: {
     padding: '3rem'
+  },
+  borderDiv: {
+    borderStyle: 'solid',
+    borderBottom: '4px',
+    borderColor: theme.palette.primary.main
   },
   pagesList: {
     marginTop: '1rem'
@@ -107,34 +118,33 @@ class SearchResultsContainer extends React.Component {
 
     return (
       <div className={classes.root}>
-        <div className={classes.resultsFilter}>
-          <Grid container spacing={24} justify="space-between">
-            <Grid item xs={6}>
-              <Typography variant="body2">
-                Showing Results 1 - 10 of 100 results
-              </Typography>
-            </Grid>
-            <Grid item xs={6}>
-              <Typography
-                variant="body2"
-                color="inherit"
-                className={classes.filterItemLabel}
-              >
-                Show:
-              </Typography>
-              <Link className={classes.filterItem} href="/search">
-                All Results
-              </Link>
-              <Link className={classes.filterItem} href="/search">
-                Analysis Results
-              </Link>
-              <Link className={classes.filterItem} href="/search">
-                Data Results
-              </Link>
-            </Grid>
+        <Grid className={classes.resultsFilter}>
+          <Typography item variant="body2" className={classes.showResult}>
+            Showing Results 1 - 10 of 100 results
+          </Typography>
+          <Grid item className={classes.filter}>
+            <Typography
+              item
+              variant="body2"
+              color="inherit"
+              className={classes.filterItemLabel}
+            >
+              Show:
+            </Typography>
+            <Link className={classes.filterItem} href="/search">
+              All Results
+            </Link>
+            <Link className={classes.filterItem} href="/search">
+              Analysis Results
+            </Link>
+            <Link className={classes.filterItem} href="/search">
+              Data Results
+            </Link>
           </Grid>
-        </div>
+        </Grid>
+        <div className={classes.borderDiv} />
         <div className={classes.searchResultsList}>{resultItems}</div>
+        <div className={classes.borderDiv} />
 
         <div className={classes.paginationContainer}>
           <Typography variant="body2">
