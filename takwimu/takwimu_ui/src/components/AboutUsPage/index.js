@@ -38,36 +38,68 @@ const styles = theme => ({
   }
 });
 
-function AboutUsPage({
-  classes,
-  takwimu: {
-    content,
-    methodology,
-    relatedContent,
-    faqs,
-    services,
-    settings: { socialMedia }
+const contentHeadings = [
+  { title: 'About Takwimu', link: 'about' },
+  { title: 'Methodology', link: 'methodology' },
+  { title: 'Services', link: 'services' },
+  { title: 'FAQs', link: 'faqs' }
+];
+
+class AboutUsPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { activeContent: 'about' };
+
+    this.changeActiveContent = this.changeActiveContent.bind(this);
   }
-}) {
-  return (
-    <Section classes={{ root: classes.root }}>
-      <Grid container justify="space-between">
-        <div className={classes.aside}>
-          <SideMenu activeContent="about" />
-        </div>
-        <div className={classes.main}>
-          <AboutContent
-            content={content}
-            methodology={methodology}
-            relatedContent={relatedContent}
-            faqs={faqs}
-            services={services}
-            socialMedia={socialMedia}
-          />
-        </div>
-      </Grid>
-    </Section>
-  );
+
+  changeActiveContent(content) {
+    this.setState({
+      activeContent: content
+    });
+    window.scrollTo(0, 0);
+  }
+
+  render() {
+    const {
+      classes,
+      takwimu: {
+        content,
+        methodology,
+        relatedContent,
+        faqs,
+        services,
+        settings: { socialMedia }
+      }
+    } = this.props;
+    const { activeContent } = this.state;
+    return (
+      <Section classes={{ root: classes.root }}>
+        <Grid container justify="space-between">
+          <div className={classes.aside}>
+            <SideMenu
+              activeContent={activeContent}
+              contentHeadings={contentHeadings}
+              changeActiveContent={this.changeActiveContent}
+            />
+          </div>
+          <div className={classes.main}>
+            <AboutContent
+              content={content}
+              methodology={methodology}
+              relatedContent={relatedContent}
+              faqs={faqs}
+              services={services}
+              socialMedia={socialMedia}
+              activeContent={activeContent}
+              contentHeadings={contentHeadings}
+              changeActiveContent={this.changeActiveContent}
+            />
+          </div>
+        </Grid>
+      </Section>
+    );
+  }
 }
 
 AboutUsPage.propTypes = {

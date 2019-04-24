@@ -35,7 +35,12 @@ const styles = theme => ({
   }
 });
 
-function AboutContentNav({ classes, currentContent, contentHeadings }) {
+function AboutContentNav({
+  classes,
+  currentContent,
+  contentHeadings,
+  changeActiveContent
+}) {
   return (
     <div className={classes.root}>
       <Layout>
@@ -49,6 +54,7 @@ function AboutContentNav({ classes, currentContent, contentHeadings }) {
                 [classes.otherTopic]: currentContent !== item.link
               })}
               key={item.link}
+              onClick={changeActiveContent(item.link)}
             >
               <Typography variant="body2" color="textSecondary">
                 {item.title}
@@ -64,7 +70,8 @@ function AboutContentNav({ classes, currentContent, contentHeadings }) {
 AboutContentNav.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   currentContent: PropTypes.string.isRequired,
-  contentHeadings: PropTypes.shape([]).isRequired
+  contentHeadings: PropTypes.shape([]).isRequired,
+  changeActiveContent: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AboutContentNav);

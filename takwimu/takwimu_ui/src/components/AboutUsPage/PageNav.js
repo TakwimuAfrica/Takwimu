@@ -26,7 +26,12 @@ const styles = theme => ({
   }
 });
 
-function PageNav({ classes, currentContent, contentHeadings }) {
+function PageNav({
+  classes,
+  currentContent,
+  contentHeadings,
+  changeActiveContent
+}) {
   return (
     <div className={classes.root}>
       <Typography className={classes.label}>On this page</Typography>
@@ -38,6 +43,7 @@ function PageNav({ classes, currentContent, contentHeadings }) {
             component="button"
             variant="body2"
             color={currentContent === c.link ? 'textPrimary' : 'primary'}
+            onClick={changeActiveContent(c.link)}
             className={classNames({
               [classes.otherTopic]: currentContent !== c.link
             })}
@@ -53,7 +59,8 @@ function PageNav({ classes, currentContent, contentHeadings }) {
 PageNav.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   currentContent: PropTypes.string.isRequired,
-  contentHeadings: PropTypes.shape({}).isRequired
+  contentHeadings: PropTypes.shape({}).isRequired,
+  changeActiveContent: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(PageNav);

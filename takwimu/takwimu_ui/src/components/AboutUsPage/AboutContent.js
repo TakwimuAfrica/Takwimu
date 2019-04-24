@@ -30,27 +30,17 @@ const styles = theme => ({
   }
 });
 
-const contentHeadings = [
-  { title: 'About Takwimu', link: 'about' },
-  { title: 'Methodology', link: 'methodology' },
-  { title: 'Services', link: 'services' },
-  { title: 'FAQs', link: 'faqs' }
-];
-
 class AboutContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      activeContent: 'about'
-    };
     this.showContent = this.showContent.bind(this);
   }
 
   showContent(currentContent) {
+    const { changeActiveContent } = this.props;
     return () => {
-      this.setState({ activeContent: currentContent });
-      window.scrollTo(0, 0);
+      changeActiveContent(currentContent);
     };
   }
 
@@ -60,17 +50,19 @@ class AboutContent extends React.Component {
       content,
       methodology,
       relatedContent,
+      activeContent,
+      contentHeadings,
       faqs,
       services,
       socialMedia
     } = this.props;
-    const { activeContent } = this.state;
+
     return (
       <React.Fragment>
         <AboutContentNav
           currentContent={activeContent}
           contentHeadings={contentHeadings}
-          showContent={this.showContent}
+          changeActiveContent={this.showContent}
         />
         <Typography variant="h2" className={classes.title}>
           About Us
@@ -78,14 +70,15 @@ class AboutContent extends React.Component {
         <PageNav
           contentHeadings={contentHeadings}
           currentContent={activeContent}
+          changeActiveContent={this.showContent}
         />
-        <div className={classes.borderDiv} />
+        <div className={classes.borderDiv} id="about" />
         <AboutTakwimu content={content} />
-        <div className={classes.borderDiv} />
+        <div className={classes.borderDiv} id="methodology" />
         <Methodology methodology={methodology} />
-        <div className={classes.borderDiv} />
+        <div className={classes.borderDiv} id="services" />
         <Services services={services} />
-        <div className={classes.borderDiv} />
+        <div className={classes.borderDiv} id="faqs" />
         <Faqs faqs={faqs} />
         <AboutWhereToNext socialMedia={socialMedia} />
         <RelatedContent relatedContent={relatedContent} />
@@ -101,7 +94,10 @@ AboutContent.propTypes = {
   faqs: PropTypes.shape({}).isRequired,
   services: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
-  relatedContent: PropTypes.shape([]).isRequired
+  relatedContent: PropTypes.shape([]).isRequired,
+  activeContent: PropTypes.string.isRequired,
+  contentHeadings: PropTypes.shape([]).isRequired,
+  changeActiveContent: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(AboutContent);

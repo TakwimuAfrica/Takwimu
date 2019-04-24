@@ -38,14 +38,12 @@ const styles = theme => ({
   }
 });
 
-const contentHeadings = [
-  { title: 'About Takwimu', link: 'about' },
-  { title: 'Methodology', link: 'methodology' },
-  { title: 'Services', link: 'services' },
-  { title: 'FAQs', link: 'faqs' }
-];
-
-function SideMenu({ classes, activeContent }) {
+function SideMenu({
+  classes,
+  activeContent,
+  contentHeadings,
+  changeActiveContent
+}) {
   return (
     <div className={classes.sideMenuRoot}>
       <Typography variant="subtitle2" className={classes.sideMenuHeader}>
@@ -67,6 +65,11 @@ function SideMenu({ classes, activeContent }) {
               classes={{ root: classes.listItem }}
               href={`#${item.link}`}
               color={activeContent === item.link ? 'textPrimary' : 'primary'}
+              onClick={e => {
+                e.preventDefault();
+                window.history.pushState(null, '', `#${item.link}`);
+                changeActiveContent(item.link);
+              }}
             >
               {item.title}
             </Link>
@@ -79,7 +82,9 @@ function SideMenu({ classes, activeContent }) {
 
 SideMenu.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  activeContent: PropTypes.string.isRequired
+  activeContent: PropTypes.string.isRequired,
+  contentHeadings: PropTypes.shape([]).isRequired,
+  changeActiveContent: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SideMenu);
