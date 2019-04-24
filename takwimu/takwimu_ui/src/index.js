@@ -101,7 +101,7 @@ const renderAboutPage = () => {
 };
 
 const renderSearchResultsPage = () => {
-  const el = document.getElementById('takwimuSearchResultsPage');
+  const el = document.getElementById('takwimuSearchResults');
   if (el) {
     renderApp(SearchResults, 'takwimuSearchResults');
   }
