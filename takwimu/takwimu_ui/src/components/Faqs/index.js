@@ -5,17 +5,26 @@ import { withStyles, Grid, Typography } from '@material-ui/core';
 import Section from '../Section';
 import Faq from './Faq';
 
-const styles = {
-  root: { flexGrow: 1 },
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '44.671875rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '59.5625rem'
+    }
+  },
   contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' }
-};
+});
 
 function Faqs({ classes, faqs }) {
   return (
     <Section
       title="Frequently Asked Questions"
       variant="h3"
-      className={classes.root}
+      classes={{ root: classes.root }}
     >
       <Typography
         variant="body1"

@@ -8,6 +8,15 @@ import Card from './Card';
 import Section from '../Section';
 
 const styles = theme => ({
+  sectionRoot: {
+    width: '100%',
+    [theme.breakpoints.up('md')]: {
+      width: '44.671875rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '59.5625rem'
+    }
+  },
   root: {
     flexGrow: 1,
     paddingBottom: '6.25rem'
@@ -28,7 +37,11 @@ const styles = theme => ({
 });
 function AboutWhereToNext({ classes, socialMedia }) {
   return (
-    <Section title="Where to next..." variant="h3">
+    <Section
+      title="Where to next..."
+      variant="h3"
+      classes={{ root: classes.sectionRoot }}
+    >
       <Grid
         container
         justify="center"
