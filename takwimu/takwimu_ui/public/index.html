@@ -179,24 +179,24 @@
         {
           type: "link",
           value: {
-          type: "url",
-          value: {
-          title: "sajdfkldshkjgfs",
-          link: "http://takwimu.africa"
-          },
-          id: "de517671-eeba-4c8d-990e-1c7496acae1c"
+            type: "url",
+            value: {
+              title: "sajdfkldshkjgfs",
+              link: "http://takwimu.africa"
+            },
+            id: "de517671-eeba-4c8d-990e-1c7496acae1c"
           },
           id: "aa08e9eb-b54c-40e9-9339-5185d1a1d4fe"
-          },
-          {
+        },
+        {
           type: "link",
           value: {
-          type: "url",
-          value: {
-          title: "kjajglkfsjlkaajkgagd;lksadgsa",
-          link: "http://instagram.com"
-          },
-          id: "5f3786b3-b639-46bc-b6cb-9147fa52121d"
+            type: "url",
+            value: {
+              title: "kjajglkfsjlkaajkgagd;lksadgsa",
+              link: "http://instagram.com"
+            },
+            id: "5f3786b3-b639-46bc-b6cb-9147fa52121d"
           },
           id: "4e87f44d-af08-459f-9757-b49bb69897b7"
           }
@@ -252,13 +252,9 @@
       takwimu.page.id = page;
       switch (page) {
         case 'about':
-          ['takwimuAboutUsPage', 'takwimuMethodoloy', 'takwimuServices','takwimuFAQ', 'takwimuWhereToNext', 'takwimuRelatedContent'].forEach(
-            id => {
-              const el = document.createElement('div');
-              el.setAttribute('id', id);
-              body.appendChild(el);
-            }
-          );
+          const elm = document.createElement('div');
+          elm.setAttribute('id', 'takwimuAboutUsPage');
+          body.appendChild(elm);
           break;
         case 'topic':
           ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {

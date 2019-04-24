@@ -10,7 +10,7 @@ import AboutContentNav from './AboutContentNav';
 import { About as AboutWhereToNext } from '../Next';
 import Faqs from '../Faqs';
 
-const styles = {
+const styles = theme => ({
   root: {
     maxWidth: '933px'
   },
@@ -19,8 +19,15 @@ const styles = {
   },
   body: {
     padding: '0 19px'
+  },
+  borderDiv: {
+    marginTop: '3rem',
+    marginBottom: '3rem',
+    borderStyle: 'solid',
+    borderBottom: '4px',
+    borderColor: theme.palette.primary.main
   }
-};
+});
 
 const contentHeadings = [
   { title: 'About Takwimu', link: 'about' },
@@ -48,6 +55,7 @@ class AboutContent extends React.Component {
 
   render() {
     const {
+      classes,
       content,
       methodology,
       relatedContent,
@@ -63,9 +71,13 @@ class AboutContent extends React.Component {
           contentHeadings={contentHeadings}
           showContent={this.showContent}
         />
+        <div className={classes.borderDiv} />
         <AboutTakwimu content={content} />
+        <div className={classes.borderDiv} />
         <Methodology methodology={methodology} />
+        <div className={classes.borderDiv} />
         <Services services={services} />
+        <div className={classes.borderDiv} />
         <Faqs faqs={faqs} />
         <AboutWhereToNext socialMedia={socialMedia} />
         <RelatedContent relatedContent={relatedContent} />
@@ -75,6 +87,7 @@ class AboutContent extends React.Component {
 }
 
 AboutContent.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
   content: PropTypes.string.isRequired,
   methodology: PropTypes.string.isRequired,
   faqs: PropTypes.shape({}).isRequired,
