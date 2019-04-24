@@ -22,7 +22,7 @@ const styles = theme => ({
     }
   },
   sideMenuHeader: {
-    fontColor: theme.palette.info.other
+    color: theme.palette.info.other
   },
   activePageIndicator: {
     marginLeft: '-1.5rem',
@@ -64,7 +64,9 @@ function SideMenu({ classes, activeContent }) {
               className={classNames({
                 [classes.activeLink]: item.link !== activeContent
               })}
+              classes={{ root: classes.listItem }}
               href={`#${item.link}`}
+              color={activeContent === item.link ? 'textPrimary' : 'primary'}
             >
               {item.title}
             </Link>

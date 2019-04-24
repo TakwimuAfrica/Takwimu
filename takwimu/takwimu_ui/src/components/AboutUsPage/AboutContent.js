@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
+import { withStyles, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import AboutTakwimu from '../AboutTakwimu';
@@ -9,13 +9,14 @@ import RelatedContent from '../RelatedContent';
 import AboutContentNav from './AboutContentNav';
 import { About as AboutWhereToNext } from '../Next';
 import Faqs from '../Faqs';
+import PageNav from './PageNav';
 
 const styles = theme => ({
   root: {
     maxWidth: '933px'
   },
   title: {
-    margin: '37px 0 22px 19px'
+    marginBottom: '1.375rem'
   },
   body: {
     padding: '0 19px'
@@ -70,6 +71,13 @@ class AboutContent extends React.Component {
           currentContent={activeContent}
           contentHeadings={contentHeadings}
           showContent={this.showContent}
+        />
+        <Typography variant="h2" className={classes.title}>
+          About Us
+        </Typography>
+        <PageNav
+          contentHeadings={contentHeadings}
+          currentContent={activeContent}
         />
         <div className={classes.borderDiv} />
         <AboutTakwimu content={content} />
