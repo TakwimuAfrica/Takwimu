@@ -7,6 +7,9 @@ import Links from './Links';
 import Section from '../Section';
 
 const styles = () => ({
+  sectionRoot: {
+    margin: '0 0 2.3125rem 0'
+  },
   root: {
     flexGrow: 1
   }
@@ -18,7 +21,11 @@ function RelatedContent({ classes, relatedContent }) {
 
   return (
     firstBatch.length > 0 && (
-      <Section title="Related Content" variant="h3">
+      <Section
+        title="Related Content"
+        variant="h3"
+        classes={{ root: classes.sectionRoot }}
+      >
         <Grid
           container
           className={classes.root}
