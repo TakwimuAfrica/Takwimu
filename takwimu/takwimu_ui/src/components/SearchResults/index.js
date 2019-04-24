@@ -4,20 +4,22 @@ import { Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 import SearchInput from './SearchInput';
 import SearchResultsContainer from './SearchResultsContainer';
+import Section from '../Section';
 
 const styles = () => ({
   root: {
-    padding: '3rem'
+    marginTop: '3.875rem',
+    marginBottom: '4.75rem'
   }
 });
 
 function SearchResults({ classes }) {
   return (
-    <div className={classes.root}>
+    <Section classes={{ root: classes.root }}>
       <Typography variant="h3">Search Results</Typography>
       <SearchInput />
       <SearchResultsContainer />
-    </div>
+    </Section>
   );
 }
 
