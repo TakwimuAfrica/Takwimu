@@ -24,16 +24,16 @@ const contentHeadings = [
 class AboutUsPage extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { activeContent: 'about' };
+    this.state = { current: 0 };
 
     this.changeActiveContent = this.changeActiveContent.bind(this);
   }
 
-  changeActiveContent(content) {
+  changeActiveContent(index) {
     this.setState({
-      activeContent: content
+      current: index
     });
-    const activeElement = document.getElementById(content);
+    const activeElement = document.getElementById(contentHeadings[index].link);
     window.scrollTo(0, activeElement.offsetTop - 90);
   }
 
@@ -49,12 +49,12 @@ class AboutUsPage extends React.Component {
         settings: { socialMedia }
       }
     } = this.props;
-    const { activeContent } = this.state;
+    const { current } = this.state;
     return (
       <ContentPage
         aside={
           <SideMenu
-            activeContent={activeContent}
+            current={current}
             contentHeadings={contentHeadings}
             changeActiveContent={this.changeActiveContent}
           />
@@ -68,7 +68,7 @@ class AboutUsPage extends React.Component {
           faqs={faqs}
           services={services}
           socialMedia={socialMedia}
-          activeContent={activeContent}
+          current={current}
           contentHeadings={contentHeadings}
           changeActiveContent={this.changeActiveContent}
         />

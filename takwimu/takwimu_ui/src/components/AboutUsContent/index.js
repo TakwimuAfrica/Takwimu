@@ -50,7 +50,7 @@ class AboutContent extends React.Component {
       content,
       methodology,
       relatedContent,
-      activeContent,
+      current,
       contentHeadings,
       faqs,
       services,
@@ -60,7 +60,7 @@ class AboutContent extends React.Component {
     return (
       <React.Fragment>
         <AboutUsContentNav
-          currentContent={activeContent}
+          current={current}
           contentHeadings={contentHeadings}
           changeActiveContent={this.showContent}
         />
@@ -69,7 +69,7 @@ class AboutContent extends React.Component {
         </Typography>
         <PageNav
           contentHeadings={contentHeadings}
-          currentContent={activeContent}
+          current={current}
           changeActiveContent={this.showContent}
         />
         <div className={classes.borderDiv} id="about" />
@@ -95,7 +95,7 @@ AboutContent.propTypes = {
   services: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape([]).isRequired,
-  activeContent: PropTypes.string.isRequired,
+  current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.shape([]).isRequired,
   changeActiveContent: PropTypes.func.isRequired
 };

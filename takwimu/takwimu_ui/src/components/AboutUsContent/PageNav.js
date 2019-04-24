@@ -26,26 +26,21 @@ const styles = theme => ({
   }
 });
 
-function PageNav({
-  classes,
-  currentContent,
-  contentHeadings,
-  changeActiveContent
-}) {
+function PageNav({ classes, current, contentHeadings, changeActiveContent }) {
   return (
     <div className={classes.root}>
       <Typography className={classes.label}>On this page</Typography>
       <div className={classes.otherTopicLinks}>
-        {contentHeadings.map(c => (
+        {contentHeadings.map((c, index) => (
           <Link
             key={c.link}
             href={c.link}
             component="button"
             variant="body2"
-            color={currentContent === c.link ? 'textPrimary' : 'primary'}
-            onClick={changeActiveContent(c.link)}
+            color={current === index ? 'textPrimary' : 'primary'}
+            onClick={changeActiveContent(index)}
             className={classNames({
-              [classes.otherTopic]: currentContent !== c.link
+              [classes.otherTopic]: current !== index
             })}
           >
             {c.title}
@@ -58,7 +53,7 @@ function PageNav({
 
 PageNav.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  currentContent: PropTypes.string.isRequired,
+  current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.shape({}).isRequired,
   changeActiveContent: PropTypes.func.isRequired
 };
