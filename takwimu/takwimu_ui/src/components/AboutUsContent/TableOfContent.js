@@ -13,7 +13,12 @@ const styles = theme => ({
   }
 });
 
-function SideMenu({ classes, current, contentHeadings, changeActiveContent }) {
+function AboutUsTableOfContent({
+  classes,
+  current,
+  contentHeadings,
+  changeActiveContent
+}) {
   const generateHref = index => {
     const item = contentHeadings[index];
     return `#${item.link}`;
@@ -34,11 +39,11 @@ function SideMenu({ classes, current, contentHeadings, changeActiveContent }) {
   );
 }
 
-SideMenu.propTypes = {
+AboutUsTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.shape([]).isRequired,
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(SideMenu);
+export default withStyles(styles)(AboutUsTableOfContent);

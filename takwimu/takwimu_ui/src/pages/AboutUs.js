@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 
 import AboutUsContent from '../components/AboutUsContent/index';
 import ContentPage from '../components/ContentPage';
-import SideMenu from '../components/AboutUsContent/SideMenu';
+import TableOfContent from '../components/AboutUsContent/TableOfContent';
 
 const styles = () => ({
   root: {
@@ -53,7 +53,7 @@ class AboutUsPage extends React.Component {
     return (
       <ContentPage
         aside={
-          <SideMenu
+          <TableOfContent
             current={current}
             contentHeadings={contentHeadings}
             changeActiveContent={this.changeActiveContent}
