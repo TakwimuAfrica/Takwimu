@@ -341,6 +341,12 @@ class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
 
+    # Since this block will only have only one of widget type, there is no need
+    # to return a list; return the first item
+    def get_api_representation(self, value, context=None):
+        representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
+        representation['widget'] = representation['widget'][0]
+        return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
