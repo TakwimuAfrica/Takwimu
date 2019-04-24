@@ -6,7 +6,7 @@ import AboutTakwimu from '../AboutTakwimu';
 import Methodology from '../Methodology';
 import Services from '../Services';
 import RelatedContent from '../RelatedContent';
-import AboutContentNav from './AboutContentNav';
+import AboutUsContentNav from './AboutUsContentNav';
 import { About as AboutWhereToNext } from '../Next';
 import Faqs from '../Faqs';
 import PageNav from './PageNav';
@@ -59,7 +59,7 @@ class AboutContent extends React.Component {
 
     return (
       <React.Fragment>
-        <AboutContentNav
+        <AboutUsContentNav
           currentContent={activeContent}
           contentHeadings={contentHeadings}
           changeActiveContent={this.showContent}

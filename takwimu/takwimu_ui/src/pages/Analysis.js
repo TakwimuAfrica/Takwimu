@@ -1,33 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 
-import AnalysisContent from '../../components/AnalysisContent';
-import AnalysisTableOfContent from '../../components/AnalysisContent/TableOfContent';
-import Section from '../../components/Section';
+import AnalysisContent from '../components/AnalysisContent';
+import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
+import ContentPage from '../components/ContentPage';
 
-const styles = theme => ({
-  root: {},
-  aside: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '10.5rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '14rem'
-    }
-  },
-  main: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '44.671875rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '59.5625rem'
-    }
-  }
-});
+const styles = () => ({});
 
 class AnalysisPage extends React.Component {
   constructor(props) {
@@ -117,34 +97,30 @@ class AnalysisPage extends React.Component {
 
   render() {
     const { analysis, current, topicIndex } = this.state;
-    const { classes, takwimu } = this.props;
+    const { takwimu } = this.props;
     return analysis !== null ? (
-      <Section>
-        <Grid container justify="space-between">
-          <div className={classes.aside}>
-            <AnalysisTableOfContent
-              country={takwimu.country}
-              content={analysis}
-              current={current}
-              onChangeContent={this.changeContent}
-            />
-          </div>
-          <div className={classes.main}>
-            <AnalysisContent
-              content={analysis[current]}
-              onChange={this.changeTopic}
-              takwimu={takwimu}
-              topicIndex={topicIndex}
-            />
-          </div>
-        </Grid>
-      </Section>
+      <ContentPage
+        aside={
+          <AnalysisTableOfContent
+            country={takwimu.country}
+            content={analysis}
+            current={current}
+            onChangeContent={this.changeContent}
+          />
+        }
+      >
+        <AnalysisContent
+          content={analysis[current]}
+          onChange={this.changeTopic}
+          takwimu={takwimu}
+          topicIndex={topicIndex}
+        />
+      </ContentPage>
     ) : null;
   }
 }
 
 AnalysisPage.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({}).isRequired
 };
 

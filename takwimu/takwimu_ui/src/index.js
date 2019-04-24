@@ -3,20 +3,20 @@ import ReactDOM from 'react-dom';
 
 import withRoot from './withRoot';
 
-import Hero from './components/Hero';
-import Navigation from './components/Navigation';
-import ProfileDetail from './components/ProfileDetail';
-import Profile from './components/Profile';
-import MakingOfTakwimu from './components/MakingOfTakwimu';
-import WhatCanYouDo from './components/WhatCanYouDo';
-import HomeWhereToNext from './components/Next';
 import FeaturedAnalysis from './components/FeaturedAnalysis';
-import AnalysisPage from './pages/AnalysisPage';
 import FeaturedData from './components/FeaturedData';
 import Footer from './components/Footer';
+import Hero from './components/Hero';
+import HomeWhereToNext from './components/Next';
+import Navigation from './components/Navigation';
+import Profile from './components/Profile';
+import ProfileDetail from './components/ProfileDetail';
 import LatestNewsStories from './components/LatestNewsStories';
+import MakingOfTakwimu from './components/MakingOfTakwimu';
+import WhatCanYouDo from './components/WhatCanYouDo';
 
-import AboutUsPage from './components/AboutUsPage';
+import AnalysisPage from './pages/Analysis';
+import AboutUsPage from './pages/AboutUs';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -89,11 +89,7 @@ const renderDatabyTopicPage = () => {
 const renderAboutUsPage = () => {
   const el = document.getElementById('takwimuAboutUsPage');
   if (el) {
-    fetch(
-      `${
-        PROPS.takwimu.url
-      }/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json`
-    )
+    fetch('/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json')
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {
@@ -119,8 +115,7 @@ renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
-// renderAboutPage();
+renderAboutUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();
-renderAboutUsPage();
