@@ -5,3 +5,13 @@
     <div id="takwimuSearchResults"></div>
   </div>
 {% endblock %}
+
+{% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script>
+    var takwimu = window.takwimu || {};
+    takwimu.search.searchQuery = {{ search_query}}
+    takwimu.search.searchResults = {{ search_results }}
+  </script>
+{% endblock body_javascript_extra %}
