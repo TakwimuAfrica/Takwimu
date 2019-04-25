@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles, Typography, Grid } from '@material-ui/core';
@@ -54,17 +54,38 @@ function DataContainer({ classes, featuredData, widget }) {
         featuredData.title
       }&initialSort=&statType=${featuredData.data_stat_type}"
 />`
-    : `${widget.raw_html}`;
+    : `${widget.value.raw_html}`;
+
+  const [images, setImages] = useState({});
+
+  const loadImage = id => {
+    fetch(`/api/v2/images/${id}`)
+      .then(response => response.json())
+      .then(json =>
+        setImages(prev => ({ ...prev, [json.id]: json.meta.download_url }))
+      );
+  };
 
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          {featuredData ? (
-            <IFrame featuredData={featuredData} />
-          ) : (
-            <div dangerouslySetInnerHTML={{ __html: widget.value.raw_html }} />
+          {featuredData && <IFrame featuredData={featuredData} />}
+
+          {widget.type === 'html' && (
+            <div
+              style={{ width: 'inherit' }}
+              dangerouslySetInnerHTML={{ __html: widget.value.raw_html }}
+            />
           )}
+
+          {widget.type === 'entities' &&
+            widget.value.entities.map(entity => {
+              if (!images[entity.image]) {
+                loadImage(entity.image);
+              }
+              return entity.image && <img alt="" src={images[entity.image]} />;
+            })}
           <DataActions
             onDownload={() => {
               const iframe = document.getElementById(

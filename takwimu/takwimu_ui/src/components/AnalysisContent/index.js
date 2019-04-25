@@ -28,7 +28,7 @@ const styles = {
   },
   dataContainer: {
     margin: '0.625rem',
-    maxWidth: '27.813rem'
+    minWidth: 'min-content'
   }
 };
 
