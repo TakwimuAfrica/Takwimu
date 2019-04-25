@@ -22,8 +22,8 @@ class Command(BaseCommand):
         self.stdout.write(topic_search.es_index + ": Starting rebuild")
         self.stdout.write("Ensure that the server is running on port 8000")
         self.index_hurumap(topic_search)
-        # self.index_topics(ProfileSectionPage.objects.live(), topic_search)
-        # self.index_topics(ProfilePage.objects.live(), topic_search)
+        self.index_topics(ProfileSectionPage.objects.live(), topic_search)
+        self.index_topics(ProfilePage.objects.live(), topic_search)
 
     def index_topics(self, queryset, search_backend):
         for i in queryset:
@@ -35,55 +35,51 @@ class Command(BaseCommand):
                 topic_id = topic['id']
                 title = topic['value'].get('title', '')
                 topic_summary = topic['value'].get('summary', '')
-
-
-            for topic in i.body.stream_data:
-                topic_id = topic['id']
-                title = topic['value'].get('title', '')
                 topic_body = topic['value'].get('body', '')
-                topic_summary = topic['value'].get('summary', '')
-                body = '\n'.join([topic_summary, topic_body])
-                metadata = ''
+                for k in topic_body:
+                    if k['type'] == 'text':
+                        text = k.get('value', '')
+                        body = '\n'.join([topic_summary, text])
+                        metadata = ''
+                        _, outcome = search_backend.add_to_index(topic_id,
+                                                                 'topic',
+                                                                 country,
+                                                                 category,
+                                                                 title,
+                                                                 body,
+                                                                 metadata,
+                                                                 parent_page_id,
+                                                                 parent_page_type,
+                                                                 'Analysis'
+                                                                 )
+                        self.stdout.write(
+                            search_backend.es_index + ": Indexing topic '%s result %s'" % (
+                                topic_id,
+                                outcome,
+                            ))
 
-                _, outcome = search_backend.add_to_index(topic_id,
-                                                         'topic',
-                                                         country,
-                                                         category,
-                                                         title,
-                                                         body,
-                                                         metadata,
-                                                         parent_page_id,
-                                                         parent_page_type,
-                                                         'Analysis'
-                                                         )
-                self.stdout.write(
-                    search_backend.es_index + ": Indexing topic '%s result %s'" % (
-                        topic_id,
-                        outcome,
-                    ))
-
-                indicators = topic['value'].get('indicators', '')
-                for indicator in indicators:
-                    for widget in indicator['value']['widgets']:
-                        data = get_widget_data(widget)
-                        if data:
-                            _, outcome = search_backend.add_to_index(
-                                data['id'],
-                                'indicator_widget',
-                                country,
-                                category,
-                                data['title'],
-                                data['body'],
-                                data['metadata'],
-                                parent_page_id,
-                                parent_page_type,
-                                'Data'
-                            )
-                            self.stdout.write(
-                                search_backend.es_index + ": Indexing widget '%s result %s'" % (
+                    elif k['type'] == 'indicator':
+                        indicator = k.get('value', [])
+                        for widget in indicator['widget']:
+                            data = get_widget_data(widget)
+                            if data:
+                                _, outcome = search_backend.add_to_index(
                                     data['id'],
-                                    outcome,
-                                ))
+                                    'indicator_widget',
+                                    country,
+                                    category,
+                                    data['title'],
+                                    data['body'],
+                                    data['metadata'],
+                                    parent_page_id,
+                                    parent_page_type,
+                                    'Data'
+                                )
+                                self.stdout.write(
+                                    search_backend.es_index + ": Indexing widget '%s result %s'" % (
+                                        data['id'],
+                                        outcome,
+                                    ))
 
     def index_hurumap(self, search_backend):
         options = webdriver.ChromeOptions()
@@ -92,8 +88,9 @@ class Command(BaseCommand):
 
         server_url = os.getenv('HURUMAP_URL', 'http://localhost:8000')
 
-        if not server_url.endswith('/'):
-            server_url += '/'
+        if server_url.endswith('/'):
+            # remove trailing slash
+            server_url = server_url[:-1]
 
         urls = {'Kenya': 'profiles/country-KE-kenya/',
                 'Uganda': 'profiles/country-UG-uganda/',
@@ -146,8 +143,7 @@ class Command(BaseCommand):
                                                              category='',
                                                              title=title,
                                                              body=f"{labels} {qualifiers}",
-                                                             metadata={
-                                                                 'url': link},
+                                                             metadata=link,
                                                              parent_page_id=None,
                                                              parent_page_type=None,
                                                              result_type='Data')
