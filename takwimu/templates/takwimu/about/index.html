@@ -2,11 +2,16 @@
 {% load wagtailcore_tags static jsonify %}
 
 {% block content %}
+  <div id="takwimuAboutUsPage" />
+
+  {% comment %}
   <div id='takwimuServices'></div>
   <div id='takwimuFAQ'></div>
   <div id='takwimuWhereToNext'></div>
   <div id='takwimuRelatedContent'></div>
+  {% endcomment %}
 {% endblock %}
+
 {% block body_javascript_extra %}
   {{ block.super }}
 
