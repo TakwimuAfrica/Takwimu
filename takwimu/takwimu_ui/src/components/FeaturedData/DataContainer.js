@@ -37,6 +37,13 @@ const styles = theme => ({
   description: {
     color: theme.palette.data.main,
     marginLeft: '1.25rem'
+  },
+  indicatorTitle: {
+    fontFamily: '"Roboto", sans-serif',
+    fontSize: '1.25rem',
+    fontWeight: 'bold',
+    lineHeight: 1.2,
+    marginBottom: '0.625rem'
   }
 });
 
@@ -98,28 +105,35 @@ function DataContainer({ key, classes, featuredData, widget }) {
           {featuredData && <IFrame featuredData={featuredData} />}
 
           {widget.type === 'html' && (
-            <div
-              style={{ width: 'inherit' }}
-              dangerouslySetInnerHTML={{ __html: widget.value.raw_html }}
-            />
+            <div style={{ width: 'min-content', minWidth: '25rem' }}>
+              <Typography align="center" className={classes.indicatorTitle}>
+                {widget.value.title}
+              </Typography>
+              <Typography
+                dangerouslySetInnerHTML={{ __html: widget.value.raw_html }}
+              />
+            </div>
           )}
 
           {widget.type === 'entities' &&
-            widget.value.entities.map(
-              entity =>
-                entity.image && (
-                  <div style={{ width: 'inherit' }}>
-                    <img alt="" src={images[entity.image]} />
-                    <Typography
-                      style={{ height: '250px', overflow: 'scroll' }}
-                      dangerouslySetInnerHTML={{ __html: entity.description }}
-                    />
-                  </div>
-                )
-            )}
+            widget.value.entities.map(entity => (
+              <div style={{ width: '25rem' }}>
+                <Typography align="center" className={classes.indicatorTitle}>
+                  {widget.value.title}
+                </Typography>
+                {entity.image && <img alt="" src={images[entity.image]} />}
+                <Typography
+                  style={{ height: '250px', overflow: 'scroll' }}
+                  dangerouslySetInnerHTML={{ __html: entity.description }}
+                />
+              </div>
+            ))}
 
           {widget.type === 'document' && (
             <div style={{ width: '25rem' }}>
+              <Typography align="center" className={classes.indicatorTitle}>
+                {widget.value.title}
+              </Typography>
               {documents[widget.value.document] && (
                 <PDF scale={0.65} file={documents[widget.value.document]} />
               )}
