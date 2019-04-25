@@ -18,8 +18,8 @@ function SearchResults({ classes, takwimu: { search } }) {
   return (
     <Section classes={{ root: classes.root }}>
       <Typography variant="h3">Search Results</Typography>
-      <SearchInput searchQuery={searchQuery} />
-      <SearchResultsContainer searchResults={searchResults} />
+      <SearchInput query={searchQuery} />
+      <SearchResultsContainer results={searchResults} />
     </Section>
   );
 }

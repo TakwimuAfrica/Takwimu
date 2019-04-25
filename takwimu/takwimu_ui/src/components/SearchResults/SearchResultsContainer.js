@@ -99,13 +99,17 @@ class SearchResultsContainer extends React.Component {
   }
 
   render() {
-    const { classes } = this.props;
-    const resultItems = this.results.map(result => (
+    const {
+      classes,
+      results: { items }
+    } = this.props;
+    const resultItems = items.map(result => (
       <SearchResultItem
-        resultType={result.resultType}
+        resultType="Analysis"
         country={result.country}
-        title={result.title}
-        summary={result.summary}
+        link={result.url}
+        title={result.dataPoint.title}
+        summary={result.dataPoint.summary}
         key={result.id}
       />
     ));
@@ -116,11 +120,15 @@ class SearchResultsContainer extends React.Component {
       </Link>
     ));
 
+    let resultIndex = '';
+    if (items.length > 10) {
+      resultIndex = 'Results 1 - 10 of ';
+    }
     return (
       <div className={classes.root}>
         <Grid className={classes.resultsFilter}>
           <Typography item variant="body2" className={classes.showResult}>
-            Showing Results 1 - 10 of 100 results
+            {`Showing ${resultIndex}${items.length} results`}
           </Typography>
           <Grid item className={classes.filter}>
             <Typography
@@ -158,7 +166,8 @@ class SearchResultsContainer extends React.Component {
 }
 
 SearchResultsContainer.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  results: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(SearchResultsContainer);

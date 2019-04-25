@@ -251,7 +251,11 @@ class SearchView(TemplateView):
                 id = result['content_id']
                 data_point = self.topics_widgets_map.get(id)
 
-                result['data_point'] = data_point
+                result['dataPoint'] =  {}
+                result['dataPoint']['title'] = data_point.value['title']
+                if result['content_type'] == 'topic':
+                    result['dataPoint']['summary'] = data_point.value['summary']
+
                 result['url'] = page.get_url(request)
                 self.items.append(result)
 

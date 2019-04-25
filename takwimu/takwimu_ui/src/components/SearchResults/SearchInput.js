@@ -13,8 +13,8 @@ const styles = theme => ({
     width: '100%',
     backgroundColor: '#f6f6f6',
     borderStyle: 'None',
-    paddingBottom: '1.0625rem',
-    paddingTop: '1.125rem',
+    paddingBottom: '1.5rem',
+    paddingTop: '1.5rem',
     paddingLeft: '2.0625rem',
     paddingRight: '2.4375rem',
     color: theme.palette.data.main,
@@ -25,14 +25,14 @@ const styles = theme => ({
   }
 });
 
-function SearchInput({ classes, searchQuery }) {
+function SearchInput({ classes, query }) {
   return (
     <div className={classes.root}>
       <Input
         id="searchInput"
-        className={classes.searchInput}
+        classes={{ root: classes.searchInput }}
         disableUnderline
-        placeholder={searchQuery}
+        placeholder={query}
         endAdornment={
           <InputAdornment position="end">
             <SearchIcon
@@ -49,7 +49,7 @@ function SearchInput({ classes, searchQuery }) {
 
 SearchInput.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  searchQuery: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(SearchInput);
