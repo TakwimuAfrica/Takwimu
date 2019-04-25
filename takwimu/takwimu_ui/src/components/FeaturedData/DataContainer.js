@@ -93,7 +93,15 @@ function DataContainer({ classes, featuredData, widget }) {
           {widget.type === 'entities' &&
             widget.value.entities.map(
               entity =>
-                entity.image && <img alt="" src={images[entity.image]} />
+                entity.image && (
+                  <div>
+                    <img alt="" src={images[entity.image]} />
+                    <Typography
+                      style={{ height: '250px', overflow: 'scroll' }}
+                      dangerouslySetInnerHTML={{ __html: entity.description }}
+                    />
+                  </div>
+                )
             )}
           <DataActions
             onDownload={() => {
