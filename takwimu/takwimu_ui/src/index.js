@@ -33,6 +33,7 @@ const renderApp = (Component, id, props = PROPS) => {
     ReactDOM.render(<App {...props} />, el);
   }
 };
+console.log(window.takwimu);
 
 const renderHomepage = () => {
   // check for anything that *must* be present on this page

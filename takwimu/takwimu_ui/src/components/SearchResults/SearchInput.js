@@ -1,6 +1,8 @@
 import React from 'react';
-import { withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+import { withStyles, Input, InputLabel } from '@material-ui/core';
+import SearchIcon from '@material-ui/icons/Search';
+import InputAdornment from '@material-ui/core/InputAdornment';
 
 const styles = theme => ({
   root: {
@@ -17,16 +19,27 @@ const styles = theme => ({
   }
 });
 
-function SearchInput({ classes }) {
+function SearchInput({ classes, searchQuery }) {
   return (
     <div className={classes.root}>
-      <input className={classes.searchInput} />
+      <InputLabel htmlFor="searchInput">{searchQuery}</InputLabel>
+      <Input
+        id="searchInput"
+        className={classes.searchInput}
+        endAdornment={
+          <InputAdornment position="end">
+            <SearchIcon />
+          </InputAdornment>
+        }
+        placeHolder={searchQuery}
+      />
     </div>
   );
 }
 
 SearchInput.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  searchQuery: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(SearchInput);
