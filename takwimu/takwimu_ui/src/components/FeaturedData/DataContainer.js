@@ -6,6 +6,7 @@ import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
 import PDF from 'react-pdf-js';
+import domtoimage from 'dom-to-image';
 import DataActions from './DataActions';
 import IFrame from './IFrame';
 
@@ -47,7 +48,7 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ key, classes, featuredData, widget }) {
+function DataContainer({ id, classes, featuredData, widget }) {
   const [images, setImages] = useState({});
   const [documents, setDocuments] = useState({});
 
@@ -99,17 +100,20 @@ function DataContainer({ key, classes, featuredData, widget }) {
     : `${widget.value.raw_html}`;
 
   return (
-    <div key={key} className={classes.root}>
+    <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           {featuredData && <IFrame featuredData={featuredData} />}
 
           {widget.type === 'html' && (
-            <div style={{ width: 'min-content', minWidth: '25rem' }}>
+            <div
+              id={`data-indicator-${id}`}
+              style={{ width: 'min-content', minWidth: '25rem' }}
+            >
               <Typography align="center" className={classes.indicatorTitle}>
                 {widget.value.title}
               </Typography>
-              <Typography
+              <div
                 dangerouslySetInnerHTML={{ __html: widget.value.raw_html }}
               />
             </div>
@@ -117,20 +121,20 @@ function DataContainer({ key, classes, featuredData, widget }) {
 
           {widget.type === 'entities' &&
             widget.value.entities.map(entity => (
-              <div style={{ width: '25rem' }}>
+              <div
+                id={`data-indicator-${id}`}
+                style={{ width: '25rem', height: '250px', overflow: 'scroll' }}
+              >
                 <Typography align="center" className={classes.indicatorTitle}>
                   {widget.value.title}
                 </Typography>
                 {entity.image && <img alt="" src={images[entity.image]} />}
-                <Typography
-                  style={{ height: '250px', overflow: 'scroll' }}
-                  dangerouslySetInnerHTML={{ __html: entity.description }}
-                />
+                <div dangerouslySetInnerHTML={{ __html: entity.description }} />
               </div>
             ))}
 
           {widget.type === 'document' && (
-            <div style={{ width: '25rem' }}>
+            <div id={`data-indicator-${id}`} style={{ width: '25rem' }}>
               <Typography align="center" className={classes.indicatorTitle}>
                 {widget.value.title}
               </Typography>
@@ -141,19 +145,36 @@ function DataContainer({ key, classes, featuredData, widget }) {
           )}
           <DataActions
             onDownload={() => {
-              const iframe = document.getElementById(
-                `cr-embed-country-${featuredData.country}-${
-                  featuredData.data_id
-                }`
-              );
-              iframe.contentWindow.domtoimage
-                .toJpeg(iframe.contentDocument.body)
-                .then(dataUrl => {
-                  const link = document.createElement('a');
-                  link.download = `${featuredData.title}.jpeg`;
-                  link.href = dataUrl;
-                  link.click();
-                });
+              if (featuredData) {
+                const iframe = document.getElementById(
+                  `cr-embed-country-${featuredData.country}-${
+                    featuredData.data_id
+                  }`
+                );
+                iframe.contentWindow.domtoimage
+                  .toJpeg(iframe.contentDocument.body)
+                  .then(dataUrl => {
+                    const link = document.createElement('a');
+                    link.download = `${featuredData.title}.jpeg`;
+                    link.href = dataUrl;
+                    link.click();
+                  });
+              } else {
+                const el = document.getElementById(`data-indicator-${id}`);
+                const temp = el.style.height;
+                el.style.height = 'unset';
+                domtoimage
+                  .toPng(el)
+                  .then(dataUrl => {
+                    const link = document.createElement('a');
+                    link.download = `${widget.value.title}.png`;
+                    link.href = dataUrl;
+                    link.click();
+                  })
+                  .finally(() => {
+                    el.style.height = temp;
+                  });
+              }
             }}
             embedCode={embedCode}
           />
@@ -179,14 +200,14 @@ function DataContainer({ key, classes, featuredData, widget }) {
 }
 
 DataContainer.propTypes = {
-  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
   featuredData: PropTypes.shape({}),
   widget: PropTypes.shape({})
 };
 
 DataContainer.defaultProps = {
-  key: '',
+  id: '',
   featuredData: null,
   widget: null
 };

@@ -87,6 +87,7 @@ class AnalysisContent extends React.Component {
                 {c.type === 'indicator' && (
                   <DataContainer
                     key={c.id}
+                    id={c.id}
                     classes={{ root: classes.dataContainer }}
                     widget={c.value.widget}
                   />
