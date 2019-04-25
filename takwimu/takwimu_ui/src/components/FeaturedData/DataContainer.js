@@ -119,9 +119,9 @@ function DataContainer({ key, classes, featuredData, widget }) {
             )}
 
           {widget.type === 'document' && (
-            <div style={{ width: 'inherit' }}>
+            <div style={{ width: '25rem' }}>
               {documents[widget.value.document] && (
-                <PDF file={documents[widget.value.document]} />
+                <PDF scale={0.65} file={documents[widget.value.document]} />
               )}
             </div>
           )}
