@@ -1,15 +1,16 @@
 import React from 'react';
-import { withStyles, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import RichTextSection from '../RichTextSection';
-import Services from '../Services';
-import ContentSection from '../ContentSection';
-import RelatedContent from '../RelatedContent';
+import { withStyles, Typography } from '@material-ui/core';
+
 import AboutUsContentNav from './AboutUsContentNav';
 import { About as AboutWhereToNext } from '../Next';
+import ContentNavigation from './ContentNavigation';
+import ContentSection from '../ContentSection';
 import Faqs from '../Faqs';
-import PageNav from './PageNav';
+import RelatedContent from '../RelatedContent';
+import RichTextSection from '../RichTextSection';
+import Services from '../Services';
 
 const styles = theme => ({
   root: {
@@ -66,7 +67,7 @@ class AboutContent extends React.Component {
         <Typography variant="h2" className={classes.title}>
           About Us
         </Typography>
-        <PageNav
+        <ContentNavigation
           contentHeadings={contentHeadings}
           current={current}
           changeActiveContent={this.showContent}
