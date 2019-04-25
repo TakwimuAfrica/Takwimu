@@ -73,21 +73,26 @@ class AnalysisContent extends React.Component {
           <Actions />
 
           <Grid container direction="row">
-            {content.body[topicIndex].value.body.map(c =>
-              c.type === 'text' ? (
-                <Typography
-                  className={classes.body}
-                  dangerouslySetInnerHTML={{
-                    __html: c.value
-                  }}
-                />
-              ) : (
-                <DataContainer
-                  classes={{ root: classes.dataContainer }}
-                  widget={c.value.widget}
-                />
-              )
-            )}
+            {content.body[topicIndex].value.body.map(c => (
+              <Fragment>
+                {c.type === 'text' && (
+                  <Typography
+                    key={c.id}
+                    className={classes.body}
+                    dangerouslySetInnerHTML={{
+                      __html: c.value
+                    }}
+                  />
+                )}
+                {c.type === 'indicator' && (
+                  <DataContainer
+                    key={c.id}
+                    classes={{ root: classes.dataContainer }}
+                    widget={c.value.widget}
+                  />
+                )}
+              </Fragment>
+            ))}
           </Grid>
 
           <Actions hideLastUpdated />
