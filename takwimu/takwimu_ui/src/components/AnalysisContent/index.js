@@ -65,12 +65,17 @@ class AnalysisContent extends React.Component {
             showContent={this.showContent}
           />
           <Actions />
-          <Typography
-            className={classes.body}
-            dangerouslySetInnerHTML={{
-              __html: content.body[topicIndex].value.body
-            }}
-          />
+          {content.body[topicIndex].value.body.map(c =>
+            c.type === 'text' ? (
+              <Typography
+                className={classes.body}
+                dangerouslySetInnerHTML={{
+                  __html: c.value
+                }}
+              />
+            ) : null
+          )}
+
           <Actions hideLastUpdated />
           <OtherInfo
             labelText="Other topics in"
