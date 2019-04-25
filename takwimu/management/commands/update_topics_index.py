@@ -143,10 +143,11 @@ class Command(BaseCommand):
                                                              category='',
                                                              title=title,
                                                              body=f"{labels} {qualifiers}",
-                                                             metadata=link,
+                                                             metadata='',
                                                              parent_page_id=None,
                                                              parent_page_type=None,
-                                                             result_type='Data')
+                                                             result_type='Data',
+                                                             link=link)
 
                     self.stdout.write(
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
