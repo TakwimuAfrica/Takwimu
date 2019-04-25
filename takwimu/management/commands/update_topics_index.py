@@ -34,6 +34,12 @@ class Command(BaseCommand):
             for topic in i.body.stream_data:
                 topic_id = topic['id']
                 title = topic['value'].get('title', '')
+                topic_summary = topic['value'].get('summary', '')
+
+
+            for topic in i.body.stream_data:
+                topic_id = topic['id']
+                title = topic['value'].get('title', '')
                 topic_body = topic['value'].get('body', '')
                 topic_summary = topic['value'].get('summary', '')
                 body = '\n'.join([topic_summary, topic_body])
