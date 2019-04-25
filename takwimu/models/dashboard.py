@@ -338,9 +338,15 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
 
 
 class IndicatorBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False)
-    widgets = IndicatorWidgetsBlock(required=False)
+    title = blocks.CharBlock()
+    widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
 
+    # Since this block will only have only one of widget type, there is no need
+    # to return a list; return the first item
+    def get_api_representation(self, value, context=None):
+        representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
+        representation['widget'] = representation['widget'][0]
+        return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
@@ -350,10 +356,9 @@ class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.RichTextBlock(required=False)
-    body = blocks.RichTextBlock(required=False)
-
-    indicators = blocks.StreamBlock([
-        ('indicators', IndicatorBlock(required=False))
+    body = blocks.StreamBlock([
+        ('text', blocks.RichTextBlock(required=False)),
+        ('indicator', IndicatorBlock(required=False))
     ], required=False)
 
     def js_initializer(self):
@@ -501,9 +506,6 @@ class ProfileSectionPage(ModelMeta, Page):
         context = super(ProfileSectionPage, self).get_context(request)
 
         slug = self.get_parent().slug
-        print('\n\n\n\n\n\n\n\n\n')
-        print(slug)
-        print('\n\n\n\n\n\n\n\n\n')
         for code, names in COUNTRIES.items():
             if slug == slugify(names['name']):
                 context['country'] = {
@@ -513,9 +515,6 @@ class ProfileSectionPage(ModelMeta, Page):
                     'slug': slugify(names['name'])
                 }
                 break
-        print('\n\n\n\n\n\n\n\n\n')
-        print(context['country'])
-        print('\n\n\n\n\n\n\n\n\n')
 
         context['meta'] = self.as_meta(request)
 
@@ -936,22 +935,21 @@ class IndexPage(ModelMeta, Page):
                  serializer=serializers.DictField(child=serializers.CharField(),
                                                   source='get_making_of_takwimu')),
         APIField('latest_news_stories',
-                 serializer=serializers.DictField(child=serializers.CharField(),
-                                                  source='get_latest_news_stories')),
+                 serializer=serializers.DictField(source='get_latest_news_stories')),
     ]
 
     def get_context(self, request, *args, **kwargs):
         country_profile_settings = CountryProfilesSetting.for_site(
             request.site)
-        published_status = country_profile_settings.__dict__
+        social_media_settings = SocialMediaSetting.for_site(request.site)
 
         context = super(IndexPage, self).get_context(request, *args, **kwargs)
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         context.update(wagtail_settings(request))
-        context.update(get_takwimu_countries(published_status))
-        context.update(get_takwimu_stories())
+        context.update(get_takwimu_countries(country_profile_settings.__dict__))
+        context.update(get_takwimu_stories(social_media_settings, return_dict=True))
         context['meta'] = self.as_meta(request)
         return context
 
@@ -977,8 +975,12 @@ class IndexPage(ModelMeta, Page):
         }
 
     def get_latest_news_stories(self):
+        social_media_settings = SocialMediaSetting.for_site(self.get_site())
+        stories = get_takwimu_stories(social_media_settings, True)
+
         return {
             'description': self.latest_news_stories_description,
+            'stories': stories['stories_latest'],
         }
 
 #
