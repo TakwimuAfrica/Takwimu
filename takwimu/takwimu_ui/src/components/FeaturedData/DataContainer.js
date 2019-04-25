@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
@@ -38,26 +39,32 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ classes, featuredData }) {
-  const embedCode = `<iframe
+function DataContainer({ classes, featuredData, widget }) {
+  const embedCode = featuredData
+    ? `<iframe
     allowFullScreen
     title="${featuredData.title}"
     src="/embed/iframe.html?geoID=country-${
       featuredData.country
     }&geoVersion=2009&chartDataID=${
-    featuredData.data_id
-  }&dataYear=2011&chartType=${
-    featuredData.chart_type
-  }&chartHeight=300&chartTitle=${featuredData.title}&initialSort=&statType=${
-    featuredData.data_stat_type
-  }"
-/>`;
+        featuredData.data_id
+      }&dataYear=2011&chartType=${
+        featuredData.chart_type
+      }&chartHeight=300&chartTitle=${
+        featuredData.title
+      }&initialSort=&statType=${featuredData.data_stat_type}"
+/>`
+    : `${widget.raw_html}`;
 
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          <IFrame featuredData={featuredData} />
+          {featuredData ? (
+            <IFrame featuredData={featuredData} />
+          ) : (
+            <div dangerouslySetInnerHTML={{ __html: widget.value.raw_html }} />
+          )}
           <DataActions
             onDownload={() => {
               const iframe = document.getElementById(
@@ -78,25 +85,34 @@ function DataContainer({ classes, featuredData }) {
           />
         </Grid>
       </div>
-      <div className={classes.descriptionContainer}>
-        <Grid container direction="row" wrap="nowrap">
-          <Grid item>
-            <ArrowDropUp color="primary" />
+
+      {featuredData && (
+        <div className={classes.descriptionContainer}>
+          <Grid container direction="row" wrap="nowrap">
+            <Grid item>
+              <ArrowDropUp color="primary" />
+            </Grid>
+            <Grid item>
+              <Typography variant="caption" className={classes.description}>
+                {featuredData.description}
+              </Typography>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Typography variant="caption" className={classes.description}>
-              {featuredData.description}
-            </Typography>
-          </Grid>
-        </Grid>
-      </div>
+        </div>
+      )}
     </div>
   );
 }
 
 DataContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  featuredData: PropTypes.shape({}).isRequired
+  featuredData: PropTypes.shape({}),
+  widget: PropTypes.shape({})
+};
+
+DataContainer.defaultProps = {
+  featuredData: null,
+  widget: null
 };
 
 export default withStyles(styles)(DataContainer);

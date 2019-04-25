@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, withStyles } from '@material-ui/core';
+import { Typography, withStyles, Grid } from '@material-ui/core';
 
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
@@ -10,6 +10,8 @@ import OtherInfoNav from './OtherInfoNav';
 import OtherInfo from './OtherInfo';
 import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
+
+import DataContainer from '../FeaturedData/DataContainer';
 
 const styles = {
   root: {
@@ -23,6 +25,10 @@ const styles = {
   },
   readNextContainer: {
     paddingBottom: '2.3125rem'
+  },
+  dataContainer: {
+    margin: '0.625rem',
+    maxWidth: '27.813rem'
   }
 };
 
@@ -65,16 +71,24 @@ class AnalysisContent extends React.Component {
             showContent={this.showContent}
           />
           <Actions />
-          {content.body[topicIndex].value.body.map(c =>
-            c.type === 'text' ? (
-              <Typography
-                className={classes.body}
-                dangerouslySetInnerHTML={{
-                  __html: c.value
-                }}
-              />
-            ) : null
-          )}
+
+          <Grid container direction="row">
+            {content.body[topicIndex].value.body.map(c =>
+              c.type === 'text' ? (
+                <Typography
+                  className={classes.body}
+                  dangerouslySetInnerHTML={{
+                    __html: c.value
+                  }}
+                />
+              ) : (
+                <DataContainer
+                  classes={{ root: classes.dataContainer }}
+                  widget={c.value.widget}
+                />
+              )
+            )}
+          </Grid>
 
           <Actions hideLastUpdated />
           <OtherInfo
