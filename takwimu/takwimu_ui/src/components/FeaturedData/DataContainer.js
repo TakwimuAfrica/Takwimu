@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
+import PDF from 'react-pdf-js';
 import DataActions from './DataActions';
 import IFrame from './IFrame';
 
@@ -39,12 +40,13 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ classes, featuredData, widget }) {
+function DataContainer({ key, classes, featuredData, widget }) {
   const [images, setImages] = useState({});
+  const [documents, setDocuments] = useState({});
 
   useEffect(() => {
     if (widget.type === 'entities') {
-      widget.value.entities.map(
+      widget.value.entities.forEach(
         entity =>
           entity.image &&
           fetch(`/api/v2/images/${entity.image}`)
@@ -56,6 +58,18 @@ function DataContainer({ classes, featuredData, widget }) {
               }))
             )
       );
+    }
+    if (widget.type === 'document') {
+      if (widget.value.document) {
+        fetch(`/api/v2/documents/${widget.value.document}`)
+          .then(response => response.json())
+          .then(json =>
+            setDocuments(prev => ({
+              ...prev,
+              [json.id]: json.meta.download_url
+            }))
+          );
+      }
     }
 
     return () => {};
@@ -78,7 +92,7 @@ function DataContainer({ classes, featuredData, widget }) {
     : `${widget.value.raw_html}`;
 
   return (
-    <div className={classes.root}>
+    <div key={key} className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           {featuredData && <IFrame featuredData={featuredData} />}
@@ -94,7 +108,7 @@ function DataContainer({ classes, featuredData, widget }) {
             widget.value.entities.map(
               entity =>
                 entity.image && (
-                  <div>
+                  <div style={{ width: 'inherit' }}>
                     <img alt="" src={images[entity.image]} />
                     <Typography
                       style={{ height: '250px', overflow: 'scroll' }}
@@ -103,6 +117,14 @@ function DataContainer({ classes, featuredData, widget }) {
                   </div>
                 )
             )}
+
+          {widget.type === 'document' && (
+            <div style={{ width: 'inherit' }}>
+              {documents[widget.value.document] && (
+                <PDF file={documents[widget.value.document]} />
+              )}
+            </div>
+          )}
           <DataActions
             onDownload={() => {
               const iframe = document.getElementById(
@@ -143,12 +165,14 @@ function DataContainer({ classes, featuredData, widget }) {
 }
 
 DataContainer.propTypes = {
+  key: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   classes: PropTypes.shape({}).isRequired,
   featuredData: PropTypes.shape({}),
   widget: PropTypes.shape({})
 };
 
 DataContainer.defaultProps = {
+  key: '',
   featuredData: null,
   widget: null
 };

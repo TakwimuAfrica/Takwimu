@@ -9,6 +9,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
+    "react-pdf-js": "^4.0.2",
     "react-scripts": "2.1.8"
   },
   "devDependencies": {
