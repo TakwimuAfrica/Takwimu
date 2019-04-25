@@ -11,13 +11,13 @@ const styles = theme => ({
   searchResultsList: {
     paddingTop: '1.5rem',
     paddingBottom: '3rem',
-    marginLeft: '1.5rem',
-    marginRight: '1.5rem'
+    marginLeft: '2.0625rem',
+    marginRight: '4.3125rem'
   },
   resultsFilter: {
     paddingTop: '2rem',
     paddingBottom: '2rem',
-    marginLeft: '1.5rem',
+    marginLeft: '2.0625rem',
     display: 'flex'
   },
   filter: {
