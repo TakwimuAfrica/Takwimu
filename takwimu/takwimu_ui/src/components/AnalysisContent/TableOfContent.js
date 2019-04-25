@@ -1,41 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, MenuList, Link } from '@material-ui/core';
 
-import classNames from 'classnames';
+import { withStyles } from '@material-ui/core';
 
 import { CountrySelector } from '../ProfileDetail';
-
-import activePageIcon from '../../assets/images/active-page.svg';
+import TableOfContent from '../TableOfContent';
 
 const styles = theme => ({
-  root: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: '34rem',
-    padding: '1.438rem 1.438rem 1.438rem 0',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    [theme.breakpoints.up('md')]: {
-      position: 'fixed',
-      width: '14.375rem'
-    }
-  },
-  label: {
+  root: {},
+  countrySelectorLabel: {
     fontSize: theme.typography.caption.fontSize
-  },
-  activePageIndicator: {
-    marginLeft: '-1.5rem',
-    marginRight: '1rem'
-  },
-  listItem: {
-    decorator: 'none',
-    padding: '0.625rem 0'
-  },
-  activeLink: {
-    textDecoration: 'underline'
   }
 });
 
@@ -56,40 +30,19 @@ function AnalysisTableOfContent({
   };
 
   return (
-    <div className={classes.root}>
+    <TableOfContent
+      classes={{ root: classes.root }}
+      content={content}
+      current={current}
+      generateHref={generateHref}
+      onChange={onChangeContent}
+    >
       <CountrySelector
         country={country}
         context="analysis"
-        classes={{ label: classes.label }}
+        classes={{ label: classes.countrySelectorLabel }}
       />
-      <MenuList style={{ width: '14.188rem' }}>
-        {content.map((c, index) => (
-          <li key={c.id} className={classes.listItem}>
-            <img
-              alt=""
-              src={activePageIcon}
-              className={classes.activePageIndicator}
-              hidden={current !== index}
-            />
-            <Link
-              className={classNames({
-                [classes.activeLink]: current !== index
-              })}
-              href={generateHref(index)}
-              color={current !== index ? 'primary' : 'textPrimary'}
-              onClick={e => {
-                e.preventDefault();
-
-                window.history.pushState(null, '', generateHref(index));
-                onChangeContent(index);
-              }}
-            >
-              {c.title}
-            </Link>
-          </li>
-        ))}
-      </MenuList>
-    </div>
+    </TableOfContent>
   );
 }
 

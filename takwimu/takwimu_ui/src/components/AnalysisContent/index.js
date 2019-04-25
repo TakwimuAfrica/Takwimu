@@ -6,8 +6,8 @@ import { Typography, withStyles } from '@material-ui/core';
 
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
+import ContentNavigation from './ContentNavigation';
 import OtherInfoNav from './OtherInfoNav';
-import OtherInfo from './OtherInfo';
 import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
 
@@ -57,7 +57,7 @@ class AnalysisContent extends React.Component {
           <Typography className={classes.title} variant="h2">
             {content.body[topicIndex].value.title}
           </Typography>
-          <OtherInfo
+          <ContentNavigation
             labelText="Other topics in"
             labelTextStrong={content.title}
             current={topicIndex}
@@ -72,7 +72,7 @@ class AnalysisContent extends React.Component {
             }}
           />
           <Actions hideLastUpdated />
-          <OtherInfo
+          <ContentNavigation
             labelText="Other topics in"
             labelTextStrong={content.title}
             current={topicIndex}
@@ -86,7 +86,7 @@ class AnalysisContent extends React.Component {
             showContent={this.showContent}
           />
           <ViewCountry takwimu={takwimu} />
-          <RelatedContent content={content.related_content} />
+          <RelatedContent relatedContent={content.related_content} />
         </div>
       </Fragment>
     );
