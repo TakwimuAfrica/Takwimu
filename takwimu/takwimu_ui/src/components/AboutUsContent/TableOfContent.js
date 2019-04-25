@@ -42,7 +42,7 @@ function AboutUsTableOfContent({
 AboutUsTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
-  contentHeadings: PropTypes.shape([]).isRequired,
+  contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   changeActiveContent: PropTypes.func.isRequired
 };
 

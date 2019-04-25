@@ -2,19 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Grid, Typography } from '@material-ui/core';
 
-import Section from '../Section';
+import RichTextSection from './RichTextSection';
+import ContentSection from './ContentSection';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '44.671875rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '59.5625rem'
-    }
-  },
+const styles = () => ({
+  root: {},
   serviceHeading: {
     fontWeight: 'bold',
     paddingTop: '2rem',
@@ -25,10 +17,16 @@ const styles = theme => ({
   }
 });
 
-function Services({ classes, services }) {
+function Services({ classes, services, ...props }) {
   return (
-    <Section title="Services" variant="h3" classes={{ root: classes.root }}>
-      <Typography variant="body1">{services.overview}</Typography>
+    <RichTextSection
+      title="Services"
+      value={services.overview}
+      variant="h3"
+      classes={{ root: classes.root }}
+      component={ContentSection}
+      {...props}
+    >
       <Grid className={classes.contentGrid}>
         {services.servicesList.map(service => (
           <React.Fragment key={service.title}>
@@ -48,7 +46,7 @@ function Services({ classes, services }) {
           </React.Fragment>
         ))}
       </Grid>
-    </Section>
+    </RichTextSection>
   );
 }
 

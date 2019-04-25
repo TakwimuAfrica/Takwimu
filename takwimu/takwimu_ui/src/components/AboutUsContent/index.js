@@ -2,9 +2,9 @@ import React from 'react';
 import { withStyles, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import AboutTakwimu from '../AboutTakwimu';
-import Methodology from '../Methodology';
+import RichTextSection from '../RichTextSection';
 import Services from '../Services';
+import ContentSection from '../ContentSection';
 import RelatedContent from '../RelatedContent';
 import AboutUsContentNav from './AboutUsContentNav';
 import { About as AboutWhereToNext } from '../Next';
@@ -21,12 +21,11 @@ const styles = theme => ({
   body: {
     padding: '0 19px'
   },
-  borderDiv: {
+  section: {
     marginTop: '3rem',
-    marginBottom: '3rem',
-    borderStyle: 'solid',
-    borderBottom: '4px',
-    borderColor: theme.palette.primary.main
+    padidngTop: '3rem',
+    padidngBottom: '1rem',
+    borderTop: `4px solid ${theme.palette.primary.main}`
   }
 });
 
@@ -72,14 +71,26 @@ class AboutContent extends React.Component {
           current={current}
           changeActiveContent={this.showContent}
         />
-        <div className={classes.borderDiv} id="about" />
-        <AboutTakwimu content={content} />
-        <div className={classes.borderDiv} id="methodology" />
-        <Methodology methodology={methodology} />
-        <div className={classes.borderDiv} id="services" />
-        <Services services={services} />
-        <div className={classes.borderDiv} id="faqs" />
-        <Faqs faqs={faqs} />
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title="About Takwimu"
+          value={content}
+          id="about"
+          component={ContentSection}
+        />
+        <RichTextSection
+          classes={{ root: classes.section }}
+          title="Methodology"
+          value={methodology}
+          id="methodology"
+          component={ContentSection}
+        />
+        <Services
+          classes={{ root: classes.section }}
+          services={services}
+          id="services"
+        />
+        <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
         <AboutWhereToNext socialMedia={socialMedia} />
         <RelatedContent relatedContent={relatedContent} />
       </React.Fragment>
@@ -94,9 +105,9 @@ AboutContent.propTypes = {
   faqs: PropTypes.shape({}).isRequired,
   services: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
-  relatedContent: PropTypes.shape([]).isRequired,
+  relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
-  contentHeadings: PropTypes.shape([]).isRequired,
+  contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   changeActiveContent: PropTypes.func.isRequired
 };
 

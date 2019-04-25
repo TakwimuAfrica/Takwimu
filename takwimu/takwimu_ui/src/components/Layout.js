@@ -19,8 +19,12 @@ const styles = theme => ({
   }
 });
 
-function Layout({ children, classes }) {
-  return <div className={classes.root}>{children}</div>;
+function Layout({ children, classes, ...props }) {
+  return (
+    <div className={classes.root} {...props}>
+      {children}
+    </div>
+  );
 }
 
 Layout.propTypes = {

@@ -2,36 +2,25 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Grid, Typography } from '@material-ui/core';
 
-import Section from '../Section';
+import ContentSection from '../ContentSection';
 import Faq from './Faq';
+import RichTextSection from '../RichTextSection';
 
-const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '44.671875rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '59.5625rem'
-    }
-  },
+const styles = () => ({
+  root: {},
   contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' }
 });
 
-function Faqs({ classes, faqs }) {
+function Faqs({ classes, faqs, ...props }) {
   return (
-    <Section
+    <RichTextSection
       title="Frequently Asked Questions"
+      value={faqs.overview}
       variant="h3"
       classes={{ root: classes.root }}
+      component={ContentSection}
+      {...props}
     >
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{
-          __html: faqs.overview
-        }}
-      />
       <Grid
         container
         className={classes.contentGrid}
@@ -49,7 +38,7 @@ function Faqs({ classes, faqs }) {
           </Faq>
         ))}
       </Grid>
-    </Section>
+    </RichTextSection>
   );
 }
 

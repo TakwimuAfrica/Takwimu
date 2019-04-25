@@ -87,7 +87,8 @@ AboutUsPage.propTypes = {
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({}).isRequired
     }).isRequired,
-    related_content: PropTypes.shape([]).isRequired
+    related_content: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+      .isRequired
   }).isRequired
 };
 
