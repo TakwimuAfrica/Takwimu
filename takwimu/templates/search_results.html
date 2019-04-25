@@ -1,4 +1,5 @@
 {% extends 'takwimu/_layouts/page.html' %}
+{% load jsonify staticfiles sass_tags %}
 
 {% block content %}
   <div class="container">
@@ -11,7 +12,10 @@
 
   <script>
     var takwimu = window.takwimu || {};
-    takwimu.search.searchQuery = {{ search_query}}
-    takwimu.search.searchResults = {{ search_results }}
+    var search = {};
+    search['searchQuery'] = '{{ search_query }}';
+    search['searchResults'] = {{ search_results | safe }};
+
+    takwimu.search = search;
   </script>
 {% endblock body_javascript_extra %}

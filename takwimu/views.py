@@ -267,8 +267,8 @@ class SearchView(TemplateView):
             },
             'search_results': {
                 'items': self.items,
-                'countries': self.countries.keys(),
-                'topics': self.topics.keys(),
+                'countries': list(self.countries.keys()),
+                'topics': list(self.topics.keys()),
             },
         })
 
