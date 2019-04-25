@@ -1,5 +1,8 @@
 FROM codeforafrica/hurumap:0.6.0
 
+# install chromedriver
+RUN apt-get install chromium-chromedriver
+
 # Set env variables used in this Dockerfile
 # HURUmap App and Django settings
 ENV HURUMAP_APP=takwimu

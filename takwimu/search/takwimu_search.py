@@ -120,7 +120,7 @@ class TakwimuTopicSearch():
 
     def add_to_index(self, content_id, content_type,
                      country, category, title, body, metadata,
-                     parent_page_id, parent_page_type):
+                     parent_page_id, parent_page_type, result_type=None):
         """
         - content_id
         - content_type
@@ -146,6 +146,7 @@ class TakwimuTopicSearch():
             'metadata': metadata,
             'parent_page_id': parent_page_id,
             'parent_page_type': parent_page_type,
+            'result_type': result_type,
         }
         result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
                                id=content_id)
