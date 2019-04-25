@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles, Typography, Grid } from '@material-ui/core';
@@ -40,6 +40,27 @@ const styles = theme => ({
 });
 
 function DataContainer({ classes, featuredData, widget }) {
+  const [images, setImages] = useState({});
+
+  useEffect(() => {
+    if (widget.type === 'entities') {
+      widget.value.entities.map(
+        entity =>
+          entity.image &&
+          fetch(`/api/v2/images/${entity.image}`)
+            .then(response => response.json())
+            .then(json =>
+              setImages(prev => ({
+                ...prev,
+                [json.id]: json.meta.download_url
+              }))
+            )
+      );
+    }
+
+    return () => {};
+  }, []);
+
   const embedCode = featuredData
     ? `<iframe
     allowFullScreen
@@ -56,16 +77,6 @@ function DataContainer({ classes, featuredData, widget }) {
 />`
     : `${widget.value.raw_html}`;
 
-  const [images, setImages] = useState({});
-
-  const loadImage = id => {
-    fetch(`/api/v2/images/${id}`)
-      .then(response => response.json())
-      .then(json =>
-        setImages(prev => ({ ...prev, [json.id]: json.meta.download_url }))
-      );
-  };
-
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
@@ -80,12 +91,10 @@ function DataContainer({ classes, featuredData, widget }) {
           )}
 
           {widget.type === 'entities' &&
-            widget.value.entities.map(entity => {
-              if (!images[entity.image]) {
-                loadImage(entity.image);
-              }
-              return entity.image && <img alt="" src={images[entity.image]} />;
-            })}
+            widget.value.entities.map(
+              entity =>
+                entity.image && <img alt="" src={images[entity.image]} />
+            )}
           <DataActions
             onDownload={() => {
               const iframe = document.getElementById(
