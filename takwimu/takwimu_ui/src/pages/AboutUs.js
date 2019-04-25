@@ -43,7 +43,7 @@ class AboutUsPage extends React.Component {
       takwimu: {
         content,
         methodology,
-        relatedContent,
+        related_content: relatedContent,
         faqs,
         services,
         settings: { socialMedia }
@@ -87,7 +87,7 @@ AboutUsPage.propTypes = {
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({}).isRequired
     }).isRequired,
-    relatedContent: PropTypes.shape([]).isRequired
+    related_content: PropTypes.shape([]).isRequired
   }).isRequired
 };
 
