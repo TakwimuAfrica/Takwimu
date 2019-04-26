@@ -84,6 +84,9 @@ class Command(BaseCommand):
     def index_hurumap(self, search_backend):
         options = webdriver.ChromeOptions()
         options.add_argument('headless')
+        # chrome can not be run as root, which is the case in docker
+        options.add_argument('no-sandbox')
+        options.add_argument('disable-gpu')
         browser = webdriver.Chrome(options=options)
 
         server_url = os.getenv('HURUMAP_URL', 'http://localhost:8000')
