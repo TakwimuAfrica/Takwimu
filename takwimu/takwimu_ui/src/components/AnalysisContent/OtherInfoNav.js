@@ -16,7 +16,7 @@ const styles = theme => ({
     height: '100px',
     display: 'flex',
     justifyContent: 'center',
-    zIndex: 1,
+    zIndex: 2, // Ensure its ontop (data continer actions has index 1)
     backgroundColor: theme.palette.primary.main
   },
   otherTopicLinks: {

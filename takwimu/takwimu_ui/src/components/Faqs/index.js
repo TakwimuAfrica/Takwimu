@@ -4,7 +4,6 @@ import { withStyles, Grid, Typography } from '@material-ui/core';
 
 import ContentSection from '../ContentSection';
 import Faq from './Faq';
-import RichTextSection from '../RichTextSection';
 
 const styles = () => ({
   root: {},
@@ -13,14 +12,19 @@ const styles = () => ({
 
 function Faqs({ classes, faqs, ...props }) {
   return (
-    <RichTextSection
+    <ContentSection
       title="Frequently Asked Questions"
-      value={faqs.overview}
       variant="h3"
       classes={{ root: classes.root }}
       component={ContentSection}
       {...props}
     >
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: faqs.overview
+        }}
+      />
       <Grid
         container
         className={classes.contentGrid}
@@ -38,7 +42,7 @@ function Faqs({ classes, faqs, ...props }) {
           </Faq>
         ))}
       </Grid>
-    </RichTextSection>
+    </ContentSection>
   );
 }
 

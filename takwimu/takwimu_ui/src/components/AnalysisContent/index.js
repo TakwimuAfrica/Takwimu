@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, withStyles } from '@material-ui/core';
+import { Typography, withStyles, Grid } from '@material-ui/core';
 
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
@@ -10,6 +10,8 @@ import ContentNavigation from './ContentNavigation';
 import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
+
+import DataContainer from '../FeaturedData/DataContainer';
 
 const styles = {
   root: {
@@ -23,6 +25,10 @@ const styles = {
   },
   readNextContainer: {
     paddingBottom: '2.3125rem'
+  },
+  dataContainer: {
+    margin: '0.625rem',
+    width: 'fit-content'
   }
 };
 
@@ -65,12 +71,31 @@ class AnalysisContent extends React.Component {
             showContent={this.showContent}
           />
           <Actions />
-          <Typography
-            className={classes.body}
-            dangerouslySetInnerHTML={{
-              __html: content.body[topicIndex].value.body
-            }}
-          />
+
+          <Grid container direction="row">
+            {content.body[topicIndex].value.body.map(c => (
+              <Fragment>
+                {c.type === 'text' && (
+                  <Typography
+                    key={c.id}
+                    className={classes.body}
+                    dangerouslySetInnerHTML={{
+                      __html: c.value
+                    }}
+                  />
+                )}
+                {c.type === 'indicator' && (
+                  <DataContainer
+                    key={c.id}
+                    id={c.id}
+                    classes={{ root: classes.dataContainer }}
+                    widget={c.value.widget}
+                  />
+                )}
+              </Fragment>
+            ))}
+          </Grid>
+
           <Actions hideLastUpdated />
           <ContentNavigation
             labelText="Other topics in"
