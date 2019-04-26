@@ -15,9 +15,9 @@ const styles = () => ({
   }
 });
 
-function RelatedContent({ classes, content }) {
-  const firstBatch = content.slice(0, 4);
-  const secondBatch = content.slice(4, 8);
+function RelatedContent({ classes, relatedContent }) {
+  const firstBatch = relatedContent.slice(0, 4);
+  const secondBatch = relatedContent.slice(4, 8);
 
   return (
     firstBatch.length > 0 && (
@@ -42,7 +42,7 @@ function RelatedContent({ classes, content }) {
 
 RelatedContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
 };
 
 export default withStyles(styles)(RelatedContent);

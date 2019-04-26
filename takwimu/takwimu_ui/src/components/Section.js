@@ -16,13 +16,17 @@ const styles = theme => ({
   }
 });
 
-function Section({ children, classes, title, variant }) {
+function Section({ children, classes, title, variant, ...props }) {
   return (
-    <Layout classes={{ root: classes.root }}>
+    <Layout classes={{ root: classes.root }} {...props}>
       {title && (
-        <Typography variant={variant} className={classes.title}>
-          {title}
-        </Typography>
+        <Typography
+          variant={variant}
+          className={classes.title}
+          dangerouslySetInnerHTML={{
+            __html: title
+          }}
+        />
       )}
       {children}
     </Layout>

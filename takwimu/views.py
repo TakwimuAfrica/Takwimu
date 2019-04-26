@@ -17,7 +17,7 @@ from wazimap.geo import geo_data, LocationNotFound
 from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, FAQSetting, \
     ProfileSectionPage, ProfilePage
 from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
@@ -42,7 +42,6 @@ class HomePageView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
         context['explainer_steps'] = ExplainerSteps.objects.first()
-        context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
 
         context.update(settings(self.request))

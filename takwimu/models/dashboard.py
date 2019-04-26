@@ -660,16 +660,19 @@ class AboutPage(Page):
     related_content = StreamField([
         ('link', RelatedContentBlock(required=False))
     ], blank=True)
+    methodology = RichTextField(blank=True)
 
     content_panels = [
         FieldPanel('title'),
         FieldPanel('content'),
         StreamFieldPanel('related_content'),
+        FieldPanel('methodology'),
     ]
 
     api_fields = [
         APIField('content'),
         APIField('related_content'),
+        APIField('methodology'),
     ]
 
 
@@ -760,7 +763,6 @@ class FAQ(index.Indexed, models.Model):
 
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
-
 
 class FeaturedDataBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
@@ -1061,11 +1063,13 @@ class ServiceBlock(blocks.StructBlock):
 
 @register_setting
 class SupportServicesSetting(BaseSetting):
+    overview = RichTextField(blank=True)
     services = StreamField([
         ('service', ServiceBlock())
     ], blank=True)
 
     panels = [
+        FieldPanel('overview'),
         StreamFieldPanel('services')
     ]
 
@@ -1087,11 +1091,13 @@ class FAQBlock(blocks.StructBlock):
 
 @register_setting
 class FAQSetting(BaseSetting):
+    overview = RichTextField(blank=True)
     faqs = StreamField([
         ('faq', FAQBlock())
     ], blank=True)
 
     panels = [
+        FieldPanel('overview'),
         StreamFieldPanel('faqs')
     ]
 
