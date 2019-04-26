@@ -117,14 +117,15 @@ class TakwimuTopicSearch():
                 'content_type': hit['content_type'],
                 'title': hit.get('title', ''),
                 'link': hit.get('link', ''),
-                'result_type': hit['result_type']
+                'result_type': hit['result_type'],
+                'summary': hit.get('summary', ''),
             })
         return results
 
     def add_to_index(self, content_id, content_type,
                      country, category, title, body, metadata,
                      parent_page_id, parent_page_type, result_type=None,
-                     link=None):
+                     link=None, summary=None):
         """
         - content_id
         - content_type
@@ -151,7 +152,8 @@ class TakwimuTopicSearch():
             'parent_page_id': parent_page_id,
             'parent_page_type': parent_page_type,
             'result_type': result_type,
-            'link': link
+            'link': link,
+            'summary': summary,
         }
         result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
                                id=content_id)

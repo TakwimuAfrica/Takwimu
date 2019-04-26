@@ -51,6 +51,8 @@ class Command(BaseCommand):
                                                                  parent_page_id,
                                                                  parent_page_type,
                                                                  'Analysis'
+                                                                 '',
+                                                                 '',
                                                                  )
                         self.stdout.write(
                             search_backend.es_index + ": Indexing topic '%s result %s'" % (
@@ -73,7 +75,9 @@ class Command(BaseCommand):
                                     data['metadata'],
                                     parent_page_id,
                                     parent_page_type,
-                                    'Data'
+                                    'Data',
+                                    '',
+
                                 )
                                 self.stdout.write(
                                     search_backend.es_index + ": Indexing widget '%s result %s'" % (
