@@ -40,8 +40,6 @@ const styles = theme => ({
     marginLeft: '1.25rem'
   },
   indicatorTitle: {
-    fontFamily: '"Roboto", sans-serif',
-    fontSize: '1.25rem',
     fontWeight: 'bold',
     lineHeight: 1.2,
     marginBottom: '0.625rem'
@@ -110,7 +108,11 @@ function DataContainer({ id, classes, featuredData, widget }) {
               id={`data-indicator-${id}`}
               style={{ width: 'min-content', minWidth: '25rem' }}
             >
-              <Typography align="center" className={classes.indicatorTitle}>
+              <Typography
+                variant="body1"
+                align="center"
+                className={classes.indicatorTitle}
+              >
                 {widget.value.title}
               </Typography>
               <div
@@ -125,7 +127,11 @@ function DataContainer({ id, classes, featuredData, widget }) {
                 id={`data-indicator-${id}`}
                 style={{ width: '25rem', height: '250px', overflow: 'scroll' }}
               >
-                <Typography align="center" className={classes.indicatorTitle}>
+                <Typography
+                  variant="body1"
+                  align="center"
+                  className={classes.indicatorTitle}
+                >
                   {widget.value.title}
                 </Typography>
                 {entity.image && <img alt="" src={images[entity.image]} />}
@@ -135,7 +141,11 @@ function DataContainer({ id, classes, featuredData, widget }) {
 
           {widget.type === 'document' && (
             <div id={`data-indicator-${id}`} style={{ width: '25rem' }}>
-              <Typography align="center" className={classes.indicatorTitle}>
+              <Typography
+                variant="body1"
+                align="center"
+                className={classes.indicatorTitle}
+              >
                 {widget.value.title}
               </Typography>
               {documents[widget.value.document] && (
