@@ -138,7 +138,7 @@ class Command(BaseCommand):
                          viz.find_all('span', class_=['chart-qualifier'])])
 
                     id = f"{country}-{viz['id']}"
-                    link = f"{server_url}/{url}/#{viz['id']}"
+                    link = f"{server_url}/{url}#{viz['id']}"
 
                     _, outcome = search_backend.add_to_index(content_id=id,
                                                              content_type='HURUmap',

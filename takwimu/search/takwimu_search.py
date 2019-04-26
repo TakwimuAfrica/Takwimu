@@ -89,7 +89,7 @@ class TakwimuTopicSearch():
 
         # Countries and categories may contain whitespace so don't join or
         # split on ' '.
-        # Best approch is still to `try and see` rather than `checking`
+        # Best approach is still to `try and see` rather than `checking`
         # https://stackoverflow.com/questions/1952464/in-python-how-do-i-determine-if-an-object-is-iterable
         try:
             country_tags = [tagify(i) for i in country_filters]
@@ -115,6 +115,9 @@ class TakwimuTopicSearch():
                 'parent_page_type': hit['parent_page_type'],
                 'content_id': hit['content_id'],
                 'content_type': hit['content_type'],
+                'title': hit.get('title', ''),
+                'link': hit.get('link', ''),
+                'result_type': hit['result_type']
             })
         return results
 
