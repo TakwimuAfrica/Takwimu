@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles, Grid, Typography } from '@material-ui/core';
 
-import RichTextSection from './RichTextSection';
 import ContentSection from './ContentSection';
 
 const styles = () => ({
@@ -19,14 +18,19 @@ const styles = () => ({
 
 function Services({ classes, services, ...props }) {
   return (
-    <RichTextSection
+    <ContentSection
       title="Services"
-      value={services.overview}
       variant="h3"
       classes={{ root: classes.root }}
       component={ContentSection}
       {...props}
     >
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: services.overview
+        }}
+      />
       <Grid className={classes.contentGrid}>
         {services.servicesList.map(service => (
           <React.Fragment key={service.title}>
@@ -46,7 +50,7 @@ function Services({ classes, services, ...props }) {
           </React.Fragment>
         ))}
       </Grid>
-    </RichTextSection>
+    </ContentSection>
   );
 }
 
