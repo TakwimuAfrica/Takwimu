@@ -229,8 +229,7 @@ class SearchAPIView(APIView):
                     elif hit['parent_page_type'] == 'ProfilePage':
                         page = profilepages.get(id=parent_page_id)
                     if page:
-                        host = os.getenv('HURUMAP_URL', 'http://localhost:8000')
-                        hit['link'] = f"{host}{page.get_url(request)}"
+                        hit['link'] = page.get_url(request)
                         results.append(hit)
                 else:
                     results.append(hit)
