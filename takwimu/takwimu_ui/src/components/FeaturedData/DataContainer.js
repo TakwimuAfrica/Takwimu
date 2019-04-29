@@ -51,30 +51,32 @@ function DataContainer({ id, classes, featuredData, widget }) {
   const [documents, setDocuments] = useState({});
 
   useEffect(() => {
-    if (widget.type === 'entities') {
-      widget.value.entities.forEach(
-        entity =>
-          entity.image &&
-          fetch(`/api/v2/images/${entity.image}`)
+    if (widget) {
+      if (widget.type === 'entities') {
+        widget.value.entities.forEach(
+          entity =>
+            entity.image &&
+            fetch(`/api/v2/images/${entity.image}`)
+              .then(response => response.json())
+              .then(json =>
+                setImages(prev => ({
+                  ...prev,
+                  [json.id]: json.meta.download_url
+                }))
+              )
+        );
+      }
+      if (widget.type === 'document') {
+        if (widget.value.document) {
+          fetch(`/api/v2/documents/${widget.value.document}`)
             .then(response => response.json())
             .then(json =>
-              setImages(prev => ({
+              setDocuments(prev => ({
                 ...prev,
                 [json.id]: json.meta.download_url
               }))
-            )
-      );
-    }
-    if (widget.type === 'document') {
-      if (widget.value.document) {
-        fetch(`/api/v2/documents/${widget.value.document}`)
-          .then(response => response.json())
-          .then(json =>
-            setDocuments(prev => ({
-              ...prev,
-              [json.id]: json.meta.download_url
-            }))
-          );
+            );
+        }
       }
     }
 
@@ -103,7 +105,7 @@ function DataContainer({ id, classes, featuredData, widget }) {
         <Grid container direction="column" alignItems="center">
           {featuredData && <IFrame featuredData={featuredData} />}
 
-          {widget.type === 'html' && (
+          {widget && widget.type === 'html' && (
             <div
               id={`data-indicator-${id}`}
               style={{ width: 'min-content', minWidth: '25rem' }}
@@ -121,7 +123,8 @@ function DataContainer({ id, classes, featuredData, widget }) {
             </div>
           )}
 
-          {widget.type === 'entities' &&
+          {widget &&
+            widget.type === 'entities' &&
             widget.value.entities.map(entity => (
               <div
                 id={`data-indicator-${id}`}
@@ -139,7 +142,7 @@ function DataContainer({ id, classes, featuredData, widget }) {
               </div>
             ))}
 
-          {widget.type === 'document' && (
+          {widget && widget.type === 'document' && (
             <div id={`data-indicator-${id}`} style={{ width: '25rem' }}>
               <Typography
                 variant="body1"
