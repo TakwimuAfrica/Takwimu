@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import AnalysisContentNavigation from './ContentNavigation';
 
 import Layout from '../Layout';
+import useScrollListener from '../../useScrollListener';
 
 const styles = theme => ({
   root: {
@@ -18,6 +19,9 @@ const styles = theme => ({
     justifyContent: 'center',
     zIndex: 2, // Ensure its ontop (data continer actions has index 1)
     backgroundColor: theme.palette.primary.main
+  },
+  shadow: {
+    boxShadow: '0 2px 6px 2px rgba(0, 0, 0, 0.27)'
   },
   otherTopicLinks: {
     '& > button:nth-child(n)': {
@@ -54,8 +58,9 @@ function OtherInfoNav({
   current,
   showContent
 }) {
+  const showShadow = useScrollListener(10);
   return (
-    <div className={classes.root}>
+    <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>
         <AnalysisContentNavigation
           classes={{ root: classes.navigation, label: classes.label }}
