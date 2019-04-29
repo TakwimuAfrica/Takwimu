@@ -6,7 +6,7 @@ import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 
 import Layout from '../Layout';
-import useScrollListener from '../../useScrollLister';
+import useScrollListener from '../../useScrollListener';
 
 const styles = theme => ({
   root: {
