@@ -5,8 +5,8 @@ from django.views.generic import RedirectView
 from wagtail.api.v2.router import WagtailAPIRouter
 
 from takwimu import settings
-from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
-    LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, SDGIndicatorView
+from takwimu.views import HomePageView, SupportServicesIndexView, LegalView, \
+    TopicView, SearchView, IndicatorsGeographyDetailView, SDGIndicatorView
 from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
@@ -23,9 +23,6 @@ takwimu_urlpatterns = [
     url(r'^about/support-services',
         SupportServicesIndexView.as_view(),
         name='about_supportservices'),
-
-    # Use AboutPage model
-    # url(r'^about/?$', AboutUsView.as_view(), name='about'),
 
     url(r'^legal$', LegalView.as_view(), name='legal'),
     url(
