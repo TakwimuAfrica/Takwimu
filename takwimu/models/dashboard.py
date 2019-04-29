@@ -736,7 +736,7 @@ class MethodologyBlock(blocks.StreamBlock):
             return representation[0]
         return {}
 
-class AboutPage(Page):
+class AboutPage(ModelMeta, Page):
     about_takwimu = StreamField(AboutTakwimuBlock(required=False, max_num=1), blank=True)
     methodology = StreamField(MethodologyBlock(required=False, max_num=1), blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)

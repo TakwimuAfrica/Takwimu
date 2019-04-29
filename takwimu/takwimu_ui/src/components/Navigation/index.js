@@ -153,10 +153,10 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link color="textSecondary" className={classes.link} href="/about">
+          <Link color="textSecondary" className={classes.link} href="/about/">
             About Us
           </Link>
-          <Link color="textSecondary" className={classes.link} href="/about">
+          <Link color="textSecondary" className={classes.link} href="/about/">
             FAQs
           </Link>
           <Link
@@ -228,12 +228,12 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link className={classes.link} href="/about">
+              <Link className={classes.link} href="/about/">
                 About Us
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/about">
+              <Link className={classes.link} href="/about/">
                 FAQs
               </Link>
             </MenuItem>
