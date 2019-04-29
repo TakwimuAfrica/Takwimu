@@ -66,31 +66,21 @@ class AnalysisPage extends React.Component {
             }
           } = this.props;
           const paths = window.location.pathname.split(`/profiles/${slug}/`);
-          const { hash } = window.location;
 
           let foundIndex = -1;
-          let foundTopicIndex = -1;
           if (paths.length === 2) {
             const sectionSlug = paths[1].replace('/', '');
             foundIndex = json.items.findIndex(
               item => item.meta.slug === sectionSlug
             );
-
-            if (hash.length && foundIndex !== -1) {
-              const topicId = hash.replace('#', '');
-              foundTopicIndex = json.items[foundIndex].body.findIndex(
-                body => body.id === topicId
-              );
-            }
           }
+
           this.setState(prevState => {
             let { current, topicIndex, analysis } = prevState;
             if (foundIndex !== -1) {
               current = foundIndex;
             }
-            if (foundTopicIndex !== -1) {
-              topicIndex = foundTopicIndex;
-            }
+
             if (analysis) {
               if (foundIndex !== -1) {
                 // Adjust for `Country Overview`
@@ -98,6 +88,18 @@ class AnalysisPage extends React.Component {
               }
               analysis = analysis.concat(json.items);
             }
+
+            const { hash } = window.location;
+            if (hash.length) {
+              const topicId = hash.replace('#', '');
+              const foundTopicIndex = analysis[current].body.findIndex(
+                body => body.id === topicId
+              );
+              if (foundTopicIndex !== -1) {
+                topicIndex = foundTopicIndex;
+              }
+            }
+
             return { current, topicIndex, analysis };
           });
         });
