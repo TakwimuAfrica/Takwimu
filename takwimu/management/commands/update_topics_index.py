@@ -59,6 +59,7 @@ class Command(BaseCommand):
 
                     elif k['type'] == 'indicator':
                         indicator = k.get('value', [])
+                        indicator_summary = k.get('summary', '')
                         for widget in indicator['widget']:
                             data = get_widget_data(widget)
                             if data:
@@ -70,7 +71,7 @@ class Command(BaseCommand):
                                     metadata=data['metadata'],
                                     parent_page_id=parent_page_id,
                                     parent_page_type=parent_page_type,
-                                    result_type='Data', summary=topic_summary)
+                                    result_type='Data', summary=indicator_summary)
 
                                 self.stdout.write(
                                     search_backend.es_index + ": Indexing widget '%s result %s'" % (
