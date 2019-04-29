@@ -338,9 +338,15 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
 
 
 class IndicatorBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False)
-    widgets = IndicatorWidgetsBlock(required=False)
+    title = blocks.CharBlock()
+    widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
 
+    # Since this block will only have only one of widget type, there is no need
+    # to return a list; return the first item
+    def get_api_representation(self, value, context=None):
+        representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
+        representation['widget'] = representation['widget'][0]
+        return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
@@ -350,10 +356,9 @@ class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.RichTextBlock(required=False)
-    body = blocks.RichTextBlock(required=False)
-
-    indicators = blocks.StreamBlock([
-        ('indicators', IndicatorBlock(required=False))
+    body = blocks.StreamBlock([
+        ('text', blocks.RichTextBlock(required=False)),
+        ('indicator', IndicatorBlock(required=False))
     ], required=False)
 
     def js_initializer(self):
@@ -383,6 +388,41 @@ TWITTER_CARD = (
 )
 
 
+class LinkBlock(blocks.StreamBlock):
+    url = blocks.StructBlock([
+        ('title', blocks.TextBlock()),
+        ('link', blocks.URLBlock()),
+    ],
+        icon='link'
+    )
+    page = blocks.PageChooserBlock(required=False)
+
+    # Since this block will only have one of url or page, there is no need
+    # to return a list; return the first item & convert it to (title, link)
+    # if it's a page
+    def get_api_representation(self, value, context=None):
+        representation = super(LinkBlock, self).get_api_representation(value, context=context)[0]
+        if representation['type'] == 'page':
+            representation['value'] = {
+                'title': value[0].value.title,
+                'link': value[0].value.get_url()
+            }
+        return representation
+
+    class Meta:
+        icon = 'cogs'
+
+
+class RelatedContentBlock(blocks.StructBlock):
+    link = LinkBlock(min_num=1, max_num=1, block_counts={'url': { 'max_num': 1 }, 'page': { 'max_num': 1 } })
+
+    # This block purpose is only to enable the selection of either url or page
+    # and hence shouldn't be included in the representation
+    def get_api_representation(self, value, context=None):
+        (name, val) = list(value.items())[0]
+        return self.child_blocks[name].get_api_representation(val, context=context)
+
+
 class ProfileSectionPage(ModelMeta, Page):
     '''
     Profile Section Page
@@ -392,6 +432,9 @@ class ProfileSectionPage(ModelMeta, Page):
     description = models.TextField(blank=True)
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
+    related_content = StreamField([
+        ('link', RelatedContentBlock(required=False))
+    ], blank=True)
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -420,6 +463,7 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('description'),
         APIField('body'),
+        APIField('related_content'),
         APIField('promotion_image'),
     ]
 
@@ -434,6 +478,7 @@ class ProfileSectionPage(ModelMeta, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
+        StreamFieldPanel('related_content'),
         StreamFieldPanel('body'),
     ]
 
@@ -452,15 +497,27 @@ class ProfileSectionPage(ModelMeta, Page):
     api_fields = [
         APIField('body'),
         APIField('description'),
+        APIField('related_content'),
         APIField('date'),
         APIField('promotion_image'),
-        APIField('promotion_image_thumbnail'),
     ]
 
     def get_context(self, request):
         context = super(ProfileSectionPage, self).get_context(request)
 
+        slug = self.get_parent().slug
+        for code, names in COUNTRIES.items():
+            if slug == slugify(names['name']):
+                context['country'] = {
+                    'iso_code': code,
+                    'name': names['name'],
+                    'short_name': names['short_name'],
+                    'slug': slugify(names['name'])
+                }
+                break
+
         context['meta'] = self.as_meta(request)
+
         return context
 
     def get_promotion_image(self):
@@ -470,8 +527,9 @@ class ProfileSectionPage(ModelMeta, Page):
     def __str__(self):
         return f"{self.get_parent().title} - {self.title}"
 
-
 # The abstract model for topics, complete with panels
+
+
 class ProfilePageSection(models.Model):
     section = models.ForeignKey(ProfileSectionPage, on_delete=models.CASCADE)
 
@@ -507,6 +565,10 @@ class ProfilePage(ModelMeta, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
+    related_content = StreamField([
+        ('link', RelatedContentBlock(required=False))
+    ], blank=True)
+
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
@@ -536,9 +598,9 @@ class ProfilePage(ModelMeta, Page):
         APIField('geo'),
         APIField('date'),
         APIField('document'),
+        APIField('related_content'),
         APIField('body'),
         APIField('promotion_image'),
-        APIField('promotion_image_thumbnail'),
     ]
 
     # Search index configuration
@@ -554,6 +616,7 @@ class ProfilePage(ModelMeta, Page):
         FieldPanel('geo'),
         DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
+        StreamFieldPanel('related_content'),
         InlinePanel('sections', label="Sections"),
     ]
 
@@ -573,6 +636,16 @@ class ProfilePage(ModelMeta, Page):
 
     def get_context(self, request):
         context = super(ProfilePage, self).get_context(request)
+        
+        for code, names in COUNTRIES.items():
+            if self.slug == slugify(names['name']):
+                context['country'] = {
+                    'iso_code': code,
+                    'name': names['name'],
+                    'short_name': names['short_name'],
+                    'slug': slugify(names['name'])
+                }
+                break
 
         context['meta'] = self.as_meta(request)
         return context
@@ -584,13 +657,23 @@ class ProfilePage(ModelMeta, Page):
 
 class AboutPage(Page):
     content = RichTextField()
+    related_content = StreamField([
+        ('link', RelatedContentBlock(required=False))
+    ], blank=True)
+    methodology = RichTextField(blank=True)
 
     content_panels = [
         FieldPanel('title'),
         FieldPanel('content'),
+        StreamFieldPanel('related_content'),
+        FieldPanel('methodology'),
     ]
 
-    api_fields = [APIField('content'), ]
+    api_fields = [
+        APIField('content'),
+        APIField('related_content'),
+        APIField('methodology'),
+    ]
 
 
 class ContactUsPage(Page):
@@ -680,7 +763,6 @@ class FAQ(index.Indexed, models.Model):
 
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
-
 
 class FeaturedDataBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
@@ -853,22 +935,21 @@ class IndexPage(ModelMeta, Page):
                  serializer=serializers.DictField(child=serializers.CharField(),
                                                   source='get_making_of_takwimu')),
         APIField('latest_news_stories',
-                 serializer=serializers.DictField(child=serializers.CharField(),
-                                                  source='get_latest_news_stories')),
+                 serializer=serializers.DictField(source='get_latest_news_stories')),
     ]
 
     def get_context(self, request, *args, **kwargs):
         country_profile_settings = CountryProfilesSetting.for_site(
             request.site)
-        published_status = country_profile_settings.__dict__
+        social_media_settings = SocialMediaSetting.for_site(request.site)
 
         context = super(IndexPage, self).get_context(request, *args, **kwargs)
         context['explainer_steps'] = ExplainerSteps.objects.first()
         context['faqs'] = FAQ.objects.all()
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         context.update(wagtail_settings(request))
-        context.update(get_takwimu_countries(published_status))
-        context.update(get_takwimu_stories())
+        context.update(get_takwimu_countries(country_profile_settings.__dict__))
+        context.update(get_takwimu_stories(social_media_settings, return_dict=True))
         context['meta'] = self.as_meta(request)
         return context
 
@@ -894,8 +975,12 @@ class IndexPage(ModelMeta, Page):
         }
 
     def get_latest_news_stories(self):
+        social_media_settings = SocialMediaSetting.for_site(self.get_site())
+        stories = get_takwimu_stories(social_media_settings, True)
+
         return {
             'description': self.latest_news_stories_description,
+            'stories': stories['stories_latest'],
         }
 
 #
@@ -978,11 +1063,13 @@ class ServiceBlock(blocks.StructBlock):
 
 @register_setting
 class SupportServicesSetting(BaseSetting):
+    overview = RichTextField(blank=True)
     services = StreamField([
         ('service', ServiceBlock())
     ], blank=True)
 
     panels = [
+        FieldPanel('overview'),
         StreamFieldPanel('services')
     ]
 
@@ -1004,11 +1091,13 @@ class FAQBlock(blocks.StructBlock):
 
 @register_setting
 class FAQSetting(BaseSetting):
+    overview = RichTextField(blank=True)
     faqs = StreamField([
         ('faq', FAQBlock())
     ], blank=True)
 
     panels = [
+        FieldPanel('overview'),
         StreamFieldPanel('faqs')
     ]
 

@@ -26,10 +26,14 @@
       href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700"
       rel="stylesheet"
     />
-    <title>React App</title>
+    <title>Takwimu</title>
     <script>
       var takwimu = {
         url: 'http://localhost:8000',
+        country: {
+          name: 'Senegal',
+          slug: 'senegal'
+        },
         page: {
           relatedContent: [
             {
@@ -150,7 +154,64 @@
             medium: '//medium.com/takwimu-africa',
             linkedin: '//www.linkedin.com/company/takwimu-africa'
           }
-        }
+        },
+        services: {
+          overview:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqua',
+
+          servicesList: [
+            {
+              title: 'Service one name',
+              description:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqua.'
+            }
+          ]
+        },
+        faqs: {
+          overview:
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo <a>Get in touch with us</a>',
+          faqsList: [
+            {
+              question: 'Service Where is this data sourced from?',
+              answer:
+                'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqua.'
+            }
+          ]
+        },
+        methodology:
+          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo \
+              tempor incididunt ut labore et dolore magna aliqu',
+        relatedContent: [
+          {
+            type: 'link',
+            value: {
+              type: 'url',
+              value: {
+                title: 'sajdfkldshkjgfs',
+                link: 'http://takwimu.africa'
+              },
+              id: 'de517671-eeba-4c8d-990e-1c7496acae1c'
+            },
+            id: 'aa08e9eb-b54c-40e9-9339-5185d1a1d4fe'
+          },
+          {
+            type: 'link',
+            value: {
+              type: 'url',
+              value: {
+                title: 'kjajglkfsjlkaajkgagd;lksadgsa',
+                link: 'http://instagram.com'
+              },
+              id: '5f3786b3-b639-46bc-b6cb-9147fa52121d'
+            },
+            id: '4e87f44d-af08-459f-9757-b49bb69897b7'
+          }
+        ]
       };
       var profileData = {
         demographics: {},
@@ -187,39 +248,33 @@
       if (pathname.startsWith('/about')) {
         page = 'about';
       } else if (pathname.startsWith('/profiles/country-')) {
-        page = 'profile';
+        page = 'topic';
       } else if (pathname.startsWith('/profiles/')) {
+        var paths = pathname.replace('/profiles/', '').split('/');
+        if (paths.length) {
+          var countrySlug = paths[0];
+          var country = takwimu.countries.find(c => c.slug === countrySlug);
+          if (country) {
+            takwimu.country = country;
+          }
+        }
         page = 'analysis';
       }
+      takwimu.page.id = page;
+      let ids = [];
       switch (page) {
         case 'about':
-          ['takwimuWhereToNext'].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          ids = ['takwimuAboutUsPage'];
           break;
-        case 'profile':
-          ['takwimuProfileDetail', 'takwimuProfile'].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+        case 'topic':
+          ids = ['takwimuProfileDetail', 'takwimuProfile'];
           break;
         case 'analysis':
-          [
-            'takwimuReadNext',
-            'takwimuViewCountry',
-            'takwimuRelatedContent'
-          ].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          ids = ['takwimuAnalysisPage'];
           break;
         case 'homepage': // fall through
         default:
-          [
+          ids = [
             'takwimuHero',
             'takwimuFeaturedAnalysis',
             'takwimuFeaturedData',
@@ -227,12 +282,13 @@
             'takwimuMakingOf',
             'takwimuLatestNewsStories',
             'takwimuWhereToNext'
-          ].forEach(id => {
-            const el = document.createElement('div');
-            el.setAttribute('id', id);
-            body.appendChild(el);
-          });
+          ];
       }
+      ids.forEach(id => {
+        const el = document.createElement('div');
+        el.setAttribute('id', id);
+        body.appendChild(el);
+      });
     </script>
     <div id="takwimuFooter"></div>
 

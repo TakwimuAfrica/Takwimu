@@ -32,7 +32,7 @@ function StoryBlocks({ classes, stories }) {
     <Grid container className={classes.root}>
       {stories.slice(0, 3).map((story, index) => (
         <StoryCard
-          key={story.link}
+          key={story.url}
           story={story}
           classes={{
             root: classNames([classes.story, { [classes.margin]: index > 0 }])
@@ -41,7 +41,7 @@ function StoryBlocks({ classes, stories }) {
       ))}
       {stories.slice(0, 3).map((story, index) => (
         <StorySummary
-          key={story.link}
+          key={story.url}
           story={story}
           classes={{
             root: classNames([classes.story, { [classes.margin]: index > 0 }])

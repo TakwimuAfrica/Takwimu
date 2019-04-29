@@ -8,7 +8,6 @@ import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.primary.main,
-    width: '100%',
     height: '14.875rem',
     display: 'flex',
     justifyContent: 'center',
@@ -18,6 +17,7 @@ const styles = theme => ({
     textDecoration: 'none'
   },
   cardDual: {
+    width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '21.09375rem' // .75 of lg
     },
@@ -26,6 +26,7 @@ const styles = theme => ({
     }
   },
   cardTriple: {
+    width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '18.375rem' // .75 of lg
     },
@@ -41,12 +42,13 @@ const styles = theme => ({
   }
 });
 
-function Card({ classes, children, component, href, variant }) {
+function Card({ classes, children, component, href, onClick, variant }) {
   const variantClass =
     variant === 'triple' ? classes.cardTriple : classes.cardDual;
   return (
     <ButtonBase
       href={href}
+      onClick={onClick}
       className={classNames(classes.root, variantClass)}
       color="primary"
       component={component}
@@ -63,20 +65,22 @@ function Card({ classes, children, component, href, variant }) {
 }
 
 Card.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
   ]),
+  classes: PropTypes.shape({}).isRequired,
+  component: PropTypes.elementType,
   href: PropTypes.string,
-  variant: PropTypes.oneOf(['dual', 'triple']),
-  component: PropTypes.elementType
+  onClick: PropTypes.func,
+  variant: PropTypes.oneOf(['dual', 'triple'])
 };
 
 Card.defaultProps = {
   children: '',
+  component: 'button',
   href: null,
-  variant: 'triple',
-  component: 'button'
+  onClick: null,
+  variant: 'triple'
 };
 export default withStyles(styles)(Card);

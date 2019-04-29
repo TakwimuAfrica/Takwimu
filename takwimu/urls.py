@@ -7,8 +7,8 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
     LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, SDGIndicatorView
-from takwimu.views import handler404, handler500
 from wazimap.views import HomepageView as ProfileView
+from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
 from .api import api_router

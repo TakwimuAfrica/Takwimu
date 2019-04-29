@@ -31,11 +31,13 @@ const styles = theme => ({
     padding: '1.25rem',
     display: 'flex',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
   },
   drawer: {
     backgroundColor: theme.palette.primary.main,
-    outline: 'none'
+    outline: 'none',
+    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
   },
   link: {
     color: theme.palette.text.secondary,
@@ -125,7 +127,7 @@ class Navigation extends React.Component {
           <IconButton
             disableRipple
             disableTouchRipple
-            color="secondary"
+            color="textSecondary"
             onClick={this.toggleMobileDrawer}
           >
             <MenuOutlined color="inherit" />
@@ -138,26 +140,31 @@ class Navigation extends React.Component {
   renderDesktopNav() {
     const {
       classes,
-      takwimu: { countries }
+      takwimu: { page, countries }
     } = this.props;
     const { openDrawer } = this.state;
     return (
       <Fragment>
         <Grid item>
           <DropDowns
+            page={page}
             active={openDrawer}
             toggle={this.toggleDrawer}
             countries={countries}
           />
         </Grid>
         <Grid item>
-          <Link className={classes.link} href="/about">
+          <Link color="textSecondary" className={classes.link} href="/about">
             About Us
           </Link>
-          <Link className={classes.link} href="/about">
+          <Link color="textSecondary" className={classes.link} href="/about">
             FAQs
           </Link>
-          <Link className={classes.link} href="/contact-us">
+          <Link
+            color="textSecondary"
+            className={classes.link}
+            href="/contact-us"
+          >
             Contact Us
           </Link>
           <ButtonBase
@@ -204,7 +211,7 @@ class Navigation extends React.Component {
   renderMobileDrawer() {
     const {
       classes,
-      takwimu: { countries }
+      takwimu: { page, countries }
     } = this.props;
     const { openDrawer, isMobileDrawerOpen } = this.state;
     return (
@@ -228,6 +235,7 @@ class Navigation extends React.Component {
           {this.renderNavBar()}
           <MenuList>
             <DropDowns
+              page={page}
               active={openDrawer}
               countries={countries}
               toggle={this.toggleDrawer}
@@ -277,6 +285,7 @@ Navigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   width: PropTypes.string.isRequired,
   takwimu: PropTypes.shape({
+    page: PropTypes.shape({}).isRequired,
     countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
   }).isRequired
 };

@@ -16,6 +16,12 @@ const styles = theme => ({
     marginTop: '0.9375rem',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
+      marginLeft: '0.703125rem',
+      marginRight: '0.796875rem',
+      width: '12.09375rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginTop: 0,
       marginLeft: '0.9375rem',
       marginRight: '1.0625rem',
       width: '16.125rem'
