@@ -43,17 +43,14 @@ class Command(BaseCommand):
                         text = k.get('value', '')
                         body = '\n'.join([topic_summary, text])
                         metadata = ''
-                        _, outcome = search_backend.add_to_index(topic_id,
-                                                                 'topic',
-                                                                 country,
-                                                                 category,
-                                                                 title,
-                                                                 body,
-                                                                 metadata,
-                                                                 parent_page_id,
-                                                                 parent_page_type,
-                                                                 'Analysis'
-                                                                 )
+
+                        _, outcome = search_backend.add_to_index(
+                            content_id=topic_id, content_type='topic',
+                            country=country, category=category, title=title,
+                            body=body, metadata=metadata,
+                            parent_page_id=parent_page_id,
+                            parent_page_type=parent_page_type,
+                            result_type='Analysis', summary=topic_summary)
                         self.stdout.write(
                             search_backend.es_index + ": Indexing topic '%s result %s'" % (
                                 topic_id,
@@ -66,17 +63,15 @@ class Command(BaseCommand):
                             data = get_widget_data(widget)
                             if data:
                                 _, outcome = search_backend.add_to_index(
-                                    data['id'],
-                                    'indicator_widget',
-                                    country,
-                                    category,
-                                    data['title'],
-                                    data['body'],
-                                    data['metadata'],
-                                    parent_page_id,
-                                    parent_page_type,
-                                    'Data',
-                                )
+                                    content_id=data['id'],
+                                    content_type='indicator_widget',
+                                    country=country, category=category,
+                                    title=data['title'], body=data['body'],
+                                    metadata=data['metadata'],
+                                    parent_page_id=parent_page_id,
+                                    parent_page_type=parent_page_type,
+                                    result_type='Data')
+
                                 self.stdout.write(
                                     search_backend.es_index + ": Indexing widget '%s result %s'" % (
                                         data['id'],
@@ -96,18 +91,6 @@ class Command(BaseCommand):
         if server_url.endswith('/'):
             # remove trailing slash
             server_url = server_url[:-1]
-
-        # urls = {'Kenya': 'profiles/country-KE-kenya/',
-        #         'Uganda': 'profiles/country-UG-uganda/',
-        #         'Ethiopia': 'profiles/country-ET-ethiopia/',
-        #         'Tanzania': 'profiles/country-TZ-tanzania/',
-        #         'Nigeria': 'profiles/country-NG-nigeria/',
-        #         'Senegal': 'profiles/country-SN-senegal/',
-        #         'Burkina Faso': 'profiles/country-BF-burkina-faso/',
-        #         'Democratic Republic of Congo': 'profiles/country-CD-democratic-republic-of-congo',
-        #         'Zambia': 'profiles/country-ZM-zambia/',
-        #         'South Africa': 'country-ZA-south-africa/'
-        #         }
 
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
