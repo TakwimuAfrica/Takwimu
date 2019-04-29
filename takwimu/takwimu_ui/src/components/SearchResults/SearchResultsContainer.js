@@ -55,114 +55,66 @@ const styles = theme => ({
   }
 });
 
-class SearchResultsContainer extends React.Component {
-  constructor(props) {
-    super(props);
-    this.results = [
-      {
-        id: '23',
-        resultType: 'Data by Topic',
-        country: 'Uganda',
-        title: 'All data',
-        summary:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing.',
-        link: 'https://takwimu.africa'
-      },
-      {
-        id: '26',
-        resultType: 'Analysis',
-        country: 'Ethiopia',
-        title: 'Politics',
-        summary:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing.',
-        link: 'https://takwimu.africa'
-      },
-      {
-        id: '25',
-        resultType: 'Data by Topic',
-        country: 'Tanzania',
-        title: 'Education',
-        summary:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing.',
-        link: 'https://takwimu.africa'
-      },
-      {
-        id: '24',
-        resultType: 'Analysis',
-        country: 'Kenya',
-        title: 'Health',
-        summary:
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Et tortor at risus viverra adipiscing.',
-        link: 'https://takwimu.africa'
-      }
-    ];
+function SearchResultsContainer({ classes, results: { items } }) {
+  const resultItems = items.map(result => (
+    <SearchResultItem
+      resultType="Analysis"
+      country={result.country}
+      link={result.url}
+      title={result.title}
+      summary={result.summary}
+      key={result.id}
+    />
+  ));
+
+  const paginator = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(page => (
+    <Link className={classes.filterItem} href="/search">
+      {page}
+    </Link>
+  ));
+
+  let resultIndex = '';
+  if (items.length > 10) {
+    resultIndex = 'Results 1 - 10 of ';
   }
-
-  render() {
-    const {
-      classes,
-      results: { items }
-    } = this.props;
-    const resultItems = items.map(result => (
-      <SearchResultItem
-        resultType="Analysis"
-        country={result.country}
-        link={result.url}
-        title={result.dataPoint.title}
-        summary={result.dataPoint.summary}
-        key={result.id}
-      />
-    ));
-
-    const paginator = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(page => (
-      <Link className={classes.filterItem} href="/search">
-        {page}
-      </Link>
-    ));
-
-    let resultIndex = '';
-    if (items.length > 10) {
-      resultIndex = 'Results 1 - 10 of ';
-    }
-    return (
-      <div className={classes.root}>
-        <Grid className={classes.resultsFilter}>
-          <Typography item variant="body2" className={classes.showResult}>
-            {`Showing ${resultIndex}${items.length} results`}
+  return (
+    <div className={classes.root}>
+      <Grid className={classes.resultsFilter}>
+        <Typography item variant="body2" className={classes.showResult}>
+          {`Showing ${resultIndex}${items.length} results`}
+        </Typography>
+        <Grid item className={classes.filter}>
+          <Typography
+            item
+            variant="body2"
+            color="inherit"
+            className={classes.filterItemLabel}
+          >
+            Show:
           </Typography>
-          <Grid item className={classes.filter}>
-            <Typography
-              item
-              variant="body2"
-              color="inherit"
-              className={classes.filterItemLabel}
-            >
-              Show:
-            </Typography>
-            <Link className={classes.filterItem} href="/search">
-              All Results
-            </Link>
-            <Link className={classes.filterItem} href="/search">
-              Analysis Results
-            </Link>
-            <Link className={classes.filterItem} href="/search">
-              Data Results
-            </Link>
-          </Grid>
+          <Link className={classes.filterItem} href="/search">
+            All Results
+          </Link>
+          <Link className={classes.filterItem} href="/search">
+            Analysis Results
+          </Link>
+          <Link className={classes.filterItem} href="/search">
+            Data Results
+          </Link>
         </Grid>
-        <div className={classes.borderDiv} />
-        <div className={classes.searchResultsList}>{resultItems}</div>
-        <div className={classes.borderDiv} />
+      </Grid>
+      <div className={classes.borderDiv} />
+      <div className={classes.searchResultsList}>{resultItems}</div>
+      <div className={classes.borderDiv} />
 
-        <div className={classes.paginationContainer}>
-          <Typography variant="body2">
-            Showing Results 1 - 10 of 100 results
-          </Typography>
-          <div className={classes.pagesList}>{paginator}</div>
-        </div>
+      <div className={classes.paginationContainer}>
+        <Typography variant="body2">
+          Showing Results 1 - 10 of 100 results
+        </Typography>
+        <div className={classes.pagesList}>{paginator}</div>
       </div>
-    );
-  }
+    </div>
+  );
 }
 
 SearchResultsContainer.propTypes = {
