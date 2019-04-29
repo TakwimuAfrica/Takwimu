@@ -237,8 +237,6 @@
 
   <body id="homepage">
     <noscript>You need to enable JavaScript to run this app.</noscript>
-
-    <nav id="takwimuNavigation"></nav>
     <script>
       // Simulate multiple pages using `pathname`s e.g.
       // `http//localhost:3000/about` should show about page
@@ -259,6 +257,16 @@
           }
         }
         page = 'analysis';
+      } else if (pathname.startsWith('/analysis/')) {
+        var paths = pathname.replace('/analysis/', '').split('/');
+        if (paths.length) {
+          var countrySlug = paths[0];
+          var country = takwimu.countries.find(c => c.slug === countrySlug);
+          if (country) {
+            takwimu.country = country;
+          }
+        }
+        page = 'analysisContent';
       }
       takwimu.page.id = page;
       let ids = [];
@@ -272,6 +280,9 @@
         case 'analysis':
           ids = ['takwimuAnalysisPage'];
           break;
+        case 'analysisContent':
+          ids = ['takwimuAnalysisContentPage'];
+          break;
         case 'homepage': // fall through
         default:
           ids = [
@@ -284,13 +295,13 @@
             'takwimuWhereToNext'
           ];
       }
+      ids = ['takwimuNavigation', ...ids, 'takwimuFooter'];
       ids.forEach(id => {
         const el = document.createElement('div');
         el.setAttribute('id', id);
         body.appendChild(el);
       });
     </script>
-    <div id="takwimuFooter"></div>
 
     <!--
       This HTML file is a template.
