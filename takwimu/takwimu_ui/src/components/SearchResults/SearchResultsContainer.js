@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core';
 import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Link from '@material-ui/core/Link';
+import classNames from 'classnames';
 import SearchResultItem from './SearchResultItem';
 
 const styles = theme => ({
@@ -32,11 +33,10 @@ const styles = theme => ({
   filterItem: {
     display: 'inline-block',
     marginLeft: '1rem',
-    color: theme.palette.primary.main,
     textDecoration: 'underline'
   },
   filterActive: {
-    color: theme.palette.primary.main,
+    color: theme.palette.text.primary,
     textDecoration: 'none'
   },
   filterItemLabel: {
@@ -55,6 +55,42 @@ const styles = theme => ({
   }
 });
 
+function RenderPaginator({ classes, items, activePage }) {
+  const numPages = Math.floor(items / 10) + 1;
+  console.log(numPages);
+  const pages = Array.from({ length: numPages }, (v, k) => k + 1);
+
+  return (
+    <div className={classes.pagesList}>
+      {activePage > 1 ? (
+        <Link className={classes.filterItem} href="/search">
+          Previous
+        </Link>
+      ) : null}
+      {pages.map(page => (
+        <Link
+          className={classNames([
+            classes.filterItem,
+            { [classes.filterActive]: page === activePage }
+          ])}
+          href="/search"
+        >
+          {page}
+        </Link>
+      ))}
+      <Link className={classes.filterItem} href="/search">
+        Next
+      </Link>
+    </div>
+  );
+}
+RenderPaginator.propTypes = {
+  classes: PropTypes.shape({}).isRequired,
+  items: PropTypes.number.isRequired,
+  activePage: PropTypes.number.isRequired
+};
+export const Paginator = withStyles(styles)(RenderPaginator);
+
 function SearchResultsContainer({ classes, results: { items } }) {
   const resultItems = items.map(result => (
     <SearchResultItem
@@ -65,12 +101,6 @@ function SearchResultsContainer({ classes, results: { items } }) {
       summary={result.summary}
       key={result.id}
     />
-  ));
-
-  const paginator = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(page => (
-    <Link className={classes.filterItem} href="/search">
-      {page}
-    </Link>
   ));
 
   let resultIndex = '';
@@ -109,9 +139,9 @@ function SearchResultsContainer({ classes, results: { items } }) {
 
       <div className={classes.paginationContainer}>
         <Typography variant="body2">
-          Showing Results 1 - 10 of 100 results
+          {`Showing ${resultIndex}${items.length} results`}
         </Typography>
-        <div className={classes.pagesList}>{paginator}</div>
+        <Paginator items={items.length} activePage={1} />
       </div>
     </div>
   );
