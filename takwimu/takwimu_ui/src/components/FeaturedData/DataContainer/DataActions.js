@@ -10,11 +10,11 @@ import {
   ClickAwayListener
 } from '@material-ui/core';
 
-import shareIcon from '../../assets/images/network-connection.svg';
-import embedIcon from '../../assets/images/code.svg';
-import compareIcon from '../../assets/images/compare.svg';
-import downloadIcon from '../../assets/images/download.svg';
-import showIcon from '../../assets/images/tablet-reader-31.svg';
+import shareIcon from '../../../assets/images/network-connection.svg';
+import embedIcon from '../../../assets/images/code.svg';
+import compareIcon from '../../../assets/images/compare.svg';
+import downloadIcon from '../../../assets/images/download.svg';
+import showIcon from '../../../assets/images/tablet-reader-31.svg';
 
 const styles = () => ({
   root: {
