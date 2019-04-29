@@ -81,7 +81,7 @@ def get_takwimu_stories(social_media_settings, return_dict=False):
         stories_latest = stories_latest[:3]
 
     return {
-        'stories_latest': stories_latest,
+        'stories': stories_latest,
     }
 
 
@@ -99,3 +99,38 @@ def get_takwimu_countries(published_status):
         countries.append(country)
 
     return {'countries': sorted(countries, key=itemgetter('iso_name'))}
+
+
+def get_takwimu_services(service_settings):
+    items = []
+    for service in service_settings.services:
+        if service.value['category'].lower() == 'persona':
+            item = {
+                'title': service.value['title'],
+                'description': str(service.value['description']),
+            }
+            items.append(item)
+
+    return {
+        'label': service_settings.label,
+        'title': service_settings.title,
+        'description': service_settings.description,
+        'services': items
+    }
+
+
+def get_takwimu_faqs(faq_settings):
+    items = []
+    for faq in faq_settings.faqs:
+        item = {
+            'question': faq.value['question'],
+            'answer': str(faq.value['answer']),
+        }
+        items.append(item)
+
+    return {
+        'label': faq_settings.label,
+        'title': faq_settings.title,
+        'description': faq_settings.description,
+        'faqs': items
+    }

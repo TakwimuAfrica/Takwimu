@@ -1,34 +1,33 @@
 from collections import OrderedDict
-from operator import itemgetter
 import json
+from operator import itemgetter
+import requests
 import string
 
+from django.conf import settings as takwimu_settings
 from django.core.serializers.json import DjangoJSONEncoder
-from django.utils.safestring import SafeString
-from django.utils.module_loading import import_string
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
+from django.utils.module_loading import import_string
+from django.utils.safestring import SafeString
 from django.utils.text import slugify
 from django.views.generic import TemplateView
 
-import requests
-from wazimap.views import GeographyDetailView
+from wagtail.contrib.settings.context_processors import settings
 from wazimap.geo import geo_data, LocationNotFound
 from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
+from wazimap.views import GeographyDetailView
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, FAQSetting, \
-    ProfileSectionPage, ProfilePage
+from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
+from takwimu.models.dashboard import ExplainerSteps, FAQ, FAQSetting, IndexPage, \
+    ProfileSectionPage, ProfilePage, Testimonial
 from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_page_details
 
 from .data.utils import get_page_releases_per_country, \
     get_primary_release_year_per_geography
-from wagtail.contrib.settings.context_processors import settings
-from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
-
-from django.conf import settings as takwimu_settings
 
 
 class HomePageView(TemplateView):
@@ -41,13 +40,11 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['explainer_steps'] = ExplainerSteps.objects.first()
-        context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
 
         context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
+        home = IndexPage.objects.first()
+        if home:
+            context.update(home.get_context(self.request))
         return context
 
 
@@ -170,6 +167,7 @@ class SDGIndicatorView(TemplateView):
 
 def handler404(request):
     return render(request, '404.html')
+
 
 def handler500(request):
     return render(request, '500.html')
@@ -325,7 +323,6 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
 
-
     def get_context_data(self, *args, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
@@ -334,18 +331,22 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get('profile_builder', None)
-        self.profile_name = takwimu_settings.HURUMAP.get('default_profile', 'default')
+        self.profile_name = takwimu_settings.HURUMAP.get(
+            'default_profile', 'default')
 
         if not profile_method:
-            raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
+            raise ValueError(
+                "You must define WAZIMAP.profile_builder in settings.py")
         profile_method = import_string(profile_method)
 
-        year = self.request.GET.get('release', get_primary_release_year_per_geography(self.geo))
+        year = self.request.GET.get(
+            'release', get_primary_release_year_per_geography(self.geo))
         # if takwimu_settings.HURUMAP['latest_release_year'] == year:
         #     year = 'latest'
 
         with dataset_context(year=year):
-            profile_data = profile_method(self.geo, self.profile_name, self.request)
+            profile_data = profile_method(
+                self.geo, self.profile_name, self.request)
 
         profile_data['geography'] = self.geo.as_dict_deep()
         profile_data['primary_releases'] = get_page_releases_per_country(
@@ -354,7 +355,8 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         profile_data = enhance_api_data(profile_data)
         page_context.update(profile_data)
 
-        profile_data_json = SafeString(json.dumps(profile_data, cls=DjangoJSONEncoder))
+        profile_data_json = SafeString(
+            json.dumps(profile_data, cls=DjangoJSONEncoder))
 
         page_context.update({
             'profile_data_json': profile_data_json

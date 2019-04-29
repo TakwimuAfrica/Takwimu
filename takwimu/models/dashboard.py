@@ -30,7 +30,8 @@ from wagtail.search import index
 from wazimap.models import Geography
 
 from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
-                                   get_takwimu_stories)
+                                   get_takwimu_stories, get_takwimu_faqs,
+                                   get_takwimu_services)
 
 logger = logging.getLogger(__name__)
 
@@ -413,14 +414,35 @@ class LinkBlock(blocks.StreamBlock):
         icon = 'cogs'
 
 
-class RelatedContentBlock(blocks.StructBlock):
+class LinkChooserBlock(blocks.StructBlock):
     link = LinkBlock(min_num=1, max_num=1, block_counts={'url': { 'max_num': 1 }, 'page': { 'max_num': 1 } })
 
-    # This block purpose is only to enable the selection of either url or page
-    # and hence shouldn't be included in the representation
+    # This block is only there to ensure structural integrity: Skip it in API
     def get_api_representation(self, value, context=None):
-        (name, val) = list(value.items())[0]
-        return self.child_blocks[name].get_api_representation(val, context=context)
+        representation = super(LinkChooserBlock, self).get_api_representation(value, context=context)
+        if representation:
+            representation = representation['link']
+        return representation
+
+
+class RelatedLinkBlock(blocks.StreamBlock):
+     related_link = LinkChooserBlock()
+
+
+class RelatedContentLinksBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default="Related Content", max_length=1024)
+    related_links = RelatedLinkBlock(max_num=10)
+
+
+class RelatedContentBlock(blocks.StreamBlock):
+    related_content_links = RelatedContentLinksBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(RelatedContentBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
 
 
 class ProfileSectionPage(ModelMeta, Page):
@@ -429,15 +451,13 @@ class ProfileSectionPage(ModelMeta, Page):
     -------------------
     After overview, each of the sections have the following structure
     '''
-    description = models.TextField(blank=True)
+    description = RichTextField(blank=True)
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
-    related_content = StreamField([
-        ('link', RelatedContentBlock(required=False))
-    ], blank=True)
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
     # Social media: Twitter card
 
@@ -461,10 +481,13 @@ class ProfileSectionPage(ModelMeta, Page):
     }
 
     api_fields = [
+        APIField('country',
+                 serializer=serializers.DictField(source='get_country')),
         APIField('description'),
         APIField('body'),
         APIField('related_content'),
         APIField('promotion_image'),
+        APIField('date'),
     ]
 
     # Search index configuration
@@ -478,8 +501,8 @@ class ProfileSectionPage(ModelMeta, Page):
 
     content_panels = Page.content_panels + [
         FieldPanel('description'),
-        StreamFieldPanel('related_content'),
         StreamFieldPanel('body'),
+        StreamFieldPanel('related_content'),
     ]
 
     promote_panels = [
@@ -494,27 +517,8 @@ class ProfileSectionPage(ModelMeta, Page):
     parent_page_types = ['takwimu.ProfilePage']
     subpage_types = []
 
-    api_fields = [
-        APIField('body'),
-        APIField('description'),
-        APIField('related_content'),
-        APIField('date'),
-        APIField('promotion_image'),
-    ]
-
     def get_context(self, request):
         context = super(ProfileSectionPage, self).get_context(request)
-
-        slug = self.get_parent().slug
-        for code, names in COUNTRIES.items():
-            if slug == slugify(names['name']):
-                context['country'] = {
-                    'iso_code': code,
-                    'name': names['name'],
-                    'short_name': names['short_name'],
-                    'slug': slugify(names['name'])
-                }
-                break
 
         context['meta'] = self.as_meta(request)
 
@@ -523,6 +527,18 @@ class ProfileSectionPage(ModelMeta, Page):
     def get_promotion_image(self):
         if self.promotion_image:
             return self.promotion_image.file.url
+
+    def get_country(self):
+        slug = self.get_parent().slug
+        for code, names in COUNTRIES.items():
+            if slug == slugify(names['name']):
+                return {
+                    'iso_code': code,
+                    'name': names['name'],
+                    'short_name': names['short_name'],
+                    'slug': slugify(names['name'])
+                }
+        return {}
 
     def __str__(self):
         return f"{self.get_parent().title} - {self.title}"
@@ -565,9 +581,7 @@ class ProfilePage(ModelMeta, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    related_content = StreamField([
-        ('link', RelatedContentBlock(required=False))
-    ], blank=True)
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
     body = StreamField([
         ('topic', TopicBlock())
@@ -593,14 +607,16 @@ class ProfilePage(ModelMeta, Page):
         'image': 'get_promotion_image',
         'twitter_creator': 'tweet_creator',
     }
+
     api_fields = [
+        APIField('country',
+                 serializer=serializers.DictField(source='get_country')),
         APIField('title'),
         APIField('geo'),
         APIField('date'),
         APIField('document'),
-        APIField('related_content'),
         APIField('body'),
-        APIField('promotion_image'),
+        APIField('related_content'),
     ]
 
     # Search index configuration
@@ -631,49 +647,130 @@ class ProfilePage(ModelMeta, Page):
 
     subpage_types = ['takwimu.ProfileSectionPage']
 
-    def get_absolute_url(self):
-        return self.full_url
+    def get_promotion_image(self):
+        if self.promotion_image:
+            return self.promotion_image.file.url
 
-    def get_context(self, request):
-        context = super(ProfilePage, self).get_context(request)
-        
+    def get_country(self):
+        slug = self.slug
         for code, names in COUNTRIES.items():
-            if self.slug == slugify(names['name']):
-                context['country'] = {
+            if slug == slugify(names['name']):
+                return {
                     'iso_code': code,
                     'name': names['name'],
                     'short_name': names['short_name'],
                     'slug': slugify(names['name'])
                 }
-                break
+        return {}
+
+    def get_absolute_url(self):
+        return self.full_url
+
+    def get_context(self, request):
+        context = super(ProfilePage, self).get_context(request)
 
         context['meta'] = self.as_meta(request)
+
         return context
+
+
+class AboutTakwimuContentBlock(blocks.StructBlock):
+    label = blocks.CharBlock(default="About Takwimu", max_length=255,
+                             help_text="Short title used in navigation, etc."),
+    title = blocks.CharBlock(default="About Takwimu", max_length=1024)
+    description = blocks.RichTextBlock(required=False, default="<p>People need accurate, objective information to make good decisions. However, uneven access to quality information weakens the impact of policy and programming in Africa as well as the ability of local development actors, particularly those with limited resources, to drive necessary change.</p><br/><p>Takwimu was launched in 2018 to empower African changemakers with the best data available and support their efforts to put this into effective use. We take a holistic view of what kinds of data are needed to drive change.</p><br/><p>Takwimu provides access to a growing body of national and sub-national statistics in the health, agriculture, education and financial inclusion sectors - combined with expert analysis of the key stakeholders, decision processes, policies, organisations and budgets that are driving development outcomes. All Takwimu content is visualised and packaged to be easily understood and freely shared.</p><br/><p>Takwimu currently covers 10 countries: Burkina Faso, Democratic Republic of Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia, in English and French. We&rsquo;re working to add more countries and additional languages. Takwimu is supported by the Bill &amp; Melinda Gates Foundation</p>")
+
+
+class AboutTakwimuBlock(blocks.StreamBlock):
+    about_takwimu_content = AboutTakwimuContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(AboutTakwimuBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
+class MethodologyContentBlock(blocks.StructBlock):
+    label = blocks.CharBlock(default="Methodology", max_length=255,
+                             help_text="Short title used in navigation, etc."),
+    title = blocks.CharBlock(default="Methodology", max_length=1024)
+    description = blocks.RichTextBlock(required=False, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.")
+
+
+class MethodologyBlock(blocks.StreamBlock):
+    methodology_content = MethodologyContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(MethodologyBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+class AboutPage(Page):
+    about_takwimu = StreamField(AboutTakwimuBlock(required=False, max_num=1), blank=True)
+    methodology = StreamField(MethodologyBlock(required=False, max_num=1), blank=True)
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
+
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
+
+    api_fields = [
+        APIField('about_takwimu'),
+        APIField('methodology'),
+        APIField('services',
+                 serializer=serializers.DictField(source='get_services')),
+        APIField('faqs',
+                 serializer=serializers.DictField(source='get_faqs')),
+        APIField('related_content'),
+    ]
+
+    # Editor panels configuration
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('about_takwimu'),
+        StreamFieldPanel('methodology'),
+        StreamFieldPanel('related_content'),
+    ]
 
     def get_promotion_image(self):
         if self.promotion_image:
             return self.promotion_image.file.url
 
+    def get_context(self, request):
+        context = super(AboutPage, self).get_context(request)
 
-class AboutPage(Page):
-    content = RichTextField()
-    related_content = StreamField([
-        ('link', RelatedContentBlock(required=False))
-    ], blank=True)
-    methodology = RichTextField(blank=True)
+        context['meta'] = self.as_meta(request)
+        return context
 
-    content_panels = [
-        FieldPanel('title'),
-        FieldPanel('content'),
-        StreamFieldPanel('related_content'),
-        FieldPanel('methodology'),
-    ]
+    def get_services(self):
+        service_settings = SupportServicesSetting.for_site(self.get_site())
 
-    api_fields = [
-        APIField('content'),
-        APIField('related_content'),
-        APIField('methodology'),
-    ]
+        return get_takwimu_services(service_settings)
+
+    def get_faqs(self):
+        faq_settings = FAQSetting.for_site(self.get_site())
+
+        return get_takwimu_faqs(faq_settings)
 
 
 class ContactUsPage(Page):
@@ -764,7 +861,8 @@ class FAQ(index.Indexed, models.Model):
     def __str__(self):
         return self.question.encode('ascii', 'ignore')
 
-class FeaturedDataBlock(blocks.StructBlock):
+
+class FeaturedDataContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     country = blocks.ChoiceBlock(required=True,
                                  choices=[
@@ -801,6 +899,9 @@ class FeaturedDataBlock(blocks.StructBlock):
     description = blocks.TextBlock(
         required=False, label='Description of the data')
 
+class FeaturedDataBlock(blocks.StreamBlock):
+    featured_data_content = FeaturedDataContentBlock()
+
 
 class PageSerializer(serializers.ModelSerializer):
     class Meta:
@@ -808,7 +909,7 @@ class PageSerializer(serializers.ModelSerializer):
         fields = ['title', 'description', 'slug']
 
 
-class FeaturedAnalysisBlock(blocks.StructBlock):
+class FeaturedAnalysisContentBlock(blocks.StructBlock):
     name = 'featured_analysis'
     featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
     from_country = blocks.ChoiceBlock(
@@ -820,9 +921,74 @@ class FeaturedAnalysisBlock(blocks.StructBlock):
         country_slug = value['featured_page'].get_parent().slug
         country_code, = [
             code for (code, country) in COUNTRIES.items() if slugify(country['name']) == country_slug]
-        representation['country_slug'] = country_slug
-        representation['country_code'] = country_code
+        country = {
+            'iso_code': country_code,
+            'slug': country_slug,
+        }
+        representation['country'] = country
         return representation
+
+
+class FeaturedAnalysisBlock(blocks.StreamBlock):
+    featured_analysis_content = FeaturedAnalysisContentBlock()
+
+
+class UseOfTakwimuBlock(blocks.StructBlock):
+    title = blocks.CharBlock(max_length=1024)
+    description = blocks.TextBlock(required=False, default="Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.")
+
+
+class UsesOfTakwimuBlock(blocks.StreamBlock):
+    use_of_takwimu = UseOfTakwimuBlock()
+
+
+class WhatYouCanDoWithTakwimuContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default="What You Can Do With Takwimu", max_length=1024)
+    uses_of_takwimu = UsesOfTakwimuBlock(max_num=3)
+
+
+class WhatYouCanDoWithTakwimuBlock(blocks.StreamBlock):
+    what_you_can_do_with_takwimu_content = WhatYouCanDoWithTakwimuContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(WhatYouCanDoWithTakwimuBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
+class MakingOfTakwimuContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default="Making of Takwimu", max_length=1024)
+    description = blocks.RichTextBlock(required=False, default="<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>")
+    link = blocks.URLBlock(default="https://www.youtube-nocookie.com/embed/DvDCCETHsTo")
+
+
+class MakingOfTakwimuBlock(blocks.StreamBlock):
+    making_of_takwimu_content = MakingOfTakwimuContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(MakingOfTakwimuBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
+class LatestNewsStoriesContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default="Latest News & Stories", max_length=1024)
+    description = blocks.RichTextBlock(required=False, default="<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>")
+
+
+class LatestNewsStoriesBlock(blocks.StreamBlock):
+    latest_news_stories_content = LatestNewsStoriesContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(LatestNewsStoriesBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
 
 
 class IndexPage(ModelMeta, Page):
@@ -836,35 +1002,18 @@ class IndexPage(ModelMeta, Page):
     """
     template = 'takwimu/home_page.html'
 
-    tagline_description = models.CharField(max_length=255,
-                                           default='Lorem ipsum dolor sit amet, adipiscing elitauris con',
+    tagline = RichTextField(default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con <a href=\"/about\">find out more about us</a></p>',
                                            verbose_name='Description')
 
-    featured_analysis = StreamField([
-        ('featured_analysis', FeaturedAnalysisBlock())
-    ], blank=True)
+    featured_analysis = StreamField(FeaturedAnalysisBlock(required=False, max_num=3), blank=True)
 
-    featured_data = StreamField([
-        ('featured_data', FeaturedDataBlock())
-    ], blank=True)
+    featured_data = StreamField(FeaturedDataBlock(required=False, max_num=2), blank=True)
 
-    what_you_can_do_research = models.CharField(max_length=255,
-                                                default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
-                                                verbose_name='Research')
-    what_you_can_do_download = models.CharField(max_length=255,
-                                                default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
-                                                verbose_name='Download')
-    what_you_can_do_present = models.CharField(max_length=255,
-                                               default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
-                                               verbose_name='Present')
+    what_you_can_do_with_takwimu = StreamField(WhatYouCanDoWithTakwimuBlock(required=False, max_num=1), blank=True)
 
-    making_description = models.CharField(max_length=1024,
-                                          default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
-                                          verbose_name='Description')
+    making_of_takwimu = StreamField(MakingOfTakwimuBlock(required=False, max_num=1), blank=True)
 
-    latest_news_stories_description = models.CharField(max_length=1024,
-                                                       default='Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.',
-                                                       verbose_name='Description')
+    latest_news_stories = StreamField(LatestNewsStoriesBlock(required=False, max_num=1), blank=True)
 
     # Social media: Twitter card
 
@@ -888,31 +1037,12 @@ class IndexPage(ModelMeta, Page):
     }
 
     content_panels = Page.content_panels + [
-        MultiFieldPanel([
-            FieldPanel('tagline_description'),
-        ],
-            heading='Tagline',
-        ),
+        FieldPanel('tagline'),
         StreamFieldPanel('featured_analysis'),
         StreamFieldPanel('featured_data'),
-        MultiFieldPanel([
-            FieldPanel('what_you_can_do_research'),
-            FieldPanel('what_you_can_do_download'),
-            FieldPanel('what_you_can_do_present'),
-        ],
-            heading='What you can do with Takwimu',
-            classname='collapsible',
-        ),
-        MultiFieldPanel([
-            FieldPanel('making_description'),
-        ],
-            heading='Making of Takwimu',
-        ),
-        MultiFieldPanel([
-            FieldPanel('latest_news_stories_description'),
-        ],
-            heading='Latest News & Stories',
-        ),
+        StreamFieldPanel('what_you_can_do_with_takwimu'),
+        StreamFieldPanel('making_of_takwimu'),
+        StreamFieldPanel('latest_news_stories'),
     ]
 
     promote_panels = [
@@ -923,65 +1053,39 @@ class IndexPage(ModelMeta, Page):
     ]
 
     api_fields = [
-        APIField('tagline',
-                 serializer=serializers.DictField(child=serializers.CharField(),
-                                                  source='get_tagline')),
+        APIField('tagline'),
         APIField('featured_analysis'),
         APIField('featured_data'),
-        APIField('what_you_can_do_with_takwimu',
-                 serializer=serializers.DictField(child=serializers.CharField(),
-                                                  source='get_what_you_can_do_with_takwimu')),
-        APIField('making_of_takwimu',
-                 serializer=serializers.DictField(child=serializers.CharField(),
-                                                  source='get_making_of_takwimu')),
+        APIField('what_you_can_do_with_takwimu'),
+        APIField('making_of_takwimu'),
         APIField('latest_news_stories',
                  serializer=serializers.DictField(source='get_latest_news_stories')),
     ]
-
-    def get_context(self, request, *args, **kwargs):
-        country_profile_settings = CountryProfilesSetting.for_site(
-            request.site)
-        social_media_settings = SocialMediaSetting.for_site(request.site)
-
-        context = super(IndexPage, self).get_context(request, *args, **kwargs)
-        context['explainer_steps'] = ExplainerSteps.objects.first()
-        context['faqs'] = FAQ.objects.all()
-        context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
-        context.update(wagtail_settings(request))
-        context.update(get_takwimu_countries(country_profile_settings.__dict__))
-        context.update(get_takwimu_stories(social_media_settings, return_dict=True))
-        context['meta'] = self.as_meta(request)
-        return context
 
     def get_promotion_image(self):
         if self.promotion_image:
             return self.promotion_image.file.url
 
-    def get_tagline(self):
-        return {
-            'description': self.tagline_description,
-        }
-
-    def get_what_you_can_do_with_takwimu(self):
-        return {
-            'research': self.what_you_can_do_research,
-            'download': self.what_you_can_do_download,
-            'present': self.what_you_can_do_present
-        }
-
-    def get_making_of_takwimu(self):
-        return {
-            'description': self.making_description,
-        }
-
     def get_latest_news_stories(self):
-        social_media_settings = SocialMediaSetting.for_site(self.get_site())
-        stories = get_takwimu_stories(social_media_settings, True)
+        if self.latest_news_stories:
+            latest_news_stories = {
+                'title': self.latest_news_stories[0].value['title'],
+                'description': str(self.latest_news_stories[0].value['description']),
+            }
+            social_media_settings = SocialMediaSetting.for_site(self.get_site())
+            latest_news_stories.update(get_takwimu_stories(social_media_settings, return_dict=True))
+            return latest_news_stories
 
-        return {
-            'description': self.latest_news_stories_description,
-            'stories': stories['stories_latest'],
-        }
+        return {}
+
+    def get_context(self, request, *args, **kwargs):
+        context = super(IndexPage, self).get_context(request, *args, **kwargs)
+
+        context.update(wagtail_settings(request))
+        context['meta'] = self.as_meta(request)
+
+        return context
+
 
 #
 # Settings
@@ -1063,13 +1167,18 @@ class ServiceBlock(blocks.StructBlock):
 
 @register_setting
 class SupportServicesSetting(BaseSetting):
-    overview = RichTextField(blank=True)
+    label = models.CharField(default="Services", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = models.CharField(default="Services", max_length=1024)
+    description = RichTextField(blank=False, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.")
     services = StreamField([
         ('service', ServiceBlock())
     ], blank=True)
 
     panels = [
-        FieldPanel('overview'),
+        FieldPanel('label'),
+        FieldPanel('title'),
+        FieldPanel('description'),
         StreamFieldPanel('services')
     ]
 
@@ -1091,18 +1200,23 @@ class FAQBlock(blocks.StructBlock):
 
 @register_setting
 class FAQSetting(BaseSetting):
-    overview = RichTextField(blank=True)
+    label = models.CharField(default="FAQs", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = models.CharField(default="Frequently Asked Questions", max_length=1024)
+    description = RichTextField(blank=False, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.")
     faqs = StreamField([
         ('faq', FAQBlock())
-    ], blank=True)
+    ], blank=True, verbose_name='Questions & Answers')
 
     panels = [
-        FieldPanel('overview'),
+        FieldPanel('label'),
+        FieldPanel('title'),
+        FieldPanel('description'),
         StreamFieldPanel('faqs')
     ]
 
     class Meta:
-        verbose_name = 'FAQ'
+        verbose_name = 'FAQs'
 
 
 @register_setting

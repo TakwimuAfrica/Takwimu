@@ -8,8 +8,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/share-this.min.css">
 {% endblock head_css %}
 
-{% block body_class %}{{ block.super }} profile{% endblock %}
-
+{% block body_id %}analysis{% endblock %}
 
 {% block content %}
     <div id="takwimuAnalysisPage"></div>
@@ -34,11 +33,11 @@
 
 {% block body_javascript_extra %}
   {{ block.super }}
+
   <script>
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
-    takwimu.page.id = 'analysis';
-    takwimu.country = {{ country|jsonify|safe }};
+    takwimu.page.name = 'analysis';
   </script>
 
   {% comment %} <script src="https://cdn.jsdelivr.net/npm/share-this@1.2.2/dist/share-this.min.js"></script>
