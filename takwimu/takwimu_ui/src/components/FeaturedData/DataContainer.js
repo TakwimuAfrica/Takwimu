@@ -104,10 +104,7 @@ function DataContainer({ id, classes, featuredData, widget }) {
           {featuredData && <IFrame featuredData={featuredData} />}
 
           {widget.type === 'html' && (
-            <div
-              id={`data-indicator-${id}`}
-              style={{ width: 'min-content', minWidth: '25rem' }}
-            >
+            <div id={`data-indicator-${id}`} style={{ minWidth: '25rem' }}>
               <Typography
                 variant="body1"
                 align="center"
@@ -123,10 +120,7 @@ function DataContainer({ id, classes, featuredData, widget }) {
 
           {widget.type === 'entities' &&
             widget.value.entities.map(entity => (
-              <div
-                id={`data-indicator-${id}`}
-                style={{ width: '25rem', height: '250px', overflow: 'scroll' }}
-              >
+              <div id={`data-indicator-${id}`}>
                 <Typography
                   variant="body1"
                   align="center"

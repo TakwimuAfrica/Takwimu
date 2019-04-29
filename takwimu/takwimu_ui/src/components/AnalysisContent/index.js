@@ -28,7 +28,7 @@ const styles = {
   },
   dataContainer: {
     margin: '0.625rem',
-    width: 'fit-content'
+    width: '100%'
   }
 };
 
