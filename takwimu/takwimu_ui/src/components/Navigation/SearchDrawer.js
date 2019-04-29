@@ -42,7 +42,7 @@ const styles = theme => ({
     height: '100vh',
     marginTop: '2.813rem',
     [theme.breakpoints.up('md')]: {
-      marginTop: '6.25rem'
+      marginTop: '3.75rem'
     }
   },
   arrow: {
@@ -59,7 +59,7 @@ const styles = theme => ({
     },
     '& > input': {
       fontFamily: theme.typography.fontText,
-      fontSize: '1.563rem',
+      fontSize: '1.375rem',
       fontWeight: '600',
       opacity: 1,
       padding: 0,
@@ -86,7 +86,7 @@ const styles = theme => ({
     marginLeft: '1.25rem',
     [theme.breakpoints.up('md')]: {
       maxWidth: '46.875rem',
-      padding: '1.25rem'
+      padding: '1.25rem 0.938rem'
     }
   },
   searchFieldBackgroundColor: {
@@ -95,9 +95,14 @@ const styles = theme => ({
   searchResults: {
     width: '100%',
     maxWidth: '780px',
+    marginTop: '1.25rem',
     marginRight: '3.75rem',
+    paddingLeft: '0.938rem',
+    maxHeight: '25rem',
+    overflow: 'scroll',
     [theme.breakpoints.up('md')]: {
-      marginRight: '6.25rem'
+      marginRight: '6.25rem',
+      paddingLeft: '0.625rem'
     },
     '& > a': {
       height: '2.813rem'
@@ -110,6 +115,16 @@ const styles = theme => ({
       fontStretch: 'normal',
       lineHeight: 1.7,
       letterSpacing: 'normal'
+    },
+    '&::-webkit-scrollbar': {
+      width: '0.563rem'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: 'white',
+      borderRadius: '0.281rem'
+    },
+    '&::-webkit-scrollbar-corner': {
+      backgroundColor: 'transparent'
     }
   }
 });
@@ -145,6 +160,18 @@ class SearchDrawer extends React.Component {
           {
             title: 'Senegal',
             link: '/profiles/senegal'
+          },
+          {
+            title: 'Nigeria',
+            link: '/profiles/nigere'
+          },
+          {
+            title: 'Nigeria',
+            link: '/profiles/nigere'
+          },
+          {
+            title: 'Nigeria',
+            link: '/profiles/nigere'
           },
           {
             title: 'Nigeria',
