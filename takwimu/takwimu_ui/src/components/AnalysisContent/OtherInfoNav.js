@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Typography, ButtonBase, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
@@ -18,6 +18,9 @@ const styles = theme => ({
     justifyContent: 'center',
     zIndex: 2, // Ensure its ontop (data continer actions has index 1)
     backgroundColor: theme.palette.primary.main
+  },
+  shadow: {
+    boxShadow: '0 2px 6px 2px rgba(0, 0, 0, 0.27)'
   },
   otherTopicLinks: {
     '& > button:nth-child(n)': {
@@ -43,8 +46,22 @@ function OtherInfoNav({
   current,
   showContent
 }) {
+  const [showShadow, setShowShadow] = useState(false);
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 10 && !showShadow) {
+        setShowShadow(true);
+      } else if (window.scrollY < 10 && showShadow) {
+        setShowShadow(false);
+      }
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [showShadow]);
   return (
-    <div className={classes.root}>
+    <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>
         <Typography className={classes.label} color="textSecondary">
           {labelText} <strong>{labelTextStrong}</strong>
