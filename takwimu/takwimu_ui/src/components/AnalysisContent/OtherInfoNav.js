@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import { Typography, ButtonBase, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 
 import Layout from '../Layout';
+import useScrollListener from '../../useScrollLister';
 
 const styles = theme => ({
   root: {
@@ -46,20 +47,7 @@ function OtherInfoNav({
   current,
   showContent
 }) {
-  const [showShadow, setShowShadow] = useState(false);
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10 && !showShadow) {
-        setShowShadow(true);
-      } else if (window.scrollY < 10 && showShadow) {
-        setShowShadow(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [showShadow]);
+  const showShadow = useScrollListener(10);
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>

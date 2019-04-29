@@ -6,6 +6,7 @@ import { PropTypes } from 'prop-types';
 import classNames from 'classnames';
 
 import Layout from '../Layout';
+import useScrollListener from '../../useScrollLister';
 
 const styles = theme => ({
   root: {
@@ -18,6 +19,9 @@ const styles = theme => ({
     justifyContent: 'center',
     zIndex: 1,
     backgroundColor: theme.palette.primary.main
+  },
+  shadow: {
+    boxShadow: '0 2px 6px 2px rgba(0, 0, 0, 0.27)'
   },
   otherTopicLinks: {
     '& > button:nth-child(2n)': {
@@ -41,8 +45,9 @@ function AboutContentNav({
   contentHeadings,
   changeActiveContent
 }) {
+  const showShadow = useScrollListener(10);
   return (
-    <div className={classes.root}>
+    <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>
         <Typography className={classes.label} color="textSecondary">
           On this page
