@@ -35,6 +35,33 @@ from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
 
 logger = logging.getLogger(__name__)
 
+DEFAULT_DESCRIPTION_TEXT = \
+    ("Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
+     "Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum "
+     "felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu "
+     "lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae "
+     "interdum. Phasellus efficitur tincidunt lorem ut blandit.")
+DEFAULT_ABOUT_TEXT = \
+    ("<p>People need accurate, objective information to make good decisions. "
+     "However, uneven access to quality information weakens the impact of "
+     "policy and programming in Africa as well as the ability of local "
+     "development actors, particularly those with limited resources, to drive "
+     "necessary change.</p><br/><p>Takwimu was launched in 2018 to empower "
+     "African changemakers with the best data available and support their "
+     "efforts to put this into effective use. We take a holistic view of what "
+     "kinds of data are needed to drive change.</p><br/><p>Takwimu provides "
+     "access to a growing body of national and sub-national statistics in the "
+     "health, agriculture, education and financial inclusion sectors - "
+     "combined with expert analysis of the key stakeholders, decision "
+     "processes, policies, organisations and budgets that are driving "
+     "development outcomes. All Takwimu content is visualised and packaged "
+     "to be easily understood and freely shared.</p><br/><p>Takwimu currently "
+     "covers 10 countries: Burkina Faso, Democratic Republic of Congo, "
+     "Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and "
+     "Zambia, in English and French. We&rsquo;re working to add more "
+     "countries and additional languages. Takwimu is supported by the "
+     "Bill &amp; Melinda Gates Foundation</p>")
+
 json_data = open('takwimu/fixtures/sdg.json')
 sdg_data = json.load(json_data)
 sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
@@ -678,7 +705,7 @@ class AboutTakwimuContentBlock(blocks.StructBlock):
     label = blocks.CharBlock(default="About Takwimu", max_length=255,
                              help_text="Short title used in navigation, etc."),
     title = blocks.CharBlock(default="About Takwimu", max_length=1024)
-    description = blocks.RichTextBlock(required=False, default="<p>People need accurate, objective information to make good decisions. However, uneven access to quality information weakens the impact of policy and programming in Africa as well as the ability of local development actors, particularly those with limited resources, to drive necessary change.</p><br/><p>Takwimu was launched in 2018 to empower African changemakers with the best data available and support their efforts to put this into effective use. We take a holistic view of what kinds of data are needed to drive change.</p><br/><p>Takwimu provides access to a growing body of national and sub-national statistics in the health, agriculture, education and financial inclusion sectors - combined with expert analysis of the key stakeholders, decision processes, policies, organisations and budgets that are driving development outcomes. All Takwimu content is visualised and packaged to be easily understood and freely shared.</p><br/><p>Takwimu currently covers 10 countries: Burkina Faso, Democratic Republic of Congo, Ethiopia, Kenya, Nigeria, Senegal, South Africa, Tanzania, Uganda and Zambia, in English and French. We&rsquo;re working to add more countries and additional languages. Takwimu is supported by the Bill &amp; Melinda Gates Foundation</p>")
+    description = blocks.RichTextBlock(required=False, default=DEFAULT_ABOUT_TEXT)
 
 
 class AboutTakwimuBlock(blocks.StreamBlock):
@@ -696,7 +723,7 @@ class MethodologyContentBlock(blocks.StructBlock):
     label = blocks.CharBlock(default="Methodology", max_length=255,
                              help_text="Short title used in navigation, etc."),
     title = blocks.CharBlock(default="Methodology", max_length=1024)
-    description = blocks.RichTextBlock(required=False, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.")
+    description = blocks.RichTextBlock(required=False, default=DEFAULT_DESCRIPTION_TEXT)
 
 
 class MethodologyBlock(blocks.StreamBlock):
@@ -1170,7 +1197,7 @@ class SupportServicesSetting(BaseSetting):
     label = models.CharField(default="Services", max_length=255,
                              help_text="Short title used in navigation, etc.")
     title = models.CharField(default="Services", max_length=1024)
-    description = RichTextField(blank=False, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.")
+    description = RichTextField(blank=False, default=DEFAULT_DESCRIPTION_TEXT)
     services = StreamField([
         ('service', ServiceBlock())
     ], blank=True)
@@ -1203,7 +1230,7 @@ class FAQSetting(BaseSetting):
     label = models.CharField(default="FAQs", max_length=255,
                              help_text="Short title used in navigation, etc.")
     title = models.CharField(default="Frequently Asked Questions", max_length=1024)
-    description = RichTextField(blank=False, default="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at, consequat finibus libero. Ut tincidunt rutrum purus vitae interdum. Phasellus efficitur tincidunt lorem ut blandit.")
+    description = RichTextField(blank=False, default=DEFAULT_DESCRIPTION_TEXT)
     faqs = StreamField([
         ('faq', FAQBlock())
     ], blank=True, verbose_name='Questions & Answers')
