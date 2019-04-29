@@ -29,11 +29,8 @@ function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
           alignItems="flex-start"
           className={classes.root}
         >
-          <DataContainer
-            color="secondary"
-            featuredData={featuredData[0].value}
-          />
-          <DataContainer color="primary" featuredData={featuredData[1].value} />
+          <DataContainer color="secondary" data={featuredData[0]} />
+          <DataContainer color="primary" data={featuredData[1]} />
         </Grid>
       ) : null}
     </Section>

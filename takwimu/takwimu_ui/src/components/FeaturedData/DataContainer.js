@@ -46,13 +46,13 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ id, classes, featuredData, widget }) {
+function DataContainer({ id, classes, data }) {
   const [images, setImages] = useState({});
   const [documents, setDocuments] = useState({});
 
   useEffect(() => {
-    if (widget.type === 'entities') {
-      widget.value.entities.forEach(
+    if (data.type === 'entities') {
+      data.value.entities.forEach(
         entity =>
           entity.image &&
           fetch(`/api/v2/images/${entity.image}`)
@@ -65,9 +65,9 @@ function DataContainer({ id, classes, featuredData, widget }) {
             )
       );
     }
-    if (widget.type === 'document') {
-      if (widget.value.document) {
-        fetch(`/api/v2/documents/${widget.value.document}`)
+    if (data.type === 'document') {
+      if (data.value.document) {
+        fetch(`/api/v2/documents/${data.value.document}`)
           .then(response => response.json())
           .then(json =>
             setDocuments(prev => ({
@@ -81,117 +81,100 @@ function DataContainer({ id, classes, featuredData, widget }) {
     return () => {};
   }, []);
 
-  const embedCode = featuredData
-    ? `<iframe
+  const handleDownload = () => {
+    if (data.type === 'featured_data') {
+      const iframe = document.getElementById(
+        `cr-embed-country-${data.country}-${data.data_id}`
+      );
+      iframe.contentWindow.domtoimage
+        .toJpeg(iframe.contentDocument.body)
+        .then(dataUrl => {
+          const link = document.createElement('a');
+          link.download = `${data.title}.jpeg`;
+          link.href = dataUrl;
+          link.click();
+        });
+    } else {
+      const el = document.getElementById(`data-indicator-${id}`);
+      const temp = el.style.height;
+      el.style.height = 'unset';
+      domtoimage
+        .toPng(el)
+        .then(dataUrl => {
+          const link = document.createElement('a');
+          link.download = `${data.value.title}.png`;
+          link.href = dataUrl;
+          link.click();
+        })
+        .finally(() => {
+          el.style.height = temp;
+        });
+    }
+  };
+
+  const embedCode =
+    data.type === 'featured_data'
+      ? `<iframe
     allowFullScreen
-    title="${featuredData.title}"
+    title="${data.title}"
     src="/embed/iframe.html?geoID=country-${
-      featuredData.country
-    }&geoVersion=2009&chartDataID=${
-        featuredData.data_id
-      }&dataYear=2011&chartType=${
-        featuredData.chart_type
-      }&chartHeight=300&chartTitle=${
-        featuredData.title
-      }&initialSort=&statType=${featuredData.data_stat_type}"
+      data.country
+    }&geoVersion=2009&chartDataID=${data.data_id}&dataYear=2011&chartType=${
+          data.chart_type
+        }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
+          data.data_stat_type
+        }"
 />`
-    : `${widget.value.raw_html}`;
+      : `${data.value.raw_html}`;
 
   return (
     <div className={classes.root}>
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
-          {featuredData && <IFrame featuredData={featuredData} />}
+          <Typography
+            variant="body1"
+            align="center"
+            className={classes.indicatorTitle}
+          >
+            {data.value.title}
+          </Typography>
 
-          {widget.type === 'html' && (
+          {data.type === 'featured_data' && (
+            <IFrame featuredData={data.value} />
+          )}
+
+          {data.type === 'html' && (
             <div
               id={`data-indicator-${id}`}
               style={{ width: 'min-content', minWidth: '25rem' }}
             >
-              <Typography
-                variant="body1"
-                align="center"
-                className={classes.indicatorTitle}
-              >
-                {widget.value.title}
-              </Typography>
-              <div
-                dangerouslySetInnerHTML={{ __html: widget.value.raw_html }}
-              />
+              <div dangerouslySetInnerHTML={{ __html: data.value.raw_html }} />
             </div>
           )}
 
-          {widget.type === 'entities' &&
-            widget.value.entities.map(entity => (
+          {data.type === 'entities' &&
+            data.value.entities.map(entity => (
               <div
                 id={`data-indicator-${id}`}
                 style={{ width: '25rem', height: '250px', overflow: 'scroll' }}
               >
-                <Typography
-                  variant="body1"
-                  align="center"
-                  className={classes.indicatorTitle}
-                >
-                  {widget.value.title}
-                </Typography>
                 {entity.image && <img alt="" src={images[entity.image]} />}
                 <div dangerouslySetInnerHTML={{ __html: entity.description }} />
               </div>
             ))}
 
-          {widget.type === 'document' && (
+          {data.type === 'document' && (
             <div id={`data-indicator-${id}`} style={{ width: '25rem' }}>
-              <Typography
-                variant="body1"
-                align="center"
-                className={classes.indicatorTitle}
-              >
-                {widget.value.title}
-              </Typography>
-              {documents[widget.value.document] && (
-                <PDF scale={0.65} file={documents[widget.value.document]} />
+              {documents[data.value.document] && (
+                <PDF scale={0.65} file={documents[data.value.document]} />
               )}
             </div>
           )}
-          <DataActions
-            onDownload={() => {
-              if (featuredData) {
-                const iframe = document.getElementById(
-                  `cr-embed-country-${featuredData.country}-${
-                    featuredData.data_id
-                  }`
-                );
-                iframe.contentWindow.domtoimage
-                  .toJpeg(iframe.contentDocument.body)
-                  .then(dataUrl => {
-                    const link = document.createElement('a');
-                    link.download = `${featuredData.title}.jpeg`;
-                    link.href = dataUrl;
-                    link.click();
-                  });
-              } else {
-                const el = document.getElementById(`data-indicator-${id}`);
-                const temp = el.style.height;
-                el.style.height = 'unset';
-                domtoimage
-                  .toPng(el)
-                  .then(dataUrl => {
-                    const link = document.createElement('a');
-                    link.download = `${widget.value.title}.png`;
-                    link.href = dataUrl;
-                    link.click();
-                  })
-                  .finally(() => {
-                    el.style.height = temp;
-                  });
-              }
-            }}
-            embedCode={embedCode}
-          />
+          <DataActions onDownload={handleDownload} embedCode={embedCode} />
         </Grid>
       </div>
 
-      {featuredData && (
+      {data.type === 'featured_data' && (
         <div className={classes.descriptionContainer}>
           <Grid container direction="row" wrap="nowrap">
             <Grid item>
@@ -199,7 +182,7 @@ function DataContainer({ id, classes, featuredData, widget }) {
             </Grid>
             <Grid item>
               <Typography variant="caption" className={classes.description}>
-                {featuredData.description}
+                {data.value.description}
               </Typography>
             </Grid>
           </Grid>
@@ -212,14 +195,11 @@ function DataContainer({ id, classes, featuredData, widget }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  featuredData: PropTypes.shape({}),
-  widget: PropTypes.shape({})
+  data: PropTypes.shape({}).isRequired
 };
 
 DataContainer.defaultProps = {
-  id: '',
-  featuredData: null,
-  widget: null
+  id: ''
 };
 
 export default withStyles(styles)(DataContainer);
