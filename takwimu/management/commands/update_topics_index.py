@@ -70,7 +70,7 @@ class Command(BaseCommand):
                                     metadata=data['metadata'],
                                     parent_page_id=parent_page_id,
                                     parent_page_type=parent_page_type,
-                                    result_type='Data')
+                                    result_type='Data', summary=topic_summary)
 
                                 self.stdout.write(
                                     search_backend.es_index + ": Indexing widget '%s result %s'" % (
