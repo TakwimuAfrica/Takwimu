@@ -153,7 +153,6 @@ class TakwimuTopicSearch():
             'parent_page_type': parent_page_type,
             'result_type': result_type,
             'link': link,
-            'summary': summary,
         }
         result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
                                id=content_id)

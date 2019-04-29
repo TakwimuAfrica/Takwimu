@@ -1,11 +1,13 @@
 import os
 from django.core.management.base import BaseCommand, CommandError
 from django.core.management import call_command
+from django.utils.text import slugify
 
 from bs4 import BeautifulSoup
 from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
+from takwimu.utils.helpers import COUNTRIES
 from django.conf import settings
 
 from takwimu.search.takwimu_search import TakwimuTopicSearch
@@ -51,8 +53,6 @@ class Command(BaseCommand):
                                                                  parent_page_id,
                                                                  parent_page_type,
                                                                  'Analysis'
-                                                                 '',
-                                                                 '',
                                                                  )
                         self.stdout.write(
                             search_backend.es_index + ": Indexing topic '%s result %s'" % (
@@ -76,8 +76,6 @@ class Command(BaseCommand):
                                     parent_page_id,
                                     parent_page_type,
                                     'Data',
-                                    '',
-
                                 )
                                 self.stdout.write(
                                     search_backend.es_index + ": Indexing widget '%s result %s'" % (
@@ -93,25 +91,27 @@ class Command(BaseCommand):
         options.add_argument('disable-gpu')
         browser = webdriver.Chrome(options=options)
 
-        server_url = os.getenv('HURUMAP_URL', 'http://localhost:8000')
+        server_url = settings.HURUMAP.get('url', 'localhost:8000')
 
         if server_url.endswith('/'):
             # remove trailing slash
             server_url = server_url[:-1]
 
-        urls = {'Kenya': 'profiles/country-KE-kenya/',
-                'Uganda': 'profiles/country-UG-uganda/',
-                'Ethiopia': 'profiles/country-ET-ethiopia/',
-                'Tanzania': 'profiles/country-TZ-tanzania/',
-                'Nigeria': 'profiles/country-NG-nigeria/',
-                'Senegal': 'profiles/country-SN-senegal/',
-                'Burkina Faso': 'profiles/country-BF-burkina-faso/',
-                'Democratic Republic of Congo': 'profiles/country-CD-democratic-republic-of-congo',
-                'Zambia': 'profiles/country-ZM-zambia/',
-                'South Africa': 'country-ZA-south-africa/'
-                }
+        # urls = {'Kenya': 'profiles/country-KE-kenya/',
+        #         'Uganda': 'profiles/country-UG-uganda/',
+        #         'Ethiopia': 'profiles/country-ET-ethiopia/',
+        #         'Tanzania': 'profiles/country-TZ-tanzania/',
+        #         'Nigeria': 'profiles/country-NG-nigeria/',
+        #         'Senegal': 'profiles/country-SN-senegal/',
+        #         'Burkina Faso': 'profiles/country-BF-burkina-faso/',
+        #         'Democratic Republic of Congo': 'profiles/country-CD-democratic-republic-of-congo',
+        #         'Zambia': 'profiles/country-ZM-zambia/',
+        #         'South Africa': 'country-ZA-south-africa/'
+        #         }
 
-        for country, url in urls.items():
+        for code, detail in COUNTRIES.items():
+            country = detail.get('name')
+            url = f"profiles/country-{code}-{slugify(country)}"
             self.stdout.write(f"Working on {country} {server_url}/{url}")
             browser.get(f"{server_url}/{url}")
             soup = BeautifulSoup(browser.page_source, 'lxml')
@@ -142,7 +142,7 @@ class Command(BaseCommand):
                          viz.find_all('span', class_=['chart-qualifier'])])
 
                     id = f"{country}-{viz['id']}"
-                    link = f"{server_url}/{url}#{viz['id']}"
+                    link = f"{url}#{viz['id']}"
 
                     _, outcome = search_backend.add_to_index(content_id=id,
                                                              content_type='HURUmap',
