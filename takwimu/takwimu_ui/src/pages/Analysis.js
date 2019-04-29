@@ -105,26 +105,41 @@ class AnalysisPage extends React.Component {
   render() {
     const { analysis, current, topicIndex } = this.state;
     const { classes, takwimu } = this.props;
-    return analysis !== null ? (
-      <ContentPage
-        aside={
-          <AnalysisTableOfContent
-            country={takwimu.country}
-            content={analysis}
-            current={current}
-            onChangeContent={this.changeContent}
-          />
-        }
-        classes={{ root: classes.root, aside: classes.asideRoot }}
-      >
+    const shoContentOnly =
+      window.location.search.match(/contentonly/g) !== null;
+
+    if (analysis !== null) {
+      return shoContentOnly ? (
         <AnalysisContent
+          shoContentOnly
           content={analysis[current]}
           onChange={this.changeTopic}
           takwimu={takwimu}
           topicIndex={topicIndex}
         />
-      </ContentPage>
-    ) : null;
+      ) : (
+        <ContentPage
+          aside={
+            <AnalysisTableOfContent
+              country={takwimu.country}
+              content={analysis}
+              current={current}
+              onChangeContent={this.changeContent}
+            />
+          }
+          classes={{ root: classes.root, aside: classes.asideRoot }}
+        >
+          <AnalysisContent
+            content={analysis[current]}
+            onChange={this.changeTopic}
+            takwimu={takwimu}
+            topicIndex={topicIndex}
+          />
+        </ContentPage>
+      );
+    }
+
+    return null;
   }
 }
 

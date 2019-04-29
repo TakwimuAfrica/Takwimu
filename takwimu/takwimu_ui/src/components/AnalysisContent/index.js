@@ -47,9 +47,46 @@ class AnalysisContent extends React.Component {
   }
 
   render() {
-    const { classes, content, topicIndex, takwimu } = this.props;
+    const {
+      shoContentOnly,
+      classes,
+      content,
+      topicIndex,
+      takwimu
+    } = this.props;
 
-    return (
+    return shoContentOnly ? (
+      <Fragment>
+        <div className={classes.root}>
+          <Typography className={classes.title} variant="h2">
+            {content.body[topicIndex].value.title}
+          </Typography>
+          <Grid container direction="row">
+            {content.body[topicIndex].value.body.map(c => (
+              <Fragment>
+                {c.type === 'text' && (
+                  <Typography
+                    key={c.id}
+                    className={classes.body}
+                    dangerouslySetInnerHTML={{
+                      __html: c.value
+                    }}
+                  />
+                )}
+                {c.type === 'indicator' && (
+                  <DataContainer
+                    key={c.id}
+                    id={c.id}
+                    classes={{ root: classes.dataContainer }}
+                    widget={c.value.widget}
+                  />
+                )}
+              </Fragment>
+            ))}
+          </Grid>
+        </div>
+      </Fragment>
+    ) : (
       <Fragment>
         <OtherInfoNav
           labelText="Other topics in"
@@ -123,7 +160,12 @@ AnalysisContent.propTypes = {
   content: PropTypes.shape({}).isRequired,
   topicIndex: PropTypes.number.isRequired,
   onChange: PropTypes.func.isRequired,
-  takwimu: PropTypes.shape({}).isRequired
+  takwimu: PropTypes.shape({}).isRequired,
+  shoContentOnly: PropTypes.bool
+};
+
+AnalysisContent.defaultProps = {
+  shoContentOnly: false
 };
 
 export default withStyles(styles)(AnalysisContent);

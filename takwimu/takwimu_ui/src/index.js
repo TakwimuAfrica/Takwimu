@@ -15,7 +15,6 @@ import LatestNewsStories from './components/LatestNewsStories';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
 
-import AnalysisContentPage from './pages/AnalysisContent';
 import AnalysisPage from './pages/Analysis';
 import AboutUsPage from './pages/AboutUs';
 
@@ -75,16 +74,11 @@ const renderHomepage = () => {
 const renderAnalysisPage = () => {
   const el = document.getElementById('takwimuAnalysisPage');
   if (el) {
+    if (window.location.search.match(/contentonly/g)) {
+      document.getElementById('takwimuNavigation').remove();
+      document.getElementById('takwimuFooter').remove();
+    }
     renderApp(AnalysisPage, 'takwimuAnalysisPage');
-  }
-};
-
-const renderAnalysisContentPage = () => {
-  const el = document.getElementById('takwimuAnalysisContentPage');
-  if (el) {
-    document.getElementById('takwimuNavigation').remove();
-    document.getElementById('takwimuFooter').remove();
-    renderApp(AnalysisContentPage, 'takwimuAnalysisContentPage');
   }
 };
 
@@ -128,5 +122,4 @@ renderApp(Footer, 'takwimuFooter');
 renderAboutUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
-renderAnalysisContentPage();
 renderHomepage();
