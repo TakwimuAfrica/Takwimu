@@ -89,7 +89,7 @@ class AnalysisContent extends React.Component {
                     key={c.id}
                     id={c.id}
                     classes={{ root: classes.dataContainer }}
-                    widget={c.value.widget}
+                    data={c.value.widget}
                   />
                 )}
               </Fragment>

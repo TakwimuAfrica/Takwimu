@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
-import classeNames from 'classnames';
+import classNames from 'classnames';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
 import logoWhite from '../../assets/images/logo-white-all.png';
@@ -33,6 +33,9 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
+  },
+  noShadow: {
+    boxShadow: 'unset'
   },
   drawer: {
     backgroundColor: theme.palette.primary.main,
@@ -98,10 +101,12 @@ class Navigation extends React.Component {
     };
   }
 
-  renderNavBar() {
+  renderNavBar(inDrawer = false) {
     const { classes, width } = this.props;
     return (
-      <nav className={classes.root}>
+      <nav
+        className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
+      >
         <Layout>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
@@ -190,7 +195,7 @@ class Navigation extends React.Component {
             : this.toggleMobileDrawer
         }
       >
-        {isWidthUp('md', width) ? this.renderNavBar() : <div />}
+        {isWidthUp('md', width) ? this.renderNavBar(true) : <div />}
       </DropDownDrawer>
     );
   }
@@ -219,7 +224,7 @@ class Navigation extends React.Component {
         onBackdropClick={this.toggleMobileDrawer}
       >
         <Grid container direction="column" alignItems="flex-start">
-          {this.renderNavBar()}
+          {this.renderNavBar(true)}
           <MenuList>
             <DropDowns
               page={page}
@@ -244,7 +249,7 @@ class Navigation extends React.Component {
             </MenuItem>
             <MenuItem>
               <Link
-                className={classeNames([classes.link, classes.iconLink])}
+                className={classNames([classes.link, classes.iconLink])}
                 href="/search"
               >
                 <Search className={classes.search} />
