@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { Typography, ButtonBase, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import classNames from 'classnames';
+import AnalysisContentNavigation from './ContentNavigation';
 
 import Layout from '../Layout';
 
@@ -29,9 +29,20 @@ const styles = theme => ({
     textDecoration: 'underline'
   },
   label: {
+    color: 'white',
     fontSize: '0.813rem',
     marginTop: '1rem',
     marginBottom: '0.5rem'
+  },
+  navigation: {
+    backgroundColor: 'unset',
+    padding: 0,
+    [theme.breakpoints.up('md')]: {
+      width: '100%'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '100%'
+    }
   }
 });
 
@@ -46,24 +57,16 @@ function OtherInfoNav({
   return (
     <div className={classes.root}>
       <Layout>
-        <Typography className={classes.label} color="textSecondary">
-          {labelText} <strong>{labelTextStrong}</strong>
-        </Typography>
-        <div className={classes.otherTopicLinks}>
-          {content.body.map((c, index) => (
-            <ButtonBase
-              key={c.id}
-              className={classNames({
-                [classes.otherTopic]: current !== index
-              })}
-              onClick={showContent(index)}
-            >
-              <Typography variant="body2" color="textSecondary">
-                {c.value.title}
-              </Typography>
-            </ButtonBase>
-          ))}
-        </div>
+        <AnalysisContentNavigation
+          classes={{ root: classes.navigation, label: classes.label }}
+          labelText={labelText}
+          labelTextStrong={labelTextStrong}
+          current={current}
+          content={content}
+          showContent={showContent}
+          linksPrimaryColor="textSecondary"
+          linksSecondaryColor="textSecondary"
+        />
       </Layout>
     </div>
   );
