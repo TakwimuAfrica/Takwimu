@@ -15,6 +15,7 @@ import {
 import { Search, MenuOutlined } from '@material-ui/icons';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
+import classNames from 'classnames';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
 import Layout from '../Layout';
@@ -33,6 +34,9 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
+  },
+  searchnavRoot: {
+    boxShadow: 'none'
   },
   drawer: {
     backgroundColor: theme.palette.primary.main,
@@ -99,10 +103,14 @@ class Navigation extends React.Component {
     };
   }
 
-  renderNavBar() {
+  renderNavBar(isSearch) {
     const { classes, width } = this.props;
     return (
-      <nav className={classes.root}>
+      <nav
+        className={classNames(classes.root, {
+          [classes.searchnavRoot]: isSearch
+        })}
+      >
         <Layout>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
@@ -203,7 +211,7 @@ class Navigation extends React.Component {
     const { openDrawer } = this.state;
     return (
       <SearchDrawer active={openDrawer === 'search'}>
-        {this.renderNavBar()}
+        {this.renderNavBar(true)}
       </SearchDrawer>
     );
   }
