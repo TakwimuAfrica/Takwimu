@@ -1,15 +1,6 @@
-import os
 from django.core.management.base import BaseCommand, CommandError
-from django.core.management import call_command
-from django.utils.text import slugify
-
-from bs4 import BeautifulSoup
-from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
-from takwimu.utils.helpers import COUNTRIES
-from django.conf import settings
-
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_widget_data, get_page_details
 
@@ -22,8 +13,6 @@ class Command(BaseCommand):
         topic_search.reset_index()
 
         self.stdout.write(topic_search.es_index + ": Starting rebuild")
-        self.stdout.write("Ensure that the server is running on port 8000")
-        self.index_hurumap(topic_search)
         self.index_topics(ProfileSectionPage.objects.live(), topic_search)
         self.index_topics(ProfilePage.objects.live(), topic_search)
 
@@ -78,67 +67,3 @@ class Command(BaseCommand):
                                         data['id'],
                                         outcome,
                                     ))
-
-    def index_hurumap(self, search_backend):
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        # chrome can not be run as root, which is the case in docker
-        options.add_argument('no-sandbox')
-        options.add_argument('disable-gpu')
-        browser = webdriver.Chrome(options=options)
-
-        server_url = settings.HURUMAP.get('url', 'localhost:8000')
-
-        if server_url.endswith('/'):
-            # remove trailing slash
-            server_url = server_url[:-1]
-
-        for code, detail in COUNTRIES.items():
-            country = detail.get('name')
-            url = f"profiles/country-{code}-{slugify(country)}"
-            self.stdout.write(f"Working on {country} {server_url}/{url}")
-            browser.get(f"{server_url}/{url}")
-            soup = BeautifulSoup(browser.page_source, 'lxml')
-            visualizations = soup.find_all('div', {
-                "class": ["column-full", "column-half", "column-three-quarters",
-                          "column-quarter"]})
-            self.stdout.write(
-                f"Found {len(visualizations)} possible visualizations")
-            for viz in visualizations:
-                chart_header = ''
-                try:
-                    chart_header = viz.find('h3', class_='chart-header').text
-                except AttributeError:
-                    pass
-
-                title = viz.get('data-chart-title', '') or chart_header
-
-                # if section does not have a title then it's probably a random
-                # div without a visualization
-
-                if title and viz.find('div', class_="chart"):
-                    # self.stdout.write(str(viz))
-                    labels = ' '.join(
-                        [i.text for i in viz.select('span.x.axis.label')])
-
-                    qualifiers = ' '.join(
-                        [i.text for i in
-                         viz.find_all('span', class_=['chart-qualifier'])])
-
-                    id = f"{country}-{viz['id']}"
-                    link = f"{url}#{viz['id']}"
-
-                    _, outcome = search_backend.add_to_index(content_id=id,
-                                                             content_type='HURUmap',
-                                                             country=country,
-                                                             category='',
-                                                             title=title,
-                                                             body=f"{labels} {qualifiers}",
-                                                             metadata='',
-                                                             parent_page_id=None,
-                                                             parent_page_type=None,
-                                                             result_type='Data',
-                                                             link=link)
-
-                    self.stdout.write(
-                        f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
