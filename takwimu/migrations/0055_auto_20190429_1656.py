@@ -14,7 +14,7 @@ import wagtail.images.blocks
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('takwimu', '0051_migrate_topic_to_freeform'),
+        ('takwimu', '0054_faqsetting_overview'),
     ]
 
     operations = [
