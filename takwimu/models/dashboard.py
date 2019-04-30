@@ -22,8 +22,7 @@ from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
-from wagtail.contrib.settings.context_processors import \
-    settings as wagtail_settings
+from wagtail.contrib.settings.context_processors import settings as wagtail_settings
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
@@ -340,18 +339,14 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
 
 class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock()
-    summary = blocks.RichTextBlock(required=False,
-                                   default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>')
     widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
 
     # Since this block will only have only one of widget type, there is no need
     # to return a list; return the first item
     def get_api_representation(self, value, context=None):
-        representation = super(IndicatorBlock, self).get_api_representation(
-            value, context=context)
+        representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
         representation['widget'] = representation['widget'][0]
         return representation
-
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
@@ -406,8 +401,7 @@ class LinkBlock(blocks.StreamBlock):
     # to return a list; return the first item & convert it to (title, link)
     # if it's a page
     def get_api_representation(self, value, context=None):
-        representation = \
-        super(LinkBlock, self).get_api_representation(value, context=context)[0]
+        representation = super(LinkBlock, self).get_api_representation(value, context=context)[0]
         if representation['type'] == 'page':
             representation['value'] = {
                 'title': value[0].value.title,
@@ -420,16 +414,13 @@ class LinkBlock(blocks.StreamBlock):
 
 
 class RelatedContentBlock(blocks.StructBlock):
-    link = LinkBlock(min_num=1, max_num=1, block_counts={'url': {'max_num': 1},
-                                                         'page': {
-                                                             'max_num': 1}})
+    link = LinkBlock(min_num=1, max_num=1, block_counts={'url': { 'max_num': 1 }, 'page': { 'max_num': 1 } })
 
     # This block purpose is only to enable the selection of either url or page
     # and hence shouldn't be included in the representation
     def get_api_representation(self, value, context=None):
         (name, val) = list(value.items())[0]
-        return self.child_blocks[name].get_api_representation(val,
-                                                              context=context)
+        return self.child_blocks[name].get_api_representation(val, context=context)
 
 
 class ProfileSectionPage(ModelMeta, Page):
@@ -535,7 +526,6 @@ class ProfileSectionPage(ModelMeta, Page):
 
     def __str__(self):
         return f"{self.get_parent().title} - {self.title}"
-
 
 # The abstract model for topics, complete with panels
 
@@ -646,7 +636,7 @@ class ProfilePage(ModelMeta, Page):
 
     def get_context(self, request):
         context = super(ProfilePage, self).get_context(request)
-
+        
         for code, names in COUNTRIES.items():
             if self.slug == slugify(names['name']):
                 context['country'] = {
@@ -829,8 +819,7 @@ class FeaturedAnalysisBlock(blocks.StructBlock):
             context=context).to_representation(value['featured_page'])
         country_slug = value['featured_page'].get_parent().slug
         country_code, = [
-            code for (code, country) in COUNTRIES.items() if
-            slugify(country['name']) == country_slug]
+            code for (code, country) in COUNTRIES.items() if slugify(country['name']) == country_slug]
         representation['country_slug'] = country_slug
         representation['country_code'] = country_code
         return representation
@@ -946,8 +935,7 @@ class IndexPage(ModelMeta, Page):
                  serializer=serializers.DictField(child=serializers.CharField(),
                                                   source='get_making_of_takwimu')),
         APIField('latest_news_stories',
-                 serializer=serializers.DictField(
-                     source='get_latest_news_stories')),
+                 serializer=serializers.DictField(source='get_latest_news_stories')),
     ]
 
     def get_context(self, request, *args, **kwargs):
@@ -961,8 +949,7 @@ class IndexPage(ModelMeta, Page):
         context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
         context.update(wagtail_settings(request))
         context.update(get_takwimu_countries(country_profile_settings.__dict__))
-        context.update(
-            get_takwimu_stories(social_media_settings, return_dict=True))
+        context.update(get_takwimu_stories(social_media_settings, return_dict=True))
         context['meta'] = self.as_meta(request)
         return context
 
@@ -995,7 +982,6 @@ class IndexPage(ModelMeta, Page):
             'description': self.latest_news_stories_description,
             'stories': stories['stories_latest'],
         }
-
 
 #
 # Settings
