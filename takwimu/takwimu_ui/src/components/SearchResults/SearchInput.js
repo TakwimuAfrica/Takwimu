@@ -1,6 +1,6 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles, Input } from '@material-ui/core';
+import { withStyles, InputBase, IconButton } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import InputAdornment from '@material-ui/core/InputAdornment';
 
@@ -20,26 +20,35 @@ const styles = theme => ({
     color: theme.palette.data.main,
     fontSize: theme.typography.h3.fontSize
   },
+  searchInputButton: {
+    padding: 0,
+    fontSize: '2.3125rem'
+  },
   iconStyle: {
     color: theme.palette.text.primary
   }
 });
 
-function SearchInput({ classes, query }) {
+function SearchInput({ classes, handleSearchClick, query }) {
   return (
     <div className={classes.root}>
-      <Input
+      <InputBase
         id="searchInput"
         classes={{ root: classes.searchInput }}
         disableUnderline
-        placeholder={query}
+        value={query}
         endAdornment={
           <InputAdornment position="end">
-            <SearchIcon
-              fontSize="inherit"
-              color="primary"
-              classes={{ colorPrimary: classes.iconStyle }}
-            />
+            <IconButton
+              classes={{ root: classes.searchInputButton }}
+              onClick={handleSearchClick()}
+            >
+              <SearchIcon
+                fontSize="inherit"
+                color="primary"
+                classes={{ colorPrimary: classes.iconStyle }}
+              />
+            </IconButton>
           </InputAdornment>
         }
       />
@@ -49,7 +58,8 @@ function SearchInput({ classes, query }) {
 
 SearchInput.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  query: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired,
+  handleSearchClick: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SearchInput);

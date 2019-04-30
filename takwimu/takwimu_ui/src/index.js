@@ -32,7 +32,12 @@ const renderApp = (Component, id, props = PROPS) => {
     ReactDOM.render(<App {...props} />, el);
   }
 };
-console.log(window.takwimu);
+
+const handleSearchClick = searchTerm => {
+  alert(
+    `You have clicked search icon. And here's your search Term${searchTerm}`
+  );
+};
 
 const renderHomepage = () => {
   // check for anything that *must* be present on this page
@@ -114,7 +119,11 @@ const renderAboutUsPage = () => {
 const renderSearchResultsPage = () => {
   const el = document.getElementById('takwimuSearchResults');
   if (el) {
-    renderApp(SearchResults, 'takwimuSearchResults');
+    renderApp(
+      SearchResults,
+      'takwimuSearchResults',
+      Object.assign({}, PROPS, { handleSearchClick })
+    );
   }
 };
 
