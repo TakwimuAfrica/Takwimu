@@ -13,7 +13,7 @@ import Profile from './components/Profile';
 import ProfileDetail from './components/ProfileDetail';
 import LatestNewsStories from './components/LatestNewsStories';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
-import WhatCanYouDo from './components/WhatCanYouDo';
+import WhatCanYouDo from './components/WhatYouCanDoWithTakwimu';
 
 import AnalysisPage from './pages/Analysis';
 import AboutUsPage from './pages/AboutUs';

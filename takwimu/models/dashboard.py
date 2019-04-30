@@ -998,7 +998,7 @@ class UsesOfTakwimuBlock(blocks.StreamBlock):
 
 
 class WhatYouCanDoWithTakwimuContentBlock(blocks.StructBlock):
-    title = blocks.CharBlock(default="What You Can Do With Takwimu", max_length=1024)
+    title = blocks.CharBlock(default="What you can do with Takwimu", max_length=1024)
     uses_of_takwimu = UsesOfTakwimuBlock(max_num=3)
 
 
