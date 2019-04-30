@@ -24,17 +24,29 @@ const styles = () => ({
 
 function MakingOfTakwimu({
   classes,
-  takwimu: { making_of_takwimu: makingOf }
+  takwimu: {
+    page: {
+      making_of_takwimu: { value: makingOf }
+    }
+  }
 }) {
+  if (!makingOf) {
+    return null;
+  }
+
+  const { title, description, link } = makingOf;
   return (
-    <Section title="The Making of Takwimu" variant="h3">
-      {makingOf && makingOf.description && (
-        <Typography variant="body1">{makingOf.description}</Typography>
-      )}
+    <Section title={title} variant="h3">
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: description
+        }}
+      />
       <div className={classes.container}>
         <iframe
-          title="making takwimu"
-          src="https://www.youtube-nocookie.com/embed/DvDCCETHsTo"
+          title={title}
+          src={link}
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className={classes.iframe}
@@ -47,7 +59,15 @@ function MakingOfTakwimu({
 MakingOfTakwimu.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    making_of_takwimu: PropTypes.shape({}).isRequired
+    page: PropTypes.shape({
+      making_of_takwimu: PropTypes.shape({
+        value: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+          description: PropTypes.string.isRequired,
+          link: PropTypes.string.isRequired
+        }).isRequired
+      }).isRequired
+    }).isRequired
   }).isRequired
 };
 
