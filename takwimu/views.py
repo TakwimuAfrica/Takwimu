@@ -2,7 +2,6 @@ from collections import OrderedDict
 from operator import itemgetter
 import json
 import string
-import os
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.safestring import SafeString
@@ -11,11 +10,6 @@ from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.utils.text import slugify
 from django.views.generic import TemplateView
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-
 
 import requests
 from wazimap.views import GeographyDetailView
@@ -199,43 +193,6 @@ class SupportServicesIndexView(TemplateView):
         context.update(takwimu_topics(self.request))
 
         return context
-
-
-class SearchAPIView(APIView):
-    def get(self, request, *args, **kwargs):
-        query = request.GET.get('q', '')
-        profilepages = ProfilePage.objects.live()
-        profilesectionpages = ProfileSectionPage.objects.live()
-
-        results = []
-        if query:
-            operator = 'or'
-            strip_chars = string.whitespace
-            if query.startswith('"') and query.endswith('"'):
-                # search in quotes means phrase search
-                operator = 'and'
-                strip_chars += '"'
-
-            search_query = query.strip(strip_chars)
-            hits = TakwimuTopicSearch().search(search_query, operator)
-            for hit in hits:
-
-                parent_page_id = hit['parent_page_id']
-                if parent_page_id:
-                    page = None
-                    if hit['parent_page_type'] == 'ProfileSectionPage':
-                        page = profilesectionpages.get(id=parent_page_id)
-                    elif hit['parent_page_type'] == 'ProfilePage':
-                        page = profilepages.get(id=parent_page_id)
-                    if page:
-                        hit['link'] = page.get_url(request)
-                        results.append(hit)
-                else:
-                    results.append(hit)
-
-            return Response(data=results, status=status.HTTP_200_OK)
-
-        return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)
 
 
 class SearchView(TemplateView):
