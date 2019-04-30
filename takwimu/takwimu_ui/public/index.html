@@ -244,7 +244,7 @@
       // `http//localhost:3000/about` should show about page
       const body = document.getElementsByTagName('body')[0];
       const pathname = window.location.pathname;
-      let page;
+      let page = 'home';
       if (pathname.startsWith('/about')) {
         page = 'about';
       } else if (pathname.startsWith('/profiles/country-')) {
@@ -260,7 +260,7 @@
         }
         page = 'analysis';
       }
-      takwimu.page.id = page;
+      takwimu.page.name = page;
       let ids = [];
       switch (page) {
         case 'about':
