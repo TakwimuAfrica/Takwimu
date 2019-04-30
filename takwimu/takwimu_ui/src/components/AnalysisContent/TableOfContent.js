@@ -1,38 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, MenuList, Link } from '@material-ui/core';
 
-import classNames from 'classnames';
+import { withStyles } from '@material-ui/core';
 
 import { CountrySelector } from '../ProfileDetail';
-
-import activePageIcon from '../../assets/images/active-page.svg';
+import TableOfContent from '../TableOfContent';
 
 const styles = theme => ({
-  root: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'flex-start',
-    width: '100%',
-    height: '34rem',
-    padding: '1.438rem',
-    flexDirection: 'column',
-    alignItems: 'flex-start',
-    [theme.breakpoints.up('md')]: {
-      position: 'fixed',
-      width: '14.375rem'
-    }
-  },
-  activePageIndicator: {
-    marginLeft: '-1.5rem',
-    marginRight: '1rem'
-  },
-  listItem: {
-    decorator: 'none',
-    padding: '0.625rem 0'
-  },
-  activeLink: {
-    textDecoration: 'underline'
+  root: {},
+  countrySelectorLabel: {
+    fontSize: theme.typography.caption.fontSize
   }
 });
 
@@ -43,41 +20,35 @@ function AnalysisTableOfContent({
   country,
   onChangeContent
 }) {
+  const { slug: countrySlug } = country;
+  const generateHref = index => {
+    const analysisUrl = `/profiles/${countrySlug}`;
+    if (content[index].meta.slug === countrySlug) {
+      return analysisUrl;
+    }
+    return `${analysisUrl}/${content[index].meta.slug}`;
+  };
+
   return (
-    <div className={classes.root}>
-      <CountrySelector country={country} context="analysis" />
-      <MenuList style={{ width: '14.188rem' }}>
-        {content.map((c, index) => (
-          <li className={classes.listItem}>
-            <img
-              alt=""
-              src={activePageIcon}
-              className={classes.activePageIndicator}
-              hidden={current !== index}
-            />
-            <Link
-              className={classNames({
-                [classes.activeLink]: current !== index
-              })}
-              href={`#${index}`}
-              color={current !== index ? 'primary' : 'textPrimary'}
-              onClick={e => {
-                e.preventDefault();
-                onChangeContent(index);
-              }}
-            >
-              {c.title}
-            </Link>
-          </li>
-        ))}
-      </MenuList>
-    </div>
+    <TableOfContent
+      classes={{ root: classes.root }}
+      content={content}
+      current={current}
+      generateHref={generateHref}
+      onChange={onChangeContent}
+    >
+      <CountrySelector
+        country={country}
+        context="analysis"
+        classes={{ label: classes.countrySelectorLabel }}
+      />
+    </TableOfContent>
   );
 }
 
 AnalysisTableOfContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired,
+  content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   country: PropTypes.shape({}).isRequired,
   onChangeContent: PropTypes.func.isRequired

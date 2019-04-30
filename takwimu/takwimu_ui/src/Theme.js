@@ -17,7 +17,8 @@ const Theme = createMuiTheme({
       light: '#f6f6f6' // light gray
     },
     info: {
-      main: '#f6fbfa' // ice-blue
+      main: '#f6fbfa', // ice-blue
+      other: '#9b9b9b'
     },
     data: {
       main: '#4a4a4a',
@@ -105,7 +106,7 @@ const Theme = createMuiTheme({
     },
     caption: {
       fontFamily: FONT_FAMILY_TEXT,
-      fontSize: '0.813rem',
+      fontSize: '0.8125rem',
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',

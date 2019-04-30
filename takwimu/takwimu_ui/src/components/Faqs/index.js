@@ -1,106 +1,54 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Grid, Link, Typography } from '@material-ui/core';
+import { withStyles, Grid, Typography } from '@material-ui/core';
 
-import Section from '../Section';
+import ContentSection from '../ContentSection';
 import Faq from './Faq';
 
-const styles = theme => ({
-  root: { flexGrow: 1 },
-  link: {
-    fontSize: theme.typography.body1.fontSize
-  },
+const styles = () => ({
+  root: {},
   contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' }
 });
 
-function Faqs({ classes }) {
+function Faqs({ classes, faqs, ...props }) {
   return (
-    <Section
+    <ContentSection
       title="Frequently Asked Questions"
       variant="h3"
-      className={classes.root}
+      classes={{ root: classes.root }}
+      component={ContentSection}
+      {...props}
     >
-      <Typography variant="body1">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua. Cant find the answer
-        you need?{' '}
-        <Link href="/contact-us" underline="always" className={classes.link}>
-          Get in touch with us
-        </Link>
-      </Typography>
+      <Typography
+        variant="body1"
+        dangerouslySetInnerHTML={{
+          __html: faqs.overview
+        }}
+      />
       <Grid
         container
         className={classes.contentGrid}
         direction="column"
         justify="flex-start"
-        alignItems="center"
       >
-        <Faq expandTitle="Where is the data sourced from? ">
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
-            lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
-            scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at,
-            consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
-            Phasellus efficitur tincidunt lorem ut blandit.
-          </Typography>
-        </Faq>
-
-        <Faq expandTitle="How often is the data reviewed and updated? ">
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
-            lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
-            scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at,
-            consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
-            Phasellus efficitur tincidunt lorem ut blandit.
-          </Typography>
-        </Faq>
-
-        <Faq expandTitle="Is this another question that might be asked? ">
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
-            lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
-            scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at,
-            consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
-            Phasellus efficitur tincidunt lorem ut blandit.
-          </Typography>
-        </Faq>
-
-        <Faq expandTitle="Is this another question that might be asked? ">
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
-            lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
-            scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at,
-            consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
-            Phasellus efficitur tincidunt lorem ut blandit.
-          </Typography>
-        </Faq>
-
-        <Faq expandTitle="Is this another question that might be asked? ">
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
-            lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
-            scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at,
-            consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
-            Phasellus efficitur tincidunt lorem ut blandit.
-          </Typography>
-        </Faq>
-
-        <Faq expandTitle="Is this another question that might be asked? ">
-          <Typography variant="body2">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer et
-            lorem eros. Integer vel venenatis urna. Nam vestibulum felis vitae
-            scelerisque imperdiet. Nulla nisl libero, vestibulum eu lorem at,
-            consequat finibus libero. Ut tincidunt rutrum purus vitae interdum.
-            Phasellus efficitur tincidunt lorem ut blandit.
-          </Typography>
-        </Faq>
+        {faqs.faqsList.map(faq => (
+          <Faq expandTitle={faq.question} key={faq.question}>
+            <Typography
+              variant="body2"
+              dangerouslySetInnerHTML={{
+                __html: faq.answer
+              }}
+            />
+          </Faq>
+        ))}
       </Grid>
-    </Section>
+    </ContentSection>
   );
 }
 
 Faqs.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  faqs: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(Faqs);

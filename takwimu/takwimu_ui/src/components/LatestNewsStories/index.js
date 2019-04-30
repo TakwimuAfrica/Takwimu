@@ -25,7 +25,12 @@ const styles = () => ({
 
 function LatestNewsStories({
   classes,
-  takwimu: { latest_news_stories: latestNewsStories, stories },
+  takwimu: {
+    latest_news_stories: { description, stories },
+    settings: {
+      socialMedia: { medium }
+    }
+  },
   width
 }) {
   const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
@@ -41,24 +46,24 @@ function LatestNewsStories({
         alignItems="flex-start"
         className={classes.root}
       >
-        {latestNewsStories && latestNewsStories.description && (
+        {description && (
           <Grid item xs={12}>
             <Typography
               variant="body1"
               classes={{ root: classes.descriptionRoot }}
             >
-              {latestNewsStories.description}
+              {description}
             </Typography>
           </Grid>
         )}
         <Grid item xs={12}>
-          <A href="https://medium.com/takwimu-africa" underline="none">
+          <A href={medium} underline="none">
             <Button classes={{ root: classes.buttonRoot }}>
               Read more stories on Medium
             </Button>
           </A>
         </Grid>
-        {stories && stories.length && (
+        {stories.length > 0 && (
           <Grid item xs={12}>
             <Stories stories={stories} />
           </Grid>
@@ -71,8 +76,15 @@ function LatestNewsStories({
 LatestNewsStories.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    latest_news_stories: PropTypes.shape({}).isRequired,
-    stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+    latest_news_stories: PropTypes.shape({
+      description: PropTypes.string.isRequired,
+      stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+    }).isRequired,
+    settings: PropTypes.shape({
+      socialMedia: PropTypes.shape({
+        medium: PropTypes.string.isRequired
+      }).isRequired
+    }).isRequired
   }).isRequired,
   width: PropTypes.string.isRequired
 };

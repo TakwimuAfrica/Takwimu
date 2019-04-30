@@ -61,17 +61,17 @@ COUNTRIES['ZM'] = {
 }
 
 
-def get_takwimu_stories():
+def get_takwimu_stories(social_media_settings, return_dict=False):
     stories_latest = []
 
     try:
-        if settings.HURUMAP.get('url') != 'https://takwimu.africa':
+        if settings.HURUMAP.get('url').rstrip('/').endswith('takwimu.africa'):
+            client = Medium()
+            stories = client.get_posts(social_media_settings.medium, count=3,
+                                       return_dict=True)
+        else:
             with open('data/articles.json') as f:
                 stories = json.load(f)
-        else:
-            client = Medium()
-            stories = client.get_publication_posts('takwimu-africa',
-                                                   count=3)
 
         stories_latest = stories[0:3]
     except Exception:

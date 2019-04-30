@@ -1,11 +1,17 @@
 /* eslint-disable react/no-danger */
 import React, { Fragment } from 'react';
-import { Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import OtherInfoNav from './OtherInfoNav';
-import OtherInfo from './OtherInfo';
+import { Typography, withStyles, Grid } from '@material-ui/core';
+
 import Actions from './Actions';
+import { Analysis as AnalysisReadNext } from '../Next';
+import ContentNavigation from './ContentNavigation';
+import OtherInfoNav from './OtherInfoNav';
+import RelatedContent from '../RelatedContent';
+import ViewCountry from '../ViewCountry';
+
+import DataContainer from '../FeaturedData/DataContainer';
 
 const styles = {
   root: {
@@ -16,6 +22,13 @@ const styles = {
   },
   body: {
     padding: '0 19px'
+  },
+  readNextContainer: {
+    paddingBottom: '2.3125rem'
+  },
+  dataContainer: {
+    margin: '0.625rem',
+    width: 'fit-content'
   }
 };
 
@@ -23,28 +36,18 @@ class AnalysisContent extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      current: 0,
-      currentId: null
-    };
-
     this.showContent = this.showContent.bind(this);
   }
 
   showContent(index) {
+    const { onChange } = this.props;
     return () => {
-      this.setState({ current: index });
+      onChange(index);
     };
   }
 
   render() {
-    const { classes, content } = this.props;
-    const { current, currentId } = this.state;
-
-    // Reset index when main content changes
-    if (content.id !== currentId) {
-      this.setState({ currentId: content.id, current: 0 });
-    }
+    const { classes, content, topicIndex, takwimu } = this.props;
 
     return (
       <Fragment>
@@ -52,36 +55,63 @@ class AnalysisContent extends React.Component {
           labelText="Other topics in"
           labelTextStrong={content.title}
           content={content}
-          current={current}
+          current={topicIndex}
           showContent={this.showContent}
         />
 
         <div className={classes.root}>
           <Typography className={classes.title} variant="h2">
-            {content.body[current].value.title}
+            {content.body[topicIndex].value.title}
           </Typography>
-          <OtherInfo
+          <ContentNavigation
             labelText="Other topics in"
             labelTextStrong={content.title}
-            current={current}
+            current={topicIndex}
             content={content}
             showContent={this.showContent}
           />
           <Actions />
-          <Typography
-            className={classes.body}
-            dangerouslySetInnerHTML={{
-              __html: content.body[current].value.body
-            }}
-          />
+
+          <Grid container direction="row">
+            {content.body[topicIndex].value.body.map(c => (
+              <Fragment>
+                {c.type === 'text' && (
+                  <Typography
+                    key={c.id}
+                    className={classes.body}
+                    dangerouslySetInnerHTML={{
+                      __html: c.value
+                    }}
+                  />
+                )}
+                {c.type === 'indicator' && (
+                  <DataContainer
+                    key={c.id}
+                    id={c.id}
+                    classes={{ root: classes.dataContainer }}
+                    data={c.value.widget}
+                  />
+                )}
+              </Fragment>
+            ))}
+          </Grid>
+
           <Actions hideLastUpdated />
-          <OtherInfo
+          <ContentNavigation
             labelText="Other topics in"
             labelTextStrong={content.title}
-            current={current}
+            current={topicIndex}
             content={content}
             showContent={this.showContent}
           />
+          <AnalysisReadNext
+            classes={{ container: classes.readNextContainer }}
+            content={content}
+            current={topicIndex}
+            showContent={this.showContent}
+          />
+          <ViewCountry takwimu={takwimu} />
+          <RelatedContent relatedContent={content.related_content} />
         </div>
       </Fragment>
     );
@@ -90,7 +120,10 @@ class AnalysisContent extends React.Component {
 
 AnalysisContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired
+  content: PropTypes.shape({}).isRequired,
+  topicIndex: PropTypes.number.isRequired,
+  onChange: PropTypes.func.isRequired,
+  takwimu: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(AnalysisContent);

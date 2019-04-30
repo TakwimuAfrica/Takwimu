@@ -113,9 +113,10 @@ class Faq extends React.Component {
               { [classes.expandedExpandSummaryTitle]: expanded }
             ])}
             onClick={this.handleChange}
-          >
-            {expandTitle}
-          </Typography>
+            dangerouslySetInnerHTML={{
+              __html: expandTitle
+            }}
+          />
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails className={classes.panelDetails}>

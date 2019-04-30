@@ -7,7 +7,8 @@ from takwimu import settings
 from takwimu.utils.helpers import get_takwimu_stories, get_takwimu_countries
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, CountryProfilesSetting
+from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, \
+    CountryProfilesSetting, SocialMediaSetting
 from takwimu.models.dashboard import TopicPage
 
 from .sdg import SDG
@@ -15,12 +16,12 @@ from .sdg import SDG
 
 def takwimu_countries(request):
     country_profile_settings = CountryProfilesSetting.for_site(request.site)
-    published_status = country_profile_settings.__dict__
-    return get_takwimu_countries(published_status)
+    return get_takwimu_countries(country_profile_settings.__dict__)
 
 
 def takwimu_stories(request):
-    return get_takwimu_stories()
+    social_media_settings = SocialMediaSetting.for_site(request.site)
+    return get_takwimu_stories(social_media_settings)
 
 
 def takwimu_topics(request):

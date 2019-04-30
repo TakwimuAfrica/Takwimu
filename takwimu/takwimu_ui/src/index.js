@@ -3,21 +3,20 @@ import ReactDOM from 'react-dom';
 
 import withRoot from './withRoot';
 
+import FeaturedAnalysis from './components/FeaturedAnalysis';
+import FeaturedData from './components/FeaturedData';
+import Footer from './components/Footer';
 import Hero from './components/Hero';
+import HomeWhereToNext from './components/Next';
 import Navigation from './components/Navigation';
-import ProfileDetail from './components/ProfileDetail';
 import Profile from './components/Profile';
+import ProfileDetail from './components/ProfileDetail';
+import LatestNewsStories from './components/LatestNewsStories';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
-import Faqs from './components/Faqs';
-import HomeWhereToNext, { About as AboutWhereToNext } from './components/Next';
-import FeaturedAnalysis from './components/FeaturedAnalysis';
-import AnalysisPage from './pages/AnalysisPage';
-import FeaturedData from './components/FeaturedData';
-import RelatedContent from './components/RelatedContent';
-import Footer from './components/Footer';
-import LatestNewsStories from './components/LatestNewsStories';
 import SearchResults from './components/SearchResults';
+import AnalysisPage from './pages/Analysis';
+import AboutUsPage from './pages/AboutUs';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -39,11 +38,7 @@ const renderHomepage = () => {
   // check for anything that *must* be present on this page
   const el = document.getElementById('takwimuHero');
   if (el) {
-    fetch(
-      `${
-        PROPS.takwimu.url
-      }/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json`
-    )
+    fetch('/api/v2/pages/?type=takwimu.IndexPage&fields=*&format=json')
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {
@@ -92,12 +87,27 @@ const renderDatabyTopicPage = () => {
   }
 };
 
-const renderAboutPage = () => {
-  const el = document.getElementById('takwimuWhereToNext');
+const renderAboutUsPage = () => {
+  const el = document.getElementById('takwimuAboutUsPage');
   if (el) {
-    renderApp(Faqs, 'takwimuFAQ');
-    renderApp(AboutWhereToNext, 'takwimuWhereToNext');
-    renderApp(RelatedContent, 'takwimuRelatedContent');
+    fetch('/api/v2/pages/?type=takwimu.AboutPage&fields=*&format=json')
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          const {
+            content,
+            methodology,
+            related_content: relatedContent
+          } = data.items[0];
+          const takwimu = Object.assign({}, PROPS.takwimu, {
+            content,
+            methodology,
+            related_content: relatedContent
+          });
+          const props = Object.assign({}, PROPS, { takwimu });
+          renderApp(AboutUsPage, 'takwimuAboutUsPage', props);
+        }
+      });
   }
 };
 
@@ -113,7 +123,7 @@ renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
-renderAboutPage();
+renderAboutUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();
