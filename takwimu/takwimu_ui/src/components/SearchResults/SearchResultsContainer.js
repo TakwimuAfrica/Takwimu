@@ -64,7 +64,8 @@ function RenderPaginator({
   items,
   activePage,
   handleNextClick,
-  handlePreviousClick
+  handlePreviousClick,
+  endIndex
 }) {
   const numPages = Math.floor(items / 10) + 1;
   const pages = Array.from({ length: numPages }, (v, k) => k + 1);
@@ -93,12 +94,17 @@ function RenderPaginator({
           {page}
         </Link>
       ))}
-      <ButtonBase
-        className={classNames([classes.filterItem, classes.pagginationButton])}
-        onClick={handleNextClick}
-      >
-        Next
-      </ButtonBase>
+      {endIndex !== items ? (
+        <ButtonBase
+          className={classNames([
+            classes.filterItem,
+            classes.pagginationButton
+          ])}
+          onClick={handleNextClick}
+        >
+          Next
+        </ButtonBase>
+      ) : null}
     </div>
   );
 }
@@ -107,7 +113,8 @@ RenderPaginator.propTypes = {
   items: PropTypes.number.isRequired,
   activePage: PropTypes.number.isRequired,
   handleNextClick: PropTypes.func.isRequired,
-  handlePreviousClick: PropTypes.func.isRequired
+  handlePreviousClick: PropTypes.func.isRequired,
+  endIndex: PropTypes.number.isRequired
 };
 export const Paginator = withStyles(styles)(RenderPaginator);
 
@@ -207,6 +214,7 @@ class SearchResultsContainer extends React.Component {
             activePage={activePage}
             handleNextClick={this.handleNextClick}
             handlePreviousClick={this.handlePreviousClick}
+            endIndex={endIndex}
           />
         </div>
       </div>
