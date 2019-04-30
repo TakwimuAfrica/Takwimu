@@ -228,17 +228,19 @@ class SearchDrawer extends React.Component {
                   className={classes.arrow}
                 />
               </Grid>
-              <Grid container justify="flex-end">
-                <MenuList className={classes.searchResults}>
-                  {searchResults.map(result => (
-                    <MenuItem component="a" href={`${result.link}`}>
-                      <Typography color="textSecondary">
-                        {result.title}
-                      </Typography>
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </Grid>
+              {searchResults && searchResults.length ? (
+                <Grid container justify="flex-end">
+                  <MenuList className={classes.searchResults}>
+                    {searchResults.map(result => (
+                      <MenuItem component="a" href={`${result.link}`}>
+                        <Typography color="textSecondary">
+                          {result.title}
+                        </Typography>
+                      </MenuItem>
+                    ))}
+                  </MenuList>
+                </Grid>
+              ) : null}
             </Layout>
           </Grid>
         </div>
