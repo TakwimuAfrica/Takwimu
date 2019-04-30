@@ -35,8 +35,8 @@ const styles = theme => ({
     alignItems: 'center',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
   },
-  searchnavRoot: {
-    boxShadow: 'none'
+  noShadow: {
+    boxShadow: 'unset'
   },
   drawer: {
     backgroundColor: theme.palette.primary.main,
@@ -103,13 +103,11 @@ class Navigation extends React.Component {
     };
   }
 
-  renderNavBar(isSearch) {
+  renderNavBar(inDrawer = false) {
     const { classes, width } = this.props;
     return (
       <nav
-        className={classNames(classes.root, {
-          [classes.searchnavRoot]: isSearch
-        })}
+        className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
       >
         <Layout>
           <Grid container justify="space-between" alignItems="center">
@@ -202,7 +200,7 @@ class Navigation extends React.Component {
             : this.toggleMobileDrawer
         }
       >
-        {isWidthUp('md', width) ? this.renderNavBar() : <div />}
+        {isWidthUp('md', width) ? this.renderNavBar(true) : <div />}
       </DropDownDrawer>
     );
   }
@@ -240,7 +238,7 @@ class Navigation extends React.Component {
         onBackdropClick={this.toggleMobileDrawer}
       >
         <Grid container direction="column" alignItems="flex-start">
-          {this.renderNavBar()}
+          {this.renderNavBar(true)}
           <MenuList>
             <DropDowns
               page={page}

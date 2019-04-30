@@ -72,7 +72,6 @@ class Faq extends React.Component {
     const { classes, expandTitle, children } = this.props;
     const { expanded } = this.state;
 
-    console.log(`FAQS RENDER`);
     return (
       <ExpansionPanel
         square

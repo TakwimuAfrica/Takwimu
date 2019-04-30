@@ -12,6 +12,7 @@ def get_widget_data(widget):
     title = widget_value.get('title', '')
     label = widget_value.get('label', '')
     source = widget_value.get('source', '')
+    body = ''
 
     if widget_type == 'html':
         body = widget_value.get('raw_html', '')

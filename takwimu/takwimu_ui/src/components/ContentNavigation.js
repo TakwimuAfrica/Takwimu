@@ -13,12 +13,11 @@ const styles = theme => ({
     padding: '1.125rem 1.625rem'
   },
   topicLinks: {
-    '& > button:nth-child(n)': {
+    '& > a:nth-child(n)': {
       marginRight: '3.125rem'
     }
   },
   topic: {
-    color: theme.palette.primary.main,
     textDecoration: 'underline'
   },
   topicSelected: {},
@@ -38,6 +37,8 @@ function ContentNavigation({
   generateHref,
   generateTitle,
   onClick,
+  linksPrimaryColor,
+  linksSecondaryColor,
   ...props
 }) {
   return (
@@ -51,9 +52,8 @@ function ContentNavigation({
           <Link
             key={generateHref(index)}
             href={generateHref(index)}
-            component="button"
             variant="body2"
-            color={current === index ? 'textPrimary' : 'primary'}
+            color={current === index ? linksSecondaryColor : linksPrimaryColor}
             className={classNames({
               [classes.topic]: current !== index
             })}
@@ -75,11 +75,15 @@ ContentNavigation.propTypes = {
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
   generateTitle: PropTypes.func.isRequired,
-  onClick: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired,
+  linksPrimaryColor: PropTypes.string,
+  linksSecondaryColor: PropTypes.string
 };
 
 ContentNavigation.defaultProps = {
-  contentTitle: ''
+  contentTitle: '',
+  linksPrimaryColor: 'primary',
+  linksSecondaryColor: 'textPrimary'
 };
 
 export default withStyles(styles)(ContentNavigation);

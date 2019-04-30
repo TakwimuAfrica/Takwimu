@@ -75,10 +75,7 @@ function DropDownButton({
           alignItems="center"
         >
           <Grid item component="span">
-            <img
-              alt={`${title} Icon`}
-              src={isHighlighted || isActive ? iconActive : icon}
-            />
+            <img alt="" src={isHighlighted || isActive ? iconActive : icon} />
           </Grid>
           <Grid item component="span">
             <Typography
@@ -94,7 +91,7 @@ function DropDownButton({
           <Grid item component="span">
             <img
               className={classes.img}
-              alt="Arrow"
+              alt=""
               src={
                 // eslint-disable-next-line no-nested-ternary
                 isActive ? upArrow : isHighlighted ? downArrowGreen : downArrow
