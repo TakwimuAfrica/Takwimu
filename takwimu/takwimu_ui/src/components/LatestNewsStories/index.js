@@ -27,7 +27,12 @@ function LatestNewsStories({
   classes,
   takwimu: {
     page: {
-      latest_news_stories: { title, description, stories }
+      latest_news_stories: {
+        title,
+        description,
+        read_more_link_title: readMore,
+        stories
+      }
     }
   },
   width
@@ -62,9 +67,7 @@ function LatestNewsStories({
         )}
         <Grid item xs={12}>
           <A href="https://medium.com/takwimu-africa" underline="none">
-            <Button classes={{ root: classes.buttonRoot }}>
-              Read more stories on Medium
-            </Button>
+            <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
           </A>
         </Grid>
         {stories && stories.length > 0 && (

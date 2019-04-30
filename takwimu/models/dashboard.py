@@ -986,7 +986,7 @@ class WhatYouCanDoWithTakwimuBlock(blocks.StreamBlock):
 
 
 class MakingOfTakwimuContentBlock(blocks.StructBlock):
-    title = blocks.CharBlock(default="Making of Takwimu", max_length=1024)
+    title = blocks.CharBlock(default="The Making of Takwimu", max_length=1024)
     description = blocks.RichTextBlock(required=False, default="<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>")
     link = blocks.URLBlock(default="https://www.youtube-nocookie.com/embed/DvDCCETHsTo")
 
@@ -1005,6 +1005,7 @@ class MakingOfTakwimuBlock(blocks.StreamBlock):
 class LatestNewsStoriesContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default="Latest News & Stories", max_length=1024)
     description = blocks.RichTextBlock(required=False, default="<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>")
+    read_more_link_title = blocks.CharBlock(default="Read more stories on Medium", max_length=1024)
 
 
 class LatestNewsStoriesBlock(blocks.StreamBlock):
