@@ -1,31 +1,18 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Grid, withStyles } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 
-import AnalysisContent from '../../components/AnalysisContent';
-import AnalysisTableOfContent from '../../components/AnalysisContent/TableOfContent';
-import Section from '../../components/Section';
+import AnalysisContent from '../components/AnalysisContent';
+import AnalysisTableOfContent from '../components/AnalysisContent/TableOfContent';
+import ContentPage from '../components/ContentPage';
 
-const styles = theme => ({
-  root: {},
-  aside: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '10.5rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '14rem'
-    }
+const styles = () => ({
+  root: {
+    marginBottom: '5.5rem'
   },
-  main: {
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '44.671875rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '59.5625rem'
-    }
+  asideRoot: {
+    marginTop: '3.1875rem'
   }
 });
 
@@ -79,6 +66,7 @@ class AnalysisPage extends React.Component {
             }
           } = this.props;
           const paths = window.location.pathname.split(`/profiles/${slug}/`);
+
           let foundIndex = -1;
           if (paths.length === 2) {
             const sectionSlug = paths[1].replace('/', '');
@@ -86,11 +74,13 @@ class AnalysisPage extends React.Component {
               item => item.meta.slug === sectionSlug
             );
           }
+
           this.setState(prevState => {
-            let { current, analysis } = prevState;
+            let { current, topicIndex, analysis } = prevState;
             if (foundIndex !== -1) {
               current = foundIndex;
             }
+
             if (analysis) {
               if (foundIndex !== -1) {
                 // Adjust for `Country Overview`
@@ -98,7 +88,19 @@ class AnalysisPage extends React.Component {
               }
               analysis = analysis.concat(json.items);
             }
-            return { current, analysis };
+
+            const { hash } = window.location;
+            if (hash.length) {
+              const topicId = hash.replace('#', '');
+              const foundTopicIndex = analysis[current].body.findIndex(
+                body => body.id === topicId
+              );
+              if (foundTopicIndex !== -1) {
+                topicIndex = foundTopicIndex;
+              }
+            }
+
+            return { current, topicIndex, analysis };
           });
         });
       }
@@ -119,26 +121,24 @@ class AnalysisPage extends React.Component {
     const { analysis, current, topicIndex } = this.state;
     const { classes, takwimu } = this.props;
     return analysis !== null ? (
-      <Section>
-        <Grid container justify="space-between">
-          <div className={classes.aside}>
-            <AnalysisTableOfContent
-              country={takwimu.country}
-              content={analysis}
-              current={current}
-              onChangeContent={this.changeContent}
-            />
-          </div>
-          <div className={classes.main}>
-            <AnalysisContent
-              content={analysis[current]}
-              onChange={this.changeTopic}
-              takwimu={takwimu}
-              topicIndex={topicIndex}
-            />
-          </div>
-        </Grid>
-      </Section>
+      <ContentPage
+        aside={
+          <AnalysisTableOfContent
+            country={takwimu.country}
+            content={analysis}
+            current={current}
+            onChangeContent={this.changeContent}
+          />
+        }
+        classes={{ root: classes.root, aside: classes.asideRoot }}
+      >
+        <AnalysisContent
+          content={analysis[current]}
+          onChange={this.changeTopic}
+          takwimu={takwimu}
+          topicIndex={topicIndex}
+        />
+      </ContentPage>
     ) : null;
   }
 }
