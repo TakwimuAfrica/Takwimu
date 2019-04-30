@@ -936,7 +936,7 @@ class PageSerializer(serializers.ModelSerializer):
         fields = ['title', 'description', 'slug']
 
 
-class FeaturedAnalysisContentBlock(blocks.StructBlock):
+class FeaturedAnalysisPageBlock(blocks.StructBlock):
     name = 'featured_analysis'
     featured_page = blocks.PageChooserBlock(target_model=ProfileSectionPage)
     from_country = blocks.ChoiceBlock(
@@ -955,10 +955,24 @@ class FeaturedAnalysisContentBlock(blocks.StructBlock):
         representation['country'] = country
         return representation
 
+class FeaturedAnalysisPageChooserBlock(blocks.StreamBlock):
+    featured_analysis_page = FeaturedAnalysisPageBlock()
+
+class FeaturedAnalysisContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default='Featured Analysis', max_length=1024)
+    featured_analyses = FeaturedAnalysisPageChooserBlock(max_num=3)
+    read_analysis_link_title = blocks.CharBlock(default='Read the full analysis', max_length=1024)
+    view_profile_link_title = blocks.CharBlock(default='View country profile', max_length=1024)
 
 class FeaturedAnalysisBlock(blocks.StreamBlock):
     featured_analysis_content = FeaturedAnalysisContentBlock()
 
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(FeaturedAnalysisBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
 
 class UseOfTakwimuBlock(blocks.StructBlock):
     title = blocks.CharBlock(max_length=1024)
@@ -1033,7 +1047,7 @@ class IndexPage(ModelMeta, Page):
     tagline = RichTextField(default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con <a href=\"/about\">find out more about us</a></p>',
                                            verbose_name='Description')
 
-    featured_analysis = StreamField(FeaturedAnalysisBlock(required=False, max_num=3), blank=True)
+    featured_analysis = StreamField(FeaturedAnalysisBlock(required=False, max_num=1), blank=True)
 
     featured_data = StreamField(FeaturedDataBlock(required=False, max_num=2), blank=True)
 
@@ -1099,6 +1113,7 @@ class IndexPage(ModelMeta, Page):
             latest_news_stories = {
                 'title': self.latest_news_stories[0].value['title'],
                 'description': str(self.latest_news_stories[0].value['description']),
+                'read_more_link_title': str(self.latest_news_stories[0].value['read_more_link_title']),
             }
             social_media_settings = SocialMediaSetting.for_site(self.get_site())
             latest_news_stories.update(get_takwimu_stories(social_media_settings, return_dict=True))

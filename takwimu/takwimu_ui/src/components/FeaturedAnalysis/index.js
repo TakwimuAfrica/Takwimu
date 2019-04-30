@@ -34,32 +34,48 @@ class FeaturedAnalysis extends React.Component {
   render() {
     const {
       classes,
-      takwimu: { featured_analysis: featuredAnalysis }
+      takwimu: {
+        page: {
+          featured_analysis: { value: featuredAnalysis }
+        }
+      }
     } = this.props;
+    if (!featuredAnalysis) {
+      return null;
+    }
+
+    const {
+      title,
+      featured_analyses: featuredAnalyses,
+      read_analysis_link_title: readAnalysisTitle,
+      view_profile_link_title: viewProfileTitle
+    } = featuredAnalysis;
     const { current } = this.state;
 
     return (
-      <Section title="Featured Analysis" variant="h2">
+      <Section title={title} variant="h2">
         <Grid
           container
           justify="flex-start"
           alignItems="stretch"
           className={classes.root}
         >
-          {featuredAnalysis && featuredAnalysis.length ? (
+          {featuredAnalyses && featuredAnalyses.length > 0 && (
             <React.Fragment>
               <CurrentAnalysis
-                content={featuredAnalysis[current].value}
+                content={featuredAnalyses[current]}
                 classes={{ content: classes.content }}
+                readAnalysisTitle={readAnalysisTitle}
+                viewProfileTitle={viewProfileTitle}
               />
               <AnalysisList
-                content={featuredAnalysis}
+                content={featuredAnalyses}
                 current={current}
                 onClick={this.handleClick}
                 classes={{ content: classes.list }}
               />
             </React.Fragment>
-          ) : null}
+          )}
         </Grid>
       </Section>
     );
@@ -69,17 +85,19 @@ class FeaturedAnalysis extends React.Component {
 FeaturedAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    featured_analysis: PropTypes.arrayOf(
-      PropTypes.shape({
-        value: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          description: PropTypes.string.isRequired,
-          slug: PropTypes.string.isRequired,
-          country_slug: PropTypes.string.isRequired,
-          country_code: PropTypes.string.isRequired
+    page: PropTypes.shape({
+      featured_analysis: PropTypes.arrayOf(
+        PropTypes.shape({
+          value: PropTypes.shape({
+            title: PropTypes.string.isRequired,
+            description: PropTypes.string.isRequired,
+            slug: PropTypes.string.isRequired,
+            country_slug: PropTypes.string.isRequired,
+            country_code: PropTypes.string.isRequired
+          }).isRequired
         }).isRequired
-      }).isRequired
-    ).isRequired
+      ).isRequired
+    }).isRequired
   }).isRequired
 };
 
