@@ -889,7 +889,7 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
-class FeaturedDataContentBlock(blocks.StructBlock):
+class FeaturedDataWidgetBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     country = blocks.ChoiceBlock(required=True,
                                  choices=[
@@ -926,8 +926,22 @@ class FeaturedDataContentBlock(blocks.StructBlock):
     description = blocks.TextBlock(
         required=False, label='Description of the data')
 
+class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
+    featured_data_widget = FeaturedDataWidgetBlock()
+
+class FeaturedDataContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default='Featured Data', max_length=1024)
+    featured_data = FeaturedDataWidgetChooserBlock(max_num=2)
+
 class FeaturedDataBlock(blocks.StreamBlock):
     featured_data_content = FeaturedDataContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(FeaturedDataBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
 
 
 class PageSerializer(serializers.ModelSerializer):
@@ -1049,7 +1063,7 @@ class IndexPage(ModelMeta, Page):
 
     featured_analysis = StreamField(FeaturedAnalysisBlock(required=False, max_num=1), blank=True)
 
-    featured_data = StreamField(FeaturedDataBlock(required=False, max_num=2), blank=True)
+    featured_data = StreamField(FeaturedDataBlock(required=False, max_num=1), blank=True)
 
     what_you_can_do_with_takwimu = StreamField(WhatYouCanDoWithTakwimuBlock(required=False, max_num=1), blank=True)
 

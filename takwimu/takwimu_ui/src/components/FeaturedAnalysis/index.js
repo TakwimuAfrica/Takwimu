@@ -86,17 +86,21 @@ FeaturedAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      featured_analysis: PropTypes.arrayOf(
-        PropTypes.shape({
-          value: PropTypes.shape({
-            title: PropTypes.string.isRequired,
-            description: PropTypes.string.isRequired,
-            slug: PropTypes.string.isRequired,
-            country_slug: PropTypes.string.isRequired,
-            country_code: PropTypes.string.isRequired
-          }).isRequired
+      featured_analysis: PropTypes.shape({
+        value: PropTypes.shape({
+          title: PropTypes.string.isRequired,
+          featured_analyses: PropTypes.arrayOf(
+            PropTypes.shape({
+              value: PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                description: PropTypes.string.isRequired,
+                slug: PropTypes.string.isRequired,
+                country: PropTypes.shape({}).isRequired
+              }).isRequired
+            }).isRequired
+          ).isRequired
         }).isRequired
-      ).isRequired
+      }).isRequired
     }).isRequired
   }).isRequired
 };

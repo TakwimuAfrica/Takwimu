@@ -219,7 +219,7 @@ DataContainer.propTypes = {
 DataContainer.defaultProps = {
   id: '',
   featuredData: null,
-  widget: null
+  widget: {}
 };
 
 export default withStyles(styles)(DataContainer);
