@@ -341,7 +341,7 @@ class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
     summary = blocks.RichTextBlock(required=False,
-                                   default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>')
+                                   default='')
 
     # Since this block will only have only one of widget type, there is no need
     # to return a list; return the first item
