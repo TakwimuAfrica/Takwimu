@@ -2,9 +2,7 @@
 {% load jsonify staticfiles sass_tags %}
 
 {% block content %}
-  <div class="container">
-    <div id="takwimuSearchResults"></div>
-  </div>
+  <div id="takwimuSearchResults"></div>
 {% endblock %}
 
 {% block body_javascript_extra %}
@@ -12,10 +10,9 @@
 
   <script>
     var takwimu = window.takwimu || {};
+    takwimu.page = takwimu.page || {};
+    takwimu.page.id = 'search';
     var search = {};
     search['searchQuery'] = '{{ search_query }}';
-    search['searchResults'] = {{ search_results | safe }};
-
-    takwimu.search = search;
   </script>
 {% endblock body_javascript_extra %}

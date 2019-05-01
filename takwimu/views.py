@@ -247,114 +247,12 @@ class SearchView(TemplateView):
     """
     template_name = 'search_results.html'
 
-    def get(self, request, *args, **kwargs):
-        query = request.GET.get('q', '')
-        orderby = request.GET.get('orderby', 'relevance')
-        countries_filter = request.GET.getlist('country[]')
-        topics_filter = request.GET.getlist('topic[]')
-
-        self.profilepages = ProfilePage.objects.live()
-        self.profilesectionpages = ProfileSectionPage.objects.live()
-
-        self.topics_widgets_map = {}
-        self.create_results_map()
-
-        self.items = []
-        self.countries = OrderedDict()
-        self.topics = OrderedDict()
-
-        operator = 'or'
-        strip_chars = string.whitespace
-        if query.startswith('"') and query.endswith('"'):
-            # search in quotes means phrase search
-            operator = 'and'
-            strip_chars += '"'
-
-        search_query = query.strip(strip_chars)
-        results = TakwimuTopicSearch().search(search_query, operator,
-                                              country_filters=countries_filter,
-                                              category_filters=topics_filter)
-
-        for result in results:
-            parent_page_id = result['parent_page_id']
-            page = None
-            if result['parent_page_type'] == 'ProfileSectionPage':
-                page = self.profilesectionpages.get(id=parent_page_id)
-            elif result['parent_page_type'] == 'ProfilePage':
-                page = self.profilepages.get(id=parent_page_id)
-
-            if page:
-                country, category, _ = get_page_details(page)
-                result['country'] = country
-                result['category'] = category
-                self.countries[country] = 1
-                self.topics[category] = 1
-
-                id = result['content_id']
-                data_point = self.topics_widgets_map.get(id)
-
-                result['dataPoint'] =  {}
-                result['dataPoint']['title'] = data_point.value['title']
-                if result['content_type'] == 'topic':
-                    result['dataPoint']['summary'] = data_point.value['summary']
-
-                result['url'] = page.get_url(request)
-                self.items.append(result)
-
-        if orderby == 'location':
-            self.items = sorted(self.items, key=itemgetter('country'))
-
-        return render(request, self.template_name, {
-            'search_query': query,
-            'orderby': orderby,
-            'query_params': {
-                'countries': countries_filter,
-                'topics': topics_filter,
-            },
-            'search_results': {
-                'items': self.items,
-                'countries': list(self.countries.keys()),
-                'topics': list(self.topics.keys()),
-            },
-        })
-
-    def get_topic_from_page(self, topic_id, page):
-        for topic in page.body:
-            if topic.id == topic_id:
-                return topic
-
-    def create_results_map(self):
-        for profilepage in self.profilepages:
-            for topic in profilepage.body:
-                self.topics_widgets_map[topic.id] = topic
-
-                for indicator in topic.value['indicators']:
-                    for widget in indicator.value['widgets']:
-                        self.topics_widgets_map[widget.id] = widget
-
-        for profilesectionpage in self.profilesectionpages:
-            for topic in profilesectionpage.body:
-                self.topics_widgets_map[topic.id] = topic
-
-                for indicator in topic.value['indicators']:
-                    for widget in indicator.value['widgets']:
-                        self.topics_widgets_map[widget.id] = widget
-
     def get_context_data(self, **kwargs):
-        json_data = open('takwimu/fixtures/sdg.json')
-        data = json.load(json_data)
-
+        query = self.request.GET.get('q', '')
         context = super(SearchView, self).get_context_data(
-            **kwargs)
-        context['sdgs'] = data
-
-        context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
-
+        **kwargs)
+        context['search_query'] = query
         return context
-
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
 
