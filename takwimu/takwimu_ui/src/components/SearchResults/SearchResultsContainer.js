@@ -149,6 +149,8 @@ class SearchResultsContainer extends React.Component {
 
   handleFilterClick(category) {
     this.setState({
+      activePage: 0,
+      startIndex: 0,
       filter: category
     });
   }
