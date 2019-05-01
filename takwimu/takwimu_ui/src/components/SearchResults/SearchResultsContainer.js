@@ -1,14 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
-import { withStyles, ButtonBase } from '@material-ui/core';
-import Typography from '@material-ui/core/Typography';
-import Grid from '@material-ui/core/Grid';
-import Link from '@material-ui/core/Link';
+import { withStyles, ButtonBase, Grid, Typography } from '@material-ui/core';
 import classNames from 'classnames';
 import SearchResultItem from './SearchResultItem';
 
 const styles = theme => ({
-  root: {},
+  root: {
+    flexGrow: 1
+  },
   searchResultsList: {
     paddingTop: '1.5rem',
     paddingBottom: '3rem',
@@ -33,7 +32,9 @@ const styles = theme => ({
   filterItem: {
     display: 'inline-block',
     marginLeft: '1rem',
-    textDecoration: 'underline'
+    textDecoration: 'underline',
+    color: theme.palette.primary.main,
+    fontSize: theme.typography.body2.fontSize
   },
   filterActive: {
     color: theme.palette.text.primary,
@@ -45,10 +46,7 @@ const styles = theme => ({
   paginationContainer: {
     padding: '3rem'
   },
-  pagginationButton: {
-    color: theme.palette.primary.main,
-    fontSize: theme.typography.body2.fontSize
-  },
+  pagginationButton: {},
   borderDiv: {
     borderStyle: 'solid',
     borderBottom: '4px',
@@ -65,46 +63,38 @@ function RenderPaginator({
   activePage,
   handleNextClick,
   handlePreviousClick,
+  handlePageClick,
   endIndex
 }) {
-  const numPages = Math.floor(items / 10) + 1;
+  const numPages = Math.floor(items / 10);
   const pages = Array.from({ length: numPages }, (v, k) => k + 1);
 
   return (
     <div className={classes.pagesList}>
-      {activePage > 0 ? (
+      {activePage > 0 && (
         <ButtonBase
-          className={classNames([
-            classes.filterItem,
-            classes.pagginationButton
-          ])}
+          className={classes.filterItem}
           onClick={handlePreviousClick}
         >
           Previous
         </ButtonBase>
-      ) : null}
+      )}
       {pages.map(page => (
-        <Link
+        <ButtonBase
           className={classNames([
             classes.filterItem,
             { [classes.filterActive]: page === activePage + 1 }
           ])}
-          href="/search"
+          onClick={() => handlePageClick(page)}
         >
           {page}
-        </Link>
+        </ButtonBase>
       ))}
-      {endIndex !== items ? (
-        <ButtonBase
-          className={classNames([
-            classes.filterItem,
-            classes.pagginationButton
-          ])}
-          onClick={handleNextClick}
-        >
+      {endIndex !== items && (
+        <ButtonBase className={classes.filterItem} onClick={handleNextClick}>
           Next
         </ButtonBase>
-      ) : null}
+      )}
     </div>
   );
 }
@@ -114,6 +104,7 @@ RenderPaginator.propTypes = {
   activePage: PropTypes.number.isRequired,
   handleNextClick: PropTypes.func.isRequired,
   handlePreviousClick: PropTypes.func.isRequired,
+  handlePageClick: PropTypes.func.isRequired,
   endIndex: PropTypes.number.isRequired
 };
 export const Paginator = withStyles(styles)(RenderPaginator);
@@ -123,12 +114,15 @@ class SearchResultsContainer extends React.Component {
     super(props);
 
     this.state = {
-      activePage: 1,
-      startIndex: 10
+      activePage: 0,
+      startIndex: 0,
+      filter: 'All'
     };
 
     this.handleNextClick = this.handleNextClick.bind(this);
     this.handlePreviousClick = this.handlePreviousClick.bind(this);
+    this.handlePageClick = this.handlePageClick.bind(this);
+    this.handleFilterClick = this.handleFilterClick.bind(this);
   }
 
   handleNextClick() {
@@ -145,30 +139,50 @@ class SearchResultsContainer extends React.Component {
     }));
   }
 
+  handlePageClick(pageNum) {
+    const startIndex = (pageNum - 1) * 10;
+    this.setState({
+      activePage: pageNum - 1,
+      startIndex
+    });
+  }
+
+  handleFilterClick(category) {
+    this.setState({
+      filter: category
+    });
+  }
+
   render() {
-    const {
-      classes,
-      results: { items }
-    } = this.props;
-    const { activePage, startIndex } = this.state;
+    const { classes, results } = this.props;
+    const { activePage, startIndex, filter } = this.state;
 
+    let filteredResults = results;
+    // filter results with result_type equals to state's filter
+    if (filter !== 'All') {
+      filteredResults = results.filter(
+        resultItem => resultItem.result_type === filter
+      );
+    }
+
+    // compose show result string
     let resultIndexText = '';
-    const resultsLength = items.length;
-    let endIndex = 0;
-
+    let endIndex = 10;
+    const resultsLength = filteredResults.length;
     if (resultsLength > 10) {
-      endIndex = startIndex + 10 * (activePage + 1);
+      endIndex += 10 * activePage;
 
       if (resultsLength - startIndex < 10) {
         endIndex = startIndex + (resultsLength - startIndex);
       }
       resultIndexText = `Results ${startIndex + 1} - ${endIndex} of `;
     }
+
     return (
       <div className={classes.root}>
         <Grid className={classes.resultsFilter}>
           <Typography item variant="body2" className={classes.showResult}>
-            {`Showing ${resultIndexText}${items.length} results`}
+            {`Showing ${resultIndexText}${filteredResults.length} results`}
           </Typography>
           <Grid item className={classes.filter}>
             <Typography
@@ -179,41 +193,48 @@ class SearchResultsContainer extends React.Component {
             >
               Show:
             </Typography>
-            <Link className={classes.filterItem} href="/search">
-              All Results
-            </Link>
-            <Link className={classes.filterItem} href="/search">
-              Analysis Results
-            </Link>
-            <Link className={classes.filterItem} href="/search">
-              Data Results
-            </Link>
+            {['All', 'Analysis', 'Data'].map(type => (
+              <ButtonBase
+                className={classNames([
+                  classes.filterItem,
+                  { [classes.filterActive]: filter === type }
+                ])}
+                onClick={() => this.handleFilterClick(type)}
+              >
+                {`${type} Results`}
+              </ButtonBase>
+            ))}
           </Grid>
         </Grid>
         <div className={classes.borderDiv} />
-        <div className={classes.searchResultsList}>
-          {items.slice(startIndex, endIndex).map(result => (
-            <SearchResultItem
-              resultType="Analysis"
-              country={result.country}
-              link={result.url}
-              title={result.title}
-              summary={result.summary}
-              key={result.id}
-            />
-          ))}
-        </div>
+        {results.length > 0 ? (
+          <div className={classes.searchResultsList}>
+            {filteredResults.slice(startIndex, endIndex).map(result => (
+              <SearchResultItem
+                resultType={result.result_type}
+                country={result.country}
+                link={result.link}
+                title={result.title}
+                summary={result.summary}
+                key={result.content_id}
+              />
+            ))}
+          </div>
+        ) : (
+          <Typography variant="h2"> No Results Found</Typography>
+        )}
         <div className={classes.borderDiv} />
 
         <div className={classes.paginationContainer}>
           <Typography variant="body2">
-            {`Showing ${resultIndexText}${items.length} results`}
+            {`Showing ${resultIndexText}${filteredResults.length} results`}
           </Typography>
           <Paginator
-            items={items.length}
+            items={filteredResults.length}
             activePage={activePage}
             handleNextClick={this.handleNextClick}
             handlePreviousClick={this.handlePreviousClick}
+            handlePageClick={this.handlePageClick}
             endIndex={endIndex}
           />
         </div>
@@ -224,7 +245,7 @@ class SearchResultsContainer extends React.Component {
 
 SearchResultsContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  results: PropTypes.shape({}).isRequired
+  results: PropTypes.shape([]).isRequired
 };
 
 export default withStyles(styles)(SearchResultsContainer);

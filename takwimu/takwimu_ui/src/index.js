@@ -21,7 +21,8 @@ import AboutUsPage from './pages/AboutUs';
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
-  profile: window.profileData
+  profile: window.profileData,
+  search: window.search
 };
 
 const renderApp = (Component, id, props = PROPS) => {
@@ -31,12 +32,6 @@ const renderApp = (Component, id, props = PROPS) => {
 
     ReactDOM.render(<App {...props} />, el);
   }
-};
-
-const handleSearchClick = searchTerm => {
-  alert(
-    `You have clicked search icon. And here's your search Term${searchTerm}`
-  );
 };
 
 const renderHomepage = () => {
@@ -119,11 +114,20 @@ const renderAboutUsPage = () => {
 const renderSearchResultsPage = () => {
   const el = document.getElementById('takwimuSearchResults');
   if (el) {
-    renderApp(
-      SearchResults,
-      'takwimuSearchResults',
-      Object.assign({}, PROPS, { handleSearchClick })
-    );
+    const { searchQuery } = PROPS.search;
+    fetch(`/api/search/?q=${searchQuery}&format=json`)
+      .then(response => response.json())
+      .then(data => {
+        if (data.length) {
+          const searchResults = data;
+          const search = Object.assign({}, PROPS.search, {
+            searchResults
+          });
+          const props = Object.assign({}, PROPS, { search });
+
+          renderApp(SearchResults, 'takwimuSearchResults', props);
+        }
+      });
   }
 };
 

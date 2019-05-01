@@ -29,37 +29,61 @@ const styles = theme => ({
   }
 });
 
-function SearchInput({ classes, handleSearchClick, query }) {
-  return (
-    <div className={classes.root}>
-      <InputBase
-        id="searchInput"
-        classes={{ root: classes.searchInput }}
-        disableUnderline
-        value={query}
-        endAdornment={
-          <InputAdornment position="end">
-            <IconButton
-              classes={{ root: classes.searchInputButton }}
-              onClick={handleSearchClick()}
-            >
-              <SearchIcon
-                fontSize="inherit"
-                color="primary"
-                classes={{ colorPrimary: classes.iconStyle }}
-              />
-            </IconButton>
-          </InputAdornment>
-        }
-      />
-    </div>
-  );
+class SearchInput extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchTerm: ''
+    };
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSearchClick = this.handleSearchClick.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({ searchTerm: event.target.value });
+  }
+
+  handleSearchClick() {
+    const { query } = this.props;
+    const { searchTerm } = this.state;
+    if (query !== searchTerm) {
+      window.location = `/search/?q=${searchTerm}`;
+    }
+  }
+
+  render() {
+    const { classes, query } = this.props;
+    return (
+      <div className={classes.root}>
+        <InputBase
+          id="searchInput"
+          classes={{ root: classes.searchInput }}
+          disableUnderline
+          defaultValue={query}
+          onChange={this.handleChange}
+          endAdornment={
+            <InputAdornment position="end">
+              <IconButton
+                classes={{ root: classes.searchInputButton }}
+                onClick={this.handleSearchClick}
+              >
+                <SearchIcon
+                  fontSize="inherit"
+                  color="primary"
+                  classes={{ colorPrimary: classes.iconStyle }}
+                />
+              </IconButton>
+            </InputAdornment>
+          }
+        />
+      </div>
+    );
+  }
 }
 
 SearchInput.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  query: PropTypes.string.isRequired,
-  handleSearchClick: PropTypes.func.isRequired
+  query: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(SearchInput);

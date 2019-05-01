@@ -13,12 +13,11 @@ const styles = () => ({
   }
 });
 
-function SearchResults({ classes, takwimu: { search }, handleSearchClick }) {
-  const { searchQuery, searchResults } = search;
+function SearchResults({ classes, search: { searchQuery, searchResults } }) {
   return (
     <Section classes={{ root: classes.root }}>
       <Typography variant="h3">Search Results</Typography>
-      <SearchInput query={searchQuery} handleSearchClick={handleSearchClick} />
+      <SearchInput query={searchQuery} />
       <SearchResultsContainer results={searchResults} />
     </Section>
   );
@@ -26,10 +25,10 @@ function SearchResults({ classes, takwimu: { search }, handleSearchClick }) {
 
 SearchResults.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  takwimu: PropTypes.shape({
-    search: PropTypes.shape({}).isRequired
-  }).isRequired,
-  handleSearchClick: PropTypes.func.isRequired
+  search: PropTypes.shape({
+    searchQuery: PropTypes.string.isRequired,
+    searchResults: PropTypes.shape([]).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(SearchResults);
