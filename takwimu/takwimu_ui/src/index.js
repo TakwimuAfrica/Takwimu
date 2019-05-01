@@ -118,15 +118,13 @@ const renderSearchResultsPage = () => {
     fetch(`/api/search/?q=${searchQuery}&format=json`)
       .then(response => response.json())
       .then(data => {
-        if (data.length) {
-          const searchResults = data;
-          const search = Object.assign({}, PROPS.search, {
-            searchResults
-          });
-          const props = Object.assign({}, PROPS, { search });
+        const searchResults = data;
+        const search = Object.assign({}, PROPS.search, {
+          searchResults
+        });
+        const props = Object.assign({}, PROPS, { search });
 
-          renderApp(SearchResults, 'takwimuSearchResults', props);
-        }
+        renderApp(SearchResults, 'takwimuSearchResults', props);
       });
   }
 };

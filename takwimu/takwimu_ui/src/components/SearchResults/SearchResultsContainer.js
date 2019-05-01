@@ -90,7 +90,7 @@ function RenderPaginator({
           {page}
         </ButtonBase>
       ))}
-      {endIndex !== items && (
+      {endIndex !== items && items !== 0 && (
         <ButtonBase className={classes.filterItem} onClick={handleNextClick}>
           Next
         </ButtonBase>
@@ -209,7 +209,7 @@ class SearchResultsContainer extends React.Component {
           </Grid>
         </Grid>
         <div className={classes.borderDiv} />
-        {results.length > 0 ? (
+        {filteredResults.length > 0 ? (
           <div className={classes.searchResultsList}>
             {filteredResults.slice(startIndex, endIndex).map(result => (
               <SearchResultItem
@@ -223,7 +223,9 @@ class SearchResultsContainer extends React.Component {
             ))}
           </div>
         ) : (
-          <Typography variant="h2"> No Results Found</Typography>
+          <div className={classes.searchResultsList}>
+            <Typography variant="h3"> No Results Found</Typography>
+          </div>
         )}
         <div className={classes.borderDiv} />
 
