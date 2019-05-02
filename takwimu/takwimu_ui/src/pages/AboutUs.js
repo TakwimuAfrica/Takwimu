@@ -29,6 +29,20 @@ class AboutUsPage extends React.Component {
     this.changeActiveContent = this.changeActiveContent.bind(this);
   }
 
+  componentDidMount() {
+    const {
+      takwimu: { page }
+    } = this.props;
+    const { activeContent } = page;
+    const currentIndex = contentHeadings.findIndex(
+      x => x.link === activeContent
+    );
+
+    if (currentIndex !== -1) {
+      this.changeActiveContent(currentIndex);
+    }
+  }
+
   changeActiveContent(index) {
     this.setState({
       current: index
@@ -80,6 +94,7 @@ class AboutUsPage extends React.Component {
 AboutUsPage.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    page: PropTypes.shape({}).isRequired,
     content: PropTypes.string.isRequired,
     methodology: PropTypes.string.isRequired,
     faqs: PropTypes.shape({}).isRequired,

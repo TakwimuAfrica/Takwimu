@@ -30,73 +30,57 @@ const styles = theme => ({
   }
 });
 
-class AboutContent extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.showContent = this.showContent.bind(this);
-  }
-
-  showContent(currentContent) {
-    const { changeActiveContent } = this.props;
-    return () => {
-      changeActiveContent(currentContent);
-    };
-  }
-
-  render() {
-    const {
-      classes,
-      content,
-      methodology,
-      relatedContent,
-      current,
-      contentHeadings,
-      faqs,
-      services,
-      socialMedia
-    } = this.props;
-
-    return (
-      <React.Fragment>
-        <AboutUsContentNav
-          current={current}
-          contentHeadings={contentHeadings}
-          changeActiveContent={this.showContent}
-        />
-        <Typography variant="h2" className={classes.title}>
-          About Us
-        </Typography>
-        <ContentNavigation
-          contentHeadings={contentHeadings}
-          current={current}
-          changeActiveContent={this.showContent}
-        />
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title="About Takwimu"
-          value={content}
-          id="about"
-          component={ContentSection}
-        />
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title="Methodology"
-          value={methodology}
-          id="methodology"
-          component={ContentSection}
-        />
-        <Services
-          classes={{ root: classes.section }}
-          services={services}
-          id="services"
-        />
-        <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
-        <AboutWhereToNext socialMedia={socialMedia} />
-        <RelatedContent relatedContent={relatedContent} />
-      </React.Fragment>
-    );
-  }
+function AboutContent({
+  classes,
+  content,
+  methodology,
+  relatedContent,
+  current,
+  contentHeadings,
+  changeActiveContent,
+  faqs,
+  services,
+  socialMedia
+}) {
+  return (
+    <React.Fragment>
+      <AboutUsContentNav
+        current={current}
+        contentHeadings={contentHeadings}
+        changeActiveContent={changeActiveContent}
+      />
+      <Typography variant="h2" className={classes.title}>
+        About
+      </Typography>
+      <ContentNavigation
+        contentHeadings={contentHeadings}
+        current={current}
+        changeActiveContent={changeActiveContent}
+      />
+      <RichTextSection
+        classes={{ root: classes.section }}
+        title="About Takwimu"
+        value={content}
+        id="about"
+        component={ContentSection}
+      />
+      <RichTextSection
+        classes={{ root: classes.section }}
+        title="Methodology"
+        value={methodology}
+        id="methodology"
+        component={ContentSection}
+      />
+      <Services
+        classes={{ root: classes.section }}
+        services={services}
+        id="services"
+      />
+      <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
+      <AboutWhereToNext socialMedia={socialMedia} />
+      <RelatedContent relatedContent={relatedContent} />
+    </React.Fragment>
+  );
 }
 
 AboutContent.propTypes = {

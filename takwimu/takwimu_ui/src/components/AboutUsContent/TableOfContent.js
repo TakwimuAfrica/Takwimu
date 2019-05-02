@@ -20,8 +20,11 @@ function AboutUsTableOfContent({
   changeActiveContent
 }) {
   const generateHref = index => {
+    if (index === 0) {
+      return `/about`;
+    }
     const item = contentHeadings[index];
-    return `#${item.link}`;
+    return `/about/${item.link}`;
   };
 
   return (
