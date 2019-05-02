@@ -11,7 +11,7 @@ import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
 
-import DataContainer from '../FeaturedData/DataContainer';
+import DataContainer from '../DataContainer';
 
 const styles = {
   root: {
