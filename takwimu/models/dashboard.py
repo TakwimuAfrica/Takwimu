@@ -416,6 +416,23 @@ TWITTER_CARD = (
 )
 
 
+class HeroContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default='Actionable insights for African changemakers', max_length=1024)
+    tagline = blocks.RichTextBlock(default='<p>Data driven analysis on development policies, programmes & outcomes in 10 African countries <a href=\"/about\">find out more about us</a></p>')
+    watch_video_link_title = blocks.CharBlock(default='Watch the overview video', max_length=1024)
+
+
+class HeroBlock(blocks.StreamBlock):
+    hero = HeroContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(HeroBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
 class LinkBlock(blocks.StreamBlock):
     url = blocks.StructBlock([
         ('title', blocks.TextBlock()),
@@ -1058,8 +1075,7 @@ class IndexPage(ModelMeta, Page):
     """
     template = 'takwimu/home_page.html'
 
-    tagline = RichTextField(default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con <a href=\"/about\">find out more about us</a></p>',
-                                           verbose_name='Description')
+    hero = StreamField(HeroBlock(required=False, max_num=1), blank=True)
 
     featured_analysis = StreamField(FeaturedAnalysisBlock(required=False, max_num=1), blank=True)
 
@@ -1093,7 +1109,7 @@ class IndexPage(ModelMeta, Page):
     }
 
     content_panels = Page.content_panels + [
-        FieldPanel('tagline'),
+        StreamFieldPanel('hero'),
         StreamFieldPanel('featured_analysis'),
         StreamFieldPanel('featured_data'),
         StreamFieldPanel('what_you_can_do_with_takwimu'),
@@ -1109,7 +1125,7 @@ class IndexPage(ModelMeta, Page):
     ]
 
     api_fields = [
-        APIField('tagline'),
+        APIField('hero'),
         APIField('featured_analysis'),
         APIField('featured_data'),
         APIField('what_you_can_do_with_takwimu'),
