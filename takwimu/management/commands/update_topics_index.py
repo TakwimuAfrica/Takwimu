@@ -142,3 +142,5 @@ class Command(BaseCommand):
 
                     self.stdout.write(
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
+
+        browser.quit()
