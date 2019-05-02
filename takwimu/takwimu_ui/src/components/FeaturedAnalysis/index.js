@@ -99,7 +99,7 @@ FeaturedAnalysis.propTypes = {
               }).isRequired
             }).isRequired
           ).isRequired
-        }).isRequired
+        })
       }).isRequired
     }).isRequired
   }).isRequired

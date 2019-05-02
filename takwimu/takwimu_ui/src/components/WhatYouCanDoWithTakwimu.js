@@ -99,7 +99,7 @@ WhatYouCanDoWithTakwimu.propTypes = {
               })
             })
           )
-        }).isRequired
+        })
       }).isRequired
     }).isRequired
   }).isRequired

@@ -85,8 +85,10 @@ LatestNewsStories.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
       latest_news_stories: PropTypes.shape({
-        description: PropTypes.string.isRequired,
-        stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+        title: PropTypes.string,
+        description: PropTypes.string,
+        read_more_link_title: PropTypes.string,
+        stories: PropTypes.arrayOf(PropTypes.shape({}))
       }).isRequired
     }).isRequired
   }).isRequired,

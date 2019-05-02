@@ -118,13 +118,13 @@ Hero.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
-      making_of_takwimu: PropTypes.shape({
+      hero: PropTypes.shape({
         value: PropTypes.shape({
           title: PropTypes.string.isRequired,
           tagline: PropTypes.string.isRequired,
           watch_video_link_title: PropTypes.string.isRequired
         }).isRequired
-      }).isRequired
+      })
     }).isRequired
   }).isRequired
 };

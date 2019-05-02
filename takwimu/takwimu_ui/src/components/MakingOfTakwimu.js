@@ -65,7 +65,7 @@ MakingOfTakwimu.propTypes = {
           title: PropTypes.string.isRequired,
           description: PropTypes.string.isRequired,
           link: PropTypes.string.isRequired
-        }).isRequired
+        })
       }).isRequired
     }).isRequired
   }).isRequired
