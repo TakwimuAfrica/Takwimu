@@ -28,7 +28,7 @@ function AboutUsContentNavigation({
       return `/about/`;
     }
     const item = contentHeadings[index];
-    return `/about/${item.link}`;
+    return `/${item.link}`;
   };
   const generateTitle = index => contentHeadings[index].title;
 

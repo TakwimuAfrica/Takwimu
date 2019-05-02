@@ -163,11 +163,7 @@ class Navigation extends React.Component {
           <Link color="textSecondary" className={classes.link} href="/about">
             About Us
           </Link>
-          <Link
-            color="textSecondary"
-            className={classes.link}
-            href="/about/faqs"
-          >
+          <Link color="textSecondary" className={classes.link} href="/faqs">
             FAQs
           </Link>
           <Link
@@ -256,7 +252,7 @@ class Navigation extends React.Component {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/about/faqs">
+              <Link className={classes.link} href="/faqs">
                 FAQs
               </Link>
             </MenuItem>

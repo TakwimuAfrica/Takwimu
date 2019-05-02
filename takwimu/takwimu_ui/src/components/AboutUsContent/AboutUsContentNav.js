@@ -54,7 +54,7 @@ function AboutContentNav({
       return `/about/`;
     }
     const item = contentHeadings[index];
-    return `/about/${item.link}`;
+    return `/${item.link}`;
   };
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>

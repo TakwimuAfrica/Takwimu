@@ -24,7 +24,7 @@ function AboutUsTableOfContent({
       return `/about/`;
     }
     const item = contentHeadings[index];
-    return `/about/${item.link}`;
+    return `/${item.link}`;
   };
 
   return (
