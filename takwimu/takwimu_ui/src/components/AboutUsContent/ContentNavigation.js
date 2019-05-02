@@ -25,7 +25,7 @@ function AboutUsContentNavigation({
 }) {
   const generateHref = index => {
     if (index === 0) {
-      return `/about`;
+      return `/about/`;
     }
     const item = contentHeadings[index];
     return `/about/${item.link}`;
