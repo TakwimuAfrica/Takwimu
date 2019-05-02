@@ -340,6 +340,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
 class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
+    summary = blocks.RichTextBlock(required=False,
+                                   default='')
 
     # Since this block will only have only one of widget type, there is no need
     # to return a list; return the first item
