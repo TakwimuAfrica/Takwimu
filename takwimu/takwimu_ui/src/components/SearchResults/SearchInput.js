@@ -61,6 +61,11 @@ class SearchInput extends React.Component {
           disableUnderline
           defaultValue={query}
           onChange={this.handleChange}
+          onKeyPress={e => {
+            if (e.key === 'Enter') {
+              this.handleSearchClick(e);
+            }
+          }}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
