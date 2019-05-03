@@ -113,7 +113,7 @@ class Navigation extends React.Component {
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <Link href="/">
-                <img alt="logo" src={logoWhite} height={22} />
+                <img alt="logo" src={logoWhite} height={19} />
               </Link>
             </Grid>
 

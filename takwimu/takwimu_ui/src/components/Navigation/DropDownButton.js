@@ -22,6 +22,9 @@ const styles = theme => ({
       margin: '1.563rem'
     }
   },
+  item: {
+    padding: '7px'
+  },
   rootCenter: {
     justifyContent: 'center'
   },
@@ -69,15 +72,18 @@ function DropDownButton({
       >
         <Grid
           container
-          spacing={16}
           component="span"
           justify="space-around"
           alignItems="center"
         >
-          <Grid item component="span">
-            <img alt="" src={isHighlighted || isActive ? iconActive : icon} />
+          <Grid item component="span" className={classes.item}>
+            <img
+              alt=""
+              src={isHighlighted || isActive ? iconActive : icon}
+              height={22}
+            />
           </Grid>
-          <Grid item component="span">
+          <Grid item component="span" className={classes.item}>
             <Typography
               variant="body1"
               color={
@@ -88,7 +94,7 @@ function DropDownButton({
               {title}
             </Typography>
           </Grid>
-          <Grid item component="span">
+          <Grid item component="span" className={classes.item}>
             <img
               className={classes.img}
               alt=""
