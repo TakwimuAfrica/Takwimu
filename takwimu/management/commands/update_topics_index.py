@@ -1,15 +1,6 @@
-import os
 from django.core.management.base import BaseCommand, CommandError
-from django.core.management import call_command
-from django.utils.text import slugify
-
-from bs4 import BeautifulSoup
-from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
-from takwimu.utils.helpers import COUNTRIES
-from django.conf import settings
-
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_widget_data, get_page_details
 
@@ -144,3 +135,4 @@ class Command(BaseCommand):
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
 
         browser.quit()
+
