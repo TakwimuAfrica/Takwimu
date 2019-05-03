@@ -15,14 +15,19 @@ const styles = () => ({
   }
 });
 
-function RelatedContent({ classes, relatedContent }) {
-  const firstBatch = relatedContent.slice(0, 4);
-  const secondBatch = relatedContent.slice(4, 8);
+function RelatedContent({ classes, content: { value: relatedContent } }) {
+  if (!relatedContent) {
+    return null;
+  }
+
+  const { title, related_links: relatedLinks } = relatedContent;
+  const firstBatch = relatedLinks.slice(0, 4);
+  const secondBatch = relatedLinks.slice(4, 8);
 
   return (
     firstBatch.length > 0 && (
       <Section
-        title="Related Content"
+        title={title}
         variant="h3"
         classes={{ root: classes.sectionRoot }}
       >
@@ -42,7 +47,20 @@ function RelatedContent({ classes, relatedContent }) {
 
 RelatedContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  content: PropTypes.shape({
+    value: PropTypes.shape({
+      title: PropTypes.string,
+      related_links: PropTypes.arrayOf(
+        PropTypes.shape({
+          type: PropTypes.string,
+          value: PropTypes.shape({
+            title: PropTypes.string,
+            link: PropTypes.string
+          })
+        })
+      )
+    })
+  }).isRequired
 };
 
 export default withStyles(styles)(RelatedContent);

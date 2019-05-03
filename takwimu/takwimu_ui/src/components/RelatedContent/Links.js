@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 
 import { withStyles, Link, Tooltip, Typography } from '@material-ui/core';
 
+import A from '../A';
+
 const styles = theme => ({
   root: {},
   list: {},
@@ -39,16 +41,31 @@ function Links({ classes, items }) {
               placement="bottom-start"
               classes={{ tooltip: classes.tooltip }}
             >
-              <Link
-                href={item.value.value.link}
-                variant="inherit"
-                color="inherit"
-                underline="always"
-                noWrap
-                className={classes.listItem}
-              >
-                {item.value.value.title}
-              </Link>
+              {/* Only relative URLs should be opened on the same page. */}
+              {/* Otherwise, they should be opened in new tab */}
+              {/^\/(?!\/)/.test(item.value.value.link) ? (
+                <Link
+                  href={item.value.value.link}
+                  variant="inherit"
+                  color="inherit"
+                  underline="always"
+                  noWrap
+                  className={classes.listItem}
+                >
+                  {item.value.value.title}
+                </Link>
+              ) : (
+                <A
+                  href={item.value.value.link}
+                  variant="inherit"
+                  color="inherit"
+                  underline="always"
+                  noWrap
+                  className={classes.listItem}
+                >
+                  {item.value.value.title}
+                </A>
+              )}
             </Tooltip>
           </li>
         ))}
