@@ -695,6 +695,13 @@ class ContactUsPage(Page):
         APIField('social_media'),
     ]
 
+class SearchPage(Page):
+    def get_context(self, request, *args, **kwargs):
+        context = super(SearchPage, self).get_context(request, *args, **kwargs)
+        context['content'] = request.GET.get('q', '')
+        retrun context
+
+
 
 class SocialMedia(Orderable):
     name = models.TextField()

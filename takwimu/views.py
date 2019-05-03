@@ -238,22 +238,6 @@ class SearchAPIView(APIView):
         return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)
 
 
-class SearchView(TemplateView):
-    """
-    Search View
-    -----------
-    Displays search results.
-
-    """
-    template_name = 'search_results.html'
-
-    def get_context_data(self, **kwargs):
-        query = self.request.GET.get('q', '')
-        context = super(SearchView, self).get_context_data(
-        **kwargs)
-        context['search_query'] = query
-        return context
-
 class IndicatorsGeographyDetailView(GeographyDetailView):
 
     def get(self, request, *args, **kwargs):
