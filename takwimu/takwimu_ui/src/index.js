@@ -77,18 +77,9 @@ const renderAboutUsPage = () => {
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {
-          const {
-            content,
-            methodology,
-            related_content: relatedContent
-          } = data.items[0];
-          const takwimu = Object.assign({}, PROPS.takwimu, {
-            content,
-            methodology,
-            related_content: relatedContent
-          });
-          const props = Object.assign({}, PROPS, { takwimu });
-          renderApp(AboutUsPage, 'takwimuAboutUsPage', props);
+          Object.assign(PROPS.takwimu.page, data.items[0]);
+
+          renderApp(AboutUsPage, 'takwimuAboutUsPage');
         }
       });
   }
