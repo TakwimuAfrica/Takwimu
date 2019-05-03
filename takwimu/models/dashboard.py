@@ -31,7 +31,8 @@ from wazimap.models import Geography
 
 from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
                                    get_takwimu_stories, get_takwimu_faqs,
-                                   get_takwimu_services)
+                                   get_takwimu_services, get_takwimu_profile_view_country_content,
+                                   get_takwimu_profile_navigation, get_takwimu_profile_read_next)
 
 logger = logging.getLogger(__name__)
 
@@ -528,7 +529,13 @@ class ProfileSectionPage(ModelMeta, Page):
         APIField('country',
                  serializer=serializers.DictField(source='get_country')),
         APIField('description'),
+        APIField('profile_navigation',
+                 serializer=serializers.DictField(source='get_profile_navigation')),
         APIField('body'),
+        APIField('read_next',
+                 serializer=serializers.DictField(source='get_read_next')),
+        APIField('view_country_content',
+                 serializer=serializers.DictField(source='get_view_country_content')),
         APIField('related_content'),
         APIField('promotion_image'),
         APIField('date'),
@@ -564,6 +571,7 @@ class ProfileSectionPage(ModelMeta, Page):
     def get_context(self, request):
         context = super(ProfileSectionPage, self).get_context(request)
 
+        context['country'] = self.get_country()
         context['meta'] = self.as_meta(request)
 
         return context
@@ -583,6 +591,18 @@ class ProfileSectionPage(ModelMeta, Page):
                     'slug': slugify(names['name'])
                 }
         return {}
+
+    def get_profile_navigation(self):
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
+        return get_takwimu_profile_navigation(profiles_settings)
+
+    def get_read_next(self):
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
+        return get_takwimu_profile_read_next(profiles_settings)
+
+    def get_view_country_content(self):
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
+        return get_takwimu_profile_view_country_content(profiles_settings)
 
     def __str__(self):
         return f"{self.get_parent().title} - {self.title}"
@@ -613,6 +633,8 @@ class ProfilePage(ModelMeta, Page):
     Profile Page
     -----------
     '''
+    label = models.CharField(default="Politics", max_length=1024, verbose_name='label',
+        help_text="Title of profile name i.e. county name doesn't explain what the page contains")
     geo = models.ForeignKey(Geography, on_delete=models.SET_NULL,
                             blank=True, null=True, db_constraint=False,
                             limit_choices_to={'geo_level': 'country'})
@@ -625,11 +647,10 @@ class ProfilePage(ModelMeta, Page):
         on_delete=models.SET_NULL,
         related_name='+'
     )
-    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
-
     body = StreamField([
         ('topic', TopicBlock())
     ], blank=True)
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
     # Social media: Twitter card
 
@@ -656,10 +677,17 @@ class ProfilePage(ModelMeta, Page):
         APIField('country',
                  serializer=serializers.DictField(source='get_country')),
         APIField('title'),
+        APIField('label'),
         APIField('geo'),
         APIField('date'),
         APIField('document'),
+        APIField('profile_navigation',
+                 serializer=serializers.DictField(source='get_profile_navigation')),
         APIField('body'),
+        APIField('read_next',
+                 serializer=serializers.DictField(source='get_read_next')),
+        APIField('view_country_content',
+                 serializer=serializers.DictField(source='get_view_country_content')),
         APIField('related_content'),
     ]
 
@@ -673,6 +701,12 @@ class ProfilePage(ModelMeta, Page):
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+                FieldPanel('label'),
+            ],
+            heading="Label",
+            classname="collapsible",
+        ),
         FieldPanel('geo'),
         DocumentChooserPanel('document'),
         StreamFieldPanel('body'),
@@ -707,12 +741,26 @@ class ProfilePage(ModelMeta, Page):
                 }
         return {}
 
+    def get_profile_navigation(self):
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
+        return get_takwimu_profile_navigation(profiles_settings)
+
+    def get_read_next(self):
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
+        return get_takwimu_profile_read_next(profiles_settings)
+
+    def get_view_country_content(self):
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
+        return get_takwimu_profile_view_country_content(profiles_settings)
+
     def get_absolute_url(self):
         return self.full_url
 
     def get_context(self, request):
         context = super(ProfilePage, self).get_context(request)
 
+        context['country'] = self.get_country()
+        profiles_settings = CountryProfilesSetting.for_site(self.get_site())
         context['meta'] = self.as_meta(request)
 
         return context
@@ -720,7 +768,7 @@ class ProfilePage(ModelMeta, Page):
 
 class AboutTakwimuContentBlock(blocks.StructBlock):
     label = blocks.CharBlock(default="About Takwimu", max_length=255,
-                             help_text="Short title used in navigation, etc."),
+                             help_text="Short title used in navigation, etc.")
     title = blocks.CharBlock(default="About Takwimu", max_length=1024)
     description = blocks.RichTextBlock(required=False, default=DEFAULT_ABOUT_TEXT)
 
@@ -738,7 +786,7 @@ class AboutTakwimuBlock(blocks.StreamBlock):
 
 class MethodologyContentBlock(blocks.StructBlock):
     label = blocks.CharBlock(default="Methodology", max_length=255,
-                             help_text="Short title used in navigation, etc."),
+                             help_text="Short title used in navigation, etc.")
     title = blocks.CharBlock(default="Methodology", max_length=1024)
     description = blocks.RichTextBlock(required=False, default=DEFAULT_DESCRIPTION_TEXT)
 
@@ -754,6 +802,7 @@ class MethodologyBlock(blocks.StreamBlock):
         return {}
 
 class AboutPage(ModelMeta, Page):
+    content_navigation_title = models.CharField(default="On this page", max_length=1024, verbose_name='title')
     about_takwimu = StreamField(AboutTakwimuBlock(required=False, max_num=1), blank=True)
     methodology = StreamField(MethodologyBlock(required=False, max_num=1), blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
@@ -779,6 +828,8 @@ class AboutPage(ModelMeta, Page):
     }
 
     api_fields = [
+        APIField('content_navigation',
+                 serializer=serializers.DictField(source='get_content_navigation')),
         APIField('about_takwimu'),
         APIField('methodology'),
         APIField('services',
@@ -791,6 +842,12 @@ class AboutPage(ModelMeta, Page):
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
+        MultiFieldPanel([
+                FieldPanel('content_navigation_title'),
+            ],
+            heading="Content navigation",
+            classname="collapsible",
+        ),
         StreamFieldPanel('about_takwimu'),
         StreamFieldPanel('methodology'),
         StreamFieldPanel('related_content'),
@@ -805,6 +862,14 @@ class AboutPage(ModelMeta, Page):
 
         context['meta'] = self.as_meta(request)
         return context
+
+    def get_content_navigation(self):
+        return {
+            'type': 'content_navigation',
+            'value': {
+                'title': self.content_navigation_title
+            }
+        }
 
     def get_services(self):
         service_settings = SupportServicesSetting.for_site(self.get_site())
@@ -1032,7 +1097,7 @@ class WhatYouCanDoWithTakwimuBlock(blocks.StreamBlock):
 
 class MakingOfTakwimuContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default="The Making of Takwimu", max_length=1024)
-    description = blocks.RichTextBlock(required=False, default="<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>")
+    description = blocks.RichTextBlock(required=False, default="<p>Highlights from the Takwimu design sprint at iHub Kenya.</p>")
     link = blocks.URLBlock(default="https://www.youtube-nocookie.com/embed/DvDCCETHsTo")
 
 
@@ -1292,6 +1357,24 @@ class FAQSetting(BaseSetting):
         verbose_name = 'FAQs'
 
 
+class ViewCountryContentContentBlock(blocks.StructBlock):
+    title = blocks.CharBlock(default='View analysis or data for a specific country', max_length=1024)
+    content_selection_label = blocks.CharBlock(default='Show me', max_length=1024)
+    country_selection_label = blocks.CharBlock(default='for', max_length=1024)
+    view_content_action_label = blocks.CharBlock(default='Go', max_length=1024)
+
+
+class ViewCountryContentBlock(blocks.StreamBlock):
+    view_country_content = ViewCountryContentContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(ViewCountryContentBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
 @register_setting
 class CountryProfilesSetting(BaseSetting):
     BF = models.BooleanField(COUNTRIES['BF']['iso_name'], default=True)
@@ -1304,6 +1387,40 @@ class CountryProfilesSetting(BaseSetting):
     TZ = models.BooleanField(COUNTRIES['TZ']['iso_name'], default=True)
     UG = models.BooleanField(COUNTRIES['UG']['iso_name'], default=False)
     ZM = models.BooleanField(COUNTRIES['ZM']['iso_name'], default=False)
+    other_topics_in_title = models.CharField(default="Other topics in", max_length=1024, verbose_name='title')
+    read_next_title = models.CharField(default="Read next...", max_length=1024, verbose_name='title')
+    view_country_content = StreamField(ViewCountryContentBlock(required=False, max_num=1), blank=True, verbose_name="View Country Content Section")
+
+    panels = [
+        MultiFieldPanel([
+                FieldPanel('BF'),
+                FieldPanel('CD'),
+                FieldPanel('ET'),
+                FieldPanel('KE'),
+                FieldPanel('NG'),
+                FieldPanel('SN'),
+                FieldPanel('ZA'),
+                FieldPanel('TZ'),
+                FieldPanel('UG'),
+                FieldPanel('ZM'),
+            ],
+            heading="Countries",
+            classname="collapsible collapsed",
+        ),
+        MultiFieldPanel([
+                FieldPanel('other_topics_in_title'),
+            ],
+            heading="Profile Navigation",
+            classname="collapsible",
+        ),
+        MultiFieldPanel([
+                FieldPanel('read_next_title'),
+            ],
+            heading="Read Next Section",
+            classname="collapsible",
+        ),
+        StreamFieldPanel('view_country_content'),
+    ]
 
     class Meta:
         verbose_name = 'Country Profiles'
