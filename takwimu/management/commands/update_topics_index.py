@@ -1,8 +1,13 @@
+from bs4 import BeautifulSoup
+from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.utils.text import slugify
+from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.search.utils import get_widget_data, get_page_details
+from takwimu.utils.helpers import COUNTRIES
 
 
 class Command(BaseCommand):

@@ -73,6 +73,136 @@ class TakwimuTopicSearch():
             pass
         self.es.indices.create(self.es_index,
                                settings.TAKWIMU_ES_INDEX_SETTINGS)
+        settings_ = {
+            "properties": {
+                "body": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "category": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "category_tag": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "content_id": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "content_type": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "country": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "country_tag": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "link": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "metadata": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "parent_page_id": {
+                    "type": "long"
+                },
+                "parent_page_type": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "result_type": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "summary": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "title": {
+                    "type": "text",
+                    "fields": {
+                        "keyword": {
+                            "type": "keyword",
+                            "ignore_above": 256
+                        }
+                    }
+                },
+                "suggest": {
+                    "type": "completion"
+                }
+            }
+        }
+
+        self.es.indices.put_mapping(index=self.es_index, body=settings_,
+                                    doc_type=DOC_TYPE)
 
     def search(self, query_string, operator='or', country_filters=None,
                category_filters=None):
@@ -128,7 +258,7 @@ class TakwimuTopicSearch():
     def add_to_index(self, content_id, content_type,
                      country, category, title, body, metadata,
                      parent_page_id, parent_page_type, result_type=None,
-                     link=None, summary=None):
+                     link=None, summary=''):
         """
         - content_id
         - content_type
@@ -156,7 +286,8 @@ class TakwimuTopicSearch():
             'parent_page_type': parent_page_type,
             'result_type': result_type,
             'link': link,
-            'summary': summary
+            'summary': summary,
+            'suggest': ' '.join([title, body, summary, country])
         }
         result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
                                id=content_id)
