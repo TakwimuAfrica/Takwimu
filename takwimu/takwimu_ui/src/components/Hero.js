@@ -120,10 +120,10 @@ Hero.propTypes = {
     page: PropTypes.shape({
       hero: PropTypes.shape({
         value: PropTypes.shape({
-          title: PropTypes.string.isRequired,
-          tagline: PropTypes.string.isRequired,
-          watch_video_link_title: PropTypes.string.isRequired
-        }).isRequired
+          title: PropTypes.string,
+          tagline: PropTypes.string,
+          watch_video_link_title: PropTypes.string
+        })
       })
     }).isRequired
   }).isRequired
