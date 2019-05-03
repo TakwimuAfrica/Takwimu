@@ -700,7 +700,7 @@ class SearchPage(Page):
         context = super(SearchPage, self).get_context(request)
 
         #add content varinale to search template
-        context['content'] = request.GET.get('q', '')
+        context['search_query'] = request.GET.get('q', '')
         return context
 
 
