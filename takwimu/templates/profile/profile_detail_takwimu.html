@@ -27,7 +27,7 @@
   <header class="section-contents"><h1>Demographics</h1></header>
   <div class="section-container">
     {% if not demographics.sex_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -37,7 +37,7 @@
     {% endif %}
 
     {% if not demographics.residence_dist.is_missing %}
-      <section class="clearfix stat-row">
+      <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
         <div class="column-quarter">
           <h3 class="chart-header">Population</h3>
           {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -47,7 +47,7 @@
     {% endif %}
 
     {% if not demographics.child_births_dist.is_missing %}
-      <section class="clearfix stat-row">
+      <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
         <div class="column-quarter">
           <h3 class="chart-header">Child births</h3>
           {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_child_births_dist stat_type='number' %}
@@ -66,7 +66,7 @@
   <header class="section-contents"><h1>Elections</h1></header>
   <div class="section-container">
     {% if not elections.valid_invalid_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -76,7 +76,7 @@
     {% endif %}
 
     {% if not elections.valid_invalid_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -86,7 +86,7 @@
     {% endif %}
 
     {% if not elections.candidate_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -105,7 +105,7 @@
   <header class="section-contents"><h1>Agriculture</h1></header>
   <div class="section-container">
     {% if not crops.crop_distribution.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -124,7 +124,7 @@
         <h1>Health workers distribution</h1>
       </header>
       <div class="section-container">
-        <section class="clearfix stat-row">
+        <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
           <div class="column-third">
             {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio_dist stat_type='number' %}
           </div>
@@ -143,42 +143,42 @@
       </header>
       <div class="section-container">
         {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
-          <section class="clearfix stat-row">
+          <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
             <div class="column-full">
               <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
-          <section class="clearfix stat-row">
+          <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
             <div class="column-full">
               <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
-          <section class="clearfix stat-row">
+          <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
             <div class="column-full">
               <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
-          <section class="clearfix stat-row">
+          <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
             <div class="column-full">
               <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
-          <section class="clearfix stat-row">
+          <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
             <div class="column-full">
               <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
-          <section class="clearfix stat-row">
+          <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
             <div class="column-full">
               <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
             </div>
@@ -194,7 +194,7 @@
   <header class="section-contents"><h1>Official Development Assistance</h1></header>
   <div class="section-container">
     {% if not donors.donor_assistance_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -207,7 +207,7 @@
     {% endif %}
 
     {% if not donors.donor_programmes_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -229,7 +229,7 @@
   <header class="section-contents"><h1>Households</h1></header>
   <div class="section-container">
     {% if not poverty.poverty_residence_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -243,7 +243,7 @@
     {% endif %}
 
     {% if not poverty.poverty_age_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -266,7 +266,7 @@
   <header class="section-contents"><h1>Health</h1></header>
   <div class="section-container">
     {% if not fgm.fgm_age_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -289,7 +289,7 @@
   <header class="section-contents"><h1>Crime Reports</h1></header>
   <div class="section-container">
     {% if not security.is_missing and not security.seized_firearms_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -312,7 +312,7 @@
   <header class="section-contents"><h1>Budget</h1></header>
   <div class="section-container">
     {% if not budget.government_expenditure_dist.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
          <h3 class="chart-header">Population</h3>
          {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -335,7 +335,7 @@
   <header class="section-contents"><h1>World Bank</h1></header>
   <div class="section-container">
     {% if not worldbank.cereal_yield_kg_per_hectare.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -349,7 +349,7 @@
     {% endif %}
 
     {% if not worldbank.agricultural_land.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -363,7 +363,7 @@
     {% endif %}
 
     {% if not worldbank.gini_index.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -377,7 +377,7 @@
     {% endif %}
 
     {% if not worldbank.access_to_basic_services.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -391,7 +391,7 @@
     {% endif %}
 
     {% if not worldbank.primary_school_enrollment.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -405,7 +405,7 @@
     {% endif %}
 
     {% if not worldbank.account_ownership.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -419,7 +419,7 @@
     {% endif %}
 
     {% if not worldbank.youth_unemployment.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -433,7 +433,7 @@
     {% endif %}
 
     {% if not worldbank.adult_literacy_rate.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -447,7 +447,7 @@
     {% endif %}
 
     {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -461,7 +461,7 @@
     {% endif %}
 
     {% if not worldbank.maternal_mortality.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -475,7 +475,7 @@
     {% endif %}
 
     {% if not worldbank.hiv_prevalence.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -489,7 +489,7 @@
     {% endif %}
 
     {% if not worldbank.employment_to_population_ratio.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -503,7 +503,7 @@
     {% endif %}
 
     {% if not worldbank.gdp_per_capita.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -517,7 +517,7 @@
     {% endif %}
 
     {% if not worldbank.primary_education_completion_rate.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -531,7 +531,7 @@
     {% endif %}
 
     {% if not worldbank.secondary_school_enrollment.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -545,7 +545,7 @@
     {% endif %}
 
     {% if not worldbank.nurses_and_midwives.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -559,7 +559,7 @@
     {% endif %}
 
     {% if not worldbank.mobile_phone_subscriptions.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -573,7 +573,7 @@
     {% endif %}
 
     {% if not worldbank.gdp_per_capita_growth.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -587,7 +587,7 @@
     {% endif %}
 
     {% if not worldbank.prevalence_of_undernourishment.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -601,7 +601,7 @@
     {% endif %}
 
     {% if not worldbank.life_expectancy_at_birth.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -615,7 +615,7 @@
    {% endif %}
 
    {% if not worldbank.tax_as_percentage_of_gdp.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -629,7 +629,7 @@
     {% endif %}
 
     {% if not worldbank.births_attended_by_skilled_health_staff.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -643,7 +643,7 @@
     {% endif %}
 
     {% if not worldbank.incidence_of_malaria_per_1000_pop_at_risk.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -657,7 +657,7 @@
     {% endif %}
 
     {% if not worldbank.tax_revenue.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -671,7 +671,7 @@
     {% endif %}
 
     {% if not worldbank.gdp.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
@@ -685,7 +685,7 @@
     {% endif %}
 
     {% if not worldbank.gdp_growth.is_missing %}
-    <section class="clearfix stat-row">
+    <section class="clearfix stat-row">     <div id="takwimuHurumapDataActions"></div>
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}

@@ -18,6 +18,8 @@ import WhatCanYouDo from './components/WhatCanYouDo';
 import AnalysisPage from './pages/Analysis';
 import AboutUsPage from './pages/AboutUs';
 
+import HurumapDataActions from './components/HurumapDataActions';
+
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
@@ -25,12 +27,12 @@ const PROPS = {
 };
 
 const renderApp = (Component, id, props = PROPS) => {
-  const el = document.getElementById(id);
-  if (el) {
+  const els = document.querySelectorAll(`[id='${id}']`);
+  els.forEach(el => {
     const App = withRoot(Component);
 
     ReactDOM.render(<App {...props} />, el);
-  }
+  });
 };
 
 const renderHomepage = () => {
@@ -113,6 +115,7 @@ const renderAboutUsPage = () => {
 // Render common elements
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
+renderApp(HurumapDataActions, 'takwimuHurumapDataActions');
 
 // Render specific pages
 renderAboutUsPage();
