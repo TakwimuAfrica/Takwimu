@@ -106,8 +106,13 @@ class ViewAnalysis extends Component {
   render() {
     const {
       classes,
+      content: { value: countryContent },
       takwimu: { countries }
     } = this.props;
+    if (!countryContent) {
+      return null;
+    }
+
     const { view, countrySlug } = this.state;
     const country = countries.find(c => c.slug === countrySlug);
     const href = hrefForView(view, country);
@@ -115,14 +120,15 @@ class ViewAnalysis extends Component {
       value: c.slug,
       label: c.short_name
     }));
-
     return (
       <Section classes={{ root: classes.root }}>
         <Typography variant="body1" className={classes.title}>
-          View analysis or data for a specific country
+          {countryContent.title}
         </Typography>
         <Grid container direction="row" alignItems="center">
-          <Typography variant="body1">Show me</Typography>
+          <Typography variant="body1">
+            {countryContent.content_selection_label}
+          </Typography>
           <Selection
             items={VIEW_ITEMS}
             value={view}
@@ -130,7 +136,7 @@ class ViewAnalysis extends Component {
           />
           <Typography variant="body1" className={classes.countryText}>
             {' '}
-            for
+            {countryContent.country_selection_label}
           </Typography>
           <Selection
             items={countryItems}
@@ -144,7 +150,7 @@ class ViewAnalysis extends Component {
               label: classes.selectButtonLabel
             }}
           >
-            Go
+            {countryContent.view_content_action_label}
           </Button>
         </Grid>
       </Section>
@@ -154,8 +160,14 @@ class ViewAnalysis extends Component {
 
 ViewAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  content: PropTypes.shape({
+    value: PropTypes.shape({
+      content_selection_label: PropTypes.string,
+      country_selection_label: PropTypes.string,
+      view_content_action_label: PropTypes.string
+    })
+  }).isRequired,
   takwimu: PropTypes.shape({
-    country: PropTypes.shape({}).isRequired,
     countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
   }).isRequired
 };

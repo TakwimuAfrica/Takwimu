@@ -38,13 +38,15 @@ class AnalysisPage extends React.Component {
       }
     } = this.props;
     fetch(
-      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&fields=body,related_content&format=json`
+      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${slug}&fields=*&format=json`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
           const { items: analysis } = json;
           if (analysis.length) {
-            analysis[0].title = 'Country Overview';
+            // For ProfilePage, label is used to provide descriptive title since
+            // title is just the country name
+            analysis[0].title = analysis[0].label;
           }
           this.setState({ id: analysis[0].id, analysis }, this.fetchAnalysis);
         });
@@ -56,7 +58,7 @@ class AnalysisPage extends React.Component {
     const { id } = this.state;
 
     fetch(
-      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body,related_content&descendant_of=${id}&format=json`
+      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${id}&format=json`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
@@ -105,6 +107,7 @@ class AnalysisPage extends React.Component {
   render() {
     const { analysis, current, topicIndex } = this.state;
     const { classes, takwimu } = this.props;
+
     return analysis !== null ? (
       <ContentPage
         aside={
