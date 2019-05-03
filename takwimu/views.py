@@ -233,6 +233,10 @@ class SearchAPIView(APIView):
                 else:
                     results.append(hit)
 
+            #limit search results to 30 items
+            if len(results) > 30:
+                results = results[:30]
+                
             return Response(data=results, status=status.HTTP_200_OK)
 
         return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)
