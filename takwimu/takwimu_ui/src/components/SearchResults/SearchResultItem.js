@@ -38,7 +38,12 @@ function SearchResultItem({
           {country} - {title}
         </Typography>
       </a>
-      <Typography variant="body2">{summary}</Typography>
+      <Typography
+        variant="body2"
+        dangerouslySetInnerHTML={{
+          __html: summary
+        }}
+      />
     </div>
   );
 }
