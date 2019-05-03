@@ -82,7 +82,7 @@ function Hero({ classes, takwimu: { tagline } }) {
                     className={classes.aboutLink}
                     underline="always"
                   >
-                    find out more about us
+                    find out more about Takwimu
                   </Link>
                 </Typography>
               </Grid>
