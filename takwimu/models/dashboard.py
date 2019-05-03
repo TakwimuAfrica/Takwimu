@@ -696,10 +696,12 @@ class ContactUsPage(Page):
     ]
 
 class SearchPage(Page):
-    def get_context(self, request, *args, **kwargs):
-        context = super(SearchPage, self).get_context(request, *args, **kwargs)
+    def get_context(self, request):
+        context = super(SearchPage, self).get_context(request)
+
+        #add content varinale to search template
         context['content'] = request.GET.get('q', '')
-        retrun context
+        return context
 
 
 
