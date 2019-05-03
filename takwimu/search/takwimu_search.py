@@ -196,7 +196,8 @@ class TakwimuTopicSearch():
                     }
                 },
                 "suggest": {
-                    "type": "completion"
+                    "type": "completion",
+                    "analyzer": "ngram_analyzer",
                 }
             }
         }
@@ -287,7 +288,7 @@ class TakwimuTopicSearch():
             'result_type': result_type,
             'link': link,
             'summary': summary,
-            'suggest': ' '.join([title, body, summary, country])
+            'suggest': title
         }
         result = self.es.index(index=self.es_index, doc_type=DOC_TYPE, body=doc,
                                id=content_id)
