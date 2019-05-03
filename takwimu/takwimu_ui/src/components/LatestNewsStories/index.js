@@ -30,7 +30,7 @@ function LatestNewsStories({
       latest_news_stories: {
         title,
         description,
-        read_more_link_title: readMore,
+        read_more_link_label: readMore,
         stories
       }
     }
@@ -87,7 +87,7 @@ LatestNewsStories.propTypes = {
       latest_news_stories: PropTypes.shape({
         title: PropTypes.string,
         description: PropTypes.string,
-        read_more_link_title: PropTypes.string,
+        read_more_link_label: PropTypes.string,
         stories: PropTypes.arrayOf(PropTypes.shape({}))
       }).isRequired
     }).isRequired

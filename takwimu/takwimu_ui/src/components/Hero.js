@@ -72,7 +72,7 @@ function Hero({
     return null;
   }
 
-  const { title, tagline, watch_video_link_title: watchVideoLinkTitle } = hero;
+  const { title, tagline, watch_video_link_label: watchVideoLinkTitle } = hero;
   return (
     <div className={classes.root}>
       <div className={classes.gradient}>
@@ -122,7 +122,7 @@ Hero.propTypes = {
         value: PropTypes.shape({
           title: PropTypes.string,
           tagline: PropTypes.string,
-          watch_video_link_title: PropTypes.string
+          watch_video_link_label: PropTypes.string
         })
       })
     }).isRequired

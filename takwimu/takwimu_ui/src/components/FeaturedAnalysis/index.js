@@ -47,8 +47,8 @@ class FeaturedAnalysis extends React.Component {
     const {
       title,
       featured_analyses: featuredAnalyses,
-      read_analysis_link_title: readAnalysisTitle,
-      view_profile_link_title: viewProfileTitle
+      read_analysis_link_label: readAnalysisTitle,
+      view_profile_link_label: viewProfileTitle
     } = featuredAnalysis;
     const { current } = this.state;
 

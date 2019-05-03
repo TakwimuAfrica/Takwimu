@@ -420,7 +420,7 @@ TWITTER_CARD = (
 class HeroContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default='Actionable insights for African changemakers', max_length=1024)
     tagline = blocks.RichTextBlock(default='<p>Data driven analysis on development policies, programmes & outcomes in 10 African countries <a href=\"/about\">find out more about us</a></p>')
-    watch_video_link_title = blocks.CharBlock(default='Watch the overview video', max_length=1024)
+    watch_video_link_label = blocks.CharBlock(default='Watch the overview video', max_length=1024)
 
 
 class HeroBlock(blocks.StreamBlock):
@@ -1057,8 +1057,8 @@ class FeaturedAnalysisPageChooserBlock(blocks.StreamBlock):
 class FeaturedAnalysisContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default='Featured Analysis', max_length=1024)
     featured_analyses = FeaturedAnalysisPageChooserBlock(max_num=3)
-    read_analysis_link_title = blocks.CharBlock(default='Read the full analysis', max_length=1024)
-    view_profile_link_title = blocks.CharBlock(default='View country profile', max_length=1024)
+    read_analysis_link_label = blocks.CharBlock(default='Read the full analysis', max_length=1024)
+    view_profile_link_label = blocks.CharBlock(default='View country profile', max_length=1024)
 
 class FeaturedAnalysisBlock(blocks.StreamBlock):
     featured_analysis_content = FeaturedAnalysisContentBlock()
@@ -1115,7 +1115,7 @@ class MakingOfTakwimuBlock(blocks.StreamBlock):
 class LatestNewsStoriesContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default="Latest News & Stories", max_length=1024)
     description = blocks.RichTextBlock(required=False, default="<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>")
-    read_more_link_title = blocks.CharBlock(default="Read more stories on Medium", max_length=1024)
+    read_more_link_label = blocks.CharBlock(default="Read more stories on Medium", max_length=1024)
 
 
 class LatestNewsStoriesBlock(blocks.StreamBlock):
@@ -1208,7 +1208,7 @@ class IndexPage(ModelMeta, Page):
             latest_news_stories = {
                 'title': self.latest_news_stories[0].value['title'],
                 'description': str(self.latest_news_stories[0].value['description']),
-                'read_more_link_title': str(self.latest_news_stories[0].value['read_more_link_title']),
+                'read_more_link_label': str(self.latest_news_stories[0].value['read_more_link_label']),
             }
             social_media_settings = SocialMediaSetting.for_site(self.get_site())
             latest_news_stories.update(get_takwimu_stories(social_media_settings, return_dict=True))
