@@ -46,7 +46,7 @@ class SearchInput extends React.Component {
   handleSearchClick() {
     const { query } = this.props;
     const { searchTerm } = this.state;
-    if (query !== searchTerm && searchTerm > 0) {
+    if (query !== searchTerm && searchTerm.length > 0) {
       window.location = `/search/?q=${searchTerm}`;
     }
   }
