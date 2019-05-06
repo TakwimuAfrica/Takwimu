@@ -17,15 +17,14 @@ const styles = theme => ({
       flexDirection: 'row'
     },
     [theme.breakpoints.up('lg')]: {
-      padding: '2.438rem 5.125rem'
+      padding: '2.438rem 2.5rem 2.9375rem 5.375rem'
     }
   },
   box: {
-    width: '18.125rem',
-    height: '16.25rem',
+    width: '19rem',
     display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'flex-start',
     margin: '1.25rem',
     [theme.breakpoints.up('md')]: {
@@ -33,7 +32,14 @@ const styles = theme => ({
     }
   },
   label: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    padding: '17px 0 22px'
+  },
+  title: {
+    marginBottom: '3.0625rem'
+  },
+  description: {
+    fontSize: theme.typography.body1.fontSize
   }
 });
 
@@ -42,7 +48,10 @@ function WhatCanYouDo({
   takwimu: { what_you_can_do_with_takwimu: whatYouCanDo }
 }) {
   return (
-    <Section title="What can you do with Takwimu">
+    <Section
+      title="What you can do with Takwimu"
+      classes={{ title: classes.title }}
+    >
       {whatYouCanDo &&
         whatYouCanDo.research &&
         whatYouCanDo.download &&
@@ -50,34 +59,40 @@ function WhatCanYouDo({
           <Grid
             container
             alignItems="center"
-            justify="space-evenly"
+            justify="space-between"
             className={classes.container}
           >
             <Grid item>
               <div className={classes.box}>
-                <img alt="research" src={reasearchIcon} />
+                <img alt="research" src={reasearchIcon} height={58} />
                 <Typography variant="body1" className={classes.label}>
                   Research
                 </Typography>
-                <Typography variant="body2">{whatYouCanDo.research}</Typography>
+                <Typography variant="body2" className={classes.description}>
+                  {whatYouCanDo.research}
+                </Typography>
               </div>
             </Grid>
             <Grid item>
               <div className={classes.box}>
-                <img alt="download" src={downloadIcon} />
+                <img alt="download" src={downloadIcon} height={58} />
                 <Typography variant="body1" className={classes.label}>
                   Download
                 </Typography>
-                <Typography variant="body2">{whatYouCanDo.download}</Typography>
+                <Typography variant="body2" className={classes.description}>
+                  {whatYouCanDo.download}
+                </Typography>
               </div>
             </Grid>
             <Grid item>
               <div className={classes.box}>
-                <img alt="present" src={presentIcon} />
+                <img alt="present" src={presentIcon} height={58} />
                 <Typography variant="body1" className={classes.label}>
                   Present
                 </Typography>
-                <Typography variant="body2">{whatYouCanDo.present}</Typography>
+                <Typography variant="body2" className={classes.description}>
+                  {whatYouCanDo.present}
+                </Typography>
               </div>
             </Grid>
           </Grid>

@@ -19,6 +19,9 @@ const styles = () => ({
     width: '100%',
     height: '100%',
     border: 0
+  },
+  title: {
+    marginTop: '4.125rem'
   }
 });
 
@@ -27,7 +30,11 @@ function MakingOfTakwimu({
   takwimu: { making_of_takwimu: makingOf }
 }) {
   return (
-    <Section title="The Making of Takwimu" variant="h3">
+    <Section
+      title="The Making of Takwimu"
+      variant="h3"
+      classes={{ title: classes.title }}
+    >
       {makingOf && makingOf.description && (
         <Typography variant="body1">{makingOf.description}</Typography>
       )}
