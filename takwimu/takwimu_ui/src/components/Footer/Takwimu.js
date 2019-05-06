@@ -5,6 +5,8 @@ import { Link, Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import takwimu from '../../assets/images/takwimu-logo.png';
+import takwimu2 from '../../assets/images/takwimu-logo@2x.png';
+import takwimu3 from '../../assets/images/takwimu-logo@3x.png';
 
 const styles = () => ({
   root: {
@@ -20,7 +22,11 @@ const styles = () => ({
 function Takwimu({ classes }) {
   return (
     <div className={classes.root}>
-      <img src={takwimu} alt="Takwimu" />
+      <img
+        src={takwimu}
+        srcSet={`${takwimu2} 2x, ${takwimu3} 3x`}
+        alt="Takwimu"
+      />
       <Typography variant="subtitle2" className={classes.text}>
         Actionable insights for African change makers. Takwimu provides quality
         insights and data-driven analysis to empower African development
