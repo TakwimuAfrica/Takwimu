@@ -148,7 +148,7 @@ function Chart(options) {
     chart.initHovercard();
 
     // time to make the chart
-    chart.draw(options);
+    chart.draw();
     chart.dimensions = {
       height: chart.chartContainer.node().offsetHeight,
       width: chart.chartContainer.node().offsetWidth
@@ -156,20 +156,20 @@ function Chart(options) {
     return chart;
   };
 
-  chart.draw = function(options) {
+  chart.draw = function() {
     chart.chartContainer.classed("chart", true);
 
     // hand off based on desired type of chart
     if (chart.chartType == "pie") {
-      chart.makePieChart(options);
+      chart.makePieChart();
     } else if (
       chart.chartType == "column" ||
       chart.chartType == "grouped_column" ||
       chart.chartType == "histogram"
     ) {
-      chart.makeColumnChart(options);
+      chart.makeColumnChart();
     } else if (chart.chartType == "bar" || chart.chartType == "grouped_bar") {
-      chart.makeBarChart(options);
+      chart.makeBarChart();
     }
     return chart;
   };
@@ -365,7 +365,7 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks(options);
+    chart.addActionLinks();
 
     return chart;
   };
@@ -689,12 +689,12 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks(options);
+    chart.addActionLinks();
 
     return chart;
   };
 
-  chart.makePieChart = function(options) {
+  chart.makePieChart = function() {
     chart.chartContainer.classed("pie-chart", true);
 
     // give the chart display dimensions
@@ -952,17 +952,14 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks(options);
+    chart.addActionLinks();
 
     return chart;
   };
 
-  chart.addActionLinks = function(options) {
-    const container = d3.select(document.getElementById(options.chartContainer).parentNode);
+  chart.addActionLinks = function() {
 
-    if (chart.actionLinks) return;
-
-    chart.actionLinks = container
+    chart.actionLinks = chart.chartContainer
       .insert("div", ":first-child")
       .classed("chart-actions", true);
 
