@@ -974,12 +974,12 @@ function Chart(options) {
     chart.share.append('p')
         .text("Share");
 
-    chart.download = links
+    chart.actionDownload = links
         .append("a")
         .on("click", chart.download);
-    chart.download.append('img')
+    chart.actionDownload.append('img')
         .attr('src', '/static/img/download.svg');
-    chart.download.append('p')
+    chart.actionDownload.append('p')
         .text("Download");
 
     chart.showEmbed = links
@@ -1736,7 +1736,7 @@ function Chart(options) {
 
   chart.download = function() {
     var filter = function filter(node) {
-      return node.className !== "action-links tool-group toggle-sub-group";
+      return node.className !== "chart-actions";
     };
     var bgcolor = "#fff";
     domtoimage
@@ -1745,7 +1745,10 @@ function Chart(options) {
         var link = document.createElement("a");
         link.download = chart.chartChartTitle + ".png";
         link.href = dataUrl;
+
+        document.body.appendChild(link); // Firefox requires this
         link.click();
+        document.body.removeChild(link);
       });
     return false;
   };
