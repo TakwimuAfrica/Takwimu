@@ -368,7 +368,9 @@ class AutoCompleteAPIView(APIView):
             strip_chars += '"'
 
         search_query = query.strip(strip_chars)
-        hits = TakwimuTopicSearch().search(search_query, operator)
+        hits = TakwimuTopicSearch().search(query_string=search_query,
+                                           operator=operator,
+                                           query_type='phrase_prefix')
         suggestions = hits[:5] if len(hits) > 5 else hits
         return Response(data={
             "suggestions": suggestions

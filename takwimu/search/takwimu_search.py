@@ -206,7 +206,7 @@ class TakwimuTopicSearch():
                                     doc_type=DOC_TYPE)
 
     def search(self, query_string, operator='or', country_filters=None,
-               category_filters=None):
+               category_filters=None, query_type='most_fields'):
         """
         Search for query_string using operation applying country and/or
         category filters
@@ -215,7 +215,6 @@ class TakwimuTopicSearch():
         search = Search(using=self.es, index=self.es_index,
                         doc_type=DOC_TYPE).params(size=100)
 
-        query_type = 'most_fields'
         if operator == 'and':
             query_type = 'phrase'
         search = search.query('multi_match', query=query_string,
