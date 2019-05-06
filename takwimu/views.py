@@ -359,18 +359,20 @@ class SearchAPIView(APIView):
 class AutoCompleteAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q', '')
-        suggestions = Search(using=TakwimuTopicSearch().es,
-                             index=TakwimuTopicSearch().es_index).suggest(
-            'topic-suggest', query, completion={'field': 'suggest', "skip_duplicates": True}).execute()
 
-        suggestions = suggestions.to_dict()
+        operator = 'or'
+        strip_chars = string.whitespace
+        if query.startswith('"') and query.endswith('"'):
+            # search in quotes means phrase search
+            operator = 'and'
+            strip_chars += '"'
 
-        results = []
-        for suggest in suggestions['suggest']['topic-suggest']:
-            for i in suggest['options']:
-                results.append({'title': i['_source'].get('title'), 'country': i['_source'].get('country')})
-
-        return Response(data=results)
+        search_query = query.strip(strip_chars)
+        hits = TakwimuTopicSearch().search(search_query, operator)
+        suggestions = hits[:5] if len(hits) > 5 else hits
+        return Response(data={
+            "suggestions": suggestions
+        }, status=status.HTTP_200_OK)
 
 
 
