@@ -73,6 +73,11 @@ const styles = theme => ({
       color: theme.palette.primary.dark,
       textDecoration: 'none'
     }
+  },
+  // override label padding for secondary button/ allow for the 2px border
+  secondaryActionLabel: {
+    paddingTop: '1rem',
+    paddingBottom: '0.9375rem'
   }
 });
 
@@ -128,6 +133,7 @@ function CurrentAnalysis({ classes, content }) {
                 content.country_slug
               }`}
               className={classes.secondaryAction}
+              classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
             >
               View country profile
