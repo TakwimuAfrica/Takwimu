@@ -30,7 +30,7 @@ const styles = theme => ({
     }
   },
   descriptionContainer: {
-    padding: '0 0.625em',
+    padding: '1.25rem 0.625em 0',
     [theme.breakpoints.up('md')]: {
       padding: '0 2.625rem'
     }
