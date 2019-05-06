@@ -8,11 +8,13 @@ import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import ContentNavigation from './ContentNavigation';
 import CountryContent from '../CountryContent';
-import DataContainer from '../FeaturedData/DataContainer';
+import DataContainer from '../DataContainer';
 import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 
-const styles = {
+import profileHeroImage from '../../assets/images/profile-hero-line.png';
+
+const styles = theme => ({
   root: {
     maxWidth: '933px'
   },
@@ -27,9 +29,22 @@ const styles = {
   },
   dataContainer: {
     margin: '0.625rem',
-    width: 'fit-content'
+    width: '100%'
+  },
+  hero: {
+    backgroundImage: `url(${profileHeroImage})`,
+    backgroundPosition: 'center',
+    backgroundPositionY: '-6.25rem',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100%',
+    borderBottomColor: theme.palette.primary.main,
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '0.25rem',
+    marginTop: '0.375rem',
+    width: '100%',
+    height: '21.125rem'
   }
-};
+});
 
 class AnalysisContent extends React.Component {
   constructor(props) {
@@ -62,6 +77,8 @@ class AnalysisContent extends React.Component {
           showContent={this.showContent}
         />
 
+        <div className={classes.hero} />
+
         <div className={classes.root}>
           <Typography className={classes.title} variant="h2">
             {content.body[topicIndex].value.title}
@@ -92,7 +109,7 @@ class AnalysisContent extends React.Component {
                     key={c.id}
                     id={c.id}
                     classes={{ root: classes.dataContainer }}
-                    widget={c.value.widget}
+                    data={c.value.widget}
                   />
                 )}
               </Fragment>

@@ -33,6 +33,9 @@ function LatestNewsStories({
         read_more_link_label: readMore,
         stories
       }
+    },
+    settings: {
+      socialMedia: { medium }
     }
   },
   width
@@ -66,7 +69,7 @@ function LatestNewsStories({
           </Grid>
         )}
         <Grid item xs={12}>
-          <A href="https://medium.com/takwimu-africa" underline="none">
+          <A href={medium} underline="none">
             <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
           </A>
         </Grid>
@@ -89,6 +92,11 @@ LatestNewsStories.propTypes = {
         description: PropTypes.string,
         read_more_link_label: PropTypes.string,
         stories: PropTypes.arrayOf(PropTypes.shape({}))
+      })
+    }).isRequired,
+    settings: PropTypes.shape({
+      socialMedia: PropTypes.shape({
+        medium: PropTypes.string.isRequired
       }).isRequired
     }).isRequired
   }).isRequired,

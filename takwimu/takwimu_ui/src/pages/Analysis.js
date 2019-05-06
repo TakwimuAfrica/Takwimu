@@ -68,6 +68,7 @@ class AnalysisPage extends React.Component {
             }
           } = this.props;
           const paths = window.location.pathname.split(`/profiles/${slug}/`);
+
           let foundIndex = -1;
           if (paths.length === 2) {
             const sectionSlug = paths[1].replace('/', '');
@@ -75,11 +76,13 @@ class AnalysisPage extends React.Component {
               item => item.meta.slug === sectionSlug
             );
           }
+
           this.setState(prevState => {
-            let { current, analysis } = prevState;
+            let { current, topicIndex, analysis } = prevState;
             if (foundIndex !== -1) {
               current = foundIndex;
             }
+
             if (analysis) {
               if (foundIndex !== -1) {
                 // Adjust for `Country Overview`
@@ -87,7 +90,19 @@ class AnalysisPage extends React.Component {
               }
               analysis = analysis.concat(json.items);
             }
-            return { current, analysis };
+
+            const { hash } = window.location;
+            if (hash.length) {
+              const topicId = hash.replace('#', '');
+              const foundTopicIndex = analysis[current].body.findIndex(
+                body => body.id === topicId
+              );
+              if (foundTopicIndex !== -1) {
+                topicIndex = foundTopicIndex;
+              }
+            }
+
+            return { current, topicIndex, analysis };
           });
         });
       }

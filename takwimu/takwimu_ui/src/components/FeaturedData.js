@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import { Grid, withStyles } from '@material-ui/core';
 
-import Section from '../Section';
+import Section from './Section';
 import DataContainer from './DataContainer';
 
 const styles = () => ({
@@ -41,15 +41,9 @@ function FeaturedData({
           alignItems="flex-start"
           className={classes.root}
         >
-          <DataContainer
-            color="secondary"
-            featuredData={featuredDataWidgets[0].value}
-          />
+          <DataContainer color="secondary" data={featuredDataWidgets[0]} />
           {featuredDataWidgets.length > 1 && (
-            <DataContainer
-              color="primary"
-              featuredData={featuredDataWidgets[1].value}
-            />
+            <DataContainer color="primary" data={featuredDataWidgets[1]} />
           )}
         </Grid>
       )}

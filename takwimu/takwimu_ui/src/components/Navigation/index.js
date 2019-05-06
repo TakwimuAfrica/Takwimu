@@ -9,17 +9,18 @@ import {
   Link,
   Drawer,
   IconButton,
-  MenuItem
+  MenuItem,
+  ButtonBase
 } from '@material-ui/core';
 import { Search, MenuOutlined } from '@material-ui/icons';
 
-import classeNames from 'classnames';
-
 import { isWidthUp } from '@material-ui/core/withWidth';
+import classNames from 'classnames';
 import logoWhite from '../../assets/images/logo-white-all.png';
 
 import Layout from '../Layout';
 import DropDowns, { DropDownDrawer } from './DropDowns';
+import SearchDrawer from './SearchDrawer';
 
 const styles = theme => ({
   root: {
@@ -33,6 +34,9 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
     boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
+  },
+  noShadow: {
+    boxShadow: 'unset'
   },
   drawer: {
     backgroundColor: theme.palette.primary.main,
@@ -55,8 +59,9 @@ const styles = theme => ({
       textDecoration: 'none'
     }
   },
-  search: {
-    marginBottom: '-0.313rem'
+  searchButton: {
+    color: theme.palette.text.secondary,
+    marginBottom: '0.313rem' // Move to align icon
   },
   iconLink: {
     margin: '1.375rem 0.7rem'
@@ -98,10 +103,12 @@ class Navigation extends React.Component {
     };
   }
 
-  renderNavBar() {
+  renderNavBar(inDrawer = false) {
     const { classes, width } = this.props;
     return (
-      <nav className={classes.root}>
+      <nav
+        className={classNames(classes.root, { [classes.noShadow]: inDrawer })}
+      >
         <Layout>
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
@@ -166,9 +173,12 @@ class Navigation extends React.Component {
           >
             Contact Us
           </Link>
-          <Link color="textSecondary" className={classes.link} href="/search">
+          <ButtonBase
+            className={classes.searchButton}
+            onClick={this.toggleDrawer('search')}
+          >
             <Search className={classes.search} />
-          </Link>
+          </ButtonBase>
         </Grid>
       </Fragment>
     );
@@ -190,8 +200,17 @@ class Navigation extends React.Component {
             : this.toggleMobileDrawer
         }
       >
-        {isWidthUp('md', width) ? this.renderNavBar() : <div />}
+        {isWidthUp('md', width) ? this.renderNavBar(true) : <div />}
       </DropDownDrawer>
+    );
+  }
+
+  renderSearchDrawer() {
+    const { openDrawer } = this.state;
+    return (
+      <SearchDrawer active={openDrawer === 'search'}>
+        {this.renderNavBar(true)}
+      </SearchDrawer>
     );
   }
 
@@ -219,7 +238,7 @@ class Navigation extends React.Component {
         onBackdropClick={this.toggleMobileDrawer}
       >
         <Grid container direction="column" alignItems="flex-start">
-          {this.renderNavBar()}
+          {this.renderNavBar(true)}
           <MenuList>
             <DropDowns
               page={page}
@@ -243,12 +262,12 @@ class Navigation extends React.Component {
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link
-                className={classeNames([classes.link, classes.iconLink])}
-                href="/search"
+              <ButtonBase
+                className={classes.searchButton}
+                onClick={this.toggleDrawer('search')}
               >
                 <Search className={classes.search} />
-              </Link>
+              </ButtonBase>
             </MenuItem>
           </MenuList>
         </Grid>
@@ -262,6 +281,7 @@ class Navigation extends React.Component {
         {this.renderNavBar()}
         {this.renderMobileDrawer()}
         {this.renderDropDownDrawer()}
+        {this.renderSearchDrawer()}
       </Fragment>
     );
   }
