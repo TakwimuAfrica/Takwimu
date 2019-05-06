@@ -1,6 +1,8 @@
 {% extends 'takwimu/_layouts/page.html' %}
 {% load wagtailcore_tags static jsonify %}
 
+{% block head_title %} {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
+
 {% block body_id %}about{% endblock %}
 
 {% block content %}

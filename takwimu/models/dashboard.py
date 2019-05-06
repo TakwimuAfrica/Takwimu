@@ -1222,6 +1222,8 @@ class IndexPage(ModelMeta, Page):
         context = super(IndexPage, self).get_context(request, *args, **kwargs)
 
         context.update(wagtail_settings(request))
+        if self.hero:
+            context['title'] = self.hero[0].value['title']
         context['meta'] = self.as_meta(request)
 
         return context

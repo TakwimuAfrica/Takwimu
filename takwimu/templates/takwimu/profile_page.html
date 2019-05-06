@@ -2,6 +2,8 @@
 
 {% load staticfiles jsonify sass_tags %}
 
+{% block head_title %} Analysis - {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
+
 {% block head_css %}
   {{ block.super }}
 
