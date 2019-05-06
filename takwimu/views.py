@@ -375,8 +375,6 @@ class AutoCompleteAPIView(APIView):
         }, status=status.HTTP_200_OK)
 
 
-
-
 class IndicatorsGeographyDetailView(GeographyDetailView):
 
     def get(self, request, *args, **kwargs):
