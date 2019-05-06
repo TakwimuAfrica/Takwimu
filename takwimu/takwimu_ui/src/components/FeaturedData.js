@@ -3,7 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import { Grid, withStyles } from '@material-ui/core';
 
-import Section from '../Section';
+import Section from './Section';
 import DataContainer from './DataContainer';
 
 const styles = () => ({
