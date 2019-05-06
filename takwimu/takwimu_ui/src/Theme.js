@@ -152,6 +152,7 @@ const Theme = createMuiTheme({
         borderRadius: '0.75rem',
         borderSize: '00625rem',
         width: '100%',
+        padding: '0',
         '@media (min-width: 960px)': {
           // md
           width: '15.609375rem' // .75 of lg
