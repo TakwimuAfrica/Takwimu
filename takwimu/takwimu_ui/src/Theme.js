@@ -161,6 +161,9 @@ const Theme = createMuiTheme({
           width: '20.8125rem'
         }
       },
+      contained: {
+        boxShadow: 'none'
+      },
       label: {
         paddingTop: '1.125rem',
         paddingBottom: '1.0625rem'
