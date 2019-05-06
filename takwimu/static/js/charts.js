@@ -148,7 +148,7 @@ function Chart(options) {
     chart.initHovercard();
 
     // time to make the chart
-    chart.draw();
+    chart.draw(options);
     chart.dimensions = {
       height: chart.chartContainer.node().offsetHeight,
       width: chart.chartContainer.node().offsetWidth
@@ -156,20 +156,20 @@ function Chart(options) {
     return chart;
   };
 
-  chart.draw = function() {
+  chart.draw = function(options) {
     chart.chartContainer.classed("chart", true);
 
     // hand off based on desired type of chart
     if (chart.chartType == "pie") {
-      chart.makePieChart();
+      chart.makePieChart(options);
     } else if (
       chart.chartType == "column" ||
       chart.chartType == "grouped_column" ||
       chart.chartType == "histogram"
     ) {
-      chart.makeColumnChart();
+      chart.makeColumnChart(options);
     } else if (chart.chartType == "bar" || chart.chartType == "grouped_bar") {
-      chart.makeBarChart();
+      chart.makeBarChart(options);
     }
     return chart;
   };
@@ -365,7 +365,7 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks();
+    chart.addActionLinks(options);
 
     return chart;
   };
@@ -689,12 +689,12 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks();
+    chart.addActionLinks(options);
 
     return chart;
   };
 
-  chart.makePieChart = function() {
+  chart.makePieChart = function(options) {
     chart.chartContainer.classed("pie-chart", true);
 
     // give the chart display dimensions
@@ -952,74 +952,62 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks();
+    chart.addActionLinks(options);
 
     return chart;
   };
 
-  chart.addActionLinks = function() {
-    chart.actionLinks = chart.chartContainer
+  chart.addActionLinks = function(options) {
+    const container = d3.select(document.getElementById(options.chartContainer).parentNode);
+
+    if (chart.actionLinks) return;
+
+    chart.actionLinks = container
       .insert("div", ":first-child")
-      .classed("action-links tool-group toggle-sub-group", true);
+      .classed("chart-actions", true);
 
-    chart.actionLinks
-      .append("a")
-      .text("Chart Options")
-      .append("i")
-      .classed("fa fa-chevron-circle-down", true);
+    var links = chart.actionLinks;
 
-    var links = chart.actionLinks
-      .append("ul")
-      .classed("sub-group", true)
-      .attr("style", "display: none");
 
-    chart.getData = links
-      .append("li")
-      .append("a")
-      .classed("chart-get-data", true)
-      .text("Show data")
-      .on("click", chart.toggleDataDrawer);
+    chart.share = links
+        .append("a");
+    chart.share.append('img')
+        .attr('src', '/static/img/network-connection.svg');
+        links
+    chart.share.append('p')
+        .text("Share");
 
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Embed")
-      .on("click", chart.showEmbedCode);
+    chart.download = links
+        .append("a")
+        .on("click", chart.download);
+    chart.download.append('img')
+        .attr('src', '/static/img/download.svg');
+    chart.download.append('p')
+        .text("Download");
 
     chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Explore data")
-      .attr("href", chart.tableURL);
+        .append("a")
+        .on("click", chart.showEmbedCode);
+    chart.showEmbed.append('img')
+        .attr('src', '/static/img/code.svg');
+    chart.showEmbed.append('p')
+        .text("Embed");
 
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Map data")
-      .attr("href", chart.mapURL);
+    chart.compare = links
+        .append("a")
+        .attr("href", chart.distributionURL);
+    chart.compare.append('img')
+        .attr('src', '/static/img/compare.svg');
+    chart.compare.append('p')
+        .text("Compare");
 
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Compare")
-      .attr("href", chart.distributionURL);
-
-    chart.getChart = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Download")
-      .on("click", chart.download);
-
-    $(chart.actionLinks[0]).hover(function() {
-      $(this)
-        .find(".sub-group")
-        .toggle();
-    });
+    chart.showData = links
+        .append("a")
+        .on("click", chart.toggleDataDrawer);
+    chart.showData.append('img')
+        .attr('src', '/static/img/tablet-reader-31.svg');
+    chart.showData.append('p')
+        .text("Show Data");
   };
 
   chart.fillEmbedCode = function(textarea, align) {
@@ -1164,7 +1152,6 @@ function Chart(options) {
       clicked.classed("opened", false);
     } else {
       clicked.classed("opened", true);
-      clicked.text("Hide data");
 
       // tell Google Analytics about the event
       chart.trackEvent("Charts", "Show data", tableID);

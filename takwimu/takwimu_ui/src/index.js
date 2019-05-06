@@ -18,8 +18,6 @@ import WhatCanYouDo from './components/WhatCanYouDo';
 import AnalysisPage from './pages/Analysis';
 import AboutUsPage from './pages/AboutUs';
 
-import HurumapDataActions from './components/HurumapDataActions';
-
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
@@ -115,7 +113,6 @@ const renderAboutUsPage = () => {
 // Render common elements
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
-renderApp(HurumapDataActions, 'takwimuHurumapDataActions');
 
 // Render specific pages
 renderAboutUsPage();

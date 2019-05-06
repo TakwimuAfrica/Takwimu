@@ -939,3 +939,45 @@ input:focus {
   border: unset;
   box-shadow: unset;
 }
+
+.chart-actions {
+  background-color: white;
+  border-radius: 0.625rem;
+  width: fit-content;
+  width: -moz-fit-content;
+
+  display: flex;
+  flex-direction: row;
+
+  float: right;
+  margin-right: 20px;
+
+  & > a {
+    border-radius: 0;
+    padding: 12px;
+    flex: 0 0 auto;
+    line-height: unset;
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+
+    height: 3.438rem;
+
+    cursor: pointer;
+
+    p {
+      font-size: 0.6rem;
+      font-style: normal;
+      font-family: Muli;
+      font-weight: bold;
+      line-height: normal;
+      font-stretch: normal;
+      letter-spacing: 0.019rem;
+      text-align: center;
+      margin: 0;
+    }
+  }
+}
