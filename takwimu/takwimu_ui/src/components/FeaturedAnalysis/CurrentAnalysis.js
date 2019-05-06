@@ -43,7 +43,8 @@ const styles = theme => ({
     margin: 0
   },
   body: {
-    paddingBottom: '1.875rem'
+    paddingBottom: '1.875rem',
+    lineHeight: 1.55
   },
   actions: {
     marginBottom: '3.0625rem'
@@ -57,6 +58,8 @@ const styles = theme => ({
   },
   secondaryAction: {
     marginTop: '1rem',
+    padding: 0,
+    borderWidth: '0.125rem',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '2.15625rem' // .75 lg
