@@ -26,6 +26,9 @@ function StoryCard({ classes, story }) {
     <Card classes={{ root: classes.root }}>
       <CardMedia
         className={classes.media}
+        component="a"
+        href={story.url}
+        target="_blank"
         image={story.preview_image.url}
         title={story.title}
       />
