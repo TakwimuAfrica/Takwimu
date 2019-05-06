@@ -24,6 +24,7 @@ $font-size-base: 16px;
 html, body {
   font-size: $font-size-base;
   background-color: '#fff';
+  overflow-x: hidden;
 }
 
 html, body, p, * {
@@ -948,23 +949,28 @@ input:focus {
 
   display: flex;
   flex-direction: row;
+  align-items: center;
 
   float: right;
   margin-right: 20px;
 
   & > a {
-    border-radius: 0;
-    padding: 12px;
-    flex: 0 0 auto;
     line-height: unset;
     text-decoration: none;
+
+    padding: 0 0.75rem;
+    margin: 0.75rem 0;
+    height: 2.188rem;
+    border-right: 1px #eaeaea solid;
+
+    &:last-child {
+      border: none;
+    }
 
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
-
-    height: 3.438rem;
 
     cursor: pointer;
 
