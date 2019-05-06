@@ -11,7 +11,7 @@ import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
 
-import DataContainer from '../FeaturedData/DataContainer';
+import DataContainer from '../DataContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 
@@ -30,7 +30,7 @@ const styles = theme => ({
   },
   dataContainer: {
     margin: '0.625rem',
-    width: 'fit-content'
+    width: '100%'
   },
   hero: {
     backgroundImage: `url(${profileHeroImage})`,
