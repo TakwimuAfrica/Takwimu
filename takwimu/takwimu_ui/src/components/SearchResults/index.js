@@ -13,21 +13,46 @@ const styles = () => ({
   }
 });
 
-function SearchResults({ classes, search: { searchQuery, searchResults } }) {
-  return (
-    <Section classes={{ root: classes.root }}>
-      <Typography variant="h3">Search Results</Typography>
-      <SearchInput query={searchQuery} />
-      <SearchResultsContainer results={searchResults} />
-    </Section>
-  );
+class SearchResults extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      searchQuery: '',
+      searchResults: []
+    };
+  }
+
+  componentDidMount() {
+    const {
+      search: { searchQuery }
+    } = this.props;
+    fetch(`/api/search/?q=${searchQuery}&format=json`).then(response => {
+      if (response.status === 200) {
+        response.json().then(json => {
+          const { query, results: searchResults } = json;
+          this.setState({ searchQuery: query, searchResults });
+        });
+      }
+    });
+  }
+
+  render() {
+    const { classes } = this.props;
+    const { searchQuery, searchResults } = this.state;
+    return (
+      <Section classes={{ root: classes.root }}>
+        <Typography variant="h3">Search Results</Typography>
+        <SearchInput query={searchQuery} />
+        <SearchResultsContainer results={searchResults} />
+      </Section>
+    );
+  }
 }
 
 SearchResults.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   search: PropTypes.shape({
-    searchQuery: PropTypes.string.isRequired,
-    searchResults: PropTypes.shape([]).isRequired
+    searchQuery: PropTypes.string.isRequired
   }).isRequired
 };
 

@@ -114,18 +114,7 @@ const renderAboutUsPage = () => {
 const renderSearchResultsPage = () => {
   const el = document.getElementById('takwimuSearchResults');
   if (el) {
-    const { searchQuery } = PROPS.search;
-    fetch(`/api/search/?q=${searchQuery}&format=json`)
-      .then(response => response.json())
-      .then(data => {
-        const searchResults = data;
-        const search = Object.assign({}, PROPS.search, {
-          searchResults
-        });
-        const props = Object.assign({}, PROPS, { search });
-
-        renderApp(SearchResults, 'takwimuSearchResults', props);
-      });
+    renderApp(SearchResults, 'takwimuSearchResults');
   }
 };
 

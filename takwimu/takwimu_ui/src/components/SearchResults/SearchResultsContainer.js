@@ -71,7 +71,7 @@ function RenderPaginator({
 
   return (
     <div className={classes.pagesList}>
-      {activePage > 0 && (
+      {activePage > 0 && items > 0 && (
         <ButtonBase
           className={classes.filterItem}
           onClick={handlePreviousClick}
@@ -90,7 +90,7 @@ function RenderPaginator({
           {page}
         </ButtonBase>
       ))}
-      {endIndex !== items && items !== 0 && (
+      {endIndex < items && items > 0 && (
         <ButtonBase className={classes.filterItem} onClick={handleNextClick}>
           Next
         </ButtonBase>
@@ -233,14 +233,16 @@ class SearchResultsContainer extends React.Component {
           <Typography variant="body2">
             {`Showing ${resultIndexText}${filteredResults.length} results`}
           </Typography>
-          <Paginator
-            items={filteredResults.length}
-            activePage={activePage}
-            handleNextClick={this.handleNextClick}
-            handlePreviousClick={this.handlePreviousClick}
-            handlePageClick={this.handlePageClick}
-            endIndex={endIndex}
-          />
+          {filteredResults.length > 10 && (
+            <Paginator
+              items={filteredResults.length}
+              activePage={activePage}
+              handleNextClick={this.handleNextClick}
+              handlePreviousClick={this.handlePreviousClick}
+              handlePageClick={this.handlePageClick}
+              endIndex={endIndex}
+            />
+          )}
         </div>
       </div>
     );
