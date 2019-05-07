@@ -7,7 +7,7 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
     LegalView, TopicView, SearchView, IndicatorsGeographyDetailView, \
-    SDGIndicatorView, SearchAPIView
+    SDGIndicatorView, SearchAPIView, AutoCompleteAPIView
 from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
@@ -36,6 +36,7 @@ takwimu_urlpatterns = [
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^search/$', SearchView.as_view(), name='search'),
     url(r'^api/search/$', SearchAPIView.as_view(), name='api-search'),
+    url(r'^api/autocomplete/$', AutoCompleteAPIView.as_view(), name='api-autocomplete'),
     url(r'^api/v2/', api_router.urls),
 ]
 
