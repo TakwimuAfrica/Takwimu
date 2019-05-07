@@ -234,7 +234,11 @@ class SearchAPIView(APIView):
                 else:
                     results.append(hit)
 
-            return Response(data=results, status=status.HTTP_200_OK)
+            data = {}
+            data['searchQuery'] = query
+            data['searchResults'] = results
+
+            return Response(data=data, status=status.HTTP_200_OK)
 
         return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)
 
