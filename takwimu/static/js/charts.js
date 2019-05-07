@@ -18,8 +18,56 @@ function Chart(options) {
     // establish our base vars
     chart.chartContainer = d3
       .select("#" + options.chartContainer)
+      .style("margin", "0")
+      .style("position", "relative")
+      .style("width", "75%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
       .append("div")
-      .style("position", "relative");
+      .style("position", "relative")
+      .style("float", "left")
+      .style("width", "50%"); // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
+    chart.chartActions = d3
+      .select("#" + options.chartContainer)
+      .append("div")
+      .style("float", "left")
+      .style("width", "50%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
+      .classed("chart-actions", true);
+
+    chart.chartAnalysis = chart.chartActions
+      .insert("div")
+      .classed("chart-analysis")
+      .style("padding", "0 1.938rem")
+      .style("padding-top", "2.5rem");
+    
+    // TODO : 
+    // const row = document.getElementById(options.chartContainer).parentNode;
+    // const section = row.parentNode;
+    // const rowIndex = Array.prototype.slice.call(
+    //     section.children
+    // )
+    // .indexOf(row);
+    //
+    // chart.chartAnalysis
+    //     .insert("p")
+    //     .classed("title")
+    //     .text(rowIndex > 0 ? "Summary" : "Related analysis")
+    //     .insert("p")
+    //     .classed("description")
+    //     .text("Lorem ipsum dolor sit amec, the related demographic analysis for South Africa");
+
+    const { geo_code: countryCode } = options.geographyData.this;
+    const country = window.takwimu.countries.find(c => c.iso_code === countryCode);
+
+    chart.chartAnalysis
+        .insert("a")
+        .href(`/profiles/${country.slug}`)
+        .classed("chart-analysis", true)
+        // TODO :
+        // .classed(`chart-analysis ${rowIndex > 0 && "chart-analysis--full"}`, true)
+        .insert("p")
+        .text("Read the country analysis");
+        // TODO :
+        // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
+    
 
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
     chart.parentHeight = chart.getParentHeight();
@@ -959,22 +1007,23 @@ function Chart(options) {
 
   chart.addActionLinks = function() {
 
-    chart.actionLinks = chart.chartContainer
+    chart.actionLinks = chart.chartActions
       .insert("div", ":first-child")
-      .classed("chart-actions", true);
+      .style("diplay", "flex")
+      .style("justify-content", "center")
+      .style("padding", "0 1rem")
+      .style("padding-top", "1.25rem")
+      .insert("div")
+      .classed("chart-action-links", true);
 
-    var links = chart.actionLinks;
-
-
-    chart.share = links
+    chart.share = chart.actionLinks
         .append("a");
     chart.share.append('img')
         .attr('src', '/static/img/network-connection.svg');
-        links
     chart.share.append('p')
         .text("Share");
 
-    chart.actionDownload = links
+    chart.actionDownload = chart.actionLinks
         .append("a")
         .on("click", chart.download);
     chart.actionDownload.append('img')
@@ -982,7 +1031,7 @@ function Chart(options) {
     chart.actionDownload.append('p')
         .text("Download");
 
-    chart.showEmbed = links
+    chart.showEmbed = chart.actionLinks
         .append("a")
         .on("click", chart.showEmbedCode);
     chart.showEmbed.append('img')
@@ -990,7 +1039,7 @@ function Chart(options) {
     chart.showEmbed.append('p')
         .text("Embed");
 
-    chart.compare = links
+    chart.compare = chart.actionLinks
         .append("a")
         .attr("href", chart.distributionURL);
     chart.compare.append('img')
@@ -998,7 +1047,7 @@ function Chart(options) {
     chart.compare.append('p')
         .text("Compare");
 
-    chart.showData = links
+    chart.showData = chart.actionLinks
         .append("a")
         .on("click", chart.toggleDataDrawer);
     chart.showData.append('img')

@@ -942,48 +942,128 @@ input:focus {
 }
 
 .chart-actions {
-  background-color: white;
-  border-radius: 0.625rem;
-  width: fit-content;
-  width: -moz-fit-content;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
 
-  display: flex;
-  flex-direction: row;
-  align-items: center;
+    max-width: 23.688rem;
 
-  float: right;
-  margin-right: 20px;
+    background-color: #eeebeb;
 
-  & > a {
-    line-height: unset;
-    text-decoration: none;
+    margin-top: -2.375rem;
+    margin-bottom: -1rem;
 
-    padding: 0 0.75rem;
-    margin: 0.75rem 0;
-    height: 2.188rem;
-    border-right: 1px #eaeaea solid;
+    .chart-analysis {
 
-    &:last-child {
-      border: none;
+        .title {
+            font-family: Muli;
+            font-size: 0.938rem;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+
+        .description {
+            font-family: Muli;
+            font-size: 0.813rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 2;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+
+        cursor: pointer;
+
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+
+        width: 100%;
+
+        padding: 1.125rem 0;
+
+        text-decoration: none;
+        outline: none;
+
+        border-radius: 0.75rem;
+
+        border: solid 2px #29a87c;
+        background-color: #fff;
+
+        p {
+            font-family: 'Muli', sans-serif;
+            font-size: 0.875rem;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            letter-spacing: normal;
+            line-height: normal;
+            text-transform: none;
+
+            color: #29a87c;
+            margin: 0;
+        }
+
+        &--full {
+            border: none;
+            background-color: #29a87c;
+
+            p {
+                color: #fff;
+            }
+        }
     }
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+    .chart-action-links {
+        background-color: white;
+        border-radius: 0.625rem;
+        border: solid 1px #eaeaea;
 
-    cursor: pointer;
+        height: 3.563rem;
 
-    p {
-      font-size: 0.6rem;
-      font-style: normal;
-      font-family: Muli;
-      font-weight: bold;
-      line-height: normal;
-      font-stretch: normal;
-      letter-spacing: 0.019rem;
-      text-align: center;
-      margin: 0;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &>a {
+            width: 4.081rem;
+            height: 1.913rem;
+
+            line-height: unset;
+            text-decoration: none;
+
+            margin: 0.75rem 0;
+            border-right: 0.063rem #eaeaea solid;
+
+            &:last-child {
+                border: none;
+            }
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+            cursor: pointer;
+
+            p {
+                font-size: 0.6rem;
+                font-style: normal;
+                font-family: Muli;
+                font-weight: bold;
+                line-height: normal;
+                font-stretch: normal;
+                letter-spacing: 0.019rem;
+                text-align: center;
+                margin: 0;
+            }
+        }
     }
-  }
 }
