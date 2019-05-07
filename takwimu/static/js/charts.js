@@ -15,8 +15,6 @@ function Chart(options) {
   var chart = {};
 
   chart.init = function(options) {
-
-    console.log("options.chartContainer", options.chartContainer)
     // establish our base vars
     chart.chartContainer = d3
       .select("#" + options.chartContainer)
@@ -962,10 +960,15 @@ function Chart(options) {
       .enter()
       .append("li")
       .attr("class", "legend-item")
+      .style("display", "flex")
+      .style("align-items", "center")
       .each(function(d, i) {
         g = d3.select(this);
         g.append("span")
           .attr("class", "swatch")
+          .style("height", "25px")
+          .style("width", "25px")
+          .style("margin-right", "12px")
           .style("background-color", function(d) {
             return chart.color(d.data.name);
           });
