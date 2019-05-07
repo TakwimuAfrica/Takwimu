@@ -14,12 +14,9 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       width: '37.375rem'
     },
-    position: 'relative',
-    paddingBottom: '56.25%'
-    // margin: '2.8125rem 0'
+    position: 'relative'
   },
   iframe: {
-    position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',

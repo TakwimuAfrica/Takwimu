@@ -11,9 +11,11 @@ import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 import ViewCountry from '../ViewCountry';
 
-import DataContainer from '../FeaturedData/DataContainer';
+import DataContainer from '../DataContainer';
 
-const styles = {
+import profileHeroImage from '../../assets/images/profile-hero-line.png';
+
+const styles = theme => ({
   root: {
     maxWidth: '933px'
   },
@@ -28,9 +30,22 @@ const styles = {
   },
   dataContainer: {
     margin: '0.625rem',
-    width: 'fit-content'
+    width: '100%'
+  },
+  hero: {
+    backgroundImage: `url(${profileHeroImage})`,
+    backgroundPosition: 'center',
+    backgroundPositionY: '-6.25rem',
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100%',
+    borderBottomColor: theme.palette.primary.main,
+    borderBottomStyle: 'solid',
+    borderBottomWidth: '0.25rem',
+    marginTop: '0.375rem',
+    width: '100%',
+    height: '21.125rem'
   }
-};
+});
 
 function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
   useEffect(() => {
@@ -61,6 +76,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         current={topicIndex}
         showContent={showContent}
       />
+      <div className={classes.hero} />
 
       <div className={classes.root}>
         <Typography className={classes.title} variant="h2">
