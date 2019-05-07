@@ -104,11 +104,11 @@ class DataActions extends React.Component {
   }
 
   render() {
-    const { ref, classes, onDownload, embedCode } = this.props;
+    const { classes, onDownload, embedCode } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
-      <div ref={ref} className={classes.root}>
+      <div className={classes.root}>
         <ActionButton>
           <img alt="" src={shareIcon} />
           <Typography className={classes.actionText}>Share</Typography>
@@ -169,12 +169,7 @@ class DataActions extends React.Component {
 DataActions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   onDownload: PropTypes.func.isRequired,
-  embedCode: PropTypes.string.isRequired,
-  ref: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({})])
-};
-
-DataActions.defaultProps = {
-  ref: () => {}
+  embedCode: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(DataActions);
