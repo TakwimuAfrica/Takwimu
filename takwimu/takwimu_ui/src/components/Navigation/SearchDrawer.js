@@ -142,13 +142,6 @@ class SearchDrawer extends React.Component {
     this.handleInput = this.handleInput.bind(this);
   }
 
-  handleInput(event) {
-    if (event.target.value.length > 0) {
-      const query = event.target.value;
-      this.window.location = `/search/?q=${query}`;
-    }
-  }
-
   handleSearchInput(e) {
     const { backgroundVisible } = this.state;
     if (!backgroundVisible && e.target.value.length > 0) {
@@ -195,6 +188,13 @@ class SearchDrawer extends React.Component {
   render() {
     const { classes, children, active, toggle } = this.props;
     const { backgroundVisible, searchResults } = this.state;
+    const handleInput = e => {
+      if (e.target.value.length > 0) {
+        const query = e.target.value;
+        window.location = `/search/?q=${query}`;
+      }
+    };
+
     return (
       <Drawer
         anchor="top"
@@ -230,7 +230,7 @@ class SearchDrawer extends React.Component {
                     onChange={this.handleSearchInput}
                     onKeyPress={e => {
                       if (e.key === 'Enter') {
-                        this.handleInput(e);
+                        handleInput(e);
                       }
                     }}
                   />
