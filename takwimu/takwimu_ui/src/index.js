@@ -25,12 +25,12 @@ const PROPS = {
 };
 
 const renderApp = (Component, id, props = PROPS) => {
-  const els = document.querySelectorAll(`[id='${id}']`);
-  els.forEach(el => {
+  const el = document.getElementById(id);
+  if (el) {
     const App = withRoot(Component);
 
     ReactDOM.render(<App {...props} />, el);
-  });
+  }
 };
 
 const renderHomepage = () => {
