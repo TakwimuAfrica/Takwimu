@@ -235,8 +235,8 @@ class SearchAPIView(APIView):
                     results.append(hit)
 
             data = {}
-            data['searchQuery'] = query
-            data['searchResults'] = results
+            data['query'] = query
+            data['results'] = results
 
             return Response(data=data, status=status.HTTP_200_OK)
 

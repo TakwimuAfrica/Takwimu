@@ -17,7 +17,7 @@ class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchQuery: '',
+      searchTerm: '',
       searchResults: []
     };
   }
@@ -29,8 +29,8 @@ class SearchResults extends React.Component {
     fetch(`/api/search/?q=${searchQuery}&format=json`).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
-          const { query, results: searchResults } = json;
-          this.setState({ searchQuery: query, searchResults });
+          const { query: searchTerm, results: searchResults } = json;
+          this.setState({ searchTerm, searchResults });
         });
       }
     });
@@ -38,11 +38,12 @@ class SearchResults extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const { searchQuery, searchResults } = this.state;
+    const { searchTerm, searchResults } = this.state;
+    console.log(searchTerm);
     return (
       <Section classes={{ root: classes.root }}>
         <Typography variant="h3">Search Results</Typography>
-        <SearchInput query={searchQuery} />
+        <SearchInput query={searchTerm} />
         <SearchResultsContainer results={searchResults} />
       </Section>
     );
