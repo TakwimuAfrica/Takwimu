@@ -80,7 +80,8 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
-                            "ignore_above": 256
+                            "ignore_above": 256,
+                            "null_value": "NULL",
                         }
                     }
                 },
@@ -89,6 +90,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -98,6 +100,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -107,6 +110,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -116,6 +120,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -125,6 +130,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -134,6 +140,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -143,6 +150,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -152,18 +160,20 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
                 },
                 "parent_page_id": {
-                    "type": "long"
+                    "type": "long",
                 },
                 "parent_page_type": {
                     "type": "text",
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -173,6 +183,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -182,6 +193,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -191,6 +203,7 @@ class TakwimuTopicSearch():
                     "fields": {
                         "keyword": {
                             "type": "keyword",
+                            "null_value": "NULL",
                             "ignore_above": 256
                         }
                     }
@@ -206,19 +219,23 @@ class TakwimuTopicSearch():
                                     doc_type=DOC_TYPE)
 
     def search(self, query_string, operator='or', country_filters=None,
-               category_filters=None, query_type='most_fields', quert_fields=QUERY_FIELDS):
+               category_filters=None, query_type='most_fields',
+               query_fields=None):
         """
         Search for query_string using operation applying country and/or
         category filters
         """
 
+        if query_fields is None:
+            query_fields = QUERY_FIELDS
         search = Search(using=self.es, index=self.es_index,
-                        doc_type=DOC_TYPE).params(size=size)
+                        doc_type=DOC_TYPE).params(size=100)
+        print(self.es)
 
         if operator == 'and':
             query_type = 'phrase'
         search = search.query('multi_match', query=query_string,
-                              type=query_type, fields=quert_fields)
+                              type=query_type, fields=query_fields)
 
         # Countries and categories may contain whitespace so don't join or
         # split on ' '.
