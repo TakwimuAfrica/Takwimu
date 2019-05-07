@@ -12,7 +12,7 @@ services:
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
   es:
-    image: elasticsearch:6.5
+    image: elasticsearch:6.4.0
     ports:
       - "9200:9200"
     environment:
