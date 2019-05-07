@@ -139,7 +139,6 @@ class SearchDrawer extends React.Component {
     };
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    this.handleInput = this.handleInput.bind(this);
   }
 
   handleSearchInput(e) {
