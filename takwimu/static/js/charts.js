@@ -15,6 +15,8 @@ function Chart(options) {
   var chart = {};
 
   chart.init = function(options) {
+
+    console.log("options.chartContainer", options.chartContainer)
     // establish our base vars
     chart.chartContainer = d3
       .select("#" + options.chartContainer)
@@ -34,9 +36,9 @@ function Chart(options) {
 
     chart.chartAnalysis = chart.chartActions
       .insert("div")
-      .classed("chart-analysis")
       .style("padding", "0 1.938rem")
-      .style("padding-top", "2.5rem");
+      .style("padding-top", "2.5rem")
+      .classed("chart-analysis", true);
     
     // TODO : 
     // const row = document.getElementById(options.chartContainer).parentNode;
@@ -59,8 +61,8 @@ function Chart(options) {
 
     chart.chartAnalysis
         .insert("a")
-        .href(`/profiles/${country.slug}`)
-        .classed("chart-analysis", true)
+        .attr('href', `/profiles/${country.slug}`)
+        .classed("chart-analysis-read", true)
         // TODO :
         // .classed(`chart-analysis ${rowIndex > 0 && "chart-analysis--full"}`, true)
         .insert("p")

@@ -978,44 +978,46 @@ input:focus {
             color: #4a4a4a;
         }
 
-        cursor: pointer;
+        .chart-analysis-read {
+            cursor: pointer;
 
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
 
-        width: 100%;
+            width: 100%;
 
-        padding: 1.125rem 0;
+            padding: 1.125rem 0;
 
-        text-decoration: none;
-        outline: none;
+            text-decoration: none;
+            outline: none;
 
-        border-radius: 0.75rem;
+            border-radius: 0.75rem;
 
-        border: solid 2px #29a87c;
-        background-color: #fff;
-
-        p {
-            font-family: 'Muli', sans-serif;
-            font-size: 0.875rem;
-            font-weight: bold;
-            font-style: normal;
-            font-stretch: normal;
-            letter-spacing: normal;
-            line-height: normal;
-            text-transform: none;
-
-            color: #29a87c;
-            margin: 0;
-        }
-
-        &--full {
-            border: none;
-            background-color: #29a87c;
+            border: solid 2px #29a87c;
+            background-color: #fff;
 
             p {
-                color: #fff;
+                font-family: 'Muli', sans-serif;
+                font-size: 0.875rem;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: normal;
+                line-height: normal;
+                text-transform: none;
+
+                color: #29a87c;
+                margin: 0;
+            }
+
+            &--full {
+                border: none;
+                background-color: #29a87c;
+
+                p {
+                    color: #fff;
+                }
             }
         }
     }
