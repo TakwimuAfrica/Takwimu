@@ -53,6 +53,8 @@ class SearchInput extends React.Component {
 
   render() {
     const { classes, query } = this.props;
+    const { searchTerm } = this.state;
+
     return (
       <div className={classes.root}>
         <InputBase
@@ -60,7 +62,7 @@ class SearchInput extends React.Component {
           classes={{ root: classes.searchInput }}
           disableUnderline
           defaultValue={query}
-          value={query}
+          value={searchTerm || query}
           onChange={this.handleChange}
           onKeyPress={e => {
             if (e.key === 'Enter') {
