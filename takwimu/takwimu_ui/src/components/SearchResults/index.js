@@ -39,7 +39,6 @@ class SearchResults extends React.Component {
   render() {
     const { classes } = this.props;
     const { searchTerm, searchResults } = this.state;
-    console.log(searchTerm);
     return (
       <Section classes={{ root: classes.root }}>
         <Typography variant="h3">Search Results</Typography>
