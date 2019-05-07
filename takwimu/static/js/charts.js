@@ -54,12 +54,9 @@ function Chart(options) {
     //     .classed("description")
     //     .text("Lorem ipsum dolor sit amec, the related demographic analysis for South Africa");
 
-    const { geo_code: countryCode } = options.geographyData.this;
-    const country = window.takwimu.countries.find(c => c.iso_code === countryCode);
-
     chart.chartAnalysis
         .insert("a")
-        .attr('href', `/profiles/${country.slug}`)
+        .attr('href', `/profiles/${window.takwimu.country.slug}`)
         .classed("chart-analysis-read", true)
         // TODO :
         // .classed(`chart-analysis ${rowIndex > 0 && "chart-analysis--full"}`, true)
