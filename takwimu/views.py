@@ -2,7 +2,6 @@ from collections import OrderedDict
 from operator import itemgetter
 import json
 import string
-import os
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.safestring import SafeString
@@ -12,18 +11,19 @@ from django.template import RequestContext
 from django.utils.text import slugify
 from django.views.generic import TemplateView
 
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-
+from elasticsearch_dsl import Search
 
 import requests
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from wazimap.views import GeographyDetailView
 from wazimap.geo import geo_data, LocationNotFound
 from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, FAQSetting, \
+from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, \
+    FAQSetting, \
     ProfileSectionPage, ProfilePage
 from takwimu.sdg import SDG
 from takwimu.search.takwimu_search import TakwimuTopicSearch
@@ -32,7 +32,8 @@ from takwimu.search.utils import get_page_details
 from .data.utils import get_page_releases_per_country, \
     get_primary_release_year_per_geography
 from wagtail.contrib.settings.context_processors import settings
-from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
+from takwimu.context_processors import takwimu_countries, takwimu_stories, \
+    takwimu_topics
 
 from django.conf import settings as takwimu_settings
 
@@ -165,7 +166,8 @@ class SDGIndicatorView(TemplateView):
                                     'title': indicator['value'].get('title'),
                                     'country': country,
                                     'country_slug': slugify(country),
-                                    'url': '{}#{}_{}-tab'.format(url, slugify(topic_title), indicator['id']),
+                                    'url': '{}#{}_{}-tab'.format(url, slugify(
+                                        topic_title), indicator['id']),
                                 }
                                 sdg_indicators = sdg_indicators_map.setdefault(
                                     sdg, [])
@@ -176,6 +178,7 @@ class SDGIndicatorView(TemplateView):
 
 def handler404(request):
     return render(request, '404.html')
+
 
 def handler500(request):
     return render(request, '500.html')
@@ -204,11 +207,11 @@ class SupportServicesIndexView(TemplateView):
 class SearchAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q', '')
-        size = request.GET.get('size', 30)         #limits search results size
         profilepages = ProfilePage.objects.live()
         profilesectionpages = ProfileSectionPage.objects.live()
 
         results = []
+
         if query:
             operator = 'or'
             strip_chars = string.whitespace
@@ -218,9 +221,8 @@ class SearchAPIView(APIView):
                 strip_chars += '"'
 
             search_query = query.strip(strip_chars)
-            hits = TakwimuTopicSearch().search(search_query, size, operator)
+            hits = TakwimuTopicSearch().search(search_query, operator)
             for hit in hits:
-
                 parent_page_id = hit['parent_page_id']
                 if parent_page_id:
                     page = None
@@ -234,13 +236,34 @@ class SearchAPIView(APIView):
                 else:
                     results.append(hit)
 
-            data = {}
-            data['query'] = query
-            data['results'] = results
+            return Response(data=results, status=status.HTTP_200_OK)
 
-            return Response(data=data, status=status.HTTP_200_OK)
+        return Response(data={'error': "query can not be an empty string"},
+                        status=status.HTTP_400_BAD_REQUEST)
 
-        return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)
+
+class AutoCompleteAPIView(APIView):
+    def get(self, request, *args, **kwargs):
+        query = request.GET.get('q', '')
+
+        operator = 'or'
+        strip_chars = string.whitespace
+        if query.startswith('"') and query.endswith('"'):
+            # search in quotes means phrase search
+            operator = 'and'
+            strip_chars += '"'
+
+        search_query = query.strip(strip_chars)
+        hits = TakwimuTopicSearch().search(query_string=search_query,
+                                           operator=operator,
+                                           query_type='phrase_prefix',
+                                           quert_fields=['title'])
+        suggestions = hits[:5] if len(hits) > 5 else hits
+        results = [{"title": suggestion.get('title')}
+                   for suggestion in suggestions]
+        return Response(data={
+            "suggestions": results
+        }, status=status.HTTP_200_OK)
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
@@ -259,7 +282,6 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
 
-
     def get_context_data(self, *args, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
@@ -268,18 +290,23 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get('profile_builder', None)
-        self.profile_name = takwimu_settings.HURUMAP.get('default_profile', 'default')
+        self.profile_name = takwimu_settings.HURUMAP.get('default_profile',
+                                                         'default')
 
         if not profile_method:
-            raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
+            raise ValueError(
+                "You must define WAZIMAP.profile_builder in settings.py")
         profile_method = import_string(profile_method)
 
-        year = self.request.GET.get('release', get_primary_release_year_per_geography(self.geo))
+        year = self.request.GET.get('release',
+                                    get_primary_release_year_per_geography(
+                                        self.geo))
         # if takwimu_settings.HURUMAP['latest_release_year'] == year:
         #     year = 'latest'
 
         with dataset_context(year=year):
-            profile_data = profile_method(self.geo, self.profile_name, self.request)
+            profile_data = profile_method(self.geo, self.profile_name,
+                                          self.request)
 
         profile_data['geography'] = self.geo.as_dict_deep()
         profile_data['primary_releases'] = get_page_releases_per_country(
@@ -288,7 +315,8 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         profile_data = enhance_api_data(profile_data)
         page_context.update(profile_data)
 
-        profile_data_json = SafeString(json.dumps(profile_data, cls=DjangoJSONEncoder))
+        profile_data_json = SafeString(
+            json.dumps(profile_data, cls=DjangoJSONEncoder))
 
         page_context.update({
             'profile_data_json': profile_data_json
