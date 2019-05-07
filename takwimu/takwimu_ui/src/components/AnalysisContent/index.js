@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Typography, withStyles, Grid } from '@material-ui/core';
@@ -47,92 +47,93 @@ const styles = theme => ({
   }
 });
 
-class AnalysisContent extends React.Component {
-  constructor(props) {
-    super(props);
+function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
+  useEffect(() => {
+    if (document.getElementsByClassName('flourish-embed')) {
+      const script = document.createElement('script');
+      const oldScript = document.getElementById('flourish-script');
+      if (oldScript) {
+        oldScript.remove();
+      }
 
-    this.showContent = this.showContent.bind(this);
-  }
+      window.FlourishLoaded = false;
+      script.id = 'flourish-script';
+      script.src = 'https://public.flourish.studio/resources/embed.js';
+      document.body.appendChild(script);
+    }
+  });
 
-  showContent(index) {
-    const { onChange } = this.props;
-    return () => {
-      onChange(index);
-    };
-  }
+  const showContent = index => () => {
+    onChange(index);
+  };
 
-  render() {
-    const { classes, content, topicIndex, takwimu } = this.props;
+  return (
+    <Fragment>
+      <OtherInfoNav
+        labelText="Other topics in"
+        labelTextStrong={content.title}
+        content={content}
+        current={topicIndex}
+        showContent={showContent}
+      />
+      <div className={classes.hero} />
 
-    return (
-      <Fragment>
-        <OtherInfoNav
+      <div className={classes.root}>
+        <Typography className={classes.title} variant="h2">
+          {content.body[topicIndex].value.title}
+        </Typography>
+        <ContentNavigation
           labelText="Other topics in"
           labelTextStrong={content.title}
+          current={topicIndex}
+          content={content}
+          showContent={showContent}
+        />
+        <Actions />
+
+        <Grid container direction="row">
+          {content.body[topicIndex].value.body.map(c => (
+            <Fragment>
+              {c.type === 'text' && (
+                <Typography
+                  key={c.id}
+                  className={classes.body}
+                  dangerouslySetInnerHTML={{
+                    __html: c.value
+                  }}
+                />
+              )}
+              {c.type === 'indicator' && (
+                <DataContainer
+                  key={c.id}
+                  id={c.id}
+                  classes={{ root: classes.dataContainer }}
+                  data={c.value.widget}
+                />
+              )}
+            </Fragment>
+          ))}
+        </Grid>
+
+        <Actions hideLastUpdated />
+        <ContentNavigation
+          labelText="Other topics in"
+          labelTextStrong={content.title}
+          current={topicIndex}
+          content={content}
+          showContent={showContent}
+        />
+        <AnalysisReadNext
+          classes={{ container: classes.readNextContainer }}
           content={content}
           current={topicIndex}
-          showContent={this.showContent}
+          showContent={showContent}
         />
-
-        <div className={classes.hero} />
-
-        <div className={classes.root}>
-          <Typography className={classes.title} variant="h2">
-            {content.body[topicIndex].value.title}
-          </Typography>
-          <ContentNavigation
-            labelText="Other topics in"
-            labelTextStrong={content.title}
-            current={topicIndex}
-            content={content}
-            showContent={this.showContent}
-          />
-          <Actions />
-
-          <Grid container direction="row">
-            {content.body[topicIndex].value.body.map(c => (
-              <Fragment>
-                {c.type === 'text' && (
-                  <Typography
-                    key={c.id}
-                    className={classes.body}
-                    dangerouslySetInnerHTML={{
-                      __html: c.value
-                    }}
-                  />
-                )}
-                {c.type === 'indicator' && (
-                  <DataContainer
-                    key={c.id}
-                    id={c.id}
-                    classes={{ root: classes.dataContainer }}
-                    data={c.value.widget}
-                  />
-                )}
-              </Fragment>
-            ))}
-          </Grid>
-
-          <Actions hideLastUpdated />
-          <ContentNavigation
-            labelText="Other topics in"
-            labelTextStrong={content.title}
-            current={topicIndex}
-            content={content}
-            showContent={this.showContent}
-          />
-          <AnalysisReadNext
-            classes={{ container: classes.readNextContainer }}
-            content={content}
-            current={topicIndex}
-            showContent={this.showContent}
-          />
-          <ViewCountry takwimu={takwimu} />
-          <RelatedContent relatedContent={content.related_content} />
-        </div>
-      </Fragment>
-    );
-  }
+        <ViewCountry takwimu={takwimu} />
+        <RelatedContent relatedContent={content.related_content} />
+      </div>
+    </Fragment>
+  );
 }
 
 AnalysisContent.propTypes = {
