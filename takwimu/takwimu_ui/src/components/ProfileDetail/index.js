@@ -27,13 +27,12 @@ const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 const styles = theme => ({
   root: {
     width: '100%',
-    height: '34rem',
+    height: '30rem',
     padding: '1.438rem',
     backgroundColor: 'rgba(255, 255, 255, 0.63)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
