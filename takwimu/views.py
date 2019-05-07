@@ -204,6 +204,7 @@ class SupportServicesIndexView(TemplateView):
 class SearchAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q', '')
+        size = request.GET.get('size', 30)         #limits search results size
         profilepages = ProfilePage.objects.live()
         profilesectionpages = ProfileSectionPage.objects.live()
 
@@ -217,7 +218,7 @@ class SearchAPIView(APIView):
                 strip_chars += '"'
 
             search_query = query.strip(strip_chars)
-            hits = TakwimuTopicSearch().search(search_query, operator)
+            hits = TakwimuTopicSearch().search(search_query, size, operator)
             for hit in hits:
 
                 parent_page_id = hit['parent_page_id']
@@ -233,10 +234,6 @@ class SearchAPIView(APIView):
                 else:
                     results.append(hit)
 
-            #limit search results to 30 items
-            if len(results) > 30:
-                results = results[:30]
-                
             return Response(data=results, status=status.HTTP_200_OK)
 
         return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)

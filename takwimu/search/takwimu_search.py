@@ -74,12 +74,12 @@ class TakwimuTopicSearch():
         self.es.indices.create(self.es_index,
                                settings.TAKWIMU_ES_INDEX_SETTINGS)
 
-    def search(self, query_string, operator='or', country_filters=None,
+    def search(self, query_string, size=30, operator='or', country_filters=None,
                category_filters=None):
         """Search for query_string using operation applying country and/or category filters"""
 
         search = Search(using=self.es, index=self.es_index,
-                        doc_type=DOC_TYPE).params(size=100)
+                        doc_type=DOC_TYPE).params(size=size)
 
         query_type = 'most_fields'
         if operator == 'and':
