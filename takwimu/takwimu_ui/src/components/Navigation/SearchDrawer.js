@@ -8,6 +8,7 @@ import {
   withStyles,
   MenuList,
   MenuItem,
+  Tooltip,
   Typography
 } from '@material-ui/core';
 
@@ -92,6 +93,10 @@ const styles = theme => ({
   searchFieldBackgroundColor: {
     backgroundColor: '#d8d8d826'
   },
+  // Override styling from other sources such as hurumap
+  searchFieldInput: {
+    backgroundColor: 'inherit !important'
+  },
   searchResults: {
     width: '100%',
     maxWidth: '780px',
@@ -99,7 +104,10 @@ const styles = theme => ({
     marginRight: '3.75rem',
     paddingLeft: '0.938rem',
     maxHeight: '25rem',
-    overflow: 'scroll',
+    overflowY: 'auto',
+
+    // Firefox only
+    scrollbarColor: `white ${theme.palette.primary.main}`,
     [theme.breakpoints.up('md')]: {
       marginRight: '6.25rem',
       paddingLeft: '0.625rem'
@@ -126,6 +134,10 @@ const styles = theme => ({
     '&::-webkit-scrollbar-corner': {
       backgroundColor: 'transparent'
     }
+  },
+  tooltip: {
+    fontSize: theme.typography.caption.fontSize,
+    backgroundColor: theme.palette.primary.dark
   }
 });
 
@@ -206,6 +218,7 @@ class SearchDrawer extends React.Component {
                   <Input
                     disableUnderline
                     className={classes.searchField}
+                    classes={{ input: classes.searchFieldInput }}
                     placeholder="What are you looking for ?"
                     onChange={this.handleSearchInput}
                     onKeyPress={e => {
@@ -229,9 +242,15 @@ class SearchDrawer extends React.Component {
                         component="a"
                         href={`/search/?q=${result.title}`}
                       >
-                        <Typography color="textSecondary">
-                          {result.title}
-                        </Typography>
+                        <Tooltip
+                          title={result.title}
+                          placement="bottom-start"
+                          classes={{ tooltip: classes.tooltip }}
+                        >
+                          <Typography color="textSecondary" noWrap>
+                            {result.title}
+                          </Typography>
+                        </Tooltip>
                       </MenuItem>
                     ))}
                   </MenuList>
