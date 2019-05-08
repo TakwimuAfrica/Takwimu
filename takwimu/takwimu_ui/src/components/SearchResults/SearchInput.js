@@ -36,26 +36,22 @@ class SearchInput extends React.Component {
       searchTerm: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.handleSearchClick = this.handleSearchClick.bind(this);
   }
 
   handleChange(event) {
     this.setState({ searchTerm: event.target.value });
   }
 
-  handleSearchClick(event) {
-    event.preventDefault();
-    const { query, onRefresh } = this.props;
-    const { searchTerm } = this.state;
-    if (query !== searchTerm && searchTerm.length > 0) {
-      window.history.pushState(null, '', `/search/?q=${searchTerm}`);
-      onRefresh(searchTerm);
-    }
-  }
-
   render() {
-    const { classes, query } = this.props;
+    const { classes, query, onRefresh } = this.props;
     const { searchTerm } = this.state;
+
+    const handleSearchClick = () => {
+      if (query !== searchTerm && searchTerm.length > 0) {
+        window.history.pushState(null, '', `/search/?q=${searchTerm}`);
+        onRefresh(searchTerm);
+      }
+    };
 
     return (
       <div className={classes.root}>
@@ -68,7 +64,7 @@ class SearchInput extends React.Component {
           onChange={this.handleChange}
           onKeyPress={e => {
             if (e.key === 'Enter') {
-              this.handleSearchClick(e);
+              handleSearchClick(e);
             }
           }}
           endAdornment={
@@ -76,7 +72,7 @@ class SearchInput extends React.Component {
               <IconButton
                 classes={{ root: classes.searchInputButton }}
                 onClick={e => {
-                  this.handleSearchClick(e);
+                  handleSearchClick(e);
                 }}
               >
                 <SearchIcon
