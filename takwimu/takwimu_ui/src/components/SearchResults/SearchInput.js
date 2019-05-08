@@ -11,7 +11,7 @@ const styles = theme => ({
   },
   searchInput: {
     width: '100%',
-    backgroundColor: '#f6f6f6',
+    backgroundColor: theme.palette.background.light,
     borderStyle: 'None',
     paddingBottom: '1.5rem',
     paddingTop: '1.5rem',
