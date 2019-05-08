@@ -30,8 +30,7 @@ class SearchResults extends React.Component {
     fetch(`/api/search/?q=${searchQuery}&format=json`).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
-          const { results: searchResults } = json;
-          this.setState({ searchResults });
+          this.setState({ searchResults: json });
         });
       }
     });
@@ -41,8 +40,7 @@ class SearchResults extends React.Component {
     fetch(`/api/search/?q=${searchTerm}&format=json`).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
-          const { results: searchResults } = json;
-          this.setState({ searchResults });
+          this.setState({ searchResults: json });
         });
       }
     });
