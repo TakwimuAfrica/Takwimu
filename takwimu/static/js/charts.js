@@ -38,32 +38,27 @@ function Chart(options) {
       .style("padding-top", "2.5rem")
       .classed("chart-analysis", true);
     
-    // TODO : 
-    // const row = document.getElementById(options.chartContainer).parentNode;
-    // const section = row.parentNode;
-    // const rowIndex = Array.prototype.slice.call(
-    //     section.children
-    // )
-    // .indexOf(row);
-    //
-    // chart.chartAnalysis
-    //     .insert("p")
-    //     .classed("title")
-    //     .text(rowIndex > 0 ? "Summary" : "Related analysis")
-    //     .insert("p")
-    //     .classed("description")
-    //     .text("Lorem ipsum dolor sit amec, the related demographic analysis for South Africa");
+    const inAnalysis = window.takwimu.indicators
+        .filter(i => i.indicator.value.widget.type === 'hurumap')
+        .find(i => i.indicator.value.widget.value.chart_type + "-" + i.indicator.value.widget.value.data_id === options.chartDataKey);
+     
+    if (inAnalysis) {
+        chart.chartAnalysis
+            .insert("p")
+            .text(inAnalysis ? "Related analysis" : "Summary")
+            .classed("title", true);
+        chart.chartAnalysis
+            .insert("p")
+            .classed("description", true)
+            .html(inAnalysis.topic.summary);
+     }
 
     chart.chartAnalysis
         .insert("a")
-        .attr('href', `/profiles/${window.takwimu.country.slug}`)
-        .classed("chart-analysis-read", true)
-        // TODO :
-        // .classed(`chart-analysis ${rowIndex > 0 && "chart-analysis--full"}`, true)
+        .attr('href', inAnalysis ? inAnalysis.url : `/profiles/${window.takwimu.country.slug}`)
+        .classed(`chart-analysis-read ${inAnalysis && "chart-analysis-read--full"}`, true)
         .insert("p")
-        .text("Read the country analysis");
-        // TODO :
-        // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
+        .text(inAnalysis ? "Read the full analysis" : "Read the country analysis");
     
 
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();

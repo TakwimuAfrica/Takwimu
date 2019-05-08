@@ -81,8 +81,81 @@ const renderAnalysisPage = () => {
 const renderDatabyTopicPage = () => {
   const el = document.getElementById('takwimuProfile');
   if (el) {
-    renderApp(ProfileDetail, 'takwimuProfileDetail');
-    renderApp(Profile, 'takwimuProfile');
+    fetch(
+      `/api/v2/pages/?type=takwimu.ProfilePage&slug=${
+        window.takwimu.country.slug
+      }&fields=body&format=json`
+    ).then(pageResponse => {
+      if (pageResponse.status === 200) {
+        pageResponse.json().then(pageJson => {
+          let { items: analyses } = pageJson;
+
+          fetch(
+            `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=body,related_content&descendant_of=${
+              analyses[0].id
+            }&format=json`
+          ).then(sectionResponse => {
+            if (sectionResponse.status === 200) {
+              sectionResponse.json().then(sectionJson => {
+                const { items } = sectionJson;
+                analyses = analyses.concat(items);
+
+                const indicators = [];
+
+                analyses.forEach(analysis =>
+                  analysis.body.forEach(topic =>
+                    topic.value.body
+                      .filter(item => item.type === 'indicator')
+                      .forEach(indicator => {
+                        const analysisTitle =
+                          analysis.title === window.takwimu.country.name
+                            ? 'Country Overview'
+                            : analysis.title;
+                        const analysisSlug =
+                          analysis.meta.slug === window.takwimu.country.slug
+                            ? '' // Country Overview doesn't have an anaylsis slug
+                            : analysis.meta.slug;
+                        // Assuming:
+                        //   - all indicators are unique
+                        //   - an indicator belongs to only one analysis
+                        //
+                        // TODO: Check unique indicators
+                        //       `id` will not help unless server creates indicators that are reused
+                        //       Need to check example data_id for hurumap indicators
+                        //       Figured out how to determine html indicators uniqueness
+                        indicators.push({
+                          analysis: {
+                            title: analysisTitle
+                          },
+                          topic: {
+                            title: topic.value.title,
+                            summary: topic.value.summary
+                          },
+                          url: `/profiles/${window.takwimu.country.slug}/${
+                            analysisSlug.length > 0 // Country Overview doesn't have an anaylsis slug
+                              ? `${analysisSlug}#${topic.id}`
+                              : `#${topic.id}`
+                          }`,
+                          indicator
+                        });
+                      })
+                  )
+                );
+
+                window.takwimu.indicators = indicators;
+                const props = Object.assign({}, PROPS, {
+                  takwimu: Object.assign({}, PROPS.takwimu, {
+                    indicators
+                  })
+                });
+                renderApp(ProfileDetail, 'takwimuProfileDetail');
+                renderApp(Profile, 'takwimuProfile', props);
+              });
+            }
+          });
+        });
+      }
+    });
   }
 };
 

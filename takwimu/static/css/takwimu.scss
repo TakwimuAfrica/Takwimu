@@ -976,6 +976,22 @@ input:focus {
             line-height: 2;
             letter-spacing: normal;
             color: #4a4a4a;
+            max-height: 150px;
+            overflow: hidden;
+
+            // TODO:
+            p {
+                font-family: Muli;
+                font-size: 0.813rem;
+                font-weight: normal;
+                font-style: normal;
+                font-stretch: normal;
+                line-height: 2;
+                letter-spacing: normal;
+                color: #4a4a4a;
+                max-height: 150px;
+                overflow: hidden;
+            }
         }
 
         .chart-analysis-read {
