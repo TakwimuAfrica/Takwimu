@@ -210,7 +210,10 @@ class Navigation extends React.Component {
   renderSearchDrawer() {
     const { openDrawer } = this.state;
     return (
-      <SearchDrawer active={openDrawer === 'search'}>
+      <SearchDrawer
+        active={openDrawer === 'search'}
+        toggle={this.toggleMobileDrawer}
+      >
         {this.renderNavBar(true)}
       </SearchDrawer>
     );
