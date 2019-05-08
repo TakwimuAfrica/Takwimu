@@ -91,7 +91,7 @@ class Command(BaseCommand):
 
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
-            url = f"profiles/country-{code}-{slugify(country)}"
+            url = f"/profiles/country-{code}-{slugify(country)}"
             self.stdout.write(f"Working on {country} {server_url}/{url}")
             browser.get(f"{server_url}/{url}")
             soup = BeautifulSoup(browser.page_source, 'lxml')
