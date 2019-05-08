@@ -139,14 +139,6 @@ class SearchDrawer extends React.Component {
     };
 
     this.handleSearchInput = this.handleSearchInput.bind(this);
-    this.handleInput = this.handleInput.bind(this);
-  }
-
-  handleInput(event) {
-    if (event.target.value.length > 0) {
-      const query = event.target.value;
-      this.window.location = `/search/?q=${query}`;
-    }
   }
 
   handleSearchInput(e) {
@@ -229,8 +221,9 @@ class SearchDrawer extends React.Component {
                     placeholder="What are you looking for ?"
                     onChange={this.handleSearchInput}
                     onKeyPress={e => {
-                      if (e.key === 'Enter') {
-                        this.handleInput(e);
+                      if (e.key === 'Enter' && e.target.value.length > 0) {
+                        const query = e.target.value;
+                        window.location = `/search/?q=${query}`;
                       }
                     }}
                   />

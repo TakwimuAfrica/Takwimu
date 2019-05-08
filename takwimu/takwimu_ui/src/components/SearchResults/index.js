@@ -17,9 +17,10 @@ class SearchResults extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchTerm: '',
       searchResults: []
     };
+
+    this.refreshSearch = this.refreshSearch.bind(this);
   }
 
   componentDidMount() {
@@ -29,21 +30,35 @@ class SearchResults extends React.Component {
     fetch(`/api/search/?q=${searchQuery}&format=json`).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
-          const { query: searchTerm, results: searchResults } = json;
-          this.setState({ searchTerm, searchResults });
+          const { results: searchResults } = json;
+          this.setState({ searchResults });
+        });
+      }
+    });
+  }
+
+  refreshSearch(searchTerm) {
+    fetch(`/api/search/?q=${searchTerm}&format=json`).then(response => {
+      if (response.status === 200) {
+        response.json().then(json => {
+          const { results: searchResults } = json;
+          this.setState({ searchResults });
         });
       }
     });
   }
 
   render() {
-    const { classes } = this.props;
-    const { searchTerm, searchResults } = this.state;
-    console.log(searchTerm);
+    const {
+      classes,
+      search: { searchQuery }
+    } = this.props;
+    const { searchResults } = this.state;
+
     return (
       <Section classes={{ root: classes.root }}>
         <Typography variant="h3">Search Results</Typography>
-        <SearchInput query={searchTerm} />
+        <SearchInput query={searchQuery} onRefresh={this.refreshSearch} />
         <SearchResultsContainer results={searchResults} />
       </Section>
     );

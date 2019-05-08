@@ -43,11 +43,13 @@ class SearchInput extends React.Component {
     this.setState({ searchTerm: event.target.value });
   }
 
-  handleSearchClick() {
-    const { query } = this.props;
+  handleSearchClick(event) {
+    event.preventDefault();
+    const { query, onRefresh } = this.props;
     const { searchTerm } = this.state;
     if (query !== searchTerm && searchTerm.length > 0) {
-      window.location = `/search/?q=${searchTerm}`;
+      window.history.pushState(null, '', `/search/?q=${searchTerm}`);
+      onRefresh(searchTerm);
     }
   }
 
@@ -70,7 +72,9 @@ class SearchInput extends React.Component {
             <InputAdornment position="end">
               <IconButton
                 classes={{ root: classes.searchInputButton }}
-                onClick={this.handleSearchClick}
+                onClick={e => {
+                  this.handleSearchClick(e);
+                }}
               >
                 <SearchIcon
                   fontSize="inherit"
@@ -88,7 +92,8 @@ class SearchInput extends React.Component {
 
 SearchInput.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  query: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired,
+  onRefresh: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(SearchInput);
