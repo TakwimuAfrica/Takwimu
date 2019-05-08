@@ -20,23 +20,17 @@ class SearchResults extends React.Component {
       searchResults: []
     };
 
-    this.refreshSearch = this.refreshSearch.bind(this);
+    this.handleSearch = this.handleSearch.bind(this);
   }
 
   componentDidMount() {
     const {
       search: { searchQuery }
     } = this.props;
-    fetch(`/api/search/?q=${searchQuery}&format=json`).then(response => {
-      if (response.status === 200) {
-        response.json().then(json => {
-          this.setState({ searchResults: json });
-        });
-      }
-    });
+    this.handleSearch(searchQuery);
   }
 
-  refreshSearch(searchTerm) {
+  handleSearch(searchTerm) {
     fetch(`/api/search/?q=${searchTerm}&format=json`).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
@@ -56,7 +50,7 @@ class SearchResults extends React.Component {
     return (
       <Section classes={{ root: classes.root }}>
         <Typography variant="h3">Search Results</Typography>
-        <SearchInput query={searchQuery} onRefresh={this.refreshSearch} />
+        <SearchInput query={searchQuery} onRefresh={this.handleSearch} />
         <SearchResultsContainer results={searchResults} />
       </Section>
     );
