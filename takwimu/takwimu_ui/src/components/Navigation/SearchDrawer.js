@@ -149,36 +149,17 @@ class SearchDrawer extends React.Component {
       this.setState({ backgroundVisible: false });
     }
 
-    // TODO:
     if (e.target.value.length > 0) {
-      this.setState({
-        searchResults: [
-          {
-            title: 'South Africa',
-            link: '/profiles/south-africa'
-          },
-          {
-            title: 'Senegal',
-            link: '/profiles/senegal'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
+      fetch(`/api/autocomplete/?q=${e.target.value}&format=json`).then(
+        response => {
+          if (response.status === 200) {
+            response.json().then(json => {
+              const { suggestions: searchResults } = json;
+              this.setState({ searchResults });
+            });
           }
-        ]
-      });
+        }
+      );
     } else {
       this.setState({ searchResults: [] });
     }
