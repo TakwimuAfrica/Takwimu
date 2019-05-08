@@ -19,7 +19,7 @@ const styles = theme => ({
   },
   root: {
     flexGrow: 1,
-    paddingBottom: '6.25rem'
+    paddingBottom: '2.25rem'
   },
   link: {
     width: '100%',
