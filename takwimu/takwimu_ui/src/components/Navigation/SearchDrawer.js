@@ -8,6 +8,7 @@ import {
   withStyles,
   MenuList,
   MenuItem,
+  Tooltip,
   Typography
 } from '@material-ui/core';
 
@@ -92,6 +93,10 @@ const styles = theme => ({
   searchFieldBackgroundColor: {
     backgroundColor: '#d8d8d826'
   },
+  // Override styling from other sources such as hurumap
+  searchFieldInput: {
+    backgroundColor: 'inherit !important'
+  },
   searchResults: {
     width: '100%',
     maxWidth: '780px',
@@ -99,7 +104,10 @@ const styles = theme => ({
     marginRight: '3.75rem',
     paddingLeft: '0.938rem',
     maxHeight: '25rem',
-    overflow: 'scroll',
+    overflowY: 'auto',
+
+    // Firefox only
+    scrollbarColor: `white ${theme.palette.primary.main}`,
     [theme.breakpoints.up('md')]: {
       marginRight: '6.25rem',
       paddingLeft: '0.625rem'
@@ -126,6 +134,10 @@ const styles = theme => ({
     '&::-webkit-scrollbar-corner': {
       backgroundColor: 'transparent'
     }
+  },
+  tooltip: {
+    fontSize: theme.typography.caption.fontSize,
+    backgroundColor: theme.palette.primary.dark
   }
 });
 
@@ -149,36 +161,17 @@ class SearchDrawer extends React.Component {
       this.setState({ backgroundVisible: false });
     }
 
-    // TODO:
     if (e.target.value.length > 0) {
-      this.setState({
-        searchResults: [
-          {
-            title: 'South Africa',
-            link: '/profiles/south-africa'
-          },
-          {
-            title: 'Senegal',
-            link: '/profiles/senegal'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
-          },
-          {
-            title: 'Nigeria',
-            link: '/profiles/nigere'
+      fetch(`/api/autocomplete/?q=${e.target.value}&format=json`).then(
+        response => {
+          if (response.status === 200) {
+            response.json().then(json => {
+              const { suggestions: searchResults } = json;
+              this.setState({ searchResults });
+            });
           }
-        ]
-      });
+        }
+      );
     } else {
       this.setState({ searchResults: [] });
     }
@@ -187,6 +180,13 @@ class SearchDrawer extends React.Component {
   render() {
     const { classes, children, active, toggle } = this.props;
     const { backgroundVisible, searchResults } = this.state;
+    const handleInput = e => {
+      if (e.target.value.length > 0) {
+        const query = e.target.value;
+        window.location = `/search/?q=${query}`;
+      }
+    };
+
     return (
       <Drawer
         anchor="top"
@@ -218,8 +218,14 @@ class SearchDrawer extends React.Component {
                   <Input
                     disableUnderline
                     className={classes.searchField}
+                    classes={{ input: classes.searchFieldInput }}
                     placeholder="What are you looking for ?"
                     onChange={this.handleSearchInput}
+                    onKeyPress={e => {
+                      if (e.key === 'Enter') {
+                        handleInput(e);
+                      }
+                    }}
                   />
                 </div>
                 <img
@@ -228,19 +234,28 @@ class SearchDrawer extends React.Component {
                   className={classes.arrow}
                 />
               </Grid>
-              {searchResults && searchResults.length ? (
+              {searchResults && searchResults.length > 0 && (
                 <Grid container justify="flex-end">
                   <MenuList className={classes.searchResults}>
                     {searchResults.map(result => (
-                      <MenuItem component="a" href={`${result.link}`}>
-                        <Typography color="textSecondary">
-                          {result.title}
-                        </Typography>
+                      <MenuItem
+                        component="a"
+                        href={`/search/?q=${result.title}`}
+                      >
+                        <Tooltip
+                          title={result.title}
+                          placement="bottom-start"
+                          classes={{ tooltip: classes.tooltip }}
+                        >
+                          <Typography color="textSecondary" noWrap>
+                            {result.title}
+                          </Typography>
+                        </Tooltip>
                       </MenuItem>
                     ))}
                   </MenuList>
                 </Grid>
-              ) : null}
+              )}
             </Layout>
           </Grid>
         </div>

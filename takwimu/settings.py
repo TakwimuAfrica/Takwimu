@@ -220,6 +220,11 @@ LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 TAKWIMU_ES_INDEX_SETTINGS = {
     'settings': {
+        "index": {
+            "blocks": {
+                "read_only_allow_delete": "false"
+            }
+        },
         'analysis': {
             'analyzer': {
                 'ngram_analyzer': {
@@ -285,7 +290,7 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
         'TAKWIMU_ES_AWS_REGION', 'eu-west-1')
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.search.backends.elasticsearch5',
+            'BACKEND': 'wagtail.search.backends.elasticsearch6',
             'INDEX': TAKWIMU_ES_INDEX,
             'TIMEOUT': TAKWIMU_ES_TIMEOUT,
             'HOSTS': [{
