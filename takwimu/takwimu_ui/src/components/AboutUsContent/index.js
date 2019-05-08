@@ -23,8 +23,8 @@ const styles = theme => ({
     padding: '0 19px'
   },
   section: {
-    marginTop: '3rem',
-    paddingTop: '2rem',
+    marginTop: '2.5rem',
+    paddingTop: '1rem',
     paddingBottom: '1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
   }

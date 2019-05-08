@@ -9,7 +9,7 @@ import TableOfContent from '../components/AboutUsContent/TableOfContent';
 
 const styles = () => ({
   root: {
-    marginTop: '3.875rem',
+    marginTop: '2.875rem',
     marginBottom: '4.375rem'
   }
 });
