@@ -221,7 +221,7 @@ class SearchAPIView(APIView):
                 strip_chars += '"'
 
             search_query = query.strip(strip_chars)
-            hits = TakwimuTopicSearch().search(search_query, operator)
+            hits = TakwimuTopicSearch().search(search_query, operator, size=50)
             for hit in hits:
                 parent_page_id = hit['parent_page_id']
                 if parent_page_id:
@@ -254,11 +254,10 @@ class AutoCompleteAPIView(APIView):
             strip_chars += '"'
 
         search_query = query.strip(strip_chars)
-        hits = TakwimuTopicSearch().search(query_string=search_query,
+        suggestions = TakwimuTopicSearch().search(query_string=search_query,
                                            operator=operator,
                                            query_type='phrase_prefix',
-                                           query_fields=['title'])
-        suggestions = hits[:5] if len(hits) > 5 else hits
+                                           query_fields=['title'], size=10)
         results = [{"title": suggestion.get('title')}
                    for suggestion in suggestions]
         return Response(data={
