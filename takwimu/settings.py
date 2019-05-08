@@ -220,6 +220,11 @@ LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 TAKWIMU_ES_INDEX_SETTINGS = {
     'settings': {
+        "index": {
+            "blocks": {
+                "read_only_allow_delete": "false"
+            }
+        },
         'analysis': {
             'analyzer': {
                 'ngram_analyzer': {
