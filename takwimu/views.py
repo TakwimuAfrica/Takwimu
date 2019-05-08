@@ -374,7 +374,6 @@ class AutoCompleteAPIView(APIView):
                                            quert_fields=['title'])
 
         results = [hit.get("title") for hit in hits]
-        print(hits)
         # remove duplicates
         results = list(set(results))
         suggestions = results[:5] if len(results) > 5 else results
