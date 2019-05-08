@@ -10,7 +10,8 @@ import A from '../A';
 const styles = theme => ({
   root: {},
   media: {
-    height: '17.625rem'
+    height: '17.625rem',
+    cursor: 'grabbing'
   },
   titleGutterBottom: {
     marginBottom: '1.375rem'

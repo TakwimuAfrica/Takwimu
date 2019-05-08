@@ -21,7 +21,8 @@ const styles = theme => ({
     }
   },
   menuListRoot: {
-    width: '14.188rem'
+    width: '14.188rem',
+    paddingTop: '2rem'
   },
   activeContentIndicator: {
     marginLeft: '-1.5rem',
