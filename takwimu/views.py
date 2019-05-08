@@ -254,15 +254,13 @@ class AutoCompleteAPIView(APIView):
             strip_chars += '"'
 
         search_query = query.strip(strip_chars)
-        suggestions = TakwimuTopicSearch().search(query_string=search_query,
+        results = TakwimuTopicSearch().search(query_string=search_query,
                                            operator=operator,
                                            query_type='phrase_prefix',
                                            query_fields=['title'], size=10)
-        results = [{"title": suggestion.get('title')}
-                   for suggestion in suggestions]
-        return Response(data={
-            "suggestions": results
-        }, status=status.HTTP_200_OK)
+        unique_titles = set([r.get('title') for r in results])
+        suggestions = [{"title": t} for t in unique_titles]
+        return Response(data={ "suggestions": suggestions }, status=status.HTTP_200_OK)
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
