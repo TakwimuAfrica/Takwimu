@@ -12,7 +12,7 @@ import {
   MenuItem,
   ButtonBase
 } from '@material-ui/core';
-import { Search, MenuOutlined } from '@material-ui/icons';
+import { Search, MenuOutlined, Close } from '@material-ui/icons';
 
 import { isWidthUp } from '@material-ui/core/withWidth';
 import classNames from 'classnames';
@@ -33,7 +33,8 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
+    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)',
+    color: theme.palette.text.secondary
   },
   noShadow: {
     boxShadow: 'unset'
@@ -127,16 +128,17 @@ class Navigation extends React.Component {
   }
 
   renderMobileNav() {
+    const { openDrawer } = this.state;
     return (
       <Fragment>
         <Grid item>
           <IconButton
             disableRipple
             disableTouchRipple
-            color="textSecondary"
+            color="inherit"
             onClick={this.toggleMobileDrawer}
           >
-            <MenuOutlined color="inherit" />
+            {openDrawer === 'search' ? <Close /> : <MenuOutlined />}
           </IconButton>
         </Grid>
       </Fragment>
@@ -177,7 +179,7 @@ class Navigation extends React.Component {
             className={classes.searchButton}
             onClick={this.toggleDrawer('search')}
           >
-            <Search className={classes.search} />
+            {openDrawer === 'search' ? <Close /> : <Search />}
           </ButtonBase>
         </Grid>
       </Fragment>
@@ -208,7 +210,10 @@ class Navigation extends React.Component {
   renderSearchDrawer() {
     const { openDrawer } = this.state;
     return (
-      <SearchDrawer active={openDrawer === 'search'}>
+      <SearchDrawer
+        active={openDrawer === 'search'}
+        toggle={this.toggleMobileDrawer}
+      >
         {this.renderNavBar(true)}
       </SearchDrawer>
     );

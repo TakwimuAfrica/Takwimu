@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Typography, withStyles, Grid } from '@material-ui/core';
@@ -46,36 +46,46 @@ const styles = theme => ({
   }
 });
 
-class AnalysisContent extends React.Component {
-  constructor(props) {
-    super(props);
+function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
+  useEffect(() => {
+    if (document.getElementsByClassName('flourish-embed')) {
+      const script = document.createElement('script');
+      const oldScript = document.getElementById('flourish-script');
+      if (oldScript) {
+        oldScript.remove();
+      }
 
-    this.showContent = this.showContent.bind(this);
-  }
+      window.FlourishLoaded = false;
+      script.id = 'flourish-script';
+      script.src = 'https://public.flourish.studio/resources/embed.js';
+      document.body.appendChild(script);
+    }
+  });
 
-  showContent(index) {
-    const { onChange } = this.props;
-    return () => {
-      onChange(index);
-    };
-  }
+  const showContent = index => () => {
+    onChange(index);
+  };
 
-  render() {
-    const { classes, content, topicIndex, takwimu } = this.props;
-    const {
-      profile_navigation: { value: profileNavigation },
-      read_next: { value: readNext }
-    } = content;
+  const {
+    profile_navigation: { value: profileNavigation },
+    read_next: { value: readNext }
+  } = content;
 
-    return (
-      <Fragment>
-        <OtherInfoNav
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
-          content={content}
-          current={topicIndex}
-          showContent={this.showContent}
-        />
+  return (
+    <Fragment>
+      <OtherInfoNav
+        labelText={profileNavigation.title}
+        labelTextStrong={content.title}
+        content={content}
+        current={topicIndex}
+        showContent={showContent}
+      />
+      <div className={classes.hero} />
+
+      <div className={classes.root}>
+        <Typography className={classes.title} variant="h2">
+          {content.body[topicIndex].value.title}
+        </Typography>
 
         <div className={classes.hero} />
 
@@ -84,11 +94,11 @@ class AnalysisContent extends React.Component {
             {content.body[topicIndex].value.title}
           </Typography>
           <ContentNavigation
-            labelText="Other topics in"
+            labelText={profileNavigation.title}
             labelTextStrong={content.title}
             current={topicIndex}
             content={content}
-            showContent={this.showContent}
+            showContent={showContent}
           />
           <Actions />
 
@@ -122,14 +132,14 @@ class AnalysisContent extends React.Component {
             labelTextStrong={content.title}
             current={topicIndex}
             content={content}
-            showContent={this.showContent}
+            showContent={showContent}
           />
           <AnalysisReadNext
             classes={{ container: classes.readNextContainer }}
             title={readNext.title}
             content={content}
             current={topicIndex}
-            showContent={this.showContent}
+            showContent={showContent}
           />
           <CountryContent
             content={content.view_country_content}
@@ -137,9 +147,9 @@ class AnalysisContent extends React.Component {
           />
           <RelatedContent content={content.related_content} />
         </div>
-      </Fragment>
-    );
-  }
+      </div>
+    </Fragment>
+  );
 }
 
 AnalysisContent.propTypes = {
