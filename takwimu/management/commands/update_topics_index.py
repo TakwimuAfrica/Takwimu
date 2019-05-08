@@ -63,7 +63,7 @@ class Command(BaseCommand):
                                     content_id=data['id'],
                                     content_type='indicator_widget',
                                     country=country, category=category,
-                                    title=data['title'], body=data['body'],
+                                    title=(data['title'] or 'NULL'), body=data['body'],
                                     metadata=data['metadata'],
                                     parent_page_id=parent_page_id,
                                     parent_page_type=parent_page_type,
@@ -91,7 +91,7 @@ class Command(BaseCommand):
 
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
-            url = f"profiles/country-{code}-{slugify(country)}"
+            url = f"/profiles/country-{code}-{slugify(country)}"
             self.stdout.write(f"Working on {country} {server_url}/{url}")
             browser.get(f"{server_url}/{url}")
             soup = BeautifulSoup(browser.page_source, 'lxml')

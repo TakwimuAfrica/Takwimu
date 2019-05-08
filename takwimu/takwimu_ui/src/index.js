@@ -14,14 +14,15 @@ import ProfileDetail from './components/ProfileDetail';
 import LatestNewsStories from './components/LatestNewsStories';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatCanYouDo';
-
+import SearchResults from './components/SearchResults';
 import AnalysisPage from './pages/Analysis';
 import AboutUsPage from './pages/AboutUs';
 
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
-  profile: window.profileData
+  profile: window.profileData,
+  search: window.search
 };
 
 const renderApp = (Component, id, props = PROPS) => {
@@ -110,6 +111,13 @@ const renderAboutUsPage = () => {
   }
 };
 
+const renderSearchResultsPage = () => {
+  const el = document.getElementById('takwimuSearchResults');
+  if (el) {
+    renderApp(SearchResults, 'takwimuSearchResults');
+  }
+};
+
 // Render common elements
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
@@ -119,3 +127,4 @@ renderAboutUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();
+renderSearchResultsPage();
