@@ -372,10 +372,13 @@ class AutoCompleteAPIView(APIView):
                                            operator=operator,
                                            query_type='phrase_prefix',
                                            quert_fields=['title'])
-        suggestions = hits[:5] if len(hits) > 5 else hits
-        results = [{"title": suggestion.get('title')} for suggestion in suggestions]
+
+        results = [hit.get("title") for hit in hits]
+        # remove duplicates
+        results = set(results)
+        suggestions = results[:5] if len(results) > 5 else results
         return Response(data={
-            "suggestions": results
+            "suggestions": [{"title": i} for i in suggestions]
         }, status=status.HTTP_200_OK)
 
 
