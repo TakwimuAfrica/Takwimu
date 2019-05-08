@@ -258,7 +258,8 @@ class AutoCompleteAPIView(APIView):
                                            operator=operator,
                                            query_type='phrase_prefix',
                                            query_fields=['title'], size=10)
-        suggestions = [{"title": r.get('title')} for r in results]
+        unique_titles = set([r.get('title') for r in results])
+        suggestions = [{"title": t} for t in unique_titles]
         return Response(data={ "suggestions": suggestions }, status=status.HTTP_200_OK)
 
 
