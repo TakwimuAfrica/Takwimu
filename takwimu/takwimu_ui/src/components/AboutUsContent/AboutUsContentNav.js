@@ -41,6 +41,7 @@ const styles = theme => ({
 
 function AboutContentNav({
   classes,
+  title,
   current,
   contentHeadings,
   changeActiveContent
@@ -50,7 +51,7 @@ function AboutContentNav({
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>
         <Typography className={classes.label} color="textSecondary">
-          On this page
+          {title}
         </Typography>
         <div className={classes.otherTopicLinks}>
           {contentHeadings.map((item, index) => (
@@ -74,6 +75,7 @@ function AboutContentNav({
 
 AboutContentNav.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   changeActiveContent: PropTypes.func.isRequired

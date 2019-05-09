@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Button, Link, Grid, Typography, withStyles } from '@material-ui/core';
+import { Button, Grid, Typography, withStyles } from '@material-ui/core';
 
 import Section from './Section';
 
@@ -42,6 +42,9 @@ const styles = theme => ({
     marginTop: '1.0625rem',
     marginBottom: '3.125rem',
     width: '100%',
+    '& a': {
+      color: theme.palette.primary.main
+    },
     [theme.breakpoints.up('md')]: {
       maxWidth: '27.375rem'
     }
@@ -57,7 +60,19 @@ const styles = theme => ({
   }
 });
 
-function Hero({ classes, takwimu: { tagline } }) {
+function Hero({
+  classes,
+  takwimu: {
+    page: {
+      hero: { value: hero }
+    }
+  }
+}) {
+  if (!hero) {
+    return null;
+  }
+
+  const { title, tagline, watch_video_link_label: watchVideoLinkTitle } = hero;
   return (
     <div className={classes.root}>
       <div className={classes.gradient}>
@@ -69,27 +84,26 @@ function Hero({ classes, takwimu: { tagline } }) {
             className={classes.hero}
           >
             <Grid item xs={12}>
-              <Typography variant="h1" className={classes.title}>
-                Actionable insights for African changemakers
-              </Typography>
+              <Typography
+                variant="h1"
+                className={classes.title}
+                dangerouslySetInnerHTML={{
+                  __html: title
+                }}
+              />
             </Grid>
-            {tagline && tagline.description && (
-              <Grid item xs={12}>
-                <Typography variant="body1" className={classes.description}>
-                  {tagline.description}{' '}
-                  <Link
-                    href="/about"
-                    className={classes.aboutLink}
-                    underline="always"
-                  >
-                    find out more about us
-                  </Link>
-                </Typography>
-              </Grid>
-            )}
+            <Grid item xs={12}>
+              <Typography
+                variant="body1"
+                className={classes.description}
+                dangerouslySetInnerHTML={{
+                  __html: tagline
+                }}
+              />
+            </Grid>
             <Grid item xs={12}>
               <Button href="#takwimuMakingOf" className={classes.button}>
-                Watch the overview video{' '}
+                {watchVideoLinkTitle}{' '}
                 <img alt="play" src={triangle} className={classes.buttonIcon} />
               </Button>
             </Grid>
@@ -103,7 +117,15 @@ function Hero({ classes, takwimu: { tagline } }) {
 Hero.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    tagline: PropTypes.shape({}).isRequired
+    page: PropTypes.shape({
+      hero: PropTypes.shape({
+        value: PropTypes.shape({
+          title: PropTypes.string,
+          tagline: PropTypes.string,
+          watch_video_link_label: PropTypes.string
+        })
+      })
+    }).isRequired
   }).isRequired
 };
 

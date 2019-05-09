@@ -11,6 +11,7 @@ const styles = () => ({
 
 function AboutUsContentNavigation({
   classes,
+  title,
   current,
   contentHeadings,
   changeActiveContent
@@ -24,7 +25,7 @@ function AboutUsContentNavigation({
   return (
     <ContentNavigation
       classes={{ root: classes.root }}
-      title="On this page"
+      title={title}
       content={contentHeadings}
       current={current}
       generateHref={generateHref}
@@ -36,6 +37,7 @@ function AboutUsContentNavigation({
 
 AboutUsContentNavigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   changeActiveContent: PropTypes.func.isRequired

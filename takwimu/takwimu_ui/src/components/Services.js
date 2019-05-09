@@ -4,7 +4,7 @@ import { withStyles, Grid, Typography } from '@material-ui/core';
 
 import ContentSection from './ContentSection';
 
-const styles = () => ({
+const styles = theme => ({
   root: {},
   serviceHeading: {
     fontWeight: 'bold',
@@ -12,17 +12,23 @@ const styles = () => ({
     paddingBottom: '1rem'
   },
   contentGrid: {
-    paddingTop: '1rem'
+    paddingTop: '1rem',
+    '& a': {
+      color: theme.palette.primary.main
+    }
   }
 });
 
-function Services({ classes, services, ...props }) {
+function Services({ classes, services: { value: services }, ...props }) {
+  if (!services) {
+    return null;
+  }
+
   return (
     <ContentSection
-      title="Services"
+      title={services.title}
       variant="h3"
       classes={{ root: classes.root }}
-      component={ContentSection}
       {...props}
     >
       <Typography
@@ -32,19 +38,19 @@ function Services({ classes, services, ...props }) {
         }}
       />
       <Grid className={classes.contentGrid}>
-        {services.servicesList.map(service => (
-          <React.Fragment key={service.title}>
+        {services.services.map(service => (
+          <React.Fragment key={service.value.title}>
             <Typography
               variant="subtitle2"
               className={classes.serviceHeading}
               dangerouslySetInnerHTML={{
-                __html: service.title
+                __html: service.value.title
               }}
             />
             <Typography
               variant="body1"
               dangerouslySetInnerHTML={{
-                __html: service.description
+                __html: service.value.description
               }}
             />
           </React.Fragment>
@@ -56,7 +62,20 @@ function Services({ classes, services, ...props }) {
 
 Services.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  services: PropTypes.shape({}).isRequired
+  services: PropTypes.shape({
+    value: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      services: PropTypes.arrayOf(
+        PropTypes.shape({
+          value: PropTypes.shape({
+            title: PropTypes.string,
+            description: PropTypes.string
+          })
+        })
+      )
+    })
+  }).isRequired
 };
 
 export default withStyles(styles)(Services);

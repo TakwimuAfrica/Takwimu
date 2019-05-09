@@ -55,7 +55,7 @@ function DataContainer({ id, classes, data }) {
             {data.value.title}
           </Typography>
 
-          {data.type === 'featured_data' && (
+          {data.type === 'featured_data_widget' && (
             <FeaturedDataContainer data={data.value} />
           )}
 

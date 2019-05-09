@@ -2,6 +2,8 @@
 
 {% load staticfiles jsonify wagtailcore_tags %}
 
+{% block head_title %} {% if title %}{{ title }} - {% endif %}{{ HURUMAP.name }}{% endblock %}
+
 {% block body_id %}homepage{% endblock %}
 
 {% block content %}
@@ -22,6 +24,6 @@
   <script>
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
-    takwimu.page.id = 'homepage';
+    takwimu.page.name = 'home';
   </script>
 {% endblock body_javascript_extra %}
