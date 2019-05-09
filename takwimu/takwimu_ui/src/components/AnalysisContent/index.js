@@ -93,7 +93,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           content={content}
           showContent={showContent}
         />
-        <Actions />
+        <Actions page={takwimu.page} />
 
         <Grid container direction="row">
           {content.body[topicIndex].value.body.map(c => (
@@ -119,7 +119,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           ))}
         </Grid>
 
-        <Actions hideLastUpdated />
+        <Actions page={takwimu.page} hideLastUpdated />
         <ContentNavigation
           labelText={profileNavigation.title}
           labelTextStrong={content.title}

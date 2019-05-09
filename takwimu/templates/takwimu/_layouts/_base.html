@@ -69,7 +69,9 @@
       },
     };
     takwimu.page = {
-        name: 'base'
+        name: 'base',
+        first_published_at: '{{page.first_published_at|date:"jS F Y"}}',
+        last_published_at: '{{page.last_published_at|date:"jS F Y"}}'
     };
   </script>
 
