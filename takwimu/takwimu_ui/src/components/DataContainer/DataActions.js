@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { createRef, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import {
@@ -86,6 +86,43 @@ ActionButtonComponent.defaultProps = {
 
 const ActionButton = withStyles(styles)(ActionButtonComponent);
 
+const EmbedCodeTextArea = ({ code }) => {
+  const ref = createRef();
+  useEffect(() => {
+    if (ref.current) {
+      const { current: textArea } = ref;
+
+      textArea.style.height = 'inherit';
+      const computed = window.getComputedStyle(textArea);
+      const height =
+        parseInt(computed.getPropertyValue('border-top-width'), 10) +
+        parseInt(computed.getPropertyValue('padding-top'), 10) +
+        textArea.scrollHeight +
+        parseInt(computed.getPropertyValue('border-bottom-width'), 10) +
+        parseInt(computed.getPropertyValue('padding-bottom'), 10);
+
+      textArea.style.height = `${height}px`;
+    }
+  }, []);
+  return (
+    <textarea
+      ref={ref}
+      readOnly
+      style={{
+        resize: 'none',
+        width: '25rem',
+        margin: '1.25rem',
+        border: 'none',
+        outline: 'none'
+      }}
+      value={code}
+    />
+  );
+};
+
+EmbedCodeTextArea.propTypes = {
+  code: PropTypes.string.isRequired
+};
 class DataActions extends React.Component {
   constructor(props) {
     super(props);
@@ -93,6 +130,8 @@ class DataActions extends React.Component {
     this.state = {
       anchorEl: null
     };
+
+    this.embedCodeTextAreaRef = createRef();
 
     this.handleEmbed = this.handleEmbed.bind(this);
   }
@@ -148,17 +187,7 @@ class DataActions extends React.Component {
           <ClickAwayListener
             onClickAway={() => this.setState({ anchorEl: null })}
           >
-            <textarea
-              readOnly
-              style={{
-                width: '25rem',
-                height: '10rem',
-                margin: '1.25rem',
-                border: 'none',
-                outline: 'none'
-              }}
-              value={embedCode}
-            />
+            <EmbedCodeTextArea code={embedCode} />
           </ClickAwayListener>
         </Popover>
       </div>

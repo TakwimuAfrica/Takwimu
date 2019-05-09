@@ -32,9 +32,9 @@ TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'takwimu.context_processors.sdgs',
                                                     'takwimu.context_processors.asset_manifest']
 
-
 STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, 'takwimu/takwimu_ui/build/static') # build appropriate path
+    os.path.join(BASE_DIR, 'takwimu/takwimu_ui/build/static')
+    # build appropriate path
 ]
 
 # -------------------------------------------------------------------------------------
@@ -220,6 +220,11 @@ LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 TAKWIMU_ES_INDEX_SETTINGS = {
     'settings': {
+        "index": {
+            "blocks": {
+                "read_only_allow_delete": "false"
+            }
+        },
         'analysis': {
             'analyzer': {
                 'ngram_analyzer': {
@@ -285,7 +290,7 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
         'TAKWIMU_ES_AWS_REGION', 'eu-west-1')
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.search.backends.elasticsearch5',
+            'BACKEND': 'wagtail.search.backends.elasticsearch6',
             'INDEX': TAKWIMU_ES_INDEX,
             'TIMEOUT': TAKWIMU_ES_TIMEOUT,
             'HOSTS': [{

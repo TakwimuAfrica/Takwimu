@@ -233,6 +233,12 @@
         primary_releases: { active: {}, other: [] },
         tabs: [{ name: 'All', href: '' }]
       };
+      var search = {
+        searchQuery: 'South Africa',
+        searchResults: [
+
+        ]
+      }
     </script>
   </head>
 
@@ -260,6 +266,8 @@
           }
         }
         page = 'analysis';
+      } else if (pathname.startsWith('/search')) {
+          page='search_results'
       }
       takwimu.page.id = page;
       let ids = [];
@@ -269,6 +277,9 @@
           break;
         case 'topic':
           ids = ['takwimuProfileDetail', 'takwimuProfile'];
+          break;
+        case 'search_results':
+          ids=['takwimuSearchResults'];
           break;
         case 'analysis':
           ids = ['takwimuAnalysisPage'];
