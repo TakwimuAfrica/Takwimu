@@ -24,6 +24,7 @@ $font-size-base: 16px;
 html, body {
   font-size: $font-size-base;
   background-color: '#fff';
+  overflow-x: hidden;
 }
 
 html, body, p, * {
@@ -938,4 +939,133 @@ input[type='text'] {
 input:focus {    
   border: unset;
   box-shadow: unset;
+}
+
+.chart-actions {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    max-width: 23.688rem;
+
+    background-color: #eeebeb;
+
+    margin-top: -2.375rem;
+    margin-bottom: -1rem;
+
+    .chart-analysis {
+
+        .title {
+            font-family: Muli;
+            font-size: 0.938rem;
+            font-weight: bold;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: normal;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+
+        .description {
+            font-family: Muli;
+            font-size: 0.813rem;
+            font-weight: normal;
+            font-style: normal;
+            font-stretch: normal;
+            line-height: 2;
+            letter-spacing: normal;
+            color: #4a4a4a;
+        }
+
+        .chart-analysis-read {
+            cursor: pointer;
+
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+
+            width: 100%;
+
+            padding: 1.125rem 0;
+
+            text-decoration: none;
+            outline: none;
+
+            border-radius: 0.75rem;
+
+            border: solid 2px #29a87c;
+            background-color: #fff;
+
+            p {
+                font-family: 'Muli', sans-serif;
+                font-size: 0.875rem;
+                font-weight: bold;
+                font-style: normal;
+                font-stretch: normal;
+                letter-spacing: normal;
+                line-height: normal;
+                text-transform: none;
+
+                color: #29a87c;
+                margin: 0;
+            }
+
+            &--full {
+                border: none;
+                background-color: #29a87c;
+
+                p {
+                    color: #fff;
+                }
+            }
+        }
+    }
+
+    .chart-action-links {
+        background-color: white;
+        border-radius: 0.625rem;
+        border: solid 1px #eaeaea;
+
+        height: 3.563rem;
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        &>a {
+            width: 4.081rem;
+            height: 1.913rem;
+
+            line-height: unset;
+            text-decoration: none;
+
+            margin: 0.75rem 0;
+            border-right: 0.063rem #eaeaea solid;
+
+            &:last-child {
+                border: none;
+            }
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+
+            cursor: pointer;
+
+            p {
+                font-size: 0.6rem;
+                font-style: normal;
+                font-family: Muli;
+                font-weight: bold;
+                line-height: normal;
+                font-stretch: normal;
+                letter-spacing: 0.019rem;
+                text-align: center;
+                margin: 0;
+            }
+        }
+    }
 }
