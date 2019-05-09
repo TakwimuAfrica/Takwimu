@@ -13,7 +13,7 @@ const styles = theme => ({
   root: {
     justifyContent: 'unset',
     color: theme.palette.text.primary,
-    outline: 'none',
+    outline: 'none !important',
     margin: '1.25rem 1.75rem',
     [theme.breakpoints.up('md')]: {
       margin: '0.625rem'
