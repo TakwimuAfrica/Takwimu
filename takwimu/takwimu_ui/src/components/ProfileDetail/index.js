@@ -27,13 +27,12 @@ const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 const styles = theme => ({
   root: {
     width: '100%',
-    height: '34rem',
+    height: '30rem',
     padding: '1.438rem',
     backgroundColor: 'rgba(255, 255, 255, 0.63)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
@@ -63,7 +62,8 @@ const styles = theme => ({
   },
   countryName: {
     marginLeft: '1.125rem',
-    marginRight: '0.75rem'
+    marginRight: '0.75rem',
+    fontSize: '1.75rem'
   },
   chooserButton: {
     marginTop: '0.938rem',
@@ -73,8 +73,8 @@ const styles = theme => ({
     color: '#848484'
   },
   detailLabel: {
-    color: '#231f20',
-    fontWeight: 'unset'
+    color: '#231f20'
+    // fontWeight: 'unset'
   },
   detail: {
     fontSize: '2rem',
@@ -124,7 +124,7 @@ function CountrySelectorComponent({ classes, country, context }) {
         onClick={window.toggleDrawer(context)}
       >
         <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
-        <Typography variant="subtitle1" className={classes.countryName}>
+        <Typography variant="subtitle2" className={classes.countryName}>
           {country.name}
         </Typography>
         <img alt="" src={downArrow} />
@@ -279,7 +279,10 @@ class ProfileDetail extends React.Component {
                 )}
               </Grid>
             </Grid>
-            <Grid container>
+            <Grid
+              container
+              style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}
+            >
               <Typography className={classes.label}>Release:</Typography>
               {activeRelease && (
                 <ButtonBase
@@ -316,6 +319,7 @@ class ProfileDetail extends React.Component {
                     <MenuList>
                       <MenuItem
                         component="a"
+                        s
                         href={`?release=${primaryReleases.active.year}`}
                         className={classes.releasesMenuItem}
                       >
