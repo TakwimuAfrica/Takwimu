@@ -21,8 +21,7 @@ import AboutUsPage from './pages/AboutUs';
 const PROPS = {
   takwimu: window.takwimu,
   settings: window.settings,
-  profile: window.profileData,
-  search: window.search
+  profile: window.profileData
 };
 
 const renderApp = (Component, id, props = PROPS) => {
@@ -89,7 +88,14 @@ const renderAboutUsPage = () => {
 const renderSearchResultsPage = () => {
   const el = document.getElementById('takwimuSearchResults');
   if (el) {
-    renderApp(SearchResults, 'takwimuSearchResults');
+    // Search is a time sensitive page and hence the server returns the
+    // search page template *with* search results. However, React may run before
+    // all server-sided defined <script/> have finished running & hence the
+    // initial search data defined in one of those scripts may still be
+    // undefined. We hence wait for _all_ content to load.
+    window.addEventListener('load', () =>
+      renderApp(SearchResults, 'takwimuSearchResults')
+    );
   }
 };
 
