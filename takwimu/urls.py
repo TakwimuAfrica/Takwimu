@@ -5,9 +5,10 @@ from django.views.generic import RedirectView
 from wagtail.api.v2.router import WagtailAPIRouter
 
 from takwimu import settings
-from takwimu.views import HomePageView, SupportServicesIndexView, AboutUsView, \
+from takwimu.views import HomePageView, SupportServicesIndexView, \
     LegalView, TopicView, IndicatorsGeographyDetailView, \
-    SDGIndicatorView, SearchAPIView, AutoCompleteAPIView
+    SDGIndicatorView, SearchAPIView, AutoCompleteAPIView, \
+        FAQsView, ServicesView, MethodologyView
 from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
