@@ -18,8 +18,53 @@ function Chart(options) {
     // establish our base vars
     chart.chartContainer = d3
       .select("#" + options.chartContainer)
+      .style("margin", "0")
+      .style("position", "relative")
+      .style("width", "75%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
       .append("div")
-      .style("position", "relative");
+      .style("position", "relative")
+      .style("float", "left")
+      .style("width", "50%"); // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
+    chart.chartActions = d3
+      .select("#" + options.chartContainer)
+      .append("div")
+      .style("float", "left")
+      .style("width", "50%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
+      .classed("chart-actions", true);
+
+    chart.chartAnalysis = chart.chartActions
+      .insert("div")
+      .style("padding", "0 1.938rem")
+      .style("padding-top", "2.5rem")
+      .classed("chart-analysis", true);
+    
+    // TODO : 
+    // const row = document.getElementById(options.chartContainer).parentNode;
+    // const section = row.parentNode;
+    // const rowIndex = Array.prototype.slice.call(
+    //     section.children
+    // )
+    // .indexOf(row);
+    //
+    // chart.chartAnalysis
+    //     .insert("p")
+    //     .classed("title")
+    //     .text(rowIndex > 0 ? "Summary" : "Related analysis")
+    //     .insert("p")
+    //     .classed("description")
+    //     .text("Lorem ipsum dolor sit amec, the related demographic analysis for South Africa");
+
+    chart.chartAnalysis
+        .insert("a")
+        .attr('href', `/profiles/${window.takwimu.country.slug}`)
+        .classed("chart-analysis-read", true)
+        // TODO :
+        // .classed(`chart-analysis ${rowIndex > 0 && "chart-analysis--full"}`, true)
+        .insert("p")
+        .text("Read the country analysis");
+        // TODO :
+        // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
+    
 
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
     chart.parentHeight = chart.getParentHeight();
@@ -912,10 +957,15 @@ function Chart(options) {
       .enter()
       .append("li")
       .attr("class", "legend-item")
+      .style("display", "flex")
+      .style("align-items", "center")
       .each(function(d, i) {
         g = d3.select(this);
         g.append("span")
           .attr("class", "swatch")
+          .style("height", "25px")
+          .style("width", "25px")
+          .style("margin-right", "12px")
           .style("background-color", function(d) {
             return chart.color(d.data.name);
           });
@@ -958,68 +1008,54 @@ function Chart(options) {
   };
 
   chart.addActionLinks = function() {
-    chart.actionLinks = chart.chartContainer
+
+    chart.actionLinks = chart.chartActions
       .insert("div", ":first-child")
-      .classed("action-links tool-group toggle-sub-group", true);
+      .style("diplay", "flex")
+      .style("justify-content", "center")
+      .style("padding", "0 1rem")
+      .style("padding-top", "1.25rem")
+      .insert("div")
+      .classed("chart-action-links", true);
 
-    chart.actionLinks
-      .append("a")
-      .text("Chart Options")
-      .append("i")
-      .classed("fa fa-chevron-circle-down", true);
+    chart.share = chart.actionLinks
+        .append("a");
+    chart.share.append('img')
+        .attr('src', '/static/img/network-connection.svg');
+    chart.share.append('p')
+        .text("Share");
 
-    var links = chart.actionLinks
-      .append("ul")
-      .classed("sub-group", true)
-      .attr("style", "display: none");
+    chart.actionDownload = chart.actionLinks
+        .append("a")
+        .on("click", chart.download);
+    chart.actionDownload.append('img')
+        .attr('src', '/static/img/download.svg');
+    chart.actionDownload.append('p')
+        .text("Download");
 
-    chart.getData = links
-      .append("li")
-      .append("a")
-      .classed("chart-get-data", true)
-      .text("Show data")
-      .on("click", chart.toggleDataDrawer);
+    chart.showEmbed = chart.actionLinks
+        .append("a")
+        .on("click", chart.showEmbedCode);
+    chart.showEmbed.append('img')
+        .attr('src', '/static/img/code.svg');
+    chart.showEmbed.append('p')
+        .text("Embed");
 
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Embed")
-      .on("click", chart.showEmbedCode);
+    chart.compare = chart.actionLinks
+        .append("a")
+        .attr("href", chart.distributionURL);
+    chart.compare.append('img')
+        .attr('src', '/static/img/compare.svg');
+    chart.compare.append('p')
+        .text("Compare");
 
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Explore data")
-      .attr("href", chart.tableURL);
-
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Map data")
-      .attr("href", chart.mapURL);
-
-    chart.showEmbed = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Compare")
-      .attr("href", chart.distributionURL);
-
-    chart.getChart = links
-      .append("li")
-      .append("a")
-      .classed("chart-show-embed", true)
-      .text("Download")
-      .on("click", chart.download);
-
-    $(chart.actionLinks[0]).hover(function() {
-      $(this)
-        .find(".sub-group")
-        .toggle();
-    });
+    chart.showData = chart.actionLinks
+        .append("a")
+        .on("click", chart.toggleDataDrawer);
+    chart.showData.append('img')
+        .attr('src', '/static/img/tablet-reader-31.svg');
+    chart.showData.append('p')
+        .text("Show Data");
   };
 
   chart.fillEmbedCode = function(textarea, align) {
@@ -1164,7 +1200,6 @@ function Chart(options) {
       clicked.classed("opened", false);
     } else {
       clicked.classed("opened", true);
-      clicked.text("Hide data");
 
       // tell Google Analytics about the event
       chart.trackEvent("Charts", "Show data", tableID);
@@ -1752,7 +1787,7 @@ function Chart(options) {
 
   chart.download = function() {
     var filter = function filter(node) {
-      return node.className !== "action-links tool-group toggle-sub-group";
+      return node.className !== "chart-actions";
     };
     var bgcolor = "#fff";
     domtoimage
@@ -1761,7 +1796,10 @@ function Chart(options) {
         var link = document.createElement("a");
         link.download = chart.chartChartTitle + ".png";
         link.href = dataUrl;
+
+        document.body.appendChild(link); // Firefox requires this
         link.click();
+        document.body.removeChild(link);
       });
     return false;
   };
