@@ -86,67 +86,59 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         <Typography className={classes.title} variant="h2">
           {content.body[topicIndex].value.title}
         </Typography>
+        <ContentNavigation
+          labelText={profileNavigation.title}
+          labelTextStrong={content.title}
+          current={topicIndex}
+          content={content}
+          showContent={showContent}
+        />
+        <Actions />
 
-        <div className={classes.hero} />
+        <Grid container direction="row">
+          {content.body[topicIndex].value.body.map(c => (
+            <Fragment>
+              {c.type === 'text' && (
+                <Typography
+                  key={c.id}
+                  className={classes.body}
+                  dangerouslySetInnerHTML={{
+                    __html: c.value
+                  }}
+                />
+              )}
+              {c.type === 'indicator' && (
+                <DataContainer
+                  key={c.id}
+                  id={c.id}
+                  classes={{ root: classes.dataContainer }}
+                  data={c.value.widget}
+                />
+              )}
+            </Fragment>
+          ))}
+        </Grid>
 
-        <div className={classes.root}>
-          <Typography className={classes.title} variant="h2">
-            {content.body[topicIndex].value.title}
-          </Typography>
-          <ContentNavigation
-            labelText={profileNavigation.title}
-            labelTextStrong={content.title}
-            current={topicIndex}
-            content={content}
-            showContent={showContent}
-          />
-          <Actions />
-
-          <Grid container direction="row">
-            {content.body[topicIndex].value.body.map(c => (
-              <Fragment>
-                {c.type === 'text' && (
-                  <Typography
-                    key={c.id}
-                    className={classes.body}
-                    dangerouslySetInnerHTML={{
-                      __html: c.value
-                    }}
-                  />
-                )}
-                {c.type === 'indicator' && (
-                  <DataContainer
-                    key={c.id}
-                    id={c.id}
-                    classes={{ root: classes.dataContainer }}
-                    data={c.value.widget}
-                  />
-                )}
-              </Fragment>
-            ))}
-          </Grid>
-
-          <Actions hideLastUpdated />
-          <ContentNavigation
-            labelText={profileNavigation.title}
-            labelTextStrong={content.title}
-            current={topicIndex}
-            content={content}
-            showContent={showContent}
-          />
-          <AnalysisReadNext
-            classes={{ container: classes.readNextContainer }}
-            title={readNext.title}
-            content={content}
-            current={topicIndex}
-            showContent={showContent}
-          />
-          <CountryContent
-            content={content.view_country_content}
-            takwimu={takwimu}
-          />
-          <RelatedContent content={content.related_content} />
-        </div>
+        <Actions hideLastUpdated />
+        <ContentNavigation
+          labelText={profileNavigation.title}
+          labelTextStrong={content.title}
+          current={topicIndex}
+          content={content}
+          showContent={showContent}
+        />
+        <AnalysisReadNext
+          classes={{ container: classes.readNextContainer }}
+          title={readNext.title}
+          content={content}
+          current={topicIndex}
+          showContent={showContent}
+        />
+        <CountryContent
+          content={content.view_country_content}
+          takwimu={takwimu}
+        />
+        <RelatedContent content={content.related_content} />
       </div>
     </Fragment>
   );
