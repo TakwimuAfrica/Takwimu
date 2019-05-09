@@ -62,8 +62,10 @@ const styles = theme => ({
   },
   countryName: {
     marginLeft: '1.125rem',
-    marginRight: '0.75rem',
-    fontSize: '1.75rem'
+    textAlign: 'start',
+    fontSize: '1.75rem',
+    width: '11.9rem',
+    fontFamily: theme.typography.fontHeading
   },
   chooserButton: {
     marginTop: '0.938rem',
