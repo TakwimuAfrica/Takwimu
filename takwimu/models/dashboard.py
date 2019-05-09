@@ -29,10 +29,12 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wazimap.models import Geography
 
+from takwimu.search import search
 from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
                                    get_takwimu_stories, get_takwimu_faqs,
                                    get_takwimu_services, get_takwimu_profile_view_country_content,
                                    get_takwimu_profile_navigation, get_takwimu_profile_read_next)
+
 
 logger = logging.getLogger(__name__)
 
@@ -901,12 +903,41 @@ class ContactUsPage(Page):
         APIField('social_media'),
     ]
 
+def search_analysis_and_data(query, request):
+    hits = search(query)
+    if not hits:
+        return []
+
+    profile_pages = ProfilePage.objects.live()
+    profile_section_pages = ProfileSectionPage.objects.live()
+    results = []
+    for hit in hits:
+        parent_page_id = hit['parent_page_id']
+        if parent_page_id:
+            page = None
+            if hit['parent_page_type'] == 'ProfileSectionPage':
+                page = profile_section_pages.get(id=parent_page_id)
+            elif hit['parent_page_type'] == 'ProfilePage':
+                page = profile_pages.get(id=parent_page_id)
+
+            if page:
+                hit['link'] = page.get_url(request)
+            else:
+                hit['link'] = '/'
+        results.append({ 'type': 'search_result', 'value': hit })
+    return results
+
+
 class SearchPage(Page):
     def get_context(self, request):
         context = super(SearchPage, self).get_context(request)
 
-        #add content varinale to search template
-        context['search_query'] = request.GET.get('q', '')
+        query = request.GET.get('q', '')
+        results = search_analysis_and_data(query, request)
+        context['search'] = {
+            'query': query,
+            'results': results
+        }
         return context
 
 

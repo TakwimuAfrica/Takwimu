@@ -8,8 +8,6 @@ from elasticsearch import Elasticsearch, NotFoundError
 from elasticsearch_dsl import Search
 from requests_aws4auth import AWS4Auth
 
-from takwimu.models import ProfilePage, ProfileSectionPage
-
 DOC_TYPE = 'topic'
 
 # if a match is found in two or more `body` fields:
@@ -60,9 +58,6 @@ class TakwimuTopicSearch():
         else:
             DEFAULT_HOST = DEFAULT_SEARCH_BACKEND['URLS']
             self.es = Elasticsearch(hosts=DEFAULT_HOST)
-
-        self.profilepages = ProfilePage.objects.live()
-        self.profilesectionpages = ProfileSectionPage.objects.live()
 
     def reset_index(self):
         """Deletes old index (if any) and creates a new on"""

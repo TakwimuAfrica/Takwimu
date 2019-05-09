@@ -11,8 +11,7 @@
   <script>
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
-    takwimu.page.id = 'search';
-    var search = {};
-    search['searchQuery'] = '{{ search_query }}';
+    takwimu.page.name = 'search';
+    takwimu.page.search = {{ search|jsonify|safe }};
   </script>
 {% endblock body_javascript_extra %}

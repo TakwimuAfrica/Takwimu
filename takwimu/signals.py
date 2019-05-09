@@ -14,8 +14,8 @@ from takwimu.models import ProfilePage, ProfileSectionPage
 from django.dispatch import receiver
 from wagtail.core.signals import page_published
 
+from takwimu.models.utils.search import get_widget_data, get_page_details
 from takwimu.search.takwimu_search import TakwimuTopicSearch
-from takwimu.search.utils import get_widget_data, get_page_details
 
 
 @receiver(page_published, sender=ProfilePage)
