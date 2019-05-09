@@ -16,17 +16,17 @@ const styles = theme => ({
     display: 'flex',
     padding: '0 1.25rem',
     justifyContent: 'center',
-    backgroundColor: theme.palette.primary.main,
-    [theme.breakpoints.up('md')]: {
-      padding: '0 0 1.5rem 0'
-    }
+    backgroundColor: theme.palette.primary.main
   },
   container: {
     [theme.breakpoints.up('md')]: {
-      width: '58.265625rem' // .75 of lg
+      width: '58.265625rem', // .75 of lg
+      paddingTop: '1.5rem',
+      paddingLeft: '1.5rem',
+      paddingBottom: '0.75rem'
     },
     [theme.breakpoints.up('lg')]: {
-      width: '77.6875rem'
+      width: '80.6875rem'
     }
   },
   countryButton: {
@@ -57,6 +57,7 @@ const styles = theme => ({
   },
   flagsContainer: {
     justifyContent: 'space-between',
+    paddingLeft: '1.5rem',
     [theme.breakpoints.up('sm')]: {
       justifyContent: 'unset'
     }
@@ -88,12 +89,7 @@ const styles = theme => ({
 function DropDownContent({ classes, title, description, countries, profile }) {
   return (
     <div className={classes.root}>
-      <Grid
-        container
-        direction="row"
-        justify="center"
-        className={classes.container}
-      >
+      <Grid container direction="row" className={classes.container}>
         <Grid item container md={3}>
           <div className={classes.leftContent}>
             <Typography
