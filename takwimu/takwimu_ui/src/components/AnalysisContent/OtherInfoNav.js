@@ -40,6 +40,9 @@ const styles = theme => ({
     marginTop: '1rem',
     marginBottom: '0.5rem'
   },
+  other: {
+    color: 'white'
+  },
   navigation: {
     backgroundColor: 'unset',
     padding: 0,
@@ -65,7 +68,11 @@ function OtherInfoNav({
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>
         <AnalysisContentNavigation
-          classes={{ root: classes.navigation, label: classes.label }}
+          classes={{
+            root: classes.navigation,
+            label: classes.label,
+            other: classes.other
+          }}
           labelText={labelText}
           labelTextStrong={labelTextStrong}
           current={current}
