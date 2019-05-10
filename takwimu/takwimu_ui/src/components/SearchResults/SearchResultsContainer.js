@@ -113,10 +113,11 @@ class SearchResultsContainer extends React.Component {
   constructor(props) {
     super(props);
 
+    const { filter } = this.props;
     this.state = {
       activePage: 0,
       startIndex: 0,
-      filter: 'All'
+      filter
     };
 
     this.handleNextClick = this.handleNextClick.bind(this);
@@ -251,7 +252,12 @@ class SearchResultsContainer extends React.Component {
 
 SearchResultsContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
+  filter: PropTypes.string
+};
+
+SearchResultsContainer.defaultProps = {
+  filter: 'All'
 };
 
 export default withStyles(styles)(SearchResultsContainer);

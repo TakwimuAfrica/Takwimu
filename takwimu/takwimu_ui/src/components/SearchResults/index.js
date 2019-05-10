@@ -52,7 +52,7 @@ class SearchResults extends React.Component {
       <Section classes={{ root: classes.root }}>
         <Typography variant="h3">Search Results</Typography>
         <SearchInput query={query} onRefresh={this.handleSearch} />
-        <SearchResultsContainer results={results} />
+        <SearchResultsContainer results={results} filter="All" />
       </Section>
     );
   }
