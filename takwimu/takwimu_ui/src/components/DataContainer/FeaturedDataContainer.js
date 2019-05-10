@@ -2,21 +2,28 @@
 import React, { Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
+import { withTheme } from '@material-ui/core/styles';
+
 import DataActions from './DataActions';
 import IFrame from './IFrame';
 
-function DataContainer({ data }) {
+function DataContainer({ data, theme }) {
   const handleDownload = () => {
     const iframe = document.getElementById(
       `cr-embed-country-${data.country}-${data.data_id}`
     );
     iframe.contentWindow.domtoimage
-      .toJpeg(iframe.contentDocument.body)
+      .toPng(iframe.contentDocument.getElementById('census-chart'), {
+        bgcolor: theme.palette.data.light
+      })
       .then(dataUrl => {
         const link = document.createElement('a');
-        link.download = `${data.title}.jpeg`;
+        link.download = `${data.title}.png`;
         link.href = dataUrl;
+        link.target = '_blank';
+        document.body.appendChild(link);
         link.click();
+        document.body.removeChild(link);
       });
   };
 
@@ -42,8 +49,8 @@ function DataContainer({ data }) {
 }
 
 DataContainer.propTypes = {
-  classes: PropTypes.shape({}).isRequired,
+  theme: PropTypes.shape({}).isRequired,
   data: PropTypes.shape({}).isRequired
 };
 
-export default DataContainer;
+export default withTheme()(DataContainer);
