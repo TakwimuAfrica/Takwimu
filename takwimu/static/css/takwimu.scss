@@ -362,6 +362,9 @@ header.section-contents h1 {
 /* ------------------------
  * New Components Styling
  * ------------------------ */
+ #profile button:focus {
+  border-color: $brand-color-primary !important;
+ }
 
 // Shared styles
 // -------------
