@@ -5,8 +5,8 @@ from django.utils.text import slugify
 from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
+from takwimu.models.utils.search import get_widget_data, get_page_details
 from takwimu.search.takwimu_search import TakwimuTopicSearch
-from takwimu.search.utils import get_widget_data, get_page_details
 from takwimu.utils.helpers import COUNTRIES
 
 
@@ -91,7 +91,7 @@ class Command(BaseCommand):
 
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
-            url = f"/profiles/country-{code}-{slugify(country)}"
+            url = f"profiles/country-{code}-{slugify(country)}"
             self.stdout.write(f"Working on {country} {server_url}/{url}")
             browser.get(f"{server_url}/{url}")
             soup = BeautifulSoup(browser.page_source, 'lxml')
@@ -122,7 +122,7 @@ class Command(BaseCommand):
                          viz.find_all('span', class_=['chart-qualifier'])])
 
                     id = f"{country}-{viz['id']}"
-                    link = f"{url}#{viz['id']}"
+                    link = f"/{url}#{viz['id']}"
 
                     _, outcome = search_backend.add_to_index(content_id=id,
                                                              content_type='HURUmap',
@@ -140,4 +140,3 @@ class Command(BaseCommand):
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
 
         browser.quit()
-

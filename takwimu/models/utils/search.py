@@ -1,4 +1,4 @@
-from takwimu.models import ProfileSectionPage, ProfilePage
+from takwimu.models.dashboard import ProfileSectionPage, ProfilePage
 
 
 def get_widget_data(widget):

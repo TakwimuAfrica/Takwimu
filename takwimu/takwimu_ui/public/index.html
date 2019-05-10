@@ -235,10 +235,8 @@
       };
       var search = {
         searchQuery: 'South Africa',
-        searchResults: [
-
-        ]
-      }
+        searchResults: []
+      };
     </script>
   </head>
 
@@ -251,7 +249,7 @@
       // `http//localhost:3000/about` should show about page
       const body = document.getElementsByTagName('body')[0];
       const pathname = window.location.pathname;
-      let page;
+      let page = 'home';
       if (pathname.startsWith('/about')) {
         page = 'about';
       } else if (pathname.startsWith('/profiles/country-')) {
@@ -267,9 +265,9 @@
         }
         page = 'analysis';
       } else if (pathname.startsWith('/search')) {
-          page='search_results'
+        page = 'search';
       }
-      takwimu.page.id = page;
+      takwimu.page.name = page;
       let ids = [];
       switch (page) {
         case 'about':
@@ -278,8 +276,9 @@
         case 'topic':
           ids = ['takwimuProfileDetail', 'takwimuProfile'];
           break;
-        case 'search_results':
-          ids=['takwimuSearchResults'];
+        case 'search':
+          ids = ['takwimuSearchResults'];
+          takwimu.page.search = { query: '', results: [] };
           break;
         case 'analysis':
           ids = ['takwimuAnalysisPage'];

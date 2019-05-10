@@ -18,10 +18,22 @@ const styles = () => ({
   }
 });
 
-function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
+function FeaturedData({
+  classes,
+  takwimu: {
+    page: {
+      featured_data: { value: featuredData }
+    }
+  }
+}) {
+  if (!featuredData) {
+    return null;
+  }
+
+  const { title, featured_data: featuredDataWidgets } = featuredData;
   return (
-    <Section title="Featured Data" variant="h2">
-      {featuredData && featuredData.length ? (
+    <Section title={title} variant="h2">
+      {featuredDataWidgets && featuredDataWidgets.length > 0 && (
         <Grid
           container
           direction="row"
@@ -29,10 +41,12 @@ function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
           alignItems="flex-start"
           className={classes.root}
         >
-          <DataContainer color="secondary" data={featuredData[0]} />
-          <DataContainer color="primary" data={featuredData[1]} />
+          <DataContainer color="secondary" data={featuredDataWidgets[0]} />
+          {featuredDataWidgets.length > 1 && (
+            <DataContainer color="primary" data={featuredDataWidgets[1]} />
+          )}
         </Grid>
-      ) : null}
+      )}
     </Section>
   );
 }
@@ -40,18 +54,25 @@ function FeaturedData({ classes, takwimu: { featured_data: featuredData } }) {
 FeaturedData.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    featured_data: PropTypes.arrayOf(
-      PropTypes.shape({
+    page: PropTypes.shape({
+      featured_data: PropTypes.shape({
         value: PropTypes.shape({
           title: PropTypes.string.isRequired,
-          country: PropTypes.string.isRequired,
-          data_id: PropTypes.string.isRequired,
-          chart_type: PropTypes.string.isRequired,
-          data_stat_type: PropTypes.string.isRequired,
-          description: PropTypes.string.isRequired
-        }).isRequired
+          featured_data: PropTypes.arrayOf(
+            PropTypes.shape({
+              value: PropTypes.shape({
+                title: PropTypes.string.isRequired,
+                country: PropTypes.string.isRequired,
+                data_id: PropTypes.string.isRequired,
+                chart_type: PropTypes.string.isRequired,
+                data_stat_type: PropTypes.string.isRequired,
+                description: PropTypes.string.isRequired
+              }).isRequired
+            }).isRequired
+          )
+        })
       }).isRequired
-    ).isRequired
+    }).isRequired
   }).isRequired
 };
 

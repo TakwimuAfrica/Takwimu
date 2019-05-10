@@ -5,9 +5,8 @@ from django.views.generic import RedirectView
 from wagtail.api.v2.router import WagtailAPIRouter
 
 from takwimu import settings
-from takwimu.views import HomePageView, SupportServicesIndexView, \
-    LegalView, TopicView, IndicatorsGeographyDetailView, \
-    SDGIndicatorView, SearchAPIView, AutoCompleteAPIView, \
+from takwimu.views import HomePageView, LegalView, \
+    IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
         FAQsView, ServicesView, MethodologyView
 from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
@@ -22,9 +21,6 @@ PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-
 
 takwimu_urlpatterns = [
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
-    url(r'^about/support-services',
-        SupportServicesIndexView.as_view(),
-        name='about_supportservices'),
     url(r'^faqs', FAQsView.as_view(), name='faqs'),
     url(r'^services', ServicesView.as_view(), name='services'),
     url(r'^methodology', MethodologyView.as_view(), name='methodology'),
@@ -34,8 +30,6 @@ takwimu_urlpatterns = [
         IndicatorsGeographyDetailView.as_view(),
         name='geography_detail'),
     url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
-    url(r'^topics/$', TopicView.as_view(), name='topics'),
-    url(r'^sdgs/$', SDGIndicatorView.as_view(), name='sdgs'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^api/search/$', SearchAPIView.as_view(), name='api-search'),
     url(r'^api/autocomplete/$', AutoCompleteAPIView.as_view(),

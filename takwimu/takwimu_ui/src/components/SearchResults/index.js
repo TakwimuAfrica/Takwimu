@@ -16,42 +16,43 @@ const styles = () => ({
 class SearchResults extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      searchResults: []
-    };
+
+    const {
+      takwimu: {
+        page: { search }
+      }
+    } = props;
+    this.state = { search };
 
     this.handleSearch = this.handleSearch.bind(this);
   }
 
-  componentDidMount() {
-    const {
-      search: { searchQuery }
-    } = this.props;
-    this.handleSearch(searchQuery);
-  }
-
   handleSearch(searchTerm) {
+    const {
+      takwimu: { page }
+    } = this.props;
     fetch(`/api/search/?q=${searchTerm}&format=json`).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
-          this.setState({ searchResults: json });
+          Object.assign(page, json);
+          const { search } = json;
+          this.setState({ search });
         });
       }
     });
   }
 
   render() {
+    const { classes } = this.props;
     const {
-      classes,
-      search: { searchQuery }
-    } = this.props;
-    const { searchResults } = this.state;
+      search: { query, results }
+    } = this.state;
 
     return (
       <Section classes={{ root: classes.root }}>
         <Typography variant="h3">Search Results</Typography>
-        <SearchInput query={searchQuery} onRefresh={this.handleSearch} />
-        <SearchResultsContainer results={searchResults} />
+        <SearchInput query={query} onRefresh={this.handleSearch} />
+        <SearchResultsContainer results={results} />
       </Section>
     );
   }
@@ -59,8 +60,13 @@ class SearchResults extends React.Component {
 
 SearchResults.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  search: PropTypes.shape({
-    searchQuery: PropTypes.string.isRequired
+  takwimu: PropTypes.shape({
+    page: PropTypes.shape({
+      search: PropTypes.shape({
+        query: PropTypes.string.isRequired,
+        results: PropTypes.arrayOf(PropTypes.shape({})).isRequired
+      }).isRequired
+    }).isRequired
   }).isRequired
 };
 

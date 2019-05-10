@@ -30,7 +30,7 @@ function AnalysisList({ classes, content, current, onClick }) {
     >
       {content.map((c, index) => (
         <AnalysisListItem
-          key={`${c.value.country_slug}-${c.value.slug}`}
+          key={`${c.value.country.slug}-${c.value.slug}`}
           isCurrent={index === current}
           onClick={() => onClick(index)}
         >

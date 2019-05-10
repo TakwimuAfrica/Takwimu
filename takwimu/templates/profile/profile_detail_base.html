@@ -5,6 +5,8 @@
 
 {% block head_meta_description %}{{ HURUmap.description }}{% endblock %}
 
+{% block head_title %} Data - {{ geography.this.name }} - {{ HURUMAP.name }}{% endblock %}
+
 {% block head_css %}
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
@@ -192,6 +194,14 @@
           }
         }
       };
+
+
+    const { geo_code: countryCode } = profileData.geography.this;
+    const country = takwimu.countries.find(c => c.iso_code === countryCode);
+    takwimu.country = country
+
+    $('document').ready(makeCharts());
+
     </script>
 
   <!-- Bootstrap: Enable Tooltips -->

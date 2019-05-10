@@ -33,12 +33,16 @@ const styles = {
   }
 };
 
-function Actions({ classes, hideLastUpdated }) {
+function Actions({
+  classes,
+  page: { last_published_at: lastUpdated },
+  hideLastUpdated
+}) {
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
         <Typography className={classes.lastUpdated}>
-          Last Updated: <strong>18th December 2018</strong>
+          Last Updated: <strong>{lastUpdated}</strong>
         </Typography>
       )}
       <ButtonBase className={classes.shareButton}>
@@ -55,6 +59,9 @@ function Actions({ classes, hideLastUpdated }) {
 
 Actions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  page: PropTypes.shape({
+    last_published_at: PropTypes.string
+  }).isRequired,
   hideLastUpdated: PropTypes.bool
 };
 

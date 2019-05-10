@@ -162,7 +162,7 @@ class Navigation extends React.Component {
           />
         </Grid>
         <Grid item>
-          <Link color="textSecondary" className={classes.link} href="/about">
+          <Link color="textSecondary" className={classes.link} href="/about/">
             About Us
           </Link>
           <Link color="textSecondary" className={classes.link} href="/faqs">

@@ -27,17 +27,28 @@ const styles = () => ({
 function LatestNewsStories({
   classes,
   takwimu: {
-    latest_news_stories: { description, stories },
+    page: {
+      latest_news_stories: {
+        title,
+        description,
+        read_more_link_label: readMore,
+        stories
+      }
+    },
     settings: {
       socialMedia: { medium }
     }
   },
   width
 }) {
+  if (!title) {
+    return null;
+  }
+
   const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
   return (
     <Section
-      title="Latest News &amp; Stories"
+      title={title}
       variant="h2"
       classes={{ title: classes.sectionTitle }}
     >
@@ -47,24 +58,23 @@ function LatestNewsStories({
         alignItems="flex-start"
         className={classes.root}
       >
-        {description && (
+        {description && description.length > 0 && (
           <Grid item xs={12}>
             <Typography
               variant="body1"
               classes={{ root: classes.descriptionRoot }}
-            >
-              {description}
-            </Typography>
+              dangerouslySetInnerHTML={{
+                __html: description
+              }}
+            />
           </Grid>
         )}
         <Grid item xs={12}>
           <A href={medium} underline="none" component="button">
-            <Button classes={{ root: classes.buttonRoot }}>
-              Read more stories on Medium
-            </Button>
+            <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
           </A>
         </Grid>
-        {stories.length > 0 && (
+        {stories && stories.length > 0 && (
           <Grid item xs={12}>
             <Stories stories={stories} />
           </Grid>
@@ -77,9 +87,13 @@ function LatestNewsStories({
 LatestNewsStories.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
-    latest_news_stories: PropTypes.shape({
-      description: PropTypes.string.isRequired,
-      stories: PropTypes.arrayOf(PropTypes.shape({}).isRequired)
+    page: PropTypes.shape({
+      latest_news_stories: PropTypes.shape({
+        title: PropTypes.string,
+        description: PropTypes.string,
+        read_more_link_label: PropTypes.string,
+        stories: PropTypes.arrayOf(PropTypes.shape({}))
+      })
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({

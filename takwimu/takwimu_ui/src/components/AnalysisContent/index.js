@@ -7,11 +7,10 @@ import { Typography, withStyles, Grid } from '@material-ui/core';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import ContentNavigation from './ContentNavigation';
+import CountryContent from '../CountryContent';
+import DataContainer from '../DataContainer';
 import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
-import ViewCountry from '../ViewCountry';
-
-import DataContainer from '../DataContainer';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 
@@ -67,10 +66,15 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
     onChange(index);
   };
 
+  const {
+    profile_navigation: { value: profileNavigation },
+    read_next: { value: readNext }
+  } = content;
+
   return (
     <Fragment>
       <OtherInfoNav
-        labelText="Other topics in"
+        labelText={profileNavigation.title}
         labelTextStrong={content.title}
         content={content}
         current={topicIndex}
@@ -83,13 +87,13 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           {content.body[topicIndex].value.title}
         </Typography>
         <ContentNavigation
-          labelText="Other topics in"
+          labelText={profileNavigation.title}
           labelTextStrong={content.title}
           current={topicIndex}
           content={content}
           showContent={showContent}
         />
-        <Actions />
+        <Actions page={takwimu.page} />
 
         <Grid container direction="row">
           {content.body[topicIndex].value.body.map(c => (
@@ -115,9 +119,9 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           ))}
         </Grid>
 
-        <Actions hideLastUpdated />
+        <Actions page={takwimu.page} hideLastUpdated />
         <ContentNavigation
-          labelText="Other topics in"
+          labelText={profileNavigation.title}
           labelTextStrong={content.title}
           current={topicIndex}
           content={content}
@@ -125,12 +129,16 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         />
         <AnalysisReadNext
           classes={{ container: classes.readNextContainer }}
+          title={readNext.title}
           content={content}
           current={topicIndex}
           showContent={showContent}
         />
-        <ViewCountry takwimu={takwimu} />
-        <RelatedContent relatedContent={content.related_content} />
+        <CountryContent
+          content={content.view_country_content}
+          takwimu={takwimu}
+        />
+        <RelatedContent content={content.related_content} />
       </div>
     </Fragment>
   );

@@ -1,6 +1,10 @@
 {% extends 'takwimu/_layouts/page.html' %}
 {% load wagtailcore_tags static jsonify %}
 
+{% block head_title %} {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
+
+{% block body_id %}about{% endblock %}
+
 {% block content %}
   <div id="takwimuAboutUsPage" />
 {% endblock %}
@@ -11,36 +15,6 @@
   <script type='text/javascript'>
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
-    takwimu.page.id = 'about';
-    takwimu.page.activeContent = '{{ content }}';
-
-    var servicesList = [];
-    var faqsList = [];
-
-    {% for service in settings.takwimu.SupportServicesSetting.services %}
-      {% if service.value.category != "Persona" %}
-        servicesList.push ({
-        'title': '{{ service.value.title }}',
-        'description': '{{ service.value.description }}'
-        })
-      {% endif %}
-    {% endfor %}
-
-    {% for faq in settings.takwimu.FAQSetting.faqs %}
-        faqsList.push ({
-        'question': '{{ faq.value.question }}',
-        'answer': '{{ faq.value.answer }}'
-        })
-    {% endfor %}
-
-    takwimu.services = { 
-      overview: '{{ settings.takwimu.SupportServicesSetting.overview | safe }}',
-      servicesList: servicesList
-    }
-
-    takwimu.faqs = {
-      overview: '{{ settings.takwimu.FAQSetting.overview | safe }}',
-      faqsList: faqsList
-    }
+    takwimu.page.name = 'about';
    </script>
 {% endblock body_javascript_extra %}

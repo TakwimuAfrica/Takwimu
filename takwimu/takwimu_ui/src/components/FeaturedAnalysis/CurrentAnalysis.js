@@ -81,7 +81,12 @@ const styles = theme => ({
   }
 });
 
-function CurrentAnalysis({ classes, content }) {
+function CurrentAnalysis({
+  classes,
+  content: { value: currentAnalysis },
+  readAnalysisTitle,
+  viewProfileTitle
+}) {
   return (
     <div className={classes.root}>
       <Grid
@@ -98,7 +103,7 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.header}
           >
             <img
-              src={flagSrc(`./${content.country_slug}.svg`)}
+              src={flagSrc(`./${currentAnalysis.country.slug}.svg`)}
               alt="South Africa"
               className={classes.flag}
             />
@@ -106,14 +111,16 @@ function CurrentAnalysis({ classes, content }) {
               variant="h4"
               component="h1"
               className={classes.title}
-              dangerouslySetInnerHTML={{ __html: content.title }}
+              dangerouslySetInnerHTML={{ __html: currentAnalysis.title }}
             />
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1" className={classes.body}>
-            {content.description}
-          </Typography>
+          <Typography
+            variant="body1"
+            className={classes.body}
+            dangerouslySetInnerHTML={{ __html: currentAnalysis.description }}
+          />
         </Grid>
         <Grid item xs={12}>
           <Grid
@@ -123,20 +130,22 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.actions}
           >
             <Button
-              href={`/profiles/${content.country_slug}/${content.slug}`}
+              href={`/profiles/${currentAnalysis.country.slug}/${
+                currentAnalysis.slug
+              }`}
               className={classes.primaryAction}
             >
-              Read the full analysis
+              {readAnalysisTitle}
             </Button>
             <Button
-              href={`/profiles/country-${content.country_code}-${
-                content.country_slug
+              href={`/profiles/country-${currentAnalysis.country.iso_code}-${
+                currentAnalysis.country.slug
               }`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
             >
-              View country profile
+              {viewProfileTitle}
             </Button>
           </Grid>
         </Grid>
@@ -147,7 +156,11 @@ function CurrentAnalysis({ classes, content }) {
 
 CurrentAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired
+  content: PropTypes.shape({
+    value: PropTypes.shape({}).isRequired
+  }).isRequired,
+  readAnalysisTitle: PropTypes.string.isRequired,
+  viewProfileTitle: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(CurrentAnalysis);

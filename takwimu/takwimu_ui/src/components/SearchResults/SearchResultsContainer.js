@@ -163,7 +163,7 @@ class SearchResultsContainer extends React.Component {
     // filter results with result_type equals to state's filter
     if (filter !== 'All') {
       filteredResults = results.filter(
-        resultItem => resultItem.result_type === filter
+        resultItem => resultItem.value.result_type === filter
       );
     }
 
@@ -183,12 +183,11 @@ class SearchResultsContainer extends React.Component {
     return (
       <div className={classes.root}>
         <Grid className={classes.resultsFilter}>
-          <Typography item variant="body2" className={classes.showResult}>
+          <Typography variant="body2" className={classes.showResult}>
             {`Showing ${resultIndexText}${filteredResults.length} results`}
           </Typography>
           <Grid item className={classes.filter}>
             <Typography
-              item
               variant="body2"
               color="inherit"
               className={classes.filterItemLabel}
@@ -197,6 +196,7 @@ class SearchResultsContainer extends React.Component {
             </Typography>
             {['All', 'Analysis', 'Data'].map(type => (
               <ButtonBase
+                key={type}
                 className={classNames([
                   classes.filterItem,
                   { [classes.filterActive]: filter === type }
@@ -213,12 +213,12 @@ class SearchResultsContainer extends React.Component {
           <div className={classes.searchResultsList}>
             {filteredResults.slice(startIndex, endIndex).map(result => (
               <SearchResultItem
-                resultType={result.result_type}
-                country={result.country}
-                link={result.link}
-                title={result.title}
-                summary={result.summary}
-                key={result.content_id}
+                resultType={result.value.result_type}
+                country={result.value.country}
+                link={result.value.link}
+                title={result.value.title}
+                summary={result.value.summary}
+                key={result.value.content_id}
               />
             ))}
           </div>
@@ -251,7 +251,7 @@ class SearchResultsContainer extends React.Component {
 
 SearchResultsContainer.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  results: PropTypes.shape([]).isRequired
+  results: PropTypes.arrayOf(PropTypes.shape({})).isRequired
 };
 
 export default withStyles(styles)(SearchResultsContainer);
