@@ -51,9 +51,6 @@ function AboutContentNav({
 }) {
   const showShadow = useScrollListener(10);
   const generateHref = index => {
-    if (index === 0) {
-      return `/about/`;
-    }
     const item = contentHeadings[index];
     return `/${item.link}`;
   };

@@ -23,6 +23,21 @@ class AboutUsPage extends React.Component {
     this.changeActiveContent = this.changeActiveContent.bind(this);
   }
 
+  componentDidMount() {
+    const {
+      takwimu: { page }
+    } = this.props;
+    const { activeContent } = page;
+    const contentHeadings = this.getContentHeadings();
+    const currentIndex = contentHeadings.findIndex(
+      x => x.link === activeContent
+    );
+
+    if (currentIndex !== -1) {
+      this.changeActiveContent(currentIndex);
+    }
+  }
+
   getContentHeadings() {
     const {
       takwimu: {
@@ -130,7 +145,8 @@ AboutUsPage.propTypes = {
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({}).isRequired
-    }).isRequired
+    }).isRequired,
+    activeContent: PropTypes.string.isRequired
   }).isRequired
 };
 
