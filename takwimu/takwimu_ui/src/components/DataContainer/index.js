@@ -29,15 +29,23 @@ const styles = theme => ({
       padding: '1.25rem'
     }
   },
+  descriptionWrapper: {
+    marginTop: '1.25rem',
+    marginLeft: 'auto',
+    marginRight: 'auto'
+  },
   descriptionContainer: {
-    padding: '1.25rem 0.625em 0',
-    [theme.breakpoints.up('md')]: {
-      padding: '0 2.625rem'
-    }
+    width: 'auto'
   },
   description: {
     color: theme.palette.data.main,
-    marginLeft: '1.25rem'
+    marginLeft: '1.25rem',
+    [theme.breakpoints.up('md')]: {
+      width: '17.53125rem' // .75 of lg
+    },
+    [theme.breakpoints.up('md')]: {
+      width: '23.375rem'
+    }
   },
   title: {
     fontWeight: 'bold',
@@ -74,8 +82,14 @@ function DataContainer({ id, classes, data }) {
       </div>
 
       {data.value.description && (
-        <div className={classes.descriptionContainer}>
-          <Grid container direction="row" wrap="nowrap">
+        <div className={classes.descriptionWrapper}>
+          <Grid
+            container
+            justify="center"
+            alignItems="flex-start"
+            wrap="nowrap"
+            className={classes.descriptionContainer}
+          >
             <Grid item>
               <ArrowDropUp color="primary" />
             </Grid>
