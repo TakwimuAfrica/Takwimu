@@ -92,7 +92,7 @@ const Theme = createMuiTheme({
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
-      lineHeight: 'normal',
+      lineHeight: '2.05',
       letterSpacing: 'normal'
     },
     body2: {

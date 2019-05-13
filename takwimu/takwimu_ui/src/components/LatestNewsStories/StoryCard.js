@@ -16,6 +16,9 @@ const styles = theme => ({
   titleGutterBottom: {
     marginBottom: '1.375rem'
   },
+  title: {
+    lineHeight: 'normal'
+  },
   link: {
     color: theme.palette.primary.main,
     fontWeight: 'bold'
@@ -39,6 +42,7 @@ function StoryCard({ classes, story }) {
           variant="body1"
           component="h2"
           classes={{ gutterBottom: classes.titleGutterBottom }}
+          className={classes.title}
         >
           <A href={story.url} className={classes.link}>
             {story.title}
