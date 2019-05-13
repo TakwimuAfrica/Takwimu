@@ -7,9 +7,10 @@ import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
 
-const styles = () => ({
+const styles = theme => ({
   root: {
-    flexGrow: 1
+    flexGrow: 1,
+    backgroundColor: theme.palette.info.main
   },
   content: {
     paddingBottom: '1rem'
