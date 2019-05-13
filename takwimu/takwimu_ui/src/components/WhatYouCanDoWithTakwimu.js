@@ -1,7 +1,10 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import { Typography, Grid, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+
 import Section from './Section';
 
 import reasearchIcon from '../assets/images/a-chart.svg';
@@ -14,21 +17,34 @@ const styles = theme => ({
     padding: '2.438rem 0.625rem',
     flexDirection: 'column',
     [theme.breakpoints.up('md')]: {
-      flexDirection: 'row'
+      flexDirection: 'row',
+      padding: '2.438rem 1.875rem 2.9375rem 4.03125rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
       padding: '2.438rem 2.5rem 2.9375rem 5.375rem'
     }
   },
   box: {
-    width: '19rem',
+    width: '100%',
     display: 'flex',
     flexWrap: 'wrap',
     flexDirection: 'column',
     alignItems: 'flex-start',
     margin: '1.25rem',
     [theme.breakpoints.up('md')]: {
+      width: '14.25rem',
       margin: '0'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '19rem'
+    }
+  },
+  marginLeft: {
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '4.03125rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: '5.9375rem'
     }
   },
   label: {
@@ -67,7 +83,12 @@ function WhatYouCanDoWithTakwimu({
         <Grid container justify="flex-start" className={classes.container}>
           {usesOfTakwimu.map((u, i) => (
             <Grid key={u.value.title} item>
-              <div className={classes.box}>
+              <div
+                className={classNames([
+                  classes.box,
+                  { [classes.marginLeft]: i > 0 }
+                ])}
+              >
                 <img alt="research" src={icons[i]} />
                 <Typography
                   variant="body1"
