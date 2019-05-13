@@ -63,6 +63,8 @@ const styles = theme => ({
     }
   },
   countryLink: {
+    display: 'flex',
+    alignItems: 'center',
     // Override original Takwimu & Bootstrap styles
     '&:hover': {
       color: theme.palette.text.secondary,
