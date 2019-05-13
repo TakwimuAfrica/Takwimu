@@ -5,6 +5,7 @@ from django.utils.text import slugify
 from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
+from takwimu.models.data import ProfileData
 from takwimu.models.utils.search import get_widget_data, get_page_details
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 from takwimu.utils.helpers import COUNTRIES
@@ -135,6 +136,10 @@ class Command(BaseCommand):
                                                              parent_page_type=None,
                                                              result_type='Data',
                                                              link=link)
+
+                    profile_data = ProfileData(
+                        country_iso_code=code, chart_id=viz['id'], chart_title=title)
+                    profile_data.save()
 
                     self.stdout.write(
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
