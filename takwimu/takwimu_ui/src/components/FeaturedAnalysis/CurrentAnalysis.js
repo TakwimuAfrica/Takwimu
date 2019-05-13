@@ -43,7 +43,8 @@ const styles = theme => ({
     margin: 0
   },
   body: {
-    paddingBottom: '1.875rem'
+    paddingBottom: '1.875rem',
+    lineHeight: 1.55
   },
   actions: {
     marginBottom: '3.0625rem'
@@ -57,6 +58,8 @@ const styles = theme => ({
   },
   secondaryAction: {
     marginTop: '1rem',
+    padding: 0,
+    borderWidth: '0.125rem',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '2.15625rem' // .75 lg
@@ -70,6 +73,11 @@ const styles = theme => ({
       color: theme.palette.primary.dark,
       textDecoration: 'none'
     }
+  },
+  // override label padding for secondary button/ allow for the 2px border
+  secondaryActionLabel: {
+    paddingTop: '1rem',
+    paddingBottom: '0.9375rem'
   }
 });
 
@@ -134,6 +142,7 @@ function CurrentAnalysis({
                 currentAnalysis.country.slug
               }`}
               className={classes.secondaryAction}
+              classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
             >
               {viewProfileTitle}

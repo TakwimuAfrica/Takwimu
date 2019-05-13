@@ -10,6 +10,7 @@ const styles = {
   root: {
     padding: '30px',
     display: 'flex',
+    alignItems: 'center',
     flexDirection: 'row',
     '& > *': {
       marginRight: '50px'
@@ -23,6 +24,7 @@ const styles = {
   },
   lastUpdated: {
     fontSize: '0.875rem',
+    lineHeight: 'normal',
     fontStyle: 'italic'
   },
   shareButton: {

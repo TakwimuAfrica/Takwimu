@@ -7,6 +7,8 @@ import A from '../A';
 import Title from './Title';
 
 import gates from '../../assets/images/gates.png';
+import gates2 from '../../assets/images/gates@2x.png';
+import gates3 from '../../assets/images/gates@3x.png';
 
 const styles = () => ({
   root: {
@@ -22,7 +24,12 @@ function Support({ classes }) {
     <div className={classes.root}>
       <Title>With support from</Title>
       <A href="//www.gatesfoundation.org">
-        <img src={gates} alt="Bill & Melinda Gates" className={classes.img} />
+        <img
+          src={gates}
+          srcSet={`${gates2} 2x, ${gates3} 3x`}
+          alt="Bill & Melinda Gates"
+          className={classes.img}
+        />
       </A>
     </div>
   );

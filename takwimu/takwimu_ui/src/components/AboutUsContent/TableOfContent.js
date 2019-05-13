@@ -21,7 +21,7 @@ function AboutUsTableOfContent({
 }) {
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `#${item.link}`;
+    return `/${item.link}`;
   };
 
   return (

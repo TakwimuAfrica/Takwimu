@@ -29,8 +29,11 @@ const styles = theme => ({
     }
   },
   otherTopic: {
-    color: 'white',
     textDecoration: 'underline'
+  },
+  topicSelected: {
+    textDecoration: 'none',
+    fontWeight: 'bold'
   },
   label: {
     fontSize: '0.813rem',
@@ -47,6 +50,10 @@ function AboutContentNav({
   changeActiveContent
 }) {
   const showShadow = useScrollListener(10);
+  const generateHref = index => {
+    const item = contentHeadings[index];
+    return `/${item.link}`;
+  };
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
       <Layout>
@@ -56,13 +63,21 @@ function AboutContentNav({
         <div className={classes.otherTopicLinks}>
           {contentHeadings.map((item, index) => (
             <ButtonBase
-              className={classNames({
-                [classes.otherTopic]: current !== index
-              })}
               key={item.link}
-              onClick={changeActiveContent(index)}
+              onClick={e => {
+                e.preventDefault();
+
+                window.history.pushState(null, '', generateHref(index));
+                changeActiveContent(index);
+              }}
             >
-              <Typography variant="body2" color="textSecondary">
+              <Typography
+                variant="body2"
+                color="textSecondary"
+                className={classNames(classes.otherTopic, {
+                  [classes.topicSelected]: current === index
+                })}
+              >
                 {item.title}
               </Typography>
             </ButtonBase>

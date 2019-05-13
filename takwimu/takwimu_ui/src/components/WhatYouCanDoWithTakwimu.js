@@ -1,7 +1,10 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import { Typography, Grid, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+
 import Section from './Section';
 
 import reasearchIcon from '../assets/images/a-chart.svg';
@@ -13,30 +16,46 @@ const styles = theme => ({
     backgroundColor: theme.palette.info.main,
     padding: '2.438rem 0.625rem',
     flexDirection: 'column',
-    alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
       flexDirection: 'row',
-      alignItems: 'space-between'
+      padding: '2.438rem 1.875rem 2.9375rem 4.03125rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      padding: '2.438rem 5.125rem'
+      padding: '2.438rem 2.5rem 2.9375rem 5.375rem'
     }
   },
   box: {
     width: '100%',
     display: 'flex',
+    flexWrap: 'wrap',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'flex-start',
     margin: '1.25rem',
     [theme.breakpoints.up('md')]: {
-      height: '16.25rem',
-      width: '18.125rem',
+      width: '14.25rem',
       margin: '0'
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '19rem'
+    }
+  },
+  marginLeft: {
+    [theme.breakpoints.up('md')]: {
+      marginLeft: '4.03125rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      marginLeft: '5.9375rem'
     }
   },
   label: {
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    padding: '17px 0 22px'
+  },
+  title: {
+    marginBottom: '3.0625rem'
+  },
+  description: {
+    fontSize: theme.typography.body1.fontSize
   }
 });
 
@@ -64,7 +83,12 @@ function WhatYouCanDoWithTakwimu({
         <Grid container justify="flex-start" className={classes.container}>
           {usesOfTakwimu.map((u, i) => (
             <Grid key={u.value.title} item>
-              <div className={classes.box}>
+              <div
+                className={classNames([
+                  classes.box,
+                  { [classes.marginLeft]: i > 0 }
+                ])}
+              >
                 <img alt="research" src={icons[i]} />
                 <Typography
                   variant="body1"
@@ -73,6 +97,7 @@ function WhatYouCanDoWithTakwimu({
                 />
                 <Typography
                   variant="body2"
+                  className={classes.description}
                   dangerouslySetInnerHTML={{ __html: u.value.description }}
                 />
               </div>

@@ -19,6 +19,9 @@ const styles = () => ({
     width: '100%',
     height: '100%',
     border: 0
+  },
+  title: {
+    marginTop: '4.125rem'
   }
 });
 
@@ -36,7 +39,7 @@ function MakingOfTakwimu({
 
   const { title, description, link } = makingOf;
   return (
-    <Section title={title} variant="h3">
+    <Section title={title} variant="h3" classes={{ title: classes.title }}>
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{

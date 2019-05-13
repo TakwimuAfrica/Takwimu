@@ -10,19 +10,19 @@ const styles = theme => ({
   aside: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '10.5rem' // .75 of lg
+      width: '14rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '14rem'
+      width: '19.0625rem'
     }
   },
   main: {
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '44.671875rem' // .75 of lg
+      width: '44.265625rem' // .75 of lg
     },
     [theme.breakpoints.up('lg')]: {
-      width: '59.5625rem'
+      width: '58.4375rem'
     }
   }
 });
@@ -30,7 +30,7 @@ const styles = theme => ({
 function ContentPage({ aside, children, classes }) {
   return (
     <Section classes={{ root: classes.root }}>
-      <Grid container justify="space-between">
+      <Grid container direction="row">
         <div className={classes.aside}>{aside}</div>
         <div className={classes.main}>{children}</div>
       </Grid>

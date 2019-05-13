@@ -16,7 +16,8 @@ const styles = () => ({
   },
   root: {},
   descriptionRoot: {
-    marginBottom: '2.1875rem'
+    marginBottom: '2.1875rem',
+    padding: '1rem 0'
   },
   buttonRoot: {
     marginBottom: '3.0625rem'
@@ -69,7 +70,7 @@ function LatestNewsStories({
           </Grid>
         )}
         <Grid item xs={12}>
-          <A href={medium} underline="none">
+          <A href={medium} underline="none" component="button">
             <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
           </A>
         </Grid>

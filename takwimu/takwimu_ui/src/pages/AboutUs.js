@@ -9,7 +9,7 @@ import TableOfContent from '../components/AboutUsContent/TableOfContent';
 
 const styles = () => ({
   root: {
-    marginTop: '3.875rem',
+    marginTop: '2.875rem',
     marginBottom: '4.375rem'
   }
 });
@@ -21,6 +21,21 @@ class AboutUsPage extends React.Component {
 
     this.getContentHeadings = this.getContentHeadings.bind(this);
     this.changeActiveContent = this.changeActiveContent.bind(this);
+  }
+
+  componentDidMount() {
+    const {
+      takwimu: { page }
+    } = this.props;
+    const { activeContent } = page;
+    const contentHeadings = this.getContentHeadings();
+    const currentIndex = contentHeadings.findIndex(
+      x => x.link === activeContent
+    );
+
+    if (currentIndex !== -1) {
+      this.changeActiveContent(currentIndex);
+    }
   }
 
   getContentHeadings() {
@@ -130,7 +145,8 @@ AboutUsPage.propTypes = {
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({}).isRequired
-    }).isRequired
+    }).isRequired,
+    activeContent: PropTypes.string.isRequired
   }).isRequired
 };
 

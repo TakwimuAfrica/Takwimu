@@ -114,7 +114,7 @@ class Navigation extends React.Component {
           <Grid container justify="space-between" alignItems="center">
             <Grid item>
               <Link href="/">
-                <img alt="logo" src={logoWhite} height={22} />
+                <img alt="logo" src={logoWhite} height={19} />
               </Link>
             </Grid>
 
@@ -165,7 +165,7 @@ class Navigation extends React.Component {
           <Link color="textSecondary" className={classes.link} href="/about/">
             About Us
           </Link>
-          <Link color="textSecondary" className={classes.link} href="/about/">
+          <Link color="textSecondary" className={classes.link} href="/faqs">
             FAQs
           </Link>
           <Link
@@ -252,12 +252,12 @@ class Navigation extends React.Component {
               toggle={this.toggleDrawer}
             />
             <MenuItem>
-              <Link className={classes.link} href="/about/">
-                About Us
+              <Link className={classes.link} href="/about">
+                About
               </Link>
             </MenuItem>
             <MenuItem>
-              <Link className={classes.link} href="/about/">
+              <Link className={classes.link} href="/faqs">
                 FAQs
               </Link>
             </MenuItem>

@@ -92,7 +92,7 @@ const Theme = createMuiTheme({
       fontWeight: 'normal',
       fontStyle: 'normal',
       fontStretch: 'normal',
-      lineHeight: 'normal',
+      lineHeight: '2.05',
       letterSpacing: 'normal'
     },
     body2: {
@@ -152,6 +152,7 @@ const Theme = createMuiTheme({
         borderRadius: '0.75rem',
         borderSize: '00625rem',
         width: '100%',
+        padding: '0',
         '@media (min-width: 960px)': {
           // md
           width: '15.609375rem' // .75 of lg
@@ -160,6 +161,9 @@ const Theme = createMuiTheme({
           // lg
           width: '20.8125rem'
         }
+      },
+      contained: {
+        boxShadow: 'none'
       },
       label: {
         paddingTop: '1.125rem',

@@ -56,15 +56,30 @@ class HomePageView(TemplateView):
         return context
 
 
-class AboutUsView(TemplateView):
-    template_name = 'takwimu/about/index.html'
+class FAQsView(TemplateView):
+    template_name = 'takwimu/about_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(AboutUsView, self).get_context_data(**kwargs)
-        context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
+        context = super(FAQsView, self).get_context_data(**kwargs)
+        context['content'] = 'faqs'
+
+        return context
+
+class ServicesView(TemplateView):
+    template_name = 'takwimu/about_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServicesView, self).get_context_data(**kwargs)
+        context['content'] = 'services'
+
+        return context
+
+class MethodologyView(TemplateView):
+    template_name = 'takwimu/about_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MethodologyView, self).get_context_data(**kwargs)
+        context['content'] = 'methodology'
 
         return context
 
