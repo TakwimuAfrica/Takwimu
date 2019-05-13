@@ -10,10 +10,14 @@ import A from '../A';
 const styles = theme => ({
   root: {},
   media: {
-    height: '17.625rem'
+    height: '17.625rem',
+    cursor: 'grabbing'
   },
   titleGutterBottom: {
     marginBottom: '1.375rem'
+  },
+  title: {
+    lineHeight: 'normal'
   },
   link: {
     color: theme.palette.primary.main,
@@ -26,6 +30,9 @@ function StoryCard({ classes, story }) {
     <Card classes={{ root: classes.root }}>
       <CardMedia
         className={classes.media}
+        component="a"
+        href={story.url}
+        target="_blank"
         image={story.preview_image.url}
         title={story.title}
       />
@@ -35,6 +42,7 @@ function StoryCard({ classes, story }) {
           variant="body1"
           component="h2"
           classes={{ gutterBottom: classes.titleGutterBottom }}
+          className={classes.title}
         >
           <A href={story.url} className={classes.link}>
             {story.title}

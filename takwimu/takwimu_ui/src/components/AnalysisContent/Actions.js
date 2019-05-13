@@ -20,6 +20,7 @@ const styles = {
   root: {
     padding: '30px',
     display: 'flex',
+    alignItems: 'center',
     flexDirection: 'row',
     '& > *': {
       marginRight: '50px'
@@ -33,6 +34,7 @@ const styles = {
   },
   lastUpdated: {
     fontSize: '0.875rem',
+    lineHeight: 'normal',
     fontStyle: 'italic'
   },
   shareButton: {
@@ -45,13 +47,17 @@ const styles = {
   }
 };
 
-function Actions({ classes, hideLastUpdated }) {
+function Actions({
+  classes,
+  page: { last_published_at: lastUpdated },
+  hideLastUpdated
+}) {
   const [shareButtonElement, setShareButtonElement] = useState(null);
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
         <Typography className={classes.lastUpdated}>
-          Last Updated: <strong>18th December 2018</strong>
+          Last Updated: <strong>{lastUpdated}</strong>
         </Typography>
       )}
       <ButtonBase
@@ -89,8 +95,10 @@ function Actions({ classes, hideLastUpdated }) {
 
 Actions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  hideLastUpdated: PropTypes.bool,
-  takwimu: PropTypes.shape({}).isRequired
+  page: PropTypes.shape({
+    last_published_at: PropTypes.string
+  }).isRequired,
+  hideLastUpdated: PropTypes.bool
 };
 
 Actions.defaultProps = {

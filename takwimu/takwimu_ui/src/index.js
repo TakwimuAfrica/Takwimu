@@ -13,8 +13,8 @@ import Profile from './components/Profile';
 import ProfileDetail from './components/ProfileDetail';
 import LatestNewsStories from './components/LatestNewsStories';
 import MakingOfTakwimu from './components/MakingOfTakwimu';
-import WhatCanYouDo from './components/WhatCanYouDo';
-
+import WhatCanYouDo from './components/WhatYouCanDoWithTakwimu';
+import SearchResults from './components/SearchResults';
 import AnalysisPage from './pages/Analysis';
 import AboutUsPage from './pages/AboutUs';
 
@@ -41,30 +41,14 @@ const renderHomepage = () => {
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {
-          const {
-            tagline,
-            featured_analysis: featuredAnalysis,
-            featured_data: featuredData,
-            what_you_can_do_with_takwimu: whatYouCanDo,
-            making_of_takwimu: makingOf,
-            latest_news_stories: latestNewsStories
-          } = data.items[0];
-          const takwimu = Object.assign({}, PROPS.takwimu, {
-            tagline,
-            featured_analysis: featuredAnalysis,
-            featured_data: featuredData,
-            what_you_can_do_with_takwimu: whatYouCanDo,
-            making_of_takwimu: makingOf,
-            latest_news_stories: latestNewsStories
-          });
-          const props = Object.assign({}, PROPS, { takwimu });
+          Object.assign(PROPS.takwimu.page, data.items[0]);
 
-          renderApp(Hero, 'takwimuHero', props);
-          renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', props);
-          renderApp(FeaturedData, 'takwimuFeaturedData', props);
-          renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo', props);
-          renderApp(MakingOfTakwimu, 'takwimuMakingOf', props);
-          renderApp(LatestNewsStories, 'takwimuLatestNewsStories', props);
+          renderApp(Hero, 'takwimuHero', PROPS);
+          renderApp(FeaturedAnalysis, 'takwimuFeaturedAnalysis', PROPS);
+          renderApp(FeaturedData, 'takwimuFeaturedData', PROPS);
+          renderApp(WhatCanYouDo, 'takwimuWhatCanYouDo', PROPS);
+          renderApp(MakingOfTakwimu, 'takwimuMakingOf', PROPS);
+          renderApp(LatestNewsStories, 'takwimuLatestNewsStories', PROPS);
         }
       });
     renderApp(HomeWhereToNext, 'takwimuWhereToNext');
@@ -93,20 +77,25 @@ const renderAboutUsPage = () => {
       .then(response => response.json())
       .then(data => {
         if (data.items && data.items.length) {
-          const {
-            content,
-            methodology,
-            related_content: relatedContent
-          } = data.items[0];
-          const takwimu = Object.assign({}, PROPS.takwimu, {
-            content,
-            methodology,
-            related_content: relatedContent
-          });
-          const props = Object.assign({}, PROPS, { takwimu });
-          renderApp(AboutUsPage, 'takwimuAboutUsPage', props);
+          Object.assign(PROPS.takwimu.page, data.items[0]);
+
+          renderApp(AboutUsPage, 'takwimuAboutUsPage');
         }
       });
+  }
+};
+
+const renderSearchResultsPage = () => {
+  const el = document.getElementById('takwimuSearchResults');
+  if (el) {
+    // Search is a time sensitive page and hence the server returns the
+    // search page template *with* search results. However, React may run before
+    // all server-sided defined <script/> have finished running & hence the
+    // initial search data defined in one of those scripts may still be
+    // undefined. We hence wait for _all_ content to load.
+    window.addEventListener('load', () =>
+      renderApp(SearchResults, 'takwimuSearchResults')
+    );
   }
 };
 
@@ -119,3 +108,4 @@ renderAboutUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();
+renderSearchResultsPage();

@@ -31,11 +31,11 @@ const styles = theme => ({
   }
 });
 
-function AnalysisReadNext({ classes, current, content, showContent }) {
+function AnalysisReadNext({ classes, current, content, showContent, title }) {
   const hasContent = current < content.body.length - 1;
 
   return hasContent ? (
-    <Section classes={{ root: classes.root }} title="Read next..." variant="h3">
+    <Section classes={{ root: classes.root }} title={title} variant="h3">
       <Grid
         container
         justify="flex-start"
@@ -63,6 +63,7 @@ function AnalysisReadNext({ classes, current, content, showContent }) {
 
 AnalysisReadNext.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
   content: PropTypes.shape({}).isRequired,
   showContent: PropTypes.func.isRequired

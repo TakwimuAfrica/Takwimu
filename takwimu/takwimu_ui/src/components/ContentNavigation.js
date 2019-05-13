@@ -14,6 +14,7 @@ const styles = theme => ({
   },
   topicLinks: {
     '& > a:nth-child(n)': {
+      lineHeight: 1.5,
       marginRight: '3.125rem'
     }
   },
@@ -22,9 +23,11 @@ const styles = theme => ({
   },
   topicSelected: {},
   label: {
-    color: '#848484',
     fontSize: '0.813rem',
     marginBottom: '1rem'
+  },
+  other: {
+    color: '#848484'
   }
 });
 
@@ -44,7 +47,8 @@ function ContentNavigation({
   return (
     <ContentSection classes={{ root: classes.root }} {...props}>
       <Typography className={classes.label}>
-        {title} {contentTitle && <strong> {contentTitle}</strong>}
+        <span className={classes.other}>{title} </span>{' '}
+        {contentTitle && <strong> {contentTitle}</strong>}
       </Typography>
 
       <div className={classes.topicLinks}>

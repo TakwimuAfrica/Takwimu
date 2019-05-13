@@ -31,7 +31,11 @@ function AnalysisContentNavigation({
 
   return (
     <ContentNavigation
-      classes={{ root: classes.root, label: classes.label }}
+      classes={{
+        root: classes.root,
+        label: classes.label,
+        other: classes.other
+      }}
       title={labelText}
       contentTitle={labelTextStrong}
       content={content.body}

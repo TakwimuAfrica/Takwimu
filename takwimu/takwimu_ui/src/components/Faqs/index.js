@@ -5,24 +5,33 @@ import { withStyles, Grid, Typography } from '@material-ui/core';
 import ContentSection from '../ContentSection';
 import Faq from './Faq';
 
-const styles = () => ({
+const styles = theme => ({
   root: {},
-  contentGrid: { paddingTop: '2rem', paddingBottom: '2rem' }
+  contentGrid: {
+    paddingTop: '2rem',
+    paddingBottom: '2rem',
+    '& a': {
+      color: theme.palette.primary.main
+    }
+  }
 });
 
-function Faqs({ classes, faqs, ...props }) {
+function Faqs({ classes, faqs: { value: faqs }, ...props }) {
+  if (!faqs) {
+    return null;
+  }
+
   return (
     <ContentSection
-      title="Frequently Asked Questions"
+      title={faqs.title}
       variant="h3"
       classes={{ root: classes.root }}
-      component={ContentSection}
       {...props}
     >
       <Typography
         variant="body1"
         dangerouslySetInnerHTML={{
-          __html: faqs.overview
+          __html: faqs.description
         }}
       />
       <Grid
@@ -31,12 +40,12 @@ function Faqs({ classes, faqs, ...props }) {
         direction="column"
         justify="flex-start"
       >
-        {faqs.faqsList.map(faq => (
-          <Faq expandTitle={faq.question} key={faq.question}>
+        {faqs.faqs.map(faq => (
+          <Faq expandTitle={faq.value.question} key={faq.value.question}>
             <Typography
               variant="body2"
               dangerouslySetInnerHTML={{
-                __html: faq.answer
+                __html: faq.value.answer
               }}
             />
           </Faq>
@@ -48,7 +57,20 @@ function Faqs({ classes, faqs, ...props }) {
 
 Faqs.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  faqs: PropTypes.shape({}).isRequired
+  faqs: PropTypes.shape({
+    value: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string,
+      faqs: PropTypes.arrayOf(
+        PropTypes.shape({
+          value: PropTypes.shape({
+            question: PropTypes.string,
+            answer: PropTypes.string
+          })
+        })
+      )
+    })
+  }).isRequired
 };
 
 export default withStyles(styles)(Faqs);

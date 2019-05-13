@@ -13,48 +13,52 @@ Chart({
 
 function Chart(options) {
   var chart = {};
+  var showActions = !!(window.takwimu && window.takwimu.country);
 
   chart.init = function(options) {
     // establish our base vars
     chart.chartContainer = d3
       .select("#" + options.chartContainer)
       .style("margin", "0")
-      .style("position", "relative")
-      .style("width", "75%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
-      .append("div")
-      .style("position", "relative")
-      .style("float", "left")
-      .style("width", "50%"); // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
-    chart.chartActions = d3
-      .select("#" + options.chartContainer)
-      .append("div")
-      .style("float", "left")
-      .style("width", "50%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
-      .classed("chart-actions", true);
+      .style("position", "relative");
 
-    chart.chartAnalysis = chart.chartActions
-      .insert("div")
-      .style("padding", "0 1.938rem")
-      .style("padding-top", "2.5rem")
-      .classed("chart-analysis", true);
-    
-    // TODO : 
-    // const row = document.getElementById(options.chartContainer).parentNode;
-    // const section = row.parentNode;
-    // const rowIndex = Array.prototype.slice.call(
-    //     section.children
-    // )
-    // .indexOf(row);
-    //
-    // chart.chartAnalysis
-    //     .insert("p")
-    //     .classed("title")
-    //     .text(rowIndex > 0 ? "Summary" : "Related analysis")
-    //     .insert("p")
-    //     .classed("description")
-    //     .text("Lorem ipsum dolor sit amec, the related demographic analysis for South Africa");
+    if (showActions) {
+      chart.chartContainer = chart.chartContainer
+        .style("width", "75%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
+        .append("div")
+        .style("position", "relative")
+        .style("float", "left")
+        .style("width", "50%"); // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
 
-    chart.chartAnalysis
+      chart.chartActions = d3
+        .select("#" + options.chartContainer)
+        .append("div")
+        .style("float", "left")
+        .style("width", "50%") // Since styles from wazimap column-x have -2%  in them, We reclaim that percent
+        .classed("chart-actions", true);
+      chart.chartAnalysis = chart.chartActions
+        .insert("div")
+        .style("padding", "0 1.938rem")
+        .style("padding-top", "2.5rem")
+        .classed("chart-analysis", true);
+        
+      // TODO : 
+      // const row = document.getElementById(options.chartContainer).parentNode;
+      // const section = row.parentNode;
+      // const rowIndex = Array.prototype.slice.call(
+      //     section.children
+      // )
+      // .indexOf(row);
+      //
+      // chart.chartAnalysis
+      //     .insert("p")
+      //     .classed("title")
+      //     .text(rowIndex > 0 ? "Summary" : "Related analysis")
+      //     .insert("p")
+      //     .classed("description")
+      //     .text("Lorem ipsum dolor sit amec, the related demographic analysis for South Africa");
+
+      chart.chartAnalysis
         .insert("a")
         .attr('href', `/profiles/${window.takwimu.country.slug}`)
         .classed("chart-analysis-read", true)
@@ -64,6 +68,7 @@ function Chart(options) {
         .text("Read the country analysis");
         // TODO :
         // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
+    }
     
 
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
@@ -410,7 +415,9 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks();
+    if (showActions) {
+      chart.addActionLinks();
+    }
 
     return chart;
   };
@@ -734,7 +741,9 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks();
+    if (showActions) {
+      chart.addActionLinks();
+    }
 
     return chart;
   };
@@ -1002,7 +1011,9 @@ function Chart(options) {
     if (!!chart.chartSourceLink) {
       chart.addChartSource(chart.chartContainer);
     }
-    chart.addActionLinks();
+    if (showActions) {
+      chart.addActionLinks();
+    }
 
     return chart;
   };

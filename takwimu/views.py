@@ -1,40 +1,41 @@
 from collections import OrderedDict
-from operator import itemgetter
 import json
+from operator import itemgetter
+import requests
 import string
-import os
 
+from django.conf import settings as takwimu_settings
 from django.core.serializers.json import DjangoJSONEncoder
-from django.utils.safestring import SafeString
-from django.utils.module_loading import import_string
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
+from django.utils.module_loading import import_string
+from django.utils.safestring import SafeString
 from django.utils.text import slugify
 from django.views.generic import TemplateView
+
+from elasticsearch_dsl import Search
 
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
+from wagtail.contrib.settings.context_processors import settings
 
-import requests
 from wazimap.views import GeographyDetailView
 from wazimap.geo import geo_data, LocationNotFound
 from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
+from wazimap.views import GeographyDetailView
 
-from takwimu.models.dashboard import ExplainerSteps, FAQ, Testimonial, FAQSetting, \
-    ProfileSectionPage, ProfilePage
+from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
+from takwimu.models.dashboard import ExplainerSteps, FAQ, FAQSetting, IndexPage, \
+    ProfileSectionPage, ProfilePage, Testimonial, search_analysis_and_data
+from takwimu.models.utils.search import get_page_details
 from takwimu.sdg import SDG
-from takwimu.search.takwimu_search import TakwimuTopicSearch
-from takwimu.search.utils import get_page_details
+from takwimu.search import suggest
 
 from .data.utils import get_page_releases_per_country, \
     get_primary_release_year_per_geography
-from wagtail.contrib.settings.context_processors import settings
-from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
-
-from django.conf import settings as takwimu_settings
 
 
 class HomePageView(TemplateView):
@@ -47,25 +48,38 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super(HomePageView, self).get_context_data(**kwargs)
-        context['explainer_steps'] = ExplainerSteps.objects.first()
-        context['testimonials'] = Testimonial.objects.all().order_by('-id')[:3]
 
         context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
+        home = IndexPage.objects.first()
+        if home:
+            context.update(home.get_context(self.request))
         return context
 
 
-class AboutUsView(TemplateView):
-    template_name = 'takwimu/about/index.html'
+class FAQsView(TemplateView):
+    template_name = 'takwimu/about_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(AboutUsView, self).get_context_data(**kwargs)
-        context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
+        context = super(FAQsView, self).get_context_data(**kwargs)
+        context['content'] = 'faqs'
+
+        return context
+
+class ServicesView(TemplateView):
+    template_name = 'takwimu/about_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ServicesView, self).get_context_data(**kwargs)
+        context['content'] = 'services'
+
+        return context
+
+class MethodologyView(TemplateView):
+    template_name = 'takwimu/about_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(MethodologyView, self).get_context_data(**kwargs)
+        context['content'] = 'methodology'
 
         return context
 
@@ -165,7 +179,8 @@ class SDGIndicatorView(TemplateView):
                                     'title': indicator['value'].get('title'),
                                     'country': country,
                                     'country_slug': slugify(country),
-                                    'url': '{}#{}_{}-tab'.format(url, slugify(topic_title), indicator['id']),
+                                    'url': '{}#{}_{}-tab'.format(url, slugify(
+                                        topic_title), indicator['id']),
                                 }
                                 sdg_indicators = sdg_indicators_map.setdefault(
                                     sdg, [])
@@ -176,6 +191,7 @@ class SDGIndicatorView(TemplateView):
 
 def handler404(request):
     return render(request, '404.html')
+
 
 def handler500(request):
     return render(request, '500.html')
@@ -204,152 +220,25 @@ class SupportServicesIndexView(TemplateView):
 class SearchAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q', '')
-        profilepages = ProfilePage.objects.live()
-        profilesectionpages = ProfileSectionPage.objects.live()
-
-        results = []
         if query:
-            operator = 'or'
-            strip_chars = string.whitespace
-            if query.startswith('"') and query.endswith('"'):
-                # search in quotes means phrase search
-                operator = 'and'
-                strip_chars += '"'
+            results = search_analysis_and_data(query, request)
+            data = {
+                'search': {
+                    'query': query,
+                    'results': results
+                }
+            }
+            return Response(data=data, status=status.HTTP_200_OK)
 
-            search_query = query.strip(strip_chars)
-            hits = TakwimuTopicSearch().search(search_query, operator)
-            for hit in hits:
-
-                parent_page_id = hit['parent_page_id']
-                if parent_page_id:
-                    page = None
-                    if hit['parent_page_type'] == 'ProfileSectionPage':
-                        page = profilesectionpages.get(id=parent_page_id)
-                    elif hit['parent_page_type'] == 'ProfilePage':
-                        page = profilepages.get(id=parent_page_id)
-                    if page:
-                        hit['link'] = page.get_url(request)
-                        results.append(hit)
-                else:
-                    results.append(hit)
-
-            return Response(data=results, status=status.HTTP_200_OK)
-
-        return Response(data={'error': "query can not be an empty string"}, status=status.HTTP_400_BAD_REQUEST)
+        return Response(data={'error': "query can not be an empty string"},
+                        status=status.HTTP_400_BAD_REQUEST)
 
 
-class SearchView(TemplateView):
-    """
-    Search View
-    -----------
-    Displays search results.
-
-    """
-    template_name = 'search_results.html'
-
+class AutoCompleteAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get('q', '')
-        orderby = request.GET.get('orderby', 'relevance')
-        countries_filter = request.GET.getlist('country[]')
-        topics_filter = request.GET.getlist('topic[]')
-
-        self.profilepages = ProfilePage.objects.live()
-        self.profilesectionpages = ProfileSectionPage.objects.live()
-
-        self.topics_widgets_map = {}
-        self.create_results_map()
-
-        self.items = []
-        self.countries = OrderedDict()
-        self.topics = OrderedDict()
-
-        operator = 'or'
-        strip_chars = string.whitespace
-        if query.startswith('"') and query.endswith('"'):
-            # search in quotes means phrase search
-            operator = 'and'
-            strip_chars += '"'
-
-        search_query = query.strip(strip_chars)
-        results = TakwimuTopicSearch().search(search_query, operator,
-                                              country_filters=countries_filter,
-                                              category_filters=topics_filter)
-
-        for result in results:
-            parent_page_id = result['parent_page_id']
-            page = None
-            if result['parent_page_type'] == 'ProfileSectionPage':
-                page = self.profilesectionpages.get(id=parent_page_id)
-            elif result['parent_page_type'] == 'ProfilePage':
-                page = self.profilepages.get(id=parent_page_id)
-
-            if page:
-                country, category, _ = get_page_details(page)
-                result['country'] = country
-                result['category'] = category
-                self.countries[country] = 1
-                self.topics[category] = 1
-
-                id = result['content_id']
-                data_point = self.topics_widgets_map.get(id)
-
-                result['data_point'] = data_point
-                result['url'] = page.get_url(request)
-                self.items.append(result)
-
-        if orderby == 'location':
-            self.items = sorted(self.items, key=itemgetter('country'))
-
-        return render(request, self.template_name, {
-            'search_query': query,
-            'orderby': orderby,
-            'query_params': {
-                'countries': countries_filter,
-                'topics': topics_filter,
-            },
-            'search_results': {
-                'items': self.items,
-                'countries': self.countries.keys(),
-                'topics': self.topics.keys(),
-            },
-        })
-
-    def get_topic_from_page(self, topic_id, page):
-        for topic in page.body:
-            if topic.id == topic_id:
-                return topic
-
-    def create_results_map(self):
-        for profilepage in self.profilepages:
-            for topic in profilepage.body:
-                self.topics_widgets_map[topic.id] = topic
-
-                for indicator in topic.value['indicators']:
-                    for widget in indicator.value['widgets']:
-                        self.topics_widgets_map[widget.id] = widget
-
-        for profilesectionpage in self.profilesectionpages:
-            for topic in profilesectionpage.body:
-                self.topics_widgets_map[topic.id] = topic
-
-                for indicator in topic.value['indicators']:
-                    for widget in indicator.value['widgets']:
-                        self.topics_widgets_map[widget.id] = widget
-
-    def get_context_data(self, **kwargs):
-        json_data = open('takwimu/fixtures/sdg.json')
-        data = json.load(json_data)
-
-        context = super(SearchView, self).get_context_data(
-            **kwargs)
-        context['sdgs'] = data
-
-        context.update(settings(self.request))
-        context.update(takwimu_countries(self.request))
-        context.update(takwimu_stories(self.request))
-        context.update(takwimu_topics(self.request))
-
-        return context
+        suggestions = suggest(query)
+        return Response(data={"suggestions": suggestions}, status=status.HTTP_200_OK)
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
@@ -368,7 +257,6 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
                       template_name='profile/profile_detail_takwimu.html',
                       context=context)
 
-
     def get_context_data(self, *args, **kwargs):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
@@ -377,18 +265,20 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get('profile_builder', None)
-        self.profile_name = takwimu_settings.HURUMAP.get('default_profile', 'default')
+        self.profile_name = takwimu_settings.HURUMAP.get(
+            'default_profile', 'default')
 
         if not profile_method:
-            raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
+            raise ValueError(
+                "You must define WAZIMAP.profile_builder in settings.py")
         profile_method = import_string(profile_method)
 
-        year = self.request.GET.get('release', get_primary_release_year_per_geography(self.geo))
-        # if takwimu_settings.HURUMAP['latest_release_year'] == year:
-        #     year = 'latest'
+        year = self.request.GET.get(
+            'release', get_primary_release_year_per_geography(self.geo))
 
         with dataset_context(year=year):
-            profile_data = profile_method(self.geo, self.profile_name, self.request)
+            profile_data = profile_method(
+                self.geo, self.profile_name, self.request)
 
         profile_data['geography'] = self.geo.as_dict_deep()
         profile_data['primary_releases'] = get_page_releases_per_country(
@@ -397,7 +287,8 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         profile_data = enhance_api_data(profile_data)
         page_context.update(profile_data)
 
-        profile_data_json = SafeString(json.dumps(profile_data, cls=DjangoJSONEncoder))
+        profile_data_json = SafeString(
+            json.dumps(profile_data, cls=DjangoJSONEncoder))
 
         page_context.update({
             'profile_data_json': profile_data_json

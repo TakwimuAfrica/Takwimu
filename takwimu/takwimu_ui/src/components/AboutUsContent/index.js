@@ -23,8 +23,8 @@ const styles = theme => ({
     padding: '0 19px'
   },
   section: {
-    marginTop: '3rem',
-    paddingTop: '3rem',
+    marginTop: '2.5rem',
+    paddingTop: '1rem',
     paddingBottom: '1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
   }
@@ -47,7 +47,9 @@ class AboutContent extends React.Component {
   render() {
     const {
       classes,
-      content,
+      title,
+      contentNavigation,
+      aboutTakwimu,
       methodology,
       relatedContent,
       current,
@@ -60,32 +62,38 @@ class AboutContent extends React.Component {
     return (
       <React.Fragment>
         <AboutUsContentNav
+          title={contentNavigation.value.title}
           current={current}
           contentHeadings={contentHeadings}
           changeActiveContent={this.showContent}
         />
         <Typography variant="h2" className={classes.title}>
-          About Us
+          {title}
         </Typography>
         <ContentNavigation
+          title={contentNavigation.value.title}
           contentHeadings={contentHeadings}
           current={current}
           changeActiveContent={this.showContent}
         />
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title="About Takwimu"
-          value={content}
-          id="about"
-          component={ContentSection}
-        />
-        <RichTextSection
-          classes={{ root: classes.section }}
-          title="Methodology"
-          value={methodology}
-          id="methodology"
-          component={ContentSection}
-        />
+        {aboutTakwimu && aboutTakwimu.value && (
+          <RichTextSection
+            classes={{ root: classes.section }}
+            title={aboutTakwimu.value.title}
+            value={aboutTakwimu.value.description}
+            id="about"
+            component={ContentSection}
+          />
+        )}
+        {methodology && methodology.value && (
+          <RichTextSection
+            classes={{ root: classes.section }}
+            title={methodology.value.title}
+            value={methodology.value.description}
+            id="methodology"
+            component={ContentSection}
+          />
+        )}
         <Services
           classes={{ root: classes.section }}
           services={services}
@@ -93,7 +101,7 @@ class AboutContent extends React.Component {
         />
         <Faqs classes={{ root: classes.section }} faqs={faqs} id="faqs" />
         <AboutWhereToNext socialMedia={socialMedia} />
-        <RelatedContent relatedContent={relatedContent} />
+        <RelatedContent content={relatedContent} />
       </React.Fragment>
     );
   }
@@ -101,12 +109,28 @@ class AboutContent extends React.Component {
 
 AboutContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.string.isRequired,
-  methodology: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  contentNavigation: PropTypes.shape({
+    value: PropTypes.shape({
+      title: PropTypes.string
+    })
+  }).isRequired,
+  aboutTakwimu: PropTypes.shape({
+    value: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string
+    })
+  }).isRequired,
+  methodology: PropTypes.shape({
+    value: PropTypes.shape({
+      title: PropTypes.string,
+      description: PropTypes.string
+    })
+  }).isRequired,
   faqs: PropTypes.shape({}).isRequired,
   services: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
-  relatedContent: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   changeActiveContent: PropTypes.func.isRequired

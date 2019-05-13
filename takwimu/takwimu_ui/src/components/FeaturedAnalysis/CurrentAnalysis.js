@@ -43,7 +43,8 @@ const styles = theme => ({
     margin: 0
   },
   body: {
-    paddingBottom: '1.875rem'
+    paddingBottom: '1.875rem',
+    lineHeight: 1.55
   },
   actions: {
     marginBottom: '3.0625rem'
@@ -57,6 +58,8 @@ const styles = theme => ({
   },
   secondaryAction: {
     marginTop: '1rem',
+    padding: 0,
+    borderWidth: '0.125rem',
     [theme.breakpoints.up('md')]: {
       marginTop: 0,
       marginLeft: '2.15625rem' // .75 lg
@@ -70,10 +73,20 @@ const styles = theme => ({
       color: theme.palette.primary.dark,
       textDecoration: 'none'
     }
+  },
+  // override label padding for secondary button/ allow for the 2px border
+  secondaryActionLabel: {
+    paddingTop: '1rem',
+    paddingBottom: '0.9375rem'
   }
 });
 
-function CurrentAnalysis({ classes, content }) {
+function CurrentAnalysis({
+  classes,
+  content: { value: currentAnalysis },
+  readAnalysisTitle,
+  viewProfileTitle
+}) {
   return (
     <div className={classes.root}>
       <Grid
@@ -90,7 +103,7 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.header}
           >
             <img
-              src={flagSrc(`./${content.country_slug}.svg`)}
+              src={flagSrc(`./${currentAnalysis.country.slug}.svg`)}
               alt="South Africa"
               className={classes.flag}
             />
@@ -98,14 +111,16 @@ function CurrentAnalysis({ classes, content }) {
               variant="h4"
               component="h1"
               className={classes.title}
-              dangerouslySetInnerHTML={{ __html: content.title }}
+              dangerouslySetInnerHTML={{ __html: currentAnalysis.title }}
             />
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography variant="body1" className={classes.body}>
-            {content.description}
-          </Typography>
+          <Typography
+            variant="body1"
+            className={classes.body}
+            dangerouslySetInnerHTML={{ __html: currentAnalysis.description }}
+          />
         </Grid>
         <Grid item xs={12}>
           <Grid
@@ -115,19 +130,22 @@ function CurrentAnalysis({ classes, content }) {
             className={classes.actions}
           >
             <Button
-              href={`/profiles/${content.country_slug}/${content.slug}`}
+              href={`/profiles/${currentAnalysis.country.slug}/${
+                currentAnalysis.slug
+              }`}
               className={classes.primaryAction}
             >
-              Read the full analysis
+              {readAnalysisTitle}
             </Button>
             <Button
-              href={`/profiles/country-${content.country_code}-${
-                content.country_slug
+              href={`/profiles/country-${currentAnalysis.country.iso_code}-${
+                currentAnalysis.country.slug
               }`}
               className={classes.secondaryAction}
+              classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
             >
-              View country profile
+              {viewProfileTitle}
             </Button>
           </Grid>
         </Grid>
@@ -138,7 +156,11 @@ function CurrentAnalysis({ classes, content }) {
 
 CurrentAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  content: PropTypes.shape({}).isRequired
+  content: PropTypes.shape({
+    value: PropTypes.shape({}).isRequired
+  }).isRequired,
+  readAnalysisTitle: PropTypes.string.isRequired,
+  viewProfileTitle: PropTypes.string.isRequired
 };
 
 export default withStyles(styles)(CurrentAnalysis);

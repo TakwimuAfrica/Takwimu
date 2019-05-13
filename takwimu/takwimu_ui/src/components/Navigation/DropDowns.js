@@ -107,7 +107,7 @@ function DropDowns({ classes, active, page, toggle }) {
     <div className={classes.root}>
       <DropDownButton
         isActive={active === 'analysis'}
-        isHighlighted={page.id === 'analysis'}
+        isHighlighted={page.name === 'analysis'}
         title="Country Analysis"
         icon={analysisIcon}
         iconActive={analysisIconActive}
@@ -115,7 +115,7 @@ function DropDowns({ classes, active, page, toggle }) {
       />
       <DropDownButton
         isActive={active === 'topic'}
-        isHighlighted={page.id === 'topic'}
+        isHighlighted={page.name === 'topic'}
         title="Data by Topic"
         icon={topicIcon}
         iconActive={topicIconActive}
