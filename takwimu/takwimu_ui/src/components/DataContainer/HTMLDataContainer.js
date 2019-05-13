@@ -14,24 +14,33 @@ const styles = {
 };
 
 function DataContainer({ id, classes, data }) {
-  const handleDownload = () => {
-    const el = document.getElementById(`data-indicator-${id}`);
-    domtoimage.toPng(el).then(dataUrl => {
-      const link = document.createElement('a');
-      link.download = `${data.value.title}.png`;
-      link.href = dataUrl;
-      link.click();
-    });
-  };
-
   const embedCode = data.raw_html;
+  const elementId = `data-indicator-${id}`;
 
+  const handleDownload = () => {
+    domtoimage
+      .toJpeg(document.getElementById(elementId), {
+        filter: node => node.id !== 'footer' && node.tagName !== 'IMG'
+      })
+      .then(dataUrl => {
+        const link = document.createElement('a');
+        link.download = `${data.title}.jpeg`;
+        link.href = dataUrl;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+      });
+  };
   return (
     <Fragment>
-      <div id={`data-indicator-${id}`} className={classes.root}>
-        <div dangerouslySetInnerHTML={{ __html: data.raw_html }} />
-      </div>
-      <DataActions onDownload={handleDownload} embedCode={embedCode} />
+      <div
+        id={elementId}
+        className={classes.root}
+        dangerouslySetInnerHTML={{
+          __html: data.raw_html
+        }}
+      />
+      <DataActions handleDownload={handleDownload} embedCode={embedCode} />
     </Fragment>
   );
 }

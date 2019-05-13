@@ -68,28 +68,33 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
   };
 
   return (
-    <Fragment>
-      <OtherInfoNav
-        labelText="Other topics in"
-        labelTextStrong={content.title}
-        content={content}
-        current={topicIndex}
-        showContent={showContent}
-      />
+    <div id="analysis">
+      <div id="analysis-navigation">
+        <OtherInfoNav
+          labelText="Other topics in"
+          labelTextStrong={content.title}
+          content={content}
+          current={topicIndex}
+          showContent={showContent}
+        />
+      </div>
       <div className={classes.hero} />
 
       <div className={classes.root}>
-        <Typography className={classes.title} variant="h2">
+        <Typography id="analysis-title" className={classes.title} variant="h2">
           {content.body[topicIndex].value.title}
         </Typography>
-        <ContentNavigation
-          labelText="Other topics in"
-          labelTextStrong={content.title}
-          current={topicIndex}
-          content={content}
-          showContent={showContent}
-        />
-        <Actions />
+
+        <div id="analysis-actions">
+          <ContentNavigation
+            labelText="Other topics in"
+            labelTextStrong={content.title}
+            current={topicIndex}
+            content={content}
+            showContent={showContent}
+          />
+          <Actions />
+        </div>
 
         <Grid container direction="row">
           {content.body[topicIndex].value.body.map(c => (
@@ -115,24 +120,26 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           ))}
         </Grid>
 
-        <Actions hideLastUpdated />
-        <ContentNavigation
-          labelText="Other topics in"
-          labelTextStrong={content.title}
-          current={topicIndex}
-          content={content}
-          showContent={showContent}
-        />
-        <AnalysisReadNext
-          classes={{ container: classes.readNextContainer }}
-          content={content}
-          current={topicIndex}
-          showContent={showContent}
-        />
-        <ViewCountry takwimu={takwimu} />
-        <RelatedContent relatedContent={content.related_content} />
+        <div id="analysis-footer">
+          <Actions hideLastUpdated />
+          <ContentNavigation
+            labelText="Other topics in"
+            labelTextStrong={content.title}
+            current={topicIndex}
+            content={content}
+            showContent={showContent}
+          />
+          <AnalysisReadNext
+            classes={{ container: classes.readNextContainer }}
+            content={content}
+            current={topicIndex}
+            showContent={showContent}
+          />
+          <ViewCountry takwimu={takwimu} />
+          <RelatedContent relatedContent={content.related_content} />
+        </div>
       </div>
-    </Fragment>
+    </div>
   );
 }
 

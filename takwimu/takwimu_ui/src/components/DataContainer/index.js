@@ -6,7 +6,7 @@ import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
 import EntitiesDataContainer from './EntitiesDataContainer';
-import FeaturedDataContainer from './FeaturedDataContainer';
+import HurumapDataContainer from './HurumapDataContainer';
 import HTMLDataContainer from './HTMLDataContainer';
 import PDFDataContainer from './PDFDataContainer';
 
@@ -55,8 +55,8 @@ function DataContainer({ id, classes, data }) {
             {data.value.title}
           </Typography>
 
-          {data.type === 'featured_data' && (
-            <FeaturedDataContainer data={data.value} />
+          {(data.type === 'featured_data' || data.type === 'hurumap') && (
+            <HurumapDataContainer data={data.value} />
           )}
 
           {data.type === 'html' && (

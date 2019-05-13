@@ -36,7 +36,7 @@ function DataContainer({ data }) {
     <Fragment>
       <IFrame featuredData={data} />
 
-      <DataActions onDownload={handleDownload} embedCode={embedCode} />
+      <DataActions handleDownload={handleDownload} embedCode={embedCode} />
     </Fragment>
   );
 }

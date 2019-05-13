@@ -143,17 +143,17 @@ class DataActions extends React.Component {
   }
 
   render() {
-    const { classes, onDownload, embedCode } = this.props;
+    const { classes, handleDownload, embedCode } = this.props;
     const { anchorEl } = this.state;
     const open = Boolean(anchorEl);
     return (
-      <div className={classes.root}>
+      <div id="data-actions" className={classes.root}>
         <ActionButton>
           <img alt="" src={shareIcon} />
           <Typography className={classes.actionText}>Share</Typography>
         </ActionButton>
         <div className={classes.verticalDivider} />
-        <ActionButton onClick={onDownload}>
+        <ActionButton onClick={handleDownload}>
           <img alt="" src={downloadIcon} />
           <Typography className={classes.actionText}>Download</Typography>
         </ActionButton>
@@ -197,8 +197,8 @@ class DataActions extends React.Component {
 
 DataActions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  onDownload: PropTypes.func.isRequired,
-  embedCode: PropTypes.string.isRequired
+  embedCode: PropTypes.string.isRequired,
+  handleDownload: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(DataActions);
