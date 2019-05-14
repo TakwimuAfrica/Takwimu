@@ -65,7 +65,7 @@ const styles = theme => ({
   countryLink: {
     display: 'flex',
     alignItems: 'center',
-    // Override original Takwimu & Bootstrap styles
+    // Override original takwimu.css & Bootstrap styles
     '&:hover': {
       color: theme.palette.text.secondary,
       textDecoration: 'none'
@@ -81,6 +81,11 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       height: '15.625rem',
       marginBottom: '0'
+    },
+
+    // Override takwimu.css styles
+    '& p': {
+      fontSize: theme.typography.body2.fontSize
     }
   },
   title: {
@@ -101,9 +106,14 @@ function DropDownContent({ classes, title, description, countries, profile }) {
             >
               {title}
             </Typography>
-            <Typography variant="body2" color="textSecondary">
-              {description}
-            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="div"
+              dangerouslySetInnerHTML={{
+                __html: description
+              }}
+            />
           </div>
         </Grid>
         <Grid

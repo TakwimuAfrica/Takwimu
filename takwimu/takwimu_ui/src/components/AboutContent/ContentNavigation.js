@@ -15,7 +15,7 @@ const styles = theme => ({
   }
 });
 
-function AboutUsContentNavigation({
+function AboutContentNavigation({
   classes,
   title,
   current,
@@ -26,7 +26,7 @@ function AboutUsContentNavigation({
 }) {
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `/${item.link}`;
+    return `/${item.link}/`;
   };
   const generateTitle = index => contentHeadings[index].title;
 
@@ -42,14 +42,19 @@ function AboutUsContentNavigation({
       current={current}
       generateHref={generateHref}
       generateTitle={generateTitle}
-      onClick={() => changeActiveContent}
+      onClick={(e, index) => {
+        e.preventDefault();
+
+        window.history.pushState(null, '', generateHref(index));
+        changeActiveContent(index)();
+      }}
       linksPrimaryColor={linksPrimaryColor}
       linksSecondaryColor={linksSecondaryColor}
     />
   );
 }
 
-AboutUsContentNavigation.propTypes = {
+AboutContentNavigation.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
@@ -59,9 +64,9 @@ AboutUsContentNavigation.propTypes = {
   linksSecondaryColor: PropTypes.string
 };
 
-AboutUsContentNavigation.defaultProps = {
+AboutContentNavigation.defaultProps = {
   linksPrimaryColor: 'primary',
   linksSecondaryColor: 'textPrimary'
 };
 
-export default withStyles(styles)(AboutUsContentNavigation);
+export default withStyles(styles)(AboutContentNavigation);

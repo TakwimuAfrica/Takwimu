@@ -18,14 +18,18 @@ function profile(country) {
   return `country-${country.iso_code}-${country.slug}`;
 }
 
-function DataByTopic({ classes, countries }) {
+function DataByTopic({
+  classes,
+  countries,
+  navigation: { data_by_topic: dataByTopic }
+}) {
   return (
     <DropDownContent
       classes={{
         container: classes.container
       }}
       title="Data by Topic"
-      description="Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet."
+      description={dataByTopic}
       countries={countries}
       profile={profile}
     />
@@ -34,7 +38,8 @@ function DataByTopic({ classes, countries }) {
 
 DataByTopic.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  navigation: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(DataByTopic);
