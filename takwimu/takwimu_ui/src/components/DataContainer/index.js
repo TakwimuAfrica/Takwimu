@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
+import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
 import FeaturedDataContainer from './FeaturedDataContainer';
 import HTMLDataContainer from './HTMLDataContainer';
@@ -12,14 +13,14 @@ import PDFDataContainer from './PDFDataContainer';
 
 const styles = theme => ({
   root: {
-    margin: '1.25rem 0',
     width: '100%',
     [theme.breakpoints.up('md')]: {
-      width: '28.03125rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '37.375rem'
+      width: '50%',
+      padding: '0.625rem'
     }
+  },
+  layoutFull: {
+    width: '100%'
   },
   dataContainer: {
     padding: '0.625rem',
@@ -56,7 +57,11 @@ const styles = theme => ({
 
 function DataContainer({ id, classes, data }) {
   return (
-    <div className={classes.root}>
+    <div
+      className={classNames(classes.root, {
+        [classes.layoutHalf]: data.value.layoutFull === 'full'
+      })}
+    >
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           <Typography variant="body1" align="center" className={classes.title}>
