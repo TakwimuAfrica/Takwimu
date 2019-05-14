@@ -1,8 +1,9 @@
 import logging
 
 from django.conf import settings
-from wazimap.data.utils import dataset_context, get_session, get_stat_data
+from wazimap.data.utils import dataset_context, merge_dicts, get_session, get_stat_data
 from wazimap.models.data import DataNotFound
+from wazimap.geo import geo_data
 
 from takwimu.data.utils import get_primary_release_year_per_geography
 
@@ -1231,7 +1232,6 @@ METADATA = {
         }}
 }
 
-
 def get_appropriate_dbtable(country, table_prefix):
     pass
 
@@ -1239,26 +1239,27 @@ def get_appropriate_dbtable(country, table_prefix):
 def get_profile(geo, profile_name, request):
     session = get_session()
     (country, level) = get_country_and_level(geo)
-    year = request.GET.get('release',
-                           get_primary_release_year_per_geography(geo))
+    comparative_geos = geo_data.get_comparative_geos(geo)
+    sections = list(SECTIONS)
     data = {}
     try:
-        data['demographics'] = get_demographics(geo, session, country, level,
-                                                year)
-        data['elections'] = get_elections(geo, session)
-        data['crops'] = get_crop_production(geo, session, country, level)
-        # data['health_centers'] = get_health_centers(
-        #     geo, session, country, level)
-        data['health_workers'] = get_health_workers(geo, session)
-        data['causes_of_death'] = get_causes_of_death(geo, session)
-        data['hiv'] = get_knowledge_of_HIV(geo, session)
-        data['donors'] = get_donor_assistance(geo, session, country, level)
-        data['poverty'] = get_poverty_profile(geo, session, country, level)
-        data['fgm'] = get_fgm_profile(geo, session, country, level)
-        data['security'] = get_security_profile(geo, session, country, level)
-        data['budget'] = get_budget_data(geo, session, country, level)
-        data['worldbank'] = get_worldbank_data(geo, session, country, level)
-
+        for section in sections:
+            function_name = 'get_%s_profile' % section
+            if function_name in globals():
+                func = globals()[function_name]
+                data[section] = func(geo, session, country, level)
+                # get profiles for comparative geometries
+                if not data[section]['is_missing']:
+                    for comp_geo in comparative_geos:
+                        try:
+                            merge_dicts(
+                                data[section], func(
+                                    comp_geo, session, country, level), comp_geo.geo_level)
+                        except KeyError as e:
+                            msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
+                                geo.geoid, section, comp_geo.geoid, e)
+                            log.fatal(msg, exc_info=e)
+                            raise ValueError(msg)
         return data
     finally:
         session.close()
@@ -1270,12 +1271,13 @@ def get_country_and_level(geo):
     if level != 'continent':
         country = geo.name.lower() \
             if level == 'country' \
-            else geo.ancestors()[-1].name.lower()
+            else geo.ancestors()[-1].name.lower() #-1 (last element is continent)
 
     return (country, level)
 
 
-def get_demographics(geo, session, country, level, year):
+def get_demographics_profile(geo, session, country, level):
+    year = get_primary_release_year_per_geography(geo)
     population_data = get_population(geo, session, country, level, year)
     child_births_data = get_child_births(geo, session, country, level)
     demographics_data = dict(
@@ -1434,7 +1436,7 @@ def get_child_births(geo, session, country, level):
     }
 
 
-def get_elections(geo, session):
+def get_elections_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         candidate_dist = LOCATIONNOTFOUND
         valid_invalid_dist = LOCATIONNOTFOUND
@@ -1475,7 +1477,7 @@ def get_elections(geo, session):
     }
 
 
-def get_crop_production(geo, session, country, level):
+def get_crops_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         crop_distribution = LOCATIONNOTFOUND
         try:
@@ -1485,12 +1487,13 @@ def get_crop_production(geo, session, country, level):
             pass
 
     return {
+        'is_missing': crop_distribution.get('is_missing'),
         'crop_distribution': _add_metadata_to_dist(
             crop_distribution, 'crop_distribution', country, level)
     }
 
 
-def get_health_centers(geo, session, country, level):
+def get_health_centers_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
         health_centers_ownership_dist = LOCATIONNOTFOUND
@@ -1545,7 +1548,7 @@ def get_health_centers(geo, session, country, level):
     }
 
 
-def get_health_workers(geo, session):
+def get_health_workers_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
         hrh_patient_ratio = 0
@@ -1569,14 +1572,16 @@ def get_health_workers(geo, session):
         'Total health worker population (2014)', total_health_workers)
     hrh_patient_ratio_dist = _create_single_value_dist(
         'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
+    is_missing = health_workers_dist.get('is_missing')
     return {
+        'is_missing': is_missing,
         'total_health_workers_dist': total_health_workers_dist,
         'hrh_patient_ratio_dist': hrh_patient_ratio_dist,
         'health_workers_dist': health_workers_dist,
     }
 
 
-def get_causes_of_death(geo, session):
+def get_causes_of_death_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         causes_of_death_under_five_dist = LOCATIONNOTFOUND
         causes_of_death_over_five_dist = LOCATIONNOTFOUND
@@ -1642,8 +1647,8 @@ def get_causes_of_death(geo, session):
     }
 
 
-def get_knowledge_of_HIV(geo, session):
-    with dataset_context(year='2014'):
+def get_hiv_profile(geo, session, country, level):
+    with dataset_context( year='2014'):
         prevention_methods_dist = LOCATIONNOTFOUND
         try:
             prevention_methods_dist, _ = get_stat_data(
@@ -1657,7 +1662,7 @@ def get_knowledge_of_HIV(geo, session):
     }
 
 
-def get_donor_assistance(geo, session, country, level):
+def get_donors_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         donor_assistance_dist = LOCATIONNOTFOUND
         donor_programmes_dist = LOCATIONNOTFOUND
@@ -1746,7 +1751,7 @@ def get_security_profile(geo, session, country, level):
     }
 
 
-def get_budget_data(geo, session, country, level):
+def get_budget_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         government_expenditure_dist = LOCATIONNOTFOUND
         try:
@@ -1763,7 +1768,7 @@ def get_budget_data(geo, session, country, level):
     }
 
 
-def get_worldbank_data(geo, session, country, level):
+def get_worldbank_profile(geo, session, country, level):
     with dataset_context(year='2017'):
         cereal_yield_kg_per_hectare = LOCATIONNOTFOUND
         agricultural_land = LOCATIONNOTFOUND
