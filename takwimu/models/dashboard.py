@@ -209,6 +209,12 @@ HURUMAP_DATA_DISTS = [
     ('worldbank-gdp_growth', 'GDP Growth'),
 ]
 
+class LayoutChoiceBlock(blocks.ChoiceBlock):
+    choices = (
+        ('half', 'Half Width Layout'),
+        ('full', 'Full Width Layout'),
+    )
+
 
 class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
@@ -222,6 +228,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='snippet',
         template='takwimu/_includes/dataview/freeform.html'
@@ -238,6 +245,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('layout', LayoutChoiceBlock(default='half')),
         ],
         icon='media',
         template='takwimu/_includes/dataview/embed.html'
@@ -254,6 +262,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='doc-full',
         template='takwimu/_includes/dataview/document.html'
@@ -271,6 +280,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        choices=sdg_choices, label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('layout', LayoutChoiceBlock(default='half')),
         ],
         icon='image',
         template='takwimu/_includes/dataview/image.html'
@@ -287,6 +297,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('layout', LayoutChoiceBlock(default='half')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
@@ -345,6 +356,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('widget_height', blocks.IntegerBlock(required=False,
                                                   label='Widget Height',
                                                   help_text='Default is 450px')),
+            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/hurumap.html'
@@ -359,6 +371,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('entities', blocks.ListBlock(EntityStructBlock())),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='group',
         template='takwimu/_includes/dataview/entities.html'
