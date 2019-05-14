@@ -18,14 +18,18 @@ function profile(country) {
   return country.slug;
 }
 
-function CountryAnalysis({ classes, countries }) {
+function CountryAnalysis({
+  classes,
+  countries,
+  navigation: { country_analysis: countryAnalysis }
+}) {
   return (
     <DropDownContent
       classes={{
         container: classes.container
       }}
       title="Country Analysis"
-      description="Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet."
+      description={countryAnalysis}
       countries={countries}
       profile={profile}
     />
@@ -34,7 +38,8 @@ function CountryAnalysis({ classes, countries }) {
 
 CountryAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+  countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+  navigation: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(CountryAnalysis);
