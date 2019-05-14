@@ -42,7 +42,7 @@ function AnalysisContentNavigation({
       current={current}
       generateHref={generateHref}
       generateTitle={generateTitle}
-      onClick={showContent}
+      onClick={(e, index) => showContent(index)()}
       linksPrimaryColor={linksPrimaryColor}
       linksSecondaryColor={linksSecondaryColor}
     />

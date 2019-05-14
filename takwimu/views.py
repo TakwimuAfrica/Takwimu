@@ -56,30 +56,13 @@ class HomePageView(TemplateView):
         return context
 
 
-class FAQsView(TemplateView):
+class AboutPageRedirectView(TemplateView):
     template_name = 'takwimu/about_page.html'
 
     def get_context_data(self, **kwargs):
-        context = super(FAQsView, self).get_context_data(**kwargs)
-        context['content'] = 'faqs'
+        context = super(AboutPageRedirectView, self).get_context_data(**kwargs)
 
-        return context
-
-class ServicesView(TemplateView):
-    template_name = 'takwimu/about_page.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(ServicesView, self).get_context_data(**kwargs)
-        context['content'] = 'services'
-
-        return context
-
-class MethodologyView(TemplateView):
-    template_name = 'takwimu/about_page.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(MethodologyView, self).get_context_data(**kwargs)
-        context['content'] = 'methodology'
+        context['active_content'] = self.request.resolver_match.url_name
 
         return context
 

@@ -864,6 +864,7 @@ class AboutPage(ModelMeta, Page):
     def get_context(self, request):
         context = super(AboutPage, self).get_context(request)
 
+        context['active_content'] = 'about'
         context['meta'] = self.as_meta(request)
         return context
 
