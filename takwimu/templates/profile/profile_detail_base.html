@@ -1,5 +1,5 @@
 {% extends 'profile/profile_detail.html' %}
-{% load staticfiles sass_tags jsonify geotags %}
+{% load staticfiles sass_tags jsonify geotags wagtailcore_tags %}
 
 {# HEAD #}
 
@@ -128,6 +128,10 @@
       takwimu.url = '{{ HURUMAP.url }}';
       takwimu.countries = {{ countries|jsonify|safe }};
       takwimu.settings = {
+        navigation: {
+          country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
+          data_by_topic: '{{ settings.takwimu.NavigationSetting.data_by_topic|richtext }}'
+        },
         support: {
           hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
           support: '{{ settings.takwimu.SupportSetting.support|safe }}'

@@ -7,7 +7,7 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, LegalView, \
     IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
-        FAQsView, ServicesView, MethodologyView
+        AboutPageRedirectView
 from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
@@ -21,9 +21,9 @@ PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-
 
 takwimu_urlpatterns = [
     url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
-    url(r'^faqs', FAQsView.as_view(), name='faqs'),
-    url(r'^services', ServicesView.as_view(), name='services'),
-    url(r'^methodology', MethodologyView.as_view(), name='methodology'),
+    url(r'^faqs$', AboutPageRedirectView.as_view(), name='faqs'),
+    url(r'^services$', AboutPageRedirectView.as_view(), name='services'),
+    url(r'^methodology$', AboutPageRedirectView.as_view(), name='methodology'),
     url(r'^legal$', LegalView.as_view(), name='legal'),
     url(
         r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),

@@ -54,6 +54,7 @@ function DropDownDrawerComponent({
   children,
   countries,
   active,
+  navigation,
   toggle
 }) {
   return (
@@ -78,8 +79,12 @@ function DropDownDrawerComponent({
       onBackdropClick={toggle}
     >
       {children}
-      {active === 'topic' ? <DataByTopic countries={countries} /> : null}
-      {active === 'analysis' ? <CountryAnalysis countries={countries} /> : null}
+      {active === 'topic' ? (
+        <DataByTopic countries={countries} navigation={navigation} />
+      ) : null}
+      {active === 'analysis' ? (
+        <CountryAnalysis countries={countries} navigation={navigation} />
+      ) : null}
     </Drawer>
   );
 }
@@ -92,7 +97,8 @@ DropDownDrawerComponent.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node
-  ]).isRequired
+  ]).isRequired,
+  navigation: PropTypes.shape({}).isRequired
 };
 
 DropDownDrawerComponent.defaultProps = {
@@ -129,12 +135,11 @@ DropDowns.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   active: PropTypes.string,
   toggle: PropTypes.func.isRequired,
-  page: PropTypes.shape({})
+  page: PropTypes.shape({}).isRequired
 };
 
 DropDowns.defaultProps = {
-  active: null,
-  page: null
+  active: null
 };
 
 export default withStyles(styles)(DropDowns);
