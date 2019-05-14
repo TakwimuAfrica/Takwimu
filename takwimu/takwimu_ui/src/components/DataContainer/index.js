@@ -14,13 +14,12 @@ import PDFDataContainer from './PDFDataContainer';
 const styles = theme => ({
   root: {
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '50%',
-      padding: '0.625rem'
-    }
+    padding: '1.25rem'
   },
-  layoutFull: {
-    width: '100%'
+  layoutHalf: {
+    [theme.breakpoints.up('md')]: {
+      width: '50%'
+    }
   },
   dataContainer: {
     padding: '0.625rem',
@@ -59,7 +58,7 @@ function DataContainer({ id, classes, data }) {
   return (
     <div
       className={classNames(classes.root, {
-        [classes.layoutHalf]: data.value.layoutFull === 'full'
+        [classes.layoutHalf]: data.value.layout === 'half'
       })}
     >
       <div className={classes.dataContainer}>
