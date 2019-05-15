@@ -1228,7 +1228,17 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             }
-        }}
+        }},
+            'burkina-faso': {
+                'country': {
+                    "account_ownership": {
+                        "source": {
+                            "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=BF",
+                            "title": "WorldBank"
+                        },
+                        "qualifier": "M: Male\nF: Female"
+                    }
+                }},
 }
 
 
