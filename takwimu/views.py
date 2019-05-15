@@ -182,7 +182,8 @@ class SDGIndicatorView(TemplateView):
         """
 
         sdg_indicators_map = {}
-        self._extract_sdgs_from_pages(ProfilePage.objects.live(), sdg_indicators_map)
+        self._extract_sdgs_from_pages(
+            ProfilePage.objects.live(), sdg_indicators_map)
         self._extract_sdgs_from_pages(
             ProfileSectionPage.objects.live(), sdg_indicators_map
         )
@@ -206,10 +207,12 @@ class SDGIndicatorView(TemplateView):
                                     "country": country,
                                     "country_slug": slugify(country),
                                     "url": "{}#{}_{}-tab".format(
-                                        url, slugify(topic_title), indicator["id"]
+                                        url, slugify(
+                                            topic_title), indicator["id"]
                                     ),
                                 }
-                                sdg_indicators = sdg_indicators_map.setdefault(sdg, [])
+                                sdg_indicators = sdg_indicators_map.setdefault(
+                                    sdg, [])
                                 sdg_indicators.append(indicator)
             except KeyError:
                 pass
@@ -233,7 +236,8 @@ class SupportServicesIndexView(TemplateView):
     template_name = "takwimu/about/support_services.html"
 
     def get_context_data(self, **kwargs):
-        context = super(SupportServicesIndexView, self).get_context_data(**kwargs)
+        context = super(SupportServicesIndexView,
+                        self).get_context_data(**kwargs)
 
         context.update(settings(self.request))
         context.update(takwimu_countries(self.request))
@@ -291,10 +295,12 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get("profile_builder", None)
-        self.profile_name = takwimu_settings.HURUMAP.get("default_profile", "default")
+        self.profile_name = takwimu_settings.HURUMAP.get(
+            "default_profile", "default")
 
         if not profile_method:
-            raise ValueError("You must define WAZIMAP.profile_builder in settings.py")
+            raise ValueError(
+                "You must define WAZIMAP.profile_builder in settings.py")
         profile_method = import_string(profile_method)
 
         year = self.request.GET.get(
@@ -302,7 +308,8 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         )
 
         with dataset_context(year=year):
-            profile_data = profile_method(self.geo, self.profile_name, self.request)
+            profile_data = profile_method(
+                self.geo, self.profile_name, self.request)
 
         profile_data["geography"] = self.geo.as_dict_deep()
         profile_data["primary_releases"] = get_page_releases_per_country(
@@ -312,7 +319,8 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         profile_data = enhance_api_data(profile_data)
         page_context.update(profile_data)
 
-        profile_data_json = SafeString(json.dumps(profile_data, cls=DjangoJSONEncoder))
+        profile_data_json = SafeString(
+            json.dumps(profile_data, cls=DjangoJSONEncoder))
 
         page_context.update({"profile_data_json": profile_data_json})
 

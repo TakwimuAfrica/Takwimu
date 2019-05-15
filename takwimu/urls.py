@@ -7,7 +7,7 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, LegalView, \
     IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
-        FAQsView, ServicesView, MethodologyView, FlourishView
+    FAQsView, ServicesView, MethodologyView, FlourishView
 from wazimap.views import HomepageView as ProfileView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
@@ -35,8 +35,10 @@ takwimu_urlpatterns = [
     url(r'^api/autocomplete/$', AutoCompleteAPIView.as_view(),
         name='api-autocomplete'),
     url(r'^api/v2/', api_router.urls),
-    url(r'^flourish/(?P<document_id>\d+)/$', FlourishView.as_view(), name="flourish"),
-    url(r'^flourish/(?P<document_id>\d+)/(?P<filename>.+)/$', FlourishView.as_view(), name="flourish_filename"),
+    url(r'^flourish/(?P<document_id>\d+)/$',
+        FlourishView.as_view(), name="flourish"),
+    url(r'^flourish/(?P<document_id>\d+)/(?P<filename>.+)/$',
+        FlourishView.as_view(), name="flourish_filename"),
 ]
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
