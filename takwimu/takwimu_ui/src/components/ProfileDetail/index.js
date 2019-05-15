@@ -33,8 +33,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
-      borderRadius: '0 0 1.063rem 1.063rem',
-      zIndex: '1'
+      borderRadius: '0 0 1.063rem 1.063rem'
     }
   },
   layout: {
@@ -43,7 +42,8 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'flex-start',
     [theme.breakpoints.up('md')]: {
-      position: 'absolute'
+      position: 'absolute',
+      zIndex: '1'
     }
   },
   label: {
