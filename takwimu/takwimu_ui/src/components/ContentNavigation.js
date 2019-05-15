@@ -61,7 +61,7 @@ function ContentNavigation({
             className={classNames({
               [classes.topic]: current !== index
             })}
-            onClick={onClick(index)}
+            onClick={e => onClick(e, index)}
           >
             {generateTitle(index)}
           </Link>
