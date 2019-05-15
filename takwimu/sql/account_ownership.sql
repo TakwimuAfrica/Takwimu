@@ -55,6 +55,9 @@ country	TZ	2009	F	2011	14
 country	ZA	2009	F	2017	70
 country	ZA	2009	F	2014	70
 country	ZA	2009	F	2011	51
+country	BF	2009	F	2017	34
+country	BF	2009	F	2014	13
+country	BF	2009	F	2011	11
 country	ET	2009	M	2017	41
 country	ET	2009	M	2014	23
 country	KE	2009	M	2017	86
@@ -72,6 +75,10 @@ country	TZ	2009	M	2011	21
 country	ZA	2009	M	2017	68
 country	ZA	2009	M	2014	70
 country	ZA	2009	M	2011	56
+country	BF	2009	M	2017	51
+country	BF	2009	M	2014	16
+country	BF	2009	M	2011	16
+
 \.
 
 
@@ -86,4 +93,3 @@ ALTER TABLE ONLY public.account_ownership
 --
 -- PostgreSQL database dump complete
 --
-
