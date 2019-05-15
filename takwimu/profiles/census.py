@@ -1229,16 +1229,27 @@ METADATA = {
                 "qualifier": "M: Male\nF: Female"
             }
         }},
-            'burkina-faso': {
-                'country': {
-                    "account_ownership": {
-                        "source": {
-                            "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=BF",
-                            "title": "WorldBank"
-                        },
-                        "qualifier": "M: Male\nF: Female"
-                    }
-                }},
+    'burkina-faso': {
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
+        }},
+    'democratic-republic-of-congo':{
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
+        }
+    }
 }
 
 
