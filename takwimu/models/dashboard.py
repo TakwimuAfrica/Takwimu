@@ -211,6 +211,7 @@ HURUMAP_DATA_DISTS = [
 
 class LayoutChoiceBlock(blocks.ChoiceBlock):
     choices = (
+        ('auto', 'Default Layout Size'),
         ('half', 'Half Width Layout'),
         ('full', 'Full Width Layout'),
     )
@@ -391,7 +392,9 @@ class IndicatorBlock(blocks.StructBlock):
     # to return a list; return the first item
     def get_api_representation(self, value, context=None):
         representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
-        representation['widget'] = representation['widget'][0]
+        widget = representation['widget'][0]
+        representation['widget'] = widget
+        representation['meta'] = {"size": widget['value'].pop('layout', 'auto')}
         return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
