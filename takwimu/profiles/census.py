@@ -1238,7 +1238,15 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             }
-        }},
+        },
+        "adult_literacy_rate": {
+            "source": {
+                "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.MA.ZS?locations=BF",
+                "title": "WorldBank, 2018"
+            },
+            "qualifier": "M: Male\nF: Female"
+        }
+    },
     'democratic-republic-of-congo':{
         'country': {
             "account_ownership": {
@@ -1247,7 +1255,14 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'uganda':{
@@ -1258,7 +1273,14 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=UG",
+                    "title": "WorldBank, 2013"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'zambia':{
@@ -1269,7 +1291,14 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=ZM",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     }
 }
