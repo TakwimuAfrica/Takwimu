@@ -1,17 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
-import {
-  ButtonBase,
-  Typography,
-  withStyles,
-  Popover,
-  Paper,
-  ClickAwayListener,
-  Grid
-} from '@material-ui/core';
+import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
-import { TwitterShareButton, TwitterIcon } from 'react-share';
+import { TwitterShareButton } from 'react-share';
 
 import shareIcon from '../../assets/images/analysis/share.svg';
 import downloadIcon from '../../assets/images/analysis/download.svg';
@@ -37,7 +29,12 @@ const styles = {
     lineHeight: 'normal',
     fontStyle: 'italic'
   },
-  shareButton: {
+  shareButtonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer'
+  },
+  buttonText: {
     fontSize: '0.813rem',
     color: '#848484'
   },
@@ -52,7 +49,6 @@ function Actions({
   page: { last_published_at: lastUpdated },
   hideLastUpdated
 }) {
-  const [shareButtonElement, setShareButtonElement] = useState(null);
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
@@ -60,35 +56,27 @@ function Actions({
           Last Updated: <strong>{lastUpdated}</strong>
         </Typography>
       )}
+
+      <TwitterShareButton url={window.location.href}>
+        <div
+          container
+          alignItems="center"
+          className={classes.shareButtonContainer}
+        >
+          <img alt="share" src={shareIcon} className={classes.actionIcon} />
+          <Typography className={classes.buttonText}>
+            Share this analysis
+          </Typography>
+        </div>
+      </TwitterShareButton>
       <ButtonBase
         disableRipple
-        className={classes.shareButton}
-        onClick={e => setShareButtonElement(e.target)}
+        disableTouchRipple
+        className={classes.buttonText}
       >
-        <img alt="share" src={shareIcon} className={classes.actionIcon} />
-        Share this analysis
-      </ButtonBase>
-      <ButtonBase className={classes.shareButton}>
         <img alt="download" src={downloadIcon} className={classes.actionIcon} />
         Download this analysis (PDF 800kb)
       </ButtonBase>
-
-      <Popover
-        open={shareButtonElement !== null}
-        anchorEl={shareButtonElement}
-        anchorOrigin={{ vertical: -80, horizontal: -80 }}
-      >
-        <ClickAwayListener onClickAway={() => setShareButtonElement(null)}>
-          <Paper className={classes.sharePopover}>
-            <Grid container justify="space-between">
-              <Typography>Share the link to this analysis:</Typography>
-              <TwitterShareButton url={window.location.href}>
-                <TwitterIcon size={40} />
-              </TwitterShareButton>
-            </Grid>
-          </Paper>
-        </ClickAwayListener>
-      </Popover>
     </div>
   );
 }

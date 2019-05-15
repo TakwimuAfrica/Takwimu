@@ -12,7 +12,7 @@
     "react-dom": "^16.8.4",
     "react-pdf-js": "^4.0.2",
     "react-scripts": "2.1.8",
-    "react-share": "^2.4.0"
+    "react-share": "^3.0.0"
   },
   "devDependencies": {
     "eslint-config-airbnb": "^17.1.0",
