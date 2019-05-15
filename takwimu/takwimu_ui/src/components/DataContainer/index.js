@@ -7,7 +7,7 @@ import { ArrowDropUp } from '@material-ui/icons';
 
 import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
-import FeaturedDataContainer from './FeaturedDataContainer';
+import HURUmapContainer from './HURUmapContainer';
 import HTMLDataContainer from './HTMLDataContainer';
 import PDFDataContainer from './PDFDataContainer';
 
@@ -71,7 +71,8 @@ function DataContainer({
     return (
       layout === 'half_width' ||
       (layout === 'auto' &&
-        (!['entities', 'document'].includes(data.type) && !summary))
+        (!['entities', 'document'].includes(data.type) &&
+          (!summary || summary === '<p></p>')))
     );
   };
   return (
@@ -86,9 +87,7 @@ function DataContainer({
             {data.value.title}
           </Typography>
 
-          {data.type === 'featured_data_widget' && (
-            <FeaturedDataContainer data={data.value} />
-          )}
+          {data.type === 'hurumap' && <HURUmapContainer data={data.value} />}
 
           {data.type === 'html' && (
             <HTMLDataContainer id={id} data={data.value} />

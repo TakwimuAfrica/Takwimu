@@ -30,10 +30,10 @@ function FeaturedData({
     return null;
   }
 
-  const { title, featured_data: featuredDataWidgets } = featuredData;
+  const { title, featured_data: indicators } = featuredData;
   return (
     <Section title={title} variant="h2">
-      {featuredDataWidgets && featuredDataWidgets.length > 0 && (
+      {indicators && indicators.length > 0 && (
         <Grid
           container
           direction="row"
@@ -41,9 +41,9 @@ function FeaturedData({
           alignItems="flex-start"
           className={classes.root}
         >
-          <DataContainer color="secondary" data={featuredDataWidgets[0]} />
-          {featuredDataWidgets.length > 1 && (
-            <DataContainer color="primary" data={featuredDataWidgets[1]} />
+          <DataContainer color="secondary" indicator={indicators[0]} />
+          {indicators.length > 1 && (
+            <DataContainer color="primary" indicator={indicators[1]} />
           )}
         </Grid>
       )}
@@ -67,7 +67,8 @@ FeaturedData.propTypes = {
                 chart_type: PropTypes.string.isRequired,
                 data_stat_type: PropTypes.string.isRequired,
                 description: PropTypes.string.isRequired
-              }).isRequired
+              }).isRequired,
+              meta: PropTypes.shape({}).isRequired
             }).isRequired
           )
         })

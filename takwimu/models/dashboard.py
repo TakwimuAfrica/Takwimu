@@ -408,7 +408,7 @@ class TopicBodyBlock(blocks.StreamBlock):
         representation = super(TopicBodyBlock, self).get_api_representation(value, context=context)
         for r in representation:
             if r['type'] == 'indicator':
-                r['meta'] = { "layout": r['value'].pop('layout', 'auto') }
+                r['meta'] = { 'layout': r['value'].pop('layout', 'auto') }
 
         return representation
 
@@ -1041,9 +1041,10 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
+# HURUmap style widget for FeaturedData.
 class FeaturedDataWidgetBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
-    country = blocks.ChoiceBlock(required=True,
+    data_country = blocks.ChoiceBlock(required=True,
                                  choices=[
                                      ('ET', 'Ethiopia'),
                                      ('KE', 'Kenya'),
@@ -1078,12 +1079,44 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
     description = blocks.TextBlock(
         required=False, label='Description of the data')
 
+
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
-    featured_data_widget = FeaturedDataWidgetBlock()
+    hurumap = FeaturedDataWidgetBlock()
+
+
+# FeaturedDataIndicator is structurally similar to Indicator as in they both
+# made up various widgets. For now, FeaturedDataIndicator only supports
+# HURUmap type of widgets via FeaturedDataWidget
+class FeaturedDataIndicatorBlock(blocks.StructBlock):
+    widget = FeaturedDataWidgetChooserBlock(min_num=1, max_num=1)
+
+    # Since this block will only have only one of widget type, there is no need
+    # to return a list; return the first item
+    def get_api_representation(self, value, context=None):
+        representation = super(FeaturedDataIndicatorBlock, self).get_api_representation(value, context=context)
+        if representation:
+            widget = representation['widget'][0]
+            representation['widget'] = widget
+
+        return representation
+
+
+class FeaturedDataIndicatorsBlock(blocks.StreamBlock):
+    indicator = FeaturedDataIndicatorBlock()
+
+    # FeaturedDataIndicator **must** be displayed at 'half_width' per design
+    def get_api_representation(self, value, context=None):
+        representation = super(FeaturedDataIndicatorsBlock, self).get_api_representation(value, context=context)
+        for r in representation:
+            r['meta'] = { 'layout': 'half_width' }
+
+        return representation
+
 
 class FeaturedDataContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default='Featured Data', max_length=1024)
-    featured_data = FeaturedDataWidgetChooserBlock(max_num=2)
+    featured_data = FeaturedDataIndicatorsBlock(max_num=2)
+
 
 class FeaturedDataBlock(blocks.StreamBlock):
     featured_data_content = FeaturedDataContentBlock()
