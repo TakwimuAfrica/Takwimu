@@ -37,6 +37,46 @@ CREATE TABLE public.agricultural_land (
 --
 
 COPY public.agricultural_land (geo_level, geo_code, geo_version, agricultural_land_year, total) FROM stdin;
+country	BF	2009	2016	44
+country	BF	2009	2015	44
+country	BF	2009	2014	44
+country	BF	2009	2013	45
+country	BF	2009	2012	44
+country	BF	2009	2011	43
+country	BF	2009	2010	44
+country	BF	2009	2009	43
+country	BF	2009	2008	44
+country	BF	2009	2007	40
+country	BF	2009	2006	39
+country	BF	2009	2005	40
+country	BF	2009	2004	39
+country	BF	2009	2003	41
+country	BF	2009	2002	39
+country	BF	2009	2001	39
+country	BF	2009	2000	36
+country	BF	2009	1999	36
+country	BF	2009	1998	36
+country	BF	2009	1997	36
+country	CD	2009	2016	12
+country	CD	2009	2015	12
+country	CD	2009	2014	12
+country	CD	2009	2013	12
+country	CD	2009	2012	12
+country	CD	2009	2011	11
+country	CD	2009	2010	11
+country	CD	2009	2009	11
+country	CD	2009	2008	11
+country	CD	2009	2007	11
+country	CD	2009	2006	11
+country	CD	2009	2005	11
+country	CD	2009	2004	11
+country	CD	2009	2003	11
+country	CD	2009	2002	11
+country	CD	2009	2001	11
+country	CD	2009	2000	11
+country	CD	2009	1999	11
+country	CD	2009	1998	11
+country	CD	2009	1997	11
 country	ET	2009	2016	36
 country	ET	2009	2015	36
 country	ET	2009	2014	36
@@ -54,6 +94,9 @@ country	ET	2009	2003	32
 country	ET	2009	2002	30
 country	ET	2009	2001	31
 country	ET	2009	2000	31
+country	ET	2009	1999	31
+country	ET	2009	1998	31
+country	ET	2009	1997	30
 country	KE	2009	2016	49
 country	KE	2009	2015	49
 country	KE	2009	2014	49
@@ -122,6 +165,27 @@ country	TZ	2009	2003	39
 country	TZ	2009	2002	39
 country	TZ	2009	2001	38
 country	TZ	2009	2000	38
+country	UG	2009	2016	72
+country	UG	2009	2015	72
+country	UG	2009	2014	72
+country	UG	2009	2013	72
+country	UG	2009	2012	72
+country	UG	2009	2011	72
+country	UG	2009	2010	71
+country	UG	2009	2009	71
+country	UG	2009	2008	70
+country	UG	2009	2007	68
+country	UG	2009	2006	67
+country	UG	2009	2005	66
+country	UG	2009	2004	66
+country	UG	2009	2003	66
+country	UG	2009	2002	64
+country	UG	2009	2001	63
+country	UG	2009	2000	63
+country	UG	2009	1999	61
+country	UG	2009	1998	61
+country	UG	2009	1997	61
+country	UG	2009	1996	61
 country	ZA	2009	2016	80
 country	ZA	2009	2015	80
 country	ZA	2009	2014	80
@@ -139,6 +203,30 @@ country	ZA	2009	2003	81
 country	ZA	2009	2002	81
 country	ZA	2009	2001	81
 country	ZA	2009	2000	81
+country	ZA	2009	1999	81
+country	ZA	2009	1998	81
+country	ZA	2009	1997	81
+country	ZM	2009	2016	45
+country	ZM	2009	2015	32
+country	ZM	2009	2014	32
+country	ZM	2009	2013	32
+country	ZM	2009	2012	32
+country	ZM	2009	2011	32
+country	ZM	2009	2010	32
+country	ZM	2009	2009	32
+country	ZM	2009	2008	31
+country	ZM	2009	2007	31
+country	ZM	2009	2006	31
+country	ZM	2009	2005	31
+country	ZM	2009	2004	31
+country	ZM	2009	2003	31
+country	ZM	2009	2002	30
+country	ZM	2009	2001	30
+country	ZM	2009	2000	30
+country	ZM	2009	1999	30
+country	ZM	2009	1998	30
+country	ZM	2009	1997	30
+country	ZM	2009	1996	29
 \.
 
 
@@ -153,4 +241,3 @@ ALTER TABLE ONLY public.agricultural_land
 --
 -- PostgreSQL database dump complete
 --
-

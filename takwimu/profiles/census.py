@@ -1245,6 +1245,12 @@ METADATA = {
                 "title": "WorldBank, 2018"
             },
             "qualifier": "M: Male\nF: Female"
+        },
+        "agricultural_land": {
+            "source": {
+                "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZM",
+                "title": "WorldBank"
+            }
         }
     },
     'democratic-republic-of-congo':{
@@ -1262,6 +1268,12 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=CD",
+                    "title": "WorldBank"
+                }
             },
         }
     },
@@ -1281,6 +1293,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=UG",
+                    "title": "WorldBank"
+                }
+            }
         }
     },
     'zambia':{
@@ -1299,6 +1317,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZM",
+                    "title": "WorldBank"
+                }
+            }
         }
     }
 }
