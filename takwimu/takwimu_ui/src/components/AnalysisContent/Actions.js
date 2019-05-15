@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
@@ -49,6 +49,20 @@ function Actions({
   page: { last_published_at: lastUpdated },
   hideLastUpdated
 }) {
+  const [analysisLink, setAnalysisLink] = useState(window.location.href);
+
+  useEffect(() => {
+    function locationHashChanged() {
+      setAnalysisLink(window.location.href);
+    }
+
+    window.addEventListener('hashchange', locationHashChanged);
+
+    return () => {
+      window.removeEventListener('hashchange', locationHashChanged);
+    };
+  }, []);
+
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
@@ -57,7 +71,7 @@ function Actions({
         </Typography>
       )}
 
-      <TwitterShareButton url={window.location.href}>
+      <TwitterShareButton url={analysisLink}>
         <div
           container
           alignItems="center"
