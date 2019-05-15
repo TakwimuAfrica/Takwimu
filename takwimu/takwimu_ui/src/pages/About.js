@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
-import AboutUsContent from '../components/AboutUsContent/index';
+import AboutContent from '../components/AboutContent/index';
 import ContentPage from '../components/ContentPage';
-import TableOfContent from '../components/AboutUsContent/TableOfContent';
+import TableOfContent from '../components/AboutContent/TableOfContent';
 
 const styles = () => ({
   root: {
@@ -14,7 +14,7 @@ const styles = () => ({
   }
 });
 
-class AboutUsPage extends React.Component {
+class About extends React.Component {
   constructor(props) {
     super(props);
     this.state = { current: 0 };
@@ -27,15 +27,14 @@ class AboutUsPage extends React.Component {
     const {
       takwimu: { page }
     } = this.props;
-    const { activeContent } = page;
+    const { active_content: activeContent } = page;
     const contentHeadings = this.getContentHeadings();
-    const currentIndex = contentHeadings.findIndex(
-      x => x.link === activeContent
-    );
+    const foundIndex = contentHeadings.findIndex(x => x.link === activeContent);
 
-    if (currentIndex !== -1) {
-      this.changeActiveContent(currentIndex);
+    if (foundIndex !== -1) {
+      this.changeActiveContent(foundIndex);
     }
+    this.setState({ current: foundIndex });
   }
 
   getContentHeadings() {
@@ -105,7 +104,7 @@ class AboutUsPage extends React.Component {
         }
         classes={{ root: classes.root }}
       >
-        <AboutUsContent
+        <AboutContent
           title={title}
           contentNavigation={contentNavigation}
           aboutTakwimu={aboutTakwimu}
@@ -123,11 +122,12 @@ class AboutUsPage extends React.Component {
   }
 }
 
-AboutUsPage.propTypes = {
+About.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
       title: PropTypes.string.isRequired,
+      active_content: PropTypes.string,
       content_navigation: PropTypes.shape({
         value: PropTypes.shape({
           title: PropTypes.string.isRequired
@@ -145,9 +145,8 @@ AboutUsPage.propTypes = {
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({}).isRequired
-    }).isRequired,
-    activeContent: PropTypes.string.isRequired
+    }).isRequired
   }).isRequired
 };
 
-export default withStyles(styles)(AboutUsPage);
+export default withStyles(styles)(About);
