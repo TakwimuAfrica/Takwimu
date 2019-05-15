@@ -1,4 +1,4 @@
-import React, { createRef, useEffect } from 'react';
+import React, { createRef, useEffect, Fragment, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import {
@@ -123,82 +123,94 @@ const EmbedCodeTextArea = ({ code }) => {
 EmbedCodeTextArea.propTypes = {
   code: PropTypes.string.isRequired
 };
-class DataActions extends React.Component {
-  constructor(props) {
-    super(props);
 
-    this.state = {
-      anchorEl: null
-    };
+function DataActions({ classes, onShare, onDownload, onShowData, embedCode }) {
+  const [anchorEl, setAnchorEl] = useState(null);
 
-    this.embedCodeTextAreaRef = createRef();
+  const handleEmbed = event => {
+    setAnchorEl(event.currentTarget);
+  };
+  return (
+    <div className={classes.root}>
+      <ActionButton>
+        <img alt="" src={shareIcon} />
+        <Typography className={classes.actionText}>Share</Typography>
+      </ActionButton>
 
-    this.handleEmbed = this.handleEmbed.bind(this);
-  }
+      {onDownload && (
+        <Fragment>
+          <div className={classes.verticalDivider} />
+          <ActionButton onClick={onDownload}>
+            <img alt="" src={downloadIcon} />
+            <Typography className={classes.actionText}>Download</Typography>
+          </ActionButton>
+        </Fragment>
+      )}
 
-  handleEmbed(event) {
-    this.setState({
-      anchorEl: event.currentTarget
-    });
-  }
+      {embedCode && (
+        <Fragment>
+          <div className={classes.verticalDivider} />
+          <ActionButton onClick={handleEmbed}>
+            <img alt="" src={embedIcon} />
+            <Typography className={classes.actionText}>Embed</Typography>
+          </ActionButton>
+        </Fragment>
+      )}
 
-  render() {
-    const { classes, onDownload, embedCode } = this.props;
-    const { anchorEl } = this.state;
-    const open = Boolean(anchorEl);
-    return (
-      <div className={classes.root}>
-        <ActionButton>
-          <img alt="" src={shareIcon} />
-          <Typography className={classes.actionText}>Share</Typography>
-        </ActionButton>
-        <div className={classes.verticalDivider} />
-        <ActionButton onClick={onDownload}>
-          <img alt="" src={downloadIcon} />
-          <Typography className={classes.actionText}>Download</Typography>
-        </ActionButton>
-        <div className={classes.verticalDivider} />
-        <ActionButton onClick={this.handleEmbed}>
-          <img alt="" src={embedIcon} />
-          <Typography className={classes.actionText}>Embed</Typography>
-        </ActionButton>
-        <div className={classes.verticalDivider} />
-        <ActionButton>
-          <img alt="" src={compareIcon} />
-          <Typography className={classes.actionText}>Compare</Typography>
-        </ActionButton>
-        <div className={classes.verticalDivider} />
-        <ActionButton>
-          <img alt="" src={showIcon} />
-          <Typography className={classes.actionText}>Show Data</Typography>
-        </ActionButton>
-        <Popover
-          open={open}
-          anchorEl={anchorEl}
-          anchorOrigin={{
-            vertical: 'top',
-            horizontal: 'center'
-          }}
-          transformOrigin={{
-            vertical: 'bottom',
-            horizontal: 'center'
-          }}
-        >
-          <ClickAwayListener
-            onClickAway={() => this.setState({ anchorEl: null })}
-          >
-            <EmbedCodeTextArea code={embedCode} />
-          </ClickAwayListener>
-        </Popover>
-      </div>
-    );
-  }
+      {onShare && (
+        <Fragment>
+          <div className={classes.verticalDivider} />
+
+          <ActionButton>
+            <img alt="" src={compareIcon} />
+            <Typography className={classes.actionText}>Compare</Typography>
+          </ActionButton>
+        </Fragment>
+      )}
+
+      {onShowData && (
+        <Fragment>
+          <div className={classes.verticalDivider} />
+          <ActionButton>
+            <img alt="" src={showIcon} />
+            <Typography className={classes.actionText}>Show Data</Typography>
+          </ActionButton>
+        </Fragment>
+      )}
+
+      <Popover
+        open={Boolean(anchorEl)}
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'center'
+        }}
+        transformOrigin={{
+          vertical: 'bottom',
+          horizontal: 'center'
+        }}
+      >
+        <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
+          <EmbedCodeTextArea code={embedCode} />
+        </ClickAwayListener>
+      </Popover>
+    </div>
+  );
 }
 
 DataActions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  onDownload: PropTypes.func.isRequired,
-  embedCode: PropTypes.string.isRequired
+  onDownload: PropTypes.func,
+  onShare: PropTypes.func,
+  onShowData: PropTypes.func,
+  embedCode: PropTypes.string
+};
+
+DataActions.defaultProps = {
+  onDownload: null,
+  onShare: null,
+  onShowData: null,
+  embedCode: null
 };
 
 export default withStyles(styles)(DataActions);

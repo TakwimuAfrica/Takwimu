@@ -4,7 +4,6 @@ import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
-import domtoimage from 'dom-to-image';
 import DataActions from './DataActions';
 
 const styles = {
@@ -33,16 +32,6 @@ function DataContainer({ id, classes, data }) {
     return () => {};
   }, []);
 
-  const handleDownload = () => {
-    const el = document.getElementById(`data-indicator-${id}`);
-    domtoimage.toPng(el).then(dataUrl => {
-      const link = document.createElement('a');
-      link.download = `${data.value.title}.png`;
-      link.href = dataUrl;
-      link.click();
-    });
-  };
-
   return (
     <Fragment>
       {data.entities.map(entity => (
@@ -51,7 +40,7 @@ function DataContainer({ id, classes, data }) {
           <div dangerouslySetInnerHTML={{ __html: entity.description }} />
         </div>
       ))}
-      <DataActions onDownload={handleDownload} embedCode="" />
+      <DataActions />
     </Fragment>
   );
 }
