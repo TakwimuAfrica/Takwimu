@@ -1249,6 +1249,28 @@ METADATA = {
                 "qualifier": "M: Male\nF: Female"
             }
         }
+    },
+    'uganda':{
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
+        }
+    },
+    'zambia':{
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=ZM",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
+        }
     }
 }
 

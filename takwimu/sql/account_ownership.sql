@@ -58,9 +58,15 @@ country	SN	2009	F	2011	5
 country	TZ	2009	F	2017	42
 country	TZ	2009	F	2014	34
 country	TZ	2009	F	2011	14
+country	UG	2009	F	2017	53
+country	UG	2009	F	2014	37
+country	UG	2009	F	2011	15
 country	ZA	2009	F	2017	70
 country	ZA	2009	F	2014	70
 country	ZA	2009	F	2011	51
+country	ZM	2009	F	2017	40
+country	ZM	2009	F	2014	33
+country	ZM	2009	F	2011	23
 country	BF	2009	M	2017	51
 country	BF	2009	M	2014	16
 country	BF	2009	M	2011	16
@@ -81,9 +87,15 @@ country	SN	2009	M	2011	6
 country	TZ	2009	M	2017	52
 country	TZ	2009	M	2014	45
 country	TZ	2009	M	2011	21
+country	UG	2009	M	2017	66
+country	UG	2009	M	2014	52
+country	UG	2009	M	2011	26
 country	ZA	2009	M	2017	68
 country	ZA	2009	M	2014	70
 country	ZA	2009	M	2011	56
+country	ZM	2009	M	2017	52
+country	ZM	2009	M	2014	38
+country	ZM	2009	M	2011	19
 
 \.
 
