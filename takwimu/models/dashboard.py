@@ -20,6 +20,7 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.contrib.settings.context_processors import settings as wagtail_settings
@@ -292,6 +293,22 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
+    flourish = blocks.StructBlock(
+        [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('html', DocumentChooserBlock(required=True)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
+
     hurumap = blocks.StructBlock(
         [
             ('label', blocks.CharBlock(required=False,
@@ -364,6 +381,10 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/entities.html'
     )
 
+    def get_api_representation(self, value, context=None):
+        representation = super().get_api_representation(value, context=context)[0]
+        return representation
+
     class Meta:
         icon = 'form'
 
@@ -374,12 +395,6 @@ class IndicatorBlock(blocks.StructBlock):
     summary = blocks.RichTextBlock(required=False,
                                    default='')
 
-    # Since this block will only have only one of widget type, there is no need
-    # to return a list; return the first item
-    def get_api_representation(self, value, context=None):
-        representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
-        representation['widget'] = representation['widget'][0]
-        return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
