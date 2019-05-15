@@ -104,7 +104,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
                 />
               )}
               {c.type === 'indicator' && (
-                <DataContainer key={c.id} id={c.id} data={c.value.widget} />
+                <DataContainer key={c.id} id={c.id} indicator={c} />
               )}
             </Fragment>
           ))}

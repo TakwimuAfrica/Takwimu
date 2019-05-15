@@ -17,7 +17,7 @@ const styles = theme => ({
     padding: '1.25rem'
   },
   layoutHalf: {
-    [theme.breakpoints.up('md')]: {
+    [theme.breakpoints.up('lg')]: {
       width: '50%'
     }
   },
@@ -54,11 +54,30 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({
+  id,
+  classes,
+  indicator: {
+    value: { widget: data, summary },
+    meta
+  }
+}) {
+  const isHalfWidth = () => {
+    const { layout } = meta;
+    if (layout === 'half_width') {
+      return true;
+    }
+
+    return (
+      layout === 'half_width' ||
+      (layout === 'auto' &&
+        (!['entities', 'document'].includes(data.type) && !summary))
+    );
+  };
   return (
     <div
       className={classNames(classes.root, {
-        [classes.layoutHalf]: data.value.layout === 'half'
+        [classes.layoutHalf]: isHalfWidth()
       })}
     >
       <div className={classes.dataContainer}>
@@ -112,7 +131,11 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  indicator: PropTypes.shape({
+    value: PropTypes.shape({}).isRequired,
+    summary: PropTypes.string,
+    meta: PropTypes.shape({}).isRequired
+  }).isRequired
 };
 
 DataContainer.defaultProps = {

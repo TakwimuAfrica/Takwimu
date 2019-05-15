@@ -38,6 +38,11 @@ from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
 
 logger = logging.getLogger(__name__)
 
+INDICATOR_LAYOUT_HELP_TEXT= \
+    ("'Default Layout' means Takwimu will try to pick either 'Half' or 'Full' "
+     "width layout based on the indicator type and its content. Manually "
+     "choose the layout if the Takwimu picked layout does not produce the "
+     "desired results.")
 DEFAULT_DESCRIPTION_TEXT = \
     ("Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
      "Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum "
@@ -209,13 +214,6 @@ HURUMAP_DATA_DISTS = [
     ('worldbank-gdp_growth', 'GDP Growth'),
 ]
 
-class LayoutChoiceBlock(blocks.ChoiceBlock):
-    choices = (
-        ('auto', 'Default Layout Size'),
-        ('half', 'Half Width Layout'),
-        ('full', 'Full Width Layout'),
-    )
-
 
 class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
@@ -229,7 +227,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='snippet',
         template='takwimu/_includes/dataview/freeform.html'
@@ -246,7 +243,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('layout', LayoutChoiceBlock(default='half')),
         ],
         icon='media',
         template='takwimu/_includes/dataview/embed.html'
@@ -263,7 +259,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='doc-full',
         template='takwimu/_includes/dataview/document.html'
@@ -281,7 +276,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        choices=sdg_choices, label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('layout', LayoutChoiceBlock(default='half')),
         ],
         icon='image',
         template='takwimu/_includes/dataview/image.html'
@@ -298,7 +292,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('layout', LayoutChoiceBlock(default='half')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
@@ -357,7 +350,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('widget_height', blocks.IntegerBlock(required=False,
                                                   label='Widget Height',
                                                   help_text='Default is 450px')),
-            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='code',
         template='takwimu/_includes/dataview/hurumap.html'
@@ -372,7 +364,6 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('entities', blocks.ListBlock(EntityStructBlock())),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
-            ('layout', LayoutChoiceBlock(default='full')),
         ],
         icon='group',
         template='takwimu/_includes/dataview/entities.html'
@@ -382,19 +373,43 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         icon = 'form'
 
 
+class LayoutChoiceBlock(blocks.ChoiceBlock):
+    choices = (
+        ('auto', 'Default Layout'),
+        ('half_width', 'Half Width Layout'),
+        ('full_width', 'Full Width Layout'),
+    )
+
+
 class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
     summary = blocks.RichTextBlock(required=False,
                                    default='')
+    layout = LayoutChoiceBlock(default='auto', help_text=INDICATOR_LAYOUT_HELP_TEXT)
 
     # Since this block will only have only one of widget type, there is no need
     # to return a list; return the first item
     def get_api_representation(self, value, context=None):
         representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
-        widget = representation['widget'][0]
-        representation['widget'] = widget
-        representation['meta'] = {"size": widget['value'].pop('layout', 'auto')}
+        if representation:
+            widget = representation['widget'][0]
+            representation['widget'] = widget
+
+        return representation
+
+class TopicBodyBlock(blocks.StreamBlock):
+    text= blocks.RichTextBlock(required=False)
+    indicator= IndicatorBlock(required=False)
+
+    # Since `layout` isn't really a `value`, remove it from indicator `value`
+    # and store it in indicator `meta` object
+    def get_api_representation(self, value, context=None):
+        representation = super(TopicBodyBlock, self).get_api_representation(value, context=context)
+        for r in representation:
+            if r['type'] == 'indicator':
+                r['meta'] = { "layout": r['value'].pop('layout', 'auto') }
+
         return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
@@ -405,10 +420,7 @@ class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.RichTextBlock(required=False)
-    body = blocks.StreamBlock([
-        ('text', blocks.RichTextBlock(required=False)),
-        ('indicator', IndicatorBlock(required=False))
-    ], required=False)
+    body = TopicBodyBlock(required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()
