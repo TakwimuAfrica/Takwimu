@@ -1288,6 +1288,12 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1337,6 +1343,12 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     },
     'uganda':{
@@ -1375,11 +1387,17 @@ METADATA = {
             },
             "employment_to_population_ratio": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=UG",
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
+            },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'zambia':{
@@ -1427,6 +1445,12 @@ METADATA = {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/?locations=ZM",
                     "title": "WorldBank"
+                }
+            },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=ET",
+                    "title": "WorldBank, 2017"
                 }
             },
         }
