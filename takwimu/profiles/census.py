@@ -1271,10 +1271,16 @@ METADATA = {
             },
             "employment_to_population_ratio": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=BF",
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "foreign_direct_investment_net_inflows": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/?locations=BF",
+                    "title": "WorldBank"
+                }
             }
         }
     },
@@ -1314,11 +1320,17 @@ METADATA = {
             },
             "employment_to_population_ratio": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=CD",
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
+            },
+            "foreign_direct_investment_net_inflows": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'uganda':{
@@ -1400,11 +1412,17 @@ METADATA = {
             },
             "employment_to_population_ratio": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=ZM",
                     "title": "WorldBank"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
+            },
+            "foreign_direct_investment_net_inflows": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
         }
     }
 }
