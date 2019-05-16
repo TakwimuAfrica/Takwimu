@@ -9,6 +9,7 @@ from takwimu.views import HomePageView, LegalView, \
     IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
     FlourishView, AboutPageRedirectView
 from wazimap.views import HomepageView as ProfileView
+from census.views import DataView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
@@ -39,6 +40,7 @@ takwimu_urlpatterns = [
         FlourishView.as_view(), name="flourish"),
     url(r'^flourish/(?P<document_id>\d+)/(?P<filename>.+)/$',
         FlourishView.as_view(), name="flourish_filename"),
+    url(r'^data/(?P<format>map|table|distribution)/$', cache_page(60 * 60)(DataView.as_view()), name='data_detail'),
 ]
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \
