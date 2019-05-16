@@ -13,7 +13,7 @@ import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
-import PoliticalLeaders from './topics/PoliticalLeaders';
+import CarouselTopic from './topics/CarouselTopic';
 
 const styles = theme => ({
   root: {
@@ -98,8 +98,8 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
 
         <Actions page={takwimu.page} />
 
-        {content.body[topicIndex].value.display !== 'carousel' ? (
-          <PoliticalLeaders data={content.body[topicIndex].value.body} />
+        {content.body[topicIndex].type === 'carousel_topic' ? (
+          <CarouselTopic data={content.body[topicIndex].value.body} />
         ) : (
           <Grid container direction="row">
             {content.body[topicIndex].value.body.map(c => (

@@ -148,16 +148,29 @@ const styles = theme => ({
 });
 
 function Topic({ classes, data }) {
-  const widgets = data
-    .filter(x => x.type === 'indicator' && x.value.widget.type === 'entities')
-    .map(x => x.value.widget);
   const isOverThreshold = useScrollListener(100, '<', 'political-figures');
-  const [selectedIndex, setSelectedIndex] = useState(widgets.length / 2);
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [images, setImages] = useState({});
 
   useEffect(() => {
     const profile = document.getElementById(`profile-${selectedIndex}`);
     profile.scrollIntoView({ inline: 'nearest', block: 'nearest' });
   }, [selectedIndex]);
+
+  useEffect(() => {
+    data.forEach(item =>
+      fetch(`/api/v2/images/${item.image}`)
+        .then(response => response.json())
+        .then(json =>
+          setImages(prev => ({
+            ...prev,
+            [json.id]: json.meta.download_url
+          }))
+        )
+    );
+
+    return () => {};
+  }, []);
 
   return (
     <div id="political-figures" className={classes.root}>
@@ -179,7 +192,7 @@ function Topic({ classes, data }) {
           <div className={classes.divider} />
 
           <div id="carousel-content" className={classes.content}>
-            {widgets.map((widget, index) => (
+            {data.map((item, index) => (
               <div
                 role="button"
                 tabIndex={0}
@@ -190,6 +203,7 @@ function Topic({ classes, data }) {
               >
                 <img
                   alt=""
+                  src={images[item.image]}
                   className={classNames(classes.profilePicture, {
                     [classes.profilePictureSelected]: selectedIndex === index
                   })}
@@ -199,10 +213,10 @@ function Topic({ classes, data }) {
                     [classes.profileNameSelected]: selectedIndex === index
                   })}
                 >
-                  {widget.value.entities[0].name}
+                  {item.name}
                 </Typography>
                 <Typography className={classes.profileTitle}>
-                  {widget.value.title}
+                  {item.title}
                 </Typography>
               </div>
             ))}
@@ -214,7 +228,7 @@ function Topic({ classes, data }) {
             tabIndex={0}
             className={classes.arrow}
             onClick={() =>
-              selectedIndex < widgets.length - 1 &&
+              selectedIndex < data.length - 1 &&
               setSelectedIndex(selectedIndex + 1)
             }
             onKeyUp={() => null}
@@ -224,7 +238,7 @@ function Topic({ classes, data }) {
       <Typography
         className={classes.body}
         dangerouslySetInnerHTML={{
-          __html: widgets[selectedIndex].value.entities[0].description
+          __html: data[selectedIndex].description
         }}
       />
     </div>
