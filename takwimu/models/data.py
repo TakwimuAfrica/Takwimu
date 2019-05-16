@@ -14,7 +14,7 @@ from takwimu.utils.helpers import COUNTRIES
 
 logger = logging.getLogger(__name__)
 
-country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
+country_choices = [(k, v['short_name']) for k, v in COUNTRIES.items()]
 
 
 # The abstract model for data indicators, complete with panels
@@ -32,12 +32,13 @@ class ProfileData(models.Model):
     description = models.CharField(max_length=1024, blank=True)
 
     # Summary should come from the indicator but since we currently haven't
-    # implemented the lookup, we'll but here for MVP
+    # implemented the lookup, we'll put it here for MVP
     summary = RichTextField(blank=True)
 
     panels = [
         FieldPanel('chart_title'),
         FieldPanel('description'),
+        FieldPanel('summary', verbose_name='Analysis Summary'),
     ]
 
     def __str__(self):

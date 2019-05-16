@@ -96,20 +96,20 @@ class Command(BaseCommand):
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
             url = f"profiles/country-{code}-{slugify(country)}"
-            self.stdout.write(f"Working on {country} {server_url}/{url}")
+            self.stdout.write(f"Browsing {code}|{server_url}/{url} ... ")
             browser.get(f"{server_url}/{url}")
             soup = BeautifulSoup(browser.page_source, 'lxml')
             visualizations = soup.find_all('div', {
                 "class": ["column-full", "column-half", "column-three-quarters",
                           "column-quarter"]})
             self.stdout.write(
-                f"Found {len(visualizations)} possible visualizations")
+                f"{search_backend.es_index}: Found {len(visualizations) possible HURUmap charts")
             for viz in visualizations:
                 # For our sanity, we'll only consider a div to be a chart if
                 # it has `data-id` and `data-chart-title`
-                id = viz.get('data-id')
-                title = viz.get('data-chart-title')
-                if id and title:
+                data_id = viz.get('data-id')
+                data_chart_title = viz.get('data-chart-title')
+                if data_id and data_chart_title:
                     labels = ' '.join(
                         [i.text for i in viz.select('span.x.axis.label')])
 
@@ -117,14 +117,15 @@ class Command(BaseCommand):
                         [i.text for i in
                          viz.find_all('span', class_=['chart-qualifier'])])
 
-                    content_id = f"{country}-{viz['id']}"
-                    link = f"/{url}#{viz['id']}"
+                    id = viz['id']
+                    content_id = f"{country}-{id}"
+                    link = f"/{url}#{id}"
 
                     _, outcome = search_backend.add_to_index(content_id=content_id,
                                                              content_type='HURUmap',
                                                              country=country,
                                                              category='',
-                                                             title=title,
+                                                             title=data_chart_title,
                                                              body=f"{labels} {qualifiers}",
                                                              metadata='',
                                                              parent_page_id=None,
@@ -132,11 +133,23 @@ class Command(BaseCommand):
                                                              result_type='Data',
                                                              link=link)
                     self.stdout.write(
-                        f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
+                        f"{search_backend.es_index}: Indexed HURUmap Chart {code}|{data_id} -> {outcome}")
 
-                    profile_data = ProfileData(
-                        country_iso_code=code, chart_id=f"{code}_{chart_data_id}", chart_title=title)
-                    profile_data.save()
-
+                    # id is unique per country/geography level
+                    profile_data_id = f"{code}_{data_id}"
+                    chart_id_parts = id.split('-')
+                    data_stat_type = viz['data-stat-type']
+                    chart_height = viz.get('chart_height')
+                    _, did_create = ProfileData.objects.update_or_create(id=profile_data_id,
+                        defaults={
+                            'country_iso_code': code,
+                            'chart_id': f"{chart_id_parts[2]}-{chart_id_parts[3]}",
+                            'chart_title': data_chart_title,
+                            'chart_type': chart_id_parts[1],
+                            'data_stat_type': data_stat_type,
+                            'chart_height': chart_height
+                    });
+                    self.stdout.write(
+                        f"{search_backend.es_index}: Created HURUmap Data {code}|{data_id} -> {did_create}")
 
         browser.quit()
