@@ -1294,6 +1294,13 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1349,6 +1356,13 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 }
             },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'uganda':{
@@ -1397,6 +1411,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=UG",
                     "title": "WorldBank"
                 }
+            },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=UG",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
         }
     },
@@ -1449,9 +1470,16 @@ METADATA = {
             },
             "gdp_per_capita": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=ET",
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=ZM",
                     "title": "WorldBank, 2017"
                 }
+            },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=ZM",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
         }
     }
