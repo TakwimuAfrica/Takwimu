@@ -10,7 +10,7 @@ import IFrame from './IFrame';
 function DataContainer({ data, theme }) {
   const handleDownload = () => {
     const iframe = document.getElementById(
-      `cr-embed-country-${data.country}-${data.data_id}`
+      `cr-embed-country-${data.data_country}-${data.data_id}`
     );
     iframe.contentWindow.domtoimage
       .toPng(iframe.contentDocument.getElementById('census-chart'), {
@@ -31,7 +31,7 @@ function DataContainer({ data, theme }) {
     allowFullScreen
     title="${data.title}"
     src="/embed/iframe.html?geoID=country-${
-      data.country
+      data.data_country
     }&geoVersion=2009&chartDataID=${data.data_id}&dataYear=2011&chartType=${
     data.chart_type
   }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
