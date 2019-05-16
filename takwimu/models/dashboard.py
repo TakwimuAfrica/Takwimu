@@ -892,6 +892,7 @@ class AboutPage(ModelMeta, Page):
     def get_context(self, request):
         context = super(AboutPage, self).get_context(request)
 
+        context['active_content'] = 'about'
         context['meta'] = self.as_meta(request)
         return context
 
@@ -1529,3 +1530,27 @@ class CountryProfilesSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Country Profiles'
+
+
+@register_setting
+class NavigationSetting(BaseSetting):
+    country_analysis = RichTextField(blank=False, default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>', verbose_name="description")
+    data_by_topic = RichTextField(blank=False, default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>', verbose_name="description")
+
+    panels = [
+        MultiFieldPanel([
+                FieldPanel('country_analysis'),
+            ],
+            heading="Country Analysis",
+            classname="collapsible",
+        ),
+        MultiFieldPanel([
+                FieldPanel('data_by_topic'),
+            ],
+            heading="Data by Topic",
+            classname="collapsible",
+        ),
+    ]
+
+    class Meta:
+        verbose_name = 'Navigation'

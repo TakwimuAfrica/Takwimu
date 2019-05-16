@@ -38,7 +38,15 @@ const styles = theme => ({
     borderBottomWidth: '0.25rem',
     marginTop: '0.375rem',
     width: '100%',
-    height: '21.125rem'
+    height: '21.125rem',
+    [theme.breakpoints.up('md')]: {
+      height: '17.125rem',
+      backgroundPositionY: '-3rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '21.125rem',
+      backgroundPositionY: '-6.25rem'
+    }
   }
 });
 

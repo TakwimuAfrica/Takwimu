@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { ButtonBase, Typography, withStyles } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+
+import { TwitterShareButton } from 'react-share';
 
 import shareIcon from '../../assets/images/analysis/share.svg';
 import downloadIcon from '../../assets/images/analysis/download.svg';
@@ -27,9 +29,18 @@ const styles = {
     lineHeight: 'normal',
     fontStyle: 'italic'
   },
-  shareButton: {
+  shareButtonContainer: {
+    display: 'flex',
+    alignItems: 'center',
+    cursor: 'pointer'
+  },
+  buttonText: {
     fontSize: '0.813rem',
     color: '#848484'
+  },
+  sharePopover: {
+    width: '20.313rem',
+    padding: '10px'
   }
 };
 
@@ -38,6 +49,20 @@ function Actions({
   page: { last_published_at: lastUpdated },
   hideLastUpdated
 }) {
+  const [analysisLink, setAnalysisLink] = useState(window.location.href);
+
+  useEffect(() => {
+    function locationHashChanged() {
+      setAnalysisLink(window.location.href);
+    }
+
+    window.addEventListener('hashchange', locationHashChanged);
+
+    return () => {
+      window.removeEventListener('hashchange', locationHashChanged);
+    };
+  }, []);
+
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
@@ -45,11 +70,24 @@ function Actions({
           Last Updated: <strong>{lastUpdated}</strong>
         </Typography>
       )}
-      <ButtonBase className={classes.shareButton}>
-        <img alt="share" src={shareIcon} className={classes.actionIcon} />
-        Share this analysis
-      </ButtonBase>
-      <ButtonBase className={classes.shareButton}>
+
+      <TwitterShareButton url={analysisLink}>
+        <div
+          container
+          alignItems="center"
+          className={classes.shareButtonContainer}
+        >
+          <img alt="share" src={shareIcon} className={classes.actionIcon} />
+          <Typography className={classes.buttonText}>
+            Share this analysis
+          </Typography>
+        </div>
+      </TwitterShareButton>
+      <ButtonBase
+        disableRipple
+        disableTouchRipple
+        className={classes.buttonText}
+      >
         <img alt="download" src={downloadIcon} className={classes.actionIcon} />
         Download this analysis (PDF 800kb)
       </ButtonBase>
