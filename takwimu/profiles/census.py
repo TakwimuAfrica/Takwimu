@@ -1247,7 +1247,7 @@ METADATA = {
             },
             "agricultural_land": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF"
                 }
             },
             "births_attended_by_skilled_health_staff": {
@@ -1300,6 +1300,12 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "prevalence_of_undernourishment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
+                    "title": "WorldBank, 2017"
+                }
             },
         }
     },
@@ -1419,6 +1425,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "prevalence_of_undernourishment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
+                    "title": "WorldBank, 2017"
+                }
+            },
         }
     },
     'zambia':{
@@ -1480,6 +1492,12 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "prevalence_of_undernourishment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
+                    "title": "WorldBank"
+                }
             },
         }
     }
