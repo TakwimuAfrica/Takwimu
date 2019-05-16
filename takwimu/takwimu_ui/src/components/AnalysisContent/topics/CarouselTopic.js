@@ -131,6 +131,7 @@ const styles = theme => ({
     width: '152px'
   },
   profileName: {
+    marginTop: '1.375rem',
     fontFamily: theme.typography.fontText,
     color: theme.palette.primary.main,
     textDecoration: 'underline',
