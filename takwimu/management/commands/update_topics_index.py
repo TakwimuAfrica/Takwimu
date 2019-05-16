@@ -105,23 +105,11 @@ class Command(BaseCommand):
             self.stdout.write(
                 f"Found {len(visualizations)} possible visualizations")
             for viz in visualizations:
-                chart_header = ''
-                try:
-                    chart_header = viz.find('h3', class_='chart-header').text
-                except AttributeError:
-                    pass
-
-                title = viz.get('data-chart-title', '') or chart_header
-
-                # return None if no chart data id, it's probably just a 
-                # random div lying around
-                chart_data_id = viz.get('data-id', None)
-
-                # if section does not have a title then it's probably a random
-                # div without a visualization
-
-                if title and viz.find('div', class_="chart"):
-                    # self.stdout.write(str(viz))
+                # For our sanity, we'll only consider a div to be a chart if
+                # it has `data-id` and `data-chart-title`
+                id = viz.get('data-id')
+                title = viz.get('data-chart-title')
+                if id and title:
                     labels = ' '.join(
                         [i.text for i in viz.select('span.x.axis.label')])
 
@@ -129,10 +117,10 @@ class Command(BaseCommand):
                         [i.text for i in
                          viz.find_all('span', class_=['chart-qualifier'])])
 
-                    id = f"{country}-{viz['id']}"
+                    content_id = f"{country}-{viz['id']}"
                     link = f"/{url}#{viz['id']}"
 
-                    _, outcome = search_backend.add_to_index(content_id=id,
+                    _, outcome = search_backend.add_to_index(content_id=content_id,
                                                              content_type='HURUmap',
                                                              country=country,
                                                              category='',
@@ -143,13 +131,12 @@ class Command(BaseCommand):
                                                              parent_page_type=None,
                                                              result_type='Data',
                                                              link=link)
-
-                    if chart_data_id:
-                        profile_data = ProfileData(
-                            country_iso_code=code, chart_id=f"{code}_{chart_data_id}", chart_title=title)
-                        profile_data.save()
-
                     self.stdout.write(
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
+
+                    profile_data = ProfileData(
+                        country_iso_code=code, chart_id=f"{code}_{chart_data_id}", chart_title=title)
+                    profile_data.save()
+
 
         browser.quit()
