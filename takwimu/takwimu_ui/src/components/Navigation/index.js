@@ -209,11 +209,16 @@ class Navigation extends React.Component {
   }
 
   renderSearchDrawer() {
+    const { width } = this.props;
     const { openDrawer } = this.state;
     return (
       <SearchDrawer
         active={openDrawer === 'search'}
-        toggle={this.toggleMobileDrawer}
+        toggle={
+          isWidthUp('md', width)
+            ? this.toggleDrawer(null)
+            : this.toggleMobileDrawer
+        }
       >
         {this.renderNavBar(true)}
       </SearchDrawer>

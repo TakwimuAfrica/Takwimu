@@ -27,10 +27,6 @@ const styles = theme => ({
   readNextContainer: {
     paddingBottom: '2.3125rem'
   },
-  dataContainer: {
-    margin: '0.625rem',
-    width: '100%'
-  },
   hero: {
     backgroundImage: `url(${profileHeroImage})`,
     backgroundPosition: 'center',
@@ -116,12 +112,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
                 />
               )}
               {c.type === 'indicator' && (
-                <DataContainer
-                  key={c.id}
-                  id={c.id}
-                  classes={{ root: classes.dataContainer }}
-                  data={c.value.widget}
-                />
+                <DataContainer key={c.id} id={c.id} indicator={c} />
               )}
             </Fragment>
           ))}

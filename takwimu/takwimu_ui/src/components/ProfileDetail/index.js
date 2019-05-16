@@ -9,7 +9,6 @@ import {
   Input,
   Popper,
   Paper,
-  ClickAwayListener,
   MenuList,
   MenuItem
 } from '@material-ui/core';
@@ -18,8 +17,6 @@ import classNames from 'classnames';
 import Layout from '../Layout';
 
 import searchIcon from '../../assets/images/icon-search.svg';
-import downArrowBlack from '../../assets/images/down-arrow-black.svg';
-import upArrowBlack from '../../assets/images/up-arrow-black.svg';
 import downArrow from '../../assets/images/down-arrow-green.svg';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
@@ -151,20 +148,12 @@ class ProfileDetail extends React.Component {
 
     this.state = {
       searchTerm: '',
-      releasesMenuIsOpen: false,
       showSearchResults: false
     };
 
-    this.toggleReleasesMenu = this.toggleReleasesMenu.bind(this);
     this.showSearchResults = this.showSearchResults.bind(this);
     this.hideSearchResults = this.hideSearchResults.bind(this);
     this.handleSearch = this.handleSearch.bind(this);
-  }
-
-  toggleReleasesMenu() {
-    this.setState(prevState => ({
-      releasesMenuIsOpen: !prevState.releasesMenuIsOpen
-    }));
   }
 
   showSearchResults() {
@@ -192,14 +181,13 @@ class ProfileDetail extends React.Component {
   }
 
   render() {
-    const { showSearchResults, releasesMenuIsOpen } = this.state;
+    const { showSearchResults } = this.state;
     const {
       classes,
       takwimu: { countries },
       profile: {
         comparable = false,
         demographics = {},
-        primary_releases: primaryReleases = {},
         geography = { this: {} }
       }
     } = this.props;
@@ -217,9 +205,18 @@ class ProfileDetail extends React.Component {
         1
       );
     }
-    const { active: activeRelease } = primaryReleases;
-    const { square_kms: squarekms, geo_code: countryCode } = geography.this;
-    const country = countries.find(c => c.iso_code === countryCode);
+
+    const { square_kms: squarekms, geo_level: geoLevel } = geography.this;
+    let country;
+    if (geoLevel === 'country') {
+      const { geo_code: countryCode } = geography.this;
+      country = countries.find(c => c.iso_code === countryCode);
+    } else {
+      // if level is not country, then we are in level 1
+      const { parent_geoid: countryGeoId } = geography.this;
+      country = countries.find(c => c.iso_code === countryGeoId.slice(8));
+      country.name = geography.this.name;
+    }
 
     return (
       <Grid container justify="center">
@@ -281,71 +278,6 @@ class ProfileDetail extends React.Component {
                 )}
               </Grid>
             </Grid>
-            <Grid
-              container
-              style={{ paddingTop: '0.5rem', paddingBottom: '0.5rem' }}
-            >
-              <Typography className={classes.label}>Release:</Typography>
-              {activeRelease && (
-                <ButtonBase
-                  disableRipple
-                  disableTouchRipple
-                  style={{ outline: 'none' }}
-                  buttonRef={node => {
-                    this.releasesButton = node;
-                  }}
-                  onClick={this.toggleReleasesMenu}
-                >
-                  <Typography className={classes.datasetName}>
-                    {activeRelease.name} {activeRelease.year}
-                  </Typography>
-                  <img
-                    alt=""
-                    src={releasesMenuIsOpen ? upArrowBlack : downArrowBlack}
-                  />
-                </ButtonBase>
-              )}
-
-              <Popper
-                className={classes.popperIndex}
-                open={releasesMenuIsOpen}
-                anchorEl={this.releasesButton}
-                style={{
-                  width: this.releasesButton
-                    ? this.releasesButton.clientWidth
-                    : null
-                }}
-              >
-                <ClickAwayListener onClickAway={this.toggleReleasesMenu}>
-                  <Paper>
-                    <MenuList>
-                      <MenuItem
-                        component="a"
-                        s
-                        href={`?release=${primaryReleases.active.year}`}
-                        className={classes.releasesMenuItem}
-                      >
-                        {primaryReleases.active.name}{' '}
-                        {primaryReleases.active.year}
-                      </MenuItem>
-                      {primaryReleases.other.length
-                        ? primaryReleases.other.map(release => (
-                            <MenuItem
-                              key={release.year}
-                              component="a"
-                              href={`?release=${release.year}`}
-                              className={classes.releasesMenuItem}
-                            >
-                              {release.name} {release.year}
-                            </MenuItem>
-                          ))
-                        : null}
-                    </MenuList>
-                  </Paper>
-                </ClickAwayListener>
-              </Popper>
-            </Grid>
-
             {comparable && (
               <Grid container>
                 <div
