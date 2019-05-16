@@ -1257,6 +1257,12 @@ METADATA = {
                 "title": "WorldBank"
             }
         },
+        "cereal_yield_kg_per_hectare": {
+            "source": {
+                "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=BF",
+                "title": "WorldBank"
+            }
+        },
     },
     'democratic-republic-of-congo':{
         'country': {
@@ -1283,6 +1289,12 @@ METADATA = {
             "births_attended_by_skilled_health_staff": {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=CD",
                     "title": "WorldBank"
                 }
             },
@@ -1316,6 +1328,12 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'zambia':{
@@ -1343,6 +1361,12 @@ METADATA = {
             "births_attended_by_skilled_health_staff": {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=ZM",
                     "title": "WorldBank"
                 }
             },
