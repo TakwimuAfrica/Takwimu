@@ -1303,7 +1303,13 @@ METADATA = {
             },
             "prevalence_of_undernourishment": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "tax_as_percentage_of_gdp": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=BF",
                     "title": "WorldBank, 2017"
                 }
             },
@@ -1369,6 +1375,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "tax_as_percentage_of_gdp": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            },
         }
     },
     'uganda':{
@@ -1427,7 +1439,7 @@ METADATA = {
             },
             "prevalence_of_undernourishment": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=UG",
                     "title": "WorldBank, 2017"
                 }
             },
@@ -1495,8 +1507,14 @@ METADATA = {
             },
             "prevalence_of_undernourishment": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE",
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=ZM",
                     "title": "WorldBank"
+                }
+            },
+            "tax_as_percentage_of_gdp": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=ZM",
+                    "title": "WorldBank, 2017"
                 }
             },
         }
