@@ -102,8 +102,7 @@ const styles = theme => ({
     overflow: 'scroll',
     width: '88%',
     height: '100%',
-    display: 'flex',
-    justifyContent: 'center'
+    display: 'flex'
   },
   profile: {
     cursor: 'pointer',
@@ -157,7 +156,7 @@ function Topic({ classes, data }) {
 
   useEffect(() => {
     const profile = document.getElementById(`profile-${selectedIndex}`);
-    profile.scrollIntoView({ inline: 'start', block: 'nearest' });
+    profile.scrollIntoView({ inline: 'nearest', block: 'nearest' });
   }, [selectedIndex]);
 
   return (
