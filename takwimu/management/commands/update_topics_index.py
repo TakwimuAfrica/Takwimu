@@ -110,6 +110,10 @@ class Command(BaseCommand):
 
                 title = viz.get('data-chart-title', '') or chart_header
 
+                # return None if no chart data id, it's probably just a 
+                # random div lying around
+                chart_data_id = viz.get('data-id', None)
+
                 # if section does not have a title then it's probably a random
                 # div without a visualization
 
@@ -137,9 +141,10 @@ class Command(BaseCommand):
                                                              result_type='Data',
                                                              link=link)
 
-                    profile_data = ProfileData(
-                        country_iso_code=code, chart_id=viz['id'], chart_title=title)
-                    profile_data.save()
+                    if chart_data_id:
+                        profile_data = ProfileData(
+                            country_iso_code=code, chart_id=f"{code}_{chart_data_id}", chart_title=title)
+                        profile_data.save()
 
                     self.stdout.write(
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
