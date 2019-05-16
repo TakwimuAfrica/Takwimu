@@ -168,8 +168,6 @@ function Topic({ classes, data }) {
           }))
         )
     );
-
-    return () => {};
   }, []);
 
   return (
