@@ -1248,10 +1248,15 @@ METADATA = {
         },
         "agricultural_land": {
             "source": {
-                "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZM",
+                "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF
+            }
+        },
+        "births_attended_by_skilled_health_staff": {
+            "source": {
+                "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=BF",
                 "title": "WorldBank"
             }
-        }
+        },
     },
     'democratic-republic-of-congo':{
         'country': {
@@ -1272,6 +1277,12 @@ METADATA = {
             "agricultural_land": {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=CD",
                     "title": "WorldBank"
                 }
             },
@@ -1298,7 +1309,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=UG",
                     "title": "WorldBank"
                 }
-            }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'zambia':{
@@ -1322,7 +1339,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZM",
                     "title": "WorldBank"
                 }
-            }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
         }
     }
 }
