@@ -180,6 +180,9 @@ HURUMAP['available_releases_years_per_country'] = {
     },
 }
 
+HURUMAP['comparative_levels'] = ['country']
+
+HURUMAP['topics'] = { 'demographics','elections', 'crops', 'health_workers','causes_of_death', 'hiv', 'donors','poverty', 'fgm','security', 'budget', 'worldbank'}
 # Making sure these are the same
 WAZIMAP = HURUMAP
 
