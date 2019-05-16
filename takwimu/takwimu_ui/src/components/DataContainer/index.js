@@ -5,7 +5,9 @@ import { PropTypes } from 'prop-types';
 import { withStyles, Typography, Grid } from '@material-ui/core';
 import { ArrowDropUp } from '@material-ui/icons';
 
+import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
+
 import HurumapDataContainer from './HurumapDataContainer';
 import HTMLDataContainer from './HTMLDataContainer';
 import PDFDataContainer from './PDFDataContainer';
@@ -13,13 +15,12 @@ import FlourishDataContainer from './FlourishDataContainer';
 
 const styles = theme => ({
   root: {
-    margin: '1.25rem 0',
     width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '28.03125rem' // .75 of lg
-    },
+    padding: '1.25rem'
+  },
+  layoutHalf: {
     [theme.breakpoints.up('lg')]: {
-      width: '37.375rem'
+      width: '50%'
     }
   },
   dataContainer: {
@@ -55,9 +56,33 @@ const styles = theme => ({
   }
 });
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({
+  id,
+  classes,
+  indicator: {
+    value: { widget: data, summary },
+    meta
+  }
+}) {
+  const isHalfWidth = () => {
+    const { layout } = meta;
+    if (layout === 'half_width') {
+      return true;
+    }
+
+    return (
+      layout === 'half_width' ||
+      (layout === 'auto' &&
+        (!['entities', 'document'].includes(data.type) &&
+          (!summary || summary === '<p></p>')))
+    );
+  };
   return (
-    <div className={classes.root}>
+    <div
+      className={classNames(classes.root, {
+        [classes.layoutHalf]: isHalfWidth()
+      })}
+    >
       <div className={classes.dataContainer}>
         <Grid container direction="column" alignItems="center">
           <Typography variant="body1" align="center" className={classes.title}>
@@ -114,7 +139,11 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  indicator: PropTypes.shape({
+    value: PropTypes.shape({}).isRequired,
+    summary: PropTypes.string,
+    meta: PropTypes.shape({}).isRequired
+  }).isRequired
 };
 
 DataContainer.defaultProps = {
