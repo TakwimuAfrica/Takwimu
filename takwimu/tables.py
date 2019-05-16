@@ -99,8 +99,8 @@ FieldTable(['primary_education_completion_rate_year'], year=2017,
            dataset='WorldBank', id='primary_education_completion_rate')
 FieldTable(['secondary_school_enrollment_year', 'sex'], year=2017,
            dataset='WorldBank', id='secondary_school_enrollment')
-# FieldTable(['fgm_prevalence_year'], year=2017, dataset='WorldBank',
-#            id='fgm_prevalence')
+FieldTable(['fgm_prevalence_year'], year=2017, dataset='WorldBank',
+            id='fgm_prevalence')
 FieldTable(['nurses_and_midwives_year'], year=2017, dataset='WorldBank',
            id='nurses_and_midwives')
 FieldTable(['mobile_phone_subscriptions_year'], year=2017,

@@ -1281,7 +1281,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/?locations=BF",
                     "title": "WorldBank"
                 }
-            }
+            },
+            "fgm_prevalence": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -2061,6 +2067,13 @@ def get_worldbank_data(geo, session, country, level):
 
         try:
             hiv_prevalence, _ = get_stat_data(['hiv_prevalence_year', 'sex', ],
+                                              geo,
+                                              session, percent=False)
+        except Exception:
+            pass
+
+        try:
+            fgm_prevalence, _ = get_stat_data(['fgm_prevalence_year' ],
                                               geo,
                                               session, percent=False)
         except Exception:
