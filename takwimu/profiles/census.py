@@ -1327,6 +1327,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=BF",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1409,6 +1415,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     },
     'uganda':{
@@ -1484,6 +1496,12 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
             },
         }
     },
@@ -1566,6 +1584,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZM",
+                    "title": "WorldBank, 2018"
+                }
+            }
         }
     }
 }
@@ -1648,6 +1672,17 @@ def get_population(geo, session, country, level, year):
                  residence_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
+
+    #if total population is 0, take world bank tot population
+    if total_population == 0:
+        with dataset_context(year='2017'):
+            try:
+                _, worldbank_population = get_stat_data(['total_population_year' ],
+                                                    geo, session, only={'total_population_year': ['2017']}, percent=False)
+                total_population = worldbank_population
+            except Exception:
+                pass
+
     total_population_dist = _create_single_value_dist(
         'People', total_population)
 
