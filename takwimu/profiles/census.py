@@ -1237,32 +1237,46 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 },
                 "qualifier": "M: Male\nF: Female"
-            }
-        },
-        "adult_literacy_rate": {
-            "source": {
-                "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.MA.ZS?locations=BF",
-                "title": "WorldBank, 2018"
             },
-            "qualifier": "M: Male\nF: Female"
-        },
-        "agricultural_land": {
-            "source": {
-                "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.MA.ZS?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=BF",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
             }
-        },
-        "births_attended_by_skilled_health_staff": {
-            "source": {
-                "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=BF",
-                "title": "WorldBank"
-            }
-        },
-        "cereal_yield_kg_per_hectare": {
-            "source": {
-                "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=BF",
-                "title": "WorldBank"
-            }
-        },
+        }
     },
     'democratic-republic-of-congo':{
         'country': {
@@ -1298,6 +1312,13 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
         }
     },
     'uganda':{
@@ -1334,6 +1355,13 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
         }
     },
     'zambia':{
@@ -1370,6 +1398,13 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=SN",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            }
         }
     }
 }
