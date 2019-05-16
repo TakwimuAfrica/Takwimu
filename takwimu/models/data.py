@@ -22,7 +22,7 @@ country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
 class ProfileData(models.Model):
     country_iso_code = models.CharField(
         max_length=3, choices=country_choices, verbose_name='Country')
-    chart_id = models.CharField(max_length=1024)
+    chart_id = models.CharField(max_length=1024, unique=True, blank=False, null=False)
     chart_title = models.CharField(max_length=1024)
     summary = blocks.RichTextBlock(required=False, default='')
 
