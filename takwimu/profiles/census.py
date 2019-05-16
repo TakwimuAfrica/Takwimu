@@ -1334,6 +1334,12 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 }
             },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1422,6 +1428,12 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 }
             },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            },
         }
     },
     'uganda':{
@@ -1501,6 +1513,12 @@ METADATA = {
             "total_population": {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=UG",
                     "title": "WorldBank, 2017"
                 }
             },
@@ -1589,6 +1607,12 @@ METADATA = {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZM",
                     "title": "WorldBank, 2018"
+                }
+            },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=ZM",
+                    "title": "WorldBank, 2017"
                 }
             }
         }
