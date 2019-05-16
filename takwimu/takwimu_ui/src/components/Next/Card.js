@@ -13,6 +13,10 @@ const styles = theme => ({
     justifyContent: 'center',
     alignItems: 'center',
 
+    // Ensure padding in case of long text
+    paddingRight: '1rem',
+    paddingLeft: '1rem',
+
     // Inheritable by `A` component
     textDecoration: 'none'
   },
