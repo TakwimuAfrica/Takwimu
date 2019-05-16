@@ -1313,6 +1313,20 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "secondary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1381,6 +1395,20 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "secondary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'uganda':{
@@ -1442,6 +1470,20 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=UG",
                     "title": "WorldBank, 2017"
                 }
+            },
+            "secondary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
         }
     },
@@ -1516,6 +1558,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=ZM",
                     "title": "WorldBank, 2017"
                 }
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=ZM",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
         }
     }
