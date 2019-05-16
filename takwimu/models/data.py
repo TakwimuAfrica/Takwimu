@@ -20,16 +20,29 @@ country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
 # The abstract model for data indicators, complete with panels
 @register_snippet
 class ProfileData(models.Model):
+    # e.g. 2/3 iso country code + UUUIDv4 should fit
+    id = models.CharField(max_length=54, primary_key=True)
     country_iso_code = models.CharField(
         max_length=3, choices=country_choices, verbose_name='Country')
-    chart_id = models.CharField(max_length=1024, unique=True, blank=False, null=False)
+    chart_id = models.CharField(max_length=1024)
     chart_title = models.CharField(max_length=1024)
-    summary = blocks.RichTextBlock(required=False, default='')
+    chart_type = models.CharField(max_length=1024)
+    data_stat_type = models.CharField(max_length=1024)
+    chart_height = models.IntegerField(null=True)
+    description = models.CharField(max_length=1024, blank=True)
+
+    # Summary should come from the indicator but since we currently haven't
+    # implemented the lookup, we'll but here for MVP
+    summary = RichTextField(blank=True)
 
     panels = [
         FieldPanel('chart_title'),
-        FieldPanel('summary'),
+        FieldPanel('description'),
     ]
 
     def __str__(self):
-        return '{} {} ({})\n'.format(COUNTRIES[self.country_iso_code]['short_name'], self.chart_title, self.chart_id)
+        return '{} | {}'.format(COUNTRIES[self.country_iso_code]['short_name'], self.chart_title)
+
+    class Meta:
+        verbose_name = 'HURUmap Data'
+        verbose_name_plural = "HURUmap Data"
