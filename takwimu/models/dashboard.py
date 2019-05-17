@@ -18,6 +18,7 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.contrib.settings.context_processors import settings as wagtail_settings
@@ -288,6 +289,22 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('title', blocks.CharBlock(required=False)),
             ('hide_title', blocks.BooleanBlock(default=False, required=False)),
             ('raw_html', blocks.RawHTMLBlock(required=False)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
+
+    flourish = blocks.StructBlock(
+        [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('html', DocumentChooserBlock(required=True)),
             ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(

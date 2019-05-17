@@ -7,9 +7,11 @@ import { ArrowDropUp } from '@material-ui/icons';
 
 import classNames from 'classnames';
 import EntitiesDataContainer from './EntitiesDataContainer';
-import HURUmapContainer from './HURUmapContainer';
+
+import HurumapDataContainer from './HurumapDataContainer';
 import HTMLDataContainer from './HTMLDataContainer';
 import PDFDataContainer from './PDFDataContainer';
+import FlourishDataContainer from './FlourishDataContainer';
 
 const styles = theme => ({
   root: {
@@ -88,7 +90,11 @@ function DataContainer({
           </Typography>
 
           {(data.type === 'hurumap' || data.type === 'hurumap_snippet') && (
-            <HURUmapContainer data={data.value} />
+            <HurumapDataContainer data={data.value} />
+          )}
+
+          {data.type === 'flourish' && (
+            <FlourishDataContainer id={id} data={data.value} />
           )}
 
           {data.type === 'html' && (
