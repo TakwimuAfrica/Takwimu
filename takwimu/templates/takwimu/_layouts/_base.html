@@ -1,4 +1,4 @@
-{% load staticfiles sass_tags meta jsonify %}
+{% load static sass_tags meta jsonify wagtailcore_tags %}
 
 <!doctype html>
 <!--[if lt IE 7]>      <html lang="en" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -16,15 +16,14 @@
   {% include 'meta/meta.html' %}
 
   {% block favicon %}
-    <link rel="apple-touch-icon" sizes="152x152" href="{% static 'img/favicons/apple-touch-icon.png' %}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicons/favicon-32x32.png' %}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicons/favicon-16x16.png' %}">
-    <link rel="manifest" href="{% static 'img/favicons/site.webmanifest' %}">
-    <link rel="mask-icon" href="{% static 'img/favicons/safari-pinned-tab.svg' %}" color="#5bbad5">
-    <link rel="shortcut icon" href="{% static 'img/favicons/favicon.ico' %}">
-    <meta name="msapplication-TileColor" content="#2d89ef">
-    <meta name="msapplication-config" content="{% static 'img/favicons/browserconfig.xml'%}">
-    <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' }%">
+  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
+  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
+  <link rel="manifest" href="{% static 'site.webmanifest' %}">
+  <link rel="mask-icon" href="{% static 'safari-pinned-tab.svg' %}" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
   {% endblock %}
 
   {% block head_css %}
@@ -63,6 +62,10 @@
     takwimu.url = '{{ HURUMAP.url }}';
     takwimu.countries = {{ countries|jsonify|safe }};
     takwimu.settings = {
+      navigation: {
+        country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
+        data_by_topic: '{{ settings.takwimu.NavigationSetting.data_by_topic|richtext }}'
+      },
       support: {
         hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
         support: '{{ settings.takwimu.SupportSetting.support|safe }}'

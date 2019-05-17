@@ -84,7 +84,7 @@ class IFrame extends React.Component {
           id={id}
           title={featuredData.title}
           src={`/embed/iframe.html?geoID=country-${
-            featuredData.country
+            featuredData.data_country
           }&geoVersion=2009&chartDataID=${
             featuredData.data_id
           }&dataYear=2011&chartType=${

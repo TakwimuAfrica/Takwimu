@@ -20,6 +20,7 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.contrib.settings.context_processors import settings as wagtail_settings
@@ -38,6 +39,11 @@ from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
 
 logger = logging.getLogger(__name__)
 
+INDICATOR_LAYOUT_HELP_TEXT= \
+    ("'Default Layout' means Takwimu will try to pick either 'Half' or 'Full' "
+     "width layout based on the indicator type and its content. Manually "
+     "choose the layout if the Takwimu picked layout does not produce the "
+     "desired results.")
 DEFAULT_DESCRIPTION_TEXT = \
     ("Lorem ipsum dolor sit amet, consectetur adipiscing elit. "
      "Integer et lorem eros. Integer vel venenatis urna. Nam vestibulum "
@@ -292,6 +298,22 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
+    flourish = blocks.StructBlock(
+        [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('html', DocumentChooserBlock(required=True)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
+
     hurumap = blocks.StructBlock(
         [
             ('label', blocks.CharBlock(required=False,
@@ -368,17 +390,43 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         icon = 'form'
 
 
+class LayoutChoiceBlock(blocks.ChoiceBlock):
+    choices = (
+        ('auto', 'Default Layout'),
+        ('half_width', 'Half Width Layout'),
+        ('full_width', 'Full Width Layout'),
+    )
+
+
 class IndicatorBlock(blocks.StructBlock):
     title = blocks.CharBlock()
     widget = IndicatorWidgetsBlock(min_num=1, max_num=1)
     summary = blocks.RichTextBlock(required=False,
                                    default='')
+    layout = LayoutChoiceBlock(default='auto', help_text=INDICATOR_LAYOUT_HELP_TEXT)
 
     # Since this block will only have only one of widget type, there is no need
     # to return a list; return the first item
     def get_api_representation(self, value, context=None):
         representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
-        representation['widget'] = representation['widget'][0]
+        if representation:
+            widget = representation['widget'][0]
+            representation['widget'] = widget
+
+        return representation
+
+class TopicBodyBlock(blocks.StreamBlock):
+    text= blocks.RichTextBlock(required=False)
+    indicator= IndicatorBlock(required=False)
+
+    # Since `layout` isn't really a `value`, remove it from indicator `value`
+    # and store it in indicator `meta` object
+    def get_api_representation(self, value, context=None):
+        representation = super(TopicBodyBlock, self).get_api_representation(value, context=context)
+        for r in representation:
+            if r['type'] == 'indicator':
+                r['meta'] = { 'layout': r['value'].pop('layout', 'auto') }
+
         return representation
 
 class IconChoiceBlock(blocks.FieldBlock):
@@ -389,10 +437,7 @@ class TopicBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
     icon = IconChoiceBlock(required=False)
     summary = blocks.RichTextBlock(required=False)
-    body = blocks.StreamBlock([
-        ('text', blocks.RichTextBlock(required=False)),
-        ('indicator', IndicatorBlock(required=False))
-    ], required=False)
+    body = TopicBodyBlock(required=False)
 
     def js_initializer(self):
         parent_initializer = super(TopicBlock, self).js_initializer()
@@ -864,6 +909,7 @@ class AboutPage(ModelMeta, Page):
     def get_context(self, request):
         context = super(AboutPage, self).get_context(request)
 
+        context['active_content'] = 'about'
         context['meta'] = self.as_meta(request)
         return context
 
@@ -1027,9 +1073,10 @@ class FAQ(index.Indexed, models.Model):
         return self.question.encode('ascii', 'ignore')
 
 
+# HURUmap style widget for FeaturedData.
 class FeaturedDataWidgetBlock(blocks.StructBlock):
     title = blocks.CharBlock(required=False)
-    country = blocks.ChoiceBlock(required=True,
+    data_country = blocks.ChoiceBlock(required=True,
                                  choices=[
                                      ('ET', 'Ethiopia'),
                                      ('KE', 'Kenya'),
@@ -1064,12 +1111,44 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
     description = blocks.TextBlock(
         required=False, label='Description of the data')
 
+
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
-    featured_data_widget = FeaturedDataWidgetBlock()
+    hurumap = FeaturedDataWidgetBlock()
+
+
+# FeaturedDataIndicator is structurally similar to Indicator as in they both
+# made up various widgets. For now, FeaturedDataIndicator only supports
+# HURUmap type of widgets via FeaturedDataWidget
+class FeaturedDataIndicatorBlock(blocks.StructBlock):
+    widget = FeaturedDataWidgetChooserBlock(min_num=1, max_num=1)
+
+    # Since this block will only have only one of widget type, there is no need
+    # to return a list; return the first item
+    def get_api_representation(self, value, context=None):
+        representation = super(FeaturedDataIndicatorBlock, self).get_api_representation(value, context=context)
+        if representation:
+            widget = representation['widget'][0]
+            representation['widget'] = widget
+
+        return representation
+
+
+class FeaturedDataIndicatorsBlock(blocks.StreamBlock):
+    indicator = FeaturedDataIndicatorBlock()
+
+    # FeaturedDataIndicator **must** be displayed at 'half_width' per design
+    def get_api_representation(self, value, context=None):
+        representation = super(FeaturedDataIndicatorsBlock, self).get_api_representation(value, context=context)
+        for r in representation:
+            r['meta'] = { 'layout': 'half_width' }
+
+        return representation
+
 
 class FeaturedDataContentBlock(blocks.StructBlock):
     title = blocks.CharBlock(default='Featured Data', max_length=1024)
-    featured_data = FeaturedDataWidgetChooserBlock(max_num=2)
+    featured_data = FeaturedDataIndicatorsBlock(max_num=2)
+
 
 class FeaturedDataBlock(blocks.StreamBlock):
     featured_data_content = FeaturedDataContentBlock()
@@ -1482,3 +1561,27 @@ class CountryProfilesSetting(BaseSetting):
 
     class Meta:
         verbose_name = 'Country Profiles'
+
+
+@register_setting
+class NavigationSetting(BaseSetting):
+    country_analysis = RichTextField(blank=False, default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>', verbose_name="description")
+    data_by_topic = RichTextField(blank=False, default='<p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p>', verbose_name="description")
+
+    panels = [
+        MultiFieldPanel([
+                FieldPanel('country_analysis'),
+            ],
+            heading="Country Analysis",
+            classname="collapsible",
+        ),
+        MultiFieldPanel([
+                FieldPanel('data_by_topic'),
+            ],
+            heading="Data by Topic",
+            classname="collapsible",
+        ),
+    ]
+
+    class Meta:
+        verbose_name = 'Navigation'

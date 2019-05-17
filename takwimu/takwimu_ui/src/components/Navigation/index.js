@@ -189,13 +189,14 @@ class Navigation extends React.Component {
   renderDropDownDrawer() {
     const {
       width,
-      takwimu: { countries }
+      takwimu: { countries, settings }
     } = this.props;
     const { openDrawer } = this.state;
     return (
       <DropDownDrawer
         active={openDrawer}
         countries={countries}
+        navigation={settings.navigation}
         toggle={
           isWidthUp('md', width)
             ? this.toggleDrawer(null)
@@ -208,11 +209,16 @@ class Navigation extends React.Component {
   }
 
   renderSearchDrawer() {
+    const { width } = this.props;
     const { openDrawer } = this.state;
     return (
       <SearchDrawer
         active={openDrawer === 'search'}
-        toggle={this.toggleMobileDrawer}
+        toggle={
+          isWidthUp('md', width)
+            ? this.toggleDrawer(null)
+            : this.toggleMobileDrawer
+        }
       >
         {this.renderNavBar(true)}
       </SearchDrawer>
@@ -297,7 +303,8 @@ Navigation.propTypes = {
   width: PropTypes.string.isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({}).isRequired,
-    countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired
+    countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
+    settings: PropTypes.shape({}).isRequired
   }).isRequired
 };
 

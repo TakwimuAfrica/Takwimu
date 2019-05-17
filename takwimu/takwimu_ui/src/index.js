@@ -16,7 +16,7 @@ import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatYouCanDoWithTakwimu';
 import SearchResults from './components/SearchResults';
 import AnalysisPage from './pages/Analysis';
-import AboutUsPage from './pages/AboutUs';
+import AboutPage from './pages/About';
 import ContactUsPage from './pages/ContactUs';
 
 const PROPS = {
@@ -80,7 +80,7 @@ const renderAboutUsPage = () => {
         if (data.items && data.items.length) {
           Object.assign(PROPS.takwimu.page, data.items[0]);
 
-          renderApp(AboutUsPage, 'takwimuAboutUsPage');
+          renderApp(AboutPage, 'takwimuAboutUsPage');
         }
       });
   }
