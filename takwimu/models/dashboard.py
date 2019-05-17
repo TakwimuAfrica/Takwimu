@@ -1061,7 +1061,7 @@ class FAQ(index.Indexed, models.Model):
 
 # HURUmap style widget for FeaturedData.
 class FeaturedDataWidgetBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False)
+    title = blocks.CharBlock(required=True, default="")
     data_country = blocks.ChoiceBlock(required=True,
                                  choices=[
                                      ('ET', 'Ethiopia'),
