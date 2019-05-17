@@ -1144,11 +1144,6 @@ class FeaturedDataIndicatorBlock(blocks.StructBlock):
                     'chart_height': snippet.chart_height,
                     'description': snippet.description,
                 }
-
-                # For now lets use snippet summary as indicator summary until
-                # we can figure out how to store indicator summary in
-                # ProfileData
-                representation['summary'] = snippet.summary
             representation['widget'] = widget
 
         return representation
