@@ -1,12 +1,8 @@
 import logging
 
-from django import forms
 from django.db import models
-from django.utils.html import format_html
-from django.utils.text import slugify
 
 from wagtail.admin.edit_handlers import FieldPanel
-from wagtail.core import blocks
 from wagtail.core.fields import RichTextField
 from wagtail.snippets.models import register_snippet
 
