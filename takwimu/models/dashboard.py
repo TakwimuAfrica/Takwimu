@@ -888,6 +888,7 @@ class AboutPage(ModelMeta, Page):
 
 class ContactUsPage(Page):
     address = RichTextField()
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
     content_panels = [
         FieldPanel('title'),
@@ -901,6 +902,7 @@ class ContactUsPage(Page):
         APIField('address'),
         APIField('key_contacts'),
         APIField('social_media'),
+        APIField('related_content'),
     ]
 
 def search_analysis_and_data(query, request):

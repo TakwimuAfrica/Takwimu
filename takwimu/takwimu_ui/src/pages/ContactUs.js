@@ -21,8 +21,10 @@ function ContactUs({
       title,
       key_contacts: keyContacts,
       social_media: socialMedia,
+      related_content: relatedContent,
       address
-    }
+    },
+    settings
   }
 }) {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
@@ -65,7 +67,9 @@ function ContactUs({
         socialMedia={socialMedia}
         current={currentSectionIndex}
         contentHeadings={contentHeadings}
+        relatedContent={relatedContent}
         changeActiveContent={changeActiveContent}
+        settingsSocialMedia={settings.socialMedia}
       />
     </ContentPage>
   );

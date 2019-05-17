@@ -6,6 +6,8 @@ import { withStyles, Typography, Grid, Link, Icon } from '@material-ui/core';
 import ContactUsContentNav from './ContactUsContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
+import { About as ContactWhereToNext } from '../Next';
+import RelatedContent from '../RelatedContent';
 
 const styles = theme => ({
   root: {
@@ -39,6 +41,9 @@ const styles = theme => ({
     '& > :not(:last-child)': {
       marginBottom: '2.5rem'
     }
+  },
+  whereToNext: {
+    marginTop: '7.75rem'
   }
 });
 
@@ -50,7 +55,9 @@ function ContactUsContent({
   socialMedia,
   current,
   contentHeadings,
-  changeActiveContent
+  changeActiveContent,
+  settingsSocialMedia,
+  relatedContent
 }) {
   return (
     <React.Fragment>
@@ -100,6 +107,11 @@ function ContactUsContent({
           ))}
         </Grid>
       </ContentSection>
+      <ContactWhereToNext
+        classes={{ sectionRoot: classes.whereToNext }}
+        socialMedia={settingsSocialMedia}
+      />
+      <RelatedContent content={relatedContent} />
     </React.Fragment>
   );
 }
@@ -110,6 +122,8 @@ ContactUsContent.propTypes = {
   address: PropTypes.string.isRequired,
   keyContacts: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({}).isRequired,
+  settingsSocialMedia: PropTypes.shape({}).isRequired,
+  relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   changeActiveContent: PropTypes.func.isRequired
