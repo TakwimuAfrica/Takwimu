@@ -1345,7 +1345,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=BF",
                     "title": "WorldBank, 2017"
                 }
-            }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=BF",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1445,7 +1451,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=CD",
                     "title": "WorldBank, 2017"
                 }
-            }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     },
     'uganda':{
@@ -1539,7 +1551,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=UG",
                     "title": "WorldBank, 2017"
                 }
-            }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=UG",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     },
     'zambia':{
@@ -1638,7 +1656,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=ZM",
                     "title": "WorldBank, 2017"
                 }
-            }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=ZM",
+                    "title": "WorldBank, 2018"
+                }
+            },
         }
     }
 }
