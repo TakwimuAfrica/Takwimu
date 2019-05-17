@@ -1352,6 +1352,13 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 }
             },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=BF",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1458,6 +1465,13 @@ METADATA = {
                     "title": "WorldBank, 2018"
                 }
             },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=CD",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
         }
     },
     'uganda':{
@@ -1557,6 +1571,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=UG",
                     "title": "WorldBank, 2018"
                 }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=UG",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
         }
     },
@@ -1662,6 +1683,13 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=ZM",
                     "title": "WorldBank, 2018"
                 }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=ZM",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
             },
         }
     }
