@@ -1340,6 +1340,37 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=BF",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=BF",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'democratic-republic-of-congo':{
@@ -1434,6 +1465,37 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=CD",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'uganda':{
@@ -1522,6 +1584,37 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=UG",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=UG",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=UG",
+                    "title": "WorldBank, 2016"
+                }
+            }
         }
     },
     'zambia':{
@@ -1614,7 +1707,38 @@ METADATA = {
                     "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=ZM",
                     "title": "WorldBank, 2017"
                 }
-            }
+            },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=ZM",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=ZM",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=ZM",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=ZM",
+                    "title": "WorldBank, 2016"
+                }
+            },
         }
     }
 }
