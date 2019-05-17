@@ -1,6 +1,7 @@
 from bs4 import BeautifulSoup
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
+from django.db import IntegrityError
 from django.utils.text import slugify
 from selenium import webdriver
 
@@ -91,7 +92,7 @@ class Command(BaseCommand):
             server_url = server_url[:-1]
 
         # clean out profleData DB
-        ProfileData.objects.all().delete()
+        # ProfileData.objects.all().delete()
 
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
@@ -145,9 +146,12 @@ class Command(BaseCommand):
                                                              link=link)
 
                     if chart_data_id:
-                        profile_data = ProfileData(
-                            country_iso_code=code, chart_id=f"{code}_{chart_data_id}", chart_title=title)
-                        profile_data.save()
+                        try:
+                            profile_data = ProfileData(
+                                country_iso_code=code, chart_id=f"{code}_{chart_data_id}", chart_title=title)
+                            profile_data.save()
+                        except IntegrityError:
+                            pass
 
                     self.stdout.write(
                         f"{search_backend.es_index}: Indexing HURUmap visualization {title} from {country}. Result {outcome}")
