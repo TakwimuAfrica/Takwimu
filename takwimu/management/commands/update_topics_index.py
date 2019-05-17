@@ -1,7 +1,10 @@
 from bs4 import BeautifulSoup
+
 from django.conf import settings
+from django.core.management import call_command
 from django.core.management.base import BaseCommand, CommandError
 from django.utils.text import slugify
+
 from selenium import webdriver
 
 from takwimu.models import ProfileSectionPage, ProfilePage
@@ -12,17 +15,18 @@ from takwimu.utils.helpers import COUNTRIES
 
 
 class Command(BaseCommand):
-    help = 'Add topics to the search index'
+    help = 'Index Takwimu (analysis & data) content'
 
     def handle(self, *args, **options):
         topic_search = TakwimuTopicSearch()
         topic_search.reset_index()
 
-        self.stdout.write(topic_search.es_index + ": Starting rebuild")
-        self.stdout.write("Ensure that the server is running on port 8000")
+        self.stdout.write(f"{topic_search.es_index}: Starting rebuild (Ensure that the server is running on port 8000)")
         self.index_hurumap(topic_search)
         self.index_topics(ProfileSectionPage.objects.live(), topic_search)
         self.index_topics(ProfilePage.objects.live(), topic_search)
+
+        return call_command('update_index')
 
     def index_topics(self, queryset, search_backend):
         for i in queryset:
@@ -48,11 +52,7 @@ class Command(BaseCommand):
                             parent_page_id=parent_page_id,
                             parent_page_type=parent_page_type,
                             result_type='Analysis', summary=topic_summary)
-                        self.stdout.write(
-                            search_backend.es_index + ": Indexing topic '%s result %s'" % (
-                                topic_id,
-                                outcome,
-                            ))
+                        self.stdout.write(f"{topic_search.es_index}: Indexing topic {topic_id} -> {outcome}")
 
                     elif k['type'] == 'indicator':
                         indicator = k.get('value', [])
@@ -69,12 +69,7 @@ class Command(BaseCommand):
                                     parent_page_id=parent_page_id,
                                     parent_page_type=parent_page_type,
                                     result_type='Data', summary=indicator_summary)
-
-                                self.stdout.write(
-                                    search_backend.es_index + ": Indexing widget '%s result %s'" % (
-                                        data['id'],
-                                        outcome,
-                                    ))
+                                self.stdout.write(f"{topic_search.es_index}: Indexing widget {data['id']} -> {outcome}")
 
     def index_hurumap(self, search_backend):
         options = webdriver.ChromeOptions()
@@ -96,14 +91,15 @@ class Command(BaseCommand):
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
             url = f"profiles/country-{code}-{slugify(country)}"
-            self.stdout.write(f"Browsing {code}|{server_url}/{url} ... ")
+            self.stdout.write(
+                f"{search_backend.es_index}: Searching {code} @ {server_url}/{url} ... ")
             browser.get(f"{server_url}/{url}")
             soup = BeautifulSoup(browser.page_source, 'lxml')
             visualizations = soup.find_all('div', {
-                "class": ["column-full", "column-half", "column-three-quarters",
-                          "column-quarter"]})
+                'class': ['column-full', 'column-half', 'column-three-quarters',
+                          'column-quarter']})
             self.stdout.write(
-                f"{search_backend.es_index}: Found {len(visualizations) possible HURUmap charts")
+                f"{search_backend.es_index}: Found {len(visualizations)} possible HURUmap charts")
             for viz in visualizations:
                 # For our sanity, we'll only consider a div to be a chart if
                 # it has `data-id` and `data-chart-title`
