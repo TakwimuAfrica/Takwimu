@@ -6,7 +6,7 @@
 {% block body_id %}about{% endblock %}
 
 {% block content %}
-  <div id="takwimuAboutUsPage" />
+  <div id="takwimuAboutUsPage"></div>
 {% endblock %}
 
 {% block body_javascript_extra %}
@@ -16,5 +16,6 @@
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
     takwimu.page.name = 'about';
+    takwimu.page.active_content = '{{active_content}}';
    </script>
 {% endblock body_javascript_extra %}

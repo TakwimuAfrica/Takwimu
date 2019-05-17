@@ -16,7 +16,8 @@ import MakingOfTakwimu from './components/MakingOfTakwimu';
 import WhatCanYouDo from './components/WhatYouCanDoWithTakwimu';
 import SearchResults from './components/SearchResults';
 import AnalysisPage from './pages/Analysis';
-import AboutUsPage from './pages/AboutUs';
+import AboutPage from './pages/About';
+import ContactPage from './pages/Contact';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -79,7 +80,22 @@ const renderAboutUsPage = () => {
         if (data.items && data.items.length) {
           Object.assign(PROPS.takwimu.page, data.items[0]);
 
-          renderApp(AboutUsPage, 'takwimuAboutUsPage');
+          renderApp(AboutPage, 'takwimuAboutUsPage');
+        }
+      });
+  }
+};
+
+const renderContactUsPage = () => {
+  const el = document.getElementById('takwimuContactUsPage');
+  if (el) {
+    fetch('/api/v2/pages/?type=takwimu.ContactPage&fields=*&format=json')
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          Object.assign(PROPS.takwimu.page, data.items[0]);
+
+          renderApp(ContactPage, 'takwimuContactUsPage');
         }
       });
   }
@@ -105,6 +121,7 @@ renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
 renderAboutUsPage();
+renderContactUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();

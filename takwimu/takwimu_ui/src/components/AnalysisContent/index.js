@@ -28,10 +28,6 @@ const styles = theme => ({
   readNextContainer: {
     paddingBottom: '2.3125rem'
   },
-  dataContainer: {
-    margin: '0.625rem',
-    width: '100%'
-  },
   hero: {
     backgroundImage: `url(${profileHeroImage})`,
     backgroundPosition: 'center',
@@ -43,7 +39,15 @@ const styles = theme => ({
     borderBottomWidth: '0.25rem',
     marginTop: '0.375rem',
     width: '100%',
-    height: '21.125rem'
+    height: '21.125rem',
+    [theme.breakpoints.up('md')]: {
+      height: '17.125rem',
+      backgroundPositionY: '-3rem'
+    },
+    [theme.breakpoints.up('lg')]: {
+      height: '21.125rem',
+      backgroundPositionY: '-6.25rem'
+    }
   }
 });
 
@@ -118,7 +122,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
                     key={c.id}
                     id={c.id}
                     classes={{ root: classes.dataContainer }}
-                    data={c.value.widget}
+                    indicator={c}
                   />
                 )}
               </Fragment>

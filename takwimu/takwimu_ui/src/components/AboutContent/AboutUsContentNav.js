@@ -52,7 +52,7 @@ function AboutContentNav({
   const showShadow = useScrollListener(10);
   const generateHref = index => {
     const item = contentHeadings[index];
-    return `/${item.link}`;
+    return `/${item.link}/`;
   };
   return (
     <div className={classNames(classes.root, { [classes.shadow]: showShadow })}>
@@ -68,7 +68,7 @@ function AboutContentNav({
                 e.preventDefault();
 
                 window.history.pushState(null, '', generateHref(index));
-                changeActiveContent(index);
+                changeActiveContent(index)();
               }}
             >
               <Typography

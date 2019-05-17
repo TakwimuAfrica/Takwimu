@@ -37,23 +37,17 @@ const styles = theme => ({
 class IFrame extends React.Component {
   constructor(props) {
     super(props);
-
-    const { featuredData } = props;
-    const id = `cr-embed-country-${featuredData.country}-${
-      featuredData.data_id
-    }`;
-    this.state = { id };
     this.handleFrameLoad = this.handleFrameLoad.bind(this);
   }
 
   componentDidMount() {
-    const { id } = this.state;
+    const { id } = this.props;
     const iframe = document.getElementById(id);
     iframe.addEventListener('load', this.handleFrameLoad, true);
   }
 
   handleFrameLoad() {
-    const { id } = this.state;
+    const { id } = this.props;
     const iframe = document.getElementById(id);
 
     // add domtoimage
@@ -75,23 +69,22 @@ class IFrame extends React.Component {
   }
 
   render() {
-    const { classes, featuredData } = this.props;
-    const { id } = this.state;
+    const { id, classes, data } = this.props;
 
     return (
       <div className={classNames(['cr-embed', classes.container])}>
         <iframe
           id={id}
-          title={featuredData.title}
+          title={data.title}
           src={`/embed/iframe.html?geoID=country-${
-            featuredData.country
+            data.data_country
           }&geoVersion=2009&chartDataID=${
-            featuredData.data_id
+            data.data_id
           }&dataYear=2011&chartType=${
-            featuredData.chart_type
-          }&chartHeight=300&chartTitle=${
-            featuredData.title
-          }&initialSort=&statType=${featuredData.data_stat_type}`}
+            data.chart_type
+          }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
+            data.data_stat_type
+          }`}
           allowFullScreen
           className={classNames(['census-reporter-embed', classes.iframe])}
         />
@@ -102,7 +95,8 @@ class IFrame extends React.Component {
 
 IFrame.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  featuredData: PropTypes.shape({}).isRequired
+  id: PropTypes.string.isRequired,
+  data: PropTypes.shape({}).isRequired
 };
 
 export default withStyles(styles)(IFrame);

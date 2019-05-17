@@ -1,8 +1,9 @@
 import logging
 
 from django.conf import settings
-from wazimap.data.utils import dataset_context, get_session, get_stat_data
+from wazimap.data.utils import dataset_context, merge_dicts, get_session, get_stat_data
 from wazimap.models.data import DataNotFound
+from wazimap.geo import geo_data
 
 from takwimu.data.utils import get_primary_release_year_per_geography
 
@@ -1228,9 +1229,519 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             }
-        }}
+        }},
+    'burkina-faso': {
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.MA.ZS?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=BF",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=BF",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "foreign_direct_investment_net_inflows": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "fgm_prevalence": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "prevalence_of_undernourishment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "tax_as_percentage_of_gdp": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "secondary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=BF",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=BF",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=BF",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=BF",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            }
+        }
+    },
+    'democratic-republic-of-congo':{
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=CD",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "foreign_direct_investment_net_inflows": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "tax_as_percentage_of_gdp": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "secondary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=CD",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=CD",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=CD",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            }
+        }
+    },
+    'uganda':{
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=UG",
+                    "title": "WorldBank, 2013"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=UG",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=UG",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "prevalence_of_undernourishment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "secondary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=UG",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=UG",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=UG",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=UG",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=UG",
+                    "title": "WorldBank, 2016"
+                }
+            }
+        }
+    },
+    'zambia':{
+        'country': {
+            "account_ownership": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=ZM",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "adult_literacy_rate": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=ZM",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "agricultural_land": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "cereal_yield_kg_per_hectare": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "employment_to_population_ratio": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.EMP.TOTL.SP.MA.ZS?locations=ZM",
+                    "title": "WorldBank"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "foreign_direct_investment_net_inflows": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "gdp_per_capita": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.CD?locations=ZM",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "youth_unemployment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=ZM",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "prevalence_of_undernourishment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "tax_as_percentage_of_gdp": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=ZM",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "primary_school_enrollment": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=ZM",
+                    "title": "WorldBank, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "total_population": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZM",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "mobile_phone_subscriptions": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=ZM",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=ZM",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gdp_per_capita_growth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG?locations=ZM",
+                    "title": "WorldBank, 2018"
+                }
+            },
+            "life_expectancy_at_birth": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=ZM",
+                    "title": "WorldBank, 2017"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ZM",
+                    "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=ZM",
+                    "title": "WorldBank, 2016"
+                }
+            },
+        }
+    }
 }
-
 
 def get_appropriate_dbtable(country, table_prefix):
     pass
@@ -1239,26 +1750,27 @@ def get_appropriate_dbtable(country, table_prefix):
 def get_profile(geo, profile_name, request):
     session = get_session()
     (country, level) = get_country_and_level(geo)
-    year = request.GET.get('release',
-                           get_primary_release_year_per_geography(geo))
+    comparative_geos = geo_data.get_comparative_geos(geo)
+    sections = list(SECTIONS)
     data = {}
     try:
-        data['demographics'] = get_demographics(geo, session, country, level,
-                                                year)
-        data['elections'] = get_elections(geo, session)
-        data['crops'] = get_crop_production(geo, session, country, level)
-        # data['health_centers'] = get_health_centers(
-        #     geo, session, country, level)
-        data['health_workers'] = get_health_workers(geo, session)
-        data['causes_of_death'] = get_causes_of_death(geo, session)
-        data['hiv'] = get_knowledge_of_HIV(geo, session)
-        data['donors'] = get_donor_assistance(geo, session, country, level)
-        data['poverty'] = get_poverty_profile(geo, session, country, level)
-        data['fgm'] = get_fgm_profile(geo, session, country, level)
-        data['security'] = get_security_profile(geo, session, country, level)
-        data['budget'] = get_budget_data(geo, session, country, level)
-        data['worldbank'] = get_worldbank_data(geo, session, country, level)
-
+        for section in sections:
+            function_name = 'get_%s_profile' % section
+            if function_name in globals():
+                func = globals()[function_name]
+                data[section] = func(geo, session, country, level)
+                # get profiles for comparative geometries
+                if not data[section]['is_missing']:
+                    for comp_geo in comparative_geos:
+                        try:
+                            merge_dicts(
+                                data[section], func(
+                                    comp_geo, session, country, level), comp_geo.geo_level)
+                        except KeyError as e:
+                            msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
+                                geo.geoid, section, comp_geo.geoid, e)
+                            log.fatal(msg, exc_info=e)
+                            raise ValueError(msg)
         return data
     finally:
         session.close()
@@ -1270,12 +1782,13 @@ def get_country_and_level(geo):
     if level != 'continent':
         country = geo.name.lower() \
             if level == 'country' \
-            else geo.ancestors()[-1].name.lower()
+            else geo.ancestors()[-2].name.lower() #-1 (last element is continent)
 
     return (country, level)
 
 
-def get_demographics(geo, session, country, level, year):
+def get_demographics_profile(geo, session, country, level):
+    year = get_primary_release_year_per_geography(geo)
     population_data = get_population(geo, session, country, level, year)
     child_births_data = get_child_births(geo, session, country, level)
     demographics_data = dict(
@@ -1309,6 +1822,17 @@ def get_population(geo, session, country, level, year):
                  residence_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
+
+    #if total population is 0, take world bank tot population
+    if total_population == 0:
+        with dataset_context(year='2017'):
+            try:
+                _, worldbank_population = get_stat_data(['total_population_year' ],
+                                                    geo, session, only={'total_population_year': ['2017']}, percent=False)
+                total_population = worldbank_population
+            except Exception:
+                pass
+
     total_population_dist = _create_single_value_dist(
         'People', total_population)
 
@@ -1434,7 +1958,7 @@ def get_child_births(geo, session, country, level):
     }
 
 
-def get_elections(geo, session):
+def get_elections_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         candidate_dist = LOCATIONNOTFOUND
         valid_invalid_dist = LOCATIONNOTFOUND
@@ -1475,7 +1999,7 @@ def get_elections(geo, session):
     }
 
 
-def get_crop_production(geo, session, country, level):
+def get_crops_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         crop_distribution = LOCATIONNOTFOUND
         try:
@@ -1485,12 +2009,13 @@ def get_crop_production(geo, session, country, level):
             pass
 
     return {
+        'is_missing': crop_distribution.get('is_missing'),
         'crop_distribution': _add_metadata_to_dist(
             crop_distribution, 'crop_distribution', country, level)
     }
 
 
-def get_health_centers(geo, session, country, level):
+def get_health_centers_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         health_centers_dist, total_health_centers = LOCATIONNOTFOUND, 0
         health_centers_ownership_dist = LOCATIONNOTFOUND
@@ -1545,7 +2070,7 @@ def get_health_centers(geo, session, country, level):
     }
 
 
-def get_health_workers(geo, session):
+def get_health_workers_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
         hrh_patient_ratio = 0
@@ -1569,14 +2094,16 @@ def get_health_workers(geo, session):
         'Total health worker population (2014)', total_health_workers)
     hrh_patient_ratio_dist = _create_single_value_dist(
         'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
+    is_missing = health_workers_dist.get('is_missing')
     return {
+        'is_missing': is_missing,
         'total_health_workers_dist': total_health_workers_dist,
         'hrh_patient_ratio_dist': hrh_patient_ratio_dist,
         'health_workers_dist': health_workers_dist,
     }
 
 
-def get_causes_of_death(geo, session):
+def get_causes_of_death_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         causes_of_death_under_five_dist = LOCATIONNOTFOUND
         causes_of_death_over_five_dist = LOCATIONNOTFOUND
@@ -1642,8 +2169,8 @@ def get_causes_of_death(geo, session):
     }
 
 
-def get_knowledge_of_HIV(geo, session):
-    with dataset_context(year='2014'):
+def get_hiv_profile(geo, session, country, level):
+    with dataset_context( year='2014'):
         prevention_methods_dist = LOCATIONNOTFOUND
         try:
             prevention_methods_dist, _ = get_stat_data(
@@ -1657,7 +2184,7 @@ def get_knowledge_of_HIV(geo, session):
     }
 
 
-def get_donor_assistance(geo, session, country, level):
+def get_donors_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         donor_assistance_dist = LOCATIONNOTFOUND
         donor_programmes_dist = LOCATIONNOTFOUND
@@ -1746,7 +2273,7 @@ def get_security_profile(geo, session, country, level):
     }
 
 
-def get_budget_data(geo, session, country, level):
+def get_budget_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         government_expenditure_dist = LOCATIONNOTFOUND
         try:
@@ -1763,7 +2290,7 @@ def get_budget_data(geo, session, country, level):
     }
 
 
-def get_worldbank_data(geo, session, country, level):
+def get_worldbank_profile(geo, session, country, level):
     with dataset_context(year='2017'):
         cereal_yield_kg_per_hectare = LOCATIONNOTFOUND
         agricultural_land = LOCATIONNOTFOUND
@@ -1865,6 +2392,13 @@ def get_worldbank_data(geo, session, country, level):
 
         try:
             hiv_prevalence, _ = get_stat_data(['hiv_prevalence_year', 'sex', ],
+                                              geo,
+                                              session, percent=False)
+        except Exception:
+            pass
+
+        try:
+            fgm_prevalence, _ = get_stat_data(['fgm_prevalence_year' ],
                                               geo,
                                               session, percent=False)
         except Exception:

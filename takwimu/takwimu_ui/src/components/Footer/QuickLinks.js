@@ -34,7 +34,7 @@ const LINKS = [
   { href: '#analysis', label: 'Expert insights and analysis' },
   { href: '/about/', label: 'About Takwimu' },
   { href: '/about/', label: 'FAQs' },
-  { href: '/contact-us', label: 'Contact Us' }
+  { href: '/contact', label: 'Contact Us' }
 ];
 const LEGAL = [
   { href: '/legal', label: 'Terms of use' },

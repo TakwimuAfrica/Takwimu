@@ -42,7 +42,8 @@ function Initiative({ classes }) {
     <div className={classes.root}>
       <Title>An initiative by</Title>
       <div className={classes.img}>
-        <A href="//www.africapractice.com/">
+        {/* AP does not support HTPPS */}
+        <A href="http://www.africapractice.com/">
           <img src={ap} srcSet={`${ap2} 2x, ${ap3} 3x`} alt="africapractice" />
         </A>
         <A href="//codeforafrica.org/">

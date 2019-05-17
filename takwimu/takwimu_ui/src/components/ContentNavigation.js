@@ -15,7 +15,7 @@ const styles = theme => ({
   topicLinks: {
     '& > a:nth-child(n)': {
       lineHeight: 1.5,
-      marginRight: '3.125rem'
+      marginRight: '1.125rem'
     }
   },
   topic: {
@@ -61,7 +61,7 @@ function ContentNavigation({
             className={classNames({
               [classes.topic]: current !== index
             })}
-            onClick={onClick(index)}
+            onClick={e => onClick(e, index)}
           >
             {generateTitle(index)}
           </Link>
