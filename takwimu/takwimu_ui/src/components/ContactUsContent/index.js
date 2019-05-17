@@ -35,17 +35,13 @@ function ContactUsContent({
   contentHeadings,
   changeActiveContent
 }) {
-  const showContent = currentContent => () => {
-    changeActiveContent(currentContent);
-  };
-
   return (
     <React.Fragment>
       <ContactUsContentNav
         title={contentHeadings[0].title}
         current={current}
         contentHeadings={contentHeadings}
-        changeActiveContent={showContent}
+        changeActiveContent={changeActiveContent}
       />
       <Typography variant="h2" className={classes.title}>
         {title}
@@ -65,6 +61,7 @@ function ContactUsContent({
         classes={{ root: classes.section }}
         title={contentHeadings[1].title}
         value={address}
+        component={ContentSection}
       />
       <ContentSection
         id={contentHeadings[2].link}
@@ -72,7 +69,7 @@ function ContactUsContent({
         title={contentHeadings[2].title}
         variant="h3"
       >
-        {socialMedia.map(social => (
+        {Object.keys(socialMedia).map(social => (
           <div>{social}</div>
         ))}
       </ContentSection>

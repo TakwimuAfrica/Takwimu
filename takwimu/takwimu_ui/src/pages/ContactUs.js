@@ -5,7 +5,7 @@ import { withStyles } from '@material-ui/core';
 
 import ContactUsContent from '../components/ContactUsContent';
 import ContentPage from '../components/ContentPage';
-import TableOfContent from '../components/AboutUsContent/TableOfContent';
+import TableOfContent from '../components/ContactUsContent/TableOfContent';
 
 const styles = () => ({
   root: {
@@ -17,12 +17,11 @@ const styles = () => ({
 function ContactUs({
   classes,
   takwimu: {
-    page: { title, key_contacts: keyContacts, social_media: social, address },
-    settings: { socialMedia },
-    activeContent
+    page: { title, key_contacts: keyContacts, address },
+    settings: { socialMedia }
   }
 }) {
-  const [currentSectionIndex, setCurrentSectionIndex] = useState(-1);
+  const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
   const contentHeadings = [
     { title: 'Key contacts', link: 'key-contacts' },
     { title: 'Address', link: 'address' },
@@ -32,14 +31,16 @@ function ContactUs({
   const changeActiveContent = index => {
     setCurrentSectionIndex(index);
     const activeElement = document.getElementById(contentHeadings[index].link);
-    activeElement.scrollIntoView();
+    window.scrollTo(0, activeElement.offsetTop - 100);
   };
 
   useEffect(() => {
     const currentIndex = contentHeadings.findIndex(
-      x => x.link === activeContent
+      x => x.link === window.location.hash.replace('#', '')
     );
-    changeActiveContent(currentIndex);
+    if (currentIndex !== -1) {
+      changeActiveContent(currentIndex);
+    }
   }, []);
 
   return (
@@ -57,7 +58,6 @@ function ContactUs({
         title={title}
         address={address}
         keyContacts={keyContacts}
-        social={social}
         socialMedia={socialMedia}
         current={currentSectionIndex}
         contentHeadings={contentHeadings}
