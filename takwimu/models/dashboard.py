@@ -1100,6 +1100,7 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
 
 
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
+    hurumap_snippet = SnippetChooserBlock(ProfileData)
     hurumap = FeaturedDataWidgetBlock()
 
 
@@ -1115,6 +1116,22 @@ class FeaturedDataIndicatorBlock(blocks.StructBlock):
         representation = super(FeaturedDataIndicatorBlock, self).get_api_representation(value, context=context)
         if representation:
             widget = representation['widget'][0]
+            if widget and widget['type'] == 'hurumap_snippet':
+                snippet = ProfileData.objects.get(id=widget['value'])
+                widget['value'] = {
+                    'title': snippet.chart_title,
+                    'data_country': snippet.country_iso_code,
+                    'data_id': snippet.chart_id,
+                    'chart_type': snippet.chart_type,
+                    'data_stat_type': snippet.data_stat_type,
+                    'chart_height': snippet.chart_height,
+                    'description': snippet.description,
+                }
+
+                # For now lets use snippet summary as indicator summary until
+                # we can figure out how to store indicator summary in
+                # ProfileData
+                representation['summary'] = snippet.summary
             representation['widget'] = widget
 
         return representation
