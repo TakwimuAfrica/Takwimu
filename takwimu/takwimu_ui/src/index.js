@@ -17,6 +17,7 @@ import WhatCanYouDo from './components/WhatYouCanDoWithTakwimu';
 import SearchResults from './components/SearchResults';
 import AnalysisPage from './pages/Analysis';
 import AboutPage from './pages/About';
+import ContactPage from './pages/Contact';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -85,6 +86,21 @@ const renderAboutUsPage = () => {
   }
 };
 
+const renderContactUsPage = () => {
+  const el = document.getElementById('takwimuContactUsPage');
+  if (el) {
+    fetch('/api/v2/pages/?type=takwimu.ContactPage&fields=*&format=json')
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          Object.assign(PROPS.takwimu.page, data.items[0]);
+
+          renderApp(ContactPage, 'takwimuContactUsPage');
+        }
+      });
+  }
+};
+
 const renderSearchResultsPage = () => {
   const el = document.getElementById('takwimuSearchResults');
   if (el) {
@@ -105,6 +121,7 @@ renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
 renderAboutUsPage();
+renderContactUsPage();
 renderDatabyTopicPage();
 renderAnalysisPage();
 renderHomepage();

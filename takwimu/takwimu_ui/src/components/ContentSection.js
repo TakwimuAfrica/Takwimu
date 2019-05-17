@@ -9,6 +9,7 @@ const styles = theme => ({
   root: {
     width: '100%',
     margin: 0,
+    padding: '0 0.75rem',
     [theme.breakpoints.up('md')]: {
       width: '43.734375rem' // .75 of lg
     },
