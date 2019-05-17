@@ -1359,6 +1359,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=BF",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'democratic-republic-of-congo':{
@@ -1472,6 +1478,12 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=CD",
+                    "title": "WorldBank"
+                }
+            },
         }
     },
     'uganda':{
@@ -1578,6 +1590,12 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=UG",
+                    "title": "WorldBank"
+                }
             },
         }
     },
@@ -1690,6 +1708,12 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 },
                 "qualifier": "M: Male\nF: Female"
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ZM",
+                    "title": "WorldBank"
+                }
             },
         }
     }
