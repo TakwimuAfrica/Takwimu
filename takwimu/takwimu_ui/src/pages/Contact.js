@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
 
-import ContactUsContent from '../components/ContactUsContent';
+import ContactContent from '../components/ContactContent';
 import ContentPage from '../components/ContentPage';
-import TableOfContent from '../components/ContactUsContent/TableOfContent';
+import TableOfContent from '../components/ContactContent/TableOfContent';
 
 const styles = () => ({
   root: {
@@ -14,7 +14,7 @@ const styles = () => ({
   }
 });
 
-function ContactUs({
+function Contact({
   classes,
   takwimu: {
     page: {
@@ -60,7 +60,7 @@ function ContactUs({
       }
       classes={{ root: classes.root }}
     >
-      <ContactUsContent
+      <ContactContent
         title={title}
         address={address}
         keyContacts={keyContacts}
@@ -70,12 +70,13 @@ function ContactUs({
         relatedContent={relatedContent}
         changeActiveContent={changeActiveContent}
         settingsSocialMedia={settings.socialMedia}
+        settings={settings}
       />
     </ContentPage>
   );
 }
 
-ContactUs.propTypes = {
+Contact.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
@@ -91,4 +92,4 @@ ContactUs.propTypes = {
   }).isRequired
 };
 
-export default withStyles(styles)(ContactUs);
+export default withStyles(styles)(Contact);

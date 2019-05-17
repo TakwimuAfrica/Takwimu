@@ -42,7 +42,7 @@ const styles = theme => ({
   }
 });
 
-function ContactUsContentNav({
+function ContactContentNav({
   classes,
   title,
   current,
@@ -88,7 +88,7 @@ function ContactUsContentNav({
   );
 }
 
-ContactUsContentNav.propTypes = {
+ContactContentNav.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   current: PropTypes.number.isRequired,
@@ -96,4 +96,4 @@ ContactUsContentNav.propTypes = {
   changeActiveContent: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(ContactUsContentNav);
+export default withStyles(styles)(ContactContentNav);

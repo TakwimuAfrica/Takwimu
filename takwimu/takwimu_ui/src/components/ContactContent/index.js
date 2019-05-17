@@ -3,11 +3,18 @@ import { PropTypes } from 'prop-types';
 
 import { withStyles, Typography, Grid, Link, Icon } from '@material-ui/core';
 
-import ContactUsContentNav from './ContactUsContentNav';
+import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
 import { About as ContactWhereToNext } from '../Next';
 import RelatedContent from '../RelatedContent';
+
+import facebook from '../../assets/images/logo-facebook.svg';
+import github from '../../assets/images/logo-github.svg';
+import instagram from '../../assets/images/group-3.svg';
+import linkedin from '../../assets/images/group-3-copy.svg';
+import medium from '../../assets/images/logo-medium.svg';
+import twitter from '../../assets/images/logo-twitter.svg';
 
 const styles = theme => ({
   root: {
@@ -47,7 +54,16 @@ const styles = theme => ({
   }
 });
 
-function ContactUsContent({
+const SOCIAL_MEDIA = {
+  facebook: { name: 'Facebook', logo: facebook },
+  github: { name: 'GitHub', logo: github },
+  instagram: { name: 'Instagram', logo: instagram },
+  linkedin: { name: 'LinkedIn', logo: linkedin },
+  medium: { name: 'Medium', logo: medium },
+  twitter: { name: 'Twitter', logo: twitter }
+};
+
+function ContactContent({
   classes,
   title,
   address,
@@ -57,11 +73,12 @@ function ContactUsContent({
   contentHeadings,
   changeActiveContent,
   settingsSocialMedia,
-  relatedContent
+  relatedContent,
+  settings: { socialMedia: socialMediaSettings }
 }) {
   return (
     <React.Fragment>
-      <ContactUsContentNav
+      <ContactContentNav
         title={contentHeadings[0].title}
         current={current}
         contentHeadings={contentHeadings}
@@ -100,9 +117,17 @@ function ContactUsContent({
       >
         <Grid container direction="row">
           {socialMedia.map(social => (
-            <Link className={classes.social} href={social.link}>
+            <Link
+              className={classes.social}
+              href={socialMediaSettings[social.name]}
+            >
+              <img
+                src={SOCIAL_MEDIA[social.name].logo}
+                alt=""
+                className={classes.icon}
+              />
               <Icon className={social.icon} />
-              {social.name}
+              {SOCIAL_MEDIA[social.name].name}
             </Link>
           ))}
         </Grid>
@@ -116,7 +141,7 @@ function ContactUsContent({
   );
 }
 
-ContactUsContent.propTypes = {
+ContactContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
   address: PropTypes.string.isRequired,
@@ -126,7 +151,8 @@ ContactUsContent.propTypes = {
   relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
   contentHeadings: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
-  changeActiveContent: PropTypes.func.isRequired
+  changeActiveContent: PropTypes.func.isRequired,
+  settings: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(ContactUsContent);
+export default withStyles(styles)(ContactContent);

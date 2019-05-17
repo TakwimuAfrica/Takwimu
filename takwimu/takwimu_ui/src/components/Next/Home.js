@@ -47,7 +47,7 @@ function HomeWhereToNext({ classes }) {
           Looking for other <br /> services?
         </Card>
 
-        <Card href="/contact-us" classes={{ root: classes.cardMargin }}>
+        <Card href="/contact" classes={{ root: classes.cardMargin }}>
           Talk to us
         </Card>
       </Grid>
