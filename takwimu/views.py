@@ -277,7 +277,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         ## get profileData aka summaries from wagtail
         summary_data = ProfileData.objects.filter(country_iso_code=self.geo.geo_code).values('id', 'chart_id', 'summary')
 
-        page_context = {"summaries": list(summary_data)}
+        page_context = {"profile_data_summaries": list(summary_data)}
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get("profile_builder", None)

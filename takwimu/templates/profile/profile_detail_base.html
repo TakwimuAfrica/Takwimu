@@ -140,7 +140,7 @@
       takwimu.page.id = 'topic';
       takwimu.url = '{{ HURUMAP.url }}';
       takwimu.countries = {{ countries|jsonify|safe }};
-      takwimu.summaries = {{ summaries|jsonify|safe }}
+      takwimu.profileDataSummaries = {{ profile_data_summaries|jsonify|safe }}
           takwimu.settings = {
               navigation: {
                   country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
@@ -225,10 +225,12 @@
 
 
       $(function () {
-          window.takwimu.summaries.forEach(function (obj) {
+          window.takwimu.profileDataSummaries.forEach(function (obj) {
               var data_id = obj.id.split('_')[1];
               var chart_container = $("div").find(`[data-id='${data_id}']`);
-              chart_container.find(".chart").append($("<div>" + obj.summary + "</div>"));
+              chart_container
+                  .find(".chart-action-links-container")
+                  .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
           })
       });
 
