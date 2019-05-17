@@ -40,7 +40,8 @@ class Command(BaseCommand):
                 topic_summary = topic['value'].get('summary', '')
                 topic_body = topic['value'].get('body', '')
                 for k in topic_body:
-                    if k['type'] == 'text':
+                    topic_body_type = k.get('type')
+                    if topic_body_type and topic_body_type == 'text':
                         text = k.get('value', '')
                         body = '\n'.join([topic_summary, text])
                         metadata = ''
@@ -53,8 +54,7 @@ class Command(BaseCommand):
                             parent_page_type=parent_page_type,
                             result_type='Analysis', summary=topic_summary)
                         self.stdout.write(f"{search_backend.es_index}: Indexing topic {topic_id} -> {outcome}")
-
-                    elif k['type'] == 'indicator':
+                    elif topic_body_type and topic_body_type == 'indicator':
                         indicator = k.get('value', [])
                         indicator_summary = k.get('summary', '')
                         for widget in indicator['widget']:
@@ -70,6 +70,25 @@ class Command(BaseCommand):
                                     parent_page_type=parent_page_type,
                                     result_type='Data', summary=indicator_summary)
                                 self.stdout.write(f"{search_backend.es_index}: Indexing widget {data['id']} -> {outcome}")
+                    # Carousel topic contents don't have type, unfortunately
+                    else:
+                        entity = k.get('value', {})
+                        body = '\n'.join([
+                            topic_summary,
+                            entity.get('title', ''),
+                            entity.get('name', ''),
+                            entity.get('description', '')
+                        ])
+                        metadata = ''
+
+                        _, outcome = search_backend.add_to_index(
+                            content_id=topic_id, content_type='topic',
+                            country=country, category=category, title=title,
+                            body=body, metadata=metadata,
+                            parent_page_id=parent_page_id,
+                            parent_page_type=parent_page_type,
+                            result_type='Analysis', summary=topic_summary)
+                        self.stdout.write(f"{search_backend.es_index}: Indexing topic {topic_id} -> {outcome}")
 
     def index_hurumap(self, search_backend):
         options = webdriver.ChromeOptions()
@@ -143,8 +162,8 @@ class Command(BaseCommand):
                             'chart_title': data_chart_title,
                             'chart_type': chart_id_parts[1],
                             'data_stat_type': data_stat_type,
-                            'chart_height': chart_height
-                    });
+                            'chart_height': chart_height,
+                    })
                     self.stdout.write(
                         f"{search_backend.es_index}: Created HURUmap Data {code}|{data_id} -> {upsert_outcome}")
 

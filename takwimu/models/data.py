@@ -6,6 +6,7 @@ from wagtail.search import index
 from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core.fields import RichTextField
 from wagtail.snippets.models import register_snippet
+from wagtail.core.fields import RichTextField
 
 from takwimu.utils.helpers import COUNTRIES
 

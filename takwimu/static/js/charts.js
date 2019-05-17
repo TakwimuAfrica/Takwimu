@@ -1022,6 +1022,7 @@ function Chart(options) {
 
     chart.actionLinks = chart.chartActions
       .insert("div", ":first-child")
+        .classed("chart-action-links-container", true)
       .style("diplay", "flex")
       .style("justify-content", "center")
       .style("padding", "0 1rem")
