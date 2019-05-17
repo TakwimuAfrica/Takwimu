@@ -1,0 +1,65 @@
+{% extends 'data/_base_data.html' %}
+{% load staticfiles sass_tags jsonify geotags wagtailcore_tags %}
+
+{% block header %}
+  {% include 'takwimu/_includes/navbar/_index.html' %}
+
+  {% block header_content %}
+      {{ block.super }}
+  {% endblock %}
+  <style>
+    html, body {
+      font-size: 16px;
+    }
+    body {
+      padding-top: 0;
+    }
+    #page-footer {
+        background: none;
+        border: none;
+        padding: 0;
+    }
+    #page-footer .wrapper {
+        width: auto;
+        margin: 0;
+    }
+  </style>
+{% endblock header %}
+
+{% block footer_content %}
+  <div id="takwimuFooter" />
+{% endblock footer_content %}
+
+{% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script>
+    // I. Takwimu
+    var takwimu = window.takwimu || {};
+    takwimu.page = takwimu.page || {};
+    takwimu.page.id = 'chart-data';
+    takwimu.url = '{{ HURUMAP.url }}';
+    takwimu.countries = {{ countries|jsonify|safe }};
+    takwimu.settings = {
+      navigation: {
+        country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
+        data_by_topic: '{{ settings.takwimu.NavigationSetting.data_by_topic|richtext }}'
+      },
+      support: {
+        hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+        support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+      },
+      socialMedia: {
+        facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+        twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+        medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+        linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+      }
+    };
+    </script>
+
+  <!-- React UI -->
+  <script src="{% static asset_manifest.runtime %}"></script>
+  <script src="{% static asset_manifest.vendor %}"></script>
+  <script src="{% static asset_manifest.main %}"></script>
+{% endblock %}

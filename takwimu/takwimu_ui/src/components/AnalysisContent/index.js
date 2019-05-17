@@ -13,6 +13,7 @@ import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+import CarouselTopic from './topics/CarouselTopic';
 
 const styles = theme => ({
   root: {
@@ -90,6 +91,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         <Typography className={classes.title} variant="h2">
           {content.body[topicIndex].value.title}
         </Typography>
+
         <ContentNavigation
           labelText={profileNavigation.title}
           labelTextStrong={content.title}
@@ -97,26 +99,36 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           content={content}
           showContent={showContent}
         />
+
         <Actions page={takwimu.page} />
 
-        <Grid container direction="row">
-          {content.body[topicIndex].value.body.map(c => (
-            <Fragment>
-              {c.type === 'text' && (
-                <Typography
-                  key={c.id}
-                  className={classes.body}
-                  dangerouslySetInnerHTML={{
-                    __html: c.value
-                  }}
-                />
-              )}
-              {c.type === 'indicator' && (
-                <DataContainer key={c.id} id={c.id} indicator={c} />
-              )}
-            </Fragment>
-          ))}
-        </Grid>
+        {content.body[topicIndex].type === 'carousel_topic' ? (
+          <CarouselTopic data={content.body[topicIndex].value.body} />
+        ) : (
+          <Grid container direction="row">
+            {content.body[topicIndex].value.body.map(c => (
+              <Fragment>
+                {c.type === 'text' && (
+                  <Typography
+                    key={c.id}
+                    className={classes.body}
+                    dangerouslySetInnerHTML={{
+                      __html: c.value
+                    }}
+                  />
+                )}
+                {c.type === 'indicator' && (
+                  <DataContainer
+                    key={c.id}
+                    id={c.id}
+                    classes={{ root: classes.dataContainer }}
+                    indicator={c}
+                  />
+                )}
+              </Fragment>
+            ))}
+          </Grid>
+        )}
 
         <Actions page={takwimu.page} hideLastUpdated />
         <ContentNavigation

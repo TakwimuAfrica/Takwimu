@@ -9,18 +9,20 @@ from takwimu.views import HomePageView, LegalView, \
     IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
     FlourishView, AboutPageRedirectView
 from wazimap.views import HomepageView as ProfileView
+from census.views import DataView
 from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
 from .api import api_router
 
-GEOGRAPHY_LEVELS = '|'.join(settings.WAZIMAP['levels'].keys())
+STANDARD_CACHE_TIME = settings.HURUMAP['cache_secs']
+GEOGRAPHY_LEVELS = '|'.join(settings.HURUMAP['levels'].keys())
 PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-]+))?'.format(
     GEOGRAPHY_LEVELS)
 
 
 takwimu_urlpatterns = [
-    url(r'^$', cache_page(60 * 60)(HomePageView.as_view()), name='home'),
+    url(r'^$', cache_page(STANDARD_CACHE_TIME)(HomePageView.as_view()), name='home'),
     url(r'^faqs$', AboutPageRedirectView.as_view(), name='faqs'),
     url(r'^services$', AboutPageRedirectView.as_view(), name='services'),
     url(r'^methodology$', AboutPageRedirectView.as_view(), name='methodology'),
@@ -39,6 +41,10 @@ takwimu_urlpatterns = [
         FlourishView.as_view(), name="flourish"),
     url(r'^flourish/(?P<document_id>\d+)/(?P<filename>.+)/$',
         FlourishView.as_view(), name="flourish_filename"),
+    url(
+        r'^data/(?P<format>map|table|distribution)/$',
+        cache_page(STANDARD_CACHE_TIME)(DataView.as_view()),
+        name='data_detail'),
 ]
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \

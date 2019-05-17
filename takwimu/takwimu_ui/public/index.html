@@ -283,6 +283,8 @@
       let page = 'home';
       if (pathname.startsWith('/about')) {
         page = 'about';
+      } else if (pathname.startsWith('/contact')) {
+        page = 'contact';
       } else if (pathname.startsWith('/profiles/country-')) {
         page = 'topic';
       } else if (pathname.startsWith('/profiles/')) {
@@ -303,6 +305,9 @@
       switch (page) {
         case 'about':
           ids = ['takwimuAboutUsPage'];
+          break;
+        case 'contact':
+          ids = ['takwimuContactUsPage'];
           break;
         case 'topic':
           ids = ['takwimuProfileDetail', 'takwimuProfile'];
