@@ -1340,6 +1340,12 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'democratic-republic-of-congo':{
@@ -1434,6 +1440,12 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'uganda':{
@@ -1522,6 +1534,12 @@ METADATA = {
                     "title": "WorldBank, 2017"
                 }
             },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=UG",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'zambia':{
@@ -1612,6 +1630,12 @@ METADATA = {
             "mobile_phone_subscriptions": {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=ZM",
+                    "title": "WorldBank, 2017"
+                }
+            },
+            "gini_index": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SI.POV.GINI?locations=ZM",
                     "title": "WorldBank, 2017"
                 }
             }
