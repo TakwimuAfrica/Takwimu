@@ -52,7 +52,7 @@ class Command(BaseCommand):
                             parent_page_id=parent_page_id,
                             parent_page_type=parent_page_type,
                             result_type='Analysis', summary=topic_summary)
-                        self.stdout.write(f"{topic_search.es_index}: Indexing topic {topic_id} -> {outcome}")
+                        self.stdout.write(f"{search_backend.es_index}: Indexing topic {topic_id} -> {outcome}")
 
                     elif k['type'] == 'indicator':
                         indicator = k.get('value', [])
@@ -69,7 +69,7 @@ class Command(BaseCommand):
                                     parent_page_id=parent_page_id,
                                     parent_page_type=parent_page_type,
                                     result_type='Data', summary=indicator_summary)
-                                self.stdout.write(f"{topic_search.es_index}: Indexing widget {data['id']} -> {outcome}")
+                                self.stdout.write(f"{search_backend.es_index}: Indexing widget {data['id']} -> {outcome}")
 
     def index_hurumap(self, search_backend):
         options = webdriver.ChromeOptions()
