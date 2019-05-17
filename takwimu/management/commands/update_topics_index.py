@@ -121,7 +121,7 @@ class Command(BaseCommand):
                     content_id = f"{country}-{id}"
                     link = f"/{url}#{id}"
 
-                    _, outcome = search_backend.add_to_index(content_id=content_id,
+                    _, index_outcome = search_backend.add_to_index(content_id=content_id,
                                                              content_type='HURUmap',
                                                              country=country,
                                                              category='',
@@ -133,14 +133,14 @@ class Command(BaseCommand):
                                                              result_type='Data',
                                                              link=link)
                     self.stdout.write(
-                        f"{search_backend.es_index}: Indexed HURUmap Chart {code}|{data_id} -> {outcome}")
+                        f"{search_backend.es_index}: Indexed HURUmap Chart {code}|{data_id} -> {index_outcome}")
 
                     # id is unique per country/geography level
                     profile_data_id = f"{code}_{data_id}"
                     chart_id_parts = id.split('-')
                     data_stat_type = viz['data-stat-type']
                     chart_height = viz.get('chart_height')
-                    _, did_create = ProfileData.objects.update_or_create(id=profile_data_id,
+                    _, upsert_outcome = ProfileData.objects.update_or_create(id=profile_data_id,
                         defaults={
                             'country_iso_code': code,
                             'chart_id': f"{chart_id_parts[2]}-{chart_id_parts[3]}",
@@ -150,6 +150,6 @@ class Command(BaseCommand):
                             'chart_height': chart_height
                     });
                     self.stdout.write(
-                        f"{search_backend.es_index}: Created HURUmap Data {code}|{data_id} -> {did_create}")
+                        f"{search_backend.es_index}: Created HURUmap Data {code}|{data_id} -> {upsert_outcome}")
 
         browser.quit()
