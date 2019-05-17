@@ -17,7 +17,8 @@ const styles = theme => ({
     maxWidth: '933px'
   },
   title: {
-    marginBottom: '1.375rem'
+    marginBottom: '1.375rem',
+    padding: '0 0.75rem'
   },
   body: {
     padding: '0 19px'

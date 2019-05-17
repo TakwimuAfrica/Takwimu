@@ -1,7 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { withStyles, Typography, Grid, Link, Icon } from '@material-ui/core';
 
 import ContactUsContentNav from './ContactUsContentNav';
 import ContentSection from '../ContentSection';
@@ -9,19 +9,36 @@ import RichTextSection from '../RichTextSection';
 
 const styles = theme => ({
   root: {
-    maxWidth: '933px'
+    maxWidth: '58.313rem'
   },
   title: {
-    marginBottom: '1.375rem'
+    marginBottom: '1.375rem',
+    padding: '0 0.75rem'
   },
   body: {
-    padding: '0 19px'
+    padding: '0 1.188rem'
   },
   section: {
     marginTop: '2.5rem',
     paddingTop: '1rem',
     paddingBottom: '1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
+  },
+  social: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    '&:not(:last-child)': {
+      marginRight: '3.125rem'
+    },
+    '& > :first-child': {
+      marginRight: '0.625rem'
+    }
+  },
+  keyContacts: {
+    '& > :not(:last-child)': {
+      marginBottom: '2.5rem'
+    }
   }
 });
 
@@ -52,9 +69,14 @@ function ContactUsContent({
         title={contentHeadings[0].title}
         variant="h3"
       >
-        {keyContacts.map(keyContact => (
-          <Typography>{keyContact.title}</Typography>
-        ))}
+        <div className={classes.keyContacts}>
+          {keyContacts.map(keyContact => (
+            <Grid container direction="column">
+              <Typography>{keyContact.title}</Typography>
+              <Link href={keyContact.link}>{keyContact.contact_details}</Link>
+            </Grid>
+          ))}
+        </div>
       </ContentSection>
       <RichTextSection
         id={contentHeadings[1].link}
@@ -69,9 +91,14 @@ function ContactUsContent({
         title={contentHeadings[2].title}
         variant="h3"
       >
-        {Object.keys(socialMedia).map(social => (
-          <div>{social}</div>
-        ))}
+        <Grid container direction="row">
+          {socialMedia.map(social => (
+            <Link className={classes.social} href={social.link}>
+              <Icon className={social.icon} />
+              {social.name}
+            </Link>
+          ))}
+        </Grid>
       </ContentSection>
     </React.Fragment>
   );

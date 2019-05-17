@@ -17,8 +17,12 @@ const styles = () => ({
 function ContactUs({
   classes,
   takwimu: {
-    page: { title, key_contacts: keyContacts, address },
-    settings: { socialMedia }
+    page: {
+      title,
+      key_contacts: keyContacts,
+      social_media: socialMedia,
+      address
+    }
   }
 }) {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
@@ -31,7 +35,7 @@ function ContactUs({
   const changeActiveContent = index => {
     setCurrentSectionIndex(index);
     const activeElement = document.getElementById(contentHeadings[index].link);
-    window.scrollTo(0, activeElement.offsetTop - 100);
+    window.scrollTo(0, activeElement.offsetTop - 90);
   };
 
   useEffect(() => {
