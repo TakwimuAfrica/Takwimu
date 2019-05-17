@@ -130,6 +130,7 @@ class TopicPage(Page):
 
 
 class EntityStructBlock(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
     description = blocks.RichTextBlock(features=['link'], required=False)
@@ -458,6 +459,31 @@ class TopicBlock(blocks.StructBlock):
         icon = 'form'
 
 
+class CarouselTopic(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    icon = IconChoiceBlock(required=False)
+    summary = blocks.RichTextBlock(required=False)
+    body = blocks.ListBlock(EntityStructBlock())
+
+    def js_initializer(self):
+        parent_initializer = super(CarouselTopic, self).js_initializer()
+        return "Topic(%s)" % parent_initializer
+
+    @property
+    def media(self):
+        # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
+        return super(CarouselTopic, self).media + forms.Media(
+            js=['fontawesome/js/django_fontawesome.js',
+                'fontawesome/select2/select2.min.js', 'js/dashboard.js'],
+            css={'all': ['fontawesome/css/fontawesome-all.min.css',
+                         'fontawesome/select2/select2.css',
+                         'fontawesome/select2/select2-bootstrap.css']}
+        )
+
+    class Meta:
+        icon = 'form'
+
+
 TWITTER_CARD = (
     ('summary', 'Summary'),
     ('summary_large_image', 'Summary with image'),
@@ -549,7 +575,8 @@ class ProfileSectionPage(ModelMeta, Page):
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
     body = StreamField([
-        ('topic', TopicBlock())
+        ('topic', TopicBlock()),
+        ('carousel_topic', CarouselTopic())
     ], blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
@@ -697,7 +724,8 @@ class ProfilePage(ModelMeta, Page):
         related_name='+'
     )
     body = StreamField([
-        ('topic', TopicBlock())
+        ('topic', TopicBlock()),
+        ('carousel_topic', CarouselTopic())
     ], blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
