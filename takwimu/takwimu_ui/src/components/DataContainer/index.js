@@ -89,8 +89,7 @@ function DataContainer({
             {data.value.title}
           </Typography>
 
-          {(data.type === 'hurumap' ||
-            data.type === 'featured_data_widget') && (
+          {(data.type === 'hurumap' || data.type === 'hurumap_snippet') && (
             <HurumapDataContainer data={data.value} />
           )}
 
