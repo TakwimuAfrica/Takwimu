@@ -8,10 +8,9 @@ import DataActions from './DataActions';
 import IFrame from './IFrame';
 
 function DataContainer({ data, theme }) {
+  const id = `cr-embed-country-${data.data_country}-${data.data_id}`;
   const handleDownload = () => {
-    const iframe = document.getElementById(
-      `cr-embed-country-${data.data_country}-${data.data_id}`
-    );
+    const iframe = document.getElementById(id);
     iframe.contentWindow.domtoimage
       .toPng(iframe.contentDocument.getElementById('census-chart'), {
         bgcolor: theme.palette.data.light
@@ -41,7 +40,7 @@ function DataContainer({ data, theme }) {
 
   return (
     <Fragment>
-      <IFrame featuredData={data} />
+      <IFrame id={id} data={data} />
 
       <DataActions onDownload={handleDownload} embedCode={embedCode} />
     </Fragment>
