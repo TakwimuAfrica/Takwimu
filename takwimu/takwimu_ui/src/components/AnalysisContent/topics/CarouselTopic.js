@@ -145,6 +145,19 @@ const styles = theme => ({
   profileNameSelected: {
     color: 'black',
     textDecoration: 'none'
+  },
+  title: {
+    fontFamily: theme.typography.fontText,
+    fontSize: '1.625rem',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: 'normal',
+    letterSpacing: 'normal',
+    marginBottom: '1.125rem'
+  },
+  body: {
+    padding: '3.125rem'
   }
 });
 
@@ -234,12 +247,16 @@ function Topic({ classes, data }) {
           />
         </div>
       </div>
-      <Typography
-        className={classes.body}
-        dangerouslySetInnerHTML={{
-          __html: data[selectedIndex].description
-        }}
-      />
+      <div className={classes.body}>
+        <Typography className={classes.title}>
+          {data[selectedIndex].name}, {data[selectedIndex].title}
+        </Typography>
+        <Typography
+          dangerouslySetInnerHTML={{
+            __html: data[selectedIndex].description
+          }}
+        />
+      </div>
     </div>
   );
 }
