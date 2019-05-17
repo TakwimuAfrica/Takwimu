@@ -221,17 +221,17 @@
       const country = takwimu.countries.find(c => c.iso_code === countryCode);
       takwimu.country = country
 
-      $('document').ready(makeCharts());
-
-
       $(function () {
+          makeCharts();
           window.takwimu.profileDataSummaries.forEach(function (obj) {
-              var data_id = obj.id.split('_')[1];
-              var chart_container = $("div").find(`[data-id='${data_id}']`);
-              chart_container
-                  .find(".chart-action-links-container")
-                  .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
-          })
+              if (obj.summary && obj.summary.length > 0 && obj.summary !== '<p>/</p>') {
+                  var dataId = obj.id.split('_')[1];
+                  var chartContainer = $("div").find(`[data-id='${dataId}']`);
+                  chartContainer
+                      .find(".chart-action-links-container")
+                      .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
+              }
+          });
       });
 
 
