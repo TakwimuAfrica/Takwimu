@@ -275,9 +275,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         data = json.load(json_data)
 
         ## get profileData aka summaries from wagtail
-        summary_data = ProfileData.objects.filter(country_iso_code=self.geo.geo_code).values('chart_id', 'summary')
-        # chart_summaries = SafeString(
-        #     json.dumps(list(summary_data), cls=DjangoJSONEncoder))
+        summary_data = ProfileData.objects.filter(country_iso_code=self.geo.geo_code).values('id', 'chart_id', 'summary')
 
         page_context = {"summaries": list(summary_data)}
 

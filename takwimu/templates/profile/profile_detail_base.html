@@ -225,9 +225,8 @@
 
 
       $(function () {
-          console.log("Adding summaries to charts");
           window.takwimu.summaries.forEach(function (obj) {
-              var data_id = obj.chart_id.split('_')[1];
+              var data_id = obj.id.split('_')[1];
               var chart_container = $("div").find(`[data-id='${data_id}']`);
               chart_container.find(".chart").append($("<div>" + obj.summary + "</div>"));
           })

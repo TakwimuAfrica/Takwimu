@@ -144,7 +144,7 @@ class Command(BaseCommand):
                             'chart_type': chart_id_parts[1],
                             'data_stat_type': data_stat_type,
                             'chart_height': chart_height
-                    });
+                    })
                     self.stdout.write(
                         f"{search_backend.es_index}: Created HURUmap Data {code}|{data_id} -> {upsert_outcome}")
 
