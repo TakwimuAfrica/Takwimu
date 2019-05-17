@@ -9,6 +9,7 @@ from wagtail.admin.edit_handlers import FieldPanel
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField
 from wagtail.snippets.models import register_snippet
+from wagtail.core.fields import RichTextField
 
 from takwimu.utils.helpers import COUNTRIES
 
@@ -24,7 +25,7 @@ class ProfileData(models.Model):
         max_length=3, choices=country_choices, verbose_name='Country')
     chart_id = models.CharField(max_length=1024, unique=True, blank=False, null=False)
     chart_title = models.CharField(max_length=1024)
-    summary = blocks.RichTextBlock(required=False, default='')
+    summary = RichTextField(default='')
 
     panels = [
         FieldPanel('chart_title'),

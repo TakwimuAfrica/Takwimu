@@ -28,6 +28,7 @@ from wazimap.profiles import enhance_api_data
 from wazimap.views import GeographyDetailView
 
 from takwimu.context_processors import takwimu_countries, takwimu_stories, takwimu_topics
+from takwimu.models import ProfileData
 from takwimu.models.dashboard import ExplainerSteps, FAQ, FAQSetting, IndexPage, \
     ProfileSectionPage, ProfilePage, Testimonial, search_analysis_and_data
 from takwimu.models.utils.search import get_page_details
@@ -244,7 +245,12 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         json_data = open('takwimu/fixtures/sdg.json')
         data = json.load(json_data)
 
-        page_context = {}
+        ## get profileData aka summaries from wagtail
+        summary_data = ProfileData.objects.filter(country_iso_code=self.geo.geo_code).values('chart_id', 'summary')
+        # chart_summaries = SafeString(
+        #     json.dumps(list(summary_data), cls=DjangoJSONEncoder))
+
+        page_context = {"summaries": list(summary_data)}
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get('profile_builder', None)
