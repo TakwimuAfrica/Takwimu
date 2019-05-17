@@ -901,6 +901,12 @@ class AboutPage(ModelMeta, Page):
         StreamFieldPanel('methodology'),
         StreamFieldPanel('related_content'),
     ]
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
+    ]
 
     def get_promotion_image(self):
         if self.promotion_image:
@@ -932,14 +938,46 @@ class AboutPage(ModelMeta, Page):
         return get_takwimu_faqs(faq_settings)
 
 
-class ContactUsPage(Page):
+class ContactPage(ModelMeta, Page):
     address = RichTextField()
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
-    content_panels = [
-        FieldPanel('title'),
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
+
+    # Editor panels configuration
+
+    content_panels = Page.content_panels + [
         FieldPanel('address'),
         InlinePanel('key_contacts', label='Key Contacts'),
-        InlinePanel('social_media', label='Social Media')
+        InlinePanel(
+            'social_media',
+            label='Social Media',
+            help_text='Social Media accounts to show on Contact page'),
+        StreamFieldPanel('related_content'),
+    ]
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
     ]
 
     api_fields = [
@@ -947,7 +985,45 @@ class ContactUsPage(Page):
         APIField('address'),
         APIField('key_contacts'),
         APIField('social_media'),
+        APIField('related_content'),
     ]
+
+
+SOCIAL_MEDIA = (
+    ('facebook', 'Facebook'),
+    ('github', 'GitHub'),
+    ('instagram', 'Instagram'),
+    ('linkedin', 'LinkedIn'),
+    ('medium', 'Medium'),
+    ('twitter', 'Twitter'),
+    ('youtube', 'YouTube'),
+)
+
+
+class SocialMedia(Orderable):
+    name = models.CharField(max_length=255, choices=SOCIAL_MEDIA)
+    page = ParentalKey(ContactPage, related_name='social_media')
+
+    api_fields = [
+        APIField('name'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+class KeyContacts(Orderable):
+    title = models.TextField()
+    contact_details = models.TextField()
+    link = models.TextField()
+    page = ParentalKey(ContactPage, related_name='key_contacts')
+
+    api_fields = [
+        APIField('title'),
+        APIField('contact_details'),
+        APIField('link'),
+    ]
+
 
 def search_analysis_and_data(query, request):
     hits = search(query)
@@ -985,24 +1061,6 @@ class SearchPage(Page):
             'results': results
         }
         return context
-
-
-
-class SocialMedia(Orderable):
-    name = models.TextField()
-    url = models.URLField()
-    icon = IconField()
-    page = ParentalKey(ContactUsPage, related_name='social_media')
-
-    def __str__(self):
-        return self.name
-
-
-class KeyContacts(Orderable):
-    title = models.TextField()
-    contact_details = models.TextField()
-    link = models.TextField()
-    page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
 class Testimonial(models.Model):

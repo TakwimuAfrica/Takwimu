@@ -1,0 +1,20 @@
+{% extends 'takwimu/_layouts/page.html' %}
+{% load wagtailcore_tags static jsonify %}
+
+{% block head_title %} {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
+
+{% block body_id %}about{% endblock %}
+
+{% block content %}
+  <div id="takwimuContactUsPage" />
+{% endblock %}
+
+{% block body_javascript_extra %}
+  {{ block.super }}
+
+  <script type='text/javascript'>
+    var takwimu = window.takwimu || {};
+    takwimu.page = takwimu.page || {};
+    takwimu.page.name = 'contact';
+   </script>
+{% endblock body_javascript_extra %}
