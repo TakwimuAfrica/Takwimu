@@ -1,65 +1,20 @@
 {% extends 'takwimu/_layouts/page.html' %}
+{% load wagtailcore_tags static jsonify %}
+
+{% block head_title %} {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
+
+{% block body_id %}about{% endblock %}
 
 {% block content %}
-
-{% load datastructuretags %}
-
-<div class="bg-light py-5">
-  <div class="container">
-      <h1 class="text-center display-4">Contact Us</h1>
-      <p class="text-center">We'd love to hear from you. You can reach us at:</p>
-      <div class="row mt-5">
-        <div class="col">
-        <h3>Key contacts</h3>
-          {% for contact in page.key_contacts.all %}
-          <p>{{ contact.title }}<br/>
-          <a  href="{{ contact.link }}">{{ contact.contact_details }}</a></p>
-          {% endfor %}
-
-        </div>
-        <div class="col">
-          <h3>Address</h3>
-          {{ settings.takwimu.SupportSetting.address | safe }}
-        </div>
-        <div class="col">
-          <h3>Social</h3>
-          <ul class="list-unstyled">
-          {% to_list 'twitter' 'medium' 'facebook' 'github' as social_medias %}
-          {% for social_media in social_medias %}
-            {% if settings.takwimu.SocialMediaSetting|object_value:social_media %}
-              <li>
-                <a href="{{ settings.takwimu.SocialMediaSetting|object_value:social_media }}" target="_blank" rel="noopener">
-                  <i class="fab fa-{{ social_media }} fa-fw mr-2"></i> <span class="text-capitalize">{{ social_media }}</span> 
-                </a>
-              </li>
-            {% endif %}
-          {% endfor %}
-          </ul>
-        </div>
-      </div>
-    </div>
-</div>
-
-<div class="container py-5 text-center">
-  <a class="btn btn-outline-primary btn-lg" href="mailto:{{ settings.takwimu.SupportSetting.support }}" target="_blank" rel="noopener" >
-    Get in touch with our support team. 👋
-  </a>
-</div>
-
-{% include 'takwimu/_includes/sections/support-services/button.html' %}
-
-{% include 'takwimu/_includes/partners.html' %}
-
-{% include 'takwimu/_includes/sections/updates.html' %}
-
-{% endblock content %}
+  <div id="takwimuContactUsPage" />
+{% endblock %}
 
 {% block body_javascript_extra %}
   {{ block.super }}
 
-  <script>
+  <script type='text/javascript'>
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
-    takwimu.page.id = 'contact';
-  </script>
+    takwimu.page.name = 'contact';
+   </script>
 {% endblock body_javascript_extra %}
