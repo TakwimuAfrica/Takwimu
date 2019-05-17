@@ -1365,6 +1365,12 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=BF",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'democratic-republic-of-congo':{
@@ -1484,6 +1490,12 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=CD",
+                    "title": "WorldBank, 2017"
+                }
+            }
         }
     },
     'uganda':{
@@ -1597,6 +1609,12 @@ METADATA = {
                     "title": "WorldBank"
                 }
             },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=UG",
+                    "title": "WorldBank, 2016"
+                }
+            }
         }
     },
     'zambia':{
@@ -1713,6 +1731,12 @@ METADATA = {
                 "source": {
                     "link": "https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ZM",
                     "title": "WorldBank"
+                }
+            },
+            "incidence_of_malaria_per_1000_pop_at_risk": {
+                "source": {
+                    "link": "https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=ZM",
+                    "title": "WorldBank, 2016"
                 }
             },
         }
