@@ -3,7 +3,6 @@ import logging
 
 from django import forms
 from django.db import models
-from django.utils.html import format_html
 from django.utils.text import slugify
 from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
@@ -15,11 +14,11 @@ from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
 from wagtail.api import APIField
-from wagtail.contrib.settings.context_processors import settings
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.contrib.settings.context_processors import settings as wagtail_settings
@@ -27,10 +26,12 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.blocks import SnippetChooserBlock
 from wazimap.models import Geography
 
+from takwimu.models.data import ProfileData
 from takwimu.search import search
-from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
+from takwimu.utils.helpers import (COUNTRIES,
                                    get_takwimu_stories, get_takwimu_faqs,
                                    get_takwimu_services, get_takwimu_profile_view_country_content,
                                    get_takwimu_profile_navigation, get_takwimu_profile_read_next)
@@ -297,6 +298,22 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
+    flourish = blocks.StructBlock(
+        [
+            ('label', blocks.CharBlock(required=False,
+                                       help_text="This widget's tab label on the indicator")),
+            ('title', blocks.CharBlock(required=False)),
+            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
+            ('html', DocumentChooserBlock(required=True)),
+            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
+                                       label='SDG Goal')),
+            ('source', blocks.RichTextBlock(
+                features=['link'], required=False)),
+        ],
+        icon='code',
+        template='takwimu/_includes/dataview/code.html'
+    )
+
     hurumap = blocks.StructBlock(
         [
             ('label', blocks.CharBlock(required=False,
@@ -369,6 +386,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/entities.html'
     )
 
+    hurumap_snippet = SnippetChooserBlock(ProfileData)
+
     class Meta:
         icon = 'form'
 
@@ -394,6 +413,22 @@ class IndicatorBlock(blocks.StructBlock):
         representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
         if representation:
             widget = representation['widget'][0]
+            if widget and widget['type'] == 'hurumap_snippet':
+                snippet = ProfileData.objects.get(id=widget['value'])
+                widget['value'] = {
+                    'title': snippet.chart_title,
+                    'data_country': snippet.country_iso_code,
+                    'data_id': snippet.chart_id,
+                    'chart_type': snippet.chart_type,
+                    'data_stat_type': snippet.data_stat_type,
+                    'chart_height': snippet.chart_height,
+                    'description': snippet.description,
+                }
+
+                # For now lets use snippet summary as indicator summary until
+                # we can figure out how to store indicator summary in
+                # ProfileData
+                representation['summary'] = snippet.summary
             representation['widget'] = widget
 
         return representation
@@ -1082,6 +1117,7 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
 
 
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
+    hurumap_snippet = SnippetChooserBlock(ProfileData)
     hurumap = FeaturedDataWidgetBlock()
 
 
@@ -1097,6 +1133,17 @@ class FeaturedDataIndicatorBlock(blocks.StructBlock):
         representation = super(FeaturedDataIndicatorBlock, self).get_api_representation(value, context=context)
         if representation:
             widget = representation['widget'][0]
+            if widget and widget['type'] == 'hurumap_snippet':
+                snippet = ProfileData.objects.get(id=widget['value'])
+                widget['value'] = {
+                    'title': snippet.chart_title,
+                    'data_country': snippet.country_iso_code,
+                    'data_id': snippet.chart_id,
+                    'chart_type': snippet.chart_type,
+                    'data_stat_type': snippet.data_stat_type,
+                    'chart_height': snippet.chart_height,
+                    'description': snippet.description,
+                }
             representation['widget'] = widget
 
         return representation

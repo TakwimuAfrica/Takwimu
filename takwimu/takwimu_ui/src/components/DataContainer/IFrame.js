@@ -39,7 +39,7 @@ class IFrame extends React.Component {
     super(props);
 
     const { featuredData } = props;
-    const id = `cr-embed-country-${featuredData.country}-${
+    const id = `cr-embed-country-${featuredData.data_country}-${
       featuredData.data_id
     }`;
     this.state = { id };
@@ -89,9 +89,9 @@ class IFrame extends React.Component {
             featuredData.data_id
           }&dataYear=2011&chartType=${
             featuredData.chart_type
-          }&chartHeight=300&chartTitle=${
+          }&chartHeight=300&chartTitle=${window.encodeURIComponent(
             featuredData.title
-          }&initialSort=&statType=${featuredData.data_stat_type}`}
+          )}&initialSort=&statType=${featuredData.data_stat_type}`}
           allowFullScreen
           className={classNames(['census-reporter-embed', classes.iframe])}
         />

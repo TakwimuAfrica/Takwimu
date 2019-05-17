@@ -488,6 +488,20 @@
     </section>
     {% endif %}
 
+    {% if not worldbank.fgm_prevalence.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-worldbank-fgm_prevalence"
+           data-stat-type=""
+           data-chart-title="Female Genital Mutilation Prevelence (%)" data-id="6d81e95d-3c02-4b89-8376-534f297ef0e7">
+      </div>
+    </section>
+    {% endif %}
+
     {% if not worldbank.employment_to_population_ratio.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
