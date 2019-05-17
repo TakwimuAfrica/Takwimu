@@ -124,7 +124,7 @@ function CountrySelectorComponent({ classes, country, context }) {
       >
         <img alt="" height="37" src={flagSrc(`./${country.slug}.svg`)} />
         <Typography variant="subtitle2" className={classes.countryName}>
-          {country.name}
+          {country.short_name}
         </Typography>
         <img alt="" src={downArrow} />
       </ButtonBase>
