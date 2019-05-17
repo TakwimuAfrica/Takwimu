@@ -948,6 +948,12 @@ class SocialMedia(Orderable):
     icon = IconField()
     page = ParentalKey(ContactUsPage, related_name='social_media')
 
+    api_fields = [
+        APIField('name'),
+        APIField('url'),
+        APIField('icon')
+    ]
+
     def __str__(self):
         return self.name
 
@@ -957,6 +963,12 @@ class KeyContacts(Orderable):
     contact_details = models.TextField()
     link = models.TextField()
     page = ParentalKey(ContactUsPage, related_name='key_contacts')
+
+    api_fields = [
+        APIField('title'),
+        APIField('contact_details'),
+        APIField('link')
+    ]
 
 
 class Testimonial(models.Model):
