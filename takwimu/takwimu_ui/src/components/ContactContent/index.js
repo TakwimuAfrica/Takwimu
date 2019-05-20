@@ -66,9 +66,9 @@ const SOCIAL_MEDIA = {
 function ContactContent({
   classes,
   title,
-  address,
+  address: { value: address },
   keyContacts,
-  socialMedia,
+  socialMedia: { value: socialMedia },
   current,
   contentHeadings,
   changeActiveContent,
@@ -102,36 +102,40 @@ function ContactContent({
           ))}
         </div>
       </ContentSection>
-      <RichTextSection
-        id={contentHeadings[1].link}
-        classes={{ root: classes.section }}
-        title={contentHeadings[1].title}
-        value={address}
-        component={ContentSection}
-      />
-      <ContentSection
-        id={contentHeadings[2].link}
-        classes={{ root: classes.section }}
-        title={contentHeadings[2].title}
-        variant="h3"
-      >
-        <Grid container direction="row">
-          {socialMedia.map(social => (
-            <Link
-              className={classes.social}
-              href={socialMediaSettings[social.name]}
-            >
-              <img
-                src={SOCIAL_MEDIA[social.name].logo}
-                alt=""
-                className={classes.icon}
-              />
-              <Icon className={social.icon} />
-              {SOCIAL_MEDIA[social.name].name}
-            </Link>
-          ))}
-        </Grid>
-      </ContentSection>
+      {address && (
+        <RichTextSection
+          id={contentHeadings[1].link}
+          classes={{ root: classes.section }}
+          title={address.title}
+          value={address.description}
+          component={ContentSection}
+        />
+      )}
+      {socialMedia && (
+        <ContentSection
+          id={contentHeadings[2].link}
+          classes={{ root: classes.section }}
+          title={socialMedia.title}
+          variant="h3"
+        >
+          <Grid container direction="row">
+            {socialMedia.accounts.map(account => (
+              <Link
+                className={classes.social}
+                href={socialMediaSettings[account.name]}
+              >
+                <img
+                  src={SOCIAL_MEDIA[account.name].logo}
+                  alt=""
+                  className={classes.icon}
+                />
+                <Icon className={classes.social} />
+                {SOCIAL_MEDIA[account.name].name}
+              </Link>
+            ))}
+          </Grid>
+        </ContentSection>
+      )}
       <ContactWhereToNext
         classes={{ sectionRoot: classes.whereToNext }}
         socialMedia={settingsSocialMedia}
@@ -144,9 +148,13 @@ function ContactContent({
 ContactContent.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   title: PropTypes.string.isRequired,
-  address: PropTypes.string.isRequired,
+  address: PropTypes.shape({
+    value: PropTypes.shape({})
+  }).isRequired,
   keyContacts: PropTypes.shape({}).isRequired,
-  socialMedia: PropTypes.shape({}).isRequired,
+  socialMedia: PropTypes.shape({
+    value: PropTypes.shape({})
+  }).isRequired,
   settingsSocialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,

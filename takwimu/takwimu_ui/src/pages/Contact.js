@@ -28,11 +28,13 @@ function Contact({
   }
 }) {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const contentHeadings = [
-    { title: 'Key contacts', link: 'key-contacts' },
-    { title: 'Address', link: 'address' },
-    { title: 'Social', link: 'social' }
-  ];
+  const contentHeadings = [{ title: 'Key contacts', link: 'key-contacts' }];
+  if (address.value) {
+    contentHeadings.push({ title: address.value.label, link: 'address' });
+  }
+  if (socialMedia.value) {
+    contentHeadings.push({ title: socialMedia.value.label, link: 'social' });
+  }
 
   const changeActiveContent = index => {
     setCurrentSectionIndex(index);
