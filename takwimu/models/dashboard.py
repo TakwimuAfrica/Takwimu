@@ -623,10 +623,14 @@ class ProfileSectionPage(ModelMeta, Page):
 
         if request.method == 'GET':
             indicataor_id = request.GET.get('indicator', None)
+            twitter_card_title = request.GET.get('title', '')
+            twitter_card_description = request.GET.get('description', '')
             if indicataor_id:
                 model = get_image_model()
                 image = model.objects.filter(title=indicataor_id).get()
                 context['twitter_card_image_url'] = image.get_rendition('width-600').url
+                context['twitter_card_description'] = twitter_card_description
+                context['twitter_card_title'] = twitter_card_title
 
         context['country'] = self.get_country()
         context['meta'] = self.as_meta(request)

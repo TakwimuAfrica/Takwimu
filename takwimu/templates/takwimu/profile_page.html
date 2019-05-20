@@ -4,8 +4,8 @@
 
 {% block head_twitter_tags %}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="example">
-  <meta name="twitter:description" content="heyo">
+  <meta name="twitter:title" content="{{ twitter_card_title }}">
+  <meta name="twitter:description" content="{{ twitter_card_description }}">
   <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter_card_image_url }}">
 {% endblock %}
 
