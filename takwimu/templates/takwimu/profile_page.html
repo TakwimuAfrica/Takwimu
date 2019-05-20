@@ -6,7 +6,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="example">
   <meta name="twitter:description" content="heyo">
-  <meta name="twitter:image" content="https://980912f3.ngrok.io/media/original_images/bbb976d8-18ee-4b66-a7b6-89225f93f32c_s0fxn6v">
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter_card_image_url }}">
 {% endblock %}
 
 {% block head_title %} Analysis - {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
