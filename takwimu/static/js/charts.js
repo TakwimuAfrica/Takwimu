@@ -70,7 +70,6 @@ function Chart(options) {
         // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
     }
 
-
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
     chart.parentHeight = chart.getParentHeight();
     chart.chartType = options.chartType;
