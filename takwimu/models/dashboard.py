@@ -25,6 +25,7 @@ from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
 from wagtail.contrib.settings.context_processors import settings as wagtail_settings
 from wagtail.embeds.blocks import EmbedBlock
+from wagtail.images import get_image_model
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
@@ -619,6 +620,13 @@ class ProfileSectionPage(ModelMeta, Page):
 
     def get_context(self, request):
         context = super(ProfileSectionPage, self).get_context(request)
+
+        if request.method == 'GET':
+            indicataor_id = request.GET.get('indicator', None)
+            if indicataor_id:
+                model = get_image_model()
+                image = model.objects.filter(title=indicataor_id).get()
+                context['twitter_card_image_url'] = image.get_rendition('width-600').url
 
         context['country'] = self.get_country()
         context['meta'] = self.as_meta(request)
