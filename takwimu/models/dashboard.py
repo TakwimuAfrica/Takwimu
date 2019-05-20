@@ -217,6 +217,19 @@ HURUMAP_DATA_DISTS = [
 ]
 
 
+class FlourishWidget(blocks.StructBlock):
+    label = blocks.CharBlock(required=False, help_text="This widget's tab label on the indicator")
+    title = blocks.CharBlock(required=False)
+    hide_title = blocks.BooleanBlock(default=False, required=False)
+    html = DocumentChooserBlock(required=True)
+    sdg = blocks.ChoiceBlock(required=False, choices=sdg_choices, label='SDG Goal')
+    source = blocks.RichTextBlock(features=['link'], required=False)
+
+    class Meta:
+        icon = 'folder-inverse'
+        template = 'takwimu/_includes/dataview/code.html'
+
+
 class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
         [
@@ -299,21 +312,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
-    flourish = blocks.StructBlock(
-        [
-            ('label', blocks.CharBlock(required=False,
-                                       help_text="This widget's tab label on the indicator")),
-            ('title', blocks.CharBlock(required=False)),
-            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
-            ('html', DocumentChooserBlock(required=True)),
-            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
-                                       label='SDG Goal')),
-            ('source', blocks.RichTextBlock(
-                features=['link'], required=False)),
-        ],
-        icon='code',
-        template='takwimu/_includes/dataview/code.html'
-    )
+    flourish = FlourishWidget()
 
     hurumap = blocks.StructBlock(
         [
@@ -434,6 +433,7 @@ class IndicatorBlock(blocks.StructBlock):
 
         return representation
 
+
 class TopicBodyBlock(blocks.StreamBlock):
     text= blocks.RichTextBlock(required=False)
     indicator= IndicatorBlock(required=False)
@@ -447,6 +447,7 @@ class TopicBodyBlock(blocks.StreamBlock):
                 r['meta'] = { 'layout': r['value'].pop('layout', 'auto') }
 
         return representation
+
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
@@ -1204,6 +1205,7 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
 
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
     hurumap_snippet = SnippetChooserBlock(ProfileData)
+    flourish = FlourishWidget()
     hurumap = FeaturedDataWidgetBlock()
 
 
