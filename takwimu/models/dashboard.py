@@ -31,11 +31,12 @@ from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wazimap.models import Geography
 
+from .utils.page import find_indicator_with_id_from_page
 from takwimu.search import search
 from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
                                    get_takwimu_stories, get_takwimu_faqs,
                                    get_takwimu_services, get_takwimu_profile_view_country_content,
-                                   get_takwimu_profile_navigation, get_takwimu_profile_read_next)
+                                   get_takwimu_profile_navigation, get_takwimu_profile_read_next) 
 
 
 logger = logging.getLogger(__name__)
@@ -622,20 +623,33 @@ class ProfileSectionPage(ModelMeta, Page):
         context = super(ProfileSectionPage, self).get_context(request)
 
         if request.method == 'GET':
-            indicataor_id = request.GET.get('indicator', None)
-            twitter_card_title = request.GET.get('title', '')
-            twitter_card_description = request.GET.get('description', '')
-            if indicataor_id:
-                model = get_image_model()
-                image = model.objects.filter(title=indicataor_id).get()
-                context['twitter_card_image_url'] = image.get_rendition('width-600').url
-                context['twitter_card_description'] = twitter_card_description
-                context['twitter_card_title'] = twitter_card_title
+            indicator_id = request.GET.get('indicator', None)
+            if indicator_id:
+                indicator = self.find_indicator_with_id(indicator_id)
+                if indicator:
+                    context['twitter'] = self.get_twitter_meta(
+                        indicator
+                    )
 
         context['country'] = self.get_country()
         context['meta'] = self.as_meta(request)
 
         return context
+
+    def find_indicator_with_id(self, indicator_id):
+        indicator = find_indicator_with_id_from_page(indicator_id, self)
+        if indicator:
+            return indicator
+        return None
+
+    def get_twitter_meta(self, indicator):
+        model = get_image_model()
+        image = model.objects.filter(title=indicator["id"]).get()
+        return {
+            'image_url': image.get_rendition('width-600').url,
+            'description': indicator["value"]["summary"] if indicator else '',
+            'title': indicator["value"]["title"] if indicator else ''
+        }
 
     def get_promotion_image(self):
         if self.promotion_image:
@@ -817,8 +831,32 @@ class ProfilePage(ModelMeta, Page):
     def get_absolute_url(self):
         return self.full_url
 
+    def find_indicator_with_id(self, indicator_id):
+        indicator = find_indicator_with_id_from_page(indicator_id, self)
+        if indicator:
+            return indicator
+        return None
+
+    def get_twitter_meta(self, indicator):
+        model = get_image_model()
+        image = model.objects.filter(title=indicator["id"]).get()
+        return {
+            'image_url': image.get_rendition('width-600').url,
+            'description': indicator["value"]["summary"] if indicator else '',
+            'title': indicator["value"]["title"] if indicator else ''
+        }
+
     def get_context(self, request):
         context = super(ProfilePage, self).get_context(request)
+
+        if request.method == 'GET':
+            indicator_id = request.GET.get('indicator', None)
+            if indicator_id:
+                indicator = self.find_indicator_with_id(indicator_id)
+                if indicator:
+                    context['twitter'] = self.get_twitter_meta(
+                        indicator
+                    )
 
         context['country'] = self.get_country()
         profiles_settings = CountryProfilesSetting.for_site(self.get_site())

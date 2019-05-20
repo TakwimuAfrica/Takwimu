@@ -101,23 +101,15 @@ function DataContainer({
 
           {(data.type === 'hurumap' ||
             data.type === 'featured_data_widget') && (
-            <HurumapDataContainer data={data} summary={data.summary} />
+            <HurumapDataContainer data={data} />
           )}
 
           {data.type === 'flourish' && (
-            <FlourishDataContainer
-              id={id}
-              data={data.value}
-              summary={data.summary}
-            />
+            <FlourishDataContainer id={id} data={data.value} />
           )}
 
           {data.type === 'html' && (
-            <HTMLDataContainer
-              id={id}
-              data={data.value}
-              summary={data.summary}
-            />
+            <HTMLDataContainer id={id} data={data.value} />
           )}
 
           {data.type === 'entities' && (

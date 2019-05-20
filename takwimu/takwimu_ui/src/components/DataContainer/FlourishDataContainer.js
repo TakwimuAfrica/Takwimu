@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data, summary }) {
+function DataContainer({ id, classes, data }) {
   const handleDownload = () => {
     const iframe = document.getElementById(`data-indicator-${id}`);
     iframe.contentWindow
@@ -64,7 +64,7 @@ function DataContainer({ id, classes, data, summary }) {
       <DataActions
         onDownload={handleDownload}
         embedCode={embedCode}
-        onShare={getShareHandler(id, data.title, summary)}
+        onShare={getShareHandler(id, data.title)}
       />
     </Fragment>
   );
@@ -73,8 +73,7 @@ function DataContainer({ id, classes, data, summary }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired,
-  summary: PropTypes.string.isRequired
+  data: PropTypes.shape({}).isRequired
 };
 
 DataContainer.defaultProps = {

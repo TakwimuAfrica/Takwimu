@@ -19,7 +19,7 @@ function DataContainer({ id, classes, data }) {
       <div id={`data-indicator-${id}`} className={classes.root}>
         <div dangerouslySetInnerHTML={{ __html: data.raw_html }} />
       </div>
-      <DataActions onShare={getShareHandler(id, data.title, data.summary)} />
+      <DataActions onShare={getShareHandler(id, data.title)} />
     </Fragment>
   );
 }

@@ -8,7 +8,7 @@ import DataActions from './DataActions';
 import IFrame from './IFrame';
 import { getShareHandler } from './common';
 
-function DataContainer({ id, data, theme, summary }) {
+function DataContainer({ id, data, theme }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
   const handleDownload = () => {
     const iframe = document.getElementById(iframeId);
@@ -46,7 +46,7 @@ function DataContainer({ id, data, theme, summary }) {
       <DataActions
         onDownload={handleDownload}
         embedCode={embedCode}
-        onShare={getShareHandler(id, data.title, summary)}
+        onShare={getShareHandler(id, data.title)}
       />
     </Fragment>
   );
@@ -55,8 +55,7 @@ function DataContainer({ id, data, theme, summary }) {
 DataContainer.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   data: PropTypes.shape({}).isRequired,
-  id: PropTypes.string.isRequired,
-  summary: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired
 };
 
 export default withTheme()(DataContainer);

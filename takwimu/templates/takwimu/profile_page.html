@@ -4,9 +4,10 @@
 
 {% block head_twitter_tags %}
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="{{ twitter_card_title }}">
-  <meta name="twitter:description" content="{{ twitter_card_description }}">
-  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter_card_image_url }}">
+  <meta name="twitter:title" content="{{ twitter.title }}">
+  <meta name="twitter:description" content="{{ twitter.description }}">
+  
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter.image_url }}">
 {% endblock %}
 
 {% block head_title %} Analysis - {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
