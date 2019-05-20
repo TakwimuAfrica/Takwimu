@@ -72,6 +72,7 @@ function DataContainer({
       element.scrollIntoView();
     }
   }, []);
+
   const isHalfWidth = () => {
     const { layout } = meta;
     if (layout === 'half_width') {
@@ -100,15 +101,23 @@ function DataContainer({
 
           {(data.type === 'hurumap' ||
             data.type === 'featured_data_widget') && (
-            <HurumapDataContainer data={data.value} />
+            <HurumapDataContainer data={data} summary={data.summary} />
           )}
 
           {data.type === 'flourish' && (
-            <FlourishDataContainer id={id} data={data.value} />
+            <FlourishDataContainer
+              id={id}
+              data={data.value}
+              summary={data.summary}
+            />
           )}
 
           {data.type === 'html' && (
-            <HTMLDataContainer id={id} data={data.value} />
+            <HTMLDataContainer
+              id={id}
+              data={data.value}
+              summary={data.summary}
+            />
           )}
 
           {data.type === 'entities' && (
@@ -121,7 +130,7 @@ function DataContainer({
         </Grid>
       </div>
 
-      {data.value.description && (
+      {(data.value.description || data.summary) && (
         <div className={classes.descriptionWrapper}>
           <Grid
             container
@@ -135,7 +144,7 @@ function DataContainer({
             </Grid>
             <Grid item>
               <Typography variant="caption" className={classes.description}>
-                {data.value.description}
+                {data.value.description || data.summary}
               </Typography>
             </Grid>
           </Grid>

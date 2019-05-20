@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
 import DataActions from './DataActions';
+import { getShareHandler } from './common';
 
 const styles = {
   root: {
@@ -13,19 +14,12 @@ const styles = {
 };
 
 function DataContainer({ id, classes, data }) {
-  const handleShare = () => {
-    window.open(
-      `https://twitter.com/intent/tweet?url=${encodeURI(
-        `${window.location.href}?indicator=${id}`
-      )}`
-    );
-  };
   return (
     <Fragment>
       <div id={`data-indicator-${id}`} className={classes.root}>
         <div dangerouslySetInnerHTML={{ __html: data.raw_html }} />
       </div>
-      <DataActions onShare={handleShare} />
+      <DataActions onShare={getShareHandler(id, data.title, data.summary)} />
     </Fragment>
   );
 }

@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
 import DataActions from './DataActions';
+import { getShareHandler } from './common';
 
 const styles = {
   root: {
@@ -12,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({ id, classes, data, summary }) {
   const handleDownload = () => {
     const iframe = document.getElementById(`data-indicator-${id}`);
     iframe.contentWindow
@@ -44,14 +45,6 @@ function DataContainer({ id, classes, data }) {
     frameHead.appendChild(script);
   };
 
-  const handleShare = () => {
-    window.open(
-      `https://twitter.com/intent/tweet?url=${encodeURI(
-        `${window.location.href}?indicator=${id}`
-      )}`
-    );
-  };
-
   const embedCode = `<iframe title="${data.title}" 
   frameborder="0" 
   scrolling="no" 
@@ -71,7 +64,7 @@ function DataContainer({ id, classes, data }) {
       <DataActions
         onDownload={handleDownload}
         embedCode={embedCode}
-        onShare={handleShare}
+        onShare={getShareHandler(id, data.title, summary)}
       />
     </Fragment>
   );
@@ -80,7 +73,8 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  summary: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

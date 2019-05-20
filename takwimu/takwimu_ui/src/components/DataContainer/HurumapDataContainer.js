@@ -6,8 +6,9 @@ import { withTheme } from '@material-ui/core/styles';
 
 import DataActions from './DataActions';
 import IFrame from './IFrame';
+import { getShareHandler } from './common';
 
-function DataContainer({ id, data, theme }) {
+function DataContainer({ id, data, theme, summary }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
   const handleDownload = () => {
     const iframe = document.getElementById(iframeId);
@@ -24,14 +25,6 @@ function DataContainer({ id, data, theme }) {
         link.click();
         document.body.removeChild(link);
       });
-  };
-
-  const handleShare = () => {
-    window.open(
-      `https://twitter.com/intent/tweet?url=${encodeURI(
-        `${window.location.href}?indicator=${id}`
-      )}`
-    );
   };
 
   const embedCode = `<iframe
@@ -53,7 +46,7 @@ function DataContainer({ id, data, theme }) {
       <DataActions
         onDownload={handleDownload}
         embedCode={embedCode}
-        onShare={handleShare}
+        onShare={getShareHandler(id, data.title, summary)}
       />
     </Fragment>
   );
@@ -62,7 +55,8 @@ function DataContainer({ id, data, theme }) {
 DataContainer.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   data: PropTypes.shape({}).isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  summary: PropTypes.string.isRequired
 };
 
 export default withTheme()(DataContainer);

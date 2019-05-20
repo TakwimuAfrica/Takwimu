@@ -124,7 +124,14 @@ EmbedCodeTextArea.propTypes = {
   code: PropTypes.string.isRequired
 };
 
-function DataActions({ classes, onShare, onDownload, onShowData, embedCode }) {
+function DataActions({
+  classes,
+  onShare,
+  onDownload,
+  onShowData,
+  onCompare,
+  embedCode
+}) {
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleEmbed = event => {
@@ -132,10 +139,12 @@ function DataActions({ classes, onShare, onDownload, onShowData, embedCode }) {
   };
   return (
     <div className={classes.root}>
-      <ActionButton>
-        <img alt="" src={shareIcon} />
-        <Typography className={classes.actionText}>Share</Typography>
-      </ActionButton>
+      {onShare && (
+        <ActionButton onClick={onShare}>
+          <img alt="" src={shareIcon} />
+          <Typography className={classes.actionText}>Share</Typography>
+        </ActionButton>
+      )}
 
       {onDownload && (
         <Fragment>
@@ -157,11 +166,11 @@ function DataActions({ classes, onShare, onDownload, onShowData, embedCode }) {
         </Fragment>
       )}
 
-      {onShare && (
+      {onCompare && (
         <Fragment>
           <div className={classes.verticalDivider} />
 
-          <ActionButton>
+          <ActionButton onClick={onCompare}>
             <img alt="" src={compareIcon} />
             <Typography className={classes.actionText}>Compare</Typography>
           </ActionButton>
@@ -171,7 +180,7 @@ function DataActions({ classes, onShare, onDownload, onShowData, embedCode }) {
       {onShowData && (
         <Fragment>
           <div className={classes.verticalDivider} />
-          <ActionButton>
+          <ActionButton onClick={onShowData}>
             <img alt="" src={showIcon} />
             <Typography className={classes.actionText}>Show Data</Typography>
           </ActionButton>
@@ -203,14 +212,16 @@ DataActions.propTypes = {
   onDownload: PropTypes.func,
   onShare: PropTypes.func,
   onShowData: PropTypes.func,
-  embedCode: PropTypes.string
+  embedCode: PropTypes.string,
+  onCompare: PropTypes.func
 };
 
 DataActions.defaultProps = {
   onDownload: null,
   onShare: null,
   onShowData: null,
-  embedCode: null
+  embedCode: null,
+  onCompare: null
 };
 
 export default withStyles(styles)(DataActions);
