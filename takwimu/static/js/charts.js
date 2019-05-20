@@ -41,8 +41,8 @@ function Chart(options) {
         .style("padding", "0 1.938rem")
         .style("padding-top", "2.5rem")
         .classed("chart-analysis", true);
-        
-      // TODO : 
+
+      // TODO :
       // const row = document.getElementById(options.chartContainer).parentNode;
       // const section = row.parentNode;
       // const rowIndex = Array.prototype.slice.call(
@@ -69,7 +69,7 @@ function Chart(options) {
         // TODO :
         // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
     }
-    
+
 
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
     chart.parentHeight = chart.getParentHeight();
@@ -88,9 +88,7 @@ function Chart(options) {
     chart.decimalPlaces = parseInt(options.chartDecimalPlaces) || 0;
     chart.tableDecimalPlaces = parseInt(options.chartDecimalPlaces) || 1;
     chart.colorbrewer = options.colorbrewer || (window.HURUMAP_THEME && window.HURUMAP_THEME.charts.colorbrewer);
-    chart.chartChartShowYAxis =
-      options.chartChartShowYAxis ||
-      (chart.chartStatType == "percentage" ? true : false);
+    chart.chartChartShowYAxis = true;
     chart.chartHeight =
       options.chartHeight ||
       (chart.parentHeight < 180 ? 180 : chart.parentHeight);
@@ -466,9 +464,7 @@ function Chart(options) {
     chart.htmlBase = chart.chartContainer
       .append("div")
       .attr("class", "column-set")
-      .style("margin-top", function() {
-        return chart.chartChartShowYAxis ? -chart.settings.height + "px" : "0";
-      })
+      .style("margin-top", 0)
       .style("height", chart.settings.height + "px");
 
     // narrow padding for histograms
@@ -536,7 +532,8 @@ function Chart(options) {
         .append("svg")
         .attr("class", "svg-chart")
         .attr("width", "100%")
-        .attr("height", chart.settings.height);
+        .attr("height", chart.settings.height)
+        .style("margin-top", -chart.settings.height + "px");
 
       // base where columns and axes will be attached
       chart.svgBase = chart.svgBaseContainer
@@ -545,9 +542,7 @@ function Chart(options) {
           "transform",
           "translate(" +
             chart.settings.margin.left +
-            "," +
-            chart.settings.margin.top +
-            ")"
+            ", 0)"
         );
 
       chart.yAxis = d3.svg
@@ -647,18 +642,19 @@ function Chart(options) {
               .text(function(d) {
                 return chart.capitalize(v.name);
               });
-
-            column
-              .append("span")
-              .classed("label", true)
-              .style("bottom", function(d) {
-                return (
-                  chart.settings.displayHeight - chart.y(d.value) + 3 + "px"
-                );
-              })
-              .html(function(d) {
-                return chart.getValueFmt(v);
-              });
+            if(!chart.chartChartShowYAxis) {
+              column
+                .append("span")
+                .classed("label", true)
+                .style("bottom", function(d) {
+                  return (
+                    chart.settings.displayHeight - chart.y(d.value) + 3 + "px"
+                  );
+                })
+                .html(function(d) {
+                  return chart.getValueFmt(v);
+                });
+            }
           });
         });
 
@@ -713,15 +709,17 @@ function Chart(options) {
           return d.name;
         });
 
-      chart.labels = chart.columnAreas
-        .append("span")
-        .classed("label", true)
-        .style("bottom", function(d) {
-          return chart.settings.displayHeight - chart.y(d.value) + 3 + "px";
-        })
-        .html(function(d) {
-          return chart.getValueFmt(d);
-        });
+      if(!chart.chartChartShowYAxis) {
+        chart.labels = chart.columnAreas
+          .append("span")
+          .classed("label", yLabel)
+          .style("bottom", function(d) {
+            return chart.settings.displayHeight - chart.y(d.value) + 3 + "px";
+          })
+          .html(function(d) {
+            return chart.getValueFmt(d);
+          });
+      }
     }
 
     // listen for column interactions
