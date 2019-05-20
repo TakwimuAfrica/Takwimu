@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles, Typography, Grid } from '@material-ui/core';
@@ -64,6 +64,14 @@ function DataContainer({
     meta
   }
 }) {
+  useEffect(() => {
+    const params = new URL(window.location).searchParams;
+    const indicatorId = params.get('indicator');
+    if (indicatorId) {
+      const element = document.getElementById(`indicator-${indicatorId}`);
+      element.scrollIntoView();
+    }
+  }, []);
   const isHalfWidth = () => {
     const { layout } = meta;
     if (layout === 'half_width') {
@@ -79,6 +87,7 @@ function DataContainer({
   };
   return (
     <div
+      id={`indicator-${id}`}
       className={classNames(classes.root, {
         [classes.layoutHalf]: isHalfWidth()
       })}
