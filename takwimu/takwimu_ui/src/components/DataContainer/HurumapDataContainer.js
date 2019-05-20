@@ -7,10 +7,10 @@ import { withTheme } from '@material-ui/core/styles';
 import DataActions from './DataActions';
 import IFrame from './IFrame';
 
-function DataContainer({ data, theme }) {
-  const id = `cr-embed-country-${data.data_country}-${data.data_id}`;
+function DataContainer({ id, data, theme }) {
+  const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
   const handleDownload = () => {
-    const iframe = document.getElementById(id);
+    const iframe = document.getElementById(iframeId);
     iframe.contentWindow.domtoimage
       .toPng(iframe.contentDocument.getElementById('census-chart'), {
         bgcolor: theme.palette.data.light
@@ -24,6 +24,14 @@ function DataContainer({ data, theme }) {
         link.click();
         document.body.removeChild(link);
       });
+  };
+
+  const handleShare = () => {
+    window.open(
+      `https://twitter.com/intent/tweet?url=${encodeURI(
+        `${window.location.href}?indicator=${id}`
+      )}`
+    );
   };
 
   const embedCode = `<iframe
@@ -40,16 +48,21 @@ function DataContainer({ data, theme }) {
 
   return (
     <Fragment>
-      <IFrame id={id} data={data} />
+      <IFrame id={iframeId} data={data} />
 
-      <DataActions onDownload={handleDownload} embedCode={embedCode} />
+      <DataActions
+        onDownload={handleDownload}
+        embedCode={embedCode}
+        onShare={handleShare}
+      />
     </Fragment>
   );
 }
 
 DataContainer.propTypes = {
   theme: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default withTheme()(DataContainer);

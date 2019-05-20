@@ -13,12 +13,19 @@ const styles = {
 };
 
 function DataContainer({ id, classes, data }) {
+  const handleShare = () => {
+    window.open(
+      `https://twitter.com/intent/tweet?url=${encodeURI(
+        `${window.location.href}?indicator=${id}`
+      )}`
+    );
+  };
   return (
     <Fragment>
       <div id={`data-indicator-${id}`} className={classes.root}>
         <div dangerouslySetInnerHTML={{ __html: data.raw_html }} />
       </div>
-      <DataActions />
+      <DataActions onShare={handleShare} />
     </Fragment>
   );
 }

@@ -44,6 +44,14 @@ function DataContainer({ id, classes, data }) {
     frameHead.appendChild(script);
   };
 
+  const handleShare = () => {
+    window.open(
+      `https://twitter.com/intent/tweet?url=${encodeURI(
+        `${window.location.href}?indicator=${id}`
+      )}`
+    );
+  };
+
   const embedCode = `<iframe title="${data.title}" 
   frameborder="0" 
   scrolling="no" 
@@ -60,7 +68,11 @@ function DataContainer({ id, classes, data }) {
         onLoad={handleIframeLoaded}
         className={classes.root}
       />
-      <DataActions onDownload={handleDownload} embedCode={embedCode} />
+      <DataActions
+        onDownload={handleDownload}
+        embedCode={embedCode}
+        onShare={handleShare}
+      />
     </Fragment>
   );
 }
