@@ -6,7 +6,7 @@ import { withStyles, Typography, Grid, Link, Icon } from '@material-ui/core';
 import ContactContentNav from './ContactContentNav';
 import ContentSection from '../ContentSection';
 import RichTextSection from '../RichTextSection';
-import { About as ContactWhereToNext } from '../Next';
+import { Contact as ContactWhereToNext } from '../Next';
 import RelatedContent from '../RelatedContent';
 
 import facebook from '../../assets/images/logo-facebook.svg';
@@ -67,8 +67,11 @@ function ContactContent({
   classes,
   title,
   address: { value: address },
-  keyContacts,
+  addressIndex,
+  keyContacts: { value: keyContacts },
+  keyContactsIndex,
   socialMedia: { value: socialMedia },
+  socialMediaIndex,
   current,
   contentHeadings,
   changeActiveContent,
@@ -87,24 +90,26 @@ function ContactContent({
       <Typography variant="h2" className={classes.title}>
         {title}
       </Typography>
-      <ContentSection
-        id={contentHeadings[0].link}
-        classes={{ root: classes.section }}
-        title={contentHeadings[0].title}
-        variant="h3"
-      >
-        <div className={classes.keyContacts}>
-          {keyContacts.map(keyContact => (
-            <Grid container direction="column">
-              <Typography>{keyContact.title}</Typography>
-              <Link href={keyContact.link}>{keyContact.contact_details}</Link>
-            </Grid>
-          ))}
-        </div>
-      </ContentSection>
+      {keyContacts && (
+        <ContentSection
+          id={contentHeadings[keyContactsIndex].link}
+          classes={{ root: classes.section }}
+          title={keyContacts.title}
+          variant="h3"
+        >
+          <div className={classes.keyContacts}>
+            {keyContacts.contacts.map(keyContact => (
+              <Grid container direction="column">
+                <Typography>{keyContact.title}</Typography>
+                <Link href={keyContact.link}>{keyContact.contact_details}</Link>
+              </Grid>
+            ))}
+          </div>
+        </ContentSection>
+      )}
       {address && (
         <RichTextSection
-          id={contentHeadings[1].link}
+          id={contentHeadings[addressIndex].link}
           classes={{ root: classes.section }}
           title={address.title}
           value={address.description}
@@ -113,7 +118,7 @@ function ContactContent({
       )}
       {socialMedia && (
         <ContentSection
-          id={contentHeadings[2].link}
+          id={contentHeadings[socialMediaIndex].link}
           classes={{ root: classes.section }}
           title={socialMedia.title}
           variant="h3"
@@ -151,10 +156,15 @@ ContactContent.propTypes = {
   address: PropTypes.shape({
     value: PropTypes.shape({})
   }).isRequired,
-  keyContacts: PropTypes.shape({}).isRequired,
+  addressIndex: PropTypes.number.isRequired,
+  keyContacts: PropTypes.shape({
+    value: PropTypes.shape({})
+  }).isRequired,
+  keyContactsIndex: PropTypes.number.isRequired,
   socialMedia: PropTypes.shape({
     value: PropTypes.shape({})
   }).isRequired,
+  socialMediaIndex: PropTypes.number.isRequired,
   settingsSocialMedia: PropTypes.shape({}).isRequired,
   relatedContent: PropTypes.shape({}).isRequired,
   current: PropTypes.number.isRequired,
