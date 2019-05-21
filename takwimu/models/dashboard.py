@@ -130,7 +130,7 @@ class TopicPage(Page):
 
 
 class EntityStructBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False)
+    title = blocks.CharBlock()
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
     description = blocks.RichTextBlock(features=['link'], required=False)

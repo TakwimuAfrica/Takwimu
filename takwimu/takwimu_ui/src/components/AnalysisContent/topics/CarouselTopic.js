@@ -183,7 +183,11 @@ function Topic({ classes, data }) {
         )
     );
   }, []);
-
+  const { name } = data[selectedIndex];
+  let { title } = data[selectedIndex];
+  if (name && name.length > 0) {
+    title = `${name}, ${title}`;
+  }
   return (
     <div id="political-figures" className={classes.root}>
       <div className={classes.carouselWrapper}>
@@ -249,7 +253,7 @@ function Topic({ classes, data }) {
       </div>
       <div className={classes.body}>
         <Typography variant="h4" className={classes.title}>
-          {data[selectedIndex].name}, {data[selectedIndex].title}
+          {title}
         </Typography>
         <Typography
           variant="body1"
