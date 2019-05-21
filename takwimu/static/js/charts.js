@@ -586,7 +586,7 @@ function Chart(options) {
         .each(function(d, i) {
           g = d3.select(this);
           groupValues = d3.values(d.values);
-          columnWidth = 30;
+          columnWidth = chart.columnWidth;
 
           g.append("span")
             .classed("x axis label", true)
@@ -706,7 +706,7 @@ function Chart(options) {
         .attr("class", "area")
         .style("position", "absolute")
         .style("background-color", chart.colorbrewer[chart.chartColorScale][0])
-        .style("width", "30px")
+        .style("width", chart.columnWidth + "px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom +
