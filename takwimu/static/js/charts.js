@@ -584,7 +584,7 @@ function Chart(options) {
         .each(function(d, i) {
           g = d3.select(this);
           groupValues = d3.values(d.values);
-          columnWidth = Math.floor(chart.x.rangeBand() / groupValues.length);
+          columnWidth = 30;
 
           g.append("span")
             .classed("x axis label", true)
@@ -612,6 +612,14 @@ function Chart(options) {
                 );
               })
               .style("left", function(d) {
+                if(chart.chartDataValues.length > 10) {
+                  return (
+                    chart.x(d.name) * ( 2 +  groupValues.length) +
+                    chart.settings.margin.left +
+                    (columnWidth + 2) * i +
+                    "px"
+                  );
+                }
                 return (
                   chart.x(d.name) +
                   chart.settings.margin.left +
