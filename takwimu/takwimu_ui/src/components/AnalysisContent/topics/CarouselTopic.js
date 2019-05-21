@@ -248,10 +248,11 @@ function Topic({ classes, data }) {
         </div>
       </div>
       <div className={classes.body}>
-        <Typography className={classes.title}>
+        <Typography variant="h4" className={classes.title}>
           {data[selectedIndex].name}, {data[selectedIndex].title}
         </Typography>
         <Typography
+          variant="body1"
           dangerouslySetInnerHTML={{
             __html: data[selectedIndex].description
           }}
