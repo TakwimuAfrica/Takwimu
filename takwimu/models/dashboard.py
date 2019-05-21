@@ -9,6 +9,7 @@ from fontawesome.forms import IconFormField
 from hurumap.models import DataIndicator
 from meta.models import ModelMeta
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from rest_framework import serializers
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
@@ -27,6 +28,7 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
 from wagtail.snippets.blocks import SnippetChooserBlock
+from wagtail.snippets.models import register_snippet
 from wazimap.models import Geography
 
 from takwimu.models.data import ProfileData
@@ -985,8 +987,147 @@ class AboutPage(ModelMeta, Page):
         return get_takwimu_faqs(faq_settings)
 
 
+class ContactAddressContentBlock(blocks.StructBlock):
+    label = blocks.CharBlock(default="Address", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = blocks.CharBlock(default="Address", max_length=1024)
+    description = blocks.RichTextBlock(required=False,
+        default='<p>africapractice East Africa Ltd<br/>P.O Box 40868 – 00100<br/>Mitsumi Business Park, 7th Floor<br/>Muthithi Road, Westlands</p><p></p><p>Nairobi, Kenya</p>')
+
+
+class ContactAddressBlock(blocks.StreamBlock):
+    contact_address_content = ContactAddressContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(ContactAddressBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
+@register_snippet
+class KeyContacts(ClusterableModel):
+    name = models.CharField(default="Default", max_length=1024,
+        help_text="If you're planning to maintain more than one list of contacts, then provide a unique name for this list")
+    label = models.CharField(default="Key contacts", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = models.CharField(default="Key contacts", max_length=1024)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('label'),
+        FieldPanel('title'),
+        InlinePanel('contacts', label='Contacts'),
+    ]
+
+    def __str__(self):
+        return '{}'.format(self.name)
+
+    class Meta:
+        verbose_name = 'Contact Us | Key Contacts'
+        verbose_name_plural = 'Contact Us | Key Contacts'
+
+
+class KeyContact(Orderable):
+    title = models.TextField()
+    contact_details = models.TextField()
+    link = models.TextField()
+    parent = ParentalKey(KeyContacts, related_name='contacts')
+
+    api_fields = [
+        APIField('title'),
+        APIField('contact_details'),
+        APIField('link'),
+    ]
+
+
+class KeyContactsBlock(blocks.StreamBlock):
+    key_contacts = SnippetChooserBlock(KeyContacts)
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(KeyContactsBlock, self).get_api_representation(value, context=context)
+        if representation:
+            block = representation[0]
+            snippet = KeyContacts.objects.get(id=block['value'])
+            block['value'] = {
+                'label': snippet.label,
+                'title': snippet.title,
+                'contacts': [{ 'title': c.title, 'contact_details': c.contact_details, 'link': c.link } for c in snippet.contacts.all()],
+            }
+            return block
+        return {}
+
+
+@register_snippet
+class SocialMedia(ClusterableModel):
+    name = models.CharField(default="Default", max_length=1024,
+        help_text="If you're planning to maintain more than one list of contacts, then provide a unique name for this list")
+    label = models.CharField(default="Social", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = models.CharField(default="Social", max_length=1024)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('label'),
+        FieldPanel('title'),
+        InlinePanel('accounts', label='Social Media Accounts', help_text='Social media accounts to show on Contact page'),
+    ]
+
+    def __str__(self):
+        return '{}'.format(self.name)
+
+    class Meta:
+        verbose_name = 'Contact Us | Social Media'
+        verbose_name_plural = 'Contact Us | Social Media'
+
+
+SOCIAL_MEDIA = (
+    ('facebook', 'Facebook'),
+    ('github', 'GitHub'),
+    ('instagram', 'Instagram'),
+    ('linkedin', 'LinkedIn'),
+    ('medium', 'Medium'),
+    ('twitter', 'Twitter'),
+    ('youtube', 'YouTube'),
+)
+
+
+class SocialMediaAccount(Orderable):
+    name = models.CharField(max_length=255, choices=SOCIAL_MEDIA)
+    parent = ParentalKey(SocialMedia, related_name='accounts')
+
+    api_fields = [
+        APIField('name'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+class SocialMediaBlock(blocks.StreamBlock):
+    social_media = SnippetChooserBlock(SocialMedia)
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(SocialMediaBlock, self).get_api_representation(value, context=context)
+        if representation:
+            block = representation[0]
+            snippet = SocialMedia.objects.get(id=block['value'])
+            block['value'] = {
+                'label': snippet.label,
+                'title': snippet.title,
+                'accounts': [{ 'name': a.name } for a in snippet.accounts.all()],
+            }
+            return block
+        return {}
+
+
 class ContactPage(ModelMeta, Page):
-    address = RichTextField()
+    address = StreamField(ContactAddressBlock(required=False, max_num=1), blank=True)
+    social_media = StreamField(SocialMediaBlock(required=False, max_num=1), blank=True)
+    key_contacts = StreamField(KeyContactsBlock(required=False, max_num=1), blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
     # Social media: Twitter card
@@ -1012,12 +1153,9 @@ class ContactPage(ModelMeta, Page):
     # Editor panels configuration
 
     content_panels = Page.content_panels + [
-        FieldPanel('address'),
-        InlinePanel('key_contacts', label='Key Contacts'),
-        InlinePanel(
-            'social_media',
-            label='Social Media',
-            help_text='Social Media accounts to show on Contact page'),
+        StreamFieldPanel('address'),
+        StreamFieldPanel('key_contacts'),
+        StreamFieldPanel('social_media'),
         StreamFieldPanel('related_content'),
     ]
     promote_panels = [
@@ -1033,42 +1171,6 @@ class ContactPage(ModelMeta, Page):
         APIField('key_contacts'),
         APIField('social_media'),
         APIField('related_content'),
-    ]
-
-
-SOCIAL_MEDIA = (
-    ('facebook', 'Facebook'),
-    ('github', 'GitHub'),
-    ('instagram', 'Instagram'),
-    ('linkedin', 'LinkedIn'),
-    ('medium', 'Medium'),
-    ('twitter', 'Twitter'),
-    ('youtube', 'YouTube'),
-)
-
-
-class SocialMedia(Orderable):
-    name = models.CharField(max_length=255, choices=SOCIAL_MEDIA)
-    page = ParentalKey(ContactPage, related_name='social_media')
-
-    api_fields = [
-        APIField('name'),
-    ]
-
-    def __str__(self):
-        return self.name
-
-
-class KeyContacts(Orderable):
-    title = models.TextField()
-    contact_details = models.TextField()
-    link = models.TextField()
-    page = ParentalKey(ContactPage, related_name='key_contacts')
-
-    api_fields = [
-        APIField('title'),
-        APIField('contact_details'),
-        APIField('link'),
     ]
 
 
