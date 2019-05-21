@@ -464,7 +464,9 @@ function Chart(options) {
       .append("div")
       .attr("class", "column-set")
       .style("margin-top", 0)
-      .style("height", chart.settings.height + "px");
+      .style("height", chart.settings.height + "px")
+      .style("overflow-x", "auto")
+      .style("overflow-y", "hidden");
 
     // narrow padding for histograms
     if (chart.chartType == "histogram") {
@@ -526,12 +528,18 @@ function Chart(options) {
       .domain(yDomain);
 
     if (chart.chartChartShowYAxis) {
+      //check if column-set has a scrollbar, when data value greater than 10
+      let marginBottom = 0;
+      if (chart.chartDataValues.length > 10) {
+        marginBottom = "15px";
+      }
       // if we really need to render a y axis, easier to use an svg
       chart.svgBaseContainer = chart.chartContainer
         .append("svg")
         .attr("class", "svg-chart")
-        .attr("width", "100%")
+        .attr("width", chart.settings.width)
         .attr("height", chart.settings.height)
+        .style("margin-bottom", marginBottom)
         .style("margin-top", -chart.settings.height + "px");
 
       // base where columns and axes will be attached
@@ -667,13 +675,16 @@ function Chart(options) {
         .enter()
         .append("a")
         .attr("class", "column")
-        .style("width", chart.x.rangeBand() + "px")
+        .style("width", "30px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom + chart.settings.tickPadding + "px"
           );
         })
         .style("left", function(d) {
+          if(chart.chartDataValues.length > 10) {
+            return chart.x(d.name) * 2 + chart.settings.margin.left + "px";
+          }
           return chart.x(d.name) + chart.settings.margin.left + "px";
         })
         .style("height", function(d) {
@@ -685,7 +696,7 @@ function Chart(options) {
         .attr("class", "area")
         .style("position", "absolute")
         .style("background-color", chart.colorbrewer[chart.chartColorScale][0])
-        .style("width", chart.x.rangeBand() + "px")
+        .style("width", "30px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom +

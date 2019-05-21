@@ -778,6 +778,21 @@ header.section-contents h1 {
     text-decoration: underline;
   }
 }
+.column-set::-webkit-scrollbar {
+  width: 4px;
+}
+.column-set::-webkit-scrollbar-track {
+  border-radius: 4.5px;
+}
+/* Handle */
+.column-set::-webkit-scrollbar-thumb {
+  background: #d3d3d3;
+  border-radius: 4.5px;
+}
+/* Handle on hover 
+.column-set::-webkit-scrollbar-thumb:hover {
+  background: rgb(142, 211, 165);
+} */
 
 /* --------------------------------------------
  * SECTION: Country Flags Navigation
