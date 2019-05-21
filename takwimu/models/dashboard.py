@@ -219,7 +219,7 @@ HURUMAP_DATA_DISTS = [
 
 class FlourishWidget(blocks.StructBlock):
     label = blocks.CharBlock(required=False, help_text="This widget's tab label on the indicator")
-    title = blocks.CharBlock(required=False)
+    title = blocks.CharBlock()
     hide_title = blocks.BooleanBlock(default=False, required=False)
     html = DocumentChooserBlock(required=True)
     sdg = blocks.ChoiceBlock(required=False, choices=sdg_choices, label='SDG Goal')
