@@ -88,6 +88,8 @@ function Chart(options) {
     chart.tableDecimalPlaces = parseInt(options.chartDecimalPlaces) || 1;
     chart.colorbrewer = options.colorbrewer || (window.HURUMAP_THEME && window.HURUMAP_THEME.charts.colorbrewer);
     chart.chartChartShowYAxis = true;
+    chart.columnWidth = parseInt(options.columnWidth) || 30;          //standard width for column, grouped_column
+    chart.columnOffset = parseInt(options.columnOffset) || 10;        //threshold for number of bars for adding scrolling
     chart.chartHeight =
       options.chartHeight ||
       (chart.parentHeight < 180 ? 180 : chart.parentHeight);
@@ -530,7 +532,7 @@ function Chart(options) {
     if (chart.chartChartShowYAxis) {
       //check if column-set has a scrollbar, when data value greater than 10
       let marginBottom = 0;
-      if (chart.chartDataValues.length > 10) {
+      if (chart.chartDataValues.length > chart.columnOffset) {
         marginBottom = "15px";
       }
       // if we really need to render a y axis, easier to use an svg
@@ -612,7 +614,7 @@ function Chart(options) {
                 );
               })
               .style("left", function(d) {
-                if(chart.chartDataValues.length > 10) {
+                if(chart.chartDataValues.length > chart.columnOffset) {
                   return (
                     chart.x(d.name) * ( 2 +  groupValues.length) +
                     chart.settings.margin.left +
@@ -683,14 +685,14 @@ function Chart(options) {
         .enter()
         .append("a")
         .attr("class", "column")
-        .style("width", "30px")
+        .style("width", chart.columnWidth + "px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom + chart.settings.tickPadding + "px"
           );
         })
         .style("left", function(d) {
-          if(chart.chartDataValues.length > 10) {
+          if(chart.chartDataValues.length > chart.columnOffset) {
             return chart.x(d.name) * 2 + chart.settings.margin.left + "px";
           }
           return chart.x(d.name) + chart.settings.margin.left + "px";
