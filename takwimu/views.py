@@ -287,7 +287,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
             page_context['data_by_topic_description'] = page.description
         except DataByTopicPage.DoesNotExist:
             page_context[
-                'data_by_topic_description'] = f"Lorem ipsom dolor sit amec cat this is an introduction to the demographics data topic for {self.geo.name} and should be editorially curated & populated via the backend."
+                'data_by_topic_description'] = f"What lorem ipsum dolor sit amec cat this is an introduction to the demographics data topic for {self.geo.name} and should be editorially curated & populated via the backend."
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get("profile_builder", None)

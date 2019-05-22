@@ -157,6 +157,7 @@
                   linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
               }
           };
+      takwimu.data_topic_page_description = '{{ data_by_topic_description|safe }}';
 
       // II. HURUmap
       // profileData is created in hurumap/profile_detail.html
@@ -219,7 +220,7 @@
 
       const {geo_code: countryCode} = profileData.geography.this;
       const country = takwimu.countries.find(c => c.iso_code === countryCode);
-      takwimu.country = country
+      takwimu.country = country;
 
       $(function () {
           makeCharts();

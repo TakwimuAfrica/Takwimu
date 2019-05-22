@@ -43,6 +43,9 @@ class Profile extends React.Component {
       tabs
     } = profile;
     const { value } = this.state;
+
+    // https://facebook.github.io/create-react-app/docs/using-global-variables
+    const pageDescription = window.takwimu.data_topic_page_description;
     const title = value === 0 ? 'Data by Topic' : tabs[value].name;
 
     return (
@@ -58,9 +61,7 @@ class Profile extends React.Component {
           classes={{ title: classes.sectionTitle }}
         >
           <Typography variant="body1" className={classes.description}>
-            Lorem ipsom dolor sit amec cat this is an introduction to the
-            demographics data topic for {geography.name} and should be
-            editorially curated & populated via the backend.
+            <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
           </Typography>
         </Section>
       </div>
