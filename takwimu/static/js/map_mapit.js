@@ -19,6 +19,7 @@ function MapItGeometryLoader() {
 
          _.each(comparison.geoIDs, function(geoid) {
              // eg. province-WC
+             console.log(geoid);
              var parts = geoid.split('-'),
                  level = parts[0],
                  code = geoid,
@@ -28,7 +29,7 @@ function MapItGeometryLoader() {
              var mapit_codetype = this.mapit_codetype;
 
              url_ = url_ + "?generation=" + generation;
-             d3.json(this.mapit_url + url_, function(error, data) {
+             d3.json(self.mapit_url + url_, function(error, data) {
                if (error) return console.warn(error);
                var area = data;
                var url = '/area/' + area.id + '.geojson?type=' + area.type + "&country=" + area.country+ '&simplify_tolerance='+ simplify;
