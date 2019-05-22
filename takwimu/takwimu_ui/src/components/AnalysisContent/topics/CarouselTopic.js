@@ -15,24 +15,9 @@ const styles = theme => ({
     width: '100%'
   },
   carouselWrapper: {
-    width: '100%',
-    height: '16.813rem'
+    width: '100%'
   },
-  carousel: {
-    zIndex: 1,
-    width: '100%',
-    height: '16.813rem',
-    borderRadius: '0.25rem',
-    backgroundColor: '#f6f6f6',
-    display: 'flex',
-    [theme.breakpoints.up('md')]: {
-      width: '44.265625rem' // .75 of lg
-    },
-    [theme.breakpoints.up('lg')]: {
-      width: '58.4375rem'
-    }
-  },
-  carouselFixed: {
+  carouselWrapperFixed: {
     position: 'fixed',
     top: '6.25rem',
     borderTopLeftRadius: 0,
@@ -48,11 +33,23 @@ const styles = theme => ({
       clipPath: 'inset(0 0 -0.75rem 0)' // bottom only shadow
     }
   },
+  carousel: {
+    zIndex: 1,
+    width: '100%',
+    borderRadius: '0.25rem',
+    backgroundColor: '#f6f6f6',
+    display: 'flex',
+    [theme.breakpoints.up('md')]: {
+      width: '44.265625rem' // .75 of lg
+    },
+    [theme.breakpoints.up('lg')]: {
+      width: '58.4375rem'
+    }
+  },
   arrow: {
     width: '6%', // 53px / 934px,
-    height: '100%',
     display: 'flex',
-    aligItems: 'center',
+    alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#f6f6f6',
     cursor: 'pointer',
@@ -99,7 +96,7 @@ const styles = theme => ({
     }
   },
   content: {
-    overflow: 'scroll',
+    overflowX: 'auto',
     width: '88%',
     height: '100%',
     display: 'flex'
@@ -190,12 +187,12 @@ function Topic({ classes, data }) {
   }
   return (
     <div id="political-figures" className={classes.root}>
-      <div className={classes.carouselWrapper}>
-        <div
-          className={classNames(classes.carousel, {
-            [classes.carouselFixed]: isOverThreshold
-          })}
-        >
+      <div
+        className={classNames(classes.carouselWrapper, {
+          [classes.carouselWrapperFixed]: isOverThreshold
+        })}
+      >
+        <div className={classNames(classes.carousel)}>
           <div
             role="button"
             tabIndex={0}
@@ -224,13 +221,15 @@ function Topic({ classes, data }) {
                     [classes.profilePictureSelected]: selectedIndex === index
                   })}
                 />
-                <Typography
-                  className={classNames(classes.profileName, {
-                    [classes.profileNameSelected]: selectedIndex === index
-                  })}
-                >
-                  {item.name}
-                </Typography>
+                {name && name.length > 0 && (
+                  <Typography
+                    className={classNames(classes.profileName, {
+                      [classes.profileNameSelected]: selectedIndex === index
+                    })}
+                  >
+                    {item.name}
+                  </Typography>
+                )}
                 <Typography className={classes.profileTitle}>
                   {item.title}
                 </Typography>
