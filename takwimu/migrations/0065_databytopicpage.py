@@ -10,8 +10,6 @@ import wagtail.core.fields
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('wazimap', '0013_auto_20190313_2245'),
-        ('wagtailcore', '0040_page_draft_title'),
         ('takwimu', '0064_contactpage_snippets'),
     ]
 
