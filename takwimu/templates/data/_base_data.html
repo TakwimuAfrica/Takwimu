@@ -1,6 +1,14 @@
 {% extends 'data/_base_data.html' %}
 {% load staticfiles sass_tags jsonify geotags wagtailcore_tags %}
 
+{% block head_css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+{% endblock %}
+
+{% block head_title %}Table {% if table %}{{ table }}{% endif %}{% endblock %}
+
 {% block header %}
   {% include 'takwimu/_includes/navbar/_index.html' %}
 
@@ -14,6 +22,27 @@
     body {
       padding-top: 0;
     }
+    #data-container p {
+      line-height: 20px;
+    }
+    .tool-group {
+      font-size: inherit;
+    }
+    a {
+      line-height: initial;
+      font-size: inherit;
+    }
+    .box-header {
+        background-color: #29a87c;
+      }
+
+      ul.toggle-set li {
+        width: 110px;
+      }
+
+      #table-title {
+        font-size: 2em;
+      }
     #page-footer {
         background: none;
         border: none;
@@ -26,12 +55,39 @@
   </style>
 {% endblock header %}
 
+{% block content %}
+{% include 'data/_blocks/_topic_select_input.html' %}
+
+<article id="data-display" class="clearfix">
+    <header class="section-contents table-explorer">
+        <h1>Table explorer<br>
+            <a href="#" id="change-table">Change table</a>
+        </h1>
+    </header>
+    <div class="section-container">
+        <section id="data-container" class="clearfix">
+            <h2 class="table-title">Table {{ table }}</h2>
+            <aside>{% block aside_notes %}{% endblock %}</aside>
+
+            <div id="tool-notes" class="tool-set caption-tool-set"></div>
+            <p class="caption">
+                <span id="table-universe" class="caption-group"></span>
+            </p>
+        </section>
+    </div>
+</article>
+{% endblock %}
+
 {% block footer_content %}
   <div id="takwimuFooter" />
 {% endblock footer_content %}
 
 {% block body_javascript_extra %}
   {{ block.super }}
+  {% if HURUMAP.USE_MAPIT %}
+    <script src="{% static 'js/map_mapit.js' %}"></script>
+    <script src="{% static 'js/profile_map_mapit.js' %}"></script>
+  {% endif %}
 
   <script>
     // I. Takwimu
