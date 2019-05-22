@@ -18,7 +18,7 @@ class Migration(migrations.Migration):
             name='DataByTopicPage',
             fields=[
                 ('page_ptr', models.OneToOneField(auto_created=True, on_delete=django.db.models.deletion.CASCADE, parent_link=True, primary_key=True, serialize=False, to='wagtailcore.Page')),
-                ('description', wagtail.core.fields.RichTextField(blank=True)),
+                ('description', wagtail.core.fields.RichTextField(blank=False)),
                 ('country', models.OneToOneField(blank=True, db_constraint=False, null=True, on_delete=django.db.models.deletion.SET_NULL, to='wazimap.Geography')),
             ],
             options={

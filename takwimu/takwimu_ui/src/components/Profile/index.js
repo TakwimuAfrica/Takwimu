@@ -40,12 +40,11 @@ class Profile extends React.Component {
     const { classes, profile } = this.props;
     const {
       geography: { this: geography },
-      tabs
+      tabs,
+      description
     } = profile;
     const { value } = this.state;
 
-    // https://facebook.github.io/create-react-app/docs/using-global-variables
-    const pageDescription = window.takwimu.data_topic_page_description;
     const title = value === 0 ? 'Data by Topic' : tabs[value].name;
 
     return (
@@ -60,9 +59,11 @@ class Profile extends React.Component {
           title={`${geography.name}'s ${title}`}
           classes={{ title: classes.sectionTitle }}
         >
-          <Typography variant="body1" className={classes.description}>
-            <div dangerouslySetInnerHTML={{ __html: pageDescription }} />
-          </Typography>
+          <Typography
+            variant="body1"
+            className={classes.description}
+            dangerouslySetInnerHTML={{ __html: description }}
+          />
         </Section>
       </div>
     );
@@ -83,6 +84,7 @@ Profile.propTypes = {
         href: PropTypes.string.isRequired
       })
     ).isRequired,
+    description: PropTypes.string.isRequired,
     switchToTab: PropTypes.func
   }).isRequired
 };

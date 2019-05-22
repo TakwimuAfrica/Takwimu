@@ -284,10 +284,10 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         # get data by topic page text description
         try:
             page = DataByTopicPage.objects.get(country=self.geo)
-            page_context['data_by_topic_description'] = page.description
+            page_context['profile_data_description'] = page.description
         except DataByTopicPage.DoesNotExist:
             page_context[
-                'data_by_topic_description'] = f"What lorem ipsum dolor sit amec cat this is an introduction to the demographics data topic for {self.geo.name} and should be editorially curated & populated via the backend."
+                'profile_data_description'] = f"What lorem ipsum dolor sit amec cat this is an introduction to the demographics data topic for {self.geo.name} and should be editorially curated & populated via the backend."
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get("profile_builder", None)

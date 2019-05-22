@@ -84,7 +84,7 @@ class DataByTopicPage(Page):
     country = models.OneToOneField(Geography, on_delete=models.SET_NULL,
                             blank=True, null=True, db_constraint=False,
                             limit_choices_to={'geo_level': 'country'})
-    description = models.TextField(blank=True)
+    description = models.TextField(blank=False)
 
     content_panels = Page.content_panels + [
         FieldPanel('country'),
