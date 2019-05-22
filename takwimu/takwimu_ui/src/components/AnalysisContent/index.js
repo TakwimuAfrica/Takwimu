@@ -77,7 +77,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
   } = content;
 
   return (
-    <Fragment>
+    <div className={classes.root}>
       <OtherInfoNav
         labelText={profileNavigation.title}
         labelTextStrong={content.title}
@@ -85,22 +85,27 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         current={topicIndex}
         showContent={showContent}
       />
-      <div className={classes.hero} />
 
-      <div className={classes.root}>
+      <div id="AnalysisContent--pdf-downloadable">
+        <div className={classes.hero} />
+
         <Typography className={classes.title} variant="h2">
           {content.body[topicIndex].value.title}
         </Typography>
 
-        <ContentNavigation
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
-          current={topicIndex}
-          content={content}
-          showContent={showContent}
-        />
+        <div id="ContentNavigation--pdf-ignored">
+          <ContentNavigation
+            labelText={profileNavigation.title}
+            labelTextStrong={content.title}
+            current={topicIndex}
+            content={content}
+            showContent={showContent}
+          />
+        </div>
 
-        <Actions page={takwimu.page} />
+        <div id="Actions--pdf-ignored">
+          <Actions page={takwimu.page} />
+        </div>
 
         {content.body[topicIndex].type === 'carousel_topic' ? (
           <CarouselTopic data={content.body[topicIndex].value.body} />
@@ -129,29 +134,33 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
             ))}
           </Grid>
         )}
-
-        <Actions page={takwimu.page} hideLastUpdated />
-        <ContentNavigation
-          labelText={profileNavigation.title}
-          labelTextStrong={content.title}
-          current={topicIndex}
-          content={content}
-          showContent={showContent}
-        />
-        <AnalysisReadNext
-          classes={{ container: classes.readNextContainer }}
-          title={readNext.title}
-          content={content}
-          current={topicIndex}
-          showContent={showContent}
-        />
-        <CountryContent
-          content={content.view_country_content}
-          takwimu={takwimu}
-        />
-        <RelatedContent content={content.related_content} />
       </div>
-    </Fragment>
+
+      <Actions page={takwimu.page} hideLastUpdated />
+
+      <ContentNavigation
+        labelText={profileNavigation.title}
+        labelTextStrong={content.title}
+        current={topicIndex}
+        content={content}
+        showContent={showContent}
+      />
+
+      <AnalysisReadNext
+        classes={{ container: classes.readNextContainer }}
+        title={readNext.title}
+        content={content}
+        current={topicIndex}
+        showContent={showContent}
+      />
+
+      <CountryContent
+        content={content.view_country_content}
+        takwimu={takwimu}
+      />
+
+      <RelatedContent content={content.related_content} />
+    </div>
   );
 }
 

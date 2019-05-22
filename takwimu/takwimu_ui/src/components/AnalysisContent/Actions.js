@@ -5,6 +5,9 @@ import { PropTypes } from 'prop-types';
 
 import { TwitterShareButton } from 'react-share';
 
+import domtoimage from 'dom-to-image';
+import html2canvas from 'html2canvas';
+import JSPDF from 'jspdf';
 import shareIcon from '../../assets/images/analysis/share.svg';
 import downloadIcon from '../../assets/images/analysis/download.svg';
 
@@ -63,6 +66,37 @@ function Actions({
     };
   }, []);
 
+  const handleDownload = () => {
+    const ignore = [];
+    const iframes = document.getElementsByTagName('iframe');
+    Array.from(iframes).forEach(iframe => {
+      if (iframe.src.indexOf(window.location.origin) !== -1) {
+        // const domtoimage = iframe.contentWindow.domtoimage;
+        domtoimage.toPng(iframe.contentWindow.body, data => {
+          const img = document.createElement('img');
+          img.src = data;
+          iframe.parentElement.insertBefore(iframe);
+        });
+      } else {
+        ignore.push(iframe);
+      }
+    });
+
+    const doc = new JSPDF('p', 'mm', 'a4');
+
+    const content = document.getElementById(
+      'AnalysisContent--pdf-downloadable'
+    );
+    Array.from(content.children).forEach(async child => {
+      if (child.id.indexOf('--pdf-ignored') === -1) {
+        const canvas = await html2canvas(child, { scale: 1 });
+        doc.addImage(canvas.toDataURL('image/png'), 0, 0);
+      }
+    });
+
+    doc.save();
+  };
+
   return (
     <div className={classes.root}>
       {!hideLastUpdated && (
@@ -86,6 +120,7 @@ function Actions({
       <ButtonBase
         disableRipple
         disableTouchRipple
+        onClick={handleDownload}
         className={classes.buttonText}
       >
         <img alt="download" src={downloadIcon} className={classes.actionIcon} />

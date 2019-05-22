@@ -7,6 +7,8 @@
     "@material-ui/icons": "^3.0.2",
     "classnames": "^2.2.6",
     "dom-to-image": "^2.6.0",
+    "html2canvas": "^1.0.0-rc.1",
+    "jspdf": "^1.5.3",
     "prop-types": "^15.6.2",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
