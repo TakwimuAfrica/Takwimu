@@ -35,7 +35,7 @@ const styles = theme => ({
     }
   }
 });
-function AboutWhereToNext({ classes, socialMedia }) {
+function ContactWhereToNext({ classes, socialMedia }) {
   return (
     <Section
       title="Where to next..."
@@ -53,20 +53,20 @@ function AboutWhereToNext({ classes, socialMedia }) {
         </Card>
 
         <Card
-          href="/contact"
+          href="/about"
           classes={{ root: classes.cardMargin }}
           variant="dual"
         >
-          Contact Us
+          About Us
         </Card>
       </Grid>
     </Section>
   );
 }
 
-AboutWhereToNext.propTypes = {
+ContactWhereToNext.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   socialMedia: PropTypes.shape({}).isRequired
 };
 
-export default withStyles(styles)(AboutWhereToNext);
+export default withStyles(styles)(ContactWhereToNext);

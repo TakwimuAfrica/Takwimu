@@ -49,5 +49,5 @@ class ProfileData(index.Indexed, models.Model):
         return '{} | {}'.format(COUNTRIES[self.country_iso_code]['short_name'], self.chart_title)
 
     class Meta:
-        verbose_name = 'HURUmap Data'
-        verbose_name_plural = 'HURUmap Data'
+        verbose_name = 'Data by Topic | HURUmap Data'
+        verbose_name_plural = 'Data by Topic | HURUmap Data'

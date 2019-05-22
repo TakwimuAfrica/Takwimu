@@ -28,11 +28,29 @@ function Contact({
   }
 }) {
   const [currentSectionIndex, setCurrentSectionIndex] = useState(0);
-  const contentHeadings = [
-    { title: 'Key contacts', link: 'key-contacts' },
-    { title: 'Address', link: 'address' },
-    { title: 'Social', link: 'social' }
-  ];
+  const contentHeadings = [];
+  let keyContactsIndex = -1;
+  let addressIndex = -1;
+  let socialMediaIndex = -1;
+  let count = 0;
+  if (keyContacts.value) {
+    contentHeadings.push({ title: keyContacts.value.label, link: 'contacts' });
+    keyContactsIndex = count;
+    count += 1;
+  }
+  if (address.value) {
+    contentHeadings.push({ title: address.value.label, link: 'address' });
+    addressIndex = count;
+    count += 1;
+  }
+  if (socialMedia.value) {
+    contentHeadings.push({ title: socialMedia.value.label, link: 'social' });
+    socialMediaIndex = count;
+    count += 1;
+  }
+  if (count < 1) {
+    return null;
+  }
 
   const changeActiveContent = index => {
     setCurrentSectionIndex(index);
@@ -63,8 +81,11 @@ function Contact({
       <ContactContent
         title={title}
         address={address}
+        addressIndex={addressIndex}
         keyContacts={keyContacts}
+        keyContactsIndex={keyContactsIndex}
         socialMedia={socialMedia}
+        socialMediaIndex={socialMediaIndex}
         current={currentSectionIndex}
         contentHeadings={contentHeadings}
         relatedContent={relatedContent}
