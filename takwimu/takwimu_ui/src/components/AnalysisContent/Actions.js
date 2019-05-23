@@ -47,7 +47,9 @@ const styles = {
 function Actions({
   classes,
   page: { last_published_at: lastUpdated },
-  hideLastUpdated
+  hideLastUpdated,
+  title,
+  pdfBlob
 }) {
   const [analysisLink, setAnalysisLink] = useState(window.location.href);
 
@@ -87,9 +89,22 @@ function Actions({
         disableRipple
         disableTouchRipple
         className={classes.buttonText}
+        onClick={() => {
+          if (pdfBlob) {
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(pdfBlob);
+            link.download = `${title}.pdf`;
+            link.target = '_blank';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(pdfBlob);
+          }
+        }}
       >
         <img alt="download" src={downloadIcon} className={classes.actionIcon} />
-        Download this analysis (PDF 800kb)
+        Download this analysis (PDF{' '}
+        {pdfBlob && (pdfBlob.size / 1000).toFixed(1)}kb)
       </ButtonBase>
     </div>
   );
@@ -100,11 +115,14 @@ Actions.propTypes = {
   page: PropTypes.shape({
     last_published_at: PropTypes.string
   }).isRequired,
-  hideLastUpdated: PropTypes.bool
+  hideLastUpdated: PropTypes.bool,
+  title: PropTypes.string.isRequired,
+  pdfBlob: PropTypes.shape({})
 };
 
 Actions.defaultProps = {
-  hideLastUpdated: false
+  hideLastUpdated: false,
+  pdfBlob: null
 };
 
 export default withStyles(styles)(Actions);

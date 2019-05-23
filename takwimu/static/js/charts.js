@@ -1763,7 +1763,7 @@ function Chart(options) {
       // when showing distribution and maps, try to show relevant geos right from
       // the start.
       geoIDs = [];
-      if (chart.thisGeo.parent_geoid) {
+      if (chart.thisGeo.parent_geoid && chart.thisGeo.parent_geoid !== 'continent-AFR') {
         // show our peers
         var parentGeo = chart.parentGeo;
         geoIDs.push(chart.thisGeo.geo_level + "|" + chart.thisGeo.parent_geoid);

@@ -160,7 +160,7 @@ const styles = theme => ({
   }
 });
 
-function Topic({ classes, data }) {
+function Topic({ classes, data, onIndexChanged }) {
   const isOverThreshold = useScrollListener(100, '<', 'political-figures');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [images, setImages] = useState({});
@@ -168,6 +168,8 @@ function Topic({ classes, data }) {
   useEffect(() => {
     const profile = document.getElementById(`profile-${selectedIndex}`);
     profile.scrollIntoView({ inline: 'nearest', block: 'nearest' });
+
+    onIndexChanged(selectedIndex);
   }, [selectedIndex]);
 
   useEffect(() => {
@@ -265,7 +267,8 @@ function Topic({ classes, data }) {
 
 Topic.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  onIndexChanged: PropTypes.func.isRequired
 };
 
 export default withStyles(styles)(Topic);
