@@ -782,6 +782,10 @@ header.section-contents h1 {
   scrollbar-track-color: #d3d3d3;
   scrollbar-base-color: #d3d3d3;
   scrollbar-face-color: #d3d3d3;
+
+  /* Firefox: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scrollbars */
+  scrollbar-color: #d3d3d3;
+  scrollbar-width: thin;
 }
 .column-set::-webkit-scrollbar {
   width: 0.563rem;
