@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Grid from '@material-ui/core/Grid';
-
+import { Grid, Link } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 import A from '../A';
@@ -26,13 +25,23 @@ const styles = () => ({
     height: '1.5625rem',
     objectFit: 'contain',
     marginRight: '0.9375rem'
+  },
+  title: {
+    fontSize: 'inherit',
+    fontWeight: 'inherit',
+    lineHeight: 'inherit',
+    color: 'inherit'
   }
 });
 
 function StayInTouch({ classes, settings: { support, socialMedia } }) {
   return (
     <div className={classes.root}>
-      <Title>Stay in touch</Title>
+      <Title>
+        <Link href="/contact" variant="subtitle1" className={classes.title}>
+          Stay in touch
+        </Link>
+      </Title>
       <Grid
         container
         justify="flex-start"

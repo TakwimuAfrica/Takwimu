@@ -45,6 +45,12 @@ function LatestNewsStories({
     return null;
   }
 
+  // Wagtail inserts div/p when RichTextField is empty
+  const hasDescription = () =>
+    description &&
+    description.length > 0 &&
+    description !== '<p></p>' &&
+    description !== '<div class="rich-text"></div>';
   const Stories = isWidthUp('md', width) ? StoryBlocks : StoryList;
   return (
     <Section
@@ -58,7 +64,7 @@ function LatestNewsStories({
         alignItems="flex-start"
         className={classes.root}
       >
-        {description && description.length > 0 && (
+        {hasDescription() && (
           <Grid item xs={12}>
             <Typography
               variant="body1"
