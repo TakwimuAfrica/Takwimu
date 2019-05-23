@@ -10,7 +10,6 @@ import ReactPDF, {
   Text,
   View,
   Image,
-  Font,
   StyleSheet
 } from '@react-pdf/renderer';
 import Actions from './Actions';
@@ -76,58 +75,73 @@ const pdfStyles = StyleSheet.create({
     objectFit: 'cover'
   },
   title: {
-    fontSize: 54,
-    fontFamily: 'Lora'
+    fontSize: 54
+    // fontFamily: 'Lora'
   },
   text: {
     fontSize: 18,
     lineHeight: 2.05,
-    fontFamily: 'Muli'
+    // fontFamily: 'Muli',
+    paddingBottom: 10
+  },
+  boldText: {
+    fontSize: 18,
+    fontWeight: 500,
+    lineHeight: 2.05,
+    // fontFamily: 'Muli',
+    paddingBottom: 10
   }
 });
 
-// https://gist.github.com/dotJoel/7326331
-Font.register(
-  'http://themes.googleusercontent.com/static/fonts/muli/v4/BfQP1MR3mJNaumtWa4Tizg.ttf',
-  { family: 'Muli' }
-);
-Font.register(
-  'http://themes.googleusercontent.com/static/fonts/lora/v5/4A-myfZX6oDr9CtSTkTGig.ttf',
-  { family: 'Lora' }
-);
-
-const AnalysisPDF = ({ content }) => (
+const AnalysisPDF = ({ data, topic }) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
       <Image style={pdfStyles.hero} src={profileHeroImage} />
       <View style={pdfStyles.section}>
-        <Text style={pdfStyles.title}>{content.title}</Text>
+        <Text style={pdfStyles.title}>{data.content.title}</Text>
       </View>
-      <View style={pdfStyles.section}>
-        {content.body.map(c => {
-          if (c.type === 'text') {
-            return c.value
-              .split('</p>')
-              .map(t => (
-                <Text style={pdfStyles.text}>
-                  {t.replace(/<(?:.|\n)*?>/gi, '')}
-                </Text>
-              ));
-          }
-          return null;
-        })}
-      </View>
+      {topic === 'topic' ? (
+        <View style={pdfStyles.section}>
+          {data.content.body.map(c => {
+            if (c.type === 'text') {
+              return c.value
+                .split('</p>')
+                .map(t => (
+                  <Text style={pdfStyles.text}>
+                    {t.replace(/<(?:.|\n)*?>/gi, '')}
+                  </Text>
+                ));
+            }
+            return null;
+          })}
+        </View>
+      ) : (
+        <View style={pdfStyles.section}>
+          <Text style={pdfStyles.boldText}>
+            {data.item.name}, {data.item.title}
+          </Text>
+          {data.item.description.split('</p>').map(t => (
+            <Text style={pdfStyles.text}>
+              {t.replace(/<(?:.|\n)*?>/gi, '')}
+            </Text>
+          ))}
+        </View>
+      )}
     </Page>
   </Document>
 );
 
 AnalysisPDF.propTypes = {
-  content: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired
 };
 
 function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
+  const [carouselItemIndex, setCarouselItemIndex] = useState(
+    content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
+  );
   const [analysisBlob, setAnalysisBlob] = useState(null);
-  const [id, setId] = useState(null);
+  const [id, setId] = useState(`${content.id}-${topicIndex}`);
 
   useEffect(() => {
     if (`${content.id}-${topicIndex}` !== id) {
@@ -149,10 +163,22 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
       document.body.appendChild(script);
     }
 
-    ReactPDF.pdf(<AnalysisPDF content={content.body[topicIndex].value} />)
+    ReactPDF.pdf(
+      <AnalysisPDF
+        topic={content.body[topicIndex].type}
+        data={{
+          item:
+            carouselItemIndex !== -1
+              ? content.body[topicIndex].value.body[carouselItemIndex]
+              : null,
+          content: content.body[topicIndex].value
+        }}
+      />
+    )
       .toBlob()
-      .then(setAnalysisBlob);
-  }, [id]);
+      .then(setAnalysisBlob)
+      .catch(console.error);
+  }, [id, carouselItemIndex]);
 
   const showContent = index => () => {
     onChange(index);
@@ -194,7 +220,10 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         />
 
         {content.body[topicIndex].type === 'carousel_topic' ? (
-          <CarouselTopic data={content.body[topicIndex].value.body} />
+          <CarouselTopic
+            data={content.body[topicIndex].value.body}
+            onIndexChanged={setCarouselItemIndex}
+          />
         ) : (
           <Grid container direction="row">
             {content.body[topicIndex].value.body.map(c => (
