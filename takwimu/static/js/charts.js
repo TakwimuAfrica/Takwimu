@@ -467,8 +467,9 @@ function Chart(options) {
       .attr("class", "column-set")
       .style("margin-top", 0)
       .style("height", chart.settings.height + "px")
-      .style("overflow-x", "auto")
-      .style("overflow-y", "hidden");
+      .style("overflow", function() {
+        return chart.chartChartShowYAxis ? "auto hidden" : "hidden";
+      });
 
     // narrow padding for histograms
     if (chart.chartType == "histogram") {
@@ -539,7 +540,7 @@ function Chart(options) {
       chart.svgBaseContainer = chart.chartContainer
         .append("svg")
         .attr("class", "svg-chart")
-        .attr("width", chart.settings.width)
+        .attr("width", "100%")
         .attr("height", chart.settings.height)
         .style("margin-bottom", marginBottom)
         .style("margin-top", -chart.settings.height + "px");
@@ -586,7 +587,7 @@ function Chart(options) {
         .each(function(d, i) {
           g = d3.select(this);
           groupValues = d3.values(d.values);
-          columnWidth = chart.columnWidth;
+          columnWidth = Math.floor(chart.x.rangeBand() / groupValues.length) < chart.columnWidth? chart.columnWidth : Math.floor(chart.x.rangeBand() / groupValues.length);
 
           g.append("span")
             .classed("x axis label", true)
@@ -614,9 +615,9 @@ function Chart(options) {
                 );
               })
               .style("left", function(d) {
-                if(chart.chartDataValues.length > chart.columnOffset) {
+                if(chart.chartDataValues.length > (chart.columnOffset-groupValues.length)) {
                   return (
-                    chart.x(d.name) * ( 2 +  groupValues.length) +
+                    chart.x(d.name) * (1 +  groupValues.length) +
                     chart.settings.margin.left +
                     (columnWidth + 2) * i +
                     "px"
@@ -679,13 +680,14 @@ function Chart(options) {
       // select them for interaction handling
       chart.columns = chart.htmlBase.selectAll(".column");
     } else {
+      let columnWidth = chart.x.rangeBand() < chart.columnWidth? chart.columnWidth : chart.x.rangeBand();
       chart.columns = chart.htmlBase
         .selectAll(".column")
         .data(chart.chartDataValues)
         .enter()
         .append("a")
         .attr("class", "column")
-        .style("width", chart.columnWidth + "px")
+        .style("width", columnWidth + "px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom + chart.settings.tickPadding + "px"
@@ -706,7 +708,7 @@ function Chart(options) {
         .attr("class", "area")
         .style("position", "absolute")
         .style("background-color", chart.colorbrewer[chart.chartColorScale][0])
-        .style("width", chart.columnWidth + "px")
+        .style("width", columnWidth + "px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom +
