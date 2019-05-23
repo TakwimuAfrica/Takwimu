@@ -42,7 +42,9 @@ function DataContainer({ id, classes, data }) {
 
   const handleIframeLoaded = e => {
     const iframe = e.target;
-    const { offsetHeight } = iframe.contentDocument.getElementById('wrapper');
+    const { offsetHeight } =
+      iframe.contentDocument.getElementById('wrapper') ||
+      iframe.contentDocument.body;
     iframe.style.height = `${offsetHeight}px`;
 
     // Add htm2canvas

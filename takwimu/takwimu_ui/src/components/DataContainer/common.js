@@ -1,4 +1,6 @@
 // eslint-disable-next-line import/prefer-default-export
+import { getCookie } from '../../common';
+
 export const shareIndicator = id => {
   const url = new URL(window.location);
   url.searchParams.set('indicator', id);
@@ -6,11 +8,11 @@ export const shareIndicator = id => {
 };
 
 export const uploadImage = (id, data) =>
-  fetch({
-    url: '/api/twitter_view',
+  fetch('/api/twitter_view/', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'X-CSRFToken': getCookie('csrftoken')
     },
     body: JSON.stringify({
       id,
