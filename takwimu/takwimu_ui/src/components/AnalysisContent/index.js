@@ -1,9 +1,18 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment, useEffect } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { Typography, withStyles, Grid } from '@material-ui/core';
 
+import ReactPDF, {
+  Document,
+  Page,
+  Text,
+  View,
+  Image,
+  Font,
+  StyleSheet
+} from '@react-pdf/renderer';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import ContentNavigation from './ContentNavigation';
@@ -14,6 +23,9 @@ import RelatedContent from '../RelatedContent';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import CarouselTopic from './topics/CarouselTopic';
+
+// TODO: Turn indicators to images
+// import html2canvas from 'html2canvas';
 
 const styles = theme => ({
   root: {
@@ -51,7 +63,89 @@ const styles = theme => ({
   }
 });
 
+// Create styles
+const pdfStyles = StyleSheet.create({
+  page: {
+    padding: 20
+  },
+  section: {
+    padding: 20
+  },
+  hero: {
+    borderBottomWidth: 2,
+    borderBottomColor: '#29a87c',
+    borderBottomStyle: 'solid',
+    height: 200,
+    objectFit: 'cover'
+  },
+  title: {
+    fontSize: 54,
+    fontFamily: 'Lora'
+  },
+  text: {
+    fontSize: 18,
+    lineHeight: 2.05,
+    fontFamily: 'Muli'
+  }
+});
+
+// https://gist.github.com/dotJoel/7326331
+Font.register(
+  'http://themes.googleusercontent.com/static/fonts/muli/v4/BfQP1MR3mJNaumtWa4Tizg.ttf',
+  { family: 'Muli' }
+);
+Font.register(
+  'http://themes.googleusercontent.com/static/fonts/lora/v5/4A-myfZX6oDr9CtSTkTGig.ttf',
+  { family: 'Lora' }
+);
+
+const AnalysisPDF = ({ /* images={images} , */ content }) => (
+  <Document>
+    <Page size="A4" style={pdfStyles.page}>
+      <Image style={pdfStyles.hero} src={profileHeroImage} />
+      <View style={pdfStyles.section}>
+        <Text style={pdfStyles.title}>{content.title}</Text>
+      </View>
+      <View style={pdfStyles.section}>
+        {content.body.map(c => {
+          if (c.type === 'text') {
+            return c.value
+              .split('</p>')
+              .map(t => (
+                <Text style={pdfStyles.text}>
+                  {t.replace(/<(?:.|\n)*?>/gi, '')}
+                </Text>
+              ));
+          }
+
+          // TODO: Turn indicators to images
+          // if (c.type === 'indicator') {
+          //   return <Image src={images[c.id]}/>;
+          // }
+
+          return null;
+        })}
+      </View>
+    </Page>
+  </Document>
+);
+
+AnalysisPDF.propTypes = {
+  content: PropTypes.shape({}).isRequired
+};
+
 function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
+  const [analysisBlob, setAnalysisBlob] = useState(null);
+  const [id, setId] = useState(null);
+  // TODO: Turn indicators to images
+  // const [images, setImages] = useState({});
+
+  useEffect(() => {
+    if (`${content.id}-${topicIndex}` !== id) {
+      setId(`${content.id}-${topicIndex}`);
+    }
+  });
+
   useEffect(() => {
     if (document.getElementsByClassName('flourish-embed')) {
       const script = document.createElement('script');
@@ -65,7 +159,22 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
       script.src = 'https://public.flourish.studio/resources/embed.js';
       document.body.appendChild(script);
     }
-  });
+
+    // TODO: Turn indicators to images
+    // document.querySelectorAll("[id^='DataContainer-']").forEach(async el => {
+    //   const canvas = await html2canvas(el);
+    //   setImages({ ...images, [el.id.replace('DataContainer-', '')]: canvas.toDataURL("image/png") })
+    // });
+
+    ReactPDF.pdf(
+      <AnalysisPDF
+        content={content.body[topicIndex].value}
+        /* images={images} */
+      />
+    )
+      .toBlob()
+      .then(setAnalysisBlob);
+  }, [id]);
 
   const showContent = index => () => {
     onChange(index);
@@ -100,7 +209,11 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           showContent={showContent}
         />
 
-        <Actions page={takwimu.page} />
+        <Actions
+          title={content.body[topicIndex].value.title}
+          page={takwimu.page}
+          pdfBlob={analysisBlob}
+        />
 
         {content.body[topicIndex].type === 'carousel_topic' ? (
           <CarouselTopic data={content.body[topicIndex].value.body} />
