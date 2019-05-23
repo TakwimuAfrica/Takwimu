@@ -83,6 +83,7 @@ const styles = theme => ({
 
 function CurrentAnalysis({
   classes,
+  countrifyTitle,
   content: { value: currentAnalysis },
   readAnalysisTitle,
   viewProfileTitle
@@ -104,14 +105,16 @@ function CurrentAnalysis({
           >
             <img
               src={flagSrc(`./${currentAnalysis.country.slug}.svg`)}
-              alt="South Africa"
+              alt={currentAnalysis.country.iso_code}
               className={classes.flag}
             />
             <Typography
               variant="h4"
               component="h1"
               className={classes.title}
-              dangerouslySetInnerHTML={{ __html: currentAnalysis.title }}
+              dangerouslySetInnerHTML={{
+                __html: countrifyTitle(currentAnalysis)
+              }}
             />
           </Grid>
         </Grid>
@@ -156,6 +159,7 @@ function CurrentAnalysis({
 
 CurrentAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  countrifyTitle: PropTypes.func.isRequired,
   content: PropTypes.shape({
     value: PropTypes.shape({}).isRequired
   }).isRequired,

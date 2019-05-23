@@ -60,14 +60,7 @@ FeaturedData.propTypes = {
           title: PropTypes.string.isRequired,
           featured_data: PropTypes.arrayOf(
             PropTypes.shape({
-              value: PropTypes.shape({
-                title: PropTypes.string.isRequired,
-                country: PropTypes.string.isRequired,
-                data_id: PropTypes.string.isRequired,
-                chart_type: PropTypes.string.isRequired,
-                data_stat_type: PropTypes.string.isRequired,
-                description: PropTypes.string.isRequired
-              }).isRequired,
+              value: PropTypes.shape({}).isRequired,
               meta: PropTypes.shape({}).isRequired
             }).isRequired
           )

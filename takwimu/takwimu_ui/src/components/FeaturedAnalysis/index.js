@@ -36,6 +36,7 @@ class FeaturedAnalysis extends React.Component {
     const {
       classes,
       takwimu: {
+        countries,
         page: {
           featured_analysis: { value: featuredAnalysis }
         }
@@ -52,6 +53,17 @@ class FeaturedAnalysis extends React.Component {
       view_profile_link_label: viewProfileTitle
     } = featuredAnalysis;
     const { current } = this.state;
+    const countrifyTitle = analysis => {
+      const { title: t, country } = analysis;
+      const foundCountry = countries.find(c => c.slug === country.slug);
+      if (
+        foundCountry &&
+        !t.toLowerCase().startsWith(foundCountry.short_name.toLowerCase())
+      ) {
+        return `${foundCountry.short_name}&rsquo;s ${t}`;
+      }
+      return t;
+    };
 
     return (
       <Section title={title} variant="h2">
@@ -64,12 +76,14 @@ class FeaturedAnalysis extends React.Component {
           {featuredAnalyses && featuredAnalyses.length > 0 && (
             <React.Fragment>
               <CurrentAnalysis
+                countrifyTitle={countrifyTitle}
                 content={featuredAnalyses[current]}
                 classes={{ content: classes.content }}
                 readAnalysisTitle={readAnalysisTitle}
                 viewProfileTitle={viewProfileTitle}
               />
               <AnalysisList
+                countrifyTitle={countrifyTitle}
                 content={featuredAnalyses}
                 current={current}
                 onClick={this.handleClick}
@@ -86,6 +100,7 @@ class FeaturedAnalysis extends React.Component {
 FeaturedAnalysis.propTypes = {
   classes: PropTypes.shape({}).isRequired,
   takwimu: PropTypes.shape({
+    countries: PropTypes.arrayOf(PropTypes.shape({})).isRequired,
     page: PropTypes.shape({
       featured_analysis: PropTypes.shape({
         value: PropTypes.shape({

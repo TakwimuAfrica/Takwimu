@@ -232,6 +232,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
                   <Typography
                     key={c.id}
                     className={classes.body}
+                    variant="body1"
                     dangerouslySetInnerHTML={{
                       __html: c.value
                     }}

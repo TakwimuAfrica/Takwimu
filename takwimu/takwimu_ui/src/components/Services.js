@@ -1,5 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+import classNames from 'classnames';
+
 import { withStyles, Grid, Typography } from '@material-ui/core';
 
 import ContentSection from './ContentSection';
@@ -11,11 +14,13 @@ const styles = theme => ({
     paddingTop: '2rem',
     paddingBottom: '1rem'
   },
-  contentGrid: {
-    paddingTop: '1rem',
+  content: {
     '& a': {
       color: theme.palette.primary.main
     }
+  },
+  contentGrid: {
+    paddingTop: '1rem'
   }
 });
 
@@ -33,11 +38,12 @@ function Services({ classes, services: { value: services }, ...props }) {
     >
       <Typography
         variant="body1"
+        className={classes.content}
         dangerouslySetInnerHTML={{
-          __html: services.overview
+          __html: services.description
         }}
       />
-      <Grid className={classes.contentGrid}>
+      <Grid className={classNames(classes.content, classes.contentGrid)}>
         {services.services.map(service => (
           <React.Fragment key={service.value.title}>
             <Typography

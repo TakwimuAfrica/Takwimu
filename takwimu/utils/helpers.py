@@ -5,6 +5,8 @@ from operator import itemgetter
 from django.conf import settings
 from django.utils.text import slugify
 
+from wagtail.core.templatetags import wagtailcore_tags
+
 from takwimu.utils.medium import Medium
 
 COUNTRIES = OrderedDict()
@@ -143,7 +145,7 @@ def get_takwimu_services(service_settings):
                 'type': 'service',
                 'value': {
                     'title': service.value['title'],
-                    'description': str(service.value['description']),
+                    'description': str(wagtailcore_tags.richtext(service.value['description'])),
                 }
             }
             items.append(item)
@@ -153,8 +155,8 @@ def get_takwimu_services(service_settings):
         'value': {
             'label': service_settings.label,
             'title': service_settings.title,
-            'description': service_settings.description,
-            'services': items
+            'description': wagtailcore_tags.richtext(service_settings.description),
+            'services': items,
         }
     }
 
@@ -166,7 +168,7 @@ def get_takwimu_faqs(faq_settings):
             'type': 'faq',
             'value': {
                 'question': faq.value['question'],
-                'answer': str(faq.value['answer']),
+                'answer': str(wagtailcore_tags.richtext(faq.value['answer'])),
             }
         }
         items.append(item)
@@ -176,7 +178,7 @@ def get_takwimu_faqs(faq_settings):
         'value': {
             'label': faq_settings.label,
             'title': faq_settings.title,
-            'description': faq_settings.description,
+            'description': wagtailcore_tags.richtext(faq_settings.description),
             'faqs': items
         }
     }

@@ -19,6 +19,7 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.core.templatetags import wagtailcore_tags
 from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
@@ -80,6 +81,29 @@ sdg_choices = [('', 'Please select an SDG')] + sdg_choices
 country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
 
 
+# Fix Geography __str__
+def _geography__str__(self):
+    return '{}'.format(self.name)
+
+Geography.__str__ = _geography__str__
+
+
+class DataByTopicPage(Page):
+    country = models.OneToOneField(Geography, on_delete=models.SET_NULL,
+                            null=True, db_constraint=False,
+                            limit_choices_to={'geo_level': 'country'})
+    description = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('country'),
+        FieldPanel('description')
+    ]
+
+    class Meta:
+        verbose_name = 'Data by Topic'
+        verbose_name_plural = 'Data by Topic'
+
+
 # The abstract model for data indicators, complete with panels
 class TopicPageDataIndicator(models.Model):
     indicator = models.ForeignKey(DataIndicator, on_delete=models.CASCADE)
@@ -132,7 +156,7 @@ class TopicPage(Page):
 
 
 class EntityStructBlock(blocks.StructBlock):
-    title = blocks.CharBlock(required=False)
+    title = blocks.CharBlock()
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
     description = blocks.RichTextBlock(features=['link'], required=False)
@@ -878,7 +902,13 @@ class AboutTakwimuBlock(blocks.StreamBlock):
     def get_api_representation(self, value, context=None):
         representation = super(AboutTakwimuBlock, self).get_api_representation(value, context=context)
         if representation:
-            return representation[0]
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = wagtailcore_tags.richtext(description)
+
+            return content
+
         return {}
 
 
@@ -896,7 +926,13 @@ class MethodologyBlock(blocks.StreamBlock):
     def get_api_representation(self, value, context=None):
         representation = super(MethodologyBlock, self).get_api_representation(value, context=context)
         if representation:
-            return representation[0]
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = wagtailcore_tags.richtext(description)
+
+            return content
+
         return {}
 
 class AboutPage(ModelMeta, Page):

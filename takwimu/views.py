@@ -42,14 +42,12 @@ from takwimu.models.dashboard import (
     ProfilePage,
     Testimonial,
     search_analysis_and_data,
-)
+    DataByTopicPage)
 
 from takwimu.models.utils.search import get_page_details
+from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer
 from takwimu.sdg import SDG
 from takwimu.search import suggest
-
-
-from .renderers import CSSRenderer
 from rest_framework.renderers import StaticHTMLRenderer
 from wagtail.documents.models import Document
 from django.shortcuts import get_object_or_404
@@ -248,7 +246,8 @@ class AutoCompleteAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get("q", "")
         suggestions = suggest(query)
-        return Response(data={"suggestions": suggestions}, status=status.HTTP_200_OK)
+        return Response(data={"suggestions": suggestions},
+                        status=status.HTTP_200_OK)
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
@@ -275,9 +274,18 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         data = json.load(json_data)
 
         ## get profileData aka summaries from wagtail
-        summary_data = ProfileData.objects.filter(country_iso_code=self.geo.geo_code).values('id', 'chart_id', 'summary')
+        summary_data = ProfileData.objects.filter(
+            country_iso_code=self.geo.geo_code).values('id', 'chart_id',
+                                                       'summary')
 
         page_context = {"profile_data_summaries": list(summary_data)}
+
+        # get data by topic page text description
+        try:
+            page = DataByTopicPage.objects.get(country=self.geo)
+            page_context['profile_data_description'] = page.description
+        except DataByTopicPage.DoesNotExist:
+            page_context['profile_data_description'] = ''
 
         # load the profile
         profile_method = takwimu_settings.HURUMAP.get("profile_builder", None)
@@ -323,7 +331,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (StaticHTMLRenderer, CSSRenderer)
+    renderer_classes = (JPEGRenderer, StaticHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
@@ -332,9 +340,11 @@ class FlourishView(APIView):
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:
             filename = kwargs["filename"]
-
         zip_ref = zipfile.ZipFile(doc.file.path, "r")
         file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
+        mode, content_type = ('r', 'text')
+        if not filename.lower().endswith(('html', 'css', 'txt')):
+            mode, content_type = ('rb', 'media/*')
 
-        return Response(open(file_path).read())
+        return Response(open(file_path, 'rb').read(), content_type=content_type)
