@@ -87,7 +87,7 @@ function Chart(options) {
     chart.decimalPlaces = parseInt(options.chartDecimalPlaces) || 0;
     chart.tableDecimalPlaces = parseInt(options.chartDecimalPlaces) || 1;
     chart.colorbrewer = options.colorbrewer || (window.HURUMAP_THEME && window.HURUMAP_THEME.charts.colorbrewer);
-    chart.chartChartShowYAxis = true;
+    chart.chartChartShowYAxis = options.chartChartShowYAxis || (window.HURUMAP_THEME && window.HURUMAP_THEME.charts.show_y_axis) || (chart.chartStatType == "percentage" ? true : false);
     chart.columnWidth = parseInt(options.columnWidth) || 30;          //standard width for column, grouped_column
     chart.columnOffset = parseInt(options.columnOffset) || 10;        //threshold for number of bars for adding scrolling
     chart.chartHeight =

@@ -207,7 +207,8 @@ HURUMAP['theme'] = {
             ],
         },
         'color_scale': 'takwimu',
-        'chart_height': 300
+        'chart_height': 300,
+        'show_y_axis': True
     }
 }
 
