@@ -17,23 +17,6 @@ from wagtail.core.signals import page_published
 from takwimu.models.utils.search import get_widget_data, get_page_details
 from takwimu.search.takwimu_search import TakwimuTopicSearch
 
-from django.core.management.base import BaseCommand
-from takwimu.models.dashboard import ProfilePage
-
-from selenium import webdriver
-from takwimu.models.utils.page import page_indicators_to_images
-
-@receiver(page_published, sender=ProfilePage)
-@receiver(page_published, sender=ProfileSectionPage)
-def save_indicator_image_snapshots(sender, instance, created, **kwargs):
-        options = webdriver.ChromeOptions()
-        options.add_argument('headless')
-        # chrome can not be run as root, which is the case in docker
-        options.add_argument('no-sandbox')
-        options.add_argument('disable-gpu')
-        browser = webdriver.Chrome(options=options)
-
-        page_indicators_to_images(instance, browser)
 
 @receiver(page_published, sender=ProfilePage)
 @receiver(page_published, sender=ProfileSectionPage)
