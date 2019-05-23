@@ -19,6 +19,7 @@ from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.core.templatetags import wagtailcore_tags
 from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
@@ -878,7 +879,13 @@ class AboutTakwimuBlock(blocks.StreamBlock):
     def get_api_representation(self, value, context=None):
         representation = super(AboutTakwimuBlock, self).get_api_representation(value, context=context)
         if representation:
-            return representation[0]
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = wagtailcore_tags.richtext(description)
+
+            return content
+
         return {}
 
 
@@ -896,7 +903,13 @@ class MethodologyBlock(blocks.StreamBlock):
     def get_api_representation(self, value, context=None):
         representation = super(MethodologyBlock, self).get_api_representation(value, context=context)
         if representation:
-            return representation[0]
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = wagtailcore_tags.richtext(description)
+
+            return content
+
         return {}
 
 class AboutPage(ModelMeta, Page):
