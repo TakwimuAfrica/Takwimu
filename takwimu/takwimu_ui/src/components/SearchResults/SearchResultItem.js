@@ -1,6 +1,9 @@
 import React from 'react';
-import { withStyles, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
+
+import { withStyles, Typography } from '@material-ui/core';
+
+import { RichTypography } from '../core';
 
 const styles = theme => ({
   root: {
@@ -38,12 +41,7 @@ function SearchResultItem({
           {country} - {title}
         </Typography>
       </a>
-      <Typography
-        variant="body2"
-        dangerouslySetInnerHTML={{
-          __html: summary
-        }}
-      />
+      <RichTypography variant="body2">{summary}</RichTypography>
     </div>
   );
 }

@@ -9,6 +9,8 @@ import {
   ButtonBase
 } from '@material-ui/core';
 
+import { RichTypography } from '../core';
+
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
 const styles = theme => ({
@@ -106,14 +108,14 @@ function DropDownContent({ classes, title, description, countries, profile }) {
             >
               {title}
             </Typography>
-            <Typography
+
+            <RichTypography
               variant="body2"
               color="textSecondary"
               component="div"
-              dangerouslySetInnerHTML={{
-                __html: description
-              }}
-            />
+            >
+              {description}
+            </RichTypography>
           </div>
         </Grid>
         <Grid

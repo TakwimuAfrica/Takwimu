@@ -12,6 +12,8 @@ import {
   IconButton
 } from '@material-ui/core';
 
+import { RichTypography } from '../core';
+
 const styles = theme => ({
   panel: {
     marginTop: '0.3125rem',
@@ -106,17 +108,15 @@ class Faq extends React.Component {
             </IconButton>
           }
         >
-          <Typography
-            variant="body1"
+          <RichTypography
             className={classNames([
               classes.expandSummaryTitle,
               { [classes.expandedExpandSummaryTitle]: expanded }
             ])}
             onClick={this.handleChange}
-            dangerouslySetInnerHTML={{
-              __html: expandTitle
-            }}
-          />
+          >
+            {expandTitle}
+          </RichTypography>
         </ExpansionPanelSummary>
 
         <ExpansionPanelDetails className={classes.panelDetails}>

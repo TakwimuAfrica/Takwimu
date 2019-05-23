@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Button, Grid, Typography } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles, Button, Grid } from '@material-ui/core';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import A from '../A';
+import { RichTypography } from '../core';
 import Section from '../Section';
 import StoryBlocks from './StoryBlocks';
 import StoryList from './StoryList';
@@ -66,17 +66,13 @@ function LatestNewsStories({
       >
         {hasDescription() && (
           <Grid item xs={12}>
-            <Typography
-              variant="body1"
-              classes={{ root: classes.descriptionRoot }}
-              dangerouslySetInnerHTML={{
-                __html: description
-              }}
-            />
+            <RichTypography classes={{ root: classes.descriptionRoot }}>
+              {description}
+            </RichTypography>
           </Grid>
         )}
         <Grid item xs={12}>
-          <A href={medium} underline="none" component="button">
+          <A href={medium} underline="none">
             <Button classes={{ root: classes.buttonRoot }}>{readMore}</Button>
           </A>
         </Grid>

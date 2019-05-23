@@ -1,9 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, Grid, Typography } from '@material-ui/core';
+
+import { withStyles, Grid } from '@material-ui/core';
 
 import ContentSection from '../ContentSection';
 import Faq from './Faq';
+import { RichTypography } from '../core';
 
 const styles = theme => ({
   root: {},
@@ -28,26 +30,16 @@ function Faqs({ classes, faqs: { value: faqs }, ...props }) {
       classes={{ root: classes.root }}
       {...props}
     >
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{
-          __html: faqs.description
-        }}
-      />
+      <RichTypography>{faqs.description}</RichTypography>
       <Grid
         container
         className={classes.contentGrid}
         direction="column"
         justify="flex-start"
       >
-        {faqs.faqs.map(faq => (
-          <Faq expandTitle={faq.value.question} key={faq.value.question}>
-            <Typography
-              variant="body2"
-              dangerouslySetInnerHTML={{
-                __html: faq.value.answer
-              }}
-            />
+        {faqs.faqs.map(({ value: faq }) => (
+          <Faq expandTitle={faq.question} key={faq.question}>
+            <RichTypography variant="body2">{faq.answer}</RichTypography>
           </Faq>
         ))}
       </Grid>

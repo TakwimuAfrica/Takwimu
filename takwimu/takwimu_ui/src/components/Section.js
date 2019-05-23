@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Typography, withStyles } from '@material-ui/core';
+
+import { withStyles } from '@material-ui/core';
 
 import Layout from './Layout';
+import { RichTypography } from './core';
 
 const styles = theme => ({
   root: {
@@ -20,13 +22,9 @@ function Section({ children, classes, title, variant, ...props }) {
   return (
     <Layout classes={{ root: classes.root }} {...props}>
       {title && (
-        <Typography
-          variant={variant}
-          className={classes.title}
-          dangerouslySetInnerHTML={{
-            __html: title
-          }}
-        />
+        <RichTypography variant={variant} className={classes.title}>
+          {title}
+        </RichTypography>
       )}
       {children}
     </Layout>

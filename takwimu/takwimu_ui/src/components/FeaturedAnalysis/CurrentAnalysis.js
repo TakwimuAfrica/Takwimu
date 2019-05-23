@@ -1,7 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles, Button, Grid, Typography } from '@material-ui/core';
+import { withStyles, Button, Grid } from '@material-ui/core';
+
+import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
 
@@ -108,22 +110,20 @@ function CurrentAnalysis({
               alt={currentAnalysis.country.iso_code}
               className={classes.flag}
             />
-            <Typography
+
+            <RichTypography
               variant="h4"
               component="h1"
               className={classes.title}
-              dangerouslySetInnerHTML={{
-                __html: countrifyTitle(currentAnalysis)
-              }}
-            />
+            >
+              {countrifyTitle(currentAnalysis)}
+            </RichTypography>
           </Grid>
         </Grid>
         <Grid item xs={12}>
-          <Typography
-            variant="body1"
-            className={classes.body}
-            dangerouslySetInnerHTML={{ __html: currentAnalysis.description }}
-          />
+          <RichTypography className={classes.body}>
+            {currentAnalysis.description}
+          </RichTypography>
         </Grid>
         <Grid item xs={12}>
           <Grid

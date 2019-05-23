@@ -3,7 +3,9 @@ import { PropTypes } from 'prop-types';
 
 import classNames from 'classnames';
 
-import { ButtonBase, Typography, withStyles } from '@material-ui/core';
+import { withStyles, ButtonBase } from '@material-ui/core';
+
+import { RichTypography } from '../core';
 
 const styles = theme => ({
   button: {
@@ -55,21 +57,19 @@ function AnalysisListItem({ children, classes, isCurrent, onClick }) {
       })}
       onClick={onClick}
     >
-      <Typography
+      <RichTypography
         variant="subtitle2"
         className={classNames(classes.label, {
           [classes.currentLabel]: isCurrent
         })}
-        dangerouslySetInnerHTML={{ __html: children }}
-      />
+      >
+        {children}
+      </RichTypography>
     </ButtonBase>
   );
 }
 AnalysisListItem.propTypes = {
-  children: PropTypes.oneOfType([
-    PropTypes.arrayOf(PropTypes.node),
-    PropTypes.node
-  ]).isRequired,
+  children: PropTypes.string.isRequired,
   classes: PropTypes.shape({}).isRequired,
   isCurrent: PropTypes.bool,
   onClick: PropTypes.func.isRequired

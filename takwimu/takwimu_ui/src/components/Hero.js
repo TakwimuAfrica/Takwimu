@@ -1,8 +1,9 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Button, Grid, Typography, withStyles } from '@material-ui/core';
+import { withStyles, Button, Grid } from '@material-ui/core';
 
+import { RichTypography } from './core';
 import Section from './Section';
 
 import africanParliament from '../assets/images/africanparliament.jpg';
@@ -84,22 +85,14 @@ function Hero({
             className={classes.hero}
           >
             <Grid item xs={12}>
-              <Typography
-                variant="h1"
-                className={classes.title}
-                dangerouslySetInnerHTML={{
-                  __html: title
-                }}
-              />
+              <RichTypography variant="h1" className={classes.title}>
+                {title}
+              </RichTypography>
             </Grid>
             <Grid item xs={12}>
-              <Typography
-                variant="body1"
-                className={classes.description}
-                dangerouslySetInnerHTML={{
-                  __html: tagline
-                }}
-              />
+              <RichTypography className={classes.description}>
+                {tagline}
+              </RichTypography>
             </Grid>
             <Grid item xs={12}>
               <Button href="#takwimuMakingOf" className={classes.button}>
