@@ -42,7 +42,7 @@
           <h3 class="chart-header">Population</h3>
           {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
         </div>
-        <div class="column-three-quarters" id="chart-column-demographics-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Population by residence" data-initial-sort="-value"></div>
+        <div class="column-three-quarters" id="chart-histogram-demographics-residence_dist" data-stat-type="scaled-percentage" data-chart-title="Population by residence" data-initial-sort="-value"></div>
       </section>
     {% endif %}
 
@@ -91,7 +91,7 @@
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-column-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage votes per candidate" data-initial-sort="-value"></div>
+      <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage votes per candidate" data-initial-sort="-value"></div>
     </section>
    {% endif %}
   </div>
@@ -110,7 +110,7 @@
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-column-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop production in tonnes" data-initial-sort="-value"></div>
+      <div class="column-three-quarters" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop production in tonnes" data-initial-sort="-value"></div>
     </section>
     {% endif %}
   </div>
@@ -129,7 +129,7 @@
             {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio_dist stat_type='number' %}
           </div>
           <div class="column-full">
-            <div id="chart-column-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
+            <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)"></div>
           </div>
         </section>
       </div>
@@ -145,42 +145,42 @@
         {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
           <section class="clearfix stat-row">
             <div class="column-full">
-              <div id="chart-column-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
+              <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
           <section class="clearfix stat-row">
             <div class="column-full">
-              <div id="chart-column-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
+              <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
           <section class="clearfix stat-row">
             <div class="column-full">
-              <div id="chart-column-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
           <section class="clearfix stat-row">
             <div class="column-full">
-              <div id="chart-column-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
+              <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
           <section class="clearfix stat-row">
             <div class="column-full">
-              <div id="chart-column-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
         {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
           <section class="clearfix stat-row">
             <div class="column-full">
-              <div id="chart-column-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
+              <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)"></div>
             </div>
           </section>
         {% endif %}
@@ -200,7 +200,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-donors-donor_assistance_dist"
+           id="chart-histogram-donors-donor_assistance_dist"
            data-chart-title="Percentage contribution by principal donors"
            data-stat-type="scaled-percentage"></div>
     </section>
@@ -272,7 +272,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
        <div class="column-three-quarters"
-            id="chart-column-fgm-fgm_age_dist"
+            id="chart-histogram-fgm-fgm_age_dist"
             data-stat-type="scaled-percentage"
             data-chart-title="Percentage of women that have undergone FGM by age">
      </div>
@@ -341,7 +341,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-cereal_yield_kg_per_hectare"
+           id="chart-histogram-worldbank-cereal_yield_kg_per_hectare"
            data-stat-type=""
            data-chart-title="Cereal yield in kg per hectare (Thousands)">
       </div>
@@ -355,7 +355,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-agricultural_land"
+           id="chart-histogram-worldbank-agricultural_land"
            data-stat-type="scaled-percentage"
            data-chart-title="Agricultural land (% of land area)">
       </div>
@@ -369,7 +369,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-gini_index"
+           id="chart-histogram-worldbank-gini_index"
            data-stat-type=""
            data-chart-title="GINI index">
       </div>
@@ -383,7 +383,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-access_to_basic_services"
+           id="chart-histogram-worldbank-access_to_basic_services"
            data-stat-type=""
            data-chart-title="People using at least basic drinking water services (% of population)">
       </div>
@@ -453,7 +453,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-foreign_direct_investment_net_inflows"
+           id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"
            data-stat-type=""
            data-chart-title="Foreign direct investment, net inflows (% of GDP)">
       </div>
@@ -467,7 +467,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-maternal_mortality"
+           id="chart-histogram-worldbank-maternal_mortality"
            data-stat-type=""
            data-chart-title="Maternal mortality ratio (modeled estimate, per 100,000 live births)">
       </div>
@@ -495,7 +495,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-fgm_prevalence"
+           id="chart-histogram-worldbank-fgm_prevalence"
            data-stat-type=""
            data-chart-title="Female Genital Mutilation Prevelence (%)">
       </div>
@@ -523,7 +523,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-gdp_per_capita"
+           id="chart-histogram-worldbank-gdp_per_capita"
            data-stat-type=""
            data-chart-title="GDP per capita (current US$)">
       </div>
@@ -537,7 +537,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-primary_education_completion_rate"
+           id="chart-histogram-worldbank-primary_education_completion_rate"
            data-stat-type=""
            data-chart-title="Primary completion rate,(% of relevant age group)">
       </div>
@@ -565,7 +565,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-nurses_and_midwives"
+           id="chart-histogram-worldbank-nurses_and_midwives"
            data-stat-type="scaled-percentage"
            data-chart-title="Nurses and midwives (per 1,000 people)">
       </div>
@@ -579,7 +579,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-mobile_phone_subscriptions"
+           id="chart-histogram-worldbank-mobile_phone_subscriptions"
            data-stat-type=""
            data-chart-title="Mobile phone subscriptions (per 100 people)">
       </div>
@@ -593,7 +593,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-gdp_per_capita_growth"
+           id="chart-histogram-worldbank-gdp_per_capita_growth"
            data-stat-type=""
            data-chart-title="GDP per capita growth (annual %)">
       </div>
@@ -607,7 +607,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-prevalence_of_undernourishment"
+           id="chart-histogram-worldbank-prevalence_of_undernourishment"
            data-stat-type="scaled-percentage"
            data-chart-title="Prevalence of undernourishment (% of population)">
       </div>
@@ -635,7 +635,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-tax_as_percentage_of_gdp"
+           id="chart-histogram-worldbank-tax_as_percentage_of_gdp"
            data-stat-type=""
            data-chart-title="Tax as percentage of GDP">
       </div>
@@ -649,7 +649,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-births_attended_by_skilled_health_staff"
+           id="chart-histogram-worldbank-births_attended_by_skilled_health_staff"
            data-stat-type=""
            data-chart-title="Births attended by skilled health staff (% of total)">
       </div>
@@ -663,7 +663,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-incidence_of_malaria_per_1000_pop_at_risk"
+           id="chart-histogram-worldbank-incidence_of_malaria_per_1000_pop_at_risk"
            data-stat-type=""
            data-chart-title="Incidence of malaria per 1000 population at risk">
       </div>
@@ -677,7 +677,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-tax_revenue"
+           id="chart-histogram-worldbank-tax_revenue"
            data-stat-type=""
            data-chart-title="Tax revenue (current LCU)">
       </div>
@@ -691,7 +691,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-gdp"
+           id="chart-histogram-worldbank-gdp"
            data-stat-type=""
            data-chart-title="GDP">
       </div>
@@ -705,7 +705,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-column-worldbank-gdp_growth"
+           id="chart-histogram-worldbank-gdp_growth"
            data-stat-type=""
            data-chart-title="GDP Growth">
       </div>
