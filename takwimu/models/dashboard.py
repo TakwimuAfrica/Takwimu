@@ -371,11 +371,12 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                               label='Chart Type')),
             ('data_stat_type', blocks.ChoiceBlock(required=True,
                                                   choices=[
+                                                      ('dollar', 'Dollar'),
+                                                      ('number', 'Number'),
                                                       ('percentage',
                                                        'Percentage'),
                                                       ('scaled-percentage',
                                                        'Scaled Percentage'),
-                                                      ('dollar', 'Dollar')
                                                   ],
                                                   label='Stat Type')),
             ('data_source_link', blocks.URLBlock(
