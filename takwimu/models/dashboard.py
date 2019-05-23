@@ -365,18 +365,15 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                               choices=[
                                                   ('histogram', 'Histogram'),
                                                   ('pie', 'Pie Chart'),
-                                                  ('grouped_column',
-                                                   'Grouped Column')
+                                                  ('grouped_column', 'Grouped Column'),
                                               ],
                                               label='Chart Type')),
             ('data_stat_type', blocks.ChoiceBlock(required=True,
                                                   choices=[
                                                       ('dollar', 'Dollar'),
                                                       ('number', 'Number'),
-                                                      ('percentage',
-                                                       'Percentage'),
-                                                      ('scaled-percentage',
-                                                       'Scaled Percentage'),
+                                                      ('percentage', 'Percentage'),
+                                                      ('scaled-percentage', 'Scaled Percentage'),
                                                   ],
                                                   label='Stat Type')),
             ('data_source_link', blocks.URLBlock(
@@ -1322,17 +1319,15 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
                                     choices=[
                                         ('histogram', 'Histogram'),
                                         ('pie', 'Pie Chart'),
-                                        ('grouped_column',
-                                         'Grouped Column')
+                                        ('grouped_column', 'Grouped Column'),
                                     ],
                                     label='Chart Type')
     data_stat_type = blocks.ChoiceBlock(required=True,
                                         choices=[
-                                            ('percentage',
-                                             'Percentage'),
-                                            ('scaled-percentage',
-                                             'Scaled Percentage'),
-                                            ('dollar', 'Dollar')
+                                            ('dollar', 'Dollar'),
+                                            ('number', 'Number'),
+                                            ('percentage', 'Percentage'),
+                                            ('scaled-percentage', 'Scaled Percentage'),
                                         ],
                                         label='Stat Type')
     chart_height = blocks.IntegerBlock(required=False,
