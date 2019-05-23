@@ -24,9 +24,6 @@ import RelatedContent from '../RelatedContent';
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
 import CarouselTopic from './topics/CarouselTopic';
 
-// TODO: Turn indicators to images
-// import html2canvas from 'html2canvas';
-
 const styles = theme => ({
   root: {
     maxWidth: '933px'
@@ -99,7 +96,7 @@ Font.register(
   { family: 'Lora' }
 );
 
-const AnalysisPDF = ({ /* images={images} , */ content }) => (
+const AnalysisPDF = ({ content }) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
       <Image style={pdfStyles.hero} src={profileHeroImage} />
@@ -117,12 +114,6 @@ const AnalysisPDF = ({ /* images={images} , */ content }) => (
                 </Text>
               ));
           }
-
-          // TODO: Turn indicators to images
-          // if (c.type === 'indicator') {
-          //   return <Image src={images[c.id]}/>;
-          // }
-
           return null;
         })}
       </View>
@@ -137,8 +128,6 @@ AnalysisPDF.propTypes = {
 function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
   const [analysisBlob, setAnalysisBlob] = useState(null);
   const [id, setId] = useState(null);
-  // TODO: Turn indicators to images
-  // const [images, setImages] = useState({});
 
   useEffect(() => {
     if (`${content.id}-${topicIndex}` !== id) {
@@ -160,18 +149,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
       document.body.appendChild(script);
     }
 
-    // TODO: Turn indicators to images
-    // document.querySelectorAll("[id^='DataContainer-']").forEach(async el => {
-    //   const canvas = await html2canvas(el);
-    //   setImages({ ...images, [el.id.replace('DataContainer-', '')]: canvas.toDataURL("image/png") })
-    // });
-
-    ReactPDF.pdf(
-      <AnalysisPDF
-        content={content.body[topicIndex].value}
-        /* images={images} */
-      />
-    )
+    ReactPDF.pdf(<AnalysisPDF content={content.body[topicIndex].value} />)
       .toBlob()
       .then(setAnalysisBlob);
   }, [id]);
