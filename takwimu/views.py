@@ -20,6 +20,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from wagtail.contrib.settings.context_processors import settings
+from wagtail.images import get_image_model
 
 from wazimap.views import GeographyDetailView
 from wazimap.geo import geo_data, LocationNotFound
@@ -42,10 +43,11 @@ from takwimu.models.dashboard import (
     Testimonial,
     search_analysis_and_data,
 )
+from takwimu.models.utils.page import find_indicator_with_id_from_page
 from takwimu.models.utils.search import get_page_details
 from takwimu.sdg import SDG
 from takwimu.search import suggest
-
+from takwimu.utils.image import decode_base64_file
 
 from .renderers import CSSRenderer
 from rest_framework.renderers import StaticHTMLRenderer
@@ -246,7 +248,8 @@ class AutoCompleteAPIView(APIView):
     def get(self, request, *args, **kwargs):
         query = request.GET.get("q", "")
         suggestions = suggest(query)
-        return Response(data={"suggestions": suggestions}, status=status.HTTP_200_OK)
+        return Response(data={"suggestions": suggestions},
+                        status=status.HTTP_200_OK)
 
 
 class IndicatorsGeographyDetailView(GeographyDetailView):
@@ -333,3 +336,20 @@ class FlourishView(APIView):
         zip_ref.close()
 
         return Response(open(file_path).read())
+
+
+class TwitterImageAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        id = request.data.get('id')
+        raw_image = request.data.get('image')
+        model = get_image_model()
+
+        image = model.objects.create(title=id,
+                                     file=decode_base64_file(data=raw_image,
+                                                             file_name=id))
+
+        if image:
+            return Response({'image': image.file.url},
+                            status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)

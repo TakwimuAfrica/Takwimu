@@ -7,7 +7,7 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, LegalView, \
     IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
-    FlourishView, AboutPageRedirectView
+    FlourishView, AboutPageRedirectView, TwitterImageAPIView
 from wazimap.views import HomepageView as ProfileView
 from census.views import DataView
 from takwimu.views import handler404, handler500
@@ -34,6 +34,8 @@ takwimu_urlpatterns = [
     url(r'^profiles/$', ProfileView.as_view(), name='profiles'),
     url(r'^feed/$', CountryProfileFeed(), name='rss_feed'),
     url(r'^api/search/$', SearchAPIView.as_view(), name='api-search'),
+    url(r'^api/twitter_view/$', TwitterImageAPIView.as_view(),
+        name='api-twitter-image'),
     url(r'^api/autocomplete/$', AutoCompleteAPIView.as_view(),
         name='api-autocomplete'),
     url(r'^api/v2/', api_router.urls),
