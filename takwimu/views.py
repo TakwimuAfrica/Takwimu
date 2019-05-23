@@ -344,9 +344,14 @@ class TwitterImageAPIView(APIView):
         raw_image = request.data.get('image')
         model = get_image_model()
 
-        image = model.objects.create(title=id,
-                                     file=decode_base64_file(data=raw_image,
-                                                             file_name=id))
+        try:
+            image = model.objects.get(title=id)
+            image.file = decode_base64_file(data=raw_image, file_name=id)
+            image.save()
+        except model.DoesNotExist:
+            image = model.objects.create(title=id,
+                                         file=decode_base64_file(data=raw_image,
+                                                                 file_name=id))
 
         if image:
             return Response({'image': image.file.url},
