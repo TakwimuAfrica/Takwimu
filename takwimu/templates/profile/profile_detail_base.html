@@ -162,7 +162,7 @@
       // profileData is created in hurumap/profile_detail.html
 
       var profileData = window.profileData || {};
-      profileData.description = '{{ profile_data_description|safe }}';
+      profileData.description = '{{ profile_data_description|richtext|safe }}';
       profileData.tabs = [{name: 'All', href: ''}];
       if (!profileData.demographics.is_missing) {
           profileData.tabs.push({name: 'Demographics', href: '#demographics'});

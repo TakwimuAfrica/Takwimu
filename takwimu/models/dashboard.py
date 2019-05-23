@@ -85,12 +85,16 @@ class DataByTopicPage(Page):
     country = models.OneToOneField(Geography, on_delete=models.SET_NULL,
                             blank=True, null=True, db_constraint=False,
                             limit_choices_to={'geo_level': 'country'})
-    description = models.TextField(blank=False)
+    description = RichTextField()
 
     content_panels = Page.content_panels + [
         FieldPanel('country'),
         FieldPanel('description')
     ]
+
+    class Meta:
+        verbose_name = 'Data by Topic'
+        verbose_name_plural = 'Data by Topic'
 
 
 # The abstract model for data indicators, complete with panels
