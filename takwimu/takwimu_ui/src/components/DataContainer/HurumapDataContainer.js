@@ -6,25 +6,41 @@ import { withTheme } from '@material-ui/core/styles';
 
 import DataActions from './DataActions';
 import IFrame from './IFrame';
-import { getShareHandler } from './common';
+import { shareIndicator, uploadImage } from './common';
 
 function DataContainer({ id, data, theme }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
-  const handleDownload = () => {
+
+  const toCanvas = () => {
     const iframe = document.getElementById(iframeId);
-    iframe.contentWindow.domtoimage
-      .toPng(iframe.contentDocument.getElementById('census-chart'), {
+    return iframe.contentWindow.domtoimage.toPng(
+      iframe.contentDocument.getElementById('census-chart'),
+      {
         bgcolor: theme.palette.data.light
-      })
-      .then(dataUrl => {
-        const link = document.createElement('a');
-        link.download = `${data.title}.png`;
-        link.href = dataUrl;
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      }
+    );
+  };
+
+  const handleShare = () => {
+    toCanvas().then(canvas => {
+      uploadImage(id, canvas.toDataURL('image/png')).then(success => {
+        if (success) {
+          shareIndicator(id);
+        }
       });
+    });
+  };
+
+  const handleDownload = () => {
+    toCanvas().then(canvas => {
+      const link = document.createElement('a');
+      link.download = `${data.title}.png`;
+      link.target = '_blank';
+      link.href = canvas.toDataURL('image/png');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   };
 
   const embedCode = `<iframe
@@ -46,7 +62,7 @@ function DataContainer({ id, data, theme }) {
       <DataActions
         onDownload={handleDownload}
         embedCode={embedCode}
-        onShare={getShareHandler(id, data.title)}
+        onShare={handleShare}
       />
     </Fragment>
   );
