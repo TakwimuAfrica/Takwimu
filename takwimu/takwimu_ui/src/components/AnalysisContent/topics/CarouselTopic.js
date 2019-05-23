@@ -30,9 +30,7 @@ const styles = theme => ({
       content: '""',
       width: '100%',
       height: '100%',
-      position: 'absolute',
-      boxShadow: '0 2px 6px 4px rgba(0, 0, 0, 0.2)',
-      clipPath: 'inset(0 0 -0.75rem 0)' // bottom only shadow
+      position: 'absolute'
     }
   },
   carousel: {
