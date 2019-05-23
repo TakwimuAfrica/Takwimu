@@ -81,9 +81,16 @@ sdg_choices = [('', 'Please select an SDG')] + sdg_choices
 country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
 
 
+# Fix Geography __str__
+def _geography__str__(self):
+    return '{}'.format(self.name)
+
+Geography.__str__ = _geography__str__
+
+
 class DataByTopicPage(Page):
     country = models.OneToOneField(Geography, on_delete=models.SET_NULL,
-                            blank=True, null=True, db_constraint=False,
+                            null=True, db_constraint=False,
                             limit_choices_to={'geo_level': 'country'})
     description = RichTextField()
 
