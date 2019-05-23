@@ -53,7 +53,7 @@ function ContactWhereToNext({ classes, socialMedia }) {
         </Card>
 
         <Card
-          href="/about/"
+          href="/about"
           classes={{ root: classes.cardMargin }}
           variant="dual"
         >

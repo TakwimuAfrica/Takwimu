@@ -23,10 +23,13 @@ PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-
 
 takwimu_urlpatterns = [
     url(r'^$', cache_page(STANDARD_CACHE_TIME)(HomePageView.as_view()), name='home'),
-    url(r'^faqs$', AboutPageRedirectView.as_view(), name='faqs'),
-    url(r'^services$', AboutPageRedirectView.as_view(), name='services'),
-    url(r'^methodology$', AboutPageRedirectView.as_view(), name='methodology'),
-    url(r'^legal$', LegalView.as_view(), name='legal'),
+    # Redirect wazimap r'^about$' route to Wagtail `AboutPage`
+    url(r'^about$', RedirectView.as_view(url='about/', permanent=True)),
+    url(r'^faqs/$', AboutPageRedirectView.as_view(), name='faqs'),
+    url(r'^faqs/$', AboutPageRedirectView.as_view(), name='faqs'),
+    url(r'^services/$', AboutPageRedirectView.as_view(), name='services'),
+    url(r'^methodology/$', AboutPageRedirectView.as_view(), name='methodology'),
+    url(r'^legal/$', LegalView.as_view(), name='legal'),
     url(
         r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),
         IndicatorsGeographyDetailView.as_view(),

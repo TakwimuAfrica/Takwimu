@@ -1,5 +1,5 @@
 /* eslint-disable react/no-danger */
-import React, { Fragment } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles } from '@material-ui/core';
@@ -13,6 +13,25 @@ const styles = {
 };
 
 function DataContainer({ id, classes, data }) {
+  const [animated, setAnimated] = useState(false);
+  const [animatedId, setAnimatedId] = useState('');
+
+  useEffect(
+    () => {
+      let timer1;
+      if (animated) {
+        timer1 = setTimeout(() => setAnimated(true), 1000);
+      }
+
+      return () => {
+        if (timer1) {
+          clearTimeout(timer1);
+        }
+      };
+    },
+    [animated] // useEffect will run only one time
+  );
+
   const handleDownload = () => {
     const iframe = document.getElementById(`data-indicator-${id}`);
     iframe.contentWindow
@@ -28,10 +47,25 @@ function DataContainer({ id, classes, data }) {
       });
   };
 
+  const updateIframeHeight = chart => {
+    const { offsetHeight } = chart;
+    const iframe = document.getElementById(`data-indicator-${id}`);
+    iframe.style.height = `${offsetHeight}px`;
+  };
+
   const handleIframeLoaded = e => {
     const iframe = e.target;
-    const { offsetHeight } = iframe.contentDocument.getElementById('wrapper');
-    iframe.style.height = `${offsetHeight}px`;
+    // It's possible we'll come across different ids in the future so lets
+    // store the id name in component state as well for easier lookup.
+    const popUp = iframe.contentDocument.getElementById(
+      'flourish-popup-constrainer'
+    );
+    if (popUp) {
+      setAnimated(true);
+      setAnimatedId('flourish-popup-constrainer');
+    } else {
+      updateIframeHeight(iframe.contentDocument.getElementById('wrapper'));
+    }
 
     // Add htm2canvas
     const frameHead = iframe.contentDocument
@@ -44,10 +78,15 @@ function DataContainer({ id, classes, data }) {
     frameHead.appendChild(script);
   };
 
-  const embedCode = `<iframe title="${data.title}" 
-  frameborder="0" 
-  scrolling="no" 
-  src="https://takwimu.africa/flourish/${data.html}" />`;
+  if (animated) {
+    const iframe = document.getElementById(`data-indicator-${id}`);
+    updateIframeHeight(iframe.contentDocument.getElementById(animatedId));
+  }
+
+  const embedCode = `<iframe title="${data.title}"
+ frameborder="0"
+ scrolling="no"
+ src="https://takwimu.africa/flourish/${data.html}" />`;
 
   return (
     <Fragment>

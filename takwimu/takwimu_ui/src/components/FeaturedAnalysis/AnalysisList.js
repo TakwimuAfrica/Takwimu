@@ -19,7 +19,7 @@ const styles = theme => ({
   content: {}
 });
 
-function AnalysisList({ classes, content, current, onClick }) {
+function AnalysisList({ classes, countrifyTitle, content, current, onClick }) {
   return (
     <Grid
       container
@@ -34,7 +34,7 @@ function AnalysisList({ classes, content, current, onClick }) {
           isCurrent={index === current}
           onClick={() => onClick(index)}
         >
-          {c.value.title}
+          {countrifyTitle(c.value)}
         </AnalysisListItem>
       ))}
     </Grid>
@@ -43,6 +43,7 @@ function AnalysisList({ classes, content, current, onClick }) {
 
 AnalysisList.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  countrifyTitle: PropTypes.func.isRequired,
   content: PropTypes.arrayOf(
     PropTypes.shape({
       value: PropTypes.shape({}).isRequired

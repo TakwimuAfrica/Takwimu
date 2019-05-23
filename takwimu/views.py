@@ -49,7 +49,7 @@ from takwimu.sdg import SDG
 from takwimu.search import suggest
 
 
-from .renderers import CSSRenderer
+from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer
 from rest_framework.renderers import StaticHTMLRenderer
 from wagtail.documents.models import Document
 from django.shortcuts import get_object_or_404
@@ -323,7 +323,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (StaticHTMLRenderer, CSSRenderer)
+    renderer_classes = (JPEGRenderer, StaticHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
@@ -332,9 +332,11 @@ class FlourishView(APIView):
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:
             filename = kwargs["filename"]
-
         zip_ref = zipfile.ZipFile(doc.file.path, "r")
         file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
+        mode, content_type = ('r', 'text')
+        if not filename.lower().endswith(('html', 'css', 'txt')):
+            mode, content_type = ('rb', 'media/*')
 
-        return Response(open(file_path).read())
+        return Response(open(file_path, 'rb').read(), content_type=content_type)
