@@ -467,9 +467,7 @@ function Chart(options) {
       .attr("class", "column-set")
       .style("margin-top", 0)
       .style("height", chart.settings.height + "px")
-      .style("overflow", function() {
-        return chart.chartChartShowYAxis ? "auto hidden" : "hidden";
-      });
+      .style("overflow", "auto hidden");
 
     // narrow padding for histograms
     if (chart.chartType == "histogram") {

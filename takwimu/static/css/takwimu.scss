@@ -778,21 +778,25 @@ header.section-contents h1 {
     text-decoration: underline;
   }
 }
+.column-set {
+  scrollbar-track-color: #d3d3d3;
+  scrollbar-base-color: #d3d3d3;
+  scrollbar-face-color: #d3d3d3;
+}
 .column-set::-webkit-scrollbar {
-  width: 4px;
+  width: 0.563rem;
 }
 .column-set::-webkit-scrollbar-track {
-  border-radius: 4.5px;
+  border-radius: 0.281rem;
 }
 /* Handle */
 .column-set::-webkit-scrollbar-thumb {
   background: #d3d3d3;
-  border-radius: 4.5px;
+  border-radius: 0.281rem;
 }
-/* Handle on hover 
-.column-set::-webkit-scrollbar-thumb:hover {
-  background: rgb(142, 211, 165);
-} */
+.column-set::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
 
 /* --------------------------------------------
  * SECTION: Country Flags Navigation
