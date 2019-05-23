@@ -79,17 +79,17 @@ const pdfStyles = StyleSheet.create({
     // fontFamily: 'Lora'
   },
   text: {
-    fontSize: 18,
+    fontSize: 14,
     lineHeight: 2.05,
     // fontFamily: 'Muli',
-    paddingBottom: 10
+    paddingBottom: 28
   },
   boldText: {
-    fontSize: 18,
+    fontSize: 14,
     fontWeight: 500,
     lineHeight: 2.05,
     // fontFamily: 'Muli',
-    paddingBottom: 10
+    paddingBottom: 28
   }
 });
 
