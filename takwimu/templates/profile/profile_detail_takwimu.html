@@ -9,7 +9,7 @@
 {% block profile_detail %}
 
 {# DEMOGRAPHICS #}
-{% if not demographics.is_missing or not worldbank.youth_unemployment.is_missing or not worldbank.employment_to_population_ratio.is_missing %}
+{% if not demographics.is_missing or not worldbank.youth_unemployment.is_missing or not worldbank.employment_to_population_ratio.is_missing or not worldbank.employment_to_population_ratio.is_missing %}
 <article id="demographics" class="clearfix">
   <header class="section-contents"><h1>Demographics</h1></header>
   <div class="section-container">
@@ -264,7 +264,7 @@
 {% endif %}
 
 {# CROPS #}
-{% if not crops.crop_distribution.is_missing or not worldbank.is_missing %}
+{% if not crops.crop_distribution.is_missing or not worldbank.agricultural_land.is_missing or not worldbank.cereal_yield_kg_per_hectare.is_missing  %}
 <article id="agriculture" class="clearfix">
   <header class="section-contents"><h1>Agriculture</h1></header>
   <div class="section-container">
@@ -379,7 +379,7 @@
 {% endif %}
 
 {# ODA #}
-{% if not donors.is_missing or not worldbank.is_missing %}
+{% if not donors.is_missing or not worldbank.foreign_direct_investment_net_inflows.is_missing %}
 <article id="oda" class="clearfix">
   <header class="section-contents"><h1>Development Assistance</h1></header>
   <div class="section-container">
@@ -551,7 +551,7 @@
 
 
 {# FINANCIAL INCLUSION #}
-{% if not worldbank.is_missing %}
+{% if not worldbank.account_ownership.is_missing or not worldbank.mobile_phone_subscriptions.is_missing  %}
 <article id="financial-inclusion" class="clearfix" data-tab="Financial Inclusion">
   <header class="section-contents"><h1>Financial Inclusions</h1></header>
   <div class="section-container">
@@ -610,7 +610,7 @@
 
 
 {# PUBLIC FINANCES #}
-{% if not worldbank.is_missing %}
+{% if not worldbank.gini_index.is_missing or not worldbank.gdp_per_capita_growth.is_missing or not worldbank.gdp_per_capita.is_missing or not worldbank.tax_as_percentage_of_gdp.is_missing or not worldbank.tax_revenue.is_missing or not worldbank.gdp.is_missing or not worldbank.gdp_growth.is_missing %}
 <article id="public-finances" class="clearfix" data-tab="Public Finances">
   <header class="section-contents"><h1>Public Finances</h1></header>
   <div class="section-container">
