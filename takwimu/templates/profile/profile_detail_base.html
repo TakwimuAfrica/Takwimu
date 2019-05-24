@@ -134,7 +134,7 @@
 
   <!-- Takwimu & HURUmap  -->
   <script>
-      // I. Takwimu 
+      // I. Takwimu
       var takwimu = window.takwimu || {};
       takwimu.page = takwimu.page || {};
       takwimu.page.id = 'topic';
@@ -164,16 +164,16 @@
       var profileData = window.profileData || {};
       profileData.description = '{{ profile_data_description|richtext|safe }}';
       profileData.tabs = [{name: 'All', href: ''}];
-      if (!profileData.demographics.is_missing) {
+      if (!profileData.demographics.is_missing || !profileData.worldbank.youth_unemployment.is_missing || !profileData.worldbank.employment_to_population_ratio.is_missing) {
           profileData.tabs.push({name: 'Demographics', href: '#demographics'});
       }
       if (!profileData.elections.is_missing) {
           profileData.tabs.push({name: 'Elections', href: '#elections'});
       }
-      if (!profileData.crops.crop_distribution.is_missing) {
+      if (!profileData.crops.crop_distribution.is_missing || !profileData.worldbank.agricultural_land.is_missing || !profileData.worldbank.cereal_yield_kg_per_hectare.is_missing) {
           profileData.tabs.push({name: 'Agriculture', href: '#agriculture'});
       }
-      if (!profileData.donors.is_missing) {
+      if (!profileData.donors.is_missing || !profileData.worldbank.foreign_direct_investment_net_inflows.is_missing) {
           profileData.tabs.push({name: 'ODA', href: '#oda'});
       }
       if (!profileData.poverty.is_missing) {
@@ -182,17 +182,27 @@
       if (!profileData.fgm.is_missing) {
           profileData.tabs.push({name: 'Health', href: '#health'});
       }
+      if (!profileData.worldbank.primary_school_enrollment.is_missing || !profileData.worldbank.adult_literacy_rate.is_missing || !profileData.worldbank.secondary_school_enrollment.is_missing) {
+          profileData.tabs.push({
+              name: 'Education',
+              href: '#Education'
+          });
+      }
       if (!profileData.security.is_missing) {
           profileData.tabs.push({
               name: 'Crime Reports',
               href: '#crime-reports'
           });
       }
+      if (!profileData.worldbank.account_ownership.is_missing || !profileData.worldbank.mobile_phone_subscriptions.is_missing) {
+          profileData.tabs.push({name: 'Financial Inclusion', href: '#financial-inclusion'});
+      }
+
       if (!profileData.budget.is_missing) {
           profileData.tabs.push({name: 'Budget', href: '#budget'});
       }
       if (!profileData.worldbank.is_missing) {
-          profileData.tabs.push({name: 'World Bank', href: '#worldbank'});
+          profileData.tabs.push({name: 'Public Finances', href: '#public-finances'});
       }
 
       // While viz are created outside React, lets stick to using jQuery
