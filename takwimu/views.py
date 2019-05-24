@@ -20,6 +20,7 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from wagtail.contrib.settings.context_processors import settings
+from wagtail.images import get_image_model
 
 from wazimap.views import GeographyDetailView
 from wazimap.geo import geo_data, LocationNotFound
@@ -48,6 +49,9 @@ from takwimu.models.utils.search import get_page_details
 from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer
 from takwimu.sdg import SDG
 from takwimu.search import suggest
+from takwimu.utils.image import decode_base64_file
+
+from .renderers import CSSRenderer
 from rest_framework.renderers import StaticHTMLRenderer
 from wagtail.documents.models import Document
 from django.shortcuts import get_object_or_404
@@ -347,4 +351,28 @@ class FlourishView(APIView):
         if not filename.lower().endswith(('html', 'css', 'txt')):
             mode, content_type = ('rb', 'media/*')
 
-        return Response(open(file_path, 'rb').read(), content_type=content_type)
+        return Response(open(file_path).read())
+
+
+class TwitterImageAPIView(APIView):
+    def post(self, request, *args, **kwargs):
+        id = request.data.get('id')
+        raw_image = request.data.get('image')
+        model = get_image_model()
+
+        try:
+            image = model.objects.get(title=id)
+            image.file = decode_base64_file(data=raw_image, file_name=id)
+            image.save()
+        except model.DoesNotExist:
+            image = model.objects.create(title=id,
+                                         file=decode_base64_file(data=raw_image,
+                                                                 file_name=id))
+
+        if image:
+            # Create rendition image with width 600
+            # Hurumap visuals profile_detail_base expects it created
+            return Response({'image': image.get_rendition('width-600').url},
+                            status=status.HTTP_200_OK)
+
+        return Response(status=status.HTTP_400_BAD_REQUEST)

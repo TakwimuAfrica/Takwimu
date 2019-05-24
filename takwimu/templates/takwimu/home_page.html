@@ -4,6 +4,14 @@
 
 {% block head_title %} {% if title %}{{ title }} - {% endif %}{{ HURUMAP.name }}{% endblock %}
 
+{% block head_twitter_tags %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ twitter.title }}">
+  <meta name="twitter:description" content="{{ twitter.description }}">
+  
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter.image_url }}">
+{% endblock %}
+
 {% block body_id %}homepage{% endblock %}
 
 {% block content %}

@@ -8,6 +8,16 @@
 {% block head_title %} Data - {{ geography.this.name }} -
   {{ HURUMAP.name }}{% endblock %}
 
+
+{% block head_twitter_tags %}
+  {% if request.GET.indicator %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ request.GET.title }}">
+    <meta name="twitter:description" content="{{ request.GET.description }}">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/media/images/{{ request.GET.image }}">
+  {% endif %}
+{% endblock %}
+
 {% block head_css %}
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
@@ -205,6 +215,14 @@
                       .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
               }
           });
+          const url = new URL(window.location);
+          const indicator = url.searchParams.get('indicator');
+          if (indicator) {
+              const element = document.getElementById(indicator);
+              if (element) {
+                  element.parentElement.scrollIntoView();
+              }
+          }
       });
 
 

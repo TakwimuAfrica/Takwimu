@@ -6,24 +6,41 @@ import { withTheme } from '@material-ui/core/styles';
 
 import DataActions from './DataActions';
 import IFrame from './IFrame';
+import { shareIndicator, uploadImage } from './common';
 
-function DataContainer({ data, theme }) {
-  const id = `cr-embed-country-${data.data_country}-${data.data_id}`;
-  const handleDownload = () => {
-    const iframe = document.getElementById(id);
-    iframe.contentWindow.domtoimage
-      .toPng(iframe.contentDocument.getElementById('census-chart'), {
+function DataContainer({ id, data, theme }) {
+  const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
+
+  const toPng = () => {
+    const iframe = document.getElementById(iframeId);
+    return iframe.contentWindow.domtoimage.toPng(
+      iframe.contentDocument.getElementById('census-chart'),
+      {
         bgcolor: theme.palette.data.light
-      })
-      .then(dataUrl => {
-        const link = document.createElement('a');
-        link.download = `${data.title}.png`;
-        link.href = dataUrl;
-        link.target = '_blank';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+      }
+    );
+  };
+
+  const handleShare = () => {
+    toPng().then(dataURL => {
+      uploadImage(id, dataURL).then(success => {
+        if (success) {
+          shareIndicator(id);
+        }
       });
+    });
+  };
+
+  const handleDownload = () => {
+    toPng().then(dataURL => {
+      const link = document.createElement('a');
+      link.download = `${data.title}.png`;
+      link.target = '_blank';
+      link.href = dataURL;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
   };
 
   const embedCode = `<iframe
@@ -40,16 +57,21 @@ function DataContainer({ data, theme }) {
 
   return (
     <Fragment>
-      <IFrame id={id} data={data} />
+      <IFrame id={iframeId} data={data} />
 
-      <DataActions onDownload={handleDownload} embedCode={embedCode} />
+      <DataActions
+        onDownload={handleDownload}
+        embedCode={embedCode}
+        onShare={handleShare}
+      />
     </Fragment>
   );
 }
 
 DataContainer.propTypes = {
   theme: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  id: PropTypes.string.isRequired
 };
 
 export default withTheme()(DataContainer);

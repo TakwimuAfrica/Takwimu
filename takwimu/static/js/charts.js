@@ -16,6 +16,7 @@ function Chart(options) {
   var showActions = !!(window.takwimu && window.takwimu.country);
 
   chart.init = function(options) {
+    chart.id = options.chartContainer;
     // establish our base vars
     chart.chartContainer = d3
       .select("#" + options.chartContainer)
@@ -1049,7 +1050,8 @@ function Chart(options) {
       .classed("chart-action-links", true);
 
     chart.share = chart.actionLinks
-        .append("a");
+        .append("a")
+        .on("click", chart.share);
     chart.share.append('img')
         .attr('src', '/static/img/network-connection.svg');
     chart.share.append('p')
@@ -1815,14 +1817,57 @@ function Chart(options) {
     }
   };
 
+  const getCookie = name => {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+      const cookies = document.cookie.split(';').map(cookie => cookie.trim());
+      const found = cookies.find(
+        cookie => cookie.substring(0, name.length + 1) === `${name}=`
+      );
+      if (found) {
+        cookieValue = decodeURIComponent(found.substring(name.length + 1));
+      }
+    }
+    return cookieValue;
+  };
+
+  const toPng = () => {
+    return domtoimage
+      .toPng(chart.chartContainer.node(), { filter: (node) => {
+        return node.className !== "chart-actions";
+      }, bgcolor: "#fff" })
+  }
+  
+  chart.share = () => {
+    toPng().then(function(dataUrl) {
+        fetch('/api/twitter_view/', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+          },
+          body: JSON.stringify({
+            id: chart.id,
+            image: dataUrl
+          })
+        }).then(res => {
+          if (res.status === 200) {
+            res.json().then(json => {
+              const url = new URL(window.location);
+              url.searchParams.set('image', json.image.split('/').pop());
+              url.searchParams.set('indicator', chart.id);
+              url.searchParams.set('title', chart.chartChartTitle);
+              url.searchParams.set('description', "Takwimu");
+              window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url.href)}`);
+            })
+          }
+        })
+      });
+    return false;
+  };
+
   chart.download = function() {
-    var filter = function filter(node) {
-      return node.className !== "chart-actions";
-    };
-    var bgcolor = "#fff";
-    domtoimage
-      .toPng(chart.chartContainer.node(), { filter: filter, bgcolor: bgcolor })
-      .then(function(dataUrl) {
+    toPng().then(function(dataUrl) {
         var link = document.createElement("a");
         link.download = chart.chartChartTitle + ".png";
         link.href = dataUrl;

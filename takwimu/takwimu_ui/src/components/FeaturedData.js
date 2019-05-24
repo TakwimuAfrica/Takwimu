@@ -41,9 +41,17 @@ function FeaturedData({
           alignItems="flex-start"
           className={classes.root}
         >
-          <DataContainer color="secondary" indicator={indicators[0]} />
+          <DataContainer
+            id={indicators[0].id}
+            color="secondary"
+            indicator={indicators[0]}
+          />
           {indicators.length > 1 && (
-            <DataContainer color="primary" indicator={indicators[1]} />
+            <DataContainer
+              id={indicators[1].id}
+              color="primary"
+              indicator={indicators[1]}
+            />
           )}
         </Grid>
       )}

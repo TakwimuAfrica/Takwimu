@@ -2,6 +2,14 @@
 
 {% load staticfiles jsonify sass_tags %}
 
+{% block head_twitter_tags %}
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ twitter.title }}">
+  <meta name="twitter:description" content="{{ twitter.description }}">
+  
+  <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter.image_url }}">
+{% endblock %}
+
 {% block head_title %} Analysis - {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
 
 {% block head_css %}

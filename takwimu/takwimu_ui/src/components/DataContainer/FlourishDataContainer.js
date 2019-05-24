@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
 import DataActions from './DataActions';
+import { shareIndicator, uploadImage } from './common';
 
 const styles = {
   root: {
@@ -32,19 +33,31 @@ function DataContainer({ id, classes, data }) {
     [animated] // useEffect will run only one time
   );
 
-  const handleDownload = () => {
+  const toCanvas = () => {
     const iframe = document.getElementById(`data-indicator-${id}`);
-    iframe.contentWindow
-      .html2canvas(iframe.contentDocument.body)
-      .then(canvas => {
-        const link = document.createElement('a');
-        link.download = `${data.title}.png`;
-        link.target = '_blank';
-        link.href = canvas.toDataURL('image/png');
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
+    return iframe.contentWindow.html2canvas(iframe.contentDocument.body);
+  };
+
+  const handleDownload = () => {
+    toCanvas().then(canvas => {
+      const link = document.createElement('a');
+      link.download = `${data.title}.png`;
+      link.target = '_blank';
+      link.href = canvas.toDataURL('image/png');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  };
+
+  const handleShare = () => {
+    toCanvas().then(canvas => {
+      uploadImage(id, canvas.toDataURL('image/png')).then(success => {
+        if (success) {
+          shareIndicator(id);
+        }
       });
+    });
   };
 
   const updateIframeHeight = chart => {
@@ -99,7 +112,11 @@ function DataContainer({ id, classes, data }) {
         onLoad={handleIframeLoaded}
         className={classes.root}
       />
-      <DataActions onDownload={handleDownload} embedCode={embedCode} />
+      <DataActions
+        onDownload={handleDownload}
+        embedCode={embedCode}
+        onShare={handleShare}
+      />
     </Fragment>
   );
 }
