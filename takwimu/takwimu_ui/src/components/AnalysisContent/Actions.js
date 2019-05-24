@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import { ButtonBase, Typography, withStyles } from '@material-ui/core';
+import { withStyles, ButtonBase, Grid, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import { TwitterShareButton } from 'react-share';
@@ -74,7 +74,7 @@ function Actions({
       )}
 
       <TwitterShareButton url={analysisLink}>
-        <div
+        <Grid
           container
           alignItems="center"
           className={classes.shareButtonContainer}
@@ -83,7 +83,7 @@ function Actions({
           <Typography className={classes.buttonText}>
             Share this analysis
           </Typography>
-        </div>
+        </Grid>
       </TwitterShareButton>
       <ButtonBase
         disableRipple

@@ -2,9 +2,10 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import { Typography, Grid, withStyles } from '@material-ui/core';
+import { withStyles, Grid } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
+import { RichTypography } from './core';
 import Section from './Section';
 
 import reasearchIcon from '../assets/images/a-chart.svg';
@@ -81,25 +82,21 @@ function WhatYouCanDoWithTakwimu({
     <Section title={title}>
       {usesOfTakwimu && usesOfTakwimu.length > 0 && (
         <Grid container justify="flex-start" className={classes.container}>
-          {usesOfTakwimu.map((u, i) => (
-            <Grid key={u.value.title} item>
+          {usesOfTakwimu.map(({ value: u }, i) => (
+            <Grid key={u.title} item>
               <div
                 className={classNames([
                   classes.box,
                   { [classes.marginLeft]: i > 0 }
                 ])}
               >
-                <img alt="research" src={icons[i]} />
-                <Typography
-                  variant="body1"
-                  className={classes.label}
-                  dangerouslySetInnerHTML={{ __html: u.value.title }}
-                />
-                <Typography
-                  variant="body2"
-                  className={classes.description}
-                  dangerouslySetInnerHTML={{ __html: u.value.description }}
-                />
+                <img alt="{u.title}" src={icons[i]} />
+                <RichTypography className={classes.label}>
+                  {u.title}
+                </RichTypography>
+                <RichTypography variant="body2" className={classes.description}>
+                  {u.description}
+                </RichTypography>
               </div>
             </Grid>
           ))}

@@ -102,14 +102,13 @@ Contact.propTypes = {
   takwimu: PropTypes.shape({
     page: PropTypes.shape({
       title: PropTypes.string.isRequired,
-      address: PropTypes.string.isRequired,
+      address: PropTypes.shape({}).isRequired,
       key_contacts: PropTypes.shape({}).isRequired,
       social_media: PropTypes.shape({}).isRequired
     }).isRequired,
     settings: PropTypes.shape({
       socialMedia: PropTypes.shape({}).isRequired
-    }).isRequired,
-    activeContent: PropTypes.string.isRequired
+    }).isRequired
   }).isRequired
 };
 

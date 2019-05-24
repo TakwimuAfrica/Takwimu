@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Typography } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
+import { RichTypography } from '../core';
 import Section from '../Section';
 import Tabs from './Tabs';
 
@@ -47,6 +47,12 @@ class Profile extends React.Component {
 
     const title = value === 0 ? 'Data by Topic' : tabs[value].name;
 
+    // Wagtail inserts div/p when RichTextField is empty
+    const hasDescription = () =>
+      description &&
+      description.length > 0 &&
+      description !== '<p></p>' &&
+      description !== '<div class="rich-text"></div>';
     return (
       <div className={classes.root}>
         <Tabs
@@ -59,11 +65,11 @@ class Profile extends React.Component {
           title={`${geography.name}'s ${title}`}
           classes={{ title: classes.sectionTitle }}
         >
-          <Typography
-            variant="body1"
-            className={classes.description}
-            dangerouslySetInnerHTML={{ __html: description }}
-          />
+          {hasDescription && (
+            <RichTypography className={classes.description}>
+              {description}
+            </RichTypography>
+          )}
         </Section>
       </div>
     );
@@ -84,7 +90,7 @@ Profile.propTypes = {
         href: PropTypes.string.isRequired
       })
     ).isRequired,
-    description: PropTypes.string.isRequired,
+    description: PropTypes.string,
     switchToTab: PropTypes.func
   }).isRequired
 };

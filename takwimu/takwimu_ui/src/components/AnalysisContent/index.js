@@ -14,14 +14,15 @@ import ReactPDF, {
 } from '@react-pdf/renderer';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
-import ContentNavigation from './ContentNavigation';
+import CarouselTopic from './topics/CarouselTopic';
 import CountryContent from '../CountryContent';
+import ContentNavigation from './ContentNavigation';
 import DataContainer from '../DataContainer';
-import OtherInfoNav from './OtherInfoNav';
 import RelatedContent from '../RelatedContent';
+import { RichTypography } from '../core';
+import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
-import CarouselTopic from './topics/CarouselTopic';
 
 const styles = theme => ({
   root: {
@@ -229,14 +230,9 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
             {content.body[topicIndex].value.body.map(c => (
               <Fragment>
                 {c.type === 'text' && (
-                  <Typography
-                    key={c.id}
-                    className={classes.body}
-                    variant="body1"
-                    dangerouslySetInnerHTML={{
-                      __html: c.value
-                    }}
-                  />
+                  <RichTypography key={c.id} className={classes.body}>
+                    {c.value}
+                  </RichTypography>
                 )}
                 {c.type === 'indicator' && (
                   <DataContainer
