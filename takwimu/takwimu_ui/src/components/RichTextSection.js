@@ -5,8 +5,13 @@ import { withStyles, Typography } from '@material-ui/core';
 
 import Section from './Section';
 
-const styles = () => ({
-  root: {}
+const styles = theme => ({
+  root: {},
+  text: {
+    '& a': {
+      color: theme.palette.primary.main
+    }
+  }
 });
 
 function RichTextSection({
@@ -20,6 +25,7 @@ function RichTextSection({
   const text = (
     <Typography
       variant="body1"
+      className={classes.text}
       dangerouslySetInnerHTML={{
         __html: value
       }}

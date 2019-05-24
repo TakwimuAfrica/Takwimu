@@ -22,7 +22,10 @@ function Title({ classes, children }) {
 
 Title.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  children: PropTypes.string.isRequired
+  children: PropTypes.oneOfType([
+    PropTypes.arrayOf(PropTypes.node),
+    PropTypes.node
+  ]).isRequired
 };
 
 export default withStyles(styles)(Title);

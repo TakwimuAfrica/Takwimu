@@ -5,7 +5,8 @@
 
 {% block head_meta_description %}{{ HURUmap.description }}{% endblock %}
 
-{% block head_title %} Data - {{ geography.this.name }} - {{ HURUMAP.name }}{% endblock %}
+{% block head_title %} Data - {{ geography.this.name }} -
+  {{ HURUMAP.name }}{% endblock %}
 
 {% block head_css %}
   {{ block.super }}
@@ -15,7 +16,8 @@
 
 {% block favicon %}
   <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' }%">
-  <link rel="icon" type="image/png" sizes="32x32" href="{% static 'favicon-32x32.png' %}">
+  <link rel=" icon" type="image/png" sizes="32x32" href="
+  {% static 'favicon-32x32.png' %}">
   <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
   <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
   <link rel="manifest" href="{% static 'site.webmanifest' %}">
@@ -31,10 +33,10 @@
   {% include 'takwimu/_includes/navbar/_index.html' %}
 
   {% block header_content %}
-  <div id="takwimuProfileDetail"></div>
-  <div id="cover-map" class="clearfix">
+    <div id="takwimuProfileDetail"></div>
+    <div id="cover-map" class="clearfix">
       <div id="slippy-map"></div>
-  </div>
+    </div>
   {% endblock %}
 {% endblock %}
 
@@ -130,94 +132,112 @@
 
   {{ block.super }}
 
-    <!-- Takwimu & HURUmap  -->
-    <script>
+  <!-- Takwimu & HURUmap  -->
+  <script>
       // I. Takwimu 
       var takwimu = window.takwimu || {};
       takwimu.page = takwimu.page || {};
       takwimu.page.id = 'topic';
       takwimu.url = '{{ HURUMAP.url }}';
       takwimu.countries = {{ countries|jsonify|safe }};
-      takwimu.settings = {
-        navigation: {
-          country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
-          data_by_topic: '{{ settings.takwimu.NavigationSetting.data_by_topic|richtext }}'
-        },
-        support: {
-          hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
-          support: '{{ settings.takwimu.SupportSetting.support|safe }}'
-        },
-        socialMedia: {
-          facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
-          twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
-          medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
-          linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
-        }
-      };
+      takwimu.profileDataSummaries = {{ profile_data_summaries|jsonify|safe }}
+          takwimu.settings = {
+              navigation: {
+                  country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
+                  data_by_topic: '{{ settings.takwimu.NavigationSetting.data_by_topic|richtext }}'
+              },
+              support: {
+                  hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
+                  support: '{{ settings.takwimu.SupportSetting.support|safe }}'
+              },
+              socialMedia: {
+                  facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
+                  twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
+                  medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
+                  linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
+              }
+          };
 
       // II. HURUmap
       // profileData is created in hurumap/profile_detail.html
-      var profileData = window.profileData || {}
-      profileData.tabs = [{ name: 'All', href: ''}];
-      if (!profileData.demographics.is_missing){
-          profileData.tabs.push({ name: 'Demographics', href: '#demographics'});
+
+      var profileData = window.profileData || {};
+      profileData.description = '{{ profile_data_description|richtext|safe }}';
+      profileData.tabs = [{name: 'All', href: ''}];
+      if (!profileData.demographics.is_missing) {
+          profileData.tabs.push({name: 'Demographics', href: '#demographics'});
       }
       if (!profileData.elections.is_missing) {
-          profileData.tabs.push({ name: 'Elections', href: '#elections'});
+          profileData.tabs.push({name: 'Elections', href: '#elections'});
       }
       if (!profileData.crops.crop_distribution.is_missing) {
-          profileData.tabs.push({ name: 'Agriculture', href: '#agriculture'});
+          profileData.tabs.push({name: 'Agriculture', href: '#agriculture'});
       }
       if (!profileData.donors.is_missing) {
-          profileData.tabs.push({ name: 'ODA', href: '#oda'});
+          profileData.tabs.push({name: 'ODA', href: '#oda'});
       }
       if (!profileData.poverty.is_missing) {
-          profileData.tabs.push({ name: 'Households', href: '#households'});
+          profileData.tabs.push({name: 'Households', href: '#households'});
       }
       if (!profileData.fgm.is_missing) {
-          profileData.tabs.push({ name: 'Health', href: '#health'});
+          profileData.tabs.push({name: 'Health', href: '#health'});
       }
       if (!profileData.security.is_missing) {
-          profileData.tabs.push({ name: 'Crime Reports', href: '#crime-reports'});
+          profileData.tabs.push({
+              name: 'Crime Reports',
+              href: '#crime-reports'
+          });
       }
       if (!profileData.budget.is_missing) {
-          profileData.tabs.push({ name: 'Budget', href: '#budget'});
+          profileData.tabs.push({name: 'Budget', href: '#budget'});
       }
       if (!profileData.worldbank.is_missing) {
-          profileData.tabs.push({ name: 'World Bank', href: '#worldbank'});
+          profileData.tabs.push({name: 'World Bank', href: '#worldbank'});
       }
 
       // While viz are created outside React, lets stick to using jQuery
       // for handling Profile Tabs
       // i. Function to switch tabs on client side
       profileData.switchToTab = function switchToProfileTab(index) {
-        var i = Number.parseInt(index);
-        if (Number.isNaN(i) || i >= profileData.tabs.length) {
-          return;
-        }
-        var $tabs = $('#profile article');
-        if (i === 0) {
-          $tabs.find('header').show();
-          $tabs.show();
-        } else {
-          var tab = profileData.tabs[i];
-          var $tab = $(tab.href);
-          $tabs.hide();
-          if ($tab) {
-            $tab.find('header').hide();
-            $tab.show();
+          var i = Number.parseInt(index);
+          if (Number.isNaN(i) || i >= profileData.tabs.length) {
+              return;
           }
-        }
+          var $tabs = $('#profile article');
+          if (i === 0) {
+              $tabs.find('header').show();
+              $tabs.show();
+          } else {
+              var tab = profileData.tabs[i];
+              var $tab = $(tab.href);
+              $tabs.hide();
+              if ($tab) {
+                  $tab.find('header').hide();
+                  $tab.show();
+              }
+          }
       };
 
 
-    const { geo_code: countryCode } = profileData.geography.this;
-    const country = takwimu.countries.find(c => c.iso_code === countryCode);
-    takwimu.country = country
+      const {geo_code: countryCode} = profileData.geography.this;
+      const country = takwimu.countries.find(c => c.iso_code === countryCode);
+      takwimu.country = country;
 
-    $('document').ready(makeCharts());
+      $(function () {
+          makeCharts();
+          window.takwimu.profileDataSummaries.forEach(function (obj) {
+              if (obj.summary && obj.summary.length > 0 && obj.summary !== '<p>/</p>') {
+                  var dataId = obj.id.split('_')[1];
+                  var chartContainer = $("div").find(`[data-id='${dataId}']`);
+                  chartContainer
+                      .find(".chart-action-links-container")
+                      .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
+              }
+          });
+      });
 
-    </script>
+
+  </script>
 
   <!-- Bootstrap: Enable Tooltips -->
   <script>
@@ -227,19 +247,13 @@
   </script>
 
   <script type="text/javascript">
-  $('.release-list').hover(function() {
-      $(this).find('.sub-group').toggle();
-  });
+      $('.release-list').hover(function () {
+          $(this).find('.sub-group').toggle();
+      });
   </script>
 
   <!-- React UI -->
   <script src="{% static asset_manifest.runtime %}"></script>
   <script src="{% static asset_manifest.vendor %}"></script>
   <script src="{% static asset_manifest.main %}"></script>
-
-  <!-- Usersnap -->
-  <script type="text/javascript">
-    (function() { var s = document.createElement("script"); s.type = "text/javascript"; s.async = true; s.src = '//api.usersnap.com/load/03fa7bc6-84b1-4c96-8f01-258f14ddf4af.js';
-    var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x); })();
-  </script>
 {% endblock body_javascript_extra %}

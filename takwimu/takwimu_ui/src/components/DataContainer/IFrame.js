@@ -82,9 +82,10 @@ class IFrame extends React.Component {
             data.data_id
           }&dataYear=2011&chartType=${
             data.chart_type
-          }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
-            data.data_stat_type
-          }`}
+          }&chartHeight=300&chartTitle=${window.encodeURIComponent(
+            data.title
+          )}&initialSort=&statType=${data.data_stat_type}
+          `}
           allowFullScreen
           className={classNames(['census-reporter-embed', classes.iframe])}
         />
