@@ -370,7 +370,9 @@ class TwitterImageAPIView(APIView):
                                                                  file_name=id))
 
         if image:
-            return Response({'image': image.file.url},
+            # Create rendition image with width 600
+            # Hurumap visuals profile_detail_base expects it created
+            return Response({'image': image.get_rendition('width-600').url},
                             status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
