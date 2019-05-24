@@ -21,7 +21,6 @@ class AnalysisPage extends React.Component {
     super(props);
 
     this.state = {
-      id: null,
       analysis: null,
       current: 0,
       topicIndex: 0
@@ -48,17 +47,17 @@ class AnalysisPage extends React.Component {
             // title is just the country name
             analysis[0].title = analysis[0].label;
           }
-          this.setState({ id: analysis[0].id, analysis }, this.fetchAnalysis);
+          this.fetchWithAnalyses(analysis);
         });
       }
     });
   }
 
-  fetchAnalysis() {
-    const { id } = this.state;
-
+  fetchWithAnalyses(analyses) {
     fetch(
-      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${id}&format=json`
+      `/api/v2/pages/?type=takwimu.ProfileSectionPage&fields=*&descendant_of=${
+        analyses[0].id
+      }&format=json`
     ).then(response => {
       if (response.status === 200) {
         response.json().then(json => {
@@ -78,10 +77,12 @@ class AnalysisPage extends React.Component {
           }
 
           this.setState(prevState => {
-            let { current, topicIndex, analysis } = prevState;
+            let { current, topicIndex } = prevState;
             if (foundIndex !== -1) {
               current = foundIndex;
             }
+
+            let analysis = analyses;
 
             if (analysis) {
               if (foundIndex !== -1) {

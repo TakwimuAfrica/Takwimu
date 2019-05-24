@@ -3,23 +3,23 @@ import logging
 
 from django import forms
 from django.db import models
-from django.utils.html import format_html
 from django.utils.text import slugify
 from fontawesome.fields import IconField
 from fontawesome.forms import IconFormField
 from hurumap.models import DataIndicator
 from meta.models import ModelMeta
 from modelcluster.fields import ParentalKey
+from modelcluster.models import ClusterableModel
 from rest_framework import serializers
 from wagtail.admin.edit_handlers import (FieldPanel, InlinePanel,
                                          MultiFieldPanel, PageChooserPanel,
                                          StreamFieldPanel)
 from wagtail.api import APIField
-from wagtail.contrib.settings.context_processors import settings
 from wagtail.contrib.settings.models import BaseSetting, register_setting
 from wagtail.core import blocks
 from wagtail.core.fields import RichTextField, StreamField
 from wagtail.core.models import Orderable, Page
+from wagtail.core.templatetags import wagtailcore_tags
 from wagtail.documents.models import Document
 from wagtail.documents.blocks import DocumentChooserBlock
 from wagtail.documents.edit_handlers import DocumentChooserPanel
@@ -28,10 +28,13 @@ from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.images.edit_handlers import ImageChooserPanel
 from wagtail.search import index
+from wagtail.snippets.blocks import SnippetChooserBlock
+from wagtail.snippets.models import register_snippet
 from wazimap.models import Geography
 
+from takwimu.models.data import ProfileData
 from takwimu.search import search
-from takwimu.utils.helpers import (COUNTRIES, get_takwimu_countries,
+from takwimu.utils.helpers import (COUNTRIES,
                                    get_takwimu_stories, get_takwimu_faqs,
                                    get_takwimu_services, get_takwimu_profile_view_country_content,
                                    get_takwimu_profile_navigation, get_takwimu_profile_read_next)
@@ -76,6 +79,29 @@ sdg_data = json.load(json_data)
 sdg_choices = [(slugify(i.get('short')), i.get('short')) for i in sdg_data]
 sdg_choices = [('', 'Please select an SDG')] + sdg_choices
 country_choices = [(k, v['name']) for k, v in COUNTRIES.items()]
+
+
+# Fix Geography __str__
+def _geography__str__(self):
+    return '{}'.format(self.name)
+
+Geography.__str__ = _geography__str__
+
+
+class DataByTopicPage(Page):
+    country = models.OneToOneField(Geography, on_delete=models.SET_NULL,
+                            null=True, db_constraint=False,
+                            limit_choices_to={'geo_level': 'country'})
+    description = RichTextField()
+
+    content_panels = Page.content_panels + [
+        FieldPanel('country'),
+        FieldPanel('description')
+    ]
+
+    class Meta:
+        verbose_name = 'Data by Topic'
+        verbose_name_plural = 'Data by Topic'
 
 
 # The abstract model for data indicators, complete with panels
@@ -130,6 +156,7 @@ class TopicPage(Page):
 
 
 class EntityStructBlock(blocks.StructBlock):
+    title = blocks.CharBlock()
     name = blocks.CharBlock(required=False)
     image = ImageChooserBlock(required=False)
     description = blocks.RichTextBlock(features=['link'], required=False)
@@ -216,6 +243,19 @@ HURUMAP_DATA_DISTS = [
 ]
 
 
+class FlourishWidget(blocks.StructBlock):
+    label = blocks.CharBlock(required=False, help_text="This widget's tab label on the indicator")
+    title = blocks.CharBlock()
+    hide_title = blocks.BooleanBlock(default=False, required=False)
+    html = DocumentChooserBlock(required=True)
+    sdg = blocks.ChoiceBlock(required=False, choices=sdg_choices, label='SDG Goal')
+    source = blocks.RichTextBlock(features=['link'], required=False)
+
+    class Meta:
+        icon = 'folder-inverse'
+        template = 'takwimu/_includes/dataview/code.html'
+
+
 class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
         [
@@ -298,21 +338,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/code.html'
     )
 
-    flourish = blocks.StructBlock(
-        [
-            ('label', blocks.CharBlock(required=False,
-                                       help_text="This widget's tab label on the indicator")),
-            ('title', blocks.CharBlock(required=False)),
-            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
-            ('html', DocumentChooserBlock(required=True)),
-            ('sdg', blocks.ChoiceBlock(required=False, choices=sdg_choices,
-                                       label='SDG Goal')),
-            ('source', blocks.RichTextBlock(
-                features=['link'], required=False)),
-        ],
-        icon='code',
-        template='takwimu/_includes/dataview/code.html'
-    )
+    flourish = FlourishWidget()
 
     hurumap = blocks.StructBlock(
         [
@@ -386,6 +412,8 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/entities.html'
     )
 
+    hurumap_snippet = SnippetChooserBlock(ProfileData)
+
     class Meta:
         icon = 'form'
 
@@ -411,9 +439,26 @@ class IndicatorBlock(blocks.StructBlock):
         representation = super(IndicatorBlock, self).get_api_representation(value, context=context)
         if representation:
             widget = representation['widget'][0]
+            if widget and widget['type'] == 'hurumap_snippet':
+                snippet = ProfileData.objects.get(id=widget['value'])
+                widget['value'] = {
+                    'title': snippet.chart_title,
+                    'data_country': snippet.country_iso_code,
+                    'data_id': snippet.chart_id,
+                    'chart_type': snippet.chart_type,
+                    'data_stat_type': snippet.data_stat_type,
+                    'chart_height': snippet.chart_height,
+                    'description': snippet.description,
+                }
+
+                # For now lets use snippet summary as indicator summary until
+                # we can figure out how to store indicator summary in
+                # ProfileData
+                representation['summary'] = snippet.summary
             representation['widget'] = widget
 
         return representation
+
 
 class TopicBodyBlock(blocks.StreamBlock):
     text= blocks.RichTextBlock(required=False)
@@ -428,6 +473,7 @@ class TopicBodyBlock(blocks.StreamBlock):
                 r['meta'] = { 'layout': r['value'].pop('layout', 'auto') }
 
         return representation
+
 
 class IconChoiceBlock(blocks.FieldBlock):
     field = IconFormField(required=False)
@@ -447,6 +493,31 @@ class TopicBlock(blocks.StructBlock):
     def media(self):
         # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
         return super(TopicBlock, self).media + forms.Media(
+            js=['fontawesome/js/django_fontawesome.js',
+                'fontawesome/select2/select2.min.js', 'js/dashboard.js'],
+            css={'all': ['fontawesome/css/fontawesome-all.min.css',
+                         'fontawesome/select2/select2.css',
+                         'fontawesome/select2/select2-bootstrap.css']}
+        )
+
+    class Meta:
+        icon = 'form'
+
+
+class CarouselTopic(blocks.StructBlock):
+    title = blocks.CharBlock(required=False)
+    icon = IconChoiceBlock(required=False)
+    summary = blocks.RichTextBlock(required=False)
+    body = blocks.ListBlock(EntityStructBlock())
+
+    def js_initializer(self):
+        parent_initializer = super(CarouselTopic, self).js_initializer()
+        return "Topic(%s)" % parent_initializer
+
+    @property
+    def media(self):
+        # need to pull in StructBlock's own js code as well as our fontawesome script for our icon
+        return super(CarouselTopic, self).media + forms.Media(
             js=['fontawesome/js/django_fontawesome.js',
                 'fontawesome/select2/select2.min.js', 'js/dashboard.js'],
             css={'all': ['fontawesome/css/fontawesome-all.min.css',
@@ -549,7 +620,8 @@ class ProfileSectionPage(ModelMeta, Page):
     date = models.DateField("Last Updated", blank=True,
                             null=True, auto_now=True)
     body = StreamField([
-        ('topic', TopicBlock())
+        ('topic', TopicBlock()),
+        ('carousel_topic', CarouselTopic())
     ], blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
@@ -697,7 +769,8 @@ class ProfilePage(ModelMeta, Page):
         related_name='+'
     )
     body = StreamField([
-        ('topic', TopicBlock())
+        ('topic', TopicBlock()),
+        ('carousel_topic', CarouselTopic())
     ], blank=True)
     related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
 
@@ -829,7 +902,13 @@ class AboutTakwimuBlock(blocks.StreamBlock):
     def get_api_representation(self, value, context=None):
         representation = super(AboutTakwimuBlock, self).get_api_representation(value, context=context)
         if representation:
-            return representation[0]
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = wagtailcore_tags.richtext(description)
+
+            return content
+
         return {}
 
 
@@ -847,7 +926,13 @@ class MethodologyBlock(blocks.StreamBlock):
     def get_api_representation(self, value, context=None):
         representation = super(MethodologyBlock, self).get_api_representation(value, context=context)
         if representation:
-            return representation[0]
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = wagtailcore_tags.richtext(description)
+
+            return content
+
         return {}
 
 class AboutPage(ModelMeta, Page):
@@ -901,6 +986,12 @@ class AboutPage(ModelMeta, Page):
         StreamFieldPanel('methodology'),
         StreamFieldPanel('related_content'),
     ]
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
+    ]
 
     def get_promotion_image(self):
         if self.promotion_image:
@@ -932,14 +1023,182 @@ class AboutPage(ModelMeta, Page):
         return get_takwimu_faqs(faq_settings)
 
 
-class ContactUsPage(Page):
-    address = RichTextField()
+class ContactAddressContentBlock(blocks.StructBlock):
+    label = blocks.CharBlock(default="Address", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = blocks.CharBlock(default="Address", max_length=1024)
+    description = blocks.RichTextBlock(required=False,
+        default='<p>africapractice East Africa Ltd<br/>P.O Box 40868 – 00100<br/>Mitsumi Business Park, 7th Floor<br/>Muthithi Road, Westlands</p><p></p><p>Nairobi, Kenya</p>')
 
-    content_panels = [
+
+class ContactAddressBlock(blocks.StreamBlock):
+    contact_address_content = ContactAddressContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(ContactAddressBlock, self).get_api_representation(value, context=context)
+        if representation:
+            return representation[0]
+        return {}
+
+
+@register_snippet
+class KeyContacts(ClusterableModel):
+    name = models.CharField(default="Default", max_length=1024,
+        help_text="If you're planning to maintain more than one list of contacts, then provide a unique name for this list")
+    label = models.CharField(default="Key contacts", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = models.CharField(default="Key contacts", max_length=1024)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('label'),
         FieldPanel('title'),
-        FieldPanel('address'),
-        InlinePanel('key_contacts', label='Key Contacts'),
-        InlinePanel('social_media', label='Social Media')
+        InlinePanel('contacts', label='Contacts'),
+    ]
+
+    def __str__(self):
+        return '{}'.format(self.name)
+
+    class Meta:
+        verbose_name = 'Contact Us | Key Contacts'
+        verbose_name_plural = 'Contact Us | Key Contacts'
+
+
+class KeyContact(Orderable):
+    title = models.TextField()
+    contact_details = models.TextField()
+    link = models.TextField()
+    parent = ParentalKey(KeyContacts, related_name='contacts')
+
+    api_fields = [
+        APIField('title'),
+        APIField('contact_details'),
+        APIField('link'),
+    ]
+
+
+class KeyContactsBlock(blocks.StreamBlock):
+    key_contacts = SnippetChooserBlock(KeyContacts)
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(KeyContactsBlock, self).get_api_representation(value, context=context)
+        if representation:
+            block = representation[0]
+            snippet = KeyContacts.objects.get(id=block['value'])
+            block['value'] = {
+                'label': snippet.label,
+                'title': snippet.title,
+                'contacts': [{ 'title': c.title, 'contact_details': c.contact_details, 'link': c.link } for c in snippet.contacts.all()],
+            }
+            return block
+        return {}
+
+
+@register_snippet
+class SocialMedia(ClusterableModel):
+    name = models.CharField(default="Default", max_length=1024,
+        help_text="If you're planning to maintain more than one list of contacts, then provide a unique name for this list")
+    label = models.CharField(default="Social", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = models.CharField(default="Social", max_length=1024)
+
+    panels = [
+        FieldPanel('name'),
+        FieldPanel('label'),
+        FieldPanel('title'),
+        InlinePanel('accounts', label='Social Media Accounts', help_text='Social media accounts to show on Contact page'),
+    ]
+
+    def __str__(self):
+        return '{}'.format(self.name)
+
+    class Meta:
+        verbose_name = 'Contact Us | Social Media'
+        verbose_name_plural = 'Contact Us | Social Media'
+
+
+SOCIAL_MEDIA = (
+    ('facebook', 'Facebook'),
+    ('github', 'GitHub'),
+    ('instagram', 'Instagram'),
+    ('linkedin', 'LinkedIn'),
+    ('medium', 'Medium'),
+    ('twitter', 'Twitter'),
+    ('youtube', 'YouTube'),
+)
+
+
+class SocialMediaAccount(Orderable):
+    name = models.CharField(max_length=255, choices=SOCIAL_MEDIA)
+    parent = ParentalKey(SocialMedia, related_name='accounts')
+
+    api_fields = [
+        APIField('name'),
+    ]
+
+    def __str__(self):
+        return self.name
+
+
+class SocialMediaBlock(blocks.StreamBlock):
+    social_media = SnippetChooserBlock(SocialMedia)
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(SocialMediaBlock, self).get_api_representation(value, context=context)
+        if representation:
+            block = representation[0]
+            snippet = SocialMedia.objects.get(id=block['value'])
+            block['value'] = {
+                'label': snippet.label,
+                'title': snippet.title,
+                'accounts': [{ 'name': a.name } for a in snippet.accounts.all()],
+            }
+            return block
+        return {}
+
+
+class ContactPage(ModelMeta, Page):
+    address = StreamField(ContactAddressBlock(required=False, max_num=1), blank=True)
+    social_media = StreamField(SocialMediaBlock(required=False, max_num=1), blank=True)
+    key_contacts = StreamField(KeyContactsBlock(required=False, max_num=1), blank=True)
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
+
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
+
+    # Editor panels configuration
+
+    content_panels = Page.content_panels + [
+        StreamFieldPanel('address'),
+        StreamFieldPanel('key_contacts'),
+        StreamFieldPanel('social_media'),
+        StreamFieldPanel('related_content'),
+    ]
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
     ]
 
     api_fields = [
@@ -947,7 +1206,9 @@ class ContactUsPage(Page):
         APIField('address'),
         APIField('key_contacts'),
         APIField('social_media'),
+        APIField('related_content'),
     ]
+
 
 def search_analysis_and_data(query, request):
     hits = search(query)
@@ -985,24 +1246,6 @@ class SearchPage(Page):
             'results': results
         }
         return context
-
-
-
-class SocialMedia(Orderable):
-    name = models.TextField()
-    url = models.URLField()
-    icon = IconField()
-    page = ParentalKey(ContactUsPage, related_name='social_media')
-
-    def __str__(self):
-        return self.name
-
-
-class KeyContacts(Orderable):
-    title = models.TextField()
-    contact_details = models.TextField()
-    link = models.TextField()
-    page = ParentalKey(ContactUsPage, related_name='key_contacts')
 
 
 class Testimonial(models.Model):
@@ -1099,6 +1342,8 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
 
 
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
+    hurumap_snippet = SnippetChooserBlock(ProfileData)
+    flourish = FlourishWidget()
     hurumap = FeaturedDataWidgetBlock()
 
 
@@ -1114,6 +1359,17 @@ class FeaturedDataIndicatorBlock(blocks.StructBlock):
         representation = super(FeaturedDataIndicatorBlock, self).get_api_representation(value, context=context)
         if representation:
             widget = representation['widget'][0]
+            if widget and widget['type'] == 'hurumap_snippet':
+                snippet = ProfileData.objects.get(id=widget['value'])
+                widget['value'] = {
+                    'title': snippet.chart_title,
+                    'data_country': snippet.country_iso_code,
+                    'data_id': snippet.chart_id,
+                    'chart_type': snippet.chart_type,
+                    'data_stat_type': snippet.data_stat_type,
+                    'chart_height': snippet.chart_height,
+                    'description': snippet.description,
+                }
             representation['widget'] = widget
 
         return representation

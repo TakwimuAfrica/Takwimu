@@ -37,6 +37,46 @@ CREATE TABLE public.maternal_mortality (
 --
 
 COPY public.maternal_mortality (geo_level, geo_code, geo_version, maternal_mortality_year, total) FROM stdin;
+country	BF	2009	1995	636
+country	BF	2009	1996	620
+country	BF	2009	1997	601
+country	BF	2009	1998	581
+country	BF	2009	1999	565
+country	BF	2009	2000	547
+country	BF	2009	2001	530
+country	BF	2009	2002	516
+country	BF	2009	2003	500
+country	BF	2009	2004	482
+country	BF	2009	2005	468
+country	BF	2009	2006	457
+country	BF	2009	2007	447
+country	BF	2009	2008	436
+country	BF	2009	2009	428
+country	BF	2009	2010	417
+country	BF	2009	2011	408
+country	BF	2009	2012	398
+country	BF	2009	2013	389
+country	BF	2009	2014	379
+country	BF	2009	2015	371
+country	CD	2009	1997	919
+country	CD	2009	1998	915
+country	CD	2009	1999	902
+country	CD	2009	2000	874
+country	CD	2009	2001	853
+country	CD	2009	2002	830
+country	CD	2009	2003	808
+country	CD	2009	2004	793
+country	CD	2009	2005	787
+country	CD	2009	2006	789
+country	CD	2009	2007	803
+country	CD	2009	2008	792
+country	CD	2009	2009	793
+country	CD	2009	2010	794
+country	CD	2009	2011	777
+country	CD	2009	2012	771
+country	CD	2009	2013	746
+country	CD	2009	2014	717
+country	CD	2009	2015	693
 country	ET	2009	2015	353
 country	ET	2009	2014	378
 country	ET	2009	2013	410
@@ -117,6 +157,26 @@ country	TZ	2009	2003	747
 country	TZ	2009	2002	777
 country	TZ	2009	2001	813
 country	TZ	2009	2000	842
+counry	UG	2009	1996	678
+counry	UG	2009	1997	668
+counry	UG	2009	1998	658
+counry	UG	2009	1999	639
+counry	UG	2009	2000	620
+counry	UG	2009	2001	601
+counry	UG	2009	2002	576
+counry	UG	2009	2003	558
+counry	UG	2009	2004	536
+counry	UG	2009	2005	504
+counry	UG	2009	2006	481
+counry	UG	2009	2007	469
+counry	UG	2009	2008	451
+counry	UG	2009	2009	432
+counry	UG	2009	2010	420
+counry	UG	2009	2011	408
+counry	UG	2009	2012	395
+counry	UG	2009	2013	372
+counry	UG	2009	2014	356
+counry	UG	2009	2015	343
 country	ZA	2009	2015	138
 country	ZA	2009	2014	140
 country	ZA	2009	2013	145
@@ -133,6 +193,26 @@ country	ZA	2009	2003	102
 country	ZA	2009	2002	95
 country	ZA	2009	2001	89
 country	ZA	2009	2000	85
+country	ZM	2009	1996	598
+country	ZM	2009	1997	598
+country	ZM	2009	1998	596
+country	ZM	2009	1999	569
+country	ZM	2009	2000	541
+country	ZM	2009	2001	518
+country	ZM	2009	2002	493
+country	ZM	2009	2003	472
+country	ZM	2009	2004	414
+country	ZM	2009	2005	372
+country	ZM	2009	2006	338
+country	ZM	2009	2007	311
+country	ZM	2009	2008	289
+country	ZM	2009	2009	274
+country	ZM	2009	2010	262
+country	ZM	2009	2011	251
+country	ZM	2009	2012	243
+country	ZM	2009	2013	237
+country	ZM	2009	2014	231
+country	ZM	2009	2015	224
 \.
 
 
@@ -147,4 +227,3 @@ ALTER TABLE ONLY public.maternal_mortality
 --
 -- PostgreSQL database dump complete
 --
-

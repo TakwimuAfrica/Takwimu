@@ -1,13 +1,24 @@
 import { useEffect, useState } from 'react';
 
-export default function useScrollListener(threshold) {
+export default function useScrollListener(
+  threshold,
+  comparison = '>',
+  elementId = null
+) {
   const [isOverThreshold, setIsOverThreshold] = useState(false);
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > threshold && !isOverThreshold) {
-        setIsOverThreshold(true);
-      } else if (window.scrollY < threshold && isOverThreshold) {
-        setIsOverThreshold(false);
+      const scrollY = !elementId
+        ? window.scrollY
+        : document.getElementById(elementId).getBoundingClientRect().top;
+      if (!isOverThreshold) {
+        setIsOverThreshold(
+          comparison === '<' ? scrollY < threshold : scrollY > threshold
+        );
+      } else if (isOverThreshold) {
+        setIsOverThreshold(
+          comparison === '<' ? scrollY < threshold : scrollY > threshold
+        );
       }
     };
     window.addEventListener('scroll', handleScroll);

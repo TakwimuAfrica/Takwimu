@@ -18,6 +18,10 @@ const styles = theme => ({
       marginRight: '1.125rem'
     }
   },
+  topicLink: {
+    display: 'inline-block',
+    whiteSpace: 'nowrap'
+  },
   topic: {
     textDecoration: 'underline'
   },
@@ -58,6 +62,7 @@ function ContentNavigation({
             href={generateHref(index)}
             variant="body2"
             color={current === index ? linksSecondaryColor : linksPrimaryColor}
+            classes={{ root: classes.topicLink }}
             className={classNames({
               [classes.topic]: current !== index
             })}

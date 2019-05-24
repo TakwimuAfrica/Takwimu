@@ -1040,6 +1040,7 @@ function Chart(options) {
 
     chart.actionLinks = chart.chartActions
       .insert("div", ":first-child")
+        .classed("chart-action-links-container", true)
       .style("diplay", "flex")
       .style("justify-content", "center")
       .style("padding", "0 1rem")
@@ -1780,7 +1781,7 @@ function Chart(options) {
       // when showing distribution and maps, try to show relevant geos right from
       // the start.
       geoIDs = [];
-      if (chart.thisGeo.parent_geoid) {
+      if (chart.thisGeo.parent_geoid && chart.thisGeo.parent_geoid !== 'continent-AFR') {
         // show our peers
         var parentGeo = chart.parentGeo;
         geoIDs.push(chart.thisGeo.geo_level + "|" + chart.thisGeo.parent_geoid);
