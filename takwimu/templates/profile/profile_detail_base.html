@@ -8,6 +8,16 @@
 {% block head_title %} Data - {{ geography.this.name }} -
   {{ HURUMAP.name }}{% endblock %}
 
+
+{% block head_twitter_tags %}
+  {% if request.GET.indicator %}
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{{ request.GET.title }}">
+    <meta name="twitter:description" content="{{ request.GET.description }}">
+    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}{{ twitter.image_url }}">
+  {% endif %}
+{% endblock %}
+
 {% block head_css %}
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">

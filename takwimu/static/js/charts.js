@@ -1836,7 +1836,9 @@ function Chart(options) {
           if (res.status === 200) {
             const url = new URL(window.location);
             url.searchParams.set('indicator', chart.id);
-            window.open(`https://twitter.com/intent/tweet?url=${escape(url.href)}`);
+            url.searchParams.set('title', chart.chartChartTitle);
+            url.searchParams.set('description', chart.chartRelease);
+            window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url.href)}`);
           }
         })
       });
