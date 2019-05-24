@@ -4,7 +4,7 @@ import { getCookie } from '../../common';
 export const shareIndicator = id => {
   const url = new URL(window.location);
   url.searchParams.set('indicator', id);
-  window.open(`https://twitter.com/intent/tweet?url=${url.href}`);
+  window.open(`https://twitter.com/intent/tweet?url=${escape(url.href)}`);
 };
 
 export const uploadImage = (id, data) =>
