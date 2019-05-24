@@ -14,7 +14,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="{{ request.GET.title }}">
     <meta name="twitter:description" content="{{ request.GET.description }}">
-    <meta name="twitter:image" content="{{ request.scheme }}://{{ request.get_host }}/media/images/{{ request.GET.image }}">
+    <meta name="twitter:image" content="https://takwimu.s3.eu-west-1.amazonaws.com/media/images/{{ request.GET.image }}">
   {% endif %}
 {% endblock %}
 
