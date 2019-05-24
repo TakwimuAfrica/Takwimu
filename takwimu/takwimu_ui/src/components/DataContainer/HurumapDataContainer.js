@@ -11,7 +11,7 @@ import { shareIndicator, uploadImage } from './common';
 function DataContainer({ id, data, theme }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
 
-  const toCanvas = () => {
+  const toPng = () => {
     const iframe = document.getElementById(iframeId);
     return iframe.contentWindow.domtoimage.toPng(
       iframe.contentDocument.getElementById('census-chart'),
@@ -22,8 +22,8 @@ function DataContainer({ id, data, theme }) {
   };
 
   const handleShare = () => {
-    toCanvas().then(canvas => {
-      uploadImage(id, canvas.toDataURL('image/png')).then(success => {
+    toPng().then(dataURL => {
+      uploadImage(id, dataURL).then(success => {
         if (success) {
           shareIndicator(id);
         }
@@ -32,11 +32,11 @@ function DataContainer({ id, data, theme }) {
   };
 
   const handleDownload = () => {
-    toCanvas().then(canvas => {
+    toPng().then(dataURL => {
       const link = document.createElement('a');
       link.download = `${data.title}.png`;
       link.target = '_blank';
-      link.href = canvas.toDataURL('image/png');
+      link.href = dataURL;
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
