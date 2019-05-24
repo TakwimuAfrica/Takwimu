@@ -44,6 +44,8 @@ STATICFILES_DIRS = [
 HURUMAP['name'] = 'Takwimu'
 HURUMAP['url'] = os.environ.get('HURUMAP_URL', 'https://takwimu.africa')
 
+WAGTAILAPI_BASE_URL = HURUMAP['url']
+
 HURUMAP['title_tagline'] = ''
 HURUMAP['description'] = ''
 
