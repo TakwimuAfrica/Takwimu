@@ -1834,11 +1834,14 @@ function Chart(options) {
           })
         }).then(res => {
           if (res.status === 200) {
-            const url = new URL(window.location);
-            url.searchParams.set('indicator', chart.id);
-            url.searchParams.set('title', chart.chartChartTitle);
-            url.searchParams.set('description', chart.chartRelease);
-            window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url.href)}`);
+            res.json().then(json => {
+              const url = new URL(window.location);
+              url.searchParams.set('image', json.image.split('/').pop());
+              url.searchParams.set('indicator', chart.id);
+              url.searchParams.set('title', chart.chartChartTitle);
+              url.searchParams.set('description', "");
+              window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url.href)}`);
+            })
           }
         })
       });
