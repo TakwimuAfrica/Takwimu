@@ -1643,8 +1643,32 @@ class IndexPage(ModelMeta, Page):
 
         return {}
 
+    def find_indicator_with_id(self, indicator_id):
+        for featured_data in self.featured_data.stream_data:
+            if featured_data["value"]["featured_data"][0]["id"] == indicator_id:
+                return featured_data["value"]["featured_data"][0]
+        return None
+
+    def get_twitter_meta(self, indicator):
+        model = get_image_model()
+        image = model.objects.filter(title=indicator["id"]).get()
+        return {
+            'image_url': image.get_rendition('width-600').url,
+            'description': indicator["value"]["widget"][0]['value']["description"] if indicator else '',
+            'title': indicator["value"]["widget"][0]['value']["title"] if indicator else ''
+        }
+
     def get_context(self, request, *args, **kwargs):
         context = super(IndexPage, self).get_context(request, *args, **kwargs)
+
+        if request.method == 'GET':
+            indicator_id = request.GET.get('indicator', None)
+            if indicator_id:
+                indicator = self.find_indicator_with_id(indicator_id)
+                if indicator:
+                    context['twitter'] = self.get_twitter_meta(
+                        indicator
+                    )
 
         context.update(wagtail_settings(request))
         if self.hero:
