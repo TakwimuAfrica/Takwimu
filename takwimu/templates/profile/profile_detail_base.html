@@ -234,6 +234,14 @@
                       .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
               }
           });
+          const url = new URL(window.location);
+          const indicator = url.searchParams.get('indicator');
+          if (indicator) {
+              const element = document.getElementById(indicator);
+              if (element) {
+                  element.parentElement.scrollIntoView();
+              }
+          }
       });
 
 
