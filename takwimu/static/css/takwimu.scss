@@ -778,6 +778,27 @@ header.section-contents h1 {
     text-decoration: underline;
   }
 }
+.column-set {
+  scrollbar-track-color: #d3d3d3;
+  scrollbar-base-color: #d3d3d3;
+  scrollbar-face-color: #d3d3d3;
+
+  /* Firefox: https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Scrollbars */
+  scrollbar-color: #d3d3d3;
+  scrollbar-width: thin;
+}
+.column-set::-webkit-scrollbar {
+  height: 6px;
+}
+.column-set::-webkit-scrollbar-track {
+}
+/* Handle */
+.column-set::-webkit-scrollbar-thumb {
+  background: #d3d3d3;
+}
+.column-set::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
 
 /* --------------------------------------------
  * SECTION: Country Flags Navigation

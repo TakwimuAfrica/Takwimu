@@ -5,6 +5,7 @@ import { PropTypes } from 'prop-types';
 import { withStyles } from '@material-ui/core';
 
 import DataActions from './DataActions';
+import { RichTypography } from '../core';
 
 const styles = {
   root: {
@@ -13,11 +14,10 @@ const styles = {
 };
 
 function DataContainer({ id, classes, data }) {
-  const containerId = `data-indicator-${id}`;
   return (
     <Fragment>
-      <div id={containerId} className={classes.root}>
-        <div dangerouslySetInnerHTML={{ __html: data.raw_html }} />
+      <div id={`data-indicator-${id}`} className={classes.root}>
+        <RichTypography component="div">{data.raw_html}</RichTypography>
       </div>
       <DataActions />
     </Fragment>

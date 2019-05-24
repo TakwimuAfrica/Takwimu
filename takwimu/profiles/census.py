@@ -1,3 +1,4 @@
+from collections import OrderedDict
 import logging
 
 from django.conf import settings
@@ -1771,6 +1772,48 @@ def get_profile(geo, profile_name, request):
                                 geo.geoid, section, comp_geo.geoid, e)
                             log.fatal(msg, exc_info=e)
                             raise ValueError(msg)
+
+        tabs = OrderedDict({'all': {'name': 'All', 'href': ''}})
+        if not (data['demographics']['is_missing'] and \
+                data['worldbank']['youth_unemployment'].get('is_missing') and \
+                data['worldbank']['employment_to_population_ratio'].get('is_missing') and \
+                data['poverty'].get('is_missing')):
+            tabs['demographics'] = {'name': 'Demographics', 'href': '#demographics'}
+
+        if not data['elections'].get('is_missing'):
+            tabs['elections'] = {'name': 'Elections', 'href': '#elections'}
+
+        if not (data['fgm'].get('is_missing') and \
+                data['worldbank']['access_to_basic_services'].get('is_missing') and \
+                data['worldbank']['prevalence_of_undernourishment'].get('is_missing') and \
+                data['worldbank']['maternal_mortality'].get('is_missing')):
+            tabs['health'] = {'name': 'Health', 'href': '#health'}
+
+        if not (data['crops']['crop_distribution'].get('is_missing') and \
+                data['worldbank']['agricultural_land'].get('is_missing') and \
+                data['worldbank']['cereal_yield_kg_per_hectare'].get('is_missing')):
+            tabs['agriculture'] = {'name': 'Agriculture', 'href': '#agriculture'}
+
+        if not (data['worldbank']['primary_school_enrollment'].get('is_missing') and \
+                data['worldbank']['adult_literacy_rate'].get('is_missing') and \
+                data['worldbank']['secondary_school_enrollment'].get('is_missing')):
+            tabs['education'] = { 'name': 'Education', 'href': '#education' }
+
+        if not (data['worldbank']['account_ownership'].get('is_missing') and \
+                data['worldbank']['mobile_phone_subscriptions'].get('is_missing')):
+            tabs['financial_inclusion'] = {'name': 'Financial Inclusion', 'href': '#financial-inclusion'}
+
+        if not data['budget'].get('is_missing'):
+            tabs['budget'] = {'name': 'Budget', 'href': '#budget'}
+
+        if not data['worldbank'].get('is_missing'):
+            tabs['public_finances'] = {'name': 'Public Finances', 'href': '#public-finances'}
+
+        if not (data['donors'].get('is_missing') and \
+                data['worldbank']['foreign_direct_investment_net_inflows'].get('is_missing')):
+            tabs['oda'] = {'name': 'ODA', 'href': '#oda'}
+
+        data['tabs'] = tabs
         return data
     finally:
         session.close()

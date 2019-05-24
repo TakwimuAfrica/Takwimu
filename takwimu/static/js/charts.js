@@ -42,8 +42,8 @@ function Chart(options) {
         .style("padding", "0 1.938rem")
         .style("padding-top", "2.5rem")
         .classed("chart-analysis", true);
-        
-      // TODO : 
+
+      // TODO :
       // const row = document.getElementById(options.chartContainer).parentNode;
       // const section = row.parentNode;
       // const rowIndex = Array.prototype.slice.call(
@@ -70,7 +70,6 @@ function Chart(options) {
         // TODO :
         // .text(rowIndex > 0 ? "Read the full analysis" : "Read the country analysis");
     }
-    
 
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
     chart.parentHeight = chart.getParentHeight();
@@ -89,9 +88,9 @@ function Chart(options) {
     chart.decimalPlaces = parseInt(options.chartDecimalPlaces) || 0;
     chart.tableDecimalPlaces = parseInt(options.chartDecimalPlaces) || 1;
     chart.colorbrewer = options.colorbrewer || (window.HURUMAP_THEME && window.HURUMAP_THEME.charts.colorbrewer);
-    chart.chartChartShowYAxis =
-      options.chartChartShowYAxis ||
-      (chart.chartStatType == "percentage" ? true : false);
+    chart.chartChartShowYAxis = options.chartChartShowYAxis || (window.HURUMAP_THEME && window.HURUMAP_THEME.charts.show_y_axis) || (chart.chartStatType == "percentage" ? true : false);
+    chart.columnWidth = parseInt(options.columnWidth) || 30;          //standard width for column, grouped_column
+    chart.columnOffset = parseInt(options.columnOffset) || 10;        //threshold for number of bars for adding scrolling
     chart.chartHeight =
       options.chartHeight ||
       (chart.parentHeight < 180 ? 180 : chart.parentHeight);
@@ -467,10 +466,9 @@ function Chart(options) {
     chart.htmlBase = chart.chartContainer
       .append("div")
       .attr("class", "column-set")
-      .style("margin-top", function() {
-        return chart.chartChartShowYAxis ? -chart.settings.height + "px" : "0";
-      })
-      .style("height", chart.settings.height + "px");
+      .style("margin-top", 0)
+      .style("height", chart.settings.height + "px")
+      .style("overflow", "auto hidden");
 
     // narrow padding for histograms
     if (chart.chartType == "histogram") {
@@ -532,12 +530,19 @@ function Chart(options) {
       .domain(yDomain);
 
     if (chart.chartChartShowYAxis) {
+      //check if column-set has a scrollbar, when data value greater than 10
+      let marginBottom = 0;
+      if (chart.chartDataValues.length > chart.columnOffset) {
+        marginBottom = "15px";
+      }
       // if we really need to render a y axis, easier to use an svg
       chart.svgBaseContainer = chart.chartContainer
         .append("svg")
         .attr("class", "svg-chart")
         .attr("width", "100%")
-        .attr("height", chart.settings.height);
+        .attr("height", chart.settings.height)
+        .style("margin-bottom", marginBottom)
+        .style("margin-top", -chart.settings.height + "px");
 
       // base where columns and axes will be attached
       chart.svgBase = chart.svgBaseContainer
@@ -546,9 +551,7 @@ function Chart(options) {
           "transform",
           "translate(" +
             chart.settings.margin.left +
-            "," +
-            chart.settings.margin.top +
-            ")"
+            ", 0)"
         );
 
       chart.yAxis = d3.svg
@@ -583,7 +586,7 @@ function Chart(options) {
         .each(function(d, i) {
           g = d3.select(this);
           groupValues = d3.values(d.values);
-          columnWidth = Math.floor(chart.x.rangeBand() / groupValues.length);
+          columnWidth = Math.floor(chart.x.rangeBand() / groupValues.length) < chart.columnWidth? chart.columnWidth : Math.floor(chart.x.rangeBand() / groupValues.length);
 
           g.append("span")
             .classed("x axis label", true)
@@ -611,6 +614,14 @@ function Chart(options) {
                 );
               })
               .style("left", function(d) {
+                if(chart.chartDataValues.length > (chart.columnOffset-groupValues.length)) {
+                  return (
+                    chart.x(d.name) * (1 +  groupValues.length) +
+                    chart.settings.margin.left +
+                    (columnWidth + 2) * i +
+                    "px"
+                  );
+                }
                 return (
                   chart.x(d.name) +
                   chart.settings.margin.left +
@@ -648,18 +659,19 @@ function Chart(options) {
               .text(function(d) {
                 return chart.capitalize(v.name);
               });
-
-            column
-              .append("span")
-              .classed("label", true)
-              .style("bottom", function(d) {
-                return (
-                  chart.settings.displayHeight - chart.y(d.value) + 3 + "px"
-                );
-              })
-              .html(function(d) {
-                return chart.getValueFmt(v);
-              });
+            if(!chart.chartChartShowYAxis) {
+              column
+                .append("span")
+                .classed("label", true)
+                .style("bottom", function(d) {
+                  return (
+                    chart.settings.displayHeight - chart.y(d.value) + 3 + "px"
+                  );
+                })
+                .html(function(d) {
+                  return chart.getValueFmt(v);
+                });
+            }
           });
         });
 
@@ -667,19 +679,23 @@ function Chart(options) {
       // select them for interaction handling
       chart.columns = chart.htmlBase.selectAll(".column");
     } else {
+      let columnWidth = chart.x.rangeBand() < chart.columnWidth? chart.columnWidth : chart.x.rangeBand();
       chart.columns = chart.htmlBase
         .selectAll(".column")
         .data(chart.chartDataValues)
         .enter()
         .append("a")
         .attr("class", "column")
-        .style("width", chart.x.rangeBand() + "px")
+        .style("width", columnWidth + "px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom + chart.settings.tickPadding + "px"
           );
         })
         .style("left", function(d) {
+          if(chart.chartDataValues.length > chart.columnOffset) {
+            return chart.x(d.name) * 2 + chart.settings.margin.left + "px";
+          }
           return chart.x(d.name) + chart.settings.margin.left + "px";
         })
         .style("height", function(d) {
@@ -691,7 +707,7 @@ function Chart(options) {
         .attr("class", "area")
         .style("position", "absolute")
         .style("background-color", chart.colorbrewer[chart.chartColorScale][0])
-        .style("width", chart.x.rangeBand() + "px")
+        .style("width", columnWidth + "px")
         .style("bottom", function(d) {
           return (
             chart.settings.margin.bottom +
@@ -714,15 +730,17 @@ function Chart(options) {
           return d.name;
         });
 
-      chart.labels = chart.columnAreas
-        .append("span")
-        .classed("label", true)
-        .style("bottom", function(d) {
-          return chart.settings.displayHeight - chart.y(d.value) + 3 + "px";
-        })
-        .html(function(d) {
-          return chart.getValueFmt(d);
-        });
+      if(!chart.chartChartShowYAxis) {
+        chart.labels = chart.columnAreas
+          .append("span")
+          .classed("label", yLabel)
+          .style("bottom", function(d) {
+            return chart.settings.displayHeight - chart.y(d.value) + 3 + "px";
+          })
+          .html(function(d) {
+            return chart.getValueFmt(d);
+          });
+      }
     }
 
     // listen for column interactions

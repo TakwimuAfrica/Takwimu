@@ -1,9 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { Typography } from '@material-ui/core';
-
 import { withStyles } from '@material-ui/core/styles';
+
+import { RichTypography } from './core';
 import Section from './Section';
 
 const styles = () => ({
@@ -40,12 +40,7 @@ function MakingOfTakwimu({
   const { title, description, link } = makingOf;
   return (
     <Section title={title} variant="h3" classes={{ title: classes.title }}>
-      <Typography
-        variant="body1"
-        dangerouslySetInnerHTML={{
-          __html: description
-        }}
-      />
+      <RichTypography>{description}</RichTypography>
       <div className={classes.container}>
         <iframe
           title={title}

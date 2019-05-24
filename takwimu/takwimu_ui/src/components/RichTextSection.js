@@ -1,17 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { withStyles, Typography } from '@material-ui/core';
+import { withStyles } from '@material-ui/core';
 
 import Section from './Section';
+import { RichTypography } from './core';
 
-const styles = theme => ({
+const styles = () => ({
   root: {},
-  text: {
-    '& a': {
-      color: theme.palette.primary.main
-    }
-  }
+  text: {}
 });
 
 function RichTextSection({
@@ -23,13 +20,7 @@ function RichTextSection({
   ...props
 }) {
   const text = (
-    <Typography
-      variant="body1"
-      className={classes.text}
-      dangerouslySetInnerHTML={{
-        __html: value
-      }}
-    />
+    <RichTypography classes={{ root: classes.text }}>{value}</RichTypography>
   );
   return React.createElement(
     component,

@@ -2,9 +2,11 @@
 import React, { useState, useEffect } from 'react';
 import { PropTypes } from 'prop-types';
 
+import classNames from 'classnames';
+
 import { withStyles, Typography } from '@material-ui/core';
 
-import classNames from 'classnames';
+import { RichTypography } from '../../core';
 
 import leftArrow from '../../../assets/images/left-arrow.svg';
 import rightArrow from '../../../assets/images/right-arrow.svg';
@@ -28,9 +30,7 @@ const styles = theme => ({
       content: '""',
       width: '100%',
       height: '100%',
-      position: 'absolute',
-      boxShadow: '0 2px 6px 4px rgba(0, 0, 0, 0.2)',
-      clipPath: 'inset(0 0 -0.75rem 0)' // bottom only shadow
+      position: 'absolute'
     }
   },
   carousel: {
@@ -256,12 +256,8 @@ function Topic({ classes, data, onIndexChanged }) {
         <Typography variant="h4" className={classes.title}>
           {title}
         </Typography>
-        <Typography
-          variant="body1"
-          dangerouslySetInnerHTML={{
-            __html: data[selectedIndex].description
-          }}
-        />
+
+        <RichTypography>{data[selectedIndex].description}</RichTypography>
       </div>
     </div>
   );
