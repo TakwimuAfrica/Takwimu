@@ -788,15 +788,13 @@ header.section-contents h1 {
   scrollbar-width: thin;
 }
 .column-set::-webkit-scrollbar {
-  width: 0.563rem;
+  height: 6px;
 }
 .column-set::-webkit-scrollbar-track {
-  border-radius: 0.281rem;
 }
 /* Handle */
 .column-set::-webkit-scrollbar-thumb {
   background: #d3d3d3;
-  border-radius: 0.281rem;
 }
 .column-set::-webkit-scrollbar-corner {
   background-color: transparent;
