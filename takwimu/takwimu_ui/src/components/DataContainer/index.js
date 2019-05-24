@@ -69,7 +69,9 @@ function DataContainer({
     const indicatorId = params.get('indicator');
     if (indicatorId) {
       const element = document.getElementById(`indicator-${indicatorId}`);
-      element.scrollIntoView();
+      if (element) {
+        element.scrollIntoView();
+      }
     }
   }, []);
 
