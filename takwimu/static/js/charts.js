@@ -1839,7 +1839,7 @@ function Chart(options) {
               url.searchParams.set('image', json.image.split('/').pop());
               url.searchParams.set('indicator', chart.id);
               url.searchParams.set('title', chart.chartChartTitle);
-              url.searchParams.set('description', "");
+              url.searchParams.set('description', "Takwimu");
               window.open(`https://twitter.com/intent/tweet?url=${encodeURIComponent(url.href)}`);
             })
           }
