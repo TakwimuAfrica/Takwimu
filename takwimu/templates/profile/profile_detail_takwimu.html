@@ -9,7 +9,7 @@
 {% block profile_detail %}
 
 {# DEMOGRAPHICS #}
-{% if not demographics.is_missing or not worldbank.is_missing %}
+{% if not demographics.is_missing or not worldbank.youth_unemployment.is_missing or not worldbank.employment_to_population_ratio.is_missing %}
 <article id="demographics" class="clearfix">
   <header class="section-contents"><h1>Demographics</h1></header>
   <div class="section-container">
@@ -115,7 +115,7 @@
 {% endif %}
 
 {# HEALTH #}
-{% if not fgm.is_missing or not worldbank.is_missing %}
+{% if not fgm.is_missing or not worldbank.maternal_mortality.is_missing or not worldbank.prevalence_of_undernourishment.is_missing or not worldbank.life_expectancy_at_birth.is_missing or not worldbank.maternal_mortality.is_missing or not worldbank.hiv_prevalence.is_missing or not worldbank.births_attended_by_skilled_health_staff.is_missing or not worldbank.fgm_prevalence.is_missing or not worldbank.nurses_and_midwives.is_missing or not worldbank.incidence_of_malaria_per_1000_pop_at_risk.is_missing  %}
 <article id="health" class="clearfix">
   <header class="section-contents"><h1>Health</h1></header>
   <div class="section-container">
@@ -463,7 +463,7 @@
 {% endif %}
 
 {# EDUCATION #}
-{% if not worldbank.is_missing %}
+{% if not worldbank.primary_school_enrollment.is_missing or not worldbank.adult_literacy_rate.is_missing or not worldbank.primary_education_completion_rate.is_missing or not worldbank.secondary_school_enrollment.is_missing  %}
 <article id="education" class="clearfix" data-tab="Education">
   <header class="section-contents"><h1>Education</h1></header>
   <div class="section-container">
