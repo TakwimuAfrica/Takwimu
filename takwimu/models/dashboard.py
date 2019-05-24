@@ -1654,7 +1654,7 @@ class IndexPage(ModelMeta, Page):
         image = model.objects.filter(title=indicator["id"]).get()
         return {
             'image_url': image.get_rendition('width-600').url,
-            'description': indicator["value"]["widget"][0]['value']["description"] if indicator else '',
+            'description': indicator['value']['widget'][0]['value'].get('description', '') if indicator else '',
             'title': indicator["value"]["widget"][0]['value']["title"] if indicator else ''
         }
 
