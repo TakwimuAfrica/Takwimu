@@ -9,9 +9,9 @@
 {% block profile_detail %}
 
 {# DEMOGRAPHICS #}
-{% if not demographics.is_missing or not worldbank.is_missing %}
+{% if tabs.demographics %}
 <article id="demographics" class="clearfix">
-  <header class="section-contents"><h1>Demographics</h1></header>
+	<header class="section-contents"><h1>Demographics</h1></header>
   <div class="section-container">
     {% if not demographics.sex_dist.is_missing %}
     <section class="clearfix stat-row">
@@ -71,13 +71,40 @@
     </section>
     {% endif %}
 
+    {% if not poverty.poverty_residence_dist.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-poverty-poverty_residence_dist"
+           data-stat-type="scaled-percentage"
+           data-chart-title="Percentage of population in poverty" data-id="81a26005-c7b5-4f55-bec7-8e97662005a6">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not poverty.poverty_age_dist.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-poverty-poverty_age_dist"
+           data-stat-type="scaled-percentage"
+           data-chart-title="Percentage of population living in poverty by age and residence" data-id="53179714-02d8-447f-92df-688b1841e31a">
+      </div>
+    </section>
+    {% endif %}
   </div>
 </article>
 {% endif %}
 
 
 {# ELECTIONS #}
-{% if not elections.is_missing %}
+{% if tabs.elections %}
 <article id="elections" class="clearfix">
   <header class="section-contents"><h1>Elections</h1></header>
   <div class="section-container">
@@ -115,7 +142,7 @@
 {% endif %}
 
 {# HEALTH #}
-{% if not fgm.is_missing or not worldbank.is_missing %}
+{% if tabs.health %}
 <article id="health" class="clearfix">
   <header class="section-contents"><h1>Health</h1></header>
   <div class="section-container">
@@ -263,8 +290,8 @@
 </article>
 {% endif %}
 
-{# CROPS #}
-{% if not crops.crop_distribution.is_missing or not worldbank.is_missing %}
+{# Agriculture #}
+{% if tabs.agriculture %}
 <article id="agriculture" class="clearfix">
   <header class="section-contents"><h1>Agriculture</h1></header>
   <div class="section-container">
@@ -308,162 +335,8 @@
 </article>
 {% endif %}
 
-{% if not health_workers.health_workers_dist.is_missing %}
-  <article id="health_workers_distribution" class="clearfix">
-    <header class="section-contents">
-      <h1>Health workers distribution</h1>
-    </header>
-    <div class="section-container">
-      <section class="clearfix stat-row">
-        <div class="column-three-quarters">
-          {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.hrh_patient_ratio_dist stat_type='number' %}
-        </div>
-        <div class="column-full">
-          <div id="chart-histogram-health_workers-health_workers_dist" data-stat-type="scaled-percentage" data-chart-title="Number of health workers by profession(2014)" data-id="e7dd9db6-fc19-495b-8498-737b5e2a0777"></div>
-        </div>
-      </section>
-    </div>
-  </article>
-{% endif %}
-
-{% if not causes_of_death.is_missing %}
-  <article id="causes_of_death" class="clearfix">
-    <header class="section-contents">
-      <h1>Causes of death </h1>
-    </header>
-    <div class="section-container">
-      {% if not causes_of_death.causes_of_death_under_five_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <div class="column-full">
-            <div id="chart-histogram-causes_of_death-causes_of_death_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons under five years of age (2013)" data-id="e6841172-0a72-48c0-9dbf-0cf65a837fca"></div>
-          </div>
-        </section>
-      {% endif %}
-      {% if not causes_of_death.causes_of_death_over_five_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <div class="column-full">
-            <div id="chart-histogram-causes_of_death-causes_of_death_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Causes of death among persons over five years of age (2013)" data-id="12292b5c-1a21-4088-9b54-b802970ca27c"></div>
-          </div>
-        </section>
-      {% endif %}
-      {% if not causes_of_death.inpatient_diagnosis_under_five_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <div class="column-full">
-            <div id="chart-histogram-causes_of_death-inpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons under five years of age (2014)" data-id="621fac3a-799e-44ea-929e-0d911c9c6e00"></div>
-          </div>
-        </section>
-      {% endif %}
-      {% if not causes_of_death.inpatient_diagnosis_over_five_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <div class="column-full">
-            <div id="chart-histogram-causes_of_death-inpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Inpatient diagnosis among persons over five years of age (2014)" data-id="100e4169-ac11-451a-9f1e-47075645f1e8"></div>
-          </div>
-        </section>
-      {% endif %}
-      {% if not causes_of_death.outpatient_diagnosis_under_five_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <div class="column-full">
-            <div id="chart-histogram-causes_of_death-outpatient_diagnosis_under_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons under five years of age (2014)" data-id="b9d6886b-e739-4505-a3b7-92763e6161a1"></div>
-          </div>
-        </section>
-      {% endif %}
-      {% if not causes_of_death.outpatient_diagnosis_over_five_dist.is_missing %}
-        <section class="clearfix stat-row">
-          <div class="column-full">
-            <div id="chart-histogram-causes_of_death-outpatient_diagnosis_over_five_dist" data-stat-type="scaled-percentage" data-chart-title="Outpatient diagnosis among persons over five years of age (2014)" data-id="9d67d617-f69a-4f21-9e2b-fb9008a15c97"></div>
-          </div>
-        </section>
-      {% endif %}
-    </div>
-  </article>
-{% endif %}
-
-{# ODA #}
-{% if not donors.is_missing or not worldbank.is_missing %}
-<article id="oda" class="clearfix">
-  <header class="section-contents"><h1>Development Assistance</h1></header>
-  <div class="section-container">
-    {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
-    <section class="clearfix stat-row">
-      <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </div>
-      <div class="column-three-quarters"
-           id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"
-           data-stat-type=""
-           data-chart-title="Foreign direct investment, net inflows (% of GDP)" data-id="24d80a76-e3c7-4140-80c8-c80fed352cae">
-      </div>
-    </section>
-    {% endif %}
-
-    {% if not donors.donor_assistance_dist.is_missing %}
-    <section class="clearfix stat-row">
-      <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </div>
-      <div class="column-three-quarters"
-           id="chart-histogram-donors-donor_assistance_dist"
-           data-chart-title="Percentage contribution by principal donors"
-           data-stat-type="scaled-percentage" data-id="ac229fee-733a-4b7e-8576-9c03489eea8c"></div>
-    </section>
-    {% endif %}
-
-    {% if not donors.donor_programmes_dist.is_missing %}
-    <section class="clearfix stat-row">
-      <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </div>
-      <div class="column-three-quarters"
-           id="chart-grouped_column-donors-donor_programmes_dist"
-           data-chart-title="Percentage contribution by programme"
-           data-stat-type="scaled-percentage" data-id="ee5b3c8a-3497-44ee-b4e0-1ae9170fb48b"></div>
-    </section>
-    {% endif %}
-  </div>
-</article>
-{% endif %}
-
-{# HOUSEHOLDS #}
-{% if not poverty.is_missing %}
-<article id="households" class="clearfix">
-  <header class="section-contents"><h1>Households</h1></header>
-  <div class="section-container">
-    {% if not poverty.poverty_residence_dist.is_missing %}
-    <section class="clearfix stat-row">
-      <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </div>
-      <div class="column-three-quarters"
-           id="chart-grouped_column-poverty-poverty_residence_dist"
-           data-stat-type="scaled-percentage"
-           data-chart-title="Percentage of population in poverty" data-id="81a26005-c7b5-4f55-bec7-8e97662005a6">
-      </div>
-    </section>
-    {% endif %}
-
-    {% if not poverty.poverty_age_dist.is_missing %}
-    <section class="clearfix stat-row">
-      <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </div>
-      <div class="column-three-quarters"
-           id="chart-grouped_column-poverty-poverty_age_dist"
-           data-stat-type="scaled-percentage"
-           data-chart-title="Percentage of population living in poverty by age and residence" data-id="53179714-02d8-447f-92df-688b1841e31a">
-      </div>
-    </section>
-    {% endif %}
-  </div>
-</article>
-{% endif %}
-
 {# EDUCATION #}
-{% if not worldbank.is_missing %}
+{% if tabs.education %}
 <article id="education" class="clearfix" data-tab="Education">
   <header class="section-contents"><h1>Education</h1></header>
   <div class="section-container">
@@ -526,32 +399,8 @@
 </article>
 {% endif %}
 
-
-{# CRIME REPORS #}
-{% if not security.is_missing %}
-<article id="crime-reports" class="clearfix" data-tab="Crime Reports">
-  <header class="section-contents"><h1>Crime Reports</h1></header>
-  <div class="section-container">
-    {% if not security.is_missing and not security.seized_firearms_dist.is_missing %}
-    <section class="clearfix stat-row">
-      <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
-      </div>
-      <div class="column-three-quarters"
-           id="chart-grouped_column-security-seized_firearms_dist"
-           data-stat-type="scaled-percentage"
-           data-chart-title="Seized firearms" data-id="05db745d-d8bf-4381-8db5-eb53cbc79f5f">
-      </div>
-    </section>
-  {% endif %}
-  </div>
-</article>
-{% endif %}
-
-
 {# FINANCIAL INCLUSION #}
-{% if not worldbank.is_missing %}
+{% if tabs.financial_inclusion %}
 <article id="financial-inclusion" class="clearfix" data-tab="Financial Inclusion">
   <header class="section-contents"><h1>Financial Inclusions</h1></header>
   <div class="section-container">
@@ -587,7 +436,7 @@
 {% endif %}
 
 {# BUDGET #}
-{% if not budget.is_missing %}
+{% if tabs.budget %}
 <article id="budget" class="clearfix">
   <header class="section-contents"><h1>Budget</h1></header>
   <div class="section-container">
@@ -610,7 +459,7 @@
 
 
 {# PUBLIC FINANCES #}
-{% if not worldbank.is_missing %}
+{% if tabs.public_finances %}
 <article id="public-finances" class="clearfix" data-tab="Public Finances">
   <header class="section-contents"><h1>Public Finances</h1></header>
   <div class="section-container">
@@ -716,4 +565,53 @@
 </article>
 {% endif %}
 
-{% endblock %}
+{# ODA #}
+{% if tabs.oda %}
+<article id="oda" class="clearfix">
+  <header class="section-contents"><h1>Development Assistance</h1></header>
+  <div class="section-container">
+    {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"
+           data-stat-type=""
+           data-chart-title="Foreign direct investment, net inflows (% of GDP)" data-id="24d80a76-e3c7-4140-80c8-c80fed352cae">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not donors.donor_assistance_dist.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-donors-donor_assistance_dist"
+           data-chart-title="Percentage contribution by principal donors"
+           data-stat-type="scaled-percentage" data-id="ac229fee-733a-4b7e-8576-9c03489eea8c"></div>
+    </section>
+    {% endif %}
+
+    {% if not donors.donor_programmes_dist.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-donors-donor_programmes_dist"
+           data-chart-title="Percentage contribution by programme"
+           data-stat-type="scaled-percentage" data-id="ee5b3c8a-3497-44ee-b4e0-1ae9170fb48b"></div>
+    </section>
+    {% endif %}
+
+  </div>
+</article>
+{% endif %}
+
+{% endblock profile_detail %}
