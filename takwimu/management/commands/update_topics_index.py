@@ -104,9 +104,6 @@ class Command(BaseCommand):
             # remove trailing slash
             server_url = server_url[:-1]
 
-        # clean out profleData DB
-        ProfileData.objects.all().delete()
-
         for code, detail in COUNTRIES.items():
             country = detail.get('name')
             url = f"profiles/country-{code}-{slugify(country)}"
