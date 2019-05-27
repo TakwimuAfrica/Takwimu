@@ -10,7 +10,7 @@ from takwimu.views import HomePageView, IndicatorsGeographyDetailView, \
     TwitterImageAPIView, LegalPageRedirectView
 from wazimap.views import HomepageView as ProfileView
 from census.views import DataView
-from takwimu.views import handler404, handler500
+from takwimu.views import handler404, handler500, serve
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
 from .api import api_router
@@ -50,6 +50,7 @@ takwimu_urlpatterns = [
         r'^data/(?P<format>map|table|distribution)/$',
         cache_page(STANDARD_CACHE_TIME)(DataView.as_view()),
         name='data_detail'),
+    url(r'^(\d+)/(.*)$', serve, name='wagtaildocs_serve'),
 ]
 
 urlpatterns = static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + \

@@ -2,11 +2,14 @@ import io
 from collections import OrderedDict
 import json
 from operator import itemgetter
+from wsgiref.util import FileWrapper
+
 import requests
 import string
 
 from django.conf import settings as takwimu_settings
 from django.core.serializers.json import DjangoJSONEncoder
+from django.http import Http404, HttpResponse, StreamingHttpResponse
 from django.shortcuts import render_to_response, render
 from django.template import RequestContext
 from django.utils.module_loading import import_string
@@ -21,7 +24,10 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from wagtail.contrib.settings.context_processors import settings
+from wagtail.core import hooks
 from wagtail.images import get_image_model
+from wagtail.utils import sendfile_streaming_backend
+from wagtail.utils.sendfile import sendfile
 
 from wazimap.views import GeographyDetailView
 from wazimap.geo import geo_data, LocationNotFound
@@ -57,7 +63,7 @@ from takwimu.utils.image import decode_base64_file
 
 from .renderers import CSSRenderer
 from rest_framework.renderers import StaticHTMLRenderer
-from wagtail.documents.models import Document
+from wagtail.documents.models import Document, document_served
 from django.shortcuts import get_object_or_404
 from wagtail.documents.models import get_document_model
 import zipfile
@@ -406,3 +412,84 @@ class TwitterImageAPIView(APIView):
                             status=status.HTTP_200_OK)
 
         return Response(status=status.HTTP_400_BAD_REQUEST)
+
+
+"""
+NOTE
+--------
+
+Django files storage requires all inheriting classes to implement the path
+method, but S3Boto3Storage https://github.com/jschneier/django-storages/blob/443cf95453bc84426862d08f3631d90ebc645117/storages/backends/s3boto3.py#L171
+does not implement said method. This means we'd have to implement this method is our custom storage backends
+
+But if we implement the path method in our custom storage backends, the view
+that serves documents checks for the path of the file and if it returns a valid
+path(it will in our case), it automatically assumes the file is in the local 
+storage and tries to find it there thus a 404
+
+This view below is an implementation of the of https://github.com/wagtail/wagtail/blob/c9e740324c1a2197454274f5d18514b9a0752374/wagtail/documents/views/serve.py#L17 
+that determines if an object is local or not based on if we are using S3.
+"""
+
+def serve(request, document_id, document_filename):
+    Document = get_document_model()
+    doc = get_object_or_404(Document, id=document_id)
+
+    # We want to ensure that the document filename provided in the URL matches the one associated with the considered
+    # document_id. If not we can't be sure that the document the user wants to access is the one corresponding to the
+    # <document_id, document_filename> pair.
+    if doc.filename != document_filename:
+        raise Http404('This document does not match the given filename.')
+
+    for fn in hooks.get_hooks('before_serve_document'):
+        result = fn(doc, request)
+        if isinstance(result, HttpResponse):
+            return result
+
+    # Send document_served signal
+    document_served.send(sender=Document, instance=doc, request=request)
+
+    try:
+        local_path = doc.file.path
+    except NotImplementedError:
+        local_path = None
+
+    if takwimu_settings.USE_S3:
+
+        # We are using a storage backend which does not expose filesystem paths
+        # (e.g. storages.backends.s3boto.S3BotoStorage).
+        # Fall back on pre-sendfile behaviour of reading the file content and serving it
+        # as a StreamingHttpResponse
+
+        wrapper = FileWrapper(doc.file)
+        response = StreamingHttpResponse(wrapper,
+                                         content_type='application/octet-stream')
+
+        response[
+            'Content-Disposition'] = 'attachment; filename=%s' % doc.filename
+
+        # FIXME: storage backends are not guaranteed to implement 'size'
+        response['Content-Length'] = doc.file.size
+
+        return response
+
+    else:
+        # Use wagtail.utils.sendfile to serve the file;
+        # this provides support for mimetypes, if-modified-since and django-sendfile backends
+
+        if hasattr(settings, 'SENDFILE_BACKEND'):
+            return sendfile(request, local_path, attachment=True,
+                            attachment_filename=doc.filename)
+        else:
+            # Fallback to streaming backend if user hasn't specified SENDFILE_BACKEND
+            return sendfile(
+                request,
+                local_path,
+                attachment=True,
+                attachment_filename=doc.filename,
+                backend=sendfile_streaming_backend.sendfile
+            )
+
+
+
+
