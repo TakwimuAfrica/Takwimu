@@ -10,6 +10,7 @@ import ReactPDF, {
   Text,
   View,
   Image,
+  Link,
   StyleSheet
 } from '@react-pdf/renderer';
 import Actions from './Actions';
@@ -23,6 +24,7 @@ import { RichTypography } from '../core';
 import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+import logoWhite from '../../assets/images/logo-white-all.png';
 
 const styles = theme => ({
   root: {
@@ -68,12 +70,49 @@ const pdfStyles = StyleSheet.create({
   section: {
     padding: 20
   },
-  hero: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#29a87c',
+  header: {
+    position: 'relative',
+    height: 100,
+    marginLeft: -20,
+    marginRight: -20
+  },
+  divider: {
+    height: 4,
+    marginTop: 46,
+    backgroundColor: '#29a87c',
+    width: '100%'
+  },
+  linkTakwimu: {
+    position: 'absolute',
+    top: 26,
+    fontSize: 14,
+    right: 20,
+    color: 'black',
+    textDecoration: 'none'
+  },
+  linkLicense: {
+    position: 'absolute',
+    top: 54,
+    fontSize: 14,
+    right: 20,
+    color: 'black',
+    textDecoration: 'none'
+  },
+  logo: {
+    width: 80,
+    marginTop: 42,
+    marginLeft: 10
+  },
+  logoBackground: {
+    position: 'absolute',
+    left: 40,
+    backgroundColor: '#29a87c',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderBottomColor: '#ffffff',
     borderBottomStyle: 'solid',
-    height: 200,
-    objectFit: 'cover'
+    borderBottomWidth: 2
   },
   title: {
     fontSize: 54
@@ -97,7 +136,21 @@ const pdfStyles = StyleSheet.create({
 const AnalysisPDF = ({ data, topic }) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
-      <Image style={pdfStyles.hero} src={profileHeroImage} />
+      <View style={pdfStyles.header}>
+        <Link href="https://takwimu.africa" style={pdfStyles.linkTakwimu}>
+          www.takwimu.africa
+        </Link>
+        <View style={pdfStyles.divider} />
+        <Link
+          style={pdfStyles.linkLicense}
+          href="//creativecommons.org/licenses/by/4.0/"
+        >
+          2018 Takwimu CC by 4.0
+        </Link>
+        <View style={pdfStyles.logoBackground}>
+          <Image style={pdfStyles.logo} src={logoWhite} />
+        </View>
+      </View>
       <View style={pdfStyles.section}>
         <Text style={pdfStyles.title}>{data.content.title}</Text>
       </View>
