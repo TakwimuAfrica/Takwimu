@@ -74,7 +74,8 @@ const pdfStyles = StyleSheet.create({
     position: 'relative',
     height: 100,
     marginLeft: -20,
-    marginRight: -20
+    marginRight: -20,
+    marginBottom: 20
   },
   divider: {
     height: 4,
@@ -136,7 +137,7 @@ const pdfStyles = StyleSheet.create({
 const AnalysisPDF = ({ data, topic }) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
-      <View style={pdfStyles.header}>
+      <View style={pdfStyles.header} fixed>
         <Link href="https://takwimu.africa" style={pdfStyles.linkTakwimu}>
           www.takwimu.africa
         </Link>
