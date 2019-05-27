@@ -5,9 +5,9 @@ from django.views.generic import RedirectView
 from wagtail.api.v2.router import WagtailAPIRouter
 
 from takwimu import settings
-from takwimu.views import HomePageView, LegalView, \
-    IndicatorsGeographyDetailView, SearchAPIView, AutoCompleteAPIView, \
-    FlourishView, AboutPageRedirectView, TwitterImageAPIView
+from takwimu.views import HomePageView, IndicatorsGeographyDetailView, \
+    SearchAPIView, AutoCompleteAPIView, FlourishView, AboutPageRedirectView, \
+    TwitterImageAPIView, LegalPageRedirectView
 from wazimap.views import HomepageView as ProfileView
 from census.views import DataView
 from takwimu.views import handler404, handler500
@@ -26,10 +26,10 @@ takwimu_urlpatterns = [
     # Redirect wazimap r'^about$' route to Wagtail `AboutPage`
     url(r'^about$', RedirectView.as_view(url='about/', permanent=True)),
     url(r'^faqs/$', AboutPageRedirectView.as_view(), name='faqs'),
-    url(r'^faqs/$', AboutPageRedirectView.as_view(), name='faqs'),
     url(r'^services/$', AboutPageRedirectView.as_view(), name='services'),
     url(r'^methodology/$', AboutPageRedirectView.as_view(), name='methodology'),
-    url(r'^legal/$', LegalView.as_view(), name='legal'),
+    url(r'^terms/$', LegalPageRedirectView.as_view(), name='terms'),
+    url(r'^privacy/$', LegalPageRedirectView.as_view(), name='privacy'),
     url(
         r'^{}/$'.format(PROFILES_GEOGRAPHY_REGEX),
         IndicatorsGeographyDetailView.as_view(),

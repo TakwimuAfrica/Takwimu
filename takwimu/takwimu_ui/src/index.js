@@ -18,6 +18,7 @@ import SearchResults from './components/SearchResults';
 import AnalysisPage from './pages/Analysis';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
+import LegalPage from './pages/Legal';
 
 const PROPS = {
   takwimu: window.takwimu,
@@ -115,14 +116,30 @@ const renderSearchResultsPage = () => {
   }
 };
 
+const renderLegalPage = () => {
+  const el = document.getElementById('takwimuLegalPage');
+  if (el) {
+    fetch('/api/v2/pages/?type=takwimu.LegalPage&fields=*&format=json')
+      .then(response => response.json())
+      .then(data => {
+        if (data.items && data.items.length) {
+          Object.assign(PROPS.takwimu.page, data.items[0]);
+
+          renderApp(LegalPage, 'takwimuLegalPage');
+        }
+      });
+  }
+};
+
 // Render common elements
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
 
 // Render specific pages
+renderHomepage();
+renderAnalysisPage();
+renderDatabyTopicPage();
 renderAboutUsPage();
 renderContactUsPage();
-renderDatabyTopicPage();
-renderAnalysisPage();
-renderHomepage();
 renderSearchResultsPage();
+renderLegalPage();

@@ -37,8 +37,8 @@ const LINKS = [
   { href: '/contact', label: 'Contact Us' }
 ];
 const LEGAL = [
-  { href: '/legal', label: 'Terms of use' },
-  { href: '/legal', label: 'Privacy Policy' }
+  { href: '/terms', label: 'Terms of use' },
+  { href: '/privacy', label: 'Privacy Policy' }
 ];
 
 function QuickLinks({ classes }) {
