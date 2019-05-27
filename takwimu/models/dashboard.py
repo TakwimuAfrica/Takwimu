@@ -1101,7 +1101,7 @@ class PrivacyPolicyContentBlock(blocks.StructBlock):
 
 
 class PrivacyPolicyBlock(blocks.StreamBlock):
-    privacy_policy = PrivacyPolicyContentBlock()
+    privacy = PrivacyPolicyContentBlock()
 
     def get_api_representation(self, value, context=None):
         representation = super(PrivacyPolicyBlock, self).get_api_representation(value, context=context)
@@ -1185,9 +1185,8 @@ class LegalPage(ModelMeta, Page):
             return self.promotion_image.file.url
 
     def get_context(self, request):
-        context = super(AboutPage, self).get_context(request)
+        context = super(LegalPage, self).get_context(request)
 
-        context['active_content'] = 'terms'
         context['meta'] = self.as_meta(request)
         return context
 
