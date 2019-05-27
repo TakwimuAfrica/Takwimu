@@ -34,13 +34,12 @@ from wagtail.snippets.models import register_snippet
 from wazimap.models import Geography
 
 from takwimu.models.data import ProfileData
+from takwimu.models.utils.page import find_indicator_with_id_from_page, filter_rich_text
 from takwimu.search import search
 from takwimu.utils.helpers import (COUNTRIES,
                                    get_takwimu_stories, get_takwimu_faqs,
                                    get_takwimu_services, get_takwimu_profile_view_country_content,
                                    get_takwimu_profile_navigation, get_takwimu_profile_read_next)
-from takwimu.utils.page import find_indicator_with_id_from_page, filter_rich_text
-
 
 logger = logging.getLogger(__name__)
 
@@ -1079,9 +1078,8 @@ class TermsContentBlock(blocks.StructBlock):
 
 
 class TermsBlock(blocks.StreamBlock):
-    terms_content = TermsContentBlock()
+    terms = TermsContentBlock()
 
-    # This block is only there to ensure structural integrity: Skip it in API
     def get_api_representation(self, value, context=None):
         representation = super(TermsBlock, self).get_api_representation(value, context=context)
         if representation:
@@ -1103,9 +1101,8 @@ class PrivacyPolicyContentBlock(blocks.StructBlock):
 
 
 class PrivacyPolicyBlock(blocks.StreamBlock):
-    privacy_policy_content = PrivacyPolicyContentBlock()
+    privacy_policy = PrivacyPolicyContentBlock()
 
-    # This block is only there to ensure structural integrity: Skip it in API
     def get_api_representation(self, value, context=None):
         representation = super(PrivacyPolicyBlock, self).get_api_representation(value, context=context)
         if representation:
@@ -1120,8 +1117,16 @@ class PrivacyPolicyBlock(blocks.StreamBlock):
 
 
 class LegalBodyBlock(blocks.StreamBlock):
-    terms= TermsBlock()
-    privacy_policy= PrivacyPolicyBlock()
+    terms = TermsBlock(max_num=1)
+    privacy_policy = PrivacyPolicyBlock(max_num=1)
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(LegalBodyBlock, self).get_api_representation(value, context=context)
+        for i, r in enumerate(representation):
+            representation[i] = r['value']
+
+        return representation
 
 
 class LegalPage(ModelMeta, Page):
