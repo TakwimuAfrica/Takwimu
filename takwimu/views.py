@@ -47,7 +47,8 @@ from takwimu.models.dashboard import (
     DataByTopicPage)
 
 from takwimu.models.utils.search import get_page_details
-from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer
+from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer, \
+    FlourishHTMLRenderer
 from takwimu.sdg import SDG
 from takwimu.search import suggest
 from takwimu.utils.image import decode_base64_file
@@ -336,11 +337,12 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (JPEGRenderer, StaticHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
+    renderer_classes = (JPEGRenderer, FlourishHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
-        doc = get_object_or_404(Document, id=kwargs["document_id"])
+        # doc = get_object_or_404(Document, id=kwargs["document_id"])
+        doc = Document
 
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:

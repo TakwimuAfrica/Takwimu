@@ -1,4 +1,4 @@
-from rest_framework.renderers import BaseRenderer
+from rest_framework.renderers import BaseRenderer, StaticHTMLRenderer
 
 
 class CSSRenderer(BaseRenderer):
@@ -23,8 +23,16 @@ class JavaScriptRenderer(BaseRenderer):
 class JPEGRenderer(BaseRenderer):
     media_type = 'image/jpeg'
     format = 'jpg'
-    charset = None
     render_style = 'binary'
+
+    def render(self, data, media_type=None, renderer_context=None):
+        return data
+
+
+class FlourishHTMLRenderer(StaticHTMLRenderer):
+    media_type = 'text/html'
+    format = 'html'
+    charset = 'utf-8'
 
     def render(self, data, media_type=None, renderer_context=None):
         return data
