@@ -283,6 +283,16 @@
       let page = 'home';
       if (pathname.startsWith('/about')) {
         page = 'about';
+        page.active_content = 'about';
+      } else if(pathname.startsWith('/methodology')) {
+        page = 'about';
+        page.active_content = 'methodology';
+      } else if (pathname.startsWith('/services')) {
+        page = 'about';
+        page.active_content = 'services';
+      } else if (pathname.startsWith('/faqs')) {
+        page = 'about';
+        page.active_content = 'faqs';
       } else if (pathname.startsWith('/contact')) {
         page = 'contact';
       } else if (pathname.startsWith('/profiles/country-')) {
