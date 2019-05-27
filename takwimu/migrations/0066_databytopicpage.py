@@ -11,7 +11,7 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('wagtailcore', '0040_page_draft_title'),
-        # ('wazimap', '0013_port_to_python3'),
+        ('wazimap', '0013_port_to_python3'),
         ('takwimu', '0065_feedback_04'),
     ]
 
