@@ -33,7 +33,7 @@ function DataContainer({ id, classes, data }) {
   const handleDownload = () => {
     const link = document.createElement('a');
     link.href = documents[data.document];
-    link.download = data.document.split('/').pop();
+    link.download = documents[data.document].split('/').pop();
     link.target = '_blank';
     document.body.appendChild(link);
     link.click();
@@ -41,16 +41,17 @@ function DataContainer({ id, classes, data }) {
   };
 
   return (
-    <Fragment>
-      {data.document && (
+    data.document && (
+      <Fragment>
         <div id={`data-indicator-${id}`} className={classes.root}>
           {documents[data.document] && (
             <PDF scale={0.65} file={documents[data.document]} />
           )}
         </div>
-      )}
-      <DataActions onDownload={handleDownload} />
-    </Fragment>
+
+        <DataActions onDownload={handleDownload} />
+      </Fragment>
+    )
   );
 }
 
