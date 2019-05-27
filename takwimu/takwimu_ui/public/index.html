@@ -299,6 +299,14 @@
         page = 'analysis';
       } else if (pathname.startsWith('/search')) {
         page = 'search';
+      } else if (pathname.startsWith('/legal')) {
+        page = 'legal';
+      } else if (pathname.startsWith('/terms')) {
+        page = 'legal';
+        page.active_content = 'terms';
+      } else if (pathname.startsWith('/privacy')) {
+        page = 'legal';
+        page.active_content = 'privacy';
       }
       takwimu.page.name = page;
       let ids = [];
@@ -315,6 +323,9 @@
         case 'search':
           ids = ['takwimuSearchResults'];
           takwimu.page.search = { query: '', results: [] };
+          break;
+        case 'legal':
+          ids = ['takwimuLegalPage'];
           break;
         case 'analysis':
           ids = ['takwimuAnalysisPage'];
