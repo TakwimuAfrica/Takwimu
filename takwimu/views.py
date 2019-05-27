@@ -1,3 +1,4 @@
+import io
 from collections import OrderedDict
 import json
 from operator import itemgetter
@@ -344,7 +345,14 @@ class FlourishView(APIView):
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:
             filename = kwargs["filename"]
-        zip_ref = zipfile.ZipFile(doc.file.path, "r")
+
+        if takwimu_settings.USE_S3:
+            url_path = takwimu_settings.MEDIA_URL + doc.file.path
+            response = requests.get(url_path, stream=True)
+            zip_ref = zipfile.ZipFile(io.BytesIO(response.content))
+        else:
+            zip_ref = zipfile.ZipFile(doc.file.path, "r")
+
         file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
