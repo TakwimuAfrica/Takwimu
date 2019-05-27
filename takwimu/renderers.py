@@ -33,6 +33,7 @@ class FlourishHTMLRenderer(StaticHTMLRenderer):
     media_type = 'text/html'
     format = 'html'
     charset = 'utf-8'
+    render_style = 'text'
 
     def render(self, data, media_type=None, renderer_context=None):
         return data

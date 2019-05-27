@@ -341,8 +341,7 @@ class FlourishView(APIView):
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
-        # doc = get_object_or_404(Document, id=kwargs["document_id"])
-        doc = Document
+        doc = get_object_or_404(Document, id=kwargs["document_id"])
 
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:
