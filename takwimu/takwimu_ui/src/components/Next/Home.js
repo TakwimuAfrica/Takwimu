@@ -43,7 +43,7 @@ function HomeWhereToNext({ classes }) {
           Stay up-to-date with <br /> new data and analysis
         </Card>
 
-        <Card href="/about" classes={{ root: classes.cardMargin }}>
+        <Card href="/services" classes={{ root: classes.cardMargin }}>
           Looking for other <br /> services?
         </Card>
 
