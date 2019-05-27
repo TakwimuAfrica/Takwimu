@@ -37,4 +37,9 @@ class FlourishHTMLRenderer(StaticHTMLRenderer):
     render_style = 'text'
 
     def render(self, data, media_type=None, renderer_context=None):
+        """
+        Override the render to allow us to render unicode easily,
+        the checks in here kept throwing
+        AssertionError: renderer returned unicode, and did not specify a charset value
+        """
         return data
