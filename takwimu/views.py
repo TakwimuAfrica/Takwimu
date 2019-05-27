@@ -38,7 +38,9 @@ from takwimu.models.dashboard import (
     ExplainerSteps,
     FAQ,
     FAQSetting,
+    AboutPage,
     IndexPage,
+    LegalPage,
     ProfileSectionPage,
     ProfilePage,
     Testimonial,
@@ -89,6 +91,10 @@ class AboutPageRedirectView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AboutPageRedirectView, self).get_context_data(**kwargs)
 
+        context.update(settings(self.request))
+        about = AboutPage.objects.first()
+        if about:
+            context.update(about.get_context(self.request))
         context['active_content'] = self.request.resolver_match.url_name
 
         return context
@@ -100,6 +106,10 @@ class LegalPageRedirectView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(LegalPageRedirectView, self).get_context_data(**kwargs)
 
+        context.update(settings(self.request))
+        legal = LegalPage.objects.first()
+        if legal:
+            context.update(legal.get_context(self.request))
         context['active_content'] = self.request.resolver_match.url_name
 
         return context
