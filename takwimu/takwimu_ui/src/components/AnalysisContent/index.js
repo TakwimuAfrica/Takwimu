@@ -13,6 +13,7 @@ import ReactPDF, {
   Link,
   StyleSheet
 } from '@react-pdf/renderer';
+import moment from 'moment';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import CarouselTopic from './topics/CarouselTopic';
@@ -65,10 +66,18 @@ const styles = theme => ({
 // Create styles
 const pdfStyles = StyleSheet.create({
   page: {
-    padding: 20
+    padding: 20,
+    paddingBottom: 50
   },
   section: {
     padding: 20
+  },
+  footer: {
+    position: 'absolute',
+    height: 50,
+    bottom: 0,
+    right: 40,
+    left: 40
   },
   header: {
     position: 'relative',
@@ -82,6 +91,18 @@ const pdfStyles = StyleSheet.create({
     marginTop: 46,
     backgroundColor: '#29a87c',
     width: '100%'
+  },
+  downloadedAt: {
+    position: 'absolute',
+    fontSize: 14,
+    left: 0
+  },
+  linkTakwimuFooter: {
+    position: 'absolute',
+    fontSize: 14,
+    right: 0,
+    color: 'black',
+    textDecoration: 'none'
   },
   linkTakwimu: {
     position: 'absolute',
@@ -182,6 +203,15 @@ const AnalysisPDF = ({ data, topic }) => (
           ))}
         </View>
       )}
+
+      <View style={pdfStyles.footer} fixed>
+        <Text style={pdfStyles.downloadedAt}>
+          Dowloaded {moment().format('D MMMM YYYY')}
+        </Text>
+        <Link href="https://takwimu.africa" style={pdfStyles.linkTakwimuFooter}>
+          www.takwimu.africa
+        </Link>
+      </View>
     </Page>
   </Document>
 );
