@@ -94,6 +94,17 @@ class AboutPageRedirectView(TemplateView):
         return context
 
 
+class LegalPageRedirectView(TemplateView):
+    template_name = 'takwimu/legal_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(LegalPageRedirectView, self).get_context_data(**kwargs)
+
+        context['active_content'] = self.request.resolver_match.url_name
+
+        return context
+
+
 class LegalView(TemplateView):
     """
     Legal View:
