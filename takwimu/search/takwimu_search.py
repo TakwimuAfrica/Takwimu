@@ -283,6 +283,10 @@ class TakwimuTopicSearch():
         - parent_page_type
         :return:
         """
+        #title should not be empty as es matches title field
+        #set title to a string null if empty
+        if len(title.strip()) == 0:
+            title = "null"
 
         doc = {
             'content_id': content_id,

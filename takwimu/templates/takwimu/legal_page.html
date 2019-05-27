@@ -3,10 +3,10 @@
 
 {% block head_title %} {{ page.title }} - {{ HURUMAP.name }} {% endblock %}
 
-{% block body_id %}contact{% endblock %}
+{% block body_id %}legal{% endblock %}
 
 {% block content %}
-  <div id="takwimuContactUsPage"></div>
+  <div id="takwimuLegalPage"></div>
 {% endblock %}
 
 {% block body_javascript_extra %}
@@ -15,6 +15,7 @@
   <script type='text/javascript'>
     var takwimu = window.takwimu || {};
     takwimu.page = takwimu.page || {};
-    takwimu.page.name = 'contact';
+    takwimu.page.name = 'legal';
+    takwimu.page.active_content = '{{active_content}}';
    </script>
 {% endblock body_javascript_extra %}

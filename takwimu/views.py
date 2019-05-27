@@ -1,3 +1,4 @@
+import io
 from collections import OrderedDict
 import json
 from operator import itemgetter
@@ -38,7 +39,9 @@ from takwimu.models.dashboard import (
     ExplainerSteps,
     FAQ,
     FAQSetting,
+    AboutPage,
     IndexPage,
+    LegalPage,
     ProfileSectionPage,
     ProfilePage,
     Testimonial,
@@ -46,7 +49,8 @@ from takwimu.models.dashboard import (
     DataByTopicPage)
 
 from takwimu.models.utils.search import get_page_details
-from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer
+from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer, \
+    FlourishHTMLRenderer
 from takwimu.sdg import SDG
 from takwimu.search import suggest
 from takwimu.utils.image import decode_base64_file
@@ -89,6 +93,25 @@ class AboutPageRedirectView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(AboutPageRedirectView, self).get_context_data(**kwargs)
 
+        context.update(settings(self.request))
+        about = AboutPage.objects.first()
+        if about:
+            context.update(about.get_context(self.request))
+        context['active_content'] = self.request.resolver_match.url_name
+
+        return context
+
+
+class LegalPageRedirectView(TemplateView):
+    template_name = 'takwimu/legal_page.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(LegalPageRedirectView, self).get_context_data(**kwargs)
+
+        context.update(settings(self.request))
+        legal = LegalPage.objects.first()
+        if legal:
+            context.update(legal.get_context(self.request))
         context['active_content'] = self.request.resolver_match.url_name
 
         return context
@@ -335,7 +358,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (JPEGRenderer, StaticHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
+    renderer_classes = (JPEGRenderer, FlourishHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
@@ -344,7 +367,14 @@ class FlourishView(APIView):
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:
             filename = kwargs["filename"]
-        zip_ref = zipfile.ZipFile(doc.file.path, "r")
+
+        if takwimu_settings.USE_S3:
+            url_path = takwimu_settings.MEDIA_URL + doc.file.path
+            response = requests.get(url_path, stream=True)
+            zip_ref = zipfile.ZipFile(io.BytesIO(response.content))
+        else:
+            zip_ref = zipfile.ZipFile(doc.file.path, "r")
+
         file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
