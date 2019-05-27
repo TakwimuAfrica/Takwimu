@@ -33,13 +33,13 @@ from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.snippets.models import register_snippet
 from wazimap.models import Geography
 
-from .utils.page import find_indicator_with_id_from_page
 from takwimu.models.data import ProfileData
 from takwimu.search import search
 from takwimu.utils.helpers import (COUNTRIES,
                                    get_takwimu_stories, get_takwimu_faqs,
                                    get_takwimu_services, get_takwimu_profile_view_country_content,
-                                   get_takwimu_profile_navigation, get_takwimu_profile_read_next) 
+                                   get_takwimu_profile_navigation, get_takwimu_profile_read_next)
+from takwimu.utils.page import find_indicator_with_id_from_page, filter_rich_text
 
 
 logger = logging.getLogger(__name__)
@@ -1069,6 +1069,130 @@ class AboutPage(ModelMeta, Page):
         faq_settings = FAQSetting.for_site(self.get_site())
 
         return get_takwimu_faqs(faq_settings)
+
+
+class TermsContentBlock(blocks.StructBlock):
+    label = blocks.CharBlock(default="Terms", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = blocks.CharBlock(default="Terms of use", max_length=1024)
+    description = blocks.RichTextBlock(default=DEFAULT_DESCRIPTION_TEXT)
+
+
+class TermsBlock(blocks.StreamBlock):
+    terms_content = TermsContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(TermsBlock, self).get_api_representation(value, context=context)
+        if representation:
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = filter_rich_text(description)
+
+            return content
+
+        return {}
+
+
+class PrivacyPolicyContentBlock(blocks.StructBlock):
+    label = blocks.CharBlock(default="Privacy", max_length=255,
+                             help_text="Short title used in navigation, etc.")
+    title = blocks.CharBlock(default="Privacy policy", max_length=1024)
+    description = blocks.RichTextBlock(default=DEFAULT_DESCRIPTION_TEXT)
+
+
+class PrivacyPolicyBlock(blocks.StreamBlock):
+    privacy_policy_content = PrivacyPolicyContentBlock()
+
+    # This block is only there to ensure structural integrity: Skip it in API
+    def get_api_representation(self, value, context=None):
+        representation = super(PrivacyPolicyBlock, self).get_api_representation(value, context=context)
+        if representation:
+            content = representation[0]
+            description = content['value']['description']
+            if description:
+                content['value']['description'] = filter_rich_text(description)
+
+            return content
+
+        return {}
+
+
+class LegalBodyBlock(blocks.StreamBlock):
+    terms= TermsBlock()
+    privacy_policy= PrivacyPolicyBlock()
+
+
+class LegalPage(ModelMeta, Page):
+    content_navigation_title = models.CharField(default="On this page", max_length=1024, verbose_name='title')
+    body = StreamField(LegalBodyBlock(max_num=2, block_counts={'terms': { 'max_num':1 }, 'privacy_policy': { 'max_num':1 }}))
+    related_content = StreamField(RelatedContentBlock(required=False, max_num=1), blank=True)
+
+    # Social media: Twitter card
+
+    twitter_card = models.CharField(
+        max_length=255, choices=TWITTER_CARD, blank=True)
+    promotion_image = models.ForeignKey(
+        'wagtailimages.Image',
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name='+'
+    )
+    tweet_creator = models.CharField(max_length=255, blank=True)
+    _metadata = {
+        'title': 'seo_title',
+        'description': 'search_description',
+        'twitter_card': 'twitter_card',
+        'image': 'get_promotion_image',
+        'twitter_creator': 'tweet_creator',
+    }
+
+    api_fields = [
+        APIField('content_navigation',
+                 serializer=serializers.DictField(source='get_content_navigation')),
+        APIField('body'),
+        APIField('related_content'),
+    ]
+
+    # Editor panels configuration
+
+    content_panels = Page.content_panels + [
+        MultiFieldPanel([
+                FieldPanel('content_navigation_title'),
+            ],
+            heading="Content navigation",
+            classname="collapsible",
+        ),
+        StreamFieldPanel('body'),
+        StreamFieldPanel('related_content'),
+    ]
+    promote_panels = [
+        MultiFieldPanel(Page.promote_panels, 'Common page configuration'),
+        FieldPanel('twitter_card'),
+        FieldPanel('tweet_creator'),
+        ImageChooserPanel('promotion_image'),
+    ]
+
+    def get_promotion_image(self):
+        if self.promotion_image:
+            return self.promotion_image.file.url
+
+    def get_context(self, request):
+        context = super(AboutPage, self).get_context(request)
+
+        context['active_content'] = 'terms'
+        context['meta'] = self.as_meta(request)
+        return context
+
+    def get_content_navigation(self):
+        return {
+            'type': 'content_navigation',
+            'value': {
+                'title': self.content_navigation_title
+            }
+        }
 
 
 class ContactAddressContentBlock(blocks.StructBlock):
