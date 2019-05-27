@@ -31,7 +31,13 @@ function DataContainer({ id, classes, data }) {
   }, []);
 
   const handleDownload = () => {
-    // TODO:
+    const link = document.createElement('a');
+    link.href = documents[data.document];
+    link.download = data.document.split('/').pop();
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   return (
@@ -43,7 +49,7 @@ function DataContainer({ id, classes, data }) {
           )}
         </div>
       )}
-      <DataActions onDownload={handleDownload} embedCode="" />
+      <DataActions onDownload={handleDownload} />
     </Fragment>
   );
 }
