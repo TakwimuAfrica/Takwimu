@@ -141,9 +141,7 @@ function CurrentAnalysis({
               {readAnalysisTitle}
             </Button>
             <Button
-              href={`/profiles/country-${currentAnalysis.country.iso_code}-${
-                currentAnalysis.country.slug
-              }`}
+              href={`/profiles/${currentAnalysis.country.slug}`}
               className={classes.secondaryAction}
               classes={{ label: classes.secondaryActionLabel }}
               variant="outlined"
