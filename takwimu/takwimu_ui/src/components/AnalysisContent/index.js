@@ -13,7 +13,6 @@ import ReactPDF, {
   Link,
   StyleSheet
 } from '@react-pdf/renderer';
-import moment from 'moment';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import CarouselTopic from './topics/CarouselTopic';
@@ -206,7 +205,12 @@ const AnalysisPDF = ({ data, topic }) => (
 
       <View style={pdfStyles.footer} fixed>
         <Text style={pdfStyles.downloadedAt}>
-          Dowloaded {moment().format('D MMMM YYYY')}
+          Dowloaded{' '}
+          {new Date().toLocaleDateString('UTC', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          })}
         </Text>
         <Link href="https://takwimu.africa" style={pdfStyles.linkTakwimuFooter}>
           www.takwimu.africa
