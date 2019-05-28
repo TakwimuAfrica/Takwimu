@@ -251,6 +251,8 @@ class FlourishWidget(blocks.StructBlock):
     html = DocumentChooserBlock(required=True)
     sdg = blocks.ChoiceBlock(required=False, choices=sdg_choices, label='SDG Goal')
     source = blocks.RichTextBlock(features=['link'], required=False)
+    description = blocks.TextBlock(
+        required=False, label='Description of the data')
 
     class Meta:
         icon = 'folder-inverse'
@@ -1521,7 +1523,6 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
                           'link'],
                 required=False, label='Chart Qualifier',
                 help_text='Chart context e.g. legend, universe, etc.')
-                
     description = blocks.TextBlock(
         required=False, label='Description of the data')
 
