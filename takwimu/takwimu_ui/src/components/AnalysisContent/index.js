@@ -2,16 +2,19 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, withStyles, Grid } from '@material-ui/core';
-
 import ReactPDF, {
   Document,
   Page,
   Text,
   View,
   Image,
+  Link,
   StyleSheet
 } from '@react-pdf/renderer';
+
+import { Typography, withStyles, Grid } from '@material-ui/core';
+
+import { countrify, RichTypography } from '../core';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import CarouselTopic from './topics/CarouselTopic';
@@ -19,10 +22,10 @@ import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
 import DataContainer from '../DataContainer';
 import RelatedContent from '../RelatedContent';
-import { RichTypography } from '../core';
 import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
+import logoWhite from '../../assets/images/logo-white-all.png';
 
 const styles = theme => ({
   root: {
@@ -63,17 +66,75 @@ const styles = theme => ({
 // Create styles
 const pdfStyles = StyleSheet.create({
   page: {
-    padding: 20
+    padding: 20,
+    paddingBottom: 50
   },
   section: {
     padding: 20
   },
-  hero: {
-    borderBottomWidth: 2,
-    borderBottomColor: '#29a87c',
+  footer: {
+    position: 'absolute',
+    height: 50,
+    bottom: 0,
+    right: 40,
+    left: 40
+  },
+  header: {
+    position: 'relative',
+    height: 100,
+    marginLeft: -20,
+    marginRight: -20,
+    marginBottom: 20
+  },
+  divider: {
+    height: 4,
+    marginTop: 46,
+    backgroundColor: '#29a87c',
+    width: '100%'
+  },
+  downloadedAt: {
+    position: 'absolute',
+    fontSize: 14,
+    left: 0
+  },
+  linkTakwimuFooter: {
+    position: 'absolute',
+    fontSize: 14,
+    right: 0,
+    color: 'black',
+    textDecoration: 'none'
+  },
+  linkTakwimu: {
+    position: 'absolute',
+    top: 26,
+    fontSize: 14,
+    right: 20,
+    color: 'black',
+    textDecoration: 'none'
+  },
+  linkLicense: {
+    position: 'absolute',
+    top: 54,
+    fontSize: 14,
+    right: 20,
+    color: 'black',
+    textDecoration: 'none'
+  },
+  logo: {
+    width: 80,
+    marginTop: 42,
+    marginLeft: 10
+  },
+  logoBackground: {
+    position: 'absolute',
+    left: 40,
+    backgroundColor: '#29a87c',
+    width: 100,
+    height: 100,
+    borderRadius: 50,
+    borderBottomColor: '#ffffff',
     borderBottomStyle: 'solid',
-    height: 200,
-    objectFit: 'cover'
+    borderBottomWidth: 2
   },
   title: {
     fontSize: 54
@@ -94,12 +155,33 @@ const pdfStyles = StyleSheet.create({
   }
 });
 
-const AnalysisPDF = ({ data, topic }) => (
+const AnalysisPDF = ({ data, topic, takwimu }) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
-      <Image style={pdfStyles.hero} src={profileHeroImage} />
+      <View style={pdfStyles.header} fixed>
+        <Link href="https://takwimu.africa" style={pdfStyles.linkTakwimu}>
+          www.takwimu.africa
+        </Link>
+        <View style={pdfStyles.divider} />
+        <Link
+          style={pdfStyles.linkLicense}
+          href="//creativecommons.org/licenses/by/4.0/"
+        >
+          2018 Takwimu CC by 4.0
+        </Link>
+        <View style={pdfStyles.logoBackground}>
+          <Image style={pdfStyles.logo} src={logoWhite} />
+        </View>
+      </View>
       <View style={pdfStyles.section}>
-        <Text style={pdfStyles.title}>{data.content.title}</Text>
+        <Text style={pdfStyles.title}>
+          {countrify(
+            data.content.title,
+            takwimu.country,
+            takwimu.countries,
+            ' : '
+          )}
+        </Text>
       </View>
       {topic === 'topic' ? (
         <View style={pdfStyles.section}>
@@ -128,13 +210,28 @@ const AnalysisPDF = ({ data, topic }) => (
           ))}
         </View>
       )}
+
+      <View style={pdfStyles.footer} fixed>
+        <Text style={pdfStyles.downloadedAt}>
+          Dowloaded{' '}
+          {new Date().toLocaleDateString('UTC', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+          })}
+        </Text>
+        <Link href="https://takwimu.africa" style={pdfStyles.linkTakwimuFooter}>
+          www.takwimu.africa
+        </Link>
+      </View>
     </Page>
   </Document>
 );
 
 AnalysisPDF.propTypes = {
   data: PropTypes.shape({}).isRequired,
-  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired
+  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
+  takwimu: PropTypes.shape({}).isRequired
 };
 
 function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
@@ -174,11 +271,11 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
               : null,
           content: content.body[topicIndex].value
         }}
+        takwimu={takwimu}
       />
     )
       .toBlob()
-      .then(setAnalysisBlob)
-      .catch(console.error);
+      .then(setAnalysisBlob);
   }, [id, carouselItemIndex]);
 
   const showContent = index => () => {
@@ -247,7 +344,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           </Grid>
         )}
 
-        <Actions page={takwimu.page} hideLastUpdated />
+        <Actions page={takwimu.page} pdfBlob={analysisBlob} hideLastUpdated />
         <ContentNavigation
           labelText={profileNavigation.title}
           labelTextStrong={content.title}
