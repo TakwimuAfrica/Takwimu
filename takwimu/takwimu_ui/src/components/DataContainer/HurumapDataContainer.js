@@ -13,12 +13,22 @@ function DataContainer({ id, data, theme }) {
 
   const toPng = () => {
     const iframe = document.getElementById(iframeId);
-    return iframe.contentWindow.domtoimage.toPng(
-      iframe.contentDocument.getElementById('census-chart'),
-      {
-        bgcolor: theme.palette.data.light
-      }
+    const columnSets = iframe.contentDocument.getElementsByClassName(
+      'column-set'
     );
+    if (columnSets && columnSets.length) {
+      columnSets[0].style.overflow = 'visible';
+    }
+    return iframe.contentWindow.domtoimage
+      .toPng(iframe.contentDocument.getElementById('census-chart'), {
+        bgcolor: theme.palette.data.light
+      })
+      .then(dataURL => {
+        if (columnSets && columnSets.length) {
+          columnSets[0].style.overflow = 'auto hidden';
+        }
+        return dataURL;
+      });
   };
 
   const handleShare = () => {
@@ -52,7 +62,11 @@ function DataContainer({ id, data, theme }) {
     data.chart_type
   }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
     data.data_stat_type
-  }"
+  }&chartSourceLink=${data.data_source_link}&chartSourceTitle=${
+    data.data_source_title
+  }&chartQualifier=${data.chart_qualifier
+    .replace('<br/>', '%0A')
+    .replace(/<(.|\n)*?>/g, '')}&stylesheet=/static/css/embedchart.css"
 />`;
 
   return (

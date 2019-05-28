@@ -1511,6 +1511,17 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
     chart_height = blocks.IntegerBlock(required=False,
                                        label='Chart Height',
                                        help_text='Default is 300px')
+
+    data_source_link = blocks.URLBlock(required=False, label='Source URL')
+
+    data_source_title = blocks.CharBlock(required=False, label='Source Title')
+
+    chart_qualifier = blocks.RichTextBlock(
+                features=['h5', 'h6', 'ol', 'ul', 'bold', 'italic', 'hr',
+                          'link'],
+                required=False, label='Chart Qualifier',
+                help_text='Chart context e.g. legend, universe, etc.')
+                
     description = blocks.TextBlock(
         required=False, label='Description of the data')
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
@@ -26,7 +26,6 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       width: '33.875rem'
     },
-    height: '450px',
     border: 0,
     '& .census-chart-embed': {
       background: theme.palette.data.light
@@ -34,21 +33,25 @@ const styles = theme => ({
   }
 });
 
-class IFrame extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleFrameLoad = this.handleFrameLoad.bind(this);
-  }
+function IFrame({ id, classes, data }) {
+  const [iframeChartLoaded, setIframeChartLoaded] = useState(false);
+  useEffect(
+    () => {
+      let charttimer;
+      if (iframeChartLoaded) {
+        charttimer = setTimeout(() => setIframeChartLoaded(true), 1000);
+      }
+      return () => {
+        if (charttimer) {
+          clearTimeout(charttimer);
+        }
+      };
+    },
+    [iframeChartLoaded] // useEffect will run only one time
+  );
 
-  componentDidMount() {
-    const { id } = this.props;
-    const iframe = document.getElementById(id);
-    iframe.addEventListener('load', this.handleFrameLoad, true);
-  }
-
-  handleFrameLoad() {
-    const { id } = this.props;
-    const iframe = document.getElementById(id);
+  const handleFrameLoad = e => {
+    const iframe = e.target;
 
     // add domtoimage
     const frameHead = iframe.contentDocument
@@ -59,39 +62,45 @@ class IFrame extends React.Component {
     script.src =
       'https://cdnjs.cloudflare.com/ajax/libs/dom-to-image/2.6.0/dom-to-image.min.js';
     frameHead.appendChild(script);
-
     // eslint-disable-next-line no-return-assign, no-param-reassign
     const hideFooter = n => (n.style = 'display: none');
     iframe.contentWindow.document.body.style.background = '#F5F5F5';
     iframe.contentWindow.document
       .querySelectorAll('.embed-footer')
       .forEach(hideFooter);
+    if (iframe.contentDocument.getElementById('census-chart')) {
+      setIframeChartLoaded(true);
+    }
+  };
+
+  if (iframeChartLoaded) {
+    const iframe = document.getElementById(id);
+    iframe.height = iframe.contentWindow.document.body.scrollHeight;
   }
 
-  render() {
-    const { id, classes, data } = this.props;
-
-    return (
-      <div className={classNames(['cr-embed', classes.container])}>
-        <iframe
-          id={id}
-          title={data.title}
-          src={`/embed/iframe.html?geoID=country-${
-            data.data_country
-          }&geoVersion=2009&chartDataID=${
-            data.data_id
-          }&dataYear=2011&chartType=${
-            data.chart_type
-          }&chartHeight=300&chartTitle=${window.encodeURIComponent(
-            data.title
-          )}&initialSort=&statType=${data.data_stat_type}
+  return (
+    <div className={classNames(['cr-embed', classes.container])}>
+      <iframe
+        id={id}
+        title={data.title}
+        onLoad={handleFrameLoad}
+        src={`/embed/iframe.html?geoID=country-${
+          data.data_country
+        }&geoVersion=2009&chartDataID=${data.data_id}&dataYear=2011&chartType=${
+          data.chart_type
+        }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
+          data.data_stat_type
+        }&chartSourceLink=${data.data_source_link}&chartSourceTitle=${
+          data.data_source_title
+        }&chartQualifier=${data.chart_qualifier
+          .replace('<br/>', '%0A')
+          .replace(/<[^>]*>/g, '')}&stylesheet=/static/css/embedchart.css
           `}
-          allowFullScreen
-          className={classNames(['census-reporter-embed', classes.iframe])}
-        />
-      </div>
-    );
-  }
+        allowFullScreen
+        className={classNames(['census-reporter-embed', classes.iframe])}
+      />
+    </div>
+  );
 }
 
 IFrame.propTypes = {
