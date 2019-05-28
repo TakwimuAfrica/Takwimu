@@ -56,7 +56,7 @@ function DataContainer({ id, data, theme }) {
     data.data_source_title
   }&chartQualifier=${data.chart_qualifier
     .replace('<br/>', '%0A')
-    .replace(/<(.|\n)*?>/g, '')}&stylesheet=/static/css/embedChart.css"
+    .replace(/<(.|\n)*?>/g, '')}&stylesheet=/static/css/embedchart.css"
 />`;
 
   return (
