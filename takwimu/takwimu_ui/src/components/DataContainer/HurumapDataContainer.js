@@ -52,7 +52,11 @@ function DataContainer({ id, data, theme }) {
     data.chart_type
   }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
     data.data_stat_type
-  }"
+  }&chartSourceLink=${data.data_source_link}&chartSourceTitle=${
+    data.data_source_title
+  }&chartQualifier=${data.chart_qualifier
+    .replace('<br/>', '%0A')
+    .replace(/<(.|\n)*?>/g, '')}&stylesheet=/static/css/embedChart.css"
 />`;
 
   return (
