@@ -1,77 +1,46 @@
 import io
-from collections import OrderedDict
 import json
+import string
+import zipfile
+from collections import OrderedDict
 from operator import itemgetter
 from wsgiref.util import FileWrapper
 
 import requests
-import string
-
 from django.conf import settings as takwimu_settings
 from django.core.serializers.json import DjangoJSONEncoder
-from django.http import Http404, HttpResponse, StreamingHttpResponse
-from django.shortcuts import render_to_response, render
-from django.template import RequestContext
+from django.shortcuts import get_object_or_404, render
 from django.utils.module_loading import import_string
 from django.utils.safestring import SafeString
 from django.utils.text import slugify
 from django.views.generic import TemplateView
-
-from elasticsearch_dsl import Search
-
-from rest_framework.views import APIView
-from rest_framework.response import Response
 from rest_framework import status
-
+from rest_framework.response import Response
+from rest_framework.views import APIView
 from wagtail.contrib.settings.context_processors import settings
 from wagtail.core import hooks
+from wagtail.documents.models import get_document_model
 from wagtail.images import get_image_model
-from wagtail.utils import sendfile_streaming_backend
-from wagtail.utils.sendfile import sendfile
-
-from wazimap.views import GeographyDetailView
-from wazimap.geo import geo_data, LocationNotFound
 from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
 from wazimap.views import GeographyDetailView
 
-from takwimu.context_processors import (
-    takwimu_countries,
-    takwimu_stories,
-    takwimu_topics,
-)
+from takwimu.context_processors import (takwimu_countries, takwimu_stories,
+                                        takwimu_topics)
 from takwimu.models import ProfileData
-from takwimu.models.dashboard import (
-    ExplainerSteps,
-    FAQ,
-    FAQSetting,
-    AboutPage,
-    IndexPage,
-    LegalPage,
-    ProfileSectionPage,
-    ProfilePage,
-    Testimonial,
-    search_analysis_and_data,
-    DataByTopicPage)
-
+from takwimu.models.dashboard import (AboutPage, DataByTopicPage, IndexPage,
+                                      LegalPage, ProfilePage,
+                                      ProfileSectionPage,
+                                      search_analysis_and_data)
 from takwimu.models.utils.search import get_page_details
-from takwimu.renderers import CSSRenderer, JavaScriptRenderer, JPEGRenderer, \
-    FlourishHTMLRenderer
+from takwimu.renderers import (CSSRenderer, FlourishHTMLRenderer,
+                               JavaScriptRenderer, JPEGRenderer)
 from takwimu.sdg import SDG
 from takwimu.search import suggest
 from takwimu.utils.image import decode_base64_file
 
-from .renderers import CSSRenderer
-from rest_framework.renderers import StaticHTMLRenderer
-from wagtail.documents.models import Document, document_served
-from django.shortcuts import get_object_or_404
-from wagtail.documents.models import get_document_model
-import zipfile
-
-from .data.utils import (
-    get_page_releases_per_country,
-    get_primary_release_year_per_geography,
-)
+from .data.utils import (get_page_releases_per_country,
+                         get_primary_release_year_per_geography)
 
 
 class HomePageView(TemplateView):
