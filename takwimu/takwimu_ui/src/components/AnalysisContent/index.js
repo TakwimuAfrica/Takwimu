@@ -265,8 +265,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
       />
     )
       .toBlob()
-      .then(setAnalysisBlob)
-      .catch(console.error);
+      .then(setAnalysisBlob);
   }, [id, carouselItemIndex]);
 
   const showContent = index => () => {
@@ -335,7 +334,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
           </Grid>
         )}
 
-        <Actions page={takwimu.page} hideLastUpdated />
+        <Actions page={takwimu.page} pdfBlob={analysisBlob} hideLastUpdated />
         <ContentNavigation
           labelText={profileNavigation.title}
           labelTextStrong={content.title}
