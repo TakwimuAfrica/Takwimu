@@ -2,7 +2,7 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { withStyles } from '@material-ui/core';
+import { withStyles, withTheme } from '@material-ui/core/styles';
 
 import DataActions from './DataActions';
 import { shareIndicator, uploadImage } from './common';
@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({ id, classes, data, theme }) {
   const [animated, setAnimated] = useState(false);
   const [animatedId, setAnimatedId] = useState('');
 
@@ -60,10 +60,24 @@ function DataContainer({ id, classes, data }) {
     });
   };
 
-  const updateIframeHeight = chart => {
+  const updateIframe = (iframe, chart) => {
+    /* eslint-disable no-param-reassign */
     const { offsetHeight } = chart;
-    const iframe = document.getElementById(`data-indicator-${id}`);
     iframe.style.height = `${offsetHeight}px`;
+    iframe.contentDocument.body.style.fontFamily = theme.typography.fontText;
+    iframe.contentDocument.body.style.background = 'rgb(0,0,0) !important';
+    const headers = iframe.contentDocument.getElementsByClassName(
+      'flourish-header'
+    );
+    if (headers && headers.length) {
+      headers[0].style.display = 'none';
+    }
+
+    // Sometimes chart come with `Show full visualization` button
+    const expandEmbed = iframe.contentDocument.getElementById('expand-embed');
+    if (expandEmbed) {
+      expandEmbed.style.backgroundColor = theme.palette.data.light;
+    }
   };
 
   const handleIframeLoaded = e => {
@@ -77,7 +91,7 @@ function DataContainer({ id, classes, data }) {
       setAnimated(true);
       setAnimatedId('flourish-popup-constrainer');
     } else {
-      updateIframeHeight(iframe.contentDocument.getElementById('wrapper'));
+      updateIframe(iframe, iframe.contentDocument.getElementById('wrapper'));
     }
 
     // Add htm2canvas
@@ -89,11 +103,17 @@ function DataContainer({ id, classes, data }) {
     script.src =
       'https://cdn.jsdelivr.net/npm/html2canvas@1.0.0-rc.1/dist/html2canvas.min.js';
     frameHead.appendChild(script);
+
+    // Override `body` inline style
+    const style = iframe.contentDocument.createElement('style');
+    style.type = 'text/css';
+    style.append('body[style] { background: none !important; }');
+    frameHead.appendChild(style);
   };
 
   if (animated) {
     const iframe = document.getElementById(`data-indicator-${id}`);
-    updateIframeHeight(iframe.contentDocument.getElementById(animatedId));
+    updateIframe(iframe, iframe.contentDocument.getElementById(animatedId));
   }
 
   const embedCode = `<iframe title="${data.title}"
@@ -124,11 +144,12 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  theme: PropTypes.shape({}).isRequired
 };
 
 DataContainer.defaultProps = {
   id: ''
 };
 
-export default withStyles(styles)(DataContainer);
+export default withTheme()(withStyles(styles)(DataContainer));
