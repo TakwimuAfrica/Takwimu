@@ -3,6 +3,7 @@ import { PropTypes } from 'prop-types';
 
 import { Grid, withStyles } from '@material-ui/core';
 
+import { countrify } from '../core';
 import AnalysisList from './AnalysisList';
 import CurrentAnalysis from './CurrentAnalysis';
 import Section from '../Section';
@@ -55,14 +56,7 @@ class FeaturedAnalysis extends React.Component {
     const { current } = this.state;
     const countrifyTitle = analysis => {
       const { title: t, country } = analysis;
-      const foundCountry = countries.find(c => c.slug === country.slug);
-      if (
-        foundCountry &&
-        !t.toLowerCase().startsWith(foundCountry.short_name.toLowerCase())
-      ) {
-        return `${foundCountry.short_name}&rsquo;s ${t}`;
-      }
-      return t;
+      return countrify(t, country, countries);
     };
 
     return (

@@ -2,8 +2,6 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 
-import { Typography, withStyles, Grid } from '@material-ui/core';
-
 import ReactPDF, {
   Document,
   Page,
@@ -13,6 +11,10 @@ import ReactPDF, {
   Link,
   StyleSheet
 } from '@react-pdf/renderer';
+
+import { Typography, withStyles, Grid } from '@material-ui/core';
+
+import { countrify, RichTypography } from '../core';
 import Actions from './Actions';
 import { Analysis as AnalysisReadNext } from '../Next';
 import CarouselTopic from './topics/CarouselTopic';
@@ -20,7 +22,6 @@ import CountryContent from '../CountryContent';
 import ContentNavigation from './ContentNavigation';
 import DataContainer from '../DataContainer';
 import RelatedContent from '../RelatedContent';
-import { RichTypography } from '../core';
 import OtherInfoNav from './OtherInfoNav';
 
 import profileHeroImage from '../../assets/images/profile-hero-line.png';
@@ -154,7 +155,7 @@ const pdfStyles = StyleSheet.create({
   }
 });
 
-const AnalysisPDF = ({ data, topic }) => (
+const AnalysisPDF = ({ data, topic, takwimu }) => (
   <Document>
     <Page size="A4" style={pdfStyles.page}>
       <View style={pdfStyles.header} fixed>
@@ -173,7 +174,14 @@ const AnalysisPDF = ({ data, topic }) => (
         </View>
       </View>
       <View style={pdfStyles.section}>
-        <Text style={pdfStyles.title}>{data.content.title}</Text>
+        <Text style={pdfStyles.title}>
+          {countrify(
+            data.content.title,
+            takwimu.country,
+            takwimu.countries,
+            ' : '
+          )}
+        </Text>
       </View>
       {topic === 'topic' ? (
         <View style={pdfStyles.section}>
@@ -222,7 +230,8 @@ const AnalysisPDF = ({ data, topic }) => (
 
 AnalysisPDF.propTypes = {
   data: PropTypes.shape({}).isRequired,
-  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired
+  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
+  takwimu: PropTypes.shape({}).isRequired
 };
 
 function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
@@ -262,6 +271,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
               : null,
           content: content.body[topicIndex].value
         }}
+        takwimu={takwimu}
       />
     )
       .toBlob()
