@@ -10,6 +10,7 @@ import EntitiesDataContainer from './EntitiesDataContainer';
 
 import HurumapDataContainer from './HurumapDataContainer';
 import HTMLDataContainer from './HTMLDataContainer';
+import ImageDataContainer from './ImageDataContainer';
 import PDFDataContainer from './PDFDataContainer';
 import FlourishDataContainer from './FlourishDataContainer';
 
@@ -101,16 +102,20 @@ function DataContainer({
             {data.value.title}
           </Typography>
 
+          {data.type === 'image' && (
+            <ImageDataContainer id={id} data={data.value} />
+          )}
+
           {(data.type === 'hurumap' || data.type === 'hurumap_snippet') && (
             <HurumapDataContainer id={id} data={data.value} />
           )}
 
-          {data.type === 'flourish' && (
-            <FlourishDataContainer id={id} data={data.value} />
-          )}
-
           {data.type === 'html' && (
             <HTMLDataContainer id={id} data={data.value} />
+          )}
+
+          {data.type === 'flourish' && (
+            <FlourishDataContainer id={id} data={data.value} />
           )}
 
           {data.type === 'entities' && (
