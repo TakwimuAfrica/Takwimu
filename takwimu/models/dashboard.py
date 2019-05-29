@@ -2,6 +2,7 @@ import json
 import logging
 
 from django import forms
+from django.conf import settings
 from django.db import models
 from django.utils.text import slugify
 from fontawesome.fields import IconField
@@ -27,7 +28,9 @@ from wagtail.contrib.settings.context_processors import settings as wagtail_sett
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.images import get_image_model
 from wagtail.images.blocks import ImageChooserBlock
+from wagtail.images.shortcuts import get_rendition_or_not_found
 from wagtail.images.edit_handlers import ImageChooserPanel
+from wagtail.images.templatetags import wagtailimages_tags
 from wagtail.search import index
 from wagtail.snippets.blocks import SnippetChooserBlock
 from wagtail.snippets.models import register_snippet
@@ -259,6 +262,36 @@ class FlourishWidget(blocks.StructBlock):
         template = 'takwimu/_includes/dataview/code.html'
 
 
+class ImageRenditionChooserBlock(ImageChooserBlock):
+    def get_api_representation(self, value, context=None):
+        if value:
+            src = get_rendition_or_not_found(value, 'original').url
+            if src.startswith('/'):
+                src = settings.HURUMAP['url'].rstrip('/') + src
+            return {
+                'id': value.id,
+                'title': value.title,
+                'src': src,
+            }
+        else:
+            return {}
+
+
+class ImageWidget(blocks.StructBlock):
+    label = blocks.CharBlock(required=False, help_text="This widget's tab label on the indicator")
+    title = blocks.CharBlock()
+    hide_title = blocks.BooleanBlock(default=False, required=False)
+    image = ImageRenditionChooserBlock(required=False)
+    caption = blocks.TextBlock(required=False, help_text="Deprecated! Please use description field below"),
+    sdg = blocks.ChoiceBlock(required=False, choices=sdg_choices, label='SDG Goal')
+    source = blocks.RichTextBlock(features=['link'], required=False)
+    description = blocks.TextBlock(required=False)
+
+    class Meta:
+        icon='image',
+        template='takwimu/_includes/dataview/image.html'
+
+
 class IndicatorWidgetsBlock(blocks.StreamBlock):
     free_form = blocks.StructBlock(
         [
@@ -308,22 +341,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
         template='takwimu/_includes/dataview/document.html'
     )
 
-    image = blocks.StructBlock(
-        [
-            ('label', blocks.CharBlock(required=False,
-                                       help_text="This widget's tab label on the indicator")),
-            ('title', blocks.CharBlock(required=False)),
-            ('hide_title', blocks.BooleanBlock(default=False, required=False)),
-            ('image', ImageChooserBlock(required=False)),
-            ('caption', blocks.TextBlock(required=False)),
-            ('sdg', blocks.ChoiceBlock(required=False,
-                                       choices=sdg_choices, label='SDG Goal')),
-            ('source', blocks.RichTextBlock(
-                features=['link'], required=False)),
-        ],
-        icon='image',
-        template='takwimu/_includes/dataview/image.html'
-    )
+    image = ImageWidget()
 
     html = blocks.StructBlock(
         [
@@ -1530,6 +1548,7 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
     hurumap_snippet = SnippetChooserBlock(ProfileData)
     flourish = FlourishWidget()
+    image = ImageWidget()
     hurumap = FeaturedDataWidgetBlock()
 
 
