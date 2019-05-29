@@ -30,6 +30,16 @@ class JPEGRenderer(BaseRenderer):
         return data
 
 
+class SVGRenderer(BaseRenderer):
+    media_type = 'image/svg+xml'
+    format = 'svg'
+    charset = 'utf-8'
+    render_style = 'text'
+
+    def render(self, data, media_type=None, renderer_context=None):
+        return data
+
+
 class FlourishHTMLRenderer(StaticHTMLRenderer):
     media_type = 'text/html'
     format = 'html'

@@ -34,7 +34,7 @@ from takwimu.models.dashboard import (AboutPage, DataByTopicPage, IndexPage,
                                       search_analysis_and_data)
 from takwimu.models.utils.search import get_page_details
 from takwimu.renderers import (CSSRenderer, FlourishHTMLRenderer,
-                               JavaScriptRenderer, JPEGRenderer)
+                               JavaScriptRenderer, JPEGRenderer, SVGRenderer)
 from takwimu.sdg import SDG
 from takwimu.search import suggest
 from takwimu.utils.image import decode_base64_file
@@ -333,7 +333,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (JPEGRenderer, FlourishHTMLRenderer, CSSRenderer, JavaScriptRenderer,)
+    renderer_classes = (FlourishHTMLRenderer, CSSRenderer, JavaScriptRenderer, JPEGRenderer, SVGRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
@@ -342,6 +342,13 @@ class FlourishView(APIView):
         filename = "index.html"
         if "filename" in kwargs and kwargs["filename"]:
             filename = kwargs["filename"]
+
+        # A request from within another file, will come as
+        # 'first file/second file' to the server
+        # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
+        filename_parts = filename.split('/')
+        if len(filename_parts) > 1:
+            filename = filename_parts[-1]
 
         try:
             zip_ref = zipfile.ZipFile(doc.file.path, "r")
@@ -352,7 +359,7 @@ class FlourishView(APIView):
         file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
-        if not filename.lower().endswith(('html', 'css', 'txt')):
+        if not filename.lower().endswith(('html', 'css', 'txt', 'svg')):
             mode, content_type = ('rb', 'media/*')
 
         return Response(open(file_path).read())
