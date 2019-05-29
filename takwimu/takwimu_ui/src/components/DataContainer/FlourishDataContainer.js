@@ -60,9 +60,11 @@ function DataContainer({ id, classes, data, theme }) {
     });
   };
 
-  const updateIframe = (iframe, chart) => {
+  const updateIframe = (iframe, wrapper) => {
     /* eslint-disable no-param-reassign */
-    const { offsetHeight } = chart;
+    // In rear cases we don't have `wrapper` element to reference from, just
+    // provide a default height to start
+    const offsetHeight = wrapper ? wrapper.offsetHeight : 450;
     iframe.style.height = `${offsetHeight}px`;
     iframe.contentDocument.body.style.fontFamily = theme.typography.fontText;
     iframe.contentDocument.body.style.background = 'rgb(0,0,0) !important';
@@ -82,16 +84,20 @@ function DataContainer({ id, classes, data, theme }) {
 
   const handleIframeLoaded = e => {
     const iframe = e.target;
-    // It's possible we'll come across different ids in the future so lets
-    // store the id name in component state as well for easier lookup.
-    const popUp = iframe.contentDocument.getElementById(
-      'flourish-popup-constrainer'
-    );
-    if (popUp) {
-      setAnimated(true);
-      setAnimatedId('flourish-popup-constrainer');
+    // Most static charts have a wrapper element with id `wrapper`
+    const wrapper = iframe.contentDocument.getElementById('wrapper');
+    if (wrapper) {
+      updateIframe(iframe, wrapper);
     } else {
-      updateIframe(iframe, iframe.contentDocument.getElementById('wrapper'));
+      // The animated charts may or may not contain a wrapping element.
+      // In case there is one, store its id in the component state for easier
+      // lookup
+      let wrapperId = '';
+      if (iframe.contentDocument.getElementById('flourish-popup-constrainer')) {
+        wrapperId = 'flourish-popup-constrainer';
+      }
+      setAnimated(true);
+      setAnimatedId(wrapperId);
     }
 
     // Add htm2canvas
