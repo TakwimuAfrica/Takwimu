@@ -254,8 +254,7 @@ class FlourishWidget(blocks.StructBlock):
     html = DocumentChooserBlock(required=True)
     sdg = blocks.ChoiceBlock(required=False, choices=sdg_choices, label='SDG Goal')
     source = blocks.RichTextBlock(features=['link'], required=False)
-    description = blocks.TextBlock(
-        required=False, label='Description of the data')
+    description = blocks.TextBlock(required=False)
 
     class Meta:
         icon = 'folder-inverse'
@@ -304,6 +303,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('description', blocks.TextBlock(required=False)),
         ],
         icon='snippet',
         template='takwimu/_includes/dataview/freeform.html'
@@ -320,6 +320,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('description', blocks.TextBlock(required=False)),
         ],
         icon='media',
         template='takwimu/_includes/dataview/embed.html'
@@ -336,6 +337,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('description', blocks.TextBlock(required=False)),
         ],
         icon='doc-full',
         template='takwimu/_includes/dataview/document.html'
@@ -354,6 +356,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
                                        label='SDG Goal')),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('description', blocks.TextBlock(required=False)),
         ],
         icon='code',
         template='takwimu/_includes/dataview/code.html'
@@ -412,6 +415,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('widget_height', blocks.IntegerBlock(required=False,
                                                   label='Widget Height',
                                                   help_text='Default is 450px')),
+            ('description', blocks.TextBlock(required=False)),
         ],
         icon='code',
         template='takwimu/_includes/dataview/hurumap.html'
@@ -426,6 +430,7 @@ class IndicatorWidgetsBlock(blocks.StreamBlock):
             ('entities', blocks.ListBlock(EntityStructBlock())),
             ('source', blocks.RichTextBlock(
                 features=['link'], required=False)),
+            ('description', blocks.TextBlock(required=False)),
         ],
         icon='group',
         template='takwimu/_includes/dataview/entities.html'
@@ -1541,8 +1546,7 @@ class FeaturedDataWidgetBlock(blocks.StructBlock):
                           'link'],
                 required=False, label='Chart Qualifier',
                 help_text='Chart context e.g. legend, universe, etc.')
-    description = blocks.TextBlock(
-        required=False, label='Description of the data')
+    description = blocks.TextBlock(required=False)
 
 
 class FeaturedDataWidgetChooserBlock(blocks.StreamBlock):
