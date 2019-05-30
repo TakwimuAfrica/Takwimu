@@ -35,20 +35,17 @@ const styles = theme => ({
   descriptionWrapper: {
     marginTop: '1.25rem',
     marginLeft: 'auto',
-    marginRight: 'auto'
+    marginRight: 'auto',
+    [theme.breakpoints.up('md')]: {
+      width: '90%'
+    }
   },
   descriptionContainer: {
     width: 'auto'
   },
   description: {
     color: theme.palette.data.main,
-    marginLeft: '1.25rem',
-    [theme.breakpoints.up('md')]: {
-      width: '17.53125rem' // .75 of lg
-    },
-    [theme.breakpoints.up('md')]: {
-      width: '23.375rem'
-    }
+    marginLeft: '1.25rem'
   },
   title: {
     fontWeight: 'bold',
