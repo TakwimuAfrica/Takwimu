@@ -10,7 +10,6 @@ import { RichTypography } from '../../core';
 
 import leftArrow from '../../../assets/images/left-arrow.svg';
 import rightArrow from '../../../assets/images/right-arrow.svg';
-import useScrollListener from '../../../useScrollListener';
 
 const styles = theme => ({
   root: {
@@ -18,20 +17,6 @@ const styles = theme => ({
   },
   carouselWrapper: {
     width: '100%'
-  },
-  carouselWrapperFixed: {
-    position: 'fixed',
-    top: '6.25rem',
-    borderTopLeftRadius: 0,
-    borderTopRightRadius: 0,
-    zIndex: 1,
-    '&:after': {
-      // shadow
-      content: '""',
-      width: '100%',
-      height: '100%',
-      position: 'absolute'
-    }
   },
   carousel: {
     zIndex: 1,
@@ -99,7 +84,19 @@ const styles = theme => ({
     overflowX: 'auto',
     width: '88%',
     height: '100%',
-    display: 'flex'
+    display: 'flex',
+
+    scrollbarColor: '#d3d3d3',
+    scrollbarWidth: 'thin',
+    '&::-webkit-scrollbar': {
+      height: '0.4rem'
+    },
+    '&::-webkit-scrollbar-thumb': {
+      backgroundColor: '#d3d3d3'
+    },
+    '&::-webkit-scrollbar-corner': {
+      backgroundColor: 'transparent'
+    }
   },
   profile: {
     cursor: 'pointer',
@@ -159,7 +156,6 @@ const styles = theme => ({
 });
 
 function Topic({ classes, data, onIndexChanged }) {
-  const isOverThreshold = useScrollListener(100, '<', 'political-figures');
   const [selectedIndex, setSelectedIndex] = useState(0);
   const [images, setImages] = useState({});
 
@@ -189,12 +185,8 @@ function Topic({ classes, data, onIndexChanged }) {
   }
   return (
     <div id="political-figures" className={classes.root}>
-      <div
-        className={classNames(classes.carouselWrapper, {
-          [classes.carouselWrapperFixed]: isOverThreshold
-        })}
-      >
-        <div className={classNames(classes.carousel)}>
+      <div className={classes.carouselWrapper}>
+        <div className={classes.carousel}>
           <div
             role="button"
             tabIndex={0}
