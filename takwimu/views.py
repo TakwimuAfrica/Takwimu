@@ -340,7 +340,7 @@ class FlourishView(APIView):
         Document = get_document_model()
         doc = get_object_or_404(Document, id=kwargs["document_id"])
 
-        extract_path = "index.html"
+        member = "index.html"
         if "path" in kwargs and kwargs["path"]:
             path = kwargs["path"]
 
@@ -352,7 +352,7 @@ class FlourishView(APIView):
                 if '.' not in path_part or index == len(path_parts) - 1:
                     path_parts.append(path_part)
 
-            extract_path = "/".join(path_parts)
+            member = "/".join(path_parts)
 
         try:
             zip_ref = zipfile.ZipFile(doc.file.path, "r")
@@ -360,13 +360,10 @@ class FlourishView(APIView):
             response = requests.get(doc.file.url, stream=True)
             zip_ref = zipfile.ZipFile(io.BytesIO(response.content))
 
-        file_path = zip_ref.extract(
-            extract_path, "/tmp/" + kwargs["document_id"])
+        file_path = zip_ref.extract(member, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
-        if not extract_path.split('/')[-1].endswith(
-            ('html', 'css', 'txt', 'svg')
-        ):
+        if not member.split('/')[-1].endswith( ('html', 'css', 'txt', 'svg')):
             mode, content_type = ('rb', 'media/*')
         return Response(open(file_path).read())
 
