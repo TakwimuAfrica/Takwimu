@@ -347,10 +347,10 @@ class FlourishView(APIView):
             # A request from within another file, will come as
             # 'first file/second file' to the server
             # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
-            path_parts = path.split('/')
-            for index, part in enumerate(path_parts):
-                if '.' in part and index != len(path_parts) - 1:
-                    path_parts.pop(index)
+            path_parts = []
+            for index, path_part in enumerate(path.split('/')):
+                if '.' not in path_part or index == len(path_parts) - 1:
+                    path_parts.append(path_part)
 
             extract_path = "/".join(path_parts)
 
@@ -360,10 +360,13 @@ class FlourishView(APIView):
             response = requests.get(doc.file.url, stream=True)
             zip_ref = zipfile.ZipFile(io.BytesIO(response.content))
 
-        file_path = zip_ref.extract(extract_path, "/tmp/" + kwargs["document_id"])
+        file_path = zip_ref.extract(
+            extract_path, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
-        if not extract_path.split('/')[-1].endswith(('html', 'css', 'txt', 'svg')):
+        if not extract_path.split('/')[-1].endswith(
+            ('html', 'css', 'txt', 'svg')
+        ):
             mode, content_type = ('rb', 'media/*')
         return Response(open(file_path).read())
 
