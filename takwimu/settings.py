@@ -13,9 +13,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
 INSTALLED_APPS = ['takwimu', 'fontawesome', 'meta'] + INSTALLED_APPS + [
-    'debug_toolbar',]
+    'debug_toolbar', 'wagtail.api.v2']
 
 ROOT_URLCONF = 'takwimu.urls'
+
+WAGTAILAPI_SEARCH_ENABLED = True
 
 MIDDLEWARE_CLASSES = ('whitenoise.middleware.WhiteNoiseMiddleware',
                       'django.middleware.cache.FetchFromCacheMiddleware',
@@ -27,8 +29,13 @@ INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 TEMPLATES[0]['OPTIONS']['context_processors'] = TEMPLATES[0]['OPTIONS'][
                                                     'context_processors'] + [
                                                     'takwimu.context_processors.takwimu_countries',
-                                                    'takwimu.context_processors.takwimu_stories',
-                                                    'takwimu.context_processors.sdgs']
+                                                    'takwimu.context_processors.sdgs',
+                                                    'takwimu.context_processors.asset_manifest']
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'takwimu/takwimu_ui/build/static')
+    # build appropriate path
+]
 
 # -------------------------------------------------------------------------------------
 # HURUmap / Wazimap Config
@@ -173,6 +180,9 @@ HURUMAP['available_releases_years_per_country'] = {
     },
 }
 
+HURUMAP['comparative_levels'] = ['country']
+
+HURUMAP['topics'] = { 'demographics','elections', 'crops', 'health_workers','causes_of_death', 'hiv', 'donors','poverty', 'fgm','security', 'budget', 'worldbank'}
 # Making sure these are the same
 WAZIMAP = HURUMAP
 
@@ -183,6 +193,24 @@ WAZIMAP = HURUMAP
 DATABASE_URL = os.environ.get('DATABASE_URL',
                               'postgresql://takwimu:takwimu@localhost/takwimu')
 DATABASES['default'] = dj_database_url.parse(DATABASE_URL)
+
+# -------------------------------------------------------------------------------------
+# Theme
+# -------------------------------------------------------------------------------------
+
+HURUMAP['theme'] = {
+    'charts': {
+        'colorbrewer': {
+            'takwimu': [
+                "#8ed3a5", "#29a87c", "#223a07", "#7d8c6c",
+                "#5bc17d"
+            ],
+        },
+        'color_scale': 'takwimu',
+        'chart_height': 300,
+        'show_y_axis': True
+    }
+}
 
 # -------------------------------------------------------------------------------------
 # Logging Configs
@@ -196,6 +224,11 @@ LOGGING['loggers']['takwimu'] = {'level': 'DEBUG' if DEBUG else 'INFO'}
 
 TAKWIMU_ES_INDEX_SETTINGS = {
     'settings': {
+        "index": {
+            "blocks": {
+                "read_only_allow_delete": "false"
+            }
+        },
         'analysis': {
             'analyzer': {
                 'ngram_analyzer': {
@@ -261,7 +294,7 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
         'TAKWIMU_ES_AWS_REGION', 'eu-west-1')
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.search.backends.elasticsearch5',
+            'BACKEND': 'wagtail.search.backends.elasticsearch6',
             'INDEX': TAKWIMU_ES_INDEX,
             'TIMEOUT': TAKWIMU_ES_TIMEOUT,
             'HOSTS': [{
@@ -281,7 +314,7 @@ if TAKWIMU_ES_HOST_TYPE.lower() == 'aws':
 else:
     WAGTAILSEARCH_BACKENDS = {
         'default': {
-            'BACKEND': 'wagtail.search.backends.elasticsearch5',
+            'BACKEND': 'wagtail.search.backends.elasticsearch6',
             'INDEX': TAKWIMU_ES_INDEX,
             'TIMEOUT': TAKWIMU_ES_TIMEOUT,
             'URLS': [TAKWIMU_ES_URL],
