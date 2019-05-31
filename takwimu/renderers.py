@@ -10,7 +10,6 @@ class CSSRenderer(BaseRenderer):
     def render(self, data, accepted_media_type=None, renderer_context=None):
         return data
 
-
 class JavaScriptRenderer(BaseRenderer):
     media_type = "text/javascript"
     format = "js"
