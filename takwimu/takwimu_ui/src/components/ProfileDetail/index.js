@@ -43,7 +43,8 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'absolute',
-      zIndex: '1'
+      zIndex: '1',
+      pointerEvents: 'none'
     }
   },
   label: {
