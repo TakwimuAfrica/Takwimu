@@ -125,3 +125,7 @@ FieldTable(['tax_revenue_year'], year=2017, dataset='WorldBank',
 FieldTable(['gdp_year'], year=2017, dataset='WorldBank', id='gdp')
 FieldTable(['gdp_growth_year'], year=2017, dataset='WorldBank',
            id='gdp_growth')
+FieldTable(['employment_in_agriculture_year', 'sex'], id='employment_in_agriculture', dataset='Agriculture', year='2014')
+FieldTable(['mortality_year', 'infant_under5'], id='infant_under5_mortality', dataset='Health', year='2014')
+FieldTable(['women_parliament_year'], id="women_in_parliament", dataset='Elections', year='2014')
+FieldTable(['position'], id="women_in_government", dataset='Elections', year='2014')
