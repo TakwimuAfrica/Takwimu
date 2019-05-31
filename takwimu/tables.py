@@ -21,6 +21,8 @@ FieldTable(['centers'], id="health_centers", dataset='Health', year='2014')
 FieldTable(['centers'], id="hiv_health_centers", dataset='Health', year='2014')
 FieldTable(['organization_type'], id="health_centers_ownership", dataset='Health', year='2014')
 FieldTable(['workers'], id="health_workers", dataset='Health', year='2014')
+FieldTable(['year','workers'], id="health_workers_distribution",
+        dataset='WorldBank', year='2014')
 FieldTable(['causes_of_death_over_five'], dataset='Health', year='2014')
 FieldTable(['causes_of_death_under_five'], dataset='Health', year='2014')
 FieldTable(['inpatient_diagnosis_over_five'], dataset='Health', year='2014')
@@ -125,8 +127,11 @@ FieldTable(['tax_revenue_year'], year=2017, dataset='WorldBank',
 FieldTable(['gdp_year'], year=2017, dataset='WorldBank', id='gdp')
 FieldTable(['gdp_growth_year'], year=2017, dataset='WorldBank',
            id='gdp_growth')
-FieldTable(['employment_in_agriculture_year', 'sex'], id='employment_in_agriculture', dataset='Agriculture', year='2014')
-FieldTable(['mortality_year', 'infant_under5'], id='infant_under5_mortality', dataset='Health', year='2014')
-FieldTable(['women_parliament_year'], id="women_in_parliament", dataset='Elections', year='2014')
-FieldTable(['position'], id="women_in_government", dataset='Elections', year='2014')
-FieldTable(['year','workers'], id="health_workers_distribution", dataset='Health', year='2014')
+FieldTable(['employment_in_agriculture_year', 'sex'], id='employment_in_agriculture', 
+        dataset='WorldBank', year='2017')
+FieldTable(['mortality_year', 'infant_under5'], id='infant_under5_mortality',
+        dataset='WorldBank', year='2017')
+FieldTable(['women_parliament_year'], id="women_in_parliament",
+        dataset='WorldBank', year='2017')
+FieldTable(['position'], id="women_in_government",
+        dataset='WorldBank', year='2017')
