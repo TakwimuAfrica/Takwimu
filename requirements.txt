@@ -10,7 +10,7 @@ elasticsearch-dsl==6.3.1
 # https://github.com/benoitc/gunicorn/issues/1194#issuecomment-269836343
 greenlet==0.4.15
 requests-aws4auth==0.9
-psycopg2==2.7.7
+psycopg2==2.8.2
 selenium==3.141.0
 beautifulsoup4==4.6.0
 lxml==4.3.3
