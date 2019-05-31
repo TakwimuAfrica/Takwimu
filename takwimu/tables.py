@@ -129,3 +129,4 @@ FieldTable(['employment_in_agriculture_year', 'sex'], id='employment_in_agricult
 FieldTable(['mortality_year', 'infant_under5'], id='infant_under5_mortality', dataset='Health', year='2014')
 FieldTable(['women_parliament_year'], id="women_in_parliament", dataset='Elections', year='2014')
 FieldTable(['position'], id="women_in_government", dataset='Elections', year='2014')
+FieldTable(['year','workers'], id="health_workers_distribution", dataset='Health', year='2014')
