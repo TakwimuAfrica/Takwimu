@@ -37,23 +37,6 @@ CREATE TABLE public.prevalence_of_undernourishment (
 --
 
 COPY public.prevalence_of_undernourishment (geo_level, geo_code, geo_version, prevalence_of_undernourishment_year, total) FROM stdin;
-country	BF	2009	2000	25
-country	BF	2009	2001	26
-country	BF	2009	2002	26
-country	BF	2009	2003	26
-country	BF	2009	2004	25
-country	BF	2009	2005	25
-country	BF	2009	2006	24
-country	BF	2009	2007	24
-country	BF	2009	2008	23
-country	BF	2009	2009	22
-country	BF	2009	2010	21
-country	BF	2009	2011	21
-country	BF	2009	2012	20
-country	BF	2009	2013	20
-country	BF	2009	2014	19
-country	BF	2009	2015	20
-country	BF	2009	2016	21
 country	ET	2009	2016	21
 country	ET	2009	2015	23
 country	ET	2009	2014	25
@@ -139,22 +122,6 @@ country	TZ	2009	2003	37
 country	TZ	2009	2002	37
 country	TZ	2009	2001	37
 country	TZ	2009	2000	37
-country	UG	2009	2000	28
-country	UG	2009	2001	28
-country	UG	2009	2002	27
-country	UG	2009	2003	25
-country	UG	2009	2004	24
-country	UG	2009	2005	24
-country	UG	2009	2006	26
-country	UG	2009	2007	28
-country	UG	2009	2008	30
-country	UG	2009	2009	31
-country	UG	2009	2010	31
-country	UG	2009	2011	32
-country	UG	2009	2012	33
-country	UG	2009	2013	35
-country	UG	2009	2014	36
-country	UG	2009	2015	39
 country	ZA	2009	2016	6
 country	ZA	2009	2015	6
 country	ZA	2009	2014	5
@@ -172,22 +139,6 @@ country	ZA	2009	2003	4
 country	ZA	2009	2002	5
 country	ZA	2009	2001	5
 country	ZA	2009	2000	5
-country	ZM	2009	2000	48
-country	ZM	2009	2001	49
-country	ZM	2009	2002	50
-country	ZM	2009	2003	50
-country	ZM	2009	2004	50
-country	ZM	2009	2005	51
-country	ZM	2009	2006	53
-country	ZM	2009	2007	54
-country	ZM	2009	2008	53
-country	ZM	2009	2009	51
-country	ZM	2009	2010	50
-country	ZM	2009	2011	49
-country	ZM	2009	2012	48
-country	ZM	2009	2013	47
-country	ZM	2009	2014	47
-country	ZM	2009	2015	46
 \.
 
 
@@ -202,3 +153,4 @@ ALTER TABLE ONLY public.prevalence_of_undernourishment
 --
 -- PostgreSQL database dump complete
 --
+

@@ -37,51 +37,6 @@ CREATE TABLE public.mobile_phone_subscriptions (
 --
 
 COPY public.mobile_phone_subscriptions (geo_level, geo_code, geo_version, mobile_phone_subscriptions_year, total) FROM stdin;
-country	BF	2009	1996	0
-country	BF	2009	1997	0
-country	BF	2009	1998	0
-country	BF	2009	1999	0
-country	BF	2009	2000	0
-country	BF	2009	2001	1
-country	BF	2009	2002	1
-country	BF	2009	2003	2
-country	BF	2009	2004	3
-country	BF	2009	2005	5
-country	BF	2009	2006	7
-country	BF	2009	2007	13
-country	BF	2009	2008	21
-country	BF	2009	2009	25
-country	BF	2009	2010	37
-country	BF	2009	2011	48
-country	BF	2009	2012	60
-country	BF	2009	2013	66
-country	BF	2009	2014	71
-country	BF	2009	2015	80
-country	BF	2009	2016	83
-country	BF	2009	2017	94
-country	CD	2009	1995	0
-country	CD	2009	1996	0
-country	CD	2009	1997	0
-country	CD	2009	1998	0
-country	CD	2009	1999	0
-country	CD	2009	2000	0
-country	CD	2009	2001	0
-country	CD	2009	2002	1
-country	CD	2009	2003	2
-country	CD	2009	2004	4
-country	CD	2009	2005	5
-country	CD	2009	2006	8
-country	CD	2009	2007	11
-country	CD	2009	2008	16
-country	CD	2009	2009	15
-country	CD	2009	2010	18
-country	CD	2009	2011	23
-country	CD	2009	2012	29
-country	CD	2009	2013	40
-country	CD	2009	2014	50
-country	CD	2009	2015	50
-country	CD	2009	2016	37
-country	CD	2009	2017	43
 country	ET	2009	2017	60
 country	ET	2009	2016	50
 country	ET	2009	2015	42
@@ -172,28 +127,6 @@ country	TZ	2009	2003	3
 country	TZ	2009	2002	2
 country	TZ	2009	2001	1
 country	TZ	2009	2000	0
-country	UG	2009	1996	0
-country	UG	2009	1997	0
-country	UG	2009	1998	0
-country	UG	2009	1999	0
-country	UG	2009	2000	1
-country	UG	2009	2001	1
-country	UG	2009	2002	2
-country	UG	2009	2003	3
-country	UG	2009	2004	4
-country	UG	2009	2005	5
-country	UG	2009	2006	7
-country	UG	2009	2007	14
-country	UG	2009	2008	27
-country	UG	2009	2009	29
-country	UG	2009	2010	38
-country	UG	2009	2011	48
-country	UG	2009	2012	45
-country	UG	2009	2013	48
-country	UG	2009	2014	52
-country	UG	2009	2015	50
-country	UG	2009	2016	55
-country	UG	2009	2017	58
 country	ZA	2009	2017	162
 country	ZA	2009	2016	147
 country	ZA	2009	2015	159
@@ -212,28 +145,6 @@ country	ZA	2009	2003	35
 country	ZA	2009	2002	29
 country	ZA	2009	2001	23
 country	ZA	2009	2000	18
-country	ZM	2009	1996	0
-country	ZM	2009	1997	0
-country	ZM	2009	1998	0
-country	ZM	2009	1999	0
-country	ZM	2009	2000	1
-country	ZM	2009	2001	1
-country	ZM	2009	2002	1
-country	ZM	2009	2003	2
-country	ZM	2009	2004	4
-country	ZM	2009	2005	8
-country	ZM	2009	2006	13
-country	ZM	2009	2007	21
-country	ZM	2009	2008	27
-country	ZM	2009	2009	33
-country	ZM	2009	2010	39
-country	ZM	2009	2011	57
-country	ZM	2009	2012	72
-country	ZM	2009	2013	69
-country	ZM	2009	2014	65
-country	ZM	2009	2015	72
-country	ZM	2009	2016	72
-country	ZM	2009	2017	79
 \.
 
 
@@ -248,3 +159,4 @@ ALTER TABLE ONLY public.mobile_phone_subscriptions
 --
 -- PostgreSQL database dump complete
 --
+

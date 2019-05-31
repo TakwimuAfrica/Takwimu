@@ -1,40 +1,15 @@
 {% extends 'profile/profile_detail.html' %}
-{% load staticfiles sass_tags jsonify geotags wagtailcore_tags %}
+{% load staticfiles sass_tags geotags %}
 
 {# HEAD #}
 
 {% block head_meta_description %}{{ HURUmap.description }}{% endblock %}
-
-{% block head_title %} Data - {{ geography.this.name }} -
-  {{ HURUMAP.name }}{% endblock %}
-
-
-{% block head_twitter_tags %}
-  {% if request.GET.indicator %}
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="{{ request.GET.title }}">
-    <meta name="twitter:description" content="{{ request.GET.description }}">
-    <meta name="twitter:image" content="https://takwimu.s3.eu-west-1.amazonaws.com/media/images/{{ request.GET.image }}">
-  {% endif %}
-{% endblock %}
 
 {% block head_css %}
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
 {% endblock %}
-
-{% block favicon %}
-  <link rel="apple-touch-icon" sizes="180x180" href="{% static 'apple-touch-icon.png' }%">
-  <link rel=" icon" type="image/png" sizes="32x32" href="
-  {% static 'favicon-32x32.png' %}">
-  <link rel="icon" type="image/png" sizes="16x16" href="{% static 'favicon-16x16.png' %}">
-  <link rel="shortcut icon" href="{% static 'favicon.ico' %}">
-  <link rel="manifest" href="{% static 'site.webmanifest' %}">
-  <link rel="mask-icon" href="{% static 'safari-pinned-tab.svg' %}" color="#5bbad5">
-  <meta name="msapplication-TileColor" content="#da532c">
-  <meta name="theme-color" content="#ffffff">
-{% endblock favicon %}
 
 {# BODY #}
 
@@ -43,19 +18,103 @@
   {% include 'takwimu/_includes/navbar/_index.html' %}
 
   {% block header_content %}
-    <div id="takwimuProfileDetail"></div>
-    <div id="cover-map" class="clearfix">
+  <div id="cover-map" class="clearfix">
       <div id="slippy-map"></div>
-    </div>
+      <div id="cover-profile" class="wrapper">
+          <article class="clearfix column-half">
+              <header id="header-box" class="column-full">
+                  <h1 class="title">{{ geography.this.short_name }}</h1>
+                  <p class="caption">
+                    {{ geography | geo_level }}
+                    {% if geography.parents %}
+                        in
+                        {% for level, g in geography.parents.items %}
+                          <a href="/profiles/{{ g.full_geoid }}-{{ g.short_name|slugify }}/">{{ g.short_name }}</a>{% if not forloop.last %},{%endif%}
+                        {% endfor %}
+                    {% endif %}
+                  </p>
+              </header>
+
+              <div class="column-half">
+                  <div class="stat">
+                      <span class="primary">
+                          {% block profile_header_population %}
+                          <span class="value">{{ demographics.total_population.values.this|floatformat:"0" }}</span>
+                          <span class="name">Population</span>
+                          {% endblock %}
+                      </span>
+                  </div>
+              </div>
+              {% if geography.this.square_kms %}
+              <div class="column-half">
+                  <div class="stat">
+                      <span class="secondary">
+                          <span class="value">{% if geography.this.square_kms < 1.0 %}{{ geography.this.square_kms|floatformat:"3" }}{% else %}{{ geography.this.square_kms|floatformat:"1" }}{% endif %}</span>
+                          <span class="name"> square kilometres</span>
+                      </span>
+                      {% if demographics.population_density.values.this %}
+                      <span class="secondary">
+                          {% block profile_header_density %}
+                          <span class="value">{{ demographics.population_density.values.this|floatformat:"1" }}</span>
+                          <span class="name"> people per square kilometre</span>
+                          {% endblock %}
+                      </span>
+                      {% endif %}
+                      {% block geography_extra_sq_km %}
+                      {% endblock %}
+                  </div>
+              </div>
+              {% endif %}
+
+              {% if geography.this.show_extra_links %}
+                  {% include "profile/_blocks/_header_extra_links.html" %}
+              {% endif %}
+
+              {% block profile_header_tail %}
+              <div class="column-full">
+                <p class="caption"><strong>Census data:</strong>
+                  {% if geography.this.geo_level == 'country' %}
+                    {{ geography.this.short_name | census_year }}
+                  {% elif geography.parents %}
+                    {% for level, g in geography.parents.items %}
+                      {% if g.geo_level == 'country' %}
+                        {{ g.short_name | census_year }}
+                      {% endif %}
+                    {% endfor %}
+                  {% endif %}
+                </p>
+              </div>
+              <div class="column-full">
+                <div class="dropdown">
+                  <button class="btn btn-info dropdown-toggle" type="button" id="indicatorsMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{ data_indicators }}
+                  </button>
+                  <div class="dropdown-menu" aria-labelledby="indicatorsMenuButton">
+                    <a class="dropdown-item{% if data_indicators == 'SDGs Indicators' %} active{% endif %}" href="{{ request.path }}?data=sdg">SDG Indicators</a>
+                    <a class="dropdown-item{% if data_indicators == 'Takwimu Indicators' %} active{% endif %}" href="{{ request.path }}">Takwimu Indicators</a>
+                  </div>
+                </div>
+              </div>
+            {% endblock %}
+          </article>
+      </div>
+  </div>
   {% endblock %}
 {% endblock %}
 
 
-{% block content_container %}
-  <div id="takwimuProfile"></div>
 
+{% block content_container %}
   <div class="content-container wrapper clearfix">
     {% block profile_preamble %}
+    <section class="clearfix" id="compare-place-picker">
+      <h2>Compare with another place</h2>
+      <div class="typeahead-container">
+          <input name="place_select" id="compare-place-select" type="text" placeholder="Start typing a place name or address to compare with..." autocomplete="off">
+      </div>
+    </section>
+
+    <p class="explain">Interact with charts and statistics for additional information.</p>
     {% endblock %}
 
     {% block profile_detail %}
@@ -63,7 +122,6 @@
     {% endblock %}
   </div>
 
-  {% comment %}
   {% if geography.this.geo_level == 'country' %}
     {% for country in countries %}
       {% if country.published %}
@@ -86,7 +144,6 @@
   {% include 'takwimu/_includes/sections/explore/_index.html' with extra_css_class="grayscale" %}
 
   {% include 'takwimu/_includes/sections/updates.html' %}
-  {% endcomment %}
 
   {# Footer #}
   {% include 'takwimu/_includes/footer.html' %}
@@ -142,92 +199,6 @@
 
   {{ block.super }}
 
-  <!-- Takwimu & HURUmap  -->
-  <script>
-      // I. Takwimu
-      var takwimu = window.takwimu || {};
-      takwimu.page = takwimu.page || {};
-      takwimu.page.id = 'topic';
-      takwimu.url = '{{ HURUMAP.url }}';
-      takwimu.countries = {{ countries|jsonify|safe }};
-      takwimu.profileDataSummaries = {{ profile_data_summaries|jsonify|safe }}
-          takwimu.settings = {
-              navigation: {
-                  country_analysis: '{{ settings.takwimu.NavigationSetting.country_analysis|richtext }}',
-                  data_by_topic: '{{ settings.takwimu.NavigationSetting.data_by_topic|richtext }}'
-              },
-              support: {
-                  hello: '{{ settings.takwimu.SupportSetting.hello|safe }}',
-                  support: '{{ settings.takwimu.SupportSetting.support|safe }}'
-              },
-              socialMedia: {
-                  facebook: '{{ settings.takwimu.SocialMediaSetting.facebook|safe }}',
-                  twitter: '{{ settings.takwimu.SocialMediaSetting.twitter|safe }}',
-                  medium: '{{ settings.takwimu.SocialMediaSetting.medium|safe }}',
-                  linkedin: '{{ settings.takwimu.SocialMediaSetting.linkedin|safe }}'
-              }
-          };
-
-      // II. HURUmap
-      // profileData is created in hurumap/profile_detail.html
-
-      var profileData = window.profileData || {};
-      profileData.description = '{{ profile_data_description|richtext|safe }}';
-      // UI expects an array
-      profileData.tabs = Object.values(profileData.tabs);
-
-      // While viz are created outside React, lets stick to using jQuery
-      // for handling Profile Tabs
-      // i. Function to switch tabs on client side
-      profileData.switchToTab = function switchToProfileTab(index) {
-          var i = Number.parseInt(index);
-          if (Number.isNaN(i) || i >= profileData.tabs.length) {
-              return;
-          }
-          var $tabs = $('#profile article');
-          if (i === 0) {
-              $tabs.find('header').show();
-              $tabs.show();
-          } else {
-              var tab = profileData.tabs[i];
-              var $tab = $(tab.href);
-              $tabs.hide();
-              if ($tab) {
-                  $tab.find('header').hide();
-                  $tab.show();
-              }
-          }
-      };
-
-
-      const {geo_code: countryCode} = profileData.geography.this;
-      const country = takwimu.countries.find(c => c.iso_code === countryCode);
-      takwimu.country = country;
-
-      $(function () {
-          makeCharts();
-          window.takwimu.profileDataSummaries.forEach(function (obj) {
-              if (obj.summary && obj.summary.length > 0 && obj.summary !== '<p>/</p>') {
-                  var dataId = obj.id.split('_')[1];
-                  var chartContainer = $("div").find(`[data-id='${dataId}']`);
-                  chartContainer
-                      .find(".chart-action-links-container")
-                      .after($('<div style="justify-content: center; padding: 1.0rem 2rem 0px"><h6 style="font-size:0.8rem"><b>Summary</b></h6>' + obj.summary + '</div>'));
-              }
-          });
-          const url = new URL(window.location);
-          const indicator = url.searchParams.get('indicator');
-          if (indicator) {
-              const element = document.getElementById(indicator);
-              if (element) {
-                  element.parentElement.scrollIntoView();
-              }
-          }
-      });
-
-
-  </script>
-
   <!-- Bootstrap: Enable Tooltips -->
   <script>
       $(function () {
@@ -236,13 +207,17 @@
   </script>
 
   <script type="text/javascript">
-      $('.release-list').hover(function () {
-          $(this).find('.sub-group').toggle();
-      });
+  $('.release-list').hover(function() {
+      $(this).find('.sub-group').toggle();
+  });
   </script>
-
-  <!-- React UI -->
-  <script src="{% static asset_manifest.runtime %}"></script>
-  <script src="{% static asset_manifest.vendor %}"></script>
-  <script src="{% static asset_manifest.main %}"></script>
 {% endblock body_javascript_extra %}
+
+{% block profile_javascript_libs %}
+  <script src="{% static 'js/vendor/dom-to-image.min.js' %}"></script>
+  {{ block.super }}
+  {% if HURUMAP.USE_MAPIT %}
+    <script src="{% static 'js/map_mapit.js' %}"></script>
+    <script src="{% static 'js/profile_map_mapit.js' %}"></script>
+  {% endif %}
+{% endblock profile_javascript_libs %}

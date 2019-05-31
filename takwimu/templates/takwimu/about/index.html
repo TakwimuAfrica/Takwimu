@@ -1,0 +1,71 @@
+{% extends 'takwimu/_layouts/page.html' %}
+{% load wagtailcore_tags static %}
+
+{% block content %}
+  <div style="background-color: #fff;">
+    <div class="py-5 container" style="max-width: 800px;">
+      <h1 class="mb-4 display-4">About Us</h1>
+      <div class="px-4 py-3" style="background-color: #f6fbfa">
+        <p class="small text-muted">On this page</p>
+        <a href="#about-takwimu">About Takwimu</a>
+        <a href="#services" class="ml-4">Services</a>
+      </div>
+
+      <div class="bg-primary my-5" style="height: 2px;"></div>
+      <a name="about-takwimu">
+        <h1 class="mb-3" style="padding-top: 120px; margin-top:-120px;">About Takwimu</h1>
+      </a>
+      {{ settings.takwimu.AboutUsSetting.about_us | richtext }}
+
+      <section class="partners py-5 my-3">
+        <h2>The Partnership</h2>
+        <p>africapractice, Code for Africa and iHub came together to create Takwimu.</p>
+        <div class="row align-items-center mt-3 text-center">
+          <a href="http://www.africapractice.com/" target="_blank" rel="noopener" class="col border-right p-4">
+            <img src="{% static 'img/logos/ap.png' %}" alt="africapractice">
+          </a>
+          <a href="https://codeforafrica.org" target="_blank" rel="noopener" class="col border-right p-4">
+            <img src="{% static 'img/logos/cfafrica.png' %}" alt ="Code for Africa">
+          </a>
+          <a href="https://ihub.co.ke/" target="_blank" rel="noopener" class="col p-4">
+            <img src="{% static 'img/logos/ihub-black.png' %}" alt="iHub">
+          </a>
+        </div>
+        
+        <h5 class="my-4">Supported by:</h5>
+        <a href="https://www.gatesfoundation.org" target="_blank" rel="noopener">
+          <img src="{% static 'img/logos/bmgf.png' %}" alt="Bill and Melinda Gates Foundation"
+              style="max-width: 220px;">
+        </a>
+
+        <style>
+            section.partners img {
+              max-width: 150px;
+              max-height: 60px;
+            }
+          </style>
+      </section>
+
+      <div class="bg-primary my-5" style="height: 2px;"></div>
+      <a name="services">
+        <h1 class="mb-3" style="padding-top: 120px; margin-top:-120px;">Services</h1>
+      </a>
+
+      <p>We understand that access to data and analysis is not enough - there is a gulf between looking at a web page and being able to harness information to make your work easier and your efforts more effective.</p>
+      <p>Our Standard Services are free; currently they include using advanced tools to download data visuals, create alerts, manage collections, access data over API and attend best practice webinars.</p>
+      <p>Our Premium Services add further value by customising and packaging analysis and related data to your specific requirements as well as the option to showcase your own content to a growing African and international audience. We will usually charge for Premium services and use this income to re-invest in the Takwimu platform.</p>
+
+      {% for service in settings.takwimu.SupportServicesSetting.services %}
+        {% if service.value.category != "Persona" %}
+          <p class="font-weight-bold mt-4 mb-0" style="font-size: 24px;">{{ service.value.title }}</p>
+          {{ service.value.description | richtext }}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+
+  {% include 'takwimu/_includes/sections/support-services/button.html' %}
+
+  {% include 'takwimu/_includes/sections/updates.html' %}
+
+{% endblock %}

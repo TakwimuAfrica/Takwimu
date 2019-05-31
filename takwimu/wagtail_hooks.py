@@ -1,7 +1,7 @@
 from wagtail.contrib.modeladmin.options import modeladmin_register, ModelAdminGroup, ModelAdmin
 from hurumap.models import DataIndicator, DataIndicatorPublisher
 
-from takwimu.models.dashboard import AboutPage, ContactPage, ExplainerSteps, FAQ, Testimonial
+from takwimu.models.dashboard import AboutPage, ContactUsPage, ExplainerSteps, FAQ, Testimonial
 
 
 class DataPublisherAdmin(ModelAdmin):
@@ -35,7 +35,7 @@ class AboutPageAdmin(ModelAdmin):
 
 
 class ContactUsPageAdmin(ModelAdmin):
-    model = ContactPage
+    model = ContactUsPage
     menu_label = 'Contact Us Page'
     menu_icon = 'mail'
     list_display = ('title',)

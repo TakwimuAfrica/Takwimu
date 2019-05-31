@@ -1,0 +1,161 @@
+{% extends 'takwimu/_layouts/page.html' %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+
+  <div class="container-fluid">
+    <div style="background-color: #f9f9f9;">
+      <div class="py-5 container" style="max-width: 800px;">
+        <div class="text-center mb-3">
+          <h1 class="display-3">
+            Takwimu Services
+          </h1>
+          <p>Takwimu offers both free and premium services designed to help our users access and use high quality data and analysis.</p>
+        </div>
+
+        <div class="font-weight-light">
+          <p>We understand that access to data and analysis is not enough - there is a gulf between looking at a web page and being able to harness information to make your work easier and your efforts more effective.</p>
+          <p>Our Standard Services are free; currently they include using advanced tools to download data visuals, create alerts, manage collections, access data over API and attend best practice webinars.</p>
+          <p>Our Premium Services add further value by customising and packaging analysis and related data to your specific requirements as well as the option to showcase your own content to a growing African and international audience. We will usually charge for Premium services and use this income to re-invest in the Takwimu platform.</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="row p-4" id="card-area" style="background-color: #f4f4f4">
+      <div class="container">
+        <h2 class="text-center my-3 display-4" style="font-weight: bold;">
+          The Services
+        </h2>
+        <div class="row">
+          {% for service in settings.takwimu.SupportServicesSetting.services %}
+            {% if service.value.category != "Persona" %}
+              <div class="col-12 d-flex align-items-stretch mb-5">
+                <div class="shadow-sm card card-deck" style="width: 100%">
+                  <div class="row container px-0 no-gutters">
+                    <div class="col-4 grayscale">
+                      {% image service.value.cover width-400 as tmp_photo %}
+                      <div class="card-img" style="background-image: url('{{ tmp_photo.url }}'); "></div>
+                    </div>
+                    <div class="col">
+                      <div class="card-body text-left pt-3 font-weight-light" style="color: #4a4a4a;">
+                        <h5 class="card-title font-weight-bold" style="color: #000000;">{{ service.value.title }}</h5>
+                        <p class="card-text">{{ service.value.description | richtext }}</p>
+                        <b class="text-uppercase bg-primary text-white px-4 py-1 position-absolute" style="top:0; right: 2em;">
+                          {{ service.value.category }} Services
+                        </b>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+
+    <div class="p-5">
+      <h2 class="text-center my-3 display-4" style="font-weight: bold;">
+        Enquire about these services
+      </h2>
+      <div class="container p-5" style="background-color: #1e4a7e; color: #ffffff;">
+        <form id="servicesEnquiryForm" class="px-5" method="post" action="mailto:{{ settings.takwimu.SupportSetting.support }}?subject=Enquiry About Takwimu Services" enctype="text/plain">
+          <div class="form-row py-2 px-5">
+            <div class="col">
+              <div class="form-group">
+                <label for="name">Your Name</label>
+                <input type="text" name="body" id="id_name" required="" placeholder="Jane Doe" class="form-control form-control-lg rounded-0" maxlength="254">
+              </div>
+            </div>
+            <div class="col">
+              <div class="form-group">
+                <label for="location">Your Location</label>
+                <select name="location" class="form-control form-control-lg rounded-0" id="id_location">
+                  <option value="Burkina Faso">Burkina Faso</option>
+                  <option value="DR Congo">DR Congo</option>
+                  <option value="Ethiopia">Ethiopia</option>
+                  <option value="Kenya">Kenya</option>
+                  <option value="Nigeria">Nigeria</option>
+                  <option value="Senegal">Senegal</option>
+                  <option value="South Africa">South Africa</option>
+                  <option value="Uganda">Uganda</option>
+                  <option value="Zambia">Zambia</option>
+                  <option value="Tanzania">Tanzania</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group py-2 px-5">
+            <label for="role">What best describes your
+              role?</label>
+            <select name="role" class="form-control form-control-lg rounded-0" id="id_role">
+              <option value="Investor">Investor</option>
+              <option value="NGO">NGO</option>
+              <option value="Journalist">Journalist</option>
+            </select>
+          </div>
+
+          <div class="form-group px-5 py-2">
+            <label for="help">How can we help you?</label>
+            <textarea name="help" id="id_help" required rows="5" cols="40" class="form-control form-control-lg rounded-0"></textarea>
+          </div>
+          <div class="py-5">
+            <button id="sendMail" type="submit" class="btn btn-outline-light" style="float: right; height:48px; width: 260px;"
+            onclick="location.href='mailto:support@takwimu.africa';">
+              Submit Enquiry
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {% include 'takwimu/_includes/sections/updates.html' %}
+
+  <style>
+    #card-area .card-img {
+      background-size: cover !important;
+      background: #1f6cc6 center center;
+      height: 200px;
+      opacity: 0.6;
+    }
+
+    #card-area .card:hover .card-img {
+      opacity: 1;
+    }
+
+    /*Checkbox styling */
+    .custom-control-label {
+      font-size: 16px;
+    }
+
+    .custom-control-label::before,
+    .custom-control-label::after {
+      top: .8rem;
+      width: 2.3rem;
+      height: 2.3rem;
+    }
+
+  </style>
+
+{% endblock %}
+
+{% block body_javascript_extra %}
+  <script>
+    $( "#servicesEnquiryForm" ).submit(function(e) {
+      e.preventDefault();
+
+      var $name = $('#id_name').val();
+      var $location = $('#id_location').val();
+      var $role = $('#id_role').val();
+      var $help = $('#id_help').val();
+      var $body = $help + '\r\n\r\n' + $name + ',\r\n' + $role + ',\r\n' + $location;
+      var href = 'mailto:{{ settings.takwimu.SupportSetting.support }}?subject=Enquiring About Takwimu Services&body=' +
+                  window.encodeURIComponent($body)
+      window.location.href = href;
+    });
+  </script>
+{% endblock body_javascript_extra %}
+

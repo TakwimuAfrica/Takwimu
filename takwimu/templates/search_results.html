@@ -1,0 +1,41 @@
+{% extends 'takwimu/_layouts/page.html' %}
+
+{% block content %}
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb bg-transparent mb-0">
+        <li class="breadcrumb-item">
+          <a href="/" class="text-black"><u>Home</u></a>
+        </li>
+        <li class="breadcrumb-item active">
+          Explore all data
+        </li>
+      </ol>
+    </nav>
+  </div>
+<div style="background-color: #f4f4f4;">
+  <div class="container">
+    {% include 'takwimu/_includes/search/index.html' with results=search_results query=search_query %}
+  </div>
+</div>
+<style>
+  .text-black {
+    color: #000;
+  }
+  .breadcrumb {
+    padding: 1rem;
+  }
+  .breadcrumb-item {
+    padding-left: .1rem;
+    letter-spacing: 0;
+    font-size: 14px;
+  }
+  .breadcrumb-item+.breadcrumb-item::before {
+    display: inline-block;
+    padding-right: .1rem;
+    color: #000;
+    content: "\00BB";
+  }
+  </style>
+  
+{% endblock %}

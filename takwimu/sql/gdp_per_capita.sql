@@ -37,48 +37,6 @@ CREATE TABLE public.gdp_per_capita (
 --
 
 COPY public.gdp_per_capita (geo_level, geo_code, geo_version, gdp_per_capita_year, total) FROM stdin;
-country	BF	2009	1997	229
-country	BF	2009	1998	256
-country	BF	2009	1999	265
-country	BF	2009	2000	226
-country	BF	2009	2001	235
-country	BF	2009	2002	261
-country	BF	2009	2003	332
-country	BF	2009	2004	371
-country	BF	2009	2005	407
-country	BF	2009	2006	421
-country	BF	2009	2007	475
-country	BF	2009	2008	570
-country	BF	2009	2009	553
-country	BF	2009	2010	575
-country	BF	2009	2011	667
-country	BF	2009	2012	674
-country	BF	2009	2013	700
-country	BF	2009	2014	704
-country	BF	2009	2015	575
-country	BF	2009	2016	614
-country	BF	2009	2017	671
-country	CD	2009	1997	139
-country	CD	2009	1998	139
-country	CD	2009	1999	103
-country	CD	2009	2000	405
-country	CD	2009	2001	154
-country	CD	2009	2002	175
-country	CD	2009	2003	174
-country	CD	2009	2004	194
-country	CD	2009	2005	219
-country	CD	2009	2006	256
-country	CD	2009	2007	287
-country	CD	2009	2008	328
-country	CD	2009	2009	299
-country	CD	2009	2010	334
-country	CD	2009	2011	387
-country	CD	2009	2012	425
-country	CD	2009	2013	458
-country	CD	2009	2014	487
-country	CD	2009	2015	498
-country	CD	2009	2016	472
-country	CD	2009	2017	463
 country	ET	2009	2017	768
 country	ET	2009	2016	713
 country	ET	2009	2015	645
@@ -169,31 +127,6 @@ country	TZ	2009	2003	323
 country	TZ	2009	2002	308
 country	TZ	2009	2001	304
 country	TZ	2009	2000	307
-country	TZ	2009	1997	250
-country	TZ	2009	1998	296
-country	TZ	2009	1999	300
-country	UG	2009	1996	285
-country	UG	2009	1997	287
-country	UG	2009	1998	292
-country	UG	2009	1999	258
-country	UG	2009	2000	258
-country	UG	2009	2001	235
-country	UG	2009	2002	240
-country	UG	2009	2003	238
-country	UG	2009	2004	288
-country	UG	2009	2005	316
-country	UG	2009	2006	336
-country	UG	2009	2007	402
-country	UG	2009	2008	450
-country	UG	2009	2009	554
-country	UG	2009	2010	595
-country	UG	2009	2011	575
-country	UG	2009	2012	637
-country	UG	2009	2013	655
-country	UG	2009	2014	703
-country	UG	2009	2015	675
-country	UG	2009	2016	582
-country	UG	2009	2017	606
 country	ZA	2009	2017	6151
 country	ZA	2009	2016	5280
 country	ZA	2009	2015	5743
@@ -212,31 +145,6 @@ country	ZA	2009	2003	3678
 country	ZA	2009	2002	2461
 country	ZA	2009	2001	2622
 country	ZA	2009	2000	2982
-country	ZA	2009	1997	3495
-country	ZA	2009	1998	3105
-country	ZA	2009	1999	3032
-country	ZM	2009	1996	383
-country	ZM	2009	1997	445
-country	ZM	2009	1998	356
-country	ZM	2009	1999	332
-country	ZM	2009	2000	342
-country	ZM	2009	2001	378
-country	ZM	2009	2002	377
-country	ZM	2009	2003	429
-country	ZM	2009	2004	530
-country	ZM	2009	2005	691
-country	ZM	2009	2006	1030
-country	ZM	2009	2007	1105
-country	ZM	2009	2008	1369
-country	ZM	2009	2009	1139
-country	ZM	2009	2010	1463
-country	ZM	2009	2011	1645
-country	ZM	2009	2012	1735
-country	ZM	2009	2013	1851
-country	ZM	2009	2014	1738
-country	ZM	2009	2015	1314
-country	ZM	2009	2016	1263
-country	ZM	2009	2017	1510
 \.
 
 
@@ -251,3 +159,4 @@ ALTER TABLE ONLY public.gdp_per_capita
 --
 -- PostgreSQL database dump complete
 --
+
