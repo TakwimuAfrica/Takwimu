@@ -33,7 +33,8 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
-      borderRadius: '0 0 1.063rem 1.063rem'
+      borderRadius: '0 0 1.063rem 1.063rem',
+      pointerEvents: 'all'
     }
   },
   layout: {
