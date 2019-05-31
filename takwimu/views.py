@@ -275,7 +275,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         json_data = open("takwimu/fixtures/sdg.json")
         data = json.load(json_data)
 
-        ## get profileData aka summaries from wagtail
+        # get profileData aka summaries from wagtail
         summary_data = ProfileData.objects.filter(
             country_iso_code=self.geo.geo_code).values('id', 'chart_id',
                                                        'summary')
@@ -333,22 +333,26 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (FlourishHTMLRenderer, CSSRenderer, JavaScriptRenderer, JPEGRenderer, SVGRenderer,)
+    renderer_classes = (FlourishHTMLRenderer, CSSRenderer,
+                        JavaScriptRenderer, JPEGRenderer, SVGRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
         doc = get_object_or_404(Document, id=kwargs["document_id"])
 
-        filename = "index.html"
-        if "filename" in kwargs and kwargs["filename"]:
-            filename = kwargs["filename"]
+        member = "index.html"
+        if "path" in kwargs and kwargs["path"]:
+            path = kwargs["path"]
 
-        # A request from within another file, will come as
-        # 'first file/second file' to the server
-        # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
-        filename_parts = filename.split('/')
-        if len(filename_parts) > 1:
-            filename = filename_parts[-1]
+            # A request from within another file, will come as
+            # 'first file/second file' to the server
+            # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
+            path_parts = []
+            for index, path_part in enumerate(path.split('/')):
+                if '.' not in path_part or index == len(path_parts) - 1:
+                    path_parts.append(path_part)
+
+            member = "/".join(path_parts)
 
         try:
             zip_ref = zipfile.ZipFile(doc.file.path, "r")
@@ -356,12 +360,11 @@ class FlourishView(APIView):
             response = requests.get(doc.file.url, stream=True)
             zip_ref = zipfile.ZipFile(io.BytesIO(response.content))
 
-        file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
+        file_path = zip_ref.extract(member, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
-        if not filename.lower().endswith(('html', 'css', 'txt', 'svg')):
+        if not member.split('/')[-1].endswith( ('html', 'css', 'txt', 'svg')):
             mode, content_type = ('rb', 'media/*')
-
         return Response(open(file_path).read())
 
 
@@ -377,8 +380,10 @@ class TwitterImageAPIView(APIView):
             image.save()
         except model.DoesNotExist:
             image = model.objects.create(title=id,
-                                         file=decode_base64_file(data=raw_image,
-                                                                 file_name=id))
+                                         file=decode_base64_file(
+                                             data=raw_image,
+                                             file_name=id
+                                         ))
 
         if image:
             # Create rendition image with width 600
