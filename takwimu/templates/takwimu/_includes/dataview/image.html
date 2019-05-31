@@ -1,4 +1,4 @@
 {% load wagtailcore_tags wagtailimages_tags %}
 
 {% image value.image original class="img-thumbnail mb-2" style="width:100%;" %}
-<p class="text-center text-muted">{{ value.caption }}</p>
+<p class="text-center text-muted">{{ value.description  || value.caption }}</p>

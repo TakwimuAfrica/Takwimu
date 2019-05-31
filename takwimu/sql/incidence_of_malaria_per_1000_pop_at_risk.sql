@@ -37,6 +37,14 @@ CREATE TABLE public.incidence_of_malaria_per_1000_pop_at_risk (
 --
 
 COPY public.incidence_of_malaria_per_1000_pop_at_risk (geo_level, geo_code, geo_version, incidence_of_malaria_per_1000_pop_at_risk_year, total) FROM stdin;
+country	BF	2009	2000	622
+country	BF	2009	2005	550
+country	BF	2009	2010	601
+country	BF	2009	2015	389
+country	CD	2009	2000	509
+country	CD	2009	2005	525
+country	CD	2009	2010	427
+country	CD	2009	2015	246
 country	ET	2009	2017	37
 country	ET	2009	2016	42
 country	ET	2009	2015	53
@@ -82,6 +90,10 @@ country	TZ	2009	2012	119
 country	TZ	2009	2011	132
 country	TZ	2009	2010	142
 country	TZ	2009	2000	295
+country	UG	2009	2000	517
+country	UG	2009	2005	478
+country	UG	2009	2010	429
+country	UG	2009	2015	218
 country	ZA	2009	2017	4
 country	ZA	2009	2016	1
 country	ZA	2009	2015	0
@@ -91,6 +103,10 @@ country	ZA	2009	2012	1
 country	ZA	2009	2011	2
 country	ZA	2009	2010	2
 country	ZA	2009	2000	4
+country	ZM	2009	2000	382
+country	ZM	2009	2005	243
+country	ZM	2009	2010	156
+country	ZM	2009	2015	174
 \.
 
 
@@ -105,4 +121,3 @@ ALTER TABLE ONLY public.incidence_of_malaria_per_1000_pop_at_risk
 --
 -- PostgreSQL database dump complete
 --
-
