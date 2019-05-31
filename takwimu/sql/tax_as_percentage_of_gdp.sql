@@ -37,35 +37,6 @@ CREATE TABLE public.tax_as_percentage_of_gdp (
 --
 
 COPY public.tax_as_percentage_of_gdp (geo_level, geo_code, geo_version, tax_as_percentage_of_gdp_year, total) FROM stdin;
-country	BF	2009	2002	11
-country	BF	2009	2003	11
-country	BF	2009	2004	13
-country	BF	2009	2005	12
-country	BF	2009	2006	12
-country	BF	2009	2007	13
-country	BF	2009	2008	12
-country	BF	2009	2009	13
-country	BF	2009	2010	13
-country	BF	2009	2011	14
-country	BF	2009	2012	16
-country	BF	2009	2013	17
-country	BF	2009	2014	15
-country	BF	2009	2015	15
-country	BF	2009	2016	16
-country	CD	2009	1997	4
-country	CD	2009	1998	5
-country	CD	2009	1999	3
-country	CD	2009	2000	1
-country	CD	2009	2001	3
-country	CD	2009	2002	4
-country	CD	2009	2003	4
-country	CD	2009	2004	5
-country	CD	2009	2005	6
-country	CD	2009	2006	7
-country	CD	2009	2007	7
-country	CD	2009	2008	9
-country	CD	2009	2009	8
-country	CD	2009	2010	8
 country	ET	2009	2013	9
 country	ET	2009	2012	9
 country	ET	2009	2011	9
@@ -121,26 +92,6 @@ country	ZA	2009	2003	23
 country	ZA	2009	2002	23
 country	ZA	2009	2001	24
 country	ZA	2009	2000	23
-country	ZM	2009	1996	16
-country	ZM	2009	1997	16
-country	ZM	2009	1998	16
-country	ZM	2009	1999	17
-country	ZM	2009	2001	17
-country	ZM	2009	2002	15
-country	ZM	2009	2003	15
-country	ZM	2009	2004	15
-country	ZM	2009	2005	15
-country	ZM	2009	2006	14
-country	ZM	2009	2007	14
-country	ZM	2009	2008	14
-country	ZM	2009	2009	12
-country	ZM	2009	2010	13
-country	ZM	2009	2011	17
-country	ZM	2009	2012	16
-country	ZM	2009	2013	16
-country	ZM	2009	2014	17
-country	ZM	2009	2015	17
-country	ZM	2009	2016	15
 \.
 
 
@@ -155,3 +106,4 @@ ALTER TABLE ONLY public.tax_as_percentage_of_gdp
 --
 -- PostgreSQL database dump complete
 --
+

@@ -37,55 +37,24 @@ CREATE TABLE public.gini_index (
 --
 
 COPY public.gini_index (geo_level, geo_code, geo_version, gini_index_year, total) FROM stdin;
-country	BF	2009	1994	48
-country	BF	2009	1998	50
-country	BF	2009	2003	43
-country	BF	2009	2009	40
-country	BF	2009	2014	35
-country	CD	2009	2004	42
-country	CD	2009	2012	42
 country	ET	2009	2015	39
 country	ET	2009	2010	33
 country	ET	2009	2004	30
-country	ET	2009	1995	45
-country	ET	2009	1999	30
 country	KE	2009	2015	41
 country	KE	2009	2005	47
-country	KE	2009	1997	45
 country	NG	2009	2009	43
 country	NG	2009	2003	40
-country	NG	2009	1992	45
-country	NG	2009	1996	52
 country	SN	2009	2011	40
 country	SN	2009	2005	39
 country	SN	2009	2001	41
-country	SN	2009	1991	54
-country	SN	2009	1994	41
 country	TZ	2009	2011	38
 country	TZ	2009	2007	40
 country	TZ	2009	2000	37
-country	TZ	2009	1991	35
-country	UG	2009	1996	39
-country	UG	2009	1999	43
-country	UG	2009	2002	45
-country	UG	2009	2005	43
-country	UG	2009	2009	44
-country	UG	2009	2012	41
-country	UG	2009	2016	43
 country	ZA	2009	2014	63
 country	ZA	2009	2010	63
 country	ZA	2009	2008	63
 country	ZA	2009	2005	65
 country	ZA	2009	2000	58
-country	ZA	2009	1993	59
-country	ZA	2009	1996	61
-country	ZM	2009	1996	48
-country	ZM	2009	1998	49
-country	ZM	2009	2002	42
-country	ZM	2009	2004	54
-country	ZM	2009	2006	55
-country	ZM	2009	2010	56
-country	ZM	2009	2015	57
 \.
 
 
@@ -100,3 +69,4 @@ ALTER TABLE ONLY public.gini_index
 --
 -- PostgreSQL database dump complete
 --
+

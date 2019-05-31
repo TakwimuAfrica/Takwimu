@@ -12,7 +12,7 @@ services:
       - PGUSER=takwimu
       - PGPASSWORD=takwimu
   es:
-    image: blacktop/elasticsearch:6.3
+    image: elasticsearch:5.6.10
     ports:
       - "9200:9200"
     environment:

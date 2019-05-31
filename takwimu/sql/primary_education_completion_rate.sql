@@ -37,40 +37,26 @@ CREATE TABLE public.primary_education_completion_rate (
 --
 
 COPY public.primary_education_completion_rate (geo_level, geo_code, geo_version, primary_education_completion_rate_year, total) FROM stdin;
-country	ET	2009	1996	15
-country	ET	2009	1998	17
-country	ET	2009	1999	20
-country	ET	2009	2000	22
-country	ET	2009	2001	28
-country	ET	2009	2002	31
-country	ET	2009	2003	35
-country	ET	2009	2004	37
-country	ET	2009	2005	43
-country	ET	2009	2006	47
-country	ET	2009	2007	47
-country	ET	2009	2008	49
-country	ET	2009	2009	51
-country	ET	2009	2010	58
-country	ET	2009	2011	53
-country	ET	2009	2012	50
-country	ET	2009	2014	54
-country	ET	2009	2015	54
+country	ET	2009	2015	53
+country	ET	2009	2014	53
+country	ET	2009	2012	51
+country	ET	2009	2011	50
+country	ET	2009	2010	56
+country	ET	2009	2009	50
+country	ET	2009	2008	46
+country	ET	2009	2007	42
+country	ET	2009	2006	42
+country	ET	2009	2005	36
+country	ET	2009	2004	29
+country	ET	2009	2003	25
+country	ET	2009	2002	22
+country	ET	2009	2001	20
+country	ET	2009	2000	16
 country	KE	2009	2016	102
 country	KE	2009	2015	102
 country	KE	2009	2014	100
 country	KE	2009	2005	87
 country	KE	2009	2004	86
-country	KE	2009	1981	85
-country	KE	2009	1980	86
-country	KE	2009	1979	89
-country	KE	2009	1978	69
-country	KE	2009	1977	67
-country	KE	2009	1976	63
-country	KE	2009	1975	60
-country	KE	2009	1973	56
-country	KE	2009	1972	54
-country	KE	2009	1971	51
-country	KE	2009	1970	48
 country	NG	2009	2010	69
 country	NG	2009	2009	68
 country	NG	2009	2008	64
@@ -128,3 +114,4 @@ ALTER TABLE ONLY public.primary_education_completion_rate
 --
 -- PostgreSQL database dump complete
 --
+

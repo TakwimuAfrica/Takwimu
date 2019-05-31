@@ -1,27 +1,56 @@
 import json
 import operator
-import os
 
 from collections import OrderedDict
+from django.utils.text import slugify
 from takwimu import settings
-from takwimu.utils.helpers import get_takwimu_stories, get_takwimu_countries
 from takwimu.utils.medium import Medium
 
-from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, \
-    CountryProfilesSetting, SocialMediaSetting
+from takwimu.models.dashboard import ProfilePage, ProfileSectionPage, COUNTRIES, CountryProfilesSetting
 from takwimu.models.dashboard import TopicPage
 
 from .sdg import SDG
 
 
 def takwimu_countries(request):
-    country_profile_settings = CountryProfilesSetting.for_site(request.site)
-    return get_takwimu_countries(country_profile_settings.__dict__)
+    settings = CountryProfilesSetting.for_site(request.site)
+    published_status = settings.__dict__
+
+    countries = []
+    for code, names in COUNTRIES.items():
+        country = {
+            'name': names['name'],
+            'short_name': names['short_name'],
+            'slug': slugify(names['name']),
+            'published': published_status[code]
+        }
+        countries.append(country)
+
+    return {'countries': countries}
 
 
 def takwimu_stories(request):
-    social_media_settings = SocialMediaSetting.for_site(request.site)
-    return get_takwimu_stories(social_media_settings)
+
+    stories_latest = []
+    stories_trending = []
+
+    try:
+        client = Medium()
+        stories = client.get_publication_posts('takwimu-africa',
+                                                count=20)
+        stories_latest = stories[0:3]
+
+        stories_dict = [i.__dict__ for i in stories]
+        stories_trending = sorted(
+            stories_dict, key=operator.itemgetter('clap_count'), reverse=True)
+
+    except Exception as e:
+        pass
+
+    return {
+        'stories_latest': stories_latest,
+        'stories_trending': stories_trending[0:3]
+    }
 
 
 def takwimu_topics(request):
@@ -118,28 +147,4 @@ def sdgs(request):
     sdgs = json.load(json_sdgs)
     return {
         'sdgs': sdgs,
-    }
-
-
-def asset_manifest(request):
-    manifest_filepath = os.path.join(
-        settings.BASE_DIR, 'takwimu/takwimu_ui/build/asset-manifest.json')
-    asset_manifest = {}
-    try:
-        with open(manifest_filepath) as f:
-            asset_manifest_contents = json.load(f)
-            for key, value in asset_manifest_contents.items():
-                # Strip starting `/static/` from values
-                if key == 'main.js':
-                    asset_manifest['main'] = value[8:]
-                elif key == 'runtime~main.js':
-                    asset_manifest['runtime'] = value[8:]
-                elif key.startswith('static/js/') and key.endswith('chunk.js'):
-                    asset_manifest['vendor'] = value[8:]
-
-    except Exception as e:
-        print(e.message)
-
-    return {
-        'asset_manifest': asset_manifest
     }

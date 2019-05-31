@@ -5,13 +5,9 @@ git+https://github.com/CodeForAfricaLabs/django-fontawesome.git@feature/python3#
 Markdown==2.6.11
 django-meta==1.4.1
 django-debug-toolbar==1.9.1
-elasticsearch==6.3.0
-elasticsearch-dsl==6.3.0
+elasticsearch==5.5.3
+elasticsearch-dsl==5.4.0
 # https://github.com/benoitc/gunicorn/issues/1194#issuecomment-269836343
 greenlet==0.4.15
 requests-aws4auth==0.9
 psycopg2==2.7.7
-selenium==3.141.0
-beautifulsoup4==4.6.0
-lxml==4.3.3
-

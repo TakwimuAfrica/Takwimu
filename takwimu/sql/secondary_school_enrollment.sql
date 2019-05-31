@@ -38,33 +38,6 @@ CREATE TABLE public.secondary_school_enrollment (
 --
 
 COPY public.secondary_school_enrollment (geo_level, geo_code, geo_version, secondary_school_enrollment_year, sex, total) FROM stdin;
-country	BF	2009	1999	F	7
-country	BF	2009	2000	F	8
-country	BF	2009	2001	F	8
-country	BF	2009	2003	F	10
-country	BF	2009	2004	F	11
-country	BF	2009	2005	F	12
-country	BF	2009	2006	F	13
-country	BF	2009	2007	F	14
-country	BF	2009	2008	F	16
-country	BF	2009	2009	F	17
-country	BF	2009	2010	F	19
-country	BF	2009	2011	F	21
-country	BF	2009	2012	F	23
-country	BF	2009	2013	F	26
-country	BF	2009	2014	F	28
-country	BF	2009	2015	F	32
-country	BF	2009	2016	F	35
-country	CD	2009	1995	F	21
-country	CD	2009	2007	F	25
-country	CD	2009	2008	F	28
-country	CD	2009	2009	F	30
-country	CD	2009	2010	F	30
-country	CD	2009	2011	F	32
-country	CD	2009	2012	F	32
-country	CD	2009	2013	F	33
-country	CD	2009	2014	F	35
-country	CD	2009	2015	F	36
 country	ET	2009	2015	F	34
 country	ET	2009	2012	F	36
 country	ET	2009	2011	F	34
@@ -122,9 +95,6 @@ country	SN	2009	2000	F	12
 country	TZ	2009	2017	F	26
 country	TZ	2009	2013	F	30
 country	TZ	2009	2010	F	27
-country	UG	2009	1997	F	8
-country	UG	2009	2004	F	17
-country	UG	2009	2007	F	22
 country	ZA	2009	2016	F	105
 country	ZA	2009	2015	F	102
 country	ZA	2009	2014	F	106
@@ -141,33 +111,6 @@ country	ZA	2009	2003	F	89
 country	ZA	2009	2002	F	88
 country	ZA	2009	2001	F	88
 country	ZA	2009	2000	F	87
-country	BF	2009	1999	M	12
-country	BF	2009	2000	M	13
-country	BF	2009	2001	M	13
-country	BF	2009	2003	M	14
-country	BF	2009	2004	M	16
-country	BF	2009	2005	M	17
-country	BF	2009	2006	M	17
-country	BF	2009	2007	M	19
-country	BF	2009	2008	M	22
-country	BF	2009	2009	M	23
-country	BF	2009	2010	M	25
-country	BF	2009	2011	M	27
-country	BF	2009	2012	M	29
-country	BF	2009	2013	M	31
-country	BF	2009	2014	M	32
-country	BF	2009	2015	M	35
-country	BF	2009	2016	M	37
-country	CD	2009	1995	M	35
-country	CD	2009	2007	M	48
-country	CD	2009	2008	M	51
-country	CD	2009	2009	M	53
-country	CD	2009	2010	M	52
-country	CD	2009	2011	M	55
-country	CD	2009	2012	M	54
-country	CD	2009	2013	M	53
-country	CD	2009	2014	M	56
-country	CD	2009	2015	M	56
 country	ET	2009	2015	M	36
 country	ET	2009	2012	M	40
 country	ET	2009	2011	M	38
@@ -225,9 +168,6 @@ country	SN	2009	2000	M	19
 country	TZ	2009	2017	M	26
 country	TZ	2009	2013	M	33
 country	TZ	2009	2010	M	34
-country	UG	2009	1997	M	12
-country	UG	2009	2004	M	21
-country	UG	2009	2007	M	26
 country	ZA	2009	2016	M	96
 country	ZA	2009	2015	M	104
 country	ZA	2009	2014	M	97
@@ -258,3 +198,4 @@ ALTER TABLE ONLY public.secondary_school_enrollment
 --
 -- PostgreSQL database dump complete
 --
+
