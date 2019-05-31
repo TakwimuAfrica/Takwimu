@@ -451,7 +451,8 @@ function Chart(options) {
       displayHeight:
         chart.settings.height -
         chart.settings.margin.top -
-        chart.settings.margin.bottom
+        chart.settings.margin.bottom -
+        ((chart.chartChartShowYAxis || chart.chartChartShowYAxis == "true") ? 15 : 0)
     });
 
     // add optional title, adjust height available height for columns if necessary
@@ -461,14 +462,6 @@ function Chart(options) {
     if (!!chart.chartChartSubtitle) {
       chart.addChartSubtitle(chart.chartContainer);
     }
-
-    // create the base for upcoming html elements
-    chart.htmlBase = chart.chartContainer
-      .append("div")
-      .attr("class", "column-set")
-      .style("margin-top", 0)
-      .style("height", chart.settings.height + "px")
-      .style("overflow", "auto hidden");
 
     // narrow padding for histograms
     if (chart.chartType == "histogram") {
@@ -484,6 +477,14 @@ function Chart(options) {
       });
       chart.settings.height += 25;
     }
+
+    // create the base for upcoming html elements
+    chart.htmlBase = chart.chartContainer
+      .append("div")
+      .attr("class", "column-set")
+      .style("margin-top", 0)
+      .style("height", chart.settings.height + "px")
+      .style("overflow", "auto hidden");
 
     // x scale, axis and labels
     chart.x = d3.scale
@@ -592,9 +593,16 @@ function Chart(options) {
             .classed("x axis label", true)
             .style("width", chart.x.rangeBand() + "px")
             .style("top", function(d) {
-              return chart.settings.displayHeight + 51 + "px";
+              return chart.settings.displayHeight + 65 + "px";
             })
             .style("left", function(d) {
+                if(chart.chartDataValues.length > (chart.columnOffset-groupValues.length)) {
+                  return (
+                    chart.x(d.name) * (1 +  groupValues.length) +
+                    chart.settings.margin.left +
+                    "px"
+                  );
+                }
               return chart.x(d.name) + chart.settings.margin.left + "px";
             })
             .text(function(d) {
@@ -1832,10 +1840,22 @@ function Chart(options) {
   };
 
   const toPng = () => {
+    const columnSets = chart.chartContainer.node().getElementsByClassName(
+      'column-set'
+    );
+    if (columnSets && columnSets.length) {
+      columnSets[0].style.overflow = 'visible';
+    }
     return domtoimage
       .toPng(chart.chartContainer.node(), { filter: (node) => {
         return node.className !== "chart-actions";
       }, bgcolor: "#fff" })
+      .then(dataURL => {
+        if (columnSets && columnSets.length) {
+          columnSets[0].style.overflow = 'auto hidden';
+        }
+        return dataURL;
+      })
   }
   
   chart.share = () => {

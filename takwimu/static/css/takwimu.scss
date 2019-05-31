@@ -330,6 +330,7 @@ header.section-contents h1 {
   letter-spacing: normal;
   color: #ffffff;
 }
+
 #profile .chart h3 {
   font-size: 1.15rem;
 }
@@ -337,6 +338,9 @@ header.section-contents h1 {
   margin-left: 0;
   border: none;
   padding: 0;
+
+  /* Hide very wide charts; they should have their own scrolling */
+  overflow-x: hidden;
 }
 
 #profile .section-container section {
