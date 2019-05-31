@@ -15,24 +15,29 @@ ESCAPE_CHARACTERS = "])}while(1);</x>"
 
 
 class Medium(object):
-    def get_publication_posts(self, publication_name, count=10):
+    def get_posts(self, url, count=10, return_dict=False):
+        return self._send_post_request(
+            "{0}/latest?limit={count}".format(url, count=count), return_dict)
+
+    def get_publication_posts(self, publication_name, count=10, return_dict=False):
         return self._send_post_request(
             BASE_PATH + "{0}/latest?limit={count}".format(publication_name,
-                                                          count=count))
+                                                          count=count), return_dict)
 
     @staticmethod
-    def _send_request(url, parse_function):
+    def _send_request(url, parse_function, return_dict):
         req = requests.get(url, headers={"Accept": "application/json"})
-        # print(url, req.status_code)
+
         if req.status_code == requests.codes.ok:
-            return parse_function(
-                json.loads(req.text.replace(ESCAPE_CHARACTERS, "").strip()))
+            payload = json.loads(req.text.replace(
+                ESCAPE_CHARACTERS, "").strip())
+            return parse_function(payload, return_dict)
         else:
             return None
 
     @staticmethod
-    def _send_post_request(url):
-        return Medium._send_request(url, Medium.parse_post)
+    def _send_post_request(url, return_dict):
+        return Medium._send_request(url, Medium.parse_post, return_dict)
 
     @staticmethod
     def parse_images(image_dict, return_dict=False):
