@@ -38,26 +38,6 @@ CREATE TABLE public.infant_under5_mortality (
 --
 
 COPY public.infant_under5_mortality (geo_level, geo_code, geo_version, mortality_year, infant_under5, total) FROM stdin;
-country	KE	2009	1990	infant	66
-country	KE	2009	1990	under_5	104
-country	KE	2009	1991	infant	67
-country	KE	2009	1991	under_5	107
-country	KE	2009	1992	infant	69
-country	KE	2009	1992	under_5	109
-country	KE	2009	1993	infant	70
-country	KE	2009	1993	under_5	111
-country	KE	2009	1994	infant	70
-country	KE	2009	1994	under_5	113
-country	KE	2009	1995	infant	70
-country	KE	2009	1995	under_5	114
-country	KE	2009	1996	infant	70
-country	KE	2009	1996	under_5	114
-country	KE	2009	1997	infant	69
-country	KE	2009	1997	under_5	113
-country	KE	2009	1998	infant	68
-country	KE	2009	1998	under_5	111
-country	KE	2009	1999	infant	66
-country	KE	2009	1999	under_5	108
 country	KE	2009	2000	infant	64
 country	KE	2009	2000	under_5	105
 country	KE	2009	2001	infant	62
