@@ -12,6 +12,6 @@ greenlet==0.4.15
 requests-aws4auth==0.9
 psycopg2==2.7.7
 selenium==3.141.0
-beautifulsoup4==4.6.0
+beautifulsoup4==4.7.1
 lxml==4.3.3
 
