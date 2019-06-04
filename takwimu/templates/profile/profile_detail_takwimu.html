@@ -137,6 +137,35 @@
       <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage votes per candidate" data-initial-sort="-value" data-id="18aff6e1-020f-4921-8a4b-96cff4a0c2b3"></div>
     </section>
    {% endif %}
+
+   {% if not worldbank.women_in_parliament.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-worldbank-women_in_parliament"
+           data-stat-type=""
+           data-chart-title="Proportion of seats held by women in national parliaments (%)" data-id="8k532e9e-8d09-9999-b240-ecaf7eda13a4">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not worldbank.women_in_government.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-worldbank-women_in_government"
+           data-stat-type=""
+           data-chart-title="Position held by women in government" data-id="56tyru34-8d09-0p7b-ccff-ecaf7eda13a4">
+      </div>
+    </section>
+    {% endif %}
+   
   </div>
 </article>
 {% endif %}
@@ -286,6 +315,34 @@
     </section>
     {% endif %}
 
+    {% if not worldbank.infant_under5_mortality.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-worldbank-infant_under5_mortality"
+           data-stat-type=""
+           data-chart-title="Infant and Under 5 Mortality rate (per 1000 live births)">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health_workers.health_workers_distribution_per_year.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health_workers-health_workers_distribution_per_year"
+           data-stat-type=""
+           data-chart-title="Health worker density and distribution">
+      </div>
+    </section>
+    {% endif %}
+
   </div>
 </article>
 {% endif %}
@@ -328,6 +385,20 @@
            id="chart-histogram-worldbank-agricultural_land"
            data-stat-type="scaled-percentage"
            data-chart-title="Agricultural land (% of land area)" data-id="64be0af8-13d0-4b54-bbf6-6481b3777141">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not worldbank.employment_in_agriculture.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-worldbank-employment_in_agriculture"
+           data-stat-type=""
+           data-chart-title="Employment in agriculture (% of male vs female employment)" data-id="r4be0af8-13d0-4b54-bbf6-590043777144">
       </div>
     </section>
     {% endif %}
