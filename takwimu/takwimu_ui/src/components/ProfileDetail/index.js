@@ -34,7 +34,8 @@ const styles = theme => ({
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
       borderRadius: '0 0 1.063rem 1.063rem',
-      pointerEvents: 'all'
+      pointerEvents: 'all',
+      zIndex: '1'
     }
   },
   layout: {
@@ -44,7 +45,6 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'absolute',
-      zIndex: '1',
       pointerEvents: 'none'
     }
   },
