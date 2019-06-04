@@ -44,7 +44,7 @@ takwimu_urlpatterns = [
     url(r'^api/v2/', api_router.urls),
     url(r'^flourish/(?P<document_id>\d+)/$',
         FlourishView.as_view(), name="flourish"),
-    url(r'^flourish/(?P<document_id>\d+)/(?P<filename>.+)/$',
+    url(r'^flourish/(?P<document_id>\d+)/(?P<path>.+)/$',
         FlourishView.as_view(), name="flourish_filename"),
     url(
         r'^data/(?P<format>map|table|distribution)/$',

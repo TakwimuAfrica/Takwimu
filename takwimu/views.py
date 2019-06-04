@@ -275,7 +275,7 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
         json_data = open("takwimu/fixtures/sdg.json")
         data = json.load(json_data)
 
-        ## get profileData aka summaries from wagtail
+        # get profileData aka summaries from wagtail
         summary_data = ProfileData.objects.filter(
             country_iso_code=self.geo.geo_code).values('id', 'chart_id',
                                                        'summary')
@@ -333,7 +333,8 @@ class IndicatorsGeographyDetailView(GeographyDetailView):
 
 
 class FlourishView(APIView):
-    renderer_classes = (FlourishHTMLRenderer, CSSRenderer, JavaScriptRenderer, JPEGRenderer, SVGRenderer,)
+    renderer_classes = (FlourishHTMLRenderer, CSSRenderer,
+                        JavaScriptRenderer, JPEGRenderer, SVGRenderer,)
 
     def get(self, request, *args, **kwargs):
         Document = get_document_model()
@@ -364,7 +365,6 @@ class FlourishView(APIView):
         mode, content_type = ('r', 'text')
         if not member.split('/')[-1].endswith( ('html', 'css', 'txt', 'svg')):
             mode, content_type = ('rb', 'media/*')
-
         return Response(open(file_path).read())
 
 
@@ -380,8 +380,10 @@ class TwitterImageAPIView(APIView):
             image.save()
         except model.DoesNotExist:
             image = model.objects.create(title=id,
-                                         file=decode_base64_file(data=raw_image,
-                                                                 file_name=id))
+                                         file=decode_base64_file(
+                                             data=raw_image,
+                                             file_name=id
+                                         ))
 
         if image:
             # Create rendition image with width 600
