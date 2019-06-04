@@ -104,8 +104,9 @@ var ProfileMaps = function() {
         GeometryLoader.loadGeometryForLevel(geo_level, geo_code, geo_version, function(features) {
             self.drawFeatures(features.features);
 
-            // load shapes at the child level, if any once all features all drawn
-            if (child_level) {
+            // load shapes at child level, once all features all drawn
+            // No data below country level, do not load country child level
+            if (child_level && geo_level !== 'country') {
                 GeometryLoader.loadGeometryForChildLevel(child_level, geo_level, geo_code, geo_version, function(features) {
                     self.drawFeatures(features.features);
                 });

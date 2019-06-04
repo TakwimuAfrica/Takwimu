@@ -339,16 +339,19 @@ class FlourishView(APIView):
         Document = get_document_model()
         doc = get_object_or_404(Document, id=kwargs["document_id"])
 
-        filename = "index.html"
-        if "filename" in kwargs and kwargs["filename"]:
-            filename = kwargs["filename"]
+        member = "index.html"
+        if "path" in kwargs and kwargs["path"]:
+            path = kwargs["path"]
 
-        # A request from within another file, will come as
-        # 'first file/second file' to the server
-        # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
-        filename_parts = filename.split('/')
-        if len(filename_parts) > 1:
-            filename = filename_parts[-1]
+            # A request from within another file, will come as
+            # 'first file/second file' to the server
+            # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
+            path_parts = []
+            for index, path_part in enumerate(path.split('/')):
+                if '.' not in path_part or index == len(path_parts) - 1:
+                    path_parts.append(path_part)
+
+            member = "/".join(path_parts)
 
         try:
             zip_ref = zipfile.ZipFile(doc.file.path, "r")
@@ -356,10 +359,10 @@ class FlourishView(APIView):
             response = requests.get(doc.file.url, stream=True)
             zip_ref = zipfile.ZipFile(io.BytesIO(response.content))
 
-        file_path = zip_ref.extract(filename, "/tmp/" + kwargs["document_id"])
+        file_path = zip_ref.extract(member, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
-        if not filename.lower().endswith(('html', 'css', 'txt', 'svg')):
+        if not member.split('/')[-1].endswith( ('html', 'css', 'txt', 'svg')):
             mode, content_type = ('rb', 'media/*')
 
         return Response(open(file_path).read())

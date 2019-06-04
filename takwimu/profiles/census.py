@@ -37,6 +37,36 @@ METADATA = {
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
+            'employment_in_agriculture': {
+                'source': {
+                    'link': 'https://data.worldbank.org/indicator/SL.AGR.EMPL.MA.ZS?locations=KE',
+                    'title': 'WorldBank, 2018',
+                },
+            },
+            'health_workers_distribution_per_year': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'women_in_government': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'title': 'Kenya National Bureau of Statistics, 2018',
+                },
+            },
+            'women_in_parliament': {
+                'source': {
+                    'link': 'https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=KE&start=1997',
+                    'title': 'WorldBank, 2017',
+                },
+            },
+            'infant_under5_mortality': {
+                'source': {
+                    'link': 'https://data.worldbank.org/indicator/SP.DYN.IMRT.IN?end=2017&locations=KE&start=1990',
+                    'title': 'WorldBank, 2017',
+                },
+            },
             'prevention_methods_dist': {
                 'source': {
                     'link': 'https://dhsprogram.com/pubs/pdf/fr308/fr308.pdf',
@@ -1780,7 +1810,9 @@ def get_profile(geo, profile_name, request):
                 data['poverty'].get('is_missing')):
             tabs['demographics'] = {'name': 'Demographics', 'href': '#demographics'}
 
-        if not data['elections'].get('is_missing'):
+        if not (data['elections'].get('is_missing') and \
+                data['worldbank']['women_in_parliament'].get('is_missing')  and \
+                data['worldbank']['women_in_government'].get('is_missing')):
             tabs['elections'] = {'name': 'Elections', 'href': '#elections'}
 
         if not (data['fgm'].get('is_missing') and \
@@ -2045,12 +2077,13 @@ def get_elections_profile(geo, session, country, level):
 def get_crops_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         crop_distribution = LOCATIONNOTFOUND
+
         try:
             crop_distribution, _ = get_stat_data(
                 'crops', geo, session, table_fields=['crops'])
         except Exception as e:
             pass
-
+            
     return {
         'is_missing': crop_distribution.get('is_missing'),
         'crop_distribution': _add_metadata_to_dist(
@@ -2117,6 +2150,7 @@ def get_health_workers_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
         hrh_patient_ratio = 0
+        health_workers_distribution_per_year = LOCATIONNOTFOUND
 
         try:
             health_workers_dist, total_health_workers = get_stat_data(
@@ -2133,17 +2167,26 @@ def get_health_workers_profile(geo, session, country, level):
         except Exception:
             pass
 
+        try:
+            health_workers_distribution_per_year, _ = get_stat_data(
+                ['workers', 'year'], geo, session, percent=False)
+        except Exception as e:
+            pass
+
     total_health_workers_dist = _create_single_value_dist(
         'Total health worker population (2014)', total_health_workers)
     hrh_patient_ratio_dist = _create_single_value_dist(
         'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
-    is_missing = health_workers_dist.get('is_missing')
+    is_missing = health_workers_dist.get('is_missing') and \
+        health_workers_distribution_per_year.get('is_missing')
     return {
         'is_missing': is_missing,
         'total_health_workers_dist': total_health_workers_dist,
         'hrh_patient_ratio_dist': hrh_patient_ratio_dist,
         'health_workers_dist': health_workers_dist,
-    }
+        'health_workers_distribution_per_year': _add_metadata_to_dist(health_workers_distribution_per_year, 
+                    'health_workers_distribution_per_year', country, level),
+    } 
 
 
 def get_causes_of_death_profile(geo, session, country, level):
@@ -2364,6 +2407,10 @@ def get_worldbank_profile(geo, session, country, level):
         tax_revenue = LOCATIONNOTFOUND
         gdp = LOCATIONNOTFOUND
         gdp_growth = LOCATIONNOTFOUND
+        infant_under5_mortality = LOCATIONNOTFOUND
+        employment_in_agriculture = LOCATIONNOTFOUND
+        women_in_government = LOCATIONNOTFOUND
+        women_in_parliament = LOCATIONNOTFOUND
 
         try:
             cereal_yield_kg_per_hectare, _ = get_stat_data(
@@ -2561,6 +2608,32 @@ def get_worldbank_profile(geo, session, country, level):
         except Exception:
             pass
 
+        try:
+            infant_under5_mortality, _ = get_stat_data(['mortality_year', 'infant_under5'], geo, session,
+                                          percent=False, table_name='infant_under5_mortality')
+        except Exception:
+            pass
+
+        try:
+            employment_in_agriculture, _ = get_stat_data(
+                ['employment_in_agriculture_year', 'sex'], geo, session, percent=False)
+        except Exception as e:
+            pass
+        
+        try:
+            women_in_government, _ = get_stat_data(
+                ['position'], geo, session, table_name='women_in_government')
+        except Exception as e:
+            pass
+        
+        try:
+            women_in_parliament, _ = get_stat_data(
+                ['women_parliament_year'], geo, session, table_name='women_in_parliament')
+        except Exception as e:
+            pass
+
+        
+
     is_missing = cereal_yield_kg_per_hectare.get(
         'is_missing') and agricultural_land.get(
         'is_missing') and gini_index.get(
@@ -2587,7 +2660,10 @@ def get_worldbank_profile(geo, session, country, level):
         'is_missing') and births_attended_by_skilled_health_staff.get(
         'is_missing') and incidence_of_malaria_per_1000_pop_at_risk.get(
         'is_missing') and tax_revenue.get('is_missing') and gdp.get(
-        'is_missing') and gdp_growth.get('is_missing')
+        'is_missing') and gdp_growth.get(
+        'is_missing') and infant_under5_mortality.get(
+        'is_missing') and women_in_government.get(
+        'is_missing') and women_in_parliament.get('is_missing')
 
     final_data = {
         'is_missing': is_missing,
@@ -2672,7 +2748,15 @@ def get_worldbank_profile(geo, session, country, level):
                                              country, level),
         'gdp': _add_metadata_to_dist(gdp, 'gdp', country, level),
         'gdp_growth': _add_metadata_to_dist(gdp_growth, 'gdp_growth', country,
-                                            level)
+                                            level),
+        'infant_under5_mortality': _add_metadata_to_dist(infant_under5_mortality, 
+                    'infant_under5_mortality', country, level),
+        'employment_in_agriculture': _add_metadata_to_dist(
+            employment_in_agriculture, 'employment_in_agriculture', country, level),
+        'women_in_government': _add_metadata_to_dist(
+            women_in_government, 'women_in_government', country, level),
+        'women_in_parliament': _add_metadata_to_dist(
+            women_in_parliament, 'women_in_parliament', country, level)
 
     }
     return final_data

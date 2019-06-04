@@ -30,10 +30,13 @@ const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
+    justifyContent: 'space-between',
     [theme.breakpoints.up('md')]: {
       width: '23.375rem',
       border: 'solid 0.063rem rgba(0, 0, 0, 0.19)',
-      borderRadius: '0 0 1.063rem 1.063rem'
+      borderRadius: '0 0 1.063rem 1.063rem',
+      pointerEvents: 'all',
+      zIndex: '1'
     }
   },
   layout: {
@@ -43,7 +46,7 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'absolute',
-      zIndex: '1'
+      pointerEvents: 'none'
     }
   },
   label: {
@@ -72,11 +75,12 @@ const styles = theme => ({
     color: '#848484'
   },
   detailLabel: {
-    color: '#231f20'
-    // fontWeight: 'unset'
+    color: '#231f20',
+    lineHeight: 'normal'
   },
   detail: {
     fontSize: '2rem',
+    lineHeight: 'normal',
     fontWeight: '600',
     color: '#231f20'
   },
@@ -222,105 +226,106 @@ class ProfileDetail extends React.Component {
       <Grid container justify="center">
         <Layout classes={{ root: classes.layout }}>
           <div className={classes.root}>
-            <CountrySelector country={country} context="topic" />
-            <Grid container direction="row" wrap="nowrap">
-              <Grid item>
-                <div className={classes.verticalLine} />
+            <Grid container direction="column">
+              <CountrySelector country={country} context="topic" />
+              <Grid container direction="row" wrap="nowrap">
+                <Grid item>
+                  <div className={classes.verticalLine} />
+                </Grid>
+                <Grid item container direction="column" justify="space-between">
+                  {population && (
+                    <Grid item>
+                      <Typography
+                        variant="body1"
+                        className={classNames([
+                          classes.label,
+                          classes.detailLabel
+                        ])}
+                      >
+                        Population
+                      </Typography>
+                      <Typography variant="body1" className={classes.detail}>
+                        {Number(population).toLocaleString()}
+                      </Typography>
+                    </Grid>
+                  )}
+                  {squarekms && (
+                    <Grid item>
+                      <Typography
+                        variant="body1"
+                        className={classNames([
+                          classes.label,
+                          classes.detailLabel
+                        ])}
+                      >
+                        Square kilometres
+                      </Typography>
+                      <Typography variant="body1" className={classes.detail}>
+                        {Number(squarekms).toLocaleString()}
+                      </Typography>
+                    </Grid>
+                  )}
+                  {populationDensity && (
+                    <Grid item>
+                      <Typography
+                        variant="body1"
+                        className={classNames([
+                          classes.label,
+                          classes.detailLabel
+                        ])}
+                      >
+                        People per square kilometre
+                      </Typography>
+                      <Typography variant="body1" className={classes.detail}>
+                        {Number(populationDensity).toLocaleString()}
+                      </Typography>
+                    </Grid>
+                  )}
+                </Grid>
               </Grid>
-              <Grid item container direction="column" justify="space-between">
-                {population && (
-                  <Grid item>
-                    <Typography
-                      variant="body1"
-                      className={classNames([
-                        classes.label,
-                        classes.detailLabel
-                      ])}
-                    >
-                      Population
-                    </Typography>
-                    <Typography variant="body1" className={classes.detail}>
-                      {Number(population).toLocaleString()}
-                    </Typography>
-                  </Grid>
-                )}
-                {squarekms && (
-                  <Grid item>
-                    <Typography
-                      variant="body1"
-                      className={classNames([
-                        classes.label,
-                        classes.detailLabel
-                      ])}
-                    >
-                      Square kilometres
-                    </Typography>
-                    <Typography variant="body1" className={classes.detail}>
-                      {Number(squarekms).toLocaleString()}
-                    </Typography>
-                  </Grid>
-                )}
-                {populationDensity && (
-                  <Grid item>
-                    <Typography
-                      variant="body1"
-                      className={classNames([
-                        classes.label,
-                        classes.detailLabel
-                      ])}
-                    >
-                      People per square kilometre
-                    </Typography>
-                    <Typography variant="body1" className={classes.detail}>
-                      {Number(populationDensity).toLocaleString()}
-                    </Typography>
-                  </Grid>
-                )}
-              </Grid>
+              {comparable && (
+                <Grid container>
+                  <div
+                    ref={node => {
+                      this.searchBarRef = node;
+                    }}
+                    className={classes.searchBar}
+                  >
+                    <Input
+                      fullWidth
+                      disableUnderline
+                      className={classes.searchBarInput}
+                      onFocus={this.handleSearch}
+                      onBlur={this.hideSearchResults}
+                      placeholder="Compare with"
+                      onChange={this.handleSearch}
+                    />
+                    <img
+                      alt=""
+                      src={searchIcon}
+                      className={classes.searchBarIcon}
+                    />
+                  </div>
+
+                  <Popper
+                    className={classes.popperIndex}
+                    open={showSearchResults}
+                    anchorEl={this.searchBarRef}
+                    style={{
+                      width: this.searchBarRef
+                        ? this.searchBarRef.clientWidth
+                        : null
+                    }}
+                  >
+                    <Paper>
+                      <MenuList>
+                        <MenuItem>Example</MenuItem>
+                      </MenuList>
+                    </Paper>
+                  </Popper>
+                </Grid>
+              )}
             </Grid>
-            {comparable && (
-              <Grid container>
-                <div
-                  ref={node => {
-                    this.searchBarRef = node;
-                  }}
-                  className={classes.searchBar}
-                >
-                  <Input
-                    fullWidth
-                    disableUnderline
-                    className={classes.searchBarInput}
-                    onFocus={this.handleSearch}
-                    onBlur={this.hideSearchResults}
-                    placeholder="Compare with"
-                    onChange={this.handleSearch}
-                  />
-                  <img
-                    alt=""
-                    src={searchIcon}
-                    className={classes.searchBarIcon}
-                  />
-                </div>
-
-                <Popper
-                  className={classes.popperIndex}
-                  open={showSearchResults}
-                  anchorEl={this.searchBarRef}
-                  style={{
-                    width: this.searchBarRef
-                      ? this.searchBarRef.clientWidth
-                      : null
-                  }}
-                >
-                  <Paper>
-                    <MenuList>
-                      <MenuItem>Example</MenuItem>
-                    </MenuList>
-                  </Paper>
-                </Popper>
-              </Grid>
-            )}
-
             <Button href={`/profiles/${country.slug}`} fullWidth>
               Read the full country analysis
             </Button>

@@ -451,8 +451,7 @@ function Chart(options) {
       displayHeight:
         chart.settings.height -
         chart.settings.margin.top -
-        chart.settings.margin.bottom -
-        ((chart.chartChartShowYAxis || chart.chartChartShowYAxis == "true") ? 15 : 0)
+        chart.settings.margin.bottom
     });
 
     // add optional title, adjust height available height for columns if necessary
@@ -593,7 +592,7 @@ function Chart(options) {
             .classed("x axis label", true)
             .style("width", chart.x.rangeBand() + "px")
             .style("top", function(d) {
-              return chart.settings.displayHeight + 65 + "px";
+              return chart.settings.displayHeight + 51 + "px";
             })
             .style("left", function(d) {
                 if(chart.chartDataValues.length > (chart.columnOffset-groupValues.length)) {
@@ -1857,7 +1856,7 @@ function Chart(options) {
         return dataURL;
       })
   }
-  
+
   chart.share = () => {
     toPng().then(function(dataUrl) {
         fetch('/api/twitter_view/', {
