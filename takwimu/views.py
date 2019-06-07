@@ -348,8 +348,9 @@ class FlourishView(APIView):
             # 'first file/second file' to the server
             # eg. './icon.png' from 'style.css' => 'style.css/icon.png'
             path_parts = []
-            for index, path_part in enumerate(path.split('/')):
-                if '.' not in path_part or index == len(path_parts) - 1:
+            path_list = path.split('/')
+            for index, path_part in enumerate(path_list):
+                if '.' not in path_part or index == len(path_list) - 1:
                     path_parts.append(path_part)
 
             member = "/".join(path_parts)
