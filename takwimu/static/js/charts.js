@@ -540,9 +540,11 @@ function Chart(options) {
         .append("svg")
         .attr("class", "svg-chart")
         .attr("width", "100%")
-        .attr("height", chart.settings.height)
+        .attr("height", chart.settings.displayHeight  + chart.settings.margin.top +
+        chart.settings.margin.bottom)
         .style("margin-bottom", marginBottom)
-        .style("margin-top", -chart.settings.height + "px");
+        .style("margin-top", -(chart.settings.displayHeight  + chart.settings.margin.top +
+          chart.settings.margin.bottom) + "px");
 
       // base where columns and axes will be attached
       chart.svgBase = chart.svgBaseContainer
