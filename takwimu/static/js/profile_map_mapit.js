@@ -44,8 +44,6 @@ var ProfileMaps = function() {
             self.map.setView(centre, zoom);
         }
         GeometryLoader.loadGeometryForLevel(geo_level, 'TZ', geo_version, function(features) {
-            console.log("drawing homepage");
-            console.log(features);
             var layer = self.drawFeatures(features.features);
             if (!centre) {
                 self.map.fitBounds(layer.getBounds());
@@ -161,16 +159,11 @@ var ProfileMaps = function() {
                   var uri = '/areas/'+ feature.properties.name.toLowerCase() + '?generation=1' + '&type=';
                   uri = uri + feature.properties.area_type.toUpperCase();
 
-                  if (feature.properties.country_code)
-                    uri = uri +  '&country='+ feature.properties.country_code;
-
-                  console.log(uri);
                   d3.json(url + uri,  function(error, data) {
                     if (error) return console.warn(error);
                     var featureInfo = Object.values(data);
 
                     var geo_id = featureInfo[0]['codes'][mapit_codetype];
-                    console.log(geo_id)
                     //var geo_level = featureInfo[0]['type'];
                     window.location = '/profiles/' + geo_id + '/';
                   });

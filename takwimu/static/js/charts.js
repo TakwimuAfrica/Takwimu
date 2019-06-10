@@ -462,6 +462,14 @@ function Chart(options) {
       chart.addChartSubtitle(chart.chartContainer);
     }
 
+    // create the base for upcoming html elements
+    chart.htmlBase = chart.chartContainer
+      .append("div")
+      .attr("class", "column-set")
+      .style("margin-top", 0)
+      .style("height", chart.settings.height + "px")
+      .style("overflow", "auto hidden");
+
     // narrow padding for histograms
     if (chart.chartType == "histogram") {
       chart.updateSettings({
@@ -476,14 +484,6 @@ function Chart(options) {
       });
       chart.settings.height += 25;
     }
-
-    // create the base for upcoming html elements
-    chart.htmlBase = chart.chartContainer
-      .append("div")
-      .attr("class", "column-set")
-      .style("margin-top", 0)
-      .style("height", chart.settings.height + "px")
-      .style("overflow", "auto hidden");
 
     // x scale, axis and labels
     chart.x = d3.scale
@@ -540,9 +540,11 @@ function Chart(options) {
         .append("svg")
         .attr("class", "svg-chart")
         .attr("width", "100%")
-        .attr("height", chart.settings.height)
+        .attr("height", chart.settings.displayHeight  + chart.settings.margin.top +
+        chart.settings.margin.bottom)
         .style("margin-bottom", marginBottom)
-        .style("margin-top", -chart.settings.height + "px");
+        .style("margin-top", -(chart.settings.displayHeight  + chart.settings.margin.top +
+          chart.settings.margin.bottom) + "px");
 
       // base where columns and axes will be attached
       chart.svgBase = chart.svgBaseContainer

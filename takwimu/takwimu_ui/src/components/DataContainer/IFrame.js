@@ -7,6 +7,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const styles = theme => ({
   container: {
+    position: 'relative',
     width: '100%',
     [theme.breakpoints.up('md')]: {
       width: '28.03125rem' // .75 of lg
@@ -14,9 +15,10 @@ const styles = theme => ({
     [theme.breakpoints.up('lg')]: {
       width: '37.375rem'
     },
-    position: 'relative'
+    minHeight: 450
   },
   iframe: {
+    position: 'absolute',
     top: 0,
     left: 0,
     width: '100%',
@@ -77,6 +79,25 @@ function IFrame({ id, classes, data }) {
     const iframe = document.getElementById(id);
     iframe.height = iframe.contentWindow.document.body.scrollHeight;
   }
+  const params = {
+    geoID: `country-${data.data_country}`,
+    geoVersion: 2009,
+    chartDataID: data.data_id,
+    dataYear: 2011,
+    chartHeight: 300,
+    chartType: data.chart_type,
+    chartTitle: data.title,
+    initialSort: '',
+    statType: data.data_stat_type,
+    chartSourceLink: data.data_source_link,
+    chartSourceTitle: data.data_source_title,
+    chartQualifier: data.chart_qualifier
+      .replace(/<br[ /]*>/g, '\n')
+      .replace(/<[^>]*>/g, '')
+  };
+  const queryString = Object.keys(params)
+    .map(k => `${encodeURIComponent(k)}=${encodeURIComponent(params[k])}`)
+    .join('&');
 
   return (
     <div className={classNames(['cr-embed', classes.container])}>
@@ -84,18 +105,7 @@ function IFrame({ id, classes, data }) {
         id={id}
         title={data.title}
         onLoad={handleFrameLoad}
-        src={`/embed/iframe.html?geoID=country-${
-          data.data_country
-        }&geoVersion=2009&chartDataID=${data.data_id}&dataYear=2011&chartType=${
-          data.chart_type
-        }&chartHeight=300&chartTitle=${data.title}&initialSort=&statType=${
-          data.data_stat_type
-        }&chartSourceLink=${data.data_source_link}&chartSourceTitle=${
-          data.data_source_title
-        }&chartQualifier=${data.chart_qualifier
-          .replace('<br/>', '%0A')
-          .replace(/<[^>]*>/g, '')}&stylesheet=/static/css/embedchart.css
-          `}
+        src={`/embed/iframe.html?${queryString}&stylesheet=/static/css/embedchart.css`}
         allowFullScreen
         className={classNames(['census-reporter-embed', classes.iframe])}
       />
