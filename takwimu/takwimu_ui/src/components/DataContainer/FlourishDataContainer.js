@@ -64,8 +64,9 @@ function DataContainer({ id, classes, data, theme }) {
     /* eslint-disable no-param-reassign */
     // In rear cases we don't have `wrapper` element to reference from, just
     // provide a default height to start
-    const offsetHeight = wrapper ? wrapper.offsetHeight : 450;
-    iframe.style.height = `${offsetHeight}px`;
+    const height =
+      wrapper && wrapper.offsetHeight > 420 ? wrapper.offsetHeight : 420;
+    iframe.style.height = `${height}px`;
     iframe.contentDocument.body.style.fontFamily = theme.typography.fontText;
     iframe.contentDocument.body.style.background = 'rgb(0,0,0) !important';
     const headers = iframe.contentDocument.getElementsByClassName(

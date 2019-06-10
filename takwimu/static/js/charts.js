@@ -462,6 +462,14 @@ function Chart(options) {
       chart.addChartSubtitle(chart.chartContainer);
     }
 
+    // create the base for upcoming html elements
+    chart.htmlBase = chart.chartContainer
+      .append("div")
+      .attr("class", "column-set")
+      .style("margin-top", 0)
+      .style("height", chart.settings.height + "px")
+      .style("overflow", "auto hidden");
+
     // narrow padding for histograms
     if (chart.chartType == "histogram") {
       chart.updateSettings({
@@ -476,14 +484,6 @@ function Chart(options) {
       });
       chart.settings.height += 25;
     }
-
-    // create the base for upcoming html elements
-    chart.htmlBase = chart.chartContainer
-      .append("div")
-      .attr("class", "column-set")
-      .style("margin-top", 0)
-      .style("height", chart.settings.height + "px")
-      .style("overflow", "auto hidden");
 
     // x scale, axis and labels
     chart.x = d3.scale
