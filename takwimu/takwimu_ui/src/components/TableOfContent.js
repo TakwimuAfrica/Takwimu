@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 
 import classNames from 'classnames';
 import { withStyles, Link, MenuList } from '@material-ui/core';
+import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 import activeContentIcon from '../assets/images/active-page.svg';
 
@@ -62,7 +63,8 @@ function TableOfContent({
   content,
   current,
   generateHref,
-  onChange
+  onChange,
+  width
 }) {
   const [scrollDistance, setScrollDistance] = useState(0);
 
@@ -86,7 +88,8 @@ function TableOfContent({
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
-  const top = `${DEFAULT_TOP - scrollDistance}px`;
+  const y = isWidthUp('md', width) ? DEFAULT_TOP : 0;
+  const top = `${y - scrollDistance}px`;
   const bottom = `${scrollDistance}px`;
 
   return (
@@ -134,11 +137,12 @@ TableOfContent.propTypes = {
   content: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   current: PropTypes.number.isRequired,
   generateHref: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired
+  onChange: PropTypes.func.isRequired,
+  width: PropTypes.string.isRequired
 };
 
 TableOfContent.defaultProps = {
   children: null
 };
 
-export default withStyles(styles)(TableOfContent);
+export default withWidth()(withStyles(styles)(TableOfContent));

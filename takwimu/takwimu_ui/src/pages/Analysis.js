@@ -11,9 +11,7 @@ const styles = () => ({
   root: {
     marginBottom: '5.5rem'
   },
-  asideRoot: {
-    marginTop: '3.1875rem'
-  }
+  asideRoot: {}
 });
 
 class AnalysisPage extends React.Component {
