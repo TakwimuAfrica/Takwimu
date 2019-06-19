@@ -1,23 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles, MenuList, Link } from '@material-ui/core';
 
 import classNames from 'classnames';
+import { withStyles, Link, MenuList } from '@material-ui/core';
 
 import activeContentIcon from '../assets/images/active-page.svg';
 
+const DEFAULT_TOP = 120; // Navigation height + padding
 const styles = theme => ({
   root: {
     position: 'relative',
     display: 'flex',
     justifyContent: 'flex-start',
     width: '100%',
-    height: '34rem',
     flexDirection: 'column',
     alignItems: 'flex-start',
     [theme.breakpoints.up('md')]: {
       position: 'fixed',
-      width: '14.375rem'
+      width: '14.375rem',
+      top: `${DEFAULT_TOP}px`,
+      bottom: 0,
+      overflow: 'hidden auto',
+
+      scrollbarColor: '#d3d3d3',
+      scrollbarWidth: 'thin',
+      '&::-webkit-scrollbar': {
+        width: '0.4rem'
+      },
+      '&::-webkit-scrollbar-thumb': {
+        backgroundColor: '#d3d3d3'
+      },
+      '&::-webkit-scrollbar-corner': {
+        backgroundColor: 'transparent'
+      }
     }
   },
   menuListRoot: {
@@ -49,8 +64,33 @@ function TableOfContent({
   generateHref,
   onChange
 }) {
+  const [scrollDistance, setScrollDistance] = useState(0);
+
+  useEffect(() => {
+    const calculateScrollDistance = () => {
+      const footer = document.getElementById('takwimuFooter');
+      const { top } = footer.getBoundingClientRect();
+      if (top < window.innerHeight) {
+        return window.innerHeight - top;
+      }
+      return 0;
+    };
+
+    function handleScroll() {
+      setScrollDistance(calculateScrollDistance());
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+  const top = `${DEFAULT_TOP - scrollDistance}px`;
+  const bottom = `${scrollDistance}px`;
+
   return (
-    <div className={classes.root}>
+    <div className={classes.root} style={{ top, bottom }}>
       {children}
       <MenuList classes={{ root: classes.menuListRoot }}>
         {content.map((c, index) => (
