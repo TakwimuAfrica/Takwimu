@@ -38,7 +38,7 @@ const styles = theme => ({
     padding: '0 19px'
   },
   readNextContainer: {
-    paddingBottom: '2.3125rem'
+    paddingBottom: '2.25rem'
   },
   hero: {
     backgroundImage: `url(${profileHeroImage})`,
