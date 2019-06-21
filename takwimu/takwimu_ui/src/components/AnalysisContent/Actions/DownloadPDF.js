@@ -144,13 +144,11 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
             <View style={classes.section}>
               {data.content.body.map(c => {
                 if (c.type === 'text') {
-                  return c.value
-                    .split('</p>')
-                    .map(t => (
-                      <Text style={classes.text}>
-                        {t.replace(/<(?:.|\n)*?>/gi, '')}
-                      </Text>
-                    ));
+                  return c.value.split('</p>').map(t => (
+                    <Text key={t} style={classes.text}>
+                      {t.replace(/<(?:.|\n)*?>/gi, '')}
+                    </Text>
+                  ));
                 }
                 return null;
               })}
@@ -199,36 +197,43 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
 };
 
 function DownloadPDF({ classes, title, topic, data, takwimu }) {
+  const [reactPdf, setReactPdf] = useState(false);
   const [pdfBlob, setPdfBlob] = useState(null);
 
   useEffect(() => {
     import('../../../modules/react-pdf')
       .then(m => m.default)
       .then(m => {
-        const {
-          ReactPDF,
-          Document,
-          Image,
-          Link,
-          Page,
-          StyleSheet,
-          Text,
-          View
-        } = m;
-        const pdfClasses = createPdfStyles(StyleSheet);
-        const AnalysisPDF = createPdf(Document, Image, Link, Page, Text, View);
-        ReactPDF.pdf(
-          <AnalysisPDF
-            classes={pdfClasses}
-            topic={topic}
-            data={data}
-            takwimu={takwimu}
-          />
-        )
-          .toBlob()
-          .then(setPdfBlob);
+        setReactPdf(m);
       });
   }, []);
+
+  useEffect(() => {
+    if (reactPdf) {
+      const {
+        ReactPDF,
+        Document,
+        Image,
+        Link,
+        Page,
+        StyleSheet,
+        Text,
+        View
+      } = reactPdf;
+      const pdfClasses = createPdfStyles(StyleSheet);
+      const AnalysisPDF = createPdf(Document, Image, Link, Page, Text, View);
+      ReactPDF.pdf(
+        <AnalysisPDF
+          classes={pdfClasses}
+          topic={topic}
+          data={data}
+          takwimu={takwimu}
+        />
+      )
+        .toBlob()
+        .then(setPdfBlob);
+    }
+  }, [reactPdf, data]);
 
   return (
     <ButtonBase

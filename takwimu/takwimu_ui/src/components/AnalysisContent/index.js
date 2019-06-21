@@ -137,15 +137,14 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
         ) : (
           <Grid container direction="row">
             {content.body[topicIndex].value.body.map(c => (
-              <Fragment>
+              <Fragment key={c.id}>
                 {c.type === 'text' && (
-                  <RichTypography key={c.id} className={classes.body}>
+                  <RichTypography className={classes.body}>
                     {c.value}
                   </RichTypography>
                 )}
                 {c.type === 'indicator' && (
                   <DataContainer
-                    key={c.id}
                     id={c.id}
                     classes={{ root: classes.dataContainer }}
                     indicator={c}
