@@ -1,12 +1,15 @@
+/* eslint-disable import/no-named-as-default-member */
+/* eslint-disable import/no-named-as-default */
 import React, { useState, useEffect } from 'react';
 
-import { withStyles, ButtonBase, Grid, Typography } from '@material-ui/core';
+import { withStyles, Grid, Typography } from '@material-ui/core';
 import { PropTypes } from 'prop-types';
 
 import { TwitterShareButton } from 'react-share';
 
-import shareIcon from '../../assets/images/analysis/share.svg';
-import downloadIcon from '../../assets/images/analysis/download.svg';
+import DownloadPDF from './DownloadPDF';
+
+import shareIcon from '../../../assets/images/analysis/share.svg';
 
 const styles = {
   root: {
@@ -44,13 +47,7 @@ const styles = {
   }
 };
 
-function Actions({
-  classes,
-  page: { last_published_at: lastUpdated },
-  hideLastUpdated,
-  title,
-  pdfBlob
-}) {
+function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
   const [analysisLink, setAnalysisLink] = useState(window.location.href);
 
   useEffect(() => {
@@ -64,6 +61,9 @@ function Actions({
       window.removeEventListener('hashchange', locationHashChanged);
     };
   }, []);
+  const {
+    page: { last_published_at: lastUpdated }
+  } = takwimu;
 
   return (
     <div className={classes.root}>
@@ -85,44 +85,26 @@ function Actions({
           </Typography>
         </Grid>
       </TwitterShareButton>
-      <ButtonBase
-        disableRipple
-        disableTouchRipple
-        className={classes.buttonText}
-        onClick={() => {
-          if (pdfBlob) {
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(pdfBlob);
-            link.download = `${title}.pdf`;
-            link.target = '_blank';
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(pdfBlob);
-          }
-        }}
-      >
-        <img alt="download" src={downloadIcon} className={classes.actionIcon} />
-        Download this analysis (PDF{' '}
-        {pdfBlob && (pdfBlob.size / 1000).toFixed(1)}kb)
-      </ButtonBase>
+      <DownloadPDF title={title} topic={topic} data={data} takwimu={takwimu} />
     </div>
   );
 }
 
 Actions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  page: PropTypes.shape({
-    last_published_at: PropTypes.string
-  }).isRequired,
   hideLastUpdated: PropTypes.bool,
   title: PropTypes.string.isRequired,
-  pdfBlob: PropTypes.shape({})
+  data: PropTypes.shape({}).isRequired,
+  topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
+  takwimu: PropTypes.shape({
+    page: PropTypes.shape({
+      last_published_at: PropTypes.string
+    }).isRequired
+  }).isRequired
 };
 
 Actions.defaultProps = {
-  hideLastUpdated: false,
-  pdfBlob: null
+  hideLastUpdated: false
 };
 
 export default withStyles(styles)(Actions);
