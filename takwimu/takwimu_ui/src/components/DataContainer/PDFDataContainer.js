@@ -3,11 +3,13 @@ import React, { useState, useEffect, Fragment } from 'react';
 import { PropTypes } from 'prop-types';
 
 import { withStyles, ButtonBase } from '@material-ui/core';
-import PDF from 'react-pdf-js';
+
+import DataActions from './DataActions';
+
 import leftArrow from '../../assets/images/left-arrow.svg';
 import rightArrow from '../../assets/images/right-arrow.svg';
 
-import DataActions from './DataActions';
+const PDF = React.lazy(() => import('../../modules/pdf'));
 
 const styles = {
   root: {
@@ -68,12 +70,14 @@ function DataContainer({ id, classes, data }) {
             <img alt="" src={leftArrow} />
           </ButtonBase>
           {documents[data.document] && (
-            <PDF
-              scale={1}
-              page={page}
-              file={documents[data.document]}
-              onDocumentComplete={setNumberOfPages}
-            />
+            <React.Suspense fallback={<div>Loading...</div>}>
+              <PDF
+                scale={1}
+                page={page}
+                file={documents[data.document]}
+                onDocumentComplete={setNumberOfPages}
+              />
+            </React.Suspense>
           )}
           <ButtonBase
             disableRipple
