@@ -124,7 +124,7 @@ def sdgs(request):
 def asset_manifest(request):
     manifest_filepath = os.path.join(
         settings.BASE_DIR, 'takwimu/takwimu_ui/build/asset-manifest.json')
-    asset_manifest = {}
+    asset_manifest = { 'vendors': [] }
     try:
         with open(manifest_filepath) as f:
             asset_manifest_contents = json.load(f)
@@ -135,7 +135,7 @@ def asset_manifest(request):
                 elif key == 'runtime~main.js':
                     asset_manifest['runtime'] = value[8:]
                 elif key.startswith('static/js/') and key.endswith('chunk.js'):
-                    asset_manifest['vendor'] = value[8:]
+                    asset_manifest['vendors'].append(value[8:])
 
     except Exception as e:
         print(e.message)

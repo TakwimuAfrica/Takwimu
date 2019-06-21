@@ -79,7 +79,10 @@
   </script>
 
   <script src="{% static asset_manifest.runtime %}"></script>
-  <script src="{% static asset_manifest.vendor %}"></script>
+  {% get_static_prefix as STATIC_PREFIX %}
+  {% for vendor in asset_manifest.vendors %}
+  <script src="{{ STATIC_PREFIX }}{{ vendor }}"></script>
+  {% endfor %}
   <script src="{% static asset_manifest.main %}"></script>
 
   {% block body_javascript_extra %}{% endblock %}
