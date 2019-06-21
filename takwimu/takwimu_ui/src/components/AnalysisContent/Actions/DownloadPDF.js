@@ -201,11 +201,9 @@ function DownloadPDF({ classes, title, topic, data, takwimu }) {
   const [pdfBlob, setPdfBlob] = useState(null);
 
   useEffect(() => {
-    import('../../../modules/react-pdf')
-      .then(m => m.default)
-      .then(m => {
-        setReactPdf(m);
-      });
+    import('../../../modules/react-pdf').then(m => {
+      setReactPdf(m.default);
+    });
   }, []);
 
   useEffect(() => {
