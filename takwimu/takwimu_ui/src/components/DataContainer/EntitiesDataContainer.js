@@ -41,7 +41,7 @@ function DataContainer({ id, classes, data }) {
           <RichTypography component="div">{entity.description}</RichTypography>
         </div>
       ))}
-      <DataActions />
+      <DataActions title={data.title} />
     </Fragment>
   );
 }

@@ -64,6 +64,9 @@ function DataContainer({ id, classes, data }) {
             disableRipple
             disableTouchRipple
             disabled={page <= 1}
+            ga-on="click"
+            ga-event-category="Data Indicator"
+            ga-event-action={`Navigate PDF Page ${page - 1}`}
             className={classes.pageButton}
             onClick={() => setPage(page - 1)}
           >
@@ -82,6 +85,9 @@ function DataContainer({ id, classes, data }) {
           <ButtonBase
             disableRipple
             disableTouchRipple
+            ga-on="click"
+            ga-event-category="Data Indicator"
+            ga-event-action={`Navigate PDF Page ${page + 1}`}
             disabled={page >= numberOfPages}
             className={classes.pageButton}
             onClick={() => setPage(page + 1)}
@@ -90,7 +96,11 @@ function DataContainer({ id, classes, data }) {
           </ButtonBase>
         </div>
 
-        <DataActions onDownload={handleDownload} onShare={handleShare} />
+        <DataActions
+          title={data.title}
+          onDownload={handleDownload}
+          onShare={handleShare}
+        />
       </Fragment>
     )
   );

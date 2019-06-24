@@ -140,6 +140,7 @@ function DataContainer({ id, classes, data, theme }) {
         className={classes.root}
       />
       <DataActions
+        title={data.title}
         onDownload={handleDownload}
         embedCode={embedCode}
         onShare={handleShare}

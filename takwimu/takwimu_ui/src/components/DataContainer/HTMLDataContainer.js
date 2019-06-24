@@ -19,7 +19,7 @@ function DataContainer({ id, classes, data }) {
       <div id={`data-indicator-${id}`} className={classes.root}>
         <RichTypography component="div">{data.raw_html}</RichTypography>
       </div>
-      <DataActions />
+      <DataActions title={data.title} />
     </Fragment>
   );
 }

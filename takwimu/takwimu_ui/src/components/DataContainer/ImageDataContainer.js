@@ -54,7 +54,11 @@ function DataContainer({
       <div id={`data-indicator-${id}`} className={classes.root}>
         <img alt={title} src={src} />
       </div>
-      <DataActions onShare={handleShare} onDownload={handleDownload} />
+      <DataActions
+        title={title}
+        onShare={handleShare}
+        onDownload={handleDownload}
+      />
     </Fragment>
   );
 }

@@ -74,6 +74,7 @@ function DataContainer({ id, data, theme }) {
       <IFrame id={iframeId} data={data} />
 
       <DataActions
+        title={data.title}
         onDownload={handleDownload}
         embedCode={embedCode}
         onShare={handleShare}

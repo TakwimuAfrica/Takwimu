@@ -126,6 +126,10 @@ const Theme = createMuiTheme({
     useNextVariants: true
   },
   props: {
+    MuiButtonBase: {
+      disableRipple: true,
+      disableTouchRipple: true
+    },
     MuiButton: {
       color: 'primary',
       variant: 'contained'
