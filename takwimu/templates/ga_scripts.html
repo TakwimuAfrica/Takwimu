@@ -12,7 +12,11 @@
     // Allows you to track when elements are visible within the viewport.
     ga('require', 'impressionTracker');
     // Automatically tracks how far down the page a user scrolls.
-    ga('require', 'maxScrollTracker');
+    ga('require', 'maxScrollTracker', {
+        fieldsObj: {
+            eventAction: `Scrolled ${window.location.href}`
+        }
+    });
     // Automatically tracks link clicks to external domains.
     // e.g. Medium
     ga('require', 'outboundLinkTracker');
