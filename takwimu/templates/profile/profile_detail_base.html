@@ -248,4 +248,8 @@
   <script src="{{ STATIC_PREFIX }}{{ vendor }}"></script>
   {% endfor %}
   <script src="{% static asset_manifest.main %}"></script>
+
+  <!-- Google Analytics -->
+  {% include 'ga_scripts.html' %}
+  <!-- End Google Analytics -->
 {% endblock body_javascript_extra %}
