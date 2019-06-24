@@ -32,7 +32,7 @@ const styles = theme => ({
     '& .census-chart-embed': {
       background: theme.palette.data.light
     },
-    '& #census-chart': {
+    '& #census-chart .column-set': {
       overflowX: 'scroll'
     }
   }
