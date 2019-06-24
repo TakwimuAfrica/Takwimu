@@ -73,7 +73,15 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
         </Typography>
       )}
 
-      <TwitterShareButton url={analysisLink}>
+      <TwitterShareButton
+        additionalProps={{
+          'ga-on': 'click',
+          'ga-event-category': 'Analysis',
+          'ga-event-action': `Twitter Share ${title}`,
+          'ga-event-label': title
+        }}
+        url={analysisLink}
+      >
         <Grid
           container
           alignItems="center"

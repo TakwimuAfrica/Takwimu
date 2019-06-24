@@ -235,8 +235,10 @@ function DownloadPDF({ classes, title, topic, data, takwimu }) {
 
   return (
     <ButtonBase
-      disableRipple
-      disableTouchRipple
+      ga-on="click"
+      ga-event-category="Analysis"
+      ga-event-action={`Download ${title}`}
+      ga-event-label={title}
       className={classes.root}
       disabled={pdfBlob === null}
       onClick={() => {
