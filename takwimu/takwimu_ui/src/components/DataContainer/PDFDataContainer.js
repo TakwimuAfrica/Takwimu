@@ -61,12 +61,12 @@ function DataContainer({ id, classes, data }) {
       <Fragment>
         <div id={`data-indicator-${id}`} className={classes.root}>
           <ButtonBase
-            disableRipple
-            disableTouchRipple
             disabled={page <= 1}
             ga-on="click"
-            ga-event-category="Data Indicator"
-            ga-event-action={`Navigate PDF Page ${page - 1}`}
+            ga-event-category="Data (PDF)"
+            ga-event-action="Paginate"
+            ga-event-label={data.title}
+            ga-event-value={page + 1}
             className={classes.pageButton}
             onClick={() => setPage(page - 1)}
           >
@@ -83,11 +83,11 @@ function DataContainer({ id, classes, data }) {
             </React.Suspense>
           )}
           <ButtonBase
-            disableRipple
-            disableTouchRipple
             ga-on="click"
-            ga-event-category="Data Indicator"
-            ga-event-action={`Navigate PDF Page ${page + 1}`}
+            ga-event-category="Data (PDF)"
+            ga-event-action="Paginate"
+            ga-event-label={data.title}
+            ga-event-value={page + 1}
             disabled={page >= numberOfPages}
             className={classes.pageButton}
             onClick={() => setPage(page + 1)}

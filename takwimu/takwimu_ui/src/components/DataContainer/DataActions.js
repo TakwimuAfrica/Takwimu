@@ -138,8 +138,8 @@ function DataActions({
       {onShare && (
         <ActionButton
           ga-on="click"
-          ga-event-category="Data Indicator"
-          ga-event-action={`Share ${title}`}
+          ga-event-category="Data"
+          ga-event-action="Share"
           ga-event-label={title}
           onClick={onShare}
         >
@@ -153,8 +153,8 @@ function DataActions({
           <div className={classes.verticalDivider} />
           <ActionButton
             ga-on="click"
-            ga-event-category="Data Indicator"
-            ga-event-action={`Download ${title}`}
+            ga-event-category="Data"
+            ga-event-action="Download"
             ga-event-label={title}
             onClick={onDownload}
           >
@@ -169,8 +169,8 @@ function DataActions({
           <div className={classes.verticalDivider} />
           <ActionButton
             ga-on="click"
-            ga-event-category="Data Indicator"
-            ga-event-action={`Embed ${title}`}
+            ga-event-category="Data"
+            ga-event-action="Embed"
             ga-event-label={title}
             onClick={handleEmbed}
           >
@@ -186,8 +186,8 @@ function DataActions({
 
           <ActionButton
             ga-on="click"
-            ga-event-category="Data Indicator"
-            ga-event-action={`Compare ${title}`}
+            ga-event-category="Data"
+            ga-event-action="Compare"
             ga-event-label={title}
             onClick={onCompare}
           >
@@ -202,8 +202,8 @@ function DataActions({
           <div className={classes.verticalDivider} />
           <ActionButton
             ga-on="click"
-            ga-event-category="Data Indicator"
-            ga-event-action={`Show Data ${title}`}
+            ga-event-category="Data"
+            ga-event-action="Show Data"
             ga-event-label={title}
             onClick={onShowData}
           >
