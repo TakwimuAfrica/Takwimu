@@ -1063,7 +1063,7 @@ function Chart(options) {
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
         .attr("ga-event-action","Share")
-        .attr("ga-event-label", chart.id)
+        .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.share);
     chart.share.append('img')
         .attr('src', '/static/img/network-connection.svg');
@@ -1075,7 +1075,7 @@ function Chart(options) {
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
         .attr("ga-event-action","Download")
-        .attr("ga-event-label", chart.id)
+        .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.download);
     chart.actionDownload.append('img')
         .attr('src', '/static/img/download.svg');
@@ -1087,7 +1087,7 @@ function Chart(options) {
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
         .attr("ga-event-action","Embed")
-        .attr("ga-event-label", chart.id)
+        .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.showEmbedCode);
     chart.showEmbed.append('img')
         .attr('src', '/static/img/code.svg');
@@ -1099,7 +1099,7 @@ function Chart(options) {
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
         .attr("ga-event-action","Compare")
-        .attr("ga-event-label", chart.id)
+        .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .attr("href", chart.distributionURL);
     chart.compare.append('img')
         .attr('src', '/static/img/compare.svg');
@@ -1111,7 +1111,7 @@ function Chart(options) {
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
         .attr("ga-event-action","Show Data")
-        .attr("ga-event-label", chart.id)
+        .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.toggleDataDrawer);
     chart.showData.append('img')
         .attr('src', '/static/img/tablet-reader-31.svg');
