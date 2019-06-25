@@ -60,7 +60,8 @@ function DataContainer({
   indicator: {
     value: { widget: data, summary },
     meta
-  }
+  },
+  country: { name: countryName }
 }) {
   useEffect(() => {
     const params = new URL(window.location).searchParams;
@@ -100,27 +101,51 @@ function DataContainer({
           </Typography>
 
           {data.type === 'image' && (
-            <ImageDataContainer id={id} data={data.value} />
+            <ImageDataContainer
+              id={id}
+              data={data.value}
+              countryName={countryName}
+            />
           )}
 
           {(data.type === 'hurumap' || data.type === 'hurumap_snippet') && (
-            <HurumapDataContainer id={id} data={data.value} />
+            <HurumapDataContainer
+              id={id}
+              data={data.value}
+              countryName={countryName}
+            />
           )}
 
           {data.type === 'html' && (
-            <HTMLDataContainer id={id} data={data.value} />
+            <HTMLDataContainer
+              id={id}
+              data={data.value}
+              countryName={countryName}
+            />
           )}
 
           {data.type === 'flourish' && (
-            <FlourishDataContainer id={id} data={data.value} />
+            <FlourishDataContainer
+              id={id}
+              data={data.value}
+              countryName={countryName}
+            />
           )}
 
           {data.type === 'entities' && (
-            <EntitiesDataContainer id={id} data={data.value} />
+            <EntitiesDataContainer
+              id={id}
+              data={data.value}
+              countryName={countryName}
+            />
           )}
 
           {data.type === 'document' && (
-            <PDFDataContainer id={id} data={data.value} />
+            <PDFDataContainer
+              id={id}
+              data={data.value}
+              countryName={countryName}
+            />
           )}
         </Grid>
       </div>
@@ -156,6 +181,9 @@ DataContainer.propTypes = {
     value: PropTypes.shape({}).isRequired,
     summary: PropTypes.string,
     meta: PropTypes.shape({}).isRequired
+  }).isRequired,
+  country: PropTypes.shape({
+    name: PropTypes.string.isRequired
   }).isRequired
 };
 

@@ -25,7 +25,8 @@ function DataContainer({
   data: {
     title,
     image: { src }
-  }
+  },
+  countryName
 }) {
   const handleDownload = () => {
     const index = src.lastIndexOf('.');
@@ -54,7 +55,11 @@ function DataContainer({
       <div id={`data-indicator-${id}`} className={classes.root}>
         <img alt={title} src={src} />
       </div>
-      <DataActions onShare={handleShare} onDownload={handleDownload} />
+      <DataActions
+        title={`${countryName}: ${title}`}
+        onShare={handleShare}
+        onDownload={handleDownload}
+      />
     </Fragment>
   );
 }
@@ -62,7 +67,8 @@ function DataContainer({
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

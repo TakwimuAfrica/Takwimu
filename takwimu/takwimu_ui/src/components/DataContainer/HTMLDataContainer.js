@@ -13,13 +13,13 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({ id, classes, data, countryName }) {
   return (
     <Fragment>
       <div id={`data-indicator-${id}`} className={classes.root}>
         <RichTypography component="div">{data.raw_html}</RichTypography>
       </div>
-      <DataActions />
+      <DataActions title={`${countryName}: ${data.title}`} />
     </Fragment>
   );
 }
@@ -27,7 +27,8 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
-  data: PropTypes.shape({}).isRequired
+  data: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

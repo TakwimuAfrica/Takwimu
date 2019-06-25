@@ -8,7 +8,7 @@ import DataActions from './DataActions';
 import IFrame from './IFrame';
 import { shareIndicator, uploadImage } from './common';
 
-function DataContainer({ id, data, theme }) {
+function DataContainer({ id, data, theme, countryName }) {
   const iframeId = `cr-embed-country-${data.data_country}-${data.data_id}`;
 
   const toPng = () => {
@@ -74,6 +74,7 @@ function DataContainer({ id, data, theme }) {
       <IFrame id={iframeId} data={data} />
 
       <DataActions
+        title={`${countryName}: ${data.title}`}
         onDownload={handleDownload}
         embedCode={embedCode}
         onShare={handleShare}
@@ -85,7 +86,8 @@ function DataContainer({ id, data, theme }) {
 DataContainer.propTypes = {
   theme: PropTypes.shape({}).isRequired,
   data: PropTypes.shape({}).isRequired,
-  id: PropTypes.string.isRequired
+  id: PropTypes.string.isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 export default withTheme()(DataContainer);

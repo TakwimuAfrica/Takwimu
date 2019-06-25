@@ -21,7 +21,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({ id, classes, data, countryName }) {
   const [documents, setDocuments] = useState({});
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -61,9 +61,12 @@ function DataContainer({ id, classes, data }) {
       <Fragment>
         <div id={`data-indicator-${id}`} className={classes.root}>
           <ButtonBase
-            disableRipple
-            disableTouchRipple
             disabled={page <= 1}
+            ga-on="click"
+            ga-event-category="Data (PDF)"
+            ga-event-action="Paginate"
+            ga-event-label={data.title}
+            ga-event-value={page + 1}
             className={classes.pageButton}
             onClick={() => setPage(page - 1)}
           >
@@ -80,8 +83,11 @@ function DataContainer({ id, classes, data }) {
             </React.Suspense>
           )}
           <ButtonBase
-            disableRipple
-            disableTouchRipple
+            ga-on="click"
+            ga-event-category="Data (PDF)"
+            ga-event-action="Paginate"
+            ga-event-label={data.title}
+            ga-event-value={page + 1}
             disabled={page >= numberOfPages}
             className={classes.pageButton}
             onClick={() => setPage(page + 1)}
@@ -90,7 +96,11 @@ function DataContainer({ id, classes, data }) {
           </ButtonBase>
         </div>
 
-        <DataActions onDownload={handleDownload} onShare={handleShare} />
+        <DataActions
+          title={`${countryName}: ${data.title}`}
+          onDownload={handleDownload}
+          onShare={handleShare}
+        />
       </Fragment>
     )
   );
@@ -99,7 +109,8 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   data: PropTypes.shape({}).isRequired,
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

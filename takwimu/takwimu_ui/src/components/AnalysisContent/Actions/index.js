@@ -73,7 +73,15 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
         </Typography>
       )}
 
-      <TwitterShareButton url={analysisLink}>
+      <TwitterShareButton
+        additionalProps={{
+          'ga-on': 'click',
+          'ga-event-category': 'Twitter',
+          'ga-event-action': 'Tweet',
+          'ga-event-label': analysisLink
+        }}
+        url={analysisLink}
+      >
         <Grid
           container
           alignItems="center"
@@ -85,7 +93,13 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
           </Typography>
         </Grid>
       </TwitterShareButton>
-      <DownloadPDF title={title} topic={topic} data={data} takwimu={takwimu} />
+      <DownloadPDF
+        title={title}
+        topic={topic}
+        data={data}
+        takwimu={takwimu}
+        top={!hideLastUpdated}
+      />
     </div>
   );
 }

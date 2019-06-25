@@ -196,7 +196,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
   return AnalysisPDF;
 };
 
-function DownloadPDF({ classes, title, topic, data, takwimu }) {
+function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
   const [reactPdf, setReactPdf] = useState(false);
   const [pdfBlob, setPdfBlob] = useState(null);
 
@@ -235,8 +235,11 @@ function DownloadPDF({ classes, title, topic, data, takwimu }) {
 
   return (
     <ButtonBase
-      disableRipple
-      disableTouchRipple
+      ga-on="click"
+      ga-event-category="Analysis"
+      ga-event-action="Download"
+      ga-event-label={`${takwimu.country.name}: ${title}`}
+      ga-event-value={top ? 1 : 0}
       className={classes.root}
       disabled={pdfBlob === null}
       onClick={() => {
@@ -264,7 +267,8 @@ DownloadPDF.propTypes = {
   title: PropTypes.string.isRequired,
   data: PropTypes.shape({}).isRequired,
   topic: PropTypes.oneOf(['topic', 'carousel_topic']).isRequired,
-  takwimu: PropTypes.shape({}).isRequired
+  takwimu: PropTypes.shape({}).isRequired,
+  top: PropTypes.bool.isRequired
 };
 
 export default withStyles(styles)(DownloadPDF);

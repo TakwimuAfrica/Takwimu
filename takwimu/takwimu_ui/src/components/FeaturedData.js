@@ -45,12 +45,20 @@ function FeaturedData({
             id={indicators[0].id}
             color="secondary"
             indicator={indicators[0]}
+            // Since we don't know the county of the featured data
+            country={{
+              name: 'Featured Data'
+            }}
           />
           {indicators.length > 1 && (
             <DataContainer
               id={indicators[1].id}
               color="primary"
               indicator={indicators[1]}
+              // Since we don't know the county of the featured data
+              country={{
+                name: 'Featured Data'
+              }}
             />
           )}
         </Grid>

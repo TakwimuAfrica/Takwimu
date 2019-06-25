@@ -148,6 +148,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
                     id={c.id}
                     classes={{ root: classes.dataContainer }}
                     indicator={c}
+                    country={takwimu.country}
                   />
                 )}
               </Fragment>

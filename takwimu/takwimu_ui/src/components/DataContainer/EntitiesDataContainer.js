@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({ id, classes, data, countryName }) {
   const [images, setImages] = useState({});
 
   useEffect(() => {
@@ -41,7 +41,7 @@ function DataContainer({ id, classes, data }) {
           <RichTypography component="div">{entity.description}</RichTypography>
         </div>
       ))}
-      <DataActions />
+      <DataActions title={`${countryName}: ${data.title}`} />
     </Fragment>
   );
 }
@@ -49,7 +49,8 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   data: PropTypes.shape({}).isRequired,
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {

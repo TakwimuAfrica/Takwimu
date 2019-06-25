@@ -50,14 +50,9 @@ const styles = () => ({
   }
 });
 
-function ActionButtonComponent({ classes, children, onClick }) {
+function ActionButtonComponent({ classes, children, onClick, ...props }) {
   return (
-    <IconButton
-      disableRipple
-      disableTouchRipple
-      className={classes.button}
-      onClick={onClick}
-    >
+    <IconButton className={classes.button} onClick={onClick} {...props}>
       <Grid
         component="span"
         container
@@ -126,6 +121,7 @@ EmbedCodeTextArea.propTypes = {
 
 function DataActions({
   classes,
+  title,
   onShare,
   onDownload,
   onShowData,
@@ -140,7 +136,13 @@ function DataActions({
   return (
     <div className={classes.root}>
       {onShare && (
-        <ActionButton onClick={onShare}>
+        <ActionButton
+          ga-on="click"
+          ga-event-category="Data"
+          ga-event-action="Share"
+          ga-event-label={title}
+          onClick={onShare}
+        >
           <img alt="" src={shareIcon} />
           <Typography className={classes.actionText}>Share</Typography>
         </ActionButton>
@@ -149,7 +151,13 @@ function DataActions({
       {onDownload && (
         <Fragment>
           <div className={classes.verticalDivider} />
-          <ActionButton onClick={onDownload}>
+          <ActionButton
+            ga-on="click"
+            ga-event-category="Data"
+            ga-event-action="Download"
+            ga-event-label={title}
+            onClick={onDownload}
+          >
             <img alt="" src={downloadIcon} />
             <Typography className={classes.actionText}>Download</Typography>
           </ActionButton>
@@ -159,7 +167,13 @@ function DataActions({
       {embedCode && (
         <Fragment>
           <div className={classes.verticalDivider} />
-          <ActionButton onClick={handleEmbed}>
+          <ActionButton
+            ga-on="click"
+            ga-event-category="Data"
+            ga-event-action="Embed"
+            ga-event-label={title}
+            onClick={handleEmbed}
+          >
             <img alt="" src={embedIcon} />
             <Typography className={classes.actionText}>Embed</Typography>
           </ActionButton>
@@ -170,7 +184,13 @@ function DataActions({
         <Fragment>
           <div className={classes.verticalDivider} />
 
-          <ActionButton onClick={onCompare}>
+          <ActionButton
+            ga-on="click"
+            ga-event-category="Data"
+            ga-event-action="Compare"
+            ga-event-label={title}
+            onClick={onCompare}
+          >
             <img alt="" src={compareIcon} />
             <Typography className={classes.actionText}>Compare</Typography>
           </ActionButton>
@@ -180,7 +200,13 @@ function DataActions({
       {onShowData && (
         <Fragment>
           <div className={classes.verticalDivider} />
-          <ActionButton onClick={onShowData}>
+          <ActionButton
+            ga-on="click"
+            ga-event-category="Data"
+            ga-event-action="ShowData"
+            ga-event-label={title}
+            onClick={onShowData}
+          >
             <img alt="" src={showIcon} />
             <Typography className={classes.actionText}>Show Data</Typography>
           </ActionButton>
@@ -209,6 +235,7 @@ function DataActions({
 
 DataActions.propTypes = {
   classes: PropTypes.shape({}).isRequired,
+  title: PropTypes.string.isRequired,
   onDownload: PropTypes.func,
   onShare: PropTypes.func,
   onShowData: PropTypes.func,

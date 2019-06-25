@@ -13,7 +13,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data, theme }) {
+function DataContainer({ id, classes, data, theme, countryName }) {
   const [animated, setAnimated] = useState(false);
   const [animatedId, setAnimatedId] = useState('');
 
@@ -140,6 +140,7 @@ function DataContainer({ id, classes, data, theme }) {
         className={classes.root}
       />
       <DataActions
+        title={`${countryName}: ${data.title}`}
         onDownload={handleDownload}
         embedCode={embedCode}
         onShare={handleShare}
@@ -152,7 +153,8 @@ DataContainer.propTypes = {
   id: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
   data: PropTypes.shape({}).isRequired,
-  theme: PropTypes.shape({}).isRequired
+  theme: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {
