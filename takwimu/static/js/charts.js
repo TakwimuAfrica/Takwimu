@@ -1063,7 +1063,7 @@ function Chart(options) {
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
         .attr("ga-event-action","Share")
-        .attr("ga-event-label", "")
+        .attr("ga-event-label", chart.id)
         .on("click", chart.share);
     chart.share.append('img')
         .attr('src', '/static/img/network-connection.svg');
