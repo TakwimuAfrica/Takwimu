@@ -1011,6 +1011,13 @@ input:focus {
   box-shadow: unset;
 }
 
+.chart {
+  .column-set {
+    overflow-x: scroll;
+    overflow-y: hidden;
+  }
+}
+
 .chart-actions {
     position: absolute;
     top: 0;
