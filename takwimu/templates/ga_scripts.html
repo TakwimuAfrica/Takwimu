@@ -30,9 +30,11 @@
             eventAction: `Scrolled ${window.location.href}`
         }
     });
-    // Automatically tracks link clicks to external domains.
-    // e.g. Medium
-    ga('require', 'outboundLinkTracker');
+    // Automatically tracks link clicks to external domains e.g. Medium
+    // To track all types of link clicks i.e. Tracking right-clicks and middle-clicks
+    ga('require', 'outboundLinkTracker', {
+        events: ['click', 'auxclick', 'contextmenu']
+    });
     // Automatically tracks how long pages are in the visible state 
     // (as opposed to in a background tab)
     ga('require', 'pageVisibilityTracker');
