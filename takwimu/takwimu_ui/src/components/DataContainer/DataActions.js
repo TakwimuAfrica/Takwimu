@@ -203,7 +203,7 @@ function DataActions({
           <ActionButton
             ga-on="click"
             ga-event-category="Data"
-            ga-event-action="Show Data"
+            ga-event-action="ShowData"
             ga-event-label={title}
             onClick={onShowData}
           >

@@ -1110,7 +1110,7 @@ function Chart(options) {
         .append("a")
         .attr("ga-on", "click")
         .attr("ga-event-category", "Data")
-        .attr("ga-event-action","Show Data")
+        .attr("ga-event-action","ShowData")
         .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.toggleDataDrawer);
     chart.showData.append('img')
