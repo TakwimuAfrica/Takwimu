@@ -239,7 +239,7 @@ function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
       ga-event-category="Analysis"
       ga-event-action="Download"
       ga-event-label={`${takwimu.country.name}: ${title}`}
-      ga-event-value={top ? 'Top' : 'Bottom'}
+      ga-event-value={top ? 1 : 0}
       className={classes.root}
       disabled={pdfBlob === null}
       onClick={() => {
