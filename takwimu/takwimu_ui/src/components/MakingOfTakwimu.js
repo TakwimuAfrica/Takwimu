@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import { withStyles } from '@material-ui/core/styles';
@@ -36,15 +36,40 @@ function MakingOfTakwimu({
   if (!makingOf) {
     return null;
   }
-
   const { title, description, link } = makingOf;
+  const iframeId = 'making-of-takwimu-yt-iframe';
+
+  useEffect(() => {
+    const tag = document.createElement('script');
+    tag.id = 'making-of-takwimu-yt-iframe_api';
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+    window.onYouTubeIframeAPIReady = () => {
+      // eslint-disable-next-line no-new
+      new window.YT.Player(iframeId, {
+        events: {
+          onStateChange: () => {
+            window.ga('send', 'event', 'Video', 'Play', `${title}: ${link}`);
+          }
+        }
+      });
+    };
+  });
+
   return (
     <Section title={title} variant="h3" classes={{ title: classes.title }}>
       <RichTypography>{description}</RichTypography>
       <div className={classes.container}>
         <iframe
+          id={iframeId}
           title={title}
-          src={link}
+          src={
+            link.indexOf('?') === -1
+              ? `${link}?enablejsapi=1`
+              : `${link}enablejsapi=1`
+          }
           allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
           allowFullScreen
           className={classes.iframe}
