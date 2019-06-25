@@ -77,7 +77,7 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
         additionalProps={{
           'ga-on': 'click',
           'ga-event-category': 'Twitter',
-          'ga-event-action': 'tweet',
+          'ga-event-action': 'Tweet',
           'ga-event-label': analysisLink
         }}
         url={analysisLink}
