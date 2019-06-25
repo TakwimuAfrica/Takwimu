@@ -8,7 +8,20 @@
     // avoiding the problem where separate rows in your pages reports actually point to the same page.
     ga('require', 'cleanUrlTracker');
     // Enables declarative event tracking, via HTML attributes in the markup.
-    ga('require', 'eventTracker');
+    ga('require', 'eventTracker', {
+        hitFilter: (model) => {
+            if (model.get('eventCategory') === 'Twitter') { 
+                // event to social
+                model.set('hitType', 'social');
+                model.set('socialNetwork', model.get('eventCategory'));
+                model.set('socialAction', model.get('eventAction'));
+                model.set('socialTarget', model.get('eventLabel'));
+                model.set('eventCategory', null);
+                model.set('eventAction', null);
+                model.set('eventLabel', null);
+            }
+        }
+    });
     // Allows you to track when elements are visible within the viewport.
     ga('require', 'impressionTracker');
     // Automatically tracks how far down the page a user scrolls.

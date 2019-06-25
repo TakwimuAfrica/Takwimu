@@ -76,9 +76,9 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
       <TwitterShareButton
         additionalProps={{
           'ga-on': 'click',
-          'ga-event-category': 'Analysis',
-          'ga-event-action': `Twitter Share ${title}`,
-          'ga-event-label': title
+          'ga-event-category': 'Twitter',
+          'ga-event-action': 'tweet',
+          'ga-event-label': analysisLink
         }}
         url={analysisLink}
       >
