@@ -27,7 +27,8 @@
     // Automatically tracks how far down the page a user scrolls.
     ga('require', 'maxScrollTracker', {
         fieldsObj: {
-            eventAction: `Scrolled ${window.location.href}`
+            eventAction: 'Scrolled',
+            eventLabel: window.location.href
         }
     });
     // Automatically tracks link clicks to external domains e.g. Medium
