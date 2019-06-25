@@ -93,7 +93,13 @@ function Actions({ classes, hideLastUpdated, title, data, topic, takwimu }) {
           </Typography>
         </Grid>
       </TwitterShareButton>
-      <DownloadPDF title={title} topic={topic} data={data} takwimu={takwimu} />
+      <DownloadPDF
+        title={title}
+        topic={topic}
+        data={data}
+        takwimu={takwimu}
+        top={!hideLastUpdated}
+      />
     </div>
   );
 }

@@ -21,7 +21,7 @@ const styles = {
   }
 };
 
-function DataContainer({ id, classes, data }) {
+function DataContainer({ id, classes, data, countryName }) {
   const [documents, setDocuments] = useState({});
   const [page, setPage] = useState(1);
   const [numberOfPages, setNumberOfPages] = useState(0);
@@ -97,7 +97,7 @@ function DataContainer({ id, classes, data }) {
         </div>
 
         <DataActions
-          title={data.title}
+          title={`${countryName}: ${data.title}`}
           onDownload={handleDownload}
           onShare={handleShare}
         />
@@ -109,7 +109,8 @@ function DataContainer({ id, classes, data }) {
 DataContainer.propTypes = {
   id: PropTypes.string,
   data: PropTypes.shape({}).isRequired,
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  countryName: PropTypes.string.isRequired
 };
 
 DataContainer.defaultProps = {
