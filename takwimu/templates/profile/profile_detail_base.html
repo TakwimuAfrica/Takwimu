@@ -22,6 +22,10 @@
   {{ block.super }}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/combine/npm/bootstrap@4.1.1/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="{% sass_src 'css/takwimu.scss' %}">
+
+  <!-- PACE: Page load indicator  -->
+  <script src="{% static 'pace.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'pace.css' %}" />
 {% endblock %}
 
 {% block favicon %}
