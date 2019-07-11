@@ -1,5 +1,6 @@
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from django.contrib import admin
 from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
 from wagtail.api.v2.router import WagtailAPIRouter
@@ -22,6 +23,7 @@ PROFILES_GEOGRAPHY_REGEX = r'profiles/(?P<geography_id>[{}]+-\w+)(-(?P<slug>[\w-
 
 
 takwimu_urlpatterns = [
+    url(r'^admin/', include(admin.site.urls)),
     url(r'^$', cache_page(STANDARD_CACHE_TIME)(HomePageView.as_view()), name='home'),
     # Redirect wazimap r'^about$' route to Wagtail `AboutPage`
     url(r'^about$', RedirectView.as_view(url='about/', permanent=True)),
