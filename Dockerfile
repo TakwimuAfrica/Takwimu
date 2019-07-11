@@ -1,4 +1,4 @@
-FROM codeforafrica/hurumap:0.6.2
+FROM codeforafrica/hurumap:0.6.5
 
 # install google chrome
 RUN wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
