@@ -318,11 +318,29 @@ METADATA = {
     },
     'nigeria': {
         'country': {
-            'sex_dist_per_year': {
+            "sex_dist_per_year": {
                 'source': {
                     'link': 'https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls',
                     'title': 'Nigeria Bureau of Statistics, 2016',
                 },
+            },
+            "senior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "junior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "primary_school_enrollment_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
             },
             'child_births_by_size_dist': {
                 'source': {
@@ -514,12 +532,36 @@ METADATA = {
             },
         },
         'level1': {
-            'sex_dist_per_year': {
+            "sex_dist_per_year": {
                 'source': {
                     'link': 'https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls',
                     'title': 'Nigeria Bureau of Statistics, 2016',
                 },
             },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "senior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "junior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "primary_school_enrollment_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            }
         }
     },
     'ethiopia': {
@@ -2397,6 +2439,47 @@ def get_budget_profile(geo, session, country, level):
         'is_missing': government_expenditure_dist.get('is_missing'),
         'government_expenditure_dist': _add_metadata_to_dist(
             government_expenditure_dist, 'government_expenditure_dist', country,
+            level),
+    }
+
+
+def get_education_profile(geo, session, country, level):
+    primary_school_enrollment_distribution_dist = LOCATIONNOTFOUND
+    senior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
+    junior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
+
+    with dataset_context(year='2018'):
+        try:
+            senior_secondary_school_enrollment_dist, _ = get_stat_data(
+                ['senior_secondary_school_enrollment_year', 'sex'], geo, session)
+        except Exception:
+            pass
+
+        try:
+            junior_secondary_school_enrollment_dist, _ = get_stat_data(
+                ['junior_secondary_school_enrollment_year', 'sex'], geo, session)
+        except Exception:
+            pass
+        
+        try:
+            primary_school_enrollment_distribution_dist, _ = get_stat_data(
+                ['primary_school_enrollment_year', 'sex'], geo, session)
+        except Exception:
+            pass
+    is_missing = senior_secondary_school_enrollment_dist.get('is_missing') and \
+        junior_secondary_school_enrollment_dist.get('is_missing') and \
+            primary_school_enrollment_distribution_dist.get('is_missing')
+
+    return {
+        'is_missing': is_missing,
+        'senior_secondary_school_enrollment': _add_metadata_to_dist(
+            senior_secondary_school_enrollment_dist, 'senior_secondary_school_enrollment', country,
+            level),
+        'junior_secondary_school_enrollment': _add_metadata_to_dist(
+            junior_secondary_school_enrollment_dist, 'junior_secondary_school_enrollment', country,
+            level),
+        'primary_school_enrollment_distribution': _add_metadata_to_dist(
+            senior_secondary_school_enrollment_dist, 'primary_school_enrollment_distribution', country,
             level),
     }
 
