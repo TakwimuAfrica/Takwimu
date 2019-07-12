@@ -5,6 +5,7 @@ import { withStyles, Typography } from '@material-ui/core';
 
 import Error from '../components/Error';
 import ErrorPage from '../components/ErrorPage';
+import { About } from '../components/Next';
 
 const styles = () => ({
   root: {
@@ -12,7 +13,12 @@ const styles = () => ({
   }
 });
 
-function NotFoundError({ classes }) {
+function NotFoundError({
+  classes,
+  takwimu: {
+    settings: { socialMedia }
+  }
+}) {
   return (
     <ErrorPage classes={{ root: classes.root }}>
       <Error title="404 - Page Not Found">
@@ -20,12 +26,18 @@ function NotFoundError({ classes }) {
           The page you are looking for does not exist.
         </Typography>
       </Error>
+      <About title="Explore further" socialMedia={socialMedia} />
     </ErrorPage>
   );
 }
 
 NotFoundError.propTypes = {
-  classes: PropTypes.shape({}).isRequired
+  classes: PropTypes.shape({}).isRequired,
+  takwimu: PropTypes.shape({
+    settings: PropTypes.shape({
+      socialMedia: PropTypes.shape({}).isRequired
+    }).isRequired
+  }).isRequired
 };
 
 export default withStyles(styles)(NotFoundError);

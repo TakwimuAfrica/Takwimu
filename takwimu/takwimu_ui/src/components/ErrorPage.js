@@ -14,8 +14,7 @@ const styles = theme => ({
   },
   section: {
     margin: 0,
-    paddingTop: '2.3125rem',
-    paddingBottom: '1rem',
+    padding: '2.3125rem 0 1rem',
     borderTop: `4px solid ${theme.palette.primary.main}`
   }
 });
