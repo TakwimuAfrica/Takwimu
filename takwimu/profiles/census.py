@@ -318,6 +318,12 @@ METADATA = {
     },
     'nigeria': {
         'country': {
+            'sex_dist_per_year': {
+                'source': {
+                    'link': 'https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls',
+                    'title': 'Nigeria Bureau of Statistics, 2016',
+                },
+            },
             'child_births_by_size_dist': {
                 'source': {
                     'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
@@ -426,8 +432,8 @@ METADATA = {
             },
             "births_attended_by_skilled_health_staff": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=NG",
-                    "title": "WorldBank"
+                    "link": "https://msdat.fmohconnect.gov.ng/#/central_analytics/ODY",
+                    "title": "Federal Ministry of Health, 2018"
                 }
             },
             "gdp_per_capita_growth": {
@@ -507,6 +513,14 @@ METADATA = {
                 "qualifier": "M: Male\nF: Female"
             },
         },
+        'level1': {
+            'sex_dist_per_year': {
+                'source': {
+                    'link': 'https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls',
+                    'title': 'Nigeria Bureau of Statistics, 2016',
+                },
+            },
+        }
     },
     'ethiopia': {
         'country': {
@@ -1876,6 +1890,8 @@ def get_demographics_profile(geo, session, country, level):
 def get_population(geo, session, country, level, year):
     sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
+    sex_dist_per_year = LOCATIONNOTFOUND
+
     db_table = db_column_name = 'population_sex_' + str(year)
     try:
         sex_dist, total_population_sex = get_stat_data(
@@ -1892,9 +1908,17 @@ def get_population(geo, session, country, level, year):
     except Exception:
         pass
 
+    with dataset_context(year='2016'):
+        try:
+            sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
+                                    table_name='population_sex_year' )
+        except Exception:
+            pass
+
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
-                 residence_dist.get('is_missing')
+                 residence_dist.get('is_missing') and \
+                 sex_dist_per_year.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
 
@@ -1914,6 +1938,7 @@ def get_population(geo, session, country, level, year):
     demographics_data = {
         'is_missing': is_missing,
         'sex_dist': _add_metadata_to_dist(sex_dist, 'sex_dist', country, level),
+        'sex_dist_per_year': _add_metadata_to_dist(sex_dist_per_year, 'sex_dist_per_year', country, level),
         'residence_dist': _add_metadata_to_dist(residence_dist,
                                                 'residence_dist', country,
                                                 level),
