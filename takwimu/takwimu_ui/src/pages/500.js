@@ -19,7 +19,10 @@ function ServerError({ classes }) {
         <Typography variant="body1">
           We’re having some trouble processing your request. We’ve logged the
           error and will investigate. You can try again or if the issue
-          persists, please <Link href="/contact">contact us</Link>
+          persists, please{' '}
+          <Link href="/contact" underline="always">
+            contact us
+          </Link>
         </Typography>
       </Error>
     </ErrorPage>
