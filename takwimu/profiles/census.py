@@ -354,6 +354,24 @@ METADATA = {
                     "title": " National Bureau of Statistics, 2018"
                 }
             },
+            "prevalence_fgm": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "MICS, 2016-17"
+                }
+            },
+            "malaria_prevalence": {
+                "source": {
+                    "link": "https://dhsprogram.com/pubs/pdf/MIS20/MIS20.pdf",
+                    "title": "Nigeria Demographic Health Survey, 2015"
+                }
+            },
+            "hiv_patients_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
             'child_births_by_size_dist': {
                 'source': {
                     'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
@@ -587,6 +605,24 @@ METADATA = {
                 }
             },
             "literacy_sex": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "prevalence_fgm": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "MICS, 2016-17"
+                }
+            },
+            "malaria_prevalence": {
+                "source": {
+                    "link": "https://dhsprogram.com/pubs/pdf/MIS20/MIS20.pdf",
+                    "title": "Nigeria Demographic Health Survey, 2015"
+                }
+            },
+            "hiv_patients_distribution": {
                 "source": {
                     "link": "https://nigerianstat.gov.ng/download/952",
                     "title": " National Bureau of Statistics, 2018"
@@ -1893,8 +1929,7 @@ def get_profile(geo, profile_name, request):
         if not (data['demographics']['is_missing'] and \
                 data['worldbank']['youth_unemployment'].get('is_missing') and \
                 data['worldbank']['employment_to_population_ratio'].get('is_missing') and \
-                data['poverty'].get('is_missing') and \
-                    data['demographics']['sex_dist_per_year'].get('is_missing')):
+                data['poverty'].get('is_missing')):
             tabs['demographics'] = {'name': 'Demographics', 'href': '#demographics'}
 
         if not (data['elections'].get('is_missing') and \
@@ -1913,14 +1948,10 @@ def get_profile(geo, profile_name, request):
                 data['worldbank']['cereal_yield_kg_per_hectare'].get('is_missing')):
             tabs['agriculture'] = {'name': 'Agriculture', 'href': '#agriculture'}
 
-        if not (data['worldbank']['primary_school_enrollment'].get('is_missing') and \
+        if not (data['education']['is_missing'] and \
+                data['worldbank']['primary_school_enrollment'].get('is_missing') and \
                 data['worldbank']['adult_literacy_rate'].get('is_missing') and \
-                data['worldbank']['secondary_school_enrollment'].get('is_missing') and \
-                data['education']['junior_secondary_school_enrollment'].get('is_missing') and \
-                data['education']['junior_secondary_school_enrollment'].get('is_missing') and \
-                    data['education']['senior_secondary_school_enrollment'].get('is_missing') and \
-                        data['education']['primary_school_completion_sex'].get('is_missing') and \
-                        data['education']['literacy_sex'].get('is_missing')):
+                data['worldbank']['secondary_school_enrollment'].get('is_missing')):
             tabs['education'] = { 'name': 'Education', 'href': '#education' }
 
         if not (data['worldbank']['account_ownership'].get('is_missing') and \
@@ -2432,16 +2463,24 @@ def get_poverty_profile(geo, session, country, level):
 
 
 def get_fgm_profile(geo, session, country, level):
+    fgm_age_dist = LOCATIONNOTFOUND
+    prevalance_fgm_dist = LOCATIONNOTFOUND
     with dataset_context(year='2014'):
-        fgm_age_dist = LOCATIONNOTFOUND
         try:
             fgm_age_dist, _ = get_stat_data(['age'], geo, session)
         except Exception:
             pass
+    with dataset_context(year='2018'):
+        try:
+            prevalance_fgm_dist, _ = get_stat_data(['prevalence_fgm'], geo, session)
+        except Exception:
+            pass
 
     return {
-        'is_missing': fgm_age_dist.get('is_missing'),
+        'is_missing': fgm_age_dist.get('is_missing') and prevalance_fgm_dist.get('is_missing'),
         'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist',
+                                              country, level),
+        'prevalence_fgm': _add_metadata_to_dist(prevalance_fgm_dist, 'prevalence_fgm',
                                               country, level),
     }
 
@@ -2484,6 +2523,7 @@ def get_education_profile(geo, session, country, level):
     senior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
     junior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
     primary_school_completion_dist = LOCATIONNOTFOUND
+    literacy_sex_dist = LOCATIONNOTFOUND
 
     with dataset_context(year='2018'):
         try:

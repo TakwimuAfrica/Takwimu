@@ -238,6 +238,19 @@
      </div>
     </section>
     {% endif %}
+    {% if not fgm.prevalence_fgm.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+       <div class="column-three-quarters"
+            id="chart-histogram-fgm-prevalence_fgm"
+            data-stat-type="number"
+            data-chart-title="Prevalence of FGM among women aged 15 - 49 yearse" data-id="3e52a9fd-f26d-46a8-2221-27fbfxC03ecf">
+     </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.maternal_mortality.is_missing %}
     <section class="clearfix stat-row">
@@ -274,7 +287,7 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-histogram-worldbank-births_attended_by_skilled_health_staff"
+           id="chart-column-worldbank-births_attended_by_skilled_health_staff"
            data-stat-type=""
            data-chart-title="Births attended by skilled health staff (% of total)" data-id="26e7c9fd-53b0-4cb9-8949-368b572e8568">
       </div>
