@@ -1,4 +1,4 @@
-from django.conf.urls import include, url
+from django.conf.urls import include, url, handler404, handler500
 from django.conf.urls.static import static
 from django.views.decorators.cache import cache_page
 from django.views.generic import RedirectView
@@ -10,7 +10,6 @@ from takwimu.views import HomePageView, IndicatorsGeographyDetailView, \
     TwitterImageAPIView, LegalPageRedirectView
 from wazimap.views import HomepageView as ProfileView
 from census.views import DataView
-from takwimu.views import handler404, handler500
 from takwimu.feed import CountryProfileFeed
 from hurumap.dashboard.urls import urlpatterns as hurumap_dashboard_urlpatterns
 from .api import api_router
