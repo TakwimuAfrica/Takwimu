@@ -13,8 +13,8 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.primary_secondary_school_enrollment_distribution DROP CONSTRAINT IF EXISTS pk_primary_secondary_school_enrollment_distribution;
-DROP TABLE IF EXISTS public.primary_secondary_school_enrollment_distribution;
+ALTER TABLE IF EXISTS ONLY public.primary_school_enrollment_distribution DROP CONSTRAINT IF EXISTS pk_primary_school_enrollment_distribution;
+DROP TABLE IF EXISTS public.primary_school_enrollment_distribution;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
@@ -23,21 +23,21 @@ SET default_with_oids = false;
 -- Name: primary_secondary_school_enrollment_distribution; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.primary_secondary_school_enrollment_distribution (
+CREATE TABLE public.primary_school_enrollment_distribution (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     sex character varying(128) NOT NULL,
-    primary_secondary_school_enrollment_year character varying(128) NOT NULL,
+    primary_school_enrollment_year character varying(128) NOT NULL,
     total integer
 );
 
 
 --
--- Data for Name: primary_secondary_school_enrollment_distribution; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: primary_school_enrollment_distribution; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.primary_secondary_school_enrollment_distribution (geo_level, geo_code, geo_version, sex, primary_secondary_school_enrollment_year, total) FROM stdin;
+COPY public.primary_school_enrollment_distribution (geo_level, geo_code, geo_version, sex, primary_school_enrollment_year, total) FROM stdin;
 country	NG	2009	Female	2015	2920182
 country	NG	2009	Male	2015	3260109
 country	NG	2009	Female	2016	2786332
@@ -192,11 +192,11 @@ level1	NG_1_037	2009	Male	2016	68041
 
 
 --
--- Name: primary_secondary_school_enrollment pk_primary_secondary_school_enrollment_distribution; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: primary_secondary_school_enrollment pk_primary_school_enrollment_distribution; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.primary_secondary_school_enrollment_distribution
-    ADD CONSTRAINT pk_primary_secondary_school_enrollment_distribution PRIMARY KEY (geo_level, geo_code, geo_version, sex, primary_secondary_school_enrollment_year);
+ALTER TABLE ONLY public.primary_school_enrollment_distribution
+    ADD CONSTRAINT pk_primary_school_enrollment_distribution PRIMARY KEY (geo_level, geo_code, geo_version, sex, primary_school_enrollment_year);
 
 
 --

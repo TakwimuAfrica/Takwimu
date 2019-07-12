@@ -28,7 +28,7 @@ CREATE TABLE public.maternal_mortality (
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     maternal_mortality_year character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -213,6 +213,44 @@ country	ZM	2009	2012	243
 country	ZM	2009	2013	237
 country	ZM	2009	2014	231
 country	ZM	2009	2015	224
+country	NG	2009	2016	567.5
+level1	NG_1_001	2009	2016	375.9
+level1	NG_1_002	2009	2016	1841.9
+level1	NG_1_003	2009	2016	150.9
+level1	NG_1_004	2009	2016	279
+level1	NG_1_005	2009	2016	593.8
+level1	NG_1_006	2009	2016	471.1
+level1	NG_1_007	2009	2016	809.6
+level1	NG_1_008	2009	2016	2374.8
+level1	NG_1_009	2009	2016	642.3
+level1	NG_1_010	2009	2016	394.1
+level1	NG_1_011	2009	2016	218
+level1	NG_1_012	2009	2016	641.4
+level1	NG_1_013	2009	2016	876.8
+level1	NG_1_014	2009	2016	519
+level1	NG_1_015	2009	2016	83.6
+level1	NG_1_016	2009	2016	371.3
+level1	NG_1_017	2009	2016	642.9
+level1	NG_1_018	2009	2016	298.8
+level1	NG_1_019	2009	2016	452.6
+level1	NG_1_020	2009	2016	364.3
+level1	NG_1_021	2009	2016	214.2
+level1	NG_1_022	2009	2016	506.1
+level1	NG_1_023	2009	2016	1267.8
+level1	NG_1_024	2009	2016	904.4
+level1	NG_1_025	2009	2016	110.4
+level1	NG_1_026	2009	2016	817
+level1	NG_1_027	2009	2016	387
+level1	NG_1_028	2009	2016	258.8
+level1	NG_1_029	2009	2016	115.9
+level1	NG_1_030	2009	2016	344.1
+level1	NG_1_031	2009	2016	184
+level1	NG_1_032	2009	2016	278.5
+level1	NG_1_033	2009	2016	483.4
+level1	NG_1_034	2009	2016	737.4
+level1	NG_1_035	2009	2016	623.2
+level1	NG_1_036	2009	2016	1678.9
+level1	NG_1_037	2009	2016	259.8
 \.
 
 
