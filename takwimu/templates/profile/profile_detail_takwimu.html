@@ -279,6 +279,33 @@
       </div>
     </section>
     {% endif %}
+    {% if not health.hiv_patients_distribution.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health-hiv_patients_distribution"
+           data-stat-type=""
+           data-chart-title="Distribution of HIV Patients by Year and Sex 2015-2016" data-id="20aa37ec-1a2e-4ef6-a209-25d933ed13f0">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health.malaria_prevalence.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-health-malaria_prevalence"
+           data-stat-type=""
+           data-chart-title="Prevalence of Malaria in Children - Number of children" data-id="p679hhn4-53b0-4cb9-8949-368b572e8568">
+      </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.births_attended_by_skilled_health_staff.is_missing %}
     <section class="clearfix stat-row">
@@ -289,7 +316,7 @@
       <div class="column-three-quarters"
            id="chart-column-worldbank-births_attended_by_skilled_health_staff"
            data-stat-type=""
-           data-chart-title="Births attended by skilled health staff (% of total)" data-id="26e7c9fd-53b0-4cb9-8949-368b572e8568">
+           data-chart-title="Births attended by skilled health staff (% of total)" data-id="26e343fd-53b0-4cb9-8949-368b572e8568">
       </div>
     </section>
     {% endif %}
@@ -360,6 +387,34 @@
            id="chart-grouped_column-health_workers-health_workers_distribution_per_year"
            data-stat-type=""
            data-chart-title="Health worker density and distribution">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health_workers.doctors_per_sex_year.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health_workers-doctors_per_sex_year"
+           data-stat-type=""
+           data-chart-title="Number of Doctors by Year and Sex (2015-2017)">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health_workers.dentists_per_sex_year.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health_workers-dentists_per_sex_year"
+           data-stat-type=""
+           data-chart-title="Number of Dentists Year and Sex (2015-2017)">
       </div>
     </section>
     {% endif %}

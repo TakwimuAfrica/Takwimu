@@ -351,7 +351,7 @@ METADATA = {
             "literacy_sex": {
                 "source": {
                     "link": "https://nigerianstat.gov.ng/download/952",
-                    "title": " National Bureau of Statistics, 2018"
+                    "title": "National Bureau of Statistics, 2018"
                 }
             },
             "prevalence_fgm": {
@@ -369,7 +369,37 @@ METADATA = {
             "hiv_patients_distribution": {
                 "source": {
                     "link": "https://nigerianstat.gov.ng/download/952",
-                    "title": " National Bureau of Statistics, 2018"
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "doctors_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "dentists_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "human_development_indices": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/830",
+                    "title": "Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)"
+                }
+            },
+            "access_to_electricity_water": {
+                "source": {
+                    "link": "http://microdata.worldbank.org/index.php/catalog/3002/download/41925",
+                    "title": "Nigeria National Bureau of Statistics, 2017"
+                }
+            },
+            "account_ownership_indicator": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "Multiple Indicator Cluster Survey, 2016-17"
                 }
             },
             'child_births_by_size_dist': {
@@ -626,6 +656,36 @@ METADATA = {
                 "source": {
                     "link": "https://nigerianstat.gov.ng/download/952",
                     "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "doctors_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "dentists_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "human_development_indices": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/830",
+                    "title": "Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)"
+                }
+            },
+            "access_to_electricity_water": {
+                "source": {
+                    "link": "http://microdata.worldbank.org/index.php/catalog/3002/download/41925",
+                    "title": "Nigeria National Bureau of Statistics, 2017"
+                }
+            },
+            "account_ownership_indicator": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "Multiple Indicator Cluster Survey, 2016-17"
                 }
             }
         }
@@ -1938,6 +1998,8 @@ def get_profile(geo, profile_name, request):
             tabs['elections'] = {'name': 'Elections', 'href': '#elections'}
 
         if not (data['fgm'].get('is_missing') and \
+                data['health_workers'].get('is_missing') and \
+                data['health'].get('is_missing') and \
                 data['worldbank']['access_to_basic_services'].get('is_missing') and \
                 data['worldbank']['prevalence_of_undernourishment'].get('is_missing') and \
                 data['worldbank']['maternal_mortality'].get('is_missing')):
@@ -2281,11 +2343,13 @@ def get_health_centers_profile(geo, session, country, level):
 
 
 def get_health_workers_profile(geo, session, country, level):
+    health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
+    hrh_patient_ratio = 0
+    health_workers_distribution_per_year = LOCATIONNOTFOUND
+    doctors_per_sex_year_dist = LOCATIONNOTFOUND
+    dentists_per_sex_year_dist = LOCATIONNOTFOUND
+    
     with dataset_context(year='2014'):
-        health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
-        hrh_patient_ratio = 0
-        health_workers_distribution_per_year = LOCATIONNOTFOUND
-
         try:
             health_workers_dist, total_health_workers = get_stat_data(
                 'workers', geo, session, table_name='health_workers',
@@ -2306,13 +2370,29 @@ def get_health_workers_profile(geo, session, country, level):
                 ['workers', 'year'], geo, session, percent=False)
         except Exception as e:
             pass
+    with dataset_context(year='2018'):
+        try:
+            doctors_per_sex_year_dist, _ = get_stat_data(
+                ['number_of_dentist_year', 'number_of_dentist_sex'], geo, session, percent=False)
+        except Exception as e:
+            pass
+        
+        try:
+            dentists_per_sex_year_dist, _ = get_stat_data(
+                ['number_of_doctors_year', 'number_of_doctors_sex'], geo, session, percent=False)
+        except Exception as e:
+            pass
+
 
     total_health_workers_dist = _create_single_value_dist(
         'Total health worker population (2014)', total_health_workers)
     hrh_patient_ratio_dist = _create_single_value_dist(
         'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
+
     is_missing = health_workers_dist.get('is_missing') and \
-        health_workers_distribution_per_year.get('is_missing')
+        health_workers_distribution_per_year.get('is_missing') and \
+            doctors_per_sex_year_dist.get('is_missing') and \
+                dentists_per_sex_year_dist.get("is_missing")
     return {
         'is_missing': is_missing,
         'total_health_workers_dist': total_health_workers_dist,
@@ -2320,6 +2400,10 @@ def get_health_workers_profile(geo, session, country, level):
         'health_workers_dist': health_workers_dist,
         'health_workers_distribution_per_year': _add_metadata_to_dist(health_workers_distribution_per_year, 
                     'health_workers_distribution_per_year', country, level),
+        'doctors_per_sex_year': _add_metadata_to_dist(doctors_per_sex_year_dist, 
+                    'doctors_per_sex_year', country, level),
+        'dentists_per_sex_year': _add_metadata_to_dist(dentists_per_sex_year_dist, 
+                    'dentists_per_sex_year', country, level),
     } 
 
 
@@ -2389,18 +2473,33 @@ def get_causes_of_death_profile(geo, session, country, level):
     }
 
 
-def get_hiv_profile(geo, session, country, level):
-    with dataset_context( year='2014'):
-        prevention_methods_dist = LOCATIONNOTFOUND
+def get_health_profile(geo, session, country, level):
+    hiv_patients_distribution_dist = LOCATIONNOTFOUND
+    malaria_prevalence_dist = LOCATIONNOTFOUND
+
+    with dataset_context( year='2018'):
         try:
-            prevention_methods_dist, _ = get_stat_data(
-                ['method', 'sex'], geo, session)
+            hiv_patients_distribution_dist, _ = get_stat_data(
+                ['hiv_patients_distribution_year', 'sex'], geo, session)
         except Exception:
             pass
+        
+        try:
+            malaria_prevalence_dist, _ = get_stat_data(
+                ['malaria_prevalence_test'], geo, session)
+        except Exception:
+            pass
+    
 
     return {
-        'is_missing': prevention_methods_dist.get('is_missing'),
-        'prevention_methods_dist': prevention_methods_dist,
+        'is_missing': malaria_prevalence_dist.get('is_missing') and \
+            hiv_patients_distribution_dist.get('is_missing'),
+        'malaria_prevalence': _add_metadata_to_dist(malaria_prevalence_dist,
+                                                    'malaria_prevalence',
+                                                    country, level),
+        'hiv_patients_distribution': _add_metadata_to_dist(hiv_patients_distribution_dist,
+                                                    'hiv_patients_distribution',
+                                                    country, level),
     }
 
 
