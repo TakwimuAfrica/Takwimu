@@ -7,7 +7,8 @@ from wagtail.api.v2.router import WagtailAPIRouter
 from takwimu import settings
 from takwimu.views import HomePageView, IndicatorsGeographyDetailView, \
     SearchAPIView, AutoCompleteAPIView, FlourishView, AboutPageRedirectView, \
-    TwitterImageAPIView, LegalPageRedirectView
+    TwitterImageAPIView, LegalPageRedirectView, \
+    handler404 as custom_handler404, handler500 as custom_handler500
 from wazimap.views import HomepageView as ProfileView
 from census.views import DataView
 from takwimu.feed import CountryProfileFeed
@@ -59,8 +60,8 @@ if settings.DEBUG:
     import debug_toolbar
 
     urlpatterns = [
-        url(r'^404/$', handler404, name='error_404'),
-        url(r'^500/$', handler500, name='error_500'),
+        url(r'^404/$', custom_handler404, name='error_404'),
+        url(r'^500/$', custom_handler500, name='error_500'),
         url(r'^__debug__/', include(debug_toolbar.urls)),
     ] + urlpatterns
 
