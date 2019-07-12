@@ -3,9 +3,10 @@ import PropTypes from 'prop-types';
 
 import { withStyles, Typography } from '@material-ui/core';
 
+import { About } from '../components/Next';
 import Error from '../components/Error';
 import ErrorPage from '../components/ErrorPage';
-import { About } from '../components/Next';
+import SearchInput from '../components/SearchInput';
 
 const styles = () => ({
   root: {
@@ -26,6 +27,7 @@ function NotFoundError({
           The page you are looking for does not exist.
         </Typography>
       </Error>
+      <SearchInput title="Why not try searching…" />
       <About title="Explore further" socialMedia={socialMedia} />
     </ErrorPage>
   );
