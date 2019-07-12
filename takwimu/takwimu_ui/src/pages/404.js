@@ -9,9 +9,7 @@ import ErrorPage from '../components/ErrorPage';
 import SearchInput from '../components/SearchInput';
 
 const styles = () => ({
-  root: {
-    marginBottom: '14.375rem'
-  }
+  root: {}
 });
 
 function NotFoundError({
