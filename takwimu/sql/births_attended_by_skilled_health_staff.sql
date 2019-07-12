@@ -27,7 +27,7 @@ CREATE TABLE public.births_attended_by_skilled_health_staff (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    births_attended_by_skilled_health_staff_year character varying(128) NOT NULL,
+    births_attended_by_skilled_health_staff_year character varying(10) NOT NULL,
     total numeric
 );
 

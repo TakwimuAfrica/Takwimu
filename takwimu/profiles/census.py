@@ -342,6 +342,18 @@ METADATA = {
                     "title": " National Bureau of Statistics, 2018"
                 }
             },
+            "primary_school_completion_sex": {
+                "source": {
+                    "link": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "title": "Nigeria Federal Ministry of Education, 2016"
+                }
+            },
+            "literacy_sex": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
             'child_births_by_size_dist': {
                 'source': {
                     'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
@@ -557,6 +569,24 @@ METADATA = {
                 }
             },
             "primary_school_enrollment_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://msdat.fmohconnect.gov.ng/#/central_analytics/ODY",
+                    "title": "Federal Ministry of Health, 2018"
+                }
+            },
+            "primary_school_completion_sex": {
+                "source": {
+                    "link": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "title": "Nigeria Federal Ministry of Education, 2016"
+                }
+            },
+            "literacy_sex": {
                 "source": {
                     "link": "https://nigerianstat.gov.ng/download/952",
                     "title": " National Bureau of Statistics, 2018"
@@ -1863,7 +1893,8 @@ def get_profile(geo, profile_name, request):
         if not (data['demographics']['is_missing'] and \
                 data['worldbank']['youth_unemployment'].get('is_missing') and \
                 data['worldbank']['employment_to_population_ratio'].get('is_missing') and \
-                data['poverty'].get('is_missing')):
+                data['poverty'].get('is_missing') and \
+                    data['demographics']['sex_dist_per_year'].get('is_missing')):
             tabs['demographics'] = {'name': 'Demographics', 'href': '#demographics'}
 
         if not (data['elections'].get('is_missing') and \
@@ -1884,7 +1915,12 @@ def get_profile(geo, profile_name, request):
 
         if not (data['worldbank']['primary_school_enrollment'].get('is_missing') and \
                 data['worldbank']['adult_literacy_rate'].get('is_missing') and \
-                data['worldbank']['secondary_school_enrollment'].get('is_missing')):
+                data['worldbank']['secondary_school_enrollment'].get('is_missing') and \
+                data['education']['junior_secondary_school_enrollment'].get('is_missing') and \
+                data['education']['junior_secondary_school_enrollment'].get('is_missing') and \
+                    data['education']['senior_secondary_school_enrollment'].get('is_missing') and \
+                        data['education']['primary_school_completion_sex'].get('is_missing') and \
+                        data['education']['literacy_sex'].get('is_missing')):
             tabs['education'] = { 'name': 'Education', 'href': '#education' }
 
         if not (data['worldbank']['account_ownership'].get('is_missing') and \
@@ -2447,6 +2483,7 @@ def get_education_profile(geo, session, country, level):
     primary_school_enrollment_distribution_dist = LOCATIONNOTFOUND
     senior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
     junior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
+    primary_school_completion_dist = LOCATIONNOTFOUND
 
     with dataset_context(year='2018'):
         try:
@@ -2466,9 +2503,22 @@ def get_education_profile(geo, session, country, level):
                 ['primary_school_enrollment_year', 'sex'], geo, session)
         except Exception:
             pass
+        
+        try:
+            primary_school_completion_dist, _ = get_stat_data(
+                ['primary_education_completion_sex'], geo, session)
+        except Exception:
+            pass
+        try:
+            literacy_sex_dist, _ = get_stat_data(
+                ['sex'], geo, session, table_name='literacy_sex')
+        except Exception:
+            pass
     is_missing = senior_secondary_school_enrollment_dist.get('is_missing') and \
         junior_secondary_school_enrollment_dist.get('is_missing') and \
-            primary_school_enrollment_distribution_dist.get('is_missing')
+            primary_school_enrollment_distribution_dist.get('is_missing') and \
+                primary_school_completion_dist.get('is_missing') and \
+                    literacy_sex_dist.get('is_missing')
 
     return {
         'is_missing': is_missing,
@@ -2480,6 +2530,12 @@ def get_education_profile(geo, session, country, level):
             level),
         'primary_school_enrollment_distribution': _add_metadata_to_dist(
             senior_secondary_school_enrollment_dist, 'primary_school_enrollment_distribution', country,
+            level),
+        'primary_school_completion_sex': _add_metadata_to_dist(
+            primary_school_completion_dist, 'primary_school_completion_sex', country,
+            level),
+        'literacy_sex': _add_metadata_to_dist(
+            literacy_sex_dist, 'literacy_sex', country,
             level),
     }
 
