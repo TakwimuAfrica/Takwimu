@@ -1985,15 +1985,15 @@ def get_profile(geo, profile_name, request):
                 func = globals()[function_name]
                 data[section] = func(geo, session, country, level)
                 # get profiles for comparative geometries
-                if not data[section]['is_missing']:
+                if not data[section]['is_missing'] and not data[section]['is_missing'] is None:
                     for comp_geo in comparative_geos:
                         try:
                             merge_dicts(
                                 data[section], func(
                                     comp_geo, session, country, level), comp_geo.geo_level)
                         except KeyError as e:
-                            msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
-                                geo.geoid, section, comp_geo.geoid, e)
+                            msg = "Error merging data into %s for section '%s' from %s %s: KeyError: %s" % (
+                                geo.geoid, section, comp_geo.geoid, data[section], e)
                             log.fatal(msg, exc_info=e)
                             raise ValueError(msg)
 
@@ -2036,7 +2036,9 @@ def get_profile(geo, profile_name, request):
         if not data['budget'].get('is_missing'):
             tabs['budget'] = {'name': 'Budget', 'href': '#budget'}
 
-        if not data['worldbank'].get('is_missing'):
+        if not data['worldbank']['mobile_phone_subscriptions'].get('is_missing') and \
+            data['worldbank']['account_ownership_indicator'].get('is_missing') and \
+                data['worldbank']['account_ownership'].get('is_missing'):
             tabs['public_finances'] = {'name': 'Public Finances', 'href': '#public-finances'}
 
         if not (data['donors'].get('is_missing') and \
