@@ -48,8 +48,9 @@ class Input extends React.Component {
 
     const handleSearchClick = () => {
       if (query !== searchTerm && searchTerm.length > 0) {
-        // On a searchPage, onRefresh will be available to make API query
-        // On all other page that this component is used, onRefresh will be null
+        // On the search page, onRefresh will be a function used to query the
+        // API. On all other pages that this component is used, onRefresh is
+        // expected to be null
         if (typeof onRefresh === 'function') {
           window.history.pushState(null, '', `/search/?q=${searchTerm}`);
           onRefresh(searchTerm);
