@@ -106,6 +106,19 @@
       </div>
     </section>
     {% endif %}
+    {% if not demographics.human_development_indices.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-demographics-human_development_indices"
+           data-stat-type="number"
+           data-chart-title="Human Development Indices" data-id="53179714-0000-447f-92df-68800041e31a">
+      </div>
+    </section>
+    {% endif %}
   </div>
 </article>
 {% endif %}
@@ -193,6 +206,19 @@
            id="chart-histogram-worldbank-access_to_basic_services"
            data-stat-type=""
            data-chart-title="People using at least basic drinking water services (% of population)" data-id="6d232e9e-8d09-477b-b240-ecaf7eda13a4">
+      </div>
+    </section>
+    {% endif %}
+    {% if not health.access_to_electricity_water.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-health-access_to_electricity_water"
+           data-stat-type=""
+           data-chart-title="Percent of households with access to water and electricity services" data-id="6d119900-8d09-fg7b-b240-ecaw3eda13a4">
       </div>
     </section>
     {% endif %}
@@ -629,6 +655,19 @@
            id="chart-grouped_column-worldbank-account_ownership"
            data-stat-type=""
            data-chart-title="Account ownership at a financial institution or with a mobile-money-service provider, (% of population ages 15+)" data-id="76f69b31-1022-4280-a267-b5665177b1b1">
+      </div>
+    </section>
+    {% endif %}
+    {% if not financial_inclusion.account_ownership_indicator.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-financial_inclusion-account_ownership_indicator"
+           data-stat-type=""
+           data-chart-title="Percentage of households where at least one member owns or has a Bank Account" data-id="76888888-1022-4280-a267-b5665177b1b1">
       </div>
     </section>
     {% endif %}

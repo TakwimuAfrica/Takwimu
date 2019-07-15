@@ -2016,7 +2016,8 @@ def get_profile(geo, profile_name, request):
                 data['worldbank']['secondary_school_enrollment'].get('is_missing')):
             tabs['education'] = { 'name': 'Education', 'href': '#education' }
 
-        if not (data['worldbank']['account_ownership'].get('is_missing') and \
+        if not (data['financial_inclusion'].get('is_missing') and \
+                data['worldbank']['account_ownership'].get('is_missing') and \
                 data['worldbank']['mobile_phone_subscriptions'].get('is_missing')):
             tabs['financial_inclusion'] = {'name': 'Financial Inclusion', 'href': '#financial-inclusion'}
 
@@ -2062,6 +2063,7 @@ def get_population(geo, session, country, level, year):
     sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
     sex_dist_per_year = LOCATIONNOTFOUND
+    human_development_indices_dist = LOCATIONNOTFOUND
 
     db_table = db_column_name = 'population_sex_' + str(year)
     try:
@@ -2079,6 +2081,13 @@ def get_population(geo, session, country, level, year):
     except Exception:
         pass
 
+    with dataset_context(year='2018'):
+        try:
+            human_development_indices_dist, _ = get_stat_data(
+                ['human_dev_indices'], geo, session, percent=False)
+        except Exception:
+            pass
+
     with dataset_context(year='2016'):
         try:
             sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
@@ -2089,7 +2098,8 @@ def get_population(geo, session, country, level, year):
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
                  residence_dist.get('is_missing') and \
-                 sex_dist_per_year.get('is_missing')
+                 sex_dist_per_year.get('is_missing') and \
+                human_development_indices_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
 
@@ -2113,6 +2123,9 @@ def get_population(geo, session, country, level, year):
         'residence_dist': _add_metadata_to_dist(residence_dist,
                                                 'residence_dist', country,
                                                 level),
+        'human_development_indices': _add_metadata_to_dist(human_development_indices_dist,
+                                                'human_development_indices', country,
+                                                level),                                               
         'total_population': _add_metadata_to_dist(total_population_dist,
                                                   'total_population_dist',
                                                   country, level),
@@ -2476,29 +2489,40 @@ def get_causes_of_death_profile(geo, session, country, level):
 def get_health_profile(geo, session, country, level):
     hiv_patients_distribution_dist = LOCATIONNOTFOUND
     malaria_prevalence_dist = LOCATIONNOTFOUND
+    access_to_electricity_water_dist = LOCATIONNOTFOUND
 
     with dataset_context( year='2018'):
         try:
             hiv_patients_distribution_dist, _ = get_stat_data(
-                ['hiv_patients_distribution_year', 'sex'], geo, session)
+                ['hiv_patients_distribution_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
         
         try:
             malaria_prevalence_dist, _ = get_stat_data(
-                ['malaria_prevalence_test'], geo, session)
+                ['malaria_prevalence_test'], geo, session, percent=False)
+        except Exception:
+            pass
+
+        try:
+            access_to_electricity_water_dist, _ = get_stat_data(
+                ['access_to_elec_water_services'], geo, session, percent=False)
         except Exception:
             pass
     
 
     return {
         'is_missing': malaria_prevalence_dist.get('is_missing') and \
-            hiv_patients_distribution_dist.get('is_missing'),
+            hiv_patients_distribution_dist.get('is_missing') and \
+                access_to_electricity_water_dist.get('is_missing'),
         'malaria_prevalence': _add_metadata_to_dist(malaria_prevalence_dist,
                                                     'malaria_prevalence',
                                                     country, level),
         'hiv_patients_distribution': _add_metadata_to_dist(hiv_patients_distribution_dist,
                                                     'hiv_patients_distribution',
+                                                    country, level),
+        'access_to_electricity_water': _add_metadata_to_dist(access_to_electricity_water_dist,
+                                                    'access_to_electricity_water',
                                                     country, level),
     }
 
@@ -2571,7 +2595,8 @@ def get_fgm_profile(geo, session, country, level):
             pass
     with dataset_context(year='2018'):
         try:
-            prevalance_fgm_dist, _ = get_stat_data(['prevalence_fgm'], geo, session)
+            prevalance_fgm_dist, _ = get_stat_data(
+                ['prevalence_fgm'], geo, session, percent=False)
         except Exception:
             pass
 
@@ -2627,30 +2652,30 @@ def get_education_profile(geo, session, country, level):
     with dataset_context(year='2018'):
         try:
             senior_secondary_school_enrollment_dist, _ = get_stat_data(
-                ['senior_secondary_school_enrollment_year', 'sex'], geo, session)
+                ['senior_secondary_school_enrollment_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
 
         try:
             junior_secondary_school_enrollment_dist, _ = get_stat_data(
-                ['junior_secondary_school_enrollment_year', 'sex'], geo, session)
+                ['junior_secondary_school_enrollment_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
         
         try:
             primary_school_enrollment_distribution_dist, _ = get_stat_data(
-                ['primary_school_enrollment_year', 'sex'], geo, session)
+                ['primary_school_enrollment_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
         
         try:
             primary_school_completion_dist, _ = get_stat_data(
-                ['primary_education_completion_sex'], geo, session)
+                ['primary_education_completion_sex'], geo, session, percent=False)
         except Exception:
             pass
         try:
             literacy_sex_dist, _ = get_stat_data(
-                ['sex'], geo, session, table_name='literacy_sex')
+                ['sex'], geo, session, table_name='literacy_sex', percent=False)
         except Exception:
             pass
     is_missing = senior_secondary_school_enrollment_dist.get('is_missing') and \
@@ -2675,6 +2700,23 @@ def get_education_profile(geo, session, country, level):
             level),
         'literacy_sex': _add_metadata_to_dist(
             literacy_sex_dist, 'literacy_sex', country,
+            level),
+    }
+
+
+def get_financial_inclusion_profile(geo, session, country, level):
+    account_ownership_indicator_dict = LOCATIONNOTFOUND
+    with dataset_context(year='2018'):
+        try:
+            account_ownership_indicator_dict, _ = get_stat_data(
+                ['account_ownership_year'], geo, session, percent=False)
+        except Exception:
+            pass
+
+    return {
+        'is_missing': account_ownership_indicator_dict.get('is_missing'),
+        'account_ownership_indicator': _add_metadata_to_dist(
+            account_ownership_indicator_dict, 'account_ownership_indicator', country,
             level),
     }
 
