@@ -1,8 +1,9 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+
 import { withStyles } from '@material-ui/core/styles';
-import { Typography } from '@material-ui/core';
-import { PropTypes } from 'prop-types';
-import SearchInput from './SearchInput';
+
+import SearchInput from '../SearchInput';
 import SearchResultsContainer from './SearchResultsContainer';
 import Section from '../Section';
 
@@ -50,8 +51,7 @@ class SearchResults extends React.Component {
 
     return (
       <Section classes={{ root: classes.root }}>
-        <Typography variant="h3">Search Results</Typography>
-        <SearchInput query={query} onRefresh={this.handleSearch} />
+        <SearchInput onRefresh={this.handleSearch} query={query} />
         <SearchResultsContainer results={results} filter="All" />
       </Section>
     );

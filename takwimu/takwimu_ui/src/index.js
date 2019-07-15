@@ -20,6 +20,7 @@ import AnalysisPage from './pages/Analysis';
 import AboutPage from './pages/About';
 import ContactPage from './pages/Contact';
 import ServerErrorPage from './pages/500';
+import NotFoundErrorPage from './pages/404';
 import LegalPage from './pages/Legal';
 
 const PROPS = {
@@ -140,6 +141,13 @@ const render500Page = () => {
   }
 };
 
+const render404Page = () => {
+  const el = document.getElementById('takwimu404Page');
+  if (el) {
+    renderApp(NotFoundErrorPage, 'takwimu404Page');
+  }
+};
+
 // Render common elements
 renderApp(Navigation, 'takwimuNavigation');
 renderApp(Footer, 'takwimuFooter');
@@ -153,3 +161,4 @@ renderContactUsPage();
 renderSearchResultsPage();
 renderLegalPage();
 render500Page();
+render404Page();

@@ -29,7 +29,7 @@ const styles = theme => ({
   }
 });
 
-class SearchInput extends React.Component {
+class Input extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -43,13 +43,20 @@ class SearchInput extends React.Component {
   }
 
   render() {
-    const { classes, query, onRefresh } = this.props;
+    const { classes, onRefresh, placeholder, query } = this.props;
     const { searchTerm } = this.state;
 
     const handleSearchClick = () => {
       if (query !== searchTerm && searchTerm.length > 0) {
-        window.history.pushState(null, '', `/search/?q=${searchTerm}`);
-        onRefresh(searchTerm);
+        // On the search page, onRefresh will be a function used to query the
+        // API. On all other pages that this component is used, onRefresh is
+        // expected to be null
+        if (typeof onRefresh === 'function') {
+          window.history.pushState(null, '', `/search/?q=${searchTerm}`);
+          onRefresh(searchTerm);
+        } else {
+          window.location = `/search/?q=${searchTerm}`;
+        }
       }
     };
 
@@ -65,6 +72,7 @@ class SearchInput extends React.Component {
               handleSearchClick(e);
             }
           }}
+          placeholder={placeholder}
           endAdornment={
             <InputAdornment position="end">
               <IconButton
@@ -87,10 +95,15 @@ class SearchInput extends React.Component {
   }
 }
 
-SearchInput.propTypes = {
+Input.propTypes = {
   classes: PropTypes.shape({}).isRequired,
-  query: PropTypes.string.isRequired,
-  onRefresh: PropTypes.func.isRequired
+  onRefresh: PropTypes.func.isRequired,
+  placeholder: PropTypes.string,
+  query: PropTypes.string.isRequired
 };
 
-export default withStyles(styles)(SearchInput);
+Input.defaultProps = {
+  placeholder: 'Enter search term'
+};
+
+export default withStyles(styles)(Input);

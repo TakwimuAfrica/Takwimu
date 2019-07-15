@@ -321,6 +321,8 @@
         page.active_content = 'privacy';
       } else if (pathname.startsWith('/500')) {
         page = '500';
+      } else if (pathname.startsWith('/404')) {
+        page = '404';
       }
       takwimu.page.name = page;
       let ids = [];
@@ -346,6 +348,9 @@
           break;
         case '500':
           ids = ['takwimu500Page'];
+          break;
+        case '404':
+          ids = ['takwimu404Page'];
           break;
         case 'homepage': // fall through
         default:
