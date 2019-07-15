@@ -25,6 +25,7 @@ from wazimap.data.utils import dataset_context
 from wazimap.profiles import enhance_api_data
 from wazimap.views import GeographyDetailView
 
+import takwimu
 from takwimu.context_processors import (takwimu_countries, takwimu_stories,
                                         takwimu_topics)
 from takwimu.models import ProfileData
@@ -205,8 +206,8 @@ def handler404(request):
     return render(request, "404.html")
 
 
-def handler500(request):
-    return render(request, "500.html")
+def handler500(request, template_name="500.html"):
+    return render(request, template_name, status=500)
 
 
 class SupportServicesIndexView(TemplateView):

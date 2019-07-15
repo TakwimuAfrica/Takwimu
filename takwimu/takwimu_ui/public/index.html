@@ -319,6 +319,8 @@
       } else if (pathname.startsWith('/privacy')) {
         page = 'legal';
         page.active_content = 'privacy';
+      } else if (pathname.startsWith('/500')) {
+        page = '500';
       }
       takwimu.page.name = page;
       let ids = [];
@@ -341,6 +343,9 @@
           break;
         case 'analysis':
           ids = ['takwimuAnalysisPage'];
+          break;
+        case '500':
+          ids = ['takwimu500Page'];
           break;
         case 'homepage': // fall through
         default:
