@@ -390,6 +390,12 @@ METADATA = {
                     "title": "Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)"
                 }
             },
+            "youth_unemployment_2017": {
+                "source": {
+                    "link": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
+                    "title": "National Bureau of Statistics, 2017"
+                }
+            },
             "access_to_electricity_water": {
                 "source": {
                     "link": "http://microdata.worldbank.org/index.php/catalog/3002/download/41925",
@@ -686,6 +692,12 @@ METADATA = {
                 "source": {
                     "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
                     "title": "Multiple Indicator Cluster Survey, 2016-17"
+                }
+            },
+            "youth_unemployment_2017": {
+                "source": {
+                    "link": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
+                    "title": "National Bureau of Statistics, 2017"
                 }
             }
         }
@@ -2064,6 +2076,7 @@ def get_population(geo, session, country, level, year):
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
     sex_dist_per_year = LOCATIONNOTFOUND
     human_development_indices_dist = LOCATIONNOTFOUND
+    youth_unemployment_dist = LOCATIONNOTFOUND
 
     db_table = db_column_name = 'population_sex_' + str(year)
     try:
@@ -2088,6 +2101,12 @@ def get_population(geo, session, country, level, year):
         except Exception:
             pass
 
+        try:
+            youth_unemployment_dist, _ = get_stat_data(['youth_unemployment_period'], geo, session,
+                                    percent=False )
+        except Exception:
+            pass
+
     with dataset_context(year='2016'):
         try:
             sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
@@ -2099,7 +2118,8 @@ def get_population(geo, session, country, level, year):
     is_missing = sex_dist.get('is_missing') and \
                  residence_dist.get('is_missing') and \
                  sex_dist_per_year.get('is_missing') and \
-                human_development_indices_dist.get('is_missing')
+                human_development_indices_dist.get('is_missing') and \
+                    youth_unemployment_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
 
@@ -2125,7 +2145,10 @@ def get_population(geo, session, country, level, year):
                                                 level),
         'human_development_indices': _add_metadata_to_dist(human_development_indices_dist,
                                                 'human_development_indices', country,
-                                                level),                                               
+                                                level),   
+        'youth_unemployment_2017': _add_metadata_to_dist(youth_unemployment_dist,
+                                                'youth_unemployment_2017', country, level),
+
         'total_population': _add_metadata_to_dist(total_population_dist,
                                                   'total_population_dist',
                                                   country, level),
