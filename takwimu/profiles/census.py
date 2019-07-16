@@ -2036,9 +2036,7 @@ def get_profile(geo, profile_name, request):
         if not data['budget'].get('is_missing'):
             tabs['budget'] = {'name': 'Budget', 'href': '#budget'}
 
-        if not data['worldbank']['mobile_phone_subscriptions'].get('is_missing') and \
-            data['worldbank']['account_ownership_indicator'].get('is_missing') and \
-                data['worldbank']['account_ownership'].get('is_missing'):
+        if not data['worldbank'].get('is_missing'):
             tabs['public_finances'] = {'name': 'Public Finances', 'href': '#public-finances'}
 
         if not (data['donors'].get('is_missing') and \
