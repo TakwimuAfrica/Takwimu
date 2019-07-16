@@ -1992,8 +1992,8 @@ def get_profile(geo, profile_name, request):
                                 data[section], func(
                                     comp_geo, session, country, level), comp_geo.geo_level)
                         except KeyError as e:
-                            msg = "Error merging data into %s for section '%s' from %s %s: KeyError: %s" % (
-                                geo.geoid, section, comp_geo.geoid, data[section], e)
+                            msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
+                                geo.geoid, section, comp_geo.geoid, e)
                             log.fatal(msg, exc_info=e)
                             raise ValueError(msg)
 
