@@ -26,9 +26,9 @@ SET default_with_oids = false;
 CREATE TABLE public.births_attended_by_skilled_health_staff (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
-    geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    births_attended_by_skilled_health_staff_year character varying(128) NOT NULL,
-    total integer
+    geo_version character varying(10) DEFAULT ''::character varying NOT NULL,
+    births_attended_by_skilled_health_staff_year character varying(10) NOT NULL,
+    total numeric
 );
 
 
@@ -60,7 +60,6 @@ country	KE	2009	2003	42
 country	KE	2009	2000	43
 country	KE	2009	1998	44
 country	NG	2009	2017	43
-country	NG	2009	2013	35
 country	NG	2009	2011	47
 country	NG	2009	2008	34
 country	NG	2009	2003	35
@@ -100,6 +99,82 @@ country	ZM	2009	2007	45
 country	ZM	2009	2002	42
 country	ZM	2009	1999	45
 country	ZM	2009	1996	47
+country	NG	2009	2013	38.1
+country	NG	2009	2018	43.4
+level1	NG_1_001	2009	2013	77.2
+level1	NG_1_001	2009	2018	94.9
+level1	NG_1_002	2009	2013	36.3
+level1	NG_1_002	2009	2018	40.8
+level1	NG_1_003	2009	2013	45.6
+level1	NG_1_003	2009	2018	39.2
+level1	NG_1_004	2009	2013	87.6
+level1	NG_1_004	2009	2018	91.3
+level1	NG_1_005	2009	2013	16.3
+level1	NG_1_005	2009	2018	27
+level1	NG_1_006	2009	2013	32.1
+level1	NG_1_006	2009	2018	25.1
+level1	NG_1_007	2009	2013	51.6
+level1	NG_1_007	2009	2018	71.1
+level1	NG_1_008	2009	2013	22.3
+level1	NG_1_008	2009	2018	29.5
+level1	NG_1_009	2009	2013	41.3
+level1	NG_1_009	2009	2018	56.2
+level1	NG_1_010	2009	2013	59.8
+level1	NG_1_010	2009	2018	63.4
+level1	NG_1_011	2009	2013	62.1
+level1	NG_1_011	2009	2018	58.3
+level1	NG_1_012	2009	2013	78.3
+level1	NG_1_012	2009	2018	89.7
+level1	NG_1_013	2009	2013	84.7
+level1	NG_1_013	2009	2018	79
+level1	NG_1_014	2009	2013	91.5
+level1	NG_1_014	2009	2018	89.9
+level1	NG_1_015	2009	2013	70.2
+level1	NG_1_015	2009	2018	71.7
+level1	NG_1_016	2009	2013	26.6
+level1	NG_1_016	2009	2018	21.1
+level1	NG_1_017	2009	2013	96.5
+level1	NG_1_017	2009	2018	94.2
+level1	NG_1_018	2009	2013	7.6
+level1	NG_1_018	2009	2018	21.3
+level1	NG_1_019	2009	2013	35.5
+level1	NG_1_019	2009	2018	23.3
+level1	NG_1_020	2009	2013	13.7
+level1	NG_1_020	2009	2018	23.6
+level1	NG_1_021	2009	2013	7.7
+level1	NG_1_021	2009	2018	19.1
+level1	NG_1_022	2009	2013	9.3
+level1	NG_1_022	2009	2018	9.4
+level1	NG_1_023	2009	2013	70.9
+level1	NG_1_023	2009	2018	77.6
+level1	NG_1_024	2009	2013	79.6
+level1	NG_1_024	2009	2018	58
+level1	NG_1_025	2009	2013	87.2
+level1	NG_1_025	2009	2018	80.1
+level1	NG_1_026	2009	2013	40.7
+level1	NG_1_026	2009	2018	57.5
+level1	NG_1_027	2009	2013	28.6
+level1	NG_1_027	2009	2018	30.6
+level1	NG_1_028	2009	2013	84.7
+level1	NG_1_028	2009	2018	77
+level1	NG_1_029	2009	2013	67.2
+level1	NG_1_029	2009	2018	82.8
+level1	NG_1_030	2009	2013	94.2
+level1	NG_1_030	2009	2018	94.7
+level1	NG_1_031	2009	2013	78.3
+level1	NG_1_031	2009	2018	76.8
+level1	NG_1_032	2009	2013	35.8
+level1	NG_1_032	2009	2018	46.3
+level1	NG_1_033	2009	2013	63.4
+level1	NG_1_033	2009	2018	67.2
+level1	NG_1_034	2009	2013	5.4
+level1	NG_1_034	2009	2018	12.9
+level1	NG_1_035	2009	2013	14.3
+level1	NG_1_035	2009	2018	37.3
+level1	NG_1_036	2009	2013	10.2
+level1	NG_1_036	2009	2018	16.3
+level1	NG_1_037	2009	2013	6.1
+level1	NG_1_037	2009	2018	12.4
 \.
 
 

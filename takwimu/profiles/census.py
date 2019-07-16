@@ -318,6 +318,96 @@ METADATA = {
     },
     'nigeria': {
         'country': {
+            "sex_dist_per_year": {
+                'source': {
+                    'link': 'https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls',
+                    'title': 'Nigeria Bureau of Statistics, 2016',
+                },
+            },
+            "senior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "junior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "primary_school_enrollment_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "primary_school_completion_sex": {
+                "source": {
+                    "link": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "title": "Nigeria Federal Ministry of Education, 2016"
+                }
+            },
+            "literacy_sex": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "prevalence_fgm": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "MICS, 2016-17"
+                }
+            },
+            "malaria_prevalence": {
+                "source": {
+                    "link": "https://dhsprogram.com/pubs/pdf/MIS20/MIS20.pdf",
+                    "title": "Nigeria Demographic Health Survey, 2015"
+                }
+            },
+            "hiv_patients_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "doctors_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "dentists_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "human_development_indices": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/830",
+                    "title": "Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)"
+                }
+            },
+            "youth_unemployment_2017": {
+                "source": {
+                    "link": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
+                    "title": "National Bureau of Statistics, 2017"
+                }
+            },
+            "access_to_electricity_water": {
+                "source": {
+                    "link": "http://microdata.worldbank.org/index.php/catalog/3002/download/41925",
+                    "title": "Nigeria National Bureau of Statistics, 2017"
+                }
+            },
+            "account_ownership_indicator": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "Multiple Indicator Cluster Survey, 2016-17"
+                }
+            },
             'child_births_by_size_dist': {
                 'source': {
                     'link': 'https://dhsprogram.com/pubs/pdf/fr293/fr293.pdf',
@@ -426,8 +516,8 @@ METADATA = {
             },
             "births_attended_by_skilled_health_staff": {
                 "source": {
-                    "link": "https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=NG",
-                    "title": "WorldBank"
+                    "link": "https://msdat.fmohconnect.gov.ng/#/central_analytics/ODY",
+                    "title": "Federal Ministry of Health, 2018"
                 }
             },
             "gdp_per_capita_growth": {
@@ -507,6 +597,110 @@ METADATA = {
                 "qualifier": "M: Male\nF: Female"
             },
         },
+        'level1': {
+            "sex_dist_per_year": {
+                'source': {
+                    'link': 'https://nigerianstat.gov.ng/resource/POPULATION%20PROJECTION%20Nigeria%20sgfn.xls',
+                    'title': 'Nigeria Bureau of Statistics, 2016',
+                },
+            },
+            "maternal_mortality": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "senior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "junior_secondary_school_enrollment": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "primary_school_enrollment_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "births_attended_by_skilled_health_staff": {
+                "source": {
+                    "link": "https://msdat.fmohconnect.gov.ng/#/central_analytics/ODY",
+                    "title": "Federal Ministry of Health, 2018"
+                }
+            },
+            "primary_school_completion_sex": {
+                "source": {
+                    "link": "https://www.nemis.gov.ng/downloads_fold/Nigeria%20Education%20Indicators%202016.pdf#page=13",
+                    "title": "Nigeria Federal Ministry of Education, 2016"
+                }
+            },
+            "literacy_sex": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "prevalence_fgm": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "MICS, 2016-17"
+                }
+            },
+            "malaria_prevalence": {
+                "source": {
+                    "link": "https://dhsprogram.com/pubs/pdf/MIS20/MIS20.pdf",
+                    "title": "Nigeria Demographic Health Survey, 2015"
+                }
+            },
+            "hiv_patients_distribution": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": " National Bureau of Statistics, 2018"
+                }
+            },
+            "doctors_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "dentists_per_sex_year": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/952",
+                    "title": "National Bureau of Statistics, 2018"
+                }
+            },
+            "human_development_indices": {
+                "source": {
+                    "link": "https://nigerianstat.gov.ng/download/830",
+                    "title": "Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)"
+                }
+            },
+            "access_to_electricity_water": {
+                "source": {
+                    "link": "http://microdata.worldbank.org/index.php/catalog/3002/download/41925",
+                    "title": "Nigeria National Bureau of Statistics, 2017"
+                }
+            },
+            "account_ownership_indicator": {
+                "source": {
+                    "link": "https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip",
+                    "title": "Multiple Indicator Cluster Survey, 2016-17"
+                }
+            },
+            "youth_unemployment_2017": {
+                "source": {
+                    "link": "https://africacheck.org/wp-content/uploads/2018/03/q1-q3_2017_unemployment_report_VOLUME_1-1.pdf2",
+                    "title": "National Bureau of Statistics, 2017"
+                }
+            }
+        }
     },
     'ethiopia': {
         'country': {
@@ -1791,7 +1985,7 @@ def get_profile(geo, profile_name, request):
                 func = globals()[function_name]
                 data[section] = func(geo, session, country, level)
                 # get profiles for comparative geometries
-                if not data[section]['is_missing']:
+                if not data[section]['is_missing'] and not data[section]['is_missing'] is None:
                     for comp_geo in comparative_geos:
                         try:
                             merge_dicts(
@@ -1816,6 +2010,8 @@ def get_profile(geo, profile_name, request):
             tabs['elections'] = {'name': 'Elections', 'href': '#elections'}
 
         if not (data['fgm'].get('is_missing') and \
+                data['health_workers'].get('is_missing') and \
+                data['health'].get('is_missing') and \
                 data['worldbank']['access_to_basic_services'].get('is_missing') and \
                 data['worldbank']['prevalence_of_undernourishment'].get('is_missing') and \
                 data['worldbank']['maternal_mortality'].get('is_missing')):
@@ -1826,12 +2022,14 @@ def get_profile(geo, profile_name, request):
                 data['worldbank']['cereal_yield_kg_per_hectare'].get('is_missing')):
             tabs['agriculture'] = {'name': 'Agriculture', 'href': '#agriculture'}
 
-        if not (data['worldbank']['primary_school_enrollment'].get('is_missing') and \
+        if not (data['education']['is_missing'] and \
+                data['worldbank']['primary_school_enrollment'].get('is_missing') and \
                 data['worldbank']['adult_literacy_rate'].get('is_missing') and \
                 data['worldbank']['secondary_school_enrollment'].get('is_missing')):
             tabs['education'] = { 'name': 'Education', 'href': '#education' }
 
-        if not (data['worldbank']['account_ownership'].get('is_missing') and \
+        if not (data['financial_inclusion'].get('is_missing') and \
+                data['worldbank']['account_ownership'].get('is_missing') and \
                 data['worldbank']['mobile_phone_subscriptions'].get('is_missing')):
             tabs['financial_inclusion'] = {'name': 'Financial Inclusion', 'href': '#financial-inclusion'}
 
@@ -1876,6 +2074,10 @@ def get_demographics_profile(geo, session, country, level):
 def get_population(geo, session, country, level, year):
     sex_dist, total_population_sex = LOCATIONNOTFOUND, 0
     residence_dist, total_population_residence = LOCATIONNOTFOUND, 0
+    sex_dist_per_year = LOCATIONNOTFOUND
+    human_development_indices_dist = LOCATIONNOTFOUND
+    youth_unemployment_dist = LOCATIONNOTFOUND
+
     db_table = db_column_name = 'population_sex_' + str(year)
     try:
         sex_dist, total_population_sex = get_stat_data(
@@ -1892,9 +2094,32 @@ def get_population(geo, session, country, level, year):
     except Exception:
         pass
 
+    with dataset_context(year='2018'):
+        try:
+            human_development_indices_dist, _ = get_stat_data(
+                ['human_dev_indices'], geo, session, percent=False)
+        except Exception:
+            pass
+
+        try:
+            youth_unemployment_dist, _ = get_stat_data(['youth_unemployment_period'], geo, session,
+                                    percent=False )
+        except Exception:
+            pass
+
+    with dataset_context(year='2016'):
+        try:
+            sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
+                                    table_name='population_sex_year' )
+        except Exception:
+            pass
+
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
-                 residence_dist.get('is_missing')
+                 residence_dist.get('is_missing') and \
+                 sex_dist_per_year.get('is_missing') and \
+                human_development_indices_dist.get('is_missing') and \
+                    youth_unemployment_dist.get('is_missing')
     if not is_missing:
         total_population = total_population_sex if total_population_sex > 0 else total_population_residence
 
@@ -1914,9 +2139,16 @@ def get_population(geo, session, country, level, year):
     demographics_data = {
         'is_missing': is_missing,
         'sex_dist': _add_metadata_to_dist(sex_dist, 'sex_dist', country, level),
+        'sex_dist_per_year': _add_metadata_to_dist(sex_dist_per_year, 'sex_dist_per_year', country, level),
         'residence_dist': _add_metadata_to_dist(residence_dist,
                                                 'residence_dist', country,
                                                 level),
+        'human_development_indices': _add_metadata_to_dist(human_development_indices_dist,
+                                                'human_development_indices', country,
+                                                level),   
+        'youth_unemployment_2017': _add_metadata_to_dist(youth_unemployment_dist,
+                                                'youth_unemployment_2017', country, level),
+
         'total_population': _add_metadata_to_dist(total_population_dist,
                                                   'total_population_dist',
                                                   country, level),
@@ -2147,11 +2379,13 @@ def get_health_centers_profile(geo, session, country, level):
 
 
 def get_health_workers_profile(geo, session, country, level):
+    health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
+    hrh_patient_ratio = 0
+    health_workers_distribution_per_year = LOCATIONNOTFOUND
+    doctors_per_sex_year_dist = LOCATIONNOTFOUND
+    dentists_per_sex_year_dist = LOCATIONNOTFOUND
+    
     with dataset_context(year='2014'):
-        health_workers_dist, total_health_workers = LOCATIONNOTFOUND, 0
-        hrh_patient_ratio = 0
-        health_workers_distribution_per_year = LOCATIONNOTFOUND
-
         try:
             health_workers_dist, total_health_workers = get_stat_data(
                 'workers', geo, session, table_name='health_workers',
@@ -2172,13 +2406,29 @@ def get_health_workers_profile(geo, session, country, level):
                 ['workers', 'year'], geo, session, percent=False)
         except Exception as e:
             pass
+    with dataset_context(year='2018'):
+        try:
+            doctors_per_sex_year_dist, _ = get_stat_data(
+                ['number_of_dentist_year', 'number_of_dentist_sex'], geo, session, percent=False)
+        except Exception as e:
+            pass
+        
+        try:
+            dentists_per_sex_year_dist, _ = get_stat_data(
+                ['number_of_doctors_year', 'number_of_doctors_sex'], geo, session, percent=False)
+        except Exception as e:
+            pass
+
 
     total_health_workers_dist = _create_single_value_dist(
         'Total health worker population (2014)', total_health_workers)
     hrh_patient_ratio_dist = _create_single_value_dist(
         'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
+
     is_missing = health_workers_dist.get('is_missing') and \
-        health_workers_distribution_per_year.get('is_missing')
+        health_workers_distribution_per_year.get('is_missing') and \
+            doctors_per_sex_year_dist.get('is_missing') and \
+                dentists_per_sex_year_dist.get("is_missing")
     return {
         'is_missing': is_missing,
         'total_health_workers_dist': total_health_workers_dist,
@@ -2186,6 +2436,10 @@ def get_health_workers_profile(geo, session, country, level):
         'health_workers_dist': health_workers_dist,
         'health_workers_distribution_per_year': _add_metadata_to_dist(health_workers_distribution_per_year, 
                     'health_workers_distribution_per_year', country, level),
+        'doctors_per_sex_year': _add_metadata_to_dist(doctors_per_sex_year_dist, 
+                    'doctors_per_sex_year', country, level),
+        'dentists_per_sex_year': _add_metadata_to_dist(dentists_per_sex_year_dist, 
+                    'dentists_per_sex_year', country, level),
     } 
 
 
@@ -2255,18 +2509,44 @@ def get_causes_of_death_profile(geo, session, country, level):
     }
 
 
-def get_hiv_profile(geo, session, country, level):
-    with dataset_context( year='2014'):
-        prevention_methods_dist = LOCATIONNOTFOUND
+def get_health_profile(geo, session, country, level):
+    hiv_patients_distribution_dist = LOCATIONNOTFOUND
+    malaria_prevalence_dist = LOCATIONNOTFOUND
+    access_to_electricity_water_dist = LOCATIONNOTFOUND
+
+    with dataset_context( year='2018'):
         try:
-            prevention_methods_dist, _ = get_stat_data(
-                ['method', 'sex'], geo, session)
+            hiv_patients_distribution_dist, _ = get_stat_data(
+                ['hiv_patients_distribution_year', 'sex'], geo, session, percent=False)
+        except Exception:
+            pass
+        
+        try:
+            malaria_prevalence_dist, _ = get_stat_data(
+                ['malaria_prevalence_test'], geo, session, percent=False)
         except Exception:
             pass
 
+        try:
+            access_to_electricity_water_dist, _ = get_stat_data(
+                ['access_to_elec_water_services'], geo, session, percent=False)
+        except Exception:
+            pass
+    
+
     return {
-        'is_missing': prevention_methods_dist.get('is_missing'),
-        'prevention_methods_dist': prevention_methods_dist,
+        'is_missing': malaria_prevalence_dist.get('is_missing') and \
+            hiv_patients_distribution_dist.get('is_missing') and \
+                access_to_electricity_water_dist.get('is_missing'),
+        'malaria_prevalence': _add_metadata_to_dist(malaria_prevalence_dist,
+                                                    'malaria_prevalence',
+                                                    country, level),
+        'hiv_patients_distribution': _add_metadata_to_dist(hiv_patients_distribution_dist,
+                                                    'hiv_patients_distribution',
+                                                    country, level),
+        'access_to_electricity_water': _add_metadata_to_dist(access_to_electricity_water_dist,
+                                                    'access_to_electricity_water',
+                                                    country, level),
     }
 
 
@@ -2329,16 +2609,25 @@ def get_poverty_profile(geo, session, country, level):
 
 
 def get_fgm_profile(geo, session, country, level):
+    fgm_age_dist = LOCATIONNOTFOUND
+    prevalance_fgm_dist = LOCATIONNOTFOUND
     with dataset_context(year='2014'):
-        fgm_age_dist = LOCATIONNOTFOUND
         try:
             fgm_age_dist, _ = get_stat_data(['age'], geo, session)
         except Exception:
             pass
+    with dataset_context(year='2018'):
+        try:
+            prevalance_fgm_dist, _ = get_stat_data(
+                ['prevalence_fgm'], geo, session, percent=False)
+        except Exception:
+            pass
 
     return {
-        'is_missing': fgm_age_dist.get('is_missing'),
+        'is_missing': fgm_age_dist.get('is_missing') and prevalance_fgm_dist.get('is_missing'),
         'fgm_age_dist': _add_metadata_to_dist(fgm_age_dist, 'fgm_age_dist',
+                                              country, level),
+        'prevalence_fgm': _add_metadata_to_dist(prevalance_fgm_dist, 'prevalence_fgm',
                                               country, level),
     }
 
@@ -2372,6 +2661,85 @@ def get_budget_profile(geo, session, country, level):
         'is_missing': government_expenditure_dist.get('is_missing'),
         'government_expenditure_dist': _add_metadata_to_dist(
             government_expenditure_dist, 'government_expenditure_dist', country,
+            level),
+    }
+
+
+def get_education_profile(geo, session, country, level):
+    primary_school_enrollment_distribution_dist = LOCATIONNOTFOUND
+    senior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
+    junior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
+    primary_school_completion_dist = LOCATIONNOTFOUND
+    literacy_sex_dist = LOCATIONNOTFOUND
+
+    with dataset_context(year='2018'):
+        try:
+            senior_secondary_school_enrollment_dist, _ = get_stat_data(
+                ['senior_secondary_school_enrollment_year', 'sex'], geo, session, percent=False)
+        except Exception:
+            pass
+
+        try:
+            junior_secondary_school_enrollment_dist, _ = get_stat_data(
+                ['junior_secondary_school_enrollment_year', 'sex'], geo, session, percent=False)
+        except Exception:
+            pass
+        
+        try:
+            primary_school_enrollment_distribution_dist, _ = get_stat_data(
+                ['primary_school_enrollment_year', 'sex'], geo, session, percent=False)
+        except Exception:
+            pass
+        
+        try:
+            primary_school_completion_dist, _ = get_stat_data(
+                ['primary_education_completion_sex'], geo, session, percent=False)
+        except Exception:
+            pass
+        try:
+            literacy_sex_dist, _ = get_stat_data(
+                ['sex'], geo, session, table_name='literacy_sex', percent=False)
+        except Exception:
+            pass
+    is_missing = senior_secondary_school_enrollment_dist.get('is_missing') and \
+        junior_secondary_school_enrollment_dist.get('is_missing') and \
+            primary_school_enrollment_distribution_dist.get('is_missing') and \
+                primary_school_completion_dist.get('is_missing') and \
+                    literacy_sex_dist.get('is_missing')
+
+    return {
+        'is_missing': is_missing,
+        'senior_secondary_school_enrollment': _add_metadata_to_dist(
+            senior_secondary_school_enrollment_dist, 'senior_secondary_school_enrollment', country,
+            level),
+        'junior_secondary_school_enrollment': _add_metadata_to_dist(
+            junior_secondary_school_enrollment_dist, 'junior_secondary_school_enrollment', country,
+            level),
+        'primary_school_enrollment_distribution': _add_metadata_to_dist(
+            senior_secondary_school_enrollment_dist, 'primary_school_enrollment_distribution', country,
+            level),
+        'primary_school_completion_sex': _add_metadata_to_dist(
+            primary_school_completion_dist, 'primary_school_completion_sex', country,
+            level),
+        'literacy_sex': _add_metadata_to_dist(
+            literacy_sex_dist, 'literacy_sex', country,
+            level),
+    }
+
+
+def get_financial_inclusion_profile(geo, session, country, level):
+    account_ownership_indicator_dict = LOCATIONNOTFOUND
+    with dataset_context(year='2018'):
+        try:
+            account_ownership_indicator_dict, _ = get_stat_data(
+                ['account_ownership_year'], geo, session, percent=False)
+        except Exception:
+            pass
+
+    return {
+        'is_missing': account_ownership_indicator_dict.get('is_missing'),
+        'account_ownership_indicator': _add_metadata_to_dist(
+            account_ownership_indicator_dict, 'account_ownership_indicator', country,
             level),
     }
 

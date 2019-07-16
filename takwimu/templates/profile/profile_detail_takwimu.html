@@ -22,7 +22,15 @@
       <div class="column-three-quarters" id="chart-pie-demographics-sex_dist" data-stat-type="percentage" data-chart-title="Population by sex" data-initial-sort="-value" data-id="d23d5731-0db0-4ad4-b2a3-e741d1a6efc8"></div>
     </section>
     {% endif %}
-
+    {% if not demographics.sex_dist_per_year.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters" id="chart-grouped_column-demographics-sex_dist_per_year" data-stat-type="number" data-chart-title="Population by sex per year" data-initial-sort="-value" data-id="345e5731-0db0-5674-b2a3-e741d1a6efc8"></div>
+    </section>
+    {% endif %}
     {% if not demographics.residence_dist.is_missing %}
       <section class="clearfix stat-row">
         <div class="column-quarter">
@@ -53,6 +61,20 @@
            id="chart-grouped_column-worldbank-youth_unemployment"
            data-stat-type=""
            data-chart-title="Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)" data-id="f888d12d-d4e9-426f-ba1e-dc4aff7017ea">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not demographics.youth_unemployment_2017.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-demographics-youth_unemployment_2017"
+           data-stat-type=""
+           data-chart-title="Percent Under-employed and unemployed " data-id="35m8d12d-erer-426f-ba1e-dc4aff7017ea">
       </div>
     </section>
     {% endif %}
@@ -95,6 +117,19 @@
            id="chart-grouped_column-poverty-poverty_age_dist"
            data-stat-type="scaled-percentage"
            data-chart-title="Percentage of population living in poverty by age and residence" data-id="53179714-02d8-447f-92df-688b1841e31a">
+      </div>
+    </section>
+    {% endif %}
+    {% if not demographics.human_development_indices.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-demographics-human_development_indices"
+           data-stat-type="number"
+           data-chart-title="Human Development Indices" data-id="53179714-0000-447f-92df-68800041e31a">
       </div>
     </section>
     {% endif %}
@@ -188,6 +223,19 @@
       </div>
     </section>
     {% endif %}
+    {% if not health.access_to_electricity_water.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-histogram-health-access_to_electricity_water"
+           data-stat-type=""
+           data-chart-title="Percent of households with access to water and electricity services" data-id="6d119900-8d09-fg7b-b240-ecaw3eda13a4">
+      </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.prevalence_of_undernourishment.is_missing %}
     <section class="clearfix stat-row">
@@ -230,6 +278,19 @@
      </div>
     </section>
     {% endif %}
+    {% if not fgm.prevalence_fgm.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+       <div class="column-three-quarters"
+            id="chart-histogram-fgm-prevalence_fgm"
+            data-stat-type="number"
+            data-chart-title="Prevalence of FGM among women aged 15 - 49 yearse" data-id="3e52a9fd-f26d-46a8-2221-27fbfxC03ecf">
+     </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.maternal_mortality.is_missing %}
     <section class="clearfix stat-row">
@@ -258,6 +319,33 @@
       </div>
     </section>
     {% endif %}
+    {% if not health.hiv_patients_distribution.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health-hiv_patients_distribution"
+           data-stat-type=""
+           data-chart-title="Distribution of HIV Patients by Year and Sex 2015-2016" data-id="20aa37ec-1a2e-4ef6-a209-25d933ed13f0">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health.malaria_prevalence.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-health-malaria_prevalence"
+           data-stat-type=""
+           data-chart-title="Prevalence of Malaria in Children - Number of children" data-id="p679hhn4-53b0-4cb9-8949-368b572e8568">
+      </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.births_attended_by_skilled_health_staff.is_missing %}
     <section class="clearfix stat-row">
@@ -266,9 +354,9 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
       <div class="column-three-quarters"
-           id="chart-histogram-worldbank-births_attended_by_skilled_health_staff"
+           id="chart-column-worldbank-births_attended_by_skilled_health_staff"
            data-stat-type=""
-           data-chart-title="Births attended by skilled health staff (% of total)" data-id="26e7c9fd-53b0-4cb9-8949-368b572e8568">
+           data-chart-title="Births attended by skilled health staff (% of total)" data-id="26e343fd-53b0-4cb9-8949-368b572e8568">
       </div>
     </section>
     {% endif %}
@@ -339,6 +427,34 @@
            id="chart-grouped_column-health_workers-health_workers_distribution_per_year"
            data-stat-type=""
            data-chart-title="Health worker density and distribution">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health_workers.doctors_per_sex_year.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health_workers-doctors_per_sex_year"
+           data-stat-type=""
+           data-chart-title="Number of Doctors by Year and Sex (2015-2017)">
+      </div>
+    </section>
+    {% endif %}
+
+    {% if not health_workers.dentists_per_sex_year.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-health_workers-dentists_per_sex_year"
+           data-stat-type=""
+           data-chart-title="Number of Dentists Year and Sex (2015-2017)">
       </div>
     </section>
     {% endif %}
@@ -438,6 +554,19 @@
       </div>
     </section>
     {% endif %}
+    {% if not education.literacy_sex.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-education-literacy_sex"
+           data-stat-type=""
+           data-chart-title="Percentage of Women and Men age 15-24 years who are literate by Sex, 2016/17" data-id="xdfvh678-5f83-43ff-8861-151be98bb844">
+      </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.primary_education_completion_rate.is_missing %}
     <section class="clearfix stat-row">
@@ -452,6 +581,48 @@
       </div>
     </section>
     {% endif %}
+    {% if not education.primary_school_enrollment_distribution.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-education-primary_school_enrollment_distribution"
+           data-stat-type="number"
+           data-chart-title="Percentage Distribution of Enrolment in Primary Schools by State, Year and Sex, 2015 -2016"
+           data-id="ryt78912-0c2d-403d-b57d-0df33a061644">
+      </div>
+    </section>
+    {% endif %}
+    {% if not education.junior_secondary_school_enrollment.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-education-junior_secondary_school_enrollment"
+           data-stat-type="number"
+           data-chart-title="Percentage Distribution of Enrolment in Junior Secondary School by State, Year and sex, 2015 -2016"
+           data-id="ryt78912-072d-1111-b57d-0df33a061644">
+      </div>
+    </section>
+    {% endif %}
+    {% if not education.senior_secondary_school_enrollment.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-education-senior_secondary_school_enrollment"
+           data-stat-type="number"
+           data-chart-title="Percentage Distribution of Enrolment in Senior Secondary School by State, Year and Sex, 2015 -2016"
+           data-id="ryt78912-gty0-3210-b57d-0df33a061644">
+      </div>
+    </section>
+    {% endif %}
 
     {% if not worldbank.secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
@@ -463,6 +634,19 @@
            id="chart-grouped_column-worldbank-secondary_school_enrollment"
            data-stat-type=""
            data-chart-title="School enrollment, secondary (% gross)" data-id="f0c46ae2-5f83-43ff-8861-151be98bb844">
+      </div>
+    </section>
+    {% endif %}
+    {% if not education.primary_school_completion_sex.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-education-primary_school_completion_sex"
+           data-stat-type=""
+           data-chart-title="Primary Completion rate (%)" data-id="1qw23d45-5f83-43ff-8861-151be98bb844">
       </div>
     </section>
     {% endif %}
@@ -485,6 +669,19 @@
            id="chart-grouped_column-worldbank-account_ownership"
            data-stat-type=""
            data-chart-title="Account ownership at a financial institution or with a mobile-money-service provider, (% of population ages 15+)" data-id="76f69b31-1022-4280-a267-b5665177b1b1">
+      </div>
+    </section>
+    {% endif %}
+    {% if not financial_inclusion.account_ownership_indicator.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Population</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-financial_inclusion-account_ownership_indicator"
+           data-stat-type=""
+           data-chart-title="Percentage of households where at least one member owns or has a Bank Account" data-id="76888888-1022-4280-a267-b5665177b1b1">
       </div>
     </section>
     {% endif %}
