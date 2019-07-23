@@ -2004,10 +2004,6 @@ def get_profile(geo, profile_name, request):
                 data['poverty'].get('is_missing')):
             tabs['demographics'] = {'name': 'Demographics', 'href': '#demographics'}
 
-        if not (data['worldbank']['youth_unemployment'].get('is_missing') and \
-                data['worldbank']['employment_to_population_ratio'].get('is_missing')):
-            tabs['employment'] = {'name': 'Employment', 'href': '#employment'}
-
         if not (data['elections'].get('is_missing') and \
                 data['worldbank']['women_in_parliament'].get('is_missing')  and \
                 data['worldbank']['women_in_government'].get('is_missing')):
