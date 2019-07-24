@@ -2077,6 +2077,7 @@ def get_population(geo, session, country, level, year):
     sex_dist_per_year = LOCATIONNOTFOUND
     human_development_indices_dist = LOCATIONNOTFOUND
     youth_unemployment_dist = LOCATIONNOTFOUND
+    pop_sex_dist = pop_youth_unemployment_dist = tot_hdi = 0
 
     db_table = db_column_name = 'population_sex_' + str(year)
     try:
@@ -2096,7 +2097,7 @@ def get_population(geo, session, country, level, year):
 
     with dataset_context(year='2018'):
         try:
-            human_development_indices_dist, _ = get_stat_data(
+            human_development_indices_dist, tot_hdi = get_stat_data(
                 ['human_dev_indices'], geo, session, percent=False)
         except Exception:
             pass
@@ -2107,6 +2108,8 @@ def get_population(geo, session, country, level, year):
         except Exception:
             pass
 
+    pop_youth_unemployment_dist = youth_unemployment_dist['Q3']['values']['this']
+
     with dataset_context(year='2016'):
         try:
             sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
@@ -2114,6 +2117,7 @@ def get_population(geo, session, country, level, year):
         except Exception:
             pass
 
+    pop_sex_dist = sex_dist_per_year['2016']['Female']['values']['this']
     total_population = 0
     is_missing = sex_dist.get('is_missing') and \
                  residence_dist.get('is_missing') and \
@@ -2145,13 +2149,19 @@ def get_population(geo, session, country, level, year):
                                                 level),
         'human_development_indices': _add_metadata_to_dist(human_development_indices_dist,
                                                 'human_development_indices', country,
-                                                level),   
+                                                level),
         'youth_unemployment_2017': _add_metadata_to_dist(youth_unemployment_dist,
                                                 'youth_unemployment_2017', country, level),
 
         'total_population': _add_metadata_to_dist(total_population_dist,
                                                   'total_population_dist',
                                                   country, level),
+        'pop_sex_dist': _create_single_value_dist(
+                            'Number of Female Population in 2016', pop_sex_dist),
+        'pop_youth_unemployment_dist': _create_single_value_dist(
+                            'Percent of Under-employed and unemployed youth in the third quater of year 2017 ',
+                            pop_youth_unemployment_dist),
+        'tot_hdi': _create_single_value_dist('Human Development Index', tot_hdi)
     }
 
     if geo.square_kms:
@@ -2321,17 +2331,19 @@ def get_elections_profile(geo, session, country, level):
 def get_crops_profile(geo, session, country, level):
     with dataset_context(year='2014'):
         crop_distribution = LOCATIONNOTFOUND
+        total_production = 0
 
         try:
-            crop_distribution, _ = get_stat_data(
-                'crops', geo, session, table_fields=['crops'])
+            crop_distribution, total_production = get_stat_data(
+                'crops', geo, session, table_fields=['crops'], percent=False)
         except Exception as e:
             pass
-            
+
     return {
         'is_missing': crop_distribution.get('is_missing'),
         'crop_distribution': _add_metadata_to_dist(
-            crop_distribution, 'crop_distribution', country, level)
+            crop_distribution, 'crop_distribution', country, level),
+        'total_production': _create_single_value_dist('Total crops psroduction in tonnes', total_production)
     }
 
 
@@ -2396,7 +2408,7 @@ def get_health_workers_profile(geo, session, country, level):
     health_workers_distribution_per_year = LOCATIONNOTFOUND
     doctors_per_sex_year_dist = LOCATIONNOTFOUND
     dentists_per_sex_year_dist = LOCATIONNOTFOUND
-    
+
     with dataset_context(year='2014'):
         try:
             health_workers_dist, total_health_workers = get_stat_data(
@@ -2424,7 +2436,7 @@ def get_health_workers_profile(geo, session, country, level):
                 ['number_of_dentist_year', 'number_of_dentist_sex'], geo, session, percent=False)
         except Exception as e:
             pass
-        
+
         try:
             dentists_per_sex_year_dist, _ = get_stat_data(
                 ['number_of_doctors_year', 'number_of_doctors_sex'], geo, session, percent=False)
@@ -2446,13 +2458,13 @@ def get_health_workers_profile(geo, session, country, level):
         'total_health_workers_dist': total_health_workers_dist,
         'hrh_patient_ratio_dist': hrh_patient_ratio_dist,
         'health_workers_dist': health_workers_dist,
-        'health_workers_distribution_per_year': _add_metadata_to_dist(health_workers_distribution_per_year, 
+        'health_workers_distribution_per_year': _add_metadata_to_dist(health_workers_distribution_per_year,
                     'health_workers_distribution_per_year', country, level),
-        'doctors_per_sex_year': _add_metadata_to_dist(doctors_per_sex_year_dist, 
+        'doctors_per_sex_year': _add_metadata_to_dist(doctors_per_sex_year_dist,
                     'doctors_per_sex_year', country, level),
-        'dentists_per_sex_year': _add_metadata_to_dist(dentists_per_sex_year_dist, 
+        'dentists_per_sex_year': _add_metadata_to_dist(dentists_per_sex_year_dist,
                     'dentists_per_sex_year', country, level),
-    } 
+    }
 
 
 def get_causes_of_death_profile(geo, session, country, level):
@@ -2533,7 +2545,7 @@ def get_health_profile(geo, session, country, level):
                 ['hiv_patients_distribution_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
-        
+
         try:
             malaria_prevalence_dist, _ = get_stat_data(
                 ['malaria_prevalence_test'], geo, session, percent=False)
@@ -2545,7 +2557,7 @@ def get_health_profile(geo, session, country, level):
                 ['access_to_elec_water_services'], geo, session, percent=False)
         except Exception:
             pass
-    
+
         pop_electricity_services = access_to_electricity_water_dist['Electricity']['values']['this']
 
     return {
@@ -2700,13 +2712,13 @@ def get_education_profile(geo, session, country, level):
                 ['junior_secondary_school_enrollment_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
-        
+
         try:
             primary_school_enrollment_distribution_dist, _ = get_stat_data(
                 ['primary_school_enrollment_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
-        
+
         try:
             primary_school_completion_dist, _ = get_stat_data(
                 ['primary_education_completion_sex'], geo, session, percent=False)
@@ -2798,9 +2810,13 @@ def get_worldbank_profile(geo, session, country, level):
         pop_basic_water_services = 0
         pop_prevelance_undernourishment = 0
         pop_life_expectancy_at_birth = 0
+        pop_youth_unemployment_dist = 0
+        pop_employment_dist = 0
+        tot_cereal_yield = 0
+        stat_agriculture_land = 0
 
         try:
-            cereal_yield_kg_per_hectare, _ = get_stat_data(
+            cereal_yield_kg_per_hectare, tot_cereal_yield = get_stat_data(
                 ['cereal_yield_kg_per_hectare_year', ], geo, session,
                 percent=False)
         except Exception as e:
@@ -3006,13 +3022,13 @@ def get_worldbank_profile(geo, session, country, level):
                 ['employment_in_agriculture_year', 'sex'], geo, session, percent=False)
         except Exception as e:
             pass
-        
+
         try:
             women_in_government, _ = get_stat_data(
                 ['position'], geo, session, table_name='women_in_government')
         except Exception as e:
             pass
-        
+
         try:
             women_in_parliament, _ = get_stat_data(
                 ['women_parliament_year'], geo, session, table_name='women_in_parliament')
@@ -3022,7 +3038,10 @@ def get_worldbank_profile(geo, session, country, level):
         pop_basic_water_services = access_to_basic_services['2015']['values']['this']
         pop_prevelance_undernourishment = prevalence_of_undernourishment['2016']['values']['this']
         pop_life_expectancy_at_birth = life_expectancy_at_birth['2016']['F']['values']['this']
-        
+        pop_youth_unemployment_dist = youth_unemployment['2018']['M']['values']['this']
+        pop_employment_dist = employment_to_population_ratio['2018']['F']['values']['this']
+        stat_agriculture_land = agricultural_land['2016']['values']['this']
+
 
     is_missing = cereal_yield_kg_per_hectare.get(
         'is_missing') and agricultural_land.get(
@@ -3139,7 +3158,7 @@ def get_worldbank_profile(geo, session, country, level):
         'gdp': _add_metadata_to_dist(gdp, 'gdp', country, level),
         'gdp_growth': _add_metadata_to_dist(gdp_growth, 'gdp_growth', country,
                                             level),
-        'infant_under5_mortality': _add_metadata_to_dist(infant_under5_mortality, 
+        'infant_under5_mortality': _add_metadata_to_dist(infant_under5_mortality,
                     'infant_under5_mortality', country, level),
         'employment_in_agriculture': _add_metadata_to_dist(
             employment_in_agriculture, 'employment_in_agriculture', country, level),
@@ -3152,7 +3171,14 @@ def get_worldbank_profile(geo, session, country, level):
         'pop_prevelance_undernourishment': _create_single_value_dist(
                 'Prevalence of Undernourishment in percent population for 2016', pop_prevelance_undernourishment ),
         'pop_life_expectancy_at_birth': _create_single_value_dist(
-            'Life expectancy a birth, female (year 2016)',pop_life_expectancy_at_birth)
+                'Life expectancy a birth, female (year 2016)',pop_life_expectancy_at_birth),
+        'pop_youth_unemployment_dist': _create_single_value_dist(
+                'Unemployment male youth 2018 (% of male labor force ages 15-24)',pop_youth_unemployment_dist),
+        'pop_employment_dist': _create_single_value_dist(
+                    'Male Employment to population ratio, 15+', pop_employment_dist),
+        'tot_cereal_yield': _create_single_value_dist(
+                    'Total Cereals Yield from 1997 to 2016 in kg per hectare (Thousands)', tot_cereal_yield),
+        'stat_agriculture_land': _create_single_value_dist('Percent of Land Area in 2016', stat_agriculture_land)
 
     }
     return final_data

@@ -26,7 +26,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.pop_sex_dist stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-grouped_column-demographics-sex_dist_per_year" data-stat-type="number" data-chart-title="Population by sex per year" data-initial-sort="-value" data-id="345e5731-0db0-5674-b2a3-e741d1a6efc8"></div>
     </section>
@@ -54,12 +54,12 @@
     {% if not worldbank.youth_unemployment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Unemployment</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-youth_unemployment"
-           data-stat-type=""
+           data-stat-type="scaled-percentage"
            data-chart-title="Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)" data-id="f888d12d-d4e9-426f-ba1e-dc4aff7017ea">
       </div>
     </section>
@@ -68,8 +68,8 @@
     {% if not demographics.youth_unemployment_2017.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Unemployment</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.pop_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-demographics-youth_unemployment_2017"
@@ -82,8 +82,8 @@
     {% if not worldbank.employment_to_population_ratio.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Employment</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_employment_dist stat_type='number' stat_suffix='%'  %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-employment_to_population_ratio"
@@ -123,8 +123,8 @@
     {% if not demographics.human_development_indices.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Human Development Index</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.tot_hdi stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-demographics-human_development_indices"
@@ -200,7 +200,7 @@
       </div>
     </section>
     {% endif %}
-   
+
   </div>
 </article>
 {% endif %}
@@ -471,17 +471,17 @@
     {% if not crops.crop_distribution.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Agriculture</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=crops.total_production stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop production in tonnes" data-initial-sort="-value" data-id="9f93f360-5fce-4fa1-a1f9-6fe3292ef90b"></div>
+      <div class="column-three-quarters" id="chart-histogram-crops-crop_distribution" data-stat-type="number" data-chart-title="Crop production in tonnes" data-initial-sort="-value" data-id="9f93f360-5fce-4fa1-a1f9-6fe3292ef90b"></div>
     </section>
     {% endif %}
     {% if not worldbank.cereal_yield_kg_per_hectare.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Agriculture</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.tot_cereal_yield stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-cereal_yield_kg_per_hectare"
@@ -494,8 +494,8 @@
     {% if not worldbank.agricultural_land.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Agriculture</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_agriculture_land stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-agricultural_land"
