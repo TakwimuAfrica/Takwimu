@@ -1,0 +1,8 @@
+{% extends 'settings_js.html' %}
+{% load static %}
+
+{% block settings_javascript %}
+  {{ block.super }}
+
+  var STATIC_PREFIX = '{% get_static_prefix %}';
+{% endblock settings_javascript %}
