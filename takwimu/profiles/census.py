@@ -2110,7 +2110,7 @@ def get_population(geo, session, country, level, year):
     with dataset_context(year='2016'):
         try:
             sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
-                                    table_name='population_sex_year' )
+                                    table_name='population_sex_year', percent=False )
         except Exception:
             pass
 
