@@ -166,7 +166,7 @@
     {% if not elections.candidate_dist.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
+        <h3 class="chart-header">Elections</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_cast_votes stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="number" data-chart-title="Votes per candidate" data-initial-sort="-value" data-id="18aff6e1-020f-4921-8a4b-96cff4a0c2b3"></div>

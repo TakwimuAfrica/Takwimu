@@ -1489,9 +1489,6 @@ function Chart(options) {
   chart.mouseover = function(data) {
     // reset screen position to account for scrolling
     chart.screenPosition = chart.chartContainer.node().getBoundingClientRect();
-    if (chart.chartType == "grouped_column") {
-      console.log(chart.capitalize(data.name));
-    }
 
     // ensure we have hovercard so other interactions can safely call this
     if (!!chart.hovercard) {
