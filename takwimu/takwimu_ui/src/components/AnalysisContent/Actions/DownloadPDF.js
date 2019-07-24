@@ -168,7 +168,7 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
 
           <View style={classes.footer} fixed>
             <Text style={classes.downloadedAt}>
-              Dowloaded{' '}
+              Downloaded{' '}
               {new Date().toLocaleDateString('UTC', {
                 day: '2-digit',
                 month: 'short',
@@ -213,7 +213,11 @@ function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
   }, []);
 
   useEffect(() => {
-    if (reactPdf && data && !isEmpty(data.item)) {
+    if (
+      reactPdf &&
+      !isEmpty(data) &&
+      (topic === 'topic' || !isEmpty(data.item))
+    ) {
       const {
         ReactPDF,
         Document,
