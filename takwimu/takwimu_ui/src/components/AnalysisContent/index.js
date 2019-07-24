@@ -56,8 +56,13 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
   const [carouselItemIndex, setCarouselItemIndex] = useState(
     content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
   );
-  const [id, setId] = useState(`${content.id}-${topicIndex}`);
+  useEffect(() => {
+    setCarouselItemIndex(
+      content.body[topicIndex].type === 'carousel_topic' ? 0 : -1
+    );
+  }, [topicIndex]);
 
+  const [id, setId] = useState(`${content.id}-${topicIndex}`);
   useEffect(() => {
     if (`${content.id}-${topicIndex}` !== id) {
       setId(`${content.id}-${topicIndex}`);
@@ -131,6 +136,7 @@ function AnalysisContent({ classes, content, topicIndex, takwimu, onChange }) {
 
         {content.body[topicIndex].type === 'carousel_topic' ? (
           <CarouselTopic
+            key={topicIndex}
             data={content.body[topicIndex].value.body}
             onIndexChanged={setCarouselItemIndex}
           />
