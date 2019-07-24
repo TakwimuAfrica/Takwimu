@@ -146,18 +146,18 @@
     {% if not elections.valid_invalid_dist.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Elections</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_votes stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid vs invalid votes" data-initial-sort="-value" data-id="2c98267e-9073-4d58-a621-c9ed6c0de49d"></div>
     </section>
     {% endif %}
 
-    {% if not elections.valid_invalid_dist.is_missing %}
+    {% if not elections.registered_accred_dist.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Elections</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_reg_voters stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered voters vs total votes cast" data-initial-sort="-value" data-id="9786ae6a-c4ab-4de0-a941-53ecf5cbc5ee"></div>
     </section>
@@ -167,9 +167,9 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_cast_votes stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage votes per candidate" data-initial-sort="-value" data-id="18aff6e1-020f-4921-8a4b-96cff4a0c2b3"></div>
+      <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="number" data-chart-title="Votes per candidate" data-initial-sort="-value" data-id="18aff6e1-020f-4921-8a4b-96cff4a0c2b3"></div>
     </section>
    {% endif %}
 

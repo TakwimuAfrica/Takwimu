@@ -2270,17 +2270,20 @@ def get_elections_profile(geo, session, country, level):
         candidate_dist = LOCATIONNOTFOUND
         valid_invalid_dist = LOCATIONNOTFOUND
         registered_accred_dist = LOCATIONNOTFOUND
+        total_reg_voters = 0
+        total_votes = 0
+        total_cast_votes = 0
 
         # Each of these fetches may fail due to data unavailability but failure of one
         # does not imply failure of another i.e. they are independent.
         try:
-            candidate_dist, _ = get_stat_data(
-                'candidate', geo, session, table_fields=['candidate'])
+            candidate_dist, total_cast_votes = get_stat_data(
+                'candidate', geo, session, table_fields=['candidate'], percent=False)
         except Exception:
             pass
 
         try:
-            valid_invalid_dist, _ = get_stat_data('votes', geo, session,
+            valid_invalid_dist, total_votes = get_stat_data('votes', geo, session,
                                                   table_fields=[
                                                       'votes'],
                                                   table_name='valid_invalid_votes')
@@ -2292,17 +2295,26 @@ def get_elections_profile(geo, session, country, level):
                                                       table_fields=[
                                                           'voters'],
                                                       table_name='registered_accredited_voters')
+
         except Exception:
             pass
 
     is_missing = candidate_dist.get('is_missing') and \
                  valid_invalid_dist.get('is_missing') and \
                  registered_accred_dist.get('is_missing')
+
+    total_reg_voters = registered_accred_dist['Total Registered Voters']["numerators"]["this"]
     return {
         'is_missing': is_missing,
         'candidate_dist': candidate_dist,
         'valid_invalid_dist': valid_invalid_dist,
         'registered_accred_dist': registered_accred_dist,
+        'total_votes': _create_single_value_dist(
+                            'Total Votes Count', total_votes),
+        'total_reg_voters': _create_single_value_dist(
+                            'Total number of Registered Voters', total_reg_voters),
+        'total_cast_votes': _create_single_value_dist(
+                            'Total cast votes', total_cast_votes)
     }
 
 
