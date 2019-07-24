@@ -213,8 +213,8 @@
     {% if not worldbank.access_to_basic_services.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_basic_water_services stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-access_to_basic_services"
@@ -226,8 +226,8 @@
     {% if not health.access_to_electricity_water.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.pop_electricity_services stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-health-access_to_electricity_water"
@@ -240,8 +240,8 @@
     {% if not worldbank.prevalence_of_undernourishment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_prevelance_undernourishment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-prevalence_of_undernourishment"
@@ -255,7 +255,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_life_expectancy_at_birth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-life_expectancy_at_birth"

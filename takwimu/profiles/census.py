@@ -2525,6 +2525,7 @@ def get_health_profile(geo, session, country, level):
     hiv_patients_distribution_dist = LOCATIONNOTFOUND
     malaria_prevalence_dist = LOCATIONNOTFOUND
     access_to_electricity_water_dist = LOCATIONNOTFOUND
+    pop_electricity_services = 0
 
     with dataset_context( year='2018'):
         try:
@@ -2545,6 +2546,7 @@ def get_health_profile(geo, session, country, level):
         except Exception:
             pass
     
+        pop_electricity_services = access_to_electricity_water_dist['Electricity']['values']['this']
 
     return {
         'is_missing': malaria_prevalence_dist.get('is_missing') and \
@@ -2559,6 +2561,8 @@ def get_health_profile(geo, session, country, level):
         'access_to_electricity_water': _add_metadata_to_dist(access_to_electricity_water_dist,
                                                     'access_to_electricity_water',
                                                     country, level),
+        'pop_electricity_services': _create_single_value_dist(
+                                'Percent Population with access to electricity', pop_electricity_services)
     }
 
 
@@ -2791,6 +2795,9 @@ def get_worldbank_profile(geo, session, country, level):
         employment_in_agriculture = LOCATIONNOTFOUND
         women_in_government = LOCATIONNOTFOUND
         women_in_parliament = LOCATIONNOTFOUND
+        pop_basic_water_services = 0
+        pop_prevelance_undernourishment = 0
+        pop_life_expectancy_at_birth = 0
 
         try:
             cereal_yield_kg_per_hectare, _ = get_stat_data(
@@ -3012,6 +3019,9 @@ def get_worldbank_profile(geo, session, country, level):
         except Exception as e:
             pass
 
+        pop_basic_water_services = access_to_basic_services['2015']['values']['this']
+        pop_prevelance_undernourishment = prevalence_of_undernourishment['2016']['values']['this']
+        pop_life_expectancy_at_birth = life_expectancy_at_birth['2016']['F']['values']['this']
         
 
     is_missing = cereal_yield_kg_per_hectare.get(
@@ -3136,7 +3146,13 @@ def get_worldbank_profile(geo, session, country, level):
         'women_in_government': _add_metadata_to_dist(
             women_in_government, 'women_in_government', country, level),
         'women_in_parliament': _add_metadata_to_dist(
-            women_in_parliament, 'women_in_parliament', country, level)
+            women_in_parliament, 'women_in_parliament', country, level),
+        'pop_basic_water_services': _create_single_value_dist(
+                'Percent Population with basic water services in 2015', pop_basic_water_services),
+        'pop_prevelance_undernourishment': _create_single_value_dist(
+                'Prevalence of Undernourishment in percent population for 2016', pop_prevelance_undernourishment ),
+        'pop_life_expectancy_at_birth': _create_single_value_dist(
+            'Life expectancy a birth, female (year 2016)',pop_life_expectancy_at_birth)
 
     }
     return final_data
