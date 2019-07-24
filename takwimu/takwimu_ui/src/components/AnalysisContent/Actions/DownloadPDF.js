@@ -196,6 +196,12 @@ const createPdf = (Document, Image, Link, Page, Text, View) => {
   return AnalysisPDF;
 };
 
+// https://stackoverflow.com/a/32108184
+const isEmpty = obj =>
+  obj === undefined ||
+  obj === null ||
+  (Object.keys(obj).length === 0 && obj.constructor === Object);
+
 function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
   const [reactPdf, setReactPdf] = useState(false);
   const [pdfBlob, setPdfBlob] = useState(null);
@@ -207,7 +213,7 @@ function DownloadPDF({ classes, title, topic, data, takwimu, top }) {
   }, []);
 
   useEffect(() => {
-    if (reactPdf) {
+    if (reactPdf && data && !isEmpty(data.item)) {
       const {
         ReactPDF,
         Document,
