@@ -254,7 +254,7 @@
     {% if not worldbank.life_expectancy_at_birth.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
+        <h3 class="chart-header">Health</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_life_expectancy_at_birth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
@@ -735,8 +735,8 @@
     {% if not worldbank.gini_index.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gini_index stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gini_index"
@@ -749,8 +749,8 @@
     {% if not worldbank.gdp_per_capita.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp_per_capita stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp_per_capita"
@@ -763,8 +763,8 @@
     {% if not worldbank.gdp_per_capita_growth.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp_per_capita_growth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp_per_capita_growth"
@@ -777,8 +777,8 @@
    {% if not worldbank.tax_as_percentage_of_gdp.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_tax_as_percentage_of_gdp stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-tax_as_percentage_of_gdp"
@@ -791,8 +791,8 @@
     {% if not worldbank.tax_revenue.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_tax_revenue stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-tax_revenue"
@@ -805,8 +805,8 @@
     {% if not worldbank.gdp.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp"
@@ -819,8 +819,8 @@
     {% if not worldbank.gdp_growth.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp_growth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp_growth"
@@ -841,8 +841,8 @@
     {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Development Assistance</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_foreign_direct_investment_net_inflows stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"

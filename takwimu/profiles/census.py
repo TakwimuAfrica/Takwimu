@@ -2813,7 +2813,10 @@ def get_worldbank_profile(geo, session, country, level):
         pop_youth_unemployment_dist = 0
         pop_employment_dist = 0
         tot_cereal_yield = 0
-        stat_agriculture_land = 0
+        stat_agriculture_land = stat_gini_index = 0
+        stat_foreign_direct_investment_net_inflows = 0
+        stat_gdp_growth = stat_tax_revenue = stat_tax_as_percentage_of_gdp = 0
+        stat_gdp = stat_gdp_per_capita = stat_gdp_per_capita_growth = 0
 
         try:
             cereal_yield_kg_per_hectare, tot_cereal_yield = get_stat_data(
@@ -3041,6 +3044,14 @@ def get_worldbank_profile(geo, session, country, level):
         pop_youth_unemployment_dist = youth_unemployment['2018']['M']['values']['this']
         pop_employment_dist = employment_to_population_ratio['2018']['F']['values']['this']
         stat_agriculture_land = agricultural_land['2016']['values']['this']
+        stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows['2017']['values']['this']
+        stat_gdp_growth = gdp_growth['2017']['values']['this']
+        stat_gdp = gdp['2017']['values']['this']
+        stat_gdp_per_capita_growth = gdp_per_capita_growth['2017']['values']['this']
+        stat_tax_revenue = tax_revenue['2013']['values']['this']
+        stat_gdp_per_capita = gdp_per_capita['2017']['values']['this']
+        stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp['2013']['values']['this']
+        stat_gini_index = gini_index['2009']['values']['this']
 
 
     is_missing = cereal_yield_kg_per_hectare.get(
@@ -3178,7 +3189,23 @@ def get_worldbank_profile(geo, session, country, level):
                     'Male Employment to population ratio, 15+', pop_employment_dist),
         'tot_cereal_yield': _create_single_value_dist(
                     'Total Cereals Yield from 1997 to 2016 in kg per hectare (Thousands)', tot_cereal_yield),
-        'stat_agriculture_land': _create_single_value_dist('Percent of Land Area in 2016', stat_agriculture_land)
+        'stat_agriculture_land': _create_single_value_dist('Percent of Land Area in 2016', stat_agriculture_land),
+        'stat_foreign_direct_investment_net_inflows': _create_single_value_dist(
+                    'FDI (year 2017)',stat_foreign_direct_investment_net_inflows),
+        'stat_gdp_growth': _create_single_value_dist(
+                    'GDP Growth (year 2017)', stat_gdp_growth),
+        'stat_gdp': _create_single_value_dist(
+                    'GDP (year 2017)', stat_gdp),
+        'stat_gini_index': _create_single_value_dist(
+                'GINI Index, (year 2009)',stat_gini_index),
+        'stat_gdp_per_capita': _create_single_value_dist(
+                'GDP per capita (year 2017)', stat_gdp_per_capita),
+        'stat_gdp_per_capita_growth': _create_single_value_dist(
+                'GDP per capita (year 2017)', stat_gdp_per_capita_growth),
+        'stat_tax_as_percentage_of_gdp': _create_single_value_dist(
+                'Tax as percentage of gdp (year 2013)', stat_tax_as_percentage_of_gdp),
+        'stat_tax_revenue': _create_single_value_dist(
+                'Tax Revenue (year 2013)', stat_tax_revenue),
 
     }
     return final_data
