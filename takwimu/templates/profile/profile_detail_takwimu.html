@@ -662,8 +662,8 @@
     {% if not worldbank.account_ownership.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Financial Inclusions</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_account_ownership stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-account_ownership"
@@ -675,8 +675,8 @@
     {% if not financial_inclusion.account_ownership_indicator.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Financial Inclusions</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=financial_inclusion.stat_account_ownership_indicator stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-financial_inclusion-account_ownership_indicator"
@@ -689,8 +689,8 @@
     {% if not worldbank.mobile_phone_subscriptions.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Financial Inclusions</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_mobile_phone_subscriptions stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-mobile_phone_subscriptions"

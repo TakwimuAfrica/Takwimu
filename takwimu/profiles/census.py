@@ -2757,9 +2757,11 @@ def get_education_profile(geo, session, country, level):
 
 def get_financial_inclusion_profile(geo, session, country, level):
     account_ownership_indicator_dict = LOCATIONNOTFOUND
+    stat_account_ownership_indicator = 0
+
     with dataset_context(year='2018'):
         try:
-            account_ownership_indicator_dict, _ = get_stat_data(
+            account_ownership_indicator_dict, stat_account_ownership_indicator = get_stat_data(
                 ['account_ownership_year'], geo, session, percent=False)
         except Exception:
             pass
@@ -2769,6 +2771,8 @@ def get_financial_inclusion_profile(geo, session, country, level):
         'account_ownership_indicator': _add_metadata_to_dist(
             account_ownership_indicator_dict, 'account_ownership_indicator', country,
             level),
+        'stat_account_ownership_indicator': _create_single_value_dist(
+            'Percentage of households where at least one member owns or has a Bank Account', stat_account_ownership_indicator)
     }
 
 
@@ -2817,6 +2821,8 @@ def get_worldbank_profile(geo, session, country, level):
         stat_foreign_direct_investment_net_inflows = 0
         stat_gdp_growth = stat_tax_revenue = stat_tax_as_percentage_of_gdp = 0
         stat_gdp = stat_gdp_per_capita = stat_gdp_per_capita_growth = 0
+        stat_mobile_phone_subscriptions = 0
+        stat_account_ownership = 0
 
         try:
             cereal_yield_kg_per_hectare, tot_cereal_yield = get_stat_data(
@@ -3052,6 +3058,8 @@ def get_worldbank_profile(geo, session, country, level):
         stat_gdp_per_capita = gdp_per_capita['2017']['values']['this']
         stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp['2013']['values']['this']
         stat_gini_index = gini_index['2009']['values']['this']
+        stat_account_ownership = account_ownership['F']['2017']['values']['this']
+        stat_mobile_phone_subscriptions = mobile_phone_subscriptions['2017']['values']['this']
 
 
     is_missing = cereal_yield_kg_per_hectare.get(
@@ -3206,6 +3214,12 @@ def get_worldbank_profile(geo, session, country, level):
                 'Tax as percentage of gdp (year 2013)', stat_tax_as_percentage_of_gdp),
         'stat_tax_revenue': _create_single_value_dist(
                 'Tax Revenue (year 2013)', stat_tax_revenue),
+        'stat_tax_revenue': _create_single_value_dist(
+                'Tax Revenue (year 2013)', stat_tax_revenue),
+        'stat_mobile_phone_subscriptions': _create_single_value_dist(
+                'Mobile Phone Subscription (per 100 people) in 2017)', stat_mobile_phone_subscriptions),
+        'stat_account_ownership': _create_single_value_dist(
+                'Female Account ownership at a financial institution or with a mobile-money-service provider in 2017 (% population)', stat_account_ownership)
 
     }
     return final_data
