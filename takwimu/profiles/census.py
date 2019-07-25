@@ -2806,7 +2806,7 @@ def get_education_profile(geo, session, country, level):
             junior_secondary_school_enrollment_dist, 'junior_secondary_school_enrollment', country,
             level),
         'primary_school_enrollment_distribution': _add_metadata_to_dist(
-            senior_secondary_school_enrollment_dist, 'primary_school_enrollment_distribution', country,
+            primary_school_enrollment_distribution_dist, 'primary_school_enrollment_distribution', country,
             level),
         'primary_school_completion_sex': _add_metadata_to_dist(
             primary_school_completion_dist, 'primary_school_completion_sex', country,
