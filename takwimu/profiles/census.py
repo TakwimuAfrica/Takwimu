@@ -2254,14 +2254,17 @@ def get_child_births(geo, session, country, level):
             pass
 
     is_missing = child_births_dist.get('is_missing')
-    total_child_births_dist = _create_single_value_dist(
-        'Total births', total_child_births)
-    total_reported_birth_weights_dist = _create_single_value_dist(
-        'Of all births have a reported birth weight',
-        total_reported_birth_weights)
-    total_low_birth_weights_dist = _create_single_value_dist(
-        'Of all reported birth weights are less than 2.5 kg',
-        total_low_birth_weights)
+    try:
+        total_child_births_dist = _create_single_value_dist(
+            'Total births', total_child_births)
+        total_reported_birth_weights_dist = _create_single_value_dist(
+            'Of all births have a reported birth weight',
+            total_reported_birth_weights)
+        total_low_birth_weights_dist = _create_single_value_dist(
+            'Of all reported birth weights are less than 2.5 kg',
+            total_low_birth_weights)
+    except Exception as e:
+        pass
 
     return {
         'is_missing': is_missing,
@@ -2309,11 +2312,14 @@ def get_elections_profile(geo, session, country, level):
         except Exception:
             pass
 
+        try:
+            total_reg_voters = registered_accred_dist['Total Registered Voters']["numerators"]["this"]
+        except Exception as e:
+            pass
+
     is_missing = candidate_dist.get('is_missing') and \
                  valid_invalid_dist.get('is_missing') and \
                  registered_accred_dist.get('is_missing')
-
-    total_reg_voters = registered_accred_dist['Total Registered Voters']["numerators"]["this"]
     return {
         'is_missing': is_missing,
         'candidate_dist': candidate_dist,
@@ -2385,10 +2391,14 @@ def get_health_centers_profile(geo, session, country, level):
                  health_centers_ownership_dist.get('is_missing') and \
                  hiv_health_centers_dist.get('is_missing') and \
                  prevention_methods_dist.get('is_missing')
-    total_health_centers_dist = _create_single_value_dist(
-        'Total health centers in operation (2014)', total_health_centers)
-    total_hiv_health_centers_dist = _create_single_value_dist(
-        'HIV care and treatment centers (2014)', total_hiv_health_centers)
+
+    try:
+        total_health_centers_dist = _create_single_value_dist(
+            'Total health centers in operation (2014)', total_health_centers)
+        total_hiv_health_centers_dist = _create_single_value_dist(
+            'HIV care and treatment centers (2014)', total_hiv_health_centers)
+    except Exception as e:
+            pass
     return {
         'is_missing': is_missing,
         'health_centers_dist': _add_metadata_to_dist(
@@ -2444,10 +2454,13 @@ def get_health_workers_profile(geo, session, country, level):
             pass
 
 
-    total_health_workers_dist = _create_single_value_dist(
-        'Total health worker population (2014)', total_health_workers)
-    hrh_patient_ratio_dist = _create_single_value_dist(
-        'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
+    try:
+        total_health_workers_dist = _create_single_value_dist(
+            'Total health worker population (2014)', total_health_workers)
+        hrh_patient_ratio_dist = _create_single_value_dist(
+            'Skilled health worker to patient ratio (2014)', hrh_patient_ratio)
+    except Exception as e:
+        pass
 
     is_missing = health_workers_dist.get('is_missing') and \
         health_workers_distribution_per_year.get('is_missing') and \
@@ -2558,7 +2571,10 @@ def get_health_profile(geo, session, country, level):
         except Exception:
             pass
 
-        pop_electricity_services = access_to_electricity_water_dist['Electricity']['values']['this']
+        try:
+            pop_electricity_services = access_to_electricity_water_dist['Electricity']['values']['this']
+        except Exception as e:
+            pass
 
     return {
         'is_missing': malaria_prevalence_dist.get('is_missing') and \
@@ -2699,6 +2715,12 @@ def get_education_profile(geo, session, country, level):
     junior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
     primary_school_completion_dist = LOCATIONNOTFOUND
     literacy_sex_dist = LOCATIONNOTFOUND
+    stat_senior_secondary_school_enrollment = 0
+    stat_junior_secondary_school_enrollment = 0
+    stat_literacy_sex = 0
+    stat_primary_school_enrollment_distribution = 0
+    stat_primary_school_completion_sex = 0
+
 
     with dataset_context(year='2018'):
         try:
@@ -2722,6 +2744,7 @@ def get_education_profile(geo, session, country, level):
         try:
             primary_school_completion_dist, _ = get_stat_data(
                 ['primary_education_completion_sex'], geo, session, percent=False)
+
         except Exception:
             pass
         try:
@@ -2729,6 +2752,28 @@ def get_education_profile(geo, session, country, level):
                 ['sex'], geo, session, table_name='literacy_sex', percent=False)
         except Exception:
             pass
+
+        try:
+            stat_literacy_sex = literacy_sex_dist['Female']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_primary_school_enrollment_distribution = primary_school_enrollment_distribution_dist['2016']['Male']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_primary_school_completion_sex = primary_school_completion_dist['Female']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_junior_secondary_school_enrollment = junior_secondary_school_enrollment_dist['2016']['Female']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_senior_secondary_school_enrollment = senior_secondary_school_enrollment_dist['2016']['Male']['values']['this']
+        except Exception as e:
+            pass
+
     is_missing = senior_secondary_school_enrollment_dist.get('is_missing') and \
         junior_secondary_school_enrollment_dist.get('is_missing') and \
             primary_school_enrollment_distribution_dist.get('is_missing') and \
@@ -2752,6 +2797,17 @@ def get_education_profile(geo, session, country, level):
         'literacy_sex': _add_metadata_to_dist(
             literacy_sex_dist, 'literacy_sex', country,
             level),
+        'stat_literacy_sex': _create_single_value_dist(
+            'Percentage of Men age 15-24 years who are literate by Sex, 2016/17', stat_literacy_sex),
+        'stat_primary_school_enrollment_distribution': _create_single_value_dist(
+                    'Percentage Distribution of Enrolment in Primary Schools, Male 2016',
+                    stat_primary_school_enrollment_distribution),
+        'stat_primary_school_completion_sex': _create_single_value_dist(
+                    '', stat_primary_school_completion_sex),
+        'stat_junior_secondary_school_enrollment': _create_single_value_dist(
+            'Percentage Distribution of Enrolment in Junior Secondary School, Female 2016', stat_junior_secondary_school_enrollment),
+        'stat_senior_secondary_school_enrollment': _create_single_value_dist(
+            'Percentage Distribution of Enrolment in Senior Secondary School, Male 2016', stat_senior_secondary_school_enrollment)
     }
 
 
@@ -2823,6 +2879,10 @@ def get_worldbank_profile(geo, session, country, level):
         stat_gdp = stat_gdp_per_capita = stat_gdp_per_capita_growth = 0
         stat_mobile_phone_subscriptions = 0
         stat_account_ownership = 0
+        stat_primary_school_enrollment = 0
+        stat_secondary_school_enrollment = 0
+        stat_primary_education_completion_rate = 0
+        stat_adult_literacy_rate = 0
 
         try:
             cereal_yield_kg_per_hectare, tot_cereal_yield = get_stat_data(
@@ -3044,22 +3104,86 @@ def get_worldbank_profile(geo, session, country, level):
         except Exception as e:
             pass
 
-        pop_basic_water_services = access_to_basic_services['2015']['values']['this']
-        pop_prevelance_undernourishment = prevalence_of_undernourishment['2016']['values']['this']
-        pop_life_expectancy_at_birth = life_expectancy_at_birth['2016']['F']['values']['this']
-        pop_youth_unemployment_dist = youth_unemployment['2018']['M']['values']['this']
-        pop_employment_dist = employment_to_population_ratio['2018']['F']['values']['this']
-        stat_agriculture_land = agricultural_land['2016']['values']['this']
-        stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows['2017']['values']['this']
-        stat_gdp_growth = gdp_growth['2017']['values']['this']
-        stat_gdp = gdp['2017']['values']['this']
-        stat_gdp_per_capita_growth = gdp_per_capita_growth['2017']['values']['this']
-        stat_tax_revenue = tax_revenue['2013']['values']['this']
-        stat_gdp_per_capita = gdp_per_capita['2017']['values']['this']
-        stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp['2013']['values']['this']
-        stat_gini_index = gini_index['2009']['values']['this']
-        stat_account_ownership = account_ownership['F']['2017']['values']['this']
-        stat_mobile_phone_subscriptions = mobile_phone_subscriptions['2017']['values']['this']
+        try:
+            pop_basic_water_services = access_to_basic_services['2015']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            pop_prevelance_undernourishment = prevalence_of_undernourishment['2016']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            pop_life_expectancy_at_birth = life_expectancy_at_birth['2016']['F']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            pop_youth_unemployment_dist = youth_unemployment['2018']['M']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            pop_employment_dist = employment_to_population_ratio['2018']['F']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_agriculture_land = agricultural_land['2016']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_gdp_growth = gdp_growth['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_gdp = gdp['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_gdp_per_capita_growth = gdp_per_capita_growth['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_tax_revenue = tax_revenue['2013']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_gdp_per_capita = gdp_per_capita['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp['2013']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_gini_index = gini_index['2009']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_account_ownership = account_ownership['F']['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_mobile_phone_subscriptions = mobile_phone_subscriptions['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_primary_school_enrollment = primary_school_enrollment['2016']['F']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_secondary_school_enrollment = secondary_school_enrollment['2016']['M']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_adult_literacy_rate = adult_literacy_rate['2008']['M']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_primary_education_completion_rate = primary_education_completion_rate['2010']['values']['this']
+        except Exception as e:
+            pass
 
 
     is_missing = cereal_yield_kg_per_hectare.get(
@@ -3219,7 +3343,16 @@ def get_worldbank_profile(geo, session, country, level):
         'stat_mobile_phone_subscriptions': _create_single_value_dist(
                 'Mobile Phone Subscription (per 100 people) in 2017)', stat_mobile_phone_subscriptions),
         'stat_account_ownership': _create_single_value_dist(
-                'Female Account ownership at a financial institution or with a mobile-money-service provider in 2017 (% population)', stat_account_ownership)
+                'Female Account ownership at a financial institution or with a mobile-money-service provider in 2017 (% population)',
+                 stat_account_ownership),
+        'stat_adult_literacy_rate': _create_single_value_dist(
+                'Literacy rate, Male adult 2008 (% of population ages 15+)', stat_adult_literacy_rate),
+        'stat_primary_school_enrollment': _create_single_value_dist(
+                'Primary School enrollment for Female in 2016 (% gross)', stat_primary_school_enrollment),
+        'stat_secondary_school_enrollment': _create_single_value_dist(
+                'Primary School enrollment for Male in 2016 (% gross)', stat_secondary_school_enrollment),
+        'stat_primary_education_completion_rate': _create_single_value_dist(
+                'Primary completion rate,(% of relevant age group) in 2010', stat_primary_education_completion_rate),
 
     }
     return final_data

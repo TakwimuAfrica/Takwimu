@@ -530,13 +530,13 @@
     {% if not worldbank.primary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_primary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-primary_school_enrollment"
            data-stat-type=""
-           data-chart-title="School enrollment, primary, male (% gross)" data-id="7055880a-7b34-4569-b070-c26932e69522">
+           data-chart-title="Primary School enrollment, Female and Male (% gross)" data-id="7055880a-7b34-4569-b070-c26932e69522">
       </div>
     </section>
     {% endif %}
@@ -544,8 +544,8 @@
     {% if not worldbank.adult_literacy_rate.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_adult_literacy_rate stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-adult_literacy_rate"
@@ -557,8 +557,8 @@
     {% if not education.literacy_sex.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_literacy_sex stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-education-literacy_sex"
@@ -571,8 +571,8 @@
     {% if not worldbank.primary_education_completion_rate.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_primary_education_completion_rate stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-primary_education_completion_rate"
@@ -584,13 +584,13 @@
     {% if not education.primary_school_enrollment_distribution.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_enrollment_distribution stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-education-primary_school_enrollment_distribution"
            data-stat-type="number"
-           data-chart-title="Percentage Distribution of Enrolment in Primary Schools by State, Year and Sex, 2015 -2016"
+           data-chart-title="Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016"
            data-id="ryt78912-0c2d-403d-b57d-0df33a061644">
       </div>
     </section>
@@ -598,13 +598,13 @@
     {% if not education.junior_secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_junior_secondary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-education-junior_secondary_school_enrollment"
            data-stat-type="number"
-           data-chart-title="Percentage Distribution of Enrolment in Junior Secondary School by State, Year and sex, 2015 -2016"
+           data-chart-title="Percentage Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016"
            data-id="ryt78912-072d-1111-b57d-0df33a061644">
       </div>
     </section>
@@ -612,8 +612,8 @@
     {% if not education.senior_secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_senior_secondary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-education-senior_secondary_school_enrollment"
@@ -627,8 +627,8 @@
     {% if not worldbank.secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_secondary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-secondary_school_enrollment"
@@ -640,8 +640,8 @@
     {% if not education.primary_school_completion_sex.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_completion_sex stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-education-primary_school_completion_sex"
