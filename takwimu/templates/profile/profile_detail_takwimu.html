@@ -26,7 +26,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.indicative_sex_dist stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-grouped_column-demographics-sex_dist_per_year" data-stat-type="number" data-chart-title="Population by sex per year" data-initial-sort="-value" data-id="345e5731-0db0-5674-b2a3-e741d1a6efc8"></div>
     </section>
@@ -54,12 +54,12 @@
     {% if not worldbank.youth_unemployment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Unemployment</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-youth_unemployment"
-           data-stat-type=""
+           data-stat-type="scaled-percentage"
            data-chart-title="Unemployment, youth (% of labor force ages 15-24) (modeled ILO estimate)" data-id="f888d12d-d4e9-426f-ba1e-dc4aff7017ea">
       </div>
     </section>
@@ -68,8 +68,8 @@
     {% if not demographics.youth_unemployment_2017.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Unemployment</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.indicative_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-demographics-youth_unemployment_2017"
@@ -82,8 +82,8 @@
     {% if not worldbank.employment_to_population_ratio.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Employment</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_employment_dist stat_type='number' stat_suffix='%'  %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-employment_to_population_ratio"
@@ -123,8 +123,8 @@
     {% if not demographics.human_development_indices.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Human Development Index</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_hdi stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-demographics-human_development_indices"
@@ -146,18 +146,18 @@
     {% if not elections.valid_invalid_dist.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Elections</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_votes stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-pie-elections-valid_invalid_dist" data-stat-type="percentage" data-chart-title="Valid vs invalid votes" data-initial-sort="-value" data-id="2c98267e-9073-4d58-a621-c9ed6c0de49d"></div>
     </section>
     {% endif %}
 
-    {% if not elections.valid_invalid_dist.is_missing %}
+    {% if not elections.registered_accred_dist.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Elections</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_reg_voters stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-pie-elections-registered_accred_dist" data-stat-type="percentage" data-chart-title="Registered voters vs total votes cast" data-initial-sort="-value" data-id="9786ae6a-c4ab-4de0-a941-53ecf5cbc5ee"></div>
     </section>
@@ -166,10 +166,10 @@
     {% if not elections.candidate_dist.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Elections</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=elections.total_cast_votes stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="scaled-percentage" data-chart-title="Percentage votes per candidate" data-initial-sort="-value" data-id="18aff6e1-020f-4921-8a4b-96cff4a0c2b3"></div>
+      <div class="column-three-quarters" id="chart-histogram-elections-candidate_dist" data-stat-type="number" data-chart-title="Votes per candidate" data-initial-sort="-value" data-id="18aff6e1-020f-4921-8a4b-96cff4a0c2b3"></div>
     </section>
    {% endif %}
 
@@ -200,7 +200,7 @@
       </div>
     </section>
     {% endif %}
-   
+
   </div>
 </article>
 {% endif %}
@@ -213,8 +213,8 @@
     {% if not worldbank.access_to_basic_services.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_basic_water_services stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-access_to_basic_services"
@@ -226,8 +226,8 @@
     {% if not health.access_to_electricity_water.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.indicative_electricity_services stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-health-access_to_electricity_water"
@@ -240,8 +240,8 @@
     {% if not worldbank.prevalence_of_undernourishment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_prevalence_undernourishment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-prevalence_of_undernourishment"
@@ -254,8 +254,8 @@
     {% if not worldbank.life_expectancy_at_birth.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_life_expectancy_at_birth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-life_expectancy_at_birth"
@@ -281,8 +281,8 @@
     {% if not fgm.prevalence_fgm.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=fgm.tot_prevalence stat_type='number' stat_suffix='%' %}
       </div>
        <div class="column-three-quarters"
             id="chart-histogram-fgm-prevalence_fgm"
@@ -295,8 +295,8 @@
     {% if not worldbank.maternal_mortality.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_maternal_mortality stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-maternal_mortality"
@@ -309,8 +309,8 @@
     {% if not worldbank.hiv_prevalence.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_prevalence_hiv stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-hiv_prevalence"
@@ -322,8 +322,8 @@
     {% if not health.hiv_patients_distribution.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.tot_hiv_patients stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-health-hiv_patients_distribution"
@@ -336,8 +336,8 @@
     {% if not health.malaria_prevalence.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.malaria_count stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-health-malaria_prevalence"
@@ -350,8 +350,8 @@
     {% if not worldbank.births_attended_by_skilled_health_staff.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_births_attended_by_skilled_health_staff stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-worldbank-births_attended_by_skilled_health_staff"
@@ -378,8 +378,8 @@
     {% if not worldbank.nurses_and_midwives.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_nurses_midwives stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-nurses_and_midwives"
@@ -392,8 +392,8 @@
     {% if not worldbank.incidence_of_malaria_per_1000_pop_at_risk.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_incidence_malaria stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-incidence_of_malaria_per_1000_pop_at_risk"
@@ -434,8 +434,8 @@
     {% if not health_workers.doctors_per_sex_year.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.tot_doctors stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-health_workers-doctors_per_sex_year"
@@ -448,13 +448,13 @@
     {% if not health_workers.dentists_per_sex_year.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.tot_dentists stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-health_workers-dentists_per_sex_year"
            data-stat-type=""
-           data-chart-title="Number of Dentists Year and Sex (2015-2017)">
+           data-chart-title="Number of Dentists by Year and Sex (2015-2017)">
       </div>
     </section>
     {% endif %}
@@ -471,17 +471,17 @@
     {% if not crops.crop_distribution.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Agriculture</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=crops.total_production stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-histogram-crops-crop_distribution" data-stat-type="scaled-percentage" data-chart-title="Crop production in tonnes" data-initial-sort="-value" data-id="9f93f360-5fce-4fa1-a1f9-6fe3292ef90b"></div>
+      <div class="column-three-quarters" id="chart-histogram-crops-crop_distribution" data-stat-type="number" data-chart-title="Crop production in tonnes" data-initial-sort="-value" data-id="9f93f360-5fce-4fa1-a1f9-6fe3292ef90b"></div>
     </section>
     {% endif %}
     {% if not worldbank.cereal_yield_kg_per_hectare.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Agriculture</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.total_cereal_yield stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-cereal_yield_kg_per_hectare"
@@ -494,8 +494,8 @@
     {% if not worldbank.agricultural_land.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Agriculture</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_agriculture_land stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-agricultural_land"
@@ -530,13 +530,13 @@
     {% if not worldbank.primary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_primary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-primary_school_enrollment"
            data-stat-type=""
-           data-chart-title="School enrollment, primary, male (% gross)" data-id="7055880a-7b34-4569-b070-c26932e69522">
+           data-chart-title="Primary School enrollment, Female and Male (% gross)" data-id="7055880a-7b34-4569-b070-c26932e69522">
       </div>
     </section>
     {% endif %}
@@ -544,8 +544,8 @@
     {% if not worldbank.adult_literacy_rate.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_adult_literacy_rate stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-adult_literacy_rate"
@@ -557,8 +557,8 @@
     {% if not education.literacy_sex.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_literacy_sex stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-education-literacy_sex"
@@ -571,8 +571,8 @@
     {% if not worldbank.primary_education_completion_rate.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_primary_education_completion_rate stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-primary_education_completion_rate"
@@ -584,13 +584,13 @@
     {% if not education.primary_school_enrollment_distribution.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_enrollment_distribution stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-education-primary_school_enrollment_distribution"
            data-stat-type="number"
-           data-chart-title="Percentage Distribution of Enrolment in Primary Schools by State, Year and Sex, 2015 -2016"
+           data-chart-title="Percentage Distribution of Enrolment in Primary Schools by Year and Sex, 2015 -2016"
            data-id="ryt78912-0c2d-403d-b57d-0df33a061644">
       </div>
     </section>
@@ -598,13 +598,13 @@
     {% if not education.junior_secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_junior_secondary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-education-junior_secondary_school_enrollment"
            data-stat-type="number"
-           data-chart-title="Percentage Distribution of Enrolment in Junior Secondary School by State, Year and sex, 2015 -2016"
+           data-chart-title="Percentage Distribution of Enrolment in Junior Secondary School by Year and sex, 2015 -2016"
            data-id="ryt78912-072d-1111-b57d-0df33a061644">
       </div>
     </section>
@@ -612,8 +612,8 @@
     {% if not education.senior_secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_senior_secondary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-education-senior_secondary_school_enrollment"
@@ -627,8 +627,8 @@
     {% if not worldbank.secondary_school_enrollment.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_secondary_school_enrollment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-secondary_school_enrollment"
@@ -640,8 +640,8 @@
     {% if not education.primary_school_completion_sex.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_completion_sex stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-education-primary_school_completion_sex"
@@ -662,8 +662,8 @@
     {% if not worldbank.account_ownership.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Financial Inclusions</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_account_ownership stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-account_ownership"
@@ -675,8 +675,8 @@
     {% if not financial_inclusion.account_ownership_indicator.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Financial Inclusions</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=financial_inclusion.stat_account_ownership_indicator stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-financial_inclusion-account_ownership_indicator"
@@ -689,8 +689,8 @@
     {% if not worldbank.mobile_phone_subscriptions.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Financial Inclusions</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_mobile_phone_subscriptions stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-mobile_phone_subscriptions"
@@ -735,8 +735,8 @@
     {% if not worldbank.gini_index.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gini_index stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gini_index"
@@ -749,8 +749,8 @@
     {% if not worldbank.gdp_per_capita.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp_per_capita stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp_per_capita"
@@ -763,8 +763,8 @@
     {% if not worldbank.gdp_per_capita_growth.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp_per_capita_growth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp_per_capita_growth"
@@ -777,8 +777,8 @@
    {% if not worldbank.tax_as_percentage_of_gdp.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_tax_as_percentage_of_gdp stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-tax_as_percentage_of_gdp"
@@ -791,8 +791,8 @@
     {% if not worldbank.tax_revenue.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_tax_revenue stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-tax_revenue"
@@ -805,8 +805,8 @@
     {% if not worldbank.gdp.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp"
@@ -819,8 +819,8 @@
     {% if not worldbank.gdp_growth.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Public Finances</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_gdp_growth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-gdp_growth"
@@ -841,8 +841,8 @@
     {% if not worldbank.foreign_direct_investment_net_inflows.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Development Assistance</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_foreign_direct_investment_net_inflows stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-foreign_direct_investment_net_inflows"
