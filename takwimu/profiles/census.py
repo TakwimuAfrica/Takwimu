@@ -3135,7 +3135,7 @@ def get_worldbank_profile(geo, session, country, level):
         except Exception as e:
             pass
         try:
-            stat_gdp = gdp['2017']['values']['this']
+            stat_gdp = gdp['2017']['values']['this'] / 1000000
         except Exception as e:
             pass
         try:
@@ -3143,7 +3143,7 @@ def get_worldbank_profile(geo, session, country, level):
         except Exception as e:
             pass
         try:
-            stat_tax_revenue = tax_revenue['2013']['values']['this']
+            stat_tax_revenue = tax_revenue['2013']['values']['this'] / 1000000
         except Exception as e:
             pass
         try:
@@ -3210,43 +3210,6 @@ def get_worldbank_profile(geo, session, country, level):
             stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows['2017']['values']['this']
         except Exception as e:
             pass
-        try:
-            stat_gdp_growth = gdp_growth['2017']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_gdp = gdp['2017']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_gdp_per_capita_growth = gdp_per_capita_growth['2017']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_tax_revenue = tax_revenue['2013']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_gdp_per_capita = gdp_per_capita['2017']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp['2013']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_gini_index = gini_index['2009']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_account_ownership = account_ownership['F']['2017']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_mobile_phone_subscriptions = mobile_phone_subscriptions['2017']['values']['this']
-        except Exception as e:
-            pass
-
 
     is_missing = cereal_yield_kg_per_hectare.get(
         'is_missing') and agricultural_land.get(
@@ -3389,7 +3352,7 @@ def get_worldbank_profile(geo, session, country, level):
         'stat_gdp_growth': _create_single_value_dist(
                     'GDP Growth', stat_gdp_growth),
         'stat_gdp': _create_single_value_dist(
-                    'GDP', stat_gdp),
+                    'GDP (Millions)', stat_gdp),
         'stat_gini_index': _create_single_value_dist(
                 'GINI Index',stat_gini_index),
         'stat_gdp_per_capita': _create_single_value_dist(
@@ -3399,7 +3362,7 @@ def get_worldbank_profile(geo, session, country, level):
         'stat_tax_as_percentage_of_gdp': _create_single_value_dist(
                 'Tax to GDP', stat_tax_as_percentage_of_gdp),
         'stat_tax_revenue': _create_single_value_dist(
-                'Tax Revenue', stat_tax_revenue),
+                'Tax Revenue (Millions)', stat_tax_revenue),
         'stat_mobile_phone_subscriptions': _create_single_value_dist(
                 'Mobile Phones', stat_mobile_phone_subscriptions),
         'stat_account_ownership': _create_single_value_dist(
