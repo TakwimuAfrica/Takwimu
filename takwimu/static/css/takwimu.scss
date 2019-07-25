@@ -342,6 +342,11 @@ header.section-contents h1 {
   overflow-x: hidden;
 }
 
+/* #profile .section-container .stat .number */
+.stat-suffix {
+  font-size: 0.75em;
+}
+
 #profile .section-container section {
   background-color: #f6f6f6;
   padding-top: 2.375rem;

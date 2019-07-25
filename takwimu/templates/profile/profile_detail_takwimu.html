@@ -26,7 +26,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.pop_sex_dist stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.indicative_sex_dist stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-grouped_column-demographics-sex_dist_per_year" data-stat-type="number" data-chart-title="Population by sex per year" data-initial-sort="-value" data-id="345e5731-0db0-5674-b2a3-e741d1a6efc8"></div>
     </section>
@@ -55,7 +55,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Unemployment</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-youth_unemployment"
@@ -69,7 +69,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Unemployment</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.pop_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.indicative_youth_unemployment_dist stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-demographics-youth_unemployment_2017"
@@ -83,7 +83,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Employment</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_employment_dist stat_type='number' stat_suffix='%'  %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_employment_dist stat_type='number' stat_suffix='%'  %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-employment_to_population_ratio"
@@ -124,7 +124,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Human Development Index</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.tot_hdi stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_hdi stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-demographics-human_development_indices"
@@ -214,7 +214,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Health</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_basic_water_services stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_basic_water_services stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-access_to_basic_services"
@@ -227,7 +227,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Health</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=health.pop_electricity_services stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.indicative_electricity_services stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-health-access_to_electricity_water"
@@ -241,7 +241,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Health</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_prevelance_undernourishment stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_prevalence_undernourishment stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-prevalence_of_undernourishment"
@@ -255,7 +255,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Health</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.pop_life_expectancy_at_birth stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.indicative_life_expectancy_at_birth stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-life_expectancy_at_birth"
@@ -481,7 +481,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Agriculture</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.tot_cereal_yield stat_type='number' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.total_cereal_yield stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-cereal_yield_kg_per_hectare"
