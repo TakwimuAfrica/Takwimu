@@ -1066,7 +1066,7 @@ function Chart(options) {
         .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.share);
     chart.share.append('img')
-        .attr('src', '/static/img/network-connection.svg');
+        .attr('src', (STATIC_PREFIX || '/static/') + 'img/network-connection.svg');
     chart.share.append('p')
         .text("Share");
 
@@ -1078,7 +1078,7 @@ function Chart(options) {
         .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.download);
     chart.actionDownload.append('img')
-        .attr('src', '/static/img/download.svg');
+        .attr('src', (STATIC_PREFIX || '/static/') + 'img/download.svg');
     chart.actionDownload.append('p')
         .text("Download");
 
@@ -1090,7 +1090,7 @@ function Chart(options) {
         .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.showEmbedCode);
     chart.showEmbed.append('img')
-        .attr('src', '/static/img/code.svg');
+        .attr('src', (STATIC_PREFIX || '/static/') + 'img/code.svg');
     chart.showEmbed.append('p')
         .text("Embed");
 
@@ -1102,7 +1102,7 @@ function Chart(options) {
         .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .attr("href", chart.distributionURL);
     chart.compare.append('img')
-        .attr('src', '/static/img/compare.svg');
+        .attr('src', (STATIC_PREFIX || '/static/') + 'img/compare.svg');
     chart.compare.append('p')
         .text("Compare");
 
@@ -1114,7 +1114,7 @@ function Chart(options) {
         .attr("ga-event-label", window.takwimu.country.slug + '-' + chart.id)
         .on("click", chart.toggleDataDrawer);
     chart.showData.append('img')
-        .attr('src', '/static/img/tablet-reader-31.svg');
+        .attr('src', (STATIC_PREFIX || '/static/') + 'img/tablet-reader-31.svg');
     chart.showData.append('p')
         .text("Show Data");
   };
@@ -1162,7 +1162,7 @@ function Chart(options) {
         '"></iframe>',
       '\n<script src="' +
         EMBED_URL +
-        '/static/js/embed.chart.make.js"></script>'
+        (STATIC_PREFIX || '/static/') + 'js/embed.chart.make.js"></script>'
     ].join("");
 
     textarea.html(embedCode);
