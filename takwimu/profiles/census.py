@@ -2418,6 +2418,7 @@ def get_health_workers_profile(geo, session, country, level):
     health_workers_distribution_per_year = LOCATIONNOTFOUND
     doctors_per_sex_year_dist = LOCATIONNOTFOUND
     dentists_per_sex_year_dist = LOCATIONNOTFOUND
+    tot_doctors = tot_dentists = 0
 
     with dataset_context(year='2014'):
         try:
@@ -2442,13 +2443,13 @@ def get_health_workers_profile(geo, session, country, level):
             pass
     with dataset_context(year='2018'):
         try:
-            doctors_per_sex_year_dist, _ = get_stat_data(
+            doctors_per_sex_year_dist, tot_doctors = get_stat_data(
                 ['number_of_dentist_year', 'number_of_dentist_sex'], geo, session, percent=False)
         except Exception as e:
             pass
 
         try:
-            dentists_per_sex_year_dist, _ = get_stat_data(
+            dentists_per_sex_year_dist, tot_dentists = get_stat_data(
                 ['number_of_doctors_year', 'number_of_doctors_sex'], geo, session, percent=False)
         except Exception as e:
             pass
@@ -2477,6 +2478,8 @@ def get_health_workers_profile(geo, session, country, level):
                     'doctors_per_sex_year', country, level),
         'dentists_per_sex_year': _add_metadata_to_dist(dentists_per_sex_year_dist,
                     'dentists_per_sex_year', country, level),
+        'tot_dentists': _create_single_value_dist('Total Dentist (Male and Female) from 2015 -2017', tot_dentists),
+        'tot_doctors': _create_single_value_dist('Total Doctors (Male and Female) from 2015 -2017', tot_doctors),
     }
 
 
@@ -2551,10 +2554,12 @@ def get_health_profile(geo, session, country, level):
     malaria_prevalence_dist = LOCATIONNOTFOUND
     access_to_electricity_water_dist = LOCATIONNOTFOUND
     pop_electricity_services = 0
+    tot_hiv_patients = 0
+    malaria_count = 0
 
     with dataset_context( year='2018'):
         try:
-            hiv_patients_distribution_dist, _ = get_stat_data(
+            hiv_patients_distribution_dist, tot_hiv_patients = get_stat_data(
                 ['hiv_patients_distribution_year', 'sex'], geo, session, percent=False)
         except Exception:
             pass
@@ -2576,6 +2581,11 @@ def get_health_profile(geo, session, country, level):
         except Exception as e:
             pass
 
+        try:
+            malaria_count = malaria_prevalence_dist['According to microscopy']['values']['this']
+        except Exception as e:
+            pass
+
     return {
         'is_missing': malaria_prevalence_dist.get('is_missing') and \
             hiv_patients_distribution_dist.get('is_missing') and \
@@ -2590,7 +2600,10 @@ def get_health_profile(geo, session, country, level):
                                                     'access_to_electricity_water',
                                                     country, level),
         'pop_electricity_services': _create_single_value_dist(
-                                'Percent Population with access to electricity', pop_electricity_services)
+                                'Percent Population with access to electricity', pop_electricity_services),
+        'tot_hiv_patients': _create_single_value_dist('Total HIV patients in 2015 and 2016', tot_hiv_patients),
+        'malaria_count': _create_single_value_dist(
+                'Malaria prevalence among children in 2015 (According to microscopy )', malaria_count)
     }
 
 
@@ -2655,6 +2668,8 @@ def get_poverty_profile(geo, session, country, level):
 def get_fgm_profile(geo, session, country, level):
     fgm_age_dist = LOCATIONNOTFOUND
     prevalance_fgm_dist = LOCATIONNOTFOUND
+    tot_prevalence = 0
+
     with dataset_context(year='2014'):
         try:
             fgm_age_dist, _ = get_stat_data(['age'], geo, session)
@@ -2662,7 +2677,7 @@ def get_fgm_profile(geo, session, country, level):
             pass
     with dataset_context(year='2018'):
         try:
-            prevalance_fgm_dist, _ = get_stat_data(
+            prevalance_fgm_dist, tot_prevalence = get_stat_data(
                 ['prevalence_fgm'], geo, session, percent=False)
         except Exception:
             pass
@@ -2673,6 +2688,8 @@ def get_fgm_profile(geo, session, country, level):
                                               country, level),
         'prevalence_fgm': _add_metadata_to_dist(prevalance_fgm_dist, 'prevalence_fgm',
                                               country, level),
+        'tot_prevalence': _create_single_value_dist(
+                'Prevalence of FGM among women aged 15 - 49 years in 2016/17', tot_prevalence)
     }
 
 
@@ -2803,7 +2820,7 @@ def get_education_profile(geo, session, country, level):
                     'Percentage Distribution of Enrolment in Primary Schools, Male 2016',
                     stat_primary_school_enrollment_distribution),
         'stat_primary_school_completion_sex': _create_single_value_dist(
-                    '', stat_primary_school_completion_sex),
+                    'Primary Completion rate (%), Female', stat_primary_school_completion_sex),
         'stat_junior_secondary_school_enrollment': _create_single_value_dist(
             'Percentage Distribution of Enrolment in Junior Secondary School, Female 2016', stat_junior_secondary_school_enrollment),
         'stat_senior_secondary_school_enrollment': _create_single_value_dist(
@@ -2883,6 +2900,11 @@ def get_worldbank_profile(geo, session, country, level):
         stat_secondary_school_enrollment = 0
         stat_primary_education_completion_rate = 0
         stat_adult_literacy_rate = 0
+        stat_incidence_malaria = 0
+        stat_nurses_midwives = 0
+        stat_births_attended_by_skilled_health_staff = 0
+        stat_maternal_mortality = 0
+        stat_prevalence_hiv = 0
 
         try:
             cereal_yield_kg_per_hectare, tot_cereal_yield = get_stat_data(
@@ -3184,6 +3206,26 @@ def get_worldbank_profile(geo, session, country, level):
             stat_primary_education_completion_rate = primary_education_completion_rate['2010']['values']['this']
         except Exception as e:
             pass
+        try:
+            stat_incidence_malaria = incidence_of_malaria_per_1000_pop_at_risk['2017']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_nurses_midwives = nurses_and_midwives['2010']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_births_attended_by_skilled_health_staff = births_attended_by_skilled_health_staff['2018']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_maternal_mortality = maternal_mortality['2016']['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_prevalence_hiv = hiv_prevalence['2017']['F']['values']['this']
+        except Exception as e:
+            pass
 
 
     is_missing = cereal_yield_kg_per_hectare.get(
@@ -3353,6 +3395,16 @@ def get_worldbank_profile(geo, session, country, level):
                 'Primary School enrollment for Male in 2016 (% gross)', stat_secondary_school_enrollment),
         'stat_primary_education_completion_rate': _create_single_value_dist(
                 'Primary completion rate,(% of relevant age group) in 2010', stat_primary_education_completion_rate),
+        'stat_incidence_malaria': _create_single_value_dist(
+                'Incidence of malaria per 1000 population at risk in 2017', stat_incidence_malaria),
+        'stat_nurses_midwives': _create_single_value_dist(
+                'Nurses and midwives (per 1,000 people) in 2010', stat_nurses_midwives),
+        'stat_births_attended_by_skilled_health_staff': _create_single_value_dist(
+                'Births attended by skilled health staff in 2018', stat_births_attended_by_skilled_health_staff),
+        'stat_prevalence_hiv': _create_single_value_dist(
+            'Prevalence of HIV, (among Female ages 15-24) in 2017', stat_prevalence_hiv),
+        'stat_maternal_mortality': _create_single_value_dist(
+            'Maternal mortality ratio in 2016 (per 100,000 live births)', stat_maternal_mortality)
 
     }
     return final_data

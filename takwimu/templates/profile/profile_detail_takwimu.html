@@ -281,8 +281,8 @@
     {% if not fgm.prevalence_fgm.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=fgm.tot_prevalence stat_type='number' stat_suffix='%' %}
       </div>
        <div class="column-three-quarters"
             id="chart-histogram-fgm-prevalence_fgm"
@@ -295,8 +295,8 @@
     {% if not worldbank.maternal_mortality.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_maternal_mortality stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-maternal_mortality"
@@ -309,8 +309,8 @@
     {% if not worldbank.hiv_prevalence.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_prevalence_hiv stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-worldbank-hiv_prevalence"
@@ -322,8 +322,8 @@
     {% if not health.hiv_patients_distribution.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.tot_hiv_patients stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-health-hiv_patients_distribution"
@@ -336,8 +336,8 @@
     {% if not health.malaria_prevalence.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.malaria_count stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-health-malaria_prevalence"
@@ -350,8 +350,8 @@
     {% if not worldbank.births_attended_by_skilled_health_staff.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_births_attended_by_skilled_health_staff stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-worldbank-births_attended_by_skilled_health_staff"
@@ -378,8 +378,8 @@
     {% if not worldbank.nurses_and_midwives.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_nurses_midwives stat_type='number' stat_suffix='%' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-nurses_and_midwives"
@@ -392,8 +392,8 @@
     {% if not worldbank.incidence_of_malaria_per_1000_pop_at_risk.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=worldbank.stat_incidence_malaria stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-histogram-worldbank-incidence_of_malaria_per_1000_pop_at_risk"
@@ -434,8 +434,8 @@
     {% if not health_workers.doctors_per_sex_year.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.tot_doctors stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-health_workers-doctors_per_sex_year"
@@ -448,13 +448,13 @@
     {% if not health_workers.dentists_per_sex_year.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
-        <h3 class="chart-header">Population</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health_workers.tot_dentists stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-grouped_column-health_workers-dentists_per_sex_year"
            data-stat-type=""
-           data-chart-title="Number of Dentists Year and Sex (2015-2017)">
+           data-chart-title="Number of Dentists by Year and Sex (2015-2017)">
       </div>
     </section>
     {% endif %}
