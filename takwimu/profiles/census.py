@@ -2105,7 +2105,8 @@ def get_population(geo, session, country, level, year):
         try:
             youth_unemployment_dist, _ = get_stat_data(['youth_unemployment_period'], geo, session,
                                     percent=False )
-            indicative_youth_unemployment_dist = youth_unemployment_dist['Q3']['values']['this']
+            # When sorted, the last element will be `metadata` since the rest are `Q1`, `Q2`, etc.
+            indicative_youth_unemployment_dist = youth_unemployment_dist[sorted(youth_unemployment_dist.keys())[-2]]['values']['this']
         except Exception:
             pass
 
@@ -2113,7 +2114,8 @@ def get_population(geo, session, country, level, year):
         try:
             sex_dist_per_year, _ = get_stat_data( ['population_year', 'population_sex'], geo, session,
                                     table_name='population_sex_year', percent=False )
-            indicative_sex_dist = sex_dist_per_year['2016']['Female']['values']['this']
+            # When sorted, the last element will be `metadata` since the rest are years/numbers.
+            indicative_sex_dist = sex_dist_per_year[sorted(sex_dist_per_year.keys())[-2]]['Female']['values']['this']
         except Exception:
             pass
 
@@ -2766,7 +2768,7 @@ def get_education_profile(geo, session, country, level):
         except Exception as e:
             pass
         try:
-            stat_primary_school_enrollment_distribution = primary_school_enrollment_distribution_dist['2016']['Male']['values']['this']
+            stat_primary_school_enrollment_distribution = primary_school_enrollment_distribution_dist[sorted(primary_school_enrollment_distribution_dist.keys())[-2]]['Male']['values']['this']
         except Exception as e:
             pass
         try:
@@ -2774,11 +2776,11 @@ def get_education_profile(geo, session, country, level):
         except Exception as e:
             pass
         try:
-            stat_junior_secondary_school_enrollment = junior_secondary_school_enrollment_dist['2016']['Female']['values']['this']
+            stat_junior_secondary_school_enrollment = junior_secondary_school_enrollment_dist[sorted(junior_secondary_school_enrollment_dist.keys())[-2]]['Female']['values']['this']
         except Exception as e:
             pass
         try:
-            stat_senior_secondary_school_enrollment = senior_secondary_school_enrollment_dist['2016']['Male']['values']['this']
+            stat_senior_secondary_school_enrollment = senior_secondary_school_enrollment_dist[sorted(senior_secondary_school_enrollment_dist.keys())[-2]]['Male']['values']['this']
         except Exception as e:
             pass
 
@@ -2921,7 +2923,7 @@ def get_worldbank_profile(geo, session, country, level):
             access_to_basic_services, _ = get_stat_data(
                 ['access_to_basic_services_year', ], geo, session,
                 percent=False)
-            indicative_basic_water_services = access_to_basic_services['2015']['values']['this']
+            indicative_basic_water_services = access_to_basic_services[sorted(access_to_basic_services.keys())[-2]]['values']['this']
         except Exception:
             pass
 
@@ -2943,7 +2945,7 @@ def get_worldbank_profile(geo, session, country, level):
             youth_unemployment, _ = get_stat_data(
                 ['youth_unemployment_year', 'sex', ], geo, session,
                 percent=False)
-            indicative_youth_unemployment_dist = youth_unemployment['2018']['M']['values']['this']
+            indicative_youth_unemployment_dist = youth_unemployment[sorted(youth_unemployment.keys())[-2]]['M']['values']['this']
         except Exception:
             pass
 
@@ -2985,7 +2987,7 @@ def get_worldbank_profile(geo, session, country, level):
             employment_to_population_ratio, _ = get_stat_data(
                 ['employment_to_population_ratio_year', 'sex', ], geo, session,
                 percent=False)
-            indicative_employment_dist = employment_to_population_ratio['2018']['F']['values']['this']
+            indicative_employment_dist = employment_to_population_ratio[sorted(employment_to_population_ratio.keys())[-2]]['F']['values']['this']
         except Exception:
             pass
 
@@ -3040,7 +3042,7 @@ def get_worldbank_profile(geo, session, country, level):
             prevalence_of_undernourishment, _ = get_stat_data(
                 ['prevalence_of_undernourishment_year', ], geo, session,
                 percent=False)
-            indicative_prevalence_undernourishment = prevalence_of_undernourishment['2016']['values']['this']
+            indicative_prevalence_undernourishment = prevalence_of_undernourishment[sorted(prevalence_of_undernourishment.keys())[-2]]['values']['this']
         except Exception:
             pass
 
@@ -3055,7 +3057,7 @@ def get_worldbank_profile(geo, session, country, level):
             life_expectancy_at_birth, _ = get_stat_data(
                 ['life_expectancy_at_birth_year', 'sex', ], geo, session,
                 percent=False)
-            indicative_life_expectancy_at_birth = life_expectancy_at_birth['2016']['F']['values']['this']
+            indicative_life_expectancy_at_birth = life_expectancy_at_birth[sorted(life_expectancy_at_birth.keys())[-2]]['F']['values']['this']
         except Exception:
             pass
 
@@ -3123,91 +3125,93 @@ def get_worldbank_profile(geo, session, country, level):
             pass
 
         try:
-            stat_agriculture_land = agricultural_land['2016']['values']['this']
+            stat_agriculture_land = agricultural_land[sorted(agricultural_land.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows['2017']['values']['this']
+            stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows[sorted(foreign_direct_investment_net_inflows.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_gdp_growth = gdp_growth['2017']['values']['this']
+            stat_gdp_growth = gdp_growth[sorted(gdp_growth.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_gdp = gdp['2017']['values']['this'] / 1000000
+            stat_gdp = gdp[sorted(gdp.keys())[-2]]['values']['this'] / 1000000
         except Exception as e:
             pass
         try:
-            stat_gdp_per_capita_growth = gdp_per_capita_growth['2017']['values']['this']
+            stat_gdp_per_capita_growth = gdp_per_capita_growth[sorted(gdp_per_capita_growth.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_tax_revenue = tax_revenue['2013']['values']['this'] / 1000000
+            stat_tax_revenue = tax_revenue[sorted(tax_revenue.keys())[-2]]['values']['this'] / 1000000
         except Exception as e:
             pass
         try:
-            stat_gdp_per_capita = gdp_per_capita['2017']['values']['this']
+            stat_gdp_per_capita = gdp_per_capita[sorted(gdp_per_capita.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp['2013']['values']['this']
+            stat_tax_as_percentage_of_gdp = tax_as_percentage_of_gdp[sorted(tax_as_percentage_of_gdp.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_gini_index = gini_index['2009']['values']['this']
+            stat_gini_index = gini_index[sorted(gini_index.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_account_ownership = account_ownership['F']['2017']['values']['this']
+            f_account_ownership = account_ownership['F']
+            stat_account_ownership = f_account_ownership[sorted(f_account_ownership.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_mobile_phone_subscriptions = mobile_phone_subscriptions['2017']['values']['this']
+            stat_mobile_phone_subscriptions = mobile_phone_subscriptions[sorted(mobile_phone_subscriptions.keys())[-2]]['values']['this']
+        except Exception as e:
+            pass
+
+        try:
+            stat_primary_school_enrollment = primary_school_enrollment[sorted(primary_school_enrollment.keys())[-2]]['F']['values']['this']
         except Exception as e:
             pass
         try:
-            stat_primary_school_enrollment = primary_school_enrollment['2016']['F']['values']['this']
+            stat_secondary_school_enrollment = secondary_school_enrollment[sorted(secondary_school_enrollment.keys())[-2]]['M']['values']['this']
         except Exception as e:
             pass
         try:
-            stat_secondary_school_enrollment = secondary_school_enrollment['2016']['M']['values']['this']
+            stat_adult_literacy_rate = adult_literacy_rate[sorted(adult_literacy_rate.keys())[-2]]['M']['values']['this']
         except Exception as e:
             pass
         try:
-            stat_adult_literacy_rate = adult_literacy_rate['2008']['M']['values']['this']
+            stat_primary_education_completion_rate = primary_education_completion_rate[sorted(primary_education_completion_rate.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_primary_education_completion_rate = primary_education_completion_rate['2010']['values']['this']
+            stat_incidence_malaria = incidence_of_malaria_per_1000_pop_at_risk[sorted(incidence_of_malaria_per_1000_pop_at_risk.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_incidence_malaria = incidence_of_malaria_per_1000_pop_at_risk['2017']['values']['this']
+            stat_nurses_midwives = nurses_and_midwives[sorted(nurses_and_midwives.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_nurses_midwives = nurses_and_midwives['2010']['values']['this']
+            stat_births_attended_by_skilled_health_staff = births_attended_by_skilled_health_staff[sorted(births_attended_by_skilled_health_staff.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_births_attended_by_skilled_health_staff = births_attended_by_skilled_health_staff['2018']['values']['this']
+            stat_maternal_mortality = maternal_mortality[sorted(maternal_mortality.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_maternal_mortality = maternal_mortality['2016']['values']['this']
+            stat_prevalence_hiv = hiv_prevalence[sorted(hiv_prevalence.keys())[-2]]['F']['values']['this']
         except Exception as e:
             pass
         try:
-            stat_prevalence_hiv = hiv_prevalence['2017']['F']['values']['this']
+            stat_agriculture_land = agricultural_land[sorted(agricultural_land.keys())[-2]]['values']['this']
         except Exception as e:
             pass
         try:
-            stat_agriculture_land = agricultural_land['2016']['values']['this']
-        except Exception as e:
-            pass
-        try:
-            stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows['2017']['values']['this']
+            stat_foreign_direct_investment_net_inflows = foreign_direct_investment_net_inflows[sorted(foreign_direct_investment_net_inflows.keys())[-2]]['values']['this']
         except Exception as e:
             pass
 
@@ -3341,9 +3345,9 @@ def get_worldbank_profile(geo, session, country, level):
         'indicative_life_expectancy_at_birth': _create_single_value_dist(
                 'Life Expectancy (Female)',indicative_life_expectancy_at_birth),
         'indicative_youth_unemployment_dist': _create_single_value_dist(
-                'Youth Unemployment',indicative_youth_unemployment_dist),
+                'Youth Unemployment (Male)',indicative_youth_unemployment_dist),
         'indicative_employment_dist': _create_single_value_dist(
-                    'Employment Ratio (Male)', indicative_employment_dist),
+                    'Employment Ratio (Female)', indicative_employment_dist),
         'total_cereal_yield': _create_single_value_dist(
                     'Cereal Yield (1997 - 2016)', total_cereal_yield),
         'stat_agriculture_land': _create_single_value_dist('Land', stat_agriculture_land),
