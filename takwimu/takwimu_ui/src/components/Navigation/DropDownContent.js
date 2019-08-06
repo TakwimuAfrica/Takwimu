@@ -63,7 +63,8 @@ const styles = theme => ({
     overflow: 'auto',
     justifyContent: 'space-between',
     [theme.breakpoints.up('sm')]: {
-      overflow: 'visible'
+      overflow: 'visible',
+      justifyContent: 'unset'
     },
     [theme.breakpoints.up('md')]: {
       paddingLeft: '1.5rem'
