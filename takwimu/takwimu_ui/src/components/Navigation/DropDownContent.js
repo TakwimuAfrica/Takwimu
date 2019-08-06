@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -58,10 +58,10 @@ const styles = theme => ({
     borderRadius: '1.187rem'
   },
   flagsContainer: {
+    overflow: 'scroll',
     justifyContent: 'space-between',
-    paddingLeft: '1.5rem',
-    [theme.breakpoints.up('sm')]: {
-      justifyContent: 'unset'
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: '1.5rem'
     }
   },
   countryLink: {
@@ -96,6 +96,16 @@ const styles = theme => ({
 });
 
 function DropDownContent({ classes, title, description, countries, profile }) {
+  useEffect(() => {
+    /**
+     * Fix flagsContainer height to avoid modal overflow
+     */
+    const container = document.getElementById('flagsContainer');
+    if (container) {
+      const rect = container.getBoundingClientRect();
+      container.style.setProperty('height', `${window.innerHeight - rect.y}px`);
+    }
+  });
   return (
     <div className={classes.root}>
       <Grid container direction="row" className={classes.container}>
@@ -120,10 +130,11 @@ function DropDownContent({ classes, title, description, countries, profile }) {
         </Grid>
         <Grid
           item
-          container
           md={9}
-          direction="row"
+          container
           wrap="wrap"
+          direction="row"
+          id="flagsContainer"
           className={classes.flagsContainer}
         >
           {countries.map(country => (

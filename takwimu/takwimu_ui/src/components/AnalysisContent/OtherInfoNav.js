@@ -17,6 +17,7 @@ const styles = theme => ({
     left: 0,
     width: '100%',
     height: '100px',
+    overflow: 'scroll',
     display: 'flex',
     justifyContent: 'center',
     zIndex: 2, // Ensure its ontop (data continer actions has index 1)
