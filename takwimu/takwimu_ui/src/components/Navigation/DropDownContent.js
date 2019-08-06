@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
 
 import {
@@ -6,9 +6,11 @@ import {
   Grid,
   Link,
   Typography,
-  ButtonBase
+  ButtonBase,
+  withWidth
 } from '@material-ui/core';
 
+import { isWidthDown } from '@material-ui/core/withWidth';
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
@@ -43,7 +45,9 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: 'transparent'
     },
+    width: '100%',
     [theme.breakpoints.up('sm')]: {
+      width: 'auto',
       minWidth: '11.25rem'
     },
     [theme.breakpoints.up('md')]: {
@@ -58,10 +62,14 @@ const styles = theme => ({
     borderRadius: '1.187rem'
   },
   flagsContainer: {
+    overflow: 'auto',
     justifyContent: 'space-between',
-    paddingLeft: '1.5rem',
     [theme.breakpoints.up('sm')]: {
+      overflow: 'visible',
       justifyContent: 'unset'
+    },
+    [theme.breakpoints.up('md')]: {
+      paddingLeft: '1.5rem'
     }
   },
   countryLink: {
@@ -95,7 +103,29 @@ const styles = theme => ({
   }
 });
 
-function DropDownContent({ classes, title, description, countries, profile }) {
+function DropDownContent({
+  classes,
+  width,
+  title,
+  description,
+  countries,
+  profile
+}) {
+  useEffect(() => {
+    /**
+     * Fix flagsContainer height to avoid modal overflow
+     */
+    if (isWidthDown('xs', width)) {
+      const container = document.getElementById('flagsContainer');
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        container.style.setProperty(
+          'height',
+          `${window.innerHeight - rect.y}px`
+        );
+      }
+    }
+  });
   return (
     <div className={classes.root}>
       <Grid container direction="row" className={classes.container}>
@@ -120,10 +150,11 @@ function DropDownContent({ classes, title, description, countries, profile }) {
         </Grid>
         <Grid
           item
-          container
           md={9}
-          direction="row"
+          container
           wrap="wrap"
+          direction="row"
+          id="flagsContainer"
           className={classes.flagsContainer}
         >
           {countries.map(country => (
@@ -157,6 +188,7 @@ function DropDownContent({ classes, title, description, countries, profile }) {
 }
 
 DropDownContent.propTypes = {
+  width: PropTypes.string.isRequired,
   classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
@@ -164,4 +196,4 @@ DropDownContent.propTypes = {
   profile: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(DropDownContent);
+export default withWidth()(withStyles(styles)(DropDownContent));

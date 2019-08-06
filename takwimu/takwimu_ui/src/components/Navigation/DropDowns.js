@@ -24,13 +24,13 @@ const styles = theme => ({
     }
   },
   modalTopic: {
-    top: '15.313rem',
+    top: '18.313rem',
     [theme.breakpoints.up('md')]: {
       top: '0'
     }
   },
   modalAnalysis: {
-    top: '11.313rem',
+    top: '13.313rem',
     [theme.breakpoints.up('md')]: {
       top: '0'
     }
@@ -45,7 +45,9 @@ const styles = theme => ({
   drawer: {
     backgroundColor: theme.palette.primary.main,
     outline: 'none',
-    boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
+    [theme.breakpoints.up('md')]: {
+      boxShadow: '0 2px 8px 0 rgba(0, 0, 0, 0.07)'
+    }
   }
 });
 
