@@ -60,8 +60,11 @@ const styles = theme => ({
     borderRadius: '1.187rem'
   },
   flagsContainer: {
-    overflow: 'scroll',
+    overflow: 'auto',
     justifyContent: 'space-between',
+    [theme.breakpoints.up('sm')]: {
+      overflow: 'visible'
+    },
     [theme.breakpoints.up('md')]: {
       paddingLeft: '1.5rem'
     }
