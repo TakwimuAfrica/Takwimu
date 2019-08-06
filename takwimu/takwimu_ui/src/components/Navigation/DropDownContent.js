@@ -6,9 +6,11 @@ import {
   Grid,
   Link,
   Typography,
-  ButtonBase
+  ButtonBase,
+  withWidth
 } from '@material-ui/core';
 
+import { isWidthDown } from '@material-ui/core/withWidth';
 import { RichTypography } from '../core';
 
 const flagSrc = require.context('../../assets/images/flags', false, /\.svg$/);
@@ -95,15 +97,27 @@ const styles = theme => ({
   }
 });
 
-function DropDownContent({ classes, title, description, countries, profile }) {
+function DropDownContent({
+  classes,
+  width,
+  title,
+  description,
+  countries,
+  profile
+}) {
   useEffect(() => {
     /**
      * Fix flagsContainer height to avoid modal overflow
      */
-    const container = document.getElementById('flagsContainer');
-    if (container) {
-      const rect = container.getBoundingClientRect();
-      container.style.setProperty('height', `${window.innerHeight - rect.y}px`);
+    if (isWidthDown('xs', width)) {
+      const container = document.getElementById('flagsContainer');
+      if (container) {
+        const rect = container.getBoundingClientRect();
+        container.style.setProperty(
+          'height',
+          `${window.innerHeight - rect.y}px`
+        );
+      }
     }
   });
   return (
@@ -168,6 +182,7 @@ function DropDownContent({ classes, title, description, countries, profile }) {
 }
 
 DropDownContent.propTypes = {
+  width: PropTypes.string.isRequired,
   classes: PropTypes.shape({}).isRequired,
   countries: PropTypes.arrayOf(PropTypes.shape({}).isRequired).isRequired,
   title: PropTypes.string.isRequired,
@@ -175,4 +190,4 @@ DropDownContent.propTypes = {
   profile: PropTypes.func.isRequired
 };
 
-export default withStyles(styles)(DropDownContent);
+export default withWidth()(withStyles(styles)(DropDownContent));
