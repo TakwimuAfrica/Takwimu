@@ -45,7 +45,9 @@ const styles = theme => ({
     '&:hover': {
       backgroundColor: 'transparent'
     },
+    width: '100%',
     [theme.breakpoints.up('sm')]: {
+      width: 'auto',
       minWidth: '11.25rem'
     },
     [theme.breakpoints.up('md')]: {
