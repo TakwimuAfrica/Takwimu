@@ -20,7 +20,8 @@ ROOT_URLCONF = 'takwimu.urls'
 WAGTAILAPI_SEARCH_ENABLED = True
 
 # The order of MIDDLEWARE is important: https://docs.djangoproject.com/en/2.2/ref/middleware/#middleware-ordering
-# Best to copy Wazimap & HURUmap MIDDLEWARE and modify as needs
+# Best to copy Wazimap HURUmap & HURUmap[dashboard] MIDDLEWARE and modify as
+# needed
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -28,10 +29,11 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
     'wazimap.middleware.RedirectMiddleware',
+    'wagtail.contrib.redirects.middleware.RedirectMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
