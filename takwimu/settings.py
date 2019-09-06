@@ -19,10 +19,21 @@ ROOT_URLCONF = 'takwimu.urls'
 
 WAGTAILAPI_SEARCH_ENABLED = True
 
-MIDDLEWARE_CLASSES = ('whitenoise.middleware.WhiteNoiseMiddleware',
-                      'django.middleware.cache.FetchFromCacheMiddleware',
-                      'django.middleware.cache.UpdateCacheMiddleware',) + MIDDLEWARE_CLASSES + (
-                         'debug_toolbar.middleware.DebugToolbarMiddleware',)
+# The order of MIDDLEWARE is important: https://docs.djangoproject.com/en/2.2/ref/middleware/#middleware-ordering
+# Best to copy Wazimap & HURUmap MIDDLEWARE and modify as needs
+MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.cache.UpdateCacheMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
+    'django.middleware.cache.FetchFromCacheMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'wazimap.middleware.RedirectMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+]
 
 INTERNAL_IPS = ['127.0.0.1', '172.18.0.1']
 
