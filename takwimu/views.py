@@ -7,6 +7,8 @@ from operator import itemgetter
 from wsgiref.util import FileWrapper
 
 import requests
+import bs4
+
 from django.conf import settings as takwimu_settings
 from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import get_object_or_404, render
@@ -365,8 +367,18 @@ class FlourishView(APIView):
         file_path = zip_ref.extract(member, "/tmp/" + kwargs["document_id"])
         zip_ref.close()
         mode, content_type = ('r', 'text')
-        if not member.split('/')[-1].endswith( ('html', 'css', 'txt', 'svg')):
+        if not member.split('/')[-1].endswith(('html', 'css', 'txt', 'svg')):
             mode, content_type = ('rb', 'media/*')
+
+        if member == 'index.html':
+            soup = bs4.BeautifulSoup(open(file_path).read())
+            # Same-origin policy
+            script_tag = soup.new_tag("script", type="text/javascript")
+            script_tag.append(
+                'document.domain = new URL("{}").hostname;'.format(takwimu_settings.HURUMAP['url'])
+            )
+            soup.head.append(script_tag)
+            return Response(str(soup))
         return Response(open(file_path).read())
 
 
