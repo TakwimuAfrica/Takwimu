@@ -64,9 +64,11 @@ function DataContainer({ id, data, theme, countryName }) {
     data.data_stat_type
   }&chartSourceLink=${data.data_source_link}&chartSourceTitle=${
     data.data_source_title
-  }&chartQualifier=${data.chart_qualifier
-    .replace('<br/>', '%0A')
-    .replace(/<(.|\n)*?>/g, '')}&stylesheet=/static/css/embedchart.css"
+  }&chartQualifier=${
+    data.chart_qualifier
+      ? data.chart_qualifier.replace('<br/>', '%0A').replace(/<(.|\n)*?>/g, '')
+      : ''
+  }&stylesheet=/static/css/embedchart.css"
 />`;
 
   return (
