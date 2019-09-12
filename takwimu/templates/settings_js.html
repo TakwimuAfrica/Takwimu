@@ -5,4 +5,7 @@
   {{ block.super }}
 
   var STATIC_PREFIX = '{% get_static_prefix %}';
+
+  // Same-origin policy for embeds
+  document.domain = new URL(SITE_URL).hostname;
 {% endblock settings_javascript %}

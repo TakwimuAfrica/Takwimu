@@ -162,3 +162,6 @@ renderSearchResultsPage();
 renderLegalPage();
 render500Page();
 render404Page();
+
+// Same-origin policy
+document.domain = new URL(PROPS.takwimu.url).hostname;
