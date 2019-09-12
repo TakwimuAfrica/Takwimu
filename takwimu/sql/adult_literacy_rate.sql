@@ -100,7 +100,7 @@ country	KE	2009	2007	M	78
 country	KE	2009	2000	M	87
 country	NG	2009	2008	M	61
 country	NG	2009	2003	M	67
-country	NG	1991	2003	M	68
+country	NG	2009	2019	M	68
 country	SN	2009	2017	M	65
 country	SN	2009	2013	M	53
 country	SN	2009	2011	M	66
