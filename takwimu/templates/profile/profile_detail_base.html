@@ -203,8 +203,10 @@
           }
       };
 
-
-      const {geo_code: countryCode} = profileData.geography.this;
+      let { geo_code: countryCode, geo_level, parent_geoid } = profileData.geography.this;
+      if (geo_level !== 'country') {
+           countryCode  = parent_geoid.split('-')[1]; 
+      }
       const country = takwimu.countries.find(c => c.iso_code === countryCode);
       takwimu.country = country;
 
