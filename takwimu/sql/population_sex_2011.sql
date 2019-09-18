@@ -37,7 +37,6 @@ CREATE TABLE public.population_sex_2011 (
 --
 
 COPY public.population_sex_2011 (geo_level, geo_code, geo_version, "population_sex_2011", total) FROM stdin;
-country	TZ	2009	male	21869990
 level1	ZA_1_008	2009	Male	3096457
 level1	ZA_1_008	2009	Female	3183273
 level1	ZA_1_003	2009	Male	3327495
