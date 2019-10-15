@@ -314,7 +314,76 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "sex_dist_per_year": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                },
+            },
+             "secondary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            "primary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'budget_allocation': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'health_facility_beds': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            }
         },
+        'level1': {
+            "sex_dist_per_year": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                },
+            },
+            "hiv_prevalence": {
+                "source": {
+                    "link": "https://nacc.or.ke/wp-content/uploads/2018/12/HIV-estimates-report-Kenya-20182.pdf",
+                    "title": "Kenya HIV Estimates, NACC, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "secondary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            "primary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'budget_allocation': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'health_facility_beds': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            }
+        }
     },
     'nigeria': {
         'country': {
