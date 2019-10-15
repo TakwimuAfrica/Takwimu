@@ -2054,17 +2054,17 @@ def get_profile(geo, profile_name, request):
                 func = globals()[function_name]
                 data[section] = func(geo, session, country, level)
                 # get profiles for comparative geometries
-                if not bool(data[section]['is_missing']):
-                    for comp_geo in comparative_geos:
-                        try:
-                            merge_dicts(
-                                data[section], func(
-                                    comp_geo, session, country, level), comp_geo.geo_level)
-                        except KeyError as e:
-                            msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
-                                geo.geoid, section, comp_geo.geoid, e)
-                            log.fatal(msg, exc_info=e)
-                            raise ValueError(msg)
+                # if not data[section]['is_missing']):
+                #     for comp_geo in comparative_geos:
+                #         try:
+                #             merge_dicts(
+                #                 data[section], func(
+                #                     comp_geo, session, country, level), comp_geo.geo_level)
+                #         except KeyError as e:
+                #             msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
+                #                 geo.geoid, section, comp_geo.geoid, e)
+                #             log.fatal(msg, exc_info=e)
+                #             raise ValueError(msg)
 
         tabs = OrderedDict({'all': {'name': 'All', 'href': ''}})
         if not (data['demographics']['is_missing'] and \
@@ -2533,10 +2533,10 @@ def get_health_workers_profile(geo, session, country, level):
     except Exception as e:
         pass
 
-    is_missing = bool(health_workers_dist.get('is_missing')) and \
-        bool(health_workers_distribution_per_year.get('is_missing')) and \
-            bool(doctors_per_sex_year_dist.get('is_missing')) and \
-                bool(dentists_per_sex_year_dist.get("is_missing"))
+    is_missing = health_workers_dist.get('is_missing') and \
+        health_workers_distribution_per_year.get('is_missing') and \
+            doctors_per_sex_year_dist.get('is_missing') and \
+                dentists_per_sex_year_dist.get("is_missing")
     return {
         'is_missing': is_missing,
         'total_health_workers_dist': total_health_workers_dist,
@@ -2658,10 +2658,10 @@ def get_health_profile(geo, session, country, level):
             pass
 
     return {
-        'is_missing': bool(malaria_prevalence_dist.get('is_missing')) and \
-            bool(hiv_patients_distribution_dist.get('is_missing')) and \
-                bool(access_to_electricity_water_dist.get('is_missing')) and \
-                    bool(health_facility_beds_dist.get('is_missing')),
+        'is_missing': malaria_prevalence_dist.get('is_missing') and \
+            hiv_patients_distribution_dist.get('is_missing') and \
+                access_to_electricity_water_dist.get('is_missing') and \
+                    health_facility_beds_dist.get('is_missing'),
         'malaria_prevalence': _add_metadata_to_dist(malaria_prevalence_dist,
                                                     'malaria_prevalence',
                                                     country, level),
@@ -2789,23 +2789,23 @@ def get_budget_profile(geo, session, country, level):
     budget_allocation_dist = LOCATIONNOTFOUND
     tot_budget_allocation = 0
 
-    # with dataset_context(year='2014'):
-    #     try:
-    #         government_expenditure_dist, _ = get_stat_data(
-    #             ['year', 'sector'], geo, session)
-    #     except Exception:
-    #         pass
+    with dataset_context(year='2014'):
+        try:
+            government_expenditure_dist, _ = get_stat_data(
+                ['year', 'sector'], geo, session)
+        except Exception:
+            pass
 
     with dataset_context(year='2018'):
         try:
             budget_allocation_dist, tot_budget_allocation = get_stat_data(
-                ['financial_year', 'allocation'], geo, session, table_name='budget_allocation')
+                ['financial_year', 'allocation'], geo, session, table_name='budget_allocation', percent=False)
         except Exception:
             pass
 
     return {
-        'is_missing': bool(government_expenditure_dist.get('is_missing')) and \
-             bool(budget_allocation_dist.get('is_missing')),
+        'is_missing': government_expenditure_dist.get('is_missing') and \
+             budget_allocation_dist.get('is_missing'),
         'government_expenditure_dist': _add_metadata_to_dist(
             government_expenditure_dist, 'government_expenditure_dist', country,
             level),
@@ -3346,36 +3346,36 @@ def get_worldbank_profile(geo, session, country, level):
         except Exception as e:
             pass
 
-    is_missing = bool(cereal_yield_kg_per_hectare.get(
-        'is_missing')) and bool(agricultural_land.get(
-        'is_missing')) and bool(gini_index.get(
-        'is_missing')) and bool(access_to_basic_services.get(
-        'is_missing')) and bool(primary_school_enrollment.get(
-        'is_missing')) and bool(account_ownership.get(
-        'is_missing')) and bool(youth_unemployment.get(
-        'is_missing')) and bool(adult_literacy_rate.get(
-        'is_missing')) and bool(foreign_direct_investment_net_inflows.get(
-        'is_missing')) and bool(maternal_mortality.get(
-        'is_missing')) and bool(hiv_prevalence.get(
-        'is_missing')) and bool(employment_to_population_ratio.get(
-        'is_missing')) and bool(total_population.get(
-        'is_missing')) and bool(gdp_per_capita.get(
-        'is_missing')) and bool(primary_education_completion_rate.get(
-        'is_missing')) and bool(secondary_school_enrollment.get(
-        'is_missing')) and bool(nurses_and_midwives.get(
-        'is_missing')) and bool(mobile_phone_subscriptions.get(
-        'is_missing')) and bool(gdp_per_capita_growth.get(
-        'is_missing')) and bool(prevalence_of_undernourishment.get(
-        'is_missing')) and bool(physicians_nurses_and_midwives.get(
-        'is_missing')) and bool(life_expectancy_at_birth.get(
-        'is_missing')) and bool(tax_as_percentage_of_gdp.get(
-        'is_missing')) and bool(births_attended_by_skilled_health_staff.get(
-        'is_missing')) and bool(incidence_of_malaria_per_1000_pop_at_risk.get(
-        'is_missing')) and bool(tax_revenue.get('is_missing')) and bool(gdp.get(
-        'is_missing')) and bool(gdp_growth.get(
-        'is_missing')) and bool(infant_under5_mortality.get(
-        'is_missing')) and bool(women_in_government.get(
-        'is_missing')) and bool(women_in_parliament.get('is_missing'))
+    is_missing = cereal_yield_kg_per_hectare.get(
+        'is_missing') and agricultural_land.get(
+        'is_missing') and gini_index.get(
+        'is_missing') and access_to_basic_services.get(
+        'is_missing') and primary_school_enrollment.get(
+        'is_missing') and account_ownership.get(
+        'is_missing') and youth_unemployment.get(
+        'is_missing') and adult_literacy_rate.get(
+        'is_missing') and foreign_direct_investment_net_inflows.get(
+        'is_missing') and maternal_mortality.get(
+        'is_missing') and hiv_prevalence.get(
+        'is_missing') and employment_to_population_ratio.get(
+        'is_missing') and total_population.get(
+        'is_missing') and gdp_per_capita.get(
+        'is_missing') and primary_education_completion_rate.get(
+        'is_missing') and secondary_school_enrollment.get(
+        'is_missing') and nurses_and_midwives.get(
+        'is_missing') and mobile_phone_subscriptions.get(
+        'is_missing') and gdp_per_capita_growth.get(
+        'is_missing') and prevalence_of_undernourishment.get(
+        'is_missing') and physicians_nurses_and_midwives.get(
+        'is_missing') and life_expectancy_at_birth.get(
+        'is_missing') and tax_as_percentage_of_gdp.get(
+        'is_missing') and births_attended_by_skilled_health_staff.get(
+        'is_missing') and incidence_of_malaria_per_1000_pop_at_risk.get(
+        'is_missing') and tax_revenue.get('is_missing') and gdp.get(
+        'is_missing') and gdp_growth.get(
+        'is_missing') and infant_under5_mortality.get(
+        'is_missing') and women_in_government.get(
+        'is_missing') and women_in_parliament.get('is_missing')
 
     final_data = {
         'is_missing': is_missing,
