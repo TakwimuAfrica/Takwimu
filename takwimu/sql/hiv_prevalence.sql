@@ -348,6 +348,8 @@ level1	KE_1_027	2009	2018	M	3.3
 level1	KE_1_038	2009	2018	M	4
 level1	KE_1_008	2009	2018	M	0.03
 level1	KE_1_024	2009	2018	M	1.3
+country	KE	2009	2018	M	1.3
+country	KE	2009	2018	F	1.3
 \.
 
 

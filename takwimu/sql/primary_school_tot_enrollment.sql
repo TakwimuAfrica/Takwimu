@@ -13,17 +13,17 @@ SELECT pg_catalog.set_config('search_path', '', false);
 SET check_function_bodies = false;
 SET client_min_messages = warning;
 
-ALTER TABLE IF EXISTS ONLY public.primary_school_enrollment DROP CONSTRAINT IF EXISTS pk_primary_school_enrollment;
-DROP TABLE IF EXISTS public.primary_school_enrollment;
+ALTER TABLE IF EXISTS ONLY public.primary_school_tot_enrollment DROP CONSTRAINT IF EXISTS pk_primary_school_tot_enrollment;
+DROP TABLE IF EXISTS public.primary_school_tot_enrollment;
 SET default_tablespace = '';
 
 SET default_with_oids = false;
 
 --
--- Name: primary_school_enrollment; Type: TABLE; Schema: public; Owner: -
+-- Name: primary_school_tot_enrollment; Type: TABLE; Schema: public; Owner: -
 --
 
-CREATE TABLE public.primary_school_enrollment (
+CREATE TABLE public.primary_school_tot_enrollment (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
@@ -33,10 +33,10 @@ CREATE TABLE public.primary_school_enrollment (
 
 
 --
--- Data for Name: primary_school_enrollment; Type: TABLE DATA; Schema: public; Owner: -
+-- Data for Name: primary_school_tot_enrollment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.primary_school_enrollment (geo_level, geo_code, geo_version, enrollment_year, total) FROM stdin;
+COPY public.primary_school_tot_enrollment (geo_level, geo_code, geo_version, enrollment_year, total) FROM stdin;
 level1	KE_1_030	2009	2011	141574
 level1	KE_1_030	2009	2012	144484
 level1	KE_1_030	2009	2013	145965
@@ -370,11 +370,11 @@ level1	KE_1_024	2009	2017	205090
 
 
 --
--- Name: primary_school_enrollment pk_primary_school_enrollment; Type: CONSTRAINT; Schema: public; Owner: -
+-- Name: primary_school_tot_enrollment pk_primary_school_tot_enrollment; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
-ALTER TABLE ONLY public.primary_school_enrollment
-    ADD CONSTRAINT pk_primary_school_enrollment PRIMARY KEY (geo_level, geo_code, geo_version, enrollment_year);
+ALTER TABLE ONLY public.primary_school_tot_enrollment
+    ADD CONSTRAINT pk_primary_school_tot_enrollment PRIMARY KEY (geo_level, geo_code, geo_version, enrollment_year);
 
 
 --
