@@ -27,7 +27,7 @@ CREATE TABLE public.primary_school_enrollment (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    primary_school_tot_enrollment character varying(128) NOT NULL,
+    enrollment_year character varying(128) NOT NULL,
     total integer
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE public.primary_school_enrollment (
 -- Data for Name: primary_school_enrollment; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.primary_school_enrollment (geo_level, geo_code, geo_version, primary_school_tot_enrollment, total) FROM stdin;
+COPY public.primary_school_enrollment (geo_level, geo_code, geo_version, enrollment_year, total) FROM stdin;
 level1	KE_1_030	2009	2011	141574
 level1	KE_1_030	2009	2012	144484
 level1	KE_1_030	2009	2013	145965
@@ -374,7 +374,7 @@ level1	KE_1_024	2009	2017	205090
 --
 
 ALTER TABLE ONLY public.primary_school_enrollment
-    ADD CONSTRAINT pk_primary_school_enrollment PRIMARY KEY (geo_level, geo_code, geo_version, primary_school_tot_enrollment);
+    ADD CONSTRAINT pk_primary_school_enrollment PRIMARY KEY (geo_level, geo_code, geo_version, enrollment_year);
 
 
 --
