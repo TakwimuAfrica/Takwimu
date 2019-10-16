@@ -2053,18 +2053,6 @@ def get_profile(geo, profile_name, request):
             if function_name in globals():
                 func = globals()[function_name]
                 data[section] = func(geo, session, country, level)
-                # get profiles for comparative geometries
-                # if not data[section]['is_missing']):
-                #     for comp_geo in comparative_geos:
-                #         try:
-                #             merge_dicts(
-                #                 data[section], func(
-                #                     comp_geo, session, country, level), comp_geo.geo_level)
-                #         except KeyError as e:
-                #             msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
-                #                 geo.geoid, section, comp_geo.geoid, e)
-                #             log.fatal(msg, exc_info=e)
-                #             raise ValueError(msg)
 
         tabs = OrderedDict({'all': {'name': 'All', 'href': ''}})
         if not (data['demographics']['is_missing'] and \
