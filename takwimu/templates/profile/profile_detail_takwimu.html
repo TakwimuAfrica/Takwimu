@@ -5,8 +5,8 @@
 {% endblock %}
 
 
-
 {% block profile_detail %}
+
 
 {# DEMOGRAPHICS #}
 {% if tabs.demographics %}
@@ -458,6 +458,19 @@
       </div>
     </section>
     {% endif %}
+    {% if not health.health_facility_beds.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Health</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=health.tot_health_facility_beds stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-health-health_facility_beds"
+           data-stat-type=""
+           data-chart-title="Health Facility Beds by 2017">
+      </div>
+    </section>
+    {% endif %}
 
   </div>
 </article>
@@ -637,6 +650,32 @@
       </div>
     </section>
     {% endif %}
+    {% if not education.secondary_school_tot_enrollment.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_secondary_school_tot_enrollment stat_type='number' stat_suffix='%' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-education-secondary_school_tot_enrollment"
+           data-stat-type=""
+           data-chart-title="Secondary School Enrollment 2011 - 2017" data-id="derrtae2-556fg3-43ff-8861-151be98bb844">
+      </div>
+    </section>
+    {% endif %}
+    {% if not education.primary_school_tot_enrollment.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Education</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_tot_enrollment stat_type='number' stat_suffix='%' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-column-education-primary_school_tot_enrollment"
+           data-stat-type=""
+           data-chart-title="Primary School Enrollment 2011 - 2017" data-id="111111-556fg3-43ff-8861-456bb844">
+      </div>
+    </section>
+    {% endif %}
     {% if not education.primary_school_completion_sex.is_missing %}
     <section class="clearfix stat-row">
       <div class="column-quarter">
@@ -718,6 +757,19 @@
            id="chart-grouped_column-budget-government_expenditure_dist"
            data-stat-type="scaled-percentage"
            data-chart-title="Government spending" data-id="ff06fa89-778e-46a4-a054-091711a1c84b">
+      </div>
+    </section>
+    {% endif %}
+    {% if not budget.budget_allocation.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+         <h3 class="chart-header">Budget</h3>
+         {% include 'profile/_blocks/_stat_list.html' with stat=budget.tot_budget_allocation stat_type='number' %}
+      </div>
+      <div class="column-three-quarters"
+           id="chart-grouped_column-budget-budget_allocation"
+           data-stat-type="number"
+           data-chart-title="Consolidated Governments Budget Allocation, FY 2017/18 ( KSh Million )" data-id="ff06fa89-3333-46a4-a054-091711a1c84b">
       </div>
     </section>
     {% endif %}

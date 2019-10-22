@@ -104,8 +104,8 @@ var ProfileMaps = function() {
 
             // load shapes at child level, once all features all drawn
             // No data below country level
-            // load country child level for only nigeria
-            if (child_level && geo_code === 'NG') {
+            // load country child level for only nigeria and kenya
+            if (child_level && (geo_code === 'NG' || geo_code == 'KE')) {
                 GeometryLoader.loadGeometryForChildLevel(child_level, geo_level, geo_code, geo_version, function(features) {
                     self.drawFeatures(features.features);
                 });

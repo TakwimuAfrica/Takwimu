@@ -314,7 +314,76 @@ METADATA = {
                 },
                 "qualifier": "M: Male\nF: Female"
             },
+            "sex_dist_per_year": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                },
+            },
+             "secondary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            "primary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'budget_allocation': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'health_facility_beds': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            }
         },
+        'level1': {
+            "sex_dist_per_year": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                },
+            },
+            "hiv_prevalence": {
+                "source": {
+                    "link": "https://nacc.or.ke/wp-content/uploads/2018/12/HIV-estimates-report-Kenya-20182.pdf",
+                    "title": "Kenya HIV Estimates, NACC, 2018"
+                },
+                "qualifier": "M: Male\nF: Female"
+            },
+            "secondary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            "primary_school_tot_enrollment": {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'budget_allocation': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            },
+            'health_facility_beds': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'title': 'Statistical Abstract, 2018',
+                }
+            }
+        }
     },
     'nigeria': {
         'country': {
@@ -1984,18 +2053,6 @@ def get_profile(geo, profile_name, request):
             if function_name in globals():
                 func = globals()[function_name]
                 data[section] = func(geo, session, country, level)
-                # get profiles for comparative geometries
-                if not data[section]['is_missing'] and not data[section]['is_missing'] is None:
-                    for comp_geo in comparative_geos:
-                        try:
-                            merge_dicts(
-                                data[section], func(
-                                    comp_geo, session, country, level), comp_geo.geo_level)
-                        except KeyError as e:
-                            msg = "Error merging data into %s for section '%s' from %s: KeyError: %s" % (
-                                geo.geoid, section, comp_geo.geoid, e)
-                            log.fatal(msg, exc_info=e)
-                            raise ValueError(msg)
 
         tabs = OrderedDict({'all': {'name': 'All', 'href': ''}})
         if not (data['demographics']['is_missing'] and \
@@ -2554,6 +2611,8 @@ def get_health_profile(geo, session, country, level):
     hiv_patients_distribution_dist = LOCATIONNOTFOUND
     malaria_prevalence_dist = LOCATIONNOTFOUND
     access_to_electricity_water_dist = LOCATIONNOTFOUND
+    health_facility_beds_dist = LOCATIONNOTFOUND
+    tot_health_facility_beds = 0
     indicative_electricity_services = 0
     tot_hiv_patients = 0
     malaria_count = 0
@@ -2579,10 +2638,18 @@ def get_health_profile(geo, session, country, level):
         except Exception:
             pass
 
+        try:
+            health_facility_beds_dist, tot_health_facility_beds = get_stat_data(
+                ['facility_type'], geo, session, table_name='health_facility_beds', percent=False)
+
+        except Exception:
+            pass
+
     return {
         'is_missing': malaria_prevalence_dist.get('is_missing') and \
             hiv_patients_distribution_dist.get('is_missing') and \
-                access_to_electricity_water_dist.get('is_missing'),
+                access_to_electricity_water_dist.get('is_missing') and \
+                    health_facility_beds_dist.get('is_missing'),
         'malaria_prevalence': _add_metadata_to_dist(malaria_prevalence_dist,
                                                     'malaria_prevalence',
                                                     country, level),
@@ -2592,11 +2659,14 @@ def get_health_profile(geo, session, country, level):
         'access_to_electricity_water': _add_metadata_to_dist(access_to_electricity_water_dist,
                                                     'access_to_electricity_water',
                                                     country, level),
+        'health_facility_beds': _add_metadata_to_dist(health_facility_beds_dist,
+                                                    'health_facility_beds', country, level),
         'indicative_electricity_services': _create_single_value_dist(
                                 'Population with Access to Electricity', indicative_electricity_services),
         'tot_hiv_patients': _create_single_value_dist('Total HIV patients in 2015 and 2016', tot_hiv_patients),
         'malaria_count': _create_single_value_dist(
-                'Malaria prevalence among children in 2015 (According to microscopy )', malaria_count)
+                'Malaria prevalence among children in 2015 (According to microscopy )', malaria_count),
+        'tot_health_facility_beds': _create_single_value_dist('Health facility total beds count 2017', tot_health_facility_beds)
     }
 
 
@@ -2703,19 +2773,34 @@ def get_security_profile(geo, session, country, level):
 
 
 def get_budget_profile(geo, session, country, level):
+    government_expenditure_dist = LOCATIONNOTFOUND
+    budget_allocation_dist = LOCATIONNOTFOUND
+    tot_budget_allocation = 0
+
     with dataset_context(year='2014'):
-        government_expenditure_dist = LOCATIONNOTFOUND
         try:
             government_expenditure_dist, _ = get_stat_data(
                 ['year', 'sector'], geo, session)
         except Exception:
             pass
 
+    with dataset_context(year='2018'):
+        try:
+            budget_allocation_dist, tot_budget_allocation = get_stat_data(
+                ['financial_year', 'allocation'], geo, session, table_name='budget_allocation', percent=False)
+        except Exception:
+            pass
+
     return {
-        'is_missing': government_expenditure_dist.get('is_missing'),
+        'is_missing': government_expenditure_dist.get('is_missing') and \
+             budget_allocation_dist.get('is_missing'),
         'government_expenditure_dist': _add_metadata_to_dist(
             government_expenditure_dist, 'government_expenditure_dist', country,
             level),
+        'budget_allocation': _add_metadata_to_dist(budget_allocation_dist, 'budget_allocation',
+                                              country, level),
+        'tot_budget_allocation': _create_single_value_dist(
+                'Total consolidated Governments Budget Allocation, FY 2017/18 ( KSh Million )', tot_budget_allocation)
     }
 
 
@@ -2724,15 +2809,29 @@ def get_education_profile(geo, session, country, level):
     senior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
     junior_secondary_school_enrollment_dist = LOCATIONNOTFOUND
     primary_school_completion_dist = LOCATIONNOTFOUND
+    primary_school_tot_enrollment_dist = LOCATIONNOTFOUND
+    secondary_school_tot_enrollment_dist = LOCATIONNOTFOUND
     literacy_sex_dist = LOCATIONNOTFOUND
     stat_senior_secondary_school_enrollment = 0
     stat_junior_secondary_school_enrollment = 0
     stat_literacy_sex = 0
     stat_primary_school_enrollment_distribution = 0
     stat_primary_school_completion_sex = 0
+    stat_primary_school_tot_enrollment = 0
+    stat_secondary_school_tot_enrollment = 0
 
 
     with dataset_context(year='2018'):
+        try:
+            primary_school_tot_enrollment_dist, _ = get_stat_data(
+                ['enrollment_year'], geo, session, percent=False)
+        except Exception:
+            pass
+        try:
+            secondary_school_tot_enrollment_dist, _ = get_stat_data(
+                ['enrollment_year'], geo, session, percent=False)
+        except Exception:
+            pass
         try:
             senior_secondary_school_enrollment_dist, _ = get_stat_data(
                 ['senior_secondary_school_enrollment_year', 'sex'], geo, session, percent=False)
@@ -2783,12 +2882,22 @@ def get_education_profile(geo, session, country, level):
             stat_senior_secondary_school_enrollment = senior_secondary_school_enrollment_dist[sorted(senior_secondary_school_enrollment_dist.keys())[-2]]['Male']['values']['this']
         except Exception as e:
             pass
+        try:
+            stat_primary_school_tot_enrollment = primary_school_tot_enrollment_dist[sorted(primary_school_tot_enrollment_dist.keys())[-2]]['values']['this']
+        except Exception as e:
+            pass
+        try:
+            stat_secondary_school_tot_enrollment = secondary_school_tot_enrollment_dist[sorted(secondary_school_tot_enrollment_dist.keys())[-2]]['values']['this']
+        except Exception as e:
+            pass
 
     is_missing = senior_secondary_school_enrollment_dist.get('is_missing') and \
         junior_secondary_school_enrollment_dist.get('is_missing') and \
             primary_school_enrollment_distribution_dist.get('is_missing') and \
                 primary_school_completion_dist.get('is_missing') and \
-                    literacy_sex_dist.get('is_missing')
+                    literacy_sex_dist.get('is_missing') and \
+                        primary_school_tot_enrollment_dist.get('is_missing') and \
+                            secondary_school_tot_enrollment_dist.get('is_missing')
 
     return {
         'is_missing': is_missing,
@@ -2807,8 +2916,18 @@ def get_education_profile(geo, session, country, level):
         'literacy_sex': _add_metadata_to_dist(
             literacy_sex_dist, 'literacy_sex', country,
             level),
+        'primary_school_tot_enrollment': _add_metadata_to_dist(
+            primary_school_tot_enrollment_dist, 'primary_school_tot_enrollment', country,
+            level),
+        'secondary_school_tot_enrollment': _add_metadata_to_dist(
+            secondary_school_tot_enrollment_dist, 'secondary_school_tot_enrollment', country,
+            level),
         'stat_literacy_sex': _create_single_value_dist(
             'Percentage of Men age 15-24 years who are literate by Sex, 2016/17', stat_literacy_sex),
+        'stat_primary_school_tot_enrollment': _create_single_value_dist(
+            'Primary School Total Enrollment 2017', stat_primary_school_tot_enrollment),
+        'stat_secondary_school_tot_enrollment': _create_single_value_dist(
+            'Secondary School Total Enrollment 2017', stat_secondary_school_tot_enrollment),
         'stat_primary_school_enrollment_distribution': _create_single_value_dist(
                     'Percentage Distribution of Enrolment in Primary Schools, Male 2016',
                     stat_primary_school_enrollment_distribution),
