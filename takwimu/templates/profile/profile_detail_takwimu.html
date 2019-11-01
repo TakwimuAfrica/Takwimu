@@ -654,7 +654,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Education</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_secondary_school_tot_enrollment stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_secondary_school_tot_enrollment stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-education-secondary_school_tot_enrollment"
@@ -667,7 +667,7 @@
     <section class="clearfix stat-row">
       <div class="column-quarter">
         <h3 class="chart-header">Education</h3>
-        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_tot_enrollment stat_type='number' stat_suffix='%' %}
+        {% include 'profile/_blocks/_stat_list.html' with stat=education.stat_primary_school_tot_enrollment stat_type='number' %}
       </div>
       <div class="column-three-quarters"
            id="chart-column-education-primary_school_tot_enrollment"

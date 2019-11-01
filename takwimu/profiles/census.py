@@ -2824,12 +2824,12 @@ def get_education_profile(geo, session, country, level):
     with dataset_context(year='2018'):
         try:
             primary_school_tot_enrollment_dist, _ = get_stat_data(
-                ['enrollment_year'], geo, session, percent=False)
+                ['enrollment_year'], geo, session, table_name='primary_school_tot_enrollment', percent=False)
         except Exception:
             pass
         try:
             secondary_school_tot_enrollment_dist, _ = get_stat_data(
-                ['enrollment_year'], geo, session, percent=False)
+                ['enrollment_year'], geo, session, table_name='secondary_school_tot_enrollment', percent=False)
         except Exception:
             pass
         try:
