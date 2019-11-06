@@ -512,4 +512,13 @@ static/*
 # Ignore the whole folder
 .vscode/*
 
+### Deploy ###
+# Add folders/files required to deploy
+# Only ignore media in root dir
+!media
+/media
+# Only ignore build in root dir
+!build/
+/build
+
 # End of custom configuration
