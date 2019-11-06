@@ -1,0 +1,1 @@
+{"version":3,"sources":["modules/pdf.js"],"names":["__webpack_require__","r","__webpack_exports__","react_pdf_js__WEBPACK_IMPORTED_MODULE_0__","PDF"],"mappings":"2FAAAA,EAAAC,EAAAC,GAAA,IAAAC,EAAAH,EAAA,MAEeI,YAAf","file":"static/js/7.349b9243.chunk.js","sourcesContent":["import PDF from 'react-pdf-js';\n\nexport default PDF;\n"],"sourceRoot":""}

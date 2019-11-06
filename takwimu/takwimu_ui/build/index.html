@@ -1,0 +1,91 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"/><link rel="apple-touch-icon" sizes="180x180" href="/static/apple-touch-icon.png"/><link rel="icon" type="image/png" sizes="32x32" href="/static/favicon-32x32.png"/><link rel="icon" type="image/png" sizes="16x16" href="/static/favicon-16x16.png"/><link rel="shortcut icon" href="/static/favicon.ico"/><link rel="manifest" href="/static/site.webmanifest"/><link rel="mask-icon" href="/static/safari-pinned-tab.svg" color="#5bbad5"/><meta name="msapplication-TileColor" content="#da532c"/><meta name="theme-color" content="#ffffff"/><meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no"/><meta name="theme-color" content="#000000"/><script src="/pace.min.js"></script><link rel="stylesheet" href="/pace.css"/><link rel="manifest" href="/manifest.json"/><link href="https://fonts.googleapis.com/css?family=Lora:400,700|Muli:400,700" rel="stylesheet"/><title>Takwimu</title><script>var takwimu={url:"http://localhost:8000",country:{name:"Senegal",slug:"senegal"},page:{activeContent:"faqs",relatedContent:[{name:"Lorem ipsom dolor sit amec",href:"#1/"},{name:"South Africa Data visuals for politics",href:"#2/"},{name:"Source 1 lorem ipsumo",href:"#3/"},{name:"Source 2 lorem ipsum dolor",href:"#4/"},{name:"Lorem ipsom dolor sit amec",href:"#5/"},{name:"South Africa Data visuals for politics",href:"#6/"}]},countries:[{iso_code:"BF",name:"Burkina Faso",iso_name:"Burkina Faso",short_name:"Burkina Faso",slug:"burkina-faso",published:!0},{iso_code:"CD",name:"Democratic Republic of Congo",iso_name:"Congo, the Democratic Republic of the",short_name:"DR Congo",slug:"democratic-republic-of-congo",published:!0},{iso_code:"ET",name:"Ethiopia",iso_name:"Ethiopia",short_name:"Ethiopia",slug:"ethiopia",published:!0},{iso_code:"KE",name:"Kenya",iso_name:"Kenya",short_name:"Kenya",slug:"kenya",published:!0},{iso_code:"NG",name:"Nigeria",iso_name:"Nigeria",short_name:"Nigeria",slug:"nigeria",published:!0},{iso_code:"SN",name:"Senegal",iso_name:"Senegal",short_name:"Senegal",slug:"senegal",published:!0},{iso_code:"ZA",name:"South Africa",iso_name:"South Africa",short_name:"South Africa",slug:"south-africa",published:!0},{iso_code:"TZ",name:"Tanzania",iso_name:"Tanzania, United Republic of",short_name:"Tanzania",slug:"tanzania",published:!0},{iso_code:"UG",name:"Uganda",iso_name:"Uganda",short_name:"Uganda",slug:"uganda",published:!0},{iso_code:"ZM",name:"Zambia",iso_name:"Zambia",short_name:"Zambia",slug:"zambia",published:!0}],settings:{navigation:{country_analysis:'<div class="rich-text"><p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</p></div>',data_by_topic:'<div class="rich-text"><p>Lorem ipsum dolor sit amet, adipiscing elitauris con lorem ipsum dolor sit amet.</div></p>'},support:{hello:"hello@takwimu.africa"},socialMedia:{twitter:"//twitter.com/TakwimuAfrica",facebook:"//facebook.com/TakwimuAfrica",medium:"//medium.com/takwimu-africa",linkedin:"//www.linkedin.com/company/takwimu-africa"}},services:{overview:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo               tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo               tempor incididunt ut labore et dolore magna aliqua",servicesList:[{title:"Service one name",description:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo               tempor incididunt ut labore et dolore magna aliqua."}]},faqs:{overview:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo <a>Get in touch with us</a>",faqsList:[{question:"Service Where is this data sourced from?",answer:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo               tempor incididunt ut labore et dolore magna aliqua."}]},methodology:"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo               tempor incididunt ut labore et dolore magna aliqua. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmo               tempor incididunt ut labore et dolore magna aliqu",relatedContent:[{type:"link",value:{type:"url",value:{title:"sajdfkldshkjgfs",link:"http://takwimu.africa"},id:"de517671-eeba-4c8d-990e-1c7496acae1c"},id:"aa08e9eb-b54c-40e9-9339-5185d1a1d4fe"},{type:"link",value:{type:"url",value:{title:"kjajglkfsjlkaajkgagd;lksadgsa",link:"http://instagram.com"},id:"5f3786b3-b639-46bc-b6cb-9147fa52121d"},id:"4e87f44d-af08-459f-9757-b49bb69897b7"}]},profileData={demographics:{},geography:{this:{child_level:"level1",full_geoid:"country-KE",full_name:"Kenya",geo_code:"KE",geo_level:"country",name:"Kenya",parent_geoid:"continent-AFR",short_name:"Kenya",square_kms:581309,version:"2009"}},primary_releases:{active:{},other:[]},tabs:[{name:"All",href:""}]},search={searchQuery:"South Africa",searchResults:[]}</script></head><body id="homepage"><noscript>You need to enable JavaScript to run this app.</noscript><nav id="takwimuNavigation"></nav><script>// Simulate multiple pages using `pathname`s e.g.
+      // `http//localhost:3000/about` should show about page
+      const body = document.getElementsByTagName('body')[0];
+      const pathname = window.location.pathname;
+      let page = 'home';
+      if (pathname.startsWith('/about')) {
+        page = 'about';
+        page.active_content = 'about';
+      } else if(pathname.startsWith('/methodology')) {
+        page = 'about';
+        page.active_content = 'methodology';
+      } else if (pathname.startsWith('/services')) {
+        page = 'about';
+        page.active_content = 'services';
+      } else if (pathname.startsWith('/faqs')) {
+        page = 'about';
+        page.active_content = 'faqs';
+      } else if (pathname.startsWith('/contact')) {
+        page = 'contact';
+      } else if (pathname.startsWith('/profiles/country-')) {
+        page = 'topic';
+      } else if (pathname.startsWith('/profiles/')) {
+        var paths = pathname.replace('/profiles/', '').split('/');
+        if (paths.length) {
+          var countrySlug = paths[0];
+          var country = takwimu.countries.find(c => c.slug === countrySlug);
+          if (country) {
+            takwimu.country = country;
+          }
+        }
+        page = 'analysis';
+      } else if (pathname.startsWith('/search')) {
+        page = 'search';
+      } else if (pathname.startsWith('/legal')) {
+        page = 'legal';
+      } else if (pathname.startsWith('/terms')) {
+        page = 'legal';
+        page.active_content = 'terms';
+      } else if (pathname.startsWith('/privacy')) {
+        page = 'legal';
+        page.active_content = 'privacy';
+      } else if (pathname.startsWith('/500')) {
+        page = '500';
+      } else if (pathname.startsWith('/404')) {
+        page = '404';
+      }
+      takwimu.page.name = page;
+      let ids = [];
+      switch (page) {
+        case 'about':
+          ids = ['takwimuAboutUsPage'];
+          break;
+        case 'contact':
+          ids = ['takwimuContactUsPage'];
+          break;
+        case 'topic':
+          ids = ['takwimuProfileDetail', 'takwimuProfile'];
+          break;
+        case 'search':
+          ids = ['takwimuSearchResults'];
+          takwimu.page.search = { query: '', results: [] };
+          break;
+        case 'legal':
+          ids = ['takwimuLegalPage'];
+          break;
+        case 'analysis':
+          ids = ['takwimuAnalysisPage'];
+          break;
+        case '500':
+          ids = ['takwimu500Page'];
+          break;
+        case '404':
+          ids = ['takwimu404Page'];
+          break;
+        case 'homepage': // fall through
+        default:
+          ids = [
+            'takwimuHero',
+            'takwimuFeaturedAnalysis',
+            'takwimuFeaturedData',
+            'takwimuWhatCanYouDo',
+            'takwimuMakingOf',
+            'takwimuLatestNewsStories',
+            'takwimuWhereToNext'
+          ];
+      }
+      ids.forEach(id => {
+        const el = document.createElement('div');
+        el.setAttribute('id', id);
+        body.appendChild(el);
+      });</script><div id="takwimuFooter"></div><script>!function(c){function e(e){for(var r,t,n=e[0],o=e[1],u=e[2],i=0,a=[];i<n.length;i++)t=n[i],f[t]&&a.push(f[t][0]),f[t]=0;for(r in o)Object.prototype.hasOwnProperty.call(o,r)&&(c[r]=o[r]);for(d&&d(e);a.length;)a.shift()();return p.push.apply(p,u||[]),l()}function l(){for(var e,r=0;r<p.length;r++){for(var t=p[r],n=!0,o=1;o<t.length;o++){var u=t[o];0!==f[u]&&(n=!1)}n&&(p.splice(r--,1),e=s(s.s=t[0]))}return e}var t={},f={2:0},p=[];function s(e){if(t[e])return t[e].exports;var r=t[e]={i:e,l:!1,exports:{}};return c[e].call(r.exports,r,r.exports,s),r.l=!0,r.exports}s.e=function(u){var e=[],t=f[u];if(0!==t)if(t)e.push(t[2]);else{var r=new Promise(function(e,r){t=f[u]=[e,r]});e.push(t[2]=r);var n,i=document.createElement("script");i.charset="utf-8",i.timeout=120,s.nc&&i.setAttribute("nonce",s.nc),i.src=s.p+"static/js/"+({}[u]||u)+"."+{0:"58445111",4:"74694962",5:"9de40f3b",6:"99ce5cd6",7:"349b9243"}[u]+".chunk.js",n=function(e){i.onerror=i.onload=null,clearTimeout(a);var r=f[u];if(0!==r){if(r){var t=e&&("load"===e.type?"missing":e.type),n=e&&e.target&&e.target.src,o=new Error("Loading chunk "+u+" failed.\n("+t+": "+n+")");o.type=t,o.request=n,r[1](o)}f[u]=void 0}};var a=setTimeout(function(){n({type:"timeout",target:i})},12e4);i.onerror=i.onload=n,document.head.appendChild(i)}return Promise.all(e)},s.m=c,s.c=t,s.d=function(e,r,t){s.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},s.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(r,e){if(1&e&&(r=s(r)),8&e)return r;if(4&e&&"object"==typeof r&&r&&r.__esModule)return r;var t=Object.create(null);if(s.r(t),Object.defineProperty(t,"default",{enumerable:!0,value:r}),2&e&&"string"!=typeof r)for(var n in r)s.d(t,n,function(e){return r[e]}.bind(null,n));return t},s.n=function(e){var r=e&&e.__esModule?function(){return e.default}:function(){return e};return s.d(r,"a",r),r},s.o=function(e,r){return Object.prototype.hasOwnProperty.call(e,r)},s.p="/",s.oe=function(e){throw console.error(e),e};var r=window.webpackJsonp=window.webpackJsonp||[],n=r.push.bind(r);r.push=e,r=r.slice();for(var o=0;o<r.length;o++)e(r[o]);var d=n;l()}([])</script><script src="/static/js/3.b9b0ca9f.chunk.js"></script><script src="/static/js/main.f2e1c93b.chunk.js"></script></body></html>
