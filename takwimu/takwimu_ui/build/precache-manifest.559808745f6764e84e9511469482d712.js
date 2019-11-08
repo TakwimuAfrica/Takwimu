@@ -116,8 +116,8 @@ self.__precacheManifest = [
     "url": "/static/media/a-chart-bg.ad81313b.svg"
   },
   {
-    "revision": "b786b838c408d29998c0",
-    "url": "/static/js/main.ea6cb72e.chunk.js"
+    "revision": "27a834ce4aae53d8ded3",
+    "url": "/static/js/main.f2e1c93b.chunk.js"
   },
   {
     "revision": "6a8b37c4a70da420cd284137e9ebe7bb",
@@ -232,7 +232,7 @@ self.__precacheManifest = [
     "url": "/static/media/zambia.37586be9.svg"
   },
   {
-    "revision": "dac3b630e3c77b977ba0ed73a75162ae",
+    "revision": "2ee6568104a1336de1abc6c460abd1e9",
     "url": "/index.html"
   }
 ];
