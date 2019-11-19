@@ -33,7 +33,7 @@ METADATA = {
             },
             'crop_distribution': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
@@ -45,13 +45,13 @@ METADATA = {
             },
             'health_workers_distribution_per_year': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
             'women_in_government': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
@@ -86,13 +86,13 @@ METADATA = {
                     'THSUCP: Transforming Health Systems for Universal Care Project',
                 ]),
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
             'seized_firearms_dist': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
@@ -104,7 +104,7 @@ METADATA = {
             },
             'government_expenditure_dist': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
@@ -116,13 +116,13 @@ METADATA = {
                     'U: Urban',
                 ]),
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
             'poverty_residence_dist': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/economic-survey-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
                     'title': 'Kenya National Bureau of Statistics, 2018',
                 },
             },
@@ -316,31 +316,31 @@ METADATA = {
             },
             "sex_dist_per_year": {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 },
             },
              "secondary_school_tot_enrollment": {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             },
             "primary_school_tot_enrollment": {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             },
             'budget_allocation': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             },
             'health_facility_beds': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             }
@@ -348,7 +348,7 @@ METADATA = {
         'level1': {
             "sex_dist_per_year": {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 },
             },
@@ -361,25 +361,25 @@ METADATA = {
             },
             "secondary_school_tot_enrollment": {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             },
             "primary_school_tot_enrollment": {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             },
             'budget_allocation': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             },
             'health_facility_beds': {
                 'source': {
-                    'link': 'https://www.knbs.or.ke/download/statistics-abstract-2018/',
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
             }
