@@ -29,7 +29,7 @@ CREATE TABLE public.households_and_population (
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     year character varying(128) NOT NULL,
     variable character varying(128) NOT NULL,
-    total numeric
+    total integer
 );
 
 

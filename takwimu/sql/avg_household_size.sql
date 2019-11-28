@@ -28,7 +28,7 @@ CREATE TABLE public.avg_household_size (
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     year character varying(128) NOT NULL,
-    total numeric
+    total integer
 );
 
 
