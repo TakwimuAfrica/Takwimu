@@ -43,6 +43,30 @@ METADATA = {
                     'title': 'WorldBank, 2018',
                 },
             },
+            'households_and_population': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+            'avg_household_size': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'subcounty_population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
             'health_workers_distribution_per_year': {
                 'source': {
                     'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
@@ -382,6 +406,30 @@ METADATA = {
                     'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
+            },
+                        'households_and_population': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+            'avg_household_size': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'subcounty_population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
             }
         }
     },
