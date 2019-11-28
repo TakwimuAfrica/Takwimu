@@ -119,8 +119,8 @@ HURUMAP['primary_dataset_name'] = 'Census'
 
 HURUMAP['primary_release_year'] = {
     'ke': {
-        'country': 2009,
-        'level1': 2009
+        'country': 2019,
+        'level1': 2019
     },
     'tz': {
         'country': 2012,
@@ -163,14 +163,14 @@ HURUMAP['latest_release_year'] = 'latest'
 
 # default census release years
 HURUMAP['available_release_years'] = {
-    'country': [2009, 2012, 2013, 2006, 2007, 2011]
+    'country': [2009, 2012, 2013, 2006, 2007, 2011, 2019]
 }
 
 # census release years for each country and it's subnational geographies
 HURUMAP['available_releases_years_per_country'] = {
     'ke': {
-        'country': [2009],
-        'level1': [2009]
+        'country': [2009, 2019]
+        'level1': [2009, 2019]
     },
     'tz': {
         'country': [2012],
