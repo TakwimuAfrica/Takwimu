@@ -2200,6 +2200,26 @@ def get_population(geo, session, country, level, year):
     except Exception:
         pass
 
+    with dataset_context(year='2019'):
+        try:
+            avg_household_size_dist, _ = get_stat_data(
+                ['year'], geo, session, table_name='avg_household_size', percent=False)
+        except Exception:
+            pass
+
+        try:
+            households_and_population_dist, _ = get_stat_data(
+                ['variable'], geo, session, table_name='households_and_population', percent=False)
+        except Exception:
+            pass
+        
+        try:
+            subcounty_population_sex_2019_dist, _ = get_stat_data(
+                ['subcounty', 'gender'], geo, session, table_name='subcounty_population_sex_2019', percent=False)
+        except Exception:
+            pass
+
+
     with dataset_context(year='2018'):
         try:
             human_development_indices_dist, total_hdi = get_stat_data(
@@ -2267,6 +2287,15 @@ def get_population(geo, session, country, level, year):
         'indicative_youth_unemployment_dist': _create_single_value_dist(
                             'Under-employed and Unemployed Youth in 2017 Q3',
                             indicative_youth_unemployment_dist),
+        'households_and_population': _add_metadata_to_dist(households_and_population_dist,
+                                                'households_and_population', country,
+                                                level),
+        'avg_household_size': _add_metadata_to_dist(avg_household_size_dist,
+                                                'avg_household_size', country,
+                                                level),
+        'subcounty_population_sex_2019': _add_metadata_to_dist(subcounty_population_sex_2019_dist,
+                                                'subcounty_population_sex_2019', country,
+                                                level),
         'total_hdi': _create_single_value_dist('HDI', total_hdi)
     }
 
