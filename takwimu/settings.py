@@ -169,7 +169,7 @@ HURUMAP['available_release_years'] = {
 # census release years for each country and it's subnational geographies
 HURUMAP['available_releases_years_per_country'] = {
     'ke': {
-        'country': [2009, 2019]
+        'country': [2009, 2019],
         'level1': [2009, 2019]
     },
     'tz': {
