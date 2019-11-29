@@ -55,7 +55,7 @@ METADATA = {
                     'title': '2019 Kenya Population and Housing Census Volume I',
                 },
             },
-             'population_sex_2019': {
+             'sex_dist': {
                 'source': {
                     'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
                     'title': '2019 Kenya Population and Housing Census Volume I',
@@ -419,7 +419,7 @@ METADATA = {
                     'title': '2019 Kenya Population and Housing Census Volume I',
                 },
             },
-             'population_sex_2019': {
+             'sex_dist': {
                 'source': {
                     'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
                     'title': '2019 Kenya Population and Housing Census Volume I',
