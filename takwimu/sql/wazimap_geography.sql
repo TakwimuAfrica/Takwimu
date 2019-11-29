@@ -161,63 +161,63 @@ COPY public.wazimap_geography (id, geo_level, geo_code, name, square_kms, parent
 361	level1	NG_1_003	Akwa Ibom	7081	country	NG	Akwa Ibom	2009
 362	level1	NG_1_004	Anambra	4844	country	NG	Anambra	2009
 363	level1	NG_1_005	Bauchi	45837	country	NG	Bauchi	2009
-364	level1	KE_1_020	Kirinyaga	1205.40000000000009	country	KE	Kirinyaga	2009
-365	level1	KE_1_021	Murang'a	2325.80000000000018	country	KE	Murang'a	2009
-366	level1	KE_1_018	Nyandarua	3107.69999999999982	country	KE	Nyandarua	2009
-367	level1	KE_1_019	Nyeri	2361	country	KE	Nyeri	2009
-368	level1	KE_1_024	West Pokot	8418.20000000000073	country	KE	West Pokot	2009
-369	level1	KE_1_025	Samburu	20182.5	country	KE	Samburu	2009
-370	level1	KE_1_022	Kiambu	2449.19999999999982	country	KE	Kiambu	2009
-371	level1	KE_1_023	Turkana	71597.8000000000029	country	KE	Turkana	2009
-372	level1	KE_1_028	Elgeyo-Marakwet	3049.69999999999982	country	KE	Elgeyo-Marakwet	2009
-373	level1	KE_1_029	Nandi	2884.5	country	KE	Nandi	2009
-374	level1	KE_1_026	Trans-Nzoia	2469.90000000000009	country	KE	Trans-Nzoia	2009
-375	level1	KE_1_027	Uasin Gishu	2955.30000000000018	country	KE	Uasin Gishu	2009
-376	level1	KE_1_032	Nakuru	7509.5	country	KE	Nakuru	2009
-377	level1	KE_1_033	Narok	17921.2000000000007	country	KE	Narok	2009
-378	level1	KE_1_030	Baringo	11075.2999999999993	country	KE	Baringo	2009
-379	level1	KE_1_031	Laikipia	8696.10000000000036	country	KE	Laikipia	2009
-380	level1	KE_1_036	Bomet	1997.90000000000009	country	KE	Bomet	2009
-381	level1	KE_1_037	Kakamega	3033.80000000000018	country	KE	Kakamega	2009
-382	level1	KE_1_034	Kajiado	21292.7000000000007	country	KE	Kajiado	2009
-383	level1	KE_1_035	Kericho	2454.5	country	KE	Kericho	2009
-384	level1	KE_1_040	Busia	1628.40000000000009	country	KE	Busia	2009
-385	level1	KE_1_041	Siaya	2496.09999999999991	country	KE	Siaya	2009
-386	level1	KE_1_038	Vihiga	531.299999999999955	country	KE	Vihiga	2009
-387	level1	KE_1_039	Bungoma	2206.90000000000009	country	KE	Bungoma	2009
-388	level1	KE_1_044	Migori	2586.40000000000009	country	KE	Migori	2009
-389	level1	KE_1_045	Kisii	1317.90000000000009	country	KE	Kisii	2009
-390	level1	KE_1_042	Kisumu	2009	country	KE	Kisumu	2009
-391	level1	KE_1_043	Homa Bay	3154.69999999999982	country	KE	Homa Bay	2009
-392	level1	KE_1_046	Nyamira	912.5	country	KE	Nyamira	2009
-393	level1	KE_1_047	Nairobi	694.899999999999977	country	KE	Nairobi	2009
-394	country	KE	Kenya	581309	continent	AFR	Kenya	2009
-395	level1	KE_1_001	Mombasa	212.5	country	KE	Mombasa	2009
-396	level1	KE_1_004	Tana River	35375.8000000000029	country	KE	Tana River	2009
-397	level1	KE_1_005	Lamu	6497.69999999999982	country	KE	Lamu	2009
-398	level1	KE_1_002	Kwale	8270.29999999999927	country	KE	Kwale	2009
-399	level1	KE_1_003	Kilifi	12245.8999999999996	country	KE	Kilifi	2009
-400	level1	KE_1_008	Wajir	55840.5999999999985	country	KE	Wajir	2009
-401	level1	KE_1_009	Mandera	25797.7000000000007	country	KE	Mandera	2009
-402	level1	KE_1_006	Taita Taveta	17083.9000000000015	country	KE	Taita Taveta	2009
-403	level1	KE_1_007	Garissa	45720.1999999999971	country	KE	Garissa	2009
-404	level1	KE_1_012	Meru	6930.10000000000036	country	KE	Meru	2009
-405	level1	KE_1_013	Tharaka-Nithi	2409.5	country	KE	Tharaka-Nithi	2009
-406	level1	KE_1_010	Marsabit	66923.1000000000058	country	KE	Marsabit	2009
-407	level1	KE_1_011	Isiolo	25336.0999999999985	country	KE	Isiolo	2009
-408	level1	KE_1_016	Machakos	5952.89999999999964	country	KE	Machakos	2009
-409	level1	KE_1_017	Makueni	8008.89999999999964	country	KE	Makueni	2009
-410	level1	KE_1_014	Embu	2555.90000000000009	country	KE	Embu	2009
-411	level1	KE_1_015	Kitui	24385.0999999999985	country	KE	Kitui	2009
+364	level1	KE_1_020	Kirinyaga	1478.3	country	KE	Kirinyaga	2009
+365	level1	KE_1_021	Murang'a	2524.2	country	KE	Murang'a	2009
+366	level1	KE_1_018	Nyandarua	3285.7	country	KE	Nyandarua	2009
+367	level1	KE_1_019	Nyeri	3325	country	KE	Nyeri	2009
+368	level1	KE_1_024	West Pokot	9123.2	country	KE	West Pokot	2009
+369	level1	KE_1_025	Samburu	21065.1	country	KE	Samburu	2009
+370	level1	KE_1_022	Kiambu	2538.6	country	KE	Kiambu	2009
+371	level1	KE_1_023	Turkana	68232.9	country	KE	Turkana	2009
+372	level1	KE_1_028	Elgeyo-Marakwet	3032	country	KE	Elgeyo-Marakwet	2009
+373	level1	KE_1_029	Nandi	2855.8	country	KE	Nandi	2009
+374	level1	KE_1_026	Trans-Nzoia	2495.2	country	KE	Trans-Nzoia	2009
+375	level1	KE_1_027	Uasin Gishu	3392.2	country	KE	Uasin Gishu	2009
+376	level1	KE_1_032	Nakuru	7462.4	country	KE	Nakuru	2009
+377	level1	KE_1_033	Narok	17950.3	country	KE	Narok	2009
+378	level1	KE_1_030	Baringo	10976.4	country	KE	Baringo	2009
+379	level1	KE_1_031	Laikipia	9532.2	country	KE	Laikipia	2009
+380	level1	KE_1_036	Bomet	2530.9	country	KE	Bomet	2009
+381	level1	KE_1_037	Kakamega	3020	country	KE	Kakamega	2009
+382	level1	KE_1_034	Kajiado	21871.1	country	KE	Kajiado	2009
+383	level1	KE_1_035	Kericho	2436.1	country	KE	Kericho	2009
+384	level1	KE_1_040	Busia	1696.3	country	KE	Busia	2009
+385	level1	KE_1_041	Siaya	2529.8	country	KE	Siaya	2009
+386	level1	KE_1_038	Vihiga	563.8	country	KE	Vihiga	2009
+387	level1	KE_1_039	Bungoma	3023.9	country	KE	Bungoma	2009
+388	level1	KE_1_044	Migori	2613.5	country	KE	Migori	2009
+389	level1	KE_1_045	Kisii	1323	country	KE	Kisii	2009
+390	level1	KE_1_042	Kisumu	2085.4	country	KE	Kisumu	2009
+391	level1	KE_1_043	Homa Bay	3152.5	country	KE	Homa Bay	2009
+392	level1	KE_1_046	Nyamira	897.3	country	KE	Nyamira	2009
+393	level1	KE_1_047	Nairobi	703.9	country	KE	Nairobi	2009
+394	country	KE	Kenya	580876.3	continent	AFR	Kenya	2009
+395	level1	KE_1_001	Mombasa	219.9	country	KE	Mombasa	2009
+396	level1	KE_1_004	Tana River	37950.5	country	KE	Tana River	2009
+397	level1	KE_1_005	Lamu	6253.3	country	KE	Lamu	2009
+398	level1	KE_1_002	Kwale	8267.1	country	KE	Kwale	2009
+399	level1	KE_1_003	Kilifi	12539.7	country	KE	Kilifi	2009
+400	level1	KE_1_008	Wajir	56773.1	country	KE	Wajir	2009
+401	level1	KE_1_009	Mandera	25939.8	country	KE	Mandera	2009
+402	level1	KE_1_006	Taita Taveta	17152	country	KE	Taita Taveta	2009
+403	level1	KE_1_007	Garissa	44736	country	KE	Garissa	2009
+404	level1	KE_1_012	Meru	7006.3	country	KE	Meru	2009
+405	level1	KE_1_013	Tharaka-Nithi	2564.4	country	KE	Tharaka-Nithi	2009
+406	level1	KE_1_010	Marsabit	70944.1	country	KE	Marsabit	2009
+407	level1	KE_1_011	Isiolo	25350.6	country	KE	Isiolo	2009
+408	level1	KE_1_016	Machakos	6042.7	country	KE	Machakos	2009
+409	level1	KE_1_017	Makueni	8169.8	country	KE	Makueni	2009
+410	level1	KE_1_014	Embu	2820.7	country	KE	Embu	2009
+411	level1	KE_1_015	Kitui	30429.5	country	KE	Kitui	2009
 412	country	ET	Ethiopia	1104000	continent	AFR	Ethiopia	2009
-413	level1	ET_1_001	Addis Ababa	526.990000000000009	country	ET	Addis Ababa	2009
-414	level1	ET_1_002	Afar	72052.7799999999988	country	ET	Afar	2009
-415	level1	ET_1_003	Amhara	154708.959999999992	country	ET	Amhara	2009
-416	level1	ET_1_004	Beneshangul Gumuz	50698.6800000000003	country	ET	Beneshangul Gumuz	2009
-417	level1	ET_1_005	Dire Dawa	1558.6099999999999	country	ET	Dire Dawa	2009
-418	level1	ET_1_006	Gambella	29782.8199999999997	country	ET	Gambella	2009
-419	level1	ET_1_007	Harar	333.939999999999998	country	ET	Harar	2009
-420	level1	ET_1_008	Oromiya	284537.840000000026	country	ET	Oromiya	2009
+413	level1	ET_1_001	Addis Ababa	526.99	country	ET	Addis Ababa	2009
+414	level1	ET_1_002	Afar	72052.78	country	ET	Afar	2009
+415	level1	ET_1_003	Amhara	154708.96	country	ET	Amhara	2009
+416	level1	ET_1_004	Beneshangul Gumuz	50698.68	country	ET	Beneshangul Gumuz	2009
+417	level1	ET_1_005	Dire Dawa	1558.61	country	ET	Dire Dawa	2009
+418	level1	ET_1_006	Gambella	29782.82	country	ET	Gambella	2009
+419	level1	ET_1_007	Harar	333.94	country	ET	Harar	2009
+420	level1	ET_1_008	Oromiya	284537.84	country	ET	Oromiya	2009
 421	level1	ET_1_009	SNNPR	105476	country	ET	SNNPR	2009
 422	level1	ET_1_010	Somali	279252	country	ET	Somali	2009
 423	level1	ET_1_011	Tigray	84722	country	ET	Tigray	2009

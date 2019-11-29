@@ -43,6 +43,30 @@ METADATA = {
                     'title': 'WorldBank, 2018',
                 },
             },
+            'households_and_population': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+            'avg_household_size': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'subcounty_population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
             'health_workers_distribution_per_year': {
                 'source': {
                     'link': 'https://www.knbs.or.ke/?wpdmpro=economic-survey-2018',
@@ -382,6 +406,30 @@ METADATA = {
                     'link': 'https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018',
                     'title': 'Statistical Abstract, 2018',
                 }
+            },
+                        'households_and_population': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+            'avg_household_size': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
+            },
+             'subcounty_population_sex_2019': {
+                'source': {
+                    'link': 'https://www.knbs.or.ke/?wpdmpro=2019-kenya-population-and-housing-census-volume-i-population-by-county-and-sub-county',
+                    'title': '2019 Kenya Population and Housing Census Volume I',
+                },
             }
         }
     },
@@ -2134,12 +2182,15 @@ def get_population(geo, session, country, level, year):
     sex_dist_per_year = LOCATIONNOTFOUND
     human_development_indices_dist = LOCATIONNOTFOUND
     youth_unemployment_dist = LOCATIONNOTFOUND
+    households_and_population_dist = LOCATIONNOTFOUND
+    subcounty_population_sex_2019_dist = LOCATIONNOTFOUND
+    avg_household_size_dist  = 0
     indicative_sex_dist = indicative_youth_unemployment_dist = total_hdi = 0
 
     db_table = db_column_name = 'population_sex_' + str(year)
     try:
         sex_dist, total_population_sex = get_stat_data(
-            db_table, geo, session, table_fields=[db_column_name])
+            db_table, geo, session, table_fields=[db_column_name], percent=False)
 
     except Exception:
         pass
@@ -2151,6 +2202,26 @@ def get_population(geo, session, country, level, year):
             table_fields=[db_column_name])
     except Exception:
         pass
+
+    with dataset_context(year='2019'):
+        try:
+            _, avg_household_size_dist = get_stat_data(
+                ['year'], geo, session, table_name='avg_household_size', percent=False)
+        except Exception:
+            pass
+
+        try:
+            households_and_population_dist, _ = get_stat_data(
+                ['variable'], geo, session, table_name='households_and_population', percent=False)
+        except Exception:
+            pass
+        
+        try:
+            subcounty_population_sex_2019_dist, _ = get_stat_data(
+                ['subcounty'], geo, session, table_name='subcounty_population_sex_2019', percent=False)
+        except Exception:
+            pass
+
 
     with dataset_context(year='2018'):
         try:
@@ -2219,6 +2290,14 @@ def get_population(geo, session, country, level, year):
         'indicative_youth_unemployment_dist': _create_single_value_dist(
                             'Under-employed and Unemployed Youth in 2017 Q3',
                             indicative_youth_unemployment_dist),
+        'households_and_population': _add_metadata_to_dist(households_and_population_dist,
+                                                'households_and_population', country,
+                                                level),
+        'avg_household_size': _create_single_value_dist(
+                            'Average Household Size 2019', avg_household_size_dist),
+        'subcounty_population_sex_2019': _add_metadata_to_dist(subcounty_population_sex_2019_dist,
+                                                'subcounty_population_sex_2019', country,
+                                                level),
         'total_hdi': _create_single_value_dist('HDI', total_hdi)
     }
 

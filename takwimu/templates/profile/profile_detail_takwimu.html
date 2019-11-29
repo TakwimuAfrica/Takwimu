@@ -19,7 +19,7 @@
         <h3 class="chart-header">Population</h3>
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.total_population stat_type='number' %}
       </div>
-      <div class="column-three-quarters" id="chart-pie-demographics-sex_dist" data-stat-type="percentage" data-chart-title="Population by sex" data-initial-sort="-value" data-id="d23d5731-0db0-4ad4-b2a3-e741d1a6efc8"></div>
+      <div class="column-three-quarters" id="chart-pie-demographics-sex_dist" data-stat-type="number" data-chart-title="Population by sex" data-initial-sort="-value" data-id="d23d5731-0db0-4ad4-b2a3-e741d1a6efc8"></div>
     </section>
     {% endif %}
     {% if not demographics.sex_dist_per_year.is_missing %}
@@ -29,6 +29,24 @@
         {% include 'profile/_blocks/_stat_list.html' with stat=demographics.indicative_sex_dist stat_type='number' %}
       </div>
       <div class="column-three-quarters" id="chart-grouped_column-demographics-sex_dist_per_year" data-stat-type="number" data-chart-title="Population by sex per year" data-initial-sort="-value" data-id="345e5731-0db0-5674-b2a3-e741d1a6efc8"></div>
+    </section>
+    {% endif %}
+    {% if not demographics.households_and_population.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Household Size</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.avg_household_size stat_type='number' %}
+      </div>
+      <div class="column-three-quarters" id="chart-column-demographics-households_and_population" data-stat-type="number" data-chart-title="Distribution of Population and Number of Households" data-id="ty6754gh-568y-4ad4-b2a3-e741d1a6efc8"></div>
+    </section>
+    {% endif %}
+    {% if not demographics.subcounty_population_sex_2019.is_missing %}
+    <section class="clearfix stat-row">
+      <div class="column-quarter">
+        <h3 class="chart-header">Household Size</h3>
+        {% include 'profile/_blocks/_stat_list.html' with stat=demographics.avg_household_size stat_type='number' %}
+      </div>
+      <div class="column-three-quarters" id="chart-column-demographics-subcounty_population_sex_2019" data-stat-type="number" data-chart-title="Population per subcounty 2019"  data-id="t11114gh-568y-4ad4-b2a3-tyrtw556"></div>
     </section>
     {% endif %}
     {% if not demographics.residence_dist.is_missing %}

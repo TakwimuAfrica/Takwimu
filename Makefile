@@ -19,6 +19,9 @@ update_index:
 migrate:
 	$(COMPOSE) exec web python manage.py migrate
 
+dumpdata:
+	$(COMPOSE) exec web python manage.py dumpdata wazimap hurumap -o takwimu/fixtures/wazimap.json
+
 createdb:
 	$(COMPOSE) exec db createdb takwimu
 
