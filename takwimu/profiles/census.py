@@ -2218,7 +2218,7 @@ def get_population(geo, session, country, level, year):
         
         try:
             subcounty_population_sex_2019_dist, _ = get_stat_data(
-                ['subcounty', 'gender'], geo, session, table_name='subcounty_population_sex_2019', percent=False)
+                ['subcounty'], geo, session, table_name='subcounty_population_sex_2019', percent=False)
         except Exception:
             pass
 
