@@ -28,7 +28,7 @@ CREATE TABLE public.foreign_direct_investment_net_inflows (
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     foreign_direct_investment_net_inflows_year character varying(128) NOT NULL,
-    total integer
+    total double precision
 );
 
 
@@ -114,27 +114,27 @@ country	KE	2009	2003	1
 country	KE	2009	2002	0
 country	KE	2009	2001	0
 country	KE	2009	2000	1
-country	NG	2009	2017	1
-country	NG	2009	2016	1
-country	NG	2009	2015	1
-country	NG	2009	2014	1
-country	NG	2009	2013	1
-country	NG	2009	2012	2
-country	NG	2009	2011	2
-country	NG	2009	2010	2
-country	NG	2009	2009	3
-country	NG	2009	2008	2
-country	NG	2009	2007	2
-country	NG	2009	2006	2
-country	NG	2009	2005	3
-country	NG	2009	2004	1
-country	NG	2009	2003	2
-country	NG	2009	2002	2
-country	NG	2009	2001	2
-country	NG	2009	2000	2
-country	NG	2009	1997	4
-country	NG	2009	1998	3
-country	NG	2009	1999	3
+country	NG	2009	1998	1.93
+country	NG	2009	1999	1.69
+country	NG	2009	2000	1.64
+country	NG	2009	2001	1.61
+country	NG	2009	2002	1.96
+country	NG	2009	2003	1.91
+country	NG	2009	2004	1.37
+country	NG	2009	2005	2.83
+country	NG	2009	2006	2.06
+country	NG	2009	2007	2.19
+country	NG	2009	2008	2.43
+country	NG	2009	2009	2.93
+country	NG	2009	2010	1.66
+country	NG	2009	2011	2.15
+country	NG	2009	2012	1.54
+country	NG	2009	2013	1.08
+country	NG	2009	2014	0.82
+country	NG	2009	2015	0.63
+country	NG	2009	2016	1.1
+country	NG	2009	2017	0.93
+country	NG	2009	2018	0.5
 country	SN	2009	2017	3
 country	SN	2009	2016	2
 country	SN	2009	2015	2

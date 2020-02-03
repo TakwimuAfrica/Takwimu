@@ -29,7 +29,7 @@ CREATE TABLE public.primary_school_enrollment (
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     primary_school_enrollment_year character varying(128) NOT NULL,
     sex character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -98,22 +98,23 @@ country	KE	2009	2003	F	101
 country	KE	2009	2002	F	88
 country	KE	2009	2001	F	95
 country	KE	2009	2000	F	94
-country	NG	2009	2016	F	82
-country	NG	2009	2014	F	89
-country	NG	2009	2013	F	93
-country	NG	2009	2012	F	91
-country	NG	2009	2011	F	87
-country	NG	2009	2010	F	81
-country	NG	2009	2009	F	81
-country	NG	2009	2008	F	79
-country	NG	2009	2007	F	87
-country	NG	2009	2006	F	94
-country	NG	2009	2005	F	93
-country	NG	2009	2004	F	92
-country	NG	2009	2003	F	90
-country	NG	2009	2002	F	88
-country	NG	2009	2001	F	87
-country	NG	2009	2000	F	88
+country	NG	2009	1999	F	83.90638
+country	NG	2009	2000	F	88.19535
+country	NG	2009	2001	F	87.08653
+country	NG	2009	2002	F	88.49938
+country	NG	2009	2003	F	90.19695
+country	NG	2009	2004	F	91.65238
+country	NG	2009	2005	F	92.60578
+country	NG	2009	2006	F	94.28542
+country	NG	2009	2007	F	87.37689
+country	NG	2009	2008	F	79.06753
+country	NG	2009	2009	F	80.63669
+country	NG	2009	2010	F	80.96385
+country	NG	2009	2011	F	87.459
+country	NG	2009	2012	F	90.86255
+country	NG	2009	2013	F	92.89585
+country	NG	2009	2014	F	89.42713
+country	NG	2009	2016	F	82.17733
 country	SN	2009	2017	F	90
 country	SN	2009	2016	F	88
 country	SN	2009	2015	F	88
@@ -261,22 +262,23 @@ country	KE	2009	2003	M	106
 country	KE	2009	2002	M	92
 country	KE	2009	2001	M	97
 country	KE	2009	2000	M	96
-country	NG	2009	2016	M	87
-country	NG	2009	2014	M	91
-country	NG	2009	2013	M	95
-country	NG	2009	2012	M	93
-country	NG	2009	2011	M	94
-country	NG	2009	2010	M	89
-country	NG	2009	2009	M	90
-country	NG	2009	2008	M	89
-country	NG	2009	2007	M	99
-country	NG	2009	2006	M	110
-country	NG	2009	2005	M	110
-country	NG	2009	2004	M	109
-country	NG	2009	2003	M	108
-country	NG	2009	2002	M	107
-country	NG	2009	2001	M	105
-country	NG	2009	2000	M	109
+country	NG	2009	1999	M	103.9826
+country	NG	2009	2000	M	108.8362
+country	NG	2009	2001	M	105.3563
+country	NG	2009	2002	M	107.1947
+country	NG	2009	2003	M	108.4261
+country	NG	2009	2004	M	109.3959
+country	NG	2009	2005	M	109.8247
+country	NG	2009	2006	M	109.6608
+country	NG	2009	2007	M	99.03583
+country	NG	2009	2008	M	89.02941
+country	NG	2009	2009	M	89.96664
+country	NG	2009	2010	M	89.11822
+country	NG	2009	2011	M	93.76269
+country	NG	2009	2012	M	93.27269
+country	NG	2009	2013	M	95.29357
+country	NG	2009	2014	M	90.75322
+country	NG	2009	2016	M	87.17114
 country	SN	2009	2017	M	78
 country	SN	2009	2016	M	78
 country	SN	2009	2015	M	79

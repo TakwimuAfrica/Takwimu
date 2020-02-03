@@ -29,7 +29,7 @@ CREATE TABLE public.adult_literacy_rate (
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     adult_literacy_rate_year character varying(128) NOT NULL,
     sex character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -54,9 +54,12 @@ country	ET	2009	2004	F	23
 country	KE	2009	2014	F	74
 country	KE	2009	2007	F	67
 country	KE	2009	2000	F	78
-country	NG	2009	2008	F	41
-country	NG	2009	2003	F	43
-country	NG	2009	1991	F	44
+country	NG	2009	2003	F	43.322
+country	NG	2009	2008	F	41.387
+country	NG	2009	2018	F	52.656
+country	NG	2009	2003	M	66.767
+country	NG	2009	2008	M	61.254
+country	NG	2009	2018	M	71.256
 country	SN	2009	2017	F	40
 country	SN	2009	2013	F	34
 country	SN	2009	2011	F	40
@@ -98,9 +101,6 @@ country	ET	2009	2004	M	50
 country	KE	2009	2014	M	84
 country	KE	2009	2007	M	78
 country	KE	2009	2000	M	87
-country	NG	2009	2008	M	61
-country	NG	2009	2003	M	67
-country	NG	2009	1991	M	68
 country	SN	2009	2017	M	65
 country	SN	2009	2013	M	53
 country	SN	2009	2011	M	66

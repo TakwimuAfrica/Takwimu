@@ -28,7 +28,7 @@ CREATE TABLE public.cereal_yield_kg_per_hectare (
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     cereal_yield_kg_per_hectare_year character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -117,26 +117,27 @@ country	KE	2009	2000	1375
 country	KE	2009	1999	1428
 country	KE	2009	1998	1590
 country	KE	2009	1997	1397
-country	NG	2009	2016	1444
-country	NG	2009	2015	1444
-country	NG	2009	2014	1450
-country	NG	2009	2013	1235
-country	NG	2009	2012	1400
-country	NG	2009	2011	1335
+country	NG	2009	1997	1182.8
+country	NG	2009	1998	1201.8
+country	NG	2009	1999	1239.3
+country	NG	2009	2000	1171.5
+country	NG	2009	2001	1233.6
+country	NG	2009	2002	1255.2
+country	NG	2009	2003	1308.8
+country	NG	2009	2004	1372.8
+country	NG	2009	2005	1421.7
+country	NG	2009	2006	1507.5
+country	NG	2009	2007	1399.8
+country	NG	2009	2008	1598.4
+country	NG	2009	2009	1531.1
 country	NG	2009	2010	1528
-country	NG	2009	2009	1531
-country	NG	2009	2008	1598
-country	NG	2009	2007	1400
-country	NG	2009	2006	1508
-country	NG	2009	2005	1422
-country	NG	2009	2004	1373
-country	NG	2009	2003	1309
-country	NG	2009	2002	1255
-country	NG	2009	2001	1234
-country	NG	2009	2000	1172
-country	NG	2009	1999	1239
-country	NG	2009	1998	1202
-country	NG	2009	1997	1183
+country	NG	2009	2011	1334.4
+country	NG	2009	2012	1399
+country	NG	2009	2013	1234.7
+country	NG	2009	2014	1451
+country	NG	2009	2015	1443.5
+country	NG	2009	2016	1535.4
+country	NG	2009	2017	1462.1
 country	SN	2009	2016	1349
 country	SN	2009	2015	1376
 country	SN	2009	2014	1112

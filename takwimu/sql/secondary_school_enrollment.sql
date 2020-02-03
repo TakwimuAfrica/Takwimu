@@ -29,7 +29,7 @@ CREATE TABLE public.secondary_school_enrollment (
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     secondary_school_enrollment_year character varying(128) NOT NULL,
     sex character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -89,22 +89,23 @@ country	KE	2009	2003	F	44
 country	KE	2009	2002	F	40
 country	KE	2009	2001	F	39
 country	KE	2009	2000	F	38
-country	NG	2009	2016	F	40
-country	NG	2009	2015	F	45
-country	NG	2009	2014	F	43
-country	NG	2009	2013	F	53
-country	NG	2009	2012	F	45
-country	NG	2009	2011	F	42
-country	NG	2009	2010	F	41
-country	NG	2009	2009	F	36
-country	NG	2009	2008	F	32
-country	NG	2009	2007	F	28
-country	NG	2009	2006	F	31
-country	NG	2009	2005	F	32
+country	NG	2009	1999	F	22.4
+country	NG	2009	2000	F	22.4
+country	NG	2009	2001	F	24.5
+country	NG	2009	2002	F	25.6
 country	NG	2009	2004	F	31
-country	NG	2009	2002	F	26
-country	NG	2009	2001	F	25
-country	NG	2009	2000	F	22
+country	NG	2009	2005	F	31.7
+country	NG	2009	2006	F	30.9
+country	NG	2009	2007	F	27.7
+country	NG	2009	2008	F	32.1
+country	NG	2009	2009	F	36.4
+country	NG	2009	2010	F	41.2
+country	NG	2009	2011	F	41.9
+country	NG	2009	2012	F	45
+country	NG	2009	2013	F	53.5
+country	NG	2009	2014	F	43
+country	NG	2009	2015	F	44.7
+country	NG	2009	2016	F	39.8
 country	SN	2009	2017	F	47
 country	SN	2009	2016	F	48
 country	SN	2009	2014	F	49
@@ -192,22 +193,23 @@ country	KE	2009	2003	M	43
 country	KE	2009	2002	M	42
 country	KE	2009	2001	M	42
 country	KE	2009	2000	M	40
-country	NG	2009	2016	M	44
-country	NG	2009	2015	M	49
-country	NG	2009	2014	M	48
-country	NG	2009	2013	M	59
-country	NG	2009	2012	M	49
-country	NG	2009	2011	M	49
-country	NG	2009	2010	M	47
-country	NG	2009	2009	M	42
-country	NG	2009	2008	M	39
-country	NG	2009	2007	M	36
-country	NG	2009	2006	M	38
-country	NG	2009	2005	M	38
-country	NG	2009	2004	M	39
-country	NG	2009	2002	M	34
-country	NG	2009	2001	M	29
-country	NG	2009	2000	M	27
+country	NG	2009	1999	M	24.7
+country	NG	2009	2000	M	26.7
+country	NG	2009	2001	M	29.5
+country	NG	2009	2002	M	33.5
+country	NG	2009	2004	M	38.9
+country	NG	2009	2005	M	38.1
+country	NG	2009	2006	M	37.9
+country	NG	2009	2007	M	35.9
+country	NG	2009	2008	M	38.5
+country	NG	2009	2009	M	41.9
+country	NG	2009	2010	M	47.2
+country	NG	2009	2011	M	49.1
+country	NG	2009	2012	M	49.3
+country	NG	2009	2013	M	58.8
+country	NG	2009	2014	M	48.2
+country	NG	2009	2015	M	48.8
+country	NG	2009	2016	M	44.1
 country	SN	2009	2017	M	43
 country	SN	2009	2016	M	48
 country	SN	2009	2014	M	50

@@ -28,7 +28,7 @@ CREATE TABLE public.tax_as_percentage_of_gdp (
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     tax_as_percentage_of_gdp_year character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -82,17 +82,14 @@ country	ET	2009	2001	8
 country	KE	2009	2016	16
 country	KE	2009	2015	16
 country	KE	2009	2014	17
-country	NG	2009	2013	1
-country	NG	2009	2012	2
-country	NG	2009	2011	2
-country	NG	2009	2010	2
-country	NG	2009	2009	3
-country	NG	2009	2008	3
-country	NG	2009	2007	2
-country	NG	2009	2006	1
-country	NG	2009	2005	2
-country	NG	2009	2004	1
-country	NG	2009	2003	1
+country	NG	2009	2010	7.3
+country	NG	2009	2011	9.6
+country	NG	2009	2012	9.4
+country	NG	2009	2013	8.3
+country	NG	2009	2014	7.6
+country	NG	2009	2015	6.1
+country	NG	2009	2016	5.3
+country	NG	2009	2017	5.7
 country	SN	2009	2017	15
 country	SN	2009	2016	16
 country	SN	2009	2015	16
