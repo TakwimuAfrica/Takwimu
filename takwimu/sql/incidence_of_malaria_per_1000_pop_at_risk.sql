@@ -28,7 +28,7 @@ CREATE TABLE public.incidence_of_malaria_per_1000_pop_at_risk (
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
     incidence_of_malaria_per_1000_pop_at_risk_year character varying(128) NOT NULL,
-    total integer
+    total numeric
 );
 
 
@@ -63,15 +63,14 @@ country	KE	2009	2012	75
 country	KE	2009	2011	69
 country	KE	2009	2010	69
 country	KE	2009	2000	217
-country	NG	2009	2017	281
-country	NG	2009	2016	282
-country	NG	2009	2015	291
-country	NG	2009	2014	336
-country	NG	2009	2013	361
-country	NG	2009	2012	368
-country	NG	2009	2011	372
-country	NG	2009	2010	383
-country	NG	2009	2000	378
+country	NG	2009	2010	383.09
+country	NG	2009	2011	371.63
+country	NG	2009	2012	368.13
+country	NG	2009	2013	360.94
+country	NG	2009	2014	336.42
+country	NG	2009	2015	290.86
+country	NG	2009	2016	281.50
+country	NG	2009	2017	281.15
 country	SN	2009	2017	65
 country	SN	2009	2016	54
 country	SN	2009	2015	79

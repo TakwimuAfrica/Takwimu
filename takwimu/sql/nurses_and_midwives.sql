@@ -27,7 +27,7 @@ CREATE TABLE public.nurses_and_midwives (
     geo_level character varying(15) NOT NULL,
     geo_code character varying(10) NOT NULL,
     geo_version character varying(100) DEFAULT ''::character varying NOT NULL,
-    nurses_and_midwives_year character varying(128) NOT NULL,
+    year character varying(128) NOT NULL,
     total double precision
 );
 
@@ -36,7 +36,7 @@ CREATE TABLE public.nurses_and_midwives (
 -- Data for Name: nurses_and_midwives; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-COPY public.nurses_and_midwives (geo_level, geo_code, geo_version, nurses_and_midwives_year, total) FROM stdin;
+COPY public.nurses_and_midwives (geo_level, geo_code, geo_version, year, total) FROM stdin;
 country	BF	2009	2012	0.630000000000000004
 country	BF	2009	2011	0.456000000000000016
 country	BF	2009	2010	0.552999999999999936
@@ -62,12 +62,14 @@ country	KE	2009	2010	0.735999999999999988
 country	KE	2009	2009	0.406000000000000028
 country	KE	2009	2008	0.367999999999999994
 country	KE	2009	2004	0.468999999999999972
-country	NG	2009	2010	1.60499999999999998
-country	NG	2009	2008	1.4890000000000001
-country	NG	2009	2007	1.49099999999999988
-country	NG	2009	2006	1.49500000000000011
-country	NG	2009	2005	1.52900000000000014
-country	NG	2009	2003	1.58599999999999985
+country	NG	2009	2003	1.5936
+country	NG	2009	2005	1.5361
+country	NG	2009	2006	1.5026
+country	NG	2009	2007	1.4985
+country	NG	2009	2008	1.4962
+country	NG	2009	2009	1.0762
+country	NG	2009	2010	1.3561
+country	NG	2009	2013	1.4524
 country	SN	2009	2016	0.308999999999999997
 country	SN	2009	2010	0.419999999999999984
 country	SN	2009	2008	0.429999999999999993
@@ -112,7 +114,7 @@ country	ZM	2009	2005	0.694999999999999951
 --
 
 ALTER TABLE ONLY public.nurses_and_midwives
-    ADD CONSTRAINT pk_nurses_and_midwives PRIMARY KEY (geo_level, geo_code, geo_version, nurses_and_midwives_year);
+    ADD CONSTRAINT pk_nurses_and_midwives PRIMARY KEY (geo_level, geo_code, geo_version, year);
 
 
 --

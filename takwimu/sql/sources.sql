@@ -52,7 +52,7 @@ country	ZA	allTaxRevenues	WorldBank	https://data.worldbank.org/indicator/GC.TAX.
 country	ZA	allGiniIndices	WorldBank	https://data.worldbank.org/indicator/SI.POV.GINI?locations=ZA
 country	ZA	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=ZA
 country	ZA	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=ZA
-country	ZA	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=ZA
+country	ZA	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=ZA
 country	ZA	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=ZA
 country	ZA	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=ZA
 country	ZA	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=ZA
@@ -84,7 +84,7 @@ country	TZ	allValidInvalidVotes	Commonwealth Tanzania General Election 2015	http
 country	TZ	allGiniIndices	WorldBank	https://data.worldbank.org/indicator/SI.POV.GINI?locations=TZ
 country	TZ	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=TZ
 country	TZ	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=TZ
-country	TZ	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=TZ
+country	TZ	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=TZ
 country	TZ	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=TZ
 country	TZ	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=TZ
 country	TZ	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=TZ
@@ -117,7 +117,7 @@ country	ET	allTaxRevenues	WorldBank	https://data.worldbank.org/indicator/GC.TAX.
 country	ET	allGiniIndices	WorldBank	https://data.worldbank.org/indicator/SI.POV.GINI?locations=ET
 country	ET	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=ET
 country	ET	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=ET
-country	ET	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=ET
+country	ET	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=ET
 country	ET	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=ET
 country	ET	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=ET
 country	ET	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=ET
@@ -153,7 +153,7 @@ country	SN	allRegisteredAccreditedVoters	African Election Database	http://africa
 country	SN	allGiniIndices	WorldBank	https://data.worldbank.org/indicator/SI.POV.GINI?locations=SN
 country	SN	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=SN
 country	SN	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=SN
-country	SN	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=SN
+country	SN	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=SN
 country	SN	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=SN
 country	SN	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=SN
 country	SN	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=SN
@@ -220,7 +220,7 @@ country	UG	allPrevalenceOfUndernourishments	WorldBank 2017	https://data.worldban
 country	UG	allNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=UG
 country	UG	allPrimarySchoolEnrollments	WorldBank 2018	https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=UG
 country	KE	allDonorFundedProgrammes	Kenya National Bureau of Statistics 2018	https://www.knbs.or.ke/?wpdmpro=economic-survey-2018
-country	KE	allEmploymentInAgricultures	WorldBank 2018	https://data.worldbank.org/indicator/SL.AGR.EMPL.MA.ZS?locations=KE
+country	KE	allEmploymentInAgricultures	International Labour Organization, 2019	https://data.worldbank.org/indicator/SL.AGR.EMPL.MA.ZS?locations=KE
 country	KE	allWomenInGovernments	Kenya National Bureau of Statistics 2018	https://www.knbs.or.ke/?wpdmpro=economic-survey-2018
 country	KE	allDonors	OECD 2016	http://www.oecd.org/dac/financing-sustainable-development/development-finance-data/aid-at-a-glance.htm
 country	KE	allGdpPerCapitas	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.CD?locations=KE
@@ -232,7 +232,8 @@ country	KE	fgm_age_dist	Kenya Demographic and Health Survey 2014	https://openafr
 country	KE	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=KE
 country	KE	allSecondarySchoolEnrollments	WorldBank	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=KE
 country	KE	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=KE
-country	KE	allWomenInParliaments	WorldBank 2017	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=KE&start=1997
+country	KE	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=KE&start=1998
+country	NG	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=NG&start=1998
 country	KE	allBudgetAllocations	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
 country	KE	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=KE
 country	KE	allHealthFacilityBeds	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
@@ -243,19 +244,19 @@ country	KE	allSecondarySchoolTotEnrollments	Statistical Abstract 2018	https://ww
 country	KE	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=KE
 country	KE	prevention_methods_dist	Kenya Demographic and Health Survey 2014	https://openafrica.net/dataset/2014-kenya-demographic-and-health-survey
 country	KE	allGiniIndices	WorldBank	https://data.worldbank.org/indicator/SI.POV.GINI?locations=KE
-country	KE	allHealthWorkersDistributions	Kenya National Bureau of Statistics 2018	https://www.knbs.or.ke/?wpdmpro=economic-survey-2018
+country	KE	allHealthWorkersDistributions	Kenya National Bureau of Statistics 2018	https://africaopendata.org/dataset/kenya-economic-survey-2019/resource/5b9357a4-6227-4fbf-9e10-ae7043a41ce3
 country	KE	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=KE
 country	KE	allPopulationResidence2009S	Census 2009	https://dc.sourceafrica.net/documents/21197-Census-2009.html
 country	KE	allPopulationSexYears	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
 country	KE	allGdpPerCapitaGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=KE
-country	KE	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=KE
+country	KE	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=KE
 country	KE	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=KE
-country	KE	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=KE
+country	KE	allAdultLiteracyRates	UNESCO, 2018	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=KE
 country	KE	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=KE
 country	KE	allPopulationSex2009S	Census 2009	https://dc.sourceafrica.net/documents/21197-Census-2009.html
 country	KE	allCerealYieldKgPerHectares	WorldBank	https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=KE
 country	KE	allTaxRevenues	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.CN?locations=KE
-country	KE	allMobilePhoneSubscriptions	WorldBank	https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=KE
+country	KE	allMobilePhoneSubscriptions	International Telecommunication Union, 2018	https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=KE
 country	KE	allIncidenceOfMalariaPer1000PopAtRisks	WorldBank	https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=KE
 country	KE	allResidencePovertyTypes	Kenya National Bureau of Statistics 2018	https://www.knbs.or.ke/?wpdmpro=economic-survey-2018
 country	KE	allPrimarySchoolTotEnrollments	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
@@ -269,7 +270,7 @@ country	KE	health_centers_dist	Ministry of Health 2014	https://africaopendata.or
 country	KE	allPrevalenceOfUndernourishments	WorldBank	https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=KE
 country	KE	allPovertyAgeResidences	Kenya National Bureau of Statistics 2018	https://www.knbs.or.ke/?wpdmpro=economic-survey-2018
 country	KE	allNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=KE
-country	KE	allPrimarySchoolEnrollments	Worldbank	https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=NG
+country	KE	allPrimarySchoolEnrollments	Kenya Economic Survey, 2019	https://africaopendata.org/dataset/kenya-economic-survey-2019/resource/5b9357a4-6227-4fbf-9e10-ae7043a41ce3
 level1	KE	allBudgetAllocations	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
 level1	KE	allHealthFacilityBeds	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
 level1	KE	allHivPrevalences	Kenya HIV Estimates NACC 2018	https://africaopendata.org/dataset/kenya-hiv-estimates-2018
@@ -278,12 +279,12 @@ level1	KE	allSecondarySchoolTotEnrollments	Statistical Abstract 2018	https://www
 level1	KE	allPopulationSexYears	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
 level1	KE	allPrimarySchoolTotEnrollments	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
 country	NG	allHivPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.HIV.1524.MA.ZS?locations=NG
-country	NG	allSecondarySchoolEnrollments	WorldBank	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=NG
+country	NG	allSecondarySchoolEnrollments	UNESCO, 2016	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=NG
 country	NG	allGdpPerCapitas	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.CD?locations=NG
 country	NG	allBirthsAttendedBySkilledHealthStaffs	Federal Ministry of Health 2018	https://msdat.fmohconnect.gov.ng/#/central_analytics/ODY
 country	NG	allFoodProductions	National Bureau of Statistics 2018	https://nigerianstat.gov.ng/
 country	NG	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=NG
-country	NG	allForeignDirectInvestmentNetInflows	WorldBank	https://data.worldbank.org/indicator/?locations=NG
+country	NG	allForeignDirectInvestmentNetInflows	International Monetary Fund, World Bank and OECD, 2018	https://data.worldbank.org/indicator/?locations=NG
 country	NG	allNumberOfDoctorsYearSexes	National Bureau of Statistics 2018	https://nigerianstat.gov.ng/download/952
 country	NG	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=NG
 country	NG	allYouthUnemploymentGenerals	National Bureau of Statistics 2017	https://openafrica.net/dataset/labor_force_unemployment_rate_2017_2018
@@ -305,14 +306,14 @@ country	NG	allPrimarySchoolEnrollmentDistributions	 National Bureau of Statistic
 country	NG	allHumanDevIndices	Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)	https://nigerianstat.gov.ng/download/830
 country	NG	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=NG
 country	NG	allGdpPerCapitaGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=NG
-country	NG	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=NG
+country	NG	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=NG
 country	NG	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=NG
-country	NG	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=NG
+country	NG	allAdultLiteracyRates	UNESCO, 2018	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=NG
 country	NG	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=NG
-country	NG	allCerealYieldKgPerHectares	WorldBank	https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=NG
+country	NG	allCerealYieldKgPerHectares	Food and Agriculture Organization, 2017	https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=NG
 country	NG	allNumberOfDentistYearSexes	National Bureau of Statistics 2018	https://nigerianstat.gov.ng/download/952
-country	NG	allMobilePhoneSubscriptions	WorldBank	https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=NG
-country	NG	allIncidenceOfMalariaPer1000PopAtRisks	WorldBank	https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=NG
+country	NG	allMobilePhoneSubscriptions	International Telecommunication Union, 2018	https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=NG
+country	NG	allIncidenceOfMalariaPer1000PopAtRisks	World Health Organization, 2017	https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=NG
 country	NG	allJuniorSecondarySchoolEnrollments	 National Bureau of Statistics 2018	https://nigerianstat.gov.ng/download/952
 country	NG	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=NG
 country	NG	allSeniorSecondarySchoolEnrollments	 National Bureau of Statistics 2018	https://nigerianstat.gov.ng/download/952
@@ -327,7 +328,7 @@ country	NG	allPrevalenceOfUndernourishments	WorldBank	https://data.worldbank.org
 country	NG	allNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=NG
 country	NG	allPrimarySchoolEnrollments	Worldbank	https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=NG
 level1	NG	allHivPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.HIV.1524.MA.ZS?locations=NG
-level1	NG	allSecondarySchoolEnrollments	WorldBank	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=NG
+level1	NG	allSecondarySchoolEnrollments	UNESCO, 2016	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=NG
 level1	NG	allGdpPerCapitas	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.CD?locations=NG
 level1	NG	allGdps	WorldBank	https://data.worldbank.org/indicator/NY.gpds.MKTP.CD?locations=NG
 level1	NG	allFoodProductions	National Bureau of Statistics 2018	https://nigerianstat.gov.ng/
@@ -354,7 +355,7 @@ level1	NG	allPrimarySchoolEnrollmentDistributions	 National Bureau of Statistics
 level1	NG	allHumanDevIndices	Computation of Human Development Indices for the UNDP Nigeria Human Development Report (2016)	https://nigerianstat.gov.ng/download/830
 level1	NG	allGdpGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.KD.ZG?locations=NG
 level1	NG	allGdpPerCapitaGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=NG
-level1	NG	allPhysiciansNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=NG
+level1	NG	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=NG
 level1	NG	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=NG
 level1	NG	allAdultLiteracyRates	WorldBank	https://data.worldbank.org/indicator/SE.ADT.LITR.FE.ZS?locations=NG
 level1	NG	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicator/GC.TAX.TOTL.GD.ZS?locations=NG
@@ -428,6 +429,37 @@ country	ZM	allEmploymentToPopulationRatios	WorldBank	https://data.worldbank.org/
 country	ZM	allPrevalenceOfUndernourishments	WorldBank	https://data.worldbank.org/indicator/SN.ITK.DEFC.ZS?locations=ZM
 country	ZM	allNursesAndMidwives	WorldBank	https://data.worldbank.org/indicator/SH.MED.NUMW.P3?locations=ZM
 country	ZM	allPrimarySchoolEnrollments	WorldBank 2018	https://data.worldbank.org/indicator/SE.PRM.ENRR.MA?locations=ZM
+country	NG	allArableLands	Food and Agriculture Organization, 2016	https://data.worldbank.org/indicator/AG.LND.ARBL.ZS?locations=NG
+country	NG	allNationalDebts	Nigeria Budget Office, 2019	https://www.budgetoffice.gov.ng/index.php/resources/internal-resources/budget-documents
+country	KE	allPublicDebts	Central Bank of Kenya, 2019	https://www.centralbank.go.ke/uploads/government_finance_statistics/296219061_Public%20Debt.csv
+country	NG	allDebtServiceToRevenues	Nigerian Debt Management Office, 2018	https://www.dmo.gov.ng/publications/reports/debt-sustainability-analysis
+country	NG	allFiscalDeficits	International Monetary Fund and Reuters, 2019	https://www.imf.org/~/media/Files/Publications/CR/2018/cr1863.ashx
+country	KE	allFiscalDeficits	International Monetary Fund, 2017	https://www.imf.org/~/media/Files/Publications/CR/2018/cr18295.ashx
+country	NG	allDonorAids	AidData, 2012	http://dashboard.aiddata.org/#/agregate/analytic-dashboard
+country	NG	allHumanitarianNeeds	OCHA, 2019	https://reliefweb.int/sites/reliefweb.int/files/resources/01022019_ocha_nigeria_humanitarian_needs_overview.pdf
+country	NG	allPhysiciansNursesAndMidwives	World Health Organization, OECD and Country Data, 2013	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=NG
+country	NG	allDefenceBudgets	Nigeria Federal Government, 2019	https://yourbudgit.com/wp-content/uploads/2019/02/FEDERAL-GOVERNMENT-2018-BUDGET-Final.pdf
+country	NG	allRevenueAllocations	Nigeria Bureau of Statistics, 2019	https://www.proshareng.com/report/Nigerian%20Economy/Federation-Account-Allocation-Committee-(FAAC)-Nov-2019-Disbursement/13006
+country	NG	allEffectBokoHarams	UNHCR and OCHA, 2019	https://www.unhcr.org/uk/nigeria-emergency.html
+country	NG	allDfidAids	DFID, 2019	https://devtracker.dfid.gov.uk/countries/NG/projects#page-1
+country	NG	allUnFundings	United Nations Sustainable Development Partnership Framework, 2018	https://www.ng.undp.org/content/dam/nigeria/docs/unct-documents/UN%20Development%20Partnership%20Framework%202018%202022.pdf
+country	KE	allHivPrevalenceTots	UNAIDS, 2018	https://data.worldbank.org/indicator/SH.DYN.AIDS.ZS?locations=KE
+country	NG	allHivPrevalenceTots	UNAIDS, 2018	https://data.worldbank.org/indicator/SH.DYN.AIDS.ZS?locations=NG
+country	KE	allGovtExpenditureRevenues	The National Treasury, 2017	https://www.cabri-sbo.org/en/countries/kenya
+country	NG	allGovtExpenditureRevenues	Federal Ministry of Finance, Budgeting and National Planning, 2017	https://www.cabri-sbo.org/en/our-work/budgets-in-africa/countries/Nigeria
+country	NG	allOutOfPocketExpenditures	World Health Organization, 2016	https://data.worldbank.org/indicator/SH.XPD.OOPC.CH.ZS?locations=NG
+country	NG	allFederalBudgetAllocations	Nigeria Budget Office, 2019	https://budgetoffice.gov.ng/index.php/2019-appropriation-bill
+country	NG	allEssServicesExpenditures	Nigeria Budget Office, 2019	https://budgetoffice.gov.ng/index.php/breakdown-of-2019-fgn-approved-budget
+country	NG	allUsAids	USAID, 2018	https://www.usaid.gov/nigeria/press-releases/feb-05-2018-usaid-provides-89-million-new-assistance-nigeria
+country	KE	allDebtServingKenyas	Kenya Economic Survey, 2019	https://africaopendata.org/dataset/kenya-economic-survey-2019/resource/5b9357a4-6227-4fbf-9e10-ae7043a41ce3
+country	NG	allDebtServingNigerias	Nigeria Budget Office, 2019	https://www.budgetoffice.gov.ng/index.php/resources/internal-resources/budget-documents
+country	KE	allImmunizationCoverages	Kenya Economic Survey, 2019	https://open.africa/dataset/kenya-economic-survey-2019/resource/1c0e889c-e905-4928-8c7c-be1869830695
+country	KE	allExternalInternalDebts	Kenya Economic Survey, 2019	https://open.africa/dataset/kenya-economic-survey-2019/resource/6b3b1594-1d9f-4f2a-b10e-c412335c0d7c
+country	KE	allBudgetSpendings	Kenya Economic Survey, 2019	https://open.africa/dataset/kenya-economic-survey-2019/resource/263250e4-e0bf-4ae0-9f93-17d5a3a205ab
+country	KE	allJicas	AidData, 2014	http://dashboard.aiddata.org/#go/5bad3ae8505052e66d000002
+country	KE	allInfantMortalities	UNICEF, WHO, World Bank and UN DESA Population Division, 2018	https://data.worldbank.org/indicator/SP.DYN.IMRT.IN?end=2016&locations=KE&start=1996
+country	KE	allMobileMoneyTransfers	Central Bank of Kenya, 2019	https://www.centralbank.go.ke/national-payments-system/mobile-payments/
+country	NG	allRecurrentCapitalExpenditures	Nigeria Budget Office, 2018, 2020	https://open.africa/dataset/nigeria-recurrent-vs-capital-expenditure/resource/42a11709-ddab-45d2-9956-e30307a49812
 \.
 
 
