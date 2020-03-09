@@ -461,6 +461,15 @@ country	KE	allJicas	AidData, 2014	http://dashboard.aiddata.org/#go/5bad3ae850505
 country	KE	allInfantMortalities	UNICEF, WHO, World Bank and UN DESA Population Division, 2018	https://data.worldbank.org/indicator/SP.DYN.IMRT.IN?end=2016&locations=KE&start=1996
 country	KE	allMobileMoneyTransfers	Central Bank of Kenya, 2019	https://www.centralbank.go.ke/national-payments-system/mobile-payments/
 country	NG	allRecurrentCapitalExpenditures	Nigeria Budget Office, 2018, 2020	https://open.africa/dataset/nigeria-recurrent-vs-capital-expenditure/resource/42a11709-ddab-45d2-9956-e30307a49812
+country	SN	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=SN&start=1998
+country	ET	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=ET&start=1998
+country	ZA	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=ZA&start=1998
+country	ZA	allTertiarySchoolTotEnrollments	UNESCO, 2017	https://data.worldbank.org/indicator/SE.TER.ENRR?locations=ZA
+country	KE	allEmploymentInAgricultureTots	International Labour Organization, 2019	https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS?locations=KE
+country	SN	allEmploymentInAgricultureTots	International Labour Organization, 2019	https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS?locations=SN
+country	NG	allEmploymentInAgricultureTots	International Labour Organization, 2019	https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS?locations=NG
+country	ET	allEmploymentInAgricultureTots	International Labour Organization, 2019	https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS?locations=ET
+country	ZA	allEmploymentInAgricultureTots	International Labour Organization, 2019	https://data.worldbank.org/indicator/SL.AGR.EMPL.ZS?locations=ZA
 \.
 
 
