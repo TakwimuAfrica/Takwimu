@@ -43,7 +43,7 @@ country	ZA	allGdps	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.CD
 country	ZA	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=ZA
 country	ZA	allPopulationSex2011S	Community Survey 2016	https://openafrica.net/dataset/community-survey-2016
 country	ZA	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZA
-country	ZA	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZA
+country	ZA	allTotalPopulations	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZA
 country	ZA	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=ZA
 country	ZA	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=ZA
 country	ZA	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ZA
@@ -73,7 +73,7 @@ country	TZ	allGdps	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.CD
 country	TZ	allFoodProductions	WorldBank	https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=TZ
 country	TZ	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=TZ
 country	TZ	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=TZ
-country	TZ	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=TZ
+country	TZ	allTotalPopulations	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=TZ
 country	TZ	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=TZ
 country	TZ	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=TZ
 country	TZ	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=TZ
@@ -108,7 +108,7 @@ country	ET	allGdps	WorldBank	https://data.worldbank.org/indicator/NY.gpds.MKTP.C
 country	ET	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=ET
 country	ET	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ET
 country	ET	allSecondarySchoolEnrollments	WorldBank	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=ET
-country	ET	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ET
+country	ET	allTotalPopulations	United Nations World Population Prospects, 2019	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ET
 country	ET	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=ET
 country	ET	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=ET
 country	ET	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ET
@@ -124,7 +124,7 @@ country	ET	allTaxAsPercentageOfGdps	WorldBank	https://data.worldbank.org/indicat
 country	ET	allCerealYieldKgPerHectares	WorldBank	https://data.worldbank.org/indicator/AG.YLD.CREL.KG?locations=ET
 country	ET	allMobilePhoneSubscriptions	WorldBank	https://data.worldbank.org/indicator/IT.CEL.SETS.P2?locations=ET
 country	ET	allIncidenceOfMalariaPer1000PopAtRisks	WorldBank	https://data.worldbank.org/indicator/SH.MLR.INCD.P3?locations=ET
-country	ET	allPopulationSex2007S	Population and Housing Census 2007	http://catalog.ihsn.org/index.php/catalog/3583
+country	ET	allPopulationSexEts	World Bank and United Nations World Population Prospects, 2019	https://open.africa/dataset/population-totals/resource/99719918-e8ee-410c-9fef-0b2c6b22034c
 country	ET	allHivPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.HIV.1524.MA.ZS?locations=ET
 country	ET	allYouthUnemployments	WorldBank	https://data.worldbank.org/indicator/SL.UEM.1524.MA.ZS?locations=ET
 country	ET	allPrimaryEducationCompletionRates	WorldBank	https://data.worldbank.org/indicator/SE.PRM.CMPT.MA.ZS?locations=ET
@@ -141,7 +141,7 @@ country	SN	allFoodProductions	WorldBank	https://data.worldbank.org/indicator/AG.
 country	SN	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=SN
 country	SN	allPopulationSex2013S	Census Data 2013	https://africaopendata.org/dataset/senegal-census-data
 country	SN	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=SN
-country	SN	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=SN
+country	SN	allTotalPopulations	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=SN
 country	SN	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=SN
 country	SN	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=SN
 country	SN	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=SN
@@ -174,7 +174,7 @@ country	CD	allGdpPerCapitas	WorldBank 2018	https://data.worldbank.org/indicator/
 country	CD	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=CD
 country	CD	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=CD
 country	CD	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=CD
-country	CD	total_population	WorldBank 2018	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=CD
+country	CD	allTotalPopulations	WorldBank 2018	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=CD
 country	CD	allLifeExpectancyAtBirths	WorldBank 2017	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=CD
 country	CD	allGdps	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=CD
 country	CD	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=CD
@@ -200,7 +200,7 @@ country	UG	allGdpPerCapitas	WorldBank	https://data.worldbank.org/indicator/NY.gd
 country	UG	allGdpPerCapitaGrowths	WorldBank 2018	https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=UG
 country	UG	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=UG
 country	UG	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=UG
-country	UG	total_population	WorldBank 2017	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=UG
+country	UG	allTotalPopulations	WorldBank 2017	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=UG
 country	UG	allLifeExpectancyAtBirths	WorldBank 2017	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=UG
 country	UG	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=UG
 country	UG	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=UG
@@ -231,7 +231,7 @@ country	KE	allGovernmentFundings	Kenya National Bureau of Statistics 2018	https:
 country	KE	fgm_age_dist	Kenya Demographic and Health Survey 2014	https://openafrica.net/dataset/2014-kenya-demographic-and-health-survey
 country	KE	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=KE
 country	KE	allSecondarySchoolEnrollments	WorldBank	https://data.worldbank.org/indicator/SE.SEC.ENRR.FE?locations=KE
-country	KE	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=KE
+country	KE	allTotalPopulations	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=KE
 country	KE	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=KE&start=1998
 country	NG	allWomenInParliaments	Inter-Parliamentary Union, 2019	https://data.worldbank.org/indicator/SG.GEN.PARL.ZS?end=2017&locations=NG&start=1998
 country	KE	allBudgetAllocations	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
@@ -248,6 +248,7 @@ country	KE	allHealthWorkersDistributions	Kenya National Bureau of Statistics 201
 country	KE	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=KE
 country	KE	allPopulationResidence2009S	Census 2009	https://dc.sourceafrica.net/documents/21197-Census-2009.html
 country	KE	allPopulationSexYears	Statistical Abstract 2018	https://www.knbs.or.ke/?wpdmpro=statistics-abstract-2018
+country	ET	allPopulationSexYears	World Bank and United Nations World Population Prospects, 2019	https://open.africa/dataset/population-totals/resource/99719918-e8ee-410c-9fef-0b2c6b22034c
 country	KE	allGdpPerCapitaGrowths	WorldBank	https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=KE
 country	KE	allPhysicians	WorldBank	https://data.worldbank.org/indicator/SH.MED.PHYS.ZS?locations=KE
 country	KE	allFgmPrevalences	WorldBank	https://data.worldbank.org/indicator/SH.STA.FGMS.ZS?locations=KE
@@ -289,7 +290,7 @@ country	NG	allNumberOfDoctorsYearSexes	National Bureau of Statistics 2018	https:
 country	NG	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=NG
 country	NG	allYouthUnemploymentGenerals	National Bureau of Statistics 2017	https://openafrica.net/dataset/labor_force_unemployment_rate_2017_2018
 country	NG	allPrimaryEducationCompletionSexes	Nigeria Federal Ministry of Education 2016	https://africaopendata.org/dataset/nigeria-education-indicators-2016
-country	NG	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NG
+country	NG	allTotalPopulations	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NG
 country	NG	allAccountOwnershipIndicators	Multiple Indicator Cluster Survey 2016-17	https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip
 country	NG	allLiteracySexes	National Bureau of Statistics 2018	https://nigerianstat.gov.ng/download/952
 country	NG	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=NG
@@ -338,7 +339,7 @@ level1	NG	allNumberOfDoctorsYearSexes	National Bureau of Statistics 2018	https:/
 level1	NG	allAccountOwnerships	WorldBank	https://data.worldbank.org/indicator/FX.OWN.TOTL.MA.ZS?locations=NG
 level1	NG	allYouthUnemploymentGenerals	National Bureau of Statistics 2017	https://openafrica.net/dataset/labor_force_unemployment_rate_2017_2018
 level1	NG	allPrimaryEducationCompletionSexes	Nigeria Federal Ministry of Education 2016	https://africaopendata.org/dataset/nigeria-education-indicators-2016
-level1	NG	total_population	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NG
+level1	NG	allTotalPopulations	WorldBank	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=NG
 level1	NG	allAccountOwnershipIndicators	Multiple Indicator Cluster Survey 2016-17	https://mics-surveys-prod.s3.amazonaws.com/MICS5/West%20and%20Central%20Africa/Nigeria/2016-2017/Final/Nigeria%202016-17%20MICS_English.zip
 level1	NG	allLiteracySexes	 National Bureau of Statistics 2018	https://nigerianstat.gov.ng/download/952
 level1	NG	allLifeExpectancyAtBirths	WorldBank	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=NG
@@ -382,7 +383,7 @@ country	BF	allGdpPerCapitas	WorldBank 2017	https://data.worldbank.org/indicator/
 country	BF	allGdpPerCapitaGrowths	WorldBank 2018	https://data.worldbank.org/indicator/NY.gdp.PCAP.KD.ZG?locations=BF
 country	BF	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=BF
 country	BF	allAgriculturalLands	WorldBank 2018	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=BF
-country	BF	total_population	WorldBank 2018	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=BF
+country	BF	allTotalPopulations	WorldBank 2018	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=BF
 country	BF	allLifeExpectancyAtBirths	WorldBank 2017	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=BF
 country	BF	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=BF
 country	BF	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=BF
@@ -408,7 +409,7 @@ country	ZM	allGdpPerCapitas	WorldBank 2017	https://data.worldbank.org/indicator/
 country	ZM	allGdps	WorldBank	https://data.worldbank.org/indicator/NY.gdp.MKTP.CD?locations=ZM
 country	ZM	allAccessToBasicServices	WorldBank	https://data.worldbank.org/indicator/SH.H2O.BASW.ZS?locations=ZM
 country	ZM	allAgriculturalLands	WorldBank	https://data.worldbank.org/indicator/AG.LND.AGRI.ZS?locations=ZM
-country	ZM	total_population	WorldBank 2018	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZM
+country	ZM	allTotalPopulations	WorldBank 2018	https://data.worldbank.org/indicator/SP.POP.TOTL?locations=ZM
 country	ZM	allLifeExpectancyAtBirths	WorldBank 2017	https://data.worldbank.org/indicator/SP.DYN.LE00.FE.IN?locations=ZM
 country	ZM	allBirthsAttendedBySkilledHealthStaffs	WorldBank	https://data.worldbank.org/indicator/SH.STA.BRTC.ZS?locations=ZM
 country	ZM	allMaternalMortalities	WorldBank	https://data.worldbank.org/indicator/SH.STA.MMRT?locations=ZM
