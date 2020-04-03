@@ -140,6 +140,16 @@ const Theme = createMuiTheme({
     }
   },
   overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        '.wp-block-table': {
+          fontSize: '12px'
+        },
+        '.wp-block-table table': {
+          borderCollapse: 'collapse'
+        }
+      }
+    },
     MuiLink: {
       root: {
         fontFamily: FONT_FAMILY_TEXT,
